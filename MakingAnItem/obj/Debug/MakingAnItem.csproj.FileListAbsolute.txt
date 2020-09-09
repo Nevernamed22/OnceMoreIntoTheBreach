@@ -1,0 +1,13 @@
+C:\Users\Travis\source\repos\MakingAnItem\MakingAnItem\bin\Debug\MakingAnItem.dll
+C:\Users\Travis\source\repos\MakingAnItem\MakingAnItem\bin\Debug\MakingAnItem.pdb
+C:\Users\Travis\source\repos\MakingAnItem\MakingAnItem\bin\Debug\Assembly-CSharp.Base.mm.dll
+C:\Users\Travis\source\repos\MakingAnItem\MakingAnItem\bin\Debug\Assembly-CSharp.dll
+C:\Users\Travis\source\repos\MakingAnItem\MakingAnItem\bin\Debug\MonoMod.RuntimeDetour.dll
+C:\Users\Travis\source\repos\MakingAnItem\MakingAnItem\bin\Debug\MonoMod.Utils.dll
+C:\Users\Travis\source\repos\MakingAnItem\MakingAnItem\bin\Debug\UnityEngine.CoreModule.Base.mm.dll
+C:\Users\Travis\source\repos\MakingAnItem\MakingAnItem\bin\Debug\UnityEngine.CoreModule.dll
+C:\Users\Travis\source\repos\MakingAnItem\MakingAnItem\bin\Debug\UnityEngine.ImageConversionModule.dll
+C:\Users\Travis\source\repos\MakingAnItem\MakingAnItem\obj\Debug\MakingAnItem.csprojAssemblyReference.cache
+C:\Users\Travis\source\repos\MakingAnItem\MakingAnItem\obj\Debug\MakingAnItem.csproj.CopyComplete
+C:\Users\Travis\source\repos\MakingAnItem\MakingAnItem\obj\Debug\MakingAnItem.dll
+C:\Users\Travis\source\repos\MakingAnItem\MakingAnItem\obj\Debug\MakingAnItem.pdb
