@@ -327,12 +327,12 @@ namespace NevernamedsItems
             //VISCERIFLE / GREEN GUON STONE
             List<string> mandatorySynergyItemsDangerIsMyMiddleName = new List<string>() { "nn:viscerifle", "green_guon_stone" };
             CustomSynergies.Add("Danger Is My Middle Name", mandatorySynergyItemsDangerIsMyMiddleName);
-            //BLANKANNON / GLASS AMMOLET
+            /*//BLANKANNON / GLASS AMMOLET
             List<string> mandatorySynergyItemsPanedExpression = new List<string>() { "nn:blankannon", "nn:glass_ammolet" };
             CustomSynergies.Add("Paned Expression", mandatorySynergyItemsPanedExpression);
             //BLANKANNON / ELDER BLANK
             List<string> mandatorySynergyItemsSecretsOfTheAncients = new List<string>() { "nn:blankannon", "elder_blank" };
-            CustomSynergies.Add("Secrets of the Ancients", mandatorySynergyItemsSecretsOfTheAncients);
+            CustomSynergies.Add("Secrets of the Ancients", mandatorySynergyItemsSecretsOfTheAncients);*/
             //CLOWN SHOTGUN / CLOWN MASK
             List<string> mandatorySynergyItemsClownTown = new List<string>() { "nn:clown_shotgun" };
             List<string> optionalSynergyItemsClownTown = new List<string>() { "clown_mask" };

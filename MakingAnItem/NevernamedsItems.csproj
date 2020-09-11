@@ -94,6 +94,7 @@
     <Compile Include="Blombk.cs" />
     <Compile Include="BloodglassGuonStone.cs" />
     <Compile Include="BloodthirstyBullets.cs" />
+    <Compile Include="BloodyAmmo.cs" />
     <Compile Include="BloodyBox.cs" />
     <Compile Include="Blowgun.cs" />
     <Compile Include="BlueGun.cs" />
@@ -157,6 +158,7 @@
     <Compile Include="LovePotion.cs" />
     <Compile Include="Magic Missile.cs" />
     <Compile Include="MastersGun.cs" />
+    <Compile Include="MengerAmmoBox.cs" />
     <Compile Include="MinigunMiniShotgunSynergyForme.cs" />
     <Compile Include="Multiplicator.cs" />
     <Compile Include="Octagun.cs" />
@@ -168,6 +170,7 @@
     <Compile Include="PoisonDartFrog.cs" />
     <Compile Include="Purpler.cs" />
     <Compile Include="Repeatovolver.cs" />
+    <Compile Include="RingOfAmmoRedemption.cs" />
     <Compile Include="RiskRifle.cs" />
     <Compile Include="Showdown.cs" />
     <Compile Include="SimpleToolbox.cs" />
@@ -936,6 +939,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\honey_standard_base_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\bloodyammo_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\mengerammobox_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

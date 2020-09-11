@@ -140,6 +140,10 @@ namespace NevernamedsItems
                 KeyBullwark.Init();
                 KeyBulletEffigy.Init();
                 FrostKey.Init();
+                //Ammo Box Themed Items
+                TheShellactery.Init();
+                BloodyAmmo.Init();
+                MengerAmmoBox.Init();
                 //Boxes and Stuff
                 BloodyBox.Init();
                 MaidenShapedBox.Init();
@@ -185,6 +189,7 @@ namespace NevernamedsItems
                 PearlBracelet.Init();
                 //Rings
                 RingOfOddlySpecificBenefits.Init();
+                RingOfAmmoRedemption.Init(); //UNFINISHED
                 //Holsters
                 BlackHolster.Init();
                 TheBeholster.Init();
@@ -202,7 +207,6 @@ namespace NevernamedsItems
                 BagOfHolding.Init();
                 ItemCoupon.Init();
                 TimeFuddlersRobe.Init();
-                TheShellactery.Init();
                 IdentityCrisis.Init();
                 LiquidMetalBody.Init();
                 KalibersEye.Init();
