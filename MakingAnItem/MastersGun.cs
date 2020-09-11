@@ -142,7 +142,7 @@ namespace NevernamedsItems
             forgeProjectile.SetProjectileSpriteRight("mastersgun_forge_projectile", 33, 18, false, tk2dBaseSprite.Anchor.MiddleLeft, 27, 12);
             forgeProjectile.transform.parent = gun.barrelOffset;
 
-            gun.quality = PickupObject.ItemQuality.EXCLUDED; //S
+            gun.quality = PickupObject.ItemQuality.S; //S
             gun.encounterTrackable.EncounterGuid = "this is the Master's Gun";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
