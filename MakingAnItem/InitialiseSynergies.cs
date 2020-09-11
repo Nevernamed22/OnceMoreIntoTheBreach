@@ -287,9 +287,9 @@ namespace NevernamedsItems
             List<string> optionalSynergyItemsFireAspect = new List<string>() { "hot_lead", "nn:tracer_rounds", "copper_ammolet", "phoenix", "nn:mr._fahrenheit" };
             CustomSynergies.Add("Fire Aspect", mandatorySynergyItemsFireAspect, optionalSynergyItemsFireAspect);
             //DIAMOND GUN - KNOCKBACK
-            List<string> mandatorySynergyItemsKnockback = new List<string>() { "nn:diamond_gun" };
-            List<string> optionalSynergyItemsKnockback = new List<string>() { "casey", "nn:diamond_bracelet", "boxing_glove", "ruby_bracelet", "nn:pearl_bracelet" };
-            CustomSynergies.Add("Knockback", mandatorySynergyItemsKnockback, optionalSynergyItemsKnockback);
+            //List<string> mandatorySynergyItemsKnockback = new List<string>() { "nn:diamond_gun" };
+            //List<string> optionalSynergyItemsKnockback = new List<string>() { "casey", "nn:diamond_bracelet", "boxing_glove", "ruby_bracelet", "nn:pearl_bracelet" };
+            //CustomSynergies.Add("Knockback", mandatorySynergyItemsKnockback, optionalSynergyItemsKnockback);
             //DIAMOND GUN - SHARPNESS
             List<string> mandatorySynergyItemsSharpness = new List<string>() { "nn:diamond_gun" };
             List<string> optionalSynergyItemsSharpness = new List<string>() { "knife_shield", "katana_bullets", "vorpal_bullets", "excaliber" };
@@ -348,6 +348,18 @@ namespace NevernamedsItems
             //PISTA / BOW
             List<string> mandatorySynergyItemsPistolsRequiem = new List<string>() { "nn:pista", "bow" };
             CustomSynergies.Add("Pistols Requiem", mandatorySynergyItemsPistolsRequiem);
+            //RISK RIFLE / MEDKIT / RATION / ORANGE
+            List<string> mandatorySynergyItemsZeroRisk = new List<string>() { "nn:risk_rifle" };
+            List<string> optionalSynergyItemsZeroRisk = new List<string>() { "medkit", "ration", "orange" };
+            CustomSynergies.Add("Zero Risk", mandatorySynergyItemsZeroRisk, optionalSynergyItemsZeroRisk);
+            //ARMOURED ARMOUR / ARMOR SYNTHESIZER / MEAT SHIELD / GOLDEN ARMOUR / GUNKNIGHT ARMOUR / POWER ARMOUR / ARMOR OF THORNS
+            List<string> mandatorySynergyItemsArmouredArmouredArmour = new List<string>() { "nn:armoured_armour" };
+            List<string> optionalSynergyItemsArmouredArmouredArmour = new List<string>() { "armor_synthesizer", "nn:meat_shield", "nn:golden_armour", "gunknight_armor", "nn:power_armour", "armor_of_thorns" };
+            CustomSynergies.Add("Armoured Armoured Armour", mandatorySynergyItemsArmouredArmouredArmour, optionalSynergyItemsArmouredArmouredArmour);
+            //MULTIPLICATOR / TABLE TECHS
+            List<string> mandatorySynergyItemsTimesTables = new List<string>() { "nn:multiplicator" };
+            List<string> optionalSynergyItemsTimesTables = new List<string>() { "portable_table_device", "table_tech_sight", "table_tech_money", "table_tech_rocket", "table_tech_shotgun", "table_tech_heat", "table_tech_rage", "table_tech_blanks", "table_tech_stun", "nn:table_tech_table", "nn:table_tech_invulnerability", "nn:table_tech_speed", "nn:table_tech_ammo", "nn:table_tech_guon", "nn:tabullets" };
+            CustomSynergies.Add("Times Tables", mandatorySynergyItemsTimesTables, optionalSynergyItemsTimesTables);
 
             //SYNERGIES ADDED IN THE SYNERGISING
             //BOXING GLOVE / BASHING BULLETS

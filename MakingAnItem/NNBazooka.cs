@@ -21,7 +21,7 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:bazooka", "nn:bazooka");
             gun.gameObject.AddComponent<NNBazooka>();
             gun.SetShortDescription("Boom Boom Boom Boom");
-            gun.SetLongDescription("It takes a lunatic to be a legend."+"\n\nThis powerful explosive weapon has one major drawback; it is capable of damaging it's bearer. You'd think more bombs would do that, but the Gungeon forgives.");
+            gun.SetLongDescription("It takes a lunatic to be a legend." + "\n\nThis powerful explosive weapon has one major drawback; it is capable of damaging it's bearer. You'd think more bombs would do that, but the Gungeon forgives.");
 
             gun.SetupSprite(null, "bazooka_idle_001", 8);
 
@@ -50,7 +50,13 @@ namespace NevernamedsItems
             projectile.baseData.speed *= 1.2f;
             projectile.ignoreDamageCaps = true;
             projectile.pierceMinorBreakables = true;
-            FuckingExplodeYouCunt explodePleaseImBeggingYou = projectile.gameObject.AddComponent<FuckingExplodeYouCunt>();
+
+            if (projectile.GetComponent<ExplosiveModifier>())
+            {
+                Destroy(projectile.GetComponent<ExplosiveModifier>());
+            }
+            FuckingExplodeYouCunt explosiveModifier = projectile.gameObject.AddComponent<FuckingExplodeYouCunt>();
+
             projectile.SetProjectileSpriteRight("bazooka_projectile", 26, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 26, 7);
 
             projectile.transform.parent = gun.barrelOffset;
@@ -61,24 +67,9 @@ namespace NevernamedsItems
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
         }
-        
         public override void OnPostFired(PlayerController player, Gun gun)
         {
-            //This determines what sound you want to play when you fire a gun.
-            //Sounds names are based on the Gungeon sound dump, which can be found at EnterTheGungeon/Etg_Data/StreamingAssets/Audio/GeneratedSoundBanks/Windows/sfx.txt
-            gun.PreventNormalFireAudio = true;
-            AkSoundEngine.PostEvent("Play_WPN_plasmarifle_shot_01", gameObject);
         }
-
-
-        //All that's left now is sprite stuff. 
-        //Your sprites should be organized, like how you see in the mod folder. 
-        //Every gun requires that you have a .json to match the sprites or else the gun won't spawn at all
-        //.Json determines the hand sprites for your character. You can make a gun two handed by having both "SecondaryHand" and "PrimaryHand" in the .json file, which can be edited through Notepad or Visual Studios
-        //By default this gun is a one-handed weapon
-        //If you need a basic two handed .json. Just use the jpxfrd2.json.
-        //And finally, don't forget to add your Gun to your ETGModule class!
-
         public NNBazooka()
         {
 
@@ -100,6 +91,7 @@ namespace NevernamedsItems
         private void OnDestroy(Projectile projectile)
         {
             //ETGModConsole.Log("On Destroy was called");
+            Exploder.DoDefaultExplosion(projectile.specRigidbody.UnitTopCenter, new Vector2(), null, false, CoreDamageTypes.None, true);
             Exploder.DoDefaultExplosion(projectile.specRigidbody.UnitTopCenter, new Vector2(), null, false, CoreDamageTypes.None, true);
         }
         private void Update()

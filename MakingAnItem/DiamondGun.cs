@@ -57,13 +57,20 @@ namespace NevernamedsItems
         public static int DiamondGunID;
         public override void PostProcessProjectile(Projectile projectile)
         {
-            PlayerController player = projectile.Owner as PlayerController;
-            base.PostProcessProjectile(projectile);
-            if (player.PlayerHasActiveSynergy("Bane of Arthropods")) projectile.OnHitEnemy += this.killArthropods;
-            if (player.PlayerHasActiveSynergy("Smite")) projectile.OnHitEnemy += this.killUndead;
-            if (player.PlayerHasActiveSynergy("Fire Aspect")) projectile.OnHitEnemy += this.applyFire;
-            if (player.PlayerHasActiveSynergy("Knockback")) projectile.knockbackDoer.knockbackMultiplier *= 2f;
-            if (player.PlayerHasActiveSynergy("Sharpness")) projectile.baseData.damage *= 1.5f;
+            try
+            {
+                PlayerController player = projectile.Owner as PlayerController;
+                if (player.PlayerHasActiveSynergy("Bane of Arthropods")) projectile.OnHitEnemy += this.killArthropods;
+                if (player.PlayerHasActiveSynergy("Smite")) projectile.OnHitEnemy += this.killUndead;
+                if (player.PlayerHasActiveSynergy("Fire Aspect")) projectile.OnHitEnemy += this.applyFire;
+                if (player.PlayerHasActiveSynergy("Sharpness")) projectile.baseData.damage *= 1.5f;
+                base.PostProcessProjectile(projectile);
+            }
+            catch (Exception e)
+            {
+                ETGModConsole.Log(e.Message);
+                ETGModConsole.Log(e.StackTrace);
+            }
 
         }
         protected override void OnPickup(PlayerController player)
@@ -122,7 +129,7 @@ namespace NevernamedsItems
             EnemyGuidDatabase.Entries["phaser_spider"],
             EnemyGuidDatabase.Entries["shotgrub"],
             EnemyGuidDatabase.Entries["creech"],
-        };       
+        };
         public DiamondGun()
         {
 

@@ -377,6 +377,13 @@ namespace NevernamedsItems
         public bool doVFX;
         public float stunLength;
     }
+    public class TextBubble
+    {
+        public static void DoAmbientTalk(Transform baseTransform, Vector3 offset, string stringKey, float duration)
+        {
+            TextBoxManager.ShowTextBox(baseTransform.position + offset, baseTransform, duration, stringKey, string.Empty, false, TextBoxManager.BoxSlideOrientation.NO_ADJUSTMENT, false, false);
+        }
+    }
     public class AdjustGunPosition
     {
         public static List<tk2dSpriteAnimationClip> GetGunAnimationClips(Gun gun)

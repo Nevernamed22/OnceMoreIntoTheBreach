@@ -57,7 +57,7 @@ namespace NevernamedsItems
 
             projectile.transform.parent = gun.barrelOffset;
 
-            gun.quality = PickupObject.ItemQuality.C;
+            gun.quality = PickupObject.ItemQuality.EXCLUDED; //C
             gun.encounterTrackable.EncounterGuid = "this is the Blankannon";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
         }

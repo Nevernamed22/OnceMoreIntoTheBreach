@@ -31,7 +31,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "Why ARE they shields?";
-            string longDesc = "Doubles all armour pickups."+"\n\nA suit of armour made out of smaller, less effective pieces of armour."+"\nIt's genius!";
+            string longDesc = "Chance to double armour pickups." + "\n\nA suit of armour made out of smaller, less effective pieces of armour." + "\nIt's genius!";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -41,40 +41,43 @@ namespace NevernamedsItems
 
 
             //Set the rarity of the item
-            item.quality = PickupObject.ItemQuality.EXCLUDED;
+            item.quality = PickupObject.ItemQuality.B;
         }
         Hook healthPickupHook = new Hook(
                 typeof(HealthPickup).GetMethod("Pickup", BindingFlags.Instance | BindingFlags.Public),
-                typeof(ArmouredArmour).GetMethod("heartPickupHookMethod", BindingFlags.Instance | BindingFlags.Public),
-                typeof(HealthPickup)
+                typeof(ArmouredArmour).GetMethod("heartPickupHookMethod")
             );
-        public void heartPickupHookMethod(Action<HealthPickup, PlayerController> orig, HealthPickup self, PlayerController player)
+        public static void heartPickupHookMethod(Action<HealthPickup, PlayerController> orig, HealthPickup self, PlayerController player)
         {
             orig(self, player);
-            if (player.HasPickupID(Gungeon.Game.Items["nn:armoured_armour"].PickupObjectId))
+            if (self.armorAmount > 0)
             {
-                if (self.armorAmount > 0)
+                if (player.HasPickupID(Gungeon.Game.Items["nn:armoured_armour"].PickupObjectId))
                 {
-                    if (ArmourInt == 1)
+                    if (canGiveArmor)
                     {
-                        player.healthHaver.Armor += 1;
-                        ArmourInt = 0;
+                        float procChance = 0.5f;
+                        if (player.PlayerHasActiveSynergy("Armoured Armoured Armour")) procChance = 0.75f;
+                        if (UnityEngine.Random.value >= procChance)
+                        {
+                            player.healthHaver.Armor += 1;
+                        }
+                        canGiveArmor = false;
                     }
                     else
                     {
-                        ArmourInt += 1;
+                        canGiveArmor = true;
                     }
-                    
                 }
             }
         }
-        int ArmourInt = 0;
+        static bool canGiveArmor = false;
         public override void Pickup(PlayerController player)
         {
             bool hasntAlreadyBeenCollected = !this.m_pickedUpThisRun;
             if (hasntAlreadyBeenCollected)
             {
-                player.healthHaver.Armor += 2;
+                player.healthHaver.Armor += 1;
             }
             base.Pickup(player);
         }

@@ -158,6 +158,7 @@
     <Compile Include="Magic Missile.cs" />
     <Compile Include="MastersGun.cs" />
     <Compile Include="MinigunMiniShotgunSynergyForme.cs" />
+    <Compile Include="Multiplicator.cs" />
     <Compile Include="Octagun.cs" />
     <Compile Include="Orgun.cs" />
     <Compile Include="OrgunHeadacheSynergyForme.cs" />
@@ -167,6 +168,7 @@
     <Compile Include="PoisonDartFrog.cs" />
     <Compile Include="Purpler.cs" />
     <Compile Include="Repeatovolver.cs" />
+    <Compile Include="RiskRifle.cs" />
     <Compile Include="Showdown.cs" />
     <Compile Include="SimpleToolbox.cs" />
     <Compile Include="MagicQuiver.cs" />

@@ -122,7 +122,7 @@ namespace NevernamedsItems
                 GoldenArmour.Init();
                 ExoskeletalArmour.Init();
                 PowerArmour.Init();
-                //ArmouredArmour.Init(); //Unfinished
+                ArmouredArmour.Init(); 
                 //Consumable Givers
                 LooseChange.Init();
                 SpaceMetal.Init();
@@ -296,6 +296,8 @@ namespace NevernamedsItems
                 Oxygun.Add();
                 Pista.Add();
                 ClownShotgun.Add();
+                RiskRifle.Add();
+                Multiplicator.Add();
                 Viscerifle.Add();
                 Blankannon.Add();
                 MastersGun.Add();

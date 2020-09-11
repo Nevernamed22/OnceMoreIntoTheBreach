@@ -12,3 +12,17 @@ C:\Users\Travis\source\repos\MakingAnItem\MakingAnItem\obj\Debug\NevernamedsItem
 C:\Users\Travis\source\repos\MakingAnItem\MakingAnItem\obj\Debug\MakingAnItem.dll
 C:\Users\Travis\source\repos\MakingAnItem\MakingAnItem\obj\Debug\MakingAnItem.pdb
 C:\Users\Travis\source\repos\MakingAnItem\MakingAnItem\obj\Debug\NevernamedsItems.csprojAssemblyReference.cache
+C:\Users\Travis\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\NevernamedsItems.csprojAssemblyReference.cache
+C:\Users\Travis\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\MakingAnItem.dll
+C:\Users\Travis\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\MakingAnItem.pdb
+C:\Users\Travis\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\MakingAnItem.dll
+C:\Users\Travis\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\MakingAnItem.pdb
+C:\Users\Travis\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\Assembly-CSharp.Base.mm.dll
+C:\Users\Travis\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\Assembly-CSharp.dll
+C:\Users\Travis\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\MonoMod.RuntimeDetour.dll
+C:\Users\Travis\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\MonoMod.Utils.dll
+C:\Users\Travis\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\UnityEngine.CoreModule.Base.mm.dll
+C:\Users\Travis\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\UnityEngine.CoreModule.dll
+C:\Users\Travis\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\UnityEngine.ImageConversionModule.dll
+C:\Users\Travis\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\UnityEngine.JSONSerializeModule.dll
+C:\Users\Travis\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\NevernamedsItems.csproj.CopyComplete
