@@ -50,7 +50,7 @@ namespace NevernamedsItems
             projectile.baseData.range *= 2f;
             projectile.baseData.damage *= 1.6f;
 
-            gun.quality = PickupObject.ItemQuality.EXCLUDED;
+            gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "this is the Pista";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
