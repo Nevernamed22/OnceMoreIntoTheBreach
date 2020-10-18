@@ -12,7 +12,7 @@ using ItemAPI;
 namespace NevernamedsItems
 {
 
-    public class SporeLauncher : GunBehaviour
+    public class SporeLauncher : AdvancedGunBehavior
     {
         public static void Add()
         {
@@ -68,6 +68,18 @@ namespace NevernamedsItems
             SporeLauncherID = gun.PickupObjectId;
         }        
         public static int SporeLauncherID;
+        public override void OnPostFired(PlayerController player, Gun gun)
+        {
+            if (player.PlayerHasActiveSynergy("Enspore!"))
+            {
+                int id = Gungeon.Game.Items["nn:fungo_cannon"].PickupObjectId;
+                if (player.HasPickupID(id))
+                {
+                    if (UnityEngine.Random.value <= 0.45) { MiscToolbox.GiveAmmoToGunNotInHand(player, id, 1); }
+                }
+            }
+            base.OnPostFired(player, gun);
+        }
         public SporeLauncher()
         {
 

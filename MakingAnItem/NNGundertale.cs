@@ -2,69 +2,81 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Collections;
+using Gungeon;
+using MonoMod;
 using UnityEngine;
 using ItemAPI;
 
 namespace NevernamedsItems
 {
-    public class NNGundertale : PassiveItem
+    public class NNGundertale : AdvancedGunBehavior
     {
-        public static void Init()
+        public static void Add()
         {
-            //The name of the item
-            string itemName = "Gundertale";
+            Gun gun = ETGMod.Databases.Items.NewGun("Gundertale", "gundertale");
+            Game.Items.Rename("outdated_gun_mods:gundertale", "nn:gundertale");
+            var behav = gun.gameObject.AddComponent<NNGundertale>();
+            behav.preventNormalFireAudio = true;
+            behav.preventNormalReloadAudio = true;
+            gun.SetShortDescription("Boom Boom Boom Boom");
+            gun.SetLongDescription("It takes a lunatic to be a legend." + "\n\nThis powerful explosive weapon has one major drawback; it is capable of damaging it's bearer. You'd think more bombs would do that, but the Gungeon forgives.");
 
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/legboot_icon";
+            gun.SetupSprite(null, "gundertale_idle_001", 8);
 
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
+            gun.SetAnimationFPS(gun.shootAnimation, 12);
 
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<NNGundertale>();
+            gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
 
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
+            //GUN STATS
+            gun.DefaultModule.ammoCost = 0;
+            gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
+            gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
+            gun.reloadTime = 1f;
+            gun.DefaultModule.cooldownTime = 10000000000f;
+            gun.muzzleFlashEffects.type = VFXPoolType.None;
+            gun.DefaultModule.numberOfShotsInClip = 10;
+            gun.barrelOffset.transform.localPosition = new Vector3(2.5f, 0.68f, 0f);
+            gun.SetBaseMaxAmmo(30);
 
-            //Ammonomicon entry variables
-            string shortDesc = "Knock It Off";
-            string longDesc = "From a peculiar and less graphically appealing alternate dimension where dodge rolling through bullets or into enemies restores ammo." + "\n\nThis boot is as long as your entire leg!";
+            //BULLET STATS
+            Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
+            projectile.gameObject.SetActive(false);
+            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
+            UnityEngine.Object.DontDestroyOnLoad(projectile);
+            gun.DefaultModule.projectiles[0] = projectile;
+            projectile.baseData.damage *= 0f;
+            projectile.baseData.speed *= 0f;
+            projectile.sprite.renderer.enabled = false;
 
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
 
-            //Adds the actual passive effect to the item
+            gun.quality = PickupObject.ItemQuality.A;
+            ETGMod.Databases.Items.Add(gun, null, "ANY");
 
-            //Set the rarity of the item
-            item.quality = PickupObject.ItemQuality.EXCLUDED; //S
-
-            //Synergy with the Balloon Gun --> Double Radius.
-            //Synergy with Armour of Thorns --> Deal damage to all enemies pushed. dam = dodgerolldam * 3.
         }
 
-
+        protected override void Update()
+        {
+            if (!this.gun.RuntimeModuleData[this.gun.DefaultModule].onCooldown)
+            {
+                this.gun.RuntimeModuleData[this.gun.DefaultModule].onCooldown = true;
+            }
+            base.Update();
+        }
         private void onDodgeRolledOverBullet(Projectile bullet)
         {
-            float procChance;
-            if (Owner.HasPickupID(394)) procChance = 0.7f;
-            else procChance = 0.4f;
-            if (bullet.Owner && bullet.Owner is AIActor)
+            if (this.gun.CurrentOwner.CurrentGun == this.gun && bullet.Owner && bullet.Owner is AIActor)
             {
-                if (UnityEngine.Random.value < 1 /*procChance*/) MakeEnemyNPC(bullet.Owner.aiActor);
+                MakeEnemyNPC(bullet.Owner.aiActor);
             }
         }
         private void onDodgeRolledIntoEnemy(PlayerController player, AIActor enemy)
         {
-            enemy.healthHaver.flashesOnDamage = false;
-            enemy.healthHaver.RegenerateCache();
-            float procChance;
-            if (Owner.HasPickupID(394)) procChance = 0.7f;
-            else procChance = 0.4f;
-            if (enemy && enemy is AIActor)
+            if (this.gun.CurrentOwner.CurrentGun == this.gun && enemy && enemy is AIActor)
             {
-                if (UnityEngine.Random.value < 1 /*procChance*/) MakeEnemyNPC(enemy.aiActor);
+                enemy.healthHaver.flashesOnDamage = false;
+                enemy.healthHaver.RegenerateCache();
+                MakeEnemyNPC(enemy.aiActor);
             }
         }
         private void MakeEnemyNPC(AIActor enemy)
@@ -81,30 +93,30 @@ namespace NevernamedsItems
             }
             if (enemy.healthHaver)
             {
-                UnityEngine.Object.Destroy(enemy.healthHaver);
-            }                       
+                enemy.healthHaver.IsVulnerable = false;
+                enemy.healthHaver.bossHealthBar = HealthHaver.BossBarType.None;
+                enemy.healthHaver.EndBossState(false);
+            }
             if (enemy.aiAnimator)
             {
                 enemy.aiAnimator.PlayUntilCancelled("idle", false, null, -1f, false);
-            }           
+            }
+            //GameUIBossHealthController bossUI = enemy.GetComponent<GameUIBossHealthController>()
         }
-        public override void Pickup(PlayerController player)
+        protected override void OnPickedUpByPlayer(PlayerController player)
         {
             player.OnDodgedProjectile += this.onDodgeRolledOverBullet;
             player.OnRolledIntoEnemy += this.onDodgeRolledIntoEnemy;
-            base.Pickup(player);
+            base.OnPickedUpByPlayer(player);
         }
-        public override DebrisObject Drop(PlayerController player)
+        protected override void OnPostDroppedByPlayer(PlayerController player)
         {
-            DebrisObject result = base.Drop(player);
             player.OnDodgedProjectile -= this.onDodgeRolledOverBullet;
             player.OnRolledIntoEnemy -= this.onDodgeRolledIntoEnemy;
-            return result;
+            base.OnPostDroppedByPlayer(player);
         }
         protected override void OnDestroy()
         {
-            Owner.OnDodgedProjectile -= this.onDodgeRolledOverBullet;
-            Owner.OnRolledIntoEnemy -= this.onDodgeRolledIntoEnemy;
             base.OnDestroy();
         }
     }

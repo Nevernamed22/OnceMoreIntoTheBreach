@@ -16,7 +16,7 @@ namespace NevernamedsItems
             string itemName = "Ring of Ammo Redemption";
 
             //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/pearlbracelet_icon";
+            string resourceName = "NevernamedsItems/Resources/ringofammoredemption_icon";
 
             //Create new GameObject
             GameObject obj = new GameObject(itemName);
@@ -28,8 +28,8 @@ namespace NevernamedsItems
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
 
             //Ammonomicon entry variables
-            string shortDesc = "Thrown Guns Afflict";
-            string longDesc = "Thrown guns afflict a whole host of status effects, and return to their owner." + "\n\nPearls aren't really proper gemstones, but the people who make these are Wizards, not Geologists.";
+            string shortDesc = "Thrown Guns Reload";
+            string longDesc = "Killing an enemy with a thrown gun restores 10% of that gun's ammo."+"\n\nThis ring once belonged to Peale-4, an infamously loot-oriented Gungeoneer."+"\nHis ring is so hungry for loot that it encourages your guns to steal ammo directly from the dead.";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -38,15 +38,15 @@ namespace NevernamedsItems
             //Adds the actual passive effect to the item
 
             //Set the rarity of the item
-            item.quality = PickupObject.ItemQuality.EXCLUDED; //D
+            item.quality = PickupObject.ItemQuality.D; //D
         }
         private void PostProcessThrownGun(Projectile thrownGunProjectile)
         {
             thrownGunProjectile.OnHitEnemy += this.RestoreAmmo;
-            foreach (Component component in thrownGunProjectile.GetComponents<Component>())
-            {
-                ETGModConsole.Log(component.GetType().ToString());
-            }
+            //foreach (Component component in thrownGunProjectile.GetComponents<Component>())
+            //{
+               // ETGModConsole.Log(component.GetType().ToString());
+            //}
         }
         public override void Pickup(PlayerController player)
         {
@@ -57,14 +57,16 @@ namespace NevernamedsItems
         {
             if (arg3)
             {
-                Gun gun = arg1.GetComponent<Gun>();
+                float restorePercent = 0.10f;
+                if ((arg1.Owner as PlayerController).PlayerHasActiveSynergy("Ammo Economy Inflation")) restorePercent = 0.20f;
+                Gun gun = arg1.GetComponentInChildren<Gun>();
                 if (gun)
                 {
-                    gun.GainAmmo(Mathf.FloorToInt(gun.AdjustedMaxAmmo * 0.5f));
+                    gun.GainAmmo(Mathf.FloorToInt(gun.AdjustedMaxAmmo * restorePercent));
                 }
                 else
                 {
-                    //ETGModConsole.Log("Could not find gun component.");
+                    ETGModConsole.Log("Could not find gun component.");
                 }
             }
             else
@@ -79,7 +81,10 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
+            if (Owner != null)
+            {
             Owner.PostProcessThrownGun -= this.PostProcessThrownGun;
+            }
             base.OnDestroy();
         }
     }

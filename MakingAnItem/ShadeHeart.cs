@@ -179,6 +179,7 @@ namespace NevernamedsItems
             "ResourcefulRat_SecondSecretRoom_01"
         };
         private DamageTypeModifier m_poisonImmunity;
+        private DamageTypeModifier m_fireImmunity;
         public override void Pickup(PlayerController player)
         {
             base.Pickup(player);
@@ -187,6 +188,10 @@ namespace NevernamedsItems
             this.m_poisonImmunity.damageMultiplier = 0f;
             this.m_poisonImmunity.damageType = CoreDamageTypes.Poison;
             player.healthHaver.damageTypeModifiers.Add(this.m_poisonImmunity);
+            this.m_fireImmunity = new DamageTypeModifier();
+            this.m_fireImmunity.damageMultiplier = 0f;
+            this.m_fireImmunity.damageType = CoreDamageTypes.Fire;
+            player.healthHaver.damageTypeModifiers.Add(this.m_fireImmunity);
             player.ImmuneToPits.SetOverride("ShadeHeart", true, null);
             //player.SetIsFlying(true, "shade", true, false);
         }
@@ -196,6 +201,7 @@ namespace NevernamedsItems
             //player.SetIsFlying(false, "shade", true, false);
             DebrisObject debrisObject = base.Drop(player);
             player.healthHaver.damageTypeModifiers.Remove(this.m_poisonImmunity);
+            player.healthHaver.damageTypeModifiers.Remove(this.m_fireImmunity);
             player.ImmuneToPits.SetOverride("ShadeHeart", false, null);
             return debrisObject;
         }

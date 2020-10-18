@@ -63,8 +63,6 @@ namespace NevernamedsItems
 
             projectile.transform.parent = gun.barrelOffset;
 
-            gun.PreventNormalFireAudio = true;
-            gun.OverrideNormalFireAudioEvent = "Play_PET_dog_bark_02";
             
             gun.quality = PickupObject.ItemQuality.A;
             gun.encounterTrackable.EncounterGuid = "this is the Doggun";
@@ -73,6 +71,11 @@ namespace NevernamedsItems
             DoggunID = gun.PickupObjectId;
         }
         public static int DoggunID;
+        public override void OnPostFired(PlayerController player, Gun gun)
+        {
+            gun.PreventNormalFireAudio = true;
+            AkSoundEngine.PostEvent("Play_PET_dog_bark_02", gameObject);
+        }
         public override void OnReload(PlayerController player, Gun gun)
         {
             base.OnReload(player, gun);

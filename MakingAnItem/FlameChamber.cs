@@ -6,6 +6,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using Dungeonator;
 
 namespace NevernamedsItems
 {
@@ -30,7 +31,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "Hotshot";
-            string longDesc = "Reloading on an empty clip creates a pool of fire beneath the bearer. Use with caution."+"\n\nThis artefact seems strangely familiar to you, but you've never seen anything like it... yet.";
+            string longDesc = "Reloading on an empty clip creates a pool of fire beneath the bearer. Use with caution." + "\n\nThis artefact seems strangely familiar to you, but you've never seen anything like it... yet.";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -47,77 +48,40 @@ namespace NevernamedsItems
             // 'Burning With Passion' - Flamechamber + Charmed Bow, Charmed Horn, or Charming Rounds --> Item spawns charm creep instead.
             List<string> mandatorySynergyItems = new List<string>() { "nn:flame_chamber" };
             List<string> optionalSynergyItems = new List<string>() { "charmed_bow", "charm_horn", "charming_rounds" };
-            CustomSynergies.Add("Burning With Passion", mandatorySynergyItems, optionalSynergyItems);          
+            CustomSynergies.Add("Burning With Passion", mandatorySynergyItems, optionalSynergyItems);
+        }
 
-            AssetBundle assetBundle = ResourceManager.LoadAssetBundle("shared_auto_001");
-            FlameChamber.goopDefs = new List<GoopDefinition>();
-            foreach (string text in FlameChamber.goops)
-            {
-                GoopDefinition goopDefinition;
-                try
-                {
-                    GameObject gameObject = assetBundle.LoadAsset(text) as GameObject;
-                    goopDefinition = gameObject.GetComponent<GoopDefinition>();
-                }
-                catch
-                {
-                    goopDefinition = (assetBundle.LoadAsset(text) as GoopDefinition);
-                }
-                goopDefinition.name = text.Replace("assets/data/goops/", "").Replace(".asset", "");
-                FlameChamber.goopDefs.Add(goopDefinition);
-            }
-            List<GoopDefinition> list = FlameChamber.goopDefs;
-        }
-        public GoopDefinition Goop;
-        public float Radius = 3f;
-
-        private void GiveFireImmunity()
-        {
-            if (fireImmune == true)
-            {
-                Owner.healthHaver.damageTypeModifiers.Remove(this.m_fireImmunity);
-                fireImmune = false;
-            }
-            fireImmune = true;
-            this.m_fireImmunity = new DamageTypeModifier();
-            this.m_fireImmunity.damageMultiplier = 0f;
-            this.m_fireImmunity.damageType = CoreDamageTypes.Fire;
-            Owner.healthHaver.damageTypeModifiers.Add(this.m_fireImmunity);
-            //ETGModConsole.Log("Fire immunity was given");
-        }
-        private void RemoveFireImmunity()
-        {
-            Owner.healthHaver.damageTypeModifiers.Remove(this.m_fireImmunity);
-            fireImmune = false;
-            //ETGModConsole.Log("Fire immunity was removed");
-        }
-        public bool fireImmune;
-        private DamageTypeModifier m_fireImmunity;
         private void HandleGunReloaded(PlayerController player, Gun playerGun)
         {
             if (playerGun.ClipShotsRemaining == 0)
             {
-                //ETGModConsole.Log("Empty Clip Reload detected");
-                var charmGoop = PickupObjectDatabase.GetById(310)?.GetComponent<WingsItem>()?.RollGoop;
-                float duration = 0.75f;
-                GiveFireImmunity();
-                if (Owner.HasPickupID(527) || Owner.HasPickupID(200) || Owner.HasPickupID(206))
+                LightEnemiesInRadiusOnFire(player);
+                if (player.PlayerHasActiveSynergy("Burning With Passion"))
                 {
-                    DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(charmGoop).TimedAddGoopCircle(Owner.specRigidbody.UnitCenter, 3.75f, duration, false);
+                    DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.CharmGoopDef).TimedAddGoopCircle(Owner.specRigidbody.UnitCenter, 3.75f, 0.75f, false);
                 }
-                else
-                {
-                    DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(FlameChamber.goopDefs[0]).TimedAddGoopCircle(Owner.specRigidbody.UnitCenter, 3.75f, duration, false);
-                }
-                //ETGModConsole.Log("Handled spawning goop");
-                //player.healthHaver.damageTypeModifiers.Add();
-                Invoke("RemoveFireImmunity", 2.0f);
             }
         }
-
-        public void ForceGoop(PlayerController player)
+        private void LightEnemiesInRadiusOnFire(PlayerController user)
         {
-            DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(this.Goop).TimedAddGoopCircle(player.CenterPosition, this.Radius, 0.5f, false);
+                float effectRadius = 5f;
+            if (user.PlayerHasActiveSynergy("Pyromaniac")) effectRadius *= 2;       
+            List<AIActor> activeEnemies = user.CurrentRoom.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+            if (activeEnemies != null)
+            {
+                for (int i = 0; i < activeEnemies.Count; i++)
+                {
+                    AIActor aiactor = activeEnemies[i];
+                    if (aiactor.IsNormalEnemy)
+                    {
+                        float num = Vector2.Distance(user.CenterPosition, aiactor.CenterPosition);
+                        if (num <= effectRadius)
+                        {
+                            ApplyDirectStatusEffects.ApplyDirectFire(aiactor, 10f, EasyStatusEffectAccess.hotLeadEffect.DamagePerSecondToEnemies, EasyStatusEffectAccess.hotLeadEffect.TintColor, EasyStatusEffectAccess.hotLeadEffect.DeathTintColor, EffectResistanceType.Fire, "Fire", true, true);
+                        }
+                    }
+                }
+            }
         }
         public override void Pickup(PlayerController player)
         {
@@ -127,23 +91,14 @@ namespace NevernamedsItems
         public override DebrisObject Drop(PlayerController player)
         {
             player.OnReloadedGun -= this.HandleGunReloaded;
-            if (fireImmune == true) RemoveFireImmunity();
             DebrisObject debrisObject = base.Drop(player);
             return debrisObject;
         }
         protected override void OnDestroy()
         {
             Owner.OnReloadedGun -= this.HandleGunReloaded;
-            if (fireImmune == true) RemoveFireImmunity();
             base.OnDestroy();
         }
-
-        private static List<GoopDefinition> goopDefs;
-
-        private static string[] goops = new string[]
-        {
-            "assets/data/goops/napalmgoopthatworks.asset"
-        };
     }
 
 }

@@ -20,7 +20,7 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:risk_rifle", "nn:risk_rifle");
             gun.gameObject.AddComponent<RiskRifle>();
             gun.SetShortDescription("Danger Zone");
-            gun.SetLongDescription("A strong rifle with one notable drawback; it harms it's owner upon emptying a clip. Be very careful to reload before then."+"\n\n");
+            gun.SetLongDescription("A strong rifle with one notable drawback; it harms it's owner upon emptying a clip. Be very careful to reload before then." + "\n\n");
 
             gun.SetupSprite(null, "riskrifle_idle_001", 8);
 
@@ -58,8 +58,13 @@ namespace NevernamedsItems
         }
         public override void PostProcessProjectile(Projectile projectile)
         {
-            PlayerController playerController = projectile.Owner as PlayerController;
-            base.PostProcessProjectile(projectile);
+            if (projectile.Owner is PlayerController)
+            {
+
+                PlayerController playerController = projectile.Owner as PlayerController;
+                if (playerController.PlayerHasActiveSynergy("Double Risk, Double Reward")) projectile.baseData.damage *= 2f;
+                base.PostProcessProjectile(projectile);
+            }
         }
         public override void OnPostFired(PlayerController player, Gun gun)
         {
@@ -67,7 +72,14 @@ namespace NevernamedsItems
             {
                 if (!player.PlayerHasActiveSynergy("Zero Risk"))
                 {
-                player.healthHaver.ApplyDamage(0.5f, Vector2.zero, "Risky Business", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
+                    if (player.PlayerHasActiveSynergy("Double Risk, Double Reward"))
+                    {
+                        player.healthHaver.ApplyDamage(1f, Vector2.zero, "Very Risky Business", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
+                    }
+                    else
+                    {
+                        player.healthHaver.ApplyDamage(0.5f, Vector2.zero, "Risky Business", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
+                    }
 
                 }
 

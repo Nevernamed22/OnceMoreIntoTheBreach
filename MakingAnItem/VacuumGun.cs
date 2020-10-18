@@ -18,7 +18,7 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:vacuum_gun", "nn:vacuum_gun");
             gun.gameObject.AddComponent<VacuumGun>();
             gun.SetShortDescription("Ranged Weapon");
-            gun.SetLongDescription("Pressing reload sucks up nearby blobs, and uses them as ammo. Cannot gain ammo by any other method."+"\n\nDesigned specifically to combat Blobulonian creatures, in the case of a potential re-emergence of the empire."+"\n\nZZZZZZZ");
+            gun.SetLongDescription("Pressing reload sucks up nearby blobs, and uses them as ammo. Cannot gain ammo by any other method." + "\n\nDesigned specifically to combat Blobulonian creatures, in the case of a potential re-emergence of the empire." + "\n\nZZZZZZZ");
 
             gun.SetupSprite(null, "vacuumgun_idle_001", 8);
 
@@ -71,13 +71,22 @@ namespace NevernamedsItems
                 GameManager.Instance.Dungeon.StartCoroutine(this.HandleEnemySuck(target));
                 target.EraseFromExistence(true);
                 int AmmoWorth = 0;
-                if (EasyEnemyTypeLists.BlobulonEnemiesSMALL.Contains(target.EnemyGuid)) AmmoWorth = 2;
-                else if (EasyEnemyTypeLists.BlobulonEnemiesMEDIUM.Contains(target.EnemyGuid)) AmmoWorth = UnityEngine.Random.Range(3, 7);
-                else if (EasyEnemyTypeLists.BlobulonEnemiesLARGE.Contains(target.EnemyGuid)) AmmoWorth = 10;
-                else if (EasyEnemyTypeLists.BlobulonEnemiesMEGA.Contains(target.EnemyGuid)) AmmoWorth = 20;
+                if (EasyEnemyTypeLists.BlobulonEnemiesSMALL.Contains(target.EnemyGuid)) AmmoWorth = 5;
+                else if (EasyEnemyTypeLists.BlobulonEnemiesMEDIUM.Contains(target.EnemyGuid)) AmmoWorth = 14;
+                else if (EasyEnemyTypeLists.BlobulonEnemiesLARGE.Contains(target.EnemyGuid)) AmmoWorth = 20;
+                else if (EasyEnemyTypeLists.BlobulonEnemiesMEGA.Contains(target.EnemyGuid)) AmmoWorth = 30;
                 if (AmmoWorth > 0)
                 {
                     gun.ammo += AmmoWorth;
+                }
+            }
+            else if (target.EnemyGuid == EnemyGuidDatabase.Entries["chicken"])
+            {
+                if (gun.CurrentOwner && (gun.CurrentOwner as PlayerController).PlayerHasActiveSynergy("Chickadee"))
+                {
+                    GameManager.Instance.Dungeon.StartCoroutine(this.HandleEnemySuck(target));
+                    target.EraseFromExistence(true);
+                    gun.ammo += 5;
                 }
             }
         }

@@ -65,7 +65,7 @@ namespace NevernamedsItems
                     {
                         Gun gun = ETGMod.Databases.Items["triple_crossbow"] as Gun;
                         GameActorSpeedEffect gameActorSpeedEffect = gun.DefaultModule.projectiles[0].speedEffect;
-                        EasyApplyDirectSlow.ApplyDirectSlow(arg2.gameActor, 20f, gameActorSpeedEffect.SpeedMultiplier, Color.white, Color.white, EffectResistanceType.None, "Snail Bullets", false, false);
+                        ApplyDirectStatusEffects.ApplyDirectSlow(arg2.gameActor, 20f, gameActorSpeedEffect.SpeedMultiplier, Color.white, Color.white, EffectResistanceType.None, "Snail Bullets", false, false);
                     }
                 }
             }

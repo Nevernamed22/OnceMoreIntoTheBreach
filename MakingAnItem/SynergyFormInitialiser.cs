@@ -37,6 +37,31 @@ namespace NevernamedsItems
             WolfgunSynergyForme.NonSynergyGunId = Corgun.DoggunID;
             WolfgunSynergyForme.SynergyGunId = Wolfgun.WolfgunID;
             WolfgunSynergyForme.SynergyToCheck = "Discord and Rhyme";
+            //PENCIL - MIGHTIER THAN THE GUN FORME
+            AdvancedTransformGunSynergyProcessor MightierThanTheGunForme = (PickupObjectDatabase.GetById(Pencil.pencilID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
+            MightierThanTheGunForme.NonSynergyGunId = Pencil.pencilID;
+            MightierThanTheGunForme.SynergyGunId = PenPencilSynergy.penID;
+            MightierThanTheGunForme.SynergyToCheck = "Mightier Than The Gun";
+            //REKEYTER - RESHELLETONKEYTER
+            AdvancedTransformGunSynergyProcessor ReShelletonKeyterForme = (PickupObjectDatabase.GetById(Rekeyter.RekeyterID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
+            ReShelletonKeyterForme.NonSynergyGunId = Rekeyter.RekeyterID;
+            ReShelletonKeyterForme.SynergyGunId = ReShelletonKeyter.ReShelletonKeyterID;
+            ReShelletonKeyterForme.SynergyToCheck = "ReShelletonKeyter";
+            //AM0 - SPREAD FORME
+            AdvancedTransformGunSynergyProcessor AM0SpreadForm = (PickupObjectDatabase.GetById(AM0.AM0ID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
+            AM0SpreadForm.NonSynergyGunId = AM0.AM0ID;
+            AM0SpreadForm.SynergyGunId = AM0SpreadForme.AM0SpreadFormeID;
+            AM0SpreadForm.SynergyToCheck = "Spreadshot";
+            //BULLET BLADE - GHOST SWORD
+            AdvancedTransformGunSynergyProcessor GhostBladeForme = (PickupObjectDatabase.GetById(BulletBlade.BulletBladeID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
+            GhostBladeForme.NonSynergyGunId = BulletBlade.BulletBladeID;
+            GhostBladeForme.SynergyGunId = BulletBladeGhostForme.GhostBladeID;
+            GhostBladeForme.SynergyToCheck = "GHOST SWORD!!!";
+            //HOT GLUE GUN - GLUE GUNNER
+            AdvancedTransformGunSynergyProcessor GlueGunnerForme = (PickupObjectDatabase.GetById(HotGlueGun.HotGlueGunID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
+            GlueGunnerForme.NonSynergyGunId = HotGlueGun.HotGlueGunID;
+            GlueGunnerForme.SynergyGunId = GlueGunGlueGunnerSynergy.GlueGunnerID;
+            GlueGunnerForme.SynergyToCheck = "Glue Gunner";
             //-------------------------------------------------------------DUAL WIELDING
             //STUN GUN & TRANQ GUN
             AdvancedDualWieldSynergyProcessor StunTranqDualSTUN = (PickupObjectDatabase.GetById(StunGun.StunGunID) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
@@ -52,6 +77,13 @@ namespace NevernamedsItems
             AdvancedDualWieldSynergyProcessor BlowFrogDualFROG = (PickupObjectDatabase.GetById(PoisonDartFrog.PoisonDartFrogID) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
             BlowFrogDualFROG.PartnerGunID = Blowgun.BlowgunID;
             BlowFrogDualFROG.SynergyNameToCheck = "Dartistry";
+            //BOOKLLET & LOREBOOK
+            AdvancedDualWieldSynergyProcessor BooklletLorebookDualLORE = (PickupObjectDatabase.GetById(Lorebook.LorebookID) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
+            BooklletLorebookDualLORE.PartnerGunID = Bookllet.BooklletID;
+            BooklletLorebookDualLORE.SynergyNameToCheck = "Librarian";
+            AdvancedDualWieldSynergyProcessor BooklletLorebookDualBOOK = (PickupObjectDatabase.GetById(Bookllet.BooklletID) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
+            BooklletLorebookDualBOOK.PartnerGunID = Lorebook.LorebookID;
+            BooklletLorebookDualBOOK.SynergyNameToCheck = "Librarian";
         }
     }
 }

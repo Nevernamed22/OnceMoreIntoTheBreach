@@ -6,99 +6,127 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
+using ItemAPI;
 
 namespace NevernamedsItems
 {
 
-    public class G20 : GunBehaviour
+    public class G20 : AdvancedGunBehavior
     {
 
 
         public static void Add()
         {
-            // Get yourself a new gun "base" first.
-            // Let's just call it "Basic Gun", and use "jpxfrd" for all sprites and as "codename" All sprites must begin with the same word as the codename. For example, your firing sprite would be named "jpxfrd_fire_001".
-            Gun gun = ETGMod.Databases.Items.NewGun("G20", "g20");
-            // "kp:basic_gun determines how you spawn in your gun through the console. You can change this command to whatever you want, as long as it follows the "name:itemname" template.
+
+            Gun gun = ETGMod.Databases.Items.NewGun("G20", "g20rework");
             Game.Items.Rename("outdated_gun_mods:g20", "nn:g20");
-            gun.gameObject.AddComponent<NNMinigun>();
-            //These two lines determines the description of your gun, ".SetShortDescription" being the description that appears when you pick up the gun and ".SetLongDescription" being the description in the Ammonomicon entry. 
+            gun.gameObject.AddComponent<G20>();
             gun.SetShortDescription("Roll and Die");
-            gun.SetLongDescription("Randomly picks between 1 and 20 damage when fired."+"\n\nThe preferred weapon of a young disciple of Icosahedrax, stolen by his michevious nephew.");
-            // This is required, unless you want to use the sprites of the base gun.
-            // That, by default, is the pea shooter.
-            // SetupSprite sets up the default gun sprite for the ammonomicon and the "gun get" popup.
-            // WARNING: Add a copy of your default sprite to Ammonomicon Encounter Icon Collection!
-            // That means, "sprites/Ammonomicon Encounter Icon Collection/defaultsprite.png" in your mod .zip. You can see an example of this with inside the mod folder.
-            gun.SetupSprite(null, "g20_idle_001", 8);
-            // ETGMod automatically checks which animations are available.
-            // The numbers next to "shootAnimation" determine the animation fps. You can also tweak the animation fps of the reload animation and idle animation using this method.
-            gun.SetAnimationFPS(gun.shootAnimation, 20);
-            // Every modded gun has base projectile it works with that is borrowed from other guns in the game. 
-            // The gun names are the names from the JSON dump! While most are the same, some guns named completely different things. If you need help finding gun names, ask a modder on the Gungeon discord.
-            gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(38) as Gun, true, false);
-            // Here we just take the default projectile module and change its settings how we want it to be.
+            gun.SetLongDescription("Randomises stats upon entering combat." + "\n\nThe preferred weapon of a young disciple of Icosahedrax, stolen by his michevious nephew.");
+            gun.SetupSprite(null, "g20rework_idle_001", 8);
+            gun.SetAnimationFPS(gun.shootAnimation, 14);
+
+            gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
+
+            //GUN STATS
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
-            gun.reloadTime = 1.1f;
-            //Bullet Position
-            //gun.barrelOffset.transform.localPosition += new Vector3(0.1f, 0.1f, 0.1f);
-            //gun.projectile.transform.parent = gun.barrelOffset;
+            gun.reloadTime = 1f;
+            gun.DefaultModule.cooldownTime = 0.5f;
+            gun.DefaultModule.numberOfShotsInClip = 10;
+            gun.barrelOffset.transform.localPosition = new Vector3(2.31f, 0.75f, 0f);
+            gun.SetBaseMaxAmmo(350);
 
-            gun.DefaultModule.cooldownTime = 0.1f;
-            gun.DefaultModule.numberOfShotsInClip = 4;
-            gun.SetBaseMaxAmmo(200);
-            // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.
-            gun.quality = PickupObject.ItemQuality.EXCLUDED;
-            gun.encounterTrackable.EncounterGuid = "this is the G20";
+            //BULLET STATS
+            Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
+            projectile.gameObject.SetActive(false);
+            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
+            UnityEngine.Object.DontDestroyOnLoad(projectile);
+            gun.DefaultModule.projectiles[0] = projectile;
+            projectile.transform.parent = gun.barrelOffset;
+            projectile.baseData.speed *= 1f;
+            projectile.baseData.damage *= 2f;
+            projectile.baseData.range *= 1f;
+            projectile.SetProjectileSpriteRight("g20_projectile", 11, 11, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
+
+            gun.quality = PickupObject.ItemQuality.D;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
-
+            G20ID = gun.PickupObjectId;
         }
-        public float newDamage;
+        public static int G20ID;
+        public override void OnReloadPressedSafe(PlayerController player, Gun gun, bool manualReload)
+        {
+            if (player.PlayerHasActiveSynergy("Rerollin Rollin Rollin"))
+            {
+                if ((gun.ClipCapacity == gun.ClipShotsRemaining) || (gun.CurrentAmmo == gun.ClipShotsRemaining))
+                {
+                    if (gun.CurrentAmmo >= 10)
+                    {
+                        gun.CurrentAmmo -= 10;
+                        EnteredCombat();
+                    }
+                }
+            }
+            base.OnReloadPressedSafe(player, gun, manualReload);
+        }
+        protected override void OnPickedUpByPlayer(PlayerController player)
+        {
+            player.OnEnteredCombat += this.EnteredCombat;
+            base.OnPickedUpByPlayer(player);
+        }
+        protected override void OnPostDroppedByPlayer(PlayerController player)
+        {
+            player.OnEnteredCombat -= this.EnteredCombat;
+            base.OnPostDroppedByPlayer(player);
+        }
+        protected override void Update()
+        {
+            if (ClipSize != -1 && gun.DefaultModule.numberOfShotsInClip != ClipSize)
+            {
+                gun.DefaultModule.numberOfShotsInClip = ClipSize;
+            }
+            if (CooldownTime != -1 && gun.DefaultModule.cooldownTime != CooldownTime)
+            {
+                gun.DefaultModule.cooldownTime = CooldownTime;
+            }
+            base.Update();
+        }
+        private void EnteredCombat()
+        {
+            gun.reloadTime = UnityEngine.Random.Range(10f, 191f) / 100f;
 
-        // This determines what the projectile does when it fires.
+            CooldownTime = UnityEngine.Random.Range(10f, 81f) / 100f;
+            ClipSize = UnityEngine.Random.Range(1, 31);
+
+            gun.DefaultModule.numberOfShotsInClip = ClipSize;
+            gun.DefaultModule.cooldownTime = CooldownTime;
+
+            damageMod = UnityEngine.Random.Range(10f, 211f) / 100f;
+            rangeMod = UnityEngine.Random.Range(10f, 191f) / 100f;
+            speedMod = UnityEngine.Random.Range(10f, 191f) / 100f;
+            knockbackMod = UnityEngine.Random.Range(10f, 191f) / 100f;
+            scaleMod = UnityEngine.Random.Range(10f, 191f) / 100f;
+        }
+        private int ClipSize = -1;
+        private float CooldownTime = -1;
         public override void PostProcessProjectile(Projectile projectile)
         {
-            PlayerController playerController = this.gun.CurrentOwner as PlayerController;
-            if (playerController == null)
-                this.gun.ammo = this.gun.GetBaseMaxAmmo();
-            //projectile.baseData allows you to modify the base properties of your projectile module.
-            //In our case, our gun uses modified projectiles from the ak-47.
-            //Setting static values for a custom gun's projectile stats prevents them from scaling with player stats and bullet modifiers (damage, shotspeed, knockback)
-            //You have to multiply the value of the original projectile you're using instead so they scale accordingly. For example if the projectile you're using as a base has 10 damage and you want it to be 6 you use this
-            //In our case, our projectile has a base damage of 5.5, so we multiply it by 1.1 so it does 10% more damage from the ak-47.
-            projectile.baseData.damage -= 13f;
-            projectile.baseData.speed *= 1f;
-            newDamage = UnityEngine.Random.Range(1,21);
-            projectile.baseData.damage += newDamage;
-            float newSize = newDamage /= 100;
-            newSize += 1;
-            projectile.AdditionalScaleMultiplier *= newSize;
-            this.gun.DefaultModule.ammoCost = 1;
+            projectile.baseData.damage *= damageMod;
+            projectile.baseData.force *= knockbackMod;
+            projectile.baseData.speed *= speedMod;
+            projectile.baseData.range *= rangeMod;
+            projectile.UpdateSpeed();
+            projectile.RuntimeUpdateScale(scaleMod);
             base.PostProcessProjectile(projectile);
-            //This is for when you want to change the sprite of your projectile and want to do other magic fancy stuff. But for now let's just change the sprite. 
-            //Refer to BasicGunProjectile.cs for changing the sprite.
-
         }
+        private float damageMod = 1;
+        private float rangeMod = 1;
+        private float speedMod = 1;
+        private float knockbackMod = 1;
+        private float scaleMod = 1;
 
-        public override void OnPostFired(PlayerController player, Gun gun)
-        {
-            //This determines what sound you want to play when you fire a gun.
-            //Sounds names are based on the Gungeon sound dump, which can be found at EnterTheGungeon/Etg_Data/StreamingAssets/Audio/GeneratedSoundBanks/Windows/sfx.txt
-            gun.PreventNormalFireAudio = true;
-            AkSoundEngine.PostEvent("Play_WPN_smileyrevolver_shot_01", gameObject);
-        }
-
-
-        //All that's left now is sprite stuff. 
-        //Your sprites should be organized, like how you see in the mod folder. 
-        //Every gun requires that you have a .json to match the sprites or else the gun won't spawn at all
-        //.Json determines the hand sprites for your character. You can make a gun two handed by having both "SecondaryHand" and "PrimaryHand" in the .json file, which can be edited through Notepad or Visual Studios
-        //By default this gun is a one-handed weapon
-        //If you need a basic two handed .json. Just use the jpxfrd2.json.
-        //And finally, don't forget to add your Gun to your ETGModule class!
         public G20()
         {
 

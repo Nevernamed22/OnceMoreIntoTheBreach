@@ -17,7 +17,7 @@ namespace NevernamedsItems
             string itemName = "Showdown";
 
             //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/goomperorscrown_icon";
+            string resourceName = "NevernamedsItems/Resources/showdown_icon";
 
             //Create new GameObject
             GameObject obj = new GameObject(itemName);
@@ -30,7 +30,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "Now it's just you and me...";
-            string longDesc = "Prevents bosses from being able to spawn additional backup."+"\n\nAn icon of the one-on-one gunfights of days gone by.";
+            string longDesc = "Prevents bosses from being able to spawn additional backup." + "\n\nAn icon of the one-on-one gunfights of days gone by.";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -39,13 +39,39 @@ namespace NevernamedsItems
             //Adds the actual passive effect to the item
 
             //Set the rarity of the item
-            item.quality = PickupObject.ItemQuality.EXCLUDED; //D
+            item.quality = PickupObject.ItemQuality.D; 
         }
         public void AIActorMods(AIActor target)
         {
-            if (EasyEnemyTypeLists.BossMinions.Contains(target.EnemyGuid))
+            if (!target.healthHaver.IsBoss)
             {
-
+                if (target.GetAbsoluteParentRoom().area.PrototypeRoomCategory == PrototypeDungeonRoom.RoomCategory.BOSS && (!target.IsHarmlessEnemy || target.EnemyGuid == EnemyGuidDatabase.Entries["mine_flayers_claymore"]) && target.GetAbsoluteParentRoom().IsSealed)
+                {
+                    if (Owner.PlayerHasActiveSynergy("Frenemies"))
+                    {
+                        target.ApplyEffect(GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultPermanentCharmEffect, 1f, null);
+                        target.IsHarmlessEnemy = true;
+                    }
+                    else
+                    {
+                        target.EraseFromExistenceWithRewards(true);
+                    }
+                    if (Owner.PlayerHasActiveSynergy("Dirty Tricks"))
+                    {
+                        List<AIActor> activeEnemies = target.GetAbsoluteParentRoom().GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+                        if (activeEnemies != null)
+                        {
+                            for (int i = 0; i < activeEnemies.Count; i++)
+                            {
+                                AIActor aiactor = activeEnemies[i];
+                                if (aiactor.healthHaver.IsBoss)
+                                {
+                                    aiactor.healthHaver.ApplyDamage(50, Vector2.zero, "Dirty Tricks", CoreDamageTypes.None, DamageCategory.Unstoppable, true, null, true);
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 

@@ -71,6 +71,9 @@
     <Compile Include="AdvancedPlayerOrbital.cs" />
     <Compile Include="AlkaliBullets.cs" />
     <Compile Include="AllJammedState.cs" />
+    <Compile Include="AM0.cs" />
+    <Compile Include="AM0SpreadForme.cs" />
+    <Compile Include="Ammolite.cs" />
     <Compile Include="AntimagicRounds.cs" />
     <Compile Include="AntimaterielRifle.cs" />
     <Compile Include="AntimatterBullets.cs" />
@@ -85,6 +88,7 @@
     <Compile Include="BehaviourAPI\Hooks.cs" />
     <Compile Include="BehaviourAPI\OverrideBehavior.cs" />
     <Compile Include="BehaviourAPI\Tools.cs" />
+    <Compile Include="Birdshot.cs" />
     <Compile Include="BlackHolster.cs" />
     <Compile Include="BlankBoots.cs" />
     <Compile Include="BlankKey.cs" />
@@ -102,76 +106,112 @@
     <Compile Include="BomberJacket.cs" />
     <Compile Include="Bombinomicon.cs" />
     <Compile Include="BoneDie.cs" />
+    <Compile Include="Bookllet.cs" />
     <Compile Include="BookOfMimicAnatomy.cs" />
     <Compile Include="BootLeg.cs" />
     <Compile Include="BoxOfBlanks.cs" />
     <Compile Include="BrownGuonStone.cs" />
+    <Compile Include="BulletBlade.cs" />
+    <Compile Include="BulletBladeGhostForme.cs" />
     <Compile Include="BulletBullets.cs" />
     <Compile Include="BulletKinPlushie.cs" />
     <Compile Include="Bullut.cs" />
+    <Compile Include="CardinalsMitre.cs" />
     <Compile Include="CaseyMimic.cs" />
     <Compile Include="ChanceKinEffigy.cs" />
     <Compile Include="ChaosRuby.cs" />
     <Compile Include="CheeseHeart.cs" />
+    <Compile Include="ChemGrenade.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="ClownShotgun.cs" />
     <Compile Include="CombatKnife.cs" />
+    <Compile Include="ComponentListers.cs" />
     <Compile Include="Corgun.cs" />
     <Compile Include="DartRifle.cs" />
     <Compile Include="Defender.cs" />
     <Compile Include="Demolitionist.cs" />
+    <Compile Include="DeskFan.cs" />
     <Compile Include="DiamondGun.cs" />
     <Compile Include="DiscGun.cs" />
     <Compile Include="DiscGunSuperDiscForme.cs" />
+    <Compile Include="DisplacerCannon.cs" />
     <Compile Include="EasyEnemyTypeLists.cs" />
-    <Compile Include="EasyGoopDefinitions.cs" />
+    <Compile Include="EasyStorageDatabases.cs" />
     <Compile Include="EmptyRounds.cs" />
     <Compile Include="EndlessBullets.cs" />
     <Compile Include="ExampleGun.cs" />
     <Compile Include="ExistantGunModifiers.cs" />
     <Compile Include="ExoskeletalArmour.cs" />
-    <Compile Include="ExtendedColours.cs" />
     <Compile Include="Felissile.cs" />
     <Compile Include="FingerGuns.cs" />
     <Compile Include="FireLance.cs" />
+    <Compile Include="FungoCannon.cs" />
+    <Compile Include="GlobbitMED.cs" />
+    <Compile Include="GlobbitMEGA.cs" />
+    <Compile Include="GlobbitSMALL.cs" />
+    <Compile Include="GlueGunGlueGunnerSynergy.cs" />
     <Compile Include="GolfRifle.cs" />
     <Compile Include="Gonne.cs" />
     <Compile Include="GoomperorsCrown.cs" />
+    <Compile Include="GrandfatherGlock.cs" />
     <Compile Include="GreekFire.cs" />
+    <Compile Include="GunjurersBelt.cs" />
     <Compile Include="Gunshark.cs" />
     <Compile Include="GunsharkMegasharkSynergyForme.cs" />
     <Compile Include="GunslingerEmblem.cs" />
+    <Compile Include="Gunycomb.cs" />
     <Compile Include="HandCannon.cs" />
     <Compile Include="HandMortar.cs" />
+    <Compile Include="HeavyAssaultRifle.cs" />
     <Compile Include="HellfireRounds.cs" />
+    <Compile Include="HoneyPot.cs" />
+    <Compile Include="HotGlueGun.cs" />
     <Compile Include="Hwacha.cs" />
+    <Compile Include="Icicle.cs" />
     <Compile Include="InitialiseSynergies.cs" />
+    <Compile Include="IntersectEnemyBulletsItem.cs" />
     <Compile Include="ItemAPI\AdvancedGunBehaviour.cs" />
     <Compile Include="ItemAPI\ApplyOffset.cs" />
     <Compile Include="ItemAPI\DualWieldSynergyProcessor.cs" />
     <Compile Include="ItemAPI\GunTools.cs" />
     <Compile Include="Justice.cs" />
     <Compile Include="Kalashnirang.cs" />
+    <Compile Include="Keymmolet.cs" />
     <Compile Include="Lantaka.cs" />
+    <Compile Include="LockdownBullets.cs" />
     <Compile Include="LockdownStatusEffect.cs" />
+    <Compile Include="Lorebook.cs" />
     <Compile Include="LovePistol.cs" />
     <Compile Include="LovePotion.cs" />
     <Compile Include="Magic Missile.cs" />
     <Compile Include="MastersGun.cs" />
     <Compile Include="MengerAmmoBox.cs" />
     <Compile Include="MinigunMiniShotgunSynergyForme.cs" />
+    <Compile Include="Muggun.cs" />
     <Compile Include="Multiplicator.cs" />
+    <Compile Include="ObsidianPistol.cs" />
     <Compile Include="Octagun.cs" />
     <Compile Include="Orgun.cs" />
     <Compile Include="OrgunHeadacheSynergyForme.cs" />
     <Compile Include="Oxygun.cs" />
+    <Compile Include="Pencil.cs" />
+    <Compile Include="PenPencilSynergy.cs" />
     <Compile Include="Permafrost.cs" />
+    <Compile Include="PhaserSpiderling.cs" />
     <Compile Include="Pista.cs" />
     <Compile Include="PoisonDartFrog.cs" />
+    <Compile Include="CustomGoopEffectHandler.cs" />
+    <Compile Include="PortableHole.cs" />
+    <Compile Include="Protean.cs" />
     <Compile Include="Purpler.cs" />
+    <Compile Include="Ranger.cs" />
+    <Compile Include="Rekeyter.cs" />
     <Compile Include="Repeatovolver.cs" />
+    <Compile Include="ReShelletonKeyter.cs" />
     <Compile Include="RingOfAmmoRedemption.cs" />
     <Compile Include="RiskRifle.cs" />
+    <Compile Include="RiskyRing.cs" />
+    <Compile Include="SetupCrossModIDs.cs" />
     <Compile Include="Showdown.cs" />
     <Compile Include="SimpleToolbox.cs" />
     <Compile Include="MagicQuiver.cs" />
@@ -184,12 +224,17 @@
     <Compile Include="SpearOfJustice.cs" />
     <Compile Include="Spiral.cs" />
     <Compile Include="SporeLauncher.cs" />
+    <Compile Include="StuffIStoleFromApacheThatIDontUnderstand.cs" />
     <Compile Include="StunGun.cs" />
     <Compile Include="SynergyFormInitialiser.cs" />
+    <Compile Include="Toolbox.cs" />
+    <Compile Include="ToolGun.cs" />
+    <Compile Include="Unpredictabullets.cs" />
     <Compile Include="UnusCentum.cs" />
     <Compile Include="UpNUp.cs" />
     <Compile Include="VacuumGun.cs" />
     <Compile Include="Viscerifle.cs" />
+    <Compile Include="WarpBullets.cs" />
     <Compile Include="WhereTheMagicHappens.cs" />
     <Compile Include="ClaySculpture.cs" />
     <Compile Include="CleansingRounds.cs" />
@@ -359,6 +404,7 @@
     <Compile Include="Wonderchest.cs" />
     <Compile Include="WoodenBullets.cs" />
     <Compile Include="WoodGuonStone.cs" />
+    <Compile Include="Wrench.cs" />
     <Compile Include="YellowGuonStone.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -945,6 +991,70 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\mengerammobox_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\showdown_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ammolite_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\cardinalsmitre_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\gunjurersbelt_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\birdshot_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\blombk_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\chemgrenade_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\toolbox_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\unpredictabullets_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\obsidianpistol_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\lockdownbullets_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ringofammoredemption_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\bombardiershells_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\riskyring_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\warpbullets_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\pitgooptex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\portablehole_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\keymmolet_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\honeypot_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\StatusEffectVFX\plaguevfxframe_001.png" />
+    <EmbeddedResource Include="Resources\StatusEffectVFX\plaguevfxframe_002.png" />
+    <EmbeddedResource Include="Resources\StatusEffectVFX\plaguevfxframe_003.png" />
+    <EmbeddedResource Include="Resources\StatusEffectVFX\plaguevfxframe_004.png" />
+    <EmbeddedResource Include="Resources\StatusEffectVFX\plaguevfxframe_005.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -40,6 +40,18 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D;
+
+            //ETGModConsole.Log("ID: " + item.PickupObjectId);
+
+            WholeBulletKinID = item.PickupObjectId;
+
+            //ETGModConsole.Log("Stored ID: " + WholeBulletKinID);
+        }
+        public static int WholeBulletKinID;
+        public override DebrisObject Drop(PlayerController player)
+        {
+            DebrisObject result = base.Drop(player);
+            return result;
         }
     }
 }

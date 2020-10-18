@@ -117,19 +117,19 @@ namespace NevernamedsItems
             base.OnReload(player, gun);
             flightCheck(gun);
         }
-        protected override void OnPickup(PlayerController player)
+        protected override void OnPickedUpByPlayer(PlayerController player)
         {
             //ETGModConsole.Log("OnPickup Was Triggered");
-            base.OnPickup(player);
+            base.OnPickedUpByPlayer(player);
             player.GunChanged += this.changedGun;
             flightCheck(player.CurrentGun);
         }
-        protected override void OnPostDrop(PlayerController player)
+        protected override void OnPostDroppedByPlayer(PlayerController player)
         {
             player.GunChanged -= this.changedGun;
             flightCheck(player.CurrentGun);
             player.stats.RecalculateStats(player, true, false);
-            base.OnPostDrop(player);
+            base.OnPostDroppedByPlayer(player);
         }
         public Purpler()
         {

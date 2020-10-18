@@ -170,7 +170,7 @@ namespace NevernamedsItems
         private bool currentHasCrest, lastHasCrest;
         protected override void Update()
         {
-            if (gun.CurrentOwner)
+            if (gun.CurrentOwner != null)
             {
                 currentHasCrest = (gun.CurrentOwner as PlayerController).HasPickupID(305);
                 currentArmour = gun.CurrentOwner.healthHaver.Armor;
@@ -182,10 +182,10 @@ namespace NevernamedsItems
                 lastHP = currentHP;
                 lastArmour = currentArmour;
                 lastHasCrest = currentHasCrest;
-            }
-            if ((gun.CurrentAmmo == 0) || (gun.DefaultModule.numberOfShotsInClip != gun.CurrentAmmo))
-            {
-                RecalculateClip(gun.CurrentOwner as PlayerController);
+                if ((gun.CurrentAmmo == 0) || (gun.DefaultModule.numberOfShotsInClip != gun.CurrentAmmo))
+                {
+                    RecalculateClip(gun.CurrentOwner as PlayerController);
+                }
             }
             base.Update();
         }

@@ -47,8 +47,10 @@ namespace NevernamedsItems
 
             List<string> mandatorySynergyItems = new List<string>() { "nn:lewis", "battle_standard" };
             CustomSynergies.Add("Rally The Slacker", mandatorySynergyItems);
-        }
 
+            LewisID = item.PickupObjectId;
+        }
+        public static int LewisID;
         //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!
 
         protected override void DoEffect(PlayerController user)

@@ -18,7 +18,7 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:unus_centum", "nn:unus_centum");
             gun.gameObject.AddComponent<UnusCentum>();
             gun.SetShortDescription("Forget Me Not");
-            gun.SetLongDescription("Has 100 shots. Cannot gain ammo."+"\n\nThe sidearm of a glistening sentinel, who came to the Gungeon not to flee his inevitable death, but to embrace it.");
+            gun.SetLongDescription("Has 100 shots. Cannot gain ammo." + "\n\nThe sidearm of a glistening sentinel, who came to the Gungeon not to flee his inevitable death, but to embrace it.");
 
             gun.SetupSprite(null, "unuscentum_idle_001", 8);
 
@@ -61,6 +61,8 @@ namespace NevernamedsItems
             {
                 player.inventory.DestroyCurrentGun();
             }
+           gun.PreventNormalFireAudio = true;
+            AkSoundEngine.PostEvent("Play_WPN_deck4rd_shot_01", gameObject);
         }
         public UnusCentum()
         {

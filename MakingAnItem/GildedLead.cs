@@ -31,7 +31,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "Pays Off";
-            string longDesc = "Chance to consume a casing when you fire a bullet. If a bullet consumes a casing it will have it's damage doubled."+"\nBuffed bullets that hit enemies will drop their casing onto the floor again. You miss, you lose out."+"\n\nBullets found scattered at the seat of the Charthurian Throne.";
+            string longDesc = "Chance to consume a casing when you fire a bullet. If a bullet consumes a casing it will have it's damage doubled." + "\nBuffed bullets that hit enemies will drop their casing onto the floor again. You miss, you lose out." + "\n\nBullets found scattered at the seat of the Charthurian Throne.";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -94,8 +94,11 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.PostProcessProjectile -= this.PostProcessProjectile;
-            Owner.PostProcessBeam -= this.PostProcessBeam;
+            if (Owner)
+            {
+                Owner.PostProcessProjectile -= this.PostProcessProjectile;
+                Owner.PostProcessBeam -= this.PostProcessBeam;
+            }
             base.OnDestroy();
         }
     }

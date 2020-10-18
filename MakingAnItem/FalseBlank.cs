@@ -69,6 +69,11 @@ namespace NevernamedsItems
             {
                 giveSomeCurse(user);
             }            
+            if (user.PlayerHasActiveSynergy("Transparent Lies"))
+            {
+                PickupObject byId = PickupObjectDatabase.GetById(565);
+                user.AcquirePassiveItemPrefabDirectly(byId as PassiveItem);
+            }
             user.ForceBlank(25f, 0.5f, false, true, null, true, -1f);
         }
 

@@ -5,6 +5,7 @@ using System.Text;
 using Dungeonator;
 using UnityEngine;
 using ItemAPI;
+using System.Collections;
 
 namespace NevernamedsItems
 {
@@ -29,7 +30,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "They are mine.";
-            string longDesc = "Makes the Gundead your own."+"\n\nDestroy them, but do not waste them.";
+            string longDesc = "Makes the Gundead your own." + "\n\nDestroy them, but do not waste them.";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -41,54 +42,112 @@ namespace NevernamedsItems
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.S;
 
-            //YELLOW CHAMBER SYNERGY --> All Seeing
-            List<string> mandatorySynergyItems = new List<string>() { "nn:kaliber's_eye", "yellow_chamber" };
-            CustomSynergies.Add("All Seeing", mandatorySynergyItems);
-
             List<string> mandatorySynergyItems2 = new List<string>() { "nn:miners_bullets" };
             List<string> optionalSynergyItems2 = new List<string>() { "nn:kaliber's_eye", "bloody_eye", "rolling_eye", "eye_of_the_beholster" };
             CustomSynergies.Add("Eye of the Spider", mandatorySynergyItems2, optionalSynergyItems2);
 
             //NPC Pools
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
+            KalibersEyeID = item.PickupObjectId;
+        }
+        public static int KalibersEyeID;
+        private bool EnemyValidForKalibersEye(bool fatal, HealthHaver enemy)
+        {
+            if (enemy.aiActor && fatal && !enemy.IsBoss && Owner.IsInCombat && enemy.aiActor.EnemyGuid != "249db525a9464e5282d02162c88e0357")
+            {
+                if (!enemy.aiActor.IgnoreForRoomClear)
+                {
+                    return true;
+                }
+                return false;
+            }
+            else return false;
         }
         private void OnEnemyDamaged(float damage, bool fatal, HealthHaver enemy)
         {
-            if (enemy.aiActor && fatal && !enemy.aiActor.IgnoreForRoomClear && !enemy.IsBoss && Owner.IsInCombat && enemy.aiActor.EnemyGuid != "249db525a9464e5282d02162c88e0357")
+            if (fatal)
             {
-                float procChance;
-                if (Owner.HasPickupID(570)) procChance = 1f;
-                else procChance = 0.5f;
-                if (UnityEngine.Random.value < procChance)
+                if (EnemyValidForKalibersEye(fatal, enemy))
                 {
-                    bool isJammed = false;
-                    string enemyGuid = enemy.aiActor.EnemyGuid;
-                    if (enemy.aiActor.IsBlackPhantom)
+                    //ETGModConsole.Log("Enemy valid");
+                    try
                     {
-                        isJammed = true;
+                        float procChance;
+                        if (Owner.PlayerHasActiveSynergy("All Seeing")) procChance = 1f;
+                        else procChance = 0.5f;
+                        if (UnityEngine.Random.value < procChance)
+                        {
+                            bool isJammed = enemy.aiActor.IsBlackPhantom;
+                            string enemyGuid = enemy.aiActor.EnemyGuid;
+                            Vector2 worldBottomLeft = enemy.sprite.WorldBottomLeft;
+                            IntVector2 PosToSpawn = worldBottomLeft.ToIntVector2();
+                            GameManager.Instance.StartCoroutine(this.DoEnemySpawn(enemyGuid, PosToSpawn, isJammed));
+                        }
                     }
-                    //ETGModConsole.Log("Jammed State: " + isJammed);
-                    Vector2 nearbyPoint = (Owner.CenterPosition + new Vector2(3, 3));
-                    IntVector2? intVector = Owner.CurrentRoom.GetNearestAvailableCell(nearbyPoint, new IntVector2?(IntVector2.One), new CellTypes?(CellTypes.FLOOR), false, null);
-                    if (intVector.HasValue)
+                    catch (Exception e)
                     {
-                        AIActor TargetActor = AIActor.Spawn(enemy.aiActor, intVector.Value, GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(intVector.Value), true, AIActor.AwakenAnimationType.Default, true);
-                        PhysicsEngine.Instance.RegisterOverlappingGhostCollisionExceptions(TargetActor.specRigidbody, null, false);
-                        if (isJammed == true)
-                        {
-                            TargetActor.BecomeBlackPhantom();
-                        }
-                        TargetActor.ApplyEffect(GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultPermanentCharmEffect, 1f, null);
-                        TargetActor.gameObject.AddComponent<KillOnRoomClear>();
-                        TargetActor.IsHarmlessEnemy = true;
-                        TargetActor.IgnoreForRoomClear = true;
-                        if (TargetActor.gameObject.GetComponent<SpawnEnemyOnDeath>())
-                        {
-                            Destroy(TargetActor.gameObject.GetComponent<SpawnEnemyOnDeath>());
-                        }
+                        ETGModConsole.Log(e.Message);
+                        ETGModConsole.Log(e.StackTrace);
+                    }
+                }
+                //else ETGModConsole.Log("Enemy invalid");
+            }
+        }
+        private IEnumerator DoEnemySpawn(string enemyGuid, IntVector2 position, bool isJammed)
+        {
+            //ETGModConsole.Log("DoEnemySpawn triggered");
+            yield return new WaitForSeconds(1f);
+            try
+            {
+                if (Owner.IsInCombat)
+                {
+
+                    var enemyToSpawn = EnemyDatabase.GetOrLoadByGuid(enemyGuid);
+                    Instantiate<GameObject>(EasyVFXDatabase.BloodiedScarfPoofVFX, position.ToVector3(), Quaternion.identity);
+                    AIActor TargetActor = AIActor.Spawn(enemyToSpawn, position, GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(position), true, AIActor.AwakenAnimationType.Default, true);
+                    PhysicsEngine.Instance.RegisterOverlappingGhostCollisionExceptions(TargetActor.specRigidbody, null, false);
+                    CustomEnemyTagsSystem tags = TargetActor.gameObject.GetOrAddComponent<CustomEnemyTagsSystem>();
+                    tags.TagsList.Add("KalibersEyeMinion");
+                    tags.TagsList.Add("IgnoreForGoodMimic");
+
+                    CompanionController orAddComponent = TargetActor.gameObject.GetOrAddComponent<CompanionController>();
+                    orAddComponent.companionID = CompanionController.CompanionIdentifier.NONE;
+                    orAddComponent.Initialize(Owner);
+
+                    if (isJammed == true)
+                    {
+                        TargetActor.BecomeBlackPhantom();
+                    }
+                    CompanionisedEnemyBulletModifiers companionisedBullets = TargetActor.gameObject.GetOrAddComponent<CompanionisedEnemyBulletModifiers>();
+                    companionisedBullets.jammedDamageMultiplier = 2f;
+                    companionisedBullets.TintBullets = true;
+                    companionisedBullets.TintColor = ExtendedColours.honeyYellow;
+                    companionisedBullets.baseBulletDamage = 10f;
+
+                    TargetActor.ApplyEffect(GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultPermanentCharmEffect, 1f, null);
+                    TargetActor.gameObject.AddComponent<KillOnRoomClear>();
+
+
+                    if (EasyEnemyTypeLists.MultiPhaseEnemies.Contains(TargetActor.EnemyGuid) || EasyEnemyTypeLists.EnemiesWithInvulnerablePhases.Contains(TargetActor.EnemyGuid))
+                    {
+                        EraseFromExistenceOnRoomClear destroyTrickyEnemy = TargetActor.gameObject.AddComponent<EraseFromExistenceOnRoomClear>();
+                        destroyTrickyEnemy.Delay = 1f;
+                    }
+                    TargetActor.IsHarmlessEnemy = true;
+                    TargetActor.RegisterOverrideColor(Color.grey, "Ressurection");
+                    TargetActor.IgnoreForRoomClear = true;
+                    if (TargetActor.gameObject.GetComponent<SpawnEnemyOnDeath>())
+                    {
+                        Destroy(TargetActor.gameObject.GetComponent<SpawnEnemyOnDeath>());
                     }
                 }
             }
+            catch (Exception e)
+            {
+                ETGModConsole.Log(e.Message);
+                ETGModConsole.Log(e.StackTrace);
+            }
+            yield break;
         }
         public override void Pickup(PlayerController player)
         {
@@ -105,6 +164,7 @@ namespace NevernamedsItems
         {
             Owner.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
             base.OnDestroy();
+
         }
     }
 }

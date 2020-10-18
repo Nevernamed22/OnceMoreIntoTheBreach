@@ -30,52 +30,51 @@ namespace NevernamedsItems
             item.CanBeDropped = true;
             item.CanBeSold = true;
         }
-            //bullet.BecomeBlackBullet();
-            //bullet.PlayerKnockbackForce = 100f;
-            //bullet.AppliesKnockbackToPlayer = true;
-            //JamPlayerBulletModifier jamProjectileModifier = bullet.gameObject.AddComponent<JamPlayerBulletModifier>();
+        //bullet.BecomeBlackBullet();
+        //bullet.PlayerKnockbackForce = 100f;
+        //bullet.AppliesKnockbackToPlayer = true;
+        //JamPlayerBulletModifier jamProjectileModifier = bullet.gameObject.AddComponent<JamPlayerBulletModifier>();
         public void onFired(Projectile bullet, float eventchancescaler)
         {
-            foreach (Component component in bullet.GetComponents<Component>())
-            {
-                ETGModConsole.Log(component.GetType().ToString());
-            }
+            bullet.collidesWithProjectiles = true;
             bullet.OnHitEnemy += this.onHitEnemy;
+            bullet.specRigidbody.OnCollision += this.onCollision;
             //bullet.specRigidbody.OnPreRigidbodyCollision = (SpeculativeRigidbody.OnPreRigidbodyCollisionDelegate)Delegate.Combine(bullet.specRigidbody.OnPreRigidbodyCollision, new SpeculativeRigidbody.OnPreRigidbodyCollisionDelegate(this.HandlePreCollision));
         }
         public void onHitEnemy(Projectile bullet, SpeculativeRigidbody enemy, bool somethingthefuckidk)
         {
-            //enemy.aiActor.Transmogrify(EnemyDatabase.GetOrLoadByGuid("cd4a4b7f612a4ba9a720b9f97c52f38c"), (GameObject)ResourceCache.Acquire("Global VFX/VFX_Item_Spawn_Poof"));
-            /*if (enemy.gameObject.GetComponent<KeyBulletManController>())
-            {
-                ETGModConsole.Log("Enemy has a Keybullet Man Controller");
-            }
-            else if (!enemy.gameObject.GetComponent<KeyBulletManController>())
-            {
-                ETGModConsole.Log("Enemy has no Keybullet Man Controller!!!");
-            }*/
+
         }
-       /* private void HandlePreCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherPixelCollider)
+        public void onCollision(CollisionData data)
         {
-            try
+            if (data.OtherRigidbody != null)
             {
-                if (otherRigidbody.name != null)
+                foreach (Component component in data.OtherRigidbody.gameObject.GetComponentsInChildren<Component>())
                 {
-                    ETGModConsole.Log(otherRigidbody.name);
+                    if (component != null)
+                    {
+                        ETGModConsole.Log(component.GetType().ToString());
+                    }
                 }
+                Projectile bulletness = data.OtherRigidbody.gameObject.GetComponentInChildren<Projectile>();
+                if (bulletness != null)
+                {
+                ETGModConsole.Log("<color=#ff0000ff>Projectile Bools:</color>");
+                    ETGModConsole.Log("CollidesWithProjectiles: " + bulletness.collidesWithProjectiles);
+                    ETGModConsole.Log("CollidesOnlyWithPlayerProjectiles: " + bulletness.collidesOnlyWithPlayerProjectiles);
+                    ETGModConsole.Log("CollidesWithEnemies: " + bulletness.collidesWithEnemies);
+                    ETGModConsole.Log("CollidesWithPlayer: " + bulletness.collidesWithPlayer);
+                }
+
+                ETGModConsole.Log("<color=#ff0000ff>---------------------------------</color>");
             }
-            catch (Exception e)
-            {
-                ETGModConsole.Log(e.Message);
-                ETGModConsole.Log(e.StackTrace);
-            }
-        }*/
+        }
         public override void Pickup(PlayerController player)
         {
             player.PostProcessProjectile += this.onFired;
             base.Pickup(player);
         }
-            //player.SetOverrideShader(ShaderCache.Acquire("Brave/LitCutoutUberPhantom"));
+        //player.SetOverrideShader(ShaderCache.Acquire("Brave/LitCutoutUberPhantom"));
         public override DebrisObject Drop(PlayerController player)
         {
             DebrisObject result = base.Drop(player);

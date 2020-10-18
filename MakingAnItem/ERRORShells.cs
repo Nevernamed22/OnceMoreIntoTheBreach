@@ -196,7 +196,22 @@ namespace NevernamedsItems
             EnemyGuidDatabase.Entries["robots_past_critter_2"],
             EnemyGuidDatabase.Entries["robots_past_critter_1"],
             EnemyGuidDatabase.Entries["snake"],
-
+            EnemyGuidDatabase.Entries["beholster"],
+            EnemyGuidDatabase.Entries["treadnaught"],
+            EnemyGuidDatabase.Entries["cannonbalrog"],
+            EnemyGuidDatabase.Entries["gorgun"],
+            EnemyGuidDatabase.Entries["gatling_gull"],
+            EnemyGuidDatabase.Entries["ammoconda"],
+            EnemyGuidDatabase.Entries["dragun"],
+            EnemyGuidDatabase.Entries["dragun_advanced"],
+            EnemyGuidDatabase.Entries["helicopter_agunim"],
+            EnemyGuidDatabase.Entries["super_space_turtle_dummy"],
+            EnemyGuidDatabase.Entries["cop_android"],
+            EnemyGuidDatabase.Entries["portable_turret"],
+            EnemyGuidDatabase.Entries["friendly_gatling_gull"],
+            EnemyGuidDatabase.Entries["cucco"],
+            EnemyGuidDatabase.Entries["cop"],
+            EnemyGuidDatabase.Entries["blockner"],
         };
 
         private void HandlePreCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherPixelCollider)

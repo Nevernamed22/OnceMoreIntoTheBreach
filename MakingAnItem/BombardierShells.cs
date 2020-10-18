@@ -18,7 +18,7 @@ namespace NevernamedsItems
             string itemName = "Bombardier Shells";
 
             //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/promethianbullets_icon";
+            string resourceName = "NevernamedsItems/Resources/bombardiershells_icon";
 
             //Create new GameObject
             GameObject obj = new GameObject(itemName);
@@ -30,8 +30,8 @@ namespace NevernamedsItems
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
 
             //Ammonomicon entry variables
-            string shortDesc = "Forethought";
-            string longDesc = "Deals 50% more damage to enemies who have more than half their health." + "\n\nCreated by the mighty titan bullet Prometheus.";
+            string shortDesc = "Heavy Ammunition";
+            string longDesc = "Increases damage and gives a chance for projectiles to be explosive." + "\n\nThe explosive force necessary to fire these shells creates a lot of recoil.";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -42,29 +42,76 @@ namespace NevernamedsItems
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.PlayerBulletScale, 1.3f, StatModifier.ModifyMethod.MULTIPLICATIVE);
 
             //Set the rarity of the item
-            item.quality = PickupObject.ItemQuality.EXCLUDED; //A
+            item.quality = PickupObject.ItemQuality.A; //A
 
         }
 
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
-            Owner.knockbackDoer.ApplyKnockback((Owner.sprite.WorldCenter - Owner.unadjustedAimPoint.XY()).normalized, 40f);
+            if (UnityEngine.Random.value <= 0.07f)
+            {
+                ExplosiveModifier exploding = sourceProjectile.gameObject.GetOrAddComponent<ExplosiveModifier>();
+                exploding.doExplosion = true;
+                exploding.explosionData = EasyExplosionDataStorage.explosiveRoundsExplosion;
+            }
+            try
+            {
+
+                if (sourceProjectile.Shooter != null && sourceProjectile.Shooter.aiActor == null && sourceProjectile.Shooter.projectile == null)
+                {
+                    
+                        Owner.knockbackDoer.ApplyKnockback((Owner.sprite.WorldCenter - Owner.unadjustedAimPoint.XY()).normalized, 30f);
+                    
+                }
+            }
+            catch (Exception e)
+            {
+                ETGModConsole.Log(e.Message);
+                ETGModConsole.Log(e.StackTrace);
+            }
         }
-                
+        private void PostProcessBeamTick(BeamController beam)
+        {
+            try
+            {
+                if (beam.aiShooter == null)
+                {
+
+                    Owner.knockbackDoer.ApplyKnockback((Owner.sprite.WorldCenter - Owner.unadjustedAimPoint.XY()).normalized, 45f);
+                }
+                else
+                {
+                    ETGModConsole.Log("Beam AIShooter was not null");
+                }
+            }
+            catch (Exception e)
+            {
+                ETGModConsole.Log(e.Message);
+                ETGModConsole.Log(e.StackTrace);
+            }
+        }
+
         public override DebrisObject Drop(PlayerController player)
         {
             DebrisObject debrisObject = base.Drop(player);
             player.PostProcessProjectile -= this.PostProcessProjectile;
+            player.PostProcessBeamChanceTick -= this.PostProcessBeamTick;
             return debrisObject;
         }
         public override void Pickup(PlayerController player)
         {
             base.Pickup(player);
             player.PostProcessProjectile += this.PostProcessProjectile;
+            player.PostProcessBeamChanceTick += this.PostProcessBeamTick;
+
         }
         protected override void OnDestroy()
         {
-            Owner.PostProcessProjectile -= this.PostProcessProjectile;
+            if (Owner)
+            {
+                Owner.PostProcessBeamChanceTick -= this.PostProcessBeamTick;
+                Owner.PostProcessProjectile -= this.PostProcessProjectile;
+            }
             base.OnDestroy();
         }
     }

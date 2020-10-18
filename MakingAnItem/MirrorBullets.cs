@@ -38,7 +38,7 @@ namespace NevernamedsItems
             //Adds the actual passive effect to the item
 
             //Set the rarity of the item
-            item.quality = PickupObject.ItemQuality.B;
+            item.quality = PickupObject.ItemQuality.S;
 
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1, StatModifier.ModifyMethod.ADDITIVE);
 

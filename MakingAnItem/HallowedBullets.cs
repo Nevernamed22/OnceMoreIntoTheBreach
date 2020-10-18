@@ -5,10 +5,11 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using Dungeonator;
 
 namespace NevernamedsItems
 {
-    public class HallowedBullets : PassiveItem
+    public class HallowedBullets : IntersectEnemyBulletsItem
     {
         public static void Init()
         {
@@ -42,51 +43,33 @@ namespace NevernamedsItems
 
         }
         public void onFired(Projectile bullet, float eventchancescaler)
-        {
-            bullet.collidesWithProjectiles = true;
-            bullet.BlackPhantomDamageMultiplier += 0.1f;
-            SpeculativeRigidbody specRigidbody = bullet.specRigidbody;
-            specRigidbody.OnPreRigidbodyCollision = (SpeculativeRigidbody.OnPreRigidbodyCollisionDelegate)Delegate.Combine(specRigidbody.OnPreRigidbodyCollision, new SpeculativeRigidbody.OnPreRigidbodyCollisionDelegate(this.HandlePreCollision));
-        }
-        private void onFiredBeam(BeamController sourceBeam)
-        {
-
-        }
+        {           
+            bullet.BlackPhantomDamageMultiplier *= 1.1f;           
+        }        
         public override void Pickup(PlayerController player)
         {
             player.PostProcessProjectile += this.onFired;
-            player.PostProcessBeam += this.onFiredBeam;
             base.Pickup(player);
         }
         public override DebrisObject Drop(PlayerController player)
         {
             DebrisObject result = base.Drop(player);
             player.PostProcessProjectile -= this.onFired;
-            player.PostProcessBeam -= this.onFiredBeam;
             return result;
         }
         protected override void OnDestroy()
         {
             Owner.PostProcessProjectile -= this.onFired;
-            Owner.PostProcessBeam -= this.onFiredBeam;
             base.OnDestroy();
         }
-
-        private void HandlePreCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherPixelCollider)
+        public override void DoIntersectionEffect(Projectile playerBullet, Projectile enemyBullet)
         {
-            if (otherRigidbody && otherRigidbody.projectile)
+            if (enemyBullet.IsBlackBullet)
             {
-                if (otherRigidbody.projectile.Owner is AIActor)
-                {
-
-                    if (otherRigidbody.projectile.IsBlackBullet)
-                    {
-                        otherRigidbody.projectile.ReturnFromBlackBullet();
-                    }
-                }
-                PhysicsEngine.SkipCollision = true;
+                enemyBullet.ReturnFromBlackBullet();
             }
+            base.DoIntersectionEffect(playerBullet, enemyBullet);
         }
-    }
 
+    }
 }

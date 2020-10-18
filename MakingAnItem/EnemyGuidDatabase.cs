@@ -202,22 +202,22 @@ public class EnemyGuidDatabase
         {"robots_past_terminator", "12a054b8a6e549dcac58a82b89e319e5"},
         //Minibosses
         //{"ser_manuel", "fc809bd43a4d41738a62d7565456622c"},
-        //{"blockner", "bb73eeeb9e584fbeaf35877ec176de28"},
+        {"blockner", "bb73eeeb9e584fbeaf35877ec176de28"},
         {"blockner_rematch", "edc61b105ddd4ce18302b82efdc47178"},
         {"fuselier", "39de9bd6a863451a97906d949c103538"},
         {"shadow_agunim", "db97e486ef02425280129e1e27c33118"},
         //Bosses
         //{"smiley", "ea40fcc863d34b0088f490f4e57f8913"},
         //{"shades", "c00390483f394a849c36143eb878998f"},
-        //{"gatling_gull", "ec6b674e0acd4553b47ee94493d66422"},
+        {"gatling_gull", "ec6b674e0acd4553b47ee94493d66422"}, //Blacklist
         {"bullet_king", "ffca09398635467da3b1f4a54bcfda80"}, //ERROR SHELLS BLACKLIST
         {"blobulord", "1b5810fafbec445d89921a4efb4e42b7"}, //ERROR SHELLS BLACKLIST
-        //{"beholster", "4b992de5b4274168a8878ef9bf7ea36b"},
-        //{"gorgun", "c367f00240a64d5d9f3c26484dc35833"},
-        //{"ammoconda", "da797878d215453abba824ff902e21b4"},
+        {"beholster", "4b992de5b4274168a8878ef9bf7ea36b"}, //Blacklist
+        {"gorgun", "c367f00240a64d5d9f3c26484dc35833"}, //Blacklist
+        {"ammoconda", "da797878d215453abba824ff902e21b4"}, //Blacklist
         {"old_king", "5729c8b5ffa7415bb3d01205663a33ef"}, //ERROR SHELLS BLACKLIST
-        //{"treadnaught", "fa76c8cfdf1c4a88b55173666b4bc7fb"},
-        //{"mine_flayer", "8b0dd96e2fe74ec7bebc1bc689c0008a"},
+        {"treadnaught", "fa76c8cfdf1c4a88b55173666b4bc7fb"}, //Blacklist
+        {"mine_flayer", "8b0dd96e2fe74ec7bebc1bc689c0008a"}, //Blacklist
         {"cannonbalrog", "5e0af7f7d9de4755a68d2fd3bbc15df4"}, //ERROR SHELLS BLACKLIST
         {"door_lord", "9189f46c47564ed588b9108965f975c9"}, //ERROR SHELLS BLACKLIST
         //{"resourceful_rat", "6868795625bd46f3ae3e4377adce288b"},
@@ -225,9 +225,9 @@ public class EnemyGuidDatabase
         //{"high_priest", "6c43fddfd401456c916089fdd1c99b1c"},
         //{"kill_pillars", "3f11bbbc439c4086a180eb0fb9990cb4"},
         //{"wallmonger", "f3b04a067a65492f8b279130323b41f0"},
-        //{"helicopter_agunim", "41ee1c8538e8474a82a74c4aff99c712"},
-        //{"dragun", "465da2bb086a4a88a803f79fe3a27677"},
-        //{"dragun_advanced", "05b8afe0b6cc4fffa9dc6036fa24c8ec"},
+        {"helicopter_agunim", "41ee1c8538e8474a82a74c4aff99c712"},//Blacklist
+        {"dragun", "465da2bb086a4a88a803f79fe3a27677"}, //Blacklist
+        {"dragun_advanced", "05b8afe0b6cc4fffa9dc6036fa24c8ec"}, //Blacklist
         {"lich", "cd88c3ce60c442e9aa5b3904d31652bc"}, //ERROR SHELLS BLACKLIST
         {"megalich", "68a238ed6a82467ea85474c595c49c6e"}, //ERROR SHELLS BLACKLIST
         {"infinilich", "7c5d5f09911e49b78ae644d2b50ff3bf"}, //ERROR SHELLS BLACKLIST
@@ -262,15 +262,15 @@ public class EnemyGuidDatabase
         {"rat_candle", "14ea47ff46b54bb4a98f91ffcffb656d"},
         {"dragun_egg_slimeguy", "8b43a5c59b854eb780f9ab669ec26b7a"},
         //Companions
-        //{"portable_turret", "998807b57e454f00a63d67883fcf90d6"},
+        {"portable_turret", "998807b57e454f00a63d67883fcf90d6"},
         //{"super_space_turtle", "3a077fa5872d462196bb9a3cb1af02a3"},
         //{"dog", "c07ef60ae32b404f99e294a6f9acba75"},
         //{"hunters_past_dog", "ededff1deaf3430eaf8321d0c6b2bd80"},
         //{"r2g2", "1ccdace06ebd42dc984d46cb1f0db6cf"},
-        //{"friendly_gatling_gull", "538669d3b2cd4edca2e3699812bcf2b6"},
-        //{"cop", "705e9081261446039e1ed9ff16905d04"},
+        {"friendly_gatling_gull", "538669d3b2cd4edca2e3699812bcf2b6"},
+        {"cop", "705e9081261446039e1ed9ff16905d04"},
         //{"caterpillar", "d375913a61d1465f8e4ffcf4894e4427"},
-        //{"cucco", "7bd9c670f35b4b8d84280f52a5cc47f6"},
+        {"cucco", "7bd9c670f35b4b8d84280f52a5cc47f6"},
         //{"raccoon", "e9fa6544000942a79ad05b6e4afb62db"},
         //{"baby_mimic", "e456b66ed3664a4cb590eab3a8ff3814"},
         //{"pig", "fe51c83b41ce4a46b42f54ab5f31e6d0"},
@@ -278,7 +278,7 @@ public class EnemyGuidDatabase
         //{"dog_synergy_1", "ebf2314289ff4a4ead7ea7ef363a0a2e"},
         //{"dog_synergy_2", "ab4a779d6e8f429baafa4bf9e5dca3a9"},
         //"super_space_turtle_synergy", "9216803e9c894002a4b931d7ea9c6bdf"},
-        //{"super_space_turtle_dummy", "cc9c41aa8c194e17b44ac45f993dd212"},
+        {"super_space_turtle_dummy", "cc9c41aa8c194e17b44ac45f993dd212"},
         //{"payday_shooter_01", "45f5291a60724067bd3ccde50f65ac22"},
         //{"payday_shooter_02", "41ab10778daf4d3692e2bc4b370ab037"},
         //{"payday_shooter_03", "2976522ec560460c889d11bb54fbe758"},
@@ -287,10 +287,22 @@ public class EnemyGuidDatabase
         //{"phoenix", "11a14dbd807e432985a89f69b5f9b31e"},
         //{"pig_synergy", "86237c6482754cd29819c239403a2de7"},
         //{"blank_companion_synergy", "ad35abc5a3bf451581c3530417d89f2c"},
-        //{"cop_android", "640238ba85dd4e94b3d6f68888e6ecb8"},
+        {"cop_android", "640238ba85dd4e94b3d6f68888e6ecb8"},
         //{"baby_good_shelleton", "3f40178e10dc4094a1565cd4fdc4af56"},
         //Turrets (From the Tutorial, and really weird acting. Basically nonfunctional)
         //{"tutorial_turret", "e667fdd01f1e43349c03a18e5b79e579"},
         //{"faster_tutorial_turret", "41ba74c517534f02a62f2e2028395c58"},
+    };
+}
+public class ExpandTheGungeonGUIDDatabase
+{
+    public static Dictionary<string, string> Entries { get; set; } = new Dictionary<string, string>()
+    {
+        {"grenade_rat", "1a1dc5ed-92a6-4bd1-bbee-098991e7d2d4"},
+        {"bootleg_bullat", "7ef020b9-11fb-4a24-a818-60581e6d3105"},
+        {"cronenberg", "0a2433d6e0784eefb28762c5c127d0b3"},
+        {"agressive_cronenberg", "6d2d7a845e464d3ca453fe1fff5fed84"},
+        {"parasitic_abomination", "acd8d483f24e4c43b964fa4e54068cf1"},
+        {"com4nd0_boss", "0a406e36-80eb-43b8-8ad0-c56232f9496e"},
     };
 }

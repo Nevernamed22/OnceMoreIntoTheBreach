@@ -6,6 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
+using ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -36,63 +37,58 @@ namespace NevernamedsItems
             gun.SetAnimationFPS(gun.shootAnimation, 10);
             // Every modded gun has base projectile it works with that is borrowed from other guns in the game. 
             // The gun names are the names from the JSON dump! While most are the same, some guns named completely different things. If you need help finding gun names, ask a modder on the Gungeon discord.
-            gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(480) as Gun, true, false);
+            gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
             // Here we just take the default projectile module and change its settings how we want it to be.
             gun.DefaultModule.ammoCost = 1;
-            gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
+            gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
             gun.reloadTime = 1.1f;
-            gun.DefaultModule.cooldownTime = 0.1f;
+            gun.DefaultModule.cooldownTime = 0.4f;
             gun.DefaultModule.numberOfShotsInClip = 500;
-            gun.SetBaseMaxAmmo(42069);
+            gun.SetBaseMaxAmmo(500);
+
+
+
+            Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
+            projectile.gameObject.SetActive(false);
+            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
+            UnityEngine.Object.DontDestroyOnLoad(projectile);
+            gun.DefaultModule.projectiles[0] = projectile;
+            TestBulletBehaviour orAddComponent = projectile.gameObject.GetOrAddComponent<TestBulletBehaviour>();
+
             // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             gun.encounterTrackable.EncounterGuid = "this is the Testinator";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
         }
-
-
-        // This determines what the projectile does when it fires.
+        public static int vector = 1;
         public override void PostProcessProjectile(Projectile projectile)
         {
-            PlayerController playerController = this.gun.CurrentOwner as PlayerController;
-            if (playerController == null)
-                this.gun.ammo = this.gun.GetBaseMaxAmmo();
-            //projectile.baseData allows you to modify the base properties of your projectile module.
-            //In our case, our gun uses modified projectiles from the ak-47.
-            //Setting static values for a custom gun's projectile stats prevents them from scaling with player stats and bullet modifiers (damage, shotspeed, knockback)
-            //You have to multiply the value of the original projectile you're using instead so they scale accordingly. For example if the projectile you're using as a base has 10 damage and you want it to be 6 you use this
-            //In our case, our projectile has a base damage of 5.5, so we multiply it by 1.1 so it does 10% more damage from the ak-47.
-            projectile.baseData.damage *= 0.9f;
-            projectile.baseData.speed *= 1f;
-            this.gun.DefaultModule.ammoCost = 1;
             base.PostProcessProjectile(projectile);
-            //This is for when you want to change the sprite of your projectile and want to do other magic fancy stuff. But for now let's just change the sprite. 
-            //Refer to BasicGunProjectile.cs for changing the sprite.
-
         }
-
-        public override void OnPostFired(PlayerController player, Gun gun)
-        {
-            //This determines what sound you want to play when you fire a gun.
-            //Sounds names are based on the Gungeon sound dump, which can be found at EnterTheGungeon/Etg_Data/StreamingAssets/Audio/GeneratedSoundBanks/Windows/sfx.txt
-            gun.PreventNormalFireAudio = true;
-            AkSoundEngine.PostEvent("Play_WPN_smileyrevolver_shot_01", gameObject);
-        }
-
-
-        //All that's left now is sprite stuff. 
-        //Your sprites should be organized, like how you see in the mod folder. 
-        //Every gun requires that you have a .json to match the sprites or else the gun won't spawn at all
-        //.Json determines the hand sprites for your character. You can make a gun two handed by having both "SecondaryHand" and "PrimaryHand" in the .json file, which can be edited through Notepad or Visual Studios
-        //By default this gun is a one-handed weapon
-        //If you need a basic two handed .json. Just use the jpxfrd2.json.
-        //And finally, don't forget to add your Gun to your ETGModule class!
 
         public TestGun()
         {
 
+        }
+        public class TestBulletBehaviour : MonoBehaviour
+        {
+            public TestBulletBehaviour()
+            {
+               
+            }
+            int vector = 1;
+            
+            private void Start()
+            {
+                this.m_projectile = base.GetComponent<Projectile>();
+            this.m_projectile.SendInDirection(MiscToolbox.DegreeToVector2(TestGun.vector), false);
+                TestGun.vector += 1;
+
+                
+            }
+            private Projectile m_projectile;
         }
     }
 }

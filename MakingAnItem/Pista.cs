@@ -70,19 +70,7 @@ namespace NevernamedsItems
                 {
                     if (bullet)
                     {
-                        Vector2 dirVec = UnityEngine.Random.insideUnitCircle;
-                        Vector2 bulletPosition = bullet.sprite.WorldCenter;
-                        Func<AIActor, bool> isValid = (AIActor a) => a && a.HasBeenEngaged && a.healthHaver && a.healthHaver.IsVulnerable;
-                        IntVector2 bulletPositionIntVector2 = bulletPosition.ToIntVector2();
-                        AIActor closestToPosition = BraveUtility.GetClosestToPosition<AIActor>(GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(bulletPositionIntVector2).GetActiveEnemies(RoomHandler.ActiveEnemyType.All), bullet.sprite.WorldCenter, isValid, new AIActor[]
-                        {
-
-                        });
-                        if (closestToPosition)
-                        {
-                            dirVec = closestToPosition.CenterPosition - bullet.transform.position.XY();
-                        }
-                        bullet.SendInDirection(dirVec, false, true);
+                        ReAimBullet.ReAimBulletToNearestEnemy(bullet);
                         if (!player.PlayerHasActiveSynergy("Pistols Requiem")) BulletsToRemoveFromActiveBullets.Add(bullet);
                     }
                 }

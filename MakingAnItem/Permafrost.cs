@@ -58,7 +58,7 @@ namespace NevernamedsItems
                             float freezeAmount = 0;
                             if (aiactor.healthHaver.IsBoss) freezeAmount = 100;
                             else freezeAmount = 150;
-                            EasyApplyDirectFreeze.ApplyDirectFreeze(aiactor.gameActor, 5, freezeAmount, EasyStatusEffectAccess.freezeModifierEffect.UnfreezeDamagePercent, ExtendedColours.freezeBlue, ExtendedColours.freezeBlue, EffectResistanceType.None, "Permafrost", true, true);
+                            ApplyDirectStatusEffects.ApplyDirectFreeze(aiactor.gameActor, 5, freezeAmount, EasyStatusEffectAccess.freezeModifierEffect.UnfreezeDamagePercent, ExtendedColours.freezeBlue, ExtendedColours.freezeBlue, EffectResistanceType.None, "Permafrost", true, true);
                         }
                     }
                 }

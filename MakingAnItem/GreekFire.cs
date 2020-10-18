@@ -60,14 +60,14 @@ namespace NevernamedsItems
                 goopSpawned.SpawnGoopInFlight = true;
                 goopSpawned.CollisionSpawnRadius = 3f;
                 goopSpawned.goopDefinition = EasyGoopDefinitions.GreenFireDef;
+                PierceProjModifier orAddComponent = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();
+                orAddComponent.penetratesBreakables = true;
+                orAddComponent.penetration++;
                 ProjectileModule.ChargeProjectile chargeProj = new ProjectileModule.ChargeProjectile
                 {
                     Projectile = projectile,
                     ChargeTime = 1f,
                 };
-                PierceProjModifier orAddComponent = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();
-                orAddComponent.penetratesBreakables = true;
-                orAddComponent.penetration++;
                 mod.chargeProjectiles = new List<ProjectileModule.ChargeProjectile> { chargeProj };
             }
             gun.reloadTime = 1f;

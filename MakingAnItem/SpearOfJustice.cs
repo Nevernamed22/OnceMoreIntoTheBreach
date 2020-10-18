@@ -72,9 +72,9 @@ namespace NevernamedsItems
                 homing.HomingRadius = 250f;
             }
         }
-        protected override void OnPickup(PlayerController player)
+        protected override void OnPostDroppedByPlayer(PlayerController player)
         {
-            base.OnPickup(player);
+            base.OnPostDroppedByPlayer(player);
             ETGMod.AIActor.OnPreStart += this.Greenify;
         }
         public void Greenify(AIActor target)

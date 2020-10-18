@@ -48,7 +48,7 @@ namespace NevernamedsItems
             {
                 if (target && target.aiActor && target.aiActor.EnemyGuid != null)
                 {
-                    EasyApplyDirectSlow.ApplyDirectSlow(target, 10000000000f, 0.75f, Color.white, Color.white, EffectResistanceType.None, "Goomperors Crown", false, false);
+                    ApplyDirectStatusEffects.ApplyDirectSlow(target, 10000000000f, 0.75f, Color.white, Color.white, EffectResistanceType.None, "Goomperors Crown", false, false);
                 }
             }
         }
@@ -67,7 +67,7 @@ namespace NevernamedsItems
                         AIActor aiactor = activeEnemies[i];
                         if (aiactor.IsNormalEnemy)
                         {
-                            EasyApplyDirectSlow.ApplyDirectSlow(aiactor.gameActor, 10000000000f, 0.75f, Color.white, Color.white, EffectResistanceType.None, "Goomperors Crown", false, false);
+                            ApplyDirectStatusEffects.ApplyDirectSlow(aiactor.gameActor, 10000000000f, 0.75f, Color.white, Color.white, EffectResistanceType.None, "Goomperors Crown", false, false);
                         }
                     }
                 }

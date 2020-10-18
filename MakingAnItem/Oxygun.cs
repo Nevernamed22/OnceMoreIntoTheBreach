@@ -18,7 +18,7 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:oxygun", "nn:oxygun");
             gun.gameObject.AddComponent<Oxygun>();
             gun.SetShortDescription("Bullets Not Included");
-            gun.SetLongDescription("This standard-issue colony multi-tool seems to be stuck on the 'offensive' setting."+"\n\nUpon finding it, there seemed to be no shots left inside.");
+            gun.SetLongDescription("This standard-issue colony multi-tool seems to be stuck on the 'offensive' setting." + "\n\nUpon finding it, there seemed to be no shots left inside.");
 
             gun.SetupSprite(null, "oxygun_idle_001", 8);
 
@@ -60,6 +60,11 @@ namespace NevernamedsItems
             gun.encounterTrackable.EncounterGuid = "this is the Oxygun";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
         }
+        public override void OnPostFired(PlayerController player, Gun gun)
+        {
+            gun.PreventNormalFireAudio = true;
+            AkSoundEngine.PostEvent("Play_WPN_stdissuelaser_shot_01", gameObject);
+        }      
         public Oxygun()
         {
 

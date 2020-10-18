@@ -128,10 +128,6 @@ namespace NevernamedsItems
             }
         }
         private int currentBlanks, lastBlanks;
-        protected override void OnPickup(PlayerController player)
-        {
-            base.OnPickup(player);
-        }
         protected override void Update()
         {
             try

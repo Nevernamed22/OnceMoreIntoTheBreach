@@ -16,6 +16,36 @@ namespace NevernamedsItems
             (PickupObjectDatabase.GetById(539) as Gun).gameObject.AddComponent<BoxingGloveModifiers>();
             (PickupObjectDatabase.GetById(506) as Gun).gameObject.AddComponent<ReallySpecialLuteModifiers>();
             (PickupObjectDatabase.GetById(93) as Gun).gameObject.AddComponent<OldGoldieModifiers>();
+            (PickupObjectDatabase.GetById(32) as Gun).gameObject.AddComponent<VoidMarshalModifiers>();
+            (PickupObjectDatabase.GetById(184) as Gun).gameObject.AddComponent<JudgeModifiers>();
+        }
+    }
+    public class JudgeModifiers : GunBehaviour
+    {
+        public override void PostProcessProjectile(Projectile projectile)
+        {
+            PlayerController playerController = this.gun.CurrentOwner as PlayerController;
+            base.PostProcessProjectile(projectile);
+            if (playerController.PlayerHasActiveSynergy("Court Marshal"))
+            {
+                projectile.baseData.damage *= 1.2f;
+                projectile.baseData.speed *= 1.2f;
+                projectile.UpdateSpeed();
+            }
+        }
+    }
+    public class VoidMarshalModifiers : GunBehaviour
+    {
+        public override void PostProcessProjectile(Projectile projectile)
+        {
+            PlayerController playerController = this.gun.CurrentOwner as PlayerController;
+            base.PostProcessProjectile(projectile);
+            if (playerController.PlayerHasActiveSynergy("Court Marshal"))
+            {
+                projectile.baseData.damage *= 1.2f;
+                projectile.baseData.speed *= 1.2f;
+                projectile.UpdateSpeed();
+            }
         }
     }
     public class OldGoldieModifiers : GunBehaviour

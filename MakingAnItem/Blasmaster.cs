@@ -64,7 +64,7 @@ namespace NevernamedsItems
                 projectile.baseData.damage *= 2f;
             }
         }
-        protected override void OnPickup(PlayerController player)
+        protected override void OnPickedUpByPlayer(PlayerController player)
         {
             base.OnPickup(player);
             player.OnUsedPlayerItem += this.onUsedPlayerItem;
@@ -82,9 +82,9 @@ namespace NevernamedsItems
             hasBonusDamageFromSynergy = false;
         }
         private bool hasBonusDamageFromSynergy;
-        protected override void OnPostDrop(PlayerController player)
+        protected override void OnPostDroppedByPlayer(PlayerController player)
         {
-            base.OnPostDrop(player);
+            base.OnPostDroppedByPlayer(player);
             player.OnUsedPlayerItem -= this.onUsedPlayerItem;
         }
         public Blasmaster()

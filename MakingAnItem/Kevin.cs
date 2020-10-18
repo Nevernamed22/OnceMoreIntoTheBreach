@@ -43,7 +43,9 @@ namespace NevernamedsItems
 
             List<string> mandatorySynergyItems = new List<string>() { "nn:kevin", "eyepatch" };
             CustomSynergies.Add("High Lord Kevin", mandatorySynergyItems);
+            KevinID = item.PickupObjectId;
         }
+        public static int KevinID;
 
         public GameActorCharmEffect charmEffect;
         private void SpawnKevin()
@@ -61,6 +63,7 @@ namespace NevernamedsItems
             PhysicsEngine.Instance.RegisterOverlappingGhostCollisionExceptions(TargetActor.specRigidbody, null, false);
             TargetActor.gameObject.AddComponent<KillOnRoomClear>();
             TargetActor.IsHarmlessEnemy = true;
+            //TargetActor.healthHaver.bossHealthBar = HealthHaver.BossBarType.MainBar;
             TargetActor.IgnoreForRoomClear = true;
             TargetActor.HandleReinforcementFallIntoRoom(0f);
             //PRAISE BE OUR LORD AND SAVIOUR KEVIN. YOU WILL BOW TO HIM, OR YOU WILL DIE.
@@ -69,12 +72,12 @@ namespace NevernamedsItems
         public override void Pickup(PlayerController player)
         {
             base.Pickup(player);
-            Owner.OnEnteredCombat += this.SpawnKevin;
+            player.OnEnteredCombat += this.SpawnKevin;
         }
         public override DebrisObject Drop(PlayerController player)
         {
             DebrisObject result = base.Drop(player);
-            Owner.OnEnteredCombat -= this.SpawnKevin;
+            player.OnEnteredCombat -= this.SpawnKevin;
             return result;
         }
         protected override void OnDestroy()

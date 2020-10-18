@@ -55,8 +55,44 @@ namespace NevernamedsItems
         float duration = 20f;
         protected override void DoEffect(PlayerController user)
         {
-            DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.HoneyGoop).TimedAddGoopCircle(user.sprite.WorldCenter, 10, 1, false);
-        }
+            Vector2 yourPosition = user.sprite.WorldCenter;
+
+            DeadlyDeadlyGoopManager goop = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.PlagueGoop);
+            goop.TimedAddGoopCircle(user.specRigidbody.UnitCenter, 3, 0.75f, true);
+
+            AIActor randomActiveEnemy = user.CurrentRoom.GetRandomActiveEnemy(true);
+            if (randomActiveEnemy.IsNormalEnemy && randomActiveEnemy.healthHaver && !randomActiveEnemy.healthHaver.IsBoss)
+            {
+                randomActiveEnemy.ApplyEffect(EasyStatusEffectAccess.commonPlague);
+            }
+
+                //PassiveItem itemOfTypeAndQuality = LootEngine.GetItemOfTypeAndQuality<PlayerOrbitalItem>(ItemQuality.A, GameManager.Instance.RewardManager.ItemsLootTable, true);
+                //LootEngine.SpawnItem(itemOfTypeAndQuality.gameObject, user.sprite.WorldCenter, Vector2.left, 0f, false, true, true);
+
+
+                //DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.HoneyGoop).TimedAddGoopCircle(user.sprite.WorldCenter, 10, 1, false);
+                /* List<AIActor> activeEnemies = user.CurrentRoom.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+                 if (activeEnemies != null)
+                 {
+                     for (int i = 0; i < activeEnemies.Count; i++)
+                     {
+                         AIActor aiactor = activeEnemies[i];
+                         if (aiactor.IsNormalEnemy)
+                         {
+                             ApplyLockdown.ApplyDirectLockdown(aiactor, 10, Color.grey, Color.grey, EffectResistanceType.None, "Lockdown", true, false);
+                         }
+                     }
+                 }*/
+                /*TalkDoer[] Chests = FindObjectsOfType<TalkDoer>();
+
+                 foreach (TalkDoer chest in Chests)
+                 {
+                     if (chest.gameObject != null)
+                     {
+                         UnityEngine.Object.Destroy(chest.gameObject);
+                     }
+                 }*/
+            }
         public override void Update()
         {
             base.Update();

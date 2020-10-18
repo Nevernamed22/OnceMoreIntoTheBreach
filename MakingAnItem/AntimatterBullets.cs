@@ -8,7 +8,7 @@ using ItemAPI;
 
 namespace NevernamedsItems
 {
-    public class AntimatterBullets : PassiveItem
+    public class AntimatterBullets : IntersectEnemyBulletsItem
     {
         public static void Init()
         {
@@ -29,7 +29,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "Prime Antimaterial";
-            string longDesc = "Your bullets have a chance to create an explosion upon intersecting with enemy bullets."+"\n\nWhy does't this trigger when you actually hit an enemy?... don't ask questions.";
+            string longDesc = "Your bullets have a chance to create an explosion upon intersecting with enemy bullets." + "\n\nWhy does't this trigger when you actually hit an enemy?... don't ask questions.";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -41,38 +41,17 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.A;
 
         }
-        public void onFired(Projectile bullet, float eventchancescaler)
-        {
-            bullet.collidesWithProjectiles = true;
-            SpeculativeRigidbody specRigidbody = bullet.specRigidbody;
-            specRigidbody.OnPreRigidbodyCollision = (SpeculativeRigidbody.OnPreRigidbodyCollisionDelegate)Delegate.Combine(specRigidbody.OnPreRigidbodyCollision, new SpeculativeRigidbody.OnPreRigidbodyCollisionDelegate(this.HandlePreCollision));
-        }
-        private void onFiredBeam(BeamController sourceBeam)
-        {
 
-        }
-        public override void Pickup(PlayerController player)
+        public static List<Projectile> NonValidProjectile = new List<Projectile>() { };
+
+        public override void DoIntersectionEffect(Projectile playerBullet, Projectile enemyBullet)
         {
-            player.PostProcessProjectile += this.onFired;
-            player.PostProcessBeam += this.onFiredBeam;
-            base.Pickup(player);
-        }
-        public override DebrisObject Drop(PlayerController player)
-        {
-            DebrisObject result = base.Drop(player);
-            player.PostProcessProjectile -= this.onFired;
-            player.PostProcessBeam -= this.onFiredBeam;
-            return result;
-        }
-        protected override void OnDestroy()
-        {
-            Owner.PostProcessProjectile -= this.onFired;
-            Owner.PostProcessBeam -= this.onFiredBeam;
-            base.OnDestroy();
-        }
-        protected void Explode(Projectile enemyBullet)
-        {
-            DoSafeExplosion(enemyBullet.specRigidbody.UnitCenter);
+            if (!NonValidProjectile.Contains(enemyBullet))
+            {
+                DoSafeExplosion(enemyBullet.specRigidbody.UnitCenter);
+                NonValidProjectile.Add(enemyBullet);
+            }
+            base.DoIntersectionEffect(playerBullet, enemyBullet);
         }
         ExplosionData smallPlayerSafeExplosion = new ExplosionData()
         {
@@ -96,23 +75,6 @@ namespace NevernamedsItems
             smallPlayerSafeExplosion.ignoreList = defaultExplosion.ignoreList;
             smallPlayerSafeExplosion.ss = defaultExplosion.ss;
             Exploder.Explode(position, smallPlayerSafeExplosion, Vector2.zero);
-        }
-        private void HandlePreCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherPixelCollider)
-        {
-            if (otherRigidbody && otherRigidbody.projectile)
-            {
-                if (otherRigidbody.projectile.Owner is AIActor)
-                {
-
-                    if (UnityEngine.Random.value <= 0.3f)
-                    {
-                        Explode(otherRigidbody.projectile);
-                    }
-
-
-                }
-                PhysicsEngine.SkipCollision = true;
-            }
         }
     }
 

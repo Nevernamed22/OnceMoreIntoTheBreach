@@ -37,7 +37,7 @@ namespace NevernamedsItems
 
             //Adds the actual passive effect to the item            
             //Set the rarity of the item
-            item.quality = PickupObject.ItemQuality.C;
+            item.quality = PickupObject.ItemQuality.EXCLUDED; //c
         }
         public override void Pickup(PlayerController player)
         {

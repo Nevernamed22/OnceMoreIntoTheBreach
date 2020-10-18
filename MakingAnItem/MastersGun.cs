@@ -46,7 +46,7 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
-            projectile.baseData.damage *= 8f;
+            projectile.baseData.damage *= 10f;
             projectile.ignoreDamageCaps = true;
             projectile.baseData.speed *= 1f;
             projectile.pierceMinorBreakables = true;
@@ -61,13 +61,15 @@ namespace NevernamedsItems
             keepProjectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(keepProjectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(keepProjectile);
-            keepProjectile.baseData.damage *= 8f;
+            keepProjectile.baseData.damage *= 16f;
             keepProjectile.ignoreDamageCaps = true;
             keepProjectile.baseData.speed *= 1f;
             keepProjectile.pierceMinorBreakables = true;
             PierceProjModifier keepComponent = keepProjectile.gameObject.GetOrAddComponent<PierceProjModifier>();
             keepComponent.penetratesBreakables = true;
             keepComponent.penetration++;
+            BounceProjModifier Bouncing = keepProjectile.gameObject.GetOrAddComponent<BounceProjModifier>();
+            Bouncing.numberOfBounces = 5;
             keepProjectile.SetProjectileSpriteRight("mastersgun_keep_projectile", 27, 12, false, tk2dBaseSprite.Anchor.MiddleCenter, 27, 12);
             keepProjectile.transform.parent = gun.barrelOffset;
 
@@ -76,13 +78,16 @@ namespace NevernamedsItems
             properProjectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(properProjectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(properProjectile);
-            properProjectile.baseData.damage *= 8f;
+            properProjectile.baseData.damage *= 16f;
             properProjectile.ignoreDamageCaps = true;
             properProjectile.baseData.speed *= 1f;
             properProjectile.pierceMinorBreakables = true;
             PierceProjModifier properComponent = properProjectile.gameObject.GetOrAddComponent<PierceProjModifier>();
             properComponent.penetratesBreakables = true;
             properComponent.penetration++;
+            ApplyLockdownBulletBehaviour properLockdown = properProjectile.gameObject.GetOrAddComponent<ApplyLockdownBulletBehaviour>();
+            properLockdown.duration = 6;
+
             properProjectile.SetProjectileSpriteRight("mastersgun_proper_projectile", 27, 12, false, tk2dBaseSprite.Anchor.MiddleCenter, 27, 12);
             properProjectile.transform.parent = gun.barrelOffset;
 
@@ -91,7 +96,7 @@ namespace NevernamedsItems
             minesProjectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(minesProjectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(minesProjectile);
-            minesProjectile.baseData.damage *= 8f;
+            minesProjectile.baseData.damage *= 16f;
             minesProjectile.ignoreDamageCaps = true;
             minesProjectile.baseData.speed *= 1f;
             minesProjectile.pierceMinorBreakables = true;
@@ -109,14 +114,14 @@ namespace NevernamedsItems
             hollowProjectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(hollowProjectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(hollowProjectile);
-            hollowProjectile.baseData.damage *= 8f;
+            hollowProjectile.baseData.damage *= 16f;
             hollowProjectile.ignoreDamageCaps = true;
             hollowProjectile.baseData.speed *= 1f;
             hollowProjectile.pierceMinorBreakables = true;
             PierceProjModifier hollowComponent = hollowProjectile.gameObject.GetOrAddComponent<PierceProjModifier>();
             hollowComponent.penetratesBreakables = true;
             hollowComponent.penetration++;
-            SimpleFreezingBulletBehaviour freezing = projectile.gameObject.GetOrAddComponent<SimpleFreezingBulletBehaviour>();
+            SimpleFreezingBulletBehaviour freezing = hollowProjectile.gameObject.GetOrAddComponent<SimpleFreezingBulletBehaviour>();
             freezing.procChance = 1;
             freezing.useSpecialTint = false;
             freezing.freezeAmount = 150;
@@ -129,15 +134,17 @@ namespace NevernamedsItems
             forgeProjectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(forgeProjectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(forgeProjectile);
-            forgeProjectile.baseData.damage *= 10f;
+            forgeProjectile.baseData.damage *= 20f;
             forgeProjectile.ignoreDamageCaps = true;
             forgeProjectile.baseData.speed *= 1f;
             forgeProjectile.pierceMinorBreakables = true;
             PierceProjModifier forgeComponent = forgeProjectile.gameObject.GetOrAddComponent<PierceProjModifier>();
             forgeComponent.penetratesBreakables = true;
             forgeComponent.penetration++;
-            ExtremelySimpleFireBulletBehaviour burning = forgeProjectile.gameObject.GetOrAddComponent<ExtremelySimpleFireBulletBehaviour>();
-            burning.procChance = 1;
+            ExtremelySimpleStatusEffectBulletBehaviour burning = forgeProjectile.gameObject.GetOrAddComponent<ExtremelySimpleStatusEffectBulletBehaviour>();
+            burning.onFiredProcChance = 1;
+            burning.usesFireEffect = true;
+            burning.fireEffect = EasyStatusEffectAccess.hotLeadEffect;
             burning.useSpecialTint = false;
             forgeProjectile.SetProjectileSpriteRight("mastersgun_forge_projectile", 33, 18, false, tk2dBaseSprite.Anchor.MiddleLeft, 27, 12);
             forgeProjectile.transform.parent = gun.barrelOffset;
@@ -207,6 +214,8 @@ namespace NevernamedsItems
         }
         public override void OnPostFired(PlayerController player, Gun gun)
         {
+            gun.PreventNormalFireAudio = true;
+            AkSoundEngine.PostEvent("Play_WPN_seriouscannon_shot_01", gameObject);
         }
         public MastersGun()
         {

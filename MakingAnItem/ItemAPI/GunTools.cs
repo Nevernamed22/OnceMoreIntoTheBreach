@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
-
+using System.Reflection;
 
 namespace ItemAPI
 {
@@ -111,60 +111,6 @@ namespace ItemAPI
             return result;
         }
 
-        public static void SetProjectileSpriteRight(this Projectile proj, string name, int pixelWidth, int pixelHeight, bool lightened = true, tk2dBaseSprite.Anchor anchor = tk2dBaseSprite.Anchor.LowerLeft, int? overrideColliderPixelWidth = null,
-            int? overrideColliderPixelHeight = null, int? overrideColliderOffsetX = null, int? overrideColliderOffsetY = null, Projectile overrideProjectileToCopyFrom = null)
-        {
-            try
-            {
-                proj.GetAnySprite().spriteId = ETGMod.Databases.Items.ProjectileCollection.inst.GetSpriteIdByName(name);
-                tk2dSpriteDefinition def = GunTools.SetupDefinitionForProjectileSprite(name, proj.GetAnySprite().spriteId, pixelWidth, pixelHeight, lightened, overrideColliderPixelWidth, overrideColliderPixelHeight, overrideColliderOffsetX,
-                    overrideColliderOffsetY, overrideProjectileToCopyFrom);
-                def.ConstructOffsetsFromAnchor(anchor, def.position3);
-            }
-            catch (Exception ex)
-            {
-                ETGModConsole.Log("Ooops! Seems like something got very, Very, VERY wrong. Here's the exception:");
-                ETGModConsole.Log(ex.ToString());
-            }
-
-        }
-        public static void MakeOffset(this tk2dSpriteDefinition def, Vector2 offset)
-        {
-            float xOffset = offset.x;
-            float yOffset = offset.y;
-            def.position0 += new Vector3(xOffset, yOffset, 0);
-            def.position1 += new Vector3(xOffset, yOffset, 0);
-            def.position2 += new Vector3(xOffset, yOffset, 0);
-            def.position3 += new Vector3(xOffset, yOffset, 0);
-            def.boundsDataCenter += new Vector3(xOffset, yOffset, 0);
-            def.boundsDataExtents += new Vector3(xOffset, yOffset, 0);
-            def.untrimmedBoundsDataCenter += new Vector3(xOffset, yOffset, 0);
-            def.untrimmedBoundsDataExtents += new Vector3(xOffset, yOffset, 0);
-        }
-
-        public static void ConstructOffsetsFromAnchor(this tk2dSpriteDefinition def, tk2dBaseSprite.Anchor anchor, Vector2 scale)
-        {
-            float xOffset = 0;
-            if (anchor == tk2dBaseSprite.Anchor.LowerCenter || anchor == tk2dBaseSprite.Anchor.MiddleCenter || anchor == tk2dBaseSprite.Anchor.UpperCenter)
-            {
-                xOffset = -(scale.x / 2f);
-            }
-            else if (anchor == tk2dBaseSprite.Anchor.LowerRight || anchor == tk2dBaseSprite.Anchor.MiddleRight || anchor == tk2dBaseSprite.Anchor.UpperRight)
-            {
-                xOffset = -scale.x;
-            }
-            float yOffset = 0;
-            if (anchor == tk2dBaseSprite.Anchor.MiddleLeft || anchor == tk2dBaseSprite.Anchor.MiddleCenter || anchor == tk2dBaseSprite.Anchor.MiddleLeft)
-            {
-                yOffset = -(scale.y / 2f);
-            }
-            else if (anchor == tk2dBaseSprite.Anchor.UpperLeft || anchor == tk2dBaseSprite.Anchor.UpperCenter || anchor == tk2dBaseSprite.Anchor.UpperRight)
-            {
-                yOffset = -scale.y;
-            }
-            def.MakeOffset(new Vector2(xOffset, yOffset));
-        }
-
         public static tk2dSpriteDefinition SetupDefinitionForProjectileSprite(string name, int id, int pixelWidth, int pixelHeight, bool lightened = true, int? overrideColliderPixelWidth = null, int? overrideColliderPixelHeight = null,
             int? overrideColliderOffsetX = null, int? overrideColliderOffsetY = null, Projectile overrideProjectileToCopyFrom = null)
         {
@@ -184,7 +130,7 @@ namespace ItemAPI
             {
                 overrideColliderOffsetY = 0;
             }
-            float thing = 14;
+            float thing = 16;
             float thing2 = 16;
             float trueWidth = (float)pixelWidth / thing;
             float trueHeight = (float)pixelHeight / thing;
@@ -203,13 +149,149 @@ namespace ItemAPI
             def.position1 = new Vector3(0f + trueWidth, 0f, 0f);
             def.position2 = new Vector3(0f, 0f + trueHeight, 0f);
             def.position3 = new Vector3(0f + trueWidth, 0f + trueHeight, 0f);
-            def.colliderVertices[0].x = colliderOffsetX;
-            def.colliderVertices[0].y = colliderOffsetY;
-            def.colliderVertices[1].x = colliderWidth;
-            def.colliderVertices[1].y = colliderHeight;
+            def.colliderVertices = new Vector3[2];
+            def.colliderVertices[0] = new Vector3(colliderOffsetX, colliderOffsetY, 0f);
+            def.colliderVertices[1] = new Vector3(colliderWidth / 2, colliderHeight / 2);
             def.name = name;
             ETGMod.Databases.Items.ProjectileCollection.inst.spriteDefinitions[id] = def;
             return def;
         }
-    }
+
+        public static tk2dSpriteDefinition SetProjectileSpriteRight(this Projectile proj, string name, int pixelWidth, int pixelHeight, bool lightened = true, tk2dBaseSprite.Anchor anchor = tk2dBaseSprite.Anchor.LowerLeft, int? overrideColliderPixelWidth = null, int? overrideColliderPixelHeight = null, bool anchorChangesCollider = true,
+            bool fixesScale = false, int? overrideColliderOffsetX = null, int? overrideColliderOffsetY = null, Projectile overrideProjectileToCopyFrom = null)
+        {
+            try
+            {
+                proj.GetAnySprite().spriteId = ETGMod.Databases.Items.ProjectileCollection.inst.GetSpriteIdByName(name);
+                tk2dSpriteDefinition def = SetupDefinitionForProjectileSprite(name, proj.GetAnySprite().spriteId, pixelWidth, pixelHeight, lightened, overrideColliderPixelWidth, overrideColliderPixelHeight, overrideColliderOffsetX,
+                    overrideColliderOffsetY, overrideProjectileToCopyFrom);
+                def.ConstructOffsetsFromAnchor(anchor, def.position3, fixesScale, anchorChangesCollider);
+                proj.GetAnySprite().scale = new Vector3(1f, 1f, 1f);
+                proj.transform.localScale = new Vector3(1f, 1f, 1f);
+                proj.GetAnySprite().transform.localScale = new Vector3(1f, 1f, 1f);
+                proj.AdditionalScaleMultiplier = 1f;
+                return def;
+            }
+            catch (Exception ex)
+            {
+                ETGModConsole.Log("Ooops! Seems like something got very, Very, VERY wrong. Here's the exception:");
+                ETGModConsole.Log(ex.ToString());
+                return null;
+            }
+        }
+
+        public static void MakeOffset(this tk2dSpriteDefinition def, Vector2 offset, bool changesCollider = false)
+        {
+            float xOffset = offset.x;
+            float yOffset = offset.y;
+            def.position0 += new Vector3(xOffset, yOffset, 0);
+            def.position1 += new Vector3(xOffset, yOffset, 0);
+            def.position2 += new Vector3(xOffset, yOffset, 0);
+            def.position3 += new Vector3(xOffset, yOffset, 0);
+            def.boundsDataCenter += new Vector3(xOffset, yOffset, 0);
+            def.boundsDataExtents += new Vector3(xOffset, yOffset, 0);
+            def.untrimmedBoundsDataCenter += new Vector3(xOffset, yOffset, 0);
+            def.untrimmedBoundsDataExtents += new Vector3(xOffset, yOffset, 0);
+            if (def.colliderVertices != null && def.colliderVertices.Length > 0 && changesCollider)
+            {
+                def.colliderVertices[0] += new Vector3(xOffset, yOffset, 0);
+            }
+        }
+
+        public static void ConstructOffsetsFromAnchor(this tk2dSpriteDefinition def, tk2dBaseSprite.Anchor anchor, Vector2? scale = null, bool fixesScale = false, bool changesCollider = true)
+        {
+            if (!scale.HasValue)
+            {
+                scale = new Vector2?(def.position3);
+            }
+            if (fixesScale)
+            {
+                Vector2 fixedScale = scale.Value - def.position0.XY();
+                scale = new Vector2?(fixedScale);
+            }
+            float xOffset = 0;
+            if (anchor == tk2dBaseSprite.Anchor.LowerCenter || anchor == tk2dBaseSprite.Anchor.MiddleCenter || anchor == tk2dBaseSprite.Anchor.UpperCenter)
+            {
+                xOffset = -(scale.Value.x / 2f);
+            }
+            else if (anchor == tk2dBaseSprite.Anchor.LowerRight || anchor == tk2dBaseSprite.Anchor.MiddleRight || anchor == tk2dBaseSprite.Anchor.UpperRight)
+            {
+                xOffset = -scale.Value.x;
+            }
+            float yOffset = 0;
+            if (anchor == tk2dBaseSprite.Anchor.MiddleLeft || anchor == tk2dBaseSprite.Anchor.MiddleCenter || anchor == tk2dBaseSprite.Anchor.MiddleLeft)
+            {
+                yOffset = -(scale.Value.y / 2f);
+            }
+            else if (anchor == tk2dBaseSprite.Anchor.UpperLeft || anchor == tk2dBaseSprite.Anchor.UpperCenter || anchor == tk2dBaseSprite.Anchor.UpperRight)
+            {
+                yOffset = -scale.Value.y;
+            }
+            def.MakeOffset(new Vector2(xOffset, yOffset), false);
+            if (changesCollider && def.colliderVertices != null && def.colliderVertices.Length > 0)
+            {
+                float colliderXOffset = 0;
+                if (anchor == tk2dBaseSprite.Anchor.LowerLeft || anchor == tk2dBaseSprite.Anchor.MiddleLeft || anchor == tk2dBaseSprite.Anchor.UpperLeft)
+                {
+                    colliderXOffset = (scale.Value.x / 2f);
+                }
+                else if (anchor == tk2dBaseSprite.Anchor.LowerRight || anchor == tk2dBaseSprite.Anchor.MiddleRight || anchor == tk2dBaseSprite.Anchor.UpperRight)
+                {
+                    colliderXOffset = -(scale.Value.x / 2f);
+                }
+                float colliderYOffset = 0;
+                if (anchor == tk2dBaseSprite.Anchor.LowerLeft || anchor == tk2dBaseSprite.Anchor.LowerCenter || anchor == tk2dBaseSprite.Anchor.LowerRight)
+                {
+                    colliderYOffset = (scale.Value.y / 2f);
+                }
+                else if (anchor == tk2dBaseSprite.Anchor.UpperLeft || anchor == tk2dBaseSprite.Anchor.UpperCenter || anchor == tk2dBaseSprite.Anchor.UpperRight)
+                {
+                    colliderYOffset = -(scale.Value.y / 2f);
+                }
+                def.colliderVertices[0] += new Vector3(colliderXOffset, colliderYOffset, 0);
+            }
+        }
+        public static void SetFields(this Component comp, Component other, bool includeFields = true, bool includeProperties = true)
+        {
+            if (comp != null && other != null)
+            {
+                Type type = comp.GetType();
+                if (type != other.GetType())
+                {
+                    ETGModConsole.Log(" type mis-match");
+                    return;
+                } // type mis-match
+                if (includeProperties)
+                {
+                    PropertyInfo[] pinfos = type.GetProperties();
+                    foreach (var pinfo in pinfos)
+                    {
+                        if (pinfo.CanWrite)
+                        {
+                            try
+                            {
+                                pinfo.SetValue(comp, pinfo.GetValue(other, null), null);
+                            }
+                            catch { } // In case of NotImplementedException being thrown. For some reason specifying that exception didn't seem to catch it, so I didn't catch anything specific.
+                        }
+                        else
+                        {
+                        }
+                    }
+                }
+                if (includeFields)
+                {
+                    FieldInfo[] finfos = type.GetFields();
+                    foreach (var finfo in finfos)
+                    {
+                        try
+                        {
+                            finfo.SetValue(comp, finfo.GetValue(other));
+                        }
+                        catch { }
+                    }
+                }
+            }
+        }
+    }  
 }

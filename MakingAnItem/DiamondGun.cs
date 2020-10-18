@@ -49,7 +49,6 @@ namespace NevernamedsItems
             projectile.SetProjectileSpriteRight("diamond_projectile", 11, 11, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
 
             gun.quality = PickupObject.ItemQuality.A;
-            gun.encounterTrackable.EncounterGuid = "this is the Diamond Gun";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             DiamondGunID = gun.PickupObjectId;
@@ -64,6 +63,7 @@ namespace NevernamedsItems
                 if (player.PlayerHasActiveSynergy("Smite")) projectile.OnHitEnemy += this.killUndead;
                 if (player.PlayerHasActiveSynergy("Fire Aspect")) projectile.OnHitEnemy += this.applyFire;
                 if (player.PlayerHasActiveSynergy("Sharpness")) projectile.baseData.damage *= 1.5f;
+                if (player.PlayerHasActiveSynergy("Knockback")) projectile.baseData.force *= 2f;
                 base.PostProcessProjectile(projectile);
             }
             catch (Exception e)
@@ -73,10 +73,10 @@ namespace NevernamedsItems
             }
 
         }
-        protected override void OnPickup(PlayerController player)
+        protected override void OnPickedUpByPlayer(PlayerController player)
         {
             player.GunChanged += this.OnChangedGun;
-            base.OnPickup(player);
+            base.OnPickedUpByPlayer(player);
         }
         private void OnChangedGun(Gun oldGun, Gun newGun, bool huh)
         {
