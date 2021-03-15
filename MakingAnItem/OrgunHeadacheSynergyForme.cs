@@ -57,7 +57,7 @@ namespace NevernamedsItems
 
             gun.reloadTime = 1.5f;
             gun.barrelOffset.transform.localPosition = new Vector3(1.62f, 0.87f, 0f);
-            gun.SetBaseMaxAmmo(400);
+            gun.SetBaseMaxAmmo(120);
 
             //BULLET STATS
 

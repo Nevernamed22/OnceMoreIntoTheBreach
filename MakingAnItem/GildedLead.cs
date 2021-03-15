@@ -46,7 +46,7 @@ namespace NevernamedsItems
         public static Color gold = new Color(230f / 255f, 174f / 255f, 21f / 255f);
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
-            if (Owner.carriedConsumables.Currency > 0)
+            if (Owner.carriedConsumables.Currency > 0 && !sourceProjectile.TreatedAsNonProjectileForChallenge)
             {
                 float procChance;
                 if (Owner.HasPickupID(10)) procChance = 0.5f;
@@ -54,8 +54,8 @@ namespace NevernamedsItems
                 if (UnityEngine.Random.value < procChance * effectChanceScalar)
                 {
                     Owner.carriedConsumables.Currency -= 1;
-                    float damageMult = 2f;
-                    if (Owner.HasPickupID(532)) damageMult = 3f;
+                    float damageMult = 3f;
+                    if (Owner.HasPickupID(532)) damageMult = 4f;
                     sourceProjectile.baseData.damage *= damageMult;
                     sourceProjectile.AdjustPlayerProjectileTint(gold, 1, 0f);
                     sourceProjectile.OnHitEnemy += this.OnHitEnemy;

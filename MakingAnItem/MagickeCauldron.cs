@@ -121,7 +121,7 @@ namespace NevernamedsItems
         public AIActorDebuffEffect WeakenedDebuff = new AIActorDebuffEffect
         {
             HealthMultiplier = 0.5f,
-            CooldownMultiplier = 0.5f,
+            CooldownMultiplier = 0.5f,            
             SpeedMultiplier = 0.8f,
             KeepHealthPercentage = true,
             OverheadVFX = MagickeCauldron.overheadder,

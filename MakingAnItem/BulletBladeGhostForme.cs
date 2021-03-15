@@ -112,7 +112,7 @@ namespace NevernamedsItems
                 }
             }
             gun.reloadTime = 1f;
-            gun.SetBaseMaxAmmo(80);
+            gun.SetBaseMaxAmmo(50);
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
 
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.LoopSection;

@@ -42,7 +42,7 @@ namespace NevernamedsItems
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.PlayerBulletScale, 1.3f, StatModifier.ModifyMethod.MULTIPLICATIVE);
 
             //Set the rarity of the item
-            item.quality = PickupObject.ItemQuality.A; //A
+            item.quality = PickupObject.ItemQuality.EXCLUDED; //A
 
         }
 
@@ -52,7 +52,7 @@ namespace NevernamedsItems
             {
                 ExplosiveModifier exploding = sourceProjectile.gameObject.GetOrAddComponent<ExplosiveModifier>();
                 exploding.doExplosion = true;
-                exploding.explosionData = EasyExplosionDataStorage.explosiveRoundsExplosion;
+                exploding.explosionData = StaticExplosionDatas.explosiveRoundsExplosion;
             }
             try
             {

@@ -30,7 +30,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "Nyoom";
-            string longDesc = "Makes your bullets travel at supersonic speeds."+"\n\nBrought to the Gungeon by the infamous speedster Tonic.";
+            string longDesc = "Makes your bullets travel at supersonic speeds." + "\n\nBrought to the Gungeon by the infamous speedster Tonic.";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -46,18 +46,21 @@ namespace NevernamedsItems
         private Gun currentHeldGun, lastHeldGun;
         protected override void Update()
         {
-            currentHeldGun = Owner.CurrentGun;
-            if (currentHeldGun != lastHeldGun)
+            if (Owner && Owner.CurrentGun)
             {
-                if (Owner.CurrentGun.PickupObjectId == 149)
+                currentHeldGun = Owner.CurrentGun;
+                if (currentHeldGun != lastHeldGun)
                 {
-                    GiveSynergyBoost();
+                    if (Owner.CurrentGun.PickupObjectId == 149)
+                    {
+                        GiveSynergyBoost();
+                    }
+                    else
+                    {
+                        RemoveSynergyBoost();
+                    }
+                    lastHeldGun = currentHeldGun;
                 }
-                else
-                {
-                    RemoveSynergyBoost();
-                }
-                lastHeldGun = currentHeldGun;
             }
             base.Update();
         }
@@ -111,8 +114,11 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.healthHaver.OnDamaged -= this.PlayerTookDamage;
-            Owner.PostProcessProjectile -= this.PostProcessProjectile;
+            if (Owner)
+            {
+                Owner.healthHaver.OnDamaged -= this.PlayerTookDamage;
+                Owner.PostProcessProjectile -= this.PostProcessProjectile;
+            }
             base.OnDestroy();
         }
         private void AddStat(PlayerStats.StatType statType, float amount, StatModifier.ModifyMethod method = StatModifier.ModifyMethod.ADDITIVE)

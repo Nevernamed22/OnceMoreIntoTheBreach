@@ -44,7 +44,8 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.damage *= 1.5f;
-            PaintballController paintballController = projectile.gameObject.AddComponent<PaintballController>();
+            RandomiseProjectileColourComponent paintballController = projectile.gameObject.AddComponent<RandomiseProjectileColourComponent>();
+            paintballController.ApplyColourToHitEnemies = true;
 
             gun.quality = PickupObject.ItemQuality.C;
 
@@ -61,51 +62,5 @@ namespace NevernamedsItems
         {
 
         }
-    }
-    public class PaintballController : MonoBehaviour
-    {
-        public PaintballController()
-        {
-            
-        }
-        private static List<Color> PaintballColourList = new List<Color>
-        {
-            ExtendedColours.pink,
-            Color.red,
-            ExtendedColours.orange,
-            Color.yellow,
-            Color.green,
-            Color.blue,
-            ExtendedColours.purple,
-            Color.cyan,
-        };
-        private void Start()
-        {
-            this.m_projectile = base.GetComponent<Projectile>();
-            PaintballColour = BraveUtility.RandomElement(PaintballColourList);
-            m_projectile.AdjustPlayerProjectileTint(PaintballColour, 1);
-            m_projectile.OnHitEnemy += this.OnHitEnemy;
-        }
-        private Projectile m_projectile;
-        private Color PaintballColour;
-        private void OnHitEnemy(Projectile bullet, SpeculativeRigidbody enemy, bool what)
-        {
-            GameActorHealthEffect tint = new GameActorHealthEffect()
-            {
-                TintColor = PaintballColour,
-                DeathTintColor = PaintballColour,
-                AppliesTint = true,
-                AppliesDeathTint = true,
-                AffectsEnemies = true,
-                DamagePerSecondToEnemies = 0f,
-                duration = 10000000,
-                effectIdentifier = "PaintballTint",
-            };
-            enemy.aiActor.ApplyEffect(tint);
-        }        
-        private void Update()
-        {
-            
-        }        
-    }    
+    }  
 }

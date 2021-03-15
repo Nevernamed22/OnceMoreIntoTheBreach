@@ -55,8 +55,9 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.D;
             gun.encounterTrackable.EncounterGuid = "this is the Fire Lance";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
-
+            FireLanceID = gun.PickupObjectId;
         }
+        public static int FireLanceID;
         static ExplosionData smallExplosion = GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultSmallExplosionData;
         static ExplosionData FireLanceExplosion = new ExplosionData()
         {

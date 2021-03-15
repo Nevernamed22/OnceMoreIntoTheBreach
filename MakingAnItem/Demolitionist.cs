@@ -52,7 +52,9 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.B;
             gun.encounterTrackable.EncounterGuid = "this is the Demolitionist";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+            DemolitionistID = gun.PickupObjectId;
         }
+        public static int DemolitionistID;
         public override void OnReloadPressed(PlayerController player, Gun gun, bool bSOMETHING)
         {
             base.OnReloadPressed(player, gun, bSOMETHING);

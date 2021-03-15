@@ -42,24 +42,24 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.D;
 
         }
-        public void onFired(Projectile bullet, float eventchancescaler)
+        public void onFiredGun(Projectile bullet, float eventchancescaler)
         {           
-            bullet.BlackPhantomDamageMultiplier *= 1.1f;           
+            bullet.BlackPhantomDamageMultiplier *= 1.1f;              
         }        
         public override void Pickup(PlayerController player)
         {
-            player.PostProcessProjectile += this.onFired;
+            player.PostProcessProjectile += this.onFiredGun;
             base.Pickup(player);
         }
         public override DebrisObject Drop(PlayerController player)
         {
             DebrisObject result = base.Drop(player);
-            player.PostProcessProjectile -= this.onFired;
+            player.PostProcessProjectile -= this.onFiredGun;
             return result;
         }
         protected override void OnDestroy()
         {
-            Owner.PostProcessProjectile -= this.onFired;
+            Owner.PostProcessProjectile -= this.onFiredGun;
             base.OnDestroy();
         }
         public override void DoIntersectionEffect(Projectile playerBullet, Projectile enemyBullet)

@@ -38,7 +38,7 @@ namespace NevernamedsItems
             gun.DefaultModule.cooldownTime = 0.11f;
             gun.DefaultModule.numberOfShotsInClip = 40;
             gun.barrelOffset.transform.localPosition = new Vector3(4.18f, 0.87f, 0f);
-            gun.SetBaseMaxAmmo(400);
+            gun.SetBaseMaxAmmo(250);
 
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
@@ -54,12 +54,18 @@ namespace NevernamedsItems
             orAddComponent.penetratesBreakables = true;
             orAddComponent.penetration = 5;
 
+            gun.AddCurrentGunStatModifier(PlayerStats.StatType.MovementSpeed, 0.8f, StatModifier.ModifyMethod.MULTIPLICATIVE);
+            gun.AddCurrentGunStatModifier(PlayerStats.StatType.DodgeRollSpeedMultiplier, 0.8f, StatModifier.ModifyMethod.MULTIPLICATIVE);
+
             gun.DefaultModule.projectiles[0] = projectile;
             gun.quality = PickupObject.ItemQuality.S;
             gun.encounterTrackable.EncounterGuid = "this is the Heavy Assault Rifle";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             HeavyAssaultRifleID = gun.PickupObjectId;
+
+            gun.AddToSubShop(ItemBuilder.ShopType.Trorc);
+
         }
         public static int HeavyAssaultRifleID;
         public HeavyAssaultRifle()

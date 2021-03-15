@@ -53,6 +53,7 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "this is the Unus Centum";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+            UnusCentumID = gun.PickupObjectId;
         }
         public override void OnPostFired(PlayerController player, Gun gun)
         {
@@ -64,6 +65,7 @@ namespace NevernamedsItems
            gun.PreventNormalFireAudio = true;
             AkSoundEngine.PostEvent("Play_WPN_deck4rd_shot_01", gameObject);
         }
+        public static int UnusCentumID;
         public UnusCentum()
         {
 

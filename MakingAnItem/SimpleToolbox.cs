@@ -19,6 +19,35 @@ namespace NevernamedsItems
                 if (gun.PickupObjectId == idToGive) { gun.GainAmmo(AmmoToGive); }
             }
         }
+        public static void SpawnShield(PlayerController user, Vector3 location)
+        {
+            Gun gun = PickupObjectDatabase.GetById(380) as Gun;
+            Gun currentGun = user.CurrentGun;
+            GameObject gameObject = gun.ObjectToInstantiateOnReload.gameObject;
+            GameObject gameObject2 = UnityEngine.Object.Instantiate<GameObject>(gameObject, location, Quaternion.identity);
+            SingleSpawnableGunPlacedObject @interface = gameObject2.GetInterface<SingleSpawnableGunPlacedObject>();
+            BreakableShieldController component = gameObject2.GetComponent<BreakableShieldController>();
+            bool flag3 = gameObject2;
+            if (flag3)
+            {
+                @interface.Initialize(currentGun);
+                component.Initialize(currentGun);
+            }
+        }
+
+        public static Vector2 GetCursorPosition(PlayerController user)
+        {
+            Vector2 m_cachedBlinkPosition = Vector2.zero;
+
+            GungeonActions m_activeActions = OMITBReflectionHelpers.ReflectGetField<GungeonActions>(typeof(PlayerController), "m_activeActions", user);
+
+            bool IsKeyboardAndMouse = BraveInput.GetInstanceForPlayer(user.PlayerIDX).IsKeyboardAndMouse(false);
+            if (IsKeyboardAndMouse) { m_cachedBlinkPosition = user.unadjustedAimPoint.XY() - (user.CenterPosition - user.specRigidbody.UnitCenter); }
+            else { if (m_activeActions != null) { m_cachedBlinkPosition += m_activeActions.Aim.Vector.normalized * BraveTime.DeltaTime * 15f; } }
+
+            m_cachedBlinkPosition = BraveMathCollege.ClampToBounds(m_cachedBlinkPosition, GameManager.Instance.MainCameraController.MinVisiblePoint, GameManager.Instance.MainCameraController.MaxVisiblePoint);
+            return m_cachedBlinkPosition;
+        }
         public static RoomHandler GetAbsoluteRoomFromProjectile(Projectile bullet)
         {
             Vector2 bulletPosition = bullet.sprite.WorldCenter;
@@ -34,6 +63,53 @@ namespace NevernamedsItems
         {
             return RadianToVector2(degree * Mathf.Deg2Rad);
         }
+        public static float Vector2ToDegree(Vector2 p_vector2)
+        {
+            if (p_vector2.x < 0) { return 360 - (Mathf.Atan2(p_vector2.x, p_vector2.y) * Mathf.Rad2Deg * -1); }
+            else { return Mathf.Atan2(p_vector2.x, p_vector2.y) * Mathf.Rad2Deg; }
+        }
+        public static void ApplyFear(this AIActor enemy, PlayerController player, float fearLength, float fearStartDistance, float fearStopDistance)
+        {           
+            EnemyFeared inflictedFear = enemy.gameObject.AddComponent<EnemyFeared>();
+            inflictedFear.player = player;
+            inflictedFear.fearLength = fearLength;
+            inflictedFear.fearStartDistance = fearStartDistance;
+            inflictedFear.fearStopDistance = fearStopDistance;
+        }
+    }
+    public class EnemyFeared : BraveBehaviour
+    {
+        private void Start()
+        {
+            this.enemy = base.aiActor;
+            if (this.player != null && this.enemy != null)
+            {
+                StartCoroutine("HandleFear");
+            }
+        }
+        private IEnumerator HandleFear()
+        {
+            if (this.enemy.behaviorSpeculator != null)
+            {
+                //ETGModConsole.Log("Fear Triggered");
+                FleePlayerData fleedata = new FleePlayerData
+                {
+                    StartDistance = this.fearStartDistance,
+                    StopDistance = this.fearStopDistance,
+                    Player = this.player,
+                };
+                this.enemy.behaviorSpeculator.FleePlayerData = fleedata;
+
+                yield return new WaitForSeconds(fearLength);
+
+                this.enemy.behaviorSpeculator.FleePlayerData = null;              
+            }
+        }
+        public PlayerController player;
+        private AIActor enemy;
+        public float fearLength;
+        public float fearStartDistance;
+        public float fearStopDistance;
     }
     public class StaticCoroutine : MonoBehaviour
     {
@@ -89,16 +165,16 @@ namespace NevernamedsItems
     }
     public class CustomEnemyTagsSystem : MonoBehaviour
     {
-        //EXISTING TAGS
-        //KalibersEyeMinion - Enemy is a companion created by Kaliber's eye.
-        //IgnoreForGoodMimic - Enemy dying does not change Good Mimic's form.
         public CustomEnemyTagsSystem()
         {
-
+            isKalibersEyeMinion = false;
+            ignoreForGoodMimic = false;
+            isGundertaleFriendly = false;
         }
-        public List<string> TagsList = new List<string>()
-        {
-        };
+
+        public bool isKalibersEyeMinion;
+        public bool isGundertaleFriendly;
+        public bool ignoreForGoodMimic;
     }
     public class AdvancedTransformGunSynergyProcessor : MonoBehaviour
     {
@@ -194,6 +270,72 @@ namespace NevernamedsItems
         public bool useSpecialTint;
         public float procChance;
     }
+    public class AreaFearBulletModifier : MonoBehaviour
+    {
+        public AreaFearBulletModifier()
+        {
+            this.tintColour = ExtendedColours.pink;
+            this.useSpecialTint = true;
+            this.procChance = 1;
+            this.effectRadius = 5;
+            this.fearLength = 1f;
+            this.fearStartDistance = 5f;
+            this.fearStopDistance = 7f;
+        }
+        private void Start()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
+            if (m_projectile.Owner is PlayerController) this.player = m_projectile.Owner as PlayerController;
+            if (useSpecialTint)
+            {
+                m_projectile.AdjustPlayerProjectileTint(tintColour, 2);
+            }
+            m_projectile.OnHitEnemy += this.OnHitEnemy;
+
+        }
+        private void OnHitEnemy(Projectile bullet, SpeculativeRigidbody enemy, bool fatal)
+        {
+            //ETGModConsole.Log("OnHitEnemy Activated");
+            if (UnityEngine.Random.value <= procChance)
+            {
+                //ETGModConsole.Log("Proc Chance Passed");
+
+                List<AIActor> activeEnemies = enemy.aiActor.GetAbsoluteParentRoom().GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+                if (activeEnemies != null)
+                {
+                    //ETGModConsole.Log("Active Enemies was not Null");
+
+                    for (int i = 0; i < activeEnemies.Count; i++)
+                    {
+                        //ETGModConsole.Log("Found Valid Enemy --------------");
+
+                        AIActor aiactor = activeEnemies[i];
+                        if (aiactor.IsNormalEnemy)
+                        {
+                            //ETGModConsole.Log("Valid enemy is normal enemy");
+
+                            float num = Vector2.Distance(enemy.specRigidbody.UnitCenter, aiactor.CenterPosition);
+                            if (num <= effectRadius)
+                            {
+                                aiactor.ApplyFear(player, fearLength, fearStartDistance, fearStopDistance);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private PlayerController player;
+        private Projectile m_projectile;
+        public Color tintColour;
+        public bool useSpecialTint;
+        public float procChance;
+        public float fearStartDistance;
+        public float fearStopDistance;
+        public float fearLength;
+        public float effectRadius;
+    }
+
     public class PlayerProjectileTeleportModifier : BraveBehaviour
     {
         public PlayerProjectileTeleportModifier()
@@ -437,6 +579,96 @@ namespace NevernamedsItems
             }
         }
     }
+    public class SpawnEnemyOnBulletSpawn : MonoBehaviour
+    {
+        public SpawnEnemyOnBulletSpawn()
+        {
+            this.procChance = 1;
+            this.deleteProjAfterSpawn = true;
+            this.companioniseEnemy = true;
+            this.ignoreSpawnedEnemyForGoodMimic = true;
+            this.killSpawnedEnemyOnRoomClear = true;
+            this.doPostProcessOnEnemyBullets = true;
+            this.scaleEnemyDamage = true;
+            this.scaleEnemyProjSize = true;
+            this.scaleEnemyProjSpeed = true;
+            this.enemyBulletDamage = 10f;
+        }
+        private void Start()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
+            if (this.m_projectile.Owner is PlayerController) { this.projOwner = this.m_projectile.Owner as PlayerController; }
+            GameManager.Instance.StartCoroutine(handleSpawn());
+        }
+        private IEnumerator handleSpawn()
+        {
+            yield return null;
+            if (UnityEngine.Random.value <= this.procChance)
+            {
+                if (guidToSpawn != null)
+                {
+                    var enemyToSpawn = EnemyDatabase.GetOrLoadByGuid(guidToSpawn);
+                    var position = this.m_projectile.specRigidbody.UnitCenter;
+                    Instantiate<GameObject>(EasyVFXDatabase.SpiratTeleportVFX, position, Quaternion.identity);
+
+                    AIActor TargetActor = AIActor.Spawn(enemyToSpawn, position, GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(position.ToIntVector2()), true, AIActor.AwakenAnimationType.Default, true);
+
+                    PhysicsEngine.Instance.RegisterOverlappingGhostCollisionExceptions(TargetActor.specRigidbody, null, false);
+
+                    if (ignoreSpawnedEnemyForGoodMimic)
+                    {
+                        CustomEnemyTagsSystem tags = TargetActor.gameObject.GetOrAddComponent<CustomEnemyTagsSystem>();
+                        tags.ignoreForGoodMimic = true;
+                    }
+
+                    if (companioniseEnemy && this.projOwner != null)
+                    {
+                        CompanionController orAddComponent = TargetActor.gameObject.GetOrAddComponent<CompanionController>();
+                        orAddComponent.companionID = CompanionController.CompanionIdentifier.NONE;
+                        orAddComponent.Initialize(this.projOwner);
+
+                        CompanionisedEnemyBulletModifiers companionisedBullets = TargetActor.gameObject.GetOrAddComponent<CompanionisedEnemyBulletModifiers>();
+                        companionisedBullets.jammedDamageMultiplier = 2f;
+                        companionisedBullets.TintBullets = true;
+                        companionisedBullets.TintColor = ExtendedColours.honeyYellow;
+                        companionisedBullets.baseBulletDamage = enemyBulletDamage;
+                        companionisedBullets.scaleDamage = this.scaleEnemyDamage;
+                        companionisedBullets.doPostProcess = this.doPostProcessOnEnemyBullets;
+                        companionisedBullets.scaleSize = this.scaleEnemyProjSize;
+                        companionisedBullets.scaleSpeed = this.scaleEnemyProjSpeed;
+                        companionisedBullets.enemyOwner = this.projOwner;
+                    }
+
+                    if (killSpawnedEnemyOnRoomClear)
+                    {
+                        TargetActor.gameObject.AddComponent<KillOnRoomClear>();
+                    }
+
+                    TargetActor.IsHarmlessEnemy = true;
+                    TargetActor.IgnoreForRoomClear = true;
+
+                    if (TargetActor.gameObject.GetComponent<SpawnEnemyOnDeath>())
+                    {
+                        Destroy(TargetActor.gameObject.GetComponent<SpawnEnemyOnDeath>());
+                    }
+                    if (deleteProjAfterSpawn) { Destroy(this.m_projectile.gameObject); }
+                }
+            }
+        }
+        private Projectile m_projectile;
+        private PlayerController projOwner;
+        public float procChance;
+        public float enemyBulletDamage;
+        public bool companioniseEnemy;
+        public bool killSpawnedEnemyOnRoomClear;
+        public bool deleteProjAfterSpawn;
+        public bool ignoreSpawnedEnemyForGoodMimic;
+        public string guidToSpawn;
+        public bool scaleEnemyDamage;
+        public bool scaleEnemyProjSize;
+        public bool scaleEnemyProjSpeed;
+        public bool doPostProcessOnEnemyBullets;
+    }
     public class KeyBulletBehaviour : MonoBehaviour
     {
         public KeyBulletBehaviour()
@@ -667,14 +899,14 @@ namespace NevernamedsItems
             this.useSpecialTint = false;
             this.onFiredProcChance = 1;
             this.onHitProcChance = 1;
-            this.fireEffect = EasyStatusEffectAccess.hotLeadEffect;
+            this.fireEffect = StaticStatusEffects.hotLeadEffect;
             this.usesFireEffect = false;
             this.usesCharmEffect = false;
             this.usesPoisonEffect = false;
             this.usesSpeedEffect = false;
-            this.speedEffect = EasyStatusEffectAccess.tripleCrossbowSlowEffect;
-            this.poisonEffect = EasyStatusEffectAccess.irradiatedLeadEffect;
-            this.charmEffect = EasyStatusEffectAccess.charmingRoundsEffect;
+            this.speedEffect = StaticStatusEffects.tripleCrossbowSlowEffect;
+            this.poisonEffect = StaticStatusEffects.irradiatedLeadEffect;
+            this.charmEffect = StaticStatusEffects.charmingRoundsEffect;
         }
         public GameActorFireEffect fireEffect;
         public bool usesFireEffect;
@@ -715,7 +947,26 @@ namespace NevernamedsItems
         public float onFiredProcChance;
         public float onHitProcChance;
     }
-    public class ExtremelySimplePoisonBulletBehaviour : MonoBehaviour
+    public class InstantTeleportToPlayerCursorBehav : MonoBehaviour
+    {
+        public InstantTeleportToPlayerCursorBehav()
+        {
+            this.procChance = 1;
+        }
+        private void Start()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
+            if (m_projectile.Owner is PlayerController) this.owner = m_projectile.Owner as PlayerController;
+            if (owner && UnityEngine.Random.value <= procChance)
+            {
+                m_projectile.specRigidbody.Position = new Position(MiscToolbox.GetCursorPosition(owner));
+            }
+        }
+        private Projectile m_projectile;
+        private PlayerController owner;
+        public float procChance;
+    }
+        public class ExtremelySimplePoisonBulletBehaviour : MonoBehaviour
     {
         public ExtremelySimplePoisonBulletBehaviour()
         {
@@ -891,13 +1142,13 @@ namespace NevernamedsItems
                 resistanceType = resistanceType,
 
                 //Eh
-                OverheadVFX = EasyStatusEffectAccess.hotLeadEffect.OverheadVFX,
+                OverheadVFX = StaticStatusEffects.hotLeadEffect.OverheadVFX,
                 AffectsEnemies = true,
                 AffectsPlayers = false,
                 AppliesOutlineTint = false,
-                ignitesGoops = EasyStatusEffectAccess.hotLeadEffect.ignitesGoops,
+                ignitesGoops = StaticStatusEffects.hotLeadEffect.ignitesGoops,
                 OutlineTintColor = tintColour,
-                PlaysVFXOnActor = EasyStatusEffectAccess.hotLeadEffect.PlaysVFXOnActor,
+                PlaysVFXOnActor = StaticStatusEffects.hotLeadEffect.PlaysVFXOnActor,
             };
             if (target && target.aiActor && target.healthHaver && target.healthHaver.IsAlive)
             {
@@ -950,6 +1201,11 @@ namespace NevernamedsItems
         }
         public static void ReAimBulletToNearestEnemy(Projectile bullet)
         {
+            Vector2 dirVec = GetVectorToNearestEnemy(bullet);
+            bullet.SendInDirection(dirVec, false, true);
+        }
+        public static Vector2 GetVectorToNearestEnemy(Projectile bullet)
+        {
             Vector2 dirVec = UnityEngine.Random.insideUnitCircle;
             Vector2 bulletPosition = bullet.sprite.WorldCenter;
             Func<AIActor, bool> isValid = (AIActor a) => a && a.HasBeenEngaged && a.healthHaver && a.healthHaver.IsVulnerable;
@@ -962,13 +1218,34 @@ namespace NevernamedsItems
             {
                 dirVec = closestToPosition.CenterPosition - bullet.transform.position.XY();
             }
-            bullet.SendInDirection(dirVec, false, true);
+            return dirVec;
+
+        }
+        public static float GetDegreeToNearestEnemy(Projectile bullet)
+        {
+            Vector2 dirVec = UnityEngine.Random.insideUnitCircle;
+            Vector2 bulletPosition = bullet.sprite.WorldCenter;
+            Func<AIActor, bool> isValid = (AIActor a) => a && a.HasBeenEngaged && a.healthHaver && a.healthHaver.IsVulnerable;
+            IntVector2 bulletPositionIntVector2 = bulletPosition.ToIntVector2();
+            AIActor closestToPosition = BraveUtility.GetClosestToPosition<AIActor>(GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(bulletPositionIntVector2).GetActiveEnemies(RoomHandler.ActiveEnemyType.All), bullet.sprite.WorldCenter, isValid, new AIActor[]
+            {
+
+            });
+            if (closestToPosition)
+            {
+                dirVec = closestToPosition.CenterPosition - bullet.transform.position.XY();
+            }
+            return MiscToolbox.Vector2ToDegree(dirVec);
         }
     }
     public class CompanionisedEnemyBulletModifiers : BraveBehaviour //----------------------------------------------------------------------------------------------
     {
         public CompanionisedEnemyBulletModifiers()
         {
+            this.scaleDamage = false;
+            this.scaleSize = false;
+            this.scaleSpeed = false;
+            this.doPostProcess = false;
             this.baseBulletDamage = 10f;
             this.TintBullets = false;
             this.TintColor = Color.grey;
@@ -1002,6 +1279,22 @@ namespace NevernamedsItems
                 if (enemy.aiActor != null)
                 {
                     proj.baseData.damage = baseBulletDamage;
+                    if (enemyOwner != null)
+                    {
+                        //ETGModConsole.Log("Companionise: enemyOwner is not null");
+                        if (scaleDamage) proj.baseData.damage *= enemyOwner.stats.GetStatValue(PlayerStats.StatType.Damage);
+                        if (scaleSize)
+                        {
+                            proj.RuntimeUpdateScale(enemyOwner.stats.GetStatValue(PlayerStats.StatType.PlayerBulletScale));
+                        }
+                        if (scaleSpeed)
+                        {
+                            proj.baseData.speed *= enemyOwner.stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed);
+                            proj.UpdateSpeed();
+                        }
+                        //ETGModConsole.Log("Damage: " + proj.baseData.damage);
+                        if (doPostProcess) enemyOwner.DoPostProcessProjectile(proj);
+                    }
                     if (enemy.aiActor.IsBlackPhantom) { proj.baseData.damage = baseBulletDamage * jammedDamageMultiplier; }
                 }
             }
@@ -1009,6 +1302,11 @@ namespace NevernamedsItems
         }
 
         private AIActor enemy;
+        public PlayerController enemyOwner;
+        public bool scaleDamage;
+        public bool scaleSize;
+        public bool scaleSpeed;
+        public bool doPostProcess;
         public float baseBulletDamage;
         public float jammedDamageMultiplier;
         public bool TintBullets;

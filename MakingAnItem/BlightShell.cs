@@ -57,10 +57,12 @@ namespace NevernamedsItems
             }
             else
             {
-                var gun = (PickupObjectDatabase.GetById(selectedShotgun) as Gun);
+                var gameGun = (PickupObjectDatabase.GetById(selectedShotgun) as Gun);
+                var gun = UnityEngine.Object.Instantiate<Gun>(gameGun);
+
+                gun.AddPassiveStatModifier(PlayerStats.StatType.Curse, 1, StatModifier.ModifyMethod.ADDITIVE);
+
                 Owner.inventory.AddGunToInventory(gun, true);
-                float currentCurse = Owner.stats.GetBaseStatValue(PlayerStats.StatType.Curse);
-                Owner.stats.SetBaseStatValue(PlayerStats.StatType.Curse, currentCurse + 1f, Owner);
             }
         }
 
@@ -97,6 +99,8 @@ namespace NevernamedsItems
             JusticeGun.JusticeID, //Justice
             Orgun.OrgunID, //Orgun
             Octagun.OctagunID, //Octagun
+            ClownShotgun.ClownShotgunID,
+            Ranger.RangerID,
         };
 
         public override void Pickup(PlayerController player)

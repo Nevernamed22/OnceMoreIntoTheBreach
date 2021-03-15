@@ -11,15 +11,6 @@ using ItemAPI;
 
 namespace NevernamedsItems
 {
-    public static class StuffIStoleFromApacheThatIDontUnderstand
-    {
-        public static T ReflectGetField<T>(Type classType, string fieldName, object o = null)
-        {
-            FieldInfo field = classType.GetField(fieldName, BindingFlags.Public | BindingFlags.NonPublic | ((o != null) ? BindingFlags.Instance : BindingFlags.Static));
-            return (T)field.GetValue(o);
-        }
-
-    }
     public class TeleportNonsense
     {
         public static bool CanBlinkToPoint(PlayerController Owner, Vector2 point, Vector2 centerOffset)
@@ -79,7 +70,7 @@ namespace NevernamedsItems
         public GameObject BlinkpoofVfx = m_BlinkPassive.BlinkpoofVfx;
         public static void StartTeleport(PlayerController user)
         {
-            GungeonActions m_activeActions = StuffIStoleFromApacheThatIDontUnderstand.ReflectGetField<GungeonActions>(typeof(PlayerController), "m_activeActions", user);
+            GungeonActions m_activeActions = OMITBReflectionHelpers.ReflectGetField<GungeonActions>(typeof(PlayerController), "m_activeActions", user);
             Vector2 currentDirection = TeleportNonsense.AdjustInputVector(m_activeActions.Move.Vector, BraveInput.MagnetAngles.movementCardinal, BraveInput.MagnetAngles.movementOrdinal);
             Vector2 cachedBlinkPosition = m_cachedBlinkPosition;
 
@@ -139,12 +130,12 @@ namespace NevernamedsItems
         private static IEnumerator HandleBlinkTeleport(PlayerController Owner, Vector2 targetPoint, Vector2 targetDirection)
         {
 
-            targetPoint = (targetPoint - new Vector2(0.75f, 0.125f));
+            targetPoint = (targetPoint - new Vector2(0.40f, 0.125f));
 
             Owner.PlayEffectOnActor(EasyVFXDatabase.BloodiedScarfPoofVFX, Vector3.zero, false, true, false);
 
             AkSoundEngine.PostEvent("Play_ENM_wizardred_vanish_01", Owner.gameObject);
-            List<AIActor> m_rollDamagedEnemies = StuffIStoleFromApacheThatIDontUnderstand.ReflectGetField<List<AIActor>>(typeof(PlayerController), "m_rollDamagedEnemies", Owner);
+            List<AIActor> m_rollDamagedEnemies = OMITBReflectionHelpers.ReflectGetField<List<AIActor>>(typeof(PlayerController), "m_rollDamagedEnemies", Owner);
             if (m_rollDamagedEnemies != null)
             {
                 m_rollDamagedEnemies.Clear();

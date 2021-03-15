@@ -12,12 +12,7 @@ namespace NevernamedsItems
 {
     class YellowGuonStone : IounStoneOrbitalItem
     {
-
-        public static Hook guonHook;
-        public static bool speedUp = false;
         public static PlayerOrbital orbitalPrefab;
-
-        //Call this method from the Start() method of your ETGModule extension
         public static void Init()
         {
             string itemName = "Yellow Guon Stone"; //The name of the item
@@ -53,6 +48,7 @@ namespace NevernamedsItems
             orbitalPrefab.motionStyle = PlayerOrbital.OrbitalMotionStyle.ORBIT_PLAYER_ALWAYS;
             orbitalPrefab.shouldRotate = false;
             orbitalPrefab.orbitRadius = 2.5f;
+            orbitalPrefab.orbitDegreesPerSecond = 120f;
             orbitalPrefab.SetOrbitalTier(0);
 
             GameObject.DontDestroyOnLoad(prefab);
@@ -63,39 +59,18 @@ namespace NevernamedsItems
         public override void Pickup(PlayerController player)
         {
             player.OnAnyEnemyReceivedDamage += this.OnEnemyDamaged;
-            foreach (var orbital in player.orbitals)
-            {
-                var o = (PlayerOrbital)orbital;
-                o.orbitDegreesPerSecond = 90f;
-            }            
-            guonHook = new Hook(
-                typeof(PlayerOrbital).GetMethod("Initialize"),
-                typeof(YellowGuonStone).GetMethod("GuonInit")
-            );
-
             base.Pickup(player);
         }
 
         public override DebrisObject Drop(PlayerController player)
         {
             player.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
-            guonHook.Dispose();
-            speedUp = false;
-
             return base.Drop(player);
         }
         protected override void OnDestroy()
         {
             Owner.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
-            guonHook.Dispose();
-            speedUp = false;
             base.OnDestroy();
-        }
-
-        public static void GuonInit(Action<PlayerOrbital, PlayerController> orig, PlayerOrbital self, PlayerController player)
-        {
-            self.orbitDegreesPerSecond = speedUp ? 180f : 90f;
-            orig(self, player);
         }
         private void OnEnemyDamaged(float damage, bool fatal, HealthHaver enemyHealth)
         {
@@ -104,16 +79,11 @@ namespace NevernamedsItems
                 StartCoroutine(HandleShield(Owner));
             }
         }
-
-        //bool IsCurrentlyActive = false;
-        //float m_activeElapsed = 0f;
         float m_activeDuration = 1f;
         float duration = 1f;
         bool m_usedOverrideMaterial;
         private IEnumerator HandleShield(PlayerController user)
         {
-            //IsCurrentlyActive = true;
-            //float m_activeElapsed = 0f;
             m_activeDuration = this.duration;
             m_usedOverrideMaterial = user.sprite.usesOverrideMaterial;
             user.sprite.usesOverrideMaterial = true;

@@ -155,10 +155,11 @@ namespace NevernamedsItems
                                 if (enemyHealth?.aiActor?.EnemyGuid == "98ca70157c364750a60f5e0084f9d3e2" && Owner.HasPickupID(190) || Owner.HasPickupID(90) || Owner.HasPickupID(167) || Owner.HasPickupID(Gungeon.Game.Items["nn:kaliber's_eye"].PickupObjectId))
                                 {
                                     SpawnCasings(enemyHealth.aiActor);
+                                    LootEngine.SpawnCurrency(enemyHealth.sprite.WorldCenter, 5);
                                 }
                                 else if (enemyHealth?.aiActor?.EnemyGuid != "98ca70157c364750a60f5e0084f9d3e2")
                                 {
-                                    SpawnCasings(enemyHealth.aiActor);
+                                    LootEngine.SpawnCurrency(enemyHealth.sprite.WorldCenter, 5);
                                 }
                             }
                         }

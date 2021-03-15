@@ -143,4 +143,82 @@ namespace NevernamedsItems
 
         }
     }
+    public class WrenchNullRefException : AdvancedGunBehavior
+    {
+        public static void Add()
+        {
+            Gun gun = ETGMod.Databases.Items.NewGun("Null Reference Exwrenchion", "wrenchnull");
+            Game.Items.Rename("outdated_gun_mods:null_reference_exwrenchion", "nn:wrench+null_reference_exception");
+            gun.gameObject.AddComponent<WrenchNullRefException>();
+            gun.SetShortDescription("Mod The Gun");
+            gun.SetLongDescription("i am so tired while coding this");
+
+            gun.SetupSprite(null, "wrenchnull_idle_001", 8);
+
+            gun.SetAnimationFPS(gun.shootAnimation, 12);
+            gun.SetAnimationFPS(gun.reloadAnimation, 1);
+
+            gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
+
+            //GUN STATS
+            gun.DefaultModule.ammoCost = 1;
+            gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Burst;
+            gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.OrderedGroups;
+            gun.DefaultModule.orderedGroupCounts.Add(1);
+            gun.DefaultModule.orderedGroupCounts.Add(1);
+            gun.DefaultModule.orderedGroupCounts.Add(1);
+            gun.DefaultModule.burstShotCount = 3;
+            gun.DefaultModule.burstCooldownTime = 0.1f;
+            gun.reloadTime = 1f;
+            gun.DefaultModule.cooldownTime = 0.5f;
+            gun.muzzleFlashEffects.type = VFXPoolType.None;
+            gun.DefaultModule.numberOfShotsInClip = 12;
+            gun.barrelOffset.transform.localPosition = new Vector3(1.43f, 0.31f, 0f);
+            gun.SetBaseMaxAmmo(400);
+
+            //IF PROJECTILE STATS
+            Projectile ifProjectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
+            ifProjectile.gameObject.SetActive(false);
+            FakePrefab.MarkAsFakePrefab(ifProjectile.gameObject);
+            UnityEngine.Object.DontDestroyOnLoad(ifProjectile);
+            ifProjectile.baseData.damage *= 1.8f;
+            ifProjectile.baseData.speed *= 1f;
+            ifProjectile.baseData.range *= 10f;
+            ifProjectile.SetProjectileSpriteRight("wrench_null_projectile", 13, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 12, 7);
+
+            //ELSE PROJECTILE
+            Projectile elseProjectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
+            elseProjectile.gameObject.SetActive(false);
+            FakePrefab.MarkAsFakePrefab(elseProjectile.gameObject);
+            UnityEngine.Object.DontDestroyOnLoad(elseProjectile);
+            elseProjectile.baseData.damage *= 1.8f;
+            elseProjectile.baseData.speed *= 1f;
+            elseProjectile.baseData.range *= 10f;
+            elseProjectile.SetProjectileSpriteRight("wrench_reference_projectile", 36, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 30, 7);
+
+            //FLOAT PROJECTILE
+            Projectile floatProjectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
+            floatProjectile.gameObject.SetActive(false);
+            FakePrefab.MarkAsFakePrefab(floatProjectile.gameObject);
+            UnityEngine.Object.DontDestroyOnLoad(floatProjectile);
+            floatProjectile.baseData.damage *= 1.8f;
+            floatProjectile.baseData.speed *= 1f;
+            floatProjectile.baseData.range *= 10f;
+            floatProjectile.SetProjectileSpriteRight("wrench_exception_projectile", 35, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 30, 7);           
+
+            gun.DefaultModule.projectiles[0] = ifProjectile;
+            gun.DefaultModule.projectiles.Add(elseProjectile);
+            gun.DefaultModule.projectiles.Add(floatProjectile);
+
+            gun.quality = PickupObject.ItemQuality.EXCLUDED;
+            ETGMod.Databases.Items.Add(gun, null, "ANY");
+
+            NullWrenchID = gun.PickupObjectId;
+        }
+        public static int NullWrenchID;
+        public WrenchNullRefException()
+        {
+
+        }
+    }
 }

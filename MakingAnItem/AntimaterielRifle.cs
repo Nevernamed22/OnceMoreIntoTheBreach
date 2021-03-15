@@ -62,8 +62,10 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.S;
             gun.encounterTrackable.EncounterGuid = "this is the Antimateriel Rifle";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
-
+            gun.AddToSubShop(ItemBuilder.ShopType.Trorc);
+            AntimaterielRifleID = gun.PickupObjectId;
         }
+        public static int AntimaterielRifleID;
         public override void OnPostFired(PlayerController player, Gun gun)
         {
             //This determines what sound you want to play when you fire a gun.

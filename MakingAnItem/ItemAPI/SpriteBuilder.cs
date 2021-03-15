@@ -66,7 +66,7 @@ namespace ItemAPI
 			}
 			tk2dSpriteCollectionData tk2dSpriteCollectionData = SpriteBuilder.ConstructCollection(obj, texture.name.ToLower().Replace(" ", "_") + "_collection");
 			int newSpriteId = SpriteBuilder.AddSpriteToCollection(spriteName, tk2dSpriteCollectionData);
-			tk2dSpriteCollectionData.InitMaterialIds();
+			//tk2dSpriteCollectionData.InitMaterialIds();
 			tk2dSprite.SetSprite(tk2dSpriteCollectionData, newSpriteId);
 			tk2dSprite.SortingOrder = 0;
 			obj.GetComponent<BraveBehaviour>().sprite = tk2dSprite;

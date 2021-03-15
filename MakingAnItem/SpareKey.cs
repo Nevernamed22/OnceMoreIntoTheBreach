@@ -53,11 +53,6 @@ namespace NevernamedsItems
 
         public override void Pickup(PlayerController player)
         {
-            bool hasntAlreadyBeenCollected = !this.m_pickedUpThisRun;
-            if (hasntAlreadyBeenCollected)
-            {
-                LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(67).gameObject, player);
-            }
             GameManager.Instance.OnNewLevelFullyLoaded += this.OnNewFloor;
             base.Pickup(player);
         }

@@ -66,7 +66,10 @@ namespace NevernamedsItems
             gun.encounterTrackable.EncounterGuid = "this is the Bazooka";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
+            gun.AddToSubShop(ItemBuilder.ShopType.Trorc);
+            BazookaID = gun.PickupObjectId;
         }
+        public static int BazookaID;
         public override void OnPostFired(PlayerController player, Gun gun)
         {
         }

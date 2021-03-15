@@ -58,8 +58,9 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.D;
             gun.encounterTrackable.EncounterGuid = "this is the Hand Cannon";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
-
+            HandCannonID = gun.PickupObjectId;
         }
+        public static int HandCannonID;
         public override void PostProcessProjectile(Projectile projectile)
         {
             base.PostProcessProjectile(projectile);

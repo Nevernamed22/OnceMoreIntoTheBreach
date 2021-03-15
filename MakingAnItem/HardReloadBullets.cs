@@ -37,7 +37,7 @@ namespace NevernamedsItems
 
             //Adds the actual passive effect to the item
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ReloadSpeed, 1.5f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.20f, StatModifier.ModifyMethod.MULTIPLICATIVE);
+            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.30f, StatModifier.ModifyMethod.MULTIPLICATIVE);
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.C;

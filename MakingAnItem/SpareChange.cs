@@ -46,7 +46,7 @@ namespace NevernamedsItems
         {
             PlayerController player = this.Owner;
             int moneyToGive = floorsVisited * 10;
-            if (Owner.HasPickupID(Gungeon.Game.Items["nn:rusty_casing"].PickupObjectId))
+            if (Owner.PlayerHasActiveSynergy("Lost, Never Found"))
             {
                 moneyToGive += 5;
             }

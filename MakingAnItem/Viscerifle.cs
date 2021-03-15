@@ -170,8 +170,10 @@ namespace NevernamedsItems
         private bool currentHasCrest, lastHasCrest;
         protected override void Update()
         {
-            if (gun.CurrentOwner != null)
+            if (gun.GunPlayerOwner())
             {
+                if (gun.GunPlayerOwner().CharacterUsesRandomGuns) gun.GunPlayerOwner().ChangeToRandomGun();
+
                 currentHasCrest = (gun.CurrentOwner as PlayerController).HasPickupID(305);
                 currentArmour = gun.CurrentOwner.healthHaver.Armor;
                 currentHP = gun.CurrentOwner.healthHaver.GetCurrentHealth();

@@ -60,7 +60,10 @@ namespace NevernamedsItems
             gun.encounterTrackable.EncounterGuid = "this is the Spiral";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
+            gun.AddToSubShop(ItemBuilder.ShopType.Cursula);
+            SpiralID = gun.PickupObjectId;
         }
+        public static int SpiralID;
         public Spiral()
         {
 
@@ -107,6 +110,7 @@ namespace NevernamedsItems
             if (component)
             {
                 component.SpawnedFromOtherPlayerProjectile = true;
+                component.TreatedAsNonProjectileForChallenge = true;
                 PlayerController playerController = this.m_projectile.Owner as PlayerController;
                 component.baseData.damage *= playerController.stats.GetStatValue(PlayerStats.StatType.Damage);
                 component.baseData.speed *= playerController.stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed);

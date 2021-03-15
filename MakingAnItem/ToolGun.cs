@@ -109,6 +109,5 @@ namespace NevernamedsItems
         private Projectile m_projectile;
         private SpeculativeRigidbody speculativeRigidBoy;
         public Projectile projectileToSpawn;
-        private float elapsed;
     }
 }

@@ -12,69 +12,59 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Keybullet Effigy";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/keybulleteffigy_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<KeyBulletEffigy>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Aimgels on High";
-            string longDesc = "Keybullet Kin drop bonus keys."+"\n\nA holy item from a historical sect of Gun Cultists that worshipped Keybullet Kin as Aimgels of Kaliber, sent down from Bullet Heaven to deliver holy gifts.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
+            string longDesc = "Keybullet Kin drop bonus keys." + "\n\nA holy item from a historical sect of Gun Cultists that worshipped Keybullet Kin as Aimgels of Kaliber, sent down from Bullet Heaven to deliver holy gifts.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D;
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
             item.AddToSubShop(ItemBuilder.ShopType.Flynt);
+            KeybulletEffigyID = item.PickupObjectId;
         }
-
-        //SYNERGY WITH SPARE KEY --> "Spare Keybullet Kin"
-        private void OnEnemyDamaged(float damage, bool fatal, HealthHaver enemy)
+        public static int KeybulletEffigyID;
+        private void OnPreSpawn(AIActor actor)
         {
-            if (enemy.aiActor && (enemy.aiActor.EnemyGuid == "699cd24270af4cd183d671090d8323a1" || enemy.aiActor.EnemyGuid == "a446c626b56d4166915a4e29869737fd"))
+            if (Owner && actor && (actor.EnemyGuid == "699cd24270af4cd183d671090d8323a1" || actor.EnemyGuid == "a446c626b56d4166915a4e29869737fd"))
             {
-                if (fatal == true)
+                actor.AdditionalSafeItemDrops.Add(PickupObjectDatabase.GetById(67));
+                if (Owner.PlayerHasActiveSynergy("Spare Kin")) actor.AdditionalSafeItemDrops.Add(PickupObjectDatabase.GetById(67));
+            }
+        }
+        private void OnEnteredCombat()
+        {
+            if (Owner && UnityEngine.Random.value <= 0.015f)
+            {
+                var KeyBulletKin = EnemyDatabase.GetOrLoadByGuid("699cd24270af4cd183d671090d8323a1");
+                IntVector2? spawnPos = Owner.CurrentRoom.GetRandomVisibleClearSpot(1, 1);
+                if (spawnPos != null)
                 {
-                    if (Owner.HasPickupID(Gungeon.Game.Items["nn:spare_key"].PickupObjectId))
-                    {
-                        LootEngine.SpawnItem(PickupObjectDatabase.GetById(67).gameObject, enemy.specRigidbody.UnitCenter, Vector2.zero, 1f, false, true, false);
-                        LootEngine.SpawnItem(PickupObjectDatabase.GetById(67).gameObject, enemy.specRigidbody.UnitCenter, Vector2.zero, 1f, false, true, false);
-                    }
-                    else LootEngine.SpawnItem(PickupObjectDatabase.GetById(67).gameObject, enemy.specRigidbody.UnitCenter, Vector2.zero, 1f, false, true, false);
+                    AIActor TargetActor = AIActor.Spawn(KeyBulletKin.aiActor, spawnPos.Value, GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(spawnPos.Value), true, AIActor.AwakenAnimationType.Default, true);
+                    PhysicsEngine.Instance.RegisterOverlappingGhostCollisionExceptions(TargetActor.specRigidbody, null, false);
+                    TargetActor.HandleReinforcementFallIntoRoom(0f);
                 }
             }
-
         }
-
         public override void Pickup(PlayerController player)
         {
             base.Pickup(player);
-            player.OnAnyEnemyReceivedDamage += this.OnEnemyDamaged;
+            ETGMod.AIActor.OnPreStart += this.OnPreSpawn;
+            player.OnEnteredCombat += this.OnEnteredCombat;
         }
         public override DebrisObject Drop(PlayerController player)
         {
             DebrisObject debrisObject = base.Drop(player);
-            player.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
+            player.OnEnteredCombat -= this.OnEnteredCombat;
+            ETGMod.AIActor.OnPreStart -= this.OnPreSpawn;
             return debrisObject;
         }
         protected override void OnDestroy()
         {
-            Owner.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
+            if (Owner) Owner.OnEnteredCombat -= this.OnEnteredCombat;
+            ETGMod.AIActor.OnPreStart -= this.OnPreSpawn;
             base.OnDestroy();
         }
     }

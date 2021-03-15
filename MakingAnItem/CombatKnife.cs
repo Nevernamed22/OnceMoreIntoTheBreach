@@ -12,51 +12,62 @@ namespace NevernamedsItems
 {
     class CombatKnife : PlayerItem
     {
-        //Call this method from the Start() method of your ETGModule extension class
         public static void Init()
         {
-            //The name of the item
             string itemName = "Combat Knife";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it.
-            string resourceName = "NevernamedsItems/Resources/finishedbullet_icon";
-
-            //Create new GameObject
+            string resourceName = "NevernamedsItems/Resources/combatknife_icon";
             GameObject obj = new GameObject(itemName);
-
-            //Add a ActiveItem component to the object
             var item = obj.AddComponent<CombatKnife>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Let's Finish This";
-            string longDesc = "A single bullet from the legendary 'Finished Gun'." + "\n\nEven without the Gun to fire it, a good throwing arm and plenty of resolve can achieve wonderful results.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //"kts" here is the item pool. In the console you'd type kts:sweating_bullets
+            string shortDesc = "Quiet and Always Available";
+            string longDesc = "In the galaxy at large, knife kills are considered demonstrations of extreme skill, and many bounty hunters, soldiers, and general vagabonds often forego more effective weaponry in hopes of gaining that prestige.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Set the cooldown type and duration of the cooldown
-            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 7);
-
-            //Adds a passive modifier, like curse, coolness, damage, etc. to the item. Works for passives and actives.
+            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 3);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
 
-            //Set some other fields
             item.consumable = false;
-            item.quality = ItemQuality.EXCLUDED; //D
+            item.quality = ItemQuality.D; //D
 
 
         }
         protected override void DoEffect(PlayerController user)
         {
-            int swingPower = 3;
-            for (int i = 0; i < swingPower; i++)
+            float dmg = 30 * user.stats.GetStatValue(PlayerStats.StatType.Damage);
+            float knockback = 10;
+            List<GameActorEffect> effectlist = null;
+            if (user.PlayerHasActiveSynergy("1000 Degree Knife")) { effectlist = new List<GameActorEffect>(); effectlist.Add(StaticStatusEffects.hotLeadEffect); }
+            SlashDoer.ProjInteractMode mode = SlashDoer.ProjInteractMode.IGNORE;
+            if (user.PlayerHasActiveSynergy("Mirror Blade")) mode = SlashDoer.ProjInteractMode.REFLECT;
+            if (user.PlayerHasActiveSynergy("Tri-Tip Dagger")) knockback /= 3f;
+            if (user.PlayerHasActiveSynergy("Whirling Blade")) knockback = 0;
+            user.StartCoroutine(DoSlash(user, 0, dmg, knockback, 0, mode, effectlist));
+            if (user.PlayerHasActiveSynergy("Whirling Blade"))
             {
-                (ETGMod.Databases.Items["wonderboy"] as Gun).muzzleFlashEffects.SpawnAtPosition(user.sprite.WorldCenter, user.CurrentGun.CurrentAngle, null, new Vector2?(Vector2.zero), new Vector2?(Vector2.zero), new float?(-0.05f), true, null, null, false);
+                user.StartCoroutine(DoSlash(user, 90, dmg, knockback, 0.25f, mode, effectlist));
+                user.StartCoroutine(DoSlash(user, 180, dmg, knockback, 0.5f, mode, effectlist));
+                user.StartCoroutine(DoSlash(user, 270, dmg, knockback, 0.75f, mode, effectlist));
             }
-        }        
+        }
+        private IEnumerator DoSlash(PlayerController user, float angle, float dmg, float knockback, float delay, SlashDoer.ProjInteractMode mode, List<GameActorEffect> effectList)
+        {
+            yield return new WaitForSeconds(delay);
+            AkSoundEngine.PostEvent("Play_WPN_blasphemy_shot_01", user.gameObject);
+            Vector2 vector = user.CenterPosition;
+            Vector2 normalized = (user.unadjustedAimPoint.XY() - vector).normalized;
+            normalized = normalized.Rotate(angle);
+            Vector2 dir = (user.CenterPosition + normalized * 0.75f);
+            float angleToUse = user.CurrentGun.CurrentAngle + angle;
+            SlashDoer.DoSwordSlash(dir, angleToUse, user, knockback, mode, dmg, 10, effectList, user.transform);
+            if (user.PlayerHasActiveSynergy("Tri-Tip Dagger"))
+            {
+                Vector2 normalized2 = normalized.Rotate(45);
+                Vector2 dir2 = (user.CenterPosition + normalized2 * 0.75f);
+                SlashDoer.DoSwordSlash(dir2, angleToUse + 45, user, knockback, mode, dmg, 10, effectList, user.transform);
+                Vector2 normalized3 = normalized.Rotate(-45);
+                Vector2 dir3 = (user.CenterPosition + normalized3 * 0.75f);
+                SlashDoer.DoSwordSlash(dir3, angleToUse + -45, user, knockback, mode, dmg, 10, effectList, user.transform);
+            }
+            yield break;
+        }
     }
 }

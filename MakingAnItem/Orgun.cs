@@ -67,7 +67,7 @@ namespace NevernamedsItems
 
             gun.reloadTime = 1.3f;
             gun.barrelOffset.transform.localPosition = new Vector3(2.62f, 0.81f, 0f);
-            gun.SetBaseMaxAmmo(250);
+            gun.SetBaseMaxAmmo(80);
 
             //BULLET STATS
 
@@ -104,8 +104,8 @@ namespace NevernamedsItems
                     player.healthHaver.damageTypeModifiers.Add(this.m_electricityImmunity);
                     hasElectricityImmunity = true;
                 }
-                if (!hadHeadacheLastTimeWeChecked) 
-                { 
+                if (!hadHeadacheLastTimeWeChecked)
+                {
                     CalculateHeartAttackStats(player);
                     hadHeadacheLastTimeWeChecked = true;
                 }
@@ -139,7 +139,8 @@ namespace NevernamedsItems
         private void CalculateHeartAttackStats(PlayerController player)
         {
             int MaxClipWithSynergy = 6;
-            int MaxAmmoWithSynergy = 250;
+            int MaxAmmoWithSynergy = 80;
+            if (player.PlayerHasActiveSynergy("Headache")) MaxAmmoWithSynergy = 120;
             if (player.PlayerHasActiveSynergy("Heart Attack"))
             {
                 foreach (PassiveItem item in player.passiveItems)
@@ -147,7 +148,7 @@ namespace NevernamedsItems
                     if (HeartAttackItems.Contains(item.PickupObjectId))
                     {
                         MaxClipWithSynergy += 2;
-                        MaxAmmoWithSynergy += 100;
+                        MaxAmmoWithSynergy += 50;
                     }
                 }
                 foreach (Gun gun in player.inventory.AllGuns)
@@ -155,7 +156,7 @@ namespace NevernamedsItems
                     if (HeartAttackItems.Contains(gun.PickupObjectId))
                     {
                         MaxClipWithSynergy += 2;
-                        MaxAmmoWithSynergy += 100;
+                        MaxAmmoWithSynergy += 50;
                     }
                 }
                 foreach (PlayerItem activeitem in player.activeItems)
@@ -163,7 +164,7 @@ namespace NevernamedsItems
                     if (HeartAttackItems.Contains(activeitem.PickupObjectId))
                     {
                         MaxClipWithSynergy += 2;
-                        MaxAmmoWithSynergy += 100;
+                        MaxAmmoWithSynergy += 50;
                     }
                 }
                 foreach (ProjectileModule mod in gun.Volley.projectiles)
@@ -178,7 +179,8 @@ namespace NevernamedsItems
                 {
                     mod.numberOfShotsInClip = 6;
                 }
-                gun.SetBaseMaxAmmo(250);
+                if (player.PlayerHasActiveSynergy("Headache")) gun.SetBaseMaxAmmo(120);
+                else gun.SetBaseMaxAmmo(80);
             }
         }
         private int currentItems, lastItems;

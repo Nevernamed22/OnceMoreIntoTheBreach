@@ -130,6 +130,9 @@ namespace NevernamedsItems
                     lastArmour = currentArmour;
                     lastGuns = currentGuns;
                 }
+
+                if (Owner.IsInCombat && this.CanBeDropped) { this.CanBeDropped = false; }
+                else if (!Owner.IsInCombat && !this.CanBeDropped) { this.CanBeDropped = true; }
             }
             base.Update();
         }

@@ -57,8 +57,9 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "this is the Golf Rifle";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
-
+            GolfRifleID = gun.PickupObjectId;
         }
+        public static int GolfRifleID;
 
         private void changedGun(Gun oldGun, Gun newGun, bool what)
         {

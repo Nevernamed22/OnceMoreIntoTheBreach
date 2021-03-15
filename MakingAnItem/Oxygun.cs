@@ -59,7 +59,9 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "this is the Oxygun";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+            OxygunID = gun.PickupObjectId;
         }
+        public static int OxygunID;
         public override void OnPostFired(PlayerController player, Gun gun)
         {
             gun.PreventNormalFireAudio = true;

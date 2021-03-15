@@ -49,11 +49,11 @@ namespace NevernamedsItems
         }  
         private void PostProcessBeamTick(BeamController whatTheFuckDoesThisDo, SpeculativeRigidbody beam, float effectChanceScalar)
         {
-            ShootRocket(effectChanceScalar);
+            ShootRocket(1);
         }
         private void ShootRocket(float effectChanceScalar)
         {
-            float procChance = 0.025f;
+            float procChance = 0.05f;
             if (Owner.HasPickupID(106))
             {
                 procChance *= 3f;

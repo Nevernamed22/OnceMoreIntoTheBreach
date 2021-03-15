@@ -39,7 +39,7 @@ namespace NevernamedsItems
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
 
             //Set the rarity of the item
-            item.quality = PickupObject.ItemQuality.S;
+            item.quality = PickupObject.ItemQuality.B;
 
 
         }

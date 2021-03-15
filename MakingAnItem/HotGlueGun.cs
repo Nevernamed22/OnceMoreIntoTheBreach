@@ -59,7 +59,7 @@ namespace NevernamedsItems
             burning.onHitProcChance = 0.07f;
             burning.onFiredProcChance = 1f;
             burning.usesFireEffect = true;
-            burning.fireEffect = EasyStatusEffectAccess.hotLeadEffect;
+            burning.fireEffect = StaticStatusEffects.hotLeadEffect;
 
             projectile.AnimateProjectile(new List<string> {
                 "gluegunproj_1",

@@ -12,43 +12,48 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "<WIP> Backwards Bullets <WIP>";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
+            string itemName = "Backwards Bullets";
             string resourceName = "NevernamedsItems/Resources/backwardsbullets_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<BackwardsBullets>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "gnaB gnaB ytoohS";
-            string longDesc = "Your shots don't know where to go, but they are much stronger.\n\n" + "Nobody knows why these rounds were made and nobody dares to ask";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
+            string longDesc = "...thgin ymrots dna dloc a no tnemirepxe cifirroh a fo tluser eht era stellub esehT" + "\n\n!sdrawkcab levart meht sekam osla tub, lufrewop erom stellub ruoy sekaM";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
+            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Accuracy, 0.5f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 2f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-            //ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ProjectileSpeed, -1f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-            //Set the rarity of the item
-            item.quality = PickupObject.ItemQuality.EXCLUDED;
+
+            item.quality = PickupObject.ItemQuality.C;
         }
-        protected override void Update()
+        public void ModifyVolley(ProjectileVolleyData volleyToModify)
         {
-            /*if (Owner)
+            int count = volleyToModify.projectiles.Count;
+            for (int i = 0; i < count; i++)
             {
-                //Vector2 vector = Owner.CenterPosition;
-                //Vector2 aimPoint = (Owner.unadjustedAimPoint.XY() - vector).normalized;
-                Owner.unadjustedAimPoint *= -1;
-            }*/
+                ProjectileModule projectileModule = volleyToModify.projectiles[i];
+                projectileModule.angleFromAim += 180;
+            }
+        }
+        public override void Pickup(PlayerController player)
+        {
+            player.stats.AdditionalVolleyModifiers += this.ModifyVolley;
+            player.stats.RecalculateStats(player, false, false);
+            base.Pickup(player);
+        }
+        public override DebrisObject Drop(PlayerController player)
+        {
+            player.stats.AdditionalVolleyModifiers -= this.ModifyVolley;
+            player.stats.RecalculateStats(player, false, false);
+            return base.Drop(player);
+        }
+        protected override void OnDestroy()
+        {
+            if (Owner)
+            {
+                Owner.stats.AdditionalVolleyModifiers -= this.ModifyVolley;
+                Owner.stats.RecalculateStats(Owner, false, false);
+            }
+            base.OnDestroy();
         }
     }
 }

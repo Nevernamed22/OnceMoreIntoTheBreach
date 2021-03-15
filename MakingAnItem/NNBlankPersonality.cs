@@ -49,7 +49,7 @@ namespace NevernamedsItems
             {
                 LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(224).gameObject, player);
             }
-           else if (UnityEngine.Random.value < .40f)
+           else if (UnityEngine.Random.value < .50f)
             {
                 LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(224).gameObject, player);
             }

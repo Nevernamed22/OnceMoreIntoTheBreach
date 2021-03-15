@@ -130,7 +130,7 @@ namespace NevernamedsItems
 
                 this.m_projectile.baseData.damage *= damageScaleAmount;
                 this.m_projectile.RuntimeUpdateScale(damageScaleAmount);
-                this.m_projectile.baseData.speed /= damageScaleAmount;
+                this.m_projectile.baseData.speed /= (damageScaleAmount);
 
                 //this.m_projectile.baseData.UsesCustomAccelerationCurve = true;
                 //this.m_projectile.baseData.AccelerationCurve = AnimationCurve;
@@ -151,7 +151,7 @@ namespace NevernamedsItems
         private bool shouldSpeedModify;
         public bool HasSynergyHunterSpores;
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (shouldSpeedModify)
             {

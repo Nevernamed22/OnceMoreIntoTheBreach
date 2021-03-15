@@ -22,23 +22,6 @@ namespace NevernamedsItems
             companionItem.SetupItem(shortDesc, longDesc, "nn");
             companionItem.quality = PickupObject.ItemQuality.C;
             companionItem.CompanionGuid = BabyGoodChanceKin.guid;
-            //companionItem.Synergies = new CompanionTransformSynergy[0];
-            /*foreach (AdvancedSynergyEntry advancedSynergyEntry in GameManager.Instance.SynergyManager.synergies)
-            {
-                bool flag = advancedSynergyEntry.NameKey == "#STRAFEPUB";
-                if (flag)
-                {
-                    advancedSynergyEntry.MandatoryGunIDs = new List<int>
-                    {
-                        Game.Items["strafe_gun"].PickupObjectId
-                    };
-                    advancedSynergyEntry.OptionalItemIDs = new List<int>
-                    {
-                        Game.Items["devolver"].PickupObjectId,
-                        companionItem.PickupObjectId
-                    };
-                }
-            }*/
             BabyGoodChanceKin.BuildPrefab();
         }
 
@@ -72,16 +55,23 @@ namespace NevernamedsItems
                 this.Owner = this.m_owner;
                 Owner.OnReceivedDamage += OnDamaged;
             }
-            private void OnDamaged(PlayerController player)
+            protected override void OnDestroy()
             {
-                
+                if (this.Owner)
+                {
+                    Owner.OnReceivedDamage -= OnDamaged;
+                }
+                base.OnDestroy();
+            }
+            private void OnDamaged(PlayerController player)
+            {        
                     float procChance;
-                    if (Owner.HasPickupID(664) || Owner.HasPickupID(818)) procChance = 0.6f;
+                    if (Owner.PlayerHasActiveSynergy("Good Lads")) procChance = 0.6f;
                     else procChance = 0.4f;
                     if (UnityEngine.Random.value < procChance)
                     {
                         int amountOfStuffToSpawn = 1;
-                        if (Owner.HasPickupID(Gungeon.Game.Items["nn:chance_effigy"].PickupObjectId)) amountOfStuffToSpawn += 1;
+                        if (Owner.PlayerHasActiveSynergy("Worship")) amountOfStuffToSpawn += 1;
                         for (int i = 0; i < amountOfStuffToSpawn; i++)
                         {
                             int lootID = BraveUtility.RandomElement(lootIDlist);
@@ -105,11 +95,7 @@ namespace NevernamedsItems
             224, //Blank
             67, //Key
         };        
-
-        // Token: 0x04000050 RID: 80
         public static GameObject prefab;
-
-        // Token: 0x04000051 RID: 81
         private static readonly string guid = "baby_good_chance_kin180492309438";
     }
 }

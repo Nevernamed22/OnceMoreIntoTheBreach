@@ -9,6 +9,7 @@ using UnityEngine;
 using ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
+using Dungeonator;
 
 namespace NevernamedsItems
 {
@@ -27,10 +28,7 @@ namespace NevernamedsItems
             gun.SetAnimationFPS(gun.shootAnimation, 24);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(520) as Gun).gunSwitchGroup;
 
-            for (int i = 0; i < 4; i++)
-            {
-                gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
-            }
+            gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
 
             //GUN STATS
             gun.reloadTime = 0.8f;
@@ -41,46 +39,54 @@ namespace NevernamedsItems
             gun.doesScreenShake = false;
 
 
-            foreach (ProjectileModule mod in gun.Volley.projectiles)
-            {
-                mod.angleVariance = 45;
-                mod.cooldownTime = 0.11f;
-                mod.numberOfShotsInClip = 30;
-                mod.ammoCost = 1;
-                mod.shootStyle = ProjectileModule.ShootStyle.Automatic;
-                mod.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
+            gun.DefaultModule.angleVariance = 5;
+            gun.DefaultModule.cooldownTime = 0.11f;
+            gun.DefaultModule.numberOfShotsInClip = 30;
+            gun.DefaultModule.ammoCost = 1;
+            gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
+            gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
 
-                //BULLET STATS
-                Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(mod.projectiles[0]);
-                projectile.gameObject.SetActive(false);
-                FakePrefab.MarkAsFakePrefab(projectile.gameObject);
-                UnityEngine.Object.DontDestroyOnLoad(projectile);
-                mod.projectiles[0] = projectile;
-                //projectile.knockbackDoer.knockbackMultiplier *= 1.5f;
-                projectile.baseData.damage *= 0.07f;
-                projectile.baseData.speed *= 1f;
-                projectile.baseData.force *= 1.5f;
-                
-                projectile.sprite.renderer.enabled = false;
-                projectile.baseData.range *= 1f;
-                if (mod != gun.DefaultModule) { mod.ammoCost = 0; }
+            //BULLET STATS
+            Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
+            projectile.gameObject.SetActive(false);
+            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
+            UnityEngine.Object.DontDestroyOnLoad(projectile);
+            gun.DefaultModule.projectiles[0] = projectile;
+            projectile.baseData.damage = 1f;
+            projectile.baseData.speed *= 0.01f;
+            projectile.baseData.force *= 1f;
+            projectile.gameObject.GetOrAddComponent<DeskFanBlowey>();
+            projectile.sprite.renderer.enabled = false;
+            projectile.baseData.range *= 0.1f;
 
-                projectile.transform.parent = gun.barrelOffset;
-            }
+
+            projectile.transform.parent = gun.barrelOffset;
+
 
             gun.quality = PickupObject.ItemQuality.D;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             DeskFanID = gun.PickupObjectId;
+
+            Projectile projectile2 = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(520) as Gun).DefaultModule.projectiles[0]);
+            projectile2.gameObject.SetActive(false);
+            FakePrefab.MarkAsFakePrefab(projectile2.gameObject);
+            UnityEngine.Object.DontDestroyOnLoad(projectile2);
+            projectile2.baseData.damage = 10;
+            DeskFanBlowey blowey = projectile2.gameObject.GetOrAddComponent<DeskFanBlowey>();
+            blowey.deleteSelf = false;
+            overrideGustyProj = projectile2;
         }
         public static int DeskFanID;
+        public static Projectile overrideGustyProj;
+
         public override Projectile OnPreFireProjectileModifier(Gun gun, Projectile projectile, ProjectileModule mod)
         {
             if (gun.CurrentOwner is PlayerController)
             {
-                if ((gun.CurrentOwner as PlayerController).PlayerHasActiveSynergy("Fresh Air") && (UnityEngine.Random.value < 0.05))
+                if ((gun.CurrentOwner as PlayerController).PlayerHasActiveSynergy("Fresh Air") && (UnityEngine.Random.value < 0.1f))
                 {
-                    return ((Gun)ETGMod.Databases.Items["balloon_gun"]).DefaultModule.projectiles[0];
+                    return overrideGustyProj;
                 }
                 else
                 {
@@ -96,5 +102,63 @@ namespace NevernamedsItems
         {
 
         }
+    }
+    public class DeskFanBlowey : MonoBehaviour
+    {
+        public DeskFanBlowey()
+        {
+            this.deleteSelf = true;
+            this.damageToDeal = 1;
+        }
+        private void Start()
+        {
+            self = base.GetComponent<Projectile>();
+            StartCoroutine(DoBlowey());
+        }
+        private IEnumerator DoBlowey()
+        {
+            yield return null;
+            RoomHandler room = self.GetAbsoluteRoom();
+            if (room != null)
+            {
+                List<AIActor> enemies = room.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+                for (int i = 0; i < enemies.Count; i++)
+                {
+                    AIActor enemy = enemies[i];
+                    if (enemy && enemy.healthHaver && enemy.healthHaver.IsAlive)
+                    {
+                        if (enemy.sprite.WorldCenter.PositionBetweenRelativeValidAngles(self.specRigidbody.UnitCenter, self.Direction.ToAngle(), 1000000, 45f))
+                        {
+                            Vector2 dir = (enemy.sprite.WorldCenter - self.specRigidbody.UnitCenter).normalized;
+                            float knockback = 10;
+                            //Calculate Damage
+
+                            float dmg = damageToDeal;
+                            if (deleteSelf) dmg *= self.baseData.damage;
+                            else dmg *= (self.baseData.damage / 10);
+                            if (self.ProjectilePlayerOwner())
+                            {
+                                //dmg *= self.ProjectilePlayerOwner().stats.GetStatValue(PlayerStats.StatType.Damage);
+                                knockback *= self.ProjectilePlayerOwner().stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
+                                if (enemy.healthHaver.IsBoss) dmg *= self.ProjectilePlayerOwner().stats.GetStatValue(PlayerStats.StatType.DamageToBosses);
+                                if (enemy.aiActor.IsBlackPhantom) dmg *= self.BlackPhantomDamageMultiplier;                                
+                            }
+                            enemy.healthHaver.ApplyDamage(dmg, (dir * -1), "Blowie");
+
+
+                            if (enemy.knockbackDoer) enemy.knockbackDoer.ApplyKnockback(dir, knockback, false);
+                            List<GameActorEffect> effects = self.GetFullListOfStatusEffects();
+                            if (effects.Count > 0) foreach (GameActorEffect effect in effects) enemy.ApplyEffect(effect);
+                            if (enemy.behaviorSpeculator && self.AppliesStun && UnityEngine.Random.value <= self.StunApplyChance) enemy.behaviorSpeculator.Stun(self.AppliedStunDuration);
+                        }
+                    }
+                }
+            }
+            if (deleteSelf) UnityEngine.Object.Destroy(self.gameObject);
+            yield break;
+        }
+        private Projectile self;
+        public bool deleteSelf;
+        public float damageToDeal;
     }
 }

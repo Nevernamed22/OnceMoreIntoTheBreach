@@ -42,7 +42,10 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D;
+
+            RustyCasingID = item.PickupObjectId;
         }
+        public static int RustyCasingID;
 
         Hook keyPickupHook = new Hook(
                 typeof(KeyBulletPickup).GetMethod("Pickup", BindingFlags.Instance | BindingFlags.Public),
@@ -63,61 +66,65 @@ namespace NevernamedsItems
         public static void ammoPickupHookMethod(Action<AmmoPickup, PlayerController> orig, AmmoPickup self, PlayerController player)
         {
             orig(self, player);
-            cashAmount = 3;
-            giveCash(player, cashAmount);
+            if (ammoRegulator)
+            {
+                giveCash(player, 6);
+                ammoRegulator = false;
+            }
+            else
+            {
+                ammoRegulator = true;
+            }
         }
+        static bool ammoRegulator = false;
         public static void blankPickupHookMethod(Action<SilencerItem, PlayerController> orig, SilencerItem self, PlayerController player)
         {
             orig(self, player);
-            cashAmount = 2;
-            giveCash(player, cashAmount);
+            if (blankRegulator)
+            {
+                blankRegulator = false;
+                giveCash(player, 4);
+            }
+            else
+            {
+                blankRegulator = true;
+            }
         }
+        static bool blankRegulator = false;
         public static void keyPickupHookMethod(Action<KeyBulletPickup, PlayerController> orig, KeyBulletPickup self, PlayerController player)
         {
             orig(self, player);
-            if (self.IsRatKey) cashAmount = 5;
-            else cashAmount = 3;
-            giveCash(player, cashAmount);
+            if (keyRegulator)
+            {
+                if (self.IsRatKey) giveCash(player, 10);
+                else giveCash(player, 6);
+                keyRegulator = false;
+            }
+            else
+            {
+                keyRegulator = true;
+            }
         }
+        static bool keyRegulator = false;
         public static void heartPickupHookMethod(Action<HealthPickup, PlayerController> orig, HealthPickup self, PlayerController player)
         {
             orig(self, player);
-            if (player.HasPickupID(Gungeon.Game.Items["nn:rusty_casing"].PickupObjectId))
+            if (heartRegulator)
             {
-                if (self.armorAmount > 0) cashAmount = 4;
-                else
-                {
-                    if (self.healAmount == 1f)
-                    {
-                        cashAmount = 4;
-                    }
-                    else if (self.healAmount == 2f)
-                    {
-                        cashAmount = 8;
-                    }
-                    else
-                    {
-                        ETGModConsole.Log("The heart pickup had an unrecognised amount of heal juice in it.");
-                        cashAmount = 1;
-                    }
-                }
-                giveCash(player, cashAmount);
+                if (self.armorAmount > 0) giveCash(player, 8);
+                else giveCash(player, (int)(self.healAmount * 4f));
+                heartRegulator = false;
             }
+            else heartRegulator = true;
         }
+        static bool heartRegulator = false;
         public static void giveCash(PlayerController player, int cashAmount)
         {
-            if (player.HasPickupID(Gungeon.Game.Items["nn:rusty_casing"].PickupObjectId))
+            if (player.HasPickupID(RustyCasingID))
             {
-                if (player.HasPickupID(Gungeon.Game.Items["nn:loose_change"].PickupObjectId))
-                {
-                    cashAmount += 5;
-                }
-                for (int i = 0; i < cashAmount; i++)
-                {
-                    LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(68).gameObject, player);
-                }
+                if (player.PlayerHasActiveSynergy("Lost, Never Found")) cashAmount += 5;
+                LootEngine.SpawnCurrency(player.sprite.WorldCenter, cashAmount);                
             }
         }
-        public static int cashAmount;
     }
 }

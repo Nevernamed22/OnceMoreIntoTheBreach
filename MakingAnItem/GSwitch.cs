@@ -51,20 +51,21 @@ namespace NevernamedsItems
         // Token: 0x06007230 RID: 29232 RVA: 0x002D6104 File Offset: 0x002D4304
         protected override void DoEffect(PlayerController user)
         {
-            if (user.HasPickupID(376)) user.carriedConsumables.Currency -= 1;
+            if (user.PlayerHasActiveSynergy("G is for Gain")) user.carriedConsumables.Currency -= 1;
             else user.carriedConsumables.Currency -= 3;
 
-            Gun gun = PickupObjectDatabase.GetById(380) as Gun;
-            Gun currentGun = user.CurrentGun;
-            GameObject gameObject = gun.ObjectToInstantiateOnReload.gameObject;
-            GameObject gameObject2 = UnityEngine.Object.Instantiate<GameObject>(gameObject, user.sprite.WorldCenter, Quaternion.identity);
-            SingleSpawnableGunPlacedObject @interface = gameObject2.GetInterface<SingleSpawnableGunPlacedObject>();
-            BreakableShieldController component = gameObject2.GetComponent<BreakableShieldController>();
-            bool flag3 = gameObject2;
-            if (flag3)
+            MiscToolbox.SpawnShield(user, user.sprite.WorldCenter);
+            if (user.PlayerHasActiveSynergy("Prototype Form")) DoSynergyShields(user.CurrentRoom, user);
+        }
+        private void DoSynergyShields(RoomHandler room, PlayerController user)
+        {
+            CurrencyPickup[] allShit = FindObjectsOfType<CurrencyPickup>();
+            foreach (CurrencyPickup shit in allShit)
             {
-                @interface.Initialize(currentGun);
-                component.Initialize(currentGun);
+                if (shit.transform.position.GetAbsoluteRoom() == room)
+                {
+                    MiscToolbox.SpawnShield(user, shit.sprite.WorldCenter);
+                }
             }
         }
         public override bool CanBeUsed(PlayerController user)

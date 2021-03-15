@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using System.Reflection;
 
 namespace NevernamedsItems
 {
@@ -19,8 +20,8 @@ namespace NevernamedsItems
             var behav = gun.gameObject.AddComponent<NNGundertale>();
             behav.preventNormalFireAudio = true;
             behav.preventNormalReloadAudio = true;
-            gun.SetShortDescription("Boom Boom Boom Boom");
-            gun.SetLongDescription("It takes a lunatic to be a legend." + "\n\nThis powerful explosive weapon has one major drawback; it is capable of damaging it's bearer. You'd think more bombs would do that, but the Gungeon forgives.");
+            gun.SetShortDescription("Filled With Determination");
+            gun.SetLongDescription("Doesnt shoot. Befriends your enemies with your masterful dodges." + "\n\nAn antique Revolver. On days like these...");
 
             gun.SetupSprite(null, "gundertale_idle_001", 8);
 
@@ -37,7 +38,7 @@ namespace NevernamedsItems
             gun.muzzleFlashEffects.type = VFXPoolType.None;
             gun.DefaultModule.numberOfShotsInClip = 10;
             gun.barrelOffset.transform.localPosition = new Vector3(2.5f, 0.68f, 0f);
-            gun.SetBaseMaxAmmo(30);
+            gun.SetBaseMaxAmmo(50);
 
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
@@ -63,26 +64,79 @@ namespace NevernamedsItems
             }
             base.Update();
         }
+        private bool DetermineCanMakeNPC(AIActor target)
+        {
+            CustomEnemyTagsSystem tags = target.gameObject.GetComponent<CustomEnemyTagsSystem>();
+            if (tags != null && tags.isGundertaleFriendly == true) { return false; }
+
+            if (!target.healthHaver.IsBoss)
+            {
+                Gun gundertale = this.gun.CurrentOwner.CurrentGun;
+                if (gundertale && gundertale == this.gun && gundertale.CurrentAmmo > 0 && gundertale.ClipShotsRemaining > 0)
+                {
+                    gundertale.CurrentAmmo -= 1;
+                    gundertale.ClipShotsRemaining -= 1;
+                    return true;
+                }
+                else { return false; }
+            }
+            else
+            {
+                return false;
+            }
+        }
         private void onDodgeRolledOverBullet(Projectile bullet)
         {
             if (this.gun.CurrentOwner.CurrentGun == this.gun && bullet.Owner && bullet.Owner is AIActor)
             {
-                MakeEnemyNPC(bullet.Owner.aiActor);
+
+                bool canNPCify = DetermineCanMakeNPC(bullet.Owner as AIActor);
+                if (canNPCify) { MakeEnemyNPC(bullet.Owner.aiActor); }
             }
         }
         private void onDodgeRolledIntoEnemy(PlayerController player, AIActor enemy)
         {
             if (this.gun.CurrentOwner.CurrentGun == this.gun && enemy && enemy is AIActor)
             {
-                enemy.healthHaver.flashesOnDamage = false;
-                enemy.healthHaver.RegenerateCache();
-                MakeEnemyNPC(enemy.aiActor);
+                bool canNPCify = DetermineCanMakeNPC(enemy);
+                if (canNPCify)
+                {
+                    enemy.healthHaver.flashesOnDamage = false;
+                    enemy.healthHaver.RegenerateCache();
+                    MakeEnemyNPC(enemy.aiActor);
+                }
             }
+        }
+        private void HandleSpawnLoot(AIActor enemy)
+        {
+            var type = typeof(AIActor);
+            var func = type.GetMethod("HandleRewards", BindingFlags.Instance | BindingFlags.NonPublic);
+            var ret = func.Invoke(enemy, null);
         }
         private void MakeEnemyNPC(AIActor enemy)
         {
+            HandleSpawnLoot(enemy);
             var CurrentRoom = enemy.transform.position.GetAbsoluteRoom();
+            UnityEngine.Object.Instantiate<GameObject>(EasyVFXDatabase.GundetaleSpareVFX, (enemy.sprite.WorldTopCenter + new Vector2(0, 0.25f)), Quaternion.identity);
             CurrentRoom.DeregisterEnemy(enemy);
+            CustomEnemyTagsSystem tags = enemy.gameObject.GetOrAddComponent<CustomEnemyTagsSystem>();
+            int bulletCount = StaticReferenceManager.AllProjectiles.Count;
+            List<Projectile> BulletsOwnedByEnemy = new List<Projectile>();
+            foreach (Projectile proj in StaticReferenceManager.AllProjectiles)
+            {
+                if (proj && proj.Owner && proj.Owner == enemy)
+                {
+                    BulletsOwnedByEnemy.Add(proj);
+                }
+            }
+            for (int i = (BulletsOwnedByEnemy.Count - 1); i > -1; i--)
+            {
+                if (BulletsOwnedByEnemy[i] != null) BulletsOwnedByEnemy[i].DieInAir(true, false, false, true);
+            }
+            if (tags != null)
+            {
+                tags.isGundertaleFriendly = true;
+            }
             if (enemy.specRigidbody)
             {
                 UnityEngine.Object.Destroy(enemy.specRigidbody);
@@ -117,7 +171,21 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
+            if (gun.GunPlayerOwner())
+            {
+                gun.GunPlayerOwner().OnDodgedProjectile -= this.onDodgeRolledOverBullet;
+                gun.GunPlayerOwner().OnRolledIntoEnemy -= this.onDodgeRolledIntoEnemy;
+            }
             base.OnDestroy();
         }
+        public static List<int> lootIDlist = new List<int>()
+        {
+            78, //Ammo
+            600, //Spread Ammo
+            565, //Glass Guon Stone
+            73, //Half Heart
+            85, //Heart
+            120, //Armor
+        };
     }
 }

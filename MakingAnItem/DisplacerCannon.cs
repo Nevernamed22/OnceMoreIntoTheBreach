@@ -61,6 +61,8 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.damage *= 6f;
             projectile.baseData.speed *= 0.5f;
+            projectile.hitEffects.alwaysUseMidair = true;
+            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.SmoothLightBlueLaserCircleVFX;
             DisplaceEnemies displacement = projectile.gameObject.AddComponent<DisplaceEnemies>();
 
             projectile.SetProjectileSpriteRight("displacercannon_projectile", 17, 17, true, tk2dBaseSprite.Anchor.MiddleCenter, 15, 15);
@@ -107,6 +109,15 @@ namespace NevernamedsItems
                     }
                 }
             }
+        }
+        public override void PostProcessProjectile(Projectile projectile)
+        {
+            PlayerController player = projectile.Owner as PlayerController;
+            if (player != null && player.PlayerHasActiveSynergy("Misfire Cannon"))
+            {
+                InstantTeleportToPlayerCursorBehav tp = projectile.gameObject.GetOrAddComponent<InstantTeleportToPlayerCursorBehav>();
+            }
+            base.PostProcessProjectile(projectile);
         }
         public static List<int> lootIDlist = new List<int>()
         {

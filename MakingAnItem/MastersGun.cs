@@ -144,7 +144,7 @@ namespace NevernamedsItems
             ExtremelySimpleStatusEffectBulletBehaviour burning = forgeProjectile.gameObject.GetOrAddComponent<ExtremelySimpleStatusEffectBulletBehaviour>();
             burning.onFiredProcChance = 1;
             burning.usesFireEffect = true;
-            burning.fireEffect = EasyStatusEffectAccess.hotLeadEffect;
+            burning.fireEffect = StaticStatusEffects.hotLeadEffect;
             burning.useSpecialTint = false;
             forgeProjectile.SetProjectileSpriteRight("mastersgun_forge_projectile", 33, 18, false, tk2dBaseSprite.Anchor.MiddleLeft, 27, 12);
             forgeProjectile.transform.parent = gun.barrelOffset;

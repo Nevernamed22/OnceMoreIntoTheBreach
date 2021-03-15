@@ -30,14 +30,12 @@ namespace NevernamedsItems
             BuildPrefab();
             item.OrbitalPrefab = orbitalPrefab;
             BuildSynergyPrefab();
-            //ETGModConsole.Log((GreyGuonStone.upgradeOrbitalPrefab != null).ToString());
 
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);            
 
             item.HasAdvancedUpgradeSynergy = true;
             item.AdvancedUpgradeSynergy = "Greyer Guon Stone";
             item.AdvancedUpgradeOrbitalPrefab = GreyGuonStone.upgradeOrbitalPrefab.gameObject;
-            //ETGModConsole.Log("Finished greyguon init");
         }
         public static void BuildPrefab()
         {
@@ -53,13 +51,12 @@ namespace NevernamedsItems
             orbitalPrefab.motionStyle = PlayerOrbital.OrbitalMotionStyle.ORBIT_PLAYER_ALWAYS;
             orbitalPrefab.shouldRotate = false;
             orbitalPrefab.orbitRadius = 2.5f;
-            orbitalPrefab.orbitDegreesPerSecond = 90f;
+            orbitalPrefab.orbitDegreesPerSecond = 120f;
             orbitalPrefab.SetOrbitalTier(0);
 
             GameObject.DontDestroyOnLoad(prefab);
             FakePrefab.MarkAsFakePrefab(prefab);
             prefab.SetActive(false);
-            //ETGModConsole.Log("finished greyguon prefab");
         }
 
         public static void BuildSynergyPrefab()
@@ -82,8 +79,6 @@ namespace NevernamedsItems
                 UnityEngine.Object.DontDestroyOnLoad(gameObject);
                 FakePrefab.MarkAsFakePrefab(gameObject);
                 gameObject.SetActive(false);
-                //ETGModConsole.Log("Finished greyguon upgrade init");
-
             }
         }
         private void OwnerHitByProjectile(Projectile incomingProjectile, PlayerController arg2)

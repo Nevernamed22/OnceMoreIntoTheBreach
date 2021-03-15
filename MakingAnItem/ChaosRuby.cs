@@ -141,7 +141,7 @@ namespace NevernamedsItems
             {
                 statToEffect = PlayerStats.StatType.GlobalPriceMultiplier,
                 modifyMethod = StatModifier.ModifyMethod.MULTIPLICATIVE,
-                amount = 1.20f,
+                amount = 0.8f,
             });
             statEffects.Add(new Effect()
             {

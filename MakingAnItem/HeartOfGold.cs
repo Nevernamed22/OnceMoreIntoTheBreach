@@ -46,13 +46,9 @@ namespace NevernamedsItems
         public static int HeartOfGoldID;
         private void giveCash(PlayerController user)
         {
-            LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(70).gameObject, user);
-            LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(70).gameObject, user);
-            if (Owner.HasPickupID(Gungeon.Game.Items["nn:organ_donor_card"].PickupObjectId))
-            {
-                LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(70).gameObject, user);
-                LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(70).gameObject, user);
-            }
+            int cashMoney = 10;
+            if (Owner.PlayerHasActiveSynergy("Do-Gooder")) cashMoney *= 2;
+            LootEngine.SpawnCurrency(user.sprite.WorldCenter, cashMoney);
         }
         public override void Pickup(PlayerController player)
         {

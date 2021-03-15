@@ -19,7 +19,7 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:spear_of_justice", "nn:spear_of_justice");
             gun.gameObject.AddComponent<SpearOfJustice>();
             gun.SetShortDescription("NGAH!");
-            gun.SetLongDescription("");
+            gun.SetLongDescription("Weapon of an ancient gundead warrior, who believed she could escape the Gungeon by harnessing the power of Gungeoneer souls."+"\n\nShe never achieved her goal.");
 
             gun.SetupSprite(null, "spearofjustice_idle_001", 8);
 
@@ -55,7 +55,13 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.A;
             gun.encounterTrackable.EncounterGuid = "this is the Spear of Justice";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
-
+            SpearOfJusticeID = gun.PickupObjectId;
+        }
+        public static int SpearOfJusticeID;
+        protected override void OnPickedUpByPlayer(PlayerController player)
+        {
+            ETGMod.AIActor.OnPreStart += this.Greenify;
+            base.OnPickedUpByPlayer(player);
         }
         public override void OnPostFired(PlayerController player, Gun gun)
         {
@@ -75,7 +81,7 @@ namespace NevernamedsItems
         protected override void OnPostDroppedByPlayer(PlayerController player)
         {
             base.OnPostDroppedByPlayer(player);
-            ETGMod.AIActor.OnPreStart += this.Greenify;
+            ETGMod.AIActor.OnPreStart -= this.Greenify;
         }
         public void Greenify(AIActor target)
         {

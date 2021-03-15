@@ -25,7 +25,7 @@ namespace NevernamedsItems
             gun.SetupSprite(null, "pencil_idle_001", 8);
 
             gun.SetAnimationFPS(gun.shootAnimation, 17);
-
+            gun.doesScreenShake = false;
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
             gun.PreventNormalFireAudio = true;
             //GUN STATS
@@ -62,6 +62,11 @@ namespace NevernamedsItems
         public static int pencilID;
         public override void PostProcessProjectile(Projectile projectile)
         {
+            PlayerController player = projectile.Owner as PlayerController;
+            if (player != null && player.PlayerHasActiveSynergy("Freehand"))
+            {
+                InstantTeleportToPlayerCursorBehav tp = projectile.gameObject.GetOrAddComponent<InstantTeleportToPlayerCursorBehav>();
+            }
             ActiveBullets.Add(projectile);
             projectile.specRigidbody.OnPreTileCollision += this.onhit;
             base.PostProcessProjectile(projectile);

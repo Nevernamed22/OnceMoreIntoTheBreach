@@ -55,8 +55,9 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.B;
             gun.encounterTrackable.EncounterGuid = "this is the Repeatovolver";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
-
+            RepeatovolverID = gun.PickupObjectId;
         }
+        public static int RepeatovolverID;
         public Repeatovolver()
         {
 

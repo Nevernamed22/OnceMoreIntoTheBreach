@@ -66,6 +66,7 @@ namespace NevernamedsItems
             //TargetActor.healthHaver.bossHealthBar = HealthHaver.BossBarType.MainBar;
             TargetActor.IgnoreForRoomClear = true;
             TargetActor.HandleReinforcementFallIntoRoom(0f);
+            TargetActor.gameObject.AddComponent<AIActorIsKevin>();
             //PRAISE BE OUR LORD AND SAVIOUR KEVIN. YOU WILL BOW TO HIM, OR YOU WILL DIE.
         }
 
@@ -86,4 +87,5 @@ namespace NevernamedsItems
             base.OnDestroy();
         }
     }
+    class AIActorIsKevin : MonoBehaviour { }
 }

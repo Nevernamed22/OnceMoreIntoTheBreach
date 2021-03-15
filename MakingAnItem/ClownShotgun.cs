@@ -64,7 +64,10 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "this is the Clown Shotgun";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+
+            ClownShotgunID = gun.PickupObjectId;
         }
+        public static int ClownShotgunID;
         private void Update()
         {
             PlayerController player = gun.CurrentOwner as PlayerController;
@@ -88,6 +91,7 @@ namespace NevernamedsItems
                     }
                 }
             }
+            
         }
         public ClownShotgun()
         {

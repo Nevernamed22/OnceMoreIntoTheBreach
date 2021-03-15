@@ -53,7 +53,10 @@ namespace NevernamedsItems
             gun.encounterTrackable.EncounterGuid = "this is the Love Pistol";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
+            gun.AddToSubShop(ItemBuilder.ShopType.Cursula);
+            LovePistolID = gun.PickupObjectId;
         }
+        public static int LovePistolID;
         public override void PostProcessProjectile(Projectile projectile)
         {
             PlayerController playerController = projectile.Owner as PlayerController;

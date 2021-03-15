@@ -16,26 +16,28 @@ namespace NevernamedsItems
     {
         public static void Add()
         {
-            Gun gun = ETGMod.Databases.Items.NewGun("Ranger", "wailingmagnum");
+            Gun gun = ETGMod.Databases.Items.NewGun("Ranger", "ranger");
             Game.Items.Rename("outdated_gun_mods:ranger", "nn:ranger");
             var behav = gun.gameObject.AddComponent<Ranger>();
 
             gun.SetShortDescription("Shooting Range");
-            gun.SetLongDescription("The hatchling spawn of a Phaser Spider." + "\n\nOne of the first organs to fully develop are the spinnerets.");
+            gun.SetLongDescription("Fires an even range of bullets, starting high in damage at one end of the spread and incrementally decreasing towards the other.");
 
-            gun.SetupSprite(null, "wailingmagnum_idle_001", 8);
+            gun.SetupSprite(null, "ranger_idle_001", 8);
             //gun.gunSwitchGroup = (PickupObjectDatabase.GetById(86) as Gun).gunSwitchGroup;
             //gun.muzzleFlashEffects.type = VFXPoolType.None;
 
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
+            gun.barrelOffset.transform.localPosition = new Vector3(1.93f, 0.81f, 0f);
+
             for (int i = 0; i < 6; i++)
             {
                 gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
             }
             float AllModCooldown = 0.6f;
-            int AllModClipshots = 500;
+            int AllModClipshots = 8;
 
             //
             Projectile twentyDamageProjectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
@@ -160,7 +162,7 @@ namespace NevernamedsItems
             gun.reloadTime = 1.4f;
             gun.SetBaseMaxAmmo(100);
 
-            gun.quality = PickupObject.ItemQuality.EXCLUDED; //A
+            gun.quality = PickupObject.ItemQuality.A; //A
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             RangerID = gun.PickupObjectId;
@@ -171,4 +173,5 @@ namespace NevernamedsItems
 
         }
     }
+    
 }

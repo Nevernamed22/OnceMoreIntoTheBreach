@@ -77,7 +77,7 @@ namespace NevernamedsItems
                         float num = Vector2.Distance(user.CenterPosition, aiactor.CenterPosition);
                         if (num <= effectRadius)
                         {
-                            ApplyDirectStatusEffects.ApplyDirectFire(aiactor, 10f, EasyStatusEffectAccess.hotLeadEffect.DamagePerSecondToEnemies, EasyStatusEffectAccess.hotLeadEffect.TintColor, EasyStatusEffectAccess.hotLeadEffect.DeathTintColor, EffectResistanceType.Fire, "Fire", true, true);
+                            ApplyDirectStatusEffects.ApplyDirectFire(aiactor, 10f, StaticStatusEffects.hotLeadEffect.DamagePerSecondToEnemies, StaticStatusEffects.hotLeadEffect.TintColor, StaticStatusEffects.hotLeadEffect.DeathTintColor, EffectResistanceType.Fire, "Fire", true, true);
                         }
                     }
                 }

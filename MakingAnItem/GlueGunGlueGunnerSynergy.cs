@@ -60,7 +60,7 @@ namespace NevernamedsItems
             burning.onFiredProcChance = 1f;
             burning.usesFireEffect = false;
             burning.usesPoisonEffect = true;
-            burning.poisonEffect = EasyStatusEffectAccess.irradiatedLeadEffect;
+            burning.poisonEffect = StaticStatusEffects.irradiatedLeadEffect;
             projectile.SetProjectileSpriteRight("gluegunner_projectile", 19, 8, false, tk2dBaseSprite.Anchor.MiddleCenter, 18, 7);
 
             gun.DefaultModule.projectiles[0] = projectile;

@@ -7,13 +7,12 @@ using ItemAPI;
 using System.Collections;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
+using Dungeonator;
 
 namespace NevernamedsItems
 {
     class WoodGuonStone : IounStoneOrbitalItem
     {
-
-        public static Hook guonHook;
         public static bool speedUp = false;
         public static PlayerOrbital orbitalPrefab;
 
@@ -55,7 +54,7 @@ namespace NevernamedsItems
             orbitalPrefab.motionStyle = PlayerOrbital.OrbitalMotionStyle.ORBIT_PLAYER_ALWAYS;
             orbitalPrefab.shouldRotate = false;
             orbitalPrefab.orbitRadius = 2.5f;
-            orbitalPrefab.orbitDegreesPerSecond = 90f;
+            orbitalPrefab.orbitDegreesPerSecond = 120f;
             orbitalPrefab.SetOrbitalTier(0);
 
             GameObject.DontDestroyOnLoad(prefab);
@@ -65,61 +64,28 @@ namespace NevernamedsItems
 
         public override void Pickup(PlayerController player)
         {
-            player.OnHitByProjectile += this.OwnerHitByProjectile;
-            player.OnReceivedDamage += this.OnOwnerTookDamage;
-            guonHook = new Hook(
-                typeof(PlayerOrbital).GetMethod("Initialize"),
-                typeof(WoodGuonStone).GetMethod("GuonInit")
-            );
-
             base.Pickup(player);
-            //float timeAlive = 20f;
-            //ETGModConsole.Log("Time alive is initially "+timeAlive);
-            //if (player.HasPickupID(540))
-            //{
-             //   timeAlive = 40f;
-             //   ETGModConsole.Log("Time alive is now set to " + timeAlive);
-            //}            
-            Invoke("breakThis", 20.0f);           
+            StartCoroutine(HandleDeathTimer());        
         }
-        private void OnOwnerTookDamage(PlayerController user)
+        public bool shouldBeKilledNextOpportunity;
+        protected override void Update()
         {
-            //if (user.HasPickupID(540))
-            //{
-            //    breakThis();
-            //}
+            if (!Dungeon.IsGenerating && Owner && shouldBeKilledNextOpportunity) InstaKillGuon();
+            base.Update();
         }
-
-        public override DebrisObject Drop(PlayerController player)
+        private IEnumerator HandleDeathTimer()
         {
-            player.OnHitByProjectile -= this.OwnerHitByProjectile;
-            player.OnReceivedDamage -= this.OnOwnerTookDamage;
-            guonHook.Dispose();
-            speedUp = false;
-
-            return base.Drop(player);
+            float seconds = 20f;
+            if (Owner.PlayerHasActiveSynergy("Mahoguny Guon Stones")) seconds *= 2;
+            yield return new WaitForSeconds(seconds);
+            shouldBeKilledNextOpportunity = true;
+            InstaKillGuon();
+            yield break;
         }
-        protected override void OnDestroy()
+        public void InstaKillGuon()
         {
-            Owner.OnHitByProjectile -= this.OwnerHitByProjectile;
-            Owner.OnReceivedDamage -= this.OnOwnerTookDamage;
-            guonHook.Dispose();
-            speedUp = false;
-            base.OnDestroy();
-        }
-
-        public static void GuonInit(Action<PlayerOrbital, PlayerController> orig, PlayerOrbital self, PlayerController player)
-        {
-            orig(self, player);
-        }
-        private void OwnerHitByProjectile(Projectile incomingProjectile, PlayerController arg2)
-        {
-
-        }
-
-        private void breakThis()
-        {
-            Owner.RemovePassiveItem(this.PickupObjectId);
+            UnityEngine.Object.Destroy(this.m_extantOrbital);
+            Owner.RemoveItemFromInventory(this);
         }
     }
 }

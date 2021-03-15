@@ -12,6 +12,7 @@ namespace NevernamedsItems
         public static void AddSynergyForms()
         {
             //------------------------------------------------------SYNERGY FORMES
+            #region PreBigUpdate
             //GUNSHARK - MEGASHARK SYNERGY FORM
             AdvancedTransformGunSynergyProcessor MegaSharkSynergyForme = (PickupObjectDatabase.GetById(Gunshark.GunsharkID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
             MegaSharkSynergyForme.NonSynergyGunId = Gunshark.GunsharkID;
@@ -37,6 +38,8 @@ namespace NevernamedsItems
             WolfgunSynergyForme.NonSynergyGunId = Corgun.DoggunID;
             WolfgunSynergyForme.SynergyGunId = Wolfgun.WolfgunID;
             WolfgunSynergyForme.SynergyToCheck = "Discord and Rhyme";
+            #endregion
+            #region BigUpdate (1.14)
             //PENCIL - MIGHTIER THAN THE GUN FORME
             AdvancedTransformGunSynergyProcessor MightierThanTheGunForme = (PickupObjectDatabase.GetById(Pencil.pencilID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
             MightierThanTheGunForme.NonSynergyGunId = Pencil.pencilID;
@@ -62,7 +65,19 @@ namespace NevernamedsItems
             GlueGunnerForme.NonSynergyGunId = HotGlueGun.HotGlueGunID;
             GlueGunnerForme.SynergyGunId = GlueGunGlueGunnerSynergy.GlueGunnerID;
             GlueGunnerForme.SynergyToCheck = "Glue Gunner";
+            //BULLATTERER - KING BULLATTERER
+            AdvancedTransformGunSynergyProcessor KingBullattererForme = (PickupObjectDatabase.GetById(Bullatterer.BullattererID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
+            KingBullattererForme.NonSynergyGunId = Bullatterer.BullattererID;
+            KingBullattererForme.SynergyGunId = KingBullatterer.KingBullattererID;
+            KingBullattererForme.SynergyToCheck = "King Bullatterer";
+            //WRENCH - NULL REFERENCE EXCEPTION
+            AdvancedTransformGunSynergyProcessor NullReferenceExceptionForme = (PickupObjectDatabase.GetById(Wrench.WrenchID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
+            NullReferenceExceptionForme.NonSynergyGunId = Wrench.WrenchID;
+            NullReferenceExceptionForme.SynergyGunId = WrenchNullRefException.NullWrenchID;
+            NullReferenceExceptionForme.SynergyToCheck = "NullReferenceException";
+            #endregion
             //-------------------------------------------------------------DUAL WIELDING
+            #region Dual Wielding
             //STUN GUN & TRANQ GUN
             AdvancedDualWieldSynergyProcessor StunTranqDualSTUN = (PickupObjectDatabase.GetById(StunGun.StunGunID) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
             StunTranqDualSTUN.PartnerGunID = 42;
@@ -84,6 +99,7 @@ namespace NevernamedsItems
             AdvancedDualWieldSynergyProcessor BooklletLorebookDualBOOK = (PickupObjectDatabase.GetById(Bookllet.BooklletID) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
             BooklletLorebookDualBOOK.PartnerGunID = Lorebook.LorebookID;
             BooklletLorebookDualBOOK.SynergyNameToCheck = "Librarian";
+            #endregion
         }
     }
 }

@@ -49,8 +49,8 @@ namespace NevernamedsItems
                 if (currentCash != lastCash)
                 {
                     RemoveStat(PlayerStats.StatType.Coolness);
-                    float dividedCurrency = currentCash / 33;
-                    double dividedRoundedCurrency = Math.Round(dividedCurrency, 0);
+                    float dividedCurrency = currentCash / 25;
+                    double dividedRoundedCurrency = Mathf.FloorToInt(dividedCurrency);
                     if (dividedRoundedCurrency > 0)
                     {
                         for (int i = 0; i < dividedRoundedCurrency; i++)
@@ -58,6 +58,7 @@ namespace NevernamedsItems
                             AddStat(PlayerStats.StatType.Coolness, 1f, StatModifier.ModifyMethod.ADDITIVE);
                         }
                     }
+                    Owner.stats.RecalculateStats(Owner, false, false);
                     lastCash = currentCash;
                 }
                 else { return; }

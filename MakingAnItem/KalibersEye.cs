@@ -107,8 +107,8 @@ namespace NevernamedsItems
                     AIActor TargetActor = AIActor.Spawn(enemyToSpawn, position, GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(position), true, AIActor.AwakenAnimationType.Default, true);
                     PhysicsEngine.Instance.RegisterOverlappingGhostCollisionExceptions(TargetActor.specRigidbody, null, false);
                     CustomEnemyTagsSystem tags = TargetActor.gameObject.GetOrAddComponent<CustomEnemyTagsSystem>();
-                    tags.TagsList.Add("KalibersEyeMinion");
-                    tags.TagsList.Add("IgnoreForGoodMimic");
+                    tags.isKalibersEyeMinion = true;
+                    tags.ignoreForGoodMimic = true;
 
                     CompanionController orAddComponent = TargetActor.gameObject.GetOrAddComponent<CompanionController>();
                     orAddComponent.companionID = CompanionController.CompanionIdentifier.NONE;
@@ -123,6 +123,11 @@ namespace NevernamedsItems
                     companionisedBullets.TintBullets = true;
                     companionisedBullets.TintColor = ExtendedColours.honeyYellow;
                     companionisedBullets.baseBulletDamage = 10f;
+                    companionisedBullets.scaleSpeed = true;
+                    companionisedBullets.scaleDamage = true;
+                    companionisedBullets.scaleSize = false;
+                    companionisedBullets.doPostProcess = false;
+                    companionisedBullets.enemyOwner = Owner;
 
                     TargetActor.ApplyEffect(GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultPermanentCharmEffect, 1f, null);
                     TargetActor.gameObject.AddComponent<KillOnRoomClear>();

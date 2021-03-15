@@ -109,6 +109,8 @@ namespace NevernamedsItems
                     mod.cooldownTime = LesserModCooldown;
                     mod.angleFromAim = -10f;
                     mod.angleVariance = 0.1f;
+                    webbing.SpawnGoopInFlight = false;
+
                     i2++;
                 }
                 else if (i2 == 4) //Second uncommon Proj
@@ -119,6 +121,8 @@ namespace NevernamedsItems
                     mod.cooldownTime = LesserModCooldown;
                     mod.angleFromAim = -20f;
                     mod.angleVariance = 0.1f;
+                    webbing.SpawnGoopInFlight = false;
+
                     i2++;
                 }
                 else if (i2 == 5) //First uncommon Proj
@@ -129,6 +133,8 @@ namespace NevernamedsItems
                     mod.cooldownTime = LesserModCooldown;
                     mod.angleFromAim = 10f;
                     mod.angleVariance = 0.1f;
+                    webbing.SpawnGoopInFlight = false;
+
                     i2++;
                 }
                 else if (i2 >= 6) //First uncommon Proj
@@ -139,6 +145,8 @@ namespace NevernamedsItems
                     mod.cooldownTime = LesserModCooldown;
                     mod.angleFromAim = 20f;
                     mod.angleVariance = 0.1f;
+                    webbing.SpawnGoopInFlight = false;
+
                     i2++;
                 }
             }
@@ -146,7 +154,7 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(1.25f, 0.62f, 0f);
             gun.SetBaseMaxAmmo(600);
 
-            gun.quality = PickupObject.ItemQuality.A;
+            gun.quality = PickupObject.ItemQuality.S;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             PhaserSpiderlingID = gun.PickupObjectId;

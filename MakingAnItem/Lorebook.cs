@@ -123,7 +123,7 @@ namespace NevernamedsItems
             bardHoming.HomingRadius = 1000f;
             ExtremelySimpleStatusEffectBulletBehaviour bardCharming = bardProjectile.gameObject.AddComponent<ExtremelySimpleStatusEffectBulletBehaviour>();
             bardCharming.usesCharmEffect = true;
-            bardCharming.charmEffect = EasyStatusEffectAccess.charmingRoundsEffect;
+            bardCharming.charmEffect = StaticStatusEffects.charmingRoundsEffect;
             BounceProjModifier bardBouncing = bardProjectile.gameObject.GetOrAddComponent<BounceProjModifier>();
             bardBouncing.numberOfBounces = 10;
             bardProjectile.AnimateProjectile(new List<string> {
@@ -300,7 +300,7 @@ namespace NevernamedsItems
                             projectile.baseData.damage *= 1.25f;
                             ExtremelySimpleStatusEffectBulletBehaviour roguePoisoning = projectile.gameObject.GetOrAddComponent<ExtremelySimpleStatusEffectBulletBehaviour>();
                             roguePoisoning.usesPoisonEffect = true;
-                            roguePoisoning.poisonEffect = EasyStatusEffectAccess.irradiatedLeadEffect;
+                            roguePoisoning.poisonEffect = StaticStatusEffects.irradiatedLeadEffect;
                             MakeLookLikeJammedBullet(projectile);
 
                         }
@@ -326,20 +326,20 @@ namespace NevernamedsItems
                             projectile.baseData.damage *= 1.25f;
                             GameActorCharmEffect UpgradedCharm = new GameActorCharmEffect
                             {
-                                duration = EasyStatusEffectAccess.charmingRoundsEffect.duration * 3,
-                                TintColor = EasyStatusEffectAccess.charmingRoundsEffect.TintColor,
-                                DeathTintColor = EasyStatusEffectAccess.charmingRoundsEffect.DeathTintColor,
+                                duration = StaticStatusEffects.charmingRoundsEffect.duration * 3,
+                                TintColor = StaticStatusEffects.charmingRoundsEffect.TintColor,
+                                DeathTintColor = StaticStatusEffects.charmingRoundsEffect.DeathTintColor,
                                 effectIdentifier = "Upgraded Bard Charm",
                                 AppliesTint = true,
                                 AppliesDeathTint = true,
                                 resistanceType = EffectResistanceType.Charm,
 
                                 //Eh
-                                OverheadVFX = EasyStatusEffectAccess.charmingRoundsEffect.OverheadVFX,
+                                OverheadVFX = StaticStatusEffects.charmingRoundsEffect.OverheadVFX,
                                 AffectsEnemies = true,
                                 AffectsPlayers = false,
                                 AppliesOutlineTint = false,
-                                OutlineTintColor = EasyStatusEffectAccess.charmingRoundsEffect.OutlineTintColor,
+                                OutlineTintColor = StaticStatusEffects.charmingRoundsEffect.OutlineTintColor,
                                 PlaysVFXOnActor = false,                               
                             };
                             ExtremelySimpleStatusEffectBulletBehaviour BardCharming = projectile.gameObject.GetComponent<ExtremelySimpleStatusEffectBulletBehaviour>();

@@ -56,8 +56,9 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "this is the Purpler";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
-
+            PurplerID = gun.PickupObjectId;
         }
+        public static int PurplerID;
         private void changedGun(Gun oldGun, Gun newGun, bool what)
         {
             //ETGModConsole.Log("Guns changed");

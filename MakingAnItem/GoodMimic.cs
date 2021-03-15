@@ -74,13 +74,16 @@ namespace NevernamedsItems
         bool canChangeToBossWeapon = true;
         public void ProjectileHitEnemy(float damage, bool fatal, HealthHaver enemy)
         {
+            CustomEnemyTagsSystem tags = enemy.gameObject.GetComponent<CustomEnemyTagsSystem>();
+            if (tags != null && tags.ignoreForGoodMimic == true) { return; }
             if (enemy != null && enemy.aiActor != null && ((fatal && !enemy.IsBoss) || (enemy.IsBoss && canChangeToBossWeapon)))
             {
 
                 int GunID = -1;
                 if (enemy.aiActor.aiShooter != null && enemy.aiActor.aiShooter.CurrentGun != null)
                 {
-                    GunID = enemy.aiActor.aiShooter.CurrentGun.PickupObjectId;
+                    if (SpecialOverrideGuns.ContainsKey(enemy.aiActor.EnemyGuid)) { GunID = SpecialOverrideGuns[enemy.aiActor.EnemyGuid]; }
+                    else { GunID = enemy.aiActor.aiShooter.CurrentGun.PickupObjectId; }
                 }
                 else if (Entries.ContainsKey(enemy.aiActor.EnemyGuid))
                 {
@@ -349,7 +352,6 @@ namespace NevernamedsItems
              {EnemyGuidDatabase.Entries["muzzle_wisp"], 125}, //Muzzle Wisp --> Flame Hand
              {EnemyGuidDatabase.Entries["muzzle_flare"], 698}, //Muzzle Flare --> Flame Hand+Maximize Spell
              {EnemyGuidDatabase.Entries["grenade_kin"], 19}, //Pinhead --> Grenade Launcher
-             {EnemyGuidDatabase.Entries["grenat"], 19}, //Grenat --> Grenade Launcher
              {EnemyGuidDatabase.Entries["mountain_cube"], 130}, //Mountain Cube --> Glacier
              {EnemyGuidDatabase.Entries["shambling_round"], 23}, //Shambing Round --> Dungeon Eagle
              {EnemyGuidDatabase.Entries["fuselier"], 332}, //Fuselier --> Lil' Bomber
@@ -377,6 +379,15 @@ namespace NevernamedsItems
              {EnemyGuidDatabase.Entries["lore_gunjurer"], Lorebook.LorebookID}, //Lore Gunjurer --> Lorebook  
              {EnemyGuidDatabase.Entries["blizzbulon"], Icicle.IcicleID}, //Blizzbulon --> Icicle
              {EnemyGuidDatabase.Entries["phaser_spider"], PhaserSpiderling.PhaserSpiderlingID}, //Phaser Spider --> Phaser Spiderling
+             {EnemyGuidDatabase.Entries["lead_maiden"], MaidenRifle.MaidenRifleID}, //Lead Maiden --> Maiden Rifle
+             {EnemyGuidDatabase.Entries["bullat"], Bullatterer.BullattererID}, //Bullat --> Bullatterer
+             {EnemyGuidDatabase.Entries["spirat"], Bullatterer.BullattererID}, //Spirat --> Bullatterer
+             {EnemyGuidDatabase.Entries["grenat"], Bullatterer.BullattererID}, //Grenat --> Bullatterer
+             {EnemyGuidDatabase.Entries["shotgat"], Bullatterer.BullattererID}, //Shotgat --> Bullatterer
+             {EnemyGuidDatabase.Entries["king_bullat"], KingBullatterer.KingBullattererID}, //King Bullat --> Bullatterer+King Bullatterer
+             {EnemyGuidDatabase.Entries["gargoyle"], KingBullatterer.KingBullattererID}, //Gargoyle --> Bullatterer+King Bullatterer
+             {EnemyGuidDatabase.Entries["dynamite_kin"], DynamiteLauncher.DynamiteLauncherID}, //Nitra --> Dynamite launcher
+             {EnemyGuidDatabase.Entries["misfire_beast"], Beastclaw.BeastclawID}, //Misfire Beast --> Beastclaw
 
 
              {ExpandTheGungeonGUIDDatabase.Entries["com4nd0_boss"], HeavyAssaultRifle.HeavyAssaultRifleID}, //Com4nd0 Boss --> Heavy Assault Rifle
@@ -388,6 +399,10 @@ namespace NevernamedsItems
              {EnemyGuidDatabase.Entries["great_bullet_shark"], GunsharkMegasharkSynergyForme.GunsharkMegasharkSynergyFormeID}, //Great Bullet Shark --> Gunshark+Megashark
              
  
+        };
+        public static Dictionary<string, int> SpecialOverrideGuns { get; set; } = new Dictionary<string, int>()
+        {
+             {EnemyGuidDatabase.Entries["shroomer"], ShroomedGun.ShroomedGunID}, //Shroomer --> ShroomedGun             
         };
     }
 }

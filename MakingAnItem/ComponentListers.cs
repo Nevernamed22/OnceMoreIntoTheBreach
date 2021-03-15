@@ -79,7 +79,7 @@ namespace NevernamedsItems
         {
             if (data.OtherRigidbody && data.OtherRigidbody.gameObject)
             {
-                foreach (Component component in data.OtherRigidbody.gameObject.GetComponents<Component>())
+                foreach (Component component in data.OtherRigidbody.gameObject.GetComponentsInChildren<Component>())
                 {
                     if (component != null)
                     {
