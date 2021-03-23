@@ -147,7 +147,7 @@ namespace NevernamedsItems
             }
 
             this.m_projectile.SendInDirection(MiscToolbox.DegreeToVector2(this.directionOfNearestEnemy), false, true);*/
-            ReAimBullet.ReAimBulletToNearestEnemy(this.m_projectile);
+            this.m_projectile.ReAimToNearestEnemy();
             this.m_projectile.baseData.speed *= 10000;
             this.m_projectile.UpdateSpeed();
 

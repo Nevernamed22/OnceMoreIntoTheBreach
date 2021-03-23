@@ -56,9 +56,10 @@ namespace NevernamedsItems
         protected override void DoEffect(PlayerController user)
         {
             Vector2 yourPosition = user.sprite.WorldCenter;
-            PickupObject item = LootEngine.GetItemOfTypeAndQuality<PickupObject>(PickupObject.ItemQuality.COMMON, null, false);
-            LootEngine.SpawnItem(item.gameObject, yourPosition, Vector2.zero, 0);
-
+            // PickupObject item = LootEngine.GetItemOfTypeAndQuality<PickupObject>(PickupObject.ItemQuality.COMMON, null, false);
+            //LootEngine.SpawnItem(item.gameObject, yourPosition, Vector2.zero, 0);
+            PlayerToolbox tools = user.GetComponent<PlayerToolbox>();
+            tools.DoTimedStatModifier(PlayerStats.StatType.MovementSpeed, 2, 5);
         }
         public override void Update()
         {

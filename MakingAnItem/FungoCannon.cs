@@ -104,11 +104,11 @@ namespace NevernamedsItems
                 int id = Gungeon.Game.Items["nn:spore_launcher"].PickupObjectId;
                 if (player.HasPickupID(id))
                 {
-                    if (UnityEngine.Random.value <= 0.45) { MiscToolbox.GiveAmmoToGunNotInHand(player, id, 1); }
+                    if (UnityEngine.Random.value <= 0.45) { player.GiveAmmoToGunNotInHand(id, 1); }
                 }
             }
             base.OnPostFired(player, gun);
-        }      
+        }
         public FungoCannon()
         {
 
@@ -179,7 +179,7 @@ namespace NevernamedsItems
                 int timesToFloat = UnityEngine.Random.Range(3, 6);
                 for (int i = 0; i < timesToFloat; i++)
                 {
-                    ReAimBullet.SendInRandomDirection(m_projectile);
+                    m_projectile.SendInRandomDirection();
                     yield return new WaitForSeconds(1f);
                 }
                 m_projectile.DieInAir();
@@ -190,7 +190,7 @@ namespace NevernamedsItems
                 if (HasSynergyHunterSpores) HunterSpeed = 10f;
                 m_projectile.baseData.speed = HunterSpeed;
                 m_projectile.UpdateSpeed();
-                ReAimBullet.ReAimBulletToNearestEnemy(m_projectile);
+                m_projectile.ReAimToNearestEnemy();
             }
             yield break;
         }

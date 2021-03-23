@@ -6,6 +6,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -42,7 +43,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.B;
 
             //LIST OF SYNERGIES
-
+            item.SetupUnlockOnCustomStat(CustomTrackedStats.BEHOLSTER_KILLS, 14, DungeonPrerequisite.PrerequisiteOperation.GREATER_THAN);
 
         }
         public bool canActivate = true;

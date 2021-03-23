@@ -254,7 +254,7 @@ namespace NevernamedsItems
             {
                 if (otherRigidBody != null && otherRigidBody.aiActor != null && otherRigidBody.healthHaver != null)
                 {
-                    if (!otherRigidBody.healthHaver.IsBoss && otherRigidBody.healthHaver.IsVulnerable && !EasyEnemyTypeLists.Mimics.Contains(otherRigidBody.aiActor.EnemyGuid) && !DisplacerIgnoreList.Contains(otherRigidBody.aiActor.EnemyGuid) && !EasyEnemyTypeLists.Companions.Contains(otherRigidBody.aiActor.EnemyGuid))
+                    if (!otherRigidBody.healthHaver.IsBoss && otherRigidBody.healthHaver.IsVulnerable && !EasyEnemyTypeLists.ModInclusiveMimics.Contains(otherRigidBody.aiActor.EnemyGuid) && !DisplacerIgnoreList.Contains(otherRigidBody.aiActor.EnemyGuid) && !EasyEnemyTypeLists.Companions.Contains(otherRigidBody.aiActor.EnemyGuid))
                     {
                         //VFX
                         //ETGModConsole.Log("We made it past the initial checks");

@@ -120,19 +120,7 @@ namespace NevernamedsItems
             UnityEngine.Object.Instantiate<GameObject>(EasyVFXDatabase.GundetaleSpareVFX, (enemy.sprite.WorldTopCenter + new Vector2(0, 0.25f)), Quaternion.identity);
             CurrentRoom.DeregisterEnemy(enemy);
             CustomEnemyTagsSystem tags = enemy.gameObject.GetOrAddComponent<CustomEnemyTagsSystem>();
-            int bulletCount = StaticReferenceManager.AllProjectiles.Count;
-            List<Projectile> BulletsOwnedByEnemy = new List<Projectile>();
-            foreach (Projectile proj in StaticReferenceManager.AllProjectiles)
-            {
-                if (proj && proj.Owner && proj.Owner == enemy)
-                {
-                    BulletsOwnedByEnemy.Add(proj);
-                }
-            }
-            for (int i = (BulletsOwnedByEnemy.Count - 1); i > -1; i--)
-            {
-                if (BulletsOwnedByEnemy[i] != null) BulletsOwnedByEnemy[i].DieInAir(true, false, false, true);
-            }
+            enemy.gameActor.DelelteOwnedBullets();
             if (tags != null)
             {
                 tags.isGundertaleFriendly = true;

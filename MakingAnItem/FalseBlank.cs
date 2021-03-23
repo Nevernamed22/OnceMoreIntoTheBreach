@@ -5,6 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -49,9 +50,15 @@ namespace NevernamedsItems
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
         }
-
-        //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!
-
+        public override void Pickup(PlayerController player)
+        {
+            if (!this.m_pickedUpThisRun)
+            {
+                timesUsed = 0;
+            }
+            base.Pickup(player);    
+        }
+        int timesUsed = 0;
         protected override void DoEffect(PlayerController user)
         {
             if (user.HasPickupID(Gungeon.Game.Items["nn:forsaken_heart"].PickupObjectId))
@@ -74,7 +81,15 @@ namespace NevernamedsItems
                 PickupObject byId = PickupObjectDatabase.GetById(565);
                 user.AcquirePassiveItemPrefabDirectly(byId as PassiveItem);
             }
+            timesUsed += 1;
             user.ForceBlank(25f, 0.5f, false, true, null, true, -1f);
+            if (timesUsed >= 10)
+            {
+                if (!SaveAPIManager.GetFlag(CustomDungeonFlags.USED_FALSE_BLANK_TEN_TIMES))
+                {
+                    SaveAPIManager.SetFlag(CustomDungeonFlags.USED_FALSE_BLANK_TEN_TIMES, true);
+                }
+            }
         }
 
         private void giveSomeCurse(PlayerController user)

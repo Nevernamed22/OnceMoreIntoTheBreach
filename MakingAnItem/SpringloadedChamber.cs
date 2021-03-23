@@ -5,6 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -40,6 +41,8 @@ namespace NevernamedsItems
             //ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ProjectileSpeed, -1f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.B; //B
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_SPRINGLOADEDCHAMBER, true);
+            item.AddItemToTrorcMetaShop(19);
         }
         private int currentClip, lastClip;
         private Gun currentGun, lastGun;

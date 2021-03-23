@@ -405,6 +405,18 @@ namespace NevernamedsItems
             //YELLOW CHAMBER / KALIBERS EYE
             List<string> mandatorySynergyItemsAllSeeing = new List<string>() { "nn:kaliber's_eye", "yellow_chamber" };
             CustomSynergies.Add("All Seeing", mandatorySynergyItemsAllSeeing);
+            //MINERS BULLETS / EYE ITEMS
+            List<string> mandatorySynergyItemsEyeOfTheSpider = new List<string>() { "nn:miners_bullets" };
+            List<string> optionalSynergyItemsEyeOfTheSpider = new List<string>() { "nn:kaliber's_eye", "bloody_eye", "rolling_eye", "eye_of_the_beholster" };
+            CustomSynergies.Add("Eye of the Spider", mandatorySynergyItemsEyeOfTheSpider, optionalSynergyItemsEyeOfTheSpider);
+            //LUCKY COIN / LOOT ITEMS
+            List<string> mandatorySynergyItemsProsperity = new List<string>() { "nn:lucky_coin" };
+            List<string> optionalSynergyItemsProsperity = new List<string>() { "nn:lump_of_space_metal", "nn:loose_change", "coin_crown", "iron_coin", "gold_junk", "table_tech_money" };
+            CustomSynergies.Add("Prosperity", mandatorySynergyItemsProsperity, optionalSynergyItemsProsperity);
+            //MINERS BULLETS / LOOT ITEMS
+            List<string> mandatorySynergyItemsMiningAway = new List<string>() { "nn:miners_bullets" };
+            List<string> optionalSynergyItemsMiningAway = new List<string>() { "nn:lump_of_space_metal", "mine_cutter" };
+            CustomSynergies.Add("Miiiining Away~", mandatorySynergyItemsMiningAway, optionalSynergyItemsMiningAway);
             #endregion
 
             #region BigUpdate (1.14) Synergies
@@ -626,6 +638,372 @@ namespace NevernamedsItems
             //KEVIN / GRAVITY GUN
             List<string> mandatorySynergyItemsOnceMoreIntoTheBreach = new List<string>() { "nn:kevin", "nn:gravity_gun" };
             CustomSynergies.Add("Once More Into The Breach", mandatorySynergyItemsOnceMoreIntoTheBreach);
+            //THICKER THAN WATER
+            List<string> mandatorySynergyItemsThickerThanWater = new List<string>() { "nn:blood_thinner" };
+            List<string> optionalSynergyItemsThickerThanWater = new List<string>() { "heart_purse", "heart_locket", "heart_bottle", "heart_holster", "heart_lunchbox" };
+            CustomSynergies.Add("Thicker Than Water", mandatorySynergyItemsThickerThanWater, optionalSynergyItemsThickerThanWater);
+            //PUNISHMENT RAY / WOOD BEAM
+            List<string> mandatorySynergyItemsSpareTheRod = new List<string>() { "nn:punishment_ray" };
+            List<string> optionalSynergyItemsSpareTheRod = new List<string>() { "wood_beam" };
+            CustomSynergies.Add("Spare The Rod", mandatorySynergyItemsSpareTheRod, optionalSynergyItemsSpareTheRod);
+            //PUNISHMENT RAY / COBALT HAMMER
+            List<string> mandatorySynergyItemsCobaltStreak = new List<string>() { "nn:punishment_ray" };
+            List<string> optionalSynergyItemsCobaltStreak = new List<string>() { "cobalt_hammer" };
+            CustomSynergies.Add("Cobalt Streak", mandatorySynergyItemsCobaltStreak, optionalSynergyItemsCobaltStreak);
+            //CRESCENDO BLASTER / FAST ITEMS
+            List<string> mandatorySynergyItemsAllegro = new List<string>() { "nn:crescendo_blaster" };
+            List<string> optionalSynergyItemsAllegro = new List<string>() { "ballistic_boots", "rocket_powered_bullets", "shotga_cola", "shotgun_coffee" };
+            CustomSynergies.Add("Allegro", mandatorySynergyItemsAllegro, optionalSynergyItemsAllegro);
+            //CRESCENDO BLASTER / LOUD ITEMS
+            List<string> mandatorySynergyItemsFortissimo = new List<string>() { "nn:crescendo_blaster" };
+            List<string> optionalSynergyItemsFortissimo = new List<string>() { "bomb", "ice_bomb", "lil_bomber", "screecher" };
+            CustomSynergies.Add("Fortissimo", mandatorySynergyItemsFortissimo, optionalSynergyItemsFortissimo);
+            //VARIABLE / BACKWARDS ITEMS
+            List<string> mandatorySynergyItemsBackwardsCompatibility = new List<string>() { "nn:variable" };
+            List<string> optionalSynergyItemsBackwardsCompatibility = new List<string>() { "backup_gun" };
+            CustomSynergies.Add("Backwards Compatible", mandatorySynergyItemsBackwardsCompatibility, optionalSynergyItemsBackwardsCompatibility);
+            //AUTOLLET / COMPUTER ITEMS
+            List<string> mandatorySynergyItemsCodeBanks = new List<string>() { "nn:autollet" };
+            List<string> optionalSynergyItemsCodeBanks = new List<string>() { "ibomb_companion_app", "nn:aimbot", "remote_bullets" };
+            CustomSynergies.Add("Code Blanks", mandatorySynergyItemsCodeBanks, optionalSynergyItemsCodeBanks);
+            //KIN AMMOLET / CURSED BULLETS / YELLOW CHAMBER / SIXTH CHAMBER / VOODOOLLETS
+            List<string> mandatorySynergyItemsFriendsOnTheOtherSide = new List<string>() { "nn:kin_ammolet" };
+            List<string> optionalSynergyItemsFriendsOnTheOtherSide = new List<string>() { "cursed_bullets", "nn:voodoollets", "yellow_chamber", "sixth_chamber" };
+            CustomSynergies.Add("Friends On The Other Side", mandatorySynergyItemsFriendsOnTheOtherSide, optionalSynergyItemsFriendsOnTheOtherSide);
+            //KIN AMMOLET / +1 BULLETS / MULTIPLICATOR / DOUBLE VISION / HELIX BULLETS / SCATTERSHOT
+            List<string> mandatorySynergyItemsAimTwiceShootOnce = new List<string>() { "nn:kin_ammolet" };
+            List<string> optionalSynergyItemsAimTwiceShootOnce = new List<string>() { "+1_bullets", "nn:multiplicator", "double_vision", "helix_bullets", "scattershot" };
+            CustomSynergies.Add("Aim Twice, Shoot Once", mandatorySynergyItemsAimTwiceShootOnce, optionalSynergyItemsAimTwiceShootOnce);
+            //KIN AMMOLET / REGULAR SHOTGUN / WINCHESTER / BIG SHOTGUN / CLOWN SHOTGUN 
+            List<string> mandatorySynergyItemsShotgunClub = new List<string>() { "nn:kin_ammolet" };
+            List<string> optionalSynergyItemsShotgunClub = new List<string>() { "regular_shotgun", "nn:clown_shotgun", "big_shotgun", "winchester" };
+            CustomSynergies.Add("Shotgun Club", mandatorySynergyItemsShotgunClub, optionalSynergyItemsShotgunClub);
+            //THE FAT LINE / THE THIN LINE
+            List<string> mandatorySynergyItemsParallelLines = new List<string>() { "the_fat_line", "nn:the_thin_line" };
+            CustomSynergies.Add("Parallel Lines", mandatorySynergyItemsParallelLines);
+            //CYANER GUON STONE
+            List<string> mandatorySynergyItemsCyanerGuonStone = new List<string>() { "nn:cyan_guon_stone" };
+            List<string> optionalSynergyItemsCyanerGuonStone = new List<string>() { "+1_bullets", "amulet_of_the_pit_lord", "heavy_boots", "nn:bullet_boots" };
+            CustomSynergies.Add("Cyaner Guon Stone", mandatorySynergyItemsCyanerGuonStone, optionalSynergyItemsCyanerGuonStone);
+            //RAINBOWER GUON STONE
+            List<string> mandatorySynergyItemsRainbowerGuonStone = new List<string>() { "nn:rainbow_guon_stone" };
+            List<string> optionalSynergyItemsRainbowerGuonStone = new List<string>() { "+1_bullets", "amulet_of_the_pit_lord" }; //Add Ammolite when you port this
+            CustomSynergies.Add("Rainbower Guon Stone", mandatorySynergyItemsRainbowerGuonStone, optionalSynergyItemsRainbowerGuonStone);
+            //INDIGOER GUON STONE
+            List<string> mandatorySynergyItemsIndigoerGuonStone = new List<string>() { "nn:indigo_guon_stone" };
+            List<string> optionalSynergyItemsIndigoerGuonStone = new List<string>() { "+1_bullets", "amulet_of_the_pit_lord", "blank_bullets" };
+            CustomSynergies.Add("Indigoer Guon Stone", mandatorySynergyItemsIndigoerGuonStone, optionalSynergyItemsIndigoerGuonStone);
+            //KALIBERS PRAYER + CHANCE BULLETS
+            List<string> mandatorySynergyItemsGunsignor = new List<string>() { "chance_bullets", "nn:kalibers_prayer" };
+            CustomSynergies.Add("Gunsignor", mandatorySynergyItemsGunsignor);
+            //KALIBERS PRAYER + YELLOW GUON STONE / LIQUID METAL BODY / BIG IRON
+            List<string> mandatorySynergyItemsRodOfIron = new List<string>() { "nn:kalibers_prayer" };
+            List<string> optionalSynergyItemsRodOfIron = new List<string>() { "nn:yellow_guon_stone", "nn:liquid-metal_body", "big_iron" };
+            CustomSynergies.Add("Rod of Iron", mandatorySynergyItemsRodOfIron, optionalSynergyItemsRodOfIron);
+            //KALIBERS PRAYER + BOMBINOMICON
+            List<string> mandatorySynergyItemsLiturgist = new List<string>() { "nn:kalibers_prayer" };
+            List<string> optionalSynergyItemsLiturgist = new List<string>() { "nn:bombinomicon" }; //Bookllet / The Book / Lorebook
+            CustomSynergies.Add("Liturgist", mandatorySynergyItemsLiturgist, optionalSynergyItemsLiturgist);
+            //KALIBERS PRAYER + SAA
+            List<string> mandatorySynergyItemsGunvana = new List<string>() { "saa", "nn:kalibers_prayer" };
+            CustomSynergies.Add("Gunvana", mandatorySynergyItemsGunvana);
+            //SILVERER GUON STONE
+            List<string> mandatorySynergyItemsSilvererGuonStone = new List<string>() { "nn:silver_guon_stone" };
+            List<string> optionalSynergyItemsSilvererGuonStone = new List<string>() { "+1_bullets", "amulet_of_the_pit_lord", "nn:silver_ammolet" };
+            CustomSynergies.Add("Silverer Guon Stone", mandatorySynergyItemsSilvererGuonStone, optionalSynergyItemsSilvererGuonStone);
+            //MAROONER GUON STONE
+            List<string> mandatorySynergyItemsMaroonerGuonStone = new List<string>() { "nn:maroon_guon_stone" };
+            List<string> optionalSynergyItemsMaroonerGuonStone = new List<string>() { "+1_bullets", "amulet_of_the_pit_lord", "nn:bloodthirsty_bullets" };
+            CustomSynergies.Add("Marooner Guon Stone", mandatorySynergyItemsMaroonerGuonStone, optionalSynergyItemsMaroonerGuonStone);
+            //SILVER GUON STONE
+            List<string> mandatorySynergyItemsTurnGundead = new List<string>() { "nn:silver_guon_stone" };
+            List<string> optionalSynergyItemsTurnGundead = new List<string>() { "silver_bullets", "nn:cleansing_rounds", "nn:hallowed_bullets" };
+            CustomSynergies.Add("Turn Gundead", mandatorySynergyItemsTurnGundead, optionalSynergyItemsTurnGundead);
+            //MAROON GUON STONE / IRRADIATED LEAD
+            List<string> mandatorySynergyItemsToxicCore = new List<string>() { "nn:maroon_guon_stone", "irradiated_lead" };
+            CustomSynergies.Add("Toxic Core", mandatorySynergyItemsToxicCore);
+            //MAROON GUON STONE / CHARMING ROUNDS
+            List<string> mandatorySynergyItemsCharmingCore = new List<string>() { "nn:maroon_guon_stone", "charming_rounds" };
+            CustomSynergies.Add("Charming Core", mandatorySynergyItemsCharmingCore);
+            //MAROON GUON STONE / HOT LEAD
+            List<string> mandatorySynergyItemsBurningCore = new List<string>() { "nn:maroon_guon_stone", "hot_lead" };
+            CustomSynergies.Add("Burning Core", mandatorySynergyItemsBurningCore);
+            //MAROON GUON STONE / EXPLOSIVE ROUNDS
+            List<string> mandatorySynergyItemsExplosiveCore = new List<string>() { "nn:maroon_guon_stone", "explosive_rounds" };
+            CustomSynergies.Add("Explosive Core", mandatorySynergyItemsExplosiveCore);
+            //MAROON GUON STONE / HUNGRY BULLETS
+            List<string> mandatorySynergyItemsHungryCore = new List<string>() { "nn:maroon_guon_stone", "hungry_bullets" };
+            CustomSynergies.Add("Hungry Core", mandatorySynergyItemsHungryCore);
+            //MAROON GUON STONE / HOMING BULLETS
+            List<string> mandatorySynergyItemsSmartCore = new List<string>() { "nn:maroon_guon_stone", "homing_bullets" };
+            CustomSynergies.Add("Smart Core", mandatorySynergyItemsSmartCore);
+            //GLASSTER / GLASS CANNON
+            List<string> mandatorySynergyItemsNoPaneNoGain = new List<string>() { "nn:glasster", "glass_cannon" };
+            CustomSynergies.Add("No Pane, No Gain", mandatorySynergyItemsNoPaneNoGain);
+            //GREG THE EGG
+            List<string> mandatorySynergyItemsFreeRangeGregs = new List<string>() { "nn:greg_the_egg" };
+            List<string> optionalSynergyItemsFreeRangeGregs = new List<string>() { "chance_bullets", "nn:chaos_ruby", "nn:rando_rounds", "chaos_bullets" };
+            CustomSynergies.Add("Free Range Gregs", mandatorySynergyItemsFreeRangeGregs, optionalSynergyItemsFreeRangeGregs);
+            //GREG THE EGG / SCRAMBLER
+            List<string> mandatorySynergyItemsScrambledGregs = new List<string>() { "nn:greg_the_egg", "the_scrambler" };
+            CustomSynergies.Add("Scrambled Gregs", mandatorySynergyItemsScrambledGregs);
+            //GREG THE EGG / EGG SALAD
+            List<string> mandatorySynergyItemsGregSalad = new List<string>() { "nn:greg_the_egg", "nn:egg_salad" };
+            CustomSynergies.Add("Greg Salad", mandatorySynergyItemsGregSalad);
+            //GREG THE EGG / PITCHFORK / LAMENT CONFIGURUM / SIXTH CHAMBER / FLAME HAND
+            List<string> mandatorySynergyItemsDeviledGregs = new List<string>() { "nn:greg_the_egg" };
+            List<string> optionalSynergyItemsDeviledGregs = new List<string>() { "pitchfork", "lament_configurum", "sixth_chamber", "flame_hand" };
+            CustomSynergies.Add("Deviled Gregs", mandatorySynergyItemsDeviledGregs, optionalSynergyItemsDeviledGregs);
+            //GREG THE EGG / POCKET CHEST / AGED BELL / BULLET TIME
+            List<string> mandatorySynergyItemsCenturyGreg = new List<string>() { "nn:greg_the_egg" };
+            List<string> optionalSynergyItemsCenturyGreg = new List<string>() { "nn:pocket_chest", "aged_bell", "bullet_time" };
+            CustomSynergies.Add("Century Greg", mandatorySynergyItemsCenturyGreg, optionalSynergyItemsCenturyGreg);
+            //GLASS SHARD / GLASSTER
+            List<string> mandatorySynergyItemsMasterglass = new List<string>() { "nn:glass_shard", "nn:glasster" };
+            CustomSynergies.Add("Masterglass", mandatorySynergyItemsMasterglass);
+            //GLASS SHARD / SHATTERSHOT
+            List<string> mandatorySynergyItemsShattershot = new List<string>() { "nn:glass_shard", "scattershot" };
+            CustomSynergies.Add("Shattershot", mandatorySynergyItemsShattershot);
+            //GLASS SHARD / EGG SALAD / ORANGE / RATION / MEATBUN / WEIRD EGG / GREG THE EGG / SCRAMBLER
+            List<string> mandatorySynergyItemsBreakFast = new List<string>() { "nn:glass_shard" };
+            List<string> optionalSynergyItemsBreakFast = new List<string>() { "orange", "ration", "meatbun", "weird_egg", "nn:egg_salad", "nn:greg_the_egg", "the_scrambler" };
+            CustomSynergies.Add("Break Fast!", mandatorySynergyItemsBreakFast, optionalSynergyItemsBreakFast);
+            //GREG THE EGG / YELLOW GUON STONE / 
+            List<string> mandatorySynergyItemsHardBoiledGregs = new List<string>() { "nn:greg_the_egg" };
+            List<string> optionalSynergyItemsHardBoiledGregs = new List<string>() { "nn:yellow_guon_stone", "potion_of_lead_skin", "teapot", "nn:mirror_bullets" };
+            CustomSynergies.Add("Hard Boiled Gregs", mandatorySynergyItemsHardBoiledGregs, optionalSynergyItemsHardBoiledGregs);
+            //DRONE / BEE ITEMS
+            List<string> mandatorySynergyItemsWrongKindOfDrone = new List<string>() { "nn:drone" };
+            List<string> optionalSynergyItemsWrongKindOfDrone = new List<string>() { "bee_hive", "honeycomb", "bumbullets", "stinger", "nn:hive_holster", "jar_of_bees" };
+            CustomSynergies.Add("Wrong Kind Of Drone", mandatorySynergyItemsWrongKindOfDrone, optionalSynergyItemsWrongKindOfDrone);
+            //BULLETS WITH GUNS / EXCALIBER
+            List<string> mandatorySynergyItemsBulletsWithKnives = new List<string>() { "nn:bullets_with_guns" };
+            List<string> optionalSynergyItemsBulletsWithKnives = new List<string>() { "excaliber", "huntsman", "fightsabre" };
+            CustomSynergies.Add("Bullets With Knives", mandatorySynergyItemsBulletsWithKnives, optionalSynergyItemsBulletsWithKnives);
+            //HAND GUN / HEART ITEMS
+            List<string> mandatorySynergyItemsHaveAHeart = new List<string>() { "nn:hand_gun" };
+            List<string> optionalSynergyItemsHaveAHeart = new List<string>() { "nn:orgun", "heart_of_ice", "heart_locket", "heart_purse", "heart_bottle", "heart_synthesizer", "heart_holster", "heart_lunchbox" };
+            CustomSynergies.Add("Have A Heart", mandatorySynergyItemsHaveAHeart, optionalSynergyItemsHaveAHeart);
+            //HAND GUN / DIGGING / KEY ITEMS
+            List<string> mandatorySynergyItemsDigDeep = new List<string>() { "nn:hand_gun" }; //Add portable hole
+            List<string> optionalSynergyItemsDigDeep = new List<string>() { "knights_gun", "drill", "amulet_of_the_pit_lord" };
+            CustomSynergies.Add("Dig Deep", mandatorySynergyItemsDigDeep, optionalSynergyItemsDigDeep);
+            //HAND GUN / DIAMOND ITEMS
+            List<string> mandatorySynergyItemsGirlsBestFriend = new List<string>() { "nn:hand_gun" };
+            List<string> optionalSynergyItemsGirlsBestFriend = new List<string>() { "nn:diamond_gun", "nn:chaos_ruby", "coin_crown", "nn:diamond_bracelet" };
+            CustomSynergies.Add("Girls Best Friend", mandatorySynergyItemsGirlsBestFriend, optionalSynergyItemsGirlsBestFriend);
+            //HAND GUN / CLUB ITEMS
+            List<string> mandatorySynergyItemsGoingClubbing = new List<string>() { "nn:hand_gun" };
+            List<string> optionalSynergyItemsGoingClubbing = new List<string>() { "nn:pearl_bracelet", "klobbe", "nn:titan_bullets", "anvillain", "casey", "boxing_glove" };
+            CustomSynergies.Add("Going Clubbing", mandatorySynergyItemsGoingClubbing, optionalSynergyItemsGoingClubbing);
+            //HAND GUN / CAT BULLET KING THRONE / CROWN OF GUNS 
+            List<string> mandatorySynergyItemsSuicideKing = new List<string>() { "nn:hand_gun" };
+            List<string> optionalSynergyItemsSuicideKing = new List<string>() { "nn:bullut", "nn:viscerifle", "nn:disc_gun", "cigarettes" };
+            CustomSynergies.Add("Suicide King", mandatorySynergyItemsSuicideKing, optionalSynergyItemsSuicideKing);
+            //HAND GUN / 
+            List<string> mandatorySynergyItemsRoyalFlush = new List<string>() { "nn:hand_gun" };
+            List<string> optionalSynergyItemsRoyalFlush = new List<string>() { "crown_of_guns", "cat_bullet_king_throne" };
+            CustomSynergies.Add("Royal Flush", mandatorySynergyItemsRoyalFlush, optionalSynergyItemsRoyalFlush);
+            //POTTY / TEAPOT
+            List<string> mandatorySynergyItemsTeapotty = new List<string>() { "nn:potto", "teapot" };
+            CustomSynergies.Add("Teapotto", mandatorySynergyItemsTeapotty);
+            //POTTY / LUCKY ITEMS
+            List<string> mandatorySynergyItemsPotOGold = new List<string>() { "nn:potto" };
+            List<string> optionalSynergyItemsPotOGold = new List<string>() { "seven_leaf_clover", "nn:lucky_coin", "unicorn_horn" };
+            CustomSynergies.Add("Pot O' Gold", mandatorySynergyItemsPotOGold, optionalSynergyItemsPotOGold);
+            //POTTY / CARD ITEMS
+            List<string> mandatorySynergyItemsWhatDoesItDo = new List<string>() { "nn:potto" };
+            List<string> optionalSynergyItemsWhatDoesItDo = new List<string>() { "nn:hand_gun" };
+            CustomSynergies.Add("What does it do?", mandatorySynergyItemsWhatDoesItDo, optionalSynergyItemsWhatDoesItDo);
+            //POTTY / MAGIC ITEMS
+            List<string> mandatorySynergyItemsThePotterBoy = new List<string>() { "nn:potto" };
+            List<string> optionalSynergyItemsThePotterBoy = new List<string>() { "magic_bullets", "witch_pistol", "bundle_of_wands", "owl" };
+            CustomSynergies.Add("The Potter Boy", mandatorySynergyItemsThePotterBoy, optionalSynergyItemsThePotterBoy);
+            //POTTY / SHOTGRUB
+            List<string> mandatorySynergyItemsTheyGrowInside = new List<string>() { "nn:potto", "shotgrub" };
+            CustomSynergies.Add("They Grow Inside", mandatorySynergyItemsTheyGrowInside);
+            //POTTY / CURSED ITEMS
+            List<string> mandatorySynergyItemsCursedCeramics = new List<string>() { "nn:potto" };
+            List<string> optionalSynergyItemsCursedCeramics = new List<string>() { "cursed_bullets", "sixth_chamber", "yellow_chamber", "riddle_of_lead" };
+            CustomSynergies.Add("Cursed Ceramics", mandatorySynergyItemsCursedCeramics, optionalSynergyItemsCursedCeramics);
+            //GUNGER / HUNGRY BULLETS
+            List<string> mandatorySynergyItemsFamished = new List<string>() { "nn:gunger", "hungry_bullets" };
+            CustomSynergies.Add("Famished", mandatorySynergyItemsFamished);
+            //GUMGUN / BIRD ITEMS
+            List<string> mandatorySynergyItemsWEH = new List<string>() { "nn:gumgun" }; //Add birdshot on port
+            List<string> optionalSynergyItemsWEH = new List<string>() { "weird_egg", "nn:greg_the_egg", "the_scrambler", "wax_wings" };
+            CustomSynergies.Add("WEH", mandatorySynergyItemsWEH, optionalSynergyItemsWEH);
+            //GUNSMOKE PERFUME / HOT LEAD / FLAMECHAMBER 
+            List<string> mandatorySynergyItemsRegularHottie = new List<string>() { "nn:gunsmoke_perfume" };
+            List<string> optionalSynergyItemsRegularHottie = new List<string>() { "hot_lead", "nn:flame_chamber" };
+            CustomSynergies.Add("Regular Hottie", mandatorySynergyItemsRegularHottie, optionalSynergyItemsRegularHottie);
+            //GUNSMOKE PERFUME / CHARMING ROUNDS / SHOTGUN FULL OF LOVE / LOVE PISTOL
+            List<string> mandatorySynergyItemsPracticallyPungent = new List<string>() { "nn:gunsmoke_perfume" };
+            List<string> optionalSynergyItemsPracticallyPungent = new List<string>() { "charming_rounds", "nn:love_pistol", "shotgun_full_of_love", "nn:gunpowder_pheromones" };
+            CustomSynergies.Add("Practically Pungent", mandatorySynergyItemsPracticallyPungent, optionalSynergyItemsPracticallyPungent);
+            //TIN HEART / OIL ITEMS
+            List<string> mandatorySynergyItemsOilCanWhat = new List<string>() { "nn:tin_heart" };
+            List<string> optionalSynergyItemsOilCanWhat = new List<string>() { "fossilized_gun", "nn:gun_grease", "gungeon_ant", "oiled_cylinder", "nn:sanctified_oil" };
+            CustomSynergies.Add("Oil Can What?", mandatorySynergyItemsOilCanWhat, optionalSynergyItemsOilCanWhat);
+            //TIN HEART / HUNTSMAN
+            List<string> mandatorySynergyItemsWoodcutter = new List<string>() { "nn:tin_heart", "huntsman" };
+            CustomSynergies.Add("Woodcutter", mandatorySynergyItemsWoodcutter);
+            //GLOCK 42 / GUNSMOKE PERUME
+            List<string> mandatorySynergyItemsSongOfMyPeople = new List<string>() { "nn:glock_42", "nn:gunsmoke_perfume" };
+            CustomSynergies.Add("Song of my people", mandatorySynergyItemsSongOfMyPeople);
+            //GLOCK 42 / STEALTH ITEMS
+            List<string> mandatorySynergyItemsConcealedCarry = new List<string>() { "nn:glock_42" };
+            List<string> optionalSynergyItemsConcealedCarry = new List<string>() { "smoke_bomb", "shadow_bullets", "shadow_clone", "backpack", "nn:hiking_pack" };
+            CustomSynergies.Add("Concealed Carry", mandatorySynergyItemsConcealedCarry, optionalSynergyItemsConcealedCarry);
+            //GLOCK 42 / LIFE THE UNIVERSE AND EVERYTHING
+            List<string> mandatorySynergyItemsLifeTheUniverseAndEverything = new List<string>() { "nn:glock_42" };
+            List<string> optionalSynergyItemsLifeTheUniverseAndEverything = new List<string>() { "mr_accretion_jr", "evolver" };
+            CustomSynergies.Add("Life, The Universe, and Everything", mandatorySynergyItemsLifeTheUniverseAndEverything, optionalSynergyItemsLifeTheUniverseAndEverything);
+            //RAPID RIPOSTE / SUPER SPACE TURTLE / TURTLE PROBLEM
+            List<string> mandatorySynergyItemsWouldntYouAgree = new List<string>() { "nn:rapid_riposte" };
+            List<string> optionalSynergyItemsWouldntYouAgree = new List<string>() { "super_space_turtle", "turtle_problem" };
+            CustomSynergies.Add("Wouldn't You Agree?", mandatorySynergyItemsWouldntYouAgree, optionalSynergyItemsWouldntYouAgree);
+            //HEAD OF THE ORDER / KALIBERS PRAYER
+            List<string> mandatorySynergyItemsNonDesistasNonExieris = new List<string>() { "nn:head_of_the_order" }; //Add Cardinal's Mitre
+            List<string> optionalSynergyItemsNonDesistasNonExieris = new List<string>() { "nn:kalibers_prayer" };
+            CustomSynergies.Add("Non Desistas Non Exieris", mandatorySynergyItemsNonDesistasNonExieris, optionalSynergyItemsNonDesistasNonExieris);
+            //PEANUT / PEA SHOOTER
+            List<string> mandatorySynergyItemsPealadin = new List<string>() { "nn:peanut", "pea_shooter" };
+            CustomSynergies.Add("Pealadin", mandatorySynergyItemsPealadin);
+            //PEA SHOOTER / REPEATOVOLVER / SHADOW BULLETS
+            List<string> mandatorySynergyItemsRepeater = new List<string>() { "pea_shooter" };
+            List<string> optionalSynergyItemsRepeater = new List<string>() { "nn:repeatovolver", "shadow_bullets" };
+            CustomSynergies.Add("Repeater", mandatorySynergyItemsRepeater, optionalSynergyItemsRepeater);
+            //VIPER / ELECTRICITY ITEMS
+            List<string> mandatorySynergyItemsLightningFastStrike = new List<string>() { "nn:viper" };
+            List<string> optionalSynergyItemsLightningFastStrike = new List<string>() { "shock_rounds", "shock_rifle", "the_emperor", "nn:diode" };
+            CustomSynergies.Add("Lightning Fast Strike", mandatorySynergyItemsLightningFastStrike, optionalSynergyItemsLightningFastStrike);
+            //VIPER / SNIPER RIFLE / AWP / 50 CALIBER ROUNDS / TRACER ROUND
+            List<string> mandatorySynergyItemsSniperViper = new List<string>() { "nn:viper" };
+            List<string> optionalSynergyItemsSniperViper = new List<string>() { "sniper_rifle", "awp", "nn:50._cal_rounds", "nn:tracer_rounds" };
+            CustomSynergies.Add("Sniper Viper", mandatorySynergyItemsSniperViper, optionalSynergyItemsSniperViper);
+            //SNAKER / SNAKE GUNS
+            List<string> mandatorySynergyItemsSnakeWorldChampion = new List<string>() { "nn:snaker" };
+            List<string> optionalSynergyItemsSnakeWorldChampion = new List<string>() { "nn:viper", "rattler", "snakemaker", "ring_of_ethereal_form" };
+            CustomSynergies.Add("Snake World Champion", mandatorySynergyItemsSnakeWorldChampion, optionalSynergyItemsSnakeWorldChampion);
+            //SNAKER / HUNGRY BULLETS
+            List<string> mandatorySynergyItemsHighScore = new List<string>() { "nn:snaker", "hungry_bullets" };
+            CustomSynergies.Add("High Score", mandatorySynergyItemsHighScore);
+            //GUNKNIGHT AMULET / OTHER GUNKNIGHT PIECES
+            List<string> mandatorySynergyItemsReuknighted = new List<string>() { "nn:gunknight_amulet" };
+            List<string> optionalSynergyItemsReuknighted = new List<string>() { "gunknight_armor", "gunknight_helmet", "gunknight_gauntlet", "gunknight_greaves" };
+            CustomSynergies.Add("Reuknighted", mandatorySynergyItemsReuknighted, optionalSynergyItemsReuknighted);
+            //COMBAT KNIFE / MIRROR BULLETS
+            List<string> mandatorySynergyItemsMirrorBlade = new List<string>() { "nn:combat_knife", "nn:mirror_bullets" };
+            CustomSynergies.Add("Mirror Blade", mandatorySynergyItemsMirrorBlade);
+            //COMBAT KNIFE / SCATTERSHOT
+            List<string> mandatorySynergyItemsTriTipDagger = new List<string>() { "nn:combat_knife", "scattershot" };
+            CustomSynergies.Add("Tri-Tip Dagger", mandatorySynergyItemsTriTipDagger);
+            //COMBAT KNIFE / SWORD BULLETS
+            List<string> mandatorySynergyItemsWhirlingBlade = new List<string>() { "nn:combat_knife", "nn:longsword_shot" };
+            CustomSynergies.Add("Whirling Blade", mandatorySynergyItemsWhirlingBlade);
+            //COMBAT KNIFE / HOT ITEMS
+            List<string> mandatorySynergyItems1000DegreeKnife = new List<string>() { "nn:combat_knife" };
+            List<string> optionalSynergyItems1000DegreeKnife = new List<string>() { "hot_lead", "nn:flame_chamber", "nn:mr._fahrenheit" };
+            CustomSynergies.Add("1000 Degree Knife", mandatorySynergyItems1000DegreeKnife, optionalSynergyItems1000DegreeKnife);
+            //LASER BULLETS / HEAVILY VECTOR BASED ITEMS
+            List<string> mandatorySynergyItemsNewVector = new List<string>() { "nn:laser_bullets" };
+            List<string> optionalSynergyItemsNewVector = new List<string>() { "nn:diode" };
+            CustomSynergies.Add("new Vector2(x, y)", mandatorySynergyItemsNewVector, optionalSynergyItemsNewVector);
+            //LASER BULLETS / BEAM WEAPONs
+            List<string> mandatorySynergyItemsBeamMeUp = new List<string>() { "nn:laser_bullets" };
+            List<string> optionalSynergyItemsBeamMeUp = new List<string>() { "mega_douser", "unicorn_horn", "demon_head", "mutation", "fossilized_gun", "gamma_ray", "freeze_ray", "science_cannon", "disintegrator", "proton_backpack", "plunger", "raiden_coil", "moonscraper", "wood_beam", "abyssal_tentacle", "life_orb" };
+            CustomSynergies.Add("Beam Me Up!", mandatorySynergyItemsBeamMeUp, optionalSynergyItemsBeamMeUp);
+            //PAPER BADGE / MAILBOX
+            List<string> mandatorySynergyItemsLuckyDay = new List<string>() { "nn:paper_badge", "mailbox" };
+            CustomSynergies.Add("Lucky Day", mandatorySynergyItemsLuckyDay);
+            //MANTID AUGMENT / HUNGRY BULLETS / BLOODTHIRSTY BULLETS
+            List<string> mandatorySynergyItemsBloodthirstyBlades = new List<string>() { "nn:mantid_augment" };
+            List<string> optionalSynergyItemsBloodthirstyBlades = new List<string>() { "hungry_bullets", "nn:bloodthirsty_bullets" };
+            CustomSynergies.Add("Bloodthirsty Blades", mandatorySynergyItemsBloodthirstyBlades, optionalSynergyItemsBloodthirstyBlades);
+            //LONGSWORD SHOT / FIGHTSABRE
+            List<string> mandatorySynergyItemsSabreThrow = new List<string>() { "nn:longsword_shot", "fightsabre" };
+            CustomSynergies.Add("Sabre Throw", mandatorySynergyItemsSabreThrow);
+            //LONGSWORD SHOT / KNIFE SHIELD / STAFF OF FIREPOWER / MAGIC BULLETS
+            List<string> mandatorySynergyItemsSwordMage = new List<string>() { "nn:longsword_shot" };
+            List<string> optionalSynergyItemsSwordMage = new List<string>() { "knife_shield", "staff_of_firepower", "magic_bullets" };
+            CustomSynergies.Add("Sword Mage", mandatorySynergyItemsSwordMage, optionalSynergyItemsSwordMage);
+            //LONGSWORD SHOT / KATANA BULLETS
+            List<string> mandatorySynergyItemsLiveByTheSword = new List<string>() { "nn:longsword_shot", "katana_bullets" };
+            CustomSynergies.Add("Live By The Sword", mandatorySynergyItemsLiveByTheSword);
+            //PUMP CHARGE SHOTGUN / BLOOD BROOCH / BLOODY EYE
+            List<string> mandatorySynergyItemsBloodForTheBloodGod = new List<string>() { "nn:pump_charge_shotgun" };
+            List<string> optionalSynergyItemsBloodForTheBloodGod = new List<string>() { "blood_brooch", "bloody_eye", "nn:blood_thinner", "monster_blood" };
+            CustomSynergies.Add("Blood For The Blood God", mandatorySynergyItemsBloodForTheBloodGod, optionalSynergyItemsBloodForTheBloodGod);
+            //PUMP CHARGE SHOTGUN / CHARGE SHOT / 
+            List<string> mandatorySynergyItemsBLOODISFUEL = new List<string>() { "nn:pump_charge_shotgun" };
+            List<string> optionalSynergyItemsBLOODISFUEL = new List<string>() { "charge_shot", "nn:bloodthirsty_bullets", "holey_grail" };
+            CustomSynergies.Add("BLOOD IS FUEL", mandatorySynergyItemsBLOODISFUEL, optionalSynergyItemsBLOODISFUEL);
+            //GRAVITY GUN PROPS
+            List<string> mandatorySynergyItemsPropFly = new List<string>() { "nn:gravity_gun" }; //Add toolbox
+            List<string> optionalSynergyItemsPropFly = new List<string>() { "portable_table_device" };
+            CustomSynergies.Add("Prop Fly", mandatorySynergyItemsPropFly, optionalSynergyItemsPropFly);
+            //GRAVITY GUN / TABLE TECH ROCKET
+            List<string> mandatorySynergyItemsHiddenTechNitro = new List<string>() { "nn:gravity_gun", "table_tech_rocket" };
+            CustomSynergies.Add("Hidden Tech Nitro", mandatorySynergyItemsHiddenTechNitro);
+            //GRAVITY GUN / MATTER AND ANTIMATTER ITEMS
+            List<string> mandatorySynergyItemsNegativeMatter = new List<string>() { "nn:gravity_gun" }; //Add toolbox
+            List<string> optionalSynergyItemsNegativeMatter = new List<string>() { "dark_marker", "nn:antimatter_bullets", "mass_shotgun" };
+            CustomSynergies.Add("Negative Matter", mandatorySynergyItemsNegativeMatter, optionalSynergyItemsNegativeMatter);
+            //GRAVITY GUN / ALKALI BULLETS
+            List<string> mandatorySynergyItemsXenobiology = new List<string>() { "nn:gravity_gun", "nn:alkali_bullets" };
+            CustomSynergies.Add("Xenobiology", mandatorySynergyItemsXenobiology);
+            //GRAVITY GUN / MAILBOX
+            List<string> mandatorySynergyItemsRedLetterDay = new List<string>() { "nn:gravity_gun", "mailbox" };
+            CustomSynergies.Add("Red Letter Day", mandatorySynergyItemsRedLetterDay);
+            //APPLE / GRAVITY ITEMS
+            List<string> mandatorySynergyItemsNewton = new List<string>() { "nn:apple" };
+            List<string> optionalSynergyItemsNewton = new List<string>() { "nn:gravity_gun", "nn:gravitron", "orbital_bullets", "mr_accretion_jr" };
+            CustomSynergies.Add("Newton", mandatorySynergyItemsNewton, optionalSynergyItemsNewton);
+            //APPLE / GOLDEN APPLE
+            List<string> mandatorySynergyItemsGoldenApple = new List<string>() { "nn:apple" };
+            List<string> optionalSynergyItemsGoldenApple = new List<string>() { "nn:diamond_gun", "au_gun", "nn:miners_bullets", "old_goldie" };
+            CustomSynergies.Add("Golden Apple", mandatorySynergyItemsGoldenApple, optionalSynergyItemsGoldenApple);
+            //APPLE / MEDICAL ITEMS
+            List<string> mandatorySynergyItemsAppleADay = new List<string>() { "nn:apple" };
+            List<string> optionalSynergyItemsAppleADay = new List<string>() { "medkit", "plunger", "muscle_relaxant", "nn:mutagen", "antibody" };
+            CustomSynergies.Add("Apple A Day", mandatorySynergyItemsAppleADay, optionalSynergyItemsAppleADay);
+            //CREDITOR / MICROTRANSACTION GUN
+            List<string> mandatorySynergyItemsFullyFunded = new List<string>() { "nn:creditor", "microtransaction_gun" };
+            CustomSynergies.Add("Fully Funded", mandatorySynergyItemsFullyFunded);
+            //GATLING GUN / ROBOT ITEMS
+            List<string> mandatorySynergyItemsGatterUp = new List<string>() { "nn:gatling_gun" };
+            List<string> optionalSynergyItemsGatterUp = new List<string>() { "casey", "remote_bullets", "vulcan_cannon", "ibomb_companion_app" };
+            CustomSynergies.Add("Gatter Up", mandatorySynergyItemsGatterUp, optionalSynergyItemsGatterUp);
+            //GATLING GUN / SNAKE ITEMS
+            List<string> mandatorySynergyItemsGattlesnake = new List<string>() { "nn:gatling_gun" };
+            List<string> optionalSynergyItemsGattlesnake = new List<string>() { "snakemaker", "rattler", "nn:viper", "nn:snaker", "nn:guneonate" };
+            CustomSynergies.Add("Gattlesnake", mandatorySynergyItemsGattlesnake, optionalSynergyItemsGattlesnake);
+            //BAYONET / KNIVES
+            List<string> mandatorySynergyItemsHackNSlash = new List<string>() { "nn:bayonet" };
+            List<string> optionalSynergyItemsHackNSlash = new List<string>() { "nn:combat_knife", "excaliber" };
+            CustomSynergies.Add("Hack n' Slash", mandatorySynergyItemsHackNSlash, optionalSynergyItemsHackNSlash);
+            //LEFTHANDEDNESS / ROBOTS LEFT HAND
+            List<string> mandatorySynergyItemsLeftyLoosey = new List<string>() { "nn:lefthandedness", "robots_left_hand" };
+            CustomSynergies.Add("Lefty Loosey", mandatorySynergyItemsLeftyLoosey);
+            //NEUTRINO / QUAD LASER / MINING LASER
+            List<string> mandatorySynergyItemsSoftnose = new List<string>() { "nn:neutrino" };
+            List<string> optionalSynergyItemsSoftnose = new List<string>() { "mine_cutter", "quad_laser" };
+            CustomSynergies.Add("Softnose", mandatorySynergyItemsSoftnose, optionalSynergyItemsSoftnose);
+            //LEFTHANDEDNESS / WITCH PISTOL / BUNDLE OF WANDS
+            List<string> mandatorySynergyItemsSinisterHanded = new List<string>() { "nn:lefthandedness" };
+            List<string> optionalSynergyItemsSinisterHanded = new List<string>() { "witch_pistol", "bundle_of_wands" };
+            CustomSynergies.Add("Sinister Handed", mandatorySynergyItemsSinisterHanded, optionalSynergyItemsSinisterHanded);
+            //PENCIL / ERASER
+            List<string> mandatorySynergyItemsStationery = new List<string>() { "nn:pencil", "nn:eraser" };
+            CustomSynergies.Add("Stationary", mandatorySynergyItemsStationery);
+            //MISTAKE BULLETS / ERASER
+            List<string> mandatorySynergyItemsForBigMistakes = new List<string>() { "nn:mistake_bullets", "nn:eraser" };
+            CustomSynergies.Add("For Big Mistakes", mandatorySynergyItemsForBigMistakes);
+            //GRANDFATHER GLOCK / FINGER GUNS / LEFTHANDEDNESS
+            List<string> mandatorySynergyItemsMechanicalHands = new List<string>() { "nn:grandfather_glock" };
+            List<string> optionalSynergyItemsMechanicalHands = new List<string>() { "nn:lefthandedness", "nn:finger_guns" };
+            CustomSynergies.Add("Mechanical Hands", mandatorySynergyItemsMechanicalHands, optionalSynergyItemsMechanicalHands);
             #endregion
 
         }

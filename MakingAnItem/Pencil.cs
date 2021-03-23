@@ -20,7 +20,7 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:pencil", "nn:pencil");
             gun.gameObject.AddComponent<Pencil>();
             gun.SetShortDescription("Me Hoy Minoy");
-            gun.SetLongDescription("Sketches out stationary bullets in the air. Reload to send your drawings flying!"+"\n\nAbandoned in the Gungeon by a grieving artist with really big hands.");
+            gun.SetLongDescription("Sketches out stationary bullets in the air. Reload to send your drawings flying!" + "\n\nAbandoned in the Gungeon by a grieving artist with really big hands.");
 
             gun.SetupSprite(null, "pencil_idle_001", 8);
 
@@ -69,11 +69,24 @@ namespace NevernamedsItems
             }
             ActiveBullets.Add(projectile);
             projectile.specRigidbody.OnPreTileCollision += this.onhit;
+            if (player.PlayerHasActiveSynergy("Stationary")) projectile.OnHitEnemy += this.OnHitEnemy;
             base.PostProcessProjectile(projectile);
         }
         private void onhit(SpeculativeRigidbody myrigidbody, PixelCollider mypixelcollider, PhysicsEngine.Tile tile, PixelCollider tilepixelcollider)
         {
-            myrigidbody.projectile.ForceDestruction();
+            // myrigidbody.projectile.ForceDestruction();
+        }
+        private void OnHitEnemy(Projectile self, SpeculativeRigidbody enemy, bool fatal)
+        {
+            if (ActiveBullets.Contains(self))
+            {
+                if (enemy && enemy.gameActor)
+                {
+                    float chance = 1f;
+                    if (enemy.healthHaver && enemy.healthHaver.IsBoss) chance = 0.33f;
+                    enemy.gameActor.DelelteOwnedBullets(chance);
+                }
+            }
         }
         public override void OnReloadPressed(PlayerController player, Gun gun, bool bSOMETHING)
         {

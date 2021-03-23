@@ -5,6 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -40,6 +41,8 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D;
+
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.KILLEDENEMYWITHTHROWNGUN, true);
         }
         private void HandleReturnLikeBoomerang(DebrisObject obj)
         {

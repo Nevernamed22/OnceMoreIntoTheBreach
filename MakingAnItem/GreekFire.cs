@@ -49,6 +49,7 @@ namespace NevernamedsItems
                 projectile.baseData.range *= 0.5f;
                 if (mod != gun.DefaultModule) { mod.ammoCost = 0; }
                 projectile.transform.parent = gun.barrelOffset;
+                projectile.statusEffectsToApply.Add(StaticStatusEffects.greenFireEffect);
                 if (projectile.gameObject.GetComponent<GoopModifier>())
                 {
                     Destroy(projectile.gameObject.GetComponent<GoopModifier>());
@@ -71,7 +72,7 @@ namespace NevernamedsItems
                 mod.chargeProjectiles = new List<ProjectileModule.ChargeProjectile> { chargeProj };
             }
             gun.reloadTime = 1f;
-            gun.SetBaseMaxAmmo(100);
+            gun.SetBaseMaxAmmo(65);
             gun.quality = PickupObject.ItemQuality.B;
 
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.LoopSection;

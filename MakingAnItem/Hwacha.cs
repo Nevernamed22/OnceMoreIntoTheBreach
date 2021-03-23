@@ -94,24 +94,29 @@ namespace NevernamedsItems
         }
         private void Update()
         {
-            PlayerController player = gun.CurrentOwner as PlayerController;
-            if (player.PlayerHasActiveSynergy("Ancient Traditions"))
+            if (gun && gun.CurrentOwner && gun.GunPlayerOwner())
             {
-                if (gun.DefaultModule.burstShotCount == 200)
+
+
+                PlayerController player = gun.CurrentOwner as PlayerController;
+                if (player.PlayerHasActiveSynergy("Ancient Traditions"))
                 {
-                    foreach (ProjectileModule mod in gun.Volley.projectiles)
+                    if (gun.DefaultModule.burstShotCount == 200)
                     {
-                        mod.burstShotCount = 100;
+                        foreach (ProjectileModule mod in gun.Volley.projectiles)
+                        {
+                            mod.burstShotCount = 100;
+                        }
                     }
                 }
-            }
-            else
-            {
-                if (gun.DefaultModule.burstShotCount == 100)
+                else
                 {
-                    foreach (ProjectileModule mod in gun.Volley.projectiles)
+                    if (gun.DefaultModule.burstShotCount == 100)
                     {
-                        mod.burstShotCount = 200;
+                        foreach (ProjectileModule mod in gun.Volley.projectiles)
+                        {
+                            mod.burstShotCount = 200;
+                        }
                     }
                 }
             }

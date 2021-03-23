@@ -5,6 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -22,6 +23,7 @@ namespace NevernamedsItems
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.D;
             ChanceEffigyID = item.PickupObjectId;
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.KILLEDJAMMEDCHANCEKIN, true);
         }
         public static int ChanceEffigyID;
         private void OnKilledEnemy(PlayerController player, HealthHaver enemy)

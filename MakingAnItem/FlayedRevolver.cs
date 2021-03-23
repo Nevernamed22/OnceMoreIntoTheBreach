@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -50,6 +51,9 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             FlayedRevolverID = gun.PickupObjectId;
+
+            gun.SetupUnlockOnCustomStat(CustomTrackedStats.MINEFLAYER_KILLS, 9, DungeonPrerequisite.PrerequisiteOperation.GREATER_THAN);
+
         }
         public static int FlayedRevolverID;
         public override void OnReloadPressedSafe(PlayerController player, Gun gun, bool manualReload)

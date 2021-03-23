@@ -6,6 +6,7 @@ using System.Text;
 using EnemyAPI;
 using GungeonAPI;
 using ItemAPI;
+using SaveAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
@@ -18,7 +19,7 @@ namespace NevernamedsItems
 
         public override void Init()
         {
-        }       
+        }
 
         public override void Start()
         {
@@ -34,8 +35,12 @@ namespace NevernamedsItems
                 Tools.Init();
                 EnemyTools.Init();
                 Hooks.Init();
-                PlayerToolsSetup.Init();
+                SaveAPIManager.Setup("nn");
 
+                //Hooks n Shit
+                PlayerToolsSetup.Init();
+                MiscUnlockHooks.InitHooks();
+                FloorAndGenerationToolbox.Init();
 
                 //VFX Setup
                 VFXToolbox.InitVFX();
@@ -248,6 +253,7 @@ namespace NevernamedsItems
                 DiamondBracelet.Init();
                 PearlBracelet.Init();
                 GunknightAmulet.Init();
+                AmuletOfShelltan.Init();
                 //Rings
                 RingOfOddlySpecificBenefits.Init();
                 RingOfAmmoRedemption.Init();
@@ -337,6 +343,7 @@ namespace NevernamedsItems
                 GlassShard.Init();
                 EqualityItem.Init();
                 Lefthandedness.Init();
+                Eraser.Init();
                 LeadOfLife.Init();
                 AWholeBulletKin.Init();
                 #endregion
@@ -347,7 +354,6 @@ namespace NevernamedsItems
                 WailingMagnum.Add();
                 Defender.Add();
                 TestGun.Add();
-                Blankannon.Add();
                 Felissile.Add();
                 Gunycomb.Add();
                 GlobbitSMALL.Add();
@@ -368,7 +374,7 @@ namespace NevernamedsItems
                 DiscGun.Add();
                 Repeatovolver.Add();
                 Pista.Add();
-                NNGundertale.Add(); 
+                NNGundertale.Add();
                 DiamondGun.Add();
                 NNMinigun.Add();
                 ShroomedGun.Add();
@@ -408,6 +414,7 @@ namespace NevernamedsItems
                 Purpler.Add();
                 VacuumGun.Add();
                 Oxygun.Add();
+                KineticBlaster.Add();
                 HighVelocityRifle.Add();
                 Demolitionist.Add();
                 PumpChargeShotgun.Add();
@@ -416,7 +423,10 @@ namespace NevernamedsItems
                 StasisRifle.Add();
                 Gravitron.Add();
                 GravityGun.Add();
+                //BOWS AND CROSSBOWS
+                IceBow.Add();
                 //ANTIQUES
+                WheelLock.Add();
                 TheLodger.Add();
                 Gonne.Add();
                 Hwacha.Add();
@@ -479,6 +489,7 @@ namespace NevernamedsItems
                 Missinguno.Add();
                 //CONSUMABLE FIRING GUNS
                 Creditor.Add();
+                Blankannon.Add();
                 Viscerifle.Add();
                 //ENDPAGE GUNS
                 MastersGun.Add();
@@ -500,6 +511,7 @@ namespace NevernamedsItems
                 WrenchNullRefException.Add();
                 GatlingGunGatterUp.Add();
                 GravityGunNegativeMatterForm.Add();
+                GonneElder.Add();
                 #endregion
 
                 //GOOD MIMIC (NEEDS TO BE INITIALISED LATER)
@@ -507,15 +519,19 @@ namespace NevernamedsItems
 
                 //Other Features
                 MasteryReplacementOub.InitDungeonHook();
+                CadenceAndOxShopPoolAdditions.Init();
 
                 //NPCS
                 TheJammomaster.Add();
-                ShrineFactory.PlaceBreachShrines();                
+                ShrineFactory.PlaceBreachShrines();
 
                 //Synergy Setup, Synergy Formes, Dual Wielding, and any changes to Basegame Guns
                 InitialiseSynergies.DoInitialisation();
                 SynergyFormInitialiser.AddSynergyForms();
                 ExistantGunModifiers.Init();
+
+                //Late Hooks
+                AmmoPickupHooks.Init();
 
                 ETGMod.StartGlobalCoroutine(this.delayedstarthandler());
                 ETGModConsole.Log("'If you're reading this, I must have done something right' - NN");
@@ -588,7 +604,7 @@ namespace NevernamedsItems
                 ETGModConsole.Log(e.StackTrace);
             }
         }
-    }   
+    }
 }
 
 

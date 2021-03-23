@@ -83,7 +83,7 @@ namespace NevernamedsItems
             private void Start()
             {
                 this.m_projectile = base.GetComponent<Projectile>();
-            this.m_projectile.SendInDirection(MiscToolbox.DegreeToVector2(TestGun.vector), false);
+            this.m_projectile.SendInDirection(TestGun.vector.DegreeToVector2(), false);
                 TestGun.vector += 1;
 
                 

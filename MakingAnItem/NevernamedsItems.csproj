@@ -67,6 +67,7 @@
     <Compile Include="50calrounds.cs" />
     <Compile Include="AcidAura.cs" />
     <Compile Include="ActiveTestingItem.cs" />
+    <Compile Include="AmuletOfShelltan.cs" />
     <Compile Include="AppleActive.cs" />
     <Compile Include="Autollet.cs" />
     <Compile Include="Bayonet.cs" />
@@ -85,18 +86,39 @@
     <Compile Include="EmberCannon.cs" />
     <Compile Include="Entropew.cs" />
     <Compile Include="Equality.cs" />
+    <Compile Include="Eraser.cs" />
     <Compile Include="GatlingGun.cs" />
     <Compile Include="GatlingGunGatterUp.cs" />
     <Compile Include="GlassShard.cs" />
     <Compile Include="Glasster.cs" />
     <Compile Include="Glock42.cs" />
     <Compile Include="GoldenRevolver.cs" />
+    <Compile Include="GonneElder.cs" />
     <Compile Include="Gravitron.cs" />
     <Compile Include="GravityGun.cs" />
     <Compile Include="GravityGunNegativeMatterForm.cs" />
     <Compile Include="Gumgun.cs" />
     <Compile Include="Guneonate.cs" />
     <Compile Include="Gunger.cs" />
+    <Compile Include="GungoSaveAPI\AdvancedGameStats.cs" />
+    <Compile Include="GungoSaveAPI\AdvancedGameStatsManager.cs" />
+    <Compile Include="GungoSaveAPI\AdvancedMidGameSaveData.cs" />
+    <Compile Include="GungoSaveAPI\BreachShopTool.cs" />
+    <Compile Include="GungoSaveAPI\CustomDungeonPrerequisite.cs" />
+    <Compile Include="GungoSaveAPI\CustomHuntQuest.cs" />
+    <Compile Include="GungoSaveAPI\CustomHuntQuests.cs" />
+    <Compile Include="GungoSaveAPI\Enums\Comparers\CustomDungeonFlagsComparer.cs" />
+    <Compile Include="GungoSaveAPI\Enums\Comparers\CustomTrackedMaximumsComparer.cs" />
+    <Compile Include="GungoSaveAPI\Enums\Comparers\CustomTrackedStatsComparer.cs" />
+    <Compile Include="GungoSaveAPI\Enums\CustomCharacterSpecificGungeonFlags.cs" />
+    <Compile Include="GungoSaveAPI\Enums\CustomDungeonFlags.cs" />
+    <Compile Include="GungoSaveAPI\Enums\CustomTrackedMaximums.cs" />
+    <Compile Include="GungoSaveAPI\Enums\CustomTrackedStats.cs" />
+    <Compile Include="GungoSaveAPI\JammedEnemyState.cs" />
+    <Compile Include="GungoSaveAPI\SaveAPIManager.cs" />
+    <Compile Include="GungoSaveAPI\SaveTools.cs" />
+    <Compile Include="GungoSaveAPI\SpecialAIActor.cs" />
+    <Compile Include="GungoSaveAPI\SpecialPickupObject.cs" />
     <Compile Include="GunjurersStaff.cs" />
     <Compile Include="GunknightAmulet.cs" />
     <Compile Include="GunsmokePerfume.cs" />
@@ -104,10 +126,12 @@
     <Compile Include="HeadOfTheOrder.cs" />
     <Compile Include="HeatRay.cs" />
     <Compile Include="HighVelocityRifle.cs" />
+    <Compile Include="IceBow.cs" />
     <Compile Include="IndigoGuonStone.cs" />
     <Compile Include="KalibersPrayer.cs" />
     <Compile Include="KillithidTendril.cs" />
     <Compile Include="KinAmmolet.cs" />
+    <Compile Include="KineticBlaster.cs" />
     <Compile Include="LaserBullets.cs" />
     <Compile Include="Lefthandedness.cs" />
     <Compile Include="LongswordShot.cs" />
@@ -132,6 +156,7 @@
     <Compile Include="OMITB Extensions\OMITBAttackBehavExtensions.cs" />
     <Compile Include="OMITB Extensions\OMITBEnemyExtensions.cs" />
     <Compile Include="OMITB Extensions\OMITBRoomhandlerExtensions.cs" />
+    <Compile Include="OMITB Hooks\AmmoPickupHooks.cs" />
     <Compile Include="OMITB Misc Game Changers\AdvancedDragunRewards.cs" />
     <Compile Include="AdvancedPlayerOrbital.cs" />
     <Compile Include="AlkaliBullets.cs" />
@@ -204,12 +229,15 @@
     <Compile Include="DisplacerCannon.cs" />
     <Compile Include="DoctorsRemote.cs" />
     <Compile Include="DynamiteLauncher.cs" />
+    <Compile Include="OMITB Misc Game Changers\CadenceAndOxShopPoolAdditions.cs" />
     <Compile Include="OMITB Misc Game Changers\JammedChests.cs" />
     <Compile Include="OMITB Misc Game Changers\PlagueStatusEffect.cs" />
     <Compile Include="OMITB Misc Toolboxes\BeamToolbox.cs" />
     <Compile Include="OMITB Misc Toolboxes\CustomHologramDoer.cs" />
+    <Compile Include="OMITB Misc Toolboxes\FloorAndGenerationToolbox.cs" />
     <Compile Include="OMITB Misc Toolboxes\LootHelpers.cs" />
     <Compile Include="OMITB Misc Toolboxes\MagicCircleDoer.cs" />
+    <Compile Include="OMITB Misc Toolboxes\MiscUnlockHooks.cs" />
     <Compile Include="OMITB Misc Toolboxes\PlayerToolbox.cs" />
     <Compile Include="OMITB Misc Toolboxes\VFXToolbox.cs" />
     <Compile Include="OMITB Misc Toolboxes\StatusEffectHelper.cs" />
@@ -351,6 +379,7 @@
     <Compile Include="Viper.cs" />
     <Compile Include="Viscerifle.cs" />
     <Compile Include="WarpBullets.cs" />
+    <Compile Include="WheelLock.cs" />
     <Compile Include="WhereTheMagicHappens.cs" />
     <Compile Include="ClaySculpture.cs" />
     <Compile Include="CleansingRounds.cs" />
@@ -2006,6 +2035,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\unstabletech_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\eraser_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\amuletofshelltan_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,6 +6,7 @@ using Dungeonator;
 using UnityEngine;
 using ItemAPI;
 using System.Collections;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -41,14 +42,12 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.S;
-
-            List<string> mandatorySynergyItems2 = new List<string>() { "nn:miners_bullets" };
-            List<string> optionalSynergyItems2 = new List<string>() { "nn:kaliber's_eye", "bloody_eye", "rolling_eye", "eye_of_the_beholster" };
-            CustomSynergies.Add("Eye of the Spider", mandatorySynergyItems2, optionalSynergyItems2);
-
+           
             //NPC Pools
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
             KalibersEyeID = item.PickupObjectId;
+
+            item.SetupUnlockOnCustomStat(CustomTrackedStats.CHARMED_ENEMIES_KILLED, 99, DungeonPrerequisite.PrerequisiteOperation.GREATER_THAN);
         }
         public static int KalibersEyeID;
         private bool EnemyValidForKalibersEye(bool fatal, HealthHaver enemy)

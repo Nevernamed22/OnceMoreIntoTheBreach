@@ -8,6 +8,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -20,7 +21,7 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:spore_launcher", "nn:spore_launcher");
             gun.gameObject.AddComponent<SporeLauncher>();
             gun.SetShortDescription("Ain't He Cute?");
-            gun.SetLongDescription("An infant alien from another dimension. Capable of storing potent spores in it's digestive tract in order to regurgitate them for self defense."+"\n\nEnjoys headpats, belly rubs, and those little fish-shaped cracker things.");
+            gun.SetLongDescription("An infant alien from another dimension. Capable of storing potent spores in it's digestive tract in order to regurgitate them for self defense." + "\n\nEnjoys headpats, belly rubs, and those little fish-shaped cracker things.");
 
             gun.SetupSprite(null, "sporelauncher_idle_001", 8);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(599) as Gun).gunSwitchGroup;
@@ -66,7 +67,9 @@ namespace NevernamedsItems
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             SporeLauncherID = gun.PickupObjectId;
-        }        
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_SPORELAUNCHER, true);
+            gun.AddItemToGooptonMetaShop(20);
+        }
         public static int SporeLauncherID;
         public override void OnPostFired(PlayerController player, Gun gun)
         {
@@ -75,7 +78,7 @@ namespace NevernamedsItems
                 int id = Gungeon.Game.Items["nn:fungo_cannon"].PickupObjectId;
                 if (player.HasPickupID(id))
                 {
-                    if (UnityEngine.Random.value <= 0.45) { MiscToolbox.GiveAmmoToGunNotInHand(player, id, 1); }
+                    if (UnityEngine.Random.value <= 0.45) { player.GiveAmmoToGunNotInHand(id, 1); }
                 }
             }
             base.OnPostFired(player, gun);

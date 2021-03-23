@@ -5,6 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -42,7 +43,10 @@ namespace NevernamedsItems
             //Set some other fields
             item.consumable = false;
             item.quality = ItemQuality.D;
+            item.AddToSubShop(ItemBuilder.ShopType.Goopton);
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_LOVEPOTION, true);
+            item.AddItemToGooptonMetaShop(10);
         }
 
         //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!

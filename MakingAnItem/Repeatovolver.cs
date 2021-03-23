@@ -8,6 +8,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -56,6 +57,7 @@ namespace NevernamedsItems
             gun.encounterTrackable.EncounterGuid = "this is the Repeatovolver";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             RepeatovolverID = gun.PickupObjectId;
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_REPEATOVOLVER, true);
         }
         public static int RepeatovolverID;
         public Repeatovolver()

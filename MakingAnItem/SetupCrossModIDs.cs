@@ -9,6 +9,14 @@ namespace NevernamedsItems
     {
         public static void DoSetup()
         {
+            if (PickupObjectDatabase.GetByEncounterName("Baby Good Cannon Kin") != null)
+            {
+                ModInstallFlags.FrostAndGunfireInstalled = true;
+            }
+            if (PickupObjectDatabase.GetByEncounterName("Daisukes Polymorphine") != null)
+            {
+                ModInstallFlags.PlanetsideOfGunymededInstalled = true;
+            }
             if (PickupObjectDatabase.GetByEncounterName("Jeremy the Blobulon") != null)
             {
                 ModInstallFlags.PrismatismInstalled = true;
@@ -109,7 +117,7 @@ namespace NevernamedsItems
     }
     public static class ModInstallFlags
     {
-        public static bool ExpandTheGungeonInstalled = false;
+        //Simple Content Packs
         public static bool PrismatismInstalled = false;
         public static bool CelsItemsInstalled = false;
         public static bool RetrashItemsInstalled = false;
@@ -119,6 +127,12 @@ namespace NevernamedsItems
         //public static bool TitansModInstalled = false;
         public static bool RORItemsInstalled = false;
         public static bool KylesItemsInstalled = false;
+
+        //Major gameplay overhauls
+        public static bool FrostAndGunfireInstalled = false;
+        public static bool PlanetsideOfGunymededInstalled = false;
+        public static bool ExpandTheGungeonInstalled = false;
+
 
     }
 }

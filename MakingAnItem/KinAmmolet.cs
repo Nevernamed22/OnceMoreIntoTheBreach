@@ -7,7 +7,7 @@ using MonoMod.RuntimeDetour;
 using System.Reflection;
 using Gungeon;
 using System.Collections.Generic;
-
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -30,6 +30,9 @@ namespace NevernamedsItems
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
             KinAmmoletID = item.PickupObjectId;
+
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_KINAMMOLET, true);
+            item.AddItemToDougMetaShop(15);
         }
 
         private static int KinAmmoletID;

@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -110,6 +111,9 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "this is the Viscerifle";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_VISCERIFLE, true);
+            gun.AddItemToGooptonMetaShop(23);
         }
         public static Projectile armourProjectile;
         public static Projectile crestProjectile;

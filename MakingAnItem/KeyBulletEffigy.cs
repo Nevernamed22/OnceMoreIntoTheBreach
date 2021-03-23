@@ -5,6 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -24,6 +25,7 @@ namespace NevernamedsItems
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
             item.AddToSubShop(ItemBuilder.ShopType.Flynt);
             KeybulletEffigyID = item.PickupObjectId;
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.KILLEDJAMMEDKEYBULLETKIN, true);
         }
         public static int KeybulletEffigyID;
         private void OnPreSpawn(AIActor actor)

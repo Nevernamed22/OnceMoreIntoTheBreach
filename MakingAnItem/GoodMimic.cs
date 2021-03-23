@@ -390,10 +390,10 @@ namespace NevernamedsItems
              {EnemyGuidDatabase.Entries["misfire_beast"], Beastclaw.BeastclawID}, //Misfire Beast --> Beastclaw
 
 
-             {ExpandTheGungeonGUIDDatabase.Entries["com4nd0_boss"], HeavyAssaultRifle.HeavyAssaultRifleID}, //Com4nd0 Boss --> Heavy Assault Rifle
-             {ExpandTheGungeonGUIDDatabase.Entries["parasitic_abomination"], 333}, //Parasitic Abomination --> Mutation
-             {ExpandTheGungeonGUIDDatabase.Entries["cronenberg"], 333}, //Cronenberg --> Mutation
-             {ExpandTheGungeonGUIDDatabase.Entries["agressive_cronenberg"], 333}, //Agressive Cronenberg --> Mutation
+             {ModdedGUIDDatabase.ExpandTheGungeonGUIDs["com4nd0_boss"], HeavyAssaultRifle.HeavyAssaultRifleID}, //Com4nd0 Boss --> Heavy Assault Rifle
+             {ModdedGUIDDatabase.ExpandTheGungeonGUIDs["parasitic_abomination"], 333}, //Parasitic Abomination --> Mutation
+             {ModdedGUIDDatabase.ExpandTheGungeonGUIDs["cronenberg"], 333}, //Cronenberg --> Mutation
+             {ModdedGUIDDatabase.ExpandTheGungeonGUIDs["agressive_cronenberg"], 333}, //Agressive Cronenberg --> Mutation
  
  
              {EnemyGuidDatabase.Entries["great_bullet_shark"], GunsharkMegasharkSynergyForme.GunsharkMegasharkSynergyFormeID}, //Great Bullet Shark --> Gunshark+Megashark

@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -38,6 +39,9 @@ namespace NevernamedsItems
             //Adds the actual passive effect to the item            
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D;
+
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_MEATSHIELD, true);
+            item.AddItemToDougMetaShop(15);
         }
         protected override void Update()
         {

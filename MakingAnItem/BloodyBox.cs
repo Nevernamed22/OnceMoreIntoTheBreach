@@ -5,6 +5,7 @@ using System.Text;
 using Dungeonator;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -47,6 +48,7 @@ namespace NevernamedsItems
             item.quality = ItemQuality.B;
 
             item.AddToSubShop(ItemBuilder.ShopType.Flynt);
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.KILLEDJAMMEDMIMIC, true);
         }
 
         //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!

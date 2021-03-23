@@ -61,7 +61,7 @@ namespace NevernamedsItems
         {
             PlayerController playerController = projectile.Owner as PlayerController;
             if (playerController.PlayerHasActiveSynergy("Toxic Love")) projectile.baseData.damage *= 2;
-                base.PostProcessProjectile(projectile);
+            base.PostProcessProjectile(projectile);
         }
         public LovePistol()
         {
@@ -83,14 +83,20 @@ namespace NevernamedsItems
 
         private void OnHitEnemy(Projectile bullet, SpeculativeRigidbody enemy, bool fatal)
         {
-            PlayerController playerController = this.m_projectile.Owner as PlayerController;
-            if (playerController.PlayerHasActiveSynergy("Everlasting Love"))
+            if (enemy && enemy.aiActor && enemy.gameActor)
             {
-            enemy.aiActor.ApplyEffect(GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultPermanentCharmEffect, 1f, null);
-            }
-            else
-            {
-                enemy.gameActor.ApplyEffect(this.charmEffect, 1f, null);
+                PlayerController playerController = this.m_projectile.Owner as PlayerController;
+                if (playerController)
+                {
+                    if (playerController.PlayerHasActiveSynergy("Everlasting Love"))
+                    {
+                        enemy.aiActor.ApplyEffect(GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultPermanentCharmEffect, 1f, null);
+                    }
+                    else
+                    {
+                        enemy.gameActor.ApplyEffect(this.charmEffect, 1f, null);
+                    }
+                }
             }
 
         }

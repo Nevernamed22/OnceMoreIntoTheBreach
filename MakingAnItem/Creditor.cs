@@ -9,6 +9,7 @@ using UnityEngine;
 using ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -83,6 +84,7 @@ namespace NevernamedsItems
 
             gun.quality = PickupObject.ItemQuality.A;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_CREDITOR, true);
 
             CreditorID = gun.PickupObjectId;
         }

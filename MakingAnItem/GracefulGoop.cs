@@ -5,6 +5,7 @@ using System.Text;
 using Dungeonator;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -59,6 +60,9 @@ namespace NevernamedsItems
                 GracefulGoop.goopDefs.Add(goopDefinition);
             }
             List<GoopDefinition> list = GracefulGoop.goopDefs;
+
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_GRACEFULGOOP, true);
+            item.AddItemToGooptonMetaShop(25);
         }
         public void onFired(Projectile bullet, float eventchancescaler)
         {
@@ -67,7 +71,6 @@ namespace NevernamedsItems
                 TrailFireModifier mirrorProjectileModifier = bullet.gameObject.AddComponent<TrailFireModifier>();
                 mirrorProjectileModifier.goopRadius = 0.5f;
                 mirrorProjectileModifier.goopType = 1;
-                mirrorProjectileModifier.projectileTint = Color.green;
             }
             else if (Owner.HasPickupID(Gungeon.Game.Items["nn:tracer_rounds"].PickupObjectId))
             {
@@ -77,7 +80,6 @@ namespace NevernamedsItems
                     if (Owner.HasPickupID(275)) mirrorProjectileModifier.goopRadius = 1;
                     else mirrorProjectileModifier.goopRadius = 0.5f;
                     mirrorProjectileModifier.goopType = 0;
-                    mirrorProjectileModifier.projectileTint = Color.green;
                     mirrorProjectileModifier.needsToUseGreenFire = true;
                 }
                 else
@@ -85,7 +87,6 @@ namespace NevernamedsItems
                     TrailFireModifier mirrorProjectileModifier = bullet.gameObject.AddComponent<TrailFireModifier>();
                     mirrorProjectileModifier.goopRadius = 0.5f;
                     mirrorProjectileModifier.goopType = 1;
-                    mirrorProjectileModifier.projectileTint = Color.green;
                 }
             }
             if (Owner.CurrentGun.PickupObjectId == 481) spawnCameraFirePool();

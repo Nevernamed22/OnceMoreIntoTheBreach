@@ -139,6 +139,13 @@ namespace NevernamedsItems
                 PlayerController owner = projectile.Owner as PlayerController;
                 if (owner != null)
                 {
+                    if (owner.PlayerHasActiveSynergy("Mechanical Hands"))
+                    {
+                        BounceProjModifier bouncing = projectile.gameObject.GetOrAddComponent<BounceProjModifier>();
+                        bouncing.bouncesTrackEnemies = true;
+                        bouncing.numberOfBounces += 1;
+                        bouncing.bounceTrackRadius = 100f;
+                    }
                     if (owner.PlayerHasActiveSynergy("Six Sharp") || owner.PlayerHasActiveSynergy("Kellys Eye"))
                     {
                         TimeBasedBulletAimer bulletmod = projectile.GetComponent<TimeBasedBulletAimer>();
@@ -231,15 +238,15 @@ namespace NevernamedsItems
 
             if (this.aimType == ClockHandAimType.MINUTE_HAND)
             {
-                this.m_projectile.SendInDirection(MiscToolbox.DegreeToVector2(minuteAngle), false);
+                this.m_projectile.SendInDirection(minuteAngle.DegreeToVector2(), false);
             }
             else if (this.aimType == ClockHandAimType.HOUR_HAND)
             {
-                this.m_projectile.SendInDirection(MiscToolbox.DegreeToVector2(hourAngle), false);
+                this.m_projectile.SendInDirection(hourAngle.DegreeToVector2(), false);
             }
             else if (this.aimType == ClockHandAimType.SECOND_HAND)
             {
-                this.m_projectile.SendInDirection(MiscToolbox.DegreeToVector2(secondAngle), false);
+                this.m_projectile.SendInDirection(secondAngle.DegreeToVector2(), false);
             }
         }
         private Projectile m_projectile;

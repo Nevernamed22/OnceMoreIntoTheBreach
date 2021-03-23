@@ -118,6 +118,18 @@ namespace NevernamedsItems
             }
             return false;
         }
+        public static Vector2 RadianToVector2(this float radian)
+        {
+            return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
+        }
+        public static Vector2 DegreeToVector2(this float degree)
+        {
+            return (degree * Mathf.Deg2Rad).RadianToVector2();     
+        }
+        public static Vector2 DegreeToVector2(this int degree)
+        {
+            return (degree * Mathf.Deg2Rad).RadianToVector2();
+        }
     }
     public static class RandomEnum<T>
     {

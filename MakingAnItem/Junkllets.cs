@@ -5,6 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -39,6 +40,8 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.C;
+
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ROBOT_HELD_FIVE_JUNK, true);
         }
         private int currentItems, lastItems;
         protected override void Update()

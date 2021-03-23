@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using ItemAPI;
+using SaveAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
@@ -46,7 +47,10 @@ namespace NevernamedsItems
             item.consumable = false;
             item.quality = ItemQuality.A;
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_RECYCLINDER, true);
+            RecyclinderID = item.PickupObjectId;
         }
+        public static int RecyclinderID;
 
         PickupObject.ItemQuality itemToGiveQuality = PickupObject.ItemQuality.D;
         protected override void DoEffect(PlayerController user)

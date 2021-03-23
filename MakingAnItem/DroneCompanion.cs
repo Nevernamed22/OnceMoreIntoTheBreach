@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Dungeonator;
 using Gungeon;
 using ItemAPI;
+using SaveAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
@@ -35,7 +36,10 @@ namespace NevernamedsItems
             projectile2.gameObject.AddComponent<DroneBulletComponent>();
             projectile2.SetProjectileSpriteRight("drone_projectile", 14, 8, true, tk2dBaseSprite.Anchor.MiddleCenter, 12, 6);
             DroneCompanionProjectile = projectile2;
+            DroneID = companionItem.PickupObjectId;
+            companionItem.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_DRONE, true);
         }
+        public static int DroneID;
         public static Projectile DroneCompanionProjectile;
         private static tk2dSpriteCollectionData DroneAnimationCollection;
         public static void BuildPrefab()

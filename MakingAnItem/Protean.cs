@@ -105,7 +105,7 @@ namespace NevernamedsItems
             while (m_projectile != null)
             {
                 yield return new WaitForSeconds(0.2f);
-                ReAimBullet.SendInRandomDirection(m_projectile);
+                m_projectile.SendInRandomDirection();
             }
         }
 

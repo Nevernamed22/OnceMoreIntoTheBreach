@@ -8,6 +8,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -47,16 +48,15 @@ namespace NevernamedsItems
             projectile.baseData.damage *= 0.8f;
             projectile.transform.parent = gun.barrelOffset;
             projectile.damageTypes |= CoreDamageTypes.Electric;
-            BulletStunModifier stunning = projectile.gameObject.AddComponent<BulletStunModifier>();
-            stunning.doVFX = true;
-            stunning.stunLength = 5f;
-            stunning.chanceToStun = 0.75f;
+            projectile.AppliesStun = true;
+            projectile.StunApplyChance = 0.75f;
+            projectile.AppliedStunDuration = 5f;
             projectile.SetProjectileSpriteRight("stungun_projectile", 8, 4, false, tk2dBaseSprite.Anchor.MiddleCenter, 8, 4);
 
             gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "this is the Stun Gun";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
-
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_STUNGUN, true);
             StunGunID = gun.PickupObjectId;
         }
         public static int StunGunID;

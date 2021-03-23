@@ -6,6 +6,7 @@ using System.Text;
 using UnityEngine;
 using ItemAPI;
 using System.Collections;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -42,58 +43,9 @@ namespace NevernamedsItems
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.A;
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
-        }
-        private Gun currentHeldGun, lastHeldGun;
-        protected override void Update()
-        {
-            if (Owner && Owner.CurrentGun)
-            {
-                currentHeldGun = Owner.CurrentGun;
-                if (currentHeldGun != lastHeldGun)
-                {
-                    if (Owner.CurrentGun.PickupObjectId == 149)
-                    {
-                        GiveSynergyBoost();
-                    }
-                    else
-                    {
-                        RemoveSynergyBoost();
-                    }
-                    lastHeldGun = currentHeldGun;
-                }
-            }
-            base.Update();
-        }
-        private void GiveSynergyBoost()
-        {
-            EnableVFX(Owner);
-            AddStat(PlayerStats.StatType.MovementSpeed, 1.45f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-            AddStat(PlayerStats.StatType.DodgeRollSpeedMultiplier, 1.45f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-            AddStat(PlayerStats.StatType.Damage, 1.2f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-            Owner.stats.RecalculateStats(Owner, true, false);
 
-        }
-        private void RemoveSynergyBoost()
-        {
-            DisableVFX(Owner);
-            RemoveStat(PlayerStats.StatType.MovementSpeed);
-            RemoveStat(PlayerStats.StatType.DodgeRollSpeedMultiplier);
-            RemoveStat(PlayerStats.StatType.Damage);
-            Owner.stats.RecalculateStats(Owner, true, false);
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.BEATEN_HOLLOW_BOSS_TURBO_MODE, true);
 
-        }
-        private void EnableVFX(PlayerController user)
-        {
-            Material outlineMaterial = SpriteOutlineManager.GetOutlineMaterial(user.sprite);
-            outlineMaterial.SetColor("_OverrideColor", new Color(1f, 1f, 200f));
-            activeOutline = true;
-        }
-
-        private void DisableVFX(PlayerController user)
-        {
-            Material outlineMaterial = SpriteOutlineManager.GetOutlineMaterial(user.sprite);
-            outlineMaterial.SetColor("_OverrideColor", new Color(0f, 0f, 0f));
-            activeOutline = false;
         }
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
@@ -102,7 +54,6 @@ namespace NevernamedsItems
         public override DebrisObject Drop(PlayerController player)
         {
             DebrisObject debrisObject = base.Drop(player);
-            player.healthHaver.OnDamaged -= this.PlayerTookDamage;
             player.PostProcessProjectile -= this.PostProcessProjectile;
             return debrisObject;
         }
@@ -110,75 +61,15 @@ namespace NevernamedsItems
         {
             base.Pickup(player);
             player.PostProcessProjectile += this.PostProcessProjectile;
-            player.healthHaver.OnDamaged += this.PlayerTookDamage;
         }
         protected override void OnDestroy()
         {
             if (Owner)
             {
-                Owner.healthHaver.OnDamaged -= this.PlayerTookDamage;
                 Owner.PostProcessProjectile -= this.PostProcessProjectile;
             }
             base.OnDestroy();
-        }
-        private void AddStat(PlayerStats.StatType statType, float amount, StatModifier.ModifyMethod method = StatModifier.ModifyMethod.ADDITIVE)
-        {
-            /*foreach (var m in passiveStatModifiers)
-            {
-                if (m.statToBoost == statType) return; //don't add duplicates
-            }*/
-
-            StatModifier modifier = new StatModifier
-            {
-                amount = amount,
-                statToBoost = statType,
-                modifyType = method
-            };
-
-            if (this.passiveStatModifiers == null)
-                this.passiveStatModifiers = new StatModifier[] { modifier };
-            else
-                this.passiveStatModifiers = this.passiveStatModifiers.Concat(new StatModifier[] { modifier }).ToArray();
-        }
-        bool activeOutline = false;
-        private void RemoveStat(PlayerStats.StatType statType)
-        {
-            var newModifiers = new List<StatModifier>();
-            for (int i = 0; i < passiveStatModifiers.Length; i++)
-            {
-                if (passiveStatModifiers[i].statToBoost != statType)
-                    newModifiers.Add(passiveStatModifiers[i]);
-            }
-            this.passiveStatModifiers = newModifiers.ToArray();
-        }
-        private void PlayerTookDamage(float resultValue, float maxValue, CoreDamageTypes damageTypes, DamageCategory damageCategory, Vector2 damageDirection)
-        {
-            if (activeOutline == true)
-            {
-                GameManager.Instance.StartCoroutine(this.GainOutline());
-            }
-
-            else if (activeOutline == false)
-            {
-                GameManager.Instance.StartCoroutine(this.LoseOutline());
-            }
-        }
-
-        private IEnumerator GainOutline()
-        {
-            PlayerController user = Owner;
-            yield return new WaitForSeconds(0.05f);
-            EnableVFX(user);
-            yield break;
-        }
-
-        private IEnumerator LoseOutline()
-        {
-            PlayerController user = Owner;
-            yield return new WaitForSeconds(0.05f);
-            DisableVFX(user);
-            yield break;
-        }
+        }       
     }
 }
 

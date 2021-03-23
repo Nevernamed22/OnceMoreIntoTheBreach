@@ -5,6 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -47,6 +48,8 @@ namespace NevernamedsItems
             item.quality = ItemQuality.B;
 
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
+
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.USEDFALLENANGELSHRINE, true);
         }
 
         //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!

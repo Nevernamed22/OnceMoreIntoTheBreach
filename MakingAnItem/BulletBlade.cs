@@ -24,7 +24,7 @@ namespace NevernamedsItems
             //behav.overrideNormalFireAudio = "Play_OBJ_gate_slam_01";//"Play_ENM_gunnut_swing_01";
 
             gun.SetShortDescription("Forged of Pure Bullet");
-            gun.SetLongDescription("The hefty blade of the fearsome armoured sentinels that tread the Gungeon's Halls."+"\n\nHas claimed the life of many a careless gungeoneer with it's wide spread.");
+            gun.SetLongDescription("The hefty blade of the fearsome armoured sentinels that tread the Gungeon's Halls." + "\n\nHas claimed the life of many a careless gungeoneer with it's wide spread.");
             gun.SetupSprite(null, "bulletblade_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.chargeAnimation, 6);
@@ -59,12 +59,12 @@ namespace NevernamedsItems
                 projectile.SetProjectileSpriteRight("enemystyle_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
                 if (mod != gun.DefaultModule) { mod.ammoCost = 0; }
                 projectile.transform.parent = gun.barrelOffset;
-                
+
                 ProjectileModule.ChargeProjectile chargeProj = new ProjectileModule.ChargeProjectile
                 {
                     Projectile = projectile,
                     ChargeTime = 1f,
-                };                
+                };
                 mod.chargeProjectiles = new List<ProjectileModule.ChargeProjectile> { chargeProj };
             }
             gun.reloadTime = 1f;
@@ -74,9 +74,28 @@ namespace NevernamedsItems
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.LoopSection;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).loopStart = 4;
 
+            tk2dSpriteAnimationClip chargeClip = gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation);
+            foreach (tk2dSpriteAnimationFrame frame in chargeClip.frames)
+            {
+                tk2dSpriteDefinition def = frame.spriteCollection.spriteDefinitions[frame.spriteId];
+                if (def != null)
+                {
+                    def.MakeOffset(new Vector2(-0.56f, -2.31f));
+                }
+            }
+            tk2dSpriteAnimationClip fireClip = gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation);
+            foreach (tk2dSpriteAnimationFrame frame in fireClip.frames)
+            {
+                tk2dSpriteDefinition def = frame.spriteCollection.spriteDefinitions[frame.spriteId];
+                if (def != null)
+                {
+                    def.MakeOffset(new Vector2(-0.56f, -2.31f));
+                }
+            }
+
             gun.encounterTrackable.EncounterGuid = "this is the Bullet Blade";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
-            gun.barrelOffset.transform.localPosition = new Vector3(3.18f, 2.0f, 0f);
+            gun.barrelOffset.transform.localPosition = new Vector3(3.18f, -0.31f, 0f);
             BulletBladeID = gun.PickupObjectId;
         }
         public static int BulletBladeID;

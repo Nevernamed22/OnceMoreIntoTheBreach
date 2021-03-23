@@ -46,7 +46,7 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             projectile.baseData.damage = 9f;
             projectile.baseData.speed *= 1.5f;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.PurpleRedLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.SetProjectileSpriteRight("nocturnepurple_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
 

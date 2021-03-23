@@ -109,12 +109,36 @@ namespace NevernamedsItems
             if (player.name == "PlayerTinker(Clone)") return ModdedCharacterID.Tinker;
             else return ModdedCharacterID.NONE;
         }
-    }
-        public enum EasyBlankType
+        public static Vector2 GetCursorPosition(this PlayerController user, float noCursorControllerRange)
         {
-            FULL,
-            MINI,
+            Vector2 m_cachedBlinkPosition = Vector2.zero;
+
+            GungeonActions m_activeActions = OMITBReflectionHelpers.ReflectGetField<GungeonActions>(typeof(PlayerController), "m_activeActions", user);
+
+            bool IsKeyboardAndMouse = BraveInput.GetInstanceForPlayer(user.PlayerIDX).IsKeyboardAndMouse(false);
+            if (IsKeyboardAndMouse) { m_cachedBlinkPosition = user.unadjustedAimPoint.XY() - (user.CenterPosition - user.specRigidbody.UnitCenter); }
+            else
+            {
+                m_cachedBlinkPosition = user.unadjustedAimPoint.normalized * 20;
+                //if (m_activeActions != null) { m_cachedBlinkPosition += m_activeActions.Aim.Vector.normalized * BraveTime.DeltaTime * 15f; }
+            }
+
+            m_cachedBlinkPosition = BraveMathCollege.ClampToBounds(m_cachedBlinkPosition, GameManager.Instance.MainCameraController.MinVisiblePoint, GameManager.Instance.MainCameraController.MaxVisiblePoint);
+            return m_cachedBlinkPosition;
         }
+        public static void GiveAmmoToGunNotInHand(this PlayerController player, int idToGive, int AmmoToGive)
+        {
+            foreach (Gun gun in player.inventory.AllGuns)
+            {
+                if (gun.PickupObjectId == idToGive) { gun.GainAmmo(AmmoToGive); }
+            }
+        }
+    }
+    public enum EasyBlankType
+    {
+        FULL,
+        MINI,
+    }
     public enum ModdedCharacterID
     {
         NONE,

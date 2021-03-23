@@ -5,7 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
-
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -46,6 +46,8 @@ namespace NevernamedsItems
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.A;
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_SANCTIFIEDOIL, true);
+            item.AddItemToGooptonMetaShop(27);
         }
         public override void Pickup(PlayerController player)
         {

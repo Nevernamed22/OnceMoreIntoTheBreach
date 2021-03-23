@@ -8,6 +8,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -52,6 +53,7 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "this is the Blasmaster";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_BLASMASTER, true);
 
             BlasmasterID = gun.PickupObjectId;
         }

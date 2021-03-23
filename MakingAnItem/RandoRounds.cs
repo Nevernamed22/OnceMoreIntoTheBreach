@@ -5,7 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
-
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -39,6 +39,8 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.C;
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_RANDOROUNDS, true);
+            item.AddItemToDougMetaShop(19);
         }
         bool hasPicked = false;
         public int randomNumber;

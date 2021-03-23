@@ -18,6 +18,105 @@ namespace NevernamedsItems
             (PickupObjectDatabase.GetById(93) as Gun).gameObject.AddComponent<OldGoldieModifiers>();
             (PickupObjectDatabase.GetById(32) as Gun).gameObject.AddComponent<VoidMarshalModifiers>();
             (PickupObjectDatabase.GetById(184) as Gun).gameObject.AddComponent<JudgeModifiers>();
+            (PickupObjectDatabase.GetById(562) as Gun).gameObject.AddComponent<FatLineModifiers>();
+            (PickupObjectDatabase.GetById(50) as Gun).gameObject.AddComponent<SAAModifiers>();
+            (PickupObjectDatabase.GetById(197) as Gun).gameObject.AddComponent<PeashooterModifiers>();
+            (PickupObjectDatabase.GetById(476) as Gun).gameObject.AddComponent<MTXGunModifiers>();
+            (PickupObjectDatabase.GetById(576) as Gun).gameObject.AddComponent<RobotsLeftHandModifiers>();
+            (PickupObjectDatabase.GetById(149) as Gun).gameObject.AddComponent<FaceMelterModifiers>();
+        }
+    }
+    public class FaceMelterModifiers : GunBehaviour
+    {
+        private void Update()
+        {
+            if (movementMod == null)
+            {
+                movementMod = new StatModifier()
+                {
+                    statToBoost = PlayerStats.StatType.MovementSpeed,
+                    amount = 1.45f,
+                    modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+                };
+            }
+            if (damageMod == null)
+            {
+                damageMod = new StatModifier()
+                {
+                    statToBoost = PlayerStats.StatType.Damage,
+                    amount = 1.2f,
+                    modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+                };
+            }
+            if (dodgeMod == null)
+            {
+                dodgeMod = new StatModifier()
+                {
+                    statToBoost = PlayerStats.StatType.DodgeRollSpeedMultiplier,
+                    amount = 1.45f,
+                    modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+                };
+            }
+            if (this.gun.CurrentOwner && this.gun.CurrentOwner is PlayerController)
+            {
+                if (this.gun.CurrentOwner.CurrentGun == this)
+                {
+                    if ((this.gun.CurrentOwner as PlayerController).PlayerHasActiveSynergy("Underground") && !synergyBoostActive)
+                    {
+                        GiveSynergyBoost();
+                        synergyBoostActive = true;
+                    }
+                    else if (!(this.gun.CurrentOwner as PlayerController).PlayerHasActiveSynergy("Underground") && synergyBoostActive)
+                    {
+                        RemoveSynergyBoost();
+                        synergyBoostActive = false;
+                    }
+                }
+                else
+                {
+                    if (synergyBoostActive)
+                    {
+                        RemoveSynergyBoost();
+                        synergyBoostActive = false;
+                    }
+                }
+            }
+        }
+        private void OnDestroy()
+        {
+            
+        }
+        public override void OnDropped()
+        {
+            if (this.gun.CurrentOwner && this.gun.CurrentOwner is PlayerController && synergyBoostActive)
+            {
+                RemoveSynergyBoost();
+                synergyBoostActive = false;
+            }
+            base.OnDropped();
+        }
+        bool synergyBoostActive;
+        StatModifier movementMod;
+        StatModifier dodgeMod;
+        StatModifier damageMod;
+        private void GiveSynergyBoost()
+        {
+            PlayerController playa = (this.gun.CurrentOwner as PlayerController);
+            playa.baseFlatColorOverride = Color.blue.WithAlpha(1);
+            playa.ownerlessStatModifiers.Add(movementMod);
+            playa.ownerlessStatModifiers.Add(dodgeMod);
+            playa.ownerlessStatModifiers.Add(damageMod);
+            playa.stats.RecalculateStats(playa, true, false);
+
+        }
+        private void RemoveSynergyBoost()
+        {
+            PlayerController playa = (this.gun.CurrentOwner as PlayerController);
+            playa.baseFlatColorOverride = Color.blue.WithAlpha(0);
+            playa.ownerlessStatModifiers.Remove(movementMod);
+            playa.ownerlessStatModifiers.Remove(dodgeMod);
+            playa.ownerlessStatModifiers.Remove(damageMod);
+            playa.stats.RecalculateStats(playa, true, false);
         }
     }
     public class JudgeModifiers : GunBehaviour
@@ -118,6 +217,154 @@ namespace NevernamedsItems
                 yield return new WaitForSeconds(10f);
                 enemy.aiActor.behaviorSpeculator.FleePlayerData.Player = null;
             }
+        }
+    }
+    public class RobotsLeftHandModifiers : GunBehaviour
+    {
+        public override void PostProcessProjectile(Projectile projectile)
+        {
+            if (projectile && projectile.ProjectilePlayerOwner() && projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Lefty Loosey"))
+            {
+                if (projectile.ProjectilePlayerOwner().SpriteFlipped)
+                {
+                    projectile.baseData.speed *= 1.5f;
+                    projectile.UpdateSpeed();
+                    PierceProjModifier pierce = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();
+                    pierce.penetration += 2;
+                }
+            }
+        }
+    }
+    public class MTXGunModifiers : AdvancedGunBehavior
+    {
+        private void OnKilledEnemy(PlayerController player, HealthHaver enemy)
+        {
+            if (gun && player && enemy && player.PlayerHasActiveSynergy("Fully Funded"))
+            {
+                if (player.CurrentGun.PickupObjectId == 476 && enemy.GetMaxHealth() >= 10)
+                {
+                    LootEngine.SpawnCurrency(enemy.specRigidbody.UnitCenter, 1, false);
+                }
+            }
+        }
+        protected override void OnPickedUpByPlayer(PlayerController player)
+        {
+            player.OnKilledEnemyContext += this.OnKilledEnemy;
+            base.OnPickedUpByPlayer(player);
+        }
+        protected override void OnPostDroppedByPlayer(PlayerController player)
+        {
+            player.OnKilledEnemyContext -= this.OnKilledEnemy;
+            base.OnPostDroppedByPlayer(player);
+        }
+        protected override void OnDestroy()
+        {
+            if (gun.GunPlayerOwner())
+            {
+                gun.GunPlayerOwner().OnKilledEnemyContext -= this.OnKilledEnemy;
+            }
+            base.OnDestroy();
+        }
+    }
+    public class SAAModifiers : GunBehaviour
+    {
+        public override void OnReloadPressed(PlayerController player, Gun gun, bool bSOMETHING)
+        {
+            player.StartCoroutine(this.IncorporealityOnHit(player, 1));
+            base.OnReloadPressed(player, gun, bSOMETHING);
+        }
+        private IEnumerator IncorporealityOnHit(PlayerController player, float incorporealityTime)
+        {
+            int enemyMask = CollisionMask.LayerToMask(CollisionLayer.EnemyCollider, CollisionLayer.EnemyHitBox, CollisionLayer.Projectile);
+            player.specRigidbody.AddCollisionLayerIgnoreOverride(enemyMask);
+            player.healthHaver.IsVulnerable = false;
+            yield return null;
+            float timer = 0f;
+            float subtimer = 0f;
+            while (timer < incorporealityTime)
+            {
+                while (timer < incorporealityTime)
+                {
+                    timer += BraveTime.DeltaTime;
+                    subtimer += BraveTime.DeltaTime;
+                    if (subtimer > 0.12f)
+                    {
+                        player.IsVisible = false;
+                        subtimer -= 0.12f;
+                        break;
+                    }
+                    yield return null;
+                }
+                while (timer < incorporealityTime)
+                {
+                    timer += BraveTime.DeltaTime;
+                    subtimer += BraveTime.DeltaTime;
+                    if (subtimer > 0.12f)
+                    {
+                        player.IsVisible = true;
+                        subtimer -= 0.12f;
+                        break;
+                    }
+                    yield return null;
+                }
+            }
+            this.EndIncorporealityOnHit(player);
+            yield break;
+        }
+        private void EndIncorporealityOnHit(PlayerController player)
+        {
+            int mask = CollisionMask.LayerToMask(CollisionLayer.EnemyCollider, CollisionLayer.EnemyHitBox, CollisionLayer.Projectile);
+            player.IsVisible = true;
+            player.healthHaver.IsVulnerable = true;
+            player.specRigidbody.RemoveCollisionLayerIgnoreOverride(mask);
+        }
+    }
+    public class FatLineModifiers : GunBehaviour
+    {
+        public override void PostProcessProjectile(Projectile projectile)
+        {
+            projectile.OnHitEnemy += this.OnHitEnemy;
+        }
+        private void OnHitEnemy(Projectile bullet, SpeculativeRigidbody enemy, bool fatal)
+        {
+            if (bullet.Owner is PlayerController && (bullet.Owner as PlayerController).PlayerHasActiveSynergy("Parallel Lines"))
+            {
+                if (UnityEngine.Random.value <= 0.1f)
+                {
+
+                    if (UnityEngine.Random.value <= 0.5f)
+                    {
+                        GameObject silencerVFX = (GameObject)ResourceCache.Acquire("Global VFX/BlankVFX_Ghost");
+                        AkSoundEngine.PostEvent("Play_OBJ_silenceblank_small_01", base.gameObject);
+                        GameObject gameObject = new GameObject("silencer");
+                        SilencerInstance silencerInstance = gameObject.AddComponent<SilencerInstance>();
+                        float additionalTimeAtMaxRadius = 0.25f;
+                        silencerInstance.TriggerSilencer(bullet.specRigidbody.UnitCenter, 25f, 5f, silencerVFX, 0f, 3f, 3f, 3f, 250f, 5f, additionalTimeAtMaxRadius, bullet.Owner as PlayerController, false, false);
+                    }
+                    else
+                    {
+                        ExplosionData data = DataCloners.CopyExplosionData(StaticExplosionDatas.explosiveRoundsExplosion);
+                        data.ignoreList.Add(bullet.ProjectilePlayerOwner().specRigidbody);
+                        Exploder.Explode(bullet.specRigidbody.UnitCenter, data, Vector2.zero);
+                    }
+                }
+            }
+        }
+    }
+    public class PeashooterModifiers : GunBehaviour
+    {
+        public override void PostProcessProjectile(Projectile projectile)
+        {
+            if (projectile.Owner && projectile.Owner is PlayerController && (projectile.Owner as PlayerController).PlayerHasActiveSynergy("Repeater"))
+            {
+                projectile.StartCoroutine(this.DoShadowDelayed(projectile));
+            }
+        }
+        private IEnumerator DoShadowDelayed(Projectile projectile)
+        {
+            yield return null;
+            projectile.SpawnChainedShadowBullets(1, 0.05f);
+            yield break;
         }
     }
 }

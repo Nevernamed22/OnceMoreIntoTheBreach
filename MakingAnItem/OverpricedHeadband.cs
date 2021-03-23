@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -38,7 +39,10 @@ namespace NevernamedsItems
             //Adds the actual passive effect to the item            
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.C;
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_OVERPRICEDHEADBAND, true);
+            OverpricedHeadbandID = item.PickupObjectId;
         }
+        public static int OverpricedHeadbandID;
         private float currentCash, lastCash;
         protected override void Update()
         {

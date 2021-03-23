@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -51,6 +52,8 @@ namespace NevernamedsItems
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             RingerID = gun.PickupObjectId;
+
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.BEATEN_MINES_BOSS_TURBO_MODE, true);
         }
         public static int RingerID;
         private void ModifyDamage(HealthHaver player, HealthHaver.ModifyDamageEventArgs args)

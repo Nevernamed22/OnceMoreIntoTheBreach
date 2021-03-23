@@ -7,6 +7,7 @@ using ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -41,6 +42,9 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.C;
+            //Unlock
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_LOCKDOWNBULLETS, true);
+            item.AddItemToDougMetaShop(20);
 
         }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Dungeonator;
 using ItemAPI;
+using SaveAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
@@ -42,7 +43,8 @@ namespace NevernamedsItems
             //Set some other fields
             item.consumable = false;
             item.quality = ItemQuality.C;
-
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_MAGICMISSILE, true);
+            item.AddItemToDougMetaShop(20);
 
         }
         protected override void DoEffect(PlayerController user)

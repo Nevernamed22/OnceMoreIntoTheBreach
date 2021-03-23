@@ -58,6 +58,10 @@ namespace NevernamedsItems
             {
                 CalculateHealth(Owner);
                 ShouldFlyCheck(Owner);
+                if (Owner.OverridePlayerSwitchState != PlayableCharacters.Pilot.ToString())
+                {
+                    Owner.OverridePlayerSwitchState = PlayableCharacters.Pilot.ToString();
+                }
             }
 
             else { return; }
@@ -72,18 +76,20 @@ namespace NevernamedsItems
                 {
                     if (hasDoneFirstArmourResetThisRun)
                     {
+                        int amountOfSurplus = (int)player.healthHaver.Armor - 1;
+                        float percentPerArmour = 0.025f;
+                        if (player.HasPickupID(FullArmourJacket.FullArmourJacketID)) percentPerArmour = 0.05f;
+
                         StatModifier statModifier = new StatModifier();
-                        statModifier.amount = 1.02f;
+                        statModifier.amount = (percentPerArmour * amountOfSurplus) + 1;
                         statModifier.modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE;
                         statModifier.statToBoost = PlayerStats.StatType.Damage;
                         Owner.ownerlessStatModifiers.Add(statModifier);
                         Owner.stats.RecalculateStats(Owner, false, false);
 
-                        LootEngine.SpawnItem(PickupObjectDatabase.GetById(70).gameObject, player.sprite.WorldCenter, Vector2.zero, 1f, false, true, false);
-                        LootEngine.SpawnItem(PickupObjectDatabase.GetById(70).gameObject, player.sprite.WorldCenter, Vector2.zero, 1f, false, true, false);
-                        LootEngine.SpawnItem(PickupObjectDatabase.GetById(70).gameObject, player.sprite.WorldCenter, Vector2.zero, 1f, false, true, false);
+                        LootEngine.SpawnCurrency(player.sprite.WorldCenter, (15 * amountOfSurplus)); 
                     }
-                        hasDoneFirstArmourResetThisRun = true;
+                    hasDoneFirstArmourResetThisRun = true;
                     player.healthHaver.Armor = 1f;
                 }
                 lastArmour = currentArmour;
@@ -150,17 +156,7 @@ namespace NevernamedsItems
         }
         private void onAnyEnemyTakeAnyDamage(float damageamount, bool fatal, HealthHaver enemy)
         {
-            /*ETGModConsole.Log("Enemy took dmg");
-            if (UnityEngine.Random.value < 1 0.01)
-            {
-                if (Owner.HasPickupID(434))
-                {
-                    Owner.healthHaver.Armor += 1;
-                    Owner.healthHaver.ApplyDamage(0.5f, Vector2.zero, "ShadeBug(Pls Report)", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
-                    Owner.CurrentRoom.PlayerHasTakenDamageInThisRoom = false;
-                    
-                }
-            }*/
+
         }
         private void DisableVFX(PlayerController user)
         {

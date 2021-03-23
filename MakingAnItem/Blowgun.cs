@@ -72,10 +72,9 @@ namespace NevernamedsItems
             base.PostProcessProjectile(projectile);
             if (player.PlayerHasActiveSynergy("Old and New"))
             {
-                BulletStunModifier stunning = projectile.gameObject.AddComponent<BulletStunModifier>();
-                stunning.doVFX = true;
-                stunning.stunLength = 10f;
-                stunning.chanceToStun = 1f;
+                projectile.AppliesStun = true;
+                projectile.AppliedStunDuration += 10f;
+                projectile.StunApplyChance = 1f;
             }
         }
         public static int BlowgunID;

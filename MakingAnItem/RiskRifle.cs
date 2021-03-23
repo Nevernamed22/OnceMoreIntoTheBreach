@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -54,8 +55,11 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "this is the Risk Rifle";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+            RiskRifleID = gun.PickupObjectId;
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_RISKRIFLE, true);
 
         }
+        public static int RiskRifleID;
         public override void PostProcessProjectile(Projectile projectile)
         {
             if (projectile.Owner is PlayerController)
@@ -79,21 +83,16 @@ namespace NevernamedsItems
                     else
                     {
                         player.healthHaver.ApplyDamage(0.5f, Vector2.zero, "Risky Business", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
+                        if (!SaveAPIManager.GetFlag(CustomDungeonFlags.HASBEENDAMAGEDBYRISKRIFLE))
+                        {
+                            SaveAPIManager.SetFlag(CustomDungeonFlags.HASBEENDAMAGEDBYRISKRIFLE, true);
+                        }
                     }
 
                 }
 
             }
         }
-
-
-        //All that's left now is sprite stuff. 
-        //Your sprites should be organized, like how you see in the mod folder. 
-        //Every gun requires that you have a .json to match the sprites or else the gun won't spawn at all
-        //.Json determines the hand sprites for your character. You can make a gun two handed by having both "SecondaryHand" and "PrimaryHand" in the .json file, which can be edited through Notepad or Visual Studios
-        //By default this gun is a one-handed weapon
-        //If you need a basic two handed .json. Just use the jpxfrd2.json.
-        //And finally, don't forget to add your Gun to your ETGModule class!
 
         public RiskRifle()
         {

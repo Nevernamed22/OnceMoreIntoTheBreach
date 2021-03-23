@@ -8,6 +8,7 @@ using MonoMod;
 using UnityEngine;
 using ItemAPI;
 using Dungeonator;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -109,6 +110,9 @@ namespace NevernamedsItems
 
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_THETHINLINE, true);
+            gun.AddItemToDougMetaShop(25);
         }
         public static ExplosionData DataForProjectiles = null;
         protected override void OnPickedUpByPlayer(PlayerController player)

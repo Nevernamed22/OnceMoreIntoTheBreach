@@ -7,6 +7,7 @@ using ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -42,6 +43,7 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.B;
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PLAYERHELDMORETHANFIVEARMOUR, true);
         }
         Hook healthPickupHook = new Hook(
                 typeof(HealthPickup).GetMethod("Pickup", BindingFlags.Instance | BindingFlags.Public),

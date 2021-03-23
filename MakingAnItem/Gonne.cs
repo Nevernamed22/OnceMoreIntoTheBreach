@@ -51,28 +51,9 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.B;
             gun.encounterTrackable.EncounterGuid = "this is the Gonne";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
-
+            GonneID = gun.PickupObjectId;
         }
-        private void Update()
-        {
-            PlayerController player = gun.CurrentOwner as PlayerController;
-            if (player.PlayerHasActiveSynergy("Discworld"))
-            {
-                if (gun.DefaultModule.numberOfShotsInClip == 3)
-                {
-                    gun.DefaultModule.numberOfShotsInClip = 6;
-                    //hasDiscworldSynergyAlready = true;
-                }
-            }
-            else
-            {
-                if (gun.DefaultModule.numberOfShotsInClip == 6)
-                {
-                    gun.DefaultModule.numberOfShotsInClip = 3;
-                    //hasDiscworldSynergyAlready = false;
-                }
-            }
-        }
+        public static int GonneID;
         public override void PostProcessProjectile(Projectile projectile)
         {
             base.PostProcessProjectile(projectile);

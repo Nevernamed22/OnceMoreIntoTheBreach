@@ -5,6 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -41,6 +42,10 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D;
+
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_TRACERROUNDS, true);
+            item.AddItemToTrorcMetaShop(8);
+
             AssetBundle assetBundle = ResourceManager.LoadAssetBundle("shared_auto_001");
             TracerRound.goopDefs = new List<GoopDefinition>();
             foreach (string text in TracerRound.goops)
@@ -70,7 +75,6 @@ namespace NevernamedsItems
                     if (Owner.HasPickupID(275)) mirrorProjectileModifier.goopRadius = 1;
                     else mirrorProjectileModifier.goopRadius = 0.5f;
                     mirrorProjectileModifier.goopType = 0;
-                    mirrorProjectileModifier.projectileTint = Color.red;
                     mirrorProjectileModifier.needsToUseGreenFire = false;
                 }
             }
@@ -174,7 +178,6 @@ namespace NevernamedsItems
         public int goopType = 0;
         public float goopRadius = 0.5f;
         public bool needsToUseGreenFire = false;
-        public Color projectileTint = Color.white;
         public TrailFireModifier()
         {
             AssetBundle assetBundle = ResourceManager.LoadAssetBundle("shared_auto_001");
@@ -201,7 +204,6 @@ namespace NevernamedsItems
         private void Awake()
         {
             this.m_projectile = base.GetComponent<Projectile>();
-            this.m_projectile.AdjustPlayerProjectileTint(projectileTint, 1, 0f);
         }
 
         // Token: 0x06007295 RID: 29333 RVA: 0x002CA3A0 File Offset: 0x002C85A0

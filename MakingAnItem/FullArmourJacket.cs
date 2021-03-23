@@ -38,7 +38,9 @@ namespace NevernamedsItems
             //Adds the actual passive effect to the item            
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.B;
+            FullArmourJacketID = item.PickupObjectId;
         }
+        public static int FullArmourJacketID;
         private float currentArmour, lastArmour;
         protected override void Update()
         {

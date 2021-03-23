@@ -70,7 +70,7 @@ namespace NevernamedsItems
                 {
                     if (bullet)
                     {
-                        ReAimBullet.ReAimBulletToNearestEnemy(bullet);
+                        bullet.ReAimToNearestEnemy();
                         if (!player.PlayerHasActiveSynergy("Pistols Requiem")) BulletsToRemoveFromActiveBullets.Add(bullet);
                     }
                 }

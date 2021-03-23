@@ -113,6 +113,49 @@ namespace NevernamedsItems
             if (bullet.AppliesSpeedModifier && (UnityEngine.Random.value <= bullet.SpeedApplyChance || ignoresProbability)) Effects.Add(bullet.speedEffect);
             return Effects;
         }
+        public static void SendInRandomDirection(this Projectile bullet)
+        {
+            Vector2 dirVec = UnityEngine.Random.insideUnitCircle;
+            bullet.SendInDirection(dirVec, false, true);
+        }
+        public static void ReAimToNearestEnemy(this Projectile bullet)
+        {
+            Vector2 dirVec = bullet.GetVectorToNearestEnemy();
+            bullet.SendInDirection(dirVec, false, true);
+        }
+        public static Vector2 GetVectorToNearestEnemy(this Projectile bullet)
+        {
+            Vector2 dirVec = UnityEngine.Random.insideUnitCircle;
+            Vector2 bulletPosition = bullet.sprite.WorldCenter;
+            Func<AIActor, bool> isValid = (AIActor a) => a && a.HasBeenEngaged && a.healthHaver && a.healthHaver.IsVulnerable;
+            IntVector2 bulletPositionIntVector2 = bulletPosition.ToIntVector2();
+            AIActor closestToPosition = BraveUtility.GetClosestToPosition<AIActor>(GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(bulletPositionIntVector2).GetActiveEnemies(RoomHandler.ActiveEnemyType.All), bullet.sprite.WorldCenter, isValid, new AIActor[]
+            {
+
+            });
+            if (closestToPosition)
+            {
+                dirVec = closestToPosition.CenterPosition - bullet.transform.position.XY();
+            }
+            return dirVec;
+
+        }
+        public static float GetDegreeToNearestEnemy(this Projectile bullet)
+        {
+            Vector2 dirVec = UnityEngine.Random.insideUnitCircle;
+            Vector2 bulletPosition = bullet.sprite.WorldCenter;
+            Func<AIActor, bool> isValid = (AIActor a) => a && a.HasBeenEngaged && a.healthHaver && a.healthHaver.IsVulnerable;
+            IntVector2 bulletPositionIntVector2 = bulletPosition.ToIntVector2();
+            AIActor closestToPosition = BraveUtility.GetClosestToPosition<AIActor>(GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(bulletPositionIntVector2).GetActiveEnemies(RoomHandler.ActiveEnemyType.All), bullet.sprite.WorldCenter, isValid, new AIActor[]
+            {
+
+            });
+            if (closestToPosition)
+            {
+                dirVec = closestToPosition.CenterPosition - bullet.transform.position.XY();
+            }
+            return MiscToolbox.Vector2ToDegree(dirVec);
+        }
     }
     static class OMITBBeamExtensions
     {

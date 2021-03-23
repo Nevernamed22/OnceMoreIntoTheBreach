@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -50,10 +51,9 @@ namespace NevernamedsItems
             projectile.baseData.range *= 1f;
             BounceProjModifier Bouncing = projectile.gameObject.GetOrAddComponent<BounceProjModifier>();
             Bouncing.numberOfBounces = 1;
-            BulletStunModifier Stunning = projectile.gameObject.GetOrAddComponent<BulletStunModifier>();
-            Stunning.chanceToStun = 0.2f;
-            Stunning.doVFX = true;
-            Stunning.stunLength = 2f;
+            projectile.AppliesStun = true;
+            projectile.StunApplyChance = 0.2f;
+            projectile.AppliedStunDuration = 2f;
             projectile.SetProjectileSpriteRight("riotgun_projectile", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
 
 
@@ -66,6 +66,8 @@ namespace NevernamedsItems
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc);
 
             RiotGunID = gun.PickupObjectId;
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_RIOTGUN, true);
+            gun.AddItemToTrorcMetaShop(10);
         }
         public static int RiotGunID;
         public RiotGun()

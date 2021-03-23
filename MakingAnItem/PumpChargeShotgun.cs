@@ -100,7 +100,7 @@ namespace NevernamedsItems
                 projectile4.gameObject.AddComponent<BloodBurstOnKill>();
             projectile4.baseData.speed *= 1f;
                 projectile4.hitEffects.alwaysUseMidair = true;
-            projectile4.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.PurpleRedLaserCircleVFX;
+            projectile4.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
 
             projectile4.baseData.damage *= 2.2f;
             projectile4.SetProjectileSpriteRight("pumpcharge_red_projectile", 17, 8, true, tk2dBaseSprite.Anchor.MiddleCenter, 16, 7);

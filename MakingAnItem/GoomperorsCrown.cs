@@ -6,6 +6,7 @@ using System.Text;
 using UnityEngine;
 using ItemAPI;
 using Dungeonator;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -41,6 +42,9 @@ namespace NevernamedsItems
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.S;
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
+
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_GOOMPERORSCROWN, true);
+            item.AddItemToGooptonMetaShop(30);
         }
         public void AIActorMods(AIActor target)
         {

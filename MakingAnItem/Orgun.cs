@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -77,6 +78,7 @@ namespace NevernamedsItems
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             OrgunID = gun.PickupObjectId;
+            gun.SetupUnlockOnCustomMaximum(CustomTrackedMaximums.MAX_HEART_CONTAINERS_EVER, 7, DungeonPrerequisite.PrerequisiteOperation.GREATER_THAN);
         }
         public static int OrgunID;
         private void Update()

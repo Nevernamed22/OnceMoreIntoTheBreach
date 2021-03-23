@@ -186,5 +186,20 @@ namespace NevernamedsItems
             }
             return null;
         }
+        public static void DelelteOwnedBullets(this GameActor enemy, float chancePerProjectile = 1)
+        {
+            List<Projectile> BulletsOwnedByEnemy = new List<Projectile>();
+            foreach (Projectile proj in StaticReferenceManager.AllProjectiles)
+            {
+                if (proj && proj.Owner && proj.Owner == enemy)
+                {
+                  if (UnityEngine.Random.value <= chancePerProjectile)  BulletsOwnedByEnemy.Add(proj);
+                }
+            }
+            for (int i = (BulletsOwnedByEnemy.Count - 1); i > -1; i--)
+            {
+                if (BulletsOwnedByEnemy[i] != null && BulletsOwnedByEnemy[i].isActiveAndEnabled) BulletsOwnedByEnemy[i].DieInAir(true, false, false, true);
+            }
+        }
     }
 }

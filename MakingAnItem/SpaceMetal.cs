@@ -40,15 +40,7 @@ namespace NevernamedsItems
             item.CanBeDropped = true;
 
             //Set the rarity of the item
-            item.quality = PickupObject.ItemQuality.A;
-
-            List<string> mandatorySynergyItems = new List<string>() { "nn:lucky_coin" };
-            List<string> optionalSynergyItems = new List<string>() { "nn:lump_of_space_metal", "nn:loose_change", "coin_crown", "iron_coin", "gold_junk", "table_tech_money" };
-            CustomSynergies.Add("Prosperity", mandatorySynergyItems, optionalSynergyItems);
-
-            List<string> mandatorySynergyItems2 = new List<string>() { "nn:miners_bullets" };
-            List<string> optionalSynergyItems2 = new List<string>() { "nn:lump_of_space_metal", "mine_cutter" };
-            CustomSynergies.Add("Miiiining Away~", mandatorySynergyItems2, optionalSynergyItems2);
+            item.quality = PickupObject.ItemQuality.A;           
         }
         public override void Pickup(PlayerController player)
         {

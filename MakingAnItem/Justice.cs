@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -71,6 +72,7 @@ namespace NevernamedsItems
             gun.encounterTrackable.EncounterGuid = "this is Justice";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             JusticeID = gun.PickupObjectId;
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.ANGERED_BELLO, true);
         }
         public static int JusticeID;
         private void Update()

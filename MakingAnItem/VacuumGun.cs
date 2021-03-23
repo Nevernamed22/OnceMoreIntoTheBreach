@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -54,6 +55,9 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "this is the Vacuum Gun";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_VACUUMGUN, true);
+            gun.AddItemToGooptonMetaShop(16);
         }
         public override void OnReloadPressed(PlayerController player, Gun gun, bool bSOMETHING)
         {
@@ -66,14 +70,14 @@ namespace NevernamedsItems
         }
         private void ProcessEnemy(AIActor target, float distance)
         {
-            if (EasyEnemyTypeLists.BlobulonEnemiesALLNOBOSS.Contains(target.EnemyGuid))
+            if (target && target.healthHaver && !target.healthHaver.IsBoss && EasyEnemyTypeLists.ModInclusiveBlobsALL.Contains(target.EnemyGuid))
             {
                 GameManager.Instance.Dungeon.StartCoroutine(this.HandleEnemySuck(target));
                 target.EraseFromExistence(true);
                 int AmmoWorth = 0;
                 if (EasyEnemyTypeLists.BlobulonEnemiesSMALL.Contains(target.EnemyGuid)) AmmoWorth = 5;
                 else if (EasyEnemyTypeLists.BlobulonEnemiesMEDIUM.Contains(target.EnemyGuid)) AmmoWorth = 14;
-                else if (EasyEnemyTypeLists.BlobulonEnemiesLARGE.Contains(target.EnemyGuid)) AmmoWorth = 20;
+                else if (EasyEnemyTypeLists.ModInclusiveBlobsLARGE.Contains(target.EnemyGuid)) AmmoWorth = 20;
                 else if (EasyEnemyTypeLists.BlobulonEnemiesMEGA.Contains(target.EnemyGuid)) AmmoWorth = 30;
                 if (AmmoWorth > 0)
                 {

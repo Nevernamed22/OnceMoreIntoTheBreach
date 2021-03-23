@@ -5,6 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -181,6 +182,8 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D;
+
+            item.SetupUnlockOnCustomStat(CustomTrackedStats.TITAN_KIN_KILLED, 4, DungeonPrerequisite.PrerequisiteOperation.GREATER_THAN);
         }
         public override void Pickup(PlayerController player)
         {
@@ -297,7 +300,10 @@ namespace NevernamedsItems
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.A;
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_POWERARMOUR, true);
+            PowerArmourID = item.PickupObjectId;
         }
+        public static int PowerArmourID;
         public override void Pickup(PlayerController player)
         {
             bool hasntAlreadyBeenCollected = !this.m_pickedUpThisRun;

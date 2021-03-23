@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -68,6 +69,9 @@ namespace NevernamedsItems
 
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc);
             BazookaID = gun.PickupObjectId;
+
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_BAZOOKA, true);
+            gun.AddItemToTrorcMetaShop(20);
         }
         public static int BazookaID;
         public override void OnPostFired(PlayerController player, Gun gun)

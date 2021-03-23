@@ -78,6 +78,8 @@ namespace NevernamedsItems
             BooklletID = gun.PickupObjectId;
         }
         public static int BooklletID;
+
+
         public static Projectile Ringbullet;
         public override void OnReloadPressed(PlayerController player, Gun gun, bool bSOMETHING)
         {
@@ -87,7 +89,7 @@ namespace NevernamedsItems
                 {
                     if (bullet)
                     {
-                        ReAimBullet.ReAimBulletToNearestEnemy(bullet);
+                        bullet.ReAimToNearestEnemy();
                         bullet.baseData.speed *= 7500;
                         bullet.UpdateSpeed();
                         BulletsToRemoveFromActiveBullets.Add(bullet);
@@ -190,7 +192,7 @@ namespace NevernamedsItems
         }
         private void ChangeSpeedAndReAim()
         {
-            ReAimBullet.ReAimBulletToNearestEnemy(m_projectile);
+            m_projectile.ReAimToNearestEnemy();
             m_projectile.baseData.speed *= 7500;
             m_projectile.UpdateSpeed();
         }

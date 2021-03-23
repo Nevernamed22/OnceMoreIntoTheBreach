@@ -742,7 +742,7 @@ namespace NevernamedsItems
     {
         public InstaKillEnemyTypeBehaviour()
         {
-
+            bossBonusDMG = 1;
         }
         public void Start()
         {
@@ -758,15 +758,21 @@ namespace NevernamedsItems
             {
                 if (!fatal)
                 {
-                    if (EnemyTypeToKill.Contains(enemy.aiActor.EnemyGuid))
+                    if (EnemyTypeToKill.Contains(enemy.aiActor.EnemyGuid) && !BossesToBonusDMG.Contains(enemy.aiActor.EnemyGuid))
                     {
                         enemy.healthHaver.ApplyDamage(1E+07f, Vector2.zero, "Erasure", CoreDamageTypes.None, DamageCategory.Unstoppable, true, null, false);
+                    }
+                    if (BossesToBonusDMG.Contains(enemy.aiActor.EnemyGuid))
+                    {
+                        enemy.healthHaver.ApplyDamage(bossBonusDMG, Vector2.zero, "Erasure", CoreDamageTypes.None, DamageCategory.Environment, true, null, false);
                     }
                 }
             }
         }
+        public float bossBonusDMG;
         private Projectile m_projectile;
         public List<string> EnemyTypeToKill = new List<string>();
+        public List<string> BossesToBonusDMG = new List<string>();
     } //Allows for easy insta-killing
     public class ProjectileSlashingBehaviour : MonoBehaviour
     {
@@ -853,6 +859,96 @@ namespace NevernamedsItems
         private Projectile m_projectile;
         private PlayerController owner;
     } //Causes the projectile to slash it's way through the air
+    public class SpawnEnemyOnBulletSpawn : MonoBehaviour
+    {
+        public SpawnEnemyOnBulletSpawn()
+        {
+            this.procChance = 1;
+            this.deleteProjAfterSpawn = true;
+            this.companioniseEnemy = true;
+            this.ignoreSpawnedEnemyForGoodMimic = true;
+            this.killSpawnedEnemyOnRoomClear = true;
+            this.doPostProcessOnEnemyBullets = true;
+            this.scaleEnemyDamage = true;
+            this.scaleEnemyProjSize = true;
+            this.scaleEnemyProjSpeed = true;
+            this.enemyBulletDamage = 10f;
+        }
+        private void Start()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
+            if (this.m_projectile.Owner is PlayerController) { this.projOwner = this.m_projectile.Owner as PlayerController; }
+            GameManager.Instance.StartCoroutine(handleSpawn());
+        }
+        private IEnumerator handleSpawn()
+        {
+            yield return null;
+            if (UnityEngine.Random.value <= this.procChance)
+            {
+                if (guidToSpawn != null)
+                {
+                    var enemyToSpawn = EnemyDatabase.GetOrLoadByGuid(guidToSpawn);
+                    var position = this.m_projectile.specRigidbody.UnitCenter;
+                    Instantiate<GameObject>(EasyVFXDatabase.SpiratTeleportVFX, position, Quaternion.identity);
+
+                    AIActor TargetActor = AIActor.Spawn(enemyToSpawn, position, GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(position.ToIntVector2()), true, AIActor.AwakenAnimationType.Default, true);
+
+                    PhysicsEngine.Instance.RegisterOverlappingGhostCollisionExceptions(TargetActor.specRigidbody, null, false);
+
+                    if (ignoreSpawnedEnemyForGoodMimic)
+                    {
+                        CustomEnemyTagsSystem tags = TargetActor.gameObject.GetOrAddComponent<CustomEnemyTagsSystem>();
+                        tags.ignoreForGoodMimic = true;
+                    }
+
+                    if (companioniseEnemy && this.projOwner != null)
+                    {
+                        CompanionController orAddComponent = TargetActor.gameObject.GetOrAddComponent<CompanionController>();
+                        orAddComponent.companionID = CompanionController.CompanionIdentifier.NONE;
+                        orAddComponent.Initialize(this.projOwner);
+
+                        CompanionisedEnemyBulletModifiers companionisedBullets = TargetActor.gameObject.GetOrAddComponent<CompanionisedEnemyBulletModifiers>();
+                        companionisedBullets.jammedDamageMultiplier = 2f;
+                        companionisedBullets.TintBullets = true;
+                        companionisedBullets.TintColor = ExtendedColours.honeyYellow;
+                        companionisedBullets.baseBulletDamage = enemyBulletDamage;
+                        companionisedBullets.scaleDamage = this.scaleEnemyDamage;
+                        companionisedBullets.doPostProcess = this.doPostProcessOnEnemyBullets;
+                        companionisedBullets.scaleSize = this.scaleEnemyProjSize;
+                        companionisedBullets.scaleSpeed = this.scaleEnemyProjSpeed;
+                        companionisedBullets.enemyOwner = this.projOwner;
+                    }
+
+                    if (killSpawnedEnemyOnRoomClear)
+                    {
+                        TargetActor.gameObject.AddComponent<KillOnRoomClear>();
+                    }
+
+                    TargetActor.IsHarmlessEnemy = true;
+                    TargetActor.IgnoreForRoomClear = true;
+
+                    if (TargetActor.gameObject.GetComponent<SpawnEnemyOnDeath>())
+                    {
+                        Destroy(TargetActor.gameObject.GetComponent<SpawnEnemyOnDeath>());
+                    }
+                    if (deleteProjAfterSpawn) { Destroy(this.m_projectile.gameObject); }
+                }
+            }
+        }
+        private Projectile m_projectile;
+        private PlayerController projOwner;
+        public float procChance;
+        public float enemyBulletDamage;
+        public bool companioniseEnemy;
+        public bool killSpawnedEnemyOnRoomClear;
+        public bool deleteProjAfterSpawn;
+        public bool ignoreSpawnedEnemyForGoodMimic;
+        public string guidToSpawn;
+        public bool scaleEnemyDamage;
+        public bool scaleEnemyProjSize;
+        public bool scaleEnemyProjSpeed;
+        public bool doPostProcessOnEnemyBullets;
+    } //Causes the projectile to spawn an enemy upon it's creation.
 
     //PASSIVE ITEM EFFECTS AS COMPONENTS
     public class AngryBulletsProjectileBehaviour : MonoBehaviour

@@ -75,6 +75,21 @@ namespace NevernamedsItems
             NullReferenceExceptionForme.NonSynergyGunId = Wrench.WrenchID;
             NullReferenceExceptionForme.SynergyGunId = WrenchNullRefException.NullWrenchID;
             NullReferenceExceptionForme.SynergyToCheck = "NullReferenceException";
+            //GRAVITY GUN - NEGATIVE MATTER
+            AdvancedTransformGunSynergyProcessor NegativeMatterSynergyForm = (PickupObjectDatabase.GetById(GravityGun.GravityGunID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
+            NegativeMatterSynergyForm.NonSynergyGunId = GravityGun.GravityGunID;
+            NegativeMatterSynergyForm.SynergyGunId = GravityGunNegativeMatterForm.GravityGunNegativeMatterID;
+            NegativeMatterSynergyForm.SynergyToCheck = "Negative Matter";
+            //GATLING GUN - GATTER UP
+            AdvancedTransformGunSynergyProcessor GatGunSynergy = (PickupObjectDatabase.GetById(GatlingGun.GatlingGunID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
+            GatGunSynergy.NonSynergyGunId = GatlingGun.GatlingGunID;
+            GatGunSynergy.SynergyGunId = GatlingGunGatterUp.GatGunID;
+            GatGunSynergy.SynergyToCheck = "Gatter Up";
+            //GONNE - DISCWORLD
+            AdvancedTransformGunSynergyProcessor DiscworldSynergy = (PickupObjectDatabase.GetById(Gonne.GonneID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
+            DiscworldSynergy.NonSynergyGunId = Gonne.GonneID;
+            DiscworldSynergy.SynergyGunId = GonneElder.ElderGonneId;
+            DiscworldSynergy.SynergyToCheck = "Discworld";
             #endregion
             //-------------------------------------------------------------DUAL WIELDING
             #region Dual Wielding

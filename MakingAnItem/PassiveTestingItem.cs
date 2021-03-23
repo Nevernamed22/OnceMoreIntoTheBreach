@@ -36,14 +36,19 @@ namespace NevernamedsItems
         //JamPlayerBulletModifier jamProjectileModifier = bullet.gameObject.AddComponent<JamPlayerBulletModifier>();
         public void onFired(Projectile bullet, float eventchancescaler)
         {
-            bullet.collidesWithProjectiles = true;
+
+           // bullet.statusEffectsToApply.Add(StaticStatusEffects.greenFireEffect);
+           // bullet.collidesWithProjectiles = true;
             bullet.OnHitEnemy += this.onHitEnemy;
-            bullet.specRigidbody.OnCollision += this.onCollision;
+            //bullet.specRigidbody.OnCollision += this.onCollision;
             //bullet.specRigidbody.OnPreRigidbodyCollision = (SpeculativeRigidbody.OnPreRigidbodyCollisionDelegate)Delegate.Combine(bullet.specRigidbody.OnPreRigidbodyCollision, new SpeculativeRigidbody.OnPreRigidbodyCollisionDelegate(this.HandlePreCollision));
         }
         public void onHitEnemy(Projectile bullet, SpeculativeRigidbody enemy, bool somethingthefuckidk)
         {
-
+            if (enemy && enemy.aiActor && enemy.aiActor.EnemyGuid != null)
+            {
+                ETGModConsole.Log(enemy.aiActor.EnemyGuid);
+            }
         }
         public void onCollision(CollisionData data)
         {
@@ -69,9 +74,14 @@ namespace NevernamedsItems
                 ETGModConsole.Log("<color=#ff0000ff>---------------------------------</color>");
             }
         }
+        private void Roll(PlayerController playa)
+        {
+
+        }    
         public override void Pickup(PlayerController player)
         {
             player.PostProcessProjectile += this.onFired;
+            player.OnPreDodgeRoll += this.Roll;
             base.Pickup(player);
         }
         //player.SetOverrideShader(ShaderCache.Acquire("Brave/LitCutoutUberPhantom"));

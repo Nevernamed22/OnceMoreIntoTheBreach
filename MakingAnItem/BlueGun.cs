@@ -36,7 +36,6 @@ namespace NevernamedsItems
             gun.DefaultModule.angleVariance = 0f;
             gun.DefaultModule.cooldownTime = 0.5f;
             gun.DefaultModule.numberOfShotsInClip = 10;
-            gun.CanGainAmmo = false;
             gun.barrelOffset.transform.localPosition = new Vector3(1.98f, 0.75f, 0f);
             gun.SetBaseMaxAmmo(0);
 
@@ -57,31 +56,35 @@ namespace NevernamedsItems
 
             projectile.transform.parent = gun.barrelOffset;
 
-            gun.quality = PickupObject.ItemQuality.EXCLUDED; //C
-            gun.encounterTrackable.EncounterGuid = "this is the Blankannon";
+            gun.quality = PickupObject.ItemQuality.C; //C
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+
+            BlankannonId = gun.PickupObjectId;
         }
+        public static int BlankannonId;
         public override void OnPostFired(PlayerController player, Gun gun)
         {
-            try
+            int blanksToRemove = 1;
+            if (player.HasPickupID(TitaniumClip.TitaniumClipID)) blanksToRemove = 2;
+            if (player.PlayerHasActiveSynergy("Secrets of the Ancients") && UnityEngine.Random.value <= 0.25) blanksToRemove = 0;
+            if (player.Blanks >= blanksToRemove) player.Blanks -= blanksToRemove;
+            else player.Blanks = 0;
+            if (player.PlayerHasActiveSynergy("Paned Expression"))
             {
-                RecalculateClip(player);
-                int blanksToRemove = 1;
-                if (player.PlayerHasActiveSynergy("Secrets of the Ancients") && UnityEngine.Random.value <= 0.25) blanksToRemove = 0;
-                player.Blanks -= blanksToRemove;
-                RecalculateClip(player);
-                if (player.PlayerHasActiveSynergy("Paned Expression"))
-                {
-                    player.AcquirePassiveItemPrefabDirectly((PickupObjectDatabase.GetById(565)) as PassiveItem);
-                }
-                DoMicroBlank(gun.barrelOffset.position);
-                base.OnPostFired(player, gun);
+                player.AcquirePassiveItemPrefabDirectly((PickupObjectDatabase.GetById(565)) as PassiveItem);
             }
-            catch (Exception e)
+            DoMicroBlank(gun.barrelOffset.position);
+            base.OnPostFired(player, gun);
+        }
+        protected override void OnPickedUpByPlayer(PlayerController player)
+        {
+            base.OnPickedUpByPlayer(player);
+            if (!everPickedUpByPlayer)
             {
-                ETGModConsole.Log(e.Message);
-                ETGModConsole.Log(e.StackTrace);
+                LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(224).gameObject, player);
+                LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(224).gameObject, player);
             }
+            RecalculateClip(player);
         }
         public override void PostProcessProjectile(Projectile projectile)
         {
@@ -127,81 +130,23 @@ namespace NevernamedsItems
                 ETGModConsole.Log(e.StackTrace);
             }
         }
-        private int currentBlanks, lastBlanks;
         protected override void Update()
         {
-            try
+            if (gun.GunPlayerOwner())
             {
-                if (gun.CurrentOwner != null)
+                if (gun.CurrentAmmo != gun.GunPlayerOwner().Blanks)
                 {
-                    try
-                    {
-                        currentBlanks = (gun.CurrentOwner as PlayerController).Blanks;
-                    }
-                    catch
-                    {
-                        ETGModConsole.Log("Problem in currentBlanks = player.CurrentBlanks thingy.");
-                    }
-                    try
-                    {
-                        if (currentBlanks != lastBlanks)
-                        {
-                            try
-                            {
-                                RecalculateClip(gun.CurrentOwner as PlayerController);
-                            }
-                            catch
-                            {
-                                ETGModConsole.Log("Problem is in RecalculateClip() #1 thingy.");
-                            }
-                        }
-                    }
-                    catch
-                    {
-                        ETGModConsole.Log("Problem in first if thingy.");
-                    }
-                    try
-                    {
-                        lastBlanks = currentBlanks;
-                    }
-                    catch
-                    {
-                        ETGModConsole.Log("Problem in lastBlanks = currentBlanks ???");
-                    }
-                    try
-                    {
-                        if ((gun.CurrentAmmo == 0) || (gun.DefaultModule.numberOfShotsInClip != gun.CurrentAmmo))
-                        {
-                            try
-                            {
-                                RecalculateClip(gun.CurrentOwner as PlayerController);
-                            }
-                            catch
-                            {
-                                ETGModConsole.Log("Problem is in RecalculateClip() #2 thingy.");
-                            }
-                        }
-                    }
-                    catch
-                    {
-                        ETGModConsole.Log("Problem in second if thingy.");
-                    }
+                    this.RecalculateClip(gun.GunPlayerOwner());
                 }
-                base.Update();
             }
-            catch (Exception e)
-            {
-                ETGModConsole.Log(e.Message);
-                ETGModConsole.Log(e.StackTrace);
-                base.Update();
-            }
+            base.Update();
         }
         private void RecalculateClip(PlayerController gunOwner)
         {
             int total = gunOwner.Blanks;
             gun.CurrentAmmo = total;
-            gun.DefaultModule.numberOfShotsInClip = total;
-            gun.ClipShotsRemaining = total;
+            gun.ForceImmediateReload(true);
+            gunOwner.stats.RecalculateStats(gunOwner);
         }
         public Blankannon()
         {

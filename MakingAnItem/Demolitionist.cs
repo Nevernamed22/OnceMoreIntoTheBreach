@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -53,6 +54,7 @@ namespace NevernamedsItems
             gun.encounterTrackable.EncounterGuid = "this is the Demolitionist";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             DemolitionistID = gun.PickupObjectId;
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_DEMOLITIONIST, true);
         }
         public static int DemolitionistID;
         public override void OnReloadPressed(PlayerController player, Gun gun, bool bSOMETHING)

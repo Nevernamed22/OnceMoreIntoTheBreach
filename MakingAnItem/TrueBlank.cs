@@ -5,6 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -46,7 +47,10 @@ namespace NevernamedsItems
             item.consumable = false;
             item.quality = ItemQuality.S;
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.USED_FALSE_BLANK_TEN_TIMES, true);
+
         }
+
 
         //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!
 

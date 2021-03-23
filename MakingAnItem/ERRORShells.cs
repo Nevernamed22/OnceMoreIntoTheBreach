@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -12,36 +13,18 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //ETGModConsole.Log("Error Shells was initialised");
-            //The name of the item
             string itemName = "ERROR Shells";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/errorshells_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<ERRORShells>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "What do you mean 74 errors!?";
             string longDesc = "Picks a random selection of enemies to become highly efficient against.\n\n" + "These bullets were moulded by the numerous errors that went into making them, thanks to their incompetent smith.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.A;
-            //ETGModConsole.Log("ERROR shells finished it's initialisation");
+
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_ERRORSHELLS, true);
+            item.AddItemToDougMetaShop(30);
         }
         public override void Pickup(PlayerController player)
         {
@@ -49,53 +32,71 @@ namespace NevernamedsItems
             PickEnemies();
             player.PostProcessProjectile += this.PostProcessProjectile;
             player.PostProcessBeam += this.PostProcessBeam;
+            TextBubble.DoAmbientTalk(player.transform, new Vector3(1, 2, 0), PickedEnemiesDialogue, 5f); ;
         }
 
         bool hasPicked = false;
+        public string PickedEnemiesDialogue;
         private void PickEnemies()
         {
+            int timesIterated = 0;
             if (hasPicked) return;
+            string pickedEnemiesMessage = "";
+            Dictionary<string, string> MidCheckGUIDS = new Dictionary<string, string>();
+            foreach (string key in EnemyGuidDatabase.Entries.Keys)
+            {
+                if (!badMenToNotGoByeBye.Contains(EnemyGuidDatabase.Entries[key]))
+                {
+                    MidCheckGUIDS.Add(key, EnemyGuidDatabase.Entries[key]);
+                }
+            }
+            if (ModInstallFlags.PlanetsideOfGunymededInstalled)
+            {
+                foreach (string key in ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs.Keys)
+                {
+                    if (!badMenToNotGoByeBye.Contains(ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs[key]))
+                    {
+                        MidCheckGUIDS.Add(key, ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs[key]);
+                    }
+                }
+            }
+            if (ModInstallFlags.FrostAndGunfireInstalled)
+            {
+                foreach (string key in ModdedGUIDDatabase.FrostAndGunfireGUIDs.Keys)
+                {
+                    if (!badMenToNotGoByeBye.Contains(ModdedGUIDDatabase.FrostAndGunfireGUIDs[key]))
+                    {
+                        MidCheckGUIDS.Add(key, ModdedGUIDDatabase.FrostAndGunfireGUIDs[key]);
+                    }
+                }
+            }
+            //add modded enemies if they exist
             for (int i = 0; i < 10; i++)
             {
-                string guid, enemyName;
-                do
-                {
-                    int r = UnityEngine.Random.Range(0, EnemyGuidDatabase.Entries.Count);
-                    enemyName = EnemyGuidDatabase.Entries.Keys.ElementAt(r);
-                    guid = EnemyGuidDatabase.Entries[enemyName];
-                } while (badMenToNotGoByeBye.Contains(guid) || badMenGoByeBye.Contains(guid));
-                badMenGoByeBye.Add(guid);
-                ETGModConsole.Log("Enemy Chosen for Death: " + enemyName);
+                timesIterated++;
+                int index = UnityEngine.Random.Range(0, MidCheckGUIDS.Count);
+                string nameToAdd;
+                if (timesIterated >= 10) nameToAdd = "and " + MidCheckGUIDS.Keys.ElementAt(index) + ".";
+                else nameToAdd = MidCheckGUIDS.Keys.ElementAt(index) + ", \n";
+                nameToAdd = nameToAdd.Replace("_", " ");
+                ETGModConsole.Log("Enemy Chosen for Death: " + MidCheckGUIDS.Keys.ElementAt(index));
+                pickedEnemiesMessage += nameToAdd;
+                badMenGoByeBye.Add(MidCheckGUIDS.Values.ElementAt(index));
+                MidCheckGUIDS.Remove(MidCheckGUIDS.Keys.ElementAt(index));
             }
             hasPicked = true;
+            PickedEnemiesDialogue = pickedEnemiesMessage;
         }
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
-            try
-            {
-                if (Commands.instakillersDoubleDamage == true)
-                {
-                    sourceProjectile.projectile.specRigidbody.OnPreRigidbodyCollision += this.HandlePreCollision;
-                }
-                else
-                {
-                    sourceProjectile.OnHitEnemy += this.OnHitEnemy;
-                }
-            }
-            catch (Exception e)
-            {
-                ETGModConsole.Log(e.Message);
-            }
+            InstaKillEnemyTypeBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<InstaKillEnemyTypeBehaviour>();
+            instakill.EnemyTypeToKill.AddRange(badMenGoByeBye);
         }
         private void PostProcessBeam(BeamController sourceBeam)
         {
-            try
+            if (sourceBeam.projectile)
             {
-                sourceBeam.projectile.OnHitEnemy += this.OnHitEnemy;
-            }
-            catch (Exception e)
-            {
-                ETGModConsole.Log(e.Message);
+                this.PostProcessProjectile(sourceBeam.projectile, 1);
             }
         }
 
@@ -212,87 +213,41 @@ namespace NevernamedsItems
             EnemyGuidDatabase.Entries["cucco"],
             EnemyGuidDatabase.Entries["cop"],
             EnemyGuidDatabase.Entries["blockner"],
+            //Expand The Gungeon
+            #region FrostAndGunfire
+            ModdedGUIDDatabase.FrostAndGunfireGUIDs["humphrey"],
+            ModdedGUIDDatabase.FrostAndGunfireGUIDs["milton"],
+            ModdedGUIDDatabase.FrostAndGunfireGUIDs["roomimic"],
+            ModdedGUIDDatabase.FrostAndGunfireGUIDs["mushboom"],
+            #endregion
+            #region PlanetsideOfGunymede
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["shellrax"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["bullet_banker"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["jammed_guardian"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["deturret_left"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["deturret_right"],
+            //Gunymede Bullet Lads
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["an3s_bullet"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["apache_bullet"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["blazey_bullet"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["bleak_bullet"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["bot_bullet"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["bunny_bullet"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["cel_bullet"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["glaurung_bullet"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["hunter_bullet"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["king_bullet"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["kyle_bullet"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["neighborino_bullet"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["nevernamed_bullet"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["panda_bullet"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["retrash_bullet"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["skilotar_bullet"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["spapi_bullet"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["spcreat_bullet"],
+            ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs["wow_bullet"],
+#endregion
         };
-
-        private void HandlePreCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherPixelCollider)
-        {
-            string enemyGuid = otherRigidbody?.aiActor?.EnemyGuid;
-            if (!string.IsNullOrEmpty(enemyGuid))
-            {
-                if (otherRigidbody && otherRigidbody.healthHaver)
-                {
-                    foreach (var guid in badMenGoByeBye)
-                    {
-                        if (guid.Equals(enemyGuid))
-                        {
-                            float originalDamage = myRigidbody.projectile.baseData.damage;
-                            myRigidbody.projectile.baseData.damage *= 2f;
-                            GameManager.Instance.StartCoroutine(this.ChangeProjectileDamage(myRigidbody.projectile, originalDamage));
-                        }
-                    }
-                }
-            }
-        }
-        private IEnumerator ChangeProjectileDamage(Projectile bullet, float oldDamage)
-        {
-            yield return new WaitForSeconds(0.1f);
-            if (bullet != null)
-            {
-                bullet.baseData.damage = oldDamage;
-            }
-            yield break;
-        }
-        private void OnHitEnemy(Projectile arg1, SpeculativeRigidbody arg2, bool arg3)
-        {
-            string enemyGuid = arg2?.aiActor?.EnemyGuid;
-            if (!string.IsNullOrEmpty(enemyGuid))
-            {
-                try
-                {
-                    //ETGModConsole.Log("This enemy's Guid is: " + enemyGuid);
-
-
-                    if (badMenGoByeBye.Contains(enemyGuid))
-                    {
-                        if (enemyGuid == "062b9b64371e46e195de17b6f10e47c8" && Commands.instakillersDoubleDamage == false)
-                        {
-                            arg2.aiActor.EraseFromExistenceWithRewards();
-                        }
-                        else
-                        {
-                            if (Commands.instakillersDoubleDamage == true)
-                            {
-                                //float damageToDeal = arg1.baseData.damage;
-                                arg2.aiActor.healthHaver.ApplyDamage(1f, Vector2.zero, "Erasure", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
-                            }
-                            else
-                            {
-                                InstaKill(arg2.aiActor.healthHaver);
-                                return;
-                            }
-                        }
-                    }
-
-                }
-                catch (Exception e)
-                {
-                    ETGModConsole.Log(e.Message);
-                }
-            }
-        }
-
-        public void InstaKill(HealthHaver target)
-        {
-            try
-            {
-                //ETGModConsole.Log("This poor bastard is gonna die");
-                target.ApplyDamage(1E+07f, Vector2.zero, "Erasure", CoreDamageTypes.None, DamageCategory.Unstoppable, true, null, false);
-            }
-            catch (Exception e)
-            {
-                ETGModConsole.Log(e.Message);
-            }
-        }
         public override DebrisObject Drop(PlayerController player)
         {
             DebrisObject debrisObject = base.Drop(player);
@@ -307,6 +262,5 @@ namespace NevernamedsItems
             base.OnDestroy();
         }
     }
-
 }
 

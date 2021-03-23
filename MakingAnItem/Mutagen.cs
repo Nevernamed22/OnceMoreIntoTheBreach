@@ -5,6 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -41,6 +42,8 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.C;
 
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.HAS_BEATEN_BOSS_BY_SKIN_OF_TEETH, true);
+
         }
 
         private void OnEnemyDamaged(float damage, bool fatal, HealthHaver enemy)

@@ -5,7 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
-
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -39,6 +39,8 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D;
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.BEATEN_ANY_BOSS_TURBO_MODE, true);
+
         }
         bool hasPicked = false;
         public int randomNumber;

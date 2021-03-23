@@ -5,6 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -40,6 +41,8 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.A;
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_SNAILBULLETS, true);
+            item.AddItemToGooptonMetaShop(30);
         }
         public override void Pickup(PlayerController player)
         {

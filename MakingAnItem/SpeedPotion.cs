@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 
 using ItemAPI;
+using SaveAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
@@ -47,6 +48,8 @@ namespace NevernamedsItems
             item.consumable = false;
             item.quality = ItemQuality.C;
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_SPEEDPOTION, true);
+            item.AddItemToGooptonMetaShop(12);
         }
 
         //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!

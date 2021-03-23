@@ -8,6 +8,7 @@ using System.Collections;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
 using Dungeonator;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -53,6 +54,8 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile2);
             projectile2.SetProjectileSpriteRight("mockorangeguon_proj", 4, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
             mockOrangeGuonProj = projectile2;
+
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.RAINBOW_KILLED_LICH, true);
         }
         public static Projectile mockOrangeGuonProj;
         public static void BuildPrefab()

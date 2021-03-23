@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -62,6 +63,7 @@ namespace NevernamedsItems
 
             gun.AddToSubShop(ItemBuilder.ShopType.Cursula);
             SpiralID = gun.PickupObjectId;
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_SPIRAL, true);
         }
         public static int SpiralID;
         public Spiral()

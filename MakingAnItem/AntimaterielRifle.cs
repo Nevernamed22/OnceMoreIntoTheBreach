@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -64,6 +65,8 @@ namespace NevernamedsItems
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc);
             AntimaterielRifleID = gun.PickupObjectId;
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_ANTIMATERIELRIFLE, true);
+            gun.AddItemToTrorcMetaShop(28);
         }
         public static int AntimaterielRifleID;
         public override void OnPostFired(PlayerController player, Gun gun)

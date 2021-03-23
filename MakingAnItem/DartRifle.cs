@@ -8,6 +8,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -47,16 +48,15 @@ namespace NevernamedsItems
             projectile.transform.parent = gun.barrelOffset;
             projectile.baseData.speed *= 2f;
             projectile.baseData.damage *= 1.4f;
-            BulletStunModifier stunning = projectile.gameObject.AddComponent<BulletStunModifier>();
-            stunning.doVFX = true;
-            stunning.stunLength = 10f;
-            stunning.chanceToStun = 1f;
+            projectile.AppliesStun = true;
+            projectile.AppliedStunDuration += 7f;
+            projectile.StunApplyChance = 1f;
             projectile.SetProjectileSpriteRight("dartrifle_projectile", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 14, 3);
 
             gun.quality = PickupObject.ItemQuality.B;
             gun.encounterTrackable.EncounterGuid = "this is the Dart Rifle";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
-
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_DARTRIFLE, true);
             DartRifleID = gun.PickupObjectId;
         }
         public override void PostProcessProjectile(Projectile projectile)

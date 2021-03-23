@@ -5,6 +5,7 @@ using System.Text;
 using ItemAPI;
 using UnityEngine;
 using System.Collections;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -42,6 +43,8 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.B;
 
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_UNENGRAVEDBULLETS, true);
+            item.AddItemToTrorcMetaShop(15);
         }
 
         float duration = 4;
@@ -184,33 +187,14 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Engraved Bullets";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/engravedbullets_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<EngravedBullets>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Bullet with your name on it";
             string longDesc = "These bullets are specially made to absolutely annihilate one specific foe.\n\n" + "They may run. They may hide. But you will find them";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.EXCLUDED;
         }
         string enemyToKillEngraved = UnengravedBullets.engravedEnemy;
@@ -219,101 +203,18 @@ namespace NevernamedsItems
             base.Pickup(player);
             player.PostProcessProjectile += this.PostProcessProjectile;
             player.PostProcessBeam += this.PostProcessBeam;
-        }
-        private void HandlePreCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherPixelCollider)
-        {
-            string enemyGuid = otherRigidbody?.aiActor?.EnemyGuid;
-            if (!string.IsNullOrEmpty(enemyGuid))
-            {
-                if (otherRigidbody && otherRigidbody.healthHaver)
-                {
-
-                    if (enemyGuid == enemyToKillEngraved)
-                    {
-                        float originalDamage = myRigidbody.projectile.baseData.damage;
-                        myRigidbody.projectile.baseData.damage *= 2f;
-                        GameManager.Instance.StartCoroutine(this.ChangeProjectileDamage(myRigidbody.projectile, originalDamage));
-                    }
-
-                }
-            }
-        }
-        private IEnumerator ChangeProjectileDamage(Projectile bullet, float oldDamage)
-        {
-            yield return new WaitForSeconds(0.1f);
-            if (bullet != null)
-            {
-                bullet.baseData.damage = oldDamage;
-            }
-            yield break;
-        }
-        private void OnHitEnemy(Projectile arg1, SpeculativeRigidbody arg2, bool arg3)
-        {
-            string enemyGuid = arg2?.aiActor?.EnemyGuid;
-            if (!string.IsNullOrEmpty(enemyGuid))
-            {
-                if (enemyGuid == enemyToKillEngraved)
-                {
-                    if (enemyGuid == "062b9b64371e46e195de17b6f10e47c8" && Commands.instakillersDoubleDamage == false)
-                    {
-                        arg2.aiActor.EraseFromExistenceWithRewards();
-                    }
-                    else
-                    {
-                        if (Commands.instakillersDoubleDamage == true)
-                        {
-                            //float damageToDeal = arg1.baseData.damage;
-                            arg2.aiActor.healthHaver.ApplyDamage(1f, Vector2.zero, "Erasure", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
-                        }
-                        else
-                        {
-                            InstaKill(arg2.aiActor.healthHaver);
-                            return;
-                        }
-                    }
-                }
-            }
-        }
-        public void InstaKill(HealthHaver target)
-        {
-            try
-            {
-                //ETGModConsole.Log("This poor bastard is gonna die");
-                target.ApplyDamage(1E+07f, Vector2.zero, "Erasure", CoreDamageTypes.None, DamageCategory.Unstoppable, true, null, false);
-            }
-            catch (Exception e)
-            {
-                ETGModConsole.Log(e.Message);
-            }
-        }
+        }                 
         private void PostProcessBeam(BeamController sourceBeam)
         {
-            try
+            if (sourceBeam.projectile)
             {
-                sourceBeam.projectile.OnHitEnemy += this.OnHitEnemy;
-            }
-            catch (Exception e)
-            {
-                ETGModConsole.Log(e.Message);
+                this.PostProcessProjectile(sourceBeam.projectile, 1);
             }
         }
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
-            try
-            {
-                if (Commands.instakillersDoubleDamage == true)
-                {
-                    sourceProjectile.projectile.specRigidbody.OnPreRigidbodyCollision += this.HandlePreCollision;
-                }
-                else
-                {
-                    sourceProjectile.OnHitEnemy += this.OnHitEnemy;
-                }
-            }
-            catch (Exception e)
-            {
-                ETGModConsole.Log(e.Message);
-            }
+            InstaKillEnemyTypeBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<InstaKillEnemyTypeBehaviour>();
+            instakill.EnemyTypeToKill.Add(enemyToKillEngraved);
         }
         public override DebrisObject Drop(PlayerController player)
         {

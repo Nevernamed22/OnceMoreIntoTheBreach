@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -69,6 +70,8 @@ namespace NevernamedsItems
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             DoggunID = gun.PickupObjectId;
+
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.KILLED_DRAGUN_WITH_DOG, true);
         }
         public static int DoggunID;
         public override void OnPostFired(PlayerController player, Gun gun)
