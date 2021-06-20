@@ -98,7 +98,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("Luck of the Quickdraw", mandatorySynergyItemsLuckOfTheQuickdraw);
             //MAGICKE CAULDRON / SIXTH CHAMBER / YELLOW CHAMBER / HIGH KALIBER / KALIBER'S EYE
             List<string> mandatorySynergyItemsAMosteAccursedBrew = new List<string>() { "nn:alchemy_crucible" };
-            List<string> optionalSynergyItemsAMosteAccursedBrew = new List<string>() { "sixth_chamber", "yellow_chamber", "high_kaliber", "nn:kaliber's_eye" };
+            List<string> optionalSynergyItemsAMosteAccursedBrew = new List<string>() { "sixth_chamber", "yellow_chamber", "high_kaliber", "nn:kalibers_eye" };
             CustomSynergies.Add("A Moste Accursed Brew", mandatorySynergyItemsAMosteAccursedBrew, optionalSynergyItemsAMosteAccursedBrew);
             //MAGICKE CAULDRON / CHAOS AMMOLET / CHAOS BULLETS
             List<string> mandatorySynergyItemsICANDOANYTHING = new List<string>() { "nn:alchemy_crucible" };
@@ -178,10 +178,10 @@ namespace NevernamedsItems
             CustomSynergies.Add("Burn, Baby Burn!", mandatorySynergyItemsBurnBabyBurn, optionalSynergyItemsBurnBabyBurn);
             //MR. FAHRENHEIT / MR ACCRETION JR
             List<string> mandatorySynergyItemsMercury = new List<string>() { "mr_accretion_jr" };
-            List<string> optionalSynergyItemsMercury = new List<string>() { "nn:mr._fahrenheit", };
+            List<string> optionalSynergyItemsMercury = new List<string>() { "nn:mr_fahrenheit", };
             CustomSynergies.Add("Mercury", mandatorySynergyItemsMercury, optionalSynergyItemsMercury);
             //MR. FAHRENHEIT / SUPERSONIC SHOTS
-            List<string> mandatorySynergyItemsSupersonicMan = new List<string>() { "nn:supersonic_shots", "nn:mr._fahrenheit" };
+            List<string> mandatorySynergyItemsSupersonicMan = new List<string>() { "nn:supersonic_shots", "nn:mr_fahrenheit" };
             CustomSynergies.Add("Supersonic Man", mandatorySynergyItemsSupersonicMan);
             //SILVER AMMOLET / SILVER BULLETS
             List<string> mandatorySynergyItemsBlessedAreTheShriek = new List<string>() { "nn:silver_ammolet", "silver_bullets" };
@@ -285,7 +285,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("Smite", mandatorySynergyItemsSmite, optionalSynergyItemsSmite);
             //DIAMOND GUN - FIRE ASPECT
             List<string> mandatorySynergyItemsFireAspect = new List<string>() { "nn:diamond_gun" };
-            List<string> optionalSynergyItemsFireAspect = new List<string>() { "hot_lead", "nn:tracer_rounds", "copper_ammolet", "phoenix", "nn:mr._fahrenheit" };
+            List<string> optionalSynergyItemsFireAspect = new List<string>() { "hot_lead", "nn:tracer_rounds", "copper_ammolet", "phoenix", "nn:mr_fahrenheit" };
             CustomSynergies.Add("Fire Aspect", mandatorySynergyItemsFireAspect, optionalSynergyItemsFireAspect);
             //DIAMOND GUN - KNOCKBACK
             List<string> mandatorySynergyItemsKnockback = new List<string>() { "nn:diamond_gun" };
@@ -327,13 +327,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("Back Muscle", mandatorySynergyItemsBackMuscle);
             //VISCERIFLE / GREEN GUON STONE
             List<string> mandatorySynergyItemsDangerIsMyMiddleName = new List<string>() { "nn:viscerifle", "green_guon_stone" };
-            CustomSynergies.Add("Danger Is My Middle Name", mandatorySynergyItemsDangerIsMyMiddleName);
-            /*//BLANKANNON / GLASS AMMOLET
-            List<string> mandatorySynergyItemsPanedExpression = new List<string>() { "nn:blankannon", "nn:glass_ammolet" };
-            CustomSynergies.Add("Paned Expression", mandatorySynergyItemsPanedExpression);
-            //BLANKANNON / ELDER BLANK
-            List<string> mandatorySynergyItemsSecretsOfTheAncients = new List<string>() { "nn:blankannon", "elder_blank" };
-            CustomSynergies.Add("Secrets of the Ancients", mandatorySynergyItemsSecretsOfTheAncients);*/
+            CustomSynergies.Add("Danger Is My Middle Name", mandatorySynergyItemsDangerIsMyMiddleName);            
             //CLOWN SHOTGUN / CLOWN MASK
             List<string> mandatorySynergyItemsClownTown = new List<string>() { "nn:clown_shotgun" };
             List<string> optionalSynergyItemsClownTown = new List<string>() { "clown_mask" };
@@ -403,11 +397,11 @@ namespace NevernamedsItems
             List<string> mandatorySynergyItemsSoundBarrier = new List<string>() { "nn:table_tech_speed", "nn:speed_potion" };
             CustomSynergies.Add("Sound Barrier", mandatorySynergyItemsSoundBarrier);
             //YELLOW CHAMBER / KALIBERS EYE
-            List<string> mandatorySynergyItemsAllSeeing = new List<string>() { "nn:kaliber's_eye", "yellow_chamber" };
+            List<string> mandatorySynergyItemsAllSeeing = new List<string>() { "nn:kalibers_eye", "yellow_chamber" };
             CustomSynergies.Add("All Seeing", mandatorySynergyItemsAllSeeing);
             //MINERS BULLETS / EYE ITEMS
             List<string> mandatorySynergyItemsEyeOfTheSpider = new List<string>() { "nn:miners_bullets" };
-            List<string> optionalSynergyItemsEyeOfTheSpider = new List<string>() { "nn:kaliber's_eye", "bloody_eye", "rolling_eye", "eye_of_the_beholster" };
+            List<string> optionalSynergyItemsEyeOfTheSpider = new List<string>() { "nn:kalibers_eye", "bloody_eye", "rolling_eye", "eye_of_the_beholster" };
             CustomSynergies.Add("Eye of the Spider", mandatorySynergyItemsEyeOfTheSpider, optionalSynergyItemsEyeOfTheSpider);
             //LUCKY COIN / LOOT ITEMS
             List<string> mandatorySynergyItemsProsperity = new List<string>() { "nn:lucky_coin" };
@@ -417,6 +411,9 @@ namespace NevernamedsItems
             List<string> mandatorySynergyItemsMiningAway = new List<string>() { "nn:miners_bullets" };
             List<string> optionalSynergyItemsMiningAway = new List<string>() { "nn:lump_of_space_metal", "mine_cutter" };
             CustomSynergies.Add("Miiiining Away~", mandatorySynergyItemsMiningAway, optionalSynergyItemsMiningAway);
+            //BLOODTHIRSTY BULLETS / SILVER BULLETS
+            List<string> mandatorySynergyItemsFunnySyngeryName = new List<string>() { "nn:bloodthirsty_bullets", "silver_bullets" };
+            CustomSynergies.Add("[todo: Add funny synergy name]", mandatorySynergyItemsFunnySyngeryName);
             #endregion
 
             #region BigUpdate (1.14) Synergies
@@ -904,7 +901,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("Whirling Blade", mandatorySynergyItemsWhirlingBlade);
             //COMBAT KNIFE / HOT ITEMS
             List<string> mandatorySynergyItems1000DegreeKnife = new List<string>() { "nn:combat_knife" };
-            List<string> optionalSynergyItems1000DegreeKnife = new List<string>() { "hot_lead", "nn:flame_chamber", "nn:mr._fahrenheit" };
+            List<string> optionalSynergyItems1000DegreeKnife = new List<string>() { "hot_lead", "nn:flame_chamber", "nn:mr_fahrenheit" };
             CustomSynergies.Add("1000 Degree Knife", mandatorySynergyItems1000DegreeKnife, optionalSynergyItems1000DegreeKnife);
             //LASER BULLETS / HEAVILY VECTOR BASED ITEMS
             List<string> mandatorySynergyItemsNewVector = new List<string>() { "nn:laser_bullets" };
@@ -1004,6 +1001,53 @@ namespace NevernamedsItems
             List<string> mandatorySynergyItemsMechanicalHands = new List<string>() { "nn:grandfather_glock" };
             List<string> optionalSynergyItemsMechanicalHands = new List<string>() { "nn:lefthandedness", "nn:finger_guns" };
             CustomSynergies.Add("Mechanical Hands", mandatorySynergyItemsMechanicalHands, optionalSynergyItemsMechanicalHands);
+            //GUSTY / CYCLONE BOOTS
+            List<string> mandatorySynergyItemsGaleForce = new List<string>() { "nn:gusty", "nn:cyclone_boots" };
+            CustomSynergies.Add("Gale Force", mandatorySynergyItemsGaleForce);
+            //SHATTERBLANK / RING OF TRIGGERS / CHANCE BULLETS / FLAK BULLETS
+            List<string> mandatorySynergyItemsFragMental = new List<string>() { "nn:shatterblank" };
+            List<string> optionalSynergyItemsFragMental = new List<string>() { "ring_of_triggers", "chance_bullets", "flak_bullets" };
+            CustomSynergies.Add("Frag Mental", mandatorySynergyItemsFragMental, optionalSynergyItemsFragMental);
+            //BLANKANNON / GLASS AMMOLET
+            List<string> mandatorySynergyItemsPanedExpression = new List<string>() { "nn:blankannon", "nn:glass_ammolet" };
+            CustomSynergies.Add("Paned Expression", mandatorySynergyItemsPanedExpression);
+            //BLANKANNON / ELDER BLANK
+            List<string> mandatorySynergyItemsSecretsOfTheAncients = new List<string>() { "nn:blankannon", "elder_blank" };
+            CustomSynergies.Add("Secrets of the Ancients", mandatorySynergyItemsSecretsOfTheAncients);
+            //MAP FRAGMENT / TATTERED MAP / SCROLL OF EXACT KNOWLEDGE
+            List<string> mandatorySynergyItemsRestoration = new List<string>() { "nn:map_fragment" };
+            List<string> optionalSynergyItemsRestoration = new List<string>() { "nn:scroll_of_exact_knowledge", "nn:tattered_map" };
+            CustomSynergies.Add("Restoration", mandatorySynergyItemsRestoration, optionalSynergyItemsRestoration);
+            //MAP FRAGMENT / BRICK OF CASH / KALIBER'S EYE / VENUSIAN BARS
+            List<string> mandatorySynergyItemsTrustInTheAllSeeing = new List<string>() { "nn:map_fragment" };
+            List<string> optionalSynergyItemsTrustInTheAllSeeing = new List<string>() { "brick_of_cash", "nn:venusian_bars", "nn:kalibers_eye" };
+            CustomSynergies.Add("Trust In The All-Seeing", mandatorySynergyItemsTrustInTheAllSeeing, optionalSynergyItemsTrustInTheAllSeeing);
+            //CLOAK OF DARKNESS / SILVER ITEMS
+            List<string> mandatorySynergyItemsCloakAndMirrors = new List<string>() { "nn:cloak_of_darkness" };
+            List<string> optionalSynergyItemsCloakAndMirrors = new List<string>() { "nn:mirror_bullets", "nn:silver_ammolet", "silver_bullets" };
+            CustomSynergies.Add("Cloak and Mirrors", mandatorySynergyItemsCloakAndMirrors, optionalSynergyItemsCloakAndMirrors);
+            //SYRINGES
+            List<string> mandatorySynergyItemsSpun = new List<string>() { "antibody", "nn:blood_thinner", "nn:booster_shot" };
+            CustomSynergies.Add("Spun", mandatorySynergyItemsSpun);
+            //MINUTE GUN / BULLET TIME / GRANDFATHERGLOCK
+            List<string> mandatorySynergyItemsNickOfTime = new List<string>() { "nn:minute_gun" };
+            List<string> optionalSynergyItemsNickOfTime = new List<string>() { "nn:grandfather_glock", "bullet_time" };
+            CustomSynergies.Add("Nick Of Time", mandatorySynergyItemsNickOfTime, optionalSynergyItemsNickOfTime);
+            //BOMBARDIER SHELLS / MISTAKE BULLETS
+            List<string> mandatorySynergyItemsForwardThinking = new List<string>() { "nn:bombardier_shells", "nn:mistake_bullets" };
+            CustomSynergies.Add("Forward Thinking", mandatorySynergyItemsForwardThinking);
+            //SPLATTERSHOT/+1BULLETS
+            List<string> mandatorySynergyItemsThreePlusOneEqualsFour = new List<string>() { "nn:splattershot", "+1_bullets" };
+            CustomSynergies.Add("3 + 1 = 4", mandatorySynergyItemsThreePlusOneEqualsFour);
+            //KEYMOLLET + AMMOLOCK
+            List<string> mandatorySynergyItemsUnderLockAndKey = new List<string>() { "nn:keymmolet", "nn:ammolock" };
+            CustomSynergies.Add("Under Lock And Key", mandatorySynergyItemsUnderLockAndKey);
+            //PESTIFEROUS LEAD + ALPHA BULLETS
+            List<string> mandatorySynergyItemsAddedEffectPlague = new List<string>() { "nn:pestiferous_lead", "alpha_bullets" };
+            CustomSynergies.Add("Added Effect - Plague", mandatorySynergyItemsAddedEffectPlague);
+            //PESTIFEROUS LEAD + OMEGA BULLETS
+            List<string> mandatorySynergyItemsAmethystWeapon = new List<string>() { "nn:pestiferous_lead", "omega_bullets" };
+            CustomSynergies.Add("Amethyst Weapon", mandatorySynergyItemsAmethystWeapon);
             #endregion
 
         }

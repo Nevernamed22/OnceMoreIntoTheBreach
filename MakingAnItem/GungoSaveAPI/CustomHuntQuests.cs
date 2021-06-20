@@ -5,6 +5,7 @@ using System.Text;
 using MonoMod.RuntimeDetour;
 using UnityEngine;
 using System.Reflection;
+using NevernamedsItems;
 
 namespace SaveAPI
 {
@@ -167,6 +168,17 @@ namespace SaveAPI
                 }
             }
             HuntData.OrderedQuests = tempQuests;
+            if (self.ActiveQuest != null)
+            {
+                //ETGModConsole.Log("Active quest is not null");
+                //VFXToolbox.DoStringSquirt("Active quest NOT NULL", GameManager.Instance.PrimaryPlayer.CenterPosition, Color.red);
+
+            }
+            else if (self.ActiveQuest == null)
+            {
+                //ETGModConsole.Log("Active quest is null");
+                //VFXToolbox.DoStringSquirt("Active quest is NULL", GameManager.Instance.PrimaryPlayer.CenterPosition, Color.red);
+            }
             int result = orig(self);
             MonsterHuntQuest normalResult = FindNextQuestNoProcedural();
             HuntData.OrderedQuests = origQuests;
@@ -194,6 +206,14 @@ namespace SaveAPI
 
         public static void HuntProgressCompleteHook(Action<MonsterHuntProgress> orig, MonsterHuntProgress self)
         {
+            if (self.ActiveQuest != null)
+            {
+                //ETGModConsole.Log("New: active quest is not null (HuntProgressCompleteHook BEGINNING)");
+            }
+            else
+            {
+                //ETGModConsole.Log("New: active quest is null (HuntProgressCompleteHook BEGINNING)");
+            }
             GungeonFlags cachedFlag = self.ActiveQuest.QuestFlag;
             bool cachedFlagValue = GameStatsManager.Instance.GetFlag(GungeonFlags.INTERNALDEBUG_HAS_SEEN_DEMO_TEXT);
             if (self.ActiveQuest is CustomHuntQuest)
@@ -207,6 +227,14 @@ namespace SaveAPI
             orig(self);
             GameStatsManager.Instance.SetFlag(GungeonFlags.INTERNALDEBUG_HAS_SEEN_DEMO_TEXT, cachedFlagValue);
             self.ActiveQuest.QuestFlag = cachedFlag;
+            if (self.ActiveQuest != null)
+            {
+                //ETGModConsole.Log("New: active quest is not null (HuntProgressCompleteHook END)");
+            }
+            else
+            {
+                //ETGModConsole.Log("New: active quest is null (HuntProgressCompleteHook END)");
+            }
         }
 
         public static bool HuntQuestCompleteHook(Func<MonsterHuntQuest, bool> orig, MonsterHuntQuest self)
@@ -229,6 +257,7 @@ namespace SaveAPI
 
         public static void HuntQuestUnlockRewardsHook(Action<MonsterHuntQuest> orig, MonsterHuntQuest self)
         {
+           // ETGModConsole.Log("Unlocking quest rewards");
             if (self is CustomHuntQuest)
             {
                 (self as CustomHuntQuest).UnlockRewards();
@@ -241,6 +270,14 @@ namespace SaveAPI
 
         public static void HuntProgressLoadedHook(Action<MonsterHuntProgress> orig, MonsterHuntProgress self)
         {
+            if (self.ActiveQuest != null)
+            {
+                //ETGModConsole.Log("Old: active quest is not null");
+            }
+            else
+            {
+                //ETGModConsole.Log("Old: active quest is null");
+            }
             if (GameManager.HasInstance)
             {
                 if (GameManager.Instance.platformInterface == null)
@@ -311,7 +348,7 @@ namespace SaveAPI
             bool cachedFlagValue = GameStatsManager.Instance.GetFlag(GungeonFlags.FRIFLE_CORE_HUNTS_COMPLETE);
             foreach (MonsterHuntQuest quest in HuntData.OrderedQuests)
             {
-                if (quest != null && !quest.IsQuestComplete())
+                if (quest != null && !quest.IsReallyCompleted())
                 {
                     lastUncompletedQuest = quest;
                 }
@@ -373,6 +410,14 @@ namespace SaveAPI
                 }
             }
             GameStatsManager.Instance.SetFlag(GungeonFlags.FRIFLE_CORE_HUNTS_COMPLETE, cachedFlagValue);
+            if (self.ActiveQuest != null)
+            {
+                //ETGModConsole.Log("New: active quest is not null");
+            }
+            else
+            {
+                //ETGModConsole.Log("New: active quest is null");
+            }
         }
 
         /// <summary>

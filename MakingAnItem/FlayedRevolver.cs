@@ -62,15 +62,99 @@ namespace NevernamedsItems
             {
                 if (gun.CurrentAmmo >= 5)
                 {
-                    gun.CurrentAmmo -= 5;
-                    TeleportPlayerToCursorPosition.StartTeleport(player);
+                    if (this.m_extantReticleQuad) //If the cursor is there, then do the teleport
+                    {
+                        gun.CurrentAmmo -= 5;
+                        Vector2 worldCenter = this.m_extantReticleQuad.WorldCenter;
+                        UnityEngine.Object.Destroy(this.m_extantReticleQuad.gameObject);
+                        worldCenter += new Vector2(1.5f, 1.5f);
+                        //worldCenter = new Vector2(Mathf.FloorToInt(worldCenter.x), Mathf.FloorToInt(worldCenter.y));
+                       // UnityEngine.Object.Instantiate<GameObject>((PickupObjectDatabase.GetById(Pencil.pencilID) as Gun).DefaultModule.projectiles[0].gameObject, new Vector3(worldCenter.x, worldCenter.y), Quaternion.identity);
+                        TeleportPlayerToCursorPosition.StartTeleport(player, worldCenter);
+                    }
+                    else //If the cursor is not there, make it
+                    {
+                        GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(this.reticleQuad);
+                        this.m_extantReticleQuad = gameObject.GetComponent<tk2dBaseSprite>();
+                        this.m_currentAngle = BraveMathCollege.Atan2Degrees(player.unadjustedAimPoint.XY() - player.CenterPosition);
+                        this.m_currentDistance = 5f;
+                        this.UpdateReticlePosition();
+                    }
                 }
             }
         }
-
+        protected override void Update()
+        {
+            if (this.m_extantReticleQuad)
+            {
+                this.UpdateReticlePosition();
+            }
+            base.Update();
+        }
+        public override void OnSwitchedAwayFromThisGun()
+        {
+            if (this.m_extantReticleQuad)
+            {
+                UnityEngine.Object.Destroy(this.m_extantReticleQuad.gameObject);
+            }
+            base.OnSwitchedAwayFromThisGun();
+        }
+        public override void OnPostFired(PlayerController player, Gun gun)
+        {
+            if (this.m_extantReticleQuad)
+            {
+                UnityEngine.Object.Destroy(this.m_extantReticleQuad.gameObject);
+            }
+            base.OnPostFired(player, gun);
+        }
+        private void UpdateReticlePosition()
+        {
+            PlayerController user = this.gun.GunPlayerOwner();
+            if (user)
+            {
+                if (BraveInput.GetInstanceForPlayer(user.PlayerIDX).IsKeyboardAndMouse(false))
+                {
+                    Vector2 vector = user.unadjustedAimPoint.XY();
+                    Vector2 vector2 = vector - this.m_extantReticleQuad.GetBounds().extents.XY();
+                    this.m_extantReticleQuad.transform.position = vector2;
+                }
+                else
+                {
+                    BraveInput instanceForPlayer = BraveInput.GetInstanceForPlayer(user.PlayerIDX);
+                    Vector2 vector3 = user.CenterPosition + (Quaternion.Euler(0f, 0f, this.m_currentAngle) * Vector2.right).XY() * this.m_currentDistance;
+                    vector3 += instanceForPlayer.ActiveActions.Aim.Vector * 12f * BraveTime.DeltaTime;
+                    this.m_currentAngle = BraveMathCollege.Atan2Degrees(vector3 - user.CenterPosition);
+                    this.m_currentDistance = Vector2.Distance(vector3, user.CenterPosition);
+                    this.m_currentDistance = Mathf.Min(this.m_currentDistance, 100);
+                    vector3 = user.CenterPosition + (Quaternion.Euler(0f, 0f, this.m_currentAngle) * Vector2.right).XY() * this.m_currentDistance;
+                    Vector2 vector4 = vector3 - this.m_extantReticleQuad.GetBounds().extents.XY();
+                    this.m_extantReticleQuad.transform.position = vector4;
+                }
+            }
+        }
+        protected override void OnDestroy()
+        {
+            if (this.m_extantReticleQuad)
+            {
+                UnityEngine.Object.Destroy(this.m_extantReticleQuad.gameObject);
+            }
+            base.OnDestroy();
+        }
+        public override void OnDropped()
+        {
+            if (this.m_extantReticleQuad)
+            {
+                UnityEngine.Object.Destroy(this.m_extantReticleQuad.gameObject);
+            }
+            base.OnDropped();
+        }
         public FlayedRevolver()
         {
-
+            reticleQuad = (PickupObjectDatabase.GetById(443) as TargetedAttackPlayerItem).reticleQuad;
         }
+        public GameObject reticleQuad;
+        private tk2dBaseSprite m_extantReticleQuad;
+        private float m_currentAngle;
+        private float m_currentDistance = 5f;
     }
 }

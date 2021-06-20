@@ -280,7 +280,7 @@ namespace NevernamedsItems
                     UnityEngine.Object.Instantiate<GameObject>(EasyVFXDatabase.TeleporterPrototypeTelefragVFX, enemy.UnitCenter, Quaternion.identity);
                     if (owner && owner.PlayerHasActiveSynergy("Blood For The Blood God"))
                     {
-                        GoopDefinition Blood = EasyGoopDefinitions.GenerateBloodGoop(15, 20);
+                        GoopDefinition Blood = EasyGoopDefinitions.GenerateBloodGoop(15, Color.red, 20);
                         DeadlyDeadlyGoopManager goopManagerForGoopType = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(Blood);
                         goopManagerForGoopType.TimedAddGoopCircle(enemy.UnitCenter, 3, 0.5f, false);
                     }

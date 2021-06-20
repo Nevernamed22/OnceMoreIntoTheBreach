@@ -18,6 +18,43 @@ namespace SaveAPI
         /// <param name="oldPath">Old filepath</param>
         /// <param name="newPath">New filepath</param>
         /// <param name="allowOverwritting">If <see langword="true"/>, instead of not moving the file if a file on <paramref name="newPath"/> already exists it will overwrite the file on <paramref name="newPath"/></param>
+        public static bool IsReallyCompleted(this MonsterHuntQuest quest)
+        {
+            bool allRewardsUnlocked = true;
+            foreach (GungeonFlags flag in quest.FlagsToSetUponReward)
+            {
+                if (flag != GungeonFlags.NONE && !GameStatsManager.Instance.GetFlag(flag))
+                {
+                    allRewardsUnlocked = false;
+                    break;
+                }
+            }
+            if (quest is CustomHuntQuest custom)
+            {
+                if (allRewardsUnlocked)
+                {
+                    foreach (CustomDungeonFlags flag in custom.CustomFlagsToSetUponReward)
+                    {
+                        if (flag != CustomDungeonFlags.NONE && !AdvancedGameStatsManager.Instance.GetFlag(flag))
+                        {
+                            allRewardsUnlocked = false;
+                            break;
+                        }
+                    }
+                }
+                bool anyQuestFlagCompleted = false;
+                if (quest.QuestFlag != GungeonFlags.NONE)
+                {
+                    anyQuestFlagCompleted = GameStatsManager.Instance.GetFlag(quest.QuestFlag);
+                }
+                else if (custom.CustomQuestFlag != CustomDungeonFlags.NONE)
+                {
+                    anyQuestFlagCompleted = AdvancedGameStatsManager.Instance.GetFlag(custom.CustomQuestFlag);
+                }
+                return anyQuestFlagCompleted && allRewardsUnlocked;
+            }
+            return GameStatsManager.Instance.GetFlag(quest.QuestFlag) && allRewardsUnlocked;
+        }
         public static void SafeMove(string oldPath, string newPath, bool allowOverwritting = false)
         {
             if (File.Exists(oldPath) && (allowOverwritting || !File.Exists(newPath)))

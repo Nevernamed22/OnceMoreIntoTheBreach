@@ -74,8 +74,13 @@ namespace NevernamedsItems
         };
         public override void Pickup(PlayerController player)
         {
-            if (PickupObjectDatabase.GetByEncounterName("Exalted Armbow") != null) bowWeapons.Add(PickupObjectDatabase.GetByEncounterName("Exalted Armbow").PickupObjectId);
-            if (PickupObjectDatabase.GetByEncounterName("Stake Launcher") != null) bowWeapons.Add(PickupObjectDatabase.GetByEncounterName("Stake Launcher").PickupObjectId);
+            if (m_pickedUpThisRun)
+            {
+                bowWeapons.Add(IceBow.IceBowID);
+                bowWeapons.Add(Hwacha.HwachaID);
+                if (PickupObjectDatabase.GetByEncounterName("Exalted Armbow") != null) bowWeapons.Add(PickupObjectDatabase.GetByEncounterName("Exalted Armbow").PickupObjectId);
+                if (PickupObjectDatabase.GetByEncounterName("Stake Launcher") != null) bowWeapons.Add(PickupObjectDatabase.GetByEncounterName("Stake Launcher").PickupObjectId);
+            }
             base.Pickup(player);
         }
         private void GiveSynergyBoost()

@@ -1,4 +1,5 @@
-﻿using MonoMod.RuntimeDetour;
+﻿using Dungeonator;
+using MonoMod.RuntimeDetour;
 using SaveAPI;
 using System;
 using System.Collections;
@@ -35,114 +36,50 @@ namespace NevernamedsItems
             {
                 m_attachedPlayer.OnAnyEnemyReceivedDamage += this.OnPlayerDamagedEnemy;
                 m_attachedPlayer.PostProcessThrownGun += this.PostProcessThrownGun;
+                m_attachedPlayer.PostProcessProjectile += this.PostProcessProjectile;
+                m_attachedPlayer.PostProcessBeam += this.PostProcessBeam;
+                m_attachedPlayer.OnHitByProjectile += this.OnHitByProjectile;
                 if (GameManager.Instance.SecondaryPlayer != null && GameManager.Instance.SecondaryPlayer == m_attachedPlayer) { isSecondaryPlayer = true; }
             }
+            //Stats
             DoubleDamageStatMod = new StatModifier();
             DoubleDamageStatMod.statToBoost = PlayerStats.StatType.Damage;
             DoubleDamageStatMod.amount = 2f;
             DoubleDamageStatMod.modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE;
+
+            keepItCoolSpeedBuff = new StatModifier();
+            keepItCoolSpeedBuff.statToBoost = PlayerStats.StatType.MovementSpeed;
+            keepItCoolSpeedBuff.amount = 2.5f;
+            keepItCoolSpeedBuff.modifyType = StatModifier.ModifyMethod.ADDITIVE;
+        }
+        private void OnHitByProjectile(Projectile bullet, PlayerController self)
+        {
+            if (bullet && bullet.Owner && (bullet.Owner is AIActor) && (bullet.Owner as AIActor).EnemyGuid == "e5cffcfabfae489da61062ea20539887")
+            {
+                if (!SaveAPIManager.GetFlag(CustomDungeonFlags.HURT_BY_SHROOMER))
+                {
+                    SaveAPIManager.SetFlag(CustomDungeonFlags.HURT_BY_SHROOMER, true);
+                }
+            }
+        }
+        private void PostProcessProjectile(Projectile proj, float shit)
+        {
+            if (Challenges.CurrentChallenge == ChallengeType.INVISIBLEO) proj.sprite.renderer.enabled = false;
+            else if (Challenges.CurrentChallenge == ChallengeType.KEEP_IT_COOL)
+            {
+                if (UnityEngine.Random.value <= 0.4f)
+                {
+                    proj.statusEffectsToApply.Add(StaticStatusEffects.frostBulletsEffect);
+                    proj.AdjustPlayerProjectileTint(ExtendedColours.frostBulletsTint, 2);
+                }
+            }
+        }
+        private void PostProcessBeam(BeamController bem)
+        {
+            if (Challenges.CurrentChallenge == ChallengeType.INVISIBLEO) bem.sprite.renderer.enabled = false;
         }
         private void OnPlayerDamagedEnemy(float huh, bool fatal, HealthHaver enemy)
         {
-            if (isSecondaryPlayer && GameManager.Instance.PrimaryPlayer && !GameManager.Instance.PrimaryPlayer.IsGhost) return;
-            if (fatal)
-            {
-                if (enemy.aiActor)
-                {
-                    if (enemy.aiActor.CanTargetEnemies = true && enemy.aiActor.CanTargetPlayers == false)
-                    {
-                        SaveAPIManager.RegisterStatChange(CustomTrackedStats.CHARMED_ENEMIES_KILLED, 1);
-                    }
-                    if (enemy.aiActor.EnemyGuid == EnemyGuidDatabase.Entries["key_bullet_kin"])
-                    {
-                        if (enemy.aiActor.IsBlackPhantom && !SaveAPIManager.GetFlag(CustomDungeonFlags.KILLEDJAMMEDKEYBULLETKIN))
-                        {
-                            SaveAPIManager.SetFlag(CustomDungeonFlags.KILLEDJAMMEDKEYBULLETKIN, true);
-                        }
-                    }
-                    if (enemy.aiActor.EnemyGuid == EnemyGuidDatabase.Entries["chance_bullet_kin"])
-                    {
-                        if (enemy.aiActor.IsBlackPhantom && !SaveAPIManager.GetFlag(CustomDungeonFlags.KILLEDJAMMEDCHANCEKIN))
-                        {
-                            SaveAPIManager.SetFlag(CustomDungeonFlags.KILLEDJAMMEDCHANCEKIN, true);
-                        }
-                    }
-                    if (enemy.aiActor.EnemyGuid == EnemyGuidDatabase.Entries["titan_bullet_kin"] || enemy.aiActor.EnemyGuid == EnemyGuidDatabase.Entries["titan_bullet_kin_boss"] || enemy.aiActor.EnemyGuid == EnemyGuidDatabase.Entries["titaness_bullet_kin_boss"])
-                    {
-                        SaveAPIManager.RegisterStatChange(CustomTrackedStats.TITAN_KIN_KILLED, 1);
-                    }
-                    if (EasyEnemyTypeLists.ModInclusiveMimics.Contains(enemy.aiActor.EnemyGuid))
-                    {
-                        if (enemy.aiActor.IsBlackPhantom && !SaveAPIManager.GetFlag(CustomDungeonFlags.KILLEDJAMMEDMIMIC))
-                        {
-                            SaveAPIManager.SetFlag(CustomDungeonFlags.KILLEDJAMMEDMIMIC, true);
-                        }
-                    }
-                    if (enemy.healthHaver && enemy.healthHaver.IsBoss && !enemy.healthHaver.IsSubboss && !m_attachedPlayer.IsGhost)
-                    {
-                        bool flag1 = m_attachedPlayer.healthHaver.GetCurrentHealth() <= 0f && m_attachedPlayer.healthHaver.Armor == 1;
-                        bool flag2 = m_attachedPlayer.healthHaver.GetCurrentHealth() <= 0.5f && m_attachedPlayer.healthHaver.Armor == 0;
-                        if (flag1 || flag2)
-                        {
-                            if (!SaveAPIManager.GetFlag(CustomDungeonFlags.HAS_BEATEN_BOSS_BY_SKIN_OF_TEETH))
-                            {
-                                SaveAPIManager.SetFlag(CustomDungeonFlags.HAS_BEATEN_BOSS_BY_SKIN_OF_TEETH, true);
-                            }
-                        }
-                        //MODE RELATED UNLOCKS
-                        if (GameStatsManager.Instance.isTurboMode)
-                        {
-                            if (!SaveAPIManager.GetFlag(CustomDungeonFlags.BEATEN_ANY_BOSS_TURBO_MODE))
-                            {
-                                SaveAPIManager.SetFlag(CustomDungeonFlags.BEATEN_ANY_BOSS_TURBO_MODE, true);
-                            }
-                            if (GameManager.Instance.Dungeon.tileIndices.tilesetId == GlobalDungeonData.ValidTilesets.MINEGEON)
-                            {
-                                if (!SaveAPIManager.GetFlag(CustomDungeonFlags.BEATEN_MINES_BOSS_TURBO_MODE))
-                                {
-                                    SaveAPIManager.SetFlag(CustomDungeonFlags.BEATEN_MINES_BOSS_TURBO_MODE, true);
-                                }
-                            }
-                            if (GameManager.Instance.Dungeon.tileIndices.tilesetId == GlobalDungeonData.ValidTilesets.CATACOMBGEON)
-                            {
-                                if (!SaveAPIManager.GetFlag(CustomDungeonFlags.BEATEN_HOLLOW_BOSS_TURBO_MODE))
-                                {
-                                    SaveAPIManager.SetFlag(CustomDungeonFlags.BEATEN_HOLLOW_BOSS_TURBO_MODE, true);
-                                }
-                            }
-                        }
-                        if (GameStatsManager.Instance.IsRainbowRun)
-                        {
-                            if (enemy.aiActor.EnemyGuid == EnemyGuidDatabase.Entries["infinilich"])
-                            {
-                                if (!SaveAPIManager.GetFlag(CustomDungeonFlags.RAINBOW_KILLED_LICH))
-                                {
-                                    SaveAPIManager.SetFlag(CustomDungeonFlags.RAINBOW_KILLED_LICH, true);
-                                }
-                            }
-                        }
-                        //SPECIFIC BOSS KILLING UNLOCKS
-                        if (GameManager.Instance.Dungeon.tileIndices.tilesetId == GlobalDungeonData.ValidTilesets.FORGEGEON)
-                        {
-                            if (m_attachedPlayer.HasPickupID(300)) //Dog
-                            {
-                                if (!SaveAPIManager.GetFlag(CustomDungeonFlags.KILLED_DRAGUN_WITH_DOG))
-                                {
-                                    SaveAPIManager.SetFlag(CustomDungeonFlags.KILLED_DRAGUN_WITH_DOG, true);
-                                }
-                            }
-                        }
-                        if (enemy.aiActor.EnemyGuid == EnemyGuidDatabase.Entries["beholster"])
-                        {
-                            SaveAPIManager.RegisterStatChange(CustomTrackedStats.BEHOLSTER_KILLS, 1);
-                        }
-                        else if (enemy.aiActor.EnemyGuid == EnemyGuidDatabase.Entries["mine_flayer"])
-                        {
-                            SaveAPIManager.RegisterStatChange(CustomTrackedStats.MINEFLAYER_KILLS, 1);
-                        }
-                    }
-                }
-            }
         }
         private void PostProcessThrownGun(Projectile gun)
         {
@@ -160,25 +97,91 @@ namespace NevernamedsItems
         }
         private void Update()
         {
-            if (m_attachedPlayer.healthHaver.Armor != armourLastChecked)
+            if (m_attachedPlayer != null && !Dungeon.IsGenerating)
             {
-                if (!SaveAPIManager.GetFlag(CustomDungeonFlags.PLAYERHELDMORETHANFIVEARMOUR))
+                if (m_attachedPlayer.healthHaver.Armor != armourLastChecked)
                 {
-                    int threshHold = 5;
-                    if (m_attachedPlayer.characterIdentity == PlayableCharacters.Robot) threshHold = 11;
-                    if (m_attachedPlayer.healthHaver.Armor >= threshHold) SaveAPIManager.SetFlag(CustomDungeonFlags.PLAYERHELDMORETHANFIVEARMOUR, true);
+                    if (!SaveAPIManager.GetFlag(CustomDungeonFlags.PLAYERHELDMORETHANFIVEARMOUR))
+                    {
+                        int threshHold = 5;
+                        if (m_attachedPlayer.characterIdentity == PlayableCharacters.Robot) threshHold = 11;
+                        if (m_attachedPlayer.healthHaver.Armor >= threshHold) SaveAPIManager.SetFlag(CustomDungeonFlags.PLAYERHELDMORETHANFIVEARMOUR, true);
+                    }
+                    armourLastChecked = (int)m_attachedPlayer.healthHaver.Armor;
                 }
-                armourLastChecked = (int)m_attachedPlayer.healthHaver.Armor;
-            }
-            if (m_attachedPlayer.stats.GetStatValue(PlayerStats.StatType.Health) != hpStatLastChecked)
-            {
-                SaveAPIManager.UpdateMaximum(CustomTrackedMaximums.MAX_HEART_CONTAINERS_EVER, m_attachedPlayer.stats.GetStatValue(PlayerStats.StatType.Health));
-                hpStatLastChecked = (int)m_attachedPlayer.stats.GetStatValue(PlayerStats.StatType.Health);
-            }
-            if (m_attachedPlayer.passiveItems.Count != itemCountLastChecked)
-            {
-                OnInventoryItemsChanged();
-                itemCountLastChecked = m_attachedPlayer.passiveItems.Count;
+                if (m_attachedPlayer.stats.GetStatValue(PlayerStats.StatType.Health) != hpStatLastChecked)
+                {
+                    SaveAPIManager.UpdateMaximum(CustomTrackedMaximums.MAX_HEART_CONTAINERS_EVER, m_attachedPlayer.stats.GetStatValue(PlayerStats.StatType.Health));
+                    hpStatLastChecked = (int)m_attachedPlayer.stats.GetStatValue(PlayerStats.StatType.Health);
+                }
+                if (m_attachedPlayer.passiveItems.Count != itemCountLastChecked)
+                {
+                    OnInventoryItemsChanged();
+                    itemCountLastChecked = m_attachedPlayer.passiveItems.Count;
+                }
+
+                #region InvisibleO
+                if (Challenges.CurrentChallenge == ChallengeType.INVISIBLEO && m_attachedPlayer.IsVisible == true)
+                {
+                    playerIsInvisibleForChallenge = true;
+                    m_attachedPlayer.DoDustUps = false;
+                    m_attachedPlayer.IsVisible = false;
+                }
+                if (playerIsInvisibleForChallenge && Challenges.CurrentChallenge != ChallengeType.INVISIBLEO && m_attachedPlayer.IsVisible == false)
+                {
+                    playerIsInvisibleForChallenge = false;
+                    m_attachedPlayer.DoDustUps = true;
+                    m_attachedPlayer.IsVisible = true;
+                }
+                if (playerIsInvisibleForChallenge && m_attachedPlayer.gameActor.ShadowObject.GetComponent<Renderer>().enabled == true && !playerShadowInvisible)
+                {
+                    m_attachedPlayer.gameActor.ShadowObject.GetComponent<Renderer>().enabled = false;
+                    playerShadowInvisible = true;
+                }
+                else if (!playerIsInvisibleForChallenge && m_attachedPlayer.gameActor.ShadowObject.GetComponent<Renderer>().enabled == false && playerShadowInvisible)
+                {
+                    m_attachedPlayer.gameActor.ShadowObject.GetComponent<Renderer>().enabled = true;
+                    playerShadowInvisible = false;
+                }
+                if (Challenges.CurrentChallenge == ChallengeType.INVISIBLEO && m_attachedPlayer.CurrentGun && m_attachedPlayer.CurrentGun.GetComponent<InvisibleGun>() == null) m_attachedPlayer.CurrentGun.gameObject.AddComponent<InvisibleGun>();
+                if (Challenges.CurrentChallenge == ChallengeType.INVISIBLEO && m_attachedPlayer.CurrentSecondaryGun && m_attachedPlayer.CurrentSecondaryGun.GetComponent<InvisibleGun>() == null) m_attachedPlayer.CurrentSecondaryGun.gameObject.AddComponent<InvisibleGun>();
+                if (playerIsInvisibleForChallenge && m_attachedPlayer.primaryHand.ForceRenderersOff == false) m_attachedPlayer.primaryHand.ForceRenderersOff = true;
+                if (playerIsInvisibleForChallenge && m_attachedPlayer.secondaryHand.ForceRenderersOff == false) m_attachedPlayer.secondaryHand.ForceRenderersOff = true;
+                if (Challenges.CurrentChallenge == ChallengeType.INVISIBLEO && GameUIRoot.Instance.GetReloadBarForPlayer(m_attachedPlayer))
+                {
+                        int i = m_attachedPlayer.PlayerIDX;
+                        GameUIRoot.Instance.ForceClearReload(i);
+                }
+                #endregion
+
+                if (Challenges.CurrentChallenge == ChallengeType.KEEP_IT_COOL)
+                {
+                    DeadlyDeadlyGoopManager goop = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.WaterGoop);
+                    goop.TimedAddGoopCircle(m_attachedPlayer.specRigidbody.UnitCenter, 2f, 0.01f, true);
+                    DeadlyDeadlyGoopManager.FreezeGoopsCircle(m_attachedPlayer.specRigidbody.UnitBottomCenter, 2);
+                    if (!m_attachedPlayer.ownerlessStatModifiers.Contains(keepItCoolSpeedBuff))
+                    {
+                        m_attachedPlayer.ownerlessStatModifiers.Add(keepItCoolSpeedBuff);
+                        m_attachedPlayer.stats.RecalculateStats(m_attachedPlayer);
+                    }
+                    if (m_attachedPlayer.HasPickupID(256))
+                    {
+                        m_attachedPlayer.RemovePassiveItem(256);
+                        IntVector2 bestRewardLocation2 = m_attachedPlayer.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
+                        Chest red_Chest = GameManager.Instance.RewardManager.A_Chest;
+                        red_Chest.IsLocked = false;
+                        red_Chest.ChestType = (UnityEngine.Random.value <= 0.5f ? Chest.GeneralChestType.ITEM : Chest.GeneralChestType.WEAPON);
+                        Chest spawnedRed = Chest.Spawn(red_Chest, bestRewardLocation2);
+                        spawnedRed.lootTable.lootTable = (UnityEngine.Random.value <= 0.5f ? GameManager.Instance.RewardManager.GunsLootTable : GameManager.Instance.RewardManager.ItemsLootTable);
+                        spawnedRed.RegisterChestOnMinimap(spawnedRed.GetAbsoluteParentRoom());
+                        TextBubble.DoAmbientTalk(m_attachedPlayer.transform, new Vector3(1, 2, 0), "Nice Try", 4f);
+                    }
+                }
+                else if (m_attachedPlayer.ownerlessStatModifiers.Contains(keepItCoolSpeedBuff))
+                {
+                    m_attachedPlayer.ownerlessStatModifiers.Remove(keepItCoolSpeedBuff);
+                    m_attachedPlayer.stats.RecalculateStats(m_attachedPlayer);
+                }
             }
         }
 
@@ -250,7 +253,7 @@ namespace NevernamedsItems
         #endregion
 
         #region TimedStatModifier
-        public void DoTimedStatModifier(PlayerStats.StatType statToBoost, float amount, float time, StatModifier.ModifyMethod modifyMethod  = StatModifier.ModifyMethod.MULTIPLICATIVE)
+        public void DoTimedStatModifier(PlayerStats.StatType statToBoost, float amount, float time, StatModifier.ModifyMethod modifyMethod = StatModifier.ModifyMethod.MULTIPLICATIVE)
         {
             m_attachedPlayer.StartCoroutine(HandleTimedStatModifier(statToBoost, amount, time, modifyMethod));
         }
@@ -271,10 +274,56 @@ namespace NevernamedsItems
         }
         #endregion
 
+        private bool playerIsInvisibleForChallenge;
+        private bool playerShadowInvisible;
+
+        private StatModifier keepItCoolSpeedBuff;
         private PlayerController m_attachedPlayer;
         private bool isSecondaryPlayer;
         private int armourLastChecked;
         private int hpStatLastChecked;
         private int itemCountLastChecked;
+    }
+    public class InvisibleGun : MonoBehaviour
+    {
+        public void Start()
+        {
+            this.gun = base.GetComponent<Gun>();
+        }
+
+        public void LateUpdate()
+        {
+            if (this.gun != null && Challenges.CurrentChallenge == ChallengeType.INVISIBLEO)
+            {
+                HandleVFX(this.gun.muzzleFlashEffects, false);
+                HandleVFX(this.gun.finalMuzzleFlashEffects, false);
+                HandleVFX(this.gun.reloadEffects, false);
+                HandleVFX(this.gun.emptyReloadEffects, false);
+                HandleVFX(this.gun.activeReloadSuccessEffects, false);
+                HandleVFX(this.gun.activeReloadFailedEffects, false);
+                HandleVFX(this.gun.CriticalMuzzleFlashEffects, false);
+                this.gun.ToggleRenderers(false);
+            }
+            else if (this.gun != null)
+            {
+                HandleVFX(this.gun.muzzleFlashEffects, true);
+                HandleVFX(this.gun.finalMuzzleFlashEffects, true);
+                HandleVFX(this.gun.reloadEffects, true);
+                HandleVFX(this.gun.emptyReloadEffects, true);
+                HandleVFX(this.gun.activeReloadSuccessEffects, true);
+                HandleVFX(this.gun.activeReloadFailedEffects, true);
+                HandleVFX(this.gun.CriticalMuzzleFlashEffects, true);
+            }
+        }
+
+        public void HandleVFX(VFXPool vfx, bool value)
+        {
+            if (vfx != null && vfx.effects != null)
+            {
+                vfx.ToggleRenderers(value);
+            }
+        }
+
+        public Gun gun;
     }
 }

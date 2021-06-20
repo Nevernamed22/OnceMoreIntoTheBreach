@@ -37,7 +37,7 @@ namespace NevernamedsItems
             //GUN STATS
             foreach (ProjectileModule mod in gun.Volley.projectiles)
             {
-                mod.ammoCost = 1;
+                mod.ammoCost = 8;
                 mod.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
                 mod.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
                 mod.cooldownTime = 0.8f;

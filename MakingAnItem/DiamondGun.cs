@@ -123,6 +123,8 @@ namespace NevernamedsItems
             EnemyGuidDatabase.Entries["skullmet"],
             EnemyGuidDatabase.Entries["shelleton"],
             EnemyGuidDatabase.Entries["gummy_spent"],
+            EnemyGuidDatabase.Entries["skusket"],
+            EnemyGuidDatabase.Entries["revolvenant"],
         };
         public static List<string> arthropods = new List<string>()
         {

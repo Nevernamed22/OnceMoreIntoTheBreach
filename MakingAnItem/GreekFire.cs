@@ -44,7 +44,7 @@ namespace NevernamedsItems
                 projectile.gameObject.SetActive(false);
                 FakePrefab.MarkAsFakePrefab(projectile.gameObject);
                 UnityEngine.Object.DontDestroyOnLoad(projectile);
-                projectile.baseData.damage *= 10f;
+                projectile.baseData.damage *= 5f;
                 projectile.AdditionalScaleMultiplier *= 2f;
                 projectile.baseData.range *= 0.5f;
                 if (mod != gun.DefaultModule) { mod.ammoCost = 0; }

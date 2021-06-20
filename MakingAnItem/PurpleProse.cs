@@ -69,7 +69,11 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
+            if (Owner)
+            {
+
             Owner.OnReceivedDamage -= this.charmAll;
+            }
             base.OnDestroy();
         }
     }

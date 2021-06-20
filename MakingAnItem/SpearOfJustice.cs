@@ -35,6 +35,7 @@ namespace NevernamedsItems
             gun.DefaultModule.cooldownTime = 0.5f;
             gun.muzzleFlashEffects.type = VFXPoolType.None;
             gun.DefaultModule.numberOfShotsInClip = 100;
+            gun.DefaultModule.angleVariance = 0;
             gun.barrelOffset.transform.localPosition = new Vector3(3.25f, 1.68f, 0f);
             gun.SetBaseMaxAmmo(200);
 
@@ -44,7 +45,7 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
-            projectile.baseData.damage *= 5f;
+            projectile.baseData.damage *= 4f;
             PierceProjModifier Piercing = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();
             Piercing.penetratesBreakables = true;
             Piercing.penetration += 10;

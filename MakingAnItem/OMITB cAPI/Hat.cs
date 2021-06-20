@@ -118,11 +118,23 @@ namespace NevernamedsItems
         {
             bool isVanished = base.sprite.renderer.enabled;
             bool shouldBeVanished = false;
-            if (hatOwner.IsFalling) shouldBeVanished = true;
-            if ((PlayerHasAdditionalVanishOverride() || hatRollReaction == HatRollReaction.VANISH) && hatOwner.IsDodgeRolling && !hatOwner.IsSlidingOverSurface) shouldBeVanished = true;
 
-            if (isVanished && !shouldBeVanished) base.sprite.renderer.enabled = true;
-            else if (!isVanished && shouldBeVanished) base.sprite.renderer.enabled = false;
+            if (hatOwner.IsFalling)
+                shouldBeVanished = true;
+
+            if (hatOwnerAnimator.CurrentClip.name == "doorway" || hatOwnerAnimator.CurrentClip.name == "spinfall")
+                shouldBeVanished = true;
+
+            if ((PlayerHasAdditionalVanishOverride() || hatRollReaction == HatRollReaction.VANISH) && hatOwner.IsDodgeRolling)
+                shouldBeVanished = true;
+
+            if (hatOwner.IsSlidingOverSurface)
+                shouldBeVanished = true;
+
+            if (!isVanished && !shouldBeVanished)
+                base.sprite.renderer.enabled = true;
+            else if (isVanished && shouldBeVanished)
+                base.sprite.renderer.enabled = false;
         }
         private bool PlayerHasAdditionalVanishOverride()
         {
@@ -302,7 +314,7 @@ namespace NevernamedsItems
             base.transform.position = vec;
             base.transform.rotation = Quaternion.Euler(0, 0, 0);
             base.transform.parent = player.transform;
-            //UpdateOffsetForGunHandedness();
+            player.sprite.AttachRenderer(gameObject.GetComponent<tk2dBaseSprite>());
             currentState = HatState.SITTING;
         }
         private IEnumerator FlipHatIENum()
@@ -325,36 +337,46 @@ namespace NevernamedsItems
 
                     if (currentState == HatState.FLIPPING)
                     {
-                        if (hatOwnerAnimator.CurrentClip == null) Debug.LogError("hatOwnerAnimator.CurrentClip is NULL!");
-                        else
+                        if (!GameManager.Instance.IsPaused)
                         {
-                            float CurrentRollTime = hatOwnerAnimator.ClipTimeSeconds;
-
-                            this.transform.RotateAround(this.sprite.WorldCenter, Vector3.forward, 13);
-
-                            if (CurrentRollTime < RollLength / 6)
-                                this.transform.position += new Vector3(0, flipHeightMultiplier * 0.3f, 0);
-                            else if (CurrentRollTime < RollLength / 5)
-                                this.transform.position += new Vector3(0, flipHeightMultiplier * 0.25f, 0);
-                            else if (CurrentRollTime < RollLength / 4)
-                                this.transform.position += new Vector3(0, flipHeightMultiplier * 0.15f, 0);
-                            else if (CurrentRollTime < RollLength / 3)
-                                this.transform.position += new Vector3(0, flipHeightMultiplier * 0.1f, 0);
-                            else if (CurrentRollTime < RollLength / 2)
-                                this.transform.position += new Vector3(0, flipHeightMultiplier * 0.01f, 0);
-                            else if (CurrentRollTime < RollLength * 0.6)
-                                this.transform.position -= new Vector3(0, flipHeightMultiplier * 0.01f, 0);
-                            else if (CurrentRollTime < RollLength * 0.7)
-                                this.transform.position -= new Vector3(0, flipHeightMultiplier * 0.15f, 0);
-                            else if (CurrentRollTime < RollLength * 0.8)
-                                this.transform.position -= new Vector3(0, flipHeightMultiplier * 0.25f, 0);
+                            if (hatOwnerAnimator.CurrentClip == null) Debug.LogError("hatOwnerAnimator.CurrentClip is NULL!");
                             else
-                                this.transform.position -= new Vector3(0, flipHeightMultiplier * 0.25f, 0);
+                            {
+                                if (hatOwnerAnimator.CurrentClip == null || !hatOwnerAnimator.CurrentClip.name.StartsWith("dodge"))
+                                { 
+                                    Debug.LogError("hatOwnerAnimator.CurrentClip is NULL! (or the current anim isnt a roll)"); 
+                                }
+                                else
+                                {
+                                    float CurrentRollTime = hatOwnerAnimator.ClipTimeSeconds;
+
+                                    this.transform.RotateAround(this.sprite.WorldCenter, Vector3.forward, 13);
+
+                                    if (CurrentRollTime < RollLength / 6)
+                                        this.transform.position += new Vector3(0, flipHeightMultiplier * 0.3f, 0);
+                                    else if (CurrentRollTime < RollLength / 5)
+                                        this.transform.position += new Vector3(0, flipHeightMultiplier * 0.25f, 0);
+                                    else if (CurrentRollTime < RollLength / 4)
+                                        this.transform.position += new Vector3(0, flipHeightMultiplier * 0.15f, 0);
+                                    else if (CurrentRollTime < RollLength / 3)
+                                        this.transform.position += new Vector3(0, flipHeightMultiplier * 0.1f, 0);
+                                    else if (CurrentRollTime < RollLength / 2)
+                                        this.transform.position += new Vector3(0, flipHeightMultiplier * 0.01f, 0);
+                                    else if (CurrentRollTime < RollLength * 0.6)
+                                        this.transform.position -= new Vector3(0, flipHeightMultiplier * 0.01f, 0);
+                                    else if (CurrentRollTime < RollLength * 0.7)
+                                        this.transform.position -= new Vector3(0, flipHeightMultiplier * 0.15f, 0);
+                                    else if (CurrentRollTime < RollLength * 0.8)
+                                        this.transform.position -= new Vector3(0, flipHeightMultiplier * 0.25f, 0);
+                                    else
+                                        this.transform.position -= new Vector3(0, flipHeightMultiplier * 0.25f, 0);
+                                }
+                            }
                         }
+                        else { StickHatToPlayer(hatOwner); }
                     }
                 }
             }
-
         }
         public enum HatDirectionality
         {

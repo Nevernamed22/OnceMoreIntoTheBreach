@@ -6,6 +6,7 @@ using UnityEngine;
 using ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -27,6 +28,8 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.B;
            
             CursedTumblerID = item.PickupObjectId;
+            item.SetupUnlockOnCustomStat(CustomTrackedStats.JAMMED_CHESTS_OPENED, 0, DungeonPrerequisite.PrerequisiteOperation.GREATER_THAN);
+
         }
         public static int CursedTumblerID;        
     }       

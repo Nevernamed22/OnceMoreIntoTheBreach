@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using ItemAPI;
 using System.Text;
 using UnityEngine;
 
@@ -223,6 +225,7 @@ namespace NevernamedsItems
         {
             damageSource = "Tick Damage";
             starterDamage = 2f;
+            godHelpUsTick = 0.016f;
         }
 
         public void Start()
@@ -258,6 +261,13 @@ namespace NevernamedsItems
                 }
             }
         }
+        private void Update()
+        {
+            if (godHelpUsTick >= 0)
+            {
+                godHelpUsTick -= BraveTime.DeltaTime;
+            }
+        }
         private void HandlePreCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherPixelCollider)
         {
             try
@@ -267,11 +277,15 @@ namespace NevernamedsItems
                     PlayerController playerness = otherRigidbody.gameObject.GetComponent<PlayerController>();
                     if (playerness == null)
                     {
-                        float damageToDeal = starterDamage;
-                        damageToDeal *= this.owner.stats.GetStatValue(PlayerStats.StatType.Damage);
-                        if (otherRigidbody.healthHaver.IsBoss) damageToDeal *= this.owner.stats.GetStatValue(PlayerStats.StatType.DamageToBosses);
-                        if (otherRigidbody.aiActor && otherRigidbody.aiActor.IsBlackPhantom) damageToDeal *= this.m_projectile.BlackPhantomDamageMultiplier;
-                        otherRigidbody.healthHaver.ApplyDamage(damageToDeal, Vector2.zero, damageSource, CoreDamageTypes.None, DamageCategory.Unstoppable, true, null, true);
+                        if (godHelpUsTick <= 0)
+                        {
+                            float damageToDeal = starterDamage;
+                            damageToDeal *= this.owner.stats.GetStatValue(PlayerStats.StatType.Damage);
+                            if (otherRigidbody.healthHaver.IsBoss) damageToDeal *= this.owner.stats.GetStatValue(PlayerStats.StatType.DamageToBosses);
+                            if (otherRigidbody.aiActor && otherRigidbody.aiActor.IsBlackPhantom) damageToDeal *= this.m_projectile.BlackPhantomDamageMultiplier;
+                            otherRigidbody.healthHaver.ApplyDamage(damageToDeal, Vector2.zero, damageSource, CoreDamageTypes.None, DamageCategory.Unstoppable, true, null, true);
+                            godHelpUsTick = 0.016f;
+                        }
                         PhysicsEngine.SkipCollision = true;
                     }
                 }
@@ -285,6 +299,7 @@ namespace NevernamedsItems
         private Projectile m_projectile;
         private tk2dBaseSprite m_sprite;
         public float EffectRadius = 1f;
+        private float godHelpUsTick;
         public string damageSource;
         public float starterDamage;
     } //Causes the projectile to deal tick damage to enemies it overlaps. Requires SuperPierceProjectile.
@@ -949,6 +964,406 @@ namespace NevernamedsItems
         public bool scaleEnemyProjSpeed;
         public bool doPostProcessOnEnemyBullets;
     } //Causes the projectile to spawn an enemy upon it's creation.
+    public class MaintainDamageOnPierce : MonoBehaviour
+    {
+        public MaintainDamageOnPierce()
+        {
+            damageMultOnPierce = 1;
+        }
+        public void Start()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
+            if (m_projectile)
+            {
+                this.m_projectile.specRigidbody.OnPreRigidbodyCollision += this.HandlePierce;
+            }
+        }
+        private void HandlePierce(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherPixelCollider)
+        {
+            FieldInfo field = typeof(Projectile).GetField("m_hasPierced", BindingFlags.Instance | BindingFlags.NonPublic);
+            field.SetValue(myRigidbody.projectile, false);
+            myRigidbody.projectile.baseData.damage *= damageMultOnPierce;
+        }
+        public float damageMultOnPierce;
+        private Projectile m_projectile;
+    } //Prevents projectiles from losing damage when they pierce an enemy, and can even increase it!
+    public class DamageSecretWalls : MonoBehaviour
+    {
+        public DamageSecretWalls()
+        {
+            damageToDeal = 1E+10f;
+        }
+        public void Start()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
+            if (m_projectile)
+            {
+                this.m_projectile.specRigidbody.OnPreRigidbodyCollision += this.HandlePierce;
+            }
+        }
+        private void HandlePierce(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherPixelCollider)
+        {
+            if (otherRigidbody.GetComponent<MajorBreakable>() != null)
+            {
+                if (otherRigidbody.GetComponent<MajorBreakable>().IsSecretDoor)
+                {
+                    otherRigidbody.GetComponent<MajorBreakable>().ApplyDamage(damageToDeal, Vector2.zero, false, false, true);
+                }
+            }
+        }
+        public float damageToDeal;
+        private Projectile m_projectile;
+    } //Makes the projectile damage secret room walls
+    public class AntimatterBulletsModifier : MonoBehaviour
+    {
+
+        public AntimatterBulletsModifier()
+        {
+
+        }
+
+        public ExplosionData explosionData;
+        private void Start()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
+            this.m_projectile.collidesWithProjectiles = true;
+            this.m_projectile.UpdateCollisionMask();
+            SpeculativeRigidbody specRigidbody = this.m_projectile.specRigidbody;
+            specRigidbody.OnPreRigidbodyCollision += this.HandlePreCollision;
+        }
+        private void HandlePreCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherPixelCollider)
+        {
+            if (otherRigidbody && otherRigidbody.projectile)
+            {
+                if (otherRigidbody.projectile.Owner is AIActor)
+                {
+                    if (otherRigidbody.projectile != lastCollidedProjectile)
+                    {
+                        if (explosionData != null)
+                        {
+                            Exploder.Explode(m_projectile.specRigidbody.UnitCenter, explosionData, Vector2.zero, null, true);
+                        }
+                        lastCollidedProjectile = otherRigidbody.projectile;
+                    }
+                }
+                PhysicsEngine.SkipCollision = true;
+            }
+        }
+        private Projectile m_projectile;
+        private Projectile lastCollidedProjectile;
+    } //Makes the projectile explode when intersecting enemy bullets
+    public class BlockEnemyProjectilesMod : MonoBehaviour
+    {
+        public bool projectileSurvives;
+        public BlockEnemyProjectilesMod()
+        {
+            this.projectileSurvives = false;
+        }
+        private void Start()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
+            this.m_projectile.collidesWithProjectiles = true;
+            this.m_projectile.UpdateCollisionMask();
+            SpeculativeRigidbody specRigidbody = this.m_projectile.specRigidbody;
+            specRigidbody.OnPreRigidbodyCollision += this.HandlePreCollision;
+        }
+        private void HandlePreCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherPixelCollider)
+        {
+            if (otherRigidbody && otherRigidbody.projectile)
+            {
+                if (otherRigidbody.projectile.Owner is AIActor)
+                {
+                    otherRigidbody.projectile.DieInAir(false, true, true, false);
+                }
+                if (
+                    !projectileSurvives) myRigidbody.projectile.DieInAir(false, true, true, false);
+                PhysicsEngine.SkipCollision = true;
+            }
+        }
+
+        private Projectile m_projectile;
+    } //Causes the projectile to destroy enemy projectiles
+    public class SelectiveDamageMult : MonoBehaviour
+    {
+        public float multiplier;
+        public bool multOnFlyingEnemies;
+        public SelectiveDamageMult()
+        {
+            this.multiplier = 1;
+            this.multOnFlyingEnemies = false;
+        }
+        private void Start()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
+            this.m_projectile.specRigidbody.OnPreRigidbodyCollision += this.HandlePreCollision;
+
+        }
+        private void HandlePreCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherPixelCollider)
+        {
+            if (otherRigidbody && otherRigidbody.healthHaver && otherRigidbody.healthHaver.aiActor)
+            {
+                Projectile me = myRigidbody.projectile;
+                if (multOnFlyingEnemies && otherRigidbody.aiActor.IsFlying) DoMult(me);
+            }
+        }
+        private void DoMult(Projectile self)
+        {
+            self.baseData.damage *= multiplier;
+            GameManager.Instance.StartCoroutine(this.ChangeProjectileDamage(self.projectile));
+        }
+        private IEnumerator ChangeProjectileDamage(Projectile bullet)
+        {
+            yield return new WaitForSeconds(0.1f);
+            if (bullet != null)
+            {
+                bullet.baseData.damage /= multiplier;
+            }
+            yield break;
+        }
+
+        private Projectile m_projectile;
+    } //Doubles the damage under certain criteria about the target
+    public class ProjectileSplitController : MonoBehaviour
+    {
+        public ProjectileSplitController()
+        {
+            distanceTillSplit = 7.5f;
+            splitAngles = 35;
+            amtToSplitTo = 3;
+            dmgMultAfterSplit = 0.66f;
+            sizeMultAfterSplit = 0.8f;
+            removeComponentAfterUse = true;
+        }
+        private void Start()
+        {
+            parentProjectile = base.GetComponent<Projectile>();
+            parentOwner = parentProjectile.ProjectilePlayerOwner();
+        }
+        private void Update()
+        {
+            if (parentProjectile != null && distanceBasedSplit && !hasSplit)
+            {
+                if (parentProjectile.GetElapsedDistance() > distanceTillSplit)
+                {
+                    SplitProjectile();
+                }
+            }
+        }
+        private void SplitProjectile()
+        {
+            float ProjectileInterval = splitAngles / (float)amtToSplitTo;
+            float currentAngle = parentProjectile.Direction.ToAngle();
+            float startAngle = currentAngle + (splitAngles * 0.5f);
+            int iteration = 0;
+            for (int i = 0; i < amtToSplitTo; i++)
+            {
+                float finalAngle = startAngle - (ProjectileInterval * iteration);
+
+                GameObject newBulletOBJ = FakePrefab.Clone(parentProjectile.gameObject);
+                GameObject spawnedBulletOBJ = SpawnManager.SpawnProjectile(newBulletOBJ, parentProjectile.sprite.WorldCenter, Quaternion.Euler(0f, 0f, finalAngle), true);
+                Projectile component = spawnedBulletOBJ.GetComponent<Projectile>();
+                if (component != null)
+                {
+                    component.Owner = parentOwner;
+                    component.Shooter = parentOwner.specRigidbody;
+                    component.baseData.damage *= dmgMultAfterSplit;
+                    component.RuntimeUpdateScale(sizeMultAfterSplit);
+                    ProjectileSplitController split2 = component.gameObject.GetComponent<ProjectileSplitController>();
+                    if (split2 && removeComponentAfterUse)
+                    {
+                        UnityEngine.Object.Destroy(split2);
+                    }
+                }
+
+                iteration++;
+            }
+            hasSplit = true;
+            UnityEngine.Object.Destroy(parentProjectile.gameObject);
+        }
+        private Projectile parentProjectile;
+        private PlayerController parentOwner;
+        private bool hasSplit;
+
+        //Publics
+        public bool distanceBasedSplit;
+        public float distanceTillSplit;
+        public bool splitOnEnemy;
+        public float splitAngles;
+        public int amtToSplitTo;
+
+        public float dmgMultAfterSplit;
+        public float sizeMultAfterSplit;
+
+        public bool removeComponentAfterUse;
+    } //Causes projectiles to split
+    public class EnemyScaleUpdaterMod : MonoBehaviour
+    {
+        public EnemyScaleUpdaterMod()
+        {
+            targetScale = new Vector2(1, 1);
+            multiplyExisting = true;
+            addScaleEffectsToEnemy = false;
+        }
+        public void Start()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
+            if (m_projectile)
+            {
+                this.m_projectile.OnHitEnemy += this.OnHitEnemy;
+            }
+        }
+        private void OnHitEnemy(Projectile bullet, SpeculativeRigidbody enemy, bool fatal)
+        {
+            if (enemy && enemy.aiActor && enemy.healthHaver)
+            {
+                if (!fatal)
+                {
+                    if (addScaleEffectsToEnemy)
+                    {
+                        enemy.gameObject.GetOrAddComponent<SpecialSizeStatModification>();
+                    }
+
+                    float targetX = targetScale.x;
+                    float targetY = targetScale.y;
+                    if (multiplyExisting)
+                    {
+                        targetX = enemy.aiActor.EnemyScale.x * targetScale.x;
+                        targetY = enemy.aiActor.EnemyScale.y * targetScale.y;
+                    }
+                    float maxCap = 2;
+                    float minCap = 0.4f;
+                    if (enemy.healthHaver.IsBoss) { maxCap = 1.4f; minCap = 0.8f; }
+                    targetX = Mathf.Min(targetX, maxCap);
+                    targetX = Mathf.Max(targetX, minCap);
+                    targetY = Mathf.Min(targetY, maxCap);
+                    targetY = Mathf.Max(targetY, minCap);
+
+                    int cachedLayer2 = enemy.gameObject.layer;
+                    int cachedOutlineLayer2 = cachedLayer2;
+                    enemy.gameObject.layer = LayerMask.NameToLayer("Unpixelated");
+                    cachedOutlineLayer2 = SpriteOutlineManager.ChangeOutlineLayer(enemy.sprite, LayerMask.NameToLayer("Unpixelated"));
+
+                    enemy.aiActor.EnemyScale = new Vector2(targetX, targetY);
+
+                    enemy.aiActor.gameObject.layer = cachedLayer2;
+                    SpriteOutlineManager.ChangeOutlineLayer(enemy.sprite, cachedOutlineLayer2);
+
+                    enemy.aiActor.specRigidbody.Reinitialize();
+                }
+            }
+        }
+        public Vector2 targetScale;
+        public bool multiplyExisting;
+        public bool addScaleEffectsToEnemy;
+        private Projectile m_projectile;
+    } //Updates the scale of the affected enemy
+    public class SpawnGameObjectOnDestructionMod : MonoBehaviour
+    {
+        public SpawnGameObjectOnDestructionMod()
+        {
+            chanceToSpawn = 1;
+        }
+        public void Start()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
+            if (m_projectile)
+            {
+                this.m_projectile.OnDestruction += this.OnDestroy;
+            }
+        }
+        private void OnDestroy(Projectile self)
+        {
+            if (UnityEngine.Random.value <= chanceToSpawn)
+            {
+                if (objectsToPickFrom.Count > 0)
+                {
+                    GameObject objToSpawn = BraveUtility.RandomElement(objectsToPickFrom);
+                    SpawnObjectManager.SpawnObject(objToSpawn, m_projectile.specRigidbody.UnitCenter, null, true);
+                }
+            }
+        }
+        public float chanceToSpawn;
+        public List<GameObject> objectsToPickFrom = new List<GameObject>();
+        private Projectile m_projectile;
+    } //Spawns a gameobject when the projectile is destroyed
+    public class SpawnEnemyOnDestructionMod : MonoBehaviour
+    {
+        public SpawnEnemyOnDestructionMod()
+        {
+            pickRandom = true;
+            companionise = true;
+        }
+        public void Start()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
+            if (m_projectile)
+            {
+                this.m_projectile.OnDestruction += this.OnDestroy;
+            }
+        }
+        private void OnDestroy(Projectile self)
+        {
+            string objToSpawn = BraveUtility.RandomElement(EnemiesToSpawn);
+            PlayerController player = m_projectile.ProjectilePlayerOwner();
+            var Kin = EnemyDatabase.GetOrLoadByGuid(objToSpawn);
+
+            CompanionisedEnemyUtility.SpawnCompanionisedEnemy(player, objToSpawn, m_projectile.specRigidbody.UnitCenter.ToIntVector2(), false, Color.red, 5, 2, false);
+        }
+        public List<string> EnemiesToSpawn = new List<string>();
+        public bool pickRandom;
+        public bool companionise;
+        private Projectile m_projectile;
+    } //Spawns a companionised enemy on destruction
+    public class EraseEnemyBehav : MonoBehaviour
+    {
+        public EraseEnemyBehav()
+        {
+            bossMode = BossInteraction.DAMAGE;
+            bonusBossDMG = 500;
+        }
+        private void Start()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
+            this.m_projectile.OnHitEnemy += this.OnHitEnemy;
+
+        }
+        private void OnHitEnemy(Projectile self, SpeculativeRigidbody enemy, bool fatal)
+        {
+            if (enemy && enemy.aiActor && enemy.aiActor.healthHaver)
+            {
+                if (enemy.aiActor.healthHaver.IsBoss && bossMode != BossInteraction.ERASE)
+                {
+                    if (bossMode == BossInteraction.IGNORE) return;
+                    else
+                    {
+                        enemy.aiActor.healthHaver.ApplyDamage(bonusBossDMG, Vector2.zero, "Erase", CoreDamageTypes.Void, DamageCategory.Unstoppable);
+                    }
+                }
+                else
+                {
+                    enemy.aiActor.EraseFromExistenceWithRewards();
+                    if (doSparks)
+                    {
+                        for (int i = 0; i < 5; i++)
+                        {
+                            GlobalSparksDoer.DoRandomParticleBurst(3, enemy.specRigidbody.UnitCenter, enemy.specRigidbody.UnitCenter, new Vector3(UnityEngine.Random.Range(0, 4), UnityEngine.Random.Range(0, 4)), 360, 0, null, null, null, GlobalSparksDoer.SparksType.SOLID_SPARKLES);
+                        }
+                    }
+                }
+            }
+        }
+        private Projectile m_projectile;
+        public BossInteraction bossMode;
+        public float bonusBossDMG;
+        public bool doSparks;
+        public enum BossInteraction
+        {
+            ERASE,
+            DAMAGE,
+            IGNORE,
+        }
+    } //Erases enemies the bullet hits
+
 
     //PASSIVE ITEM EFFECTS AS COMPONENTS
     public class AngryBulletsProjectileBehaviour : MonoBehaviour
@@ -1425,6 +1840,49 @@ namespace NevernamedsItems
         public Color transmogModifierTintColour;
 
     } //Chaos Bullets as a Projectile Component.
+    public class BloodthirstyBulletsComp : MonoBehaviour
+    {
+        public BloodthirstyBulletsComp()
+        {
+            this.jamChance = 0.4f;
+            this.nonJamDamageMult = 15;
+        }
+
+        public void Start()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
+            this.m_projectile.OnHitEnemy += this.OnHitEnemy;
+        }
+        private void OnHitEnemy(Projectile arg1, SpeculativeRigidbody arg2, bool arg3)
+        {
+            if (arg2 != null && arg1.ProjectilePlayerOwner() && arg2.aiActor != null)
+            {
+                if (AllJammedState.AllJammedActive == false)
+                {
+                    if (arg2.aiActor.IsBlackPhantom) return;
+                    else if (arg1.ProjectilePlayerOwner().CurrentGun.PickupObjectId == 17)
+                    {
+                        arg2.aiActor.healthHaver.ApplyDamage(2.2f, Vector2.zero, "BonusDamage", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
+                    }
+                    else if (!arg2.healthHaver.IsDead && !arg2.healthHaver.IsBoss)
+                    {
+                        float procChance = UnityEngine.Random.value;
+                        if (UnityEngine.Random.value <= this.jamChance)
+                        {
+                            arg2.aiActor.BecomeBlackPhantom();
+                        }
+                        else
+                        {
+                            arg2.aiActor.healthHaver.ApplyDamage(arg1.baseData.damage * nonJamDamageMult, Vector2.zero, "BonusDamage", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
+                        }
+                    }
+                }
+            }
+        }
+        private Projectile m_projectile;
+        public float jamChance;
+        public float nonJamDamageMult;
+    } //The Bloodthirsty Bullets Effect as a Projectile Component.
 
     //BEAM COMPONENTS!
     public class SpawnProjectileAtBeamPoint : MonoBehaviour
@@ -1505,6 +1963,32 @@ namespace NevernamedsItems
         }
         private float timer;
     } //Makes the beam spawn projectiles at a position along it's length on a timer.
+    public class WanderingBeamComp : MonoBehaviour
+    {
+        public WanderingBeamComp()
+        {
+        }
+        private void Start()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
+            this.m_beam = base.GetComponent<BeamController>();
+            this.m_basicBeam = base.GetComponent<BasicBeamController>();
+            if (this.m_projectile.Owner is PlayerController) this.m_owner = this.m_projectile.Owner as PlayerController;
+        }
+        private Projectile m_projectile;
+        private BeamController m_beam;
+        private BasicBeamController m_basicBeam;
+        private PlayerController m_owner;
+        
+        private void FixedUpdate()
+        {
+            if (this.m_beam != null)
+            {
+                this.m_basicBeam.Direction = this.m_basicBeam.Direction.Rotate(1);
+            }
+        }
+        private float timer;
+    } //Makes the beam spawn projectiles at a position along it's length on a time
 
     //TECHNICALLY NOT NEW COMPONENTS, BUT NEW TYPES OF PROJECTILE
     public class SuperPierceProjectile : Projectile

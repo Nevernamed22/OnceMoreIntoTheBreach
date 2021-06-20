@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -77,6 +78,8 @@ namespace NevernamedsItems
 
             DynamiteLauncherID = gun.PickupObjectId;
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc);
+
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.NITRA_QUEST_REWARDED, true);
 
         }
         public static int DynamiteLauncherID;

@@ -37,7 +37,7 @@ namespace NevernamedsItems
             gun.DefaultModule.cooldownTime = 0.11f;
             gun.DefaultModule.numberOfShotsInClip = 30;
             gun.barrelOffset.transform.localPosition = new Vector3(1.37f, 0.68f, 0f);
-            gun.SetBaseMaxAmmo(700);
+            gun.SetBaseMaxAmmo(300);
 
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(617) as Gun).DefaultModule.chargeProjectiles[0].Projectile);

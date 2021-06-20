@@ -61,42 +61,65 @@
     <Reference Include="UnityEngine.JSONSerializeModule">
       <HintPath>..\..\..\..\Desktop\Dependancies\UnityEngine.JSONSerializeModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\..\..\Desktop\Dependancies\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="1Shot.cs" />
     <Compile Include="50calrounds.cs" />
     <Compile Include="AcidAura.cs" />
     <Compile Include="ActiveTestingItem.cs" />
+    <Compile Include="Ammolock.cs" />
+    <Compile Include="AmmoTrap.cs" />
     <Compile Include="AmuletOfShelltan.cs" />
     <Compile Include="AppleActive.cs" />
     <Compile Include="Autollet.cs" />
+    <Compile Include="BackWarder.cs" />
+    <Compile Include="BarcodeScanner.cs" />
     <Compile Include="Bayonet.cs" />
+    <Compile Include="BeamBlade.cs" />
     <Compile Include="Blankh.cs" />
+    <Compile Include="Blizzkrieg.cs" />
+    <Compile Include="BloodshotEye.cs" />
     <Compile Include="BloodThinner.cs" />
+    <Compile Include="BoosterShot.cs" />
     <Compile Include="BulletBoots.cs" />
     <Compile Include="BulletsWithGuns.cs" />
     <Compile Include="ButchersKnife.cs" />
+    <Compile Include="CartographersEye.cs" />
+    <Compile Include="ChemicalBurn.cs" />
+    <Compile Include="ClipOnAmmoPouch.cs" />
+    <Compile Include="CloakOfDarkness.cs" />
+    <Compile Include="Copygat.cs" />
     <Compile Include="Creditor.cs" />
     <Compile Include="CrescendoBlaster.cs" />
     <Compile Include="CrossBullets.cs" />
     <Compile Include="CursedTumbler.cs" />
     <Compile Include="CyanGuonStone.cs" />
+    <Compile Include="DeliveryBox.cs" />
+    <Compile Include="Dimensionaliser.cs" />
     <Compile Include="Diode.cs" />
+    <Compile Include="DrillBullets.cs" />
     <Compile Include="DroneCompanion.cs" />
     <Compile Include="EmberCannon.cs" />
     <Compile Include="Entropew.cs" />
     <Compile Include="Equality.cs" />
     <Compile Include="Eraser.cs" />
+    <Compile Include="FoamDarts.cs" />
     <Compile Include="GatlingGun.cs" />
     <Compile Include="GatlingGunGatterUp.cs" />
+    <Compile Include="Gaxe.cs" />
     <Compile Include="GlassShard.cs" />
     <Compile Include="Glasster.cs" />
     <Compile Include="Glock42.cs" />
+    <Compile Include="Glooper.cs" />
     <Compile Include="GoldenRevolver.cs" />
     <Compile Include="GonneElder.cs" />
     <Compile Include="Gravitron.cs" />
     <Compile Include="GravityGun.cs" />
     <Compile Include="GravityGunNegativeMatterForm.cs" />
+    <Compile Include="GrimBlanks.cs" />
     <Compile Include="Gumgun.cs" />
     <Compile Include="Guneonate.cs" />
     <Compile Include="Gunger.cs" />
@@ -119,27 +142,35 @@
     <Compile Include="GungoSaveAPI\SaveTools.cs" />
     <Compile Include="GungoSaveAPI\SpecialAIActor.cs" />
     <Compile Include="GungoSaveAPI\SpecialPickupObject.cs" />
+    <Compile Include="GunidaeSolvitHaatelis.cs" />
     <Compile Include="GunjurersStaff.cs" />
     <Compile Include="GunknightAmulet.cs" />
+    <Compile Include="GunOfAThousandSins.cs" />
     <Compile Include="GunsmokePerfume.cs" />
+    <Compile Include="Gusty.cs" />
     <Compile Include="HandGun.cs" />
     <Compile Include="HeadOfTheOrder.cs" />
     <Compile Include="HeatRay.cs" />
     <Compile Include="HighVelocityRifle.cs" />
     <Compile Include="IceBow.cs" />
     <Compile Include="IndigoGuonStone.cs" />
+    <Compile Include="IvoryAmmolet.cs" />
     <Compile Include="KalibersPrayer.cs" />
     <Compile Include="KillithidTendril.cs" />
     <Compile Include="KinAmmolet.cs" />
     <Compile Include="KineticBlaster.cs" />
+    <Compile Include="LabelablePlayerItem.cs" />
     <Compile Include="LaserBullets.cs" />
     <Compile Include="Lefthandedness.cs" />
     <Compile Include="LongswordShot.cs" />
     <Compile Include="LootEngine.cs" />
     <Compile Include="MantidAugment.cs" />
+    <Compile Include="MapFragment.cs" />
     <Compile Include="MaroonGuonStone.cs" />
     <Compile Include="MiniMonger.cs" />
+    <Compile Include="MinuteGun.cs" />
     <Compile Include="Missinguno.cs" />
+    <Compile Include="Moonrock.cs" />
     <Compile Include="Neutrino.cs" />
     <Compile Include="Nocturne.cs" />
     <Compile Include="OMITB cAPI\Hat.cs" />
@@ -153,10 +184,15 @@
     <Compile Include="OMITB Companions\LeadOfLife.cs" />
     <Compile Include="OMITB Companions\Peanut.cs" />
     <Compile Include="OMITB Companions\Potty.cs" />
-    <Compile Include="OMITB Extensions\OMITBAttackBehavExtensions.cs" />
-    <Compile Include="OMITB Extensions\OMITBEnemyExtensions.cs" />
-    <Compile Include="OMITB Extensions\OMITBRoomhandlerExtensions.cs" />
-    <Compile Include="OMITB Hooks\AmmoPickupHooks.cs" />
+    <Compile Include="OMITB Extensions and Hooks\EnemyHooks.cs" />
+    <Compile Include="OMITB Extensions and Hooks\GoopHooksAndExtensions.cs" />
+    <Compile Include="OMITB Extensions and Hooks\OMITBAttackBehavExtensions.cs" />
+    <Compile Include="OMITB Extensions and Hooks\OMITBEnemyExtensions.cs" />
+    <Compile Include="OMITB Extensions and Hooks\OMITBRoomhandlerExtensions.cs" />
+    <Compile Include="OMITB Extensions and Hooks\PickupHooks.cs" />
+    <Compile Include="OMITB Extensions and Hooks\PedestalHooks.cs" />
+    <Compile Include="OMITB Extensions and Hooks\SimplerCrateController.cs" />
+    <Compile Include="OMITB Extensions and Hooks\UIHooks.cs" />
     <Compile Include="OMITB Misc Game Changers\AdvancedDragunRewards.cs" />
     <Compile Include="AdvancedPlayerOrbital.cs" />
     <Compile Include="AlkaliBullets.cs" />
@@ -230,17 +266,23 @@
     <Compile Include="DoctorsRemote.cs" />
     <Compile Include="DynamiteLauncher.cs" />
     <Compile Include="OMITB Misc Game Changers\CadenceAndOxShopPoolAdditions.cs" />
+    <Compile Include="OMITB Misc Game Changers\Challenges.cs" />
+    <Compile Include="OMITB Misc Game Changers\CustomHuntingQuest.cs" />
     <Compile Include="OMITB Misc Game Changers\JammedChests.cs" />
     <Compile Include="OMITB Misc Game Changers\PlagueStatusEffect.cs" />
+    <Compile Include="OMITB Misc Game Changers\ShrinkStatusEffect.cs" />
     <Compile Include="OMITB Misc Toolboxes\BeamToolbox.cs" />
     <Compile Include="OMITB Misc Toolboxes\CustomHologramDoer.cs" />
+    <Compile Include="OMITB Misc Toolboxes\EnemyComponents.cs" />
     <Compile Include="OMITB Misc Toolboxes\FloorAndGenerationToolbox.cs" />
+    <Compile Include="OMITB Misc Toolboxes\GlobalUpdate.cs" />
     <Compile Include="OMITB Misc Toolboxes\LootHelpers.cs" />
     <Compile Include="OMITB Misc Toolboxes\MagicCircleDoer.cs" />
-    <Compile Include="OMITB Misc Toolboxes\MiscUnlockHooks.cs" />
+    <Compile Include="OMITB Extensions and Hooks\MiscUnlockHooks.cs" />
     <Compile Include="OMITB Misc Toolboxes\PlayerToolbox.cs" />
     <Compile Include="OMITB Misc Toolboxes\VFXToolbox.cs" />
     <Compile Include="OMITB Misc Toolboxes\StatusEffectHelper.cs" />
+    <Compile Include="OMITB Pickups\MegaAmmoBox.cs" />
     <Compile Include="OMITB Storage Classes\EasyEnemyTypeLists.cs" />
     <Compile Include="OMITB Storage Classes\EasyGoopDefinitions.cs" />
     <Compile Include="OMITB Storage Classes\PlaceableObjectDatabase.cs" />
@@ -300,10 +342,10 @@
     <Compile Include="Multiplicator.cs" />
     <Compile Include="ObsidianPistol.cs" />
     <Compile Include="Octagun.cs" />
-    <Compile Include="OMITB Extensions\OMITBBulletExtensions.cs" />
-    <Compile Include="OMITB Extensions\OMITBGunExtensions.cs" />
-    <Compile Include="OMITB Extensions\OMITBMathsAndLogicExtensions.cs" />
-    <Compile Include="OMITB Extensions\OMITBPlayerExtensions.cs" />
+    <Compile Include="OMITB Extensions and Hooks\OMITBBulletExtensions.cs" />
+    <Compile Include="OMITB Extensions and Hooks\OMITBGunExtensions.cs" />
+    <Compile Include="OMITB Extensions and Hooks\OMITBMathsAndLogicExtensions.cs" />
+    <Compile Include="OMITB Extensions and Hooks\OMITBPlayerExtensions.cs" />
     <Compile Include="OMITB Misc Toolboxes\DataCloners.cs" />
     <Compile Include="OMITB Misc Toolboxes\ProjSpawnHelper.cs" />
     <Compile Include="OMITB Misc Toolboxes\ProjectileComponents.cs" />
@@ -313,6 +355,7 @@
     <Compile Include="OMITB Storage Classes\ExtendedColours.cs" />
     <Compile Include="OMITB Storage Classes\StaticExplosionDatas.cs" />
     <Compile Include="OMITB Storage Classes\StaticStatusEffects.cs" />
+    <Compile Include="OpulentBlank.cs" />
     <Compile Include="Orgun.cs" />
     <Compile Include="OrgunHeadacheSynergyForme.cs" />
     <Compile Include="Oxygun.cs" />
@@ -320,6 +363,7 @@
     <Compile Include="Pencil.cs" />
     <Compile Include="PenPencilSynergy.cs" />
     <Compile Include="Permafrost.cs" />
+    <Compile Include="PestiferousLead.cs" />
     <Compile Include="Pestilence.cs" />
     <Compile Include="PhaserSpiderling.cs" />
     <Compile Include="Pillarocket.cs" />
@@ -330,6 +374,7 @@
     <Compile Include="PortableHole.cs" />
     <Compile Include="Primos1.cs" />
     <Compile Include="Protean.cs" />
+    <Compile Include="Pumhart.cs" />
     <Compile Include="PumpChargeShotgun.cs" />
     <Compile Include="PunishmentRay.cs" />
     <Compile Include="Purpler.cs" />
@@ -342,10 +387,13 @@
     <Compile Include="ReShelletonKeyter.cs" />
     <Compile Include="Ringer.cs" />
     <Compile Include="RingOfAmmoRedemption.cs" />
+    <Compile Include="RingOfInvisibility.cs" />
     <Compile Include="RiotGun.cs" />
     <Compile Include="RiskRifle.cs" />
     <Compile Include="RiskyRing.cs" />
+    <Compile Include="OMITB Companions\ScrollOfExactKnowledge.cs" />
     <Compile Include="SetupCrossModIDs.cs" />
+    <Compile Include="Shatterblank.cs" />
     <Compile Include="Showdown.cs" />
     <Compile Include="ShroomedGun.cs" />
     <Compile Include="SilverGuonStone.cs" />
@@ -360,16 +408,22 @@
     <Compile Include="Snaker.cs" />
     <Compile Include="SpearOfJustice.cs" />
     <Compile Include="Spiral.cs" />
+    <Compile Include="Splattershot.cs" />
     <Compile Include="SporeLauncher.cs" />
     <Compile Include="StasisRifle.cs" />
     <Compile Include="StuffIStoleFromApacheThatIDontUnderstand.cs" />
     <Compile Include="StunGun.cs" />
     <Compile Include="SynergyFormInitialiser.cs" />
+    <Compile Include="TabletOfOrder.cs" />
+    <Compile Include="TatteredMap.cs" />
+    <Compile Include="Telekinesis.cs" />
+    <Compile Include="TheOutbreak.cs" />
     <Compile Include="TheThinLine.cs" />
     <Compile Include="TinHeart.cs" />
     <Compile Include="TitaniumClip.cs" />
     <Compile Include="Toolbox.cs" />
     <Compile Include="ToolGun.cs" />
+    <Compile Include="TriBeam.cs" />
     <Compile Include="Unpredictabullets.cs" />
     <Compile Include="UnsTableTech.cs" />
     <Compile Include="UnusCentum.cs" />
@@ -544,11 +598,15 @@
     <Compile Include="Voodoollets.cs" />
     <Compile Include="WailingMagnum.cs" />
     <Compile Include="WickerAmmolet.cs" />
+    <Compile Include="WidowsRing.cs" />
+    <Compile Include="WitchsBrew.cs" />
     <Compile Include="Wolfgun.cs" />
     <Compile Include="Wonderchest.cs" />
     <Compile Include="WoodenBullets.cs" />
+    <Compile Include="WoodenHorse.cs" />
     <Compile Include="WoodGuonStone.cs" />
     <Compile Include="Wrench.cs" />
+    <Compile Include="Wrinkler.cs" />
     <Compile Include="YellowGuonStone.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2041,6 +2099,429 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\amuletofshelltan_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\Gusty\gusty_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\Gusty\gusty_attack_001.png" />
+    <EmbeddedResource Include="Resources\Companions\Gusty\gusty_attack_002.png" />
+    <EmbeddedResource Include="Resources\Companions\Gusty\gusty_attack_003.png" />
+    <EmbeddedResource Include="Resources\Companions\Gusty\gusty_attack_004.png" />
+    <EmbeddedResource Include="Resources\Companions\Gusty\gusty_attack_005.png" />
+    <EmbeddedResource Include="Resources\Companions\Gusty\gusty_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\Gusty\gusty_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\Gusty\gusty_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\Gusty\gusty_idle_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\drillbullets_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\shatterblank_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\foamdarts_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\tabletoforder_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ringofinvisibility_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\witchsbrew_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\chemicalburn_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\gunidaesolvithaatelis_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ammotrap_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\ScrollOfExactKnowledge\scrollofexactknowledge_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\ScrollOfExactKnowledge\scrollofexactknowledge_idleleft_001.png" />
+    <EmbeddedResource Include="Resources\Companions\ScrollOfExactKnowledge\scrollofexactknowledge_idleleft_002.png" />
+    <EmbeddedResource Include="Resources\Companions\ScrollOfExactKnowledge\scrollofexactknowledge_idleleft_003.png" />
+    <EmbeddedResource Include="Resources\Companions\ScrollOfExactKnowledge\scrollofexactknowledge_idleleft_004.png" />
+    <EmbeddedResource Include="Resources\Companions\ScrollOfExactKnowledge\scrollofexactknowledge_idleright_001.png" />
+    <EmbeddedResource Include="Resources\Companions\ScrollOfExactKnowledge\scrollofexactknowledge_idleright_002.png" />
+    <EmbeddedResource Include="Resources\Companions\ScrollOfExactKnowledge\scrollofexactknowledge_idleright_003.png" />
+    <EmbeddedResource Include="Resources\Companions\ScrollOfExactKnowledge\scrollofexactknowledge_idleright_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\mapfragment_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\tatteredmap_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\cloakofdarkness_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\boostershot_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\MiscVFX\errorshellsoverhead_vfx.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\bloodshoteye_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\widowsring_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompaniona_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompaniona_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompaniona_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompaniona_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompaniona_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompaniona_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompaniona_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompaniona_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompaniona_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompaniona_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompanionb_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompanionb_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompanionb_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompanionb_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompanionb_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompanionb_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompanionb_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompanionb_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompanionb_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompanionb_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\cartographerseye_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\opulentblank_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bullettimecompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bullettimecompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bullettimecompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bullettimecompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bullettimecompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bullettimecompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bullettimecompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bullettimecompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bullettimecompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bullettimecompanion_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\darumacompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\darumacompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\darumacompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\darumacompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\darumacompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\darumacompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\darumacompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\darumacompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\darumacompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\darumacompanion_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\riddleofleadcompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\riddleofleadcompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\riddleofleadcompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\riddleofleadcompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\riddleofleadcompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\riddleofleadcompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\riddleofleadcompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\riddleofleadcompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\riddleofleadcompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\riddleofleadcompanion_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotguncoffeecompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotguncoffeecompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotguncoffeecompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotguncoffeecompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotguncoffeecompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotguncoffeecompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotguncoffeecompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotguncoffeecompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotguncoffeecompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotguncoffeecompanion_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotgacolacompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotgacolacompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotgacolacompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotgacolacompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotgacolacompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotgacolacompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotgacolacompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotgacolacompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotgacolacompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shotgacolacompanion_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\elderblankcompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\elderblankcompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\elderblankcompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\elderblankcompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\elderblankcompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\elderblankcompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\elderblankcompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\elderblankcompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\elderblankcompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\elderblankcompanion_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\MultiStageActives\deliverybox_ammo.png" />
+    <EmbeddedResource Include="Resources\MultiStageActives\deliverybox_armour.png" />
+    <EmbeddedResource Include="Resources\MultiStageActives\deliverybox_blank.png" />
+    <EmbeddedResource Include="Resources\MultiStageActives\deliverybox_closed.png" />
+    <EmbeddedResource Include="Resources\MultiStageActives\deliverybox_glassguon.png" />
+    <EmbeddedResource Include="Resources\MultiStageActives\deliverybox_halfheart.png" />
+    <EmbeddedResource Include="Resources\MultiStageActives\deliverybox_heart.png" />
+    <EmbeddedResource Include="Resources\MultiStageActives\deliverybox_key.png" />
+    <EmbeddedResource Include="Resources\MultiStageActives\deliverybox_spreadammo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bulletguncompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bulletguncompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bulletguncompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bulletguncompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bulletguncompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bulletguncompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bulletguncompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bulletguncompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bulletguncompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\bulletguncompanion_run_006.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shellguncompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shellguncompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shellguncompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shellguncompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shellguncompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shellguncompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shellguncompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shellguncompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shellguncompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\shellguncompanion_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\caseycompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\caseycompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\caseycompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\caseycompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\caseycompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\caseycompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\caseycompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\caseycompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\caseycompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\caseycompanion_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\StatVFX\speedup_vfx_001.png" />
+    <EmbeddedResource Include="Resources\StatVFX\speedup_vfx_002.png" />
+    <EmbeddedResource Include="Resources\StatVFX\speedup_vfx_003.png" />
+    <EmbeddedResource Include="Resources\StatVFX\speedup_vfx_004.png" />
+    <EmbeddedResource Include="Resources\StatVFX\speedup_vfx_005.png" />
+    <EmbeddedResource Include="Resources\StatVFX\speedup_vfx_006.png" />
+    <EmbeddedResource Include="Resources\StatVFX\speedup_vfx_007.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\grimblanks_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\BTCKTPcompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\BTCKTPcompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\BTCKTPcompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\BTCKTPcompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\BTCKTPcompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\BTCKTPcompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\BTCKTPcompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\BTCKTPcompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\BTCKTPcompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLife\BTCKTPcompanion_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\fiftycalroundscompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\fiftycalroundscompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\fiftycalroundscompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\fiftycalroundscompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\fiftycalroundscompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\fiftycalroundscompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\fiftycalroundscompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\fiftycalroundscompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\fiftycalroundscompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\fiftycalroundscompanion_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\oneshotcompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\oneshotcompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\oneshotcompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\oneshotcompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\oneshotcompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\oneshotcompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\oneshotcompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\oneshotcompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\oneshotcompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\oneshotcompanion_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\alkalibulletscompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\alkalibulletscompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\alkalibulletscompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\alkalibulletscompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\alkalibulletscompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\alkalibulletscompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\alkalibulletscompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\alkalibulletscompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\alkalibulletscompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\alkalibulletscompanion_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimagicroundscompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimagicroundscompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimagicroundscompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimagicroundscompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimagicroundscompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimagicroundscompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimagicroundscompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimagicroundscompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimagicroundscompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimagicroundscompanion_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimatterbulletscompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimatterbulletscompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimatterbulletscompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimatterbulletscompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimatterbulletscompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimatterbulletscompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimatterbulletscompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimatterbulletscompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimatterbulletscompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimatterbulletscompanion_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashfulshotcompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashfulshotcompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashfulshotcompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashfulshotcompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashfulshotcompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashfulshotcompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashfulshotcompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashfulshotcompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashfulshotcompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashfulshotcompanion_run_006.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashfulshotcompanion_run_007.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashfulshotcompanion_run_008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashingbulletscompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashingbulletscompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashingbulletscompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashingbulletscompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashingbulletscompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashingbulletscompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashingbulletscompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashingbulletscompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashingbulletscompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bashingbulletscompanion_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\moonrock_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ivoryammolet_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\cliponammopouch_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\telekinesis_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\birdshotcompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\birdshotcompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\birdshotcompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\birdshotcompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\birdshotcompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\birdshotcompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\birdshotcompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\birdshotcompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\birdshotcompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\birdshotcompanion_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\blightshellcompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\blightshellcompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\blightshellcompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\blightshellcompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\blightshellcompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\blightshellcompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\blightshellcompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\blightshellcompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\blightshellcompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\blightshellcompanion_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bloodthirstybulletscompanion_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bloodthirstybulletscompanion_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bloodthirstybulletscompanion_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bloodthirstybulletscompanion_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bloodthirstybulletscompanion_run_001.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bloodthirstybulletscompanion_run_002.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bloodthirstybulletscompanion_run_003.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bloodthirstybulletscompanion_run_004.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bloodthirstybulletscompanion_run_005.png" />
+    <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bloodthirstybulletscompanion_run_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\splattershot_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ammolock_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\pestiferouslead_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BeamSprites\heatray_impact_001.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\heatray_impact_002.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\heatray_impact_003.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\heatray_impact_004.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\heatray_impact_005.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\heatray_impact_006.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\heatray_impact_007.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\heatray_impact_008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BeamSprites\bluebeam_impact_001.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\bluebeam_impact_002.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\bluebeam_impact_003.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\bluebeam_impact_004.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\tribeam_mid_001.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\tribeam_mid_002.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\tribeam_start_001.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\tribeam_start_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BeamSprites\beamblade_end_001.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\beamblade_end_002.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\beamblade_end_003.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\beamblade_end_004.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\beamblade_end_005.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\beamblade_end_006.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\beamblade_mid_001.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\beamblade_mid_002.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\beamblade_mid_003.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\beamblade_mid_004.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\beamblade_mid_005.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\beamblade_mid_006.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

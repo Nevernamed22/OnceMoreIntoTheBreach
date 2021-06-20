@@ -15,5 +15,6 @@ namespace SaveAPI
         BEHOLSTER_KILLS,
         MINEFLAYER_KILLS,
         CHARMED_ENEMIES_KILLED,
+        JAMMED_CHESTS_OPENED,
     }
 }

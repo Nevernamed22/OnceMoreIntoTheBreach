@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Gungeon;
 using GungeonAPI;
+using SaveAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
@@ -63,13 +64,14 @@ namespace NevernamedsItems
         public static void Accept(PlayerController player, GameObject npc)
         {
             //ETGModConsole.Log("Acceptance began");
-            if (AllJammedState.allJammedActive)
+            if (AllJammedState.AllJammedActive)
             {
                 npc.GetComponent<tk2dSpriteAnimator>().PlayForDuration("doEffect", -2f, "idle", false);
                 string header = "All-Jammed Mode Disabled";
                 string text = "";
                 Notify(header, text);
-                AllJammedState.allJammedActive = false;
+                SaveAPIManager.SetFlag(CustomDungeonFlags.ALLJAMMEDMODE_ENABLED_CONSOLE, false);
+                SaveAPIManager.SetFlag(CustomDungeonFlags.ALLJAMMEDMODE_ENABLED_GENUINE, false);
             }
             else
             {
@@ -77,7 +79,8 @@ namespace NevernamedsItems
                 string header = "All-Jammed Mode Enabled";
                 string text = "";
                 Notify(header, text);
-                AllJammedState.allJammedActive = true;
+                SaveAPIManager.SetFlag(CustomDungeonFlags.ALLJAMMEDMODE_ENABLED_CONSOLE, false);
+                SaveAPIManager.SetFlag(CustomDungeonFlags.ALLJAMMEDMODE_ENABLED_GENUINE, true);
             }
             //ETGModConsole.Log("Acceptance didn't break");
         }

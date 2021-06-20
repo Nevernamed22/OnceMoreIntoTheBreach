@@ -11,7 +11,7 @@ using Dungeonator;
 
 namespace NevernamedsItems
 {
-    class GunjurersBelt : PlayerItem
+    class GunjurersBelt : TargetedAttackPlayerItem
     {
         //Call this method from the Start() method of your ETGModule extension class
         public static void Init()
@@ -48,12 +48,17 @@ namespace NevernamedsItems
             item.consumable = false;
             item.quality = ItemQuality.D;
 
-
+            item.doesStrike = false;
+            item.doesGoop = false;
+            item.DoScreenFlash = false;
+            item.reticleQuad = (PickupObjectDatabase.GetById(443) as TargetedAttackPlayerItem).reticleQuad;
         }
-
-        protected override void DoEffect(PlayerController user)
+        protected override void DoActiveEffect(PlayerController user)
         {
-            TeleportPlayerToCursorPosition.StartTeleport(user);            
+            tk2dBaseSprite cursor = OMITBReflectionHelpers.ReflectGetField<tk2dBaseSprite>(typeof(TargetedAttackPlayerItem), "m_extantReticleQuad", this);
+            Vector2 overridePos = cursor.WorldCenter;
+            TeleportPlayerToCursorPosition.StartTeleport(user, overridePos);            
+            base.DoActiveEffect(user);
         }
         public override bool CanBeUsed(PlayerController user)
         {

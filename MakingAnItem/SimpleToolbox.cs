@@ -1045,7 +1045,7 @@ namespace NevernamedsItems
     }
     public class SpawnObjectManager : MonoBehaviour //----------------------------------------------------------------------------------------------------------------------------
     {
-        public static void SpawnObject(GameObject thingToSpawn, Vector3 convertedVector, GameObject SpawnVFX)
+        public static void SpawnObject(GameObject thingToSpawn, Vector3 convertedVector, GameObject SpawnVFX, bool correctForWalls = false)
         {
             Vector2 Vector2Position = convertedVector;
 
@@ -1070,12 +1070,54 @@ namespace NevernamedsItems
                     placeConfigurable.ConfigureOnPlacement(GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(Vector2Position.ToIntVector2()));
                 }
             }
+           /* FlippableCover component7 = newObject.GetComponentInChildren<FlippableCover>();
+            component7.transform.position.XY().GetAbsoluteRoom().RegisterInteractable(component7);
+            component7.ConfigureOnPlacement(component7.transform.position.XY().GetAbsoluteRoom());*/
+
             ObjectSpecRigidBody.Initialize();
             PhysicsEngine.Instance.RegisterOverlappingGhostCollisionExceptions(ObjectSpecRigidBody, null, false);
 
             if (SpawnVFX != null)
             {
                 UnityEngine.Object.Instantiate<GameObject>(SpawnVFX, ObjectSpecRigidBody.sprite.WorldCenter, Quaternion.identity);
+            }
+            if (correctForWalls) CorrectForWalls(newObject);
+        }
+        private static void CorrectForWalls(GameObject portal)
+        {
+            SpeculativeRigidbody rigidbody = portal.GetComponent<SpeculativeRigidbody>();
+            if (rigidbody)
+            {
+            bool flag = PhysicsEngine.Instance.OverlapCast(rigidbody, null, true, false, null, null, false, null, null, new SpeculativeRigidbody[0]);
+            if (flag)
+            {
+                Vector2 vector = portal.transform.position.XY();
+                IntVector2[] cardinalsAndOrdinals = IntVector2.CardinalsAndOrdinals;
+                int num = 0;
+                int num2 = 1;
+                for (; ; )
+                {
+                    for (int i = 0; i < cardinalsAndOrdinals.Length; i++)
+                    {
+                        portal.transform.position = vector + PhysicsEngine.PixelToUnit(cardinalsAndOrdinals[i] * num2);
+                        rigidbody.Reinitialize();
+                        if (!PhysicsEngine.Instance.OverlapCast(rigidbody, null, true, false, null, null, false, null, null, new SpeculativeRigidbody[0]))
+                        {
+                            return;
+                        }
+                    }
+                    num2++;
+                    num++;
+                    if (num > 200)
+                    {
+                        goto Block_4;
+                    }
+                }
+                return;
+            Block_4:
+                UnityEngine.Debug.LogError("FREEZE AVERTED!  TELL RUBEL!  (you're welcome) 147");
+                return;
+            }
             }
         }
     }

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using UnityEngine;
+using Dungeonator;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -40,7 +42,7 @@ namespace NevernamedsItems
                 if (GameManager.Instance.PrimaryPlayer && GameManager.Instance.PrimaryPlayer.HasPickupID(CursedTumbler.CursedTumblerID)) TumblerPlayer = GameManager.Instance.PrimaryPlayer;
                 else if (GameManager.Instance.SecondaryPlayer && GameManager.Instance.SecondaryPlayer.HasPickupID(CursedTumbler.CursedTumblerID)) TumblerPlayer = GameManager.Instance.SecondaryPlayer;
 
-                if (AllJammedState.allJammedActive || TumblerPlayer != null)
+                if (AllJammedState.AllJammedActive || TumblerPlayer != null)
                 {
                     float TumblerProc = 0;
                     float AlljamProc = 0;
@@ -58,7 +60,7 @@ namespace NevernamedsItems
                         else if (localCurse >= 3) TumblerProc = 0.35f;
                         else if (localCurse >= 2) TumblerProc = 0.3f;
                     }
-                    if (AllJammedState.allJammedActive)
+                    if (AllJammedState.AllJammedActive)
                     {
                         int globalCurse = PlayerStats.GetTotalCurse();
                         if (globalCurse > 0) AlljamProc = globalCurse * 0.1f;
@@ -75,12 +77,45 @@ namespace NevernamedsItems
                     }
                 }
             }
+            if (!Dungeon.IsGenerating)
+            {
+                if (GameManager.Instance.AnyPlayerHasPickupID(ScrollOfExactKnowledge.ScrollOfExactKnowledgeID))
+                {
+                    if (GameManager.Instance.PrimaryPlayer != null)
+                    {
+                        foreach (PassiveItem item in GameManager.Instance.PrimaryPlayer.passiveItems)
+                        {
+                            if (item.GetComponent<ScrollOfExactKnowledge>() != null)
+                            {
+                                item.GetComponent<ScrollOfExactKnowledge>().ReactToRuntimeSpawnedChest(self);
+                            }
+                        }
+                    }
+                    if (GameManager.Instance.SecondaryPlayer != null)
+                    {
+                        foreach (PassiveItem item in GameManager.Instance.SecondaryPlayer.passiveItems)
+                        {
+                            if (item.GetComponent<ScrollOfExactKnowledge>() != null)
+                            {
+                                item.GetComponent<ScrollOfExactKnowledge>().ReactToRuntimeSpawnedChest(self);
+                            }
+                        }
+                    }
+                }
+            }
             orig(self, uselssVar);
         }
 
         public static void ChestPreOpen(Action<Chest, PlayerController> orig, Chest self, PlayerController opener)
         {
             JammedChestBehav jamness = self.gameObject.GetComponent<JammedChestBehav>();
+            if (self && self.IsGlitched)
+            {
+                if (!SaveAPIManager.GetFlag(CustomDungeonFlags.UNLOCKED_MISSINGUNO))
+                {
+                    SaveAPIManager.SetFlag(CustomDungeonFlags.UNLOCKED_MISSINGUNO, true);
+                }
+            }
             if (jamness != null)
             {
                 self.PredictContents(opener);
@@ -100,6 +135,7 @@ namespace NevernamedsItems
             orig(self, opener);
             if (jamness != null)
             {
+                SaveAPIManager.RegisterStatChange(CustomTrackedStats.JAMMED_CHESTS_OPENED, 1);
                 LootEngine.SpawnCurrency(self.sprite.WorldCenter, UnityEngine.Random.Range(10, 21), false);
                 if (UnityEngine.Random.value <= 0.25f && opener.name != "PlayerShade(Clone)") opener.healthHaver.ApplyDamage(1f, Vector2.zero, "Jammed Chest");
             }

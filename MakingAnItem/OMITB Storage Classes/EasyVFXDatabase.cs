@@ -35,6 +35,16 @@ namespace NevernamedsItems
         //Custom VFX Objects
         public static GameObject PlagueOverheadVFX() { return PlagueStatusEffectSetup.PlagueOverheadVFX; }
         public static GameObject GundetaleSpareVFX;
+        public static GameObject ERRORShellsOverheadVFX;
+
+        //Stat Up VFX
+        public static GameObject DamageUpVFX;
+        public static GameObject ShotSpeedUpVFX;
+        public static GameObject SpeedUpVFX;
+        public static GameObject FirerateUpVFX;
+        public static GameObject AccuracyUpVFX;
+        public static GameObject KnockbackUpVFX;
+        public static GameObject ReloadSpeedUpVFX;
         public static void Init()
         {
             //Spirat Teleportation VFX

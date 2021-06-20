@@ -5,6 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -41,7 +42,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.S;
 
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1, StatModifier.ModifyMethod.ADDITIVE);
-
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_HOLLOW, true);
         }
         public void onFired(Projectile bullet, float eventchancescaler)
         {

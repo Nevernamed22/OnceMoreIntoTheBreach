@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -41,6 +42,8 @@ namespace NevernamedsItems
             gun.SetBaseMaxAmmo(1500);
             gun.ammo = 1500;
 
+            
+
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);
@@ -60,6 +63,7 @@ namespace NevernamedsItems
             gun.AddToSubShop(ItemBuilder.ShopType.Cursula);
 
             BeastclawID = gun.PickupObjectId;
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.MISFIREBEAST_QUEST_REWARDED, true);
         }
         public static int BeastclawID;
         

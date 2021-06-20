@@ -45,7 +45,7 @@ namespace NevernamedsItems
             interactor.SetInputOverride("npcConversation");
             Pixelator.Instance.LerpToLetterbox(0.35f, 0.25f);
             yield return null;
-            var conversationToUse = AllJammedState.allJammedActive ? conversation2 : conversation;
+            var conversationToUse = AllJammedState.AllJammedActive ? conversation2 : conversation;
             int conversationIndex = 0;
             //ETGModConsole.Log("We made it to the while loop");
             while (conversationIndex < conversationToUse.Count - 1)
@@ -65,8 +65,8 @@ namespace NevernamedsItems
             m_allowMeToIntroduceMyself = false;
             TextBoxManager.ShowTextBox(this.talkPoint.position, this.talkPoint, -1f, conversationToUse[conversationToUse.Count - 1], interactor.characterAudioSpeechTag, instant: false, showContinueText: true);
 
-            var acceptanceTextToUse = AllJammedState.allJammedActive ? acceptText2 : acceptText;
-            var declineTextToUse = AllJammedState.allJammedActive ? declineText2 : declineText;
+            var acceptanceTextToUse = AllJammedState.AllJammedActive ? acceptText2 : acceptText;
+            var declineTextToUse = AllJammedState.AllJammedActive ? declineText2 : declineText;
             GameUIRoot.Instance.DisplayPlayerConversationOptions(interactor, null, acceptanceTextToUse, declineTextToUse);
             int selectedResponse = -1;
             while (!GameUIRoot.Instance.GetPlayerConversationResponse(out selectedResponse))

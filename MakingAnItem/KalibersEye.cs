@@ -7,6 +7,7 @@ using UnityEngine;
 using ItemAPI;
 using System.Collections;
 using SaveAPI;
+using Gungeon;
 
 namespace NevernamedsItems
 {
@@ -48,6 +49,8 @@ namespace NevernamedsItems
             KalibersEyeID = item.PickupObjectId;
 
             item.SetupUnlockOnCustomStat(CustomTrackedStats.CHARMED_ENEMIES_KILLED, 99, DungeonPrerequisite.PrerequisiteOperation.GREATER_THAN);
+            Game.Items.Rename("nn:kaliber's_eye", "nn:kalibers_eye");
+
         }
         public static int KalibersEyeID;
         private bool EnemyValidForKalibersEye(bool fatal, HealthHaver enemy)
@@ -112,6 +115,10 @@ namespace NevernamedsItems
                     CompanionController orAddComponent = TargetActor.gameObject.GetOrAddComponent<CompanionController>();
                     orAddComponent.companionID = CompanionController.CompanionIdentifier.NONE;
                     orAddComponent.Initialize(Owner);
+
+                    TargetActor.OverrideHitEnemies = true;
+                    TargetActor.CollisionDamage = 0.5f;
+                    TargetActor.CollisionDamageTypes |= CoreDamageTypes.Electric;
 
                     if (isJammed == true)
                     {

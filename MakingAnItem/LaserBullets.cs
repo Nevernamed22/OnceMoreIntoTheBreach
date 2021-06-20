@@ -53,6 +53,7 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             beamComp.boneType = BasicBeamController.BeamBoneType.Straight;
             beamComp.interpolateStretchedBones = false;
+            beamComp.ContinueBeamArtToWall = true;
             SimpleRedBeam = projectile;
         }
         public static Projectile SimpleRedBeam;

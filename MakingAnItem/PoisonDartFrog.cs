@@ -52,7 +52,7 @@ namespace NevernamedsItems
                 projectile.SetProjectileSpriteRight("blowgun_projectile", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 15, 8);
             }
             gun.reloadTime = 0.5f;
-            gun.SetBaseMaxAmmo(300);
+            gun.SetBaseMaxAmmo(200);
             gun.quality = PickupObject.ItemQuality.C;
 
             gun.encounterTrackable.EncounterGuid = "this is the Poison Dart Frog";

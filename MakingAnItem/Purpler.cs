@@ -39,7 +39,7 @@ namespace NevernamedsItems
             gun.DefaultModule.cooldownTime = 0.7f;
             gun.DefaultModule.numberOfShotsInClip = 12;
             gun.barrelOffset.transform.localPosition = new Vector3(1.06f, 0.5f, 0f);
-            gun.SetBaseMaxAmmo(800);
+            gun.SetBaseMaxAmmo(300);
 
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
@@ -51,7 +51,9 @@ namespace NevernamedsItems
 
             projectile.baseData.range *= 0.7f;
             projectile.transform.parent = gun.barrelOffset;
-            projectile.SetProjectileSpriteRight("purpler_projectile", 8, 6, false, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
+            projectile.SetProjectileSpriteRight("purpler_projectile", 8, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
+            projectile.hitEffects.alwaysUseMidair = true;
+            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
 
             gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "this is the Purpler";

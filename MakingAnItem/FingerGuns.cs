@@ -34,7 +34,7 @@ namespace NevernamedsItems
             gun.gunHandedness = GunHandedness.HiddenOneHanded;
             gun.DefaultModule.numberOfShotsInClip = 5;
             gun.barrelOffset.transform.localPosition = new Vector3(0.81f, 0.43f, 0f);
-            gun.SetBaseMaxAmmo(500);
+            gun.SetBaseMaxAmmo(250);
 
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
@@ -61,7 +61,7 @@ namespace NevernamedsItems
             {
                 if (!hasPolydactylySynergyAlready)
                 {
-                    gun.SetBaseMaxAmmo(600);
+                    gun.SetBaseMaxAmmo(350);
                     gun.DefaultModule.numberOfShotsInClip = 6;
                     hasPolydactylySynergyAlready = true;
                 }
@@ -70,7 +70,7 @@ namespace NevernamedsItems
             {
                 if (hasPolydactylySynergyAlready)
                 {
-                    gun.SetBaseMaxAmmo(500);
+                    gun.SetBaseMaxAmmo(250);
                     gun.DefaultModule.numberOfShotsInClip = 5;
                     hasPolydactylySynergyAlready = false;
                 }

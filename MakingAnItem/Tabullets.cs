@@ -14,34 +14,15 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Tabullets";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/tabullets_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<Tabullets>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Surface Level";
-            string longDesc = "Your bullets no longer damage tables, and are allowed to pass right through. Passing through a table increases a bullet's damage."+"\n\nAn initiation gift among the Knights of the Octagonal Table.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
+            string longDesc = "Your bullets no longer damage tables, and are allowed to pass right through. Passing through a table increases a bullet's damage." + "\n\nAn initiation gift among the Knights of the Octagonal Table.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.C;
-
         }
 
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
@@ -61,11 +42,17 @@ namespace NevernamedsItems
             {
                 if (otherRigidbody.gameObject.name == "Table_Vertical" || otherRigidbody.gameObject.name == "Table_Horizontal")
                 {
-                    myRigidbody.projectile.baseData.damage *= 1.05f;
+                    if (!tablesHitAlready.Contains(otherRigidbody))
+                    {
+                        tablesHitAlready.Add(otherRigidbody);
+                        myRigidbody.projectile.baseData.damage *= 1.2f;
+                        myRigidbody.projectile.RuntimeUpdateScale(1.2f);
+                    }
                     PhysicsEngine.SkipCollision = true;
                 }
             }
         }
+        private List<SpeculativeRigidbody> tablesHitAlready = new List<SpeculativeRigidbody>();
         public override DebrisObject Drop(PlayerController player)
         {
             DebrisObject debrisObject = base.Drop(player);

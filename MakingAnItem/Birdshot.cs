@@ -41,9 +41,9 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.B;
-
+            BirdshotID = item.PickupObjectId;
         }
-
+        public static int BirdshotID;
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
             try

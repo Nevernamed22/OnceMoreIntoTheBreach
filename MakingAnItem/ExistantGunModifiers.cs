@@ -44,7 +44,7 @@ namespace NevernamedsItems
                 damageMod = new StatModifier()
                 {
                     statToBoost = PlayerStats.StatType.Damage,
-                    amount = 1.2f,
+                    amount = 1.1f,
                     modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
                 };
             }
@@ -57,9 +57,9 @@ namespace NevernamedsItems
                     modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
                 };
             }
-            if (this.gun.CurrentOwner && this.gun.CurrentOwner is PlayerController)
+            if (this.gun.GunPlayerOwner())
             {
-                if (this.gun.CurrentOwner.CurrentGun == this)
+                if (this.gun.CurrentOwner.CurrentGun == this.gun)
                 {
                     if ((this.gun.CurrentOwner as PlayerController).PlayerHasActiveSynergy("Underground") && !synergyBoostActive)
                     {
@@ -84,11 +84,11 @@ namespace NevernamedsItems
         }
         private void OnDestroy()
         {
-            
+
         }
         public override void OnDropped()
         {
-            if (this.gun.CurrentOwner && this.gun.CurrentOwner is PlayerController && synergyBoostActive)
+            if (synergyBoostActive)
             {
                 RemoveSynergyBoost();
                 synergyBoostActive = false;
@@ -101,6 +101,7 @@ namespace NevernamedsItems
         StatModifier damageMod;
         private void GiveSynergyBoost()
         {
+            ETGModConsole.Log("Gave boost");
             PlayerController playa = (this.gun.CurrentOwner as PlayerController);
             playa.baseFlatColorOverride = Color.blue.WithAlpha(1);
             playa.ownerlessStatModifiers.Add(movementMod);
@@ -123,13 +124,16 @@ namespace NevernamedsItems
     {
         public override void PostProcessProjectile(Projectile projectile)
         {
-            PlayerController playerController = this.gun.CurrentOwner as PlayerController;
-            base.PostProcessProjectile(projectile);
-            if (playerController.PlayerHasActiveSynergy("Court Marshal"))
+            if (this.gun.CurrentOwner is PlayerController)
             {
-                projectile.baseData.damage *= 1.2f;
-                projectile.baseData.speed *= 1.2f;
-                projectile.UpdateSpeed();
+                PlayerController playerController = this.gun.CurrentOwner as PlayerController;
+                base.PostProcessProjectile(projectile);
+                if (playerController.PlayerHasActiveSynergy("Court Marshal"))
+                {
+                    projectile.baseData.damage *= 1.2f;
+                    projectile.baseData.speed *= 1.2f;
+                    projectile.UpdateSpeed();
+                }
             }
         }
     }
@@ -137,13 +141,16 @@ namespace NevernamedsItems
     {
         public override void PostProcessProjectile(Projectile projectile)
         {
-            PlayerController playerController = this.gun.CurrentOwner as PlayerController;
-            base.PostProcessProjectile(projectile);
-            if (playerController.PlayerHasActiveSynergy("Court Marshal"))
+            if (this.gun.CurrentOwner is PlayerController)
             {
-                projectile.baseData.damage *= 1.2f;
-                projectile.baseData.speed *= 1.2f;
-                projectile.UpdateSpeed();
+                PlayerController playerController = this.gun.CurrentOwner as PlayerController;
+                base.PostProcessProjectile(projectile);
+                if (playerController.PlayerHasActiveSynergy("Court Marshal"))
+                {
+                    projectile.baseData.damage *= 1.2f;
+                    projectile.baseData.speed *= 1.2f;
+                    projectile.UpdateSpeed();
+                }
             }
         }
     }
@@ -151,11 +158,14 @@ namespace NevernamedsItems
     {
         public override void PostProcessProjectile(Projectile projectile)
         {
-            PlayerController playerController = this.gun.CurrentOwner as PlayerController;
-            base.PostProcessProjectile(projectile);
-            if (playerController.PlayerHasActiveSynergy("The Classics"))
+            if (this.gun.CurrentOwner is PlayerController)
             {
-                projectile.baseData.range *= 2;
+                PlayerController playerController = this.gun.CurrentOwner as PlayerController;
+                base.PostProcessProjectile(projectile);
+                if (playerController.PlayerHasActiveSynergy("The Classics"))
+                {
+                    projectile.baseData.range *= 2;
+                }
             }
         }
     }
@@ -235,7 +245,7 @@ namespace NevernamedsItems
             }
         }
     }
-    public class MTXGunModifiers : AdvancedGunBehavior
+    public class MTXGunModifiers : GunBehaviour
     {
         private void OnKilledEnemy(PlayerController player, HealthHaver enemy)
         {
@@ -243,27 +253,37 @@ namespace NevernamedsItems
             {
                 if (player.CurrentGun.PickupObjectId == 476 && enemy.GetMaxHealth() >= 10)
                 {
+                    //ETGModConsole.Log("Spawned bonus");
                     LootEngine.SpawnCurrency(enemy.specRigidbody.UnitCenter, 1, false);
                 }
             }
         }
-        protected override void OnPickedUpByPlayer(PlayerController player)
+        private void Update()
         {
-            player.OnKilledEnemyContext += this.OnKilledEnemy;
-            base.OnPickedUpByPlayer(player);
-        }
-        protected override void OnPostDroppedByPlayer(PlayerController player)
-        {
-            player.OnKilledEnemyContext -= this.OnKilledEnemy;
-            base.OnPostDroppedByPlayer(player);
-        }
-        protected override void OnDestroy()
-        {
-            if (gun.GunPlayerOwner())
+            if (this && this.gun)
             {
-                gun.GunPlayerOwner().OnKilledEnemyContext -= this.OnKilledEnemy;
+                if (this.gun.GunPlayerOwner() != null && lastPlayerOwner == null)
+                {
+                    this.gun.GunPlayerOwner().OnKilledEnemyContext += this.OnKilledEnemy;
+
+                    lastPlayerOwner = this.gun.GunPlayerOwner();
+                }
+                else if (this.gun.GunPlayerOwner() == null && lastPlayerOwner != null)
+                {
+                    lastPlayerOwner.OnKilledEnemyContext -= this.OnKilledEnemy;
+
+                    lastPlayerOwner = null;
+                }
             }
-            base.OnDestroy();
+        }
+        private PlayerController lastPlayerOwner;
+        private void OnDestroy()
+        {
+            if (this.gun.GunPlayerOwner() || lastPlayerOwner != null)
+            {
+                if (this.gun.GunPlayerOwner()) this.gun.GunPlayerOwner().OnKilledEnemyContext -= this.OnKilledEnemy;
+                else if (lastPlayerOwner != null) lastPlayerOwner.OnKilledEnemyContext -= this.OnKilledEnemy;
+            }
         }
     }
     public class SAAModifiers : GunBehaviour

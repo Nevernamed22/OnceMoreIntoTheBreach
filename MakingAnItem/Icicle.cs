@@ -19,7 +19,7 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:icicle", "nn:icicle");
             gun.gameObject.AddComponent<Icicle>();
             gun.SetShortDescription("Begins Anew");
-            gun.SetLongDescription("Becomes more powerful the cooler it's owner is." + "\n\nSnapped off of the cieling of the Hollow's deepest catacomb, and somehow hasn't thawed ever since.");
+            gun.SetLongDescription("Becomes more powerful the cooler it's owner is." + "\n\nSnapped off of the ceiling of the Hollow's deepest catacomb, and somehow hasn't thawed ever since.");
 
             gun.SetupSprite(null, "icicle_idle_001", 8);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(199) as Gun).gunSwitchGroup;

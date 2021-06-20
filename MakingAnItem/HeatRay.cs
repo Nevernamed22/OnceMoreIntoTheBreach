@@ -30,17 +30,17 @@ namespace NevernamedsItems
 
             //GUN STATS
             gun.doesScreenShake = false;
-            gun.DefaultModule.ammoCost = 1;
+            gun.DefaultModule.ammoCost = 30;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Beam;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
             gun.reloadTime = 1f;
             gun.muzzleFlashEffects.type = VFXPoolType.None;
             gun.DefaultModule.cooldownTime = 0.001f;
-            gun.DefaultModule.numberOfShotsInClip = 1000;
+            gun.DefaultModule.numberOfShotsInClip = 3500;
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.BEAM;
             gun.barrelOffset.transform.localPosition = new Vector3(1.06f, 0.31f, 0f);
-            gun.SetBaseMaxAmmo(1000);
-            gun.ammo = 1000;
+            gun.SetBaseMaxAmmo(3500);
+            gun.ammo = 3500;
 
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop;
 
@@ -55,15 +55,37 @@ namespace NevernamedsItems
                 "NevernamedsItems/Resources/BeamSprites/heatray_seg_007",
                 "NevernamedsItems/Resources/BeamSprites/heatray_seg_008",
             };
+            List<string> BeamImpactPaths = new List<string>()
+            {
+                "NevernamedsItems/Resources/BeamSprites/heatray_impact_001",
+                "NevernamedsItems/Resources/BeamSprites/heatray_impact_002",
+                "NevernamedsItems/Resources/BeamSprites/heatray_impact_003",
+                "NevernamedsItems/Resources/BeamSprites/heatray_impact_004",
+                "NevernamedsItems/Resources/BeamSprites/heatray_impact_005",
+                "NevernamedsItems/Resources/BeamSprites/heatray_impact_006",
+                "NevernamedsItems/Resources/BeamSprites/heatray_impact_007",
+                "NevernamedsItems/Resources/BeamSprites/heatray_impact_008",
+            };
 
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
+            
             BasicBeamController beamComp = projectile.GenerateBeamPrefab(
-                "NevernamedsItems/Resources/BeamSprites/heatray_seg_001", new Vector2(10, 2), new Vector2(0, 3), BeamAnimPaths, 16);
+                "NevernamedsItems/Resources/BeamSprites/heatray_seg_001", 
+                new Vector2(10, 2), 
+                new Vector2(0, 3), 
+                BeamAnimPaths, 
+                16, 
+                BeamImpactPaths, 
+                20, 
+                new Vector2(6,6), 
+                new Vector2(2, 4)
+                );
+
             projectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
-            projectile.baseData.damage *= 0.8f;
+            projectile.baseData.damage *= 0.9f;
             projectile.baseData.force *= 0.1f;
             projectile.baseData.range *= 2;
             projectile.baseData.speed *= 0.7f;
@@ -77,7 +99,7 @@ namespace NevernamedsItems
 
             gun.DefaultModule.projectiles[0] = projectile;
 
-            gun.quality = PickupObject.ItemQuality.EXCLUDED; //D
+            gun.quality = PickupObject.ItemQuality.D; //D
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
         }       

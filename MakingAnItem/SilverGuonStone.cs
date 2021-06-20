@@ -8,6 +8,7 @@ using System.Collections;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
 using Dungeonator;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -41,6 +42,8 @@ namespace NevernamedsItems
             item.HasAdvancedUpgradeSynergy = true;
             item.AdvancedUpgradeSynergy = "Silverer Guon Stone";
             item.AdvancedUpgradeOrbitalPrefab = SilverGuonStone.upgradeOrbitalPrefab.gameObject;
+
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_PROPER, true);
         }
         public static void BuildPrefab()
         {

@@ -31,6 +31,7 @@ namespace NevernamedsItems
         public static Color cursedBulletsPurple = Gungeon.Game.Items["cursed_bullets"].GetComponent<ScalingStatBoostItem>().TintColor;
         public static Color gildedBulletsGold = Gungeon.Game.Items["gilded_bullets"].GetComponent<ScalingStatBoostItem>().TintColor;
         public static Color silvedBulletsSilver = Gungeon.Game.Items["silver_bullets"].GetComponent<SilverBulletsPassiveItem>().TintColor;
+        public static Color frostBulletsTint = Gungeon.Game.Items["frost_bullets"].GetComponent<BulletStatusEffectItem>().TintColor;
 
     }
 }

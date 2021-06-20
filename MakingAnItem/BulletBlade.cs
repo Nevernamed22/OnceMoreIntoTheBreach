@@ -8,6 +8,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -97,6 +98,8 @@ namespace NevernamedsItems
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             gun.barrelOffset.transform.localPosition = new Vector3(3.18f, -0.31f, 0f);
             BulletBladeID = gun.PickupObjectId;
+
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.JAMMEDGUNNUT_QUEST_REWARDED, true);
         }
         public static int BulletBladeID;
         public override void PostProcessProjectile(Projectile projectile)

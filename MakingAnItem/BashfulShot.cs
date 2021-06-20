@@ -40,7 +40,10 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.S;
+
+            BashfulShotID = item.PickupObjectId;
         }
+        public static int BashfulShotID;
         private int currentItems, lastItems;
         private int currentGuns, lastGuns;
         protected override void Update()
@@ -82,6 +85,8 @@ namespace NevernamedsItems
                         normalStatModAmount -= 0.03f;
                         damageStatModAmount -= 0.03f;                       
                     }
+                    normalStatModAmount = Mathf.Max(0, normalStatModAmount);
+                    damageStatModAmount = Mathf.Max(0, damageStatModAmount);
                     AddStat(PlayerStats.StatType.Damage, damageStatModAmount, StatModifier.ModifyMethod.ADDITIVE);
                     AddStat(PlayerStats.StatType.RateOfFire, normalStatModAmount, StatModifier.ModifyMethod.ADDITIVE);                    
                 }

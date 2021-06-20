@@ -27,6 +27,7 @@ namespace NevernamedsItems
             {
                 ETGModConsole.Log("Once More Into The Breach started initialising...");
 
+
                 //Tools and Toolboxes
                 GungeonAP.Init();
                 FakePrefabHooks.Init();
@@ -36,11 +37,18 @@ namespace NevernamedsItems
                 EnemyTools.Init();
                 Hooks.Init();
                 SaveAPIManager.Setup("nn");
+                ETGModMainBehaviour.Instance.gameObject.AddComponent<GlobalUpdate>();
+
+                //Challenges
+                Challenges.Init();
 
                 //Hooks n Shit
                 PlayerToolsSetup.Init();
+                EnemyHooks.InitEnemyHooks();
                 MiscUnlockHooks.InitHooks();
                 FloorAndGenerationToolbox.Init();
+                PedestalHooks.Init();
+                UIHooks.Init();
 
                 //VFX Setup
                 VFXToolbox.InitVFX();
@@ -128,7 +136,6 @@ namespace NevernamedsItems
                 EndlessBullets.Init();
                 HellfireRounds.Init();
                 Birdshot.Init();
-                LockdownBullets.Init();
                 Unpredictabullets.Init();
                 WarpBullets.Init();
                 BulletsWithGuns.Init();
@@ -139,9 +146,14 @@ namespace NevernamedsItems
                 KnightlyBullets.Init();
                 EmptyRounds.Init();
                 LongswordShot.Init();
+                DrillBullets.Init();
+                FoamDarts.Init();
                 //Status Effect Bullet Mods
                 SnailBullets.Init();
+                LockdownBullets.Init();
+                PestiferousLead.Init();
                 //Volley Modifying Bullet Mods
+                Splattershot.Init();
                 BackwardsBullets.Init();
                 CrossBullets.Init();
                 //Insta-Kill Bullet Modifiers
@@ -167,6 +179,7 @@ namespace NevernamedsItems
                 OverpricedHeadband.Init();
                 GunslingerEmblem.Init();
                 MobiusClip.Init();
+                ClipOnAmmoPouch.Init();
                 //Armour
                 GoldenArmour.Init();
                 ExoskeletalArmour.Init();
@@ -179,6 +192,8 @@ namespace NevernamedsItems
                 TrueBlank.Init();
                 FalseBlank.Init();
                 SpareBlank.Init();
+                OpulentBlank.Init();
+                GrimBlanks.Init();
                 NNBlankPersonality.Init();
                 Blombk.Init();
                 Blankh.Init();
@@ -195,11 +210,14 @@ namespace NevernamedsItems
                 TheShellactery.Init();
                 BloodyAmmo.Init();
                 MengerAmmoBox.Init();
+                AmmoTrap.Init();
                 //Boxes and Stuff
                 BloodyBox.Init();
                 MaidenShapedBox.Init();
                 Toolbox.Init();
                 PocketChest.Init();
+                DeliveryBox.Init();
+                Wonderchest.Init();
                 //Heart themed items
                 HeartPadlock.Init();
                 Mutagen.Init();
@@ -241,9 +259,12 @@ namespace NevernamedsItems
                 WickerAmmolet.Init();
                 FuriousAmmolet.Init();
                 SilverAmmolet.Init();
+                IvoryAmmolet.Init();
                 KinAmmolet.Init();
                 Autollet.Init();
                 Keymmolet.Init();
+                Ammolock.Init();
+                Shatterblank.Init();
                 // Boots
                 CycloneCylinder.Init();
                 BootLeg.Init();
@@ -258,6 +279,8 @@ namespace NevernamedsItems
                 RingOfOddlySpecificBenefits.Init();
                 RingOfAmmoRedemption.Init();
                 RiskyRing.Init();
+                WidowsRing.Init();
+                RingOfInvisibility.Init();
                 //Holsters
                 BlackHolster.Init();
                 TheBeholster.Init();
@@ -269,15 +292,20 @@ namespace NevernamedsItems
                 Diode.Init();
                 DroneCompanion.Init();
                 GregTheEgg.Init();
+                Gusty.Init();
+                ScrollOfExactKnowledge.Init();
                 //Potions / Jars 
                 SpeedPotion.Init();
                 LovePotion.Init();
                 HoneyPot.Init();
+                ChemicalBurn.Init();
+                WitchsBrew.Init();
                 //Remotes
                 DoctorsRemote.Init(); //Unfinished
                 ReinforcementRadio.Init();
                 //Medicine
                 BloodThinner.Init();
+                BoosterShot.Init();
                 //Knives and Blades
                 DaggerOfTheAimgel.Init();
                 CombatKnife.Init();
@@ -285,6 +313,17 @@ namespace NevernamedsItems
                 //Books
                 BookOfMimicAnatomy.Init();
                 KalibersPrayer.Init();
+                GunidaeSolvitHaatelis.Init();
+                //Maps
+                MapFragment.Init();
+                TatteredMap.Init();
+                //Clothing
+                CloakOfDarkness.Init();
+                TimeFuddlersRobe.Init();
+                //Eyes
+                CartographersEye.Init();
+                BloodshotEye.Init();
+                KalibersEye.Init();
                 //True Misc
                 GoldenAppleCore.Init();
                 AppleCore.Init();
@@ -293,14 +332,11 @@ namespace NevernamedsItems
                 LibationtoIcosahedrax.Init(); //Unfinished
                 BagOfHolding.Init();
                 ItemCoupon.Init();
-                TimeFuddlersRobe.Init();
                 IdentityCrisis.Init();
                 LiquidMetalBody.Init();
-                KalibersEye.Init();
                 GunGrease.Init();
                 BomberJacket.Init();
                 DragunsScale.Init();
-                Wonderchest.Init();
                 GTCWTVRP.Init();
                 BlightShell.Init();
                 BulletKinPlushie.Init();
@@ -344,6 +380,9 @@ namespace NevernamedsItems
                 EqualityItem.Init();
                 Lefthandedness.Init();
                 Eraser.Init();
+                Moonrock.Init();
+                Telekinesis.Init();
+                TabletOfOrder.Init();
                 LeadOfLife.Init();
                 AWholeBulletKin.Init();
                 #endregion
@@ -354,7 +393,6 @@ namespace NevernamedsItems
                 WailingMagnum.Add();
                 Defender.Add();
                 TestGun.Add();
-                Felissile.Add();
                 Gunycomb.Add();
                 GlobbitSMALL.Add();
                 GlobbitMED.Add();
@@ -380,6 +418,8 @@ namespace NevernamedsItems
                 ShroomedGun.Add();
                 GoldenRevolver.Add();
                 Nocturne.Add();
+                BackWarder.Add();
+                ToolGun.Add();
                 //GENERAL HANDGUNS
                 Glock42.Add();
                 UnusCentum.Add();
@@ -392,7 +432,9 @@ namespace NevernamedsItems
                 Glasster.Add();
                 HandGun.Add();
                 Viper.Add();
+                MinuteGun.Add();
                 HeadOfTheOrder.Add();
+                GunOfAThousandSins.Add();
                 //SHOTGUNS
                 JusticeGun.Add();
                 Orgun.Add();
@@ -400,6 +442,7 @@ namespace NevernamedsItems
                 ClownShotgun.Add();
                 Ranger.Add();
                 //CANNONS
+                Felissile.Add();
                 HandCannon.Add();
                 Lantaka.Add();
                 GreekFire.Add();
@@ -407,17 +450,21 @@ namespace NevernamedsItems
                 DisplacerCannon.Add();
                 //SCI-FI GUNS
                 Blasmaster.Add();
+                BeamBlade.Add();
                 Neutrino.Add();
                 TheThinLine.Add();
                 RocketPistol.Add();
                 Repetitron.Add();
+                Dimensionaliser.Add();
                 Purpler.Add();
                 VacuumGun.Add();
                 Oxygun.Add();
+                TriBeam.Add();
                 KineticBlaster.Add();
                 HighVelocityRifle.Add();
                 Demolitionist.Add();
                 PumpChargeShotgun.Add();
+                TheOutbreak.Add();
                 Multiplicator.Add();
                 PunishmentRay.Add();
                 StasisRifle.Add();
@@ -435,7 +482,10 @@ namespace NevernamedsItems
                 GrandfatherGlock.Add();
                 GatlingGun.Add();
                 Blowgun.Add();
+                Gaxe.Add();
+                WoodenHorse.Add();
                 //REALISTIC GUNS
+                BarcodeScanner.Add();
                 AntimaterielRifle.Add();
                 Primos1.Add();
                 DartRifle.Add();
@@ -444,6 +494,8 @@ namespace NevernamedsItems
                 RiotGun.Add();
                 Kalashnirang.Add();
                 MaidenRifle.Add();
+                Blizzkrieg.Add();
+                Copygat.Add();
                 HeavyAssaultRifle.Add();
                 DynamiteLauncher.Add();
                 //MISSILE LAUNCHERS
@@ -459,12 +511,14 @@ namespace NevernamedsItems
                 KillithidTendril.Add();
                 Gunger.Add();
                 MiniMonger.Add();
+                Wrinkler.Add();
                 //BLADES
                 ButchersKnife.Add();
                 MantidAugment.Add();
                 RapidRiposte.Add();
                 //FUN GUNS
                 Gumgun.Add();
+                Glooper.Add();
                 PaintballGun.Add();
                 Spiral.Add();
                 Gunshark.Add();
@@ -494,6 +548,7 @@ namespace NevernamedsItems
                 //ENDPAGE GUNS
                 MastersGun.Add();
                 Wrench.Add();
+                Pumhart.Add();
 
 
                 //SYNERGY FORME GUNS
@@ -520,6 +575,7 @@ namespace NevernamedsItems
                 //Other Features
                 MasteryReplacementOub.InitDungeonHook();
                 CadenceAndOxShopPoolAdditions.Init();
+                CustomHuntingQuest.Init();
 
                 //NPCS
                 TheJammomaster.Add();
@@ -532,6 +588,7 @@ namespace NevernamedsItems
 
                 //Late Hooks
                 AmmoPickupHooks.Init();
+                HealthPickupHooks.Init();               
 
                 ETGMod.StartGlobalCoroutine(this.delayedstarthandler());
                 ETGModConsole.Log("'If you're reading this, I must have done something right' - NN");

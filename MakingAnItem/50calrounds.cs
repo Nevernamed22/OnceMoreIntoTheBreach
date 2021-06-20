@@ -44,6 +44,8 @@ namespace NevernamedsItems
 
             //Add to NPC Pools
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
+            FiftyCalRoundsID = item.PickupObjectId;
         }
+        public static int FiftyCalRoundsID;
     }
 }

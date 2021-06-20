@@ -149,7 +149,7 @@ namespace NevernamedsItems
             this.m_projectile.collidesOnlyWithPlayerProjectiles = true;
             this.m_projectile.UpdateCollisionMask();
             this.m_projectile.specRigidbody.OnPreRigidbodyCollision += this.OnCollision;
-            ETGModConsole.Log("DelayedAssigned the Collision");
+            //ETGModConsole.Log("DelayedAssigned the Collision");
             yield break;
         }
         private void OnCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherPixelCollider)

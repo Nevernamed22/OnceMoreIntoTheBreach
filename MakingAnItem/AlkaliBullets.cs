@@ -25,7 +25,9 @@ namespace NevernamedsItems
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_ALKALIBULLETS, true);
             item.AddItemToGooptonMetaShop(30);
+            AlkaliBulletsID = item.PickupObjectId;
         }
+        public static int AlkaliBulletsID;
         public override void Pickup(PlayerController player)
         {
             base.Pickup(player);

@@ -122,13 +122,13 @@ namespace NevernamedsItems
             #endregion
 
         }
-        public static GoopDefinition GenerateBloodGoop(float dps, float lifeSpan = 20)
+        public static GoopDefinition GenerateBloodGoop(float dps, Color Color, float lifeSpan = 20)
         {
-           GoopDefinition Blood = new GoopDefinition();
+            GoopDefinition Blood = new GoopDefinition();
             Blood.CanBeIgnited = false;
             Blood.damagesEnemies = true;
             Blood.damagesPlayers = false;
-            Blood.baseColor32 = Color.red;
+             Blood.baseColor32 = Color;
             Blood.goopTexture = PoisonDef.goopTexture;
             Blood.lifespan = lifeSpan;
             Blood.usesLifespan = true;
@@ -144,7 +144,7 @@ namespace NevernamedsItems
             "assets/data/goops/phasewebgoop.asset",
             "assets/data/goops/water goop.asset",
         };
-        private static List<GoopDefinition> goopDefs;   
+        private static List<GoopDefinition> goopDefs;
     }
-    
+
 }

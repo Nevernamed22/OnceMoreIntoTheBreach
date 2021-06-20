@@ -6,6 +6,7 @@ using System.Text;
 
 using ItemAPI;
 using UnityEngine;
+using System.Collections;
 
 namespace NevernamedsItems
 {
@@ -55,11 +56,24 @@ namespace NevernamedsItems
         //float duration = 20f;
         protected override void DoEffect(PlayerController user)
         {
+            /*
             Vector2 yourPosition = user.sprite.WorldCenter;
-            // PickupObject item = LootEngine.GetItemOfTypeAndQuality<PickupObject>(PickupObject.ItemQuality.COMMON, null, false);
-            //LootEngine.SpawnItem(item.gameObject, yourPosition, Vector2.zero, 0);
-            PlayerToolbox tools = user.GetComponent<PlayerToolbox>();
-            tools.DoTimedStatModifier(PlayerStats.StatType.MovementSpeed, 2, 5);
+            List<AIActor> activeEnemies = user.CurrentRoom.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+            if (activeEnemies != null)
+            {
+                for (int i = 0; i < activeEnemies.Count; i++)
+                {
+                    AIActor aiactor = activeEnemies[i];
+
+                    GameActorSizeEffect shrinky = StatusEffectHelper.GenerateSizeEffect(10, new Vector2(0.4f, 0.4f));
+                    aiactor.ApplyEffect(shrinky);
+                }
+            }*/
+            TalkDoerLite[] allChests = FindObjectsOfType<TalkDoerLite>();
+            foreach (TalkDoerLite chest in allChests)
+            {
+                ETGModConsole.Log(chest.name);
+            }
         }
         public override void Update()
         {

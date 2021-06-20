@@ -32,7 +32,7 @@ namespace NevernamedsItems
 
             gun.DefaultModule.cooldownTime = 0.1f;
             gun.DefaultModule.numberOfShotsInClip = 4;
-            gun.SetBaseMaxAmmo(200);
+            gun.SetBaseMaxAmmo(100);
             gun.quality = PickupObject.ItemQuality.D;
             gun.encounterTrackable.EncounterGuid = "this is the Mini Gun";
             ETGMod.Databases.Items.Add(gun, null, "ANY");

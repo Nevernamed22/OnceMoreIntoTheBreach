@@ -13,17 +13,15 @@ namespace NevernamedsItems
 
     public class G20 : AdvancedGunBehavior
     {
-
-
         public static void Add()
         {
 
-            Gun gun = ETGMod.Databases.Items.NewGun("G20", "g20rework");
+            Gun gun = ETGMod.Databases.Items.NewGun("G20", "g20");
             Game.Items.Rename("outdated_gun_mods:g20", "nn:g20");
             gun.gameObject.AddComponent<G20>();
             gun.SetShortDescription("Roll and Die");
             gun.SetLongDescription("Randomises stats upon entering combat." + "\n\nThe preferred weapon of a young disciple of Icosahedrax, stolen by his michevious nephew.");
-            gun.SetupSprite(null, "g20rework_idle_001", 8);
+            gun.SetupSprite(null, "g20_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 14);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
@@ -35,7 +33,7 @@ namespace NevernamedsItems
             gun.reloadTime = 1f;
             gun.DefaultModule.cooldownTime = 0.5f;
             gun.DefaultModule.numberOfShotsInClip = 10;
-            gun.barrelOffset.transform.localPosition = new Vector3(2.31f, 0.75f, 0f);
+            gun.barrelOffset.transform.localPosition = new Vector3(1.56f, 0.87f, 0f);
             gun.SetBaseMaxAmmo(350);
 
             //BULLET STATS
@@ -48,7 +46,7 @@ namespace NevernamedsItems
             projectile.baseData.speed *= 1f;
             projectile.baseData.damage *= 2f;
             projectile.baseData.range *= 1f;
-            projectile.SetProjectileSpriteRight("g20_projectile", 11, 11, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
+            projectile.SetProjectileSpriteRight("g20_projectile", 11, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
 
             gun.quality = PickupObject.ItemQuality.D;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

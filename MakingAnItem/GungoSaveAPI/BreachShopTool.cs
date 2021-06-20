@@ -124,18 +124,27 @@ namespace SaveAPI
                     {
                         if (shopItem != null && shopItem.item != null && shopItem.item.encounterTrackable != null && shopItem.item.encounterTrackable.journalData != null)
                         {
+                            //ETGModConsole.Log("GETTING BLUEPRINT ITEM FOR: " + shopItem.item.name);
                             PickupObject po = GetBlueprintUnlockedItem(shopItem.item.encounterTrackable);
+                            //ETGModConsole.Log("BLUEPRINT ISN'T NULL: " + (po != null) + ", ENCOUNTERTRACKABLE ISN'T NULL: " + (po.encounterTrackable != null) + ", PREREQUISITES ISN'T NULL: " + (po.encounterTrackable != null));
                             if (po != null && po.encounterTrackable != null && po.encounterTrackable.prerequisites != null)
                             {
+                                //ETGModConsole.Log("GAMEOBJECT NAME: " + po.name);
+                                //ETGModConsole.Log("DATABASE OBJECT NAME: " + ETGMod.Databases.Items[po.gameObject.name].gameObject.name);
+                               // ETGModConsole.Log("DATABASE OBJECT UNLOCK COUNT: " + ETGMod.Databases.Items[po.gameObject.name].encounterTrackable.prerequisites.Length);
+
                                 CustomDungeonFlags saveFlagToSetOnAcquisition = CustomDungeonFlags.NONE;
                                 for (int i = 0; i < po.encounterTrackable.prerequisites.Length; i++)
                                 {
+                                    //ETGModConsole.Log("LOOKING AT PREREQUISITE #" + i + ": " + po.encounterTrackable.prerequisites[i].GetType());
                                     if (po.encounterTrackable.prerequisites[i] is CustomDungeonPrerequisite && (po.encounterTrackable.prerequisites[i] as CustomDungeonPrerequisite).advancedPrerequisiteType ==
                                         CustomDungeonPrerequisite.AdvancedPrerequisiteType.CUSTOM_FLAG)
                                     {
                                         saveFlagToSetOnAcquisition = (po.encounterTrackable.prerequisites[i] as CustomDungeonPrerequisite).customFlagToCheck;
+                                        //ETGModConsole.Log("FOUND FLAG: " + saveFlagToSetOnAcquisition);
                                     }
                                 }
+                                //ETGModConsole.Log("FINAL VALUE FOR FLAG: " + saveFlagToSetOnAcquisition);
                                 if (saveFlagToSetOnAcquisition != CustomDungeonFlags.NONE)
                                 {
                                     shopItem.item.gameObject.AddComponent<SpecialPickupObject>().CustomSaveFlagToSetOnAcquisition = saveFlagToSetOnAcquisition;

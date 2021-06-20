@@ -5,6 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -41,7 +42,7 @@ namespace NevernamedsItems
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.B;
 
-
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.JAMMEDLEADMAIDEN_QUEST_REWARDED, true);
         }
         public override void Pickup(PlayerController player)
         {

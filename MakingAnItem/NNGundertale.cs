@@ -118,6 +118,10 @@ namespace NevernamedsItems
             HandleSpawnLoot(enemy);
             var CurrentRoom = enemy.transform.position.GetAbsoluteRoom();
             UnityEngine.Object.Instantiate<GameObject>(EasyVFXDatabase.GundetaleSpareVFX, (enemy.sprite.WorldTopCenter + new Vector2(0, 0.25f)), Quaternion.identity);
+           if (enemy.GetComponent<KillOnRoomUnseal>())
+            {
+                UnityEngine.Object.Destroy(enemy.GetComponent<KillOnRoomUnseal>());
+            }
             CurrentRoom.DeregisterEnemy(enemy);
             CustomEnemyTagsSystem tags = enemy.gameObject.GetOrAddComponent<CustomEnemyTagsSystem>();
             enemy.gameActor.DelelteOwnedBullets();

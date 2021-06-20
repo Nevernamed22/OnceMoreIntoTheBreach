@@ -14,17 +14,40 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            GameManager.Instance.OnNewLevelFullyLoaded += OnNewFloor;
 
             ratMazeFailHook = new Hook(
                 typeof(ResourcefulRatMazeSystemController).GetMethod("HandleFailure", BindingFlags.Instance | BindingFlags.NonPublic),
                 typeof(FloorAndGenerationToolbox).GetMethod("OnFailedRatMaze", BindingFlags.Static | BindingFlags.Public)
             );
+            floorLoadPlayerHook = new Hook(
+                typeof(PlayerController).GetMethod("BraveOnLevelWasLoaded", BindingFlags.Instance | BindingFlags.Public),
+                typeof(FloorAndGenerationToolbox).GetMethod("OnNewFloor", BindingFlags.Static | BindingFlags.Public)
+            );
         }
         public static Hook ratMazeFailHook;
-        public static void OnNewFloor()
+        public static Hook floorLoadPlayerHook;
+
+        private static bool hookDoubleUpPrevention;
+        public static void OnNewFloor(Action<PlayerController> orig, PlayerController self)
         {
-            CurrentFloorEnemyPalette = GeneratePalette();
+            bool isSecondary = false;
+            if (GameManager.Instance.SecondaryPlayer && GameManager.Instance.SecondaryPlayer == self) isSecondary = true;
+            bool flag = (!isSecondary) || (isSecondary && !GameManager.Instance.PrimaryPlayer);
+            if (flag)
+            {
+                if (hookDoubleUpPrevention)
+                {
+                //ETGModConsole.Log("Level loaded hook ran");
+                CurrentFloorEnemyPalette = GeneratePalette();
+                    Challenges.OnLevelLoaded();
+                    hookDoubleUpPrevention = false;
+                }
+                else
+                {
+                    hookDoubleUpPrevention = true;
+                }
+            }
+            orig(self);
         }
         public static List<string> CurrentFloorEnemyPalette;
         private static bool EnemyIsValid(string enemyGUID, bool canReturnMimic, bool canReturnBoss)

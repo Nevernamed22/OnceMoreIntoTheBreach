@@ -36,7 +36,7 @@ namespace NevernamedsItems
             gun.muzzleFlashEffects.type = VFXPoolType.None;
             gun.DefaultModule.numberOfShotsInClip = 5;
             gun.barrelOffset.transform.localPosition = new Vector3(4.56f, 1.18f, 0f);
-            gun.SetBaseMaxAmmo(250);
+            gun.SetBaseMaxAmmo(100);
 
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);

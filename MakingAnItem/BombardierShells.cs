@@ -42,26 +42,59 @@ namespace NevernamedsItems
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.PlayerBulletScale, 1.3f, StatModifier.ModifyMethod.MULTIPLICATIVE);
 
             //Set the rarity of the item
-            item.quality = PickupObject.ItemQuality.EXCLUDED; //A
+            item.quality = PickupObject.ItemQuality.A; //A
 
+
+            gunFiredHook = new Hook(
+                    typeof(Gun).GetMethod("ShootSingleProjectile", BindingFlags.NonPublic | BindingFlags.Instance),
+                    typeof(BombardierShells).GetMethod("GunAttackHook", BindingFlags.Public | BindingFlags.Static)
+                );
+            BombardierShellsID = item.PickupObjectId;
         }
-
-        private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
+        public static int BombardierShellsID;
+        private static Hook gunFiredHook;
+        public static void GunAttackHook(Action<Gun, ProjectileModule, ProjectileData, GameObject> orig, Gun self, ProjectileModule mod, ProjectileData data = null, GameObject overrideObject = null)
         {
-            if (UnityEngine.Random.value <= 0.07f)
-            {
-                ExplosiveModifier exploding = sourceProjectile.gameObject.GetOrAddComponent<ExplosiveModifier>();
-                exploding.doExplosion = true;
-                exploding.explosionData = StaticExplosionDatas.explosiveRoundsExplosion;
-            }
             try
             {
-
-                if (sourceProjectile.Shooter != null && sourceProjectile.Shooter.aiActor == null && sourceProjectile.Shooter.projectile == null)
+                orig(self, mod, data, overrideObject);
+                if (self && self.GunPlayerOwner())
                 {
-                    
-                        Owner.knockbackDoer.ApplyKnockback((Owner.sprite.WorldCenter - Owner.unadjustedAimPoint.XY()).normalized, 30f);
-                    
+                    if (self.GunPlayerOwner().HasPickupID(BombardierShellsID))
+                    {
+                        float knockbackAmt = 40f;
+                        float projDamage = 10;
+
+                        Dictionary<ProjectileModule, ModuleShootData> moduleData = OMITBReflectionHelpers.ReflectGetField<Dictionary<ProjectileModule, ModuleShootData>>(typeof(Gun), "m_moduleData", self);
+                  
+                        if (overrideObject)
+                        {
+                            Projectile projectile = overrideObject.GetComponent<Projectile>();
+                            projDamage = projectile.baseData.damage;
+                        }
+                        else if (mod.shootStyle == ProjectileModule.ShootStyle.Charged && moduleData != null) 
+                        {
+                            ProjectileModule.ChargeProjectile chargeProjectile = mod.GetChargeProjectile(moduleData[mod].chargeTime);
+                            if (chargeProjectile != null)
+                            {
+                              Projectile  projectile = chargeProjectile.Projectile;
+                            projDamage = projectile.baseData.damage;
+                            }
+                        }
+                        else
+                        {
+                            Projectile projectile = mod.GetCurrentProjectile(moduleData[mod], self.GunPlayerOwner());
+                            projDamage = projectile.baseData.damage;
+                        }
+
+                        float multiplier = projDamage / 10;
+                        knockbackAmt *= multiplier;
+                        knockbackAmt = Mathf.Min(100, knockbackAmt);
+
+                        if (self.GunPlayerOwner().PlayerHasActiveSynergy("Forward Thinking")) knockbackAmt *= -0.5f;
+                        self.GunPlayerOwner().knockbackDoer.ApplyKnockback((self.GunPlayerOwner().sprite.WorldCenter - self.GunPlayerOwner().unadjustedAimPoint.XY()).normalized, knockbackAmt);
+
+                    }
                 }
             }
             catch (Exception e)
@@ -70,14 +103,24 @@ namespace NevernamedsItems
                 ETGModConsole.Log(e.StackTrace);
             }
         }
+        private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
+        {
+            if (UnityEngine.Random.value <= 0.07f)
+            {
+                ExplosiveModifier exploding = sourceProjectile.gameObject.GetOrAddComponent<ExplosiveModifier>();
+                exploding.doExplosion = true;
+                exploding.explosionData = StaticExplosionDatas.explosiveRoundsExplosion;
+            }
+        }
         private void PostProcessBeamTick(BeamController beam)
         {
             try
             {
                 if (beam.aiShooter == null)
                 {
-
-                    Owner.knockbackDoer.ApplyKnockback((Owner.sprite.WorldCenter - Owner.unadjustedAimPoint.XY()).normalized, 45f);
+                    float knockbackAmt = 60f;
+                    if (Owner.PlayerHasActiveSynergy("Forward Thinking")) knockbackAmt *= -0.5f;
+                    Owner.knockbackDoer.ApplyKnockback((Owner.sprite.WorldCenter - Owner.unadjustedAimPoint.XY()).normalized, knockbackAmt);
                 }
                 else
                 {

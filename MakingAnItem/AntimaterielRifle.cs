@@ -51,17 +51,12 @@ namespace NevernamedsItems
             projectile.baseData.speed *= 1.2f;
             projectile.ignoreDamageCaps = true;
             projectile.pierceMinorBreakables = true;
-            //projectile.shouldRotate = true;
             PierceProjModifier orAddComponent = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();
             orAddComponent.penetratesBreakables = true;
             orAddComponent.penetration++;
             projectile.SetProjectileSpriteRight("antimaterielrifle_projectile", 15, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 15, 7);
-
             projectile.transform.parent = gun.barrelOffset;
-
-            // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.
             gun.quality = PickupObject.ItemQuality.S;
-            gun.encounterTrackable.EncounterGuid = "this is the Antimateriel Rifle";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc);
             AntimaterielRifleID = gun.PickupObjectId;
@@ -70,22 +65,10 @@ namespace NevernamedsItems
         }
         public static int AntimaterielRifleID;
         public override void OnPostFired(PlayerController player, Gun gun)
-        {
-            //This determines what sound you want to play when you fire a gun.
-            //Sounds names are based on the Gungeon sound dump, which can be found at EnterTheGungeon/Etg_Data/StreamingAssets/Audio/GeneratedSoundBanks/Windows/sfx.txt
+        {          
             gun.PreventNormalFireAudio = true;
             AkSoundEngine.PostEvent("Play_WPN_plasmarifle_shot_01", gameObject);
         }
-
-
-        //All that's left now is sprite stuff. 
-        //Your sprites should be organized, like how you see in the mod folder. 
-        //Every gun requires that you have a .json to match the sprites or else the gun won't spawn at all
-        //.Json determines the hand sprites for your character. You can make a gun two handed by having both "SecondaryHand" and "PrimaryHand" in the .json file, which can be edited through Notepad or Visual Studios
-        //By default this gun is a one-handed weapon
-        //If you need a basic two handed .json. Just use the jpxfrd2.json.
-        //And finally, don't forget to add your Gun to your ETGModule class!
-
         public AntimaterielRifle()
         {
 

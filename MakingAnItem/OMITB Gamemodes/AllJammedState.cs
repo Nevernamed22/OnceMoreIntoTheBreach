@@ -8,33 +8,43 @@ using System.Reflection;
 using Brave.BulletScript;
 using System.Collections;
 using MonoMod.RuntimeDetour;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
     public class AllJammedState
     {
-        public static bool allJammedActive;
         public static void Init()
         {
-            allJammedActive = false;
+            SaveAPIManager.SetFlag(CustomDungeonFlags.ALLJAMMEDMODE_ENABLED_CONSOLE, false);
+            SaveAPIManager.SetFlag(CustomDungeonFlags.ALLJAMMEDMODE_ENABLED_GENUINE, false);
             ETGMod.AIActor.OnPreStart += makeJammed;
+
+            sreaperStartHook = new Hook(
+  typeof(SuperReaperController).GetMethod("Start", BindingFlags.NonPublic | BindingFlags.Instance),
+  typeof(AllJammedState).GetMethod("SreaperAwakeHook"));
         }
         private static void makeJammed(AIActor enemy)
         {
-            if (allJammedActive)
+            if (SaveAPIManager.GetFlag(CustomDungeonFlags.ALLJAMMEDMODE_ENABLED_CONSOLE) || SaveAPIManager.GetFlag(CustomDungeonFlags.ALLJAMMEDMODE_ENABLED_GENUINE))
             {
                 enemy.BecomeBlackPhantom();
             }
         }
-        Hook sreaperStartHook = new Hook(
-  typeof(SuperReaperController).GetMethod("Start", BindingFlags.NonPublic | BindingFlags.Instance),
-  typeof(AllJammedState).GetMethod("SreaperAwakeHook")
-);
+        public static Hook sreaperStartHook;
+
+        public static bool AllJammedActive
+        {
+            get
+            {
+                return (SaveAPIManager.GetFlag(CustomDungeonFlags.ALLJAMMEDMODE_ENABLED_CONSOLE) || SaveAPIManager.GetFlag(CustomDungeonFlags.ALLJAMMEDMODE_ENABLED_GENUINE));
+            }
+        }
 
         public static void SreaperAwakeHook(Action<SuperReaperController> orig, SuperReaperController self)
         {
             orig(self);
-            if (allJammedActive)
+            if (SaveAPIManager.GetFlag(CustomDungeonFlags.ALLJAMMEDMODE_ENABLED_CONSOLE) || SaveAPIManager.GetFlag(CustomDungeonFlags.ALLJAMMEDMODE_ENABLED_GENUINE))
             {
                 self.BecomeJammedLord();
             }

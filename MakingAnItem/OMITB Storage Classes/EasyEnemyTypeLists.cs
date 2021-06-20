@@ -67,6 +67,13 @@ namespace NevernamedsItems
             EnemyGuidDatabase.Entries["king_bullat"],
         };
 
+        public static List<string> TitanBulletKin = new List<string>()
+        {
+            EnemyGuidDatabase.Entries["titan_bullet_kin"],
+            EnemyGuidDatabase.Entries["titan_bullet_kin_boss"],
+            EnemyGuidDatabase.Entries["titaness_bullet_kin_boss"],
+        };
+
         public static List<string> MultiPhaseEnemies = new List<string>()
         {
             EnemyGuidDatabase.Entries["bloodbulon"],
@@ -181,6 +188,14 @@ namespace NevernamedsItems
             EnemyGuidDatabase.Entries["phaser_spider"],
             EnemyGuidDatabase.Entries["cubulon"],
             EnemyGuidDatabase.Entries["cubulead"],
+        };
+
+        public static List<string> SmallBullats = new List<string>()
+        {
+            EnemyGuidDatabase.Entries["bullat"],
+            EnemyGuidDatabase.Entries["spirat"],
+            EnemyGuidDatabase.Entries["grenat"],
+            EnemyGuidDatabase.Entries["shotgat"],
         };
 
         //MODDED INCLUSIVE LISTS

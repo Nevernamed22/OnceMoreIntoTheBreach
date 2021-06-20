@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -27,6 +28,8 @@ namespace NevernamedsItems
 
             item.consumable = false;
             item.quality = ItemQuality.D;
+
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.GUNCULTIST_QUEST_REWARDED, true);
         }
 
         protected override void DoEffect(PlayerController user)

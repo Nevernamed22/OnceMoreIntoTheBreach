@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -51,7 +52,7 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
-            projectile.baseData.damage *= 1.2f;
+            projectile.baseData.damage *= 1f;
             projectile.baseData.speed *= 2f;
             projectile.pierceMinorBreakables = true;
             //projectile.shouldRotate = true;
@@ -64,7 +65,7 @@ namespace NevernamedsItems
             gun.encounterTrackable.EncounterGuid = "this is the Gunshark";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             GunsharkID = gun.PickupObjectId;
-
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.JAMMEDBULLETSHARK_QUEST_REWARDED, true);
         }
         public override void PostProcessProjectile(Projectile projectile)
         {

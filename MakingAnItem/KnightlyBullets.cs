@@ -5,6 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using Dungeonator;
 
 namespace NevernamedsItems
 {
@@ -12,35 +13,94 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Knightly Bullets";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/knightlybullets_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<KnightlyBullets>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Charthurian";
             string longDesc = "These high class slugs are reluctant to harm those higher than them in status, but they have no problem squashing the peasantry." + "\n\nFavoured by the mighty Ser Lammorack, famed Knight of the Octagonal Table, before his untimely demise...";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.15f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.DamageToBosses, 0.5f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.C;
+            item.CanBeDropped = true;
+        }
+        private RoomHandler lastCheckedRoom;
+        protected override void Update()
+        {
+            if (Owner && Owner.CurrentRoom != null)
+            {
+                if (Owner.CurrentRoom != lastCheckedRoom)
+                {
+                    RoomHandler curRoom = Owner.CurrentRoom;
+                    bool isInOrAdjacentToBossRoom = false;
+                    if (curRoom.area.PrototypeRoomCategory == PrototypeDungeonRoom.RoomCategory.BOSS) isInOrAdjacentToBossRoom = true;
+                    else
+                    {
+                        for (int i = 0; i < curRoom.connectedRooms.Count; i++)
+                        {
+                            if (curRoom.connectedRooms[i].area.PrototypeRoomCategory == PrototypeDungeonRoom.RoomCategory.BOSS)
+                            {
+                                isInOrAdjacentToBossRoom = true;
+                            }
+                        }
+                    }
+                    if (isInOrAdjacentToBossRoom && this.CanBeDropped)
+                    {
+                        this.CanBeDropped = false;
+                    }
+                    else if (!this.CanBeDropped)
+                    {
+                        this.CanBeDropped = true;
+                    }
+                    lastCheckedRoom = Owner.CurrentRoom;
+                }
+            }
+            base.Update();
+        }
+
+        private void PostProcess(Projectile bullet, float th)
+        {
+            if (bullet && bullet.ProjectilePlayerOwner())
+            {
+                if (bullet.ProjectilePlayerOwner().CurrentRoom.area.PrototypeRoomCategory == PrototypeDungeonRoom.RoomCategory.BOSS)
+                {
+                    bullet.baseData.damage *= 0.8f;
+                }
+                else
+                {
+                    bullet.baseData.damage *= 1.3f;
+                    bullet.RuntimeUpdateScale(1.2f);
+                }
+            }
+        }
+        private void PostProcessBem(BeamController bem)
+        {
+            if (bem && bem.GetComponent<Projectile>())
+            {
+                PostProcess(bem.GetComponent<Projectile>(), 0);
+            }
+        }
+        public override void Pickup(PlayerController player)
+        {
+            player.PostProcessProjectile += PostProcess;
+            player.PostProcessBeam += PostProcessBem;
+            base.Pickup(player);
+        }
+        public override DebrisObject Drop(PlayerController player)
+        {
+            player.PostProcessProjectile -= PostProcess;
+            player.PostProcessBeam -= PostProcessBem;
+
+            return base.Drop(player);
+        }
+        protected override void OnDestroy()
+        {
+            if (Owner)
+            {
+                Owner.PostProcessProjectile -= PostProcess;
+                Owner.PostProcessBeam -= PostProcessBem;
+            }
+            base.OnDestroy();
         }
     }
 }

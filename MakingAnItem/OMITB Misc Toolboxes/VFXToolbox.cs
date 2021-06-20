@@ -1,12 +1,21 @@
 ﻿using ItemAPI;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
 
+
 namespace NevernamedsItems
 {
+   public class GameActorDecorationEffect : GameActorEffect
+    {
+        public GameActorDecorationEffect()
+        {
+
+        }
+    }
     class VFXToolbox
     {
         private static GameObject VFXScapeGoat;
@@ -24,6 +33,14 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(VFXScapeGoat);
             PrivateVFXCollection = SpriteBuilder.ConstructCollection(VFXScapeGoat, "OMITBVFXCollection");
 
+            GameObject errorshellsvfx = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/MiscVFX/errorshellsoverhead_vfx", new GameObject("ErrorShellsIcon"));
+            errorshellsvfx.SetActive(false);
+            tk2dBaseSprite vfxSprite = errorshellsvfx.GetComponent<tk2dBaseSprite>();
+            vfxSprite.GetCurrentSpriteDef().ConstructOffsetsFromAnchor(tk2dBaseSprite.Anchor.LowerCenter, vfxSprite.GetCurrentSpriteDef().position3);
+            FakePrefab.MarkAsFakePrefab(errorshellsvfx);
+            UnityEngine.Object.DontDestroyOnLoad(errorshellsvfx);
+            EasyVFXDatabase.ERRORShellsOverheadVFX = errorshellsvfx;
+
             List<string> SpareVFXPaths = new List<string>()
             {
                 "NevernamedsItems/Resources/MiscVFX/spared_vfx_001",
@@ -40,6 +57,19 @@ namespace NevernamedsItems
             };
             GameObject spareVFX = CreateVFX("GundertaleSpare", SpareVFXPaths, 16, new IntVector2(34, 14), tk2dBaseSprite.Anchor.LowerCenter, true, 0.18f, 100, Color.yellow);
             EasyVFXDatabase.GundetaleSpareVFX = spareVFX;
+
+            List<string> SpeedUpVFX = new List<string>()
+            {
+                "NevernamedsItems/Resources/StatVFX/speedup_vfx_001",
+                "NevernamedsItems/Resources/StatVFX/speedup_vfx_002",
+                "NevernamedsItems/Resources/StatVFX/speedup_vfx_003",
+                "NevernamedsItems/Resources/StatVFX/speedup_vfx_004",
+                "NevernamedsItems/Resources/StatVFX/speedup_vfx_005",
+                "NevernamedsItems/Resources/StatVFX/speedup_vfx_006",
+                "NevernamedsItems/Resources/StatVFX/speedup_vfx_007",
+            };
+            GameObject SpeedUpVFXObj = CreateVFX("Speed Up VFX", SpeedUpVFX, 16, new IntVector2(27, 17), tk2dBaseSprite.Anchor.LowerCenter, true, 0.18f, 100, Color.yellow);
+            EasyVFXDatabase.SpeedUpVFX = SpeedUpVFXObj;
 
             #region RainbowGuonPoofs
             //RED
@@ -153,6 +183,61 @@ namespace NevernamedsItems
             };
             RainbowGuonStone.IndigoGuonTransitionVFX = CreateVFX("IndigoGuonPoof", IndigoPoofPaths, 14, new IntVector2(21, 22), tk2dBaseSprite.Anchor.MiddleCenter, false, 0);
             #endregion
+        }
+        public static void DoStringSquirt(string text, Vector2 point, Color colour, float heightOffGround = 3f, float opacity = 1f)
+        {
+
+            GameObject gameObject = (GameObject)UnityEngine.Object.Instantiate(BraveResources.Load("DamagePopupLabel", ".prefab"), GameUIRoot.Instance.transform);
+
+            dfLabel label = gameObject.GetComponent<dfLabel>();
+            label.gameObject.SetActive(true);
+            label.Text = text;
+            label.Color = colour;
+            label.Opacity = opacity;
+            label.TextAlignment = TextAlignment.Center;
+
+            label.transform.position = point;
+            Vector2 point2 = new Vector2(label.transform.position.x - (label.GetCenter().x - label.transform.position.x), point.y);
+            label.transform.position = label.transform.position.QuantizeFloor(label.PixelsToUnits() / (Pixelator.Instance.ScaleTileScale / Pixelator.Instance.CurrentTileScale));
+            label.StartCoroutine(HandleDamageNumberCR(point2, point2.y - heightOffGround, label));
+        }
+        private static IEnumerator HandleDamageNumberCR(Vector3 startWorldPosition, float worldFloorHeight, dfLabel damageLabel)
+        {
+            float elapsed = 0f;
+            float duration = 1.5f;
+            float holdTime = 0f;
+            Camera mainCam = GameManager.Instance.MainCameraController.Camera;
+            Vector3 worldPosition = startWorldPosition;
+            Vector3 lastVelocity = new Vector3(Mathf.Lerp(-8f, 8f,  UnityEngine.Random.value), UnityEngine.Random.Range(15f, 25f), 0f);
+            while (elapsed < duration)
+            {
+                float dt = BraveTime.DeltaTime;
+                elapsed += dt;
+                if (GameManager.Instance.IsPaused)
+                {
+                    break;
+                }
+                if (elapsed > holdTime)
+                {
+                    lastVelocity += new Vector3(0f, -50f, 0f) * dt;
+                    Vector3 vector = lastVelocity * dt + worldPosition;
+                    if (vector.y < worldFloorHeight)
+                    {
+                        float num = worldFloorHeight - vector.y;
+                        float num2 = worldFloorHeight + num;
+                        vector.y = num2 * 0.5f;
+                        lastVelocity.y *= -0.5f;
+                    }
+                    worldPosition = vector;
+                    damageLabel.transform.position = dfFollowObject.ConvertWorldSpaces(worldPosition, mainCam, GameUIRoot.Instance.Manager.RenderCamera).WithZ(0f);
+                }
+                float t = elapsed / duration;
+                damageLabel.Opacity = 1f - t;
+                yield return null;
+            }
+            damageLabel.gameObject.SetActive(false);
+            UnityEngine.Object.Destroy(damageLabel.gameObject, 1);
+            yield break;
         }
         public static GameObject CreateVFX(string name, List<string> spritePaths, int fps, IntVector2 Dimensions, tk2dBaseSprite.Anchor anchor, bool usesZHeight, float zHeightOffset, float emissivePower = -1, Color? emissiveColour = null)
         {

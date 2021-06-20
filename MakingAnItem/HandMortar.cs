@@ -19,7 +19,7 @@ namespace NevernamedsItems
             Gun gun = ETGMod.Databases.Items.NewGun("Hand Mortar", "handmortar");
             Game.Items.Rename("outdated_gun_mods:hand_mortar", "nn:hand_mortar");
             gun.gameObject.AddComponent<HandMortar>();
-            gun.SetShortDescription("Kingdome Come");
+            gun.SetShortDescription("Kingdom Come");
             gun.SetLongDescription("The classy and classical predecessor to the modern grenade launchers, some old grenadiers still swear by their effectiveness.");
 
             gun.SetupSprite(null, "handmortar_idle_001", 8);
@@ -33,6 +33,7 @@ namespace NevernamedsItems
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
             gun.reloadTime = 2f;
+            gun.DefaultModule.angleVariance = 10;
             gun.DefaultModule.cooldownTime = 1f;
             gun.DefaultModule.numberOfShotsInClip = 3;
             gun.barrelOffset.transform.localPosition = new Vector3(2.81f, 1.0f, 0f);

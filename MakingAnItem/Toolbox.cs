@@ -21,7 +21,7 @@ namespace NevernamedsItems
             string shortDesc = "Robust";
             string longDesc = "Makes a random object." + "\n\nA blunt object popular for it's usefulness in bludgeoning other people (or yourself) in the head." + "\n\nAlso holds tools, or whatever.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 60);
+            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 60);
             item.consumable = false;
             item.quality = ItemQuality.D;
         }

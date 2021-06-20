@@ -62,12 +62,12 @@ namespace NevernamedsItems
 
             TickDamageBehaviour tickdmg = projectile.gameObject.GetOrAddComponent<TickDamageBehaviour>();
             tickdmg.damageSource = "Butchers Knife";
-            tickdmg.starterDamage = 2f;
+            tickdmg.starterDamage = 3f;
 
             ProjectileModule.ChargeProjectile chargeProj = new ProjectileModule.ChargeProjectile
             {
                 Projectile = projectile,
-                ChargeTime = 0.1f,
+                ChargeTime = 0f,
             };
             gun.DefaultModule.chargeProjectiles = new List<ProjectileModule.ChargeProjectile> { chargeProj };
 
@@ -120,7 +120,7 @@ namespace NevernamedsItems
         private float rangeTime = 0;
         private bool ProjectileReturned = true;
         private bool canAddToRangeTime = true;
-        protected override void Update()
+        private void FixedUpdate()
         {
             if (this.gun && this.gun.CurrentOwner != null)
             {
@@ -130,12 +130,10 @@ namespace NevernamedsItems
                     {
                         canAddToRangeTime = false;
                         rangeTime += 1f;
-                        //ETGModConsole.Log("RangeTime: " + rangeTime);
                         Invoke("ChargeRangeCooldown", 0.25f);
                     }
                 }
             }
-            base.Update();
         }
         private void ChargeRangeCooldown() { canAddToRangeTime = true; }
 

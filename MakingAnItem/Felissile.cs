@@ -20,7 +20,7 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:felissile", "nn:felissile");
             gun.gameObject.AddComponent<Felissile>();
             gun.SetShortDescription("What's New?");
-            gun.SetLongDescription("Fires a rocket on the first shot of it's clip.");
+            gun.SetLongDescription("Fires a rocket on the first shot of it's clip."+"\n\nOnce part of a peculiar XXXS Size mech suit.");
 
             gun.SetupSprite(null, "felissile_idle_001", 8);
 
@@ -32,14 +32,14 @@ namespace NevernamedsItems
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
-            gun.reloadTime = 2f;
-            gun.DefaultModule.cooldownTime = 0.4f;
+            gun.reloadTime = 2.5f;
+            gun.DefaultModule.cooldownTime = 0.25f;
             gun.DefaultModule.numberOfShotsInClip = 10;
             gun.barrelOffset.transform.localPosition = new Vector3(1.12f, 0.37f, 0f);
             gun.SetBaseMaxAmmo(500);
 
-            //gun.DefaultModule.usesOptionalFinalProjectile = true;
-            //gun.DefaultModule.numberOfFinalProjectiles = 9;
+            gun.DefaultModule.usesOptionalFinalProjectile = true;
+            gun.DefaultModule.numberOfFinalProjectiles = 9;
 
             //BULLET STATS
             Projectile missileProjectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
@@ -54,22 +54,54 @@ namespace NevernamedsItems
             explosiveModifier.doExplosion = true;
             explosiveModifier.explosionData = FelissileExplosion;
             missileProjectile.baseData.range *= 0.5f;
+            missileProjectile.baseData.speed *= 3f;
             missileProjectile.transform.parent = gun.barrelOffset;
             missileProjectile.SetProjectileSpriteRight("felissile_rocket_projectile", 16, 11, false, tk2dBaseSprite.Anchor.MiddleCenter, 14, 3);
 
-            /*Projectile normalProjectile = ((Gun)ETGMod.Databases.Items["38_special"]).DefaultModule.projectiles[0];
-            normalProjectile.baseData.damage *= 3f;
-            normalProjectile.baseData.range *= 10f;
-            normalProjectile.SetProjectileSpriteRight("felissile_normal_projectile", 10, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 9, 8);
-            normalProjectile.transform.parent = gun.barrelOffset;
+           
 
-            gun.DefaultModule.finalProjectile = normalProjectile;*/
+            Projectile projectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
+            projectile.gameObject.SetActive(false);
+            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
+            UnityEngine.Object.DontDestroyOnLoad(projectile);
+            projectile.baseData.speed *= 1.1f;
+            projectile.baseData.damage = 11f;
+            projectile.SetProjectileSpriteRight("felissile_normal_projectile", 10, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 8);
+            projectile.hitEffects.alwaysUseMidair = true;
+            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.WhiteCircleVFX;
+
+            gun.DefaultModule.finalProjectile = projectile;
             gun.gunHandedness = GunHandedness.HiddenOneHanded;
 
-            gun.quality = PickupObject.ItemQuality.EXCLUDED; //A
-            gun.encounterTrackable.EncounterGuid = "this is the Felissile";
+            gun.quality = PickupObject.ItemQuality.B; //A
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
+        }
+        protected override void OnPickedUpByPlayer(PlayerController player)
+        {
+            base.OnPickedUpByPlayer(player);
+            if (everPickedUpByPlayer)
+            {
+                if (gun)
+                {
+                    gun.ClipShotsRemaining = gun.ClipCapacity - 1;
+                }
+            }
+        }
+        protected override void Update()
+        {
+            if (gun && gun.CurrentOwner)
+            {
+                if (gun.DefaultModule.ammoCost < 10 && gun.ClipShotsRemaining > 9)
+                {
+                    gun.DefaultModule.ammoCost = 10;
+                }
+                else if (gun.DefaultModule.ammoCost >= 10 && gun.ClipShotsRemaining <= 9)
+                {
+                    gun.DefaultModule.ammoCost = 1;
+                }
+            }
+            base.Update();
         }
         static ExplosionData bigExplosion = GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultExplosionData;
         static ExplosionData FelissileExplosion = new ExplosionData()

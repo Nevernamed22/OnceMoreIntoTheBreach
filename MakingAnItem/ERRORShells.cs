@@ -25,6 +25,30 @@ namespace NevernamedsItems
 
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_ERRORSHELLS, true);
             item.AddItemToDougMetaShop(30);
+
+            ERRORShellsDummyEffect = new GameActorDecorationEffect()
+            {
+                AffectsEnemies = true,
+                OverheadVFX = EasyVFXDatabase.ERRORShellsOverheadVFX,
+                AffectsPlayers = false,
+                AppliesTint = false,
+                AppliesDeathTint = false,
+                AppliesOutlineTint = false,
+                duration = float.MaxValue,
+                effectIdentifier = "ERROR Shells Overheader",
+                resistanceType = EffectResistanceType.None,
+                PlaysVFXOnActor = false,
+                stackMode = GameActorEffect.EffectStackingMode.Ignore,
+            };
+        }
+        public static GameActorDecorationEffect ERRORShellsDummyEffect;
+
+        private void PreSpawn(AIActor aIActor)
+        {
+            if (badMenGoByeBye.Contains(aIActor.EnemyGuid))
+            {
+                aIActor.ApplyEffect(ERRORShellsDummyEffect);
+            }
         }
         public override void Pickup(PlayerController player)
         {
@@ -32,6 +56,7 @@ namespace NevernamedsItems
             PickEnemies();
             player.PostProcessProjectile += this.PostProcessProjectile;
             player.PostProcessBeam += this.PostProcessBeam;
+            ETGMod.AIActor.OnPreStart += PreSpawn;
             TextBubble.DoAmbientTalk(player.transform, new Vector3(1, 2, 0), PickedEnemiesDialogue, 5f); ;
         }
 
@@ -253,12 +278,18 @@ namespace NevernamedsItems
             DebrisObject debrisObject = base.Drop(player);
             player.PostProcessProjectile -= this.PostProcessProjectile;
             player.PostProcessBeam -= this.PostProcessBeam;
+            ETGMod.AIActor.OnPreStart -= PreSpawn;
+
             return debrisObject;
         }
         protected override void OnDestroy()
         {
-            Owner.PostProcessProjectile -= this.PostProcessProjectile;
-            Owner.PostProcessBeam -= this.PostProcessBeam;
+            if (Owner)
+            {
+                Owner.PostProcessProjectile -= this.PostProcessProjectile;
+                Owner.PostProcessBeam -= this.PostProcessBeam;
+            }
+            ETGMod.AIActor.OnPreStart -= PreSpawn;
             base.OnDestroy();
         }
     }

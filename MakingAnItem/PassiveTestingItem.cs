@@ -39,7 +39,7 @@ namespace NevernamedsItems
 
            // bullet.statusEffectsToApply.Add(StaticStatusEffects.greenFireEffect);
            // bullet.collidesWithProjectiles = true;
-            bullet.OnHitEnemy += this.onHitEnemy;
+            //bullet.OnHitEnemy += this.onHitEnemy;
             //bullet.specRigidbody.OnCollision += this.onCollision;
             //bullet.specRigidbody.OnPreRigidbodyCollision = (SpeculativeRigidbody.OnPreRigidbodyCollisionDelegate)Delegate.Combine(bullet.specRigidbody.OnPreRigidbodyCollision, new SpeculativeRigidbody.OnPreRigidbodyCollisionDelegate(this.HandlePreCollision));
         }
@@ -77,11 +77,30 @@ namespace NevernamedsItems
         private void Roll(PlayerController playa)
         {
 
-        }    
+        }
+        private void RollOverBullet(Projectile projectile)
+        {
+            foreach (Component component in projectile.gameObject.GetComponentsInChildren<Component>())
+            {
+                if (component != null)
+                {
+                    ETGModConsole.Log(component.GetType().ToString());
+                }
+            }
+        }
+        private void PostProcessBeam(BeamController beam)
+        {
+            if (beam && beam.gameObject)
+            {
+                beam.gameObject.GetOrAddComponent<WanderingBeamComp>();
+            }
+        }
         public override void Pickup(PlayerController player)
         {
             player.PostProcessProjectile += this.onFired;
+            player.PostProcessBeam += this.PostProcessBeam;
             player.OnPreDodgeRoll += this.Roll;
+            player.OnDodgedProjectile += this.RollOverBullet;
             base.Pickup(player);
         }
         //player.SetOverrideShader(ShaderCache.Acquire("Brave/LitCutoutUberPhantom"));
@@ -89,6 +108,9 @@ namespace NevernamedsItems
         {
             DebrisObject result = base.Drop(player);
             player.PostProcessProjectile -= this.onFired;
+            player.PostProcessBeam -= this.PostProcessBeam;
+            player.OnDodgedProjectile -= this.RollOverBullet;
+
             return result;
         }
 

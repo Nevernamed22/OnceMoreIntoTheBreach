@@ -1,5 +1,6 @@
 ﻿using Dungeonator;
 using ItemAPI;
+using MonoMod.RuntimeDetour;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +12,9 @@ namespace NevernamedsItems
 {
     public class LeadOfLife : PassiveItem
     {
+        #region Vanilla Item Stat Setup
         public static Dictionary<int, string> CompanionItemDictionary;
+        public static Dictionary<int, string> SecondaryCompanionDictionary;
         public static LeadOfLifeCompanionStats HotLeadCompanion;
         public static LeadOfLifeCompanionStats IrradiatedLeadCompanion;
         public static LeadOfLifeCompanionStats BatteryBulletsCompanion;
@@ -49,11 +52,40 @@ namespace NevernamedsItems
         public static LeadOfLifeCompanionStats HungryBulletsCompanion;
         public static LeadOfLifeCompanionStats OrbitalBulletsCompanion;
         public static LeadOfLifeCompanionStats ShockRoundsCompanion;
-
         public static LeadOfLifeCompanionStats SnowballetsCompanion;
         public static LeadOfLifeCompanionStats VorpalBulletsCompanion;
         public static LeadOfLifeCompanionStats BlankBulletsCompanion;
         public static LeadOfLifeCompanionStats PlatinumBulletsCompanion;
+        public static LeadOfLifeCompanionStats LichsEyeBulletsCompanionA;
+        public static LeadOfLifeCompanionStats LichsEyeBulletsCompanionB;
+        public static LeadOfLifeCompanionStats BulletTimeCompanion;
+        public static LeadOfLifeCompanionStats DarumaCompanion;
+        public static LeadOfLifeCompanionStats RiddleOfLeadCompanion;
+        public static LeadOfLifeCompanionStats ShotgunCoffeeCompanion;
+        public static LeadOfLifeCompanionStats ShotgaColaCompanion;
+        public static LeadOfLifeCompanionStats ElderBlankCompanion;
+        public static LeadOfLifeCompanionStats BulletGunCompanion;
+        public static LeadOfLifeCompanionStats ShellGunCompanion;
+        public static LeadOfLifeCompanionStats CaseyCompanion;
+        public static LeadOfLifeCompanionStats BTCKTPCompanion;
+        #endregion
+
+        #region Modded Item Stat Setup
+        public static LeadOfLifeCompanionStats OneShotCompanion;
+        public static LeadOfLifeCompanionStats FiftyCalRoundsCompanion;
+        public static LeadOfLifeCompanionStats AlkaliBulletsCompanion;
+        public static LeadOfLifeCompanionStats AntimagicRoundsCompanion;
+        public static LeadOfLifeCompanionStats AntimatterBulletsCompanion;
+        public static LeadOfLifeCompanionStats BashfulShotCompanion;
+        public static LeadOfLifeCompanionStats BashingBulletsCompanion;
+
+        public static LeadOfLifeCompanionStats BirdshotCompanion;
+        public static LeadOfLifeCompanionStats BlightShellCompanion;
+        public static LeadOfLifeCompanionStats BloodthirstyBulletsCompanion;
+
+
+
+        #endregion
 
 
 
@@ -102,6 +134,33 @@ namespace NevernamedsItems
                 VorpalBulletsCompanion = new LeadOfLifeCompanionStats();
                 BlankBulletsCompanion = new LeadOfLifeCompanionStats();
                 PlatinumBulletsCompanion = new LeadOfLifeCompanionStats();
+                LichsEyeBulletsCompanionA = new LeadOfLifeCompanionStats();
+                LichsEyeBulletsCompanionB = new LeadOfLifeCompanionStats();
+                BulletTimeCompanion = new LeadOfLifeCompanionStats();
+                DarumaCompanion = new LeadOfLifeCompanionStats();
+                RiddleOfLeadCompanion = new LeadOfLifeCompanionStats();
+                ShotgunCoffeeCompanion = new LeadOfLifeCompanionStats();
+                ShotgaColaCompanion = new LeadOfLifeCompanionStats();
+                ElderBlankCompanion = new LeadOfLifeCompanionStats();
+                BulletGunCompanion = new LeadOfLifeCompanionStats();
+                ShellGunCompanion = new LeadOfLifeCompanionStats();
+                CaseyCompanion = new LeadOfLifeCompanionStats();
+                BTCKTPCompanion = new LeadOfLifeCompanionStats();
+
+                OneShotCompanion = new LeadOfLifeCompanionStats();
+                FiftyCalRoundsCompanion = new LeadOfLifeCompanionStats();
+                AlkaliBulletsCompanion = new LeadOfLifeCompanionStats();
+                AntimagicRoundsCompanion = new LeadOfLifeCompanionStats();
+                AntimatterBulletsCompanion = new LeadOfLifeCompanionStats();
+                BashfulShotCompanion = new LeadOfLifeCompanionStats();
+                BashingBulletsCompanion = new LeadOfLifeCompanionStats();
+                BirdshotCompanion = new LeadOfLifeCompanionStats();
+                BlightShellCompanion = new LeadOfLifeCompanionStats();
+                BloodthirstyBulletsCompanion = new LeadOfLifeCompanionStats();
+
+
+
+
 
                 HotLeadCompanion.guid = "leadoflife_hotlead";
                 IrradiatedLeadCompanion.guid = "leadoflife_irradiatedlead";
@@ -144,6 +203,32 @@ namespace NevernamedsItems
                 VorpalBulletsCompanion.guid = "leadoflife_vorpalbullets";
                 BlankBulletsCompanion.guid = "leadoflife_blankbullets";
                 PlatinumBulletsCompanion.guid = "leadoflife_platinumbullets";
+                LichsEyeBulletsCompanionA.guid = "leadoflife_lichseyebullets_a";
+                LichsEyeBulletsCompanionB.guid = "leadoflife_lichseyebullets_b";
+                BulletTimeCompanion.guid = "leadoflife_bullettime";
+                DarumaCompanion.guid = "leadoflife_daruma";
+                RiddleOfLeadCompanion.guid = "leadoflife_riddleoflead";
+                ShotgunCoffeeCompanion.guid = "leadoflife_shotguncoffee";
+                ShotgaColaCompanion.guid = "leadoflife_shotgacola";
+                ElderBlankCompanion.guid = "leadoflife_elderblank";
+                BulletGunCompanion.guid = "leadoflife_bulletgun";
+                ShellGunCompanion.guid = "leadoflife_shellgun";
+                CaseyCompanion.guid = "leadoflife_casey";
+                BTCKTPCompanion.guid = "leadoflife_btcktp";
+
+                OneShotCompanion.guid = "leadoflife_oneshot";
+                FiftyCalRoundsCompanion.guid = "leadoflife_fiftycalrounds";
+                AlkaliBulletsCompanion.guid = "leadoflife_alkalibullets";
+                AntimagicRoundsCompanion.guid = "leadoflife_antimagicrounds";
+                AntimatterBulletsCompanion.guid = "leadoflife_antimatterbullets";
+                BashfulShotCompanion.guid = "leadoflife_bashfulshot";
+                BashingBulletsCompanion.guid = "leadoflife_bashingbullets";
+
+                BirdshotCompanion.guid = "leadoflife_birdshot";
+                BlightShellCompanion.guid = "leadoflife_blightshell";
+                BloodthirstyBulletsCompanion.guid = "leadoflife_bloodthirstybullets";
+
+
 
                 CompanionItemDictionary = new Dictionary<int, string>()
                 {
@@ -188,8 +273,40 @@ namespace NevernamedsItems
                     {640,VorpalBulletsCompanion.guid},
                     {579,BlankBulletsCompanion.guid},
                     {627,PlatinumBulletsCompanion.guid},
+                    {815,LichsEyeBulletsCompanionA.guid},
+                    {69,BulletTimeCompanion.guid},
+                    {643,DarumaCompanion.guid},
+                    {271,RiddleOfLeadCompanion.guid},
+                    {427,ShotgunCoffeeCompanion.guid},
+                    {426,ShotgaColaCompanion.guid},
+                    {499,ElderBlankCompanion.guid},
+                    {503,BulletGunCompanion.guid},
+                    {512,ShellGunCompanion.guid},
+                    {541,CaseyCompanion.guid},
+                    {303,BTCKTPCompanion.guid},
+
+                    //MODDED
+                    {OneShot.OneShotID, OneShotCompanion.guid},
+                    {FiftyCalRounds.FiftyCalRoundsID, FiftyCalRoundsCompanion.guid},
+                    {AlkaliBullets.AlkaliBulletsID, AlkaliBulletsCompanion.guid},
+                    {AntimagicRounds.AntimagicRoundsID, AntimagicRoundsCompanion.guid},
+                    {AntimatterBullets.AntimatterBulletsID, AntimatterBulletsCompanion.guid},
+                    {BashfulShot.BashfulShotID, BashfulShotCompanion.guid},
+                    {BashingBullets.BashingBulletsID, BashingBulletsCompanion.guid},
+                    {Birdshot.BirdshotID, BirdshotCompanion.guid},
+                    {BlightShell.BlightShellID, BlightShellCompanion.guid},
+                    {BloodthirstyBullets.BloodthirstyBulletsID, BloodthirstyBulletsCompanion.guid},
 
 
+
+
+
+
+                };
+
+                SecondaryCompanionDictionary = new Dictionary<int, string>()
+                {
+                    {815,LichsEyeBulletsCompanionB.guid},
                 };
 
                 string name = "Lead of Life";
@@ -202,6 +319,13 @@ namespace NevernamedsItems
                 item.quality = PickupObject.ItemQuality.S;
                 item.SetupItem(shortDesc, longDesc, "nn");
 
+                LeadOfLifeID = item.PickupObjectId;
+
+                activeItemDropHook = new Hook(
+                    typeof(PlayerController).GetMethod("DropActiveItem"),
+                    typeof(LeadOfLife).GetMethod("DropActiveHook")
+                );
+
                 // AssignGuids();
                 BuildPrefabs();
             }
@@ -211,6 +335,42 @@ namespace NevernamedsItems
                 ETGModConsole.Log(e.StackTrace);
             }
         }
+        public static int LeadOfLifeID;
+        public static Hook activeItemDropHook;
+        public static DebrisObject DropActiveHook(Func<PlayerController, PlayerItem, float, bool, DebrisObject> orig, PlayerController self, PlayerItem item, float force = 4f, bool deathdrop = false)
+        {
+            try
+            {
+                if (GameManager.Instance.PrimaryPlayer && GameManager.Instance.PrimaryPlayer.HasPickupID(LeadOfLife.LeadOfLifeID))
+                {
+                    foreach (PassiveItem LeadOfLife in GameManager.Instance.PrimaryPlayer.passiveItems)
+                    {
+                        if (LeadOfLife.GetComponent<LeadOfLife>())
+                        {
+                            LeadOfLife.GetComponent<LeadOfLife>().DoLateRecalculation();
+                        }
+                    }
+                }
+                if (GameManager.Instance.SecondaryPlayer && GameManager.Instance.SecondaryPlayer.HasPickupID(LeadOfLife.LeadOfLifeID))
+                {
+                    foreach (PassiveItem LeadOfLife in GameManager.Instance.SecondaryPlayer.passiveItems)
+                    {
+                        if (LeadOfLife.GetComponent<LeadOfLife>())
+                        {
+                            LeadOfLife.GetComponent<LeadOfLife>().DoLateRecalculation();
+                        }
+                    }
+                }
+                return orig(self, item, force, deathdrop);
+            }
+            catch (Exception e)
+            {
+                ETGModConsole.Log(e.Message);
+                ETGModConsole.Log(e.StackTrace);
+                return null;
+            }
+        }
+
         public int AmountOfEasyReloadCompanions;
         public int AmountOfHardReloadCompanions;
         public int PlatBulletsLanded = 0;
@@ -237,7 +397,17 @@ namespace NevernamedsItems
             }
             base.OnDestroy();
         }
-        private void RecalculateCompanions()
+        public void DoLateRecalculation()
+        {
+            StartCoroutine(LateRecalculation());
+        }
+        private IEnumerator LateRecalculation()
+        {
+            yield return null;
+            RecalculateCompanions();
+            yield break;
+        }
+        public void RecalculateCompanions()
         {
             DestroyAllCompanions();
             foreach (PassiveItem item in Owner.passiveItems)
@@ -246,6 +416,37 @@ namespace NevernamedsItems
                 {
                     if (item.PickupObjectId == 375) AmountOfEasyReloadCompanions += 1;
                     SpawnNewCompanion(CompanionItemDictionary[item.PickupObjectId]);
+                }
+                if (SecondaryCompanionDictionary.ContainsKey(item.PickupObjectId))
+                {
+                    if (item.PickupObjectId == 375) AmountOfEasyReloadCompanions += 1;
+                    SpawnNewCompanion(SecondaryCompanionDictionary[item.PickupObjectId]);
+                }
+            }
+            foreach (PlayerItem item in Owner.activeItems)
+            {
+                if (CompanionItemDictionary.ContainsKey(item.PickupObjectId))
+                {
+                    if (item.PickupObjectId == 375) AmountOfEasyReloadCompanions += 1;
+                    SpawnNewCompanion(CompanionItemDictionary[item.PickupObjectId]);
+                }
+                if (SecondaryCompanionDictionary.ContainsKey(item.PickupObjectId))
+                {
+                    if (item.PickupObjectId == 375) AmountOfEasyReloadCompanions += 1;
+                    SpawnNewCompanion(SecondaryCompanionDictionary[item.PickupObjectId]);
+                }
+            }
+            foreach (Gun item in Owner.inventory.AllGuns)
+            {
+                if (CompanionItemDictionary.ContainsKey(item.PickupObjectId))
+                {
+                    if (item.PickupObjectId == 375) AmountOfEasyReloadCompanions += 1;
+                    SpawnNewCompanion(CompanionItemDictionary[item.PickupObjectId]);
+                }
+                if (SecondaryCompanionDictionary.ContainsKey(item.PickupObjectId))
+                {
+                    if (item.PickupObjectId == 375) AmountOfEasyReloadCompanions += 1;
+                    SpawnNewCompanion(SecondaryCompanionDictionary[item.PickupObjectId]);
                 }
             }
         }
@@ -291,7 +492,11 @@ namespace NevernamedsItems
             if (extantCompanions.Count <= 0) { return; }
             for (int i = extantCompanions.Count - 1; i >= 0; i--)
             {
-                UnityEngine.Object.Destroy(extantCompanions[i].gameObject);
+                if (extantCompanions[i] && extantCompanions[i].gameObject)
+                {
+
+                    UnityEngine.Object.Destroy(extantCompanions[i].gameObject);
+                }
             }
             extantCompanions.Clear();
         }
@@ -300,6 +505,7 @@ namespace NevernamedsItems
         {
             try
             {
+                #region Bullet Modifiers
                 // ETGModConsole.Log("Section 1");
                 if (HotLeadCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(HotLeadCompanion.guid))
                 {
@@ -987,6 +1193,440 @@ namespace NevernamedsItems
                     component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
                     component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
                 }
+                #endregion
+
+                #region Other bullety items
+                //SECOND GO AROUND
+                if (LichsEyeBulletsCompanionA.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(LichsEyeBulletsCompanionA.guid))
+                {
+                    LichsEyeBulletsCompanionA.prefab = CompanionBuilder.BuildPrefab("LeadOfLife LichsEyeBulletsA", LichsEyeBulletsCompanionA.guid, "NevernamedsItems/Resources/Companions/LeadOfLife/lichseyebulletscompaniona_idle_001", new IntVector2(6, 2), new IntVector2(6, 6));
+                    var companionController = LichsEyeBulletsCompanionA.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 5f;
+                    companionController.tiedItemID = 815;
+                    companionController.incrementallyDifferentShots = true;
+                    companionController.incrementForAltShots = 7;
+                    companionController.incrementShot = (PickupObjectDatabase.GetById(604) as Gun).GetComponent<FireOnReloadSynergyProcessor>().DirectedBurstSettings.ProjectileInterface.SpecifiedProjectile;
+                    LichsEyeBulletsCompanionA.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLife/lichseyebulletscompaniona_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    LichsEyeBulletsCompanionA.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLife/lichseyebulletscompaniona_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = LichsEyeBulletsCompanionA.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+
+                if (LichsEyeBulletsCompanionB.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(LichsEyeBulletsCompanionB.guid))
+                {
+                    LichsEyeBulletsCompanionB.prefab = CompanionBuilder.BuildPrefab("LeadOfLife LichsEyeBulletsB", LichsEyeBulletsCompanionB.guid, "NevernamedsItems/Resources/Companions/LeadOfLife/lichseyebulletscompanionb_idle_001", new IntVector2(6, 2), new IntVector2(6, 6));
+                    var companionController = LichsEyeBulletsCompanionB.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 5f;
+                    companionController.tiedItemID = 815;
+                    companionController.incrementallyDifferentShots = true;
+                    companionController.incrementForAltShots = 7;
+                    companionController.incrementShot = (PickupObjectDatabase.GetById(604) as Gun).GetComponent<FireOnReloadSynergyProcessor>().DirectedBurstSettings.ProjectileInterface.SpecifiedProjectile;
+                    LichsEyeBulletsCompanionB.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLife/lichseyebulletscompanionb_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    LichsEyeBulletsCompanionB.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLife/lichseyebulletscompanionb_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = LichsEyeBulletsCompanionB.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (BulletTimeCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(BulletTimeCompanion.guid))
+                {
+                    BulletTimeCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife BulletTime", BulletTimeCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLife/bullettimecompanion_idle_001", new IntVector2(6, 2), new IntVector2(7, 7));
+                    var companionController = BulletTimeCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 7f;
+                    companionController.tiedItemID = 69;
+                    companionController.fireCooldown = 25;
+                    companionController.slowsTime = true;
+                    companionController.FiresBullets = false;
+                    BulletTimeCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLife/bullettimecompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    BulletTimeCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLife/bullettimecompanion_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = BulletTimeCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (DarumaCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(DarumaCompanion.guid))
+                {
+                    DarumaCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife Daruma", DarumaCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLife/darumacompanion_idle_001", new IntVector2(6, 2), new IntVector2(7, 7));
+                    var companionController = DarumaCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 5f;
+                    companionController.tiedItemID = 643;
+                    companionController.gunIDToCopyBulletsFrom = 53;
+                    companionController.attackOnTimer = false;
+                    companionController.fireOnActiveItemUse = true;
+                    companionController.doesBlanks = true;
+                    companionController.blankType = EasyBlankType.MINI;
+                    companionController.activeItemIDToCheckFor = 643;
+                    DarumaCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLife/darumacompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    DarumaCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLife/darumacompanion_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = DarumaCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (RiddleOfLeadCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(RiddleOfLeadCompanion.guid))
+                {
+                    RiddleOfLeadCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife RiddleOfLead", RiddleOfLeadCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLife/riddleofleadcompanion_idle_001", new IntVector2(6, 2), new IntVector2(8, 7));
+                    var companionController = RiddleOfLeadCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 3.5f;
+                    companionController.tiedItemID = 271;
+                    companionController.usesGunOfAThousandSinsBullets = true;
+                    companionController.fireCooldown = 5;
+                    RiddleOfLeadCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLife/riddleofleadcompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    RiddleOfLeadCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLife/riddleofleadcompanion_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = RiddleOfLeadCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (ShotgunCoffeeCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(ShotgunCoffeeCompanion.guid))
+                {
+                    ShotgunCoffeeCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife ShotgunCoffee", ShotgunCoffeeCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLife/shotguncoffeecompanion_idle_001", new IntVector2(6, 2), new IntVector2(7, 7));
+                    var companionController = ShotgunCoffeeCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 10f;
+                    companionController.tiedItemID = 427;
+                    companionController.doGoop = true;
+                    companionController.FiresBullets = false;
+                    companionController.fireCooldown = 4.5f;
+                    companionController.goopRadiusOrWidth = 3f;
+                    companionController.goopDefToSpawn = EasyGoopDefinitions.GenerateBloodGoop(5f, ExtendedColours.brown, 10);
+                    ShotgunCoffeeCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLife/shotguncoffeecompanion_idle", 11, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    ShotgunCoffeeCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLife/shotguncoffeecompanion_run", 11, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = ShotgunCoffeeCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach() { DesiredDistance = 2f }); ;
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (ShotgaColaCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(ShotgaColaCompanion.guid))
+                {
+                    ShotgaColaCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife ShotgaCola", ShotgaColaCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLife/shotgacolacompanion_idle_001", new IntVector2(5, 2), new IntVector2(7, 7));
+                    var companionController = ShotgaColaCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 10f;
+                    companionController.tiedItemID = 426;
+                    companionController.doGoop = true;
+                    companionController.FiresBullets = false;
+                    companionController.fireCooldown = 2f;
+                    companionController.goopRadiusOrWidth = 1.5f;
+                    companionController.doLineGoop = true;
+                    companionController.goopDefToSpawn = EasyGoopDefinitions.GenerateBloodGoop(5f, ExtendedColours.brown, 10);
+                    ShotgaColaCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLife/shotgacolacompanion_idle", 11, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    ShotgaColaCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLife/shotgacolacompanion_run", 11, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = ShotgaColaCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (ElderBlankCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(ElderBlankCompanion.guid))
+                {
+                    ElderBlankCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife ElderBlank", ElderBlankCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLife/elderblankcompanion_idle_001", new IntVector2(5, 2), new IntVector2(7, 7));
+                    var companionController = ElderBlankCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 5f;
+                    companionController.tiedItemID = 499;
+                    companionController.FiresBullets = false;
+                    companionController.attackOnTimer = false;
+                    companionController.fireOnActiveItemUse = true;
+                    companionController.doesBlanks = true;
+                    companionController.roomDMGAmount = 20;
+                    companionController.blankType = EasyBlankType.FULL;
+                    companionController.activeItemIDToCheckFor = 499;
+                    ElderBlankCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLife/elderblankcompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    ElderBlankCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLife/elderblankcompanion_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = ElderBlankCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (BulletGunCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(BulletGunCompanion.guid))
+                {
+                    BulletGunCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife BulletGun", BulletGunCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLife/bulletguncompanion_idle_001", new IntVector2(4, 1), new IntVector2(5, 5));
+                    var companionController = BulletGunCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 5f;
+                    companionController.tiedItemID = 503;
+                    companionController.fireCooldown = 1.6f;
+                    companionController.gunIDToCopyBulletsFrom = 503;
+                    BulletGunCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLife/bulletguncompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    BulletGunCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLife/bulletguncompanion_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = BulletGunCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (ShellGunCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(ShellGunCompanion.guid))
+                {
+                    ShellGunCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife ShellGun", ShellGunCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLife/shellguncompanion_idle_001", new IntVector2(7, 2), new IntVector2(7, 7));
+                    var companionController = ShellGunCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 5f;
+                    companionController.tiedItemID = 512;
+                    companionController.gunIDToCopyBulletsFrom = 512;
+                    companionController.angleVariance = 16;
+                    companionController.attacksPerActivation = 3;
+                    companionController.fireCooldown = 2f;
+                    ShellGunCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLife/shellguncompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    ShellGunCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLife/shellguncompanion_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = ShellGunCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (CaseyCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(CaseyCompanion.guid))
+                {
+                    CaseyCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife Casey", CaseyCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLife/caseycompanion_idle_001", new IntVector2(8, 2), new IntVector2(4, 4));
+                    var companionController = CaseyCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 5f;
+                    companionController.tiedItemID = 541;
+                    companionController.gunIDToCopyBulletsFrom = 541;
+                    companionController.fireCooldown = 3.5f;
+                    CaseyCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLife/caseycompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    CaseyCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLife/caseycompanion_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = CaseyCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach() { DesiredDistance = 3f });
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (BTCKTPCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(BTCKTPCompanion.guid))
+                {
+                    BTCKTPCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife BTCKTP", BTCKTPCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLife/BTCKTPcompanion_idle_001", new IntVector2(6, 2), new IntVector2(8, 8));
+                    var companionController = BTCKTPCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 7f;
+                    companionController.tiedItemID = 303;
+                    companionController.CanInterceptBullets = true;
+                    companionController.FiresBullets = false;
+                    BTCKTPCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLife/BTCKTPcompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    BTCKTPCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLife/BTCKTPcompanion_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    companionController.aiActor.CollisionDamage = 0f;
+                    //companionController.overrideShader = "Brave/Internal/StarNest_Derivative";
+                    companionController.aiActor.specRigidbody.CollideWithOthers = true;
+                    companionController.aiActor.specRigidbody.CollideWithTileMap = false;
+                    companionController.healthHaver.PreventAllDamage = true;
+                    companionController.aiActor.specRigidbody.PixelColliders.Clear();
+                    companionController.aiActor.specRigidbody.PixelColliders.Add(new PixelCollider
+                    {
+                        ColliderGenerationMode = PixelCollider.PixelColliderGeneration.Manual,
+                        CollisionLayer = CollisionLayer.EnemyCollider,
+                        IsTrigger = false,
+                        BagleUseFirstFrameOnly = false,
+                        SpecifyBagelFrame = string.Empty,
+                        BagelColliderNumber = 0,
+                        ManualOffsetX = 6,
+                        ManualOffsetY = 2,
+                        ManualWidth = 8,
+                        ManualHeight = 17,
+                        ManualDiameter = 0,
+                        ManualLeftX = 0,
+                        ManualLeftY = 0,
+                        ManualRightX = 0,
+                        ManualRightY = 0
+                    });
+                    companionController.aiAnimator.specRigidbody.PixelColliders.Add(new PixelCollider
+                    {
+                        ColliderGenerationMode = PixelCollider.PixelColliderGeneration.Manual,
+                        CollisionLayer = CollisionLayer.PlayerHitBox,
+                        IsTrigger = false,
+                        BagleUseFirstFrameOnly = false,
+                        SpecifyBagelFrame = string.Empty,
+                        BagelColliderNumber = 0,
+                        ManualOffsetX = 6,
+                        ManualOffsetY = 2,
+                        ManualWidth = 8,
+                        ManualHeight = 8,
+                        ManualDiameter = 0,
+                        ManualLeftX = 0,
+                        ManualLeftY = 0,
+                        ManualRightX = 0,
+                        ManualRightY = 0
+                    });
+                    BehaviorSpeculator component = BTCKTPCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                #endregion
+
+                #region Custom Bullet Modifiers
+                if (OneShotCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(OneShotCompanion.guid))
+                {
+                    OneShotCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife OneShot", OneShotCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLifeModded/oneshotcompanion_idle_001", new IntVector2(10, 1), new IntVector2(7, 7));
+                    var companionController = OneShotCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 8f;
+                    companionController.tiedItemID = OneShot.OneShotID;
+                    companionController.damageMultiplier = 2;
+                    companionController.bulletScaleMultiplier = 2;
+                    companionController.bulletSpeedMultiplier = 2;
+                    companionController.rangeMultiplier = 2;
+                    companionController.knockbackMult = 2;
+                    companionController.bossDamageMult = 2;
+                    companionController.jammedDamageMult = 2;
+                    companionController.fireCooldown = 0.65f;
+                    OneShotCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/oneshotcompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    OneShotCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/oneshotcompanion_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = OneShotCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (FiftyCalRoundsCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(FiftyCalRoundsCompanion.guid))
+                {
+                    FiftyCalRoundsCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife FiftyCalRounds", FiftyCalRoundsCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLifeModded/fiftycalroundscompanion_idle_001", new IntVector2(6, 1), new IntVector2(6, 6));
+                    var companionController = FiftyCalRoundsCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 5f;
+                    companionController.tiedItemID = FiftyCalRounds.FiftyCalRoundsID;
+                    companionController.damageMultiplier = 1.16f;
+                    companionController.bulletSpeedMultiplier = 1.25f;
+                    FiftyCalRoundsCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/fiftycalroundscompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    FiftyCalRoundsCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/fiftycalroundscompanion_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = FiftyCalRoundsCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (AlkaliBulletsCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(AlkaliBulletsCompanion.guid))
+                {
+                    AlkaliBulletsCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife AlkaliBullets", AlkaliBulletsCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLifeModded/alkalibulletscompanion_idle_001", new IntVector2(6, 1), new IntVector2(7, 7));
+                    var companionController = AlkaliBulletsCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 5f;
+                    companionController.tiedItemID = AlkaliBullets.AlkaliBulletsID;
+                    companionController.guidsToInstaKill.AddRange(EasyEnemyTypeLists.ModInclusiveBlobsALL);
+                    AlkaliBulletsCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/alkalibulletscompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    AlkaliBulletsCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/alkalibulletscompanion_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = AlkaliBulletsCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (AntimagicRoundsCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(AntimagicRoundsCompanion.guid))
+                {
+                    AntimagicRoundsCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife AntimagicRounds", AntimagicRoundsCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLifeModded/antimagicroundscompanion_idle_001", new IntVector2(9, 1), new IntVector2(7, 7));
+                    var companionController = AntimagicRoundsCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 5f;
+                    companionController.tintsBullets = true;
+                    companionController.tintColour = ExtendedColours.purple;
+                    companionController.tiedItemID = AntimagicRounds.AntimagicRoundsID;
+                    companionController.guidsToInstaKill.AddRange(EasyEnemyTypeLists.ModInclusiveMagicEnemies);
+                    AntimagicRoundsCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/antimagicroundscompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    AntimagicRoundsCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/antimagicroundscompanion_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = AntimagicRoundsCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (AntimatterBulletsCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(AntimatterBulletsCompanion.guid))
+                {
+                    AntimatterBulletsCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife AntimatterBullets", AntimatterBulletsCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLifeModded/antimatterbulletscompanion_idle_001", new IntVector2(6, 1), new IntVector2(7, 7));
+                    var companionController = AntimatterBulletsCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 5f;
+                    companionController.doesIntersectionEffect = true;
+                    companionController.explodeOnIntersection = true;
+                    companionController.tiedItemID = AntimatterBullets.AntimatterBulletsID;
+                    AntimatterBulletsCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/antimatterbulletscompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    AntimatterBulletsCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/antimatterbulletscompanion_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = AntimatterBulletsCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (BashfulShotCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(BashfulShotCompanion.guid))
+                {
+                    BashfulShotCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife BashfulShot", BashfulShotCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLifeModded/bashfulshotcompanion_idle_001", new IntVector2(5, 1), new IntVector2(8, 8));
+                    var companionController = BashfulShotCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 5f;
+                    companionController.damageMultiplier = 0.5f;
+                    companionController.tiedItemID = BashfulShot.BashfulShotID;
+                    companionController.gunIDToCopyBulletsFrom = 9;
+                    BashfulShotCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/bashfulshotcompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    BashfulShotCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/bashfulshotcompanion_run", 9, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = BashfulShotCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (BashingBulletsCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(BashingBulletsCompanion.guid))
+                {
+                    BashingBulletsCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife BashingBullets", BashingBulletsCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLifeModded/bashingbulletscompanion_idle_001", new IntVector2(7, 1), new IntVector2(7, 7));
+                    var companionController = BashingBulletsCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 5f;
+                    companionController.gunIDToCopyBulletsFrom = 541;
+                    companionController.damageMultiplier = 0.125f;
+                    companionController.rangeMultiplier = 0.5f;
+                    companionController.stunInflictChance = 0.5f;
+                    companionController.inflictedStunDuration = 1;
+                    companionController.tiedItemID = BashingBullets.BashingBulletsID;
+                    BashingBulletsCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/bashingbulletscompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    BashingBulletsCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/bashingbulletscompanion_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = BashingBulletsCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach() { DesiredDistance = 2 });
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (BirdshotCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(BirdshotCompanion.guid))
+                {
+                    BirdshotCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife Birdshot", BirdshotCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLifeModded/birdshotcompanion_idle_001", new IntVector2(14, 1), new IntVector2(7, 7));
+                    var companionController = BirdshotCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 5f;
+                    companionController.tiedItemID = Birdshot.BirdshotID;
+                    companionController.dmgUpOnFlyingEnemies = true;
+                    BirdshotCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/birdshotcompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    BirdshotCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/birdshotcompanion_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = BirdshotCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (BlightShellCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(BlightShellCompanion.guid))
+                {
+                    BlightShellCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife BlightShell", BlightShellCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLifeModded/blightshellcompanion_idle_001", new IntVector2(8, 1), new IntVector2(7, 7));
+                    var companionController = BlightShellCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 5f;
+                    companionController.fireCooldown = 3.5f;
+                    companionController.attacksPerActivation = 4;
+                    companionController.tiedItemID = BlightShell.BlightShellID;
+                    companionController.scalesWithCurse = true;
+                    companionController.bulletsHaveCurseParticles = true;
+                    companionController.tintsBullets = true;
+                    companionController.tintColour = ExtendedColours.cursedBulletsPurple;
+                    BlightShellCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/blightshellcompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    BlightShellCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/blightshellcompanion_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = BlightShellCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (BloodthirstyBulletsCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(BloodthirstyBulletsCompanion.guid))
+                {
+                    BloodthirstyBulletsCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife BloodthirstyBullets", BloodthirstyBulletsCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLifeModded/bloodthirstybulletscompanion_idle_001", new IntVector2(5, 1), new IntVector2(7, 7));
+                    var companionController = BloodthirstyBulletsCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 5f;
+                    companionController.tiedItemID = BloodthirstyBullets.BloodthirstyBulletsID;
+                    companionController.dmgUpOnFlyingEnemies = true;
+                    companionController.isBloodthirstyBullets = true;
+                    BloodthirstyBulletsCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/bloodthirstybulletscompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    BloodthirstyBulletsCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/bloodthirstybulletscompanion_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = BloodthirstyBulletsCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                #endregion
             }
             catch (Exception e)
             {
@@ -1007,12 +1647,17 @@ namespace NevernamedsItems
         public LeadOfLifeCompanion()
         {
             //basics
+            overrideShader = null;
+            attackOnTimer = true;
             FiresBullets = true;
             doesBlanks = false;
             doesKatanaSlash = false;
             gunIDToCopyBulletsFrom = 86;
             isHelix = false;
             attacksPerActivation = 1;
+            incrementallyDifferentShots = false;
+            incrementForAltShots = 0;
+            incrementShot = null;
 
             //stats
             fireCooldown = 1.3f;
@@ -1047,6 +1692,10 @@ namespace NevernamedsItems
             hasPiercingBullets = false;
             hasFlakBullets = false;
             picksRandomPlayerBullet = false;
+            fireOnActiveItemUse = false;
+            activeItemIDToCheckFor = -1;
+            roomDMGAmount = 0;
+            guidsToInstaKill = new List<string>();
         }
         private void Start()
         {
@@ -1068,9 +1717,15 @@ namespace NevernamedsItems
                     }
                 }
                 Owner.OnRoomClearEvent += this.OnRoomClearEffects;
+                Owner.OnUsedPlayerItem += this.OnOwnerUsedActiveItem;
+                if (!string.IsNullOrEmpty(overrideShader))
+                {
+                    this.sprite.renderer.material.shader = ShaderCache.Acquire(overrideShader);
+                }
             }
         }
         private float timer;
+        private int increment;
         public override void Update()
         {
             if (base.specRigidbody && base.aiActor && Owner && base.transform)
@@ -1084,16 +1739,7 @@ namespace NevernamedsItems
                     }
                     if (timer <= 0)
                     {
-                        for (int i = 0; i < attacksPerActivation; i++)
-                        {
-                            if (FiresBullets) FireBullets();
-                            if (picksRandomPlayerBullet) DoChanceBulletsSpawn();
-                            if (isHelix) { FireBullets(null, true, false); FireBullets(null, true, true); }
-                            if (doesKatanaSlash) GameManager.Instance.Dungeon.StartCoroutine(this.DoKatanaBulletsChain(base.specRigidbody.UnitCenter, (base.specRigidbody.UnitCenter.GetPositionOfNearestEnemy(false) - base.specRigidbody.UnitCenter).normalized));
-                            if (dropsBombs) DropBomb();
-                            if (doesBlanks) DoBlank();
-                        }
-
+                        if (attackOnTimer) Attack();
                         float originalFireCooldown = fireCooldown;
                         if (baseItem && baseItem.AmountOfEasyReloadCompanions > 0)
                         {
@@ -1115,11 +1761,78 @@ namespace NevernamedsItems
             }
             base.Update();
         }
+        private void Attack()
+        {
+            increment++;
+            for (int i = 0; i < attacksPerActivation; i++)
+            {
+                //ETGModConsole.Log("Attack triggered");
+                if (FiresBullets)
+                {
+                    if (incrementallyDifferentShots && increment == incrementForAltShots)
+                    {
+                        FireBullets(incrementShot);
+                        increment = 0;
+                    }
+                    FireBullets();
+                }
+                if (picksRandomPlayerBullet) DoChanceBulletsSpawn();
+                if (isHelix) { FireBullets(null, true, false); FireBullets(null, true, true); }
+                if (doesKatanaSlash) GameManager.Instance.Dungeon.StartCoroutine(this.DoKatanaBulletsChain(base.specRigidbody.UnitCenter, (base.specRigidbody.UnitCenter.GetPositionOfNearestEnemy(false) - base.specRigidbody.UnitCenter).normalized));
+                if (dropsBombs) DropBomb();
+                if (doesBlanks) DoBlank();
+                if (slowsTime) SlowTime();
+                if (doGoop) DoGoop();
+                if (roomDMGAmount > 0) DoRoomDamage();
+            }
+
+
+        }
+        private void DoRoomDamage()
+        {
+            if (base.aiActor.CurrentRoom() != null)
+            {
+                List<AIActor> enemies = base.aiActor.CurrentRoom().GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+                if (enemies != null && enemies.Count > 0)
+                {
+                    foreach (AIActor actor in enemies)
+                    {
+                        if (actor && actor.healthHaver)
+                        {
+                            actor.healthHaver.ApplyDamage(roomDMGAmount, Vector2.zero, "Elder Blank");
+                        }
+                    }
+                }
+            }
+        }
+        private void DoGoop()
+        {
+            if (goopDefToSpawn != null)
+            {
+                if (doLineGoop)
+                {
+                    DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(goopDefToSpawn).TimedAddGoopLine(base.specRigidbody.UnitCenter, base.sprite.WorldCenter.GetPositionOfNearestEnemy(false, false), goopRadiusOrWidth, 0.5f);
+                }
+                else
+                {
+                    DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(goopDefToSpawn).TimedAddGoopCircle(base.specRigidbody.UnitCenter, goopRadiusOrWidth, 0.5f, false);
+                }
+            }
+        }
         private void FireBullets(Projectile externalOverrideProj = null, bool usesHelix = false, bool helixInverted = false)
         {
-            Projectile projectile = ((Gun)ETGMod.Databases.Items[gunIDToCopyBulletsFrom]).DefaultModule.projectiles[0];
+            Projectile projectile;
+            if ((ETGMod.Databases.Items[gunIDToCopyBulletsFrom] as Gun).DefaultModule.shootStyle == ProjectileModule.ShootStyle.Charged)
+            {
+                projectile = ((Gun)ETGMod.Databases.Items[gunIDToCopyBulletsFrom]).DefaultModule.chargeProjectiles[0].Projectile;
+            }
+            else
+            {
+                projectile = ((Gun)ETGMod.Databases.Items[gunIDToCopyBulletsFrom]).DefaultModule.projectiles[0];
+            }
             if (overrideBloody9mmBullet) projectile = PickupObjectDatabase.GetById(524).GetComponent<RandomProjectileReplacementItem>().ReplacementProjectile;
             if (overrideCritbullet) projectile = PickupObjectDatabase.GetById(640).GetComponent<ComplexProjectileModifier>().CriticalProjectile;
+            if (usesGunOfAThousandSinsBullets) projectile = (PickupObjectDatabase.GetById(GunOfAThousandSins.GunOfAThousandSinsID) as Gun).DefaultModule.projectiles[0];
 
             if (externalOverrideProj != null) projectile = externalOverrideProj;
 
@@ -1163,6 +1876,12 @@ namespace NevernamedsItems
                     {
                         status.datasToApply.Add(new StatusEffectBulletMod.StatusData() { applyChance = 1f, effectTint = ExtendedColours.freezeBlue, applyTint = true, effect = StaticStatusEffects.frostBulletsEffect });
                     }
+                }
+                if (inflictedStunDuration > 0 && stunInflictChance > 0)
+                {
+                    component.AppliesStun = true;
+                    component.StunApplyChance = stunInflictChance;
+                    component.AppliedStunDuration = inflictedStunDuration;
                 }
                 //Colour
                 if (tintsBullets) { component.AdjustPlayerProjectileTint(tintColour, 2); }
@@ -1262,6 +1981,36 @@ namespace NevernamedsItems
                         component.baseData.damage *= 1.0002f;
                     }
                 }
+                if (guidsToInstaKill != null && guidsToInstaKill.Count > 0)
+                {
+                    InstaKillEnemyTypeBehaviour killywilly = component.gameObject.GetOrAddComponent<InstaKillEnemyTypeBehaviour>();
+                    killywilly.EnemyTypeToKill.AddRange(guidsToInstaKill);
+                }
+                if (doesIntersectionEffect)
+                {
+                    if (explodeOnIntersection)
+                    {
+                        AntimatterBulletsModifier mod = component.gameObject.GetOrAddComponent<AntimatterBulletsModifier>();
+                        mod.explosionData = AntimatterBullets.smallPlayerSafeExplosion;
+                    }
+                }
+                if (dmgUpOnFlyingEnemies)
+                {
+                    SelectiveDamageMult selectiveDMGMult = component.gameObject.GetOrAddComponent<SelectiveDamageMult>();
+                    if (dmgUpOnFlyingEnemies) { selectiveDMGMult.multOnFlyingEnemies = true; selectiveDMGMult.multiplier = 1.4f; }
+                }
+                if (isBloodthirstyBullets)
+                {
+                    BloodthirstyBulletsComp comp = component.gameObject.GetOrAddComponent<BloodthirstyBulletsComp>();
+                }
+
+                if(tiedItemID == BashfulShot.BashfulShotID)
+                {
+                    int numberOfOtherCompanions = (baseItem.extantCompanions.Count - 1);
+                    float multiplier = (-0.03f * numberOfOtherCompanions) + 2;
+                    multiplier = Mathf.Max(1, multiplier);
+                    component.baseData.damage *= multiplier;
+                }
 
                 component.ApplyCompanionModifierToBullet(Owner);
 
@@ -1277,10 +2026,25 @@ namespace NevernamedsItems
         }
         private void DoBlank()
         {
-            int thingToDo = UnityEngine.Random.Range(1, 5);
-            if (thingToDo == 1) return;
-            else if (thingToDo == 2 || thingToDo == 3) Owner.DoEasyBlank(base.specRigidbody.UnitCenter, EasyBlankType.MINI);
-            else if (thingToDo == 4) Owner.DoEasyBlank(base.specRigidbody.UnitCenter, EasyBlankType.FULL);
+            if (blankTypeRandomised)
+            {
+                int thingToDo = UnityEngine.Random.Range(1, 5);
+                if (thingToDo == 1) return;
+                else if (thingToDo == 2 || thingToDo == 3) Owner.DoEasyBlank(base.specRigidbody.UnitCenter, EasyBlankType.MINI);
+                else if (thingToDo == 4) Owner.DoEasyBlank(base.specRigidbody.UnitCenter, EasyBlankType.FULL);
+            }
+            else
+            {
+                Owner.DoEasyBlank(base.specRigidbody.UnitCenter, blankType);
+            }
+        }
+        private void SlowTime()
+        {
+            var timeSlow = new RadialSlowInterface();
+            timeSlow.DoesSepia = false;
+            timeSlow.RadialSlowHoldTime = 5f;
+            timeSlow.RadialSlowTimeModifier = 0.25f;
+            timeSlow.DoRadialSlow(base.specRigidbody.UnitCenter, base.aiActor.CurrentRoom());
         }
         private void ApplyShockRoundsEffect(Projectile projectile)
         {
@@ -1324,8 +2088,21 @@ namespace NevernamedsItems
             if (Owner)
             {
                 Owner.OnRoomClearEvent -= this.OnRoomClearEffects;
+                Owner.OnUsedPlayerItem -= this.OnOwnerUsedActiveItem;
             }
             base.OnDestroy();
+        }
+        private void OnOwnerUsedActiveItem(PlayerController player, PlayerItem item)
+        {
+            if (fireOnActiveItemUse)
+            {
+                //ETGModConsole.Log("Active item ran");
+
+                if (item.PickupObjectId == activeItemIDToCheckFor || activeItemIDToCheckFor == -1)
+                {
+                    Attack();
+                }
+            }
         }
         private Vector2 GetAngleToFire()
         {
@@ -1453,12 +2230,17 @@ namespace NevernamedsItems
         public int tiedItemID;
         private LeadOfLife baseItem;
         //Basic Stuff
+        public string overrideShader;
+        public bool attackOnTimer;
         public bool FiresBullets;
         public bool doesKatanaSlash;
         public bool doesBlanks;
         public int gunIDToCopyBulletsFrom;
         public bool isHelix;
         public int attacksPerActivation;
+        public bool incrementallyDifferentShots;
+        public int incrementForAltShots;
+        public Projectile incrementShot;
         //Stats
         public float damageMultiplier;
         public float bulletSpeedMultiplier;
@@ -1478,6 +2260,8 @@ namespace NevernamedsItems
         public bool inflictsCharm;
         public bool inflictsSlow;
         public bool inflictsFreeze;
+        public float inflictedStunDuration;
+        public float stunInflictChance;
         //Damage Scales
         public bool scalesWithCurse;
         public bool scalesWithCurrency;
@@ -1503,6 +2287,11 @@ namespace NevernamedsItems
         public bool hasOrbitalBullets;
         public bool hasShockRounds;
         public bool hasPlatScaling;
+        public bool slowsTime;
+        public bool blankTypeRandomised;
+        public EasyBlankType blankType;
+        public List<string> guidsToInstaKill;
+        public bool isBloodthirstyBullets;
         //Transmog
         public bool transmogsEnemies;
         public float chanceToTransmog;
@@ -1514,5 +2303,24 @@ namespace NevernamedsItems
         public bool scalesDamageWithPlayerProximity;
         public bool scaleProxClose;
         public bool scaleProxDistant;
+        //OnUsedActive stuff
+        public bool fireOnActiveItemUse;
+        public int activeItemIDToCheckFor;
+        //DoGoop
+        public bool doGoop;
+        public GoopDefinition goopDefToSpawn;
+        public bool doLineGoop;
+        public bool lineGoopLength;
+        public float goopRadiusOrWidth;
+        //RoomDMG
+        public float roomDMGAmount;
+        //Intersection Effect
+        public bool doesIntersectionEffect;
+        public bool explodeOnIntersection;
+        //SelectiveDamageUp
+        public bool dmgUpOnFlyingEnemies;
+
+        //Modded Projectiles
+        public bool usesGunOfAThousandSinsBullets;
     }
 }

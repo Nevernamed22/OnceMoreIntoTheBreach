@@ -8,53 +8,54 @@ using ItemAPI;
 
 namespace NevernamedsItems
 {
-    public class AntimatterBullets : IntersectEnemyBulletsItem
+    public class AntimatterBullets : PassiveItem
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Antimatter Bullets";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/antimatterbullets_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<AntimatterBullets>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Prime Antimaterial";
             string longDesc = "Your bullets have a chance to create an explosion upon intersecting with enemy bullets." + "\n\nWhy does't this trigger when you actually hit an enemy?... don't ask questions.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.A;
 
+            AntimatterBulletsID = item.PickupObjectId;
+
         }
+        public static int AntimatterBulletsID;
 
-        public static List<Projectile> NonValidProjectile = new List<Projectile>() { };
-
-        public override void DoIntersectionEffect(Projectile playerBullet, Projectile enemyBullet)
+        private void PostProcessProjectile(Projectile proj, float flot)
         {
-            if (!NonValidProjectile.Contains(enemyBullet))
+            AntimatterBulletsModifier mod = proj.gameObject.GetOrAddComponent<AntimatterBulletsModifier>();
+            mod.explosionData = smallPlayerSafeExplosion;
+        }
+        public override void Pickup(PlayerController player)
+        {
+            player.PostProcessProjectile += PostProcessProjectile;
+            base.Pickup(player);
+        }
+        public override DebrisObject Drop(PlayerController player)
+        {
+            player.PostProcessProjectile -= PostProcessProjectile;
+            return base.Drop(player);
+        }
+        protected override void OnDestroy()
+        {
+            if (Owner)
             {
-                DoSafeExplosion(enemyBullet.specRigidbody.UnitCenter);
-                NonValidProjectile.Add(enemyBullet);
+                Owner.PostProcessProjectile -= PostProcessProjectile;
             }
-            base.DoIntersectionEffect(playerBullet, enemyBullet);
+            base.OnDestroy();
         }
-        ExplosionData smallPlayerSafeExplosion = new ExplosionData()
+
+        public static ExplosionData smallPlayerSafeExplosion = new ExplosionData()
         {
+            effect = GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultSmallExplosionData.effect,
+            ss = GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultSmallExplosionData.ss,
+            ignoreList = GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultSmallExplosionData.ignoreList,
             damageRadius = 2.5f,
             damageToPlayer = 0f,
             doDamage = true,
@@ -68,14 +69,5 @@ namespace NevernamedsItems
             doScreenShake = true,
             playDefaultSFX = true,
         };
-        public void DoSafeExplosion(Vector3 position)
-        {
-            var defaultExplosion = GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultSmallExplosionData;
-            smallPlayerSafeExplosion.effect = defaultExplosion.effect;
-            smallPlayerSafeExplosion.ignoreList = defaultExplosion.ignoreList;
-            smallPlayerSafeExplosion.ss = defaultExplosion.ss;
-            Exploder.Explode(position, smallPlayerSafeExplosion, Vector2.zero);
-        }
     }
-
 }

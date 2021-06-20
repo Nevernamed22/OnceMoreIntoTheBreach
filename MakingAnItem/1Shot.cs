@@ -46,6 +46,8 @@ namespace NevernamedsItems
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ThrownGunDamage, 1, StatModifier.ModifyMethod.ADDITIVE);
 
             item.quality = PickupObject.ItemQuality.S;
+            OneShotID = item.PickupObjectId;
         }
+        public static int OneShotID;
     }
 }

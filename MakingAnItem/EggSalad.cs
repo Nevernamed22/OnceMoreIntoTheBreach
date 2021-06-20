@@ -138,7 +138,10 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D;
+
+            BashingBulletsID = item.PickupObjectId;
         }
+        public static int BashingBulletsID;
         public override void Pickup(PlayerController player)
         {
             base.Pickup(player);

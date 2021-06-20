@@ -47,7 +47,6 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
-            projectile.baseData.damage *= 1.4f;
 
             projectile.baseData.range *= 2f;
             projectile.transform.parent = gun.barrelOffset;

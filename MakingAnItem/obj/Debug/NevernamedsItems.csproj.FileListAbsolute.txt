@@ -41,3 +41,4 @@ C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\Nev
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\NevernamedsItems.csproj.CopyComplete
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\MakingAnItem.dll
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\MakingAnItem.pdb
+C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\UnityEngine.TextRenderingModule.dll

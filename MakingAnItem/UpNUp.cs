@@ -18,7 +18,7 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:up-n-up", "nn:up_n_up");
             gun.gameObject.AddComponent<UpNUp>();
             gun.SetShortDescription("Great Potential");
-            gun.SetLongDescription("Though this pistol on it's own is unremarkable, the damage of it's bullets is affected TWICE by any damage modifiers you recieve.");
+            gun.SetLongDescription("Though this pistol on it's own is unremarkable, the damage of it's bullets is affected TWICE by any bullet stat modifiers you recieve.");
 
             gun.SetupSprite(null, "upnup_idle_001", 8);
 
@@ -56,6 +56,10 @@ namespace NevernamedsItems
             base.PostProcessProjectile(projectile);
             PlayerController player = projectile.Owner as PlayerController;
             projectile.baseData.damage *= player.stats.GetStatValue(PlayerStats.StatType.Damage);
+            projectile.baseData.speed *= player.stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed);
+            projectile.baseData.force *= player.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
+            projectile.BossDamageMultiplier *= player.stats.GetStatValue(PlayerStats.StatType.DamageToBosses);
+            projectile.UpdateSpeed();
         }
         public UpNUp()
         {

@@ -63,7 +63,7 @@ namespace NevernamedsItems
             gun.reloadTime = 2f;
             gun.muzzleFlashEffects.type = VFXPoolType.None;
             gun.barrelOffset.transform.localPosition = new Vector3(3.12f, 0.93f, 0f);
-            gun.SetBaseMaxAmmo(200);
+            gun.SetBaseMaxAmmo(80);
 
             //BULLET STATS
 

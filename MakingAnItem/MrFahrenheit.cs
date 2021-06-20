@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections;
 using UnityEngine;
 using ItemAPI;
+using Gungeon;
 
 namespace NevernamedsItems
 {
@@ -57,37 +58,42 @@ namespace NevernamedsItems
                 MrFahrenheit.goopDefs.Add(goopDefinition);
             }
             List<GoopDefinition> list = MrFahrenheit.goopDefs;
+
+            Game.Items.Rename("nn:mr._fahrenheit", "nn:mr_fahrenheit");
         }
         private int currentItems, lastItems;
 
         protected override void Update()
         {
-            if (Owner && !Owner.IsDodgeRolling)
+            if (Owner)
             {
-                if (Owner.HasPickupID(Gungeon.Game.Items["nn:supersonic_shots"].PickupObjectId))
+                if (!Owner.IsDodgeRolling && Challenges.CurrentChallenge != ChallengeType.KEEP_IT_COOL)
                 {
-                    GoopDefinition GreenFireDef = (PickupObjectDatabase.GetById(698) as Gun).DefaultModule.projectiles[0].GetComponent<GoopModifier>().goopDefinition;
-                    var ddgm = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(GreenFireDef);
-                    ddgm.AddGoopCircle(Owner.sprite.WorldBottomCenter, 1);
+                    if (Owner.HasPickupID(Gungeon.Game.Items["nn:supersonic_shots"].PickupObjectId))
+                    {
+                        GoopDefinition GreenFireDef = (PickupObjectDatabase.GetById(698) as Gun).DefaultModule.projectiles[0].GetComponent<GoopModifier>().goopDefinition;
+                        var ddgm = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(GreenFireDef);
+                        ddgm.AddGoopCircle(Owner.sprite.WorldBottomCenter, 1);
+                    }
+                    else
+                    {
+                        var ddgm = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(MrFahrenheit.goopDefs[0]);
+                        ddgm.AddGoopCircle(Owner.sprite.WorldBottomCenter, 1);
+                    }
                 }
-                else
+                currentItems = Owner.passiveItems.Count;
+                if (currentItems != lastItems)
                 {
-                    var ddgm = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(MrFahrenheit.goopDefs[0]);
-                    ddgm.AddGoopCircle(Owner.sprite.WorldBottomCenter, 1);
+                    if (Owner.HasPickupID(Gungeon.Game.Items["nn:supersonic_shots"].PickupObjectId))
+                    {
+                        handleSpeeds(true);
+                    }
+                    else
+                    {
+                        handleSpeeds(false);
+                    }
+                    lastItems = currentItems;
                 }
-            }
-            currentItems = Owner.passiveItems.Count;
-            if (currentItems != lastItems)
-            {
-                if (Owner.HasPickupID(Gungeon.Game.Items["nn:supersonic_shots"].PickupObjectId))
-                {
-                    handleSpeeds(true);
-                }
-                else
-                {
-                    handleSpeeds(false);
-                }
-                lastItems = currentItems;
             }
         }
         private void handleSpeeds(bool IncreasedSpeed)

@@ -7,29 +7,9 @@ using Gungeon;
 
 namespace NevernamedsItems
 {
-    public class AdvancedDragunRewards : ETGModule
+    public class AdvancedDragunRewards
     {
-        public override void Exit()
-        {
-        }
-        public override void Start()
-        {
-        }
-        public override void Init()
-        {
-            ETGMod.AIActor.OnPreStart += this.AIActorMods;
-        }
-        private void AIActorMods(AIActor enemy)
-        {
-            if (enemy != null && enemy.aiActor != null)
-            {
-                if (enemy.aiActor.EnemyGuid == "05b8afe0b6cc4fffa9dc6036fa24c8ec")
-                {
-                    enemy.healthHaver.OnDeath += this.handleDragunRewards;
-                }
-            }
-        }
-        private void handleDragunRewards(Vector2 direction)
+        public static void handleDragunRewards()
         {
             PlayerController player = GameManager.Instance.PrimaryPlayer;
             Chest Black_Chest = GameManager.Instance.RewardManager.S_Chest;

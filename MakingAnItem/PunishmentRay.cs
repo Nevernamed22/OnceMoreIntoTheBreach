@@ -124,7 +124,7 @@ namespace NevernamedsItems
             {
                 if (HitStreak > 0)
                 {
-                    TextBubble.DoAmbientTalk(this.gun.CurrentOwner.transform, new Vector3(1, 2, 0), "STREAK LOST", 4f);
+                    VFXToolbox.DoStringSquirt("STREAK LOST", this.gun.CurrentOwner.transform.position, Color.red);
                 }
                 int damageThreshold = 10;
                 if ((this.gun.CurrentOwner as PlayerController).PlayerHasActiveSynergy("Spare The Rod")) damageThreshold = 20;

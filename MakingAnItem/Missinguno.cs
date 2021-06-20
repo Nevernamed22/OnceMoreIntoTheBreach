@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -43,6 +44,9 @@ namespace NevernamedsItems
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             MissingunoID = gun.PickupObjectId;
+
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.UNLOCKED_MISSINGUNO, true);
+
         }
         public static int MissingunoID;
 

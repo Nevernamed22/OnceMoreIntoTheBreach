@@ -17,7 +17,7 @@ namespace NevernamedsItems
 
         public static void Add()
         {
-            Gun gun = ETGMod.Databases.Items.NewGun("Gunycomb", "antimaterielrifle");
+            Gun gun = ETGMod.Databases.Items.NewGun("Gunycomb", "gunycomb");
             Game.Items.Rename("outdated_gun_mods:gunycomb", "nn:gunycomb");
             gun.gameObject.AddComponent<Gunycomb>();
             gun.SetShortDescription("Shreddin' Vapours");
