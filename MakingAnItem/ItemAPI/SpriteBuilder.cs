@@ -131,7 +131,7 @@ namespace ItemAPI
 			}
 			tk2dSpriteAnimationClip tk2dSpriteAnimationClip = new tk2dSpriteAnimationClip();
 			tk2dSpriteAnimationClip.name = clipName;
-			tk2dSpriteAnimationClip.fps = 15f;
+			tk2dSpriteAnimationClip.fps = 15;
 			tk2dSpriteAnimationClip.wrapMode = wrapMode;
 			Array.Resize<tk2dSpriteAnimationClip>(ref animator.Library.clips, animator.Library.clips.Length + 1);
 			animator.Library.clips[animator.Library.clips.Length - 1] = tk2dSpriteAnimationClip;

@@ -91,6 +91,13 @@ namespace NevernamedsItems
             DiscworldSynergy.SynergyGunId = GonneElder.ElderGonneId;
             DiscworldSynergy.SynergyToCheck = "Discworld";
             #endregion
+            #region ShadowsAndSorcery
+            //UTERINE POLYP --- WOMBULAR
+            AdvancedTransformGunSynergyProcessor WombularPolypForme = (PickupObjectDatabase.GetById(UterinePolyp.UterinePolypID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
+            WombularPolypForme.NonSynergyGunId = UterinePolyp.UterinePolypID;
+            WombularPolypForme.SynergyGunId = UterinePolypWombular.WombularPolypID;
+            WombularPolypForme.SynergyToCheck = "Wombular";
+            #endregion
             //-------------------------------------------------------------DUAL WIELDING
             #region Dual Wielding
             //STUN GUN & TRANQ GUN
@@ -114,6 +121,13 @@ namespace NevernamedsItems
             AdvancedDualWieldSynergyProcessor BooklletLorebookDualBOOK = (PickupObjectDatabase.GetById(Bookllet.BooklletID) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
             BooklletLorebookDualBOOK.PartnerGunID = Lorebook.LorebookID;
             BooklletLorebookDualBOOK.SynergyNameToCheck = "Librarian";
+            //WELROD & WELGUN
+            AdvancedDualWieldSynergyProcessor WelWelDualROD = (PickupObjectDatabase.GetById(Welrod.WelrodID) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
+            WelWelDualROD.PartnerGunID = Welgun.WelgunID;
+            WelWelDualROD.SynergyNameToCheck = "Wel Wel Wel";
+            AdvancedDualWieldSynergyProcessor WelWelDualGUN = (PickupObjectDatabase.GetById(Welgun.WelgunID) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
+            WelWelDualGUN.PartnerGunID = Welrod.WelrodID;
+            WelWelDualGUN.SynergyNameToCheck = "Wel Wel Wel";
             #endregion
         }
     }

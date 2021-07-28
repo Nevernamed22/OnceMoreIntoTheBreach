@@ -247,7 +247,7 @@ namespace ItemAPI
                 this.OnSwitchedAwayFromThisGun();
             }
         }
-
+        
         /// <summary>
         /// OnSwitchedToThisGun() when the player switches to this behaviour's affected gun.
         /// </summary>
@@ -430,15 +430,17 @@ namespace ItemAPI
         /// <param name="owner">The actor that picked up the gun.</param>
         protected virtual void OnPickup(GameActor owner)
         {
+            
             if (owner is PlayerController)
             {
                 this.OnPickedUpByPlayer(owner as PlayerController);
+                (owner as PlayerController).PostProcessBeam += this.CheckForPostProcessBeam;
             }
             if (owner is AIActor)
             {
                 this.OnPickedUpByEnemy(owner as AIActor);
             }
-        }
+        }       
 
         /// <summary>
         /// OnPostDrop() is called AFTER the owner drops the gun.
@@ -449,11 +451,27 @@ namespace ItemAPI
             if (owner is PlayerController)
             {
                 this.OnPostDroppedByPlayer(owner as PlayerController);
+                (owner as PlayerController).PostProcessBeam -= this.CheckForPostProcessBeam;
             }
             if (owner is AIActor)
             {
                 this.OnPostDroppedByEnemy(owner as AIActor);
             }
+        }
+
+        private void CheckForPostProcessBeam(BeamController beam)
+        {
+            if (beam && beam.projectile && beam.Owner is PlayerController)
+            {
+                if (beam.projectile.PossibleSourceGun && beam.projectile.PossibleSourceGun == this.gun)
+                {
+                    PostProcessBeam(beam);
+                }
+            }
+        }
+        protected virtual void PostProcessBeam(BeamController beam)
+        {
+
         }
 
         /// <summary>
@@ -572,8 +590,8 @@ namespace ItemAPI
         /// <summary>
         /// Returns the gun this behaviour is applied to.
         /// </summary>
-        protected Gun gun;
         private bool hasReloaded = true;
+        protected Gun gun;
         /// <summary>
         /// If true, prevents the gun's normal fire audio.
         /// </summary>

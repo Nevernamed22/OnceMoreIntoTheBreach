@@ -185,7 +185,6 @@ namespace NevernamedsItems
             EnemyGuidDatabase.Entries["mountain_cube"],
             EnemyGuidDatabase.Entries["lead_cube"],
             EnemyGuidDatabase.Entries["flesh_cube"],
-            EnemyGuidDatabase.Entries["phaser_spider"],
             EnemyGuidDatabase.Entries["cubulon"],
             EnemyGuidDatabase.Entries["cubulead"],
         };

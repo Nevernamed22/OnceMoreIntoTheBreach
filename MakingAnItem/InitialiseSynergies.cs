@@ -1050,6 +1050,44 @@ namespace NevernamedsItems
             CustomSynergies.Add("Amethyst Weapon", mandatorySynergyItemsAmethystWeapon);
             #endregion
 
+            #region ShadowsAndSorcerySynergies
+            //Y BEAM / SHIT
+            List<string> mandatorySynergyItemsCenterfold = new List<string>() { "nn:y_beam" };
+            List<string> optionalSynergyItemsCenterfold = new List<string>() { "laser_sight", "origuni", "book_of_chest_anatomy" };
+            CustomSynergies.Add("Centerfold", mandatorySynergyItemsCenterfold, optionalSynergyItemsCenterfold);
+            //WELROD / WELGUN
+            List<string> mandatorySynergyItemsWelWelWel = new List<string>() { "nn:welrod", "nn:welgun" };
+            CustomSynergies.Add("Wel Wel Wel", mandatorySynergyItemsWelWelWel);
+            //ACCELERATOR / ACCELERANT
+            List<string> mandatorySynergyItemsAccelent = new List<string>() { "nn:accelerant", "nn:accelerator" };
+            CustomSynergies.Add("Accelent", mandatorySynergyItemsAccelent);
+            //SHOULDER HOLSTER / HIP HOLSTER
+            List<string> mandatorySynergyItemsHeadsShouldersKneesAndToes = new List<string>() { "nn:shoulder_holster", "hip_holster" };
+            CustomSynergies.Add("Heads, Shoulders, Knees, and Toes", mandatorySynergyItemsHeadsShouldersKneesAndToes);
+            //UTERINE POLYP / GROSS ITEMS
+            List<string> mandatorySynergyItemsWombular = new List<string>() { "nn:uterine_polyp" };
+            List<string> optionalSynergyItemsWombular = new List<string>() { "nn:orgun", "tear_jerker", "mutation" };
+            CustomSynergies.Add("Wombular", mandatorySynergyItemsWombular, optionalSynergyItemsWombular);
+            //WITHERING CHAMBER / SEVEN LEAF CLOVER
+            List<string> mandatorySynergyItemsChamrock = new List<string>() { "nn:withering_chamber" };
+            List<string> optionalSynergyItemsChamrock = new List<string>() { "seven_leaf_clover" };
+            CustomSynergies.Add("Chamrock", mandatorySynergyItemsChamrock, optionalSynergyItemsChamrock);
+            //RC360 / AIMBOT
+            List<string> mandatorySynergyItemsICallHacks = new List<string>() { "nn:rc_360", "nn:aimbot" };
+            CustomSynergies.Add("I Call Hacks", mandatorySynergyItemsICallHacks);
+            //NECROMANCERS RIGHT HAND / THE SPRINTING DEAD
+            List<string> mandatorySynergyItemsTheSprintingDead = new List<string>() { "nn:necromancers_right_hand" };
+            List<string> optionalSynergyItemsTheSprintingDead = new List<string>() { "ballistic_boots", "nn:speed_potion", "shotga_cola", "shotgun_coffee" };
+            CustomSynergies.Add("The Sprinting Dead", mandatorySynergyItemsTheSprintingDead, optionalSynergyItemsTheSprintingDead);
+            //NECROMANCERS RIGHT HAND / SKELETON ITEMS
+            List<string> mandatorySynergyItemsRollDemBones = new List<string>() { "nn:necromancers_right_hand" };
+            List<string> optionalSynergyItemsRollDemBones = new List<string>() { "nn:grim_blanks", "shellegun", "vertebraek47", "skull_spitter" };
+            CustomSynergies.Add("Roll Dem Bones", mandatorySynergyItemsRollDemBones, optionalSynergyItemsRollDemBones);
+            //ALBEDO / SPEED
+            List<string> mandatorySynergyItemsWhiteEthesia = new List<string>() { "nn:albedo" };
+            List<string> optionalSynergyItemsWhiteEthesia = new List<string>() { "nn:speed_potion", "potion_of_gun_friendship" };
+            CustomSynergies.Add("White Ethesia", mandatorySynergyItemsWhiteEthesia, optionalSynergyItemsWhiteEthesia);
+            #endregion
         }
 
     }

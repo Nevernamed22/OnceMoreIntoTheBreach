@@ -11,6 +11,13 @@ namespace NevernamedsItems
 {
     static class OMITBBulletExtensions
     {
+        public static float ReturnRealDamageWithModifiers(this Projectile bullet, HealthHaver target)
+        {
+            float dmg = bullet.baseData.damage;
+            if (target.IsBoss) dmg *= bullet.BossDamageMultiplier;
+            if (target.aiActor && target.aiActor.IsBlackPhantom) dmg *= bullet.BlackPhantomDamageMultiplier;
+            return dmg;
+        }
         public static PlayerController ProjectilePlayerOwner(this Projectile bullet)
         {
             if (bullet && bullet.Owner && bullet.Owner is PlayerController) return bullet.Owner as PlayerController;
@@ -172,6 +179,8 @@ namespace NevernamedsItems
             GameObject prefab = FakePrefab.Clone(proj.gameObject);
             if (overrideproj != null) prefab = FakePrefab.Clone(overrideproj.gameObject);
             Projectile prefabproj = prefab.GetComponent<Projectile>();
+            prefabproj.Owner = proj.Owner;
+            prefabproj.Shooter = proj.Shooter;
             Vector3 position = proj.transform.position;
             float rotation = proj.Direction.ToAngle();
             bool isInitialProjectile = true;
@@ -218,6 +227,7 @@ namespace NevernamedsItems
             component2.baseData.speed = obj.baseData.speed;
             component2.baseData.force = obj.baseData.force;
             component2.RuntimeUpdateScale(chainScaleMult);
+            component2.UpdateSpeed();
             return component2;
         }
     }

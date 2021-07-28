@@ -293,6 +293,14 @@ namespace NevernamedsItems
                     //else ETGModConsole.Log("Item was not a greg.");
                 }
             }
+            protected override void OnDestroy()
+            {
+                if (Owner)
+                {
+                    Owner.OnRoomClearEvent += OnRoomClear;
+                }
+                base.OnDestroy();
+            }
             public override void Update()
             {
                 if (base.healthHaver && ConnectedItem)

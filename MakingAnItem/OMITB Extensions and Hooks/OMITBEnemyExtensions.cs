@@ -11,6 +11,86 @@ namespace NevernamedsItems
 {
     static class OMITBEnemyExtensions
     {
+        public static AIActor AdvancedTransmogrify(this AIActor startEnemy, AIActor EnemyPrefab, GameObject EffectVFX, string audioEvent = "Play_ENM_wizardred_appear_01", bool ignoreAlreadyTransmogged = false, bool canTransmogMimics = false, bool defuseExplosives = true, bool carryOverRewards = false, bool maintainHealthPercent = false, bool maintainsJammedState = false, bool giveIsTransmogrifiedBool = true)
+        {
+            if (startEnemy == null) { Debug.LogError("Tried to transmog a null enemy!"); return null; }
+            if (EnemyPrefab == null) { Debug.LogError("Tried to transmog to a null prefab!"); return startEnemy; }
+            if (startEnemy.ActorName == EnemyPrefab.ActorName) return startEnemy;
+            if (ignoreAlreadyTransmogged && startEnemy.IsTransmogrified) return startEnemy;
+            if (!startEnemy.healthHaver || startEnemy.healthHaver.IsBoss || startEnemy.ParentRoom == null) return startEnemy;
+
+            Vector2 centerPosition = startEnemy.CenterPosition;
+            if (EffectVFX != null)
+            {
+                SpawnManager.SpawnVFX(EffectVFX, centerPosition, Quaternion.identity);
+            }
+
+            AIActor aiactor = AIActor.Spawn(EnemyPrefab, centerPosition.ToIntVector2(VectorConversions.Floor), startEnemy.ParentRoom, true, AIActor.AwakenAnimationType.Default, true);
+            if (aiactor)
+            {
+               if (giveIsTransmogrifiedBool) aiactor.IsTransmogrified = true;
+               
+                if (maintainHealthPercent)
+                {
+                    float healthPercent = startEnemy.healthHaver.GetCurrentHealthPercentage();
+                    //ETGModConsole.Log("HP Percent: " + healthPercent);
+                    float aiactorHP = aiactor.healthHaver.GetMaxHealth();
+                    float resultHP = aiactorHP * healthPercent;
+                    aiactor.healthHaver.ForceSetCurrentHealth(resultHP);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(audioEvent)) AkSoundEngine.PostEvent(audioEvent, startEnemy.gameObject);
+
+            if (maintainsJammedState)
+            {
+                if (startEnemy.IsBlackPhantom && !aiactor.IsBlackPhantom) aiactor.BecomeBlackPhantom();
+                if (!startEnemy.IsBlackPhantom && aiactor.IsBlackPhantom) aiactor.UnbecomeBlackPhantom();
+            }
+
+            if (defuseExplosives && startEnemy.GetComponent<ExplodeOnDeath>() != null)
+            {
+                UnityEngine.Object.Destroy(startEnemy.GetComponent<ExplodeOnDeath>());
+            }
+
+            if (carryOverRewards && aiactor)
+            {
+                aiactor.CanDropCurrency = startEnemy.CanDropCurrency;
+                aiactor.AssignedCurrencyToDrop = startEnemy.AssignedCurrencyToDrop;
+                aiactor.AdditionalSafeItemDrops = startEnemy.AdditionalSafeItemDrops;
+                aiactor.AdditionalSimpleItemDrops = startEnemy.AdditionalSimpleItemDrops;
+                aiactor.AdditionalSingleCoinDropChance = startEnemy.AdditionalSingleCoinDropChance;
+                aiactor.CanDropDuplicateItems = startEnemy.CanDropDuplicateItems;
+                aiactor.CanDropItems = startEnemy.CanDropItems;
+                aiactor.ChanceToDropCustomChest = startEnemy.ChanceToDropCustomChest;
+                aiactor.CustomLootTableMaxDrops = startEnemy.CustomLootTableMaxDrops;
+                aiactor.CustomLootTableMinDrops = startEnemy.CustomLootTableMinDrops;
+                aiactor.CustomLootTable = startEnemy.CustomLootTable;
+                aiactor.SpawnLootAtRewardChestPos = startEnemy.SpawnLootAtRewardChestPos;
+                if (startEnemy.GetComponent<KeyBulletManController>())
+                {
+                    KeyBulletManController controller = startEnemy.GetComponent<KeyBulletManController>();
+                    int numberOfIterations = 1;
+                    if (startEnemy.IsBlackPhantom && controller.doubleForBlackPhantom) numberOfIterations++;
+                    for (int i = 0; i < numberOfIterations; i++)
+                    {
+                        GameObject objToAdd = null;
+                        if (controller.lootTable) objToAdd = controller.lootTable.SelectByWeight(false);
+                        else if (controller.lookPickupId > -1) objToAdd = PickupObjectDatabase.GetById(controller.lookPickupId).gameObject;
+                        if (objToAdd != null)
+                        {
+                            aiactor.AdditionalSafeItemDrops.Add(objToAdd.GetComponent<PickupObject>());
+                        }
+                    }
+                }
+                startEnemy.EraseFromExistence(false);
+            }
+            else
+            {
+                startEnemy.EraseFromExistenceWithRewards(false);
+            }
+            return aiactor;
+        }
         public static bool IsSecretlyTheMineFlayer(this AIActor target)
         {
             if (target)
@@ -215,5 +295,5 @@ namespace NevernamedsItems
             }
         }
     }
-    
+
 }

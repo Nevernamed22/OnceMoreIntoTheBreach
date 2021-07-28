@@ -66,16 +66,19 @@ namespace NevernamedsItems
         }
         private void Suicide()
         {
-            if (forceExplode) Exploder.DoDefaultExplosion(self.specRigidbody.UnitCenter, Vector2.zero);
-            if (eraseInsteadOfKill)
+            if (self & self.healthHaver && self.healthHaver.IsAlive)
             {
-                self.EraseFromExistenceWithRewards();
-            }
-            else
-            {
-                if (self.healthHaver)
+                if (forceExplode) Exploder.DoDefaultExplosion(self.specRigidbody.UnitCenter, Vector2.zero);
+                if (eraseInsteadOfKill)
                 {
-                    self.healthHaver.ApplyDamage(float.MaxValue, Vector2.zero, "Erasure");
+                    self.EraseFromExistenceWithRewards();
+                }
+                else
+                {
+                    if (self.healthHaver)
+                    {
+                        self.healthHaver.ApplyDamage(float.MaxValue, Vector2.zero, "Erasure");
+                    }
                 }
             }
         }

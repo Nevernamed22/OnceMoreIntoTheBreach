@@ -1923,8 +1923,8 @@ namespace NevernamedsItems
                 //Transmogs
                 if (transmogsEnemies)
                 {
-                    EasyTransmogrifyComponent transmog = component.gameObject.GetOrAddComponent<EasyTransmogrifyComponent>();
-                    EasyTransmogrifyComponent.TransmogData data = new EasyTransmogrifyComponent.TransmogData()
+                    AdvancedTransmogrifyComponent transmog = component.gameObject.GetOrAddComponent<AdvancedTransmogrifyComponent>();
+                    AdvancedTransmogrifyComponent.TransmogData data = new AdvancedTransmogrifyComponent.TransmogData()
                     {
                         TargetGuid = this.transmogTargetGuid,
                         identifier = "LeadOfLife Transmog",

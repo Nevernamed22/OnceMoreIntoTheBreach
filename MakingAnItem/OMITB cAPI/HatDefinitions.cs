@@ -56,6 +56,24 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(numberOneObj);
             UnityEngine.Object.DontDestroyOnLoad(numberOneObj);
             HatUtility.AddHatToDatabase(numberOneObj);
+
+            //THE STOVEPIPE
+            string stovepipeName = "The Stovepipe";
+            GameObject stovepipeObj = new GameObject(stovepipeName);
+            Hat stovepipe = stovepipeObj.AddComponent<Hat>();
+            stovepipe.hatName = stovepipeName;
+            stovepipe.hatDirectionality = Hat.HatDirectionality.NONE;
+            stovepipe.hatRollReaction = Hat.HatRollReaction.FLIP;
+            stovepipe.hatOffset = new Vector2(0, -0.12f);
+            List<string> stovepipeSprites = new List<string>()
+            {
+                "NevernamedsItems/Resources/Hats/thestovepipe_south_001",
+            };
+            HatUtility.SetupHatSprites(stovepipeSprites, stovepipeObj, 1, new Vector2(14, 12));
+            stovepipeObj.SetActive(false);
+            FakePrefab.MarkAsFakePrefab(stovepipeObj);
+            UnityEngine.Object.DontDestroyOnLoad(stovepipeObj);
+            HatUtility.AddHatToDatabase(stovepipeObj);
         }
     }
 }

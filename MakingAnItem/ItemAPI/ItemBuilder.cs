@@ -14,7 +14,23 @@ namespace ItemAPI
 {
     public static class ItemBuilder
     {
-
+       /* /// <summary>
+        /// Adds a tk2dSpriteAnimator component to an object and adds that sprite to the 
+        /// </summary>
+        public static GameObject AddAnimatedSpriteToObject(string name, List<string> resourcePaths, GameObject obj = null)
+        {
+            GameObject spriteObject = SpriteBuilder.SpriteFromResource(resourcePaths[0], obj);
+            tk2dSpriteAnimator spriteAnimator = obj.AddComponent<tk2dSpriteAnimator>();
+            var idList = new List<int>();
+            foreach (string sprite in resourcePaths)
+            {
+                idList.Add(SpriteBuilder.AddSpriteToCollection(sprite, spriteObject.GetComponent<tk2dSprite>().Collection));
+            }
+            spriteAnimator.playAutomatically = true;
+            SpriteBuilder.AddAnimation(spriteAnimator, spriteObject.GetComponent<tk2dSprite>().Collection, idList, name + "_idle", tk2dSpriteAnimationClip.WrapMode.Loop, fps);
+            spriteObject.name = name;
+            return spriteObject;
+        }*/
         public enum CooldownType
         {
             Timed, Damage, PerRoom, None

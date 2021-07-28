@@ -23,6 +23,7 @@ namespace NevernamedsItems
             hatRollReaction = HatRollReaction.FLIP;
             hatDirectionality = HatDirectionality.NONE;
             attachLevel = HatAttachLevel.HEAD_TOP;
+            hatDepthType = HatDepthType.AlwaysInFront;
         }
 
         //PUBLIC VARIABLES
@@ -36,9 +37,10 @@ namespace NevernamedsItems
         public float flipHeightMultiplier;
         public bool backDiagonalUseNorth;
         public bool frontDiagonalUseLeftRight;
+        public HatDepthType hatDepthType;
 
         //PRIVATE VARIABLES
-        private FieldInfo commandedField, lastNonZeroField;
+        private FieldInfo commandedField, lastNonZeroField, lockedDodgeRollDirection, m_currentGunAngle;
         private HatDirection currentDirection;
         private tk2dSprite hatSprite;
         private tk2dSpriteAnimator hatSpriteAnimator;
@@ -55,6 +57,8 @@ namespace NevernamedsItems
             hatSpriteAnimator = base.GetComponent<tk2dSpriteAnimator>();
             commandedField = typeof(PlayerController).GetField("m_playerCommandedDirection", BindingFlags.NonPublic | BindingFlags.Instance);
             lastNonZeroField = typeof(PlayerController).GetField("m_lastNonzeroCommandedDirection", BindingFlags.NonPublic | BindingFlags.Instance);
+            lockedDodgeRollDirection = typeof(PlayerController).GetField("lockedDodgeRollDirection", BindingFlags.NonPublic | BindingFlags.Instance);
+            m_currentGunAngle = typeof(PlayerController).GetField("m_currentGunAngle", BindingFlags.NonPublic | BindingFlags.Instance);
             if (hatOwner != null)
             {
                 GameObject playerSprite = hatOwner.transform.Find("PlayerSprite").gameObject;
@@ -90,9 +94,12 @@ namespace NevernamedsItems
                 HatDirection checkedDir = FetchOwnerFacingDirection();
                 if (checkedDir != currentDirection) UpdateHatFacingDirection(checkedDir);
 
-                //Do da flippy
-                HandleFlip();
+                HandleAttachedSpriteDepth(m_currentGunAngle.GetTypedValue<float>(hatOwner));
             }
+        }
+        private void FixedUpdate()
+        {
+            HandleFlip();
         }
         private void UpdateOffsetForGunHandedness()
         {
@@ -317,6 +324,52 @@ namespace NevernamedsItems
             player.sprite.AttachRenderer(gameObject.GetComponent<tk2dBaseSprite>());
             currentState = HatState.SITTING;
         }
+        private void HandleAttachedSpriteDepth(float gunAngle)
+        {
+            if (hatDepthType == HatDepthType.BehindWhenFacingBack || hatDepthType == HatDepthType.InFrontWhenFacingBack)
+            {
+                float num = 1f;
+                if (hatOwner.CurrentGun is null)
+                {
+                    Vector2 m_playerCommandedDirection = commandedField.GetTypedValue<Vector2>(hatOwner);
+                    Vector2 m_lastNonzeroCommandedDirection = lastNonZeroField.GetTypedValue<Vector2>(hatOwner);
+                    gunAngle = BraveMathCollege.Atan2Degrees((!(m_playerCommandedDirection == Vector2.zero)) ? m_playerCommandedDirection : m_lastNonzeroCommandedDirection);
+                }
+                float num2;
+                if (gunAngle <= 155f && gunAngle >= 25f)
+                {
+                    num = -1f;
+                    if (gunAngle < 120f && gunAngle >= 60f)
+                    {
+                        num2 = 0.15f;
+                    }
+                    else
+                    {
+                        num2 = 0.15f;
+                    }
+                }
+                else if (gunAngle <= -60f && gunAngle >= -120f)
+                {
+                    num2 = -0.15f;
+                }
+                else
+                {
+                    num2 = -0.15f;
+                }
+
+                if (hatDepthType == HatDepthType.BehindWhenFacingBack)
+                    hatSprite.HeightOffGround = num2 + num * 1;
+                else
+                    hatSprite.HeightOffGround = num2 + num * -1;
+            }
+            else
+            {
+                if (hatDepthType == HatDepthType.AlwaysInFront)
+                    hatSprite.HeightOffGround = 0.6f;
+                else
+                    hatSprite.HeightOffGround = -0.6f;
+            }
+        }
         private IEnumerator FlipHatIENum()
         {
             RollLength = hatOwner.rollStats.GetModifiedTime(hatOwner);
@@ -343,8 +396,8 @@ namespace NevernamedsItems
                             else
                             {
                                 if (hatOwnerAnimator.CurrentClip == null || !hatOwnerAnimator.CurrentClip.name.StartsWith("dodge"))
-                                { 
-                                    Debug.LogError("hatOwnerAnimator.CurrentClip is NULL! (or the current anim isnt a roll)"); 
+                                {
+                                    Debug.LogError("hatOwnerAnimator.CurrentClip is NULL! (or the current anim isnt a roll)");
                                 }
                                 else
                                 {
@@ -414,6 +467,13 @@ namespace NevernamedsItems
         {
             SITTING,
             FLIPPING,
+        }
+        public enum HatDepthType
+        {
+            AlwaysInFront,
+            AlwaysBehind,
+            BehindWhenFacingBack,
+            InFrontWhenFacingBack
         }
     }
 }

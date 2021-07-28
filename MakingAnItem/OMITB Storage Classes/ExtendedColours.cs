@@ -9,6 +9,7 @@ namespace NevernamedsItems
     public class ExtendedColours
     {
         //New Colours
+        public static Color carrionRed = new Color(176 / 255f, 4f / 255f, 4f / 255f);
         public static Color pink = new Color(242f / 255f, 116f / 255f, 225f / 255f);
         public static Color paleYellow = new Color(242f / 255f, 238f / 255f, 148f / 255f);
         public static Color lime = new Color(111f / 255f, 252f / 255f, 3f / 255f);

@@ -241,7 +241,7 @@ namespace NevernamedsItems
                         goto Block_4;
                     }
                 }
-                return;
+                //return;
             Block_4:
                 Debug.LogError("FREEZE AVERTED!  TELL RUBEL!  (you're welcome) 147");
                 return;

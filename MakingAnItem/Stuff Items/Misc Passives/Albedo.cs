@@ -1,0 +1,139 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using UnityEngine;
+using ItemAPI;
+
+namespace NevernamedsItems
+{
+    public class Albedo : PassiveItem
+    {
+        public static void Init()
+        {
+            string itemName = "Albedo";
+            string resourceName = "NevernamedsItems/Resources/albedo_icon";
+            GameObject obj = new GameObject(itemName);
+            var item = obj.AddComponent<Albedo>();
+            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
+            string shortDesc = "Clarity";
+            string longDesc = "";
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            item.quality = PickupObject.ItemQuality.C;
+            item.AddToSubShop(ItemBuilder.ShopType.Goopton);
+        }
+        private float lastOrbitals;
+        private bool hadSynergyLastChecked;
+        protected override void Update()
+        {
+            base.Update();
+            if (Owner && Owner.orbitals.Count > 0)
+            {
+                float currentOrbitals = Owner.orbitals.Count();
+                if (currentOrbitals != lastOrbitals)
+                {
+                    UpdateOrbitals();
+                    lastOrbitals = currentOrbitals;
+                }
+                if (hadSynergyLastChecked != Owner.PlayerHasActiveSynergy("White Ethesia"))
+                {
+                    UpdateOrbitals();
+                    hadSynergyLastChecked = Owner.PlayerHasActiveSynergy("White Ethesia");
+                }
+            }
+        }
+        private void UpdateOrbitals()
+        {
+            foreach (var o in Owner.orbitals)
+            {
+                var orbital = (PlayerOrbital)o;
+                if (orbital.name == "IounStone_Glass(Clone)")
+                {
+                    if (orbital.gameObject.GetComponent<BoostedByAlbedo>() == null)
+                    {
+                        int mult = 2;
+                        if (Owner.PlayerHasActiveSynergy("White Ethesia")) mult = 3;
+                        BoostedByAlbedo boost = orbital.gameObject.AddComponent<BoostedByAlbedo>();
+                        boost.currentMultiplier = mult;
+                        boost.storedOrbitalTier = orbital.GetOrbitalTier();
+                        orbital.orbitDegreesPerSecond *= mult;
+                        orbital.SetOrbitalTier(1010);
+                        orbital.SetOrbitalTierIndex(PlayerOrbital.GetNumberOfOrbitalsInTier(Owner, 1010));
+                    }
+                    else if (orbital.gameObject.GetComponent<BoostedByAlbedo>().currentMultiplier == 2 && Owner.PlayerHasActiveSynergy("White Ethesia"))
+                    {
+                        orbital.orbitDegreesPerSecond /= 2;
+                        orbital.orbitDegreesPerSecond *= 3;
+                        orbital.SetOrbitalTier(1010);
+                        orbital.SetOrbitalTierIndex(PlayerOrbital.GetNumberOfOrbitalsInTier(Owner, 1010));
+                    }
+                    else if (orbital.gameObject.GetComponent<BoostedByAlbedo>().currentMultiplier == 3 && !Owner.PlayerHasActiveSynergy("White Ethesia"))
+                    {
+                        orbital.orbitDegreesPerSecond /= 3;
+                        orbital.orbitDegreesPerSecond *= 2;
+                        orbital.SetOrbitalTier(1010);
+                        orbital.SetOrbitalTierIndex(PlayerOrbital.GetNumberOfOrbitalsInTier(Owner, 1010));
+                    }
+                }
+            }
+            RecalcOrbIndex();
+        }
+        private void ResetOrbitals(PlayerController player)
+        {
+            if (player.orbitals != null && player.orbitals.Count > 0)
+            {
+                foreach (var o in Owner.orbitals)
+                {
+                    var orbital = (PlayerOrbital)o;
+                    if (orbital.gameObject.GetComponent<BoostedByAlbedo>() != null)
+                    {
+                        orbital.orbitDegreesPerSecond /= orbital.gameObject.GetComponent<BoostedByAlbedo>().currentMultiplier;
+                        orbital.SetOrbitalTier(PlayerOrbital.CalculateTargetTier(player, o));
+                        orbital.SetOrbitalTierIndex(PlayerOrbital.GetNumberOfOrbitalsInTier(player, orbital.gameObject.GetComponent<BoostedByAlbedo>().storedOrbitalTier));
+                        UnityEngine.Object.Destroy(orbital.gameObject.GetComponent<BoostedByAlbedo>());
+                    }
+                }
+                RecalcOrbIndex();
+            }
+        }
+        private void RecalcOrbIndex()
+        {
+            int i = 0;
+            foreach (var o in Owner.orbitals)
+            {
+                var orbital = (PlayerOrbital)o;
+                orbital.SetOrbitalTier(PlayerOrbital.CalculateTargetTier(Owner, o));
+                orbital.SetOrbitalTierIndex(i);
+                i++;
+            }
+        }
+        public override void Pickup(PlayerController player)
+        {
+            if (!m_pickedUpThisRun)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    player.AcquirePassiveItemPrefabDirectly(PickupObjectDatabase.GetById(565) as PassiveItem);
+                }
+            }
+
+            base.Pickup(player);
+            UpdateOrbitals();
+        }
+        public override DebrisObject Drop(PlayerController player)
+        {
+            ResetOrbitals(player);
+            return base.Drop(player);
+        }
+        protected override void OnDestroy()
+        {
+            if (Owner)
+            {
+                ResetOrbitals(Owner);
+            }
+            base.OnDestroy();
+        }
+        class BoostedByAlbedo : MonoBehaviour { public int currentMultiplier; public int storedOrbitalTier; }
+    }
+}

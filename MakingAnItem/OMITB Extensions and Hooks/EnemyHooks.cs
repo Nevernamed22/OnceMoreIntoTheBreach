@@ -331,6 +331,13 @@ namespace NevernamedsItems
                     //SPECIFIC BOSS KILLING UNLOCKS
                     if (GameManager.Instance.Dungeon.tileIndices.tilesetId == GlobalDungeonData.ValidTilesets.FORGEGEON)
                     {
+                        if (player1.ModdedCharacterIdentity() == ModdedCharacterID.Shade)
+                        {
+                            if (!SaveAPIManager.GetFlag(CustomDungeonFlags.DRAGUN_BEATEN_SHADE))
+                            {
+                                SaveAPIManager.SetFlag(CustomDungeonFlags.DRAGUN_BEATEN_SHADE, true);
+                            }
+                        }
                         if (player1.HasPickupID(300) || (player2 && player2.HasPickupID(300))) //Dog
                         {
                             if (!SaveAPIManager.GetFlag(CustomDungeonFlags.KILLED_DRAGUN_WITH_DOG))

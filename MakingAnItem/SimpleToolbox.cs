@@ -12,7 +12,7 @@ namespace NevernamedsItems
 {
     public static class MiscToolbox
     {
-        
+
         public static void SpawnShield(PlayerController user, Vector3 location)
         {
             Gun gun = PickupObjectDatabase.GetById(380) as Gun;
@@ -29,23 +29,23 @@ namespace NevernamedsItems
             }
         }
 
-        
+
         public static RoomHandler GetAbsoluteRoomFromProjectile(Projectile bullet)
         {
             Vector2 bulletPosition = bullet.sprite.WorldCenter;
             IntVector2 bulletPositionIntVector2 = bulletPosition.ToIntVector2();
             return GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(bulletPositionIntVector2);
         }
-        
 
-        
+
+
         public static float Vector2ToDegree(Vector2 p_vector2)
         {
             if (p_vector2.x < 0) { return 360 - (Mathf.Atan2(p_vector2.x, p_vector2.y) * Mathf.Rad2Deg * -1); }
             else { return Mathf.Atan2(p_vector2.x, p_vector2.y) * Mathf.Rad2Deg; }
         }
         public static void ApplyFear(this AIActor enemy, PlayerController player, float fearLength, float fearStartDistance, float fearStopDistance)
-        {           
+        {
             EnemyFeared inflictedFear = enemy.gameObject.AddComponent<EnemyFeared>();
             inflictedFear.player = player;
             inflictedFear.fearLength = fearLength;
@@ -78,7 +78,7 @@ namespace NevernamedsItems
 
                 yield return new WaitForSeconds(fearLength);
 
-                this.enemy.behaviorSpeculator.FleePlayerData = null;              
+                this.enemy.behaviorSpeculator.FleePlayerData = null;
             }
         }
         public PlayerController player;
@@ -238,7 +238,7 @@ namespace NevernamedsItems
         {
             if (UnityEngine.Random.value <= procChance)
             {
-            if (enemy && enemy.aiActor)    enemy.aiActor.ApplyEffect(GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultPermanentCharmEffect, 1f, null);
+                if (enemy && enemy.aiActor) enemy.aiActor.ApplyEffect(GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultPermanentCharmEffect, 1f, null);
             }
         }
         private Projectile m_projectile;
@@ -360,14 +360,18 @@ namespace NevernamedsItems
         }
         private bool ShouldTeleport()
         {
-            Vector2 unitCenter = this.m_targetRigidbody.GetUnitCenter(ColliderType.HitBox);
-            if (this.trigger == PlayerProjectileTeleportModifier.TeleportTrigger.AngleToTarget)
+            if (m_targetRigidbody)
             {
-                float a = (unitCenter - base.specRigidbody.UnitCenter).ToAngle();
-                float b = base.specRigidbody.Velocity.ToAngle();
-                return BraveMathCollege.AbsAngleBetween(a, b) > this.minAngleToTeleport;
+                Vector2 unitCenter = this.m_targetRigidbody.GetUnitCenter(ColliderType.HitBox);
+                if (this.trigger == PlayerProjectileTeleportModifier.TeleportTrigger.AngleToTarget)
+                {
+                    float a = (unitCenter - base.specRigidbody.UnitCenter).ToAngle();
+                    float b = base.specRigidbody.Velocity.ToAngle();
+                    return BraveMathCollege.AbsAngleBetween(a, b) > this.minAngleToTeleport;
+                }
+                return this.trigger == PlayerProjectileTeleportModifier.TeleportTrigger.DistanceFromTarget && Vector2.Distance(unitCenter, base.specRigidbody.UnitCenter) < this.distToTeleport;
             }
-            return this.trigger == PlayerProjectileTeleportModifier.TeleportTrigger.DistanceFromTarget && Vector2.Distance(unitCenter, base.specRigidbody.UnitCenter) < this.distToTeleport;
+            return false;
         }
         private Vector2 GetTeleportPosition()
         {
@@ -555,7 +559,7 @@ namespace NevernamedsItems
             }
         }
     }
-    
+
     public class KeyBulletBehaviour : MonoBehaviour
     {
         public KeyBulletBehaviour()
@@ -853,7 +857,7 @@ namespace NevernamedsItems
         private PlayerController owner;
         public float procChance;
     }
-        public class ExtremelySimplePoisonBulletBehaviour : MonoBehaviour
+    public class ExtremelySimplePoisonBulletBehaviour : MonoBehaviour
     {
         public ExtremelySimplePoisonBulletBehaviour()
         {
@@ -1070,9 +1074,9 @@ namespace NevernamedsItems
                     placeConfigurable.ConfigureOnPlacement(GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(Vector2Position.ToIntVector2()));
                 }
             }
-           /* FlippableCover component7 = newObject.GetComponentInChildren<FlippableCover>();
-            component7.transform.position.XY().GetAbsoluteRoom().RegisterInteractable(component7);
-            component7.ConfigureOnPlacement(component7.transform.position.XY().GetAbsoluteRoom());*/
+            /* FlippableCover component7 = newObject.GetComponentInChildren<FlippableCover>();
+             component7.transform.position.XY().GetAbsoluteRoom().RegisterInteractable(component7);
+             component7.ConfigureOnPlacement(component7.transform.position.XY().GetAbsoluteRoom());*/
 
             ObjectSpecRigidBody.Initialize();
             PhysicsEngine.Instance.RegisterOverlappingGhostCollisionExceptions(ObjectSpecRigidBody, null, false);
@@ -1088,36 +1092,36 @@ namespace NevernamedsItems
             SpeculativeRigidbody rigidbody = portal.GetComponent<SpeculativeRigidbody>();
             if (rigidbody)
             {
-            bool flag = PhysicsEngine.Instance.OverlapCast(rigidbody, null, true, false, null, null, false, null, null, new SpeculativeRigidbody[0]);
-            if (flag)
-            {
-                Vector2 vector = portal.transform.position.XY();
-                IntVector2[] cardinalsAndOrdinals = IntVector2.CardinalsAndOrdinals;
-                int num = 0;
-                int num2 = 1;
-                for (; ; )
+                bool flag = PhysicsEngine.Instance.OverlapCast(rigidbody, null, true, false, null, null, false, null, null, new SpeculativeRigidbody[0]);
+                if (flag)
                 {
-                    for (int i = 0; i < cardinalsAndOrdinals.Length; i++)
+                    Vector2 vector = portal.transform.position.XY();
+                    IntVector2[] cardinalsAndOrdinals = IntVector2.CardinalsAndOrdinals;
+                    int num = 0;
+                    int num2 = 1;
+                    for (; ; )
                     {
-                        portal.transform.position = vector + PhysicsEngine.PixelToUnit(cardinalsAndOrdinals[i] * num2);
-                        rigidbody.Reinitialize();
-                        if (!PhysicsEngine.Instance.OverlapCast(rigidbody, null, true, false, null, null, false, null, null, new SpeculativeRigidbody[0]))
+                        for (int i = 0; i < cardinalsAndOrdinals.Length; i++)
                         {
-                            return;
+                            portal.transform.position = vector + PhysicsEngine.PixelToUnit(cardinalsAndOrdinals[i] * num2);
+                            rigidbody.Reinitialize();
+                            if (!PhysicsEngine.Instance.OverlapCast(rigidbody, null, true, false, null, null, false, null, null, new SpeculativeRigidbody[0]))
+                            {
+                                return;
+                            }
+                        }
+                        num2++;
+                        num++;
+                        if (num > 200)
+                        {
+                            goto Block_4;
                         }
                     }
-                    num2++;
-                    num++;
-                    if (num > 200)
-                    {
-                        goto Block_4;
-                    }
+                    //return;
+                Block_4:
+                    UnityEngine.Debug.LogError("FREEZE AVERTED!  TELL RUBEL!  (you're welcome) 147");
+                    return;
                 }
-                return;
-            Block_4:
-                UnityEngine.Debug.LogError("FREEZE AVERTED!  TELL RUBEL!  (you're welcome) 147");
-                return;
-            }
             }
         }
     }

@@ -301,7 +301,7 @@ namespace NevernamedsItems
             if (hatComponent != null)
             {
                 HatLibrary.Hats.Add(hatComponent.hatName, hatComponent);
-                ETGModConsole.Log("Hat '" + hatComponent.hatName + "' correctly added to Hatabase!", true);
+                Debug.Log("Hat '" + hatComponent.hatName + "' correctly added to Hatabase!");
             }
         }
     }

@@ -132,13 +132,13 @@ namespace NevernamedsItems
                     self.contents.Add(obj);
                 }
             }
-            orig(self, opener);
             if (jamness != null)
             {
                 SaveAPIManager.RegisterStatChange(CustomTrackedStats.JAMMED_CHESTS_OPENED, 1);
                 LootEngine.SpawnCurrency(self.sprite.WorldCenter, UnityEngine.Random.Range(10, 21), false);
                 if (UnityEngine.Random.value <= 0.25f && opener.name != "PlayerShade(Clone)") opener.healthHaver.ApplyDamage(1f, Vector2.zero, "Jammed Chest");
             }
+            orig(self, opener);
 
         }
         public static void OnBroken(Action<Chest> orig, Chest self)

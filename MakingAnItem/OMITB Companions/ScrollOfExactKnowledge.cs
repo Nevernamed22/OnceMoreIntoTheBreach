@@ -115,7 +115,7 @@ namespace NevernamedsItems
                     if (Owner.CurrentRoom != null && Owner.CurrentRoom != lastCheckedRoom)
                     {
                         OnRoomChanged(Owner.CurrentRoom);
-                        ETGModConsole.Log(Owner.CurrentRoom.GetRoomName());
+                        //ETGModConsole.Log(Owner.CurrentRoom.GetRoomName());
                         lastCheckedRoom = Owner.CurrentRoom;
                     }
                     if (Owner.PlayerHasActiveSynergy("Restoration") != hadRestorationLastChecked)
@@ -128,7 +128,7 @@ namespace NevernamedsItems
             private bool hadRestorationLastChecked;
             private void OnRoomChanged(RoomHandler room)
             {
-                ETGModConsole.Log("OnRoomChanged Ran");
+                //ETGModConsole.Log("OnRoomChanged Ran");
                 List<string> dialoguesToSay = new List<string>();
                 int previousStatements = 0;
               
@@ -138,7 +138,7 @@ namespace NevernamedsItems
                 {
                     if (chest.transform.position.GetAbsoluteRoom() == Owner.CurrentRoom && !chest.IsOpen && !chest.IsBroken)
                     {
-                        ETGModConsole.Log("Found a chest in the room");
+                        //ETGModConsole.Log("Found a chest in the room");
 
                         chestsInRoom.Add(chest);
                     }

@@ -52,6 +52,10 @@ namespace SaveAPI
         CHALLENGE_TOILANDTROUBLE_BEATEN,
         CHALLENGE_INVISIBLEO_BEATEN,
         CHALLENGE_KEEPITCOOL_BEATEN,
+        //Shade  Unlocks
+        DRAGUN_BEATEN_SHADE,
+        LICH_BEATEN_SHADE,
+        CHEATED_DEATH_SHADE,
         //---------------------------------------------Hunting Quests
         //Quest Completion
         MISFIREBEAST_QUEST_COMPLETE,

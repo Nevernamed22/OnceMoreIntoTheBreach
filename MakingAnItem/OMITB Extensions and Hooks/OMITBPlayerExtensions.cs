@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using Gungeon;
+using System.Collections;
 
 namespace NevernamedsItems
 {
@@ -146,6 +147,55 @@ namespace NevernamedsItems
             Vector2 normalized = (player.unadjustedAimPoint.XY() - vector).normalized;
             Vector2 final = player.CenterPosition + normalized * distance;
             return final;
+        }
+        public static void TriggerInvulnerableFrames(this PlayerController playa, float incorporealityTime)
+        {
+            StaticCoroutine.Start(IncorporealityOnHit(playa, incorporealityTime));
+        }
+        private static IEnumerator IncorporealityOnHit(PlayerController player, float incorporealityTime)
+        {
+            int enemyMask = CollisionMask.LayerToMask(CollisionLayer.EnemyCollider, CollisionLayer.EnemyHitBox, CollisionLayer.Projectile);
+            player.specRigidbody.AddCollisionLayerIgnoreOverride(enemyMask);
+            player.healthHaver.IsVulnerable = false;
+            yield return null;
+            float timer = 0f;
+            float subtimer = 0f;
+            while (timer < incorporealityTime)
+            {
+                while (timer < incorporealityTime)
+                {
+                    timer += BraveTime.DeltaTime;
+                    subtimer += BraveTime.DeltaTime;
+                    if (subtimer > 0.12f)
+                    {
+                        player.IsVisible = false;
+                        subtimer -= 0.12f;
+                        break;
+                    }
+                    yield return null;
+                }
+                while (timer < incorporealityTime)
+                {
+                    timer += BraveTime.DeltaTime;
+                    subtimer += BraveTime.DeltaTime;
+                    if (subtimer > 0.12f)
+                    {
+                        player.IsVisible = true;
+                        subtimer -= 0.12f;
+                        break;
+                    }
+                    yield return null;
+                }
+            }
+            EndIncorporealityOnHit(player);
+            yield break;
+        }
+        private static void EndIncorporealityOnHit(PlayerController player)
+        {
+            int mask = CollisionMask.LayerToMask(CollisionLayer.EnemyCollider, CollisionLayer.EnemyHitBox, CollisionLayer.Projectile);
+            player.IsVisible = true;
+            player.healthHaver.IsVulnerable = true;
+            player.specRigidbody.RemoveCollisionLayerIgnoreOverride(mask);
         }
     }
     public enum EasyBlankType
