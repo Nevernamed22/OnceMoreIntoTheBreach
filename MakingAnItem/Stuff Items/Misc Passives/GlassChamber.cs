@@ -12,34 +12,18 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Glass Chamber";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/glasschamber_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<GlassChamber>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Seeload";
             string longDesc = "Reloading is 10% faster for every Glass Guon Stone the bearer has." + "\n\nA symbol of the tentative peace between the fragile Lady of Pane, and the mighty king-god Relodin.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.C;
+            GlassChamberID = item.PickupObjectId;
         }
+        public static int GlassChamberID;
         private int currentItems, lastItems;
         protected override void Update()
         {
@@ -80,11 +64,6 @@ namespace NevernamedsItems
 
         private void AddStat(PlayerStats.StatType statType, float amount, StatModifier.ModifyMethod method = StatModifier.ModifyMethod.ADDITIVE)
         {
-            /*foreach (var m in passiveStatModifiers)
-            {
-                if (m.statToBoost == statType) return; //don't add duplicates
-            }*/
-
             StatModifier modifier = new StatModifier
             {
                 amount = amount,
@@ -116,7 +95,25 @@ namespace NevernamedsItems
                 PickupObject byId = PickupObjectDatabase.GetById(565);
                 player.AcquirePassiveItemPrefabDirectly(byId as PassiveItem);
             }
+            GameManager.Instance.OnNewLevelFullyLoaded += this.OnNewFloor;
             base.Pickup(player);
+        }
+        public override DebrisObject Drop(PlayerController player)
+        {
+            GameManager.Instance.OnNewLevelFullyLoaded -= this.OnNewFloor;
+            return base.Drop(player);
+        }
+        protected override void OnDestroy()
+        {
+            GameManager.Instance.OnNewLevelFullyLoaded -= this.OnNewFloor;
+            base.OnDestroy();
+        }
+        private void OnNewFloor()
+        {
+            if (Owner)
+            {
+                Owner.AcquirePassiveItemPrefabDirectly(PickupObjectDatabase.GetById(565) as PassiveItem);
+            }
         }
     }
 }

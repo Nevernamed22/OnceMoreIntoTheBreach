@@ -30,7 +30,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "Follow The Red Line";
-            string longDesc = "Shots have a chance to leave a trail of fire, marking their exact trajectory."+ "\n\nStandard issue for military training exercises, weapons tests, and really bad assassins.";
+            string longDesc = "Shots have a chance to leave a trail of fire, marking their exact trajectory." + "\n\nStandard issue for military training exercises, weapons tests, and really bad assassins.";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -64,7 +64,9 @@ namespace NevernamedsItems
                 TracerRound.goopDefs.Add(goopDefinition);
             }
             List<GoopDefinition> list = TracerRound.goopDefs;
+            TracerRoundsID = item.PickupObjectId;
         }
+        public static int TracerRoundsID;
         public void onFired(Projectile bullet, float eventchancescaler)
         {
             if (!Owner.HasPickupID(Gungeon.Game.Items["nn:graceful_goop"].PickupObjectId))
@@ -116,8 +118,11 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.PostProcessProjectile -= this.onFired;
-            Owner.PostProcessBeam -= this.onFiredBeam;
+            if (Owner)
+            {
+                Owner.PostProcessProjectile -= this.onFired;
+                Owner.PostProcessBeam -= this.onFiredBeam;
+            }
             base.OnDestroy();
         }
         private int currentItems, lastItems;

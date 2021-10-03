@@ -58,7 +58,7 @@ namespace NevernamedsItems
             gun.reloadTime = 1.5f;
             gun.barrelOffset.transform.localPosition = new Vector3(1.0f, 0.43f, 0f);
             gun.SetBaseMaxAmmo(888);
-
+            gun.gunClass = GunClass.SHOTGUN;
             //BULLET STATS
 
             // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.

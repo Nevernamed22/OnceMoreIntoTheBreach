@@ -50,8 +50,9 @@ namespace NevernamedsItems
             List<string> mandatorySynergyItems = new List<string>() { "nn:lucky_coin", "seven_leaf_clover" };
             CustomSynergies.Add("Even Luckier!", mandatorySynergyItems);
 
+            LuckyCoinID = item.PickupObjectId;
         }
-
+        public static int LuckyCoinID;
         //SYNERGIES
         //W/ Seven Leaf Clover --> Even Luckier!
         //W/ Lump of Space Metal / Loose Change / Coin Crown / Iron Coin / Gold Junk / Table Tech Money --> Prosperity

@@ -95,10 +95,10 @@ namespace NevernamedsItems
                         if (OnCooldownVoodoo == false)
                         {
                             OnCooldownVoodoo = true;
-                            
+
                             if (Owner.HasPickupID(527) && UnityEngine.Random.value < 0.25f) randomActiveEnemy.gameActor.ApplyEffect(this.charmEffect, 1f, null);
                             randomActiveEnemy.healthHaver.ApplyDamage(outcomeDamage, Vector2.zero, "Voodoo Magic", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
-                            
+
                             if ((Owner.HasPickupID(276) || Owner.HasPickupID(149) || Owner.HasPickupID(482) || Owner.HasPickupID(506) || Owner.HasPickupID(172) || Owner.HasPickupID(198) || Owner.HasPickupID(Gungeon.Game.Items["nn:spectre_bullets"].PickupObjectId)) && randomActiveOTHEREnemy != null && randomActiveOTHEREnemy != enemy.aiActor && randomActiveOTHEREnemy.healthHaver && randomActiveOTHEREnemy.healthHaver.IsAlive && randomActiveOTHEREnemy.healthHaver.IsVulnerable)
                             {
                                 if (Owner.HasPickupID(527) && UnityEngine.Random.value < 0.25f) randomActiveOTHEREnemy.gameActor.ApplyEffect(this.charmEffect, 1f, null);
@@ -137,7 +137,10 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
+            if (Owner)
+            {
+                Owner.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
+            }
             base.OnDestroy();
         }
     }

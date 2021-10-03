@@ -41,7 +41,7 @@ namespace GungeonAPI
                             foreach (var roomsData in roomData)
                             {
                                 string name = roomsData.room.name;
-                                //Tools.PrintNoID($"Found room: \"{name}\"");
+                                Debug.Log("Found room: "+name);
                                 DungeonHandler.Register(roomsData);
                                 rooms.Add(roomsData.room.name, roomsData);
 
@@ -59,7 +59,7 @@ namespace GungeonAPI
                     if (g.EndsWith(".room", StringComparison.OrdinalIgnoreCase))
                     {
                         string name = Path.GetFullPath(g).RemovePrefix(unzippedDirectory).RemoveSuffix(".room");
-                        //Tools.PrintNoID($"Found room: \"{name}\"");
+                        Debug.Log("Found room: " + name);
                         var roomData = BuildFromRoomFile(g);
                         DungeonHandler.Register(roomData);
                         rooms.Add(name, roomData);

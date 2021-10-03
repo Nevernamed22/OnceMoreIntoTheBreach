@@ -5,6 +5,7 @@ using System.Text;
 
 using UnityEngine;
 using ItemAPI;
+using System.Collections;
 
 namespace NevernamedsItems
 {
@@ -18,11 +19,13 @@ namespace NevernamedsItems
             var item = obj.AddComponent<Albedo>();
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
             string shortDesc = "Clarity";
-            string longDesc = "";
+            string longDesc = "Speeds up Glass Guon Stones."+"\n\nThe second phase of the prime materia's transition into the Philosopher's Stone, where the murky darkness of the Nigredo is purified into a lunarily charged clarity.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.C;
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
+            AlbedoID = item.PickupObjectId;
         }
+        public static int AlbedoID;
         private float lastOrbitals;
         private bool hadSynergyLastChecked;
         protected override void Update()
@@ -52,8 +55,8 @@ namespace NevernamedsItems
                 {
                     if (orbital.gameObject.GetComponent<BoostedByAlbedo>() == null)
                     {
-                        int mult = 2;
-                        if (Owner.PlayerHasActiveSynergy("White Ethesia")) mult = 3;
+                        int mult = 3;
+                        if (Owner.PlayerHasActiveSynergy("White Ethesia")) mult = 4;
                         BoostedByAlbedo boost = orbital.gameObject.AddComponent<BoostedByAlbedo>();
                         boost.currentMultiplier = mult;
                         boost.storedOrbitalTier = orbital.GetOrbitalTier();
@@ -61,17 +64,19 @@ namespace NevernamedsItems
                         orbital.SetOrbitalTier(1010);
                         orbital.SetOrbitalTierIndex(PlayerOrbital.GetNumberOfOrbitalsInTier(Owner, 1010));
                     }
-                    else if (orbital.gameObject.GetComponent<BoostedByAlbedo>().currentMultiplier == 2 && Owner.PlayerHasActiveSynergy("White Ethesia"))
+                    else if (orbital.gameObject.GetComponent<BoostedByAlbedo>().currentMultiplier == 3 && Owner.PlayerHasActiveSynergy("White Ethesia"))
                     {
-                        orbital.orbitDegreesPerSecond /= 2;
-                        orbital.orbitDegreesPerSecond *= 3;
+                        orbital.orbitDegreesPerSecond /= 3;
+                        orbital.orbitDegreesPerSecond *= 4;
+                        orbital.gameObject.GetComponent<BoostedByAlbedo>().currentMultiplier = 4;
                         orbital.SetOrbitalTier(1010);
                         orbital.SetOrbitalTierIndex(PlayerOrbital.GetNumberOfOrbitalsInTier(Owner, 1010));
                     }
-                    else if (orbital.gameObject.GetComponent<BoostedByAlbedo>().currentMultiplier == 3 && !Owner.PlayerHasActiveSynergy("White Ethesia"))
+                    else if (orbital.gameObject.GetComponent<BoostedByAlbedo>().currentMultiplier == 4 && !Owner.PlayerHasActiveSynergy("White Ethesia"))
                     {
-                        orbital.orbitDegreesPerSecond /= 3;
-                        orbital.orbitDegreesPerSecond *= 2;
+                        orbital.orbitDegreesPerSecond /= 4;
+                        orbital.orbitDegreesPerSecond *= 3;
+                        orbital.gameObject.GetComponent<BoostedByAlbedo>().currentMultiplier = 3;
                         orbital.SetOrbitalTier(1010);
                         orbital.SetOrbitalTierIndex(PlayerOrbital.GetNumberOfOrbitalsInTier(Owner, 1010));
                     }
@@ -99,14 +104,7 @@ namespace NevernamedsItems
         }
         private void RecalcOrbIndex()
         {
-            int i = 0;
-            foreach (var o in Owner.orbitals)
-            {
-                var orbital = (PlayerOrbital)o;
-                orbital.SetOrbitalTier(PlayerOrbital.CalculateTargetTier(Owner, o));
-                orbital.SetOrbitalTierIndex(i);
-                i++;
-            }
+            Owner.RecalculateOrbitals();
         }
         public override void Pickup(PlayerController player)
         {
@@ -120,19 +118,30 @@ namespace NevernamedsItems
 
             base.Pickup(player);
             UpdateOrbitals();
+            GameManager.Instance.OnNewLevelFullyLoaded += this.NewFloor;
         }
         public override DebrisObject Drop(PlayerController player)
         {
-            ResetOrbitals(player);
+            GameManager.Instance.OnNewLevelFullyLoaded -= this.NewFloor;
+         if (!(player.GetNumberOfItemInInventory(Albedo.AlbedoID) > 1))   ResetOrbitals(player);
             return base.Drop(player);
         }
         protected override void OnDestroy()
         {
+            GameManager.Instance.OnNewLevelFullyLoaded -= this.NewFloor;
             if (Owner)
             {
                 ResetOrbitals(Owner);
             }
             base.OnDestroy();
+        }
+        private void NewFloor()
+        {
+            if (Owner)
+            {
+                Owner.AcquirePassiveItemPrefabDirectly(PickupObjectDatabase.GetById(565) as PassiveItem);
+                ResetOrbitals(Owner);
+            }
         }
         class BoostedByAlbedo : MonoBehaviour { public int currentMultiplier; public int storedOrbitalTier; }
     }

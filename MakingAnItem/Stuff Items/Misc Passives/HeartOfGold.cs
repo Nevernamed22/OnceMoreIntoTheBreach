@@ -63,7 +63,7 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.OnReceivedDamage -= this.giveCash;
+            if (Owner) Owner.OnReceivedDamage -= this.giveCash;
             base.OnDestroy();
         }
     }

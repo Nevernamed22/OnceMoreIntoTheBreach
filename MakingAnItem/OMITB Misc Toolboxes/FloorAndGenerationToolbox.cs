@@ -23,10 +23,43 @@ namespace NevernamedsItems
                 typeof(PlayerController).GetMethod("BraveOnLevelWasLoaded", BindingFlags.Instance | BindingFlags.Public),
                 typeof(FloorAndGenerationToolbox).GetMethod("OnNewFloor", BindingFlags.Static | BindingFlags.Public)
             );
+            floorDepartureHook = new Hook(
+                typeof(ElevatorDepartureController).GetMethod("DoDeparture", BindingFlags.Instance | BindingFlags.Public),
+                typeof(FloorAndGenerationToolbox).GetMethod("OnFloorDeparture", BindingFlags.Instance | BindingFlags.Public),
+                typeof(ElevatorDepartureController)
+            );
         }
         public static Hook ratMazeFailHook;
         public static Hook floorLoadPlayerHook;
+        public static Hook floorDepartureHook;
+        public static Action OnFloorExited;
+        public static Action OnFloorEntered;
+        public static void OnFloorLoaded()
+        {
+            if (OnFloorEntered != null)
+            {
+                OnFloorEntered();
+            }
+        }
+        public static void OnFloorUnloaded(List<PlayerController> Players)
+        {
+            if (OnFloorExited != null)
+            {
+                OnFloorExited();
+            }
+            foreach (PlayerController player in Players)
+            {
 
+            }
+            if (CurseManager.CurrentActiveCurses.Count > 0)
+            {
+                if (!SaveAPIManager.GetFlag(CustomDungeonFlags.FLOOR_CLEARED_WITH_CURSE))
+                {
+                    SaveAPIManager.SetFlag(CustomDungeonFlags.FLOOR_CLEARED_WITH_CURSE, true);
+                }
+            }
+            CurseManager.RemoveAllCurses();
+        }
         private static bool hookDoubleUpPrevention;
         public static void OnNewFloor(Action<PlayerController> orig, PlayerController self)
         {
@@ -37,8 +70,8 @@ namespace NevernamedsItems
             {
                 if (hookDoubleUpPrevention)
                 {
-                //ETGModConsole.Log("Level loaded hook ran");
-                CurrentFloorEnemyPalette = GeneratePalette();
+                    //ETGModConsole.Log("Level loaded hook ran");
+                    CurrentFloorEnemyPalette = GeneratePalette();
                     Challenges.OnLevelLoaded();
                     hookDoubleUpPrevention = false;
                 }
@@ -47,6 +80,10 @@ namespace NevernamedsItems
                     hookDoubleUpPrevention = true;
                 }
             }
+            orig(self);
+        }
+        public void OnFloorDeparture(Action<ElevatorDepartureController> orig, ElevatorDepartureController self)
+        {
             orig(self);
         }
         public static List<string> CurrentFloorEnemyPalette;

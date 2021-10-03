@@ -24,6 +24,8 @@ namespace GungeonAPI
             { "sewer", "Sewer_RoomTable" },
             { "cathedral", "Cathedral_RoomTable" },
             { "bullethell", "BulletHell_RoomTable" },
+
+            //{ "unknown", "SecretHelpers_RoomTable" },
         };
 
         public static Dictionary<string, string> specialRoomTableMap = new Dictionary<string, string>()
@@ -38,9 +40,9 @@ namespace GungeonAPI
         public static Dictionary<string, string> BossRoomGrabage = new Dictionary<string, string>()
         {
             //Floor 1
-            { "boss1", "bosstable_01_gatlinggull"},
-            { "boss2", "bosstable_01_bulletbros"},
-            { "boss3", "bosstable_01_bulletking"},
+            { "gull", "bosstable_01_gatlinggull"},
+            { "triggertwins", "bosstable_01_bulletbros"},
+            { "bulletking", "bosstable_01_bulletking"},
             //Sewer
             { "blobby", "bosstable_01a_blobulord"},
             //Floor 2
@@ -74,7 +76,7 @@ namespace GungeonAPI
         {
             "shared_auto_001",
             "shared_auto_002",
-            "brave_resources_001"
+            "brave_resources_001",
         };
 
         public static string[] dungeonPrefabNames = new string[]
@@ -102,6 +104,8 @@ namespace GungeonAPI
                         Tools.PrintError($"Failed to load asset bundle: {name}");
                         continue;
                     }
+                    //Tools.PrintError($"Loaded assetbundle: {name}");
+
                     AssetBundles.Add(name, ResourceManager.LoadAssetBundle(name));
                 }
                 catch (Exception e)
@@ -196,6 +200,9 @@ namespace GungeonAPI
                     return RoomTables["sewer"];
                 case GlobalDungeonData.ValidTilesets.CATHEDRALGEON:
                     return RoomTables["cathedral"];
+                case GlobalDungeonData.ValidTilesets.RATGEON:
+                    ETGModConsole.Log("CANNOT ADD TO RAT FLOOR. DEFAULTING TO GUNGEON PROPER");
+                    return RoomTables["gungeon"];
                 case GlobalDungeonData.ValidTilesets.HELLGEON:
                     return RoomTables["bullethell"];
                 default:

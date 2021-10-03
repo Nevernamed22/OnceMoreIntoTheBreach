@@ -7,6 +7,7 @@ using System.Text;
 using ItemAPI;
 using UnityEngine;
 using System.Collections;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -43,7 +44,6 @@ namespace NevernamedsItems
 
             //Adds a passive modifier, like curse, coolness, damage, etc. to the item. Works for passives and actives.
 
-
             //Set some other fields
             item.consumable = false;
             item.quality = ItemQuality.EXCLUDED;
@@ -56,42 +56,354 @@ namespace NevernamedsItems
         //float duration = 20f;
         protected override void DoEffect(PlayerController user)
         {
-            CurseManager.AddCurse("Curse of Infestation");
-          /*  ChamberGunProcessor processor = user.CurrentGun.GetComponentInChildren<ChamberGunProcessor>();
-            if (processor)
-            {
-                ETGModConsole.Log("Keep: " + processor.CastleGunID);
-                ETGModConsole.Log("Oub: " + processor.OublietteGunID);
-                ETGModConsole.Log("GP: " + processor.GungeonGunID);
-                ETGModConsole.Log("Abbey: " + processor.AbbeyGunID);
-                ETGModConsole.Log("Mines: " + processor.MinesGunID);
-                ETGModConsole.Log("Rat: " + processor.RatgeonGunID);
-                ETGModConsole.Log("Hollow: " + processor.HollowGunID);
-                ETGModConsole.Log("R&G: " + processor.OfficeGunID);
-                ETGModConsole.Log("Forge: " + processor.ForgeGunID);
-                ETGModConsole.Log("BulletHell: " + processor.HellGunID);
-            }*/
+            //ProjectileImpactVFXPool hit = (PickupObjectDatabase.GetById(178) as Gun).GetComponent<FireOnReloadSynergyProcessor>().DirectedBurstSettings.ProjectileInterface.SpecifiedProjectile.hitEffects;
 
-
-           //BeamToolbox.FreeFireBeamFromAnywhere(LaserBullets.SimpleRedBeam, user, user.gameObject, Vector2.zero, false, user.CurrentGun.CurrentAngle, 10, true);
-            /*
-            Vector2 yourPosition = user.sprite.WorldCenter;
-            List<AIActor> activeEnemies = user.CurrentRoom.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
-            if (activeEnemies != null)
-            {
-                for (int i = 0; i < activeEnemies.Count; i++)
+            //hit.DeconstructHitEffects();
+            string enemyCode = ActorTemplateGenerator.GenerateActorTemplate(
+                "Testy Boss Boy",
+                "TESTENEMYGUID832974628653498",
+                "nn",
+                ActorType.BOSS,
+                true,
+                new AllAnimations()
                 {
-                    AIActor aiactor = activeEnemies[i];
+                    idleAnimation = new WholeAnimationData()
+                    {
+                        animName = "IdleAnimation",
+                        animShortname = "idle",
+                        Directionality = DirectionalAnimation.DirectionType.TwoWayHorizontal,
+                        flipType = DirectionalAnimation.FlipType.None,
+                        DirectionalAnimations = new List<DirectionalAnimationData>()
+                        {
+                            new DirectionalAnimationData()
+                            {
+                                suffix = "right",
+                                fps = 15,
+                                wrap = tk2dSpriteAnimationClip.WrapMode.Once,
+                                Frames = new List<AnimationFrameData>()
+                                {
+                                    new AnimationFrameData()
+                                    {
+                                        filePath = "Sex/Penis/Cock/Idle_right_001",
+                                        frameAudioEvent = null,
+                                        frameXOffset = 5,
+                                        frameYOffset = 6,
+                                    },
+                                    new AnimationFrameData()
+                                    {
+                                        filePath = "Sex/Penis/Cock/Idle_right_002",
+                                        frameAudioEvent = null,
+                                        frameXOffset = 2,
+                                        frameYOffset = 3,
+                                    },
+                                    new AnimationFrameData()
+                                    {
+                                        filePath = "Sex/Penis/Cock/Idle_right_003",
+                                        frameAudioEvent = null,
+                                        frameXOffset = 5,
+                                        frameYOffset = 6,
+                                    },
+                                    new AnimationFrameData()
+                                    {
+                                        filePath = "Sex/Penis/Cock/Idle_right_004",
+                                        frameAudioEvent = null,
+                                        frameXOffset = 2,
+                                        frameYOffset = 3,
+                                    },
+                                },
+                            },
+                            new DirectionalAnimationData()
+                            {
+                                suffix = "left",
+                                fps = 15,
+                                wrap = tk2dSpriteAnimationClip.WrapMode.Once,
+                                Frames = new List<AnimationFrameData>()
+                                {
+                                    new AnimationFrameData()
+                                    {
+                                        filePath = "Sex/Penis/Cock/Idle_left_001",
+                                        frameAudioEvent = null,
+                                        frameXOffset = 5,
+                                        frameYOffset = 6,
+                                    },
+                                    new AnimationFrameData()
+                                    {
+                                        filePath = "Sex/Penis/Cock/Idle_left_002",
+                                        frameAudioEvent = null,
+                                        frameXOffset = 2,
+                                        frameYOffset = 3,
+                                    },
+                                    new AnimationFrameData()
+                                    {
+                                        filePath = "Sex/Penis/Cock/Idle_left_003",
+                                        frameAudioEvent = null,
+                                        frameXOffset = 5,
+                                        frameYOffset = 6,
+                                    },
+                                    new AnimationFrameData()
+                                    {
+                                        filePath = "Sex/Penis/Cock/Idle_left_004",
+                                        frameAudioEvent = null,
+                                        frameXOffset = 2,
+                                        frameYOffset = 3,
+                                    },
+                                },
+                            },
+                        }
+                    },
+                    walkAnimation = new WholeAnimationData()
+                    {
+                        animName = "MoveAnimation",
+                        animShortname = "move",
+                        Directionality = DirectionalAnimation.DirectionType.TwoWayHorizontal,
+                        flipType = DirectionalAnimation.FlipType.None,
+                        DirectionalAnimations = new List<DirectionalAnimationData>()
+                        {
+                            new DirectionalAnimationData()
+                            {
+                                suffix = "right",
+                                fps = 15,
+                                wrap = tk2dSpriteAnimationClip.WrapMode.Once,
+                                Frames = new List<AnimationFrameData>()
+                                {
+                                    new AnimationFrameData()
+                                    {
+                                        filePath = "Sex/Penis/Cock/Walk_right_001",
+                                        frameAudioEvent = null,
+                                        frameXOffset = 5,
+                                        frameYOffset = 6,
+                                    },
+                                    new AnimationFrameData()
+                                    {
+                                        filePath = "Sex/Penis/Cock/Walk_right_002",
+                                        frameAudioEvent = null,
+                                        frameXOffset = 2,
+                                        frameYOffset = 3,
+                                    },
+                                    new AnimationFrameData()
+                                    {
+                                        filePath = "Sex/Penis/Cock/Walk_right_003",
+                                        frameAudioEvent = null,
+                                        frameXOffset = 5,
+                                        frameYOffset = 6,
+                                    },
+                                    new AnimationFrameData()
+                                    {
+                                        filePath = "Sex/Penis/Cock/Walk_right_004",
+                                        frameAudioEvent = null,
+                                        frameXOffset = 2,
+                                        frameYOffset = 3,
+                                    },
+                                },
+                            },
+                            new DirectionalAnimationData()
+                            {
+                                suffix = "left",
+                                fps = 15,
+                                wrap = tk2dSpriteAnimationClip.WrapMode.Once,
+                                Frames = new List<AnimationFrameData>()
+                                {
+                                    new AnimationFrameData()
+                                    {
+                                        filePath = "Sex/Penis/Cock/Walk_left_001",
+                                        frameAudioEvent = null,
+                                        frameXOffset = 5,
+                                        frameYOffset = 6,
+                                    },
+                                    new AnimationFrameData()
+                                    {
+                                        filePath = "Sex/Penis/Cock/Walk_left_002",
+                                        frameAudioEvent = null,
+                                        frameXOffset = 2,
+                                        frameYOffset = 3,
+                                    },
+                                    new AnimationFrameData()
+                                    {
+                                        filePath = "Sex/Penis/Cock/Walk_left_003",
+                                        frameAudioEvent = null,
+                                        frameXOffset = 5,
+                                        frameYOffset = 6,
+                                    },
+                                    new AnimationFrameData()
+                                    {
+                                        filePath = "Sex/Penis/Cock/Walk_left_004",
+                                        frameAudioEvent = null,
+                                        frameXOffset = 2,
+                                        frameYOffset = 3,
+                                    },
+                                },
+                            },
+                        }
+                    },
+                    otherAnimations = new List<WholeAnimationData>()
+                    {
+                        new WholeAnimationData()
+                        {
+                            animName = "sex",
+                            animShortname = "sex",
+                            Directionality = DirectionalAnimation.DirectionType.TwoWayHorizontal,
+                            flipType = DirectionalAnimation.FlipType.None,
+                            DirectionalAnimations = new List<DirectionalAnimationData>()
+                            {
+                                new DirectionalAnimationData()
+                                {
+                                    suffix = "right",
+                                    fps = 20,
+                                    wrap = tk2dSpriteAnimationClip.WrapMode.Once,
+                                    Frames = new List<AnimationFrameData>()
+                                    {
+                                        new AnimationFrameData()
+                                        {
+                                            filePath = "Sex/Penis/Cock/Fuck_right_001",
+                                            frameAudioEvent = "",
+                                            frameXOffset = 0,
+                                            frameYOffset = 1,
+                                        },
+                                         new AnimationFrameData()
+                                        {
+                                            filePath = "Sex/Penis/Cock/Fuck_right_002",
+                                            frameAudioEvent = "",
+                                            frameXOffset = 0,
+                                            frameYOffset = 2,
+                                        },
+                                          new AnimationFrameData()
+                                        {
+                                            filePath = "Sex/Penis/Cock/Fuck_right_003",
+                                            frameAudioEvent = "",
+                                            frameXOffset = 0,
+                                            frameYOffset = 1,
+                                        }
+                                    },
+                                },
+                                new DirectionalAnimationData()
+                                {
+                                    suffix = "left",
+                                    fps = 20,
+                                    wrap = tk2dSpriteAnimationClip.WrapMode.Once,
+                                    Frames = new List<AnimationFrameData>()
+                                    {
+                                        new AnimationFrameData()
+                                        {
+                                            filePath = "Sex/Penis/Cock/Fuck_left_001",
+                                            frameAudioEvent = "",
+                                            frameXOffset = 0,
+                                            frameYOffset = 1,
+                                        },
+                                         new AnimationFrameData()
+                                        {
+                                            filePath = "Sex/Penis/Cock/Fuck_left_002",
+                                            frameAudioEvent = "",
+                                            frameXOffset = 0,
+                                            frameYOffset = 2,
+                                        },
+                                          new AnimationFrameData()
+                                        {
+                                            filePath = "Sex/Penis/Cock/Fuck_left_003",
+                                            frameAudioEvent = "",
+                                            frameXOffset = 0,
+                                            frameYOffset = 1,
+                                        }
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                7,
+                1,
+                true,
+                false,
+                false,
+                true,
+                false,
+                10,
+                true,
+                true,
+                10,
+                15,
+                false,
+                true,
+                true,
+                14,
+                5,
+                5,
+                5,
+                false,
+                true,
+                1,
+                false,
+                false,
+                "Thingy",
+                "Thingy2",
+                "Thingy3",
+                "Thingy4",
+                "Thingy5",
+                false,
+                "red",
+                true,
+                true,
+                true,
+                5,
+                false,
+                true,
+                -1,
+                false,
+                0,
+                0,
+                false,
+                "Bingly Bungly Boo",
+                "Bungle Bish bash bosh",
+                true,
+                "Quote", //Ammonomicon Quote
+                "Description", //Ammonomicon Desc
+                15 //Pos in ammonomicon
+                );
 
-                    GameActorSizeEffect shrinky = StatusEffectHelper.GenerateSizeEffect(10, new Vector2(0.4f, 0.4f));
-                    aiactor.ApplyEffect(shrinky);
-                }
-            }*/
-           /* TalkDoerLite[] allChests = FindObjectsOfType<TalkDoerLite>();
-            foreach (TalkDoerLite chest in allChests)
-            {
-                ETGModConsole.Log(chest.name);
-            }*/
+            FileLogger.Log(enemyCode,"OMITBOutput");
+
+            //CurseManager.AddCurse("Curse of Butterfingers", true);
+            // AkSoundEngine.PostEvent("Play_NowsYourChanceToBeABigShot", user.gameObject);
+
+            //Vector3 place = user.GetCursorPosition(4);
+            //GameObject carto = UnityEngine.Object.Instantiate<GameObject>(Carto.CartoPrefab, place, Quaternion.identity);
+            //DungeonPlaceableUtility.InstantiateDungeonPlaceable(carto, user.CurrentRoom, ((Vector2)carto.transform.position).ToIntVector2(), false);
+            //SaveAPIManager.SetFlag(CustomDungeonFlags.CHEATED_DEATH_SHADE, true);
+            //CurseManager.AddCurse("Curse of Infestation");
+            /*  ChamberGunProcessor processor = user.CurrentGun.GetComponentInChildren<ChamberGunProcessor>();
+              if (processor)
+              {
+                  ETGModConsole.Log("Keep: " + processor.CastleGunID);
+                  ETGModConsole.Log("Oub: " + processor.OublietteGunID);
+                  ETGModConsole.Log("GP: " + processor.GungeonGunID);
+                  ETGModConsole.Log("Abbey: " + processor.AbbeyGunID);
+                  ETGModConsole.Log("Mines: " + processor.MinesGunID);
+                  ETGModConsole.Log("Rat: " + processor.RatgeonGunID);
+                  ETGModConsole.Log("Hollow: " + processor.HollowGunID);
+                  ETGModConsole.Log("R&G: " + processor.OfficeGunID);
+                  ETGModConsole.Log("Forge: " + processor.ForgeGunID);
+                  ETGModConsole.Log("BulletHell: " + processor.HellGunID);
+              }*/
+
+
+            //BeamToolbox.FreeFireBeamFromAnywhere(LaserBullets.SimpleRedBeam, user, user.gameObject, Vector2.zero, false, user.CurrentGun.CurrentAngle, 10, true);
+
+            /*    Vector2 yourPosition = user.sprite.WorldCenter;
+                List<AIActor> activeEnemies = user.CurrentRoom.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+                if (activeEnemies != null)
+                {
+                    for (int i = 0; i < activeEnemies.Count; i++)
+                    {
+                        AIActor aiactor = activeEnemies[i];
+
+                       GameActorSizeEffect shrinky = StatusEffectHelper.GenerateSizeEffect(10, new Vector2(0.4f, 0.4f));
+                        aiactor.ApplyEffect(shrinky);
+                    }
+                }*/
+            /* TalkDoerLite[] allChests = FindObjectsOfType<TalkDoerLite>();
+             foreach (TalkDoerLite chest in allChests)
+             {
+                 ETGModConsole.Log(chest.name);
+             }*/
         }
         public override void Update()
         {

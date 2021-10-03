@@ -41,7 +41,7 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(1.31f, 0.5f, 0f);
             gun.SetBaseMaxAmmo(10000);
             gun.ammo = 10000;
-
+            gun.gunClass = GunClass.CHARGE;
             gun.doesScreenShake = false;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;

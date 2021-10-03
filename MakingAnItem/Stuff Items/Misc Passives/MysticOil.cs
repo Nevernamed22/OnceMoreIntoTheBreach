@@ -62,7 +62,10 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.PostProcessProjectile -= this.DoEffect;
+            if (Owner)
+            {
+                Owner.PostProcessProjectile -= this.DoEffect;
+            }
             base.OnDestroy();
         }
         private void DoEffect(Projectile projectile, float effectChanceScalar)

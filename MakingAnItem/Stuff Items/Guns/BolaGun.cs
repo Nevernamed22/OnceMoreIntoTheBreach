@@ -29,7 +29,7 @@ namespace NevernamedsItems
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(150) as Gun).gunSwitchGroup;
-
+            gun.gunClass = GunClass.RIFLE;
             //GUN STATS
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
@@ -77,8 +77,6 @@ namespace NevernamedsItems
             BolaGunID = gun.PickupObjectId;
 
             LinkVFX = FakePrefab.Clone(Game.Items["shock_rounds"].GetComponent<ComplexProjectileModifier>().ChainLightningVFX);
-            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(projectile);
         }
         public static int BolaGunID;
         public static GameObject LinkVFX;

@@ -71,7 +71,7 @@ namespace NevernamedsItems
             gun.reloadTime = 1f;
             gun.SetBaseMaxAmmo(50);
             gun.quality = PickupObject.ItemQuality.B;
-
+            gun.gunClass = GunClass.CHARGE;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.LoopSection;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).loopStart = 4;
 

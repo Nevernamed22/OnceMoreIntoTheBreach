@@ -62,7 +62,7 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(2.87f, 0.68f, 0f);
             gun.SetBaseMaxAmmo(600);
             gun.PreventNormalFireAudio = true;
-
+            gun.gunClass = GunClass.FULLAUTO;
             //BULLET STATS
 
             // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.

@@ -39,7 +39,7 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(2.06f, 0.87f, 0f);
             gun.SetBaseMaxAmmo(200);
             gun.ammo = 200;
-
+            gun.gunClass = GunClass.SILLY;
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 

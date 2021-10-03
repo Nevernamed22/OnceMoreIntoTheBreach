@@ -31,7 +31,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "Dank Dungeon Walls";
-            string longDesc = "An ancient art, kept sacred by a sect of Gunjurers deep within the Hollow's caverns."+"\n\nImbued with physical form in an attempt to preserve it for future generations."+"\n\nWorks best in the dark.";
+            string longDesc = "An ancient art, kept sacred by a sect of Gunjurers deep within the Hollow's caverns." + "\n\nImbued with physical form in an attempt to preserve it for future generations." + "\n\nWorks best in the dark.";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //"kts" here is the item pool. In the console you'd type kts:sweating_bullets
@@ -46,6 +46,51 @@ namespace NevernamedsItems
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_MAGICMISSILE, true);
             item.AddItemToDougMetaShop(20);
 
+        }
+        public bool isGivingDarknessImmunity = false;
+        public override void Pickup(PlayerController player)
+        {
+            base.Pickup(player);
+            player.OnEnteredCombat += OnEnteredCombat;
+            if (!isGivingDarknessImmunity)
+            {
+                CustomDarknessHandler.shouldBeLightOverride.SetOverride("MagicMissile", true);
+                isGivingDarknessImmunity = true;
+            }
+        }
+        private void OnEnteredCombat()
+        {
+            if (LastOwner != null && LastOwner.CurrentRoom != null)
+            {
+                if (LastOwner.CurrentRoom.IsDarkAndTerrifying)
+                {
+                    LastOwner.CurrentRoom.EndTerrifyingDarkRoom();
+                }
+            }
+        }
+        protected override void OnDestroy()
+        {
+            if (LastOwner)
+            {
+                LastOwner.OnEnteredCombat += OnEnteredCombat;
+            }
+            if (isGivingDarknessImmunity)
+            {
+                CustomDarknessHandler.shouldBeLightOverride.RemoveOverride("MagicMissile");
+                isGivingDarknessImmunity = false;
+            }
+            base.OnDestroy();
+        }
+        protected override void OnPreDrop(PlayerController user)
+        {
+            base.OnPreDrop(user);
+            user.OnEnteredCombat -= OnEnteredCombat;
+
+            if (isGivingDarknessImmunity)
+            {
+                CustomDarknessHandler.shouldBeLightOverride.RemoveOverride("MagicMissile");
+                isGivingDarknessImmunity = false;
+            }
         }
         protected override void DoEffect(PlayerController user)
         {

@@ -40,7 +40,7 @@ namespace NevernamedsItems
             gun.DefaultModule.numberOfShotsInClip = 12;
             gun.barrelOffset.transform.localPosition = new Vector3(1.06f, 0.5f, 0f);
             gun.SetBaseMaxAmmo(300);
-
+            gun.gunClass = GunClass.SHITTY;
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);

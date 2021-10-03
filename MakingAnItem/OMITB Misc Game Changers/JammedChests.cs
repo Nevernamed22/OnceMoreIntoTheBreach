@@ -119,13 +119,12 @@ namespace NevernamedsItems
             if (jamness != null)
             {
                 self.PredictContents(opener);
-                float rand = UnityEngine.Random.value;
-                if (rand <= 0.25f)
+                if (UnityEngine.Random.value <= 0.5f)
                 {
                     List<PickupObject> items = GenerateContents(self.lootTable, self.breakertronLootTable, opener, 0, new System.Random());
                     self.contents.AddRange(items);
                 }
-                else if (rand <= 0.75f)
+                else
                 {
                     int lootID = BraveUtility.RandomElement(LootIDs);
                     PickupObject obj = PickupObjectDatabase.GetById(lootID);

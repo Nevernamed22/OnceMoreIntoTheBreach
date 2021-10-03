@@ -61,7 +61,7 @@ namespace NevernamedsItems
             gun.reloadTime = 1.5f;
             gun.barrelOffset.transform.localPosition = new Vector3(2.18f, 0.75f, 0f);
             gun.SetBaseMaxAmmo(300);
-
+            gun.gunClass = GunClass.FULLAUTO;
             gun.quality = PickupObject.ItemQuality.A;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 

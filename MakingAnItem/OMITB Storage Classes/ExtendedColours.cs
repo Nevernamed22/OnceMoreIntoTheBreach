@@ -22,6 +22,7 @@ namespace NevernamedsItems
         public static Color maroon = new Color(105f / 255f, 7f / 255f, 9f / 255f);
         public static Color veryDarkRed = new Color(71f / 255f, 4f / 255f, 3f / 255f);
         public static Color plaguePurple = new Color(242f / 255f, 161f / 255f, 255f / 255f);
+        public static Color darkBrown = new Color(74f / 255f, 22f / 255f, 5f / 255f);
 
         //Colours  taken from Status effects
         public static Color freezeBlue = StaticStatusEffects.chaosBulletsFreeze.TintColor;

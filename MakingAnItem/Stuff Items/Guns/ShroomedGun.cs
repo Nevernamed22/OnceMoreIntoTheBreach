@@ -78,7 +78,7 @@ namespace NevernamedsItems
             gun.reloadTime = 1f;
             gun.barrelOffset.transform.localPosition = new Vector3(1.0f, 0.81f, 0f);
             gun.SetBaseMaxAmmo(140);
-
+            gun.gunClass = GunClass.SHITTY;
             gun.quality = PickupObject.ItemQuality.D;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.HURT_BY_SHROOMER, true);

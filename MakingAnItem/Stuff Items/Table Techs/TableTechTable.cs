@@ -29,7 +29,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "Flip Recursion";
-            string longDesc = "This ancient technique has a chance to create a new table whenever a table is flipped."+"\n\nChapter 8 of the \"Tabla Sutra.\" Flip unto flip unto flip unto flip unto flip unto flip unto flip unto flip unto flip. Never stop flipping.";
+            string longDesc = "This ancient technique has a chance to create a new table whenever a table is flipped." + "\n\nChapter 8 of the \"Tabla Sutra.\" Flip unto flip unto flip unto flip unto flip unto flip unto flip unto flip unto flip. Never stop flipping.";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -56,7 +56,10 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.OnTableFlipped = (Action<FlippableCover>)Delegate.Remove(Owner.OnTableFlipped, new Action<FlippableCover>(this.SpeedEffect));
+            if (Owner)
+            {
+                Owner.OnTableFlipped -= SpeedEffect;
+            }
             base.OnDestroy();
         }
 

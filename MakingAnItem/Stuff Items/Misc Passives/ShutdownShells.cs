@@ -35,15 +35,15 @@ namespace NevernamedsItems
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
             InstaKillEnemyTypeBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<InstaKillEnemyTypeBehaviour>();
-            instakill.EnemyTypeToKill.AddRange(EasyEnemyTypeLists.ModInclusiveShotgunKin);           
-        }      
+            instakill.EnemyTypeToKill.AddRange(EasyEnemyTypeLists.ModInclusiveShotgunKin);
+        }
         private void PostProcessBeam(BeamController sourceBeam)
         {
             if (sourceBeam.projectile)
             {
                 this.PostProcessProjectile(sourceBeam.projectile, 1);
             }
-        }       
+        }
         public override DebrisObject Drop(PlayerController player)
         {
             DebrisObject debrisObject = base.Drop(player);
@@ -53,8 +53,11 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.PostProcessProjectile -= this.PostProcessProjectile;
-            Owner.PostProcessBeam -= this.PostProcessBeam;
+            if (Owner)
+            {
+                Owner.PostProcessProjectile -= this.PostProcessProjectile;
+                Owner.PostProcessBeam -= this.PostProcessBeam;
+            }
             base.OnDestroy();
         }
 

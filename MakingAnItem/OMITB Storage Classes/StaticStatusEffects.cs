@@ -24,6 +24,7 @@ namespace NevernamedsItems
         public static GameActorCharmEffect charmingRoundsEffect = PickupObjectDatabase.GetById(527).GetComponent<BulletStatusEffectItem>().CharmModifierEffect;
 
         //Cheeses
+        public static GameActorCheeseEffect elimentalerCheeseEffect = (PickupObjectDatabase.GetById(626) as Gun).DefaultModule.projectiles[0].cheeseEffect;
 
         //Speed Changes
         public static GameActorSpeedEffect tripleCrossbowSlowEffect = (PickupObjectDatabase.GetById(381) as Gun).DefaultModule.projectiles[0].speedEffect;
@@ -33,6 +34,7 @@ namespace NevernamedsItems
         //Speed Mods
         public static GameActorSpeedEffect FriendlyWebGoopSpeedMod;
         public static GameActorSpeedEffect HoneySpeedMod;
+        public static GameActorSpeedEffect FriendlyHoneySpeedMod;
         public static GameActorSpeedEffect PropulsionGoopSpeedMod;
 
         //Plague Effects
@@ -73,6 +75,26 @@ namespace NevernamedsItems
                 OverheadVFX = tripleCrossbowSlowEffect.OverheadVFX,
                 AffectsEnemies = true,
                 AffectsPlayers = true,
+                AppliesOutlineTint = false,
+                OutlineTintColor = tripleCrossbowSlowEffect.OutlineTintColor,
+                PlaysVFXOnActor = false,
+
+            };
+            FriendlyHoneySpeedMod = new GameActorSpeedEffect
+            {
+                duration = 1,
+                TintColor = tripleCrossbowSlowEffect.TintColor,
+                DeathTintColor = tripleCrossbowSlowEffect.DeathTintColor,
+                effectIdentifier = "HoneySlow",
+                AppliesTint = false,
+                AppliesDeathTint = false,
+                resistanceType = EffectResistanceType.None,
+                SpeedMultiplier = 0.60f,
+
+                //Eh
+                OverheadVFX = tripleCrossbowSlowEffect.OverheadVFX,
+                AffectsEnemies = true,
+                AffectsPlayers = false,
                 AppliesOutlineTint = false,
                 OutlineTintColor = tripleCrossbowSlowEffect.OutlineTintColor,
                 PlaysVFXOnActor = false,

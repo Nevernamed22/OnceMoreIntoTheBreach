@@ -24,14 +24,14 @@ namespace NevernamedsItems
             //gun.SetAnimationFPS(gun.shootAnimation, 10);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
-
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(55) as Gun).gunSwitchGroup;
             //GUN STATS
             gun.CanReloadNoMatterAmmo = true;
             gun.reloadTime = 1f;
             gun.barrelOffset.transform.localPosition = new Vector3(2.06f, 0.62f, 0f);
             gun.SetBaseMaxAmmo(80);
             gun.ammo = 80;
-
+            gun.gunClass = GunClass.SHOTGUN;
             //BULLET STATS
             for (int i = 0; i < 5; i++)
             {

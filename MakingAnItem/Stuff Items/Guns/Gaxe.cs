@@ -33,7 +33,7 @@ namespace NevernamedsItems
             gun.reloadTime = 1f;
             gun.barrelOffset.transform.localPosition = new Vector3(2.62f, 1.12f, 0f);
             gun.SetBaseMaxAmmo(150);
-
+            gun.gunClass = GunClass.PISTOL;
             //BULLET STATS           
 
             bool iterator = false;

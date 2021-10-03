@@ -45,7 +45,7 @@ namespace NevernamedsItems
             MegaSharkSynergyForme.NonSynergyGunId = gun.PickupObjectId;
             MegaSharkSynergyForme.SynergyGunId = 1;
             MegaSharkSynergyForme.SynergyToCheck = "Megashark";*/
-
+            gun.gunClass = GunClass.FULLAUTO;
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);

@@ -44,6 +44,8 @@ namespace NevernamedsItems
         private Gun currentHeldGun, lastHeldGun;
         protected override void Update()
         {
+            if (Owner && Owner.CurrentGun)
+            {
             currentHeldGun = Owner.CurrentGun;
             if (currentHeldGun != lastHeldGun)
             {
@@ -56,6 +58,7 @@ namespace NevernamedsItems
                     RemoveSynergyBoost();
                 }
                 lastHeldGun = currentHeldGun;
+            }
             }
             base.Update();
         }

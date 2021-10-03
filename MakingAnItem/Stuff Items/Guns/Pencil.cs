@@ -35,7 +35,7 @@ namespace NevernamedsItems
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
             gun.reloadTime = 0.1f;
             gun.muzzleFlashEffects.type = VFXPoolType.None;
-
+            gun.gunClass = GunClass.SILLY;
             gun.DefaultModule.cooldownTime = 0.0001f;
             gun.DefaultModule.numberOfShotsInClip = 5000;
             gun.barrelOffset.transform.localPosition = new Vector3(2.25f, 0.31f, 0f);

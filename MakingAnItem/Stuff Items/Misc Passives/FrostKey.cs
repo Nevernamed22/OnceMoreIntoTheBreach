@@ -77,20 +77,8 @@ namespace NevernamedsItems
             395, //Staff of Firepower
             670, //High Dragunfire
         };
-        private void OnFired(Projectile bullet, float khajhfdjsfhfdjs)
-        {
-            if (Owner.CurrentGun.PickupObjectId == 402)
-            {
-                bullet.baseData.damage *= Owner.carriedConsumables.KeyBullets;
-            }
-        }
         private void AddStat(PlayerStats.StatType statType, float amount, StatModifier.ModifyMethod method = StatModifier.ModifyMethod.ADDITIVE)
         {
-            /*foreach (var m in passiveStatModifiers)
-            {
-                if (m.statToBoost == statType) return; //don't add duplicates
-            }*/
-
             StatModifier modifier = new StatModifier
             {
                 amount = amount,
@@ -113,22 +101,6 @@ namespace NevernamedsItems
                     newModifiers.Add(passiveStatModifiers[i]);
             }
             this.passiveStatModifiers = newModifiers.ToArray();
-        }
-        public override void Pickup(PlayerController player)
-        {
-            base.Pickup(player);
-            player.PostProcessProjectile += this.OnFired;
-        }
-        public override DebrisObject Drop(PlayerController player)
-        {
-            player.PostProcessProjectile -= this.OnFired;
-            DebrisObject debrisObject = base.Drop(player);
-            return debrisObject;
-        }
-        protected override void OnDestroy()
-        {
-            //Owner.SetIsFlying(false, "shade", true, false);
-            base.OnDestroy();
         }
     }
 }

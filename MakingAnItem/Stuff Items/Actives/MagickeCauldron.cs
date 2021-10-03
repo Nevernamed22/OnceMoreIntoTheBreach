@@ -895,6 +895,7 @@ namespace NevernamedsItems
             ModdedGUIDDatabase.ExpandTheGungeonGUIDs["grenade_rat"],
             ModdedGUIDDatabase.ExpandTheGungeonGUIDs["cronenberg"],
             ModdedGUIDDatabase.ExpandTheGungeonGUIDs["agressive_cronenberg"],
+            ModdedGUIDDatabase.ExpandTheGungeonGUIDs["explodey_boy"],
         };
         public static List<string> FrostAndGunfireChaosPalette = new List<string>()
         {

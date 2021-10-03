@@ -150,6 +150,7 @@ namespace NevernamedsItems
             {
                 this.Owner = this.m_owner;
                 Owner.PostProcessProjectile += this.OnOwnerFiredGun;
+                Owner.OnEnteredCombat += OnEnteredCombat;
             }
             private void OnOwnerFiredGun(Projectile bullet, float h)
             {
@@ -204,10 +205,18 @@ namespace NevernamedsItems
                     Owner.DoPostProcessProjectile(component);
                 }
             }
+            private void OnEnteredCombat()
+            {
+                if (Owner)
+                {
+                    base.aiActor.CompanionWarp(Owner.specRigidbody.UnitCenter);
+                }
+            }
             protected override void OnDestroy()
             {
                 if (Owner)
                 {
+                Owner.OnEnteredCombat -= OnEnteredCombat;
                     Owner.PostProcessProjectile -= this.OnOwnerFiredGun;
                 }
                 base.OnDestroy();

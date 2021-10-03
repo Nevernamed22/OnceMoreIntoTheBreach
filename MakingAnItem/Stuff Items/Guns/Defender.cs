@@ -39,7 +39,7 @@ namespace NevernamedsItems
             gun.DefaultModule.numberOfShotsInClip = 10;
             gun.barrelOffset.transform.localPosition = new Vector3(1.75f, 0f, 0f);
             gun.SetBaseMaxAmmo(300);
-
+            gun.gunClass = GunClass.NONE;
             /*foreach (tk2dSpriteAnimationClip clip in gun.GetComponent<tk2dSpriteAnimator>().Library.clips)
             {
                 foreach (tk2dSpriteAnimationFrame frame in clip.frames)

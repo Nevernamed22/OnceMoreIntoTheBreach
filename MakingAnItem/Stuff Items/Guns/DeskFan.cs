@@ -37,7 +37,7 @@ namespace NevernamedsItems
             gun.SetBaseMaxAmmo(700);
             gun.ammo = 700;
             gun.doesScreenShake = false;
-
+            gun.gunClass = GunClass.SHITTY;
 
             gun.DefaultModule.angleVariance = 5;
             gun.DefaultModule.cooldownTime = 0.11f;

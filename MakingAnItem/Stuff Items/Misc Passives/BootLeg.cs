@@ -29,7 +29,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "Knock It Off";
-            string longDesc = "From a peculiar and less graphically appealing alternate dimension where dodge rolling through bullets or into enemies restores ammo."+"\n\nThis boot is as long as your entire leg!";
+            string longDesc = "From a peculiar and less graphically appealing alternate dimension where dodge rolling through bullets or into enemies restores ammo." + "\n\nThis boot is as long as your entire leg!";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -69,8 +69,11 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.OnDodgedProjectile -= this.onDodgeRolledOverBullet;
-            Owner.OnRolledIntoEnemy -= this.onDodgeRolledIntoEnemy;
+            if (Owner)
+            {
+                Owner.OnDodgedProjectile -= this.onDodgeRolledOverBullet;
+                Owner.OnRolledIntoEnemy -= this.onDodgeRolledIntoEnemy;
+            }
             base.OnDestroy();
         }
     }

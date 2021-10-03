@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -93,9 +94,10 @@ namespace NevernamedsItems
         {
             if (CurrentChallenge == ChallengeType.WHAT_ARMY)
             {
+                bool isParachuting = (AIActor.gameObject.transform.parent != null && AIActor.gameObject.transform.parent.gameObject.name.Contains("EX_Parachute"));
                 if (AIActor && AIActor.healthHaver && !AIActor.healthHaver.IsBoss && !AIActor.healthHaver.IsSubboss && !AIActor.IsSecretlyTheMineFlayer())
                 {
-                    if (AIActor.gameObject.GetComponent<HasBeenAffectedByCurrentChallenge>() == null && AIActor.gameObject.GetComponent<CompanionController>() == null)
+                    if (AIActor.gameObject.GetComponent<HasBeenAffectedByCurrentChallenge>() == null && AIActor.gameObject.GetComponent<CompanionController>() == null && !isParachuting)
                     {
                         float proc = 1;
                         if (AIActor.GetAbsoluteParentRoom().area.PrototypeRoomCategory == PrototypeDungeonRoom.RoomCategory.BOSS && AIActor.GetAbsoluteParentRoom().RoomContainsMineFlayer()) proc = 0.2f;
@@ -111,7 +113,13 @@ namespace NevernamedsItems
                             aiactor.AdditionalSimpleItemDrops = AIActor.AdditionalSimpleItemDrops;
                             aiactor.CanTargetEnemies = AIActor.CanTargetEnemies;
                             aiactor.CanTargetPlayers = AIActor.CanTargetPlayers;
-                            if (AIActor.IsInReinforcementLayer) aiactor.HandleReinforcementFallIntoRoom(0f);
+                            if (AIActor.IsInReinforcementLayer)
+                            {
+                                aiactor.invisibleUntilAwaken = true;
+                                aiactor.specRigidbody.CollideWithOthers = false;
+                                aiactor.IsGone = true;
+                                aiactor.HandleReinforcementFallIntoRoom(0f);
+                            }
                             if (aiactor.EnemyGuid == "22fc2c2c45fb47cf9fb5f7b043a70122") aiactor.CollisionDamage = 0f;
                             if (AIActor.GetComponent<ExplodeOnDeath>() != null) UnityEngine.Object.Destroy(AIActor.GetComponent<ExplodeOnDeath>());
                             AIActor.EraseFromExistence(true);
@@ -123,57 +131,9 @@ namespace NevernamedsItems
             {
                 if (AIActor && AIActor.healthHaver && !AIActor.healthHaver.IsBoss && !AIActor.healthHaver.IsSubboss && !AIActor.IsSecretlyTheMineFlayer())
                 {
-                    if (AIActor.GetComponent<CompanionController>() == null && AIActor.GetComponent<HasBeenAffectedByCurrentChallenge>() == null)
+                    if (AIActor.GetComponent<CompanionController>() == null && AIActor.GetComponent<HasBeenAffectedByCurrentChallenge>() == null && AIActor.GetComponent<DisplacedImageController>() == null && AIActor.GetComponent<WitchsBrew.HasBeenDoubledByWitchsBrew>() == null)
                     {
-                        string guid = AIActor.EnemyGuid;
-                        var enemyPrefab = EnemyDatabase.GetOrLoadByGuid(guid);
-                        AIActor aiactor = AIActor.Spawn(enemyPrefab, AIActor.gameActor.CenterPosition.ToIntVector2(VectorConversions.Floor), AIActor.GetAbsoluteParentRoom(), true, AIActor.AwakenAnimationType.Default, true);
-
-                        HasBeenAffectedByCurrentChallenge challengitude = aiactor.gameObject.AddComponent<HasBeenAffectedByCurrentChallenge>();
-                        challengitude.linkedOther = AIActor;
-                        HasBeenAffectedByCurrentChallenge challengitude2 = AIActor.gameObject.AddComponent<HasBeenAffectedByCurrentChallenge>();
-                        challengitude2.linkedOther = aiactor;
-                        aiactor.procedurallyOutlined = false;
-                        AIActor.procedurallyOutlined = false;
-                        aiactor.AssignedCurrencyToDrop = AIActor.AssignedCurrencyToDrop;
-                        aiactor.AdditionalSafeItemDrops = AIActor.AdditionalSafeItemDrops;
-                        aiactor.AdditionalSimpleItemDrops = AIActor.AdditionalSimpleItemDrops;
-                        aiactor.CanTargetEnemies = AIActor.CanTargetEnemies;
-                        aiactor.CanTargetPlayers = AIActor.CanTargetPlayers;
-                        if (AIActor.IsInReinforcementLayer) aiactor.HandleReinforcementFallIntoRoom(0f);
-                        if (aiactor.EnemyGuid == "22fc2c2c45fb47cf9fb5f7b043a70122")
-                        {
-                            aiactor.CollisionDamage = 0f;
-                            aiactor.specRigidbody.AddCollisionLayerIgnoreOverride(CollisionMask.LayerToMask(CollisionLayer.PlayerHitBox));
-                            aiactor.specRigidbody.AddCollisionLayerIgnoreOverride(CollisionMask.LayerToMask(CollisionLayer.Projectile));
-                        }
-                        else if (aiactor.EnemyGuid == "249db525a9464e5282d02162c88e0357")
-                        {
-                            if (aiactor.gameObject.GetComponent<SpawnEnemyOnDeath>())
-                            {
-                                UnityEngine.Object.Destroy(aiactor.gameObject.GetComponent<SpawnEnemyOnDeath>());
-                            }
-                        }
-
-                        //Shrinky
-                        int cachedLayer = aiactor.gameObject.layer;
-                        int cachedOutlineLayer = cachedLayer;
-                        aiactor.gameObject.layer = LayerMask.NameToLayer("Unpixelated");
-                        cachedOutlineLayer = SpriteOutlineManager.ChangeOutlineLayer(aiactor.sprite, LayerMask.NameToLayer("Unpixelated"));
-                        aiactor.EnemyScale = TargetScale;
-                        aiactor.gameObject.layer = cachedLayer;
-                        SpriteOutlineManager.ChangeOutlineLayer(aiactor.sprite, cachedOutlineLayer);
-
-
-                        int cachedLayer2 = AIActor.gameObject.layer;
-                        int cachedOutlineLayer2 = cachedLayer2;
-                        AIActor.gameObject.layer = LayerMask.NameToLayer("Unpixelated");
-                        cachedOutlineLayer2 = SpriteOutlineManager.ChangeOutlineLayer(AIActor.sprite, LayerMask.NameToLayer("Unpixelated"));
-                        AIActor.EnemyScale = TargetScale;
-                        AIActor.gameObject.layer = cachedLayer2;
-                        SpriteOutlineManager.ChangeOutlineLayer(AIActor.sprite, cachedOutlineLayer2);
-
-                        aiactor.specRigidbody.Reinitialize();
+                        GameManager.Instance.StartCoroutine(ToilEnemyDupe(AIActor));
                     }
                 }
                 else if (AIActor && AIActor.healthHaver && (AIActor.healthHaver.IsBoss || AIActor.healthHaver.IsSubboss) && !AIActor.IsSecretlyTheMineFlayer())
@@ -216,6 +176,97 @@ namespace NevernamedsItems
                     }
                 }
             }
+        }
+        private static IEnumerator ToilEnemyDupe(AIActor AIActor)
+        {
+            yield return null;
+
+            string guid = AIActor.EnemyGuid;
+            var enemyPrefab = EnemyDatabase.GetOrLoadByGuid(guid);
+            AIActor aiactor = AIActor.Spawn(enemyPrefab, AIActor.gameActor.CenterPosition.ToIntVector2(VectorConversions.Floor), AIActor.GetAbsoluteParentRoom(), true, AIActor.AwakenAnimationType.Default, true);
+
+            HasBeenAffectedByCurrentChallenge challengitude = aiactor.gameObject.AddComponent<HasBeenAffectedByCurrentChallenge>();
+            challengitude.linkedOther = AIActor;
+            HasBeenAffectedByCurrentChallenge challengitude2 = AIActor.gameObject.AddComponent<HasBeenAffectedByCurrentChallenge>();
+            challengitude2.linkedOther = aiactor;
+            aiactor.procedurallyOutlined = true;
+            AIActor.procedurallyOutlined = true;
+            aiactor.IsWorthShootingAt = AIActor.IsWorthShootingAt;
+            aiactor.IgnoreForRoomClear = AIActor.IgnoreForRoomClear;
+            aiactor.AssignedCurrencyToDrop = AIActor.AssignedCurrencyToDrop;
+            aiactor.AdditionalSafeItemDrops = AIActor.AdditionalSafeItemDrops;
+            aiactor.AdditionalSimpleItemDrops = AIActor.AdditionalSimpleItemDrops;
+            aiactor.CanTargetEnemies = AIActor.CanTargetEnemies;
+            aiactor.CanTargetPlayers = AIActor.CanTargetPlayers;
+            if (AIActor.IsInReinforcementLayer) aiactor.HandleReinforcementFallIntoRoom(0f);
+            if (AIActor.GetComponent<KillOnRoomClear>() != null)
+            {
+                KillOnRoomClear kill = aiactor.gameObject.GetOrAddComponent<KillOnRoomClear>();
+                kill.overrideDeathAnim = AIActor.GetComponent<KillOnRoomClear>().overrideDeathAnim;
+                kill.preventExplodeOnDeath = AIActor.GetComponent<KillOnRoomClear>().preventExplodeOnDeath;
+            }
+            if (aiactor.EnemyGuid == "22fc2c2c45fb47cf9fb5f7b043a70122")
+            {
+                aiactor.CollisionDamage = 0f;
+                aiactor.specRigidbody.AddCollisionLayerIgnoreOverride(CollisionMask.LayerToMask(CollisionLayer.PlayerHitBox));
+                aiactor.specRigidbody.AddCollisionLayerIgnoreOverride(CollisionMask.LayerToMask(CollisionLayer.Projectile));
+            }
+            else if (aiactor.EnemyGuid == "249db525a9464e5282d02162c88e0357")
+            {
+                if (aiactor.gameObject.GetComponent<SpawnEnemyOnDeath>())
+                {
+                    UnityEngine.Object.Destroy(aiactor.gameObject.GetComponent<SpawnEnemyOnDeath>());
+                }
+            }
+            else if (EasyEnemyTypeLists.VanillaMimics.Contains(aiactor.EnemyGuid))
+            {
+                if (AIActor.AdditionalSafeItemDrops != null && aiactor.AdditionalSafeItemDrops != null)
+                {
+                    List<PickupObject> newDrops = new List<PickupObject>();
+                    PickupObject.ItemQuality qual = PickupObject.ItemQuality.D;
+                    int itemsToReAdd = 0;
+                    for (int i = (aiactor.AdditionalSafeItemDrops.Count - 1); i >= 0; i--)
+                    {
+                        if (!BabyGoodChanceKin.lootIDlist.Contains(aiactor.AdditionalSafeItemDrops[i].PickupObjectId))
+                        {
+                            qual = aiactor.AdditionalSafeItemDrops[i].quality;
+                            itemsToReAdd++;
+                        }
+                        else
+                        {
+                            newDrops.Add(PickupObjectDatabase.GetById(aiactor.AdditionalSafeItemDrops[i].PickupObjectId));
+                        }
+                    }
+                    if (itemsToReAdd > 0)
+                    {
+                        for (int i = 0; i < itemsToReAdd; i++)
+                        {
+                            PickupObject item = LootEngine.GetItemOfTypeAndQuality<PassiveItem>(qual, null, false);
+                            if (UnityEngine.Random.value <= 0.5f) item = LootEngine.GetItemOfTypeAndQuality<Gun>(qual, null, false);
+                            newDrops.Add(item);
+                        }
+                        aiactor.AdditionalSafeItemDrops = newDrops;
+                    }
+                }
+            }
+
+
+            GameManager.Instance.StartCoroutine(Shrimk(aiactor));
+            GameManager.Instance.StartCoroutine(Shrimk(AIActor));
+
+            aiactor.specRigidbody.Reinitialize();
+            yield break;
+        }
+        private static IEnumerator Shrimk(AIActor actor)
+        {
+            while (!actor.HasBeenEngaged || !actor.HasBeenAwoken) { yield return null; }
+            int cachedLayer = actor.gameObject.layer;
+            actor.gameObject.layer = LayerMask.NameToLayer("Unpixelated");
+            int cachedOutlineLayer = SpriteOutlineManager.ChangeOutlineLayer(actor.sprite, LayerMask.NameToLayer("Unpixelated"));
+            actor.EnemyScale = TargetScale;
+            actor.gameObject.layer = cachedLayer;
+            SpriteOutlineManager.ChangeOutlineLayer(actor.sprite, cachedOutlineLayer);
+            yield break;
         }
         public static Vector2 TargetScale = new Vector2(0.75f, 0.75f);
         public static void OnLevelLoaded()

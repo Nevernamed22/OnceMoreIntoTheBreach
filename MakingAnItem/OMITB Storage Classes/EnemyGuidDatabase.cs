@@ -310,6 +310,7 @@ public class ModdedGUIDDatabase
         {"agressive_cronenberg", "6d2d7a845e464d3ca453fe1fff5fed84"},
         {"parasitic_abomination", "acd8d483f24e4c43b964fa4e54068cf1"},
         {"com4nd0_boss", "0a406e36-80eb-43b8-8ad0-c56232f9496e"},
+        {"explodey_boy", "27638478e52e4785925b578b52bf79d3" },
     };
 
     public static Dictionary<string, string> FrostAndGunfireGUIDs { get; set; } = new Dictionary<string, string>()

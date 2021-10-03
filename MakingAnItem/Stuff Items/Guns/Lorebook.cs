@@ -46,7 +46,7 @@ namespace NevernamedsItems
             gun.DefaultModule.numberOfShotsInClip = 4;
             gun.barrelOffset.transform.localPosition = new Vector3(0.93f, 0.87f, 0f);
             gun.SetBaseMaxAmmo(110);
-
+            gun.gunClass = GunClass.SILLY;
             Projectile wizardSpellProjectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
             wizardSpellProjectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(wizardSpellProjectile.gameObject);
@@ -289,7 +289,7 @@ namespace NevernamedsItems
                             projectile.baseData.speed *= 1.15f;
                             projectile.UpdateSpeed();
                             PierceProjModifier knightPiercing = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();
-                            knightPiercing.penetration = 5;
+                            knightPiercing.penetration += 5;
                             MakeLookLikeJammedBullet(projectile);
                         }
                     }

@@ -38,14 +38,14 @@ namespace NevernamedsItems
             gun.DefaultModule.numberOfShotsInClip = 5;
             gun.barrelOffset.transform.localPosition = new Vector3(2.06f, 0.75f, 0f);
             gun.SetBaseMaxAmmo(200);
-
+            gun.gunClass = GunClass.RIFLE;
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
-            projectile.baseData.damage *= 0.8f;
+            projectile.baseData.damage = 7f;
             projectile.baseData.force *= 5f;
             projectile.baseData.speed *= 1f;
             projectile.baseData.range *= 1f;

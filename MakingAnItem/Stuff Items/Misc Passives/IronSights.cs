@@ -42,7 +42,9 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.D;
 
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
+            IronSightsID = item.PickupObjectId;
         }
+        public static int IronSightsID;
         public override void Pickup(PlayerController player)
         {
             bool hasntAlreadyBeenCollected = !this.m_pickedUpThisRun;

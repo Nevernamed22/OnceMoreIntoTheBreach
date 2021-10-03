@@ -168,6 +168,11 @@ namespace NevernamedsItems
                 SpriteOutlineManager.RemoveOutlineFromSprite(self.sprite, true);
                 self.Pickup(player);
             }
+            else if (player.CurrentGun && !player.CurrentGun.CanGainAmmo)
+            {
+                GameUIRoot.Instance.InformNeedsReload(player, new Vector3(player.specRigidbody.UnitCenter.x - player.transform.position.x, 1.25f, 0f), 1f, "#RELOAD_FULL");
+                return;
+            }
             else
             {
                 orig(self, player);

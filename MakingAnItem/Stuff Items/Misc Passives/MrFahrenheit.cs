@@ -30,7 +30,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "200 Degrees";
-            string longDesc = "Sprint around, leaving a firey trail!"+"\n\nThere's no stopping you!";
+            string longDesc = "Sprint around, leaving a firey trail!" + "\n\nThere's no stopping you!";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -145,9 +145,11 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            //Owner.SetIsFlying(false, "shade", true, false);
-            Owner.healthHaver.damageTypeModifiers.Remove(this.m_fireImmunity);
-            Owner.PostProcessProjectile -= this.OnFired;
+            if (Owner)
+            {
+                Owner.healthHaver.damageTypeModifiers.Remove(this.m_fireImmunity);
+                Owner.PostProcessProjectile -= this.OnFired;
+            }
             base.OnDestroy();
         }
         private DamageTypeModifier m_fireImmunity;

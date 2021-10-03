@@ -81,7 +81,7 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.PostProcessProjectile -= this.PostProcessProjectile;
+            if (Owner) Owner.PostProcessProjectile -= this.PostProcessProjectile;
             base.OnDestroy();
         }
     }

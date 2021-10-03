@@ -46,12 +46,18 @@
     <Reference Include="MonoMod.Utils">
       <HintPath>..\..\..\..\Desktop\Dependancies\MonoMod.Utils.dll</HintPath>
     </Reference>
+    <Reference Include="PlayMaker">
+      <HintPath>..\..\..\..\Desktop\Dependancies\PlayMaker.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\Desktop\Dependancies\UnityEngine.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\..\..\Desktop\Dependancies\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
@@ -69,17 +75,38 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnemyAPI\EnemyBuilder.cs" />
     <Compile Include="GungeonAPI\Dungeon Code\ShrineTools.cs" />
     <Compile Include="GungeonAPI\Shrine API\NPCInteractble.cs" />
     <Compile Include="GungeonAPI\Shrine API\OldShrineFactory.cs" />
+    <Compile Include="GungeonAPI\Shrine API\ReloadBreachShrineHooks.cs" />
+    <Compile Include="ItemAPI\ThrowableAPI.cs" />
+    <Compile Include="NPCAPI\LootTableTools.cs" />
+    <Compile Include="NPCAPI\NPCAPI.cs" />
+    <Compile Include="OMITB Companions\AdvEnemyBuilder.cs" />
+    <Compile Include="OMITB Companions\BabyGoodDet.cs" />
+    <Compile Include="OMITB Companions\MolotovBuddy.cs" />
+    <Compile Include="OMITB Companions\TemplateCompanion.cs" />
+    <Compile Include="OMITB Companions\TestEnemy.cs" />
+    <Compile Include="OMITB Extensions and Hooks\ExplosionHooks.cs" />
     <Compile Include="OMITB Misc Game Changers\Curses.cs" />
     <Compile Include="OMITB Misc Toolboxes\AdvancedLogging.cs" />
-    <Compile Include="OMITB Misc Toolboxes\CompanionToolbox.cs" />
+    <Compile Include="OMITB Misc Toolboxes\BeamComponents.cs" />
+    <Compile Include="OMITB Misc Toolboxes\CustomDarknessHandler.cs" />
+    <Compile Include="OMITB Misc Toolboxes\DeconstructHitEffects.cs" />
     <Compile Include="OMITB Misc Toolboxes\ProjectileTrailHelper.cs" />
+    <Compile Include="OMITB Misc Toolboxes\SoundCode\AudioResourceLoader.cs" />
     <Compile Include="OMITB Misc Toolboxes\TentacleDraw.cs" />
     <Compile Include="Stuff Items\Actives\BitBucket.cs" />
+    <Compile Include="Stuff Items\Actives\FireBomb.cs" />
+    <Compile Include="Stuff Items\Actives\InfantryGrenade.cs" />
+    <Compile Include="Stuff Items\Actives\Lvl2Molotov.cs" />
     <Compile Include="Stuff Items\Actives\NecromancersRightHand.cs" />
+    <Compile Include="Stuff Items\Ammolets\BronzeAmmolet.cs" />
+    <Compile Include="Stuff Items\Ammolets\HepatizonAmmolet.cs" />
+    <Compile Include="Stuff Items\Ammolets\NeutroniumAmmolet.cs" />
     <Compile Include="Stuff Items\Guns\Accelerator.cs" />
+    <Compile Include="Stuff Items\Guns\Beams\AlphaBeam.cs" />
     <Compile Include="Stuff Items\Guns\Beams\BoomBeam.cs" />
     <Compile Include="Stuff Items\Guns\Beams\Carrion.cs" />
     <Compile Include="Stuff Items\Guns\Beams\CarrionFormeThree.cs" />
@@ -88,14 +115,30 @@
     <Compile Include="Stuff Items\Guns\Beams\SickWorm.cs" />
     <Compile Include="Stuff Items\Guns\Beams\WallRay.cs" />
     <Compile Include="Stuff Items\Guns\Beams\YBeam.cs" />
+    <Compile Include="Stuff Items\Guns\BigShot.cs" />
     <Compile Include="Stuff Items\Guns\BioTranstater2100.cs" />
     <Compile Include="Stuff Items\Guns\BolaGun.cs" />
+    <Compile Include="Stuff Items\Guns\BottleRocket.cs" />
+    <Compile Include="Stuff Items\Guns\ChromaGun.cs" />
+    <Compile Include="Stuff Items\Guns\DoubleGun.cs" />
+    <Compile Include="Stuff Items\Guns\GayK47.cs" />
+    <Compile Include="Stuff Items\Guns\Glazerbeam.cs" />
+    <Compile Include="Stuff Items\Guns\GrenadeShotgun.cs" />
     <Compile Include="Stuff Items\Guns\Pandephonium.cs" />
+    <Compile Include="Stuff Items\Guns\Paraglocks.cs" />
     <Compile Include="Stuff Items\Guns\RC360.cs" />
+    <Compile Include="Stuff Items\Guns\SaltGun.cs" />
+    <Compile Include="Stuff Items\Guns\St4ke.cs" />
+    <Compile Include="Stuff Items\Guns\StarterPistol.cs" />
     <Compile Include="Stuff Items\Guns\Synergy Formes\UterinePolypWombular.cs" />
+    <Compile Include="Stuff Items\Guns\TauCannon.cs" />
+    <Compile Include="Stuff Items\Guns\TheBride.cs" />
+    <Compile Include="Stuff Items\Guns\TheGroom.cs" />
     <Compile Include="Stuff Items\Guns\UterinePolyp.cs" />
     <Compile Include="Stuff Items\Guns\Welgun.cs" />
     <Compile Include="Stuff Items\Guns\Welrod.cs" />
+    <Compile Include="Stuff Items\Guon Stones\InfraRedGuonStone.cs" />
+    <Compile Include="Stuff Items\Guon Stones\UltraVioletGuonStone.cs" />
     <Compile Include="Stuff Items\Misc Passives\1Shot.cs" />
     <Compile Include="Stuff Items\Misc Passives\50calrounds.cs" />
     <Compile Include="Stuff Items\Misc Passives\AcidAura.cs" />
@@ -108,6 +151,7 @@
     <Compile Include="Stuff Items\Ammolets\Autollet.cs" />
     <Compile Include="Stuff Items\Guns\BackWarder.cs" />
     <Compile Include="Stuff Items\Guns\BarcodeScanner.cs" />
+    <Compile Include="Stuff Items\Misc Passives\ArmourBandage.cs" />
     <Compile Include="Stuff Items\Misc Passives\ArtilleryBelt.cs" />
     <Compile Include="Stuff Items\Misc Passives\Bayonet.cs" />
     <Compile Include="Stuff Items\Guns\Beams\BeamBlade.cs" />
@@ -122,6 +166,7 @@
     <Compile Include="Stuff Items\Misc Passives\CartographersEye.cs" />
     <Compile Include="Stuff Items\Misc Passives\ChemicalBurn.cs" />
     <Compile Include="Stuff Items\Actives\ClipOnAmmoPouch.cs" />
+    <Compile Include="Stuff Items\Misc Passives\Citrinitas.cs" />
     <Compile Include="Stuff Items\Misc Passives\CloakOfDarkness.cs" />
     <Compile Include="Stuff Items\Guns\Copygat.cs" />
     <Compile Include="Stuff Items\Guns\Creditor.cs" />
@@ -136,12 +181,15 @@
     <Compile Include="OMITB Companions\DroneCompanion.cs" />
     <Compile Include="Stuff Items\Guns\EmberCannon.cs" />
     <Compile Include="Stuff Items\Guns\Entropew.cs" />
+    <Compile Include="Stuff Items\Misc Passives\EargesplittenLoudenboomerRounds.cs" />
     <Compile Include="Stuff Items\Misc Passives\Equality.cs" />
     <Compile Include="Stuff Items\Misc Passives\Eraser.cs" />
     <Compile Include="Stuff Items\Misc Passives\FoamDarts.cs" />
     <Compile Include="Stuff Items\Guns\GatlingGun.cs" />
     <Compile Include="Stuff Items\Guns\Synergy Formes\GatlingGunGatterUp.cs" />
     <Compile Include="Stuff Items\Guns\Gaxe.cs" />
+    <Compile Include="Stuff Items\Misc Passives\FocalLenses.cs" />
+    <Compile Include="Stuff Items\Misc Passives\FowlRing.cs" />
     <Compile Include="Stuff Items\Misc Passives\GlassShard.cs" />
     <Compile Include="Stuff Items\Guns\Glasster.cs" />
     <Compile Include="Stuff Items\Guns\Glock42.cs" />
@@ -191,9 +239,17 @@
     <Compile Include="Stuff Items\Guns\KillithidTendril.cs" />
     <Compile Include="Stuff Items\Ammolets\KinAmmolet.cs" />
     <Compile Include="Stuff Items\Guns\KineticBlaster.cs" />
+    <Compile Include="Stuff Items\Misc Passives\HematicRounds.cs" />
+    <Compile Include="Stuff Items\Misc Passives\HoleyWater.cs" />
+    <Compile Include="Stuff Items\Misc Passives\JawsOfDefeat.cs" />
+    <Compile Include="Stuff Items\Misc Passives\LeadSoul.cs" />
     <Compile Include="Stuff Items\Misc Passives\Nigredo.cs" />
+    <Compile Include="Stuff Items\Misc Passives\Rubedo.cs" />
+    <Compile Include="Stuff Items\Misc Passives\ShadesEye.cs" />
     <Compile Include="Stuff Items\Misc Passives\ShadeShot.cs" />
     <Compile Include="Stuff Items\Misc Passives\ShoulderHolster.cs" />
+    <Compile Include="Stuff Items\Misc Passives\Shrinkshot.cs" />
+    <Compile Include="Stuff Items\Misc Passives\TheShell.cs" />
     <Compile Include="Stuff Items\Misc Passives\WitheringChamber.cs" />
     <Compile Include="Stuff Items\New Item Classes\LabelablePlayerItem.cs" />
     <Compile Include="Stuff Items\Misc Passives\LaserBullets.cs" />
@@ -321,7 +377,15 @@
     <Compile Include="Stuff Items\Misc Passives\EmptyRounds.cs" />
     <Compile Include="Stuff Items\Misc Passives\EndlessBullets.cs" />
     <Compile Include="ExampleGun.cs" />
-    <Compile Include="ExistantGunModifiers.cs" />
+    <Compile Include="Stuff NPCs\Carto.cs" />
+    <Compile Include="Stuff NPCs\Rusty.cs" />
+    <Compile Include="Stuff Shrines\ArtemissileShrine.cs" />
+    <Compile Include="Stuff Shrines\DagunShrine.cs" />
+    <Compile Include="Stuff Shrines\ExecutionerShrine.cs" />
+    <Compile Include="Stuff Shrines\InvestmentShrine.cs" />
+    <Compile Include="Stuff Shrines\RelodinShrine.cs" />
+    <Compile Include="Stuff Shrines\TurtleShrine.cs" />
+    <Compile Include="Stuff Tweaks\ExistantGunModifiers.cs" />
     <Compile Include="Stuff Items\Misc Passives\ExoskeletalArmour.cs" />
     <Compile Include="Stuff Items\Guns\Felissile.cs" />
     <Compile Include="Stuff Items\Guns\FingerGuns.cs" />
@@ -349,7 +413,7 @@
     <Compile Include="Stuff Items\Guns\HotGlueGun.cs" />
     <Compile Include="Stuff Items\Guns\Hwacha.cs" />
     <Compile Include="Stuff Items\Guns\Icicle.cs" />
-    <Compile Include="InitialiseSynergies.cs" />
+    <Compile Include="Stuff Items\InitialiseSynergies.cs" />
     <Compile Include="Stuff Items\New Item Classes\IntersectEnemyBulletsItem.cs" />
     <Compile Include="ItemAPI\AdvancedGunBehaviour.cs" />
     <Compile Include="ItemAPI\ApplyOffset.cs" />
@@ -402,7 +466,7 @@
     <Compile Include="Stuff Items\Guns\Pista.cs" />
     <Compile Include="Stuff Items\Actives\PocketChest.cs" />
     <Compile Include="Stuff Items\Guns\PoisonDartFrog.cs" />
-    <Compile Include="CustomGoopEffectHandler.cs" />
+    <Compile Include="OMITB Misc Toolboxes\CustomGoopEffectHandler.cs" />
     <Compile Include="Stuff Items\Actives\PortableHole.cs" />
     <Compile Include="Stuff Items\Guns\Primos1.cs" />
     <Compile Include="Stuff Items\Guns\Protean.cs" />
@@ -472,7 +536,7 @@
     <Compile Include="Stuff Items\Misc Passives\ClaySculpture.cs" />
     <Compile Include="Stuff Items\Misc Passives\CleansingRounds.cs" />
     <Compile Include="Stuff Items\Misc Passives\ComicallyGiganticBullets.cs" />
-    <Compile Include="Commands.cs" />
+    <Compile Include="OMITB Misc Game Changers\Commands.cs" />
     <Compile Include="Stuff Items\Misc Passives\CrowdedClip.cs" />
     <Compile Include="Stuff Items\Misc Passives\CycloneCylinder.cs" />
     <Compile Include="Stuff Items\Actives\DaggerOfTheAimgel.cs" />
@@ -512,7 +576,6 @@
     <Compile Include="Stuff Items\Actives\GTCWTVRP.cs" />
     <Compile Include="GungeonAPI\Dungeon Code\DungeonHandler.cs" />
     <Compile Include="GungeonAPI\Dungeon Code\DungeonHooks.cs" />
-    <Compile Include="GungeonAPI\GungeonAPI.cs" />
     <Compile Include="GungeonAPI\Shrine API\HitboxMonitor.cs" />
     <Compile Include="GungeonAPI\Shrine API\NPCBuilder.cs" />
     <Compile Include="GungeonAPI\NuclearInteractable.cs" />
@@ -539,7 +602,7 @@
     <Compile Include="Stuff Items\Misc Passives\HiveHolster.cs" />
     <Compile Include="Stuff Items\Misc Passives\HornedHelmet.cs" />
     <Compile Include="Stuff Items\Actives\IdentityCrisis.cs" />
-    <Compile Include="Inevitus.cs" />
+    <Compile Include="Roulette.cs" />
     <Compile Include="IngressBullets.cs" />
     <Compile Include="Stuff Items\Misc Passives\IronSights.cs" />
     <Compile Include="Stuff Items\Actives\FalseBlank.cs" />
@@ -569,7 +632,7 @@
     <Compile Include="Stuff Items\Actives\LuckyCoin.cs" />
     <Compile Include="Stuff Items\Actives\MagickeCauldron.cs" />
     <Compile Include="Stuff Items\Misc Passives\MaidenShapedBox.cs" />
-    <Compile Include="MasteryReplacement.cs" />
+    <Compile Include="OMITB Misc Game Changers\MasteryReplacement.cs" />
     <Compile Include="Stuff Items\Misc Passives\MicroAIContact.cs" />
     <Compile Include="Stuff Items\Misc Passives\MinersBullets.cs" />
     <Compile Include="Stuff Items\Guns\Minigun.cs" />
@@ -650,7 +713,7 @@
     <EmbeddedResource Include="Resources\primabean_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\bashingbullets_icon.png" />
+    <EmbeddedResource Include="Resources\BulletModifiers\bashingbullets_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\titanbullets_icon.png" />
@@ -2692,6 +2755,275 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\albedo_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\citrinitas_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\rubedo_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\GuonStones\ultravioletguonstone_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\GuonStones\ultravioletguon_ingame.png" />
+    <EmbeddedResource Include="Resources\GuonStones\ultravioletguon_synergy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\ChromaGunDroids\chromadroid_red_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\ChromaGunDroids\chromadroid_red_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\ChromaGunDroids\chromadroid_red_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\ChromaGunDroids\chromadroid_red_idle_004.png" />
+    <EmbeddedResource Include="Resources\Companions\ChromaGunDroids\chromadroid_red_idle_005.png" />
+    <EmbeddedResource Include="Resources\Companions\ChromaGunDroids\chromadroid_red_idle_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\shadeseye_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\MiscVFX\LeadSoulVFX\leadsouloverhead_001.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\LeadSoulVFX\leadsouloverhead_002.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\LeadSoulVFX\leadsouloverhead_003.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\LeadSoulVFX\leadsouloverhead_004.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\LeadSoulVFX\leadsouloverhead_005.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\LeadSoulVFX\leadsouloverhead_006.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\LeadSoulVFX\leadsouloverhead_007.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\LeadSoulVFX\leadsouloverhead_008.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\LeadSoulVFX\leadsouloverhead_009.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\LeadSoulVFX\leadsouloverhead_010.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\LeadSoulVFX\leadsouloverhead_011.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\LeadSoulVFX\leadsouloverhead_012.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\LeadSoulVFX\leadsouloverhead_013.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\LeadSoulVFX\leadsouloverhead_014.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\LeadSoulVFX\leadsouloverhead_015.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\LeadSoulVFX\leadsouloverhead_016.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\LeadSoulVFX\leadsouloverhead_017.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\leadsoul_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\GuonStones\infraredguonstone_icon.png" />
+    <EmbeddedResource Include="Resources\GuonStones\infraredguonstone_ingame.png" />
+    <EmbeddedResource Include="Resources\GuonStones\infraredguonstone_synergy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CurseIcons\hive_icon.png" />
+    <EmbeddedResource Include="Resources\CurseIcons\sludge_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CurseIcons\flames_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CurseIcons\butterfingers_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\jawsofdefeat_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Shrines\investment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\EmbeddedRooms\InvestmentShrineRoom.room" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\EmbeddedRooms\ShrineTestDebug.room" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Shrines\investment_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\EmbeddedRooms\CartoRoom.room" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NPCSprites\Carto\carto_idle_001.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Carto\carto_idle_002.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Carto\carto_idle_003.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Carto\carto_idle_004.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Carto\carto_idle_005.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Carto\carto_idle_006.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Carto\carto_idle_007.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Carto\carto_shadow_001.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Carto\carto_talk_001.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Carto\carto_talk_002.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Carto\carto_talk_003.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Carto\carto_talk_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NPCSprites\Rusty\rusty_buy_001.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Rusty\rusty_buy_002.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Rusty\rusty_buy_003.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Rusty\rusty_buy_004.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Rusty\rusty_idle_001.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Rusty\rusty_idle_002.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Rusty\rusty_idle_003.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Rusty\rusty_idle_004.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Rusty\rusty_idle_005.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Rusty\rusty_idle_006.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Rusty\rusty_talk_001.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Rusty\rusty_talk_002.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Rusty\rusty_talk_003.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Rusty\rusty_talk_004.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Rusty\rusty_talk_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Shrines\relodin_popup.png" />
+    <EmbeddedResource Include="Resources\Shrines\relodin_shrine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\EmbeddedRooms\RelodinShrineRoom.room" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Shrines\dagun_popup.png" />
+    <EmbeddedResource Include="Resources\Shrines\dagun_shrine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\EmbeddedRooms\DagunShrine.room" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Shrines\artemissile_popup.png" />
+    <EmbeddedResource Include="Resources\Shrines\artemissile_shrine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\EmbeddedRooms\ArtemissileShrine.room" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\EmbeddedRooms\RustyRoom.room" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Shrines\executioner_icon.png" />
+    <EmbeddedResource Include="Resources\Shrines\executioner_shrine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\EmbeddedRooms\ExecutionerShrine.room" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NPCSprites\Rusty\rustycarpet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CurseIcons\darkness_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\armourbandage_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\shrinkshot_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\focallenses_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\hepatizonammolet_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\bronzeammolet_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BeamSprites\alphabeam_mid_001.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\alphabeam_mid_002.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\alphabeam_mid_003.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\alphabeam_mid_004.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\alphabeam_start_001.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\alphabeam_start_002.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\alphabeam_start_003.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\alphabeam_start_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BeamSprites\alphabeam_end_001.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\alphabeam_end_002.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\alphabeam_end_003.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\alphabeam_end_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BeamSprites\alphabeam_impact_001.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\alphabeam_impact_002.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\alphabeam_impact_003.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\alphabeam_impact_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BulletModifiers\theshell_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BulletModifiers\hematicrounds_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_burst_001.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_burst_002.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_burst_003.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_burst_004.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_burst_005.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_burst_006.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_idle_left_001.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_idle_left_002.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_idle_left_003.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_idle_left_004.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_idle_right_001.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_idle_right_002.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_idle_right_003.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_idle_right_004.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_move_left_001.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_move_left_002.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_move_left_003.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_move_left_004.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_move_left_005.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_move_left_006.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_move_right_001.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_move_right_002.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_move_right_003.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_move_right_004.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_move_right_005.png" />
+    <EmbeddedResource Include="Resources\Companions\MolotovBud\molotovbud_move_right_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ThrowableActives\lvl2molotov_burst_001.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\lvl2molotov_burst_002.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\lvl2molotov_burst_003.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\lvl2molotov_burst_004.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\lvl2molotov_icon.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\lvl2molotov_spin_001.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\lvl2molotov_spin_002.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\lvl2molotov_spin_003.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\lvl2molotov_spin_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\BabyGoodDet\babygooddet_attack_001.png" />
+    <EmbeddedResource Include="Resources\Companions\BabyGoodDet\babygooddet_attack_002.png" />
+    <EmbeddedResource Include="Resources\Companions\BabyGoodDet\babygooddet_attack_003.png" />
+    <EmbeddedResource Include="Resources\Companions\BabyGoodDet\babygooddet_contattack_001.png" />
+    <EmbeddedResource Include="Resources\Companions\BabyGoodDet\babygooddet_contattack_002.png" />
+    <EmbeddedResource Include="Resources\Companions\BabyGoodDet\babygooddet_icon.png" />
+    <EmbeddedResource Include="Resources\Companions\BabyGoodDet\babygooddet_idle_001.png" />
+    <EmbeddedResource Include="Resources\Companions\BabyGoodDet\babygooddet_idle_002.png" />
+    <EmbeddedResource Include="Resources\Companions\BabyGoodDet\babygooddet_idle_003.png" />
+    <EmbeddedResource Include="Resources\Companions\BabyGoodDet\babygooddet_idle_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ThrowableActives\infantrygrenade_explode_001.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\infantrygrenade_icon.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\infantrygrenade_throw_001.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\infantrygrenade_throw_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NeoItemSprites\loudenboomer_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NeoItemSprites\holeywater_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NeoItemSprites\fowlring_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Ammolets\neutroniumammolet_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Shrines\turtle_icon.png" />
+    <EmbeddedResource Include="Resources\Shrines\turtle_shrine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\EmbeddedRooms\TurtleShrineRoom.room" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

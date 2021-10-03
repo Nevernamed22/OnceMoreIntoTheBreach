@@ -52,6 +52,8 @@ namespace NevernamedsItems
                 projectile.gameObject.SetActive(false);
                 FakePrefab.MarkAsFakePrefab(projectile.gameObject);
                 UnityEngine.Object.DontDestroyOnLoad(projectile);
+                projectile.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(369) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX;
+                projectile.hitEffects.alwaysUseMidair = true;
                 projectile.baseData.damage *= 1.4f;
                 projectile.baseData.speed *= 1.2f;
                 GoopModifier blood = projectile.gameObject.AddComponent<GoopModifier>();
@@ -69,7 +71,7 @@ namespace NevernamedsItems
             gun.reloadTime = 1.3f;
             gun.barrelOffset.transform.localPosition = new Vector3(2.62f, 0.81f, 0f);
             gun.SetBaseMaxAmmo(80);
-
+            gun.gunClass = GunClass.SHOTGUN;
             //BULLET STATS
 
             // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.

@@ -10,63 +10,49 @@ namespace NevernamedsItems
 {
     class IdentityCrisis : PlayerItem
     {
-        //Call this method from the Start() method of your ETGModule extension class
         public static void Init()
         {
-            //The name of the item
             string itemName = "Identity Crisis";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it.
             string resourceName = "NevernamedsItems/Resources/identitycrisis_icon";
 
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
 
-            //Add a ActiveItem component to the object
             var item = obj.AddComponent<IdentityCrisis>();
 
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
 
-            //Ammonomicon entry variables
             string shortDesc = "WHO AM I?";
             string longDesc = "Makes you completely forget who you are.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //"kts" here is the item pool. In the console you'd type kts:sweating_bullets
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Set the cooldown type and duration of the cooldown
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 1000);
-
-            //Adds a passive modifier, like curse, coolness, damage, etc. to the item. Works for passives and actives.
-
-            //Set some other fields
             item.consumable = true;
             item.quality = ItemQuality.B;
-
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
-            //SYNERGIES 
-            //WITH WINGMAN, WOLF, or UNITY --> "Those We Left Behind" (Gives the slinger, Dart gun, and Lamey's starter)
-            List<string> mandatorySynergyItems = new List<string>() { "nn:identity_crisis" };
-            List<string> optionalSynergyItems = new List<string>() { "clone", "shadow_clone", "gun_soul" };
-            CustomSynergies.Add("New run, New me", mandatorySynergyItems, optionalSynergyItems);
-            //WITH CLONE, SHADOW CLONE, OR GUN SOUL --> "New Run, new me" (gives ALL character starters)            
-            
-            List<string> mandatorySynergyItems2 = new List<string>() { "nn:identity_crisis" };
-            List<string> optionalSynergyItems2 = new List<string>() { "wingman", "wolf", "unity" };
-            CustomSynergies.Add("Those We Left Behind", mandatorySynergyItems2, optionalSynergyItems2);
         }
-
-        //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!
 
         protected override void DoEffect(PlayerController user)
         {
-            //Play a sound effect
             float currentCurse = user.stats.GetBaseStatValue(PlayerStats.StatType.Curse);
             user.stats.SetBaseStatValue(PlayerStats.StatType.Curse, currentCurse + 1f, user);
-            if (user.HasPickupID(491) || user.HasPickupID(492) || user.HasPickupID(495))
+            if (user.PlayerHasActiveSynergy("Those We Left Behind"))
             {
+                if (user.PlayerHasActiveSynergy("Associated Disassociations"))
+                {
+                    List<int> newIDs = new List<int>()
+                            {
+                                24,
+                                811,
+                                604,
+                                603
+                            };
+                    foreach (Gun gun in user.inventory.AllGuns)
+                    {
+                        if (gun.GetComponent<Paraglocks>() != null)
+                        {
+                            gun.GetComponent<Paraglocks>().idsBuffedByAssociatedDissasociationsSynergy.AddRange(newIDs);
+                        }
+                    }
+                }
                 if (!user.HasPickupID(24) && !user.HasPickupID(811))
                 {
                     Gun CharacterStarterGun = (PickupObjectDatabase.GetById(24) as Gun);
@@ -83,7 +69,7 @@ namespace NevernamedsItems
                     LastOwner.inventory.AddGunToInventory(CharacterStarterGun, true);
                 }
             }
-            if (user.HasPickupID(311) || user.HasPickupID(820) || user.HasPickupID(489))
+            if (user.PlayerHasActiveSynergy("New run, New me"))
             {
                 GiveHunterLoadout(user);
                 GiveConvictLoadout(user);
@@ -93,7 +79,6 @@ namespace NevernamedsItems
                 GiveRobotLoadout(user);
             }
             else pickRandomCharacter();
-            //start a coroutine which calls the EndEffect method when the item's effect duration runs out
         }
 
         private void pickRandomCharacter()
@@ -101,7 +86,6 @@ namespace NevernamedsItems
             int character = UnityEngine.Random.Range(1, 7);
             if (character == 1 && LastOwner.characterIdentity != PlayableCharacters.Guide)
             {
-                ETGModConsole.Log("The item seleced the Hunter loadout");
                 GiveHunterLoadout(LastOwner);
             }
             else if (character == 1 && LastOwner.characterIdentity == PlayableCharacters.Guide)
@@ -186,6 +170,14 @@ namespace NevernamedsItems
                 Gun RustySidearm = (PickupObjectDatabase.GetById(99) as Gun);
                 LastOwner.inventory.AddGunToInventory(RustySidearm, true);
             }
+            foreach (Gun gun in user.inventory.AllGuns)
+            {
+                if (gun.GetComponent<Paraglocks>() != null)
+                {
+                    gun.GetComponent<Paraglocks>().idsBuffedByAssociatedDissasociationsSynergy.Add(99);
+                    gun.GetComponent<Paraglocks>().idsBuffedByAssociatedDissasociationsSynergy.Add(810);
+                }
+            }
         }
         private void GiveConvictLoadout(PlayerController user)
         {
@@ -212,6 +204,14 @@ namespace NevernamedsItems
             {
                 PickupObject Molotov = PickupObjectDatabase.GetById(366);
                 LootEngine.SpawnItem(Molotov.gameObject, LastOwner.specRigidbody.UnitCenter, Vector2.left, 1f, false, true, false);
+            }
+            foreach (Gun gun in user.inventory.AllGuns)
+            {
+                if (gun.GetComponent<Paraglocks>() != null)
+                {
+                    gun.GetComponent<Paraglocks>().idsBuffedByAssociatedDissasociationsSynergy.Add(80);
+                    gun.GetComponent<Paraglocks>().idsBuffedByAssociatedDissasociationsSynergy.Add(652);
+                }
             }
         }
         private void GivePilotLoadout(PlayerController user)
@@ -240,6 +240,14 @@ namespace NevernamedsItems
                 PickupObject Molotov = PickupObjectDatabase.GetById(356);
                 LootEngine.SpawnItem(Molotov.gameObject, LastOwner.specRigidbody.UnitCenter, Vector2.left, 1f, false, true, false);
             }
+            foreach (Gun gun in user.inventory.AllGuns)
+            {
+                if (gun.GetComponent<Paraglocks>() != null)
+                {
+                    gun.GetComponent<Paraglocks>().idsBuffedByAssociatedDissasociationsSynergy.Add(89);
+                    gun.GetComponent<Paraglocks>().idsBuffedByAssociatedDissasociationsSynergy.Add(651);
+                }
+            }
         }
         private void GiveMarineLoadout(PlayerController user)
         {
@@ -263,6 +271,14 @@ namespace NevernamedsItems
             }
             //Give 1 Armour
             LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(120).gameObject, LastOwner);
+            foreach (Gun gun in user.inventory.AllGuns)
+            {
+                if (gun.GetComponent<Paraglocks>() != null)
+                {
+                    gun.GetComponent<Paraglocks>().idsBuffedByAssociatedDissasociationsSynergy.Add(86);
+                    gun.GetComponent<Paraglocks>().idsBuffedByAssociatedDissasociationsSynergy.Add(809);
+                }
+            }
         }
         private void GiveRobotLoadout(PlayerController user)
         {
@@ -284,6 +300,14 @@ namespace NevernamedsItems
                 PickupObject CharacterActive = PickupObjectDatabase.GetById(411);
                 LootEngine.SpawnItem(CharacterActive.gameObject, LastOwner.specRigidbody.UnitCenter, Vector2.left, 1f, false, true, false);
             }
+            foreach (Gun gun in user.inventory.AllGuns)
+            {
+                if (gun.GetComponent<Paraglocks>() != null)
+                {
+                    gun.GetComponent<Paraglocks>().idsBuffedByAssociatedDissasociationsSynergy.Add(88);
+                    gun.GetComponent<Paraglocks>().idsBuffedByAssociatedDissasociationsSynergy.Add(812);
+                }
+            }
         }
         private void GiveBulletLoadout(PlayerController user)
         {
@@ -298,6 +322,14 @@ namespace NevernamedsItems
             {
                 Gun CharacterStarterGun = (PickupObjectDatabase.GetById(417) as Gun);
                 LastOwner.inventory.AddGunToInventory(CharacterStarterGun, true);
+            }
+            foreach (Gun gun in user.inventory.AllGuns)
+            {
+                if (gun.GetComponent<Paraglocks>() != null)
+                {
+                    gun.GetComponent<Paraglocks>().idsBuffedByAssociatedDissasociationsSynergy.Add(417);
+                    gun.GetComponent<Paraglocks>().idsBuffedByAssociatedDissasociationsSynergy.Add(813);
+                }
             }
         }
     }

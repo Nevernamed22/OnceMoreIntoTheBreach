@@ -36,7 +36,7 @@ namespace NevernamedsItems
             gun.DefaultModule.cooldownTime = 0.3f;
             gun.DefaultModule.numberOfShotsInClip = 10;
             gun.SetBaseMaxAmmo(1924);
-
+            gun.gunClass = GunClass.SHITTY;
 
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);
@@ -49,8 +49,9 @@ namespace NevernamedsItems
 
             gun.quality = PickupObject.ItemQuality.D;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
-
+            TheLodgerID = gun.PickupObjectId;
         }
+        public static int TheLodgerID;
         public override void PostProcessProjectile(Projectile projectile)
         {
             PlayerController playerController = this.gun.CurrentOwner as PlayerController;

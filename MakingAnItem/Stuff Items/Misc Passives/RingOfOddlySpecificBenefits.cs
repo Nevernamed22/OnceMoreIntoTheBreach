@@ -76,7 +76,7 @@ namespace NevernamedsItems
                 }
                 if (currentCurse != lastCurse || currentCoolness != lastCoolness)
                 {
-                    bool coolnessAndCurseNull = currentCurse == 0 && currentCoolness == 0;  
+                    bool coolnessAndCurseNull = currentCurse == 0 && currentCoolness == 0;
                     if (coolnessAndCurseNull)
                     {
                         curseAndCoolnessMatch = false;
@@ -192,7 +192,7 @@ namespace NevernamedsItems
         bool activeOutline = false;
         public override void Pickup(PlayerController player)
         {
-            player.healthHaver.OnDamaged += this.PlayerTookDamage;           
+            player.healthHaver.OnDamaged += this.PlayerTookDamage;
             base.Pickup(player);
         }
         public override DebrisObject Drop(PlayerController player)
@@ -205,10 +205,12 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            DisableVFX(Owner);
-            activeOutline = false;
-            Owner.healthHaver.OnDamaged -= this.PlayerTookDamage;
-            //Owner.SetIsFlying(false, "shade", true, false);
+            if (Owner)
+            {
+                DisableVFX(Owner);
+                activeOutline = false;
+                Owner.healthHaver.OnDamaged -= this.PlayerTookDamage;
+            }
             base.OnDestroy();
         }
     }

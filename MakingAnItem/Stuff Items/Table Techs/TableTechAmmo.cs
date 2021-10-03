@@ -60,8 +60,11 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.OnTableFlipped = (Action<FlippableCover>)Delegate.Remove(Owner.OnTableFlipped, new Action<FlippableCover>(this.SpeedEffect));
-            Owner.OnTableFlipCompleted = (Action<FlippableCover>)Delegate.Remove(Owner.OnTableFlipCompleted, new Action<FlippableCover>(this.DoEffectCompleted));
+            if (Owner)
+            {
+                Owner.OnTableFlipped -= SpeedEffect;
+                Owner.OnTableFlipCompleted -= DoEffectCompleted;
+            }
             base.OnDestroy();
         }
 

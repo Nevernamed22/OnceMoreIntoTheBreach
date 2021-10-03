@@ -25,7 +25,7 @@ namespace NevernamedsItems
 
             gun.SetAnimationFPS(gun.shootAnimation, 8);
             gun.isAudioLoop = true;
-
+            gun.gunClass = GunClass.BEAM;
             int iterator = 0;
             for (int i = 0; i < 3; i++)
             {

@@ -27,7 +27,7 @@ namespace NevernamedsItems
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.chargeAnimation, 6);
-
+            gun.gunClass = GunClass.CHARGE;
             for (int i = 0; i < 20; i++)
             {
                 gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);

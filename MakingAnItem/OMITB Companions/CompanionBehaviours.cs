@@ -26,6 +26,7 @@ namespace NevernamedsItems
                         Owner = GameManager.Instance.BestActivePlayer;
                     }
                 }
+
                 BehaviorResult result;
                 if (this.m_aiActor && this.m_aiActor.OverrideTarget)
                 {
@@ -36,7 +37,10 @@ namespace NevernamedsItems
 
                         if (overrideTarget != null && this.attackTimer == 0)
                         {
-                            overrideTarget.healthHaver.ApplyDamage(this.DamagePerTick, this.m_aiActor.specRigidbody.Velocity, "Companion Melee", CoreDamageTypes.None, DamageCategory.Normal, false, null, false);
+                            if (overrideTarget.healthHaver) overrideTarget.healthHaver.ApplyDamage(this.DamagePerTick, this.m_aiActor.transform.position.CalculateVectorBetween(overrideTarget.transform.position), "Companion Melee", CoreDamageTypes.None, DamageCategory.Normal, false, null, false);
+                            if ((targetKnockbackAmount) != 0 && (overrideTarget.knockbackDoer != null)) overrideTarget.knockbackDoer.ApplyKnockback(this.m_aiActor.transform.position.CalculateVectorBetween(overrideTarget.transform.position), targetKnockbackAmount);
+                            if ((selfKnockbackAmount) != 0 && (this.m_aiActor.knockbackDoer != null)) this.m_aiActor.knockbackDoer.ApplyKnockback(overrideTarget.transform.position.CalculateVectorBetween(this.m_aiActor.transform.position), selfKnockbackAmount);
+                            ETGModConsole.Log("ATTACKED!");
                             this.attackTimer = this.TickDelay;
                             result = BehaviorResult.SkipAllRemainingBehaviors;
                         }
@@ -70,6 +74,9 @@ namespace NevernamedsItems
                 bool flag2 = flag;
                 return !flag2 && Vector2.Distance(this.m_aiActor.specRigidbody.UnitCenter, this.m_aiActor.TargetRigidbody.UnitCenter) <= this.GetMinReadyRange();
             }
+            public bool findTarget = true;
+            public float selfKnockbackAmount;
+            public float targetKnockbackAmount;
             private PlayerController Owner;
             public float DamagePerTick = 5;
             public float TickDelay = 1;
@@ -103,11 +110,11 @@ namespace NevernamedsItems
                 BehaviorResult result;
                 if (this.repathTimer > 0f)
                 {
-                    result = ((overrideTarget == null) ? BehaviorResult.Continue : BehaviorResult.SkipRemainingClassBehaviors);
+                    result = ((overrideTarget == null || (overrideTarget.healthHaver && overrideTarget.healthHaver.IsDead)) ? BehaviorResult.Continue : BehaviorResult.SkipRemainingClassBehaviors);
                 }
                 else
                 {
-                    if (overrideTarget == null)
+                    if (overrideTarget == null || (overrideTarget.healthHaver && overrideTarget.healthHaver.IsDead))
                     {
                         this.PickNewTarget();
                         result = BehaviorResult.Continue;
@@ -165,6 +172,7 @@ namespace NevernamedsItems
                     }
                 }
             }
+            
             public float PathInterval = 0.25f;
             public float DesiredDistance = 5f;
             private float repathTimer;
@@ -186,11 +194,11 @@ namespace NevernamedsItems
                 BehaviorResult result;
                 if (this.repathTimer > 0f)
                 {
-                    result = ((overrideTarget == null) ? BehaviorResult.Continue : BehaviorResult.SkipRemainingClassBehaviors);
+                    result = ((overrideTarget == null || (overrideTarget.healthHaver && overrideTarget.healthHaver.IsDead)) ? BehaviorResult.Continue : BehaviorResult.SkipRemainingClassBehaviors);
                 }
                 else
                 {
-                    if (overrideTarget == null)
+                    if (overrideTarget == null || (overrideTarget.healthHaver && overrideTarget.healthHaver.IsDead))
                     {
                         this.PickNewTarget();
                         result = BehaviorResult.Continue;
@@ -263,11 +271,11 @@ namespace NevernamedsItems
                 BehaviorResult result;
                 if (this.repathTimer > 0f)
                 {
-                    result = ((overrideTarget == null) ? BehaviorResult.Continue : BehaviorResult.SkipRemainingClassBehaviors);
+                    result = ((overrideTarget == null || (overrideTarget.healthHaver && overrideTarget.healthHaver.IsDead)) ? BehaviorResult.Continue : BehaviorResult.SkipRemainingClassBehaviors);
                 }
                 else
                 {
-                    if (overrideTarget == null)
+                    if (overrideTarget == null || (overrideTarget.healthHaver && overrideTarget.healthHaver.IsDead))
                     {
                         this.PickNewTarget();
                         result = BehaviorResult.Continue;
@@ -463,7 +471,7 @@ namespace NevernamedsItems
                                 }
                                 else
                                 {
-                                    ETGModConsole.Log("Peanut attempted to attack in an unrecognised direction, and gave up."+"\nDirection: "+z+"\nIf you see this error, report it to the mod creator with a Screenshot of this message, please.");
+                                    ETGModConsole.Log("Peanut attempted to attack in an unrecognised direction, and gave up." + "\nDirection: " + z + "\nIf you see this error, report it to the mod creator with a Screenshot of this message, please.");
                                     yield break;
                                 }
 
@@ -558,6 +566,123 @@ namespace NevernamedsItems
             private PlayerController Owner;
             private List<AIActor> roomEnemies = new List<AIActor>();
         }
-
+        public class ChromaGunDroneApproach : MovementBehaviorBase
+        {
+            public override void Init(GameObject gameObject, AIActor aiActor, AIShooter aiShooter) { base.Init(gameObject, aiActor, aiShooter); }
+            public override void Upkeep()
+            {
+                base.Upkeep();
+                base.DecrementTimer(ref this.repathTimer, false);
+            }
+            private bool Stealthed = false;
+            public override BehaviorResult Update()
+            {
+                if (Owner == null)
+                {
+                    if (this.m_aiActor && this.m_aiActor.CompanionOwner)
+                    {
+                        Owner = this.m_aiActor.CompanionOwner;
+                    }
+                    else
+                    {
+                        Owner = GameManager.Instance.BestActivePlayer;
+                    }
+                }
+                SpeculativeRigidbody overrideTarget = this.m_aiActor.OverrideTarget;
+                BehaviorResult result;
+                if ((overrideTarget == null) && (Stealthed == false))
+                {
+                    this.m_aiActor.PlayEffectOnActor(EasyVFXDatabase.BloodiedScarfPoofVFX, Vector3.zero, false, true, false);
+                    this.m_aiActor.ToggleRenderers(false);
+                    this.m_aiActor.ToggleShadowVisiblity(false);
+                    Stealthed = true;
+                }
+                else if ((overrideTarget != null) && (Stealthed == true))
+                {
+                    this.m_aiActor.PlayEffectOnActor(EasyVFXDatabase.BloodiedScarfPoofVFX, Vector3.zero, false, true, false);
+                    this.m_aiActor.sprite.renderer.enabled = true;
+                    this.m_aiActor.ToggleRenderers(true);
+                    this.m_aiActor.ToggleShadowVisiblity(true);
+                    Stealthed = false;
+                }
+                if (this.repathTimer > 0f)
+                {
+                    result = ((overrideTarget == null) ? BehaviorResult.Continue : BehaviorResult.SkipRemainingClassBehaviors);
+                }
+                else
+                {
+                    if (overrideTarget == null || (overrideTarget.healthHaver && overrideTarget.healthHaver.IsDead))
+                    {
+                        this.PickNewTarget();
+                        result = BehaviorResult.Continue;
+                    }
+                    else
+                    {
+                        if (overrideTarget.GetComponent<ChromaGun.ChromaGunColoured>() == null || (overrideTarget.GetComponent<ChromaGun.ChromaGunColoured>().ColourType != droneColour)) { overrideTarget = null; this.PickNewTarget(); result = BehaviorResult.Continue; }
+                        else
+                        {
+                            this.isInRange = (Vector2.Distance(this.m_aiActor.specRigidbody.UnitCenter, overrideTarget.UnitCenter) <= this.DesiredDistance);
+                            if (overrideTarget != null && !this.isInRange)
+                            {
+                                this.m_aiActor.PathfindToPosition(overrideTarget.UnitCenter, null, true, null, null, null, false);
+                                this.repathTimer = this.PathInterval;
+                                result = BehaviorResult.SkipRemainingClassBehaviors;
+                            }
+                            else
+                            {
+                                if (overrideTarget != null && this.repathTimer >= 0f)
+                                {
+                                    this.m_aiActor.ClearPath();
+                                    this.repathTimer = -1f;
+                                }
+                                result = BehaviorResult.Continue;
+                            }
+                        }
+                    }
+                }
+                return result;
+            }
+            private void PickNewTarget()
+            {
+                if (this.m_aiActor != null)
+                {
+                    if (this.Owner == null)
+                    {
+                        if (this.m_aiActor && this.m_aiActor.CompanionOwner)
+                        {
+                            Owner = this.m_aiActor.CompanionOwner;
+                        }
+                        else
+                        {
+                            Owner = GameManager.Instance.BestActivePlayer;
+                        }
+                    }
+                    this.Owner.CurrentRoom.GetActiveEnemies(RoomHandler.ActiveEnemyType.RoomClear, ref this.roomEnemies);
+                    for (int i = 0; i < this.roomEnemies.Count; i++)
+                    {
+                        AIActor aiactor = this.roomEnemies[i];
+                        if (aiactor.IsHarmlessEnemy || !aiactor.IsNormalEnemy || aiactor.healthHaver.IsDead || aiactor == this.m_aiActor || aiactor.EnemyGuid == "ba928393c8ed47819c2c5f593100a5bc")
+                        { this.roomEnemies.Remove(aiactor); }                     
+                        if (aiactor.GetComponent<ChromaGun.ChromaGunColoured>() == null) { this.roomEnemies.Remove(aiactor); }
+                        else if (aiactor.GetComponent<ChromaGun.ChromaGunColoured>().ColourType != droneColour) { this.roomEnemies.Remove(aiactor); }
+                    }
+                    if (this.roomEnemies.Count == 0) { this.m_aiActor.OverrideTarget = null; }
+                    else
+                    {
+                        AIActor aiActor = this.m_aiActor;
+                        AIActor aiactor2 = this.roomEnemies[UnityEngine.Random.Range(0, this.roomEnemies.Count)];
+                        aiActor.OverrideTarget = ((aiactor2 != null) ? aiactor2.specRigidbody : null);
+                    }
+                }
+            }
+            public ChromaGun.ColourType droneColour;
+            
+            public float PathInterval = 0.25f;
+            public float DesiredDistance = 5f;
+            private float repathTimer;
+            private List<AIActor> roomEnemies = new List<AIActor>();
+            private bool isInRange;
+            private PlayerController Owner;
+        }
     }
 }

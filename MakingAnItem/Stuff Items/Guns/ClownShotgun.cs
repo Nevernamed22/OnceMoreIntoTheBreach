@@ -36,6 +36,7 @@ namespace NevernamedsItems
             //GUN STATS
             foreach (ProjectileModule mod in gun.Volley.projectiles)
             {
+                
                 mod.ammoCost = 1;
                 mod.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
                 mod.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
@@ -57,13 +58,14 @@ namespace NevernamedsItems
             gun.reloadTime = 1.5f;
             gun.barrelOffset.transform.localPosition = new Vector3(1.68f, 0.62f, 0f);
             gun.SetBaseMaxAmmo(200);
-
+            gun.gunClass = GunClass.SHOTGUN;
             //BULLET STATS
-
             // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.
             gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "this is the Clown Shotgun";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+
+            gun.Volley.UsesShotgunStyleVelocityRandomizer = true;
 
             ClownShotgunID = gun.PickupObjectId;
         }

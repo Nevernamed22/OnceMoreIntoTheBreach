@@ -76,7 +76,7 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.OnRollStarted -= this.onDodgeRoll;
+            if (Owner) Owner.OnRollStarted -= this.onDodgeRoll;
             base.OnDestroy();
         }
     }

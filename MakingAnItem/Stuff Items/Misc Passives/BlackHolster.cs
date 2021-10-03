@@ -30,7 +30,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "Unload";
-            string longDesc = "Chance to unholster the full power of the void upon reloading."+"\n\nOnce sat on the hip of a gunslinger that was neither man nor beast, nor even flesh, but given form by the void itself.";
+            string longDesc = "Chance to unholster the full power of the void upon reloading." + "\n\nOnce sat on the hip of a gunslinger that was neither man nor beast, nor even flesh, but given form by the void itself.";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -75,7 +75,10 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.OnReloadedGun -= this.HandleGunReloaded;
+            if (Owner)
+            {
+                Owner.OnReloadedGun -= this.HandleGunReloaded;
+            }
             base.OnDestroy();
         }
     }

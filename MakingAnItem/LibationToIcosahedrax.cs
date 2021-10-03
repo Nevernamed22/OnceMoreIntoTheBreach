@@ -323,7 +323,7 @@ namespace NevernamedsItems
             "I feel so alone",
             "I feel so cold",
             "Lost and Forgotten",
-            "Wroth ot Icosahidrax",
+            "Wrath of Icosahidrax",
             "Bad Time",
             "On days like these...",
             "Fin",

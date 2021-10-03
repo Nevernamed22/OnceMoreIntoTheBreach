@@ -31,7 +31,7 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(1.93f, 0.87f, 0f);
             gun.SetAnimationFPS(gun.shootAnimation, 10);
             gun.SetAnimationFPS(gun.chargeAnimation, 8);
-
+            gun.gunClass = GunClass.CHARGE;
             for (int i = 0; i < 10; i++)
             {
                 gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(83) as Gun, true, false);

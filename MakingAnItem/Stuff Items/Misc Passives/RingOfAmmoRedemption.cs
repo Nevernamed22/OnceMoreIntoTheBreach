@@ -39,7 +39,9 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D; //D
+            RingOfAmmoRedemptionID = item.PickupObjectId;
         }
+        public static int RingOfAmmoRedemptionID;
         private void PostProcessThrownGun(Projectile thrownGunProjectile)
         {
             thrownGunProjectile.OnHitEnemy += this.RestoreAmmo;

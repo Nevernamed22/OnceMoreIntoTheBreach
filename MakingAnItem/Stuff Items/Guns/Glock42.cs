@@ -39,7 +39,7 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(1.0f, 0.5f, 0f);
             gun.SetBaseMaxAmmo(200);
             gun.ammo = 200;
-
+            gun.gunClass = GunClass.SHITTY;
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);
@@ -53,7 +53,9 @@ namespace NevernamedsItems
 
             gun.quality = PickupObject.ItemQuality.D;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+            Glock42ID = gun.PickupObjectId;
         }
+        public static int Glock42ID;
         public override void PostProcessProjectile(Projectile projectile)
         {
             if (projectile.Owner && projectile.Owner is PlayerController)
@@ -109,7 +111,7 @@ namespace NevernamedsItems
 
         protected override void OnDestroy()
         {
-            if (gun.CurrentOwner && gun.CurrentOwner is PlayerController)
+            if (gun && gun.CurrentOwner && gun.CurrentOwner is PlayerController)
             {
                 BreakStealth(gun.CurrentOwner as PlayerController);
             }

@@ -58,7 +58,7 @@ namespace NevernamedsItems
             try
             {
                 orig(self, mod, data, overrideObject);
-                if (self && self.GunPlayerOwner())
+                if (self != null && mod != null && self.GunPlayerOwner())
                 {
                     if (self.GunPlayerOwner().HasPickupID(BombardierShellsID))
                     {

@@ -37,7 +37,7 @@ namespace NevernamedsItems
             gun.DefaultModule.numberOfShotsInClip = 5;
             gun.barrelOffset.transform.localPosition = new Vector3(4.56f, 1.18f, 0f);
             gun.SetBaseMaxAmmo(100);
-
+            gun.gunClass = GunClass.EXPLOSIVE;
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);
@@ -77,6 +77,15 @@ namespace NevernamedsItems
             doScreenShake = true,
             playDefaultSFX = true,
         };
+        public override void PostProcessProjectile(Projectile projectile)
+        {
+            if (projectile && projectile.ProjectilePlayerOwner() && projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("There are some who call me..."))
+            {
+                projectile.baseData.range *= 1000;
+                projectile.baseData.speed *= 20;
+            }
+            base.PostProcessProjectile(projectile);
+        }
         public override void OnPostFired(PlayerController player, Gun gun)
         {
             gun.PreventNormalFireAudio = true;

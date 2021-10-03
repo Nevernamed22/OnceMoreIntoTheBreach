@@ -37,7 +37,7 @@ namespace NevernamedsItems
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Charged;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
             gun.DefaultModule.cooldownTime = 1f;
-            
+            gun.gunClass = GunClass.CHARGE;
             gun.DefaultModule.angleVariance = 1f;
             gun.DefaultModule.numberOfShotsInClip = 1;
             Projectile projectile = DataCloners.CopyFields<SuperPierceProjectile>(Instantiate(gun.DefaultModule.projectiles[0]));

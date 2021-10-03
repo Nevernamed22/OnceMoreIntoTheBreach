@@ -83,7 +83,7 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
+            if (Owner) Owner.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
             base.OnDestroy();
         }
     }

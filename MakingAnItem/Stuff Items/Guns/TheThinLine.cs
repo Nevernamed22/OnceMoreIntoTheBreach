@@ -37,7 +37,7 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(1.37f, 0.87f, 0f);
             gun.SetBaseMaxAmmo(260);
             gun.ammo = 200;
-
+            gun.gunClass = GunClass.PISTOL;
             foreach (ProjectileModule mod in gun.Volley.projectiles)
             {
                 mod.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;

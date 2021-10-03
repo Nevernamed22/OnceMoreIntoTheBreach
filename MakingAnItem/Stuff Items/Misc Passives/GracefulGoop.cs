@@ -30,7 +30,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "They Have Died... Inside";
-            string longDesc = "Bullets trail poison."+"\n\nBrewed (and probably drunk) by a comedian who IS actually funny, no matter what he tells you.";
+            string longDesc = "Bullets trail poison." + "\n\nBrewed (and probably drunk) by a comedian who IS actually funny, no matter what he tells you.";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -162,8 +162,11 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.PostProcessProjectile -= this.onFired;
-            Owner.PostProcessBeam -= this.onFiredBeam;
+            if (Owner)
+            {
+                Owner.PostProcessProjectile -= this.onFired;
+                Owner.PostProcessBeam -= this.onFiredBeam;
+            }
             base.OnDestroy();
         }
         private static List<GoopDefinition> goopDefs;

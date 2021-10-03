@@ -52,6 +52,7 @@ namespace NevernamedsItems
                 });
                 //SET UP ANIMATIONS
                 AIAnimator aiAnimator = companionController.aiAnimator;
+                aiAnimator.
                 aiAnimator.MoveAnimation = new DirectionalAnimation
                 {
                     Type = DirectionalAnimation.DirectionType.FourWayCardinal,
@@ -75,6 +76,7 @@ namespace NevernamedsItems
                         "idle_south",
                         "idle_west",
                         }
+                    
                 };
                 aiAnimator.OtherAnimations = new List<AIAnimator.NamedDirectionalAnimation>
                 {

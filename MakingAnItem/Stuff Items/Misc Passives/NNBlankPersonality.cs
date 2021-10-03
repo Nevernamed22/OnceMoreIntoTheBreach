@@ -72,7 +72,7 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.OnItemPurchased -= this.OnItemPurchased;
+            if (Owner) Owner.OnItemPurchased -= this.OnItemPurchased;
             base.OnDestroy();
         }
     }

@@ -37,7 +37,7 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(1.12f, 0.75f, 0f);
             gun.SetBaseMaxAmmo(312);
             gun.ammo = 312;
-
+            gun.gunClass = GunClass.SILLY;
 
             //------------------------------------------------------------HEARTS
             //Ace

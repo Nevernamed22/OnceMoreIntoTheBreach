@@ -26,6 +26,11 @@ namespace NevernamedsItems
         public static GoopDefinition PlagueGoop;
         public static GoopDefinition HoneyGoop;
         public static GoopDefinition PitGoop;
+        public static GoopDefinition EnemyFriendlyPoisonGoop;
+        public static GoopDefinition EnemyFriendlyFireGoop;
+        public static GoopDefinition PlayerFriendlyPoisonGoop;
+        public static GoopDefinition PlayerFriendlyFireGoop;
+        public static GoopDefinition PlayerFriendlyHoneyGoop;
         public static void DefineDefaultGoops()
         {
             //Sets up the goops that have to be extracted from asset bundles
@@ -70,6 +75,10 @@ namespace NevernamedsItems
             HoneyGoop.AppliesSpeedModifier = true;
             HoneyGoop.AppliesSpeedModifierContinuously = true;
             HoneyGoop.SpeedModifierEffect = StaticStatusEffects.HoneySpeedMod;
+
+            PlayerFriendlyHoneyGoop = UnityEngine.Object.Instantiate<GoopDefinition>(HoneyGoop);
+            PlayerFriendlyHoneyGoop.SpeedModifierEffect = StaticStatusEffects.FriendlyHoneySpeedMod;
+            PlayerFriendlyHoneyGoop.playerStepsChangeLifetime = false;
             #endregion
 
             //PROPULSION GOOP - An orange goop that speeds up enemies and players
@@ -121,6 +130,41 @@ namespace NevernamedsItems
             PlagueGoop.AppliesDamageOverTime = true;
             #endregion
 
+            //ENEMYFRIENDLY POISON - Poison that doesnt hurt enemies
+            #region EnemyFriendlyPoisonGoop
+            GoopDefinition midInitPois = UnityEngine.Object.Instantiate<GoopDefinition>(PoisonDef);
+            midInitPois.damagesEnemies = false;
+            midInitPois.HealthModifierEffect = StatusEffectHelper.GeneratePoison(3, false, 4);
+            EnemyFriendlyPoisonGoop = midInitPois;
+            #endregion
+
+            //ENEMYFRIENDLY FIRE - Fire that doesn't hurt enemies
+            #region EnemyFriendlyFireGoop
+            GoopDefinition midInitFire = UnityEngine.Object.Instantiate<GoopDefinition>(FireDef);
+            midInitFire.damagesEnemies = false;
+            midInitFire.damagePerSecondtoEnemies = 0;
+            midInitFire.fireBurnsEnemies = false;
+            midInitFire.AppliesDamageOverTime = false;
+            midInitFire.fireDamagePerSecondToEnemies = 0;
+            EnemyFriendlyFireGoop = midInitFire;
+            #endregion
+
+            //PLAYERFRIENDLY POISON - Poison that doesnt hurt the player
+            #region PlayerFriendlyPoisonGoop
+            GoopDefinition midInitFrenPois = UnityEngine.Object.Instantiate<GoopDefinition>(PoisonDef);
+            midInitFrenPois.damagesEnemies = true;
+            midInitFrenPois.damagesPlayers = false;
+            midInitFrenPois.HealthModifierEffect = StatusEffectHelper.GeneratePoison(3, true, 4, false);
+            PlayerFriendlyPoisonGoop = midInitFrenPois;
+            #endregion
+
+            //ENEMYFRIENDLY FIRE - Fire that doesn't hurt enemies
+            #region PlayerFriendlyFireGoop
+            GoopDefinition midInitFrenFire = UnityEngine.Object.Instantiate<GoopDefinition>(FireDef);
+            midInitFrenFire.damagesPlayers = false;
+            midInitFrenFire.fireDamageToPlayer = 0;
+            PlayerFriendlyFireGoop = midInitFrenFire;
+            #endregion
         }
         public static GoopDefinition GenerateBloodGoop(float dps, Color Color, float lifeSpan = 20)
         {

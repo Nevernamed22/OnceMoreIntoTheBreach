@@ -343,21 +343,27 @@ namespace NevernamedsItems
             {
                 if (GameManager.Instance.PrimaryPlayer && GameManager.Instance.PrimaryPlayer.HasPickupID(LeadOfLife.LeadOfLifeID))
                 {
-                    foreach (PassiveItem LeadOfLife in GameManager.Instance.PrimaryPlayer.passiveItems)
+                    if (GameManager.Instance.PrimaryPlayer.passiveItems != null && GameManager.Instance.PrimaryPlayer.passiveItems.Count > 0)
                     {
-                        if (LeadOfLife.GetComponent<LeadOfLife>())
+                        foreach (PassiveItem LeadOfLife in GameManager.Instance.PrimaryPlayer.passiveItems)
                         {
-                            LeadOfLife.GetComponent<LeadOfLife>().DoLateRecalculation();
+                            if (LeadOfLife.GetComponent<LeadOfLife>() != null)
+                            {
+                                LeadOfLife.GetComponent<LeadOfLife>().DoLateRecalculation();
+                            }
                         }
                     }
                 }
                 if (GameManager.Instance.SecondaryPlayer && GameManager.Instance.SecondaryPlayer.HasPickupID(LeadOfLife.LeadOfLifeID))
                 {
-                    foreach (PassiveItem LeadOfLife in GameManager.Instance.SecondaryPlayer.passiveItems)
+                    if (GameManager.Instance.SecondaryPlayer.passiveItems != null && GameManager.Instance.SecondaryPlayer.passiveItems.Count > 0)
                     {
-                        if (LeadOfLife.GetComponent<LeadOfLife>())
+                        foreach (PassiveItem LeadOfLife in GameManager.Instance.SecondaryPlayer.passiveItems)
                         {
-                            LeadOfLife.GetComponent<LeadOfLife>().DoLateRecalculation();
+                            if (LeadOfLife.GetComponent<LeadOfLife>() != null)
+                            {
+                                LeadOfLife.GetComponent<LeadOfLife>().DoLateRecalculation();
+                            }
                         }
                     }
                 }
@@ -2004,7 +2010,7 @@ namespace NevernamedsItems
                     BloodthirstyBulletsComp comp = component.gameObject.GetOrAddComponent<BloodthirstyBulletsComp>();
                 }
 
-                if(tiedItemID == BashfulShot.BashfulShotID)
+                if (tiedItemID == BashfulShot.BashfulShotID)
                 {
                     int numberOfOtherCompanions = (baseItem.extantCompanions.Count - 1);
                     float multiplier = (-0.03f * numberOfOtherCompanions) + 2;

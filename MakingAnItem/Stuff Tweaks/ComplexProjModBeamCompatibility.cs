@@ -29,6 +29,10 @@ namespace NevernamedsItems
                 explodingBeam.chancePerTick = self.ActivationChance;
                 explodingBeam.tickDelay = 0.25f;
             }
+            if (self.AddsChanceToBlank)
+            {
+                BeamBlankModifier blankingbeam = beam.gameObject.AddComponent<BeamBlankModifier>();
+            }
         }
 
         private static Hook complexProjPostProcessBeam;

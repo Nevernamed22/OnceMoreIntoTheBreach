@@ -109,7 +109,7 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.OnReloadedGun -= this.HandleGunReloaded;
+            if (Owner) Owner.OnReloadedGun -= this.HandleGunReloaded;
             base.OnDestroy();
         }
     }

@@ -149,8 +149,10 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            HealthHaver healthHaver = Owner.healthHaver;
-            healthHaver.ModifyDamage = (Action<HealthHaver, HealthHaver.ModifyDamageEventArgs>)Delegate.Remove(healthHaver.ModifyDamage, new Action<HealthHaver, HealthHaver.ModifyDamageEventArgs>(this.ModifyIncomingDamage));
+            if (Owner)
+            {
+                Owner.healthHaver.ModifyDamage -= ModifyIncomingDamage;
+            }
             base.OnDestroy();
         }
     }

@@ -8,9 +8,62 @@ namespace NevernamedsItems
 {
     class StatusEffectHelper
     {
-        public static GameActorFireEffect GenerateFireEffect()
+        public static GameActorHealthEffect GeneratePoison(float dps  = 3, bool damagesEnemies = true, float duration = 4, bool affectsPlayers = true)
         {
-            return new GameActorFireEffect();
+            GameActorHealthEffect customPoison = new GameActorHealthEffect
+            {
+                duration = duration,
+                TintColor = StaticStatusEffects.irradiatedLeadEffect.TintColor,
+                DeathTintColor = StaticStatusEffects.irradiatedLeadEffect.DeathTintColor,
+                effectIdentifier = "Poison",
+                AppliesTint = true,
+                AppliesDeathTint = true,
+                resistanceType = EffectResistanceType.Poison,
+                DamagePerSecondToEnemies = dps,
+                ignitesGoops = false,              
+
+                //Eh
+                OverheadVFX = StaticStatusEffects.irradiatedLeadEffect.OverheadVFX,
+                AffectsEnemies = damagesEnemies,
+                AffectsPlayers = StaticStatusEffects.irradiatedLeadEffect.AffectsPlayers,
+                AppliesOutlineTint = StaticStatusEffects.irradiatedLeadEffect.AppliesOutlineTint,
+                OutlineTintColor = StaticStatusEffects.irradiatedLeadEffect.OutlineTintColor,
+                PlaysVFXOnActor = StaticStatusEffects.irradiatedLeadEffect.PlaysVFXOnActor,
+            };
+            return customPoison;
+        }
+        public static GameActorFireEffect GenerateFireEffect(float dps = 3, bool damagesEnemies = true, float duration = 4)
+        {
+            GameActorFireEffect customFire = new GameActorFireEffect
+            {
+                duration = duration,
+                TintColor = StaticStatusEffects.hotLeadEffect.TintColor,
+                DeathTintColor = StaticStatusEffects.hotLeadEffect.DeathTintColor,
+                effectIdentifier = StaticStatusEffects.hotLeadEffect.effectIdentifier,
+                AppliesTint = true,
+                AppliesDeathTint = true,
+                resistanceType = EffectResistanceType.Fire,
+                DamagePerSecondToEnemies = dps,
+                ignitesGoops = true,
+
+                //Eh
+                OverheadVFX = StaticStatusEffects.hotLeadEffect.OverheadVFX,
+                AffectsEnemies = damagesEnemies,
+                AffectsPlayers = StaticStatusEffects.hotLeadEffect.AffectsPlayers,
+                AppliesOutlineTint = StaticStatusEffects.hotLeadEffect.AppliesOutlineTint,
+                OutlineTintColor = StaticStatusEffects.hotLeadEffect.OutlineTintColor,
+                PlaysVFXOnActor = StaticStatusEffects.hotLeadEffect.PlaysVFXOnActor,
+
+                FlameVfx = StaticStatusEffects.hotLeadEffect.FlameVfx,
+                flameBuffer = StaticStatusEffects.hotLeadEffect.flameBuffer,
+                flameFpsVariation = StaticStatusEffects.hotLeadEffect.flameFpsVariation,
+                flameMoveChance = StaticStatusEffects.hotLeadEffect.flameMoveChance,
+                flameNumPerSquareUnit = StaticStatusEffects.hotLeadEffect.flameNumPerSquareUnit,
+                maxStackedDuration = StaticStatusEffects.hotLeadEffect.maxStackedDuration,
+                stackMode = StaticStatusEffects.hotLeadEffect.stackMode,
+                IsGreenFire = StaticStatusEffects.hotLeadEffect.IsGreenFire,
+            };
+            return customFire;
         }
         public static GameActorSpeedEffect GenerateLockdown(float duration = 4f)
         {

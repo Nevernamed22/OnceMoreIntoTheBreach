@@ -161,7 +161,7 @@ namespace NevernamedsItems
             }
             gun.reloadTime = 1.4f;
             gun.SetBaseMaxAmmo(100);
-
+            gun.gunClass = GunClass.SHOTGUN;
             gun.quality = PickupObject.ItemQuality.A; //A
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 

@@ -35,7 +35,7 @@ namespace NevernamedsItems
             gun.DefaultModule.numberOfShotsInClip = 13;
             gun.barrelOffset.transform.localPosition = new Vector3(2.43f, 0.81f, 0f);
             gun.SetBaseMaxAmmo(330);
-
+            gun.gunClass = GunClass.POISON;
 
 
             //BULLET STATS
@@ -60,8 +60,8 @@ namespace NevernamedsItems
             projectile2.baseData.speed *= 0.8f;
             projectile2.baseData.damage = 14.1414f;
             projectile2.baseData.range *= 2;
-
-            projectile2.statusEffectsToApply.Add(StaticStatusEffects.StandardPlagueEffect);
+            PrefabStatusEffectsToApply statusE = projectile2.gameObject.AddComponent<PrefabStatusEffectsToApply>();
+            statusE.effects = new List<GameActorEffect>() { StaticStatusEffects.StandardPlagueEffect };
 
             GoopModifier goopmod = projectile2.gameObject.AddComponent<GoopModifier>();
             goopmod.SpawnGoopOnCollision = true;

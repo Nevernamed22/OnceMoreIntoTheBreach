@@ -49,7 +49,7 @@ namespace NevernamedsItems
             gun.DefaultModule.numberOfShotsInClip = 6;
             gun.barrelOffset.transform.localPosition = new Vector3(3.06f, 0.56f, 0f);
             gun.SetBaseMaxAmmo(40);
-
+            gun.gunClass = GunClass.CHARGE;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.LoopSection;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).loopStart = 9;
 

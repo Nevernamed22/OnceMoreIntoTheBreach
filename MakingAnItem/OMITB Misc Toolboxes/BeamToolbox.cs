@@ -105,7 +105,7 @@ namespace NevernamedsItems
                 animator.Library = animation;
                 UnityEngine.Object.Destroy(projectile.GetComponentInChildren<tk2dSprite>());
                 BasicBeamController beamController = projectile.gameObject.GetOrAddComponent<BasicBeamController>();
-
+                projectile.sprite = tiledSprite;
                 //---------------- Sets up the animation for the main part of the beam
                 if (beamAnimationPaths != null)
                 {
@@ -209,7 +209,7 @@ namespace NevernamedsItems
             clip.frames = frames.ToArray();
             beamAnimation.clips = beamAnimation.clips.Concat(new tk2dSpriteAnimationClip[] { clip }).ToArray();
         }
-        public static BeamController FreeFireBeamFromAnywhere(Projectile projectileToSpawn, PlayerController owner, GameObject otherShooter, Vector2 fixedPosition, bool usesFixedPosition, float targetAngle, float duration, bool skipChargeTime = false)
+        public static BeamController FreeFireBeamFromAnywhere(Projectile projectileToSpawn, PlayerController owner, GameObject otherShooter, Vector2 fixedPosition, bool usesFixedPosition, float targetAngle, float duration, bool skipChargeTime = false, bool followDirOnProjectile = false, float angleOffsetFromProjectileAngle = 0)
         {
             Vector2 sourcePos = Vector2.zero;
             SpeculativeRigidbody rigidBod = null;
@@ -237,9 +237,10 @@ namespace NevernamedsItems
                 component2.HitsPlayers = false;
                 component2.HitsEnemies = true;
                 Vector3 vector = BraveMathCollege.DegreesToVector(targetAngle, 1f);
-                component2.Direction = vector;
+                if (otherShooter != null && !usesFixedPosition && otherShooter.GetComponent<Projectile>() && followDirOnProjectile) component2.Direction = (otherShooter.GetComponent<Projectile>().Direction.ToAngle() + angleOffsetFromProjectileAngle).DegreeToVector2();
+                else component2.Direction = vector;
                 component2.Origin = sourcePos;
-                GameManager.Instance.Dungeon.StartCoroutine(BeamToolbox.HandleFreeFiringBeam(component2, rigidBod, fixedPosition, usesFixedPosition, targetAngle, duration));
+                GameManager.Instance.Dungeon.StartCoroutine(BeamToolbox.HandleFreeFiringBeam(component2, rigidBod, fixedPosition, usesFixedPosition, targetAngle, duration, followDirOnProjectile, angleOffsetFromProjectileAngle));
                 return component2;
             }
             else
@@ -248,7 +249,7 @@ namespace NevernamedsItems
                 return null;
             }
         }
-        private static IEnumerator HandleFreeFiringBeam(BeamController beam, SpeculativeRigidbody otherShooter, Vector2 fixedPosition, bool usesFixedPosition, float targetAngle, float duration)
+        private static IEnumerator HandleFreeFiringBeam(BeamController beam, SpeculativeRigidbody otherShooter, Vector2 fixedPosition, bool usesFixedPosition, float targetAngle, float duration, bool followProjDir, float projFollowOffset)
         {
             float elapsed = 0f;
             yield return null;
@@ -262,7 +263,10 @@ namespace NevernamedsItems
                 elapsed += BraveTime.DeltaTime;
                 if (sourcePos != null)
                 {
-
+                    if (otherShooter != null && !usesFixedPosition && otherShooter.GetComponent<Projectile>() && followProjDir)
+                    {
+                        beam.Direction = (otherShooter.GetComponent<Projectile>().Direction.ToAngle() + projFollowOffset).DegreeToVector2();
+                    }
                     beam.Origin = sourcePos;
                     beam.LateUpdatePosition(sourcePos);
 

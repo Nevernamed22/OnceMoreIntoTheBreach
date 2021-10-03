@@ -42,7 +42,7 @@ namespace NevernamedsItems
             gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(89) as Gun).muzzleFlashEffects;
             gun.barrelOffset.transform.localPosition = new Vector3(1.37f, 0.81f, 0f);
             gun.SetBaseMaxAmmo(0);
-
+            gun.gunClass = GunClass.PISTOL;
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);

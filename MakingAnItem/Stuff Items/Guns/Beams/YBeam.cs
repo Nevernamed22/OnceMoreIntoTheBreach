@@ -40,7 +40,7 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(1.93f, 0.31f, 0f);
             gun.SetBaseMaxAmmo(2000);
             gun.ammo = 2000;
-
+            gun.gunClass = GunClass.BEAM;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.LoopSection;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).loopStart = 1;
 

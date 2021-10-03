@@ -7,6 +7,15 @@ namespace NevernamedsItems
 {
     static class OMITBGunExtensions
     {
+        public static bool IsCurrentGun(this Gun gun)
+        {
+            if (gun && gun.CurrentOwner)
+            {
+                if (gun.CurrentOwner.CurrentGun == gun) return true;
+                else return false;
+            }
+            else return false;
+        }
         public static PlayerController GunPlayerOwner(this Gun bullet)
         {
             if (bullet && bullet.CurrentOwner && bullet.CurrentOwner is PlayerController) return bullet.CurrentOwner as PlayerController;

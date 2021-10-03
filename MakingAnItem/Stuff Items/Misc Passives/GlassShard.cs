@@ -107,12 +107,25 @@ namespace NevernamedsItems
 
                 }
             }
+            GameManager.Instance.OnNewLevelFullyLoaded += this.OnNewFloor;
             base.Pickup(player);
         }
-
+        private void OnNewFloor()
+        {
+            if (Owner)
+            {
+                Owner.AcquirePassiveItemPrefabDirectly(PickupObjectDatabase.GetById(565) as PassiveItem);
+            }
+        }
         public override DebrisObject Drop(PlayerController player)
         {
+            GameManager.Instance.OnNewLevelFullyLoaded -= this.OnNewFloor;
             return base.Drop(player);
+        }
+        protected override void OnDestroy()
+        {
+            GameManager.Instance.OnNewLevelFullyLoaded -= this.OnNewFloor;
+            base.OnDestroy();
         }
     }
 

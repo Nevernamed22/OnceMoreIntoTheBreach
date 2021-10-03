@@ -61,7 +61,9 @@ namespace NevernamedsItems
                 GunGrease.goopDefs.Add(goopDefinition);
             }
             List<GoopDefinition> list = GunGrease.goopDefs;
+            GunGreaseID = item.PickupObjectId;
         }
+        public static int GunGreaseID;
         int goopNumber;
         float goopRadius;
         private void OnEnemyDamaged(float damage, bool fatal, HealthHaver enemyHealth)
@@ -101,7 +103,7 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
+            if (Owner) Owner.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
             base.OnDestroy();
         }
         private static List<GoopDefinition> goopDefs;

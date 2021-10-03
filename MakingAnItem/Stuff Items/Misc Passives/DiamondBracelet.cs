@@ -43,7 +43,9 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.D;
 
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.KILLEDENEMYWITHTHROWNGUN, true);
+            DiamondBraceletID = item.PickupObjectId;
         }
+        public static int DiamondBraceletID;
         private void HandleReturnLikeBoomerang(DebrisObject obj)
         {
             obj.PreventFallingInPits = true;
@@ -75,7 +77,7 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.PostProcessThrownGun -= this.PostProcessThrownGun;
+            if (Owner) Owner.PostProcessThrownGun -= this.PostProcessThrownGun;
             base.OnDestroy();
         }
     }

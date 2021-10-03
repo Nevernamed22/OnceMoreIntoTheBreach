@@ -26,6 +26,7 @@ namespace NevernamedsItems
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(150) as Gun).gunSwitchGroup;
 
             //GUN STATS
             gun.DefaultModule.ammoCost = 1;
@@ -38,26 +39,97 @@ namespace NevernamedsItems
             gun.DefaultModule.numberOfShotsInClip = 10000;
             gun.barrelOffset.transform.localPosition = new Vector3(1.75f, 0.81f, 0f);
             gun.SetBaseMaxAmmo(10000);
-
+            gun.gunClass = GunClass.SILLY;
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
-            projectile.baseData.damage *= 7f;
+            projectile.baseData.damage = 30f;
             projectile.baseData.speed *= 1f;
             projectile.baseData.range *= 1f;
             projectile.SetProjectileSpriteRight("vacuumgun_projectile", 16, 14, false, tk2dBaseSprite.Anchor.MiddleCenter, 15, 13);
+            GoopModifier gooper = projectile.gameObject.AddComponent<GoopModifier>();
+            gooper.SpawnGoopInFlight = false;
+            gooper.SpawnGoopOnCollision = true;
+            gooper.CollisionSpawnRadius = 2;
+            gooper.goopDefinition = EasyGoopDefinitions.BlobulonGoopDef;
+            CustomImpactSoundBehav sound = projectile.gameObject.AddComponent<CustomImpactSoundBehav>();
+            sound.ImpactSFX = "Play_ENV_water_splash_01";
 
             projectile.transform.parent = gun.barrelOffset;
 
             gun.quality = PickupObject.ItemQuality.C;
-            gun.encounterTrackable.EncounterGuid = "this is the Vacuum Gun";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_VACUUMGUN, true);
             gun.AddItemToGooptonMetaShop(16);
+        }
+        public override void PostProcessProjectile(Projectile projectile)
+        {
+            if (projectile && projectile.ProjectilePlayerOwner())
+            {
+                List<int> possibleForms = new List<int>();
+                if (projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Poisbulonial"))
+                {
+                    possibleForms.Add(1);
+                    projectile.statusEffectsToApply.Add(StaticStatusEffects.irradiatedLeadEffect);
+                }
+                if (projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Blizzbulonial"))
+                {
+                    possibleForms.Add(2);
+                    projectile.statusEffectsToApply.Add(StaticStatusEffects.frostBulletsEffect);
+                }
+                if (projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Leadbulonial"))
+                {
+                    possibleForms.Add(3);
+                    projectile.statusEffectsToApply.Add(StaticStatusEffects.hotLeadEffect);
+                }
+                if (projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Poopulonial"))
+                {
+                    possibleForms.Add(4);
+                    projectile.statusEffectsToApply.Add(StaticStatusEffects.tripleCrossbowSlowEffect);
+                }
+                if (possibleForms.Count > 0)
+                {
+                    int randomGoopForm = BraveUtility.RandomElement(possibleForms);
+                    switch (randomGoopForm)
+                    {
+                        case 1:
+                            projectile.gameObject.GetComponent<GoopModifier>().goopDefinition = EasyGoopDefinitions.PoisonDef;
+                            projectile.damageTypes |= CoreDamageTypes.Poison;
+                            projectile.AdjustPlayerProjectileTint(ExtendedColours.poisonGreen, 1);
+                            break;
+                        case 2:
+                            projectile.gameObject.GetComponent<GoopModifier>().goopDefinition = EasyGoopDefinitions.WaterGoop;
+                            projectile.damageTypes |= CoreDamageTypes.Ice;
+                            projectile.AdjustPlayerProjectileTint(ExtendedColours.skyblue, 1);
+                            break;
+                        case 3:
+                            projectile.gameObject.GetComponent<GoopModifier>().goopDefinition = EasyGoopDefinitions.FireDef;
+                            projectile.damageTypes |= CoreDamageTypes.Fire;
+                            projectile.AdjustPlayerProjectileTint(Color.grey, 1);
+                            break;
+                        case 4:
+                            projectile.AdjustPlayerProjectileTint(ExtendedColours.brown, 1);
+                            break;
+                    }
+                }
+                if (projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Bloodbulonial"))
+                {
+                    SpawnProjModifier spawnpoj = projectile.gameObject.AddComponent<SpawnProjModifier>();
+                    spawnpoj.projectileToSpawnOnCollision = (PickupObjectDatabase.GetById(38) as Gun).DefaultModule.projectiles[0];
+                    spawnpoj.PostprocessSpawnedProjectiles = true;
+                    spawnpoj.numberToSpawnOnCollison = 10;
+                    spawnpoj.spawnOnObjectCollisions = true;
+                    spawnpoj.spawnProjecitlesOnDieInAir = true;
+                    spawnpoj.spawnProjectilesInFlight = false;
+                    spawnpoj.spawnProjectilesOnCollision = true;
+                    spawnpoj.randomRadialStartAngle = true;
+                }
+            }
+            base.PostProcessProjectile(projectile);
         }
         public override void OnReloadPressed(PlayerController player, Gun gun, bool bSOMETHING)
         {
@@ -86,7 +158,7 @@ namespace NevernamedsItems
             }
             else if (target.EnemyGuid == EnemyGuidDatabase.Entries["chicken"])
             {
-                if (gun.CurrentOwner && (gun.CurrentOwner as PlayerController).PlayerHasActiveSynergy("Chickadee"))
+                if (gun.CurrentOwner && (gun.CurrentOwner as PlayerController).PlayerHasActiveSynergy("Chickadoo"))
                 {
                     GameManager.Instance.Dungeon.StartCoroutine(this.HandleEnemySuck(target));
                     target.EraseFromExistence(true);

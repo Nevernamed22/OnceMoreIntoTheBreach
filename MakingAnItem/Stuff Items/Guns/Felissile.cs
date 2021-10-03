@@ -40,14 +40,14 @@ namespace NevernamedsItems
 
             gun.DefaultModule.usesOptionalFinalProjectile = true;
             gun.DefaultModule.numberOfFinalProjectiles = 9;
-
+            gun.gunClass = GunClass.EXPLOSIVE;
             //BULLET STATS
             Projectile missileProjectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             missileProjectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(missileProjectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(missileProjectile);
             gun.DefaultModule.projectiles[0] = missileProjectile;
-            missileProjectile.baseData.damage *= 5f;
+            missileProjectile.baseData.damage = 15f;
             ExplosiveModifier explosion = missileProjectile.gameObject.GetComponent<ExplosiveModifier>();
             if (explosion) Destroy(explosion);
             ExplosiveModifier explosiveModifier = missileProjectile.gameObject.AddComponent<ExplosiveModifier>();

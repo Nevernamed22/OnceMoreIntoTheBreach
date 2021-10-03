@@ -26,7 +26,9 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D;
+            MistakeBulletsID = item.PickupObjectId;
         }
+        public static int MistakeBulletsID;
         private void PostProcess(Projectile bullet, float bleh)
         {
             if (bullet && bullet.ProjectilePlayerOwner() && bullet.ProjectilePlayerOwner().PlayerHasActiveSynergy("For Big Mistakes"))

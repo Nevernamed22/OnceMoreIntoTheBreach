@@ -1,5 +1,6 @@
 ﻿using Dungeonator;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace NevernamedsItems
 {
-   static class OMITBMathsAndLogicExtensions
+    static class OMITBMathsAndLogicExtensions
     {
         public static bool IsBetweenRange(this float numberToCheck, float bottom, float top)
         {
@@ -37,6 +38,7 @@ namespace NevernamedsItems
             if (targetSprite && closestToPosition.sprite) return closestToPosition.sprite.WorldCenter;
             else return closestToPosition.specRigidbody.UnitCenter;
         }
+
         public static Vector2 GetVectorToNearestEnemy(this Vector2 bulletPosition, float angleFromAim = 0, float angleVariance = 0, PlayerController playerToScaleAccuracyOff = null)
         {
             Vector2 dirVec = UnityEngine.Random.insideUnitCircle;
@@ -62,6 +64,16 @@ namespace NevernamedsItems
                 float finalVariance = UnityEngine.Random.Range(negativeVariance, positiveVariance);
                 dirVec = dirVec.Rotate(finalVariance);
             }
+            return dirVec;
+        }
+        public static Vector2 CalculateVectorBetween(this Vector2 startVector, Vector2 endVector)
+        {
+            Vector2 dirVec = endVector - startVector;
+            return dirVec;
+        }
+        public static Vector2 CalculateVectorBetween(this Vector3 startVector, Vector3 endVector)
+        {
+            Vector2 dirVec = endVector - startVector;
             return dirVec;
         }
         public static Vector2 GetVectorToNearestEnemy(this Vector3 bulletPos, float angleFromAim = 0, float angleVariance = 0, PlayerController playerToScaleAccuracyOff = null)
@@ -124,7 +136,7 @@ namespace NevernamedsItems
         }
         public static Vector2 DegreeToVector2(this float degree)
         {
-            return (degree * Mathf.Deg2Rad).RadianToVector2();     
+            return (degree * Mathf.Deg2Rad).RadianToVector2();
         }
         public static Vector2 DegreeToVector2(this int degree)
         {
@@ -143,7 +155,7 @@ namespace NevernamedsItems
                     {
                         returnList.RemoveAt(i - 1);
                     }
-                   else if (GameManager.Instance.SecondaryPlayer && GameManager.Instance.SecondaryPlayer.HasPickupID(ID))
+                    else if (GameManager.Instance.SecondaryPlayer && GameManager.Instance.SecondaryPlayer.HasPickupID(ID))
                     {
                         returnList.RemoveAt(i - 1);
                     }
@@ -159,7 +171,27 @@ namespace NevernamedsItems
             }
             return returnList;
         }
-  
+        public static PickupObject.ItemQuality GetRandomQuality(this PickupObjectDatabase dat, float dChance = 0.35f, float cChance = 0.32f, float bChance = 0.2f, float aChance = 0.09f, float sChance = 0.04f)
+        {
+            float random = UnityEngine.Random.value;
+            if (random <= sChance) { return PickupObject.ItemQuality.S; }
+            else if (random <= aChance) { return PickupObject.ItemQuality.A; }
+            else if (random <= bChance) { return PickupObject.ItemQuality.B; }
+            else if (random <= cChance) { return PickupObject.ItemQuality.C; }
+            else { return PickupObject.ItemQuality.D; }
+        }
+        public static void SetForSeconds(this bool boolToSet, bool targetVal, float time)
+        {
+            GameManager.Instance.StartCoroutine(HandleTimedBool(boolToSet, targetVal, time));
+        }
+        private static IEnumerator HandleTimedBool(bool boolToSet, bool targetVal, float time)
+        {
+            bool origVal = boolToSet;
+            boolToSet = targetVal;
+            yield return new WaitForSeconds(time);
+            boolToSet = origVal;
+            yield break;
+        }
     }
     public static class RandomEnum<T>
     {

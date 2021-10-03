@@ -75,9 +75,12 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.PostProcessProjectile -= this.PostProcessProjectile;
+            if (Owner)
+            {
+                Owner.PostProcessProjectile -= this.PostProcessProjectile;
             Owner.PostProcessBeam -= this.PostProcessBeam;
             Owner.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
+            }
             base.OnDestroy();
         }
     }

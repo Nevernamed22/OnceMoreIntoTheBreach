@@ -79,12 +79,23 @@ namespace NevernamedsItems
         {
             if (data.OtherRigidbody && data.OtherRigidbody.gameObject)
             {
+                ETGModConsole.Log("<color=#ff0000ff>Name: </color>" + data.OtherRigidbody.gameObject.name);
                 foreach (Component component in data.OtherRigidbody.gameObject.GetComponentsInChildren<Component>())
                 {
                     if (component != null)
                     {
 
                         ETGModConsole.Log(component.GetType().ToString());
+                        if (component is HealthHaver)
+                        {
+                            ETGModConsole.Log("<color=#ff0000ff>Max HP: </color>" + (component as HealthHaver).GetMaxHealth());
+                            ETGModConsole.Log("<color=#ff0000ff>BossBarType: </color>" + (component as HealthHaver).bossHealthBar);
+                        }
+                        if (component is AIActor)
+                        {
+                            ETGModConsole.Log("<color=#ff0000ff>Normal Enemy: </color>" + (component as AIActor).IsNormalEnemy);
+
+                        }
                     }
                 }
                 ETGModConsole.Log("<color=#ff0000ff>---------------------------------</color>");

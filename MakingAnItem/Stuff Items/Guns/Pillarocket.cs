@@ -28,7 +28,7 @@ namespace NevernamedsItems
 
 
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(37) as Gun).gunSwitchGroup;
-            gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(372) as Gun, true, false);
+            gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(39) as Gun, true, false);
 
             //GUN STATS
             gun.DefaultModule.ammoCost = 1;
@@ -48,9 +48,13 @@ namespace NevernamedsItems
             projectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
-            projectile.baseData.speed *= 0.65f;
-            projectile.baseData.damage *= 0.8f;
+            projectile.baseData.speed = 6.5f;
+            projectile.baseData.damage = 80f;
+            projectile.baseData.range = 100;
+            projectile.baseData.force = 10;
             projectile.pierceMinorBreakables = true;
+            RemoteBulletsProjectileBehaviour remote = projectile.gameObject.GetOrAddComponent<RemoteBulletsProjectileBehaviour>();
+            remote.trackingTime = 1000;
             PillarocketFiring firing = projectile.gameObject.GetOrAddComponent<PillarocketFiring>();
 
             projectile.AnimateProjectile(new List<string> {
@@ -74,11 +78,20 @@ namespace NevernamedsItems
                 "pillarocket_proj_012",
                 "pillarocket_proj_013",
                 "pillarocket_proj_014",
-            }, 20, true, AnimateBullet.ConstructListOfSameValues<IntVector2>(new IntVector2(15,8), 20), AnimateBullet.ConstructListOfSameValues(false, 20), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 20), AnimateBullet.ConstructListOfSameValues(true, 20), AnimateBullet.ConstructListOfSameValues(false, 20),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 20), AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(12, 6), 20), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 20), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 20));
+            }, 20, //FPS
+            true, //LOOPS
+            AnimateBullet.ConstructListOfSameValues<IntVector2>(new IntVector2(15,8), 20), //PIXELSIZES
+            AnimateBullet.ConstructListOfSameValues(false, 20), //LIGHTENEDS
+            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleLeft, 20), //ANCHORS
+            AnimateBullet.ConstructListOfSameValues(false, 20), //ANCHORSCHANGECOLLIDERS
+            AnimateBullet.ConstructListOfSameValues(false, 20),
+            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 20), 
+            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(15, 6), 20), 
+            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 20), 
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 20));
 
             gun.DefaultModule.projectiles[0] = projectile;
-
+            gun.gunClass = GunClass.EXPLOSIVE;
             gun.quality = PickupObject.ItemQuality.S;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 

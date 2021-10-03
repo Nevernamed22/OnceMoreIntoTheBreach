@@ -37,7 +37,7 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(0.75f, 0.31f, 0f);
             gun.SetBaseMaxAmmo(150);
             gun.ammo = 150;
-
+            gun.gunClass = GunClass.FIRE;
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);

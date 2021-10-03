@@ -50,8 +50,9 @@ namespace NevernamedsItems
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_SPEEDPOTION, true);
             item.AddItemToGooptonMetaShop(12);
+            SpeedPotionID = item.PickupObjectId;
         }
-
+        public static int SpeedPotionID;
         //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!
         float movementBuff = -1;
         float duration = 15f;

@@ -71,7 +71,7 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.OnReceivedDamage -= this.breakItem;
+            if (Owner) Owner.OnReceivedDamage -= this.breakItem;
             base.OnDestroy();
         }
 

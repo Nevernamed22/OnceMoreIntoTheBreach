@@ -31,7 +31,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "Gonna be a long long time";
-            string longDesc = "Chance to fire random rockets."+"\n\nThe prized relic of a reclusive group of Detoknights, though in truth it does not belong to them at all...";
+            string longDesc = "Chance to fire random rockets." + "\n\nThe prized relic of a reclusive group of Detoknights, though in truth it does not belong to them at all...";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -46,7 +46,7 @@ namespace NevernamedsItems
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
             ShootRocket(effectChanceScalar);
-        }  
+        }
         private void PostProcessBeamTick(BeamController whatTheFuckDoesThisDo, SpeculativeRigidbody beam, float effectChanceScalar)
         {
             ShootRocket(1);
@@ -107,8 +107,11 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.PostProcessProjectile -= this.PostProcessProjectile;
-            Owner.PostProcessBeamTick -= this.PostProcessBeamTick;
+            if (Owner)
+            {
+                Owner.PostProcessProjectile -= this.PostProcessProjectile;
+                Owner.PostProcessBeamTick -= this.PostProcessBeamTick;
+            }
             base.OnDestroy();
         }
     }

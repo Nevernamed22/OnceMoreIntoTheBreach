@@ -29,7 +29,7 @@ namespace NevernamedsItems
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
             gun.reloadTime = 1.1f;
-
+            gun.gunClass = GunClass.PISTOL;
             gun.DefaultModule.cooldownTime = 0.1f;
             gun.DefaultModule.numberOfShotsInClip = 4;
             gun.SetBaseMaxAmmo(100);
@@ -45,11 +45,26 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.AdditionalScaleMultiplier *= 0.5f;
-            projectile.baseData.damage *= 2f;
+            projectile.baseData.damage = 7f;
 
             MiniGunID = gun.PickupObjectId;
         }
         public static int MiniGunID;
+        public override void PostProcessProjectile(Projectile projectile)
+        {
+            if (projectile && projectile.ProjectilePlayerOwner())
+            {
+                if (projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Micro Aggressions"))
+                {
+                    if (UnityEngine.Random.value <= 0.1f)
+                    {
+                        projectile.AdjustPlayerProjectileTint(ExtendedColours.vibrantOrange, 2);
+                        projectile.statusEffectsToApply.Add(StatusEffectHelper.GenerateSizeEffect(5, new Vector2(0.4f, 0.4f)));
+                    }
+                }
+            }
+            base.PostProcessProjectile(projectile);
+        }
         public override void OnPostFired(PlayerController player, Gun gun)
         {
             gun.PreventNormalFireAudio = true;

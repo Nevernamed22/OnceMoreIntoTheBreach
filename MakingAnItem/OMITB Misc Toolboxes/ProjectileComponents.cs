@@ -771,11 +771,13 @@ namespace NevernamedsItems
     {
         public SimpleRandomTransmogrifyComponent()
         {
+            chaosPalette = false;
         }
         private void Start()
         {
             self = base.GetComponent<Projectile>();
             if (self) self.OnHitEnemy += this.OnHitEnemy;
+            if (chaosPalette) RandomStringList = Challenges.GenerateChaosPalette();
         }
         private void OnHitEnemy(Projectile bullet, SpeculativeRigidbody enemy, bool fatal)
         {
@@ -808,6 +810,7 @@ namespace NevernamedsItems
         public bool maintainHPPercent;
         public List<string> RandomStringList = new List<string>();
         private Projectile self;
+        public bool chaosPalette;
     } //Allows for much easier transmogrification (Picks a random GUID from a List)
     public class InstaKillEnemyTypeBehaviour : MonoBehaviour
     {
@@ -997,7 +1000,7 @@ namespace NevernamedsItems
 
                     TargetActor.IsHarmlessEnemy = true;
                     TargetActor.IgnoreForRoomClear = true;
-
+                    TargetActor.StartCoroutine(PostSpawn(TargetActor, knockbackAmountAwayFromOwner, m_projectile.Direction));
                     if (TargetActor.gameObject.GetComponent<SpawnEnemyOnDeath>())
                     {
                         Destroy(TargetActor.gameObject.GetComponent<SpawnEnemyOnDeath>());
@@ -1006,6 +1009,19 @@ namespace NevernamedsItems
                 }
             }
         }
+        private IEnumerator PostSpawn(AIActor spawnedEnemy, float knockbackAway, Vector2 dir)
+        {
+            yield return null;
+            if (knockbackAway > 0)
+            {
+                if (spawnedEnemy.knockbackDoer)
+                {
+                    spawnedEnemy.knockbackDoer.ApplyKnockback(dir, knockbackAway);
+                }
+            }
+            yield break;
+        }
+        public float knockbackAmountAwayFromOwner;
         private Projectile m_projectile;
         private PlayerController projOwner;
         public float procChance;
@@ -1305,6 +1321,7 @@ namespace NevernamedsItems
                     SpriteOutlineManager.ChangeOutlineLayer(enemy.sprite, cachedOutlineLayer2);
 
                     enemy.aiActor.specRigidbody.Reinitialize();
+                    enemy.aiActor.DoCorrectForWalls();
                 }
             }
         }
@@ -1463,6 +1480,121 @@ namespace NevernamedsItems
         private Projectile m_projectile;
         private Projectile lastCollidedProjectile;
     } //The bullet will steal the speed from enemy bullets
+    public class BeamBulletsBehaviour : MonoBehaviour
+    {
+        public BeamBulletsBehaviour()
+        {
+            beamToFire = LaserBullets.SimpleRedBeam;
+            firetype = FireType.PLUS;
+        }
+        private void Start()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
+            if (this.m_projectile.Owner && this.m_projectile.Owner is PlayerController)
+            {
+                this.m_owner = this.m_projectile.Owner as PlayerController;
+            }
+            Invoke("BeginBeamFire", 0.1f);
+        }
+        private void BeginBeamFire()
+        {
+            if (firetype == FireType.FORWARDS)
+            {
+                BeamController beam = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, 0, 1000, true, true);
+                Projectile beamprojcomponent = beam.GetComponent<Projectile>();
+            }
+            if (firetype == FireType.BACKWARDS)
+            {
+                BeamController beam = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, 180, 1000, true, true, 180);
+                Projectile beamprojcomponent = beam.GetComponent<Projectile>();
+            }
+            if (firetype == FireType.CROSS || firetype == FireType.STAR)
+            {
+                //NorthEast
+                BeamController beam = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, 45, 1000, true);
+                Projectile beamprojcomponent = beam.GetComponent<Projectile>();
+                beamprojcomponent.baseData.damage *= m_owner.stats.GetStatValue(PlayerStats.StatType.Damage);
+                //SouthEast
+                BeamController beam2 = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, 135, 1000, true);
+                Projectile beamprojcomponent2 = beam2.GetComponent<Projectile>();
+                beamprojcomponent2.baseData.damage *= m_owner.stats.GetStatValue(PlayerStats.StatType.Damage);
+                //SouthWest
+                BeamController beam3 = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, -45, 1000, true);
+                Projectile beamprojcomponent3 = beam3.GetComponent<Projectile>();
+                beamprojcomponent3.baseData.damage *= m_owner.stats.GetStatValue(PlayerStats.StatType.Damage);
+                //NorthWest
+                BeamController beam4 = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, -135, 1000, true);
+                Projectile beamprojcomponent4 = beam4.GetComponent<Projectile>();
+                beamprojcomponent4.baseData.damage *= m_owner.stats.GetStatValue(PlayerStats.StatType.Damage);
+            }
+            if (firetype == FireType.PLUS || firetype == FireType.STAR)
+            {
+                //Right
+                BeamController beam = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, 0, 1000, true);
+                Projectile beamprojcomponent = beam.GetComponent<Projectile>();
+                beamprojcomponent.baseData.damage *= m_owner.stats.GetStatValue(PlayerStats.StatType.Damage);
+                //Up
+                BeamController beam2 = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, 90, 1000, true);
+                Projectile beamprojcomponent2 = beam2.GetComponent<Projectile>();
+                beamprojcomponent2.baseData.damage *= m_owner.stats.GetStatValue(PlayerStats.StatType.Damage);
+                //Left
+                BeamController beam3 = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, 180, 1000, true);
+                Projectile beamprojcomponent3 = beam3.GetComponent<Projectile>();
+                beamprojcomponent3.baseData.damage *= m_owner.stats.GetStatValue(PlayerStats.StatType.Damage);
+                //Down
+                BeamController beam4 = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, -90, 1000, true);
+                Projectile beamprojcomponent4 = beam4.GetComponent<Projectile>();
+                beamprojcomponent4.baseData.damage *= m_owner.stats.GetStatValue(PlayerStats.StatType.Damage);
+            }
+        }
+        private void Update()
+        {
+
+        }
+
+        private Projectile m_projectile;
+        private PlayerController m_owner;
+        public Projectile beamToFire;
+        public FireType firetype;
+        public enum FireType
+        {
+            PLUS,
+            CROSS,
+            STAR,
+            FORWARDS,
+            BACKWARDS
+        }
+    }
+    public class CustomImpactSoundBehav : MonoBehaviour
+    {
+        public CustomImpactSoundBehav()
+        {
+        }
+        private void Start()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
+            this.m_projectile.OnDestruction += this.onDestroy;
+        }
+        private void onDestroy(Projectile self)
+        {
+            if (!string.IsNullOrEmpty(ImpactSFX)) { AkSoundEngine.PostEvent(ImpactSFX, m_projectile.gameObject); }
+        }
+        public string ImpactSFX;
+        private Projectile m_projectile;
+    }
+    public class PrefabStatusEffectsToApply: MonoBehaviour
+    {
+        public PrefabStatusEffectsToApply()
+        {
+        }
+        private void Start()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
+            this.m_projectile.statusEffectsToApply.AddRange(effects);
+        }
+        public List<GameActorEffect> effects;
+        private Projectile m_projectile;
+    }
 
     //PASSIVE ITEM EFFECTS AS COMPONENTS
     public class AngryBulletsProjectileBehaviour : MonoBehaviour
@@ -1983,432 +2115,7 @@ namespace NevernamedsItems
         public float nonJamDamageMult;
     } //The Bloodthirsty Bullets Effect as a Projectile Component.
 
-    //BEAM COMPONENTS!
-    public class SpawnProjectileAtBeamPoint : MonoBehaviour
-    {
-        public SpawnProjectileAtBeamPoint()
-        {
-            this.tickCooldown = 0.1f;
-            this.maxDistance = 1;
-            this.minDistance = 0;
-            this.pickRandomPosition = true;
-            this.chanceToFirePerTick = 0.5f;
-            this.projectileToFire = UnityEngine.Object.Instantiate(((Gun)ETGMod.Databases.Items[86]).DefaultModule.projectiles[0]);
-            this.doPostProcess = true;
-            this.addFromBulletWithGunComponent = false;
-        }
-        public float minDistance;
-        public float maxDistance;
-        public bool pickRandomPosition;
-        public float tickCooldown;
-        public float chanceToFirePerTick;
-        public Projectile projectileToFire;
-        public bool doPostProcess;
-        public bool addFromBulletWithGunComponent;
-        private void Start()
-        {
-            this.m_projectile = base.GetComponent<Projectile>();
-            this.m_beam = base.GetComponent<BeamController>();
-            this.m_basicBeam = base.GetComponent<BasicBeamController>();
-            if (this.m_projectile.Owner is PlayerController) this.m_owner = this.m_projectile.Owner as PlayerController;
-        }
-        private Projectile m_projectile;
-        private BeamController m_beam;
-        private BasicBeamController m_basicBeam;
-        private PlayerController m_owner;
-        private void DoProjectileSpawn()
-        {
-            Vector2 projectileSpawnPosition = this.m_basicBeam.GetPointOnBeam(UnityEngine.Random.value);
-            Vector2 nearestEnemyPosition = projectileSpawnPosition.GetPositionOfNearestEnemy(true, true);
-            if (nearestEnemyPosition != Vector2.zero)
-            {
-                GameObject gameObject = ProjSpawnHelper.SpawnProjectileTowardsPoint(this.projectileToFire.gameObject, projectileSpawnPosition, nearestEnemyPosition, 0, 5);
-                Projectile component = gameObject.GetComponent<Projectile>();
-                if (component != null)
-                {
-                    component.Owner = this.m_owner;
-                    component.TreatedAsNonProjectileForChallenge = true;
-                    component.Shooter = this.m_owner.specRigidbody;
-                    component.collidesWithPlayer = false;
-                    if (this.addFromBulletWithGunComponent) component.gameObject.GetOrAddComponent<BulletsWithGuns.BulletFromBulletWithGun>();
-                    //Stats
-                    if (this.doPostProcess)
-                    {
-                        component.baseData.damage *= this.m_owner.stats.GetStatValue(PlayerStats.StatType.Damage);
-                        component.baseData.speed *= this.m_owner.stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed);
-                        component.baseData.range *= this.m_owner.stats.GetStatValue(PlayerStats.StatType.RangeMultiplier);
-                        component.AdditionalScaleMultiplier *= this.m_owner.stats.GetStatValue(PlayerStats.StatType.PlayerBulletScale); ;
-                        component.baseData.force *= this.m_owner.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
-                        component.BossDamageMultiplier *= this.m_owner.stats.GetStatValue(PlayerStats.StatType.DamageToBosses);
-                        this.m_owner.DoPostProcessProjectile(component);
-                    }
-                }
-            }
-        }
-        private void FixedUpdate()
-        {
-            if (this.m_beam != null)
-            {
-                if (timer > 0)
-                {
-                    timer -= BraveTime.DeltaTime;
-                }
-                if (timer <= 0)
-                {
-                    if (UnityEngine.Random.value <= this.chanceToFirePerTick) DoProjectileSpawn();
-                    timer = tickCooldown;
-                }
-            }
-        }
-        private float timer;
-    } //Makes the beam spawn projectiles at a position along it's length on a timer.
-    public class WanderingBeamComp : MonoBehaviour
-    {
-        public WanderingBeamComp()
-        {
-        }
-        private void Start()
-        {
-            this.m_projectile = base.GetComponent<Projectile>();
-            this.m_beam = base.GetComponent<BeamController>();
-            this.m_basicBeam = base.GetComponent<BasicBeamController>();
-            if (this.m_projectile.Owner is PlayerController) this.m_owner = this.m_projectile.Owner as PlayerController;
-        }
-        private Projectile m_projectile;
-        private BeamController m_beam;
-        private BasicBeamController m_basicBeam;
-        private PlayerController m_owner;
 
-        private void FixedUpdate()
-        {
-            if (this.m_beam != null)
-            {
-                this.m_basicBeam.Direction = this.m_basicBeam.Direction.Rotate(1);
-            }
-        }
-        
-    } //Makes the beam wander NONFUNCTIONAL
-    public class BeamExplosiveModifier : MonoBehaviour
-    {
-        public BeamExplosiveModifier()
-        {
-            canHarmOwner = false;
-            explosionData = GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultSmallExplosionData;
-            chancePerTick = 1;
-            tickDelay = 0.1f;
-            ignoreQueues = true;
-        }
-        private void Start()
-        {
-            timer = tickDelay;
-            this.projectile = base.GetComponent<Projectile>();
-            this.beamController = base.GetComponent<BeamController>();
-            this.basicBeamController = base.GetComponent<BasicBeamController>();
-            if (this.projectile.Owner is PlayerController) this.owner = this.projectile.Owner as PlayerController;
-
-
-        }
-        private void Update()
-        {
-            if (timer > 0)
-            {
-                timer -= BraveTime.DeltaTime;
-            }
-            if (timer <= 0)
-            {
-                DoTick();
-                timer = tickDelay;
-            }
-        }
-        private void DoTick()
-        {
-            //ETGModConsole.Log("Tick Triggered");
-            if (UnityEngine.Random.value < chancePerTick)
-            {
-                LinkedList<BasicBeamController.BeamBone> bones;
-                bones = OMITBReflectionHelpers.ReflectGetField<LinkedList<BasicBeamController.BeamBone>>(typeof(BasicBeamController), "m_bones", basicBeamController);
-                LinkedListNode<BasicBeamController.BeamBone> linkedListNode = bones.Last;
-                Vector2 bonePosition = basicBeamController.GetBonePosition(linkedListNode.Value);
-                Explode(bonePosition);
-
-            }
-        }
-        private void Explode(Vector2 pos)
-        {
-            if (!canHarmOwner && owner != null)
-            {
-                for (int i = 0; i < GameManager.Instance.AllPlayers.Length; i++)
-                {
-                    PlayerController playerController = GameManager.Instance.AllPlayers[i];
-                    if (playerController && playerController.specRigidbody)
-                    {
-                        this.explosionData.ignoreList.Add(playerController.specRigidbody);
-                    }
-                }
-            }
-            Exploder.Explode(pos, this.explosionData, Vector2.zero, null, this.ignoreQueues);
-        }
-        public bool ignoreQueues;
-
-        public float chancePerTick;
-        public float tickDelay;
-
-        public ExplosionData explosionData;
-        public bool canHarmOwner;
-
-        private float timer;
-        private Projectile projectile;
-        private BasicBeamController basicBeamController;
-        private BeamController beamController;
-        private PlayerController owner;
-    } //Makes the end of the beam explode!
-    public class EmmisiveBeams : MonoBehaviour
-    {
-        public EmmisiveBeams()
-        {
-            this.EmissivePower = 100;
-            this.EmissiveColorPower = 1.55f;
-        }
-        public void Start()
-        {
-            Transform trna = base.transform.Find("beam impact vfx");
-            tk2dSprite sproot = trna.GetComponent<tk2dSprite>();
-            if (sproot != null)
-            {
-                sproot.renderer.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
-                sproot.renderer.material.EnableKeyword("BRIGHTNESS_CLAMP_ON");
-                sproot.renderer.material.SetFloat("_EmissivePower", EmissivePower);
-                sproot.renderer.material.SetFloat("_EmissiveColorPower", EmissiveColorPower);
-            }
-            this.beamcont = base.GetComponent<BasicBeamController>();
-            BasicBeamController beam = this.beamcont;
-            beam.sprite.usesOverrideMaterial = true;
-            BasicBeamController component = beam.gameObject.GetComponent<BasicBeamController>();
-            bool flag = component != null;
-            bool flag2 = flag;
-            if (flag2)
-            {
-                component.sprite.renderer.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
-                component.sprite.renderer.material.EnableKeyword("BRIGHTNESS_CLAMP_ON");
-                component.sprite.renderer.material.SetFloat("_EmissivePower", EmissivePower);
-                component.sprite.renderer.material.SetFloat("_EmissiveColorPower", EmissiveColorPower);
-
-            }
-        }
-        private BasicBeamController beamcont;
-        public float EmissivePower;
-        public float EmissiveColorPower;
-    } //Allows the beam to glow
-    public class BeamSplittingModifier : MonoBehaviour
-    {
-        public BeamSplittingModifier()
-        {
-            subBeams = new Dictionary<BasicBeamController, float>();
-            distanceTilSplit = 7f;
-            amtToSplitTo = 0;
-            splitAngles = 39;
-            dmgMultOnSplit = 0.66f;
-        }
-        private void Start()
-        {
-            this.projectile = base.GetComponent<Projectile>();
-            this.beamController = base.GetComponent<BeamController>();
-            this.basicBeamController = base.GetComponent<BasicBeamController>();
-            if (this.projectile.Owner is PlayerController) this.owner = this.projectile.Owner as PlayerController;
-
-            if (projectile.baseData.range > distanceTilSplit)
-            {
-                originalRange = projectile.baseData.range;
-                projectile.baseData.range = distanceTilSplit;
-            }
-            else
-            {
-                distanceTilSplit = projectile.baseData.range;
-            }
-        }
-
-        private void ClearExtantSubBeams()
-        {
-            if (subBeams.Count <= 0) { return; }
-            for (int i = subBeams.Count - 1; i >= 0; i--)
-            {
-                if (subBeams.ElementAt(i).Key && subBeams.ElementAt(i).Key.gameObject)
-                {
-                    subBeams.ElementAt(i).Key.CeaseAttack();
-                }
-            }
-            subBeams.Clear();
-        }
-        private void CreateNewSubBeams()
-        {
-            ClearExtantSubBeams();
-            float ProjectileInterval = splitAngles / ((float)amtToSplitTo - 1);
-            float currentAngle = basicBeamController.GetFinalBoneDirection();
-            float startAngle = currentAngle + (splitAngles * 0.5f);
-            int iteration = 0;
-
-            for (int i = 0; i < amtToSplitTo; i++)
-            {
-                LinkedList<BasicBeamController.BeamBone> bones;
-                bones = OMITBReflectionHelpers.ReflectGetField<LinkedList<BasicBeamController.BeamBone>>(typeof(BasicBeamController), "m_bones", basicBeamController);
-                LinkedListNode<BasicBeamController.BeamBone> linkedListNode = null;
-                if (bones != null) linkedListNode = bones.Last;
-                else { Debug.LogError("Bones was NULL"); return; }
-
-                Vector2 bonePosition = basicBeamController.GetBonePosition(linkedListNode.Value);
-
-                float finalAngle = startAngle - (ProjectileInterval * iteration);
-
-                GameObject newSubBeamPrefab = FakePrefab.Clone(projectile.gameObject);
-                if (newSubBeamPrefab == null) Debug.LogError("BeamSplitComp: Cloned Beam Prefab was NULL!");
-
-                BeamController controllerPrefab = newSubBeamPrefab.GetComponent<BeamController>();
-                if (controllerPrefab == null) { Debug.LogError("BeamSplitComp: ControllerPrefab was NULL!"); }
-                if (controllerPrefab is BasicBeamController)
-                {
-                    GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(controllerPrefab.gameObject);
-
-                    BasicBeamController newBasicSubBeam = gameObject.GetComponent<BasicBeamController>();
-                    newBasicSubBeam.State = BasicBeamController.BeamState.Firing;
-                    newBasicSubBeam.HitsPlayers = false;
-                    newBasicSubBeam.HitsEnemies = true;
-                    newBasicSubBeam.Origin = bonePosition;
-                    newBasicSubBeam.Direction = finalAngle.DegreeToVector2();
-                    newBasicSubBeam.usesChargeDelay = false;
-                    newBasicSubBeam.muzzleAnimation = string.Empty;
-                    newBasicSubBeam.chargeAnimation = string.Empty;
-                    newBasicSubBeam.beamStartAnimation = string.Empty;
-                    newBasicSubBeam.projectile.Owner = this.projectile.Owner;
-                    newBasicSubBeam.Owner = this.basicBeamController.Owner;
-                    newBasicSubBeam.Gun = this.basicBeamController.Gun;
-                    if (originalRange > 0) newBasicSubBeam.projectile.baseData.range = originalRange;
-                    newBasicSubBeam.projectile.baseData.damage *= dmgMultOnSplit;
-
-                    if (newBasicSubBeam.GetComponent<BeamSplittingModifier>()) Destroy(newBasicSubBeam.GetComponent<BeamSplittingModifier>());
-
-                    subBeams.Add(newBasicSubBeam, (ProjectileInterval * iteration));
-                }
-                else { Debug.LogError("BeamSplitComp: Controller prefab was not beam????"); }
-
-                iteration++;
-            }
-        }
-        private void Update()
-        {
-            if (projectile.baseData.range > distanceTilSplit) { originalRange = projectile.baseData.range; projectile.baseData.range = distanceTilSplit; }
-            if ((basicBeamController.ApproximateDistance >= distanceTilSplit) && subBeams.Count < amtToSplitTo)
-            {
-                CreateNewSubBeams();
-            }
-            if ((basicBeamController.ApproximateDistance < distanceTilSplit) && subBeams.Count > 0)
-            {
-                ClearExtantSubBeams();
-            }
-            float currentAngle = basicBeamController.GetFinalBoneDirection();
-            float startAngle = currentAngle + (splitAngles * 0.5f);
-            if (subBeams.Count > 0)
-            {
-                for (int i = 0; i < subBeams.Count; i++)
-                {
-                    BasicBeamController particularSubBeam = subBeams.ElementAt(i).Key;
-                    LinkedList<BasicBeamController.BeamBone> bones;
-                    bones = OMITBReflectionHelpers.ReflectGetField<LinkedList<BasicBeamController.BeamBone>>(typeof(BasicBeamController), "m_bones", basicBeamController);
-                    LinkedListNode<BasicBeamController.BeamBone> linkedListNode = bones.Last;
-                    Vector2 bonePosition = basicBeamController.GetBonePosition(linkedListNode.Value);
-
-                    float angleOffset = subBeams.ElementAt(i).Value;
-                    particularSubBeam.Direction = (startAngle - angleOffset).DegreeToVector2();
-                    particularSubBeam.Origin = bonePosition;
-                    particularSubBeam.LateUpdatePosition(bonePosition);
-                }
-            }
-        }
-        private void OnDestroy()
-        {
-            ClearExtantSubBeams();
-        }
-        private Dictionary<BasicBeamController, float> subBeams;
-        public float distanceTilSplit;
-        public int amtToSplitTo;
-        public float splitAngles;
-        public float dmgMultOnSplit;
-
-        private float originalRange;
-        private Projectile projectile;
-        private BasicBeamController basicBeamController;
-        private BeamController beamController;
-        private PlayerController owner;
-    } //Makes the beam split into multiple weaker beams after travelling a certain distance
-    public class BeamProjSpewModifier : MonoBehaviour
-    {
-        public BeamProjSpewModifier()
-        {
-            chancePerTick = 1;
-            tickDelay = 0.01f;
-            accuracyVariance = 7;
-            bulletToSpew = (PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0];
-        }
-        private void Start()
-        {
-            timer = tickDelay;
-            this.projectile = base.GetComponent<Projectile>();
-            this.beamController = base.GetComponent<BeamController>();
-            this.basicBeamController = base.GetComponent<BasicBeamController>();
-            if (this.projectile.Owner is PlayerController) this.owner = this.projectile.Owner as PlayerController;
-
-
-        }
-        private void Update()
-        {
-            if (timer > 0)
-            {
-                timer -= BraveTime.DeltaTime;
-            }
-            if (timer <= 0)
-            {
-                DoTick();
-                timer = tickDelay;
-            }
-        }
-        private void DoTick()
-        {
-            //ETGModConsole.Log("Tick Triggered");
-            if (UnityEngine.Random.value < chancePerTick)
-            {
-                LinkedList<BasicBeamController.BeamBone> bones;
-                bones = OMITBReflectionHelpers.ReflectGetField<LinkedList<BasicBeamController.BeamBone>>(typeof(BasicBeamController), "m_bones", basicBeamController);
-                LinkedListNode<BasicBeamController.BeamBone> linkedListNode = bones.Last;
-                Vector2 bonePosition = basicBeamController.GetBonePosition(linkedListNode.Value);
-
-                Explode(bonePosition, basicBeamController.GetFinalBoneDirection());
-
-            }
-        }
-        private void Explode(Vector2 pos, float angle)
-        {
-            float variance = UnityEngine.Random.Range(0, accuracyVariance);
-            if (UnityEngine.Random.value <= 0.5) variance *= -1;
-            float angleVaried = angle + variance;
-            GameObject spawnedBulletOBJ = SpawnManager.SpawnProjectile(bulletToSpew.gameObject, pos, Quaternion.Euler(0f, 0f, angleVaried), true);
-            Projectile component = spawnedBulletOBJ.GetComponent<Projectile>();
-            if (component != null)
-            {
-                component.Owner = projectile.ProjectilePlayerOwner();
-                component.Shooter = projectile.ProjectilePlayerOwner().specRigidbody;
-                owner.DoPostProcessProjectile(component);
-            }
-        }
-        public float chancePerTick;
-        public float tickDelay;
-        public Projectile bulletToSpew;
-        public float accuracyVariance;
-
-        private float timer;
-        private Projectile projectile;
-        private BasicBeamController basicBeamController;
-        private BeamController beamController;
-        private PlayerController owner;
-    } //Makes the beam fire projectiles from the end
 
     //TECHNICALLY NOT NEW COMPONENTS, BUT NEW TYPES OF PROJECTILE
     public class SuperPierceProjectile : Projectile

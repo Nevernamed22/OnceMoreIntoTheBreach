@@ -128,6 +128,13 @@ namespace NevernamedsItems
             AdvancedDualWieldSynergyProcessor WelWelDualGUN = (PickupObjectDatabase.GetById(Welgun.WelgunID) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
             WelWelDualGUN.PartnerGunID = Welrod.WelrodID;
             WelWelDualGUN.SynergyNameToCheck = "Wel Wel Wel";
+            //SHOTGUN WEDDING
+            AdvancedDualWieldSynergyProcessor WeddingBride = (PickupObjectDatabase.GetById(TheBride.TheBrideID) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
+            WeddingBride.PartnerGunID = TheGroom.TheGroomID;
+            WeddingBride.SynergyNameToCheck = "Shotgun Wedding";
+            AdvancedDualWieldSynergyProcessor WeddingGroom = (PickupObjectDatabase.GetById(TheGroom.TheGroomID) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
+            WeddingGroom.PartnerGunID = TheBride.TheBrideID;
+            WeddingGroom.SynergyNameToCheck = "Shotgun Wedding";
             #endregion
         }
     }

@@ -69,7 +69,7 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
+            if (Owner) Owner.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
             base.OnDestroy();
         }
         private void OnEnemyDamaged(float damage, bool fatal, HealthHaver enemyHealth)

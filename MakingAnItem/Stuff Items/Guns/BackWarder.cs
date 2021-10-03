@@ -40,12 +40,24 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(0.18f, 0.87f, 0f);
             gun.SetBaseMaxAmmo(140);
             gun.ammo = 140;
-            
+            gun.gunClass = GunClass.SHITTY;
 
             gun.quality = PickupObject.ItemQuality.D;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             BackWarderID = gun.PickupObjectId;
 
+        }
+        public override void PostProcessProjectile(Projectile projectile)
+        {
+            if (projectile.ProjectilePlayerOwner() && projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Backstabber!"))
+            {
+              ProjectileSlashingBehaviour slash =  projectile.gameObject.AddComponent<ProjectileSlashingBehaviour>();
+                slash.DestroyBaseAfterFirstSlash = false;
+                slash.timeBetweenSlashes = 1;
+                slash.SlashDamageUsesBaseProjectileDamage = true;
+                slash.playerKnockback = 0;
+            }
+            base.PostProcessProjectile(projectile);
         }
         public static int BackWarderID;      
         public BackWarder()

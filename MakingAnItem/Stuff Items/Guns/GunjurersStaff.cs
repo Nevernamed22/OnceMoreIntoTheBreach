@@ -190,7 +190,7 @@ namespace NevernamedsItems
             behav.preventNormalReloadAudio = true;
             behav.overrideNormalReloadAudio = "Play_ENM_wizardred_chant_01";
             gun.SetShortDescription("Do you believe in magic?");
-            gun.SetLongDescription("");
+            gun.SetLongDescription("The lost wand of an Apprentice Gunjurer, cruelly slain by a Gungeoneer while out of his mentor's sight for but a moment...");
 
             gun.SetupSprite(null, "gunjurerswand_idle_001", 8);
 
@@ -220,7 +220,7 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(1.31f, 0.5f, 0f);
             gun.SetBaseMaxAmmo(45);
             gun.ammo = 45;
-
+            gun.gunClass = GunClass.CHARGE;
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);

@@ -39,7 +39,7 @@ namespace NevernamedsItems
             gun.DefaultModule.numberOfShotsInClip = 1;
             gun.barrelOffset.transform.localPosition = new Vector3(1.12f, 0.62f, 0f);
             gun.SetBaseMaxAmmo(150);
-
+            gun.gunClass = GunClass.SILLY;
             //SUBBULLET
             Projectile swirly = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
             swirly.gameObject.SetActive(false);

@@ -43,3 +43,5 @@ C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\Mak
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\MakingAnItem.pdb
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\UnityEngine.TextRenderingModule.dll
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\Ionic.Zip.dll
+C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\PlayMaker.dll
+C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\UnityEngine.dll

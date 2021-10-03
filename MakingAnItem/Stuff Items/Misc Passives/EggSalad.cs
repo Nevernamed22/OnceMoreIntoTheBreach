@@ -114,7 +114,7 @@ namespace NevernamedsItems
             string itemName = "Bashing Bullets";
 
             //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/bashingbullets_icon";
+            string resourceName = "NevernamedsItems/Resources/BulletModifiers/bashingbullets_icon";
 
             //Create new GameObject
             GameObject obj = new GameObject(itemName);
@@ -173,7 +173,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "Absolute Unit";
-            string longDesc = "Bullets increase massively in size, and slightly in damage.";
+            string longDesc = "Bullets increase massively in size, and slightly in damage."+"\n\nThese bullets are so big that enemies are left in shock and awe.";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -206,7 +206,7 @@ namespace NevernamedsItems
         {
             if (arg2 != null && arg2.healthHaver.IsAlive && !arg2.healthHaver.IsBoss)
             {
-                arg2.behaviorSpeculator.Stun(2f, true);
+                arg2.behaviorSpeculator.Stun(1f, true);
             }
         }
         public override DebrisObject Drop(PlayerController player)
@@ -217,7 +217,11 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
+            if (Owner)
+            {
+
             Owner.PostProcessProjectile -= this.PostProcessProjectile;
+            }
             base.OnDestroy();
         }
 

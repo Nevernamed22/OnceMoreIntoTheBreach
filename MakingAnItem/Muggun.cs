@@ -17,9 +17,9 @@ namespace NevernamedsItems
     {
         public static void Add()
         {
-            Gun gun = ETGMod.Databases.Items.NewGun("Pista", "pista");
-            Game.Items.Rename("outdated_gun_mods:pista", "nn:pista");
-            gun.gameObject.AddComponent<Pista>();
+            Gun gun = ETGMod.Databases.Items.NewGun("Muggun", "muggun");
+            Game.Items.Rename("outdated_gun_mods:muggun", "nn:muggun");
+            gun.gameObject.AddComponent<Muggun>();
             gun.SetShortDescription("Yeeeeehaw!");
             gun.SetLongDescription("Six tiny spirits inhabit this gun, gleefully riding it's bullets into battle, and re-aiming them towards the nearest target when the owner signals them via reloading." + "\n\nThis gun smells vaguely Italian.");
 
@@ -49,12 +49,11 @@ namespace NevernamedsItems
             projectile.baseData.speed *= 0.65f;
             projectile.baseData.range *= 2f;
             projectile.baseData.damage *= 1.6f;
-
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             gun.encounterTrackable.EncounterGuid = "this is the Pista";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
-
             PistaID = gun.PickupObjectId;
+            
         }
         public static int PistaID;
         public override void PostProcessProjectile(Projectile projectile)

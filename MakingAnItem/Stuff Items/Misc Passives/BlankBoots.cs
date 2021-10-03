@@ -90,7 +90,7 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.OnDodgedProjectile -= this.onDodgeRolledOverBullet;
+            if (Owner) Owner.OnDodgedProjectile -= this.onDodgeRolledOverBullet;
             base.OnDestroy();
         }
     }

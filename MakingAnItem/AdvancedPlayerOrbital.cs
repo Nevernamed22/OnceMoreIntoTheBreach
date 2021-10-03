@@ -9,7 +9,6 @@ namespace NevernamedsItems
 {
     public class AdvancedPlayerOrbitalItem : PassiveItem
     {
-        // Token: 0x060000F5 RID: 245 RVA: 0x0000B450 File Offset: 0x00009650
         private void CreateOrbital(PlayerController owner)
         {
             GameObject targetOrbitalPrefab = (!(this.OrbitalPrefab != null)) ? this.OrbitalFollowerPrefab.gameObject : this.OrbitalPrefab.gameObject;

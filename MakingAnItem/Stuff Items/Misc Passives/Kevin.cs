@@ -83,7 +83,7 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.OnEnteredCombat -= this.SpawnKevin;
+            if (Owner) Owner.OnEnteredCombat -= this.SpawnKevin;
             base.OnDestroy();
         }
     }

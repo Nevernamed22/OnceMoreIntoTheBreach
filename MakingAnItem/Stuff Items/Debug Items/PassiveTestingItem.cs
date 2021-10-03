@@ -30,15 +30,18 @@ namespace NevernamedsItems
             item.sprite.IsPerpendicular = true;
             item.CanBeDropped = true;
             item.CanBeSold = true;
+            DebugPassiveID = item.PickupObjectId;
         }
-
+        public static int DebugPassiveID;
         public void onFired(Projectile bullet, float eventchancescaler)
         {
-           /* if (!bullet.GetComponent<HasBeenDoubleProcessed>())
-            {
-                StartCoroutine(doLateFrameProcessing(bullet));
-                bullet.gameObject.AddComponent<HasBeenDoubleProcessed>();
-            }*/
+            /* if (!bullet.GetComponent<HasBeenDoubleProcessed>())
+             {
+                 StartCoroutine(doLateFrameProcessing(bullet));
+                 bullet.gameObject.AddComponent<HasBeenDoubleProcessed>();
+             }*/
+            bullet.sprite.renderer.enabled = false;
+            bullet.baseData.range = 5;
           
         }
         private IEnumerator doLateFrameProcessing(Projectile projectile)
@@ -58,13 +61,13 @@ namespace NevernamedsItems
         public override void Pickup(PlayerController player)
         {
             player.PostProcessProjectile += this.onFired;
-            player.PostProcessBeam += this.PostProcessBeam;
+           // player.PostProcessBeam += this.PostProcessBeam;
             base.Pickup(player);
         }
         public override DebrisObject Drop(PlayerController player)
         {
             player.PostProcessProjectile -= this.onFired;
-            player.PostProcessBeam -= this.PostProcessBeam;
+           // player.PostProcessBeam -= this.PostProcessBeam;
 
             DebrisObject result = base.Drop(player);
            return result;

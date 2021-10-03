@@ -69,7 +69,7 @@ namespace NevernamedsItems
             }
             gun.reloadTime = 2f;
             gun.SetBaseMaxAmmo(100);
-
+            gun.gunClass = GunClass.SHOTGUN;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.LoopSection;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).loopStart = 3;
 
@@ -121,7 +121,7 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            if (gun.CurrentOwner && gun.CurrentOwner is PlayerController)
+            if (gun && gun.CurrentOwner && gun.CurrentOwner is PlayerController)
             {
                 RemoveFireImmunity(gun.CurrentOwner as PlayerController);
             }

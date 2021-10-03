@@ -54,7 +54,7 @@ namespace NevernamedsItems
             gun.reloadTime = 0.5f;
             gun.SetBaseMaxAmmo(200);
             gun.quality = PickupObject.ItemQuality.C;
-
+            gun.gunClass = GunClass.POISON;
             gun.encounterTrackable.EncounterGuid = "this is the Poison Dart Frog";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             gun.barrelOffset.transform.localPosition = new Vector3(1.37f, 0.37f, 0f);

@@ -55,7 +55,7 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.OnEnteredCombat -= this.OnEnteredCombat;
+            if (Owner) Owner.OnEnteredCombat -= this.OnEnteredCombat;
             base.OnDestroy();
         }
         private void OnEnteredCombat()

@@ -117,7 +117,7 @@ namespace NevernamedsItems
                             else
                             {
                                 SpawnMaidenLoot(arg2.aiActor.healthHaver);
-                            }                            
+                            }
                             InstaKill(arg2.aiActor.healthHaver);
                             return;
                         }
@@ -133,14 +133,14 @@ namespace NevernamedsItems
         public void SpawnMaidenLoot(HealthHaver target)
         {
             if (target.healthHaver.IsDead) return;
-                int randomTierSelectionNumber = UnityEngine.Random.Range(1, 100);
-                var itemQuality = PickupObject.ItemQuality.D;
-                if (randomTierSelectionNumber <= 37) itemQuality = PickupObject.ItemQuality.D; //Make Tier D
-                else if (randomTierSelectionNumber <= 67) itemQuality = PickupObject.ItemQuality.C; //Make Tier C
-                else if (randomTierSelectionNumber <= 87) itemQuality = PickupObject.ItemQuality.B; //Make Tier B
-                else if (randomTierSelectionNumber <= 98) itemQuality = PickupObject.ItemQuality.A; //Make Tier A               
-                else if (randomTierSelectionNumber <= 100) itemQuality = PickupObject.ItemQuality.S; //Make Tier S
-                GameManager.Instance.RewardManager.SpawnTotallyRandomItem(target.specRigidbody.UnitCenter, itemQuality, itemQuality);
+            int randomTierSelectionNumber = UnityEngine.Random.Range(1, 100);
+            var itemQuality = PickupObject.ItemQuality.D;
+            if (randomTierSelectionNumber <= 37) itemQuality = PickupObject.ItemQuality.D; //Make Tier D
+            else if (randomTierSelectionNumber <= 67) itemQuality = PickupObject.ItemQuality.C; //Make Tier C
+            else if (randomTierSelectionNumber <= 87) itemQuality = PickupObject.ItemQuality.B; //Make Tier B
+            else if (randomTierSelectionNumber <= 98) itemQuality = PickupObject.ItemQuality.A; //Make Tier A               
+            else if (randomTierSelectionNumber <= 100) itemQuality = PickupObject.ItemQuality.S; //Make Tier S
+            GameManager.Instance.RewardManager.SpawnTotallyRandomItem(target.specRigidbody.UnitCenter, itemQuality, itemQuality);
         }
 
         public void SpawnMaidenRainbowLoot(HealthHaver target)
@@ -175,7 +175,7 @@ namespace NevernamedsItems
             {
                 //Spawn a full heart
                 LootEngine.SpawnHealth(target.specRigidbody.UnitCenter, 2, null);
-            }            
+            }
             else if (randomTierSelectionNumber <= 100)
             {
                 //spawn 
@@ -204,8 +204,11 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.PostProcessProjectile -= this.PostProcessProjectile;
-            Owner.PostProcessBeam -= this.PostProcessBeam;
+            if (Owner)
+            {
+                Owner.PostProcessProjectile -= this.PostProcessProjectile;
+                Owner.PostProcessBeam -= this.PostProcessBeam;
+            }
             base.OnDestroy();
         }
 

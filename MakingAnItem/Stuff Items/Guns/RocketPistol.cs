@@ -45,6 +45,7 @@ namespace NevernamedsItems
             gun.DefaultModule.cooldownTime = 0.3f;
             gun.DefaultModule.numberOfShotsInClip = 6;
             gun.SetBaseMaxAmmo(600);
+            gun.gunClass = GunClass.EXPLOSIVE;
             // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.
             gun.quality = PickupObject.ItemQuality.A;
             gun.encounterTrackable.EncounterGuid = "this is the Rocket Pistol";

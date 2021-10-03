@@ -65,7 +65,7 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.OnUsedBlank -= this.OnUsedBlank;
+            if (Owner) Owner.OnUsedBlank -= this.OnUsedBlank;
             base.OnDestroy();
         }
     }

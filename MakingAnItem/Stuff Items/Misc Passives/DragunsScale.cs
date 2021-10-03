@@ -90,9 +90,12 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.OnReceivedDamage -= this.IgniteAll;
-            Owner.OnUsedPlayerItem -= this.HandleActiveItemUsed;
-            Owner.OnTableFlipped = (Action<FlippableCover>)Delegate.Remove(Owner.OnTableFlipped, new Action<FlippableCover>(this.CheckForSynergy));
+            if (Owner)
+            {
+                Owner.OnReceivedDamage -= this.IgniteAll;
+                Owner.OnUsedPlayerItem -= this.HandleActiveItemUsed;
+                Owner.OnTableFlipped = (Action<FlippableCover>)Delegate.Remove(Owner.OnTableFlipped, new Action<FlippableCover>(this.CheckForSynergy));
+            }
             base.OnDestroy();
         }
     }

@@ -102,7 +102,6 @@ namespace NevernamedsItems
             if (Owner)
             {
                 Owner.OnDidUnstealthyAction -= this.OnUnstealthy;
-
             }
             base.OnDestroy();
         }

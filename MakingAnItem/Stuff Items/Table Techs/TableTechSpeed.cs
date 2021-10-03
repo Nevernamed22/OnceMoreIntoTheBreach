@@ -34,8 +34,10 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            DebrisObject result = base.Drop(Owner);
-            Owner.OnTableFlipped = (Action<FlippableCover>)Delegate.Remove(Owner.OnTableFlipped, new Action<FlippableCover>(this.SpeedEffect));
+            if (Owner)
+            {
+                Owner.OnTableFlipped -= SpeedEffect;
+            }
             base.OnDestroy();
         }
         private void SpeedEffect(FlippableCover obj)

@@ -134,12 +134,53 @@ namespace NevernamedsItems
                 if (gun.PickupObjectId == idToGive) { gun.GainAmmo(AmmoToGive); }
             }
         }
+        public static PlayerController GetPlayerWithItemID(this GameManager managerInstance, int id, bool randomIfBoth = true)
+        {
+            bool primary = false;
+            bool secondary = false;
+            if (managerInstance.PrimaryPlayer && managerInstance.PrimaryPlayer.HasPickupID(id)) primary = true;
+            if (managerInstance.SecondaryPlayer && managerInstance.SecondaryPlayer.HasPickupID(id)) secondary = true;
+            if (primary && secondary)
+            {
+                if (randomIfBoth)
+                {
+                    if (UnityEngine.Random.value < 0.5) return managerInstance.PrimaryPlayer;
+                    else return managerInstance.SecondaryPlayer;
+                }
+                else return managerInstance.PrimaryPlayer;
+            }
+            else if (primary) return managerInstance.PrimaryPlayer;
+            else if (secondary) return managerInstance.SecondaryPlayer;
+            else return null;
+        }
+        public static bool AnyPlayerHasActiveSynergy(this GameManager managerInstance, string synergyID)
+        {
+            bool synergyDetected = false;
+            if (managerInstance.PrimaryPlayer && managerInstance.PrimaryPlayer.PlayerHasActiveSynergy(synergyID)) synergyDetected = true;
+            if (managerInstance.SecondaryPlayer && managerInstance.SecondaryPlayer.PlayerHasActiveSynergy(synergyID)) synergyDetected = true;
+            return synergyDetected;
+        }
         public static bool AnyPlayerHasPickupID(this GameManager managerInstance, int itemID)
         {
             bool hasBeenDetectedOnPlayer = false;
             if (managerInstance.PrimaryPlayer && managerInstance.PrimaryPlayer.HasPickupID(itemID)) hasBeenDetectedOnPlayer = true;
             if (managerInstance.SecondaryPlayer && managerInstance.SecondaryPlayer.HasPickupID(itemID)) hasBeenDetectedOnPlayer = true;
             return hasBeenDetectedOnPlayer;
+        }
+       public static float GetCombinedPlayersStatAmount(this GameManager managerInstance, PlayerStats.StatType stat)
+        {
+            float amt = 0;
+            if (managerInstance.PrimaryPlayer)
+            {
+                float primary = managerInstance.PrimaryPlayer.stats.GetStatValue(stat);
+                amt += primary;
+            }
+            if (managerInstance.SecondaryPlayer)
+            {
+                float secondary = managerInstance.SecondaryPlayer.stats.GetStatValue(stat);
+                amt += secondary;
+            }
+            return amt;
         }
         public static Vector2 PositionInDistanceFromAimDir(this PlayerController player, float distance)
         {
@@ -196,6 +237,39 @@ namespace NevernamedsItems
             player.IsVisible = true;
             player.healthHaver.IsVulnerable = true;
             player.specRigidbody.RemoveCollisionLayerIgnoreOverride(mask);
+        }
+
+        public static void RecalculateOrbitals(this PlayerController player)
+        {
+            Dictionary<int, int> tiersAndCounts = new Dictionary<int, int>();
+            foreach (var o in player.orbitals)
+            {
+                var orbital = (PlayerOrbital)o;
+                int targetTier = PlayerOrbital.CalculateTargetTier(player, o);
+                orbital.SetOrbitalTier(targetTier);
+                if (tiersAndCounts.ContainsKey(targetTier)) //Count starts at 0
+                {
+                    int existingCount = tiersAndCounts[targetTier];
+                    tiersAndCounts[targetTier] = existingCount + 1;
+                }
+                else tiersAndCounts.Add(targetTier, 0);
+            }
+            foreach (var o in player.orbitals)
+            {
+                var orbital = (PlayerOrbital)o;
+                int currentTier = orbital.GetOrbitalTier();
+                if (tiersAndCounts.ContainsKey(currentTier))
+                {
+                    int currentAmtInTier = tiersAndCounts[currentTier];
+                    orbital.SetOrbitalTierIndex(tiersAndCounts[currentTier]);
+                    tiersAndCounts[currentTier] = currentAmtInTier - 1;
+
+                }
+                else
+                {
+                    orbital.SetOrbitalTierIndex(0);
+                }
+            }
         }
     }
     public enum EasyBlankType

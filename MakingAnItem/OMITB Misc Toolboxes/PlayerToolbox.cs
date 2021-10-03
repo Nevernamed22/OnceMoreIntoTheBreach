@@ -39,9 +39,16 @@ namespace NevernamedsItems
                 m_attachedPlayer.PostProcessProjectile += this.PostProcessProjectile;
                 m_attachedPlayer.PostProcessBeam += this.PostProcessBeam;
                 m_attachedPlayer.OnHitByProjectile += this.OnHitByProjectile;
+                m_attachedPlayer.healthHaver.OnDamaged += this.OnDamaged;
+                m_attachedPlayer.healthHaver.ModifyDamage += this.ModifyDamage;
+                m_attachedPlayer.OnEnteredCombat += this.EnteredCombat;
+                m_attachedPlayer.OnRoomClearEvent += this.ClearedRoom;
+                m_attachedPlayer.OnNewFloorLoaded += this.NewFloor;
                 if (GameManager.Instance.SecondaryPlayer != null && GameManager.Instance.SecondaryPlayer == m_attachedPlayer) { isSecondaryPlayer = true; }
             }
             //Stats
+            roomsSinceAllJamAmmoDrop = 0;
+
             DoubleDamageStatMod = new StatModifier();
             DoubleDamageStatMod.statToBoost = PlayerStats.StatType.Damage;
             DoubleDamageStatMod.amount = 2f;
@@ -51,6 +58,84 @@ namespace NevernamedsItems
             keepItCoolSpeedBuff.statToBoost = PlayerStats.StatType.MovementSpeed;
             keepItCoolSpeedBuff.amount = 2.5f;
             keepItCoolSpeedBuff.modifyType = StatModifier.ModifyMethod.ADDITIVE;
+        }
+        private void NewFloor(PlayerController self)
+        {
+        }
+        private void EnteredCombat()
+        {
+            if (m_attachedPlayer && m_attachedPlayer.CurrentRoom != null)
+            {
+                if (CurseManager.CurseIsActive("Curse of The Flames"))
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        IntVector2 pos = (IntVector2)m_attachedPlayer.CurrentRoom.GetRandomAvailableCell(null, CellTypes.FLOOR);
+                        DeadlyDeadlyGoopManager goop = null;
+                        if (GameManager.Instance.AnyPlayerHasActiveSynergy("The Last Crusade")) goop = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.PlayerFriendlyFireGoop);
+                        else goop = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.EnemyFriendlyFireGoop);
+                        goop.TimedAddGoopCircle(pos.ToVector2(), UnityEngine.Random.Range(2.5f, 4f), 0.75f, true);
+                    }
+                }
+            }
+        }
+        private void OnDamaged(float resultValue, float maxValue, CoreDamageTypes damageTypes, DamageCategory damageCategory, Vector2 damageDirection)
+        {
+            if ((m_attachedPlayer != null) && (m_attachedPlayer.CurrentGun != null) && (m_attachedPlayer.CurrentGun.CanActuallyBeDropped(m_attachedPlayer)))
+            {
+                if (CurseManager.CurseIsActive("Curse of Butterfingers"))
+                {
+                    if (GameManager.Instance.AnyPlayerHasActiveSynergy("The Last Crusade"))
+                    {
+                        StartCoroutine(GoodButterfingersEffect());
+                    }
+                    else StartCoroutine(ButterFingersGun());
+                }
+            }
+        }
+        private IEnumerator GoodButterfingersEffect()
+        {
+            yield return null;
+            for (int i = 0; i < 6; i++)
+            {
+                GameObject ProjToSpawn = (PickupObjectDatabase.GetById(503) as Gun).DefaultModule.projectiles[0].gameObject;
+                if (UnityEngine.Random.value <= 0.5f) ProjToSpawn = (PickupObjectDatabase.GetById(512) as Gun).DefaultModule.projectiles[0].gameObject;
+                GameObject spawnedShot = ProjSpawnHelper.SpawnProjectileTowardsPoint(ProjToSpawn, m_attachedPlayer.CenterPosition, m_attachedPlayer.unadjustedAimPoint, 0, 10, m_attachedPlayer);
+                Projectile component = spawnedShot.GetComponent<Projectile>();
+                if (component != null)
+                {
+                    component.Owner = m_attachedPlayer;
+                    component.Shooter = m_attachedPlayer.specRigidbody;
+                    component.baseData.damage *= m_attachedPlayer.stats.GetStatValue(PlayerStats.StatType.Damage);
+                    component.baseData.speed *= m_attachedPlayer.stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed);
+                    component.baseData.force *= m_attachedPlayer.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
+                    component.baseData.range *= m_attachedPlayer.stats.GetStatValue(PlayerStats.StatType.RangeMultiplier);
+                    m_attachedPlayer.DoPostProcessProjectile(component);
+                }
+                yield return new WaitForSeconds(0.2f);
+            }
+            yield break;
+        }
+        private IEnumerator ButterFingersGun()
+        {
+            yield return null;
+            m_attachedPlayer.CurrentGun.ToggleRenderers(true);
+            m_attachedPlayer.CurrentGun.PrepGunForThrow();
+            typeof(Gun).GetField("m_prepThrowTime", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(m_attachedPlayer.CurrentGun, 999);
+            Vector3 vec3 = m_attachedPlayer.CurrentGun.ThrowPrepTransform.parent.TransformPoint((m_attachedPlayer.CurrentGun.ThrowPrepPosition * -1f).WithX(0f));
+            Vector2 vec = (OMITBReflectionHelpers.ReflectGetField<Vector2>(typeof(Gun), "m_localAimPoint", m_attachedPlayer.CurrentGun) - vec3.XY());
+            ETGModConsole.Log("Vector2: " + vec);
+            m_attachedPlayer.CurrentGun.CeaseAttack();
+            yield break;
+        }
+        private void ModifyDamage(HealthHaver player, HealthHaver.ModifyDamageEventArgs args)
+        {
+            //ETGModConsole.Log("OnDamaged ran");
+            //ETGModConsole.Log("Initial Damage: "+args.InitialDamage);
+            if (args.InitialDamage > 0 && m_attachedPlayer.ModdedCharacterIdentity() == ModdedCharacterID.Shade)
+            {
+                GameManager.Instance.StartCoroutine(PostDamageCheck(m_attachedPlayer));
+            }
         }
         private void OnHitByProjectile(Projectile bullet, PlayerController self)
         {
@@ -95,6 +180,22 @@ namespace NevernamedsItems
                 }
             }
         }
+        private void ClearedRoom(PlayerController playa)
+        {
+            if (AllJammedState.AllJammedActive)
+            {
+                if (roomsSinceAllJamAmmoDrop < 6)
+                {
+                    roomsSinceAllJamAmmoDrop++;
+                }
+                else
+                {
+                    roomsSinceAllJamAmmoDrop = 0;
+                    if (UnityEngine.Random.value <= 0.5f) LootEngine.SpawnItem(PickupObjectDatabase.GetById(78).gameObject, playa.specRigidbody.UnitCenter, Vector2.zero, 1f, false, true, false);
+                    else LootEngine.SpawnItem(PickupObjectDatabase.GetById(600).gameObject, playa.specRigidbody.UnitCenter, Vector2.zero, 1f, false, true, false);
+                }
+            }
+        }
         private void Update()
         {
             if (m_attachedPlayer != null && !Dungeon.IsGenerating)
@@ -118,6 +219,13 @@ namespace NevernamedsItems
                 {
                     OnInventoryItemsChanged();
                     itemCountLastChecked = m_attachedPlayer.passiveItems.Count;
+                }
+                if (m_attachedPlayer.CurrentGun)
+                {
+                    if (m_attachedPlayer.CurrentGun.PickupObjectId != gunIDLastChecked)
+                    {
+                        OnCurrentGunChanged();
+                    }
                 }
 
                 #region InvisibleO
@@ -149,8 +257,8 @@ namespace NevernamedsItems
                 if (playerIsInvisibleForChallenge && m_attachedPlayer.secondaryHand.ForceRenderersOff == false) m_attachedPlayer.secondaryHand.ForceRenderersOff = true;
                 if (Challenges.CurrentChallenge == ChallengeType.INVISIBLEO && GameUIRoot.Instance.GetReloadBarForPlayer(m_attachedPlayer))
                 {
-                        int i = m_attachedPlayer.PlayerIDX;
-                        GameUIRoot.Instance.ForceClearReload(i);
+                    int i = m_attachedPlayer.PlayerIDX;
+                    GameUIRoot.Instance.ForceClearReload(i);
                 }
                 #endregion
 
@@ -185,6 +293,10 @@ namespace NevernamedsItems
             }
         }
 
+        private void OnCurrentGunChanged()
+        {
+            gunIDLastChecked = m_attachedPlayer.CurrentGun.PickupObjectId;
+        }
         private void OnInventoryItemsChanged()
         {
             int amountOfJunk = 0;
@@ -200,6 +312,23 @@ namespace NevernamedsItems
                 }
             }
         }
+
+        #region HandleShadeCheatedDeathUnlock
+        private IEnumerator PostDamageCheck(PlayerController player)
+        {
+            //ETGModConsole.Log("Began post damage check");
+            yield return new WaitForSeconds(5);
+            if (player.healthHaver.IsAlive)
+            {
+                //ETGModConsole.Log("Player is alive!");
+                if (!SaveAPIManager.GetFlag(CustomDungeonFlags.CHEATED_DEATH_SHADE))
+                {
+                    SaveAPIManager.SetFlag(CustomDungeonFlags.CHEATED_DEATH_SHADE, true);
+                }
+            }
+            yield break;
+        }
+        #endregion
 
         #region RageCode
         public void Enrage(float dur)
@@ -274,6 +403,8 @@ namespace NevernamedsItems
         }
         #endregion
 
+
+
         private bool playerIsInvisibleForChallenge;
         private bool playerShadowInvisible;
 
@@ -283,6 +414,8 @@ namespace NevernamedsItems
         private int armourLastChecked;
         private int hpStatLastChecked;
         private int itemCountLastChecked;
+        private int gunIDLastChecked;
+        private int roomsSinceAllJamAmmoDrop;
     }
     public class InvisibleGun : MonoBehaviour
     {

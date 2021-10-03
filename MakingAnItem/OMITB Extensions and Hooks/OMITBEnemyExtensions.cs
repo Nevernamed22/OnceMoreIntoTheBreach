@@ -294,6 +294,38 @@ namespace NevernamedsItems
                 if (BulletsOwnedByEnemy[i] != null && BulletsOwnedByEnemy[i].isActiveAndEnabled) BulletsOwnedByEnemy[i].DieInAir(true, false, false, true);
             }
         }
+        public static void DoCorrectForWalls(this AIActor enemy)
+        {
+            bool flag = PhysicsEngine.Instance.OverlapCast(enemy.specRigidbody, null, true, false, null, null, false, null, null, new SpeculativeRigidbody[0]);
+            if (flag)
+            {
+                Vector2 vector = enemy.transform.position.XY();
+                IntVector2[] cardinalsAndOrdinals = IntVector2.CardinalsAndOrdinals;
+                int num = 0;
+                int num2 = 1;
+                for (; ; )
+                {
+                    for (int i = 0; i < cardinalsAndOrdinals.Length; i++)
+                    {
+                        enemy.transform.position = vector + PhysicsEngine.PixelToUnit(cardinalsAndOrdinals[i] * num2);
+                        enemy.specRigidbody.Reinitialize();
+                        if (!PhysicsEngine.Instance.OverlapCast(enemy.specRigidbody, null, true, false, null, null, false, null, null, new SpeculativeRigidbody[0]))
+                        {
+                            return;
+                        }
+                    }
+                    num2++;
+                    num++;
+                    if (num > 200)
+                    {
+                        goto Block_4;
+                    }
+                }
+            Block_4:
+                Debug.LogError("FREEZE AVERTED!  TELL RUBEL!  (you're welcome) 147");
+                return;
+            }
+        }
     }
 
 }

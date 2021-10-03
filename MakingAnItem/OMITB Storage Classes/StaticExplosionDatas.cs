@@ -10,6 +10,7 @@ namespace NevernamedsItems
         public static ExplosionData explosiveRoundsExplosion = Gungeon.Game.Items["explosive_rounds"].GetComponent<ComplexProjectileModifier>().ExplosionData;
         public static ExplosionData genericSmallExplosion = GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultSmallExplosionData;
         public static ExplosionData genericLargeExplosion = GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultExplosionData;
+        public static ExplosionData tetrisBlockExplosion = (PickupObjectDatabase.GetById(483) as Gun).DefaultModule.projectiles[0].GetComponent<TetrisBuff>().tetrisExplosion;
         public static ExplosionData customDynamiteExplosion = new ExplosionData()
         {
             effect = genericLargeExplosion.effect,

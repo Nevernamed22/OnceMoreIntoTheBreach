@@ -38,7 +38,7 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(1.68f, 0.56f, 0f);
             gun.SetBaseMaxAmmo(200);
             gun.ammo = 200;
-
+            gun.gunClass = GunClass.PISTOL;
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);
@@ -100,41 +100,23 @@ namespace NevernamedsItems
         }
         public override void PostProcessProjectile(Projectile projectile)
         {
-            projectile.baseData.damage *= DamageMultiplier;
-            if (projectile.Owner && projectile.Owner is PlayerController)
+            if (projectile.ProjectilePlayerOwner())
             {
-                if ((projectile.Owner as PlayerController).PlayerHasActiveSynergy("No Pane, No Gain"))
-                {
-                    projectile.baseData.damage *= 2;
-                }
-            }
-            base.PostProcessProjectile(projectile);
-        }
-        private int currentItems, lastItems;
-        float DamageMultiplier;
-        protected override void Update()
-        {
-            if (gun.CurrentOwner && gun.CurrentOwner is PlayerController)
-            {
-                CalculateStats(gun.CurrentOwner as PlayerController);
-            }
-            base.Update();
-        }
-        private void CalculateStats(PlayerController player)
-        {
-            currentItems = player.passiveItems.Count;
-            if (currentItems != lastItems)
-            {
-                DamageMultiplier = 1;
-                foreach (PassiveItem item in player.passiveItems)
+                float DamageMultiplier = 1;
+                foreach (PassiveItem item in projectile.ProjectilePlayerOwner().passiveItems)
                 {
                     if (item.PickupObjectId == 565)
                     {
                         DamageMultiplier += 0.35f;
                     }
                 }
-                lastItems = currentItems;
+                projectile.baseData.damage *= DamageMultiplier;
+                if (projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("No Pane, No Gain"))
+                {
+                    projectile.baseData.damage *= 2;
+                }
             }
+            base.PostProcessProjectile(projectile);
         }
         private void OnHit(PlayerController player)
         {

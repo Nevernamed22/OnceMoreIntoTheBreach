@@ -11,6 +11,43 @@ namespace ItemAPI
 	public static class SpriteBuilder
 	{
 		// Token: 0x06000001 RID: 1 RVA: 0x00002050 File Offset: 0x00000250
+		public static tk2dSpriteAnimationClip AddAnimation(tk2dSpriteAnimator animator, tk2dSpriteCollectionData collection, List<int> spriteIDs,
+			string clipName, tk2dSpriteAnimationClip.WrapMode wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop, float fps = 15)
+		{
+			if (animator.Library == null)
+			{
+				animator.Library = animator.gameObject.AddComponent<tk2dSpriteAnimation>();
+				animator.Library.clips = new tk2dSpriteAnimationClip[0];
+				animator.Library.enabled = true;
+
+			}
+
+			List<tk2dSpriteAnimationFrame> frames = new List<tk2dSpriteAnimationFrame>();
+			for (int i = 0; i < spriteIDs.Count; i++)
+			{
+				tk2dSpriteDefinition sprite = collection.spriteDefinitions[spriteIDs[i]];
+				if (sprite.Valid)
+				{
+					frames.Add(new tk2dSpriteAnimationFrame()
+					{
+						spriteCollection = collection,
+						spriteId = spriteIDs[i]
+					});
+				}
+			}
+
+			var clip = new tk2dSpriteAnimationClip()
+			{
+				name = clipName,
+				fps = fps,
+				wrapMode = wrapMode,
+			};
+			Array.Resize(ref animator.Library.clips, animator.Library.clips.Length + 1);
+			animator.Library.clips[animator.Library.clips.Length - 1] = clip;
+
+			clip.frames = frames.ToArray();
+			return clip;
+		}
 		public static GameObject SpriteFromFile(string spriteName, GameObject obj = null, bool copyFromExisting = true)
 		{
 			string fileName = spriteName.Replace(".png", "");
@@ -74,29 +111,46 @@ namespace ItemAPI
 		}
 
 		// Token: 0x06000004 RID: 4 RVA: 0x00002190 File Offset: 0x00000390
-		public static int AddSpriteToCollection(string resourcePath, tk2dSpriteCollectionData collection)
+		/// <summary>
+		/// Adds a sprite (from a resource) to a collection
+		/// </summary>
+		/// <returns>The spriteID of the defintion in the collection</returns>
+		public static int AddSpriteToCollection(string resourcePath, tk2dSpriteCollectionData collection, string name = "")
 		{
-			string str = (!resourcePath.EndsWith(".png")) ? ".png" : "";
-			resourcePath += str;
-			Texture2D textureFromResource = ResourceExtractor.GetTextureFromResource(resourcePath);
-			tk2dSpriteDefinition tk2dSpriteDefinition = SpriteBuilder.ConstructDefinition(textureFromResource);
-			tk2dSpriteDefinition.name = textureFromResource.name;
-			return SpriteBuilder.AddSpriteToCollection(tk2dSpriteDefinition, collection);
+			string extension = !resourcePath.EndsWith(".png") ? ".png" : "";
+			resourcePath += extension;
+			var texture = ResourceExtractor.GetTextureFromResource(resourcePath); //Get Texture
+
+			var definition = ConstructDefinition(texture); //Generate definition
+			if (string.IsNullOrEmpty(name))
+			{
+				definition.name = texture.name; //naming the definition is actually extremely important 
+			}
+			else
+			{
+				definition.name = name; //naming the definition is actually extremely important 
+			}
+
+
+			return AddSpriteToCollection(definition, collection);
 		}
 
-		// Token: 0x06000005 RID: 5 RVA: 0x000021E8 File Offset: 0x000003E8
+		/// <summary>
+		/// Adds a sprite from a definition to a collection
+		/// </summary>
+		/// <returns>The spriteID of the defintion in the collection</returns>
 		public static int AddSpriteToCollection(tk2dSpriteDefinition spriteDefinition, tk2dSpriteCollectionData collection)
 		{
-			tk2dSpriteDefinition[] spriteDefinitions = collection.spriteDefinitions;
-			tk2dSpriteDefinition[] array = spriteDefinitions.Concat(new tk2dSpriteDefinition[]
-			{
-				spriteDefinition
-			}).ToArray<tk2dSpriteDefinition>();
-			collection.spriteDefinitions = array;
-			FieldInfo field = typeof(tk2dSpriteCollectionData).GetField("spriteNameLookupDict", BindingFlags.Instance | BindingFlags.NonPublic);
-			field.SetValue(collection, null);
-			collection.InitDictionary();
-			return array.Length - 1;
+			//Add definition to collection
+			var defs = collection.spriteDefinitions;
+			var newDefs = defs.Concat(new tk2dSpriteDefinition[] { spriteDefinition }).ToArray();
+			collection.spriteDefinitions = newDefs;
+
+			//Reset lookup dictionary
+			FieldInfo f = typeof(tk2dSpriteCollectionData).GetField("spriteNameLookupDict", BindingFlags.Instance | BindingFlags.NonPublic);
+			f.SetValue(collection, null);  //Set dictionary to null
+			collection.InitDictionary(); //InitDictionary only runs if the dictionary is null
+			return newDefs.Length - 1;
 		}
 
 		// Token: 0x06000006 RID: 6 RVA: 0x0000224C File Offset: 0x0000044C

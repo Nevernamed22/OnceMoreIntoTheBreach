@@ -16,40 +16,95 @@ namespace NevernamedsItems
         {
             CurrentActiveCurses = new List<CurseData>();
             CursePrefabs = new List<CurseData>();
-
+            FloorAndGenerationToolbox.OnFloorEntered += LevelLoaded;
             VFXScapegoat = new GameObject("CurseVFXScapegoat");
             VFXScapegoat.gameObject.SetActive(false);
             UnityEngine.Object.DontDestroyOnLoad(VFXScapegoat);
             CurseIconCollection = SpriteBuilder.ConstructCollection(VFXScapegoat, "CurseIcon_Collection");
             UnityEngine.Object.DontDestroyOnLoad(CurseIconCollection);
 
-            floorLoadPlayerHook = new Hook(
-                typeof(PlayerController).GetMethod("BraveOnLevelWasLoaded", BindingFlags.Instance | BindingFlags.Public),
-                typeof(CurseManager).GetMethod("OnNewLevel", BindingFlags.Static | BindingFlags.Public)
-            );
-            ETGModConsole.Log("Hook Passed");
+            //ETGModConsole.Log("Hook Passed");
+
             #region SetUpCurses
             CurseData curseOfInfestation = new CurseData();
             curseOfInfestation.curseName = "Curse of Infestation";
             curseOfInfestation.curseSubtitle = "They crawl beneath the surface";
             curseOfInfestation.curseIconId = SpriteBuilder.AddSpriteToCollection("NevernamedsItems/Resources/CurseIcons/infestation_icon", CurseIconCollection);
             CursePrefabs.Add(curseOfInfestation);
+
+            CurseData curseOfSludge = new CurseData();
+            curseOfSludge.curseName = "Curse of Sludge";
+            curseOfSludge.curseSubtitle = "You. Will. Love. My... Toxic love";
+            curseOfSludge.curseIconId = SpriteBuilder.AddSpriteToCollection("NevernamedsItems/Resources/CurseIcons/sludge_icon", CurseIconCollection);
+            CursePrefabs.Add(curseOfSludge);
+
+            CurseData curseOfTheHive = new CurseData();
+            curseOfTheHive.curseName = "Curse of The Hive";
+            curseOfTheHive.curseSubtitle = "You hear a faint buzzing";
+            curseOfTheHive.curseIconId = SpriteBuilder.AddSpriteToCollection("NevernamedsItems/Resources/CurseIcons/hive_icon", CurseIconCollection);
+            CursePrefabs.Add(curseOfTheHive);
+
+            CurseData curseOfTheFlames = new CurseData();
+            curseOfTheFlames.curseName = "Curse of The Flames";
+            curseOfTheFlames.curseSubtitle = "Cannot live with me.";
+            curseOfTheFlames.curseIconId = SpriteBuilder.AddSpriteToCollection("NevernamedsItems/Resources/CurseIcons/flames_icon", CurseIconCollection);
+            CursePrefabs.Add(curseOfTheFlames);
+
+            CurseData curseOfButterfingers = new CurseData();
+            curseOfButterfingers.curseName = "Curse of Butterfingers";
+            curseOfButterfingers.curseSubtitle = "Be careful not to slip up";
+            curseOfButterfingers.curseIconId = SpriteBuilder.AddSpriteToCollection("NevernamedsItems/Resources/CurseIcons/butterfingers_icon", CurseIconCollection);
+            CursePrefabs.Add(curseOfButterfingers);
+
+            CurseData curseOfDarkness = new CurseData();
+            curseOfDarkness.curseName = "Curse of Darkness";
+            curseOfDarkness.curseSubtitle = "Spirit of the Night";
+            curseOfDarkness.curseIconId = SpriteBuilder.AddSpriteToCollection("NevernamedsItems/Resources/CurseIcons/darkness_icon", CurseIconCollection);
+            CursePrefabs.Add(curseOfDarkness);
             #endregion
         }
         public static Hook floorLoadPlayerHook;
         private static tk2dSpriteCollectionData CurseIconCollection;
         private static GameObject VFXScapegoat;
-        public static void OnNewLevel(Action<PlayerController> orig, PlayerController self)
+        public static bool levelOnCooldown = false;
+        public static void LevelLoaded()
         {
-            if (!(GameManager.Instance.PrimaryPlayer && GameManager.Instance.SecondaryPlayer && GameManager.Instance.SecondaryPlayer == self))
+            CurseManager.RemoveAllCurses();
+            float allCurse = GameManager.Instance.GetCombinedPlayersStatAmount(PlayerStats.StatType.Curse);
+            float ran = UnityEngine.Random.value;
+            Debug.Log("Running Curse Check on Floor Load - Random (" + ran + ") - CurseTotal (" + allCurse + ")");
+            if (UnityEngine.Random.value <= (allCurse / 10))
             {
-                CurrentActiveCurses.Clear();
-                if (PostNewLevelCurseProcessing != null) CurseManager.PostNewLevelCurseProcessing();
-                GameManager.Instance.StartCoroutine(DoCursePopups());
+                float hellclears = GameStatsManager.Instance.GetPlayerStatValue(TrackedStats.TIMES_CLEARED_BULLET_HELL);
+                if (hellclears > 0)
+                {
+                    AddRandomCurse();
+                }
             }
-            orig(self);
+            if (PostNewLevelCurseProcessing != null) CurseManager.PostNewLevelCurseProcessing();
+            InherentPostLevelCurseProcessing();
+            GameManager.Instance.StartCoroutine(DoCursePopups());
         }
-
+        public static void AddRandomCurse(bool doPopup = false)
+        {
+            List<CurseData> refinedData = new List<CurseData>();
+            refinedData.AddRange(CursePrefabs);
+            if (CurrentActiveCurses.Count > 0)
+            {
+                for (int i = (refinedData.Count - 1); i >= 0; i--)
+                {
+                    if (CurseManager.CurseIsActive(refinedData[i].curseName))
+                    {
+                        refinedData.RemoveAt(i);
+                    }
+                }
+            }
+            if (refinedData.Count > 0)
+            {
+                CurseData pickedCurse = BraveUtility.RandomElement(refinedData);
+                AddCurse(pickedCurse.curseName, doPopup);
+            }
+        }
         private static IEnumerator DoCursePopups()
         {
             yield return new WaitForSeconds(1);
@@ -57,7 +112,8 @@ namespace NevernamedsItems
             {
                 foreach (CurseData curse in CurrentActiveCurses)
                 {
-                    DoSpecificCursePopup(curse.curseName,curse.curseSubtitle, curse.curseIconId);
+                    Debug.Log("CursePopup Processed: " + curse.curseName);
+                    DoSpecificCursePopup(curse.curseName, curse.curseSubtitle, curse.curseIconId);
                 }
             }
             yield break;
@@ -74,18 +130,72 @@ namespace NevernamedsItems
                     false
                     );
         }
-        public static void AddCurse(string CurseName)
+        public static void AddCurse(string CurseName, bool dopopup = false)
         {
-            if (CurseManager.CurseIsActive(CurseName)) return;
+            if (CurseManager.CurseIsActive(CurseName))
+            {
+                Debug.LogWarning("Attempted to Add Curse (" + CurseName + ") but it was already active!");
+                return;
+            }
             CurseData newCurse = null;
             foreach (CurseData data in CursePrefabs)
             {
                 if (data.curseName == CurseName) newCurse = data;
             }
-            CurrentActiveCurses.Add(newCurse);
-            DoSpecificCursePopup(CurseName,newCurse.curseSubtitle, newCurse.curseIconId);
+            if (!(GameManager.Instance.AnyPlayerHasPickupID(HoleyWater.HoleyWaterID) && !GameManager.Instance.AnyPlayerHasActiveSynergy("The Last Crusade")))
+            {
+                CurrentActiveCurses.Add(newCurse);
+                Debug.Log("Added New Curse: " + newCurse.curseName + " (Popup: " + dopopup + ")");
+                if (dopopup) DoSpecificCursePopup(CurseName, newCurse.curseSubtitle, newCurse.curseIconId);
+            }
+            InherentPostLevelCurseProcessing();
         }
-
+        private static void InherentPostLevelCurseProcessing()
+        {
+            if (CurseIsActive("Curse of Darkness") && !CustomDarknessHandler.isDark)
+            {
+                if (GameManager.Instance.AnyPlayerHasActiveSynergy("The Last Crusade"))
+                {
+                    Minimap.Instance.RevealAllRooms(false);
+                }
+                else
+                {
+                    CustomDarknessHandler.shouldBeDark.SetOverride("DarknessCurse", true);
+                }
+            }
+        }
+        public static void RemoveCurse(string name)
+        {
+            if (CurseIsActive(name))
+            {
+                for (int i = (CurrentActiveCurses.Count - 1); i >= 0; i--)
+                {
+                    if (CurrentActiveCurses[i].curseName == name)
+                    {
+                        if (CurrentActiveCurses[i].curseName == "Curse of Darkness")
+                        {
+                            CustomDarknessHandler.shouldBeDark.RemoveOverride("DarknessCurse");
+                        }
+                        CurrentActiveCurses.RemoveAt(i);
+                    }
+                }
+            }
+        }
+        public static void RemoveAllCurses()
+        {
+            List<string> cursesToRemove = new List<string>();
+            if (CurrentActiveCurses.Count > 0)
+            {
+                foreach (CurseData curse in CurrentActiveCurses)
+                {
+                    cursesToRemove.Add(curse.curseName);
+                }
+                foreach (string curse in cursesToRemove)
+                {
+                    RemoveCurse(curse);
+                }
+            }
+        }
         public static event Action PostNewLevelCurseProcessing;
         public static List<CurseData> CurrentActiveCurses;
         public static List<CurseData> CursePrefabs;

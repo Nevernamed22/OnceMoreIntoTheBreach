@@ -41,6 +41,8 @@ namespace NevernamedsItems
             "What did I do wrong?",
             "Have I really been that much of a burden?",
             "Not again...",
+            "I'll stay here, I guess... guard the... floor.",
+            "Abandoned again..."
         };
         public void ReactToRuntimeSpawnedChest(Chest chest)
         {

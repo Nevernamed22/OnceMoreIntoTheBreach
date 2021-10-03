@@ -40,7 +40,7 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(1.62f, 0.75f, 0f);
             gun.SetBaseMaxAmmo(100);
             gun.ammo = 100;
-
+            gun.gunClass = GunClass.PISTOL;
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);
@@ -124,7 +124,7 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            if (gun.CurrentOwner && gun.CurrentOwner is PlayerController)
+            if (gun && gun.CurrentOwner && gun.CurrentOwner is PlayerController)
             {
                 RemoveFlight(gun.CurrentOwner as PlayerController);
             }

@@ -39,7 +39,9 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D;
+            PearlBraceletID = item.PickupObjectId;
         }
+        public static int PearlBraceletID;
         private void HandleReturnLikeBoomerang(DebrisObject obj)
         {
             obj.PreventFallingInPits = true;
@@ -83,7 +85,7 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.PostProcessThrownGun -= this.PostProcessThrownGun;
+            if (Owner) Owner.PostProcessThrownGun -= this.PostProcessThrownGun;
             base.OnDestroy();
         }
     }

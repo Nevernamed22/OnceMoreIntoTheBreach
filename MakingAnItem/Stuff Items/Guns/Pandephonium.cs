@@ -20,8 +20,8 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:pandephonium", "nn:pandephonium");
             var behav = gun.gameObject.AddComponent<Pandephonium>();
 
-            gun.SetShortDescription("");
-            gun.SetLongDescription("");
+            gun.SetShortDescription("Chaostric Melody");
+            gun.SetLongDescription("The bullets from this peculiar brass shotgun seem to want revenge against their creator. Even though they can't do any real harm, this won't stop them trying.");
 
             gun.SetupSprite(null, "pandephonium_idle_001", 8);
 
@@ -40,6 +40,8 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(twentyDamageProjectile);
             twentyDamageProjectile.baseData.damage = 3.5f;
             twentyDamageProjectile.baseData.speed *= 1f;
+            twentyDamageProjectile.baseData.range *= 100f;
+            twentyDamageProjectile.gameObject.AddComponent<PandephoniumBounce>();
             twentyDamageProjectile.AdditionalScaleMultiplier *= 0.5f;
 
             int i2 = 1;
@@ -71,7 +73,7 @@ namespace NevernamedsItems
             }
             gun.reloadTime = 1f;
             gun.SetBaseMaxAmmo(200);
-
+            gun.gunClass = GunClass.SHOTGUN;
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
@@ -83,5 +85,27 @@ namespace NevernamedsItems
 
         }
     }
+    public class PandephoniumBounce : MonoBehaviour
+    {
+        public PandephoniumBounce()
+        {
 
+        }
+        private void Start()
+        {
+            self = base.GetComponent<Projectile>();
+            BounceProjModifier bouncy = self.gameObject.GetOrAddComponent<BounceProjModifier>();
+            bouncy.numberOfBounces += 5;
+            bouncy.OnBounceContext += this.OnBounced;
+        }
+        private void OnBounced(BounceProjModifier bouncer, SpeculativeRigidbody srb)
+        {
+            if (bouncer && bouncer.specRigidbody && bouncer.projectile && bouncer.projectile.Owner && bouncer.projectile.Owner.specRigidbody)
+            {
+                Vector2 directionToPlayer = bouncer.projectile.Owner.specRigidbody.UnitCenter - bouncer.specRigidbody.UnitCenter;
+                bouncer.projectile.SendInDirection(directionToPlayer, false);
+            }
+        }
+        private Projectile self;
+    }
 }

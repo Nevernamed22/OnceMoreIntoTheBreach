@@ -93,7 +93,7 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles.Add(floatProjectile);
             gun.DefaultModule.projectiles.Add(boolProjectile);
             gun.DefaultModule.projectiles.Add(intProjectile);
-
+            gun.gunClass = GunClass.SILLY;
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 

@@ -7,6 +7,7 @@ namespace NevernamedsItems
 {
    static class OMITBAttackBehavExtensions
     {
+      
         public static bool IsAttackBehaviorGroup(this AttackBehaviorBase self, out List<AttackBehaviorBase> groupItems)
         {
             groupItems = new List<AttackBehaviorBase>();

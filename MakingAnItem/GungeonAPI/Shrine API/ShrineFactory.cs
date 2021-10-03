@@ -9,9 +9,18 @@ namespace GungeonAPI
 	
 	public class ShrineFactory
 	{
-		// Token: 0x06000099 RID: 153 RVA: 0x00008024 File Offset: 0x00006224
+		private static GameObject VFXScapegoat;
+		public static tk2dSpriteCollectionData ShrineIconCollection;
+
 		public static void Init()
 		{
+
+			VFXScapegoat = new GameObject("ShrineVFXScapegoat");
+			VFXScapegoat.gameObject.SetActive(false);
+			UnityEngine.Object.DontDestroyOnLoad(VFXScapegoat);
+			ShrineIconCollection = SpriteBuilder.ConstructCollection(VFXScapegoat, "ShrineIcon_Collection");
+			UnityEngine.Object.DontDestroyOnLoad(ShrineIconCollection);
+
 			bool initialized = ShrineFactory.m_initialized;
 			bool flag = !initialized;
 			bool flag2 = flag;

@@ -113,7 +113,7 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.OnHitByProjectile -= this.OwnerHitByProjectile;
+            if (Owner) Owner.OnHitByProjectile -= this.OwnerHitByProjectile;
             base.OnDestroy();
         }
     }

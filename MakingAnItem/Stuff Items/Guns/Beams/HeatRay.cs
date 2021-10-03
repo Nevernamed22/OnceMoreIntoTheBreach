@@ -41,7 +41,7 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(1.06f, 0.31f, 0f);
             gun.SetBaseMaxAmmo(3500);
             gun.ammo = 3500;
-
+            gun.gunClass = GunClass.SHITTY;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop;
 
             List<string> BeamAnimPaths = new List<string>()
@@ -95,7 +95,7 @@ namespace NevernamedsItems
             beamComp.endAudioEvent = "Stop_WPN_All";
             projectile.AppliesFire = true;
             projectile.fireEffect = StaticStatusEffects.hotLeadEffect;
-            beamComp.statusEffectChance = 1;
+            beamComp.statusEffectChance = 0.5f;
             beamComp.TimeToStatus = 1;
 
             gun.DefaultModule.projectiles[0] = projectile;
@@ -105,6 +105,22 @@ namespace NevernamedsItems
             HeatRayID = gun.PickupObjectId;
         }
         public static int HeatRayID;
+        protected override void PostProcessBeam(BeamController beam)
+        {
+            if (beam && beam.projectile && beam.projectile.ProjectilePlayerOwner())
+            {
+                if (beam.projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("It won't actually show up on screen, but there's no hard limit on how long you can make synergy names."))
+                {
+                    beam.AdjustPlayerBeamTint(Color.green, 1);
+                    beam.projectile.fireEffect = StaticStatusEffects.greenFireEffect;
+                }
+                if (beam.projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Re-Heat"))
+                {
+                    beam.GetComponent<BasicBeamController>().TimeToStatus = 0.1f;
+                }
+            }
+            base.PostProcessBeam(beam);
+        }
         public HeatRay()
         {
 

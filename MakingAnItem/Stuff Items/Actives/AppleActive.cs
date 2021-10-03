@@ -38,7 +38,9 @@ namespace NevernamedsItems
             item.UsesCustomCost = true;
             item.consumable = true;
             item.quality = ItemQuality.D;
+            AppleID = item.PickupObjectId;
         }
+        public static int AppleID;
         private bool WasGoldenLastChecked = false;
         public override void Update()
         {

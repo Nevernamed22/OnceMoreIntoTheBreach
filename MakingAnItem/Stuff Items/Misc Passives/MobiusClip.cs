@@ -30,7 +30,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "The Power of Infinity";
-            string longDesc = "Triples the damage of all infinite ammo guns. Does not work on guns that are A tier or above."+"\n\nA peculiar mathematical concept repurposed to store powerful ammunition.";
+            string longDesc = "Triples the damage of all infinite ammo guns. Does not work on guns that are A tier or above." + "\n\nA peculiar mathematical concept repurposed to store powerful ammunition.";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -44,18 +44,21 @@ namespace NevernamedsItems
         private Gun currentHeldGun, lastHeldGun;
         protected override void Update()
         {
-            currentHeldGun = Owner.CurrentGun;
-            if (currentHeldGun != lastHeldGun)
+            if (Owner)
             {
-                if (Owner.CurrentGun.InfiniteAmmo && Owner.CurrentGun.quality != PickupObject.ItemQuality.A && Owner.CurrentGun.quality != PickupObject.ItemQuality.S)
+                currentHeldGun = Owner.CurrentGun;
+                if (currentHeldGun != lastHeldGun)
                 {
-                    GiveSynergyBoost();
+                    if (Owner.CurrentGun.InfiniteAmmo && Owner.CurrentGun.quality != PickupObject.ItemQuality.A && Owner.CurrentGun.quality != PickupObject.ItemQuality.S)
+                    {
+                        GiveSynergyBoost();
+                    }
+                    else
+                    {
+                        RemoveSynergyBoost();
+                    }
+                    lastHeldGun = currentHeldGun;
                 }
-                else
-                {
-                    RemoveSynergyBoost();
-                }
-                lastHeldGun = currentHeldGun;
             }
             base.Update();
         }

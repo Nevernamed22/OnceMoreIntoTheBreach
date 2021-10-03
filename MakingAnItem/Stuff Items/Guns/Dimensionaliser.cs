@@ -39,7 +39,7 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(0.81f, 0.43f, 0f);
             gun.SetBaseMaxAmmo(100);
             gun.ammo = 100;
-
+            gun.gunClass = GunClass.SILLY;
             Projectile portalSubProj = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             portalSubProj.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(portalSubProj.gameObject);

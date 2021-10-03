@@ -39,7 +39,7 @@ namespace NevernamedsItems
             gun.DefaultModule.numberOfShotsInClip = 20;
             gun.barrelOffset.transform.localPosition = new Vector3(2.18f, 0.93f, 0f);
             gun.SetBaseMaxAmmo(500);
-
+            gun.gunClass = GunClass.FULLAUTO;
             gun.DefaultModule.usesOptionalFinalProjectile = true;
             gun.DefaultModule.numberOfFinalProjectiles = 1;
 

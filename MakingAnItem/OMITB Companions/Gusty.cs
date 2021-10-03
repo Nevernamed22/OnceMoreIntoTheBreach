@@ -91,7 +91,10 @@ namespace NevernamedsItems
                     {
                         this.aiAnimator.PlayUntilFinished("attack", false, null, -1f, false);
                         Exploder.DoRadialKnockback(this.specRigidbody.UnitCenter, 70, 10);
-                        Exploder.DoRadialDamage(2.5f, this.specRigidbody.UnitCenter, 10, false, true, false, null);
+                        float dmg = 2.5f;
+                        if (PassiveItem.IsFlagSetForCharacter(this.Owner, typeof(BattleStandardItem))) dmg *= BattleStandardItem.BattleStandardCompanionDamageMultiplier;
+                        if (this.Owner.CurrentGun && this.Owner.CurrentGun.LuteCompanionBuffActive) dmg *= 2;
+                        Exploder.DoRadialDamage(dmg, this.specRigidbody.UnitCenter, 10, false, true, false, null);
                         timer = 1.5f;
                     }
                 }

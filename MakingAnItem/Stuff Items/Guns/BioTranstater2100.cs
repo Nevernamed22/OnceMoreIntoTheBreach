@@ -44,7 +44,7 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(1.43f, 0.68f, 0f);
             gun.SetBaseMaxAmmo(200);
             gun.ammo = 200;
-
+            gun.gunClass = GunClass.PISTOL;
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);
@@ -55,6 +55,7 @@ namespace NevernamedsItems
             projectile.transform.parent = gun.barrelOffset;
             SimpleRandomTransmogrifyComponent transmog = projectile.gameObject.AddComponent<SimpleRandomTransmogrifyComponent>();
             transmog.maintainHPPercent = true;
+            transmog.chaosPalette = true;
             transmog.RandomStringList.AddRange(MagickeCauldron.chaosEnemyPalette);
             if (projectile.GetComponent<PierceProjModifier>()) Destroy(projectile.GetComponent<PierceProjModifier>());
 

@@ -49,7 +49,8 @@ namespace NevernamedsItems
                 projectile.baseData.range *= 0.5f;
                 if (mod != gun.DefaultModule) { mod.ammoCost = 0; }
                 projectile.transform.parent = gun.barrelOffset;
-                projectile.statusEffectsToApply.Add(StaticStatusEffects.greenFireEffect);
+                PrefabStatusEffectsToApply statusE =  projectile.gameObject.AddComponent<PrefabStatusEffectsToApply>();
+                statusE.effects = new List<GameActorEffect>() { StaticStatusEffects.greenFireEffect };
                 if (projectile.gameObject.GetComponent<GoopModifier>())
                 {
                     Destroy(projectile.gameObject.GetComponent<GoopModifier>());
@@ -74,7 +75,7 @@ namespace NevernamedsItems
             gun.reloadTime = 1f;
             gun.SetBaseMaxAmmo(65);
             gun.quality = PickupObject.ItemQuality.B;
-
+            gun.gunClass = GunClass.FIRE;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.LoopSection;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).loopStart = 1;
 

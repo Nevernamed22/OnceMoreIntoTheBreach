@@ -64,7 +64,7 @@ namespace NevernamedsItems
             gun.muzzleFlashEffects.type = VFXPoolType.None;
             gun.barrelOffset.transform.localPosition = new Vector3(3.12f, 0.93f, 0f);
             gun.SetBaseMaxAmmo(80);
-
+            gun.gunClass = GunClass.SHOTGUN;
             //BULLET STATS
 
             // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.
