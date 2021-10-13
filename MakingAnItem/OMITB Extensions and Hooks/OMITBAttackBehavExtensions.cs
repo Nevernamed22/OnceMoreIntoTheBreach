@@ -155,5 +155,12 @@ namespace NevernamedsItems
             }
             return result;
         }
+    
+        public static AIActor GetAttackBehaviourOwner(this BehaviorBase behav)
+        {
+            AIActor actor = null;
+            actor = OMITBReflectionHelpers.ReflectGetField<AIActor>(typeof(BehaviorBase), "m_aiActor", behav);
+            return actor;
+        }
     }
 }

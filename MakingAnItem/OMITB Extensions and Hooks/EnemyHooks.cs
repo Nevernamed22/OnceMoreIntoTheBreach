@@ -232,7 +232,7 @@ namespace NevernamedsItems
                     DeadlyDeadlyGoopManager goop = null;
                     if (GameManager.Instance.AnyPlayerHasActiveSynergy("The Last Crusade")) goop = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.PlayerFriendlyPoisonGoop);
                     else goop = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.EnemyFriendlyPoisonGoop);
-                    float radius = Math.Min((maxHP / 5), 10);
+                    float radius = Math.Min((maxHP / 7.5f), 10);
                     goop.TimedAddGoopCircle(position, radius, 0.75f, true);
                 }
             }
@@ -543,6 +543,13 @@ namespace NevernamedsItems
                                 if (!SaveAPIManager.GetFlag(CustomDungeonFlags.UNLOCKED_MISSINGUNO))
                                 {
                                     SaveAPIManager.SetFlag(CustomDungeonFlags.UNLOCKED_MISSINGUNO, true);
+                                }
+                            }
+                            if (usingShade)
+                            {
+                                if (!SaveAPIManager.GetFlag(CustomDungeonFlags.LICH_BEATEN_SHADE))
+                                {
+                                    SaveAPIManager.SetFlag(CustomDungeonFlags.LICH_BEATEN_SHADE, true);
                                 }
                             }
                         }

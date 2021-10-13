@@ -50,8 +50,13 @@ namespace NevernamedsItems
             projectile.SetProjectileSpriteRight("friendlymaiden_projectile", 25, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 8);
             LeadMaidenProjectileReAiming orAddComponent = projectile.gameObject.GetOrAddComponent<LeadMaidenProjectileReAiming>();
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("MaidenRifle Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/maidenrifle_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/maidenrifle_clipempty");
+
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+
+
 
             MaidenRifleID = gun.PickupObjectId;
             gun.AddToSubShop(ItemBuilder.ShopType.Cursula);

@@ -11,7 +11,7 @@ using ItemAPI;
 namespace NevernamedsItems
 {
 
-    public class ClownShotgun : GunBehaviour
+    public class ClownShotgun : AdvancedGunBehavior
     {
 
 
@@ -19,24 +19,29 @@ namespace NevernamedsItems
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Clown Shotgun", "clownshotgun");
             Game.Items.Rename("outdated_gun_mods:clown_shotgun", "nn:clown_shotgun");
-            gun.gameObject.AddComponent<ClownShotgun>();
+            var behav = gun.gameObject.AddComponent<ClownShotgun>();
+            behav.preventNormalFireAudio = true;
             gun.SetShortDescription("Honk Honk");
-            gun.SetLongDescription("Filled to an excessive degree with bouncing shells. Once belonged to a real, genuine, pure-bred clown."+"\n\nAn essential tool in any clown's arsenal, along with a cute little car, a hula hoop, and space lubricant.");
+            gun.SetLongDescription("Filled to an excessive degree with bouncing shells. Once belonged to a real, genuine, pure-bred clown." + "\n\nAn essential tool in any clown's arsenal, along with a cute little car, a hula hoop, and space lubricant.");
 
             gun.SetupSprite(null, "clownshotgun_idle_001", 8);
 
             gun.SetAnimationFPS(gun.shootAnimation, 13);
             gun.SetAnimationFPS(gun.idleAnimation, 5);
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(519) as Gun).gunSwitchGroup;
 
             for (int i = 0; i < 9; i++)
             {
                 gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
             }
 
+            gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).frames[0].eventAudio = "Play_ClownHonk";
+            gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).frames[0].triggerEvent = true;
+
             //GUN STATS
             foreach (ProjectileModule mod in gun.Volley.projectiles)
             {
-                
+
                 mod.ammoCost = 1;
                 mod.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
                 mod.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
@@ -60,11 +65,10 @@ namespace NevernamedsItems
             gun.SetBaseMaxAmmo(200);
             gun.gunClass = GunClass.SHOTGUN;
             //BULLET STATS
-            // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.
             gun.quality = PickupObject.ItemQuality.C;
-            gun.encounterTrackable.EncounterGuid = "this is the Clown Shotgun";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
-
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Clown Shotgun Shells", "NevernamedsItems/Resources/CustomGunAmmoTypes/clownshotgun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/clownshotgun_clipempty");
             gun.Volley.UsesShotgunStyleVelocityRandomizer = true;
 
             ClownShotgunID = gun.PickupObjectId;
@@ -72,28 +76,31 @@ namespace NevernamedsItems
         public static int ClownShotgunID;
         private void Update()
         {
-            PlayerController player = gun.CurrentOwner as PlayerController;
-            if (player.PlayerHasActiveSynergy("Clown Town"))
+            if (gun && gun.GunPlayerOwner())
             {
-                if (gun.DefaultModule.angleVariance == 40f)
+                PlayerController player = gun.CurrentOwner as PlayerController;
+                if (player.PlayerHasActiveSynergy("Clown Town"))
                 {
-                    foreach (ProjectileModule mod in gun.Volley.projectiles)
+                    if (gun.DefaultModule.angleVariance == 40f)
                     {
-                        mod.angleVariance = 10f;
+                        foreach (ProjectileModule mod in gun.Volley.projectiles)
+                        {
+                            mod.angleVariance = 10f;
+                        }
+                    }
+                }
+                else
+                {
+                    if (gun.DefaultModule.angleVariance == 10f)
+                    {
+                        foreach (ProjectileModule mod in gun.Volley.projectiles)
+                        {
+                            mod.angleVariance = 40f;
+                        }
                     }
                 }
             }
-            else
-            {
-                if (gun.DefaultModule.angleVariance == 10f)
-                {
-                    foreach (ProjectileModule mod in gun.Volley.projectiles)
-                    {
-                        mod.angleVariance = 40f;
-                    }
-                }
-            }
-            
+
         }
         public ClownShotgun()
         {

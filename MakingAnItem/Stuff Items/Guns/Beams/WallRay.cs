@@ -94,7 +94,7 @@ namespace NevernamedsItems
                     new Vector2(9, 9),
                     new Vector2(0, 1),
                     //Other Variables
-                    true
+                    100
                     );
 
                 projectile.gameObject.SetActive(false);
@@ -127,6 +127,9 @@ namespace NevernamedsItems
 
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.LoopSection;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).loopStart = 1;
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("OMITB GenericRed Laser", "NevernamedsItems/Resources/CustomGunAmmoTypes/genericredbeam_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/genericbeam_clipempty");
 
             gun.quality = PickupObject.ItemQuality.C; 
             ETGMod.Databases.Items.Add(gun, null, "ANY");

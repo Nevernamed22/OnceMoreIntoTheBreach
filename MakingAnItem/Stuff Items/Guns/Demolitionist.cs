@@ -50,6 +50,9 @@ namespace NevernamedsItems
 
             projectile.transform.parent = gun.barrelOffset;
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Demolitionist Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/demolitionist_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/thinline_clipempty");
+
             gun.quality = PickupObject.ItemQuality.B;
             gun.encounterTrackable.EncounterGuid = "this is the Demolitionist";
             ETGMod.Databases.Items.Add(gun, null, "ANY");

@@ -93,13 +93,13 @@ namespace NevernamedsItems
                 new Vector2(9, 9),
                 new Vector2(0, 1),
                 //Other Variables
-                true
+                100
                 );
 
             projectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
-            projectile.baseData.damage = 15f;
+            projectile.baseData.damage = 25f;
             projectile.baseData.force *= 1f;
             projectile.baseData.range *= 200;
             projectile.baseData.speed *= 6;
@@ -113,6 +113,9 @@ namespace NevernamedsItems
             beamComp.startAudioEvent = "Play_WPN_radiationlaser_shot_01";
             beamComp.endAudioEvent = "Stop_WPN_All";
             //beamComp.interpolateStretchedBones = false;
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Y-Beam Laser", "NevernamedsItems/Resources/CustomGunAmmoTypes/ybeam_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/genericbeam_clipempty");
 
             gun.DefaultModule.projectiles[0] = projectile;
 

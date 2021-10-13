@@ -52,7 +52,7 @@ namespace NevernamedsItems
                 projectile.gameObject.SetActive(false);
                 FakePrefab.MarkAsFakePrefab(projectile.gameObject);
                 UnityEngine.Object.DontDestroyOnLoad(projectile);
-                projectile.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(369) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX;
+                projectile.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(369) as Gun).DefaultModule.chargeProjectiles[0].Projectile.hitEffects.tileMapVertical.effects[0].effects[0].effect;
                 projectile.hitEffects.alwaysUseMidair = true;
                 projectile.baseData.damage *= 1.4f;
                 projectile.baseData.speed *= 1.2f;
@@ -73,6 +73,9 @@ namespace NevernamedsItems
             gun.SetBaseMaxAmmo(80);
             gun.gunClass = GunClass.SHOTGUN;
             //BULLET STATS
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Orgun Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/orgun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/orgun_clipempty");
+
 
             // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.
             gun.quality = PickupObject.ItemQuality.A;
@@ -85,46 +88,49 @@ namespace NevernamedsItems
         public static int OrgunID;
         private void Update()
         {
-            PlayerController player = gun.CurrentOwner as PlayerController;
-            currentItems = player.passiveItems.Count;
-            currentGuns = player.inventory.AllGuns.Count;
-            currentClip = gun.DefaultModule.numberOfShotsInClip;
-            currentActives = player.activeItems.Count;
-            if (currentItems != lastItems || currentGuns != lastGuns || currentClip != lastClip || currentActives != lastActives)
+            if (gun && gun.CurrentOwner && gun.CurrentOwner is PlayerController)
             {
-                CalculateHeartAttackStats(player);
-                lastGuns = currentGuns;
-                lastItems = currentItems;
-                lastClip = currentClip;
-                lastActives = currentActives;
-            }
-            if (player.PlayerHasActiveSynergy("Headache"))
-            {
-                if (!hasElectricityImmunity)
-                {
-                    this.m_electricityImmunity = new DamageTypeModifier();
-                    this.m_electricityImmunity.damageMultiplier = 0f;
-                    this.m_electricityImmunity.damageType = CoreDamageTypes.Electric;
-                    player.healthHaver.damageTypeModifiers.Add(this.m_electricityImmunity);
-                    hasElectricityImmunity = true;
-                }
-                if (!hadHeadacheLastTimeWeChecked)
+                PlayerController player = gun.CurrentOwner as PlayerController;
+                currentItems = player.passiveItems.Count;
+                currentGuns = player.inventory.AllGuns.Count;
+                currentClip = gun.DefaultModule.numberOfShotsInClip;
+                currentActives = player.activeItems.Count;
+                if (currentItems != lastItems || currentGuns != lastGuns || currentClip != lastClip || currentActives != lastActives)
                 {
                     CalculateHeartAttackStats(player);
-                    hadHeadacheLastTimeWeChecked = true;
+                    lastGuns = currentGuns;
+                    lastItems = currentItems;
+                    lastClip = currentClip;
+                    lastActives = currentActives;
                 }
-            }
-            else
-            {
-                if (hasElectricityImmunity)
+                if (player.PlayerHasActiveSynergy("Headache"))
                 {
-                    player.healthHaver.damageTypeModifiers.Remove(this.m_electricityImmunity);
-                    hasElectricityImmunity = false;
+                    if (!hasElectricityImmunity)
+                    {
+                        this.m_electricityImmunity = new DamageTypeModifier();
+                        this.m_electricityImmunity.damageMultiplier = 0f;
+                        this.m_electricityImmunity.damageType = CoreDamageTypes.Electric;
+                        player.healthHaver.damageTypeModifiers.Add(this.m_electricityImmunity);
+                        hasElectricityImmunity = true;
+                    }
+                    if (!hadHeadacheLastTimeWeChecked)
+                    {
+                        CalculateHeartAttackStats(player);
+                        hadHeadacheLastTimeWeChecked = true;
+                    }
                 }
-                if (hadHeadacheLastTimeWeChecked)
+                else
                 {
-                    CalculateHeartAttackStats(player);
-                    hadHeadacheLastTimeWeChecked = false;
+                    if (hasElectricityImmunity)
+                    {
+                        player.healthHaver.damageTypeModifiers.Remove(this.m_electricityImmunity);
+                        hasElectricityImmunity = false;
+                    }
+                    if (hadHeadacheLastTimeWeChecked)
+                    {
+                        CalculateHeartAttackStats(player);
+                        hadHeadacheLastTimeWeChecked = false;
+                    }
                 }
             }
         }

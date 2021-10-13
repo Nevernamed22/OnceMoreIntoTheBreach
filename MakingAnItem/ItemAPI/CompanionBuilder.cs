@@ -68,7 +68,7 @@ namespace ItemAPI
             {
                 GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(CompanionBuilder.behaviorSpeculatorPrefab);
                 gameObject.name = name;
-                tk2dSprite component = SpriteBuilder.SpriteFromResource(defaultSpritePath, gameObject, false).GetComponent<tk2dSprite>();
+                tk2dSprite component = SpriteBuilder.SpriteFromResource(defaultSpritePath, gameObject).GetComponent<tk2dSprite>();
                 component.SetUpSpeculativeRigidbody(hitboxOffset, hitBoxSize).CollideWithOthers = false;
                 gameObject.AddComponent<tk2dSpriteAnimator>();
                 gameObject.AddComponent<AIAnimator>();

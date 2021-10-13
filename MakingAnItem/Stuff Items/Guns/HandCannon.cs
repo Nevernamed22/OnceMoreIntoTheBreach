@@ -55,6 +55,12 @@ namespace NevernamedsItems
             projectile.transform.parent = gun.barrelOffset;
             projectile.SetProjectileSpriteRight("handcannon_projectile", 17, 15, false, tk2dBaseSprite.Anchor.MiddleCenter, 15, 13);
 
+            projectile.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(37) as Gun).DefaultModule.chargeProjectiles[0].Projectile.hitEffects.overrideMidairDeathVFX;
+            projectile.hitEffects.alwaysUseMidair = true;
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("HandCannon Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/handcannon_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/handcannon_clipempty");
+            gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(53) as Gun).muzzleFlashEffects;
             gun.quality = PickupObject.ItemQuality.D;
             gun.encounterTrackable.EncounterGuid = "this is the Hand Cannon";
             ETGMod.Databases.Items.Add(gun, null, "ANY");

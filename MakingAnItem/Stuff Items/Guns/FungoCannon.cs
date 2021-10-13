@@ -60,6 +60,10 @@ namespace NevernamedsItems
                 };
                 mod.chargeProjectiles = new List<ProjectileModule.ChargeProjectile> { chargeProj };
             }
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("FungoCannon Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/fungocannon_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/fungocannon_clipempty");
+
             gun.reloadTime = 1.4f;
             gun.SetBaseMaxAmmo(200);
             gun.quality = PickupObject.ItemQuality.C;

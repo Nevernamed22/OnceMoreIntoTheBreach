@@ -53,7 +53,8 @@ namespace NevernamedsItems
             BlankOnHitModifier blankingArmour = projectile.gameObject.GetOrAddComponent<BlankOnHitModifier>();
             blankingArmour.useTinyBlank = false;
             projectile.SetProjectileSpriteRight("blankannon_projectile", 10, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 7);
-
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Blank UI Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/blankannon_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/blankannon_clipempty");
             projectile.transform.parent = gun.barrelOffset;
 
             gun.quality = PickupObject.ItemQuality.C; //C

@@ -1582,7 +1582,7 @@ namespace NevernamedsItems
         public string ImpactSFX;
         private Projectile m_projectile;
     }
-    public class PrefabStatusEffectsToApply: MonoBehaviour
+    public class PrefabStatusEffectsToApply : MonoBehaviour
     {
         public PrefabStatusEffectsToApply()
         {
@@ -1594,6 +1594,65 @@ namespace NevernamedsItems
         }
         public List<GameActorEffect> effects;
         private Projectile m_projectile;
+    }
+    public class ScaleChangeOverTimeModifier : MonoBehaviour
+    {
+        public ScaleChangeOverTimeModifier()
+        {
+            timeToChangeOver = 1;
+            ScaleToChangeTo = 0.1f;
+            destroyAfterChange = false;
+            timeExtendedByRangeMultiplier = true;
+            suppressDeathFXIfdestroyed = true;
+        }
+        private void Start()
+        {
+            this.m_projectile = base.GetComponent<Projectile>();
+            initialScale = m_projectile.AdditionalScaleMultiplier;
+            StartCoroutine(DoShrink());
+        }
+        private IEnumerator DoShrink()
+        {
+            float realTime = timeToChangeOver;
+            float x = m_projectile.sprite.scale.x;
+            if (timeExtendedByRangeMultiplier && m_projectile.ProjectilePlayerOwner()) realTime *= m_projectile.ProjectilePlayerOwner().stats.GetStatValue(PlayerStats.StatType.RangeMultiplier);
+            float elapsed = 0f;
+            while (elapsed < realTime)
+            {
+                elapsed += BraveTime.DeltaTime;
+                float t = Mathf.Clamp01(elapsed / realTime);
+                float scalemodifier = Mathf.Lerp(initialScale, ScaleToChangeTo, t);
+                //m_projectile.RuntimeUpdateScale(scalemodifier);
+                m_projectile.AdditionalScaleMultiplier = scalemodifier;
+                m_projectile.sprite.scale = new Vector3(x * scalemodifier, x * scalemodifier, x * scalemodifier);
+                if (m_projectile.specRigidbody != null)
+                {
+                    m_projectile.specRigidbody.UpdateCollidersOnScale = true;
+                }
+
+                yield return null;
+            }
+            if (destroyAfterChange)
+            {
+                m_projectile.DieInAir(suppressDeathFXIfdestroyed);
+            }
+        }
+        private Projectile m_projectile;
+        private float initialScale;
+        public float timeToChangeOver;
+        public float ScaleToChangeTo;
+        public bool destroyAfterChange;
+        public bool timeExtendedByRangeMultiplier;
+        public bool suppressDeathFXIfdestroyed;
+    } //Causes the projectile's scale to change over time
+    public class SpecialProjectileIdentifier : MonoBehaviour
+    {
+        //This shit is to make sure that stuff like OnPreFireProjectileModifier doesn't accidentally catch duct taped bullets in it's switcheroo.
+        public SpecialProjectileIdentifier()
+        {
+            SpecialIdentifier = "NULL";
+        }
+        public string SpecialIdentifier;
     }
 
     //PASSIVE ITEM EFFECTS AS COMPONENTS

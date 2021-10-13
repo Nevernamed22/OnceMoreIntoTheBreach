@@ -62,6 +62,9 @@ namespace NevernamedsItems
 
             gun.DefaultModule.projectiles[0] = projectile;
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = "red_beam";
+
             gun.quality = PickupObject.ItemQuality.A;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             MantidAugmentID = gun.PickupObjectId;

@@ -44,6 +44,7 @@ namespace NevernamedsItems
                 //Rooms
                 ZipFilePath = this.Metadata.Archive;
                 FilePath = this.Metadata.Directory + "/rooms";
+                ModName = this.Metadata.Name;
 
                 //Tools and Toolboxes
                 StaticReferences.Init();
@@ -56,17 +57,18 @@ namespace NevernamedsItems
 
                 FakePrefabHooks.Init();
 
-                ItemBuilder.Init();       
+                ItemBuilder.Init();
 
-
+                CustomClipAmmoTypeToolbox.Init();
                 EnemyTools.Init();
                 Hooks.Init();
                 SaveAPIManager.Setup("nn");
-                //AudioResourceLoader.InitAudio();
+                AudioResourceLoader.InitAudio();
                 CurseManager.Init();
                 ETGModMainBehaviour.Instance.gameObject.AddComponent<GlobalUpdate>();
                 ETGModMainBehaviour.Instance.gameObject.AddComponent<CustomDarknessHandler>();
 
+                //ETGModConsole.Log(Assembly.GetExecutingAssembly().FullName);
 
                 //Challenges
                 Challenges.Init();
@@ -74,6 +76,7 @@ namespace NevernamedsItems
                 //Hooks n Shit
                 PlayerToolsSetup.Init();
                 EnemyHooks.InitEnemyHooks();
+                CompanionisedEnemyUtility.InitHooks();
                 MiscUnlockHooks.InitHooks();
                 FloorAndGenerationToolbox.Init();
                 PedestalHooks.Init();
@@ -294,6 +297,7 @@ namespace NevernamedsItems
                 UltraVioletGuonStone.Init();
                 InfraredGuonStone.Init();
                 RainbowGuonStone.Init();
+                KaleidoscopicGuonStone.Init();
                 GuonBoulder.Init();
                 BloodglassGuonStone.Init();
                 //Ammolets
@@ -318,6 +322,7 @@ namespace NevernamedsItems
                 //Bracelets and Jewelry
                 DiamondBracelet.Init();
                 PearlBracelet.Init();
+                PanicPendant.Init();
                 GunknightAmulet.Init();
                 AmuletOfShelltan.Init();
                 //Rings
@@ -425,6 +430,7 @@ namespace NevernamedsItems
                 MagicQuiver.Init();
                 FocalLenses.Init();
                 MagicMissile.Init();
+                AmberDie.Init();
                 ObsidianPistol.Init();
                 Showdown.Init();
                 LootEngineItem.Init();
@@ -495,6 +501,8 @@ namespace NevernamedsItems
                 Glasster.Add();
                 HandGun.Add();
                 Viper.Add();
+                MarchGun.Add();
+                RebarGun.Add();
                 MinuteGun.Add();
                 HeadOfTheOrder.Add();
                 GunOfAThousandSins.Add();
@@ -607,6 +615,7 @@ namespace NevernamedsItems
                 Glooper.Add();
                 Accelerator.Add();
                 PaintballGun.Add();
+                Converter.Add();
                 Spiral.Add();
                 Gunshark.Add();
                 FingerGuns.Add();
@@ -618,11 +627,14 @@ namespace NevernamedsItems
                 Snaker.Add();
                 GayK47.Add();
                 RC360.Add();
+                Autogun.Add();
+                Rebondir.Add();
                 BigShot.Add();
                 BioTranstater2100.Add();
                 //MAGICAL GUNS
                 Icicle.Add();
                 GunjurersStaff.Add();
+                InitiateWand.Add();
                 OrbOfTheGun.Add();
                 SpearOfJustice.Add();
                 Protean.Add();
@@ -661,6 +673,8 @@ namespace NevernamedsItems
                 GravityGunNegativeMatterForm.Add();
                 GonneElder.Add();
                 UterinePolypWombular.Add();
+                DiamondGaxe.Add();
+                RedRebondir.Add();
                 #endregion
 
                 //-----------------------------------------------------SHRINES GET INITIALISED

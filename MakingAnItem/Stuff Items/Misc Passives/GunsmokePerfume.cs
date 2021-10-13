@@ -29,7 +29,7 @@ namespace NevernamedsItems
         }
         protected override void Update()
         {
-            if (Owner)
+            if (Owner && Owner.CurrentRoom != null)
             {
                 List<AIActor> activeEnemies = Owner.CurrentRoom.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
                 if (activeEnemies != null)

@@ -5,6 +5,8 @@ using System.Text;
 using UnityEngine;
 using Gungeon;
 using System.Collections;
+using System.Reflection;
+using Dungeonator;
 
 namespace NevernamedsItems
 {
@@ -271,6 +273,7 @@ namespace NevernamedsItems
                 }
             }
         }
+       
     }
     public enum EasyBlankType
     {

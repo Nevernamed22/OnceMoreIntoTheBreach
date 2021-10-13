@@ -57,6 +57,9 @@ namespace NevernamedsItems
             gun.AddCurrentGunStatModifier(PlayerStats.StatType.MovementSpeed, 0.8f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             gun.AddCurrentGunStatModifier(PlayerStats.StatType.DodgeRollSpeedMultiplier, 0.8f, StatModifier.ModifyMethod.MULTIPLICATIVE);
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("HeavyAssaultRifle Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/heavyassaultrifle_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/heavyassaultrifle_clipempty");
+
             gun.DefaultModule.projectiles[0] = projectile;
             gun.quality = PickupObject.ItemQuality.S;
             gun.encounterTrackable.EncounterGuid = "this is the Heavy Assault Rifle";

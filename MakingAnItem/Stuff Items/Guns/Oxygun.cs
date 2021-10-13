@@ -56,6 +56,9 @@ namespace NevernamedsItems
 
             projectile.transform.parent = gun.barrelOffset;
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = "Repetitron Bullets";
+
             gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "this is the Oxygun";
             ETGMod.Databases.Items.Add(gun, null, "ANY");

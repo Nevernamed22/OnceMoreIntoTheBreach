@@ -37,7 +37,8 @@ namespace NevernamedsItems
             gun.DefaultModule.numberOfShotsInClip = 10;
             gun.SetBaseMaxAmmo(1924);
             gun.gunClass = GunClass.SHITTY;
-
+            gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(26) as Gun).muzzleFlashEffects;
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(477) as Gun).gunSwitchGroup;
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
@@ -45,7 +46,11 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.damage = 5f;
             projectile.SetProjectileSpriteRight("lodger_projectile", 8, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 7, 8);
+            projectile.hitEffects.alwaysUseMidair = true;
+            projectile.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(28) as Gun).DefaultModule.projectiles[0].hitEffects.tileMapVertical.effects[0].effects[0].effect;
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Lodger Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/lodger_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/lodger_clipempty");
 
             gun.quality = PickupObject.ItemQuality.D;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

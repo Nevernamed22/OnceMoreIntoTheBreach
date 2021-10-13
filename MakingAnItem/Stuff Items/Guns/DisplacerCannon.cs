@@ -74,6 +74,9 @@ namespace NevernamedsItems
             };
             gun.DefaultModule.chargeProjectiles = new List<ProjectileModule.ChargeProjectile> { chargeProj };
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("DisplacerCannon Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/displacercannon_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/displacercannon_clipempty");
+
             // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.
             gun.quality = PickupObject.ItemQuality.S;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

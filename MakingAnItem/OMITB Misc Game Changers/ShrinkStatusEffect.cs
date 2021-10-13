@@ -25,6 +25,7 @@ namespace NevernamedsItems
             base.OnEffectApplied(actor, effectData, partialAmount);
             if (actor.aiActor)
             {
+                if (actor.healthHaver && (actor.healthHaver.IsBoss || actor.healthHaver.IsSubboss)) return;
                 SpecialSizeStatModification sizeStats = actor.gameObject.GetOrAddComponent<SpecialSizeStatModification>();
                 sizeStats.canBeSteppedOn = true;
                 sizeStats.adjustsSpeed = adjustsSpeed;
@@ -54,6 +55,7 @@ namespace NevernamedsItems
             base.OnEffectRemoved(actor, effectData);
             if (actor.aiActor)
             {
+                if (actor.healthHaver && (actor.healthHaver.IsBoss || actor.healthHaver.IsSubboss)) return;
                 Vector2 newSize = new Vector2((actor.aiActor.EnemyScale.x / newScaleMultiplier.x), (actor.aiActor.EnemyScale.y / newScaleMultiplier.y));
                 actor.StartCoroutine(LerpToSize(actor.aiActor, newSize));
             }

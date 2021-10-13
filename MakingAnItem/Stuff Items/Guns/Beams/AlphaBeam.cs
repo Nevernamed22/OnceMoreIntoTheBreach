@@ -98,7 +98,7 @@ namespace NevernamedsItems
                 new Vector2(15, 7),
                 new Vector2(0, 4),
                 //Other Variables
-                true
+                100
                 );
 
             projectile.gameObject.SetActive(false);
@@ -107,7 +107,9 @@ namespace NevernamedsItems
             projectile.baseData.damage = 70f;
             projectile.baseData.force *= 20f;
             projectile.baseData.range *= 200;
-            projectile.baseData.speed *= 4;            
+            projectile.baseData.speed *= 4;
+
+            //projectile.gameObject.AddComponent<EnemyBulletConverterBeam>();
 
             beamComp.boneType = BasicBeamController.BeamBoneType.Projectile;
             beamComp.startAudioEvent = "Play_WPN_radiationlaser_shot_01";

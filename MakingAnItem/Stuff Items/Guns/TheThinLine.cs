@@ -106,7 +106,8 @@ namespace NevernamedsItems
 
                 }
             }
-
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Thinline Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/thinline_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/thinline_clipempty");
 
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

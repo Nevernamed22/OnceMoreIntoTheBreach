@@ -65,7 +65,8 @@ namespace NevernamedsItems
                 if (mod != gun.DefaultModule) { mod.ammoCost = 0; }
                 projectile.transform.parent = gun.barrelOffset;
             }
-
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Groom Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/groom_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/groom_clipempty");
             gun.reloadTime = 1.5f;
             gun.gunHandedness = GunHandedness.TwoHanded;
             gun.barrelOffset.transform.localPosition = new Vector3(2.56f, 0.68f, 0f);

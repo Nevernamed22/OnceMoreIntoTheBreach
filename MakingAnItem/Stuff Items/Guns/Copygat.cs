@@ -53,7 +53,9 @@ namespace NevernamedsItems
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
             projectile.transform.parent = gun.barrelOffset;
-            
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Copygat Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/copygat_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/copygat_clipempty");
 
             gun.DefaultModule.projectiles[0] = projectile;
             gun.quality = PickupObject.ItemQuality.A;

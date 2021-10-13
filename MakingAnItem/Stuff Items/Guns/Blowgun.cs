@@ -27,6 +27,7 @@ namespace NevernamedsItems
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(150) as Gun).gunSwitchGroup;
 
             //GUN STATS
             gun.DefaultModule.ammoCost = 1;
@@ -51,6 +52,9 @@ namespace NevernamedsItems
             poisoning.procChance = 1;
             poisoning.useSpecialTint = false;
             projectile.SetProjectileSpriteRight("blowgun_projectile", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 15, 8);
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Blowgun Darts", "NevernamedsItems/Resources/CustomGunAmmoTypes/blowgun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/blowgun_clipempty");
 
             gun.quality = PickupObject.ItemQuality.D;
             gun.encounterTrackable.EncounterGuid = "this is the Blowgun";

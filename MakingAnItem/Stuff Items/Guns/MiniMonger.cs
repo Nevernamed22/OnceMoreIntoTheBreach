@@ -73,6 +73,9 @@ namespace NevernamedsItems
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.LoopSection;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).loopStart = 3;
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = "Punishment Ray Lasers";
+
             gun.quality = PickupObject.ItemQuality.A;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             MiniMongerID = gun.PickupObjectId;

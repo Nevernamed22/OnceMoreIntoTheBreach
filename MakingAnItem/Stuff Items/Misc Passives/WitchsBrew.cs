@@ -29,7 +29,7 @@ namespace NevernamedsItems
         {
             if (target && target.healthHaver && !target.healthHaver.IsBoss && !target.healthHaver.IsSubboss && !target.IsSecretlyTheMineFlayer())
             {
-                if (target.GetComponent<CompanionController>() == null && target.GetComponent<HasBeenDoubledByWitchsBrew>() == null && target.GetComponent<DisplacedImageController>() == null)
+                if (target.GetComponent<CompanionController>() == null && target.GetComponent<HasBeenDoubledByWitchsBrew>() == null && target.GetComponent<DisplacedImageController>() == null && target.GetComponent<MirrorImageController>() == null)
                 {
                          if (target.EnemyGuid != "22fc2c2c45fb47cf9fb5f7b043a70122")
                     {

@@ -51,6 +51,8 @@ namespace NevernamedsItems
             behav.minOrbitalRadius = 3.5f;
             projectile.SetProjectileSpriteRight("gravitron_projectile",7,7, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Gravitron Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/gravitron_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/gravitron_clipempty");
 
             gun.DefaultModule.projectiles[0] = projectile;
 

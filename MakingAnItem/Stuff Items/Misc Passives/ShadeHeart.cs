@@ -97,6 +97,8 @@ namespace NevernamedsItems
         }
         private void ShouldFlyCheck(PlayerController player)
         {
+            if (player && Owner.CurrentRoom != null && !string.IsNullOrEmpty(Owner.CurrentRoom.GetRoomName()))
+            {
             currentRoom = Owner.CurrentRoom.GetRoomName();
             currentCombatState = Owner.IsInCombat;
             bool roomFlag = !string.IsNullOrEmpty(currentRoom) && currentRoom != lastRoom;
@@ -106,6 +108,7 @@ namespace NevernamedsItems
                 FlyCheck(player);
                 lastRoom = currentRoom;
                 lastCombatState = currentCombatState;
+            }
             }
         }
 

@@ -55,7 +55,8 @@ namespace NevernamedsItems
             projectile.SetProjectileSpriteRight("punishmentray_projectile", 20, 3, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 3);
 
             projectile.transform.parent = gun.barrelOffset;
-
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Punishment Ray Lasers", "NevernamedsItems/Resources/CustomGunAmmoTypes/punishmentray_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/punishmentray_clipempty");
             gun.quality = PickupObject.ItemQuality.C;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
         }

@@ -656,6 +656,9 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles.Add(QueenOfClubs); //50
             gun.DefaultModule.projectiles.Add(KingOfClubs); //51
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Hand Gun Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/handgun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/handgun_clipempty");
+
             gun.quality = PickupObject.ItemQuality.C;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 

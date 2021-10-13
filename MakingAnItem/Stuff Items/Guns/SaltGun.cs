@@ -55,7 +55,8 @@ namespace NevernamedsItems
                 if (mod != gun.DefaultModule) { mod.ammoCost = 0; }
                 projectile.transform.parent = gun.barrelOffset;
             }
-
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("SaltGun Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/saltgun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/saltgun_clipempty");
             gun.reloadTime = 0.8f;
             gun.barrelOffset.transform.localPosition = new Vector3(1.43f, 0.37f, 0f);
             gun.SetBaseMaxAmmo(300);

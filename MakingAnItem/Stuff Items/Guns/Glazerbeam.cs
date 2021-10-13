@@ -53,7 +53,8 @@ namespace NevernamedsItems
             projectile.transform.parent = gun.barrelOffset;
             BeamBulletsBehaviour beam = projectile.gameObject.AddComponent<BeamBulletsBehaviour>();
             beam.firetype = BeamBulletsBehaviour.FireType.FORWARDS;
-
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = "Punishment Ray Lasers";
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             GlazerbeamID = gun.PickupObjectId;

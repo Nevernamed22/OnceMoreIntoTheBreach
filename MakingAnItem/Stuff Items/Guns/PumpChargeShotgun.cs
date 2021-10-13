@@ -61,6 +61,9 @@ namespace NevernamedsItems
                 if (mod != gun.DefaultModule) { mod.ammoCost = 0; }
             }
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Pump-Charge Shotgun Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/pumpchargeshotgun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/pumpchargeshotgun_clipempty");
+
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 

@@ -52,6 +52,8 @@ namespace NevernamedsItems
             projectile.baseData.range *= 0.5f;
             projectile.SetProjectileSpriteRight("repetiton_projectile", 10, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 6);
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Repetitron Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/repetitron_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/repetitron_clipempty");
 
             gun.DefaultModule.projectiles[0] = projectile;
 

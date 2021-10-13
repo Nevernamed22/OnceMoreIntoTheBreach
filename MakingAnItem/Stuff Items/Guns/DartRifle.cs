@@ -53,6 +53,9 @@ namespace NevernamedsItems
             projectile.StunApplyChance = 1f;
             projectile.SetProjectileSpriteRight("dartrifle_projectile", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 14, 3);
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Dart Rifle Darts", "NevernamedsItems/Resources/CustomGunAmmoTypes/dartrifle_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/dartrifle_clipempty");
+
             gun.quality = PickupObject.ItemQuality.B;
             gun.encounterTrackable.EncounterGuid = "this is the Dart Rifle";
             ETGMod.Databases.Items.Add(gun, null, "ANY");

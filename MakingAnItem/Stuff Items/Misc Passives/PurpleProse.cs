@@ -44,6 +44,7 @@ namespace NevernamedsItems
         private void charmAll(PlayerController user)
         {
             List<AIActor> activeEnemies = user.CurrentRoom.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+            
             if (activeEnemies != null)
             {
                 for (int i = 0; i < activeEnemies.Count; i++)

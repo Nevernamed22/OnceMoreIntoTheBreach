@@ -62,6 +62,9 @@ namespace NevernamedsItems
 
             projectile.SetProjectileSpriteRight("sporelauncher_projectile", 10, 10, false, tk2dBaseSprite.Anchor.MiddleCenter, 9, 9);
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("SporeLauncher Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/sporelauncher_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/sporelauncher_clipempty");
+
             gun.quality = PickupObject.ItemQuality.B;
             gun.encounterTrackable.EncounterGuid = "this is the Spore Launcher";
             ETGMod.Databases.Items.Add(gun, null, "ANY");

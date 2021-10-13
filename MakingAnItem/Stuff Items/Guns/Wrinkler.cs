@@ -71,6 +71,8 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 5), //Override Collider Offsets
             AnimateBullet.ConstructListOfSameValues<Projectile>(null, 5));
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Wrinkler Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/wrinkler_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/wrinkler_clipempty");
 
             gun.DefaultModule.projectiles[0] = projectile;
             gun.quality = PickupObject.ItemQuality.A;

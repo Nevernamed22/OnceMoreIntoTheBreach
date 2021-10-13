@@ -29,6 +29,7 @@ namespace NevernamedsItems
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
+            gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(334) as Gun).muzzleFlashEffects;
 
             //GUN STATS
             gun.DefaultModule.ammoCost = 1;
@@ -56,6 +57,10 @@ namespace NevernamedsItems
             orAddComponent.penetration++;
             projectile.SetProjectileSpriteRight("antimaterielrifle_projectile", 15, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 15, 7);
             projectile.transform.parent = gun.barrelOffset;
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = "Thinline Bullets";
+
             gun.quality = PickupObject.ItemQuality.S;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc);

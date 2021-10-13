@@ -17,12 +17,14 @@ namespace NevernamedsItems
             Gun gun = ETGMod.Databases.Items.NewGun("Bottle Rocket", "bottlerocket");
             Game.Items.Rename("outdated_gun_mods:bottle_rocket", "nn:bottle_rocket");
             var behav = gun.gameObject.AddComponent<BottleRocket>();
+            behav.preventNormalFireAudio = true;
             gun.SetShortDescription("Waterarms Afficionado");
             gun.SetLongDescription("A pressurised bottle of fluid. Pumping it any fuller will send it flying off in erratic directions."+"\n\nProne to exploding.");
 
             gun.SetupSprite(null, "bottlerocket_idle_001", 8);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(150) as Gun).gunSwitchGroup;
 
             //GUN STATS
             gun.DefaultModule.ammoCost = 1;
@@ -42,6 +44,8 @@ namespace NevernamedsItems
             gun.SetAnimationFPS(gun.chargeAnimation, 8);
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.LoopSection;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).loopStart = 0;
+            gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).frames[3].eventAudio = "Play_WPN_trashgun_impact_01";
+            gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).frames[3].triggerEvent = true;
 
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).frames[0].eventAudio = "Play_ENV_water_splash_01";
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).frames[0].triggerEvent = true;
@@ -124,6 +128,9 @@ namespace NevernamedsItems
                 ChargeTime = 0.5f,
             };
             gun.DefaultModule.chargeProjectiles = new List<ProjectileModule.ChargeProjectile> { chargeProj };
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Bottle Rocket Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/bottlerocket_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/bottlerocket_clipempty");
 
             gun.quality = PickupObject.ItemQuality.C;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

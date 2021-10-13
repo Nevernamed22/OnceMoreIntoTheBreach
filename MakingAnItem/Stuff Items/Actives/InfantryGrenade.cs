@@ -18,7 +18,7 @@ namespace NevernamedsItems
             var item = obj.AddComponent<InfantryGrenade>();
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
             string shortDesc = "Cheap, but Efficient";
-            string longDesc = "";
+            string longDesc = "A paltry explosive device carried by infantry soldiers from a far off land."+"\n\nHas a weak blast, but can be slung multiple times in quick succession.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 50);
             item.consumable = false;

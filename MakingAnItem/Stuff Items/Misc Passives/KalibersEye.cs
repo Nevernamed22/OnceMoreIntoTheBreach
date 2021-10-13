@@ -57,7 +57,7 @@ namespace NevernamedsItems
         {
             if (enemy.aiActor && fatal && !enemy.IsBoss && Owner.IsInCombat && enemy.aiActor.EnemyGuid != "249db525a9464e5282d02162c88e0357")
             {
-                if (!enemy.aiActor.IgnoreForRoomClear)
+                if (!enemy.aiActor.IgnoreForRoomClear && (enemy.GetComponent<MirrorImageController>() == null))
                 {
                     return true;
                 }
@@ -83,7 +83,7 @@ namespace NevernamedsItems
                             string enemyGuid = enemy.aiActor.EnemyGuid;
                             Vector2 worldBottomLeft = enemy.sprite.WorldBottomLeft;
                             IntVector2 PosToSpawn = worldBottomLeft.ToIntVector2();
-                            GameManager.Instance.StartCoroutine(this.DoEnemySpawn(enemyGuid, PosToSpawn, isJammed));
+                            GameManager.Instance.StartCoroutine(this.DoEnemySpawn(enemyGuid, PosToSpawn, isJammed, (enemy.GetComponent<DisplacedImageController>() != null)));
                         }
                     }
                     catch (Exception e)
@@ -95,7 +95,7 @@ namespace NevernamedsItems
                 //else ETGModConsole.Log("Enemy invalid");
             }
         }
-        private IEnumerator DoEnemySpawn(string enemyGuid, IntVector2 position, bool isJammed)
+        private IEnumerator DoEnemySpawn(string enemyGuid, IntVector2 position, bool isJammed, bool isDisplaced)
         {
             //ETGModConsole.Log("DoEnemySpawn triggered");
             yield return new WaitForSeconds(1f);
@@ -138,6 +138,11 @@ namespace NevernamedsItems
                     TargetActor.ApplyEffect(GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultPermanentCharmEffect, 1f, null);
                     TargetActor.gameObject.AddComponent<KillOnRoomClear>();
 
+                    if (isDisplaced)
+                    {
+                        DisplacedImageController displacedness = TargetActor.gameObject.AddComponent<DisplacedImageController>();
+                        displacedness.Init();
+                    }
 
                     if (EasyEnemyTypeLists.MultiPhaseEnemies.Contains(TargetActor.EnemyGuid) || EasyEnemyTypeLists.EnemiesWithInvulnerablePhases.Contains(TargetActor.EnemyGuid))
                     {

@@ -72,7 +72,7 @@ namespace NevernamedsItems
                 new Vector2(7, 2),
                 new Vector2(0, 1),
                 //Other Variables
-                false
+                0
                 );
 
             subTendrilProj.gameObject.SetActive(false);
@@ -133,7 +133,7 @@ namespace NevernamedsItems
                 null,
                 null,
                 //Other Variables
-                false
+                0
                 );
 
             projectile.gameObject.SetActive(false);
@@ -182,6 +182,9 @@ namespace NevernamedsItems
             trail.EndColor = ExtendedColours.carrionRed;
             EscapingWigglerProjectile = wiggler;
             #endregion
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = "Carrion Clip";
+
             gun.quality = PickupObject.ItemQuality.S; //S
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 

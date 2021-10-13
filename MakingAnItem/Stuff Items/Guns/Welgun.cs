@@ -71,7 +71,7 @@ namespace NevernamedsItems
             {
                 if (gun && gun.GunPlayerOwner())
                 {
-                    if (UnityEngine.Random.value <= 0.01f)
+                    if (UnityEngine.Random.value <= 0.1f)
                     {
                         gun.GainAmmo(UnityEngine.Random.Range(10, 16));
                     }

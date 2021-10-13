@@ -52,6 +52,9 @@ namespace NevernamedsItems
             explosiveModifier.doExplosion = true;
             explosiveModifier.explosionData = FireLanceExplosion;
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Fire Lance Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/firelance_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/firelance_clipempty");
+
             gun.quality = PickupObject.ItemQuality.D;
             gun.encounterTrackable.EncounterGuid = "this is the Fire Lance";
             ETGMod.Databases.Items.Add(gun, null, "ANY");

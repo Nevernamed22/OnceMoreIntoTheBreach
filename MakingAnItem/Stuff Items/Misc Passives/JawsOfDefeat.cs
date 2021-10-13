@@ -22,6 +22,7 @@ namespace NevernamedsItems
             string longDesc = "Increases Damage and Firerate by 0.5% for every death on the current save file, up to 1000 deaths."+"\n\nA charm worn by the very first adventurer... ever.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
 
+            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 3f, StatModifier.ModifyMethod.ADDITIVE);
             item.quality = PickupObject.ItemQuality.S;
             JawsOfDefeatID = item.PickupObjectId;
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.BOSSRUSH_SHADE, true);

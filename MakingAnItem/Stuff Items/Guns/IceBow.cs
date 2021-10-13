@@ -66,6 +66,9 @@ namespace NevernamedsItems
             };
             gun.DefaultModule.chargeProjectiles = new List<ProjectileModule.ChargeProjectile> { chargeProj };
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Ice Bow Arrows", "NevernamedsItems/Resources/CustomGunAmmoTypes/icebow_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/icebow_clipempty");
+
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             IceBowID = gun.PickupObjectId;

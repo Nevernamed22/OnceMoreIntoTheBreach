@@ -62,7 +62,7 @@ namespace NevernamedsItems
             }
             base.Update();
         }
-        public static List<int> bowWeapons = new List<int>
+        public List<int> bowWeapons = new List<int>
         {
             4, //Sticky Crossbow
             8, //Bow
@@ -77,7 +77,7 @@ namespace NevernamedsItems
         };
         public override void Pickup(PlayerController player)
         {
-            if (m_pickedUpThisRun)
+            if (!m_pickedUpThisRun)
             {
                 bowWeapons.Add(IceBow.IceBowID);
                 bowWeapons.Add(Hwacha.HwachaID);

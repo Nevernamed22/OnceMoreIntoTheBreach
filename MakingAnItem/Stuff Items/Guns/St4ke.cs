@@ -26,6 +26,8 @@ namespace NevernamedsItems
 
             gun.SetAnimationFPS(gun.shootAnimation, 17);
 
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(153) as Gun).gunSwitchGroup;
+
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
 
             //GUN STATS
@@ -53,14 +55,21 @@ namespace NevernamedsItems
             PierceProjModifier piercing = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();
             piercing.penetration++;
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Stk4ke Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/st4ke_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/st4ke_clipempty");
+
             gun.quality = PickupObject.ItemQuality.A;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             St4keID = gun.PickupObjectId;
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc);
 
+            LinkVFXPrefab = FakePrefab.Clone(Game.Items["shock_rounds"].GetComponent<ComplexProjectileModifier>().ChainLightningVFX);
+            FakePrefab.MarkAsFakePrefab(LinkVFXPrefab);
+            UnityEngine.Object.DontDestroyOnLoad(LinkVFXPrefab);
         }
         public static int St4keID;
+        public static GameObject LinkVFXPrefab;
         public St4ke()
         {
 
@@ -72,8 +81,7 @@ namespace NevernamedsItems
         public St4keProj()
         {
             DamagePerHit = 7;
-            IsElectricitySource = false;
-                this.LinkVFXPrefab = FakePrefab.Clone(Game.Items["shock_rounds"].GetComponent<ComplexProjectileModifier>().ChainLightningVFX);
+            IsElectricitySource = false;               
         }
         public static  Projectile lastFiredSt4keBullet = null;
         private void Start()
@@ -103,13 +111,9 @@ namespace NevernamedsItems
         }
         private void Update()
         {
-            if (this.LinkVFXPrefab == null)
-            {
-                this.LinkVFXPrefab = FakePrefab.Clone(Game.Items["shock_rounds"].GetComponent<ComplexProjectileModifier>().ChainLightningVFX);
-            }
             if (m_projectile && electricTarget && this.extantLink == null)
             {
-                tk2dTiledSprite component = SpawnManager.SpawnVFX(this.LinkVFXPrefab, false).GetComponent<tk2dTiledSprite>();
+                tk2dTiledSprite component = SpawnManager.SpawnVFX(St4ke.LinkVFXPrefab, false).GetComponent<tk2dTiledSprite>();
                 this.extantLink = component;
             }
             else if (m_projectile && electricTarget && this.extantLink != null)
@@ -172,7 +176,6 @@ namespace NevernamedsItems
         }
         public float DamagePerHit;
         private tk2dTiledSprite extantLink;
-        private GameObject LinkVFXPrefab;
         private HashSet<AIActor> m_damagedEnemies = new HashSet<AIActor>();
         private void OnCollision(CollisionData tileCollision)
         {

@@ -452,7 +452,7 @@ namespace NevernamedsItems
         {
             if (this.m_beam != null)
             {
-               Vector2 pointTowards = m_owner.sprite.WorldCenter.CalculateVectorBetween(this.m_basicBeam.Origin);
+                Vector2 pointTowards = m_owner.sprite.WorldCenter.CalculateVectorBetween(this.m_basicBeam.Origin);
                 float flotsam = pointTowards.normalized.ToAngle();
                 this.m_basicBeam.Direction = flotsam.DegreeToVector2();
             }
@@ -513,6 +513,127 @@ namespace NevernamedsItems
         public float chancePerTick;
         public float tickDelay;
         EasyBlankType blankType;
+        private float timer;
+        private Projectile projectile;
+        private BasicBeamController basicBeamController;
+        private BeamController beamController;
+        private PlayerController owner;
+    }
+    public class EnemyBulletConverterBeam : MonoBehaviour
+    {
+        public EnemyBulletConverterBeam()
+        {
+        }
+        private void Start()
+        {
+
+            this.projectile = base.GetComponent<Projectile>();
+            this.beamController = base.GetComponent<BeamController>();
+            this.basicBeamController = base.GetComponent<BasicBeamController>();
+            if (this.projectile.Owner is PlayerController) this.owner = this.projectile.Owner as PlayerController;
+
+
+        }
+        private void Update()
+        {
+            foreach (Projectile proj in StaticReferenceManager.AllProjectiles)
+            {
+                if (proj && (proj.Owner == null || !(proj.Owner is PlayerController)) && proj.specRigidbody != null)
+                {
+                    if (basicBeamController.PosIsNearAnyBoneOnBeam(proj.specRigidbody.UnitCenter, 1))
+                    {
+                        //proj.RemoveBulletScriptControl();
+                        if (proj.Owner && proj.Owner.specRigidbody) proj.specRigidbody.DeregisterSpecificCollisionException(proj.Owner.specRigidbody);
+                        if (proj.GetComponent<BeamController>() != null)
+                        {
+                            proj.GetComponent<BeamController>().HitsPlayers = false;
+                            proj.GetComponent<BeamController>().HitsEnemies = true;
+                        }
+                        else if (proj.GetComponent<BasicBeamController>() != null)
+                        {
+                            proj.GetComponent<BasicBeamController>().HitsPlayers = false;
+                            proj.GetComponent<BasicBeamController>().HitsEnemies = true;
+                        }
+                        proj.Owner = owner;
+                        proj.SetNewShooter(owner.specRigidbody);
+                        proj.allowSelfShooting = false;
+                        proj.collidesWithPlayer = false;
+                        proj.collidesWithEnemies = true;
+                        proj.baseData.damage = 5;
+                        if (proj.IsBlackBullet) proj.baseData.damage *= 2;
+                        PlayerController player = (owner as PlayerController);
+                        if (player != null)
+                        {
+                            proj.baseData.damage *= player.stats.GetStatValue(PlayerStats.StatType.Damage);
+                            proj.baseData.speed *= player.stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed);
+                            proj.UpdateSpeed();
+                            proj.baseData.force *= player.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
+                            proj.baseData.range *= player.stats.GetStatValue(PlayerStats.StatType.RangeMultiplier);
+                            proj.BossDamageMultiplier *= player.stats.GetStatValue(PlayerStats.StatType.DamageToBosses);
+                            proj.RuntimeUpdateScale(player.stats.GetStatValue(PlayerStats.StatType.PlayerBulletScale));
+                            player.DoPostProcessProjectile(proj);
+                        }
+                        proj.AdjustPlayerProjectileTint(ExtendedColours.honeyYellow, 1);
+                        proj.UpdateCollisionMask();
+                        proj.RemoveFromPool();
+                        proj.Reflected();
+                    }
+
+                }
+
+            }
+        }
+
+        private Projectile projectile;
+        private BasicBeamController basicBeamController;
+        private BeamController beamController;
+        private PlayerController owner;
+    }
+    public class EnemyBulletReflectorBeam : MonoBehaviour
+    {
+        public EnemyBulletReflectorBeam()
+        {
+        }
+        private void Start()
+        {
+
+            this.projectile = base.GetComponent<Projectile>();
+            this.beamController = base.GetComponent<BeamController>();
+            this.basicBeamController = base.GetComponent<BasicBeamController>();
+            if (this.projectile.Owner is PlayerController) this.owner = this.projectile.Owner as PlayerController;
+
+
+        }
+        private void Update()
+        {
+            if (timer <= 0.1f)
+            {
+                timer += BraveTime.DeltaTime;
+            }
+            else
+            {
+                timer = 0;
+                if (UnityEngine.Random.value <= 0.25)
+                {
+                    DoReflect();
+                }
+            }
+        }
+        private void DoReflect()
+        {
+            foreach (Projectile proj in StaticReferenceManager.AllProjectiles)
+            {
+                if (proj && (proj.Owner == null || !(proj.Owner is PlayerController)) && proj.specRigidbody != null)
+                {
+                    if (basicBeamController.PosIsNearAnyBoneOnBeam(proj.specRigidbody.UnitCenter, 1))
+                    {
+                        proj.ReflectBullet(true, owner, 10, false);
+                    }
+
+                }
+
+            }
+        }
         private float timer;
         private Projectile projectile;
         private BasicBeamController basicBeamController;

@@ -56,9 +56,12 @@ namespace NevernamedsItems
             gooper.CollisionSpawnRadius = 2;
             gooper.goopDefinition = EasyGoopDefinitions.BlobulonGoopDef;
             CustomImpactSoundBehav sound = projectile.gameObject.AddComponent<CustomImpactSoundBehav>();
-            sound.ImpactSFX = "Play_ENV_water_splash_01";
+            sound.ImpactSFX = "Play_BlobulonDeath";
 
             projectile.transform.parent = gun.barrelOffset;
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Vacuum Gun Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/vacuumgun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/vacuumgun_clipempty");
 
             gun.quality = PickupObject.ItemQuality.C;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

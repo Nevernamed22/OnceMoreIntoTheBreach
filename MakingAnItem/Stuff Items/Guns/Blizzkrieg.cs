@@ -81,6 +81,10 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(2.56f, 0.81f, 0f);
             gun.SetBaseMaxAmmo(400);
             gun.gunClass = GunClass.ICE;
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Blizzkrieg Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/blizzkreig_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/blizzkreig_clipempty");
+
+
             gun.quality = PickupObject.ItemQuality.S;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 

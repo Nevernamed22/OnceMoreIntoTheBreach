@@ -90,6 +90,9 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 20), 
             AnimateBullet.ConstructListOfSameValues<Projectile>(null, 20));
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Pillarocket Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/pillarocket_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/pillarocket_clipempty");
+
             gun.DefaultModule.projectiles[0] = projectile;
             gun.gunClass = GunClass.EXPLOSIVE;
             gun.quality = PickupObject.ItemQuality.S;

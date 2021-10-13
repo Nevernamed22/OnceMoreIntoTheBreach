@@ -71,7 +71,7 @@ namespace NevernamedsItems
                 new Vector2(7, 2),
                 new Vector2(0, 1),
                 //Other Variables
-                false
+                0
                 );
 
             subTendrilProj.gameObject.SetActive(false);
@@ -132,7 +132,7 @@ namespace NevernamedsItems
                 null,
                 null,
                 //Other Variables
-                false
+                0
                 );
 
             projectile.gameObject.SetActive(false);
@@ -157,6 +157,9 @@ namespace NevernamedsItems
 
             gun.DefaultModule.projectiles[0] = projectile;
             #endregion
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Carrion Clip", "NevernamedsItems/Resources/CustomGunAmmoTypes/carrion_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/carrion_clipempty");
 
             gun.quality = PickupObject.ItemQuality.EXCLUDED; //S
             ETGMod.Databases.Items.Add(gun, null, "ANY");

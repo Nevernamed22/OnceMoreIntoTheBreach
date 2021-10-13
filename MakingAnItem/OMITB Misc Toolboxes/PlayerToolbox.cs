@@ -44,6 +44,7 @@ namespace NevernamedsItems
                 m_attachedPlayer.OnEnteredCombat += this.EnteredCombat;
                 m_attachedPlayer.OnRoomClearEvent += this.ClearedRoom;
                 m_attachedPlayer.OnNewFloorLoaded += this.NewFloor;
+                m_attachedPlayer.PostProcessThrownGun += this.PostProcessThrownGun;
                 if (GameManager.Instance.SecondaryPlayer != null && GameManager.Instance.SecondaryPlayer == m_attachedPlayer) { isSecondaryPlayer = true; }
             }
             //Stats
@@ -119,14 +120,42 @@ namespace NevernamedsItems
         private IEnumerator ButterFingersGun()
         {
             yield return null;
-            m_attachedPlayer.CurrentGun.ToggleRenderers(true);
-            m_attachedPlayer.CurrentGun.PrepGunForThrow();
-            typeof(Gun).GetField("m_prepThrowTime", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(m_attachedPlayer.CurrentGun, 999);
-            Vector3 vec3 = m_attachedPlayer.CurrentGun.ThrowPrepTransform.parent.TransformPoint((m_attachedPlayer.CurrentGun.ThrowPrepPosition * -1f).WithX(0f));
-            Vector2 vec = (OMITBReflectionHelpers.ReflectGetField<Vector2>(typeof(Gun), "m_localAimPoint", m_attachedPlayer.CurrentGun) - vec3.XY());
-            ETGModConsole.Log("Vector2: " + vec);
-            m_attachedPlayer.CurrentGun.CeaseAttack();
+            if (m_attachedPlayer.CurrentGun != null)
+            {
+                Gun gunToSlip = m_attachedPlayer.CurrentGun;
+                m_attachedPlayer.inventory.RemoveGunFromInventory(gunToSlip);
+                gunToSlip.gameObject.AddComponent<ButterfingersedGun>();
+                gunToSlip.ForceThrowGun();
+                yield return new WaitForSeconds(0.1f);
+                gunToSlip.ToggleRenderers(true);
+                gunToSlip.RegisterMinimapIcon();
+            }
             yield break;
+        }
+        private IEnumerator ButterfingersLateReTeleport(Projectile proj)
+        {
+            yield return null;
+            bool hasTeleportedOnce = false;
+            while (hasTeleportedOnce == false)
+            {
+                try
+                {
+                    proj.specRigidbody.Position = new Position(m_attachedPlayer.specRigidbody.UnitCenter);
+                    //ETGModConsole.Log("LateTeleported gun");
+                    hasTeleportedOnce = true;
+                }
+                catch (Exception e)
+                {
+                    ETGModConsole.Log(e.ToString());
+                }
+            }
+            yield break;
+        }
+        private void PostProcessThrownGun(Projectile gun)
+        {
+            if (gun.GetComponentInChildren<ButterfingersedGun>() != null) StartCoroutine(ButterfingersLateReTeleport(gun));
+            gun.OnHitEnemy += this.OnThrownGunHitEnemy;
+
         }
         private void ModifyDamage(HealthHaver player, HealthHaver.ModifyDamageEventArgs args)
         {
@@ -165,10 +194,6 @@ namespace NevernamedsItems
         }
         private void OnPlayerDamagedEnemy(float huh, bool fatal, HealthHaver enemy)
         {
-        }
-        private void PostProcessThrownGun(Projectile gun)
-        {
-            gun.OnHitEnemy += this.OnThrownGunHitEnemy;
         }
         private void OnThrownGunHitEnemy(Projectile gun, SpeculativeRigidbody enemy, bool fatal)
         {
@@ -459,4 +484,5 @@ namespace NevernamedsItems
 
         public Gun gun;
     }
+    public class ButterfingersedGun : MonoBehaviour { }
 }

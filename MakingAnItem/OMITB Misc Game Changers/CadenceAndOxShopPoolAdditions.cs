@@ -30,6 +30,11 @@ namespace NevernamedsItems
                 StunGun.StunGunID, 10,
                 DroneCompanion.DroneID, 25
                 );
+            BreachShopTool.AddBaseMetaShopTier(
+                Autogun.AutogunID, 20,
+                Rebondir.RebondirID, 30,
+                Converter.ConverterID, 40
+                );
         }
     }
 }

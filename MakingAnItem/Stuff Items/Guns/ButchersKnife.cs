@@ -71,6 +71,9 @@ namespace NevernamedsItems
             };
             gun.DefaultModule.chargeProjectiles = new List<ProjectileModule.ChargeProjectile> { chargeProj };
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("ButchersKnife Clip", "NevernamedsItems/Resources/CustomGunAmmoTypes/butchersknife_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/butchersknife_clipempty");
+
             gun.reloadTime = 5f;
             gun.SetBaseMaxAmmo(35);
             gun.quality = PickupObject.ItemQuality.S;

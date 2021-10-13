@@ -63,6 +63,9 @@ namespace NevernamedsItems
             projectile.SetProjectileSpriteRight("12x12_yellowenemy_projectile", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
 
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Guneonate Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/guneonate_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/guneonate_clipempty");
+
             gun.DefaultModule.projectiles[0] = projectile;
 
             gun.quality = PickupObject.ItemQuality.S;

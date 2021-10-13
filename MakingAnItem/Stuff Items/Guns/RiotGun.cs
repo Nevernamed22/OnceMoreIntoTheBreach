@@ -58,7 +58,8 @@ namespace NevernamedsItems
 
 
             projectile.pierceMinorBreakables = true;
-          
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("RiotGun Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/riotgun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/riotgun_clipempty");
 
             gun.quality = PickupObject.ItemQuality.D;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

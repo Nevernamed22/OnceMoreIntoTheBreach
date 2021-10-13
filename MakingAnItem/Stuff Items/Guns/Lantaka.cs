@@ -25,6 +25,8 @@ namespace NevernamedsItems
             gun.SetupSprite(null, "lantaka_idle_001", 8);
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(49) as Gun).gunSwitchGroup;
+            gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(9) as Gun).muzzleFlashEffects;
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
 
@@ -56,6 +58,9 @@ namespace NevernamedsItems
             BounceProjModifier Bouncing = projectile.gameObject.GetOrAddComponent<BounceProjModifier>();
             Bouncing.numberOfBounces = 2;
             projectile.SetProjectileSpriteRight("lantaka_projectile", 15, 15, false, tk2dBaseSprite.Anchor.MiddleCenter, 14, 14);
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Lantaka Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/lantaka_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/lantaka_clipempty");
 
             gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "this is the Lantaka";

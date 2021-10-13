@@ -58,6 +58,9 @@ namespace NevernamedsItems
             projectile.gameObject.AddComponent<BarcodeScannerProjectile>();
             gun.AddPassiveStatModifier(PlayerStats.StatType.GlobalPriceMultiplier, 0.9f, StatModifier.ModifyMethod.MULTIPLICATIVE);
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Barcode Scanner Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/barcodescanner_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/barcodescanner_clipempty");
+
             gun.DefaultModule.projectiles[0] = projectile;
             gun.quality = PickupObject.ItemQuality.D;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

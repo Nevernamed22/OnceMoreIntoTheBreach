@@ -7,10 +7,11 @@ using UnityEngine;
 
 namespace ItemAPI
 {
-	// Token: 0x02000002 RID: 2
 	public static class SpriteBuilder
 	{
-		// Token: 0x06000001 RID: 1 RVA: 0x00002050 File Offset: 0x00000250
+		private static tk2dSpriteCollectionData itemCollection = PickupObjectDatabase.GetByEncounterName("singularity").sprite.Collection;
+		private static tk2dSpriteCollectionData ammonomiconCollection = AmmonomiconController.ForceInstance.EncounterIconCollection;
+		private static tk2dSprite baseSprite = PickupObjectDatabase.GetByEncounterName("singularity").GetComponent<tk2dSprite>();
 		public static tk2dSpriteAnimationClip AddAnimation(tk2dSpriteAnimator animator, tk2dSpriteCollectionData collection, List<int> spriteIDs,
 			string clipName, tk2dSpriteAnimationClip.WrapMode wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop, float fps = 15)
 		{
@@ -48,89 +49,70 @@ namespace ItemAPI
 			clip.frames = frames.ToArray();
 			return clip;
 		}
-		public static GameObject SpriteFromFile(string spriteName, GameObject obj = null, bool copyFromExisting = true)
+		
+		/// <summary>
+		/// Returns an object with a tk2dSprite component with the 
+		/// texture of a file in the sprites folder
+		/// </summary>
+		public static GameObject SpriteFromFile(string spriteName, GameObject obj = null)
 		{
-			string fileName = spriteName.Replace(".png", "");
-			Texture2D textureFromFile = ResourceExtractor.GetTextureFromFile(fileName, ".png");
-			bool flag = textureFromFile == null;
-			GameObject result;
-			if (flag)
-			{
-				result = null;
-			}
-			else
-			{
-				result = SpriteBuilder.SpriteFromTexture(textureFromFile, spriteName, obj, copyFromExisting);
-			}
-			return result;
+			string filename = spriteName.Replace(".png", "");
+
+			var texture = ResourceExtractor.GetTextureFromFile(filename);
+			if (texture == null) return null;
+
+			return SpriteFromTexture(texture, spriteName, obj);
+		}
+		/// <summary>
+		/// Returns an object with a tk2dSprite component with the 
+		/// texture of an embedded resource
+		/// </summary>
+		public static GameObject SpriteFromResource(string spriteName, GameObject obj = null)
+		{
+			string extension = !spriteName.EndsWith(".png") ? ".png" : "";
+			string resourcePath = spriteName + extension;
+
+			var texture = ResourceExtractor.GetTextureFromResource(resourcePath);
+			if (texture == null) return null;
+
+			return SpriteFromTexture(texture, resourcePath, obj);
 		}
 
-		// Token: 0x06000002 RID: 2 RVA: 0x00002098 File Offset: 0x00000298
-		public static GameObject SpriteFromResource(string spriteName, GameObject obj = null, bool copyFromExisting = true)
-		{
-			string str = (!spriteName.EndsWith(".png")) ? ".png" : "";
-			string text = spriteName + str;
-			Texture2D textureFromResource = ResourceExtractor.GetTextureFromResource(text);
-			bool flag = textureFromResource == null;
-			GameObject result;
-			if (flag)
-			{
-				result = null;
-			}
-			else
-			{
-				result = SpriteBuilder.SpriteFromTexture(textureFromResource, text, obj, copyFromExisting);
-			}
-			return result;
-		}
 
-		// Token: 0x06000003 RID: 3 RVA: 0x000020F0 File Offset: 0x000002F0
-		public static GameObject SpriteFromTexture(Texture2D texture, string spriteName, GameObject obj = null, bool copyFromExisting = true)
+		/// <summary>
+		/// Returns an object with a tk2dSprite component with the texture provided
+		/// </summary>
+		public static GameObject SpriteFromTexture(Texture2D texture, string spriteName, GameObject obj = null)
 		{
-			bool flag = obj == null;
-			if (flag)
+			if (obj == null)
 			{
 				obj = new GameObject();
 			}
-			tk2dSprite tk2dSprite;
-			if (copyFromExisting)
-			{
-				tk2dSprite = obj.AddComponent(SpriteBuilder.baseSprite);
-			}
-			else
-			{
-				tk2dSprite = obj.AddComponent<tk2dSprite>();
-			}
-			tk2dSpriteCollectionData tk2dSpriteCollectionData = SpriteBuilder.ConstructCollection(obj, texture.name.ToLower().Replace(" ", "_") + "_collection");
-			int newSpriteId = SpriteBuilder.AddSpriteToCollection(spriteName, tk2dSpriteCollectionData);
-			//tk2dSpriteCollectionData.InitMaterialIds();
-			tk2dSprite.SetSprite(tk2dSpriteCollectionData, newSpriteId);
-			tk2dSprite.SortingOrder = 0;
-			obj.GetComponent<BraveBehaviour>().sprite = tk2dSprite;
+			tk2dSprite sprite;
+			sprite = obj.AddComponent<tk2dSprite>();
+
+			int id = AddSpriteToCollection(spriteName, itemCollection);
+			sprite.SetSprite(itemCollection, id);
+			sprite.SortingOrder = 0;
+			sprite.IsPerpendicular = true;
+
+			obj.GetComponent<BraveBehaviour>().sprite = sprite;
+
 			return obj;
 		}
 
-		// Token: 0x06000004 RID: 4 RVA: 0x00002190 File Offset: 0x00000390
 		/// <summary>
 		/// Adds a sprite (from a resource) to a collection
 		/// </summary>
 		/// <returns>The spriteID of the defintion in the collection</returns>
-		public static int AddSpriteToCollection(string resourcePath, tk2dSpriteCollectionData collection, string name = "")
+		public static int AddSpriteToCollection(string resourcePath, tk2dSpriteCollectionData collection)
 		{
 			string extension = !resourcePath.EndsWith(".png") ? ".png" : "";
 			resourcePath += extension;
 			var texture = ResourceExtractor.GetTextureFromResource(resourcePath); //Get Texture
 
 			var definition = ConstructDefinition(texture); //Generate definition
-			if (string.IsNullOrEmpty(name))
-			{
-				definition.name = texture.name; //naming the definition is actually extremely important 
-			}
-			else
-			{
-				definition.name = name; //naming the definition is actually extremely important 
-			}
-
+			definition.name = texture.name; //naming the definition is actually extremely important 
 
 			return AddSpriteToCollection(definition, collection);
 		}
@@ -153,44 +135,51 @@ namespace ItemAPI
 			return newDefs.Length - 1;
 		}
 
-		// Token: 0x06000006 RID: 6 RVA: 0x0000224C File Offset: 0x0000044C
+		/// <summary>
+		/// Adds a sprite definition to the Ammonomicon sprite collection
+		/// </summary>
+		/// <returns>The spriteID of the defintion in the ammonomicon collection</returns>
 		public static int AddToAmmonomicon(tk2dSpriteDefinition spriteDefinition)
 		{
-			return SpriteBuilder.AddSpriteToCollection(spriteDefinition, SpriteBuilder.ammonomiconCollection);
+			return AddSpriteToCollection(spriteDefinition, ammonomiconCollection);
 		}
 
-		// Token: 0x06000007 RID: 7 RVA: 0x0000226C File Offset: 0x0000046C
-		public static tk2dSpriteAnimationClip AddAnimation(tk2dSpriteAnimator animator, tk2dSpriteCollectionData collection, List<int> spriteIDs, string clipName, tk2dSpriteAnimationClip.WrapMode wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop)
+		public static tk2dSpriteAnimationClip AddAnimation(tk2dSpriteAnimator animator, tk2dSpriteCollectionData collection, List<int> spriteIDs,
+			string clipName, tk2dSpriteAnimationClip.WrapMode wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop)
 		{
-			bool flag = animator.Library == null;
-			if (flag)
+			if (animator.Library == null)
 			{
 				animator.Library = animator.gameObject.AddComponent<tk2dSpriteAnimation>();
 				animator.Library.clips = new tk2dSpriteAnimationClip[0];
 				animator.Library.enabled = true;
+
 			}
-			List<tk2dSpriteAnimationFrame> list = new List<tk2dSpriteAnimationFrame>();
+
+			List<tk2dSpriteAnimationFrame> frames = new List<tk2dSpriteAnimationFrame>();
 			for (int i = 0; i < spriteIDs.Count; i++)
 			{
-				tk2dSpriteDefinition tk2dSpriteDefinition = collection.spriteDefinitions[spriteIDs[i]];
-				bool valid = tk2dSpriteDefinition.Valid;
-				if (valid)
+				tk2dSpriteDefinition sprite = collection.spriteDefinitions[spriteIDs[i]];
+				if (sprite.Valid)
 				{
-					list.Add(new tk2dSpriteAnimationFrame
+					frames.Add(new tk2dSpriteAnimationFrame()
 					{
 						spriteCollection = collection,
 						spriteId = spriteIDs[i]
 					});
 				}
 			}
-			tk2dSpriteAnimationClip tk2dSpriteAnimationClip = new tk2dSpriteAnimationClip();
-			tk2dSpriteAnimationClip.name = clipName;
-			tk2dSpriteAnimationClip.fps = 15;
-			tk2dSpriteAnimationClip.wrapMode = wrapMode;
-			Array.Resize<tk2dSpriteAnimationClip>(ref animator.Library.clips, animator.Library.clips.Length + 1);
-			animator.Library.clips[animator.Library.clips.Length - 1] = tk2dSpriteAnimationClip;
-			tk2dSpriteAnimationClip.frames = list.ToArray();
-			return tk2dSpriteAnimationClip;
+
+			var clip = new tk2dSpriteAnimationClip()
+			{
+				name = clipName,
+				fps = 15,
+				wrapMode = wrapMode,
+			};
+			Array.Resize(ref animator.Library.clips, animator.Library.clips.Length + 1);
+			animator.Library.clips[animator.Library.clips.Length - 1] = clip;
+
+			clip.frames = frames.ToArray();
+			return clip;
 		}
 
 		// Token: 0x06000008 RID: 8 RVA: 0x0000238C File Offset: 0x0000058C
@@ -322,14 +311,5 @@ namespace ItemAPI
 		{
 			return go.AddComponent<T>().CopyFrom(toAdd);
 		}
-
-		// Token: 0x04000001 RID: 1
-		private static tk2dSpriteCollectionData itemCollection = PickupObjectDatabase.GetByEncounterName("singularity").sprite.Collection;
-
-		// Token: 0x04000002 RID: 2
-		private static tk2dSpriteCollectionData ammonomiconCollection = AmmonomiconController.ForceInstance.EncounterIconCollection;
-
-		// Token: 0x04000003 RID: 3
-		private static tk2dSprite baseSprite = PickupObjectDatabase.GetByEncounterName("singularity").GetComponent<tk2dSprite>();
 	}
 }

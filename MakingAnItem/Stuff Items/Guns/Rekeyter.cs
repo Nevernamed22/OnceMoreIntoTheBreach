@@ -62,7 +62,8 @@ namespace NevernamedsItems
             keyDamage.consumableType = ScaleProjectileStatOffConsumableCount.ConsumableType.KEYS;
 
             projectile.SetProjectileSpriteRight("rekeyter_projectile", 17, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 17, 6);
-
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Rekeyter Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/rekeyter_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/rekeyter_clipempty");
             gun.quality = PickupObject.ItemQuality.B;
             gun.encounterTrackable.EncounterGuid = "this is the Rekeyter";
             ETGMod.Databases.Items.Add(gun, null, "ANY");

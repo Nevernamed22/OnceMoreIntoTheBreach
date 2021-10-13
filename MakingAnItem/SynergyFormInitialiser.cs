@@ -97,6 +97,16 @@ namespace NevernamedsItems
             WombularPolypForme.NonSynergyGunId = UterinePolyp.UterinePolypID;
             WombularPolypForme.SynergyGunId = UterinePolypWombular.WombularPolypID;
             WombularPolypForme.SynergyToCheck = "Wombular";
+            //GAXE ---- DIAMOND GAXE
+            AdvancedTransformGunSynergyProcessor DiamondGaxeSyn = (PickupObjectDatabase.GetById(Gaxe.GaxeID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
+            DiamondGaxeSyn.NonSynergyGunId = Gaxe.GaxeID;
+            DiamondGaxeSyn.SynergyGunId = DiamondGaxe.DiamondGaxeID;
+            DiamondGaxeSyn.SynergyToCheck = "Diamond Gaxe";
+            //REBONDIR ---- Rebondissement
+            AdvancedTransformGunSynergyProcessor Rebondissement = (PickupObjectDatabase.GetById(Rebondir.RebondirID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
+            Rebondissement.NonSynergyGunId = Rebondir.RebondirID;
+            Rebondissement.SynergyGunId = RedRebondir.RedRebondirID;
+            Rebondissement.SynergyToCheck = "Rebondissement";
             #endregion
             //-------------------------------------------------------------DUAL WIELDING
             #region Dual Wielding
@@ -135,6 +145,13 @@ namespace NevernamedsItems
             AdvancedDualWieldSynergyProcessor WeddingGroom = (PickupObjectDatabase.GetById(TheGroom.TheGroomID) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
             WeddingGroom.PartnerGunID = TheBride.TheBrideID;
             WeddingGroom.SynergyNameToCheck = "Shotgun Wedding";
+            //SUPER BOUNCE BROS
+            AdvancedDualWieldSynergyProcessor SBBRico = (PickupObjectDatabase.GetById(Rico.RicoID) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
+            SBBRico.PartnerGunID = Rebondir.RebondirID;
+            SBBRico.SynergyNameToCheck = "Super Bounce Bros";
+            AdvancedDualWieldSynergyProcessor SBBRebondir = (PickupObjectDatabase.GetById(Rebondir.RebondirID) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
+            SBBRebondir.PartnerGunID = Rico.RicoID;
+            SBBRebondir.SynergyNameToCheck = "Super Bounce Bros";
             #endregion
         }
     }

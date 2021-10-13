@@ -35,7 +35,7 @@ namespace NevernamedsItems
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
-            gun.reloadTime = 3f;
+            gun.reloadTime = 2f;
             gun.DefaultModule.cooldownTime = 1f;
             gun.DefaultModule.numberOfShotsInClip = 1;
             gun.barrelOffset.transform.localPosition = new Vector3(1.56f, 0.62f, 0f);
@@ -72,6 +72,8 @@ namespace NevernamedsItems
             }, AnimateBullet.ConstructListOfSameValues(false, 4), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4), AnimateBullet.ConstructListOfSameValues(true, 4), AnimateBullet.ConstructListOfSameValues(false, 4),
                         AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4));
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Dynamite Launcher Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/dynamitelauncher_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/dynamitelauncher_clipempty");
 
             gun.quality = PickupObject.ItemQuality.A;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

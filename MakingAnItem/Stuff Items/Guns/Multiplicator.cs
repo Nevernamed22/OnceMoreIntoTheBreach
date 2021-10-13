@@ -47,7 +47,8 @@ namespace NevernamedsItems
             projectile.baseData.range *= 1f;
             projectile.SetProjectileSpriteRight("multiplicator_projectile", 14, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 14, 7);
 
-
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Multiplicator Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/multiplicator_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/multiplicator_clipempty");
             projectile.transform.parent = gun.barrelOffset;
 
             gun.quality = PickupObject.ItemQuality.B;

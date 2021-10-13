@@ -86,7 +86,7 @@ namespace NevernamedsItems
         }
         protected override void OnPickedUpByPlayer(PlayerController player)
         {
-            base.OnPickup(player);
+            base.OnPickedUpByPlayer(player);
             player.OnUsedPlayerItem += this.onUsedPlayerItem;
         }
         public Blasmaster()

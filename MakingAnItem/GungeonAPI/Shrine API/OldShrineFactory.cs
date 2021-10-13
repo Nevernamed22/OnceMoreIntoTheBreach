@@ -45,7 +45,7 @@ namespace GungeonAPI
 			try
 			{
 				Texture2D textureFromResource = ResourceExtractor.GetTextureFromResource(this.spritePath);
-				GameObject gameObject = SpriteBuilder.SpriteFromResource(this.spritePath, null, false);
+				GameObject gameObject = SpriteBuilder.SpriteFromResource(this.spritePath, null);
 				string text = (this.modID + ":" + this.name).ToLower().Replace(" ", "_");
 				//string roomPath = this.roomPath;
 				gameObject.name = text;

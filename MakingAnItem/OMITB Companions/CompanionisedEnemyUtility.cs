@@ -1,6 +1,8 @@
-﻿using System;
+﻿using MonoMod.RuntimeDetour;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using UnityEngine;
 
@@ -8,6 +10,73 @@ namespace NevernamedsItems
 {
     class CompanionisedEnemyUtility
     {
+        public static void InitHooks()
+        {
+            DisplaceHook = new Hook(
+    typeof(DisplaceBehavior).GetMethod("SpawnImage", BindingFlags.Instance | BindingFlags.NonPublic),
+    typeof(CompanionisedEnemyUtility).GetMethod("DisplacedImageSpawnHook", BindingFlags.Instance | BindingFlags.NonPublic),
+    typeof(DisplaceBehavior));
+        }
+        public static Hook DisplaceHook;
+        private void DisplacedImageSpawnHook(Action<DisplaceBehavior> orig, DisplaceBehavior sourceBehaviour)
+        {
+            orig(sourceBehaviour);
+            AIActor attkOwner = sourceBehaviour.GetAttackBehaviourOwner();
+            if (attkOwner != null)
+            {
+                if (attkOwner.GetComponent<CustomEnemyTagsSystem>() != null && attkOwner.GetComponent<CustomEnemyTagsSystem>().isKalibersEyeMinion)
+                {
+                    AIActor image = OMITBReflectionHelpers.ReflectGetField<AIActor>(typeof(DisplaceBehavior), "m_image", sourceBehaviour);
+                    if (image != null)
+                    {
+                        PhysicsEngine.Instance.RegisterOverlappingGhostCollisionExceptions(image.specRigidbody, null, false);
+
+                        CustomEnemyTagsSystem tags = image.gameObject.GetOrAddComponent<CustomEnemyTagsSystem>();
+                        tags.isKalibersEyeMinion = true;
+                        tags.ignoreForGoodMimic = true;
+
+                        if (attkOwner.CompanionOwner != null)
+                        {
+                            CompanionController orAddComponent = image.gameObject.GetOrAddComponent<CompanionController>();
+                            orAddComponent.companionID = CompanionController.CompanionIdentifier.NONE;
+                            orAddComponent.Initialize(attkOwner.CompanionOwner);
+                        }
+
+                        image.OverrideHitEnemies = true;
+                        image.CollisionDamage = 0.5f;
+                        image.CollisionDamageTypes |= CoreDamageTypes.Electric;
+
+                        CompanionisedEnemyBulletModifiers companionisedBullets = image.gameObject.GetOrAddComponent<CompanionisedEnemyBulletModifiers>();
+                        companionisedBullets.jammedDamageMultiplier = 2f;
+                        companionisedBullets.TintBullets = true;
+                        companionisedBullets.TintColor = ExtendedColours.honeyYellow;
+                        companionisedBullets.baseBulletDamage = 10f;
+                        companionisedBullets.scaleSpeed = true;
+                        companionisedBullets.scaleDamage = true;
+                        companionisedBullets.scaleSize = false;
+                        companionisedBullets.doPostProcess = false;
+                        if (attkOwner.CompanionOwner != null) companionisedBullets.enemyOwner = attkOwner.CompanionOwner;
+
+                        image.ApplyEffect(GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultPermanentCharmEffect, 1f, null);
+                        image.gameObject.AddComponent<KillOnRoomClear>();
+
+                        
+                        if (EasyEnemyTypeLists.MultiPhaseEnemies.Contains(image.EnemyGuid) || EasyEnemyTypeLists.EnemiesWithInvulnerablePhases.Contains(image.EnemyGuid))
+                        {
+                            EraseFromExistenceOnRoomClear destroyTrickyEnemy = image.gameObject.AddComponent<EraseFromExistenceOnRoomClear>();
+                            destroyTrickyEnemy.Delay = 1f;
+                        }
+                        image.IsHarmlessEnemy = true;
+                        image.RegisterOverrideColor(Color.grey, "Ressurection");
+                        image.IgnoreForRoomClear = true;
+                        if (image.gameObject.GetComponent<SpawnEnemyOnDeath>())
+                        {
+                          UnityEngine.Object.Destroy(image.gameObject.GetComponent<SpawnEnemyOnDeath>());
+                        }
+                    }
+                }
+            }
+        }
         public static AIActor SpawnCompanionisedEnemy(PlayerController owner, string enemyGuid, IntVector2 position, bool doTint, Color enemyTint, int baseDMG, int jammedDMGMult, bool shouldBeJammed)
         {
             var enemyToSpawn = EnemyDatabase.GetOrLoadByGuid(enemyGuid);

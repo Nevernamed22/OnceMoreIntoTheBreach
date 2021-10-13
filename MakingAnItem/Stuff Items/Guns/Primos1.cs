@@ -35,6 +35,7 @@ namespace NevernamedsItems
             gun.reloadTime = 1f;
             gun.DefaultModule.cooldownTime = 0.30f;
             gun.DefaultModule.numberOfShotsInClip = 10;
+            gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(334) as Gun).muzzleFlashEffects;
             gun.barrelOffset.transform.localPosition = new Vector3(2.5f, 0.81f, 0f);
             gun.SetBaseMaxAmmo(260);
             gun.ammo = 260;
@@ -46,8 +47,13 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             projectile.baseData.damage *= 1.6f;
             projectile.baseData.force *= 1.2f;
+            projectile.hitEffects.alwaysUseMidair = true;
+            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
             projectile.SetProjectileSpriteRight("primos1_projectile", 17, 17, true, tk2dBaseSprite.Anchor.MiddleCenter, 15, 15);
             PrimosBulletBehaviour primosbullet = projectile.gameObject.GetOrAddComponent<PrimosBulletBehaviour>();
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = "Thinline Bullets";
 
             gun.DefaultModule.projectiles[0] = projectile;
 

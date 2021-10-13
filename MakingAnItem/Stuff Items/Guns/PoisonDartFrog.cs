@@ -51,6 +51,10 @@ namespace NevernamedsItems
                 poisoning.useSpecialTint = false;
                 projectile.SetProjectileSpriteRight("blowgun_projectile", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 15, 8);
             }
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = "Blowgun Darts";
+
             gun.reloadTime = 0.5f;
             gun.SetBaseMaxAmmo(200);
             gun.quality = PickupObject.ItemQuality.C;

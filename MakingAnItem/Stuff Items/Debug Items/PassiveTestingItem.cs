@@ -47,7 +47,7 @@ namespace NevernamedsItems
         private IEnumerator doLateFrameProcessing(Projectile projectile)
         {
             yield return null;
-            if (projectile.ProjectilePlayerOwner()) projectile.ProjectilePlayerOwner().DoPostProcessProjectile(projectile);
+            //if (projectile.ProjectilePlayerOwner()) projectile.ProjectilePlayerOwner().DoPostProcessProjectile(projectile);
             yield break;
         }
         private void PostProcessBeam(BeamController beam)
@@ -61,13 +61,18 @@ namespace NevernamedsItems
         public override void Pickup(PlayerController player)
         {
             player.PostProcessProjectile += this.onFired;
+            player.PostProcessThrownGun += PostProcessGun;
            // player.PostProcessBeam += this.PostProcessBeam;
             base.Pickup(player);
         }
+        private void PostProcessGun(Projectile fucker)
+        {
+        }
         public override DebrisObject Drop(PlayerController player)
         {
+            player.PostProcessThrownGun -= PostProcessGun;
             player.PostProcessProjectile -= this.onFired;
-           // player.PostProcessBeam -= this.PostProcessBeam;
+            // player.PostProcessBeam -= this.PostProcessBeam;
 
             DebrisObject result = base.Drop(player);
            return result;

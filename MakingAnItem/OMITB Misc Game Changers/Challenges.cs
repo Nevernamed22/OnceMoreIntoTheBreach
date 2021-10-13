@@ -131,7 +131,7 @@ namespace NevernamedsItems
             {
                 if (AIActor && AIActor.healthHaver && !AIActor.healthHaver.IsBoss && !AIActor.healthHaver.IsSubboss && !AIActor.IsSecretlyTheMineFlayer())
                 {
-                    if (AIActor.GetComponent<CompanionController>() == null && AIActor.GetComponent<HasBeenAffectedByCurrentChallenge>() == null && AIActor.GetComponent<DisplacedImageController>() == null && AIActor.GetComponent<WitchsBrew.HasBeenDoubledByWitchsBrew>() == null)
+                    if (AIActor.GetComponent<CompanionController>() == null && AIActor.GetComponent<HasBeenAffectedByCurrentChallenge>() == null && AIActor.GetComponent<DisplacedImageController>() == null && AIActor.GetComponent<WitchsBrew.HasBeenDoubledByWitchsBrew>() == null && AIActor.GetComponent< MirrorImageController>() == null)
                     {
                         GameManager.Instance.StartCoroutine(ToilEnemyDupe(AIActor));
                     }

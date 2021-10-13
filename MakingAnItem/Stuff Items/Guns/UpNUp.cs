@@ -46,7 +46,8 @@ namespace NevernamedsItems
             projectile.baseData.speed *= 1f;
             projectile.baseData.range *= 1f;
             projectile.transform.parent = gun.barrelOffset;
-
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("UpNUp Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/upnup_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/upnup_clipempty");
             gun.quality = PickupObject.ItemQuality.D;
             gun.encounterTrackable.EncounterGuid = "this is the Up-N-Up";
             ETGMod.Databases.Items.Add(gun, null, "ANY");

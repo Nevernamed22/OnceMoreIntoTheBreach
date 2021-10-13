@@ -91,7 +91,8 @@ namespace NevernamedsItems
             projectile.SetProjectileSpriteRight("ammoproj_1", 11, 14, false, tk2dBaseSprite.Anchor.MiddleCenter, 11, 14);
 
             projectile.transform.parent = gun.barrelOffset;
-
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("AM0 Ammo Boxes", "NevernamedsItems/Resources/CustomGunAmmoTypes/am0_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/am0_clipempty");
             gun.quality = PickupObject.ItemQuality.B;
             gun.encounterTrackable.EncounterGuid = "this is the AM-0";
             ETGMod.Databases.Items.Add(gun, null, "ANY");

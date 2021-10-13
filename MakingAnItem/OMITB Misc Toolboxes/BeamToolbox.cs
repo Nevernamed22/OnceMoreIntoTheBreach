@@ -10,7 +10,33 @@ namespace NevernamedsItems
 {
     static class BeamToolbox
     {
-        public static int GetBoneCount (this BasicBeamController beam)
+        public static bool PosIsNearAnyBoneOnBeam(this BasicBeamController beam, Vector2 positionToCheck, float distance)
+        {
+            LinkedList<BasicBeamController.BeamBone> bones;
+            bones = OMITBReflectionHelpers.ReflectGetField<LinkedList<BasicBeamController.BeamBone>>(typeof(BasicBeamController), "m_bones", beam);
+            //if (beam.UsesBones)
+            //{
+                foreach (BasicBeamController.BeamBone bone in bones)
+                {
+                    Vector2 bonepos = beam.GetBonePosition(bone);
+                    if (Vector2.Distance(positionToCheck, bonepos) < distance) return true;
+                }
+           /* }
+            else
+            {
+                List<Vector2> posCheck = new List<Vector2>();
+                for (int i = 1; i <= 100; i++)
+                {
+                    posCheck.Add(beam.Origin + beam.Direction.normalized * (bones.Last.Value.Position - bones.First.Value.Position).magnitude * (i * 0.01f));
+                }
+                foreach (Vector2 pos in posCheck)
+                {
+                    if (Vector2.Distance(pos, positionToCheck) < distance) return true;
+                }
+            }*/
+            return false;
+        }
+        public static int GetBoneCount(this BasicBeamController beam)
         {
             if (!beam.UsesBones)
             {
@@ -74,7 +100,7 @@ namespace NevernamedsItems
             return bone.Position;
         }
 
-        public static BasicBeamController GenerateBeamPrefab(this Projectile projectile, string spritePath, Vector2 colliderDimensions, Vector2 colliderOffsets, List<string> beamAnimationPaths = null, int beamFPS = -1, List<string> impactVFXAnimationPaths = null, int beamImpactFPS = -1, Vector2? impactVFXColliderDimensions = null, Vector2? impactVFXColliderOffsets = null, List<string> endVFXAnimationPaths = null, int beamEndFPS = -1, Vector2? endVFXColliderDimensions = null, Vector2? endVFXColliderOffsets = null, List<string> muzzleVFXAnimationPaths = null, int beamMuzzleFPS = -1, Vector2? muzzleVFXColliderDimensions = null, Vector2? muzzleVFXColliderOffsets = null, bool glows = false)
+        public static BasicBeamController GenerateBeamPrefab(this Projectile projectile, string spritePath, Vector2 colliderDimensions, Vector2 colliderOffsets, List<string> beamAnimationPaths = null, int beamFPS = -1, List<string> impactVFXAnimationPaths = null, int beamImpactFPS = -1, Vector2? impactVFXColliderDimensions = null, Vector2? impactVFXColliderOffsets = null, List<string> endVFXAnimationPaths = null, int beamEndFPS = -1, Vector2? endVFXColliderDimensions = null, Vector2? endVFXColliderOffsets = null, List<string> muzzleVFXAnimationPaths = null, int beamMuzzleFPS = -1, Vector2? muzzleVFXColliderDimensions = null, Vector2? muzzleVFXColliderOffsets = null, float glowAmount = 0)
         {
             try
             {
@@ -158,9 +184,10 @@ namespace NevernamedsItems
                     beamController.beamStartAnimation = "beam_start";
                 }
 
-                if (glows)
+                if (glowAmount > 0)
                 {
                     EmmisiveBeams emission = projectile.gameObject.GetOrAddComponent<EmmisiveBeams>();
+                    emission.EmissivePower = glowAmount;
                     //emission
 
                 }

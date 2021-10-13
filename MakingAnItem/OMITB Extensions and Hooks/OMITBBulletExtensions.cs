@@ -6,11 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using PathologicalGames;
 
 namespace NevernamedsItems
 {
     static class OMITBBulletExtensions
     {
+        public static void RemoveFromPool(this Projectile proj)
+        {
+            SpawnManager.PoolManager.Remove(proj.transform);
+        }
         public static float ReturnRealDamageWithModifiers(this Projectile bullet, HealthHaver target)
         {
             float dmg = bullet.baseData.damage;

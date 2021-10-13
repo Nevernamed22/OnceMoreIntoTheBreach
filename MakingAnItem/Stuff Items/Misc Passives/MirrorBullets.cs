@@ -30,7 +30,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "Upon Further Reflection...";
-            string longDesc = "Scoring a direct hit on enemy bullets sends them right back at their owners."+"\n\nOf all the greatest horrors, and most abhorrent foes one may face, perhaps the most dangerous is the one that stares back at you from the mirror.";
+            string longDesc = "Scoring a direct hit on enemy bullets sends them right back at their owners." + "\n\nOf all the greatest horrors, and most abhorrent foes one may face, perhaps the most dangerous is the one that stares back at you from the mirror.";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -41,7 +41,7 @@ namespace NevernamedsItems
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.S;
 
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1, StatModifier.ModifyMethod.ADDITIVE);
+            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 3, StatModifier.ModifyMethod.ADDITIVE);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_HOLLOW, true);
         }
         public void onFired(Projectile bullet, float eventchancescaler)
@@ -51,7 +51,8 @@ namespace NevernamedsItems
         }
         private void onFiredBeam(BeamController sourceBeam)
         {
-
+            sourceBeam.AdjustPlayerBeamTint(Color.white, 1);
+            sourceBeam.gameObject.AddComponent<EnemyBulletReflectorBeam>();
         }
         public override void Pickup(PlayerController player)
         {
@@ -68,8 +69,11 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.PostProcessProjectile -= this.onFired;
-           Owner.PostProcessBeam -= this.onFiredBeam;
+            if (Owner)
+            {
+                Owner.PostProcessProjectile -= this.onFired;
+                Owner.PostProcessBeam -= this.onFiredBeam;
+            }
             base.OnDestroy();
         }
     }
@@ -119,7 +123,7 @@ namespace NevernamedsItems
                 {
                     myRigidbody.projectile.DieInAir(false, true, true, false);
                     this.ReflectBullet(otherRigidbody.projectile, true, myRigidbody.projectile.Owner, 10f, 1f, 1f, 0f);
-                } 
+                }
                 PhysicsEngine.SkipCollision = true;
             }
         }

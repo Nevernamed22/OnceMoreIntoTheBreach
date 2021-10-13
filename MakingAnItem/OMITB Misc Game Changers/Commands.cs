@@ -94,7 +94,13 @@ namespace NevernamedsItems
                     {
                         if (obj.pickupId > 823 || obj.pickupId < 0)
                         {
+                            float initialWeight = obj.weight;
                             obj.weight *= 100;
+
+                            string displayName = "ERROR DISPLAY NAME NULL";
+                         if (PickupObjectDatabase.GetById(obj.pickupId) != null)   displayName = (PickupObjectDatabase.GetById(obj.pickupId) as Gun).DisplayName;
+                            ETGModConsole.Log(displayName + " (" + obj.pickupId + "): " + initialWeight + " ---> " + obj.weight);
+
                         }
                     }
                     foreach (WeightedGameObject obj in GameManager.Instance.RewardManager.ItemsLootTable.defaultItemDrops.elements)
@@ -288,9 +294,9 @@ namespace NevernamedsItems
                     ETGModConsole.Log("Shade's Eye <color=#04eb00>[Unlocked]</color>!");
                 }
                 else { ETGModConsole.Log("Shade's Eye <color=#ff0000ff>[Locked]</color> - Take damage as the Shade... and live!"); }
-                
+
                 //----------------------------------------------------------BOSSRUSH
-                ETGModConsole.Log("<color=#00d6e6>Bossrush Unlocks:</color>"); 
+                ETGModConsole.Log("<color=#00d6e6>Bossrush Unlocks:</color>");
 
                 //Lvl. 2 Molotov
                 if (SaveAPIManager.GetFlag(CustomDungeonFlags.BOSSRUSH_CONVICT))
@@ -314,7 +320,7 @@ namespace NevernamedsItems
                 else { ETGModConsole.Log("Jaws of Defeat  <color=#ff0000ff>[Locked]</color> - Beat Bossrush as the Shade."); }
 
                 //----------------------------------------------------------RAINBOW MODE
-                ETGModConsole.Log("<color=#00d6e6>Rainbow Mode Unlocks:</color>"); 
+                ETGModConsole.Log("<color=#00d6e6>Rainbow Mode Unlocks:</color>");
 
                 //Rainbow Guon Stone
                 if (SaveAPIManager.GetFlag(CustomDungeonFlags.RAINBOW_KILLED_LICH))

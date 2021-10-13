@@ -10,6 +10,66 @@ using System.Diagnostics;
 
 namespace NevernamedsItems
 {
+    public class StickPlayerToDebug : MonoBehaviour
+    {
+        public StickPlayerToDebug()
+        {
+            Obj = base.GetComponent<SpeculativeRigidbody>();
+        }
+      
+        private void Update()
+        {
+            player.specRigidbody.Position = new Position(Obj.Position);
+        }
+        public PlayerController player;
+        private SpeculativeRigidbody Obj;
+    }
+    public class CameraOverrideTarget : MonoBehaviour
+    {
+        public CameraOverrideTarget()
+        {
+            startOverrideOnStart = false;
+            duration = -1;
+            timer = -1;
+        }
+        private void OnDestroy()
+        {
+            GameManager.Instance.MainCameraController.SetManualControl(false, true);
+        }
+        private void Start()
+        {
+            targetObject = base.GetComponent<SpeculativeRigidbody>();
+            if (startOverrideOnStart) BeginOverride();
+        }
+        private void Update()
+        {
+            if (targetObject) GameManager.Instance.MainCameraController.OverridePosition = targetObject.UnitCenter;
+            if (duration > 0)
+            {
+                if (timer <= 0)
+                {
+                    EndOverride();
+                }
+                else
+                {
+                    timer -= BraveTime.DeltaTime;
+                }
+            }
+        }
+        public void BeginOverride()
+        {
+            GameManager.Instance.MainCameraController.SetManualControl(true, false);
+            if (duration > 0) timer = duration;
+        }
+        public void EndOverride()
+        {
+            GameManager.Instance.MainCameraController.SetManualControl(false, true);
+        }
+        public bool startOverrideOnStart;
+        private SpeculativeRigidbody targetObject;
+        public float duration;
+        private float timer;
+    }
     public static class MiscToolbox
     {
 
@@ -1117,7 +1177,7 @@ namespace NevernamedsItems
                             goto Block_4;
                         }
                     }
-                    //return;
+                //return;
                 Block_4:
                     UnityEngine.Debug.LogError("FREEZE AVERTED!  TELL RUBEL!  (you're welcome) 147");
                     return;

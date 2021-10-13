@@ -49,13 +49,13 @@ namespace NevernamedsItems
             gun.DefaultModule.numberOfShotsInClip = 10000;
             gun.DefaultModule.angleVariance = 0f;
             gun.InfiniteAmmo = true;
-            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.BEAM;
             gun.reloadTime = 0f;
             gun.muzzleFlashEffects.type = VFXPoolType.None;
             gun.DefaultModule.ammoCost = 0;
             gun.DefaultModule.projectiles[0] = null;
 
-
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = "Y-Beam Laser";
 
             gun.quality = PickupObject.ItemQuality.S;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

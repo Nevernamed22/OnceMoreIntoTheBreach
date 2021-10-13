@@ -94,6 +94,9 @@ namespace NevernamedsItems
 
             gun.DefaultModule.projectiles[0] = projectile;
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("KillithidTendril Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/killithidtendril_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/killithidtendril_clipempty");
+
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             KillithidTendrilID = gun.PickupObjectId;

@@ -85,7 +85,7 @@ namespace NevernamedsItems
             projectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
-            projectile.baseData.damage *= 0.9f;
+            projectile.baseData.damage = 16f;
             projectile.baseData.force *= 0.1f;
             projectile.baseData.range *= 2;
             projectile.baseData.speed *= 0.7f;
@@ -99,6 +99,9 @@ namespace NevernamedsItems
             beamComp.TimeToStatus = 1;
 
             gun.DefaultModule.projectiles[0] = projectile;
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = "Y-Beam Laser";
 
             gun.quality = PickupObject.ItemQuality.D; //D
             ETGMod.Databases.Items.Add(gun, null, "ANY");
@@ -117,6 +120,15 @@ namespace NevernamedsItems
                 if (beam.projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Re-Heat"))
                 {
                     beam.GetComponent<BasicBeamController>().TimeToStatus = 0.1f;
+                    beam.GetComponent<BasicBeamController>().statusEffectChance = 1f;
+                }
+                if (beam.projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Don't Trust The Toaster"))
+                {
+                    beam.projectile.baseData.speed *= 5;
+                    beam.projectile.UpdateSpeed();
+                    beam.projectile.RuntimeUpdateScale(1.3f);
+                    beam.projectile.baseData.damage *= 2;
+                    EmmisiveBeams emission = beam.projectile.gameObject.GetOrAddComponent<EmmisiveBeams>();
                 }
             }
             base.PostProcessBeam(beam);

@@ -91,7 +91,7 @@ namespace NevernamedsItems
                 new Vector2(16, 5),
                 new Vector2(0, 6),
                 //Other Variables
-                true
+                100
                 );
 
             projectile.gameObject.SetActive(false);
@@ -114,6 +114,9 @@ namespace NevernamedsItems
             //beamComp.interpolateStretchedBones = false;
 
             gun.DefaultModule.projectiles[0] = projectile;
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("BoomBeam Laser", "NevernamedsItems/Resources/CustomGunAmmoTypes/boombeam_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/boombeam_clipempty");
 
             gun.quality = PickupObject.ItemQuality.S; //S
             ETGMod.Databases.Items.Add(gun, null, "ANY");

@@ -54,6 +54,9 @@ namespace NevernamedsItems
 
             projectile.transform.parent = gun.barrelOffset;
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Kinetic Blaster Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/kineticblaster_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/kineticblaster_clipempty");
+
             gun.quality = PickupObject.ItemQuality.C;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
         }

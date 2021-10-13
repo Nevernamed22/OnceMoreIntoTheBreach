@@ -28,8 +28,8 @@ namespace NevernamedsItems
             AIActor aiactor = AIActor.Spawn(EnemyPrefab, centerPosition.ToIntVector2(VectorConversions.Floor), startEnemy.ParentRoom, true, AIActor.AwakenAnimationType.Default, true);
             if (aiactor)
             {
-               if (giveIsTransmogrifiedBool) aiactor.IsTransmogrified = true;
-               
+                if (giveIsTransmogrifiedBool) aiactor.IsTransmogrified = true;
+
                 if (maintainHealthPercent)
                 {
                     float healthPercent = startEnemy.healthHaver.GetCurrentHealthPercentage();
@@ -284,14 +284,28 @@ namespace NevernamedsItems
             }
             foreach (Projectile proj in StaticReferenceManager.AllProjectiles)
             {
-                if (proj && proj.Owner && proj.Owner == enemy)
+                if (proj && proj.Owner)
                 {
-                    if (UnityEngine.Random.value <= chancePerProjectile) BulletsOwnedByEnemy.Add(proj);
+                    bool ownerValid = false;
+                    if (proj.Owner && proj.Owner == enemy) ownerValid = true;
+                    if (proj.GetComponent<BasicBeamController>() != null)
+                    {
+                        if (proj.GetComponent<BasicBeamController>().Owner != null && proj.GetComponent<BasicBeamController>().Owner == enemy) ownerValid = true;
+                    }
+                    
+                    if ((UnityEngine.Random.value <= chancePerProjectile) && ownerValid) BulletsOwnedByEnemy.Add(proj);
                 }
             }
             for (int i = (BulletsOwnedByEnemy.Count - 1); i > -1; i--)
             {
-                if (BulletsOwnedByEnemy[i] != null && BulletsOwnedByEnemy[i].isActiveAndEnabled) BulletsOwnedByEnemy[i].DieInAir(true, false, false, true);
+                if (BulletsOwnedByEnemy[i] != null && BulletsOwnedByEnemy[i].isActiveAndEnabled)
+                {
+                    BulletsOwnedByEnemy[i].DieInAir(true, false, false, true);                   
+                    if (BulletsOwnedByEnemy[i].GetComponent<BasicBeamController>() != null)
+                    {
+                        BulletsOwnedByEnemy[i].GetComponent<BasicBeamController>().CeaseAttack();
+                    }
+                }
             }
         }
         public static void DoCorrectForWalls(this AIActor enemy)

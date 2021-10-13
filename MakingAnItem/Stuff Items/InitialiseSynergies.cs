@@ -692,7 +692,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("Cyaner Guon Stone", mandatorySynergyItemsCyanerGuonStone, optionalSynergyItemsCyanerGuonStone);
             //RAINBOWER GUON STONE
             List<string> mandatorySynergyItemsRainbowerGuonStone = new List<string>() { "nn:rainbow_guon_stone" };
-            List<string> optionalSynergyItemsRainbowerGuonStone = new List<string>() { "+1_bullets", "amulet_of_the_pit_lord" }; //Add Ammolite when you port this
+            List<string> optionalSynergyItemsRainbowerGuonStone = new List<string>() { "+1_bullets", "amulet_of_the_pit_lord", "nn:ammolite" }; //Add Ammolite when you port this
             CustomSynergies.Add("Rainbower Guon Stone", mandatorySynergyItemsRainbowerGuonStone, optionalSynergyItemsRainbowerGuonStone);
             //INDIGOER GUON STONE
             List<string> mandatorySynergyItemsIndigoerGuonStone = new List<string>() { "nn:indigo_guon_stone" };
@@ -1283,6 +1283,73 @@ namespace NevernamedsItems
             List<string> mandatorySynergyItemsToxicSolutions = new List<string>() { "nn:bottle_rocket" };
             List<string> optionalSynergyItemsToxicSolutions = new List<string>() { "plunger", "poison_vial" };
             CustomSynergies.Add("Toxic Solutions", mandatorySynergyItemsToxicSolutions, optionalSynergyItemsToxicSolutions);
+            //KALEIDOSCOPIC GUON STONE
+            List<string> mandatorySynergyItemsKaleidoscopicerGuonStone = new List<string>() { "nn:kaleidoscopic_guon_stone" };
+            List<string> optionalSynergyItemsKaleidoscopicerGuonStone = new List<string>() { "+1_bullets", "amulet_of_the_pit_lord", "scope" };
+            CustomSynergies.Add("Kaleidoscopicer Guon Stone", mandatorySynergyItemsKaleidoscopicerGuonStone, optionalSynergyItemsKaleidoscopicerGuonStone);
+            //red stone synergy
+            List<string> mandatorySynergyItemsReddySteady = new List<string>() { "nn:kaleidoscopic_guon_stone" };
+            List<string> optionalSynergyItemsReddySteady = new List<string>() { "red_guon_stone", "nn:chaos_ruby" };
+            CustomSynergies.Add("Reddy Steady", mandatorySynergyItemsReddySteady, optionalSynergyItemsReddySteady);
+            //orange stone synergy
+            List<string> mandatorySynergyItemsOrangeUGlad = new List<string>() { "nn:kaleidoscopic_guon_stone" };
+            List<string> optionalSynergyItemsOrangeUGlad = new List<string>() { "orange_guon_stone", "orange" };
+            CustomSynergies.Add("Orange U Glad", mandatorySynergyItemsOrangeUGlad, optionalSynergyItemsOrangeUGlad);
+            //yellow stone synergy
+            List<string> mandatorySynergyItemsYellowThere = new List<string>() { "nn:kaleidoscopic_guon_stone" };
+            List<string> optionalSynergyItemsYellowThere = new List<string>() { "nn:yellow_guon_stone", "yellow_chamber" };
+            CustomSynergies.Add("Yellow There", mandatorySynergyItemsYellowThere, optionalSynergyItemsYellowThere);
+            //green stone synergy
+            List<string> mandatorySynergyItemsGreenBehindTheEars = new List<string>() { "nn:kaleidoscopic_guon_stone" };
+            List<string> optionalSynergyItemsGreenBehindTheEars = new List<string>() { "green_guon_stone", "gamma_ray" };
+            CustomSynergies.Add("Green Behind The Ears", mandatorySynergyItemsGreenBehindTheEars, optionalSynergyItemsGreenBehindTheEars);
+            //blue stone synergy
+            List<string> mandatorySynergyItemsDaBaDeeDaBaDie = new List<string>() { "nn:kaleidoscopic_guon_stone" };
+            List<string> optionalSynergyItemsDaBaDeeDaBaDie = new List<string>() { "blue_guon_stone", "gungeon_blueprint" };
+            CustomSynergies.Add("da ba dee da ba die", mandatorySynergyItemsDaBaDeeDaBaDie, optionalSynergyItemsDaBaDeeDaBaDie);
+            //purple stone synergy
+            List<string> mandatorySynergyItemsTomorrowOrJustTheEndOfTime = new List<string>() { "nn:kaleidoscopic_guon_stone" };
+            List<string> optionalSynergyItemsTomorrowOrJustTheEndOfTime = new List<string>() { "nn:ultraviolet_guon_stone", "nn:purple_prose" };
+            CustomSynergies.Add("Tomorrow, or just the end of time?", mandatorySynergyItemsTomorrowOrJustTheEndOfTime, optionalSynergyItemsTomorrowOrJustTheEndOfTime);
+            //MARCH GUN / SHOES
+            List<string> mandatorySynergyItemsTappyToes = new List<string>() { "nn:march_gun" };
+            List<string> optionalSynergyItemsTappyToes = new List<string>() { "ballistic_boots", "heavy_boots", "nn:bullet_boots" ,"gunboots", "bug_boots", "springheel_boots", "rat_boots", "nn:cyclone_boots", "nn:legboot", "nn:blank_boots" };
+            CustomSynergies.Add("Tappy Toes", mandatorySynergyItemsTappyToes, optionalSynergyItemsTappyToes);
+            //MARCH GUN / MUSIC
+            List<string> mandatorySynergyItemsStepToTheBeat = new List<string>() { "nn:march_gun" };
+            List<string> optionalSynergyItemsStepToTheBeat = new List<string>() { "face_melter", "metronome", "gunzheng", "really_special_lute" };
+            CustomSynergies.Add("Step To The Beat", mandatorySynergyItemsStepToTheBeat, optionalSynergyItemsStepToTheBeat);
+            //Heat Ray / Heat Items
+            List<string> mandatorySynergyItemsReheat = new List<string>() { "nn:heat_ray" };
+            List<string> optionalSynergyItemsReheat = new List<string>() { "table_tech_heat", "phoenix", "nn:hot_glue_gun", "hot_lead" };
+            CustomSynergies.Add("Re-Heat", mandatorySynergyItemsReheat, optionalSynergyItemsReheat);
+            //Heat Ray Bullshit
+            List<string> mandatorySynergyItemsHeatRayBullshit = new List<string>() { "nn:heat_ray" };
+            List<string> optionalSynergyHeatRayBullshit = new List<string>() { "nn:greek_fire", "nn:lvl._2_molotov", "nn:ring_of_oddly_specific_benefits" };
+            CustomSynergies.Add("It won't actually show up on screen, but there's no hard limit on how long you can make synergy names.", mandatorySynergyItemsHeatRayBullshit, optionalSynergyHeatRayBullshit);
+            // Heat ray / Don't trust the toaster
+            List<string> mandatorySynergyItemsDontTrustTheToaster = new List<string>() { "nn:heat_ray" };
+            List<string> optionalSynergyItemsDontTrustTheToaster = new List<string>() { "nn:molotov_buddy", "nn:#1_boss_mug" };
+            CustomSynergies.Add("Don't Trust The Toaster", mandatorySynergyItemsDontTrustTheToaster, optionalSynergyItemsDontTrustTheToaster);
+            //GAXE / DIAMOND ITEMS
+            List<string> mandatorySynergyItemsDiamondGaxe = new List<string>() { "nn:gaxe" };
+            List<string> optionalSynergyItemsDiamondGaxe = new List<string>() { "nn:diamond_gun", "nn:miners_bullets", "nn:diamond_bracelet" };
+            CustomSynergies.Add("Diamond Gaxe", mandatorySynergyItemsDiamondGaxe, optionalSynergyItemsDiamondGaxe);
+            //BIG SHOT / pipis
+            List<string> mandatorySynergyItemspipis = new List<string>() { "nn:big_shot" };
+            List<string> optionalSynergyItemspipis = new List<string>() { "megahand", "sunglasses", "pea_shooter" };
+            CustomSynergies.Add("pipis", mandatorySynergyItemspipis, optionalSynergyItemspipis);
+            //PANIC PENDANT / ADRENALINE
+            List<string> mandatorySynergyItemsPlanB = new List<string>() { "nn:panic_pendant" };
+            List<string> optionalSynergyItemsPlanB = new List<string>() { "muscle_relaxant", "shotgun_coffee" };
+            CustomSynergies.Add("Plan B", mandatorySynergyItemsPlanB, optionalSynergyItemsPlanB);
+            //REBONDIR / BOUNCE ITEMS
+            List<string> mandatorySynergyItemsRebondissement = new List<string>() { "nn:rebondir" };
+            List<string> optionalSynergyItemsRebondissement = new List<string>() { "bouncy_bullets", "saa" };
+            CustomSynergies.Add("Rebondissement", mandatorySynergyItemsRebondissement, optionalSynergyItemsRebondissement);
+            //REBONDIR / RICO
+            List<string> mandatorySynergyItemsSuperBounceBros = new List<string>() { "nn:rebondir", "nn:rico" };
+            CustomSynergies.Add("Super Bounce Bros", mandatorySynergyItemsSuperBounceBros);
             #endregion
         }
 

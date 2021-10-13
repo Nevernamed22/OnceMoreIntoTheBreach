@@ -80,6 +80,7 @@
     <Compile Include="GungeonAPI\Shrine API\NPCInteractble.cs" />
     <Compile Include="GungeonAPI\Shrine API\OldShrineFactory.cs" />
     <Compile Include="GungeonAPI\Shrine API\ReloadBreachShrineHooks.cs" />
+    <Compile Include="ItemAPI\CustomClipAmmoTypeToolbox.cs" />
     <Compile Include="ItemAPI\ThrowableAPI.cs" />
     <Compile Include="NPCAPI\LootTableTools.cs" />
     <Compile Include="NPCAPI\NPCAPI.cs" />
@@ -106,11 +107,13 @@
     <Compile Include="Stuff Items\Ammolets\HepatizonAmmolet.cs" />
     <Compile Include="Stuff Items\Ammolets\NeutroniumAmmolet.cs" />
     <Compile Include="Stuff Items\Guns\Accelerator.cs" />
+    <Compile Include="Stuff Items\Guns\Autogun.cs" />
     <Compile Include="Stuff Items\Guns\Beams\AlphaBeam.cs" />
     <Compile Include="Stuff Items\Guns\Beams\BoomBeam.cs" />
     <Compile Include="Stuff Items\Guns\Beams\Carrion.cs" />
     <Compile Include="Stuff Items\Guns\Beams\CarrionFormeThree.cs" />
     <Compile Include="Stuff Items\Guns\Beams\CarrionFormeTwo.cs" />
+    <Compile Include="Stuff Items\Guns\Beams\Converter.cs" />
     <Compile Include="Stuff Items\Guns\Beams\Rico.cs" />
     <Compile Include="Stuff Items\Guns\Beams\SickWorm.cs" />
     <Compile Include="Stuff Items\Guns\Beams\WallRay.cs" />
@@ -124,12 +127,19 @@
     <Compile Include="Stuff Items\Guns\GayK47.cs" />
     <Compile Include="Stuff Items\Guns\Glazerbeam.cs" />
     <Compile Include="Stuff Items\Guns\GrenadeShotgun.cs" />
+    <Compile Include="Stuff Items\Guns\InitiateWand.cs" />
+    <Compile Include="Stuff Items\Guns\MarchGun.cs" />
     <Compile Include="Stuff Items\Guns\Pandephonium.cs" />
     <Compile Include="Stuff Items\Guns\Paraglocks.cs" />
+    <Compile Include="Stuff Items\Guns\PortalGun.cs" />
     <Compile Include="Stuff Items\Guns\RC360.cs" />
+    <Compile Include="Stuff Items\Guns\RebarGun.cs" />
+    <Compile Include="Stuff Items\Guns\Rebondir.cs" />
     <Compile Include="Stuff Items\Guns\SaltGun.cs" />
     <Compile Include="Stuff Items\Guns\St4ke.cs" />
     <Compile Include="Stuff Items\Guns\StarterPistol.cs" />
+    <Compile Include="Stuff Items\Guns\Synergy Formes\DiamondGaxe.cs" />
+    <Compile Include="Stuff Items\Guns\Synergy Formes\RedRebondir.cs" />
     <Compile Include="Stuff Items\Guns\Synergy Formes\UterinePolypWombular.cs" />
     <Compile Include="Stuff Items\Guns\TauCannon.cs" />
     <Compile Include="Stuff Items\Guns\TheBride.cs" />
@@ -138,6 +148,7 @@
     <Compile Include="Stuff Items\Guns\Welgun.cs" />
     <Compile Include="Stuff Items\Guns\Welrod.cs" />
     <Compile Include="Stuff Items\Guon Stones\InfraRedGuonStone.cs" />
+    <Compile Include="Stuff Items\Guon Stones\KaleidoscopicGuonStone.cs" />
     <Compile Include="Stuff Items\Guon Stones\UltraVioletGuonStone.cs" />
     <Compile Include="Stuff Items\Misc Passives\1Shot.cs" />
     <Compile Include="Stuff Items\Misc Passives\50calrounds.cs" />
@@ -145,6 +156,7 @@
     <Compile Include="Stuff Items\Debug Items\ActiveTestingItem.cs" />
     <Compile Include="Stuff Items\Ammolets\Ammolock.cs" />
     <Compile Include="Stuff Items\Misc Passives\Albedo.cs" />
+    <Compile Include="Stuff Items\Misc Passives\AmberDie.cs" />
     <Compile Include="Stuff Items\Misc Passives\AmmoTrap.cs" />
     <Compile Include="Stuff Items\Misc Passives\AmuletOfShelltan.cs" />
     <Compile Include="Stuff Items\Actives\AppleActive.cs" />
@@ -244,6 +256,7 @@
     <Compile Include="Stuff Items\Misc Passives\JawsOfDefeat.cs" />
     <Compile Include="Stuff Items\Misc Passives\LeadSoul.cs" />
     <Compile Include="Stuff Items\Misc Passives\Nigredo.cs" />
+    <Compile Include="Stuff Items\Misc Passives\PanicPendant.cs" />
     <Compile Include="Stuff Items\Misc Passives\Rubedo.cs" />
     <Compile Include="Stuff Items\Misc Passives\ShadesEye.cs" />
     <Compile Include="Stuff Items\Misc Passives\ShadeShot.cs" />
@@ -3024,6 +3037,285 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\EmbeddedRooms\TurtleShrineRoom.room" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\GuonStones\kaleidoscopicguon_icon.png" />
+    <EmbeddedResource Include="Resources\GuonStones\kaleidoscopicguon_synergy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\RebarGunImpactVFX2_001.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\RebarGunImpactVFX2_002.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\RebarGunImpactVFX2_003.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\RebarGunImpactVFX2_004.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\RebarGunImpactVFX2_005.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\RebarGunImpactVFX2_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\rebargun_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\rebargun_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\lovepistol_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\lovepistol_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\discgun_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\discgun_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\am0_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\am0_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\blankannon_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\blankannon_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\gayk47_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\gayk47_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\minutegun_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\minutegun_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\punishmentray_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\punishmentray_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\multiplicator_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\multiplicator_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\clownshotgun_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\clownshotgun_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\diamondgun_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\diamondgun_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\crescendoblaster_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\crescendoblaster_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\glasster_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\glasster_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\hotgluegun_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\hotgluegun_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\nocturne_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\nocturne_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\rekeyter_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\rekeyter_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\toolgun_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\toolgun_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\upnup_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\upnup_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\variable_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\variable_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\handgun_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\handgun_clipempty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\thousandsins_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\thousandsins_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\octagun_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\octagun_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\orgun_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\orgun_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\justice_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\justice_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\bride_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\groom_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\groom_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\saltgun_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\saltgun_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\felissile_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\felissile_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\handcannon_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\handcannon_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\lantaka_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\lantaka_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\displacercannon_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\displacercannon_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\st4ke_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\st4ke_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\genericbeam_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\rico_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\thinline_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\thinline_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\repetitron_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\repetitron_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\dimensionaliser_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\dimensionaliser_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\vacuumgun_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\vacuumgun_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\kineticblaster_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\kineticblaster_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\demolitionist_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\pumpchargeshotgun_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\pumpchargeshotgun_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\marchgun_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\marchgun_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\ybeam_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\genericredbeam_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\bolagun_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\bolagun_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\gravitron_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\gravitron_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\firelance_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\firelance_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\handmortar_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\handmortar_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\icebow_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\icebow_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\lodger_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\lodger_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\taucannon_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\taucannon_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\grandfatherglock_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\grandfatherglock_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\blowgun_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\blowgun_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\gaxe_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\gaxe_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\woodenhorse_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\barcodescanner_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\barcodescanner_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\diamondgaxe_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\dartrifle_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\dartrifle_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\riskrifle_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\riskrifle_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\blizzkreig_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\blizzkreig_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\copygat_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\copygat_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\dynamitelauncher_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\dynamitelauncher_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\heavyassaultrifle_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\heavyassaultrifle_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\maidenrifle_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\maidenrifle_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\riotgun_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\riotgun_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\bottlerocket_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\bottlerocket_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\boombeam_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\boombeam_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\doggun_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\doggun_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\fungocannon_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\fungocannon_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\phaserspiderling_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\phaserspiderling_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\pillarocket_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\pillarocket_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\sporelauncher_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\sporelauncher_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BeamSprites\yellowbeam_impact_001.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\yellowbeam_impact_002.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\yellowbeam_impact_003.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\yellowbeam_impact_004.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\yellowbeam_mid_001.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\yellowbeam_mid_002.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\yellowbeam_mid_003.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\yellowbeam_mid_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NeoItemSprites\panicpendant_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NeoItemSprites\amberdie_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\guneonate_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\guneonate_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\killithidtendril_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\killithidtendril_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\gunger_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\gunger_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\carrion_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\carrion_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\sickworm_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\sickworm_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\uterinepolyp_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\uterinepolyp_clipfull.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\wrinkler_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\wrinkler_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\initiatewand_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\initiatewand_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\butchersknife_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\butchersknife_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Sounds\OMITBSoundbank.bnk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

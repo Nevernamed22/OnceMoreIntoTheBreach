@@ -27,6 +27,7 @@ namespace NevernamedsItems
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
+            gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(53) as Gun).muzzleFlashEffects;
 
             //GUN STATS
             gun.DefaultModule.ammoCost = 1;
@@ -46,8 +47,11 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.transform.parent = gun.barrelOffset;
             projectile.baseData.damage *= 3f;
+            projectile.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(506) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX;
+            projectile.hitEffects.alwaysUseMidair = true;
             projectile.SetProjectileSpriteRight("diamond_projectile", 11, 11, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
-
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Diamond Gun Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/diamondgun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/diamondgun_clipempty");
             gun.quality = PickupObject.ItemQuality.A;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 

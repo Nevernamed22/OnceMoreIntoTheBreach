@@ -59,6 +59,8 @@ namespace NevernamedsItems
             gooper.CollisionSpawnRadius = 1;
             gooper.goopDefinition = EasyGoopDefinitions.GenerateBloodGoop(10, ExtendedColours.orange, 10);
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("UterinePolyp Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/uterinepolyp_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/uterinepolyp_clipempty");
 
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

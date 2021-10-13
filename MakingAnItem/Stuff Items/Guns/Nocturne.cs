@@ -62,7 +62,8 @@ namespace NevernamedsItems
 
             gun.DefaultModule.projectiles[0] = projectile;
             gun.DefaultModule.projectiles.Add(projectile2);
-
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Nocturne Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/nocturne_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/nocturne_clipempty");
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
         }

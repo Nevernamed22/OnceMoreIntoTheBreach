@@ -58,6 +58,9 @@ namespace NevernamedsItems
             projectile.transform.parent = gun.barrelOffset;
             projectile.SetProjectileSpriteRight("handmortar_projectile", 8, 8, false, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("HandMortar Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/handmortar_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/handmortar_clipempty");
+
             gun.quality = PickupObject.ItemQuality.A;
             gun.encounterTrackable.EncounterGuid = "this is the Hand Mortar";
             ETGMod.Databases.Items.Add(gun, null, "ANY");

@@ -51,7 +51,8 @@ namespace NevernamedsItems
             projectile.baseData.speed *= 2f;
             projectile.baseData.range *= 2f;
             projectile.AdditionalScaleMultiplier *= 0.3f;
-
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Toolgun Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/toolgun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/toolgun_clipempty");
             gun.quality = PickupObject.ItemQuality.S; //S
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             ToolGunID = gun.PickupObjectId;

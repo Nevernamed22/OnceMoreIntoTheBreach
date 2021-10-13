@@ -107,6 +107,9 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles.Add(projThree); // 8 
             gun.DefaultModule.projectiles.Add(projTwo); // 9
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Crescendo Blaster Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/crescendoblaster_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/crescendoblaster_clipempty");
+
             gun.quality = PickupObject.ItemQuality.C;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             CrescendoBlasterID = gun.PickupObjectId;

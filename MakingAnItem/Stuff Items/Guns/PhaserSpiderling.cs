@@ -154,6 +154,10 @@ namespace NevernamedsItems
             gun.reloadTime = 1.4f;
             gun.barrelOffset.transform.localPosition = new Vector3(1.25f, 0.62f, 0f);
             gun.SetBaseMaxAmmo(600);
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("PhaserSpiderling Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/phaserspiderling_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/phaserspiderling_clipempty");
+
             gun.gunClass = GunClass.FULLAUTO;
             gun.quality = PickupObject.ItemQuality.S;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

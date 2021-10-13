@@ -58,7 +58,8 @@ namespace NevernamedsItems
             Bouncing.numberOfBounces = 10;
 
             projectile.transform.parent = gun.barrelOffset;
-
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Disc Gun Discs", "NevernamedsItems/Resources/CustomGunAmmoTypes/discgun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/discgun_clipempty");
             gun.quality = PickupObject.ItemQuality.D;
 
             gun.encounterTrackable.EncounterGuid = "this is the Disc Gun";

@@ -26,7 +26,7 @@ namespace NevernamedsItems
             gun.SetAnimationFPS(gun.shootAnimation, 9);
             gun.isAudioLoop = true;
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
-
+            gun.gunHandedness = GunHandedness.OneHanded;
             //GUN STATS
             gun.doesScreenShake = false;
             gun.DefaultModule.ammoCost = 5;
@@ -36,7 +36,8 @@ namespace NevernamedsItems
             gun.muzzleFlashEffects.type = VFXPoolType.None;
             gun.DefaultModule.cooldownTime = 0.001f;
             gun.DefaultModule.numberOfShotsInClip = 1000;
-            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.BEAM;
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Rico Laser", "NevernamedsItems/Resources/CustomGunAmmoTypes/rico_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/genericbeam_clipempty");
             gun.barrelOffset.transform.localPosition = new Vector3(1.31f, 0.49f, 0f);
             gun.SetBaseMaxAmmo(1000);
             gun.ammo = 1000;
@@ -103,8 +104,9 @@ namespace NevernamedsItems
 
             gun.quality = PickupObject.ItemQuality.C; //D
             ETGMod.Databases.Items.Add(gun, null, "ANY");
-
+            RicoID = gun.PickupObjectId;
         }
+        public static int RicoID;
         public Rico()
         {
 

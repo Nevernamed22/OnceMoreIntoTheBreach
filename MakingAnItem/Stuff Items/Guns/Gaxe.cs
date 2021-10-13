@@ -25,6 +25,7 @@ namespace NevernamedsItems
             gun.SetupSprite(null, "gaxe_idle_001", 8);
 
             gun.SetAnimationFPS(gun.shootAnimation, 16);
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(335) as Gun).gunSwitchGroup;
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
@@ -80,6 +81,9 @@ namespace NevernamedsItems
                 mod.angleVariance = 5f;
                 mod.numberOfShotsInClip = 5;
             }
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Gaxe Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/gaxe_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/gaxe_clipempty");
 
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

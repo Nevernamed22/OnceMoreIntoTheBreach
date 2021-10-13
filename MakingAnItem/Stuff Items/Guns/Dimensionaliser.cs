@@ -183,6 +183,8 @@ namespace NevernamedsItems
             projectile.SetProjectileSpriteRight("dimensionaliser_projectile", 12, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 5);
             gun.DefaultModule.projectiles[0] = projectile;
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Dimensionaliser Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/dimensionaliser_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/dimensionaliser_clipempty");
 
             gun.quality = PickupObject.ItemQuality.S;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

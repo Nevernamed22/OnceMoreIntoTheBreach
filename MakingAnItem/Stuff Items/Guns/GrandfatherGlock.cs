@@ -125,6 +125,10 @@ namespace NevernamedsItems
             gun.reloadTime = 1.4f;
             gun.barrelOffset.transform.localPosition = new Vector3(1.37f, 0.68f, 0f);
             gun.SetBaseMaxAmmo(300);
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Grandfather Glock Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/grandfatherglock_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/grandfatherglock_clipempty");
+
             gun.gunClass = GunClass.SILLY;
             gun.quality = PickupObject.ItemQuality.C;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

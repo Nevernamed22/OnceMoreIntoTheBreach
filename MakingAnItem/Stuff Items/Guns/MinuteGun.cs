@@ -50,7 +50,8 @@ namespace NevernamedsItems
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.baseData.damage = 20;
             gun.DefaultModule.projectiles[0] = projectile;
-
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Minute Gun Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/minutegun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/minutegun_clipempty");
             gun.quality = PickupObject.ItemQuality.C;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 

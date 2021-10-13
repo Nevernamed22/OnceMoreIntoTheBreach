@@ -50,6 +50,9 @@ namespace NevernamedsItems
 
             projectile.transform.parent = gun.barrelOffset;
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Risk Rifle Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/riskrifle_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/riskrifle_clipempty");
+
             // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.
             gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "this is the Risk Rifle";

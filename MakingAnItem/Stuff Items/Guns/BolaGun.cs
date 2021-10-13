@@ -70,6 +70,8 @@ namespace NevernamedsItems
 
             projectile.transform.parent = gun.barrelOffset;
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Bola Gun Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/bolagun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/bolagun_clipempty");
 
             gun.quality = PickupObject.ItemQuality.A;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

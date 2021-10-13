@@ -48,6 +48,9 @@ namespace NevernamedsItems
             projectile.SetProjectileSpriteRight("glasster_projectile", 4, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
             gun.DefaultModule.projectiles[0] = projectile;
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Glasster Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/glasster_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/glasster_clipempty");
+
             gun.quality = PickupObject.ItemQuality.C;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 

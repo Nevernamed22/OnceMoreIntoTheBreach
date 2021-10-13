@@ -48,7 +48,8 @@ namespace NevernamedsItems
             projectile.SetProjectileSpriteRight("lovepistol_projectile", 7, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 6);
 
             projectile.transform.parent = gun.barrelOffset;
-
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Love Pistol Hearts", "NevernamedsItems/Resources/CustomGunAmmoTypes/lovepistol_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/lovepistol_clipempty");
             gun.quality = PickupObject.ItemQuality.B;
             gun.encounterTrackable.EncounterGuid = "this is the Love Pistol";
             ETGMod.Databases.Items.Add(gun, null, "ANY");

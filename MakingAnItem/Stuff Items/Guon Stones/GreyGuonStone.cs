@@ -64,7 +64,7 @@ namespace NevernamedsItems
             bool flag = GreyGuonStone.upgradeOrbitalPrefab == null;
             if (flag)
             {
-                GameObject gameObject = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/greyguon_synergy", null, true);
+                GameObject gameObject = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/greyguon_synergy", null);
                 gameObject.name = "Grey Guon Orbital Synergy Form";
                 SpeculativeRigidbody speculativeRigidbody = gameObject.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(12, 12));
                 GreyGuonStone.upgradeOrbitalPrefab = gameObject.AddComponent<PlayerOrbital>();

@@ -29,6 +29,7 @@ namespace NevernamedsItems
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(12) as Gun).gunSwitchGroup;
 
             //GUN STATS
             gun.DefaultModule.ammoCost = 1;
@@ -51,6 +52,9 @@ namespace NevernamedsItems
             projectile.SetProjectileSpriteRight("woodenhorse_projectile", 8,8, false, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
 
             projectile.transform.parent = gun.barrelOffset;
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Wooden Horse Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/woodenhorse_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/thinline_clipempty");
 
             gun.quality = PickupObject.ItemQuality.A;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

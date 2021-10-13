@@ -120,6 +120,9 @@ namespace NevernamedsItems
 
             gun.DefaultModule.chargeProjectiles = new List<ProjectileModule.ChargeProjectile> { chargeProj1, chargeProj2, chargeProj3 };
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("TauCannon Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/taucannon_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/taucannon_clipempty");
+
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             TauCannonID = gun.PickupObjectId;

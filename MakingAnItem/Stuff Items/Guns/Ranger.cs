@@ -159,6 +159,8 @@ namespace NevernamedsItems
                     i2++;
                 }
             }
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = "Justice Bullets";
             gun.reloadTime = 1.4f;
             gun.SetBaseMaxAmmo(100);
             gun.gunClass = GunClass.SHOTGUN;

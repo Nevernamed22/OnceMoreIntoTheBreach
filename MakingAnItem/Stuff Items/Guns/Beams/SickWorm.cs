@@ -113,6 +113,9 @@ namespace NevernamedsItems
 
             gun.DefaultModule.projectiles[0] = projectile;
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("SickWorm Clip", "NevernamedsItems/Resources/CustomGunAmmoTypes/sickworm_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/sickworm_clipempty");
+
             gun.quality = PickupObject.ItemQuality.A; //D
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 

@@ -57,6 +57,9 @@ namespace NevernamedsItems
 
             projectile.transform.parent = gun.barrelOffset;
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Gunger Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/gunger_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/gunger_clipempty");
+
             gun.quality = PickupObject.ItemQuality.A;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
         }

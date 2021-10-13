@@ -66,6 +66,8 @@ namespace NevernamedsItems
             gun.SetBaseMaxAmmo(80);
             gun.gunClass = GunClass.SHOTGUN;
             //BULLET STATS
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Justice Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/justice_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/justice_clipempty");
 
             // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.
             gun.quality = PickupObject.ItemQuality.A;
@@ -77,32 +79,35 @@ namespace NevernamedsItems
         public static int JusticeID;
         private void Update()
         {
-            PlayerController player = gun.CurrentOwner as PlayerController;
-            if (player.PlayerHasActiveSynergy("Shotkeeper"))
+            if (gun && gun.CurrentOwner && gun.CurrentOwner is PlayerController)
             {
-                if (gun.DefaultModule.numberOfShotsInClip == 5)
+                PlayerController player = gun.CurrentOwner as PlayerController;
+                if (player.PlayerHasActiveSynergy("Shotkeeper"))
                 {
-                    gun.SetBaseMaxAmmo(600);
-                    foreach (ProjectileModule mod in gun.Volley.projectiles)
+                    if (gun.DefaultModule.numberOfShotsInClip == 5)
                     {
-                        mod.shootStyle = ProjectileModule.ShootStyle.Burst;
-                        mod.burstShotCount = 3;
-                        mod.burstCooldownTime = 0.2f;
-                        mod.numberOfShotsInClip = 12;
-                        //hasShotkeeperSynergyAlready = true;
+                        gun.SetBaseMaxAmmo(600);
+                        foreach (ProjectileModule mod in gun.Volley.projectiles)
+                        {
+                            mod.shootStyle = ProjectileModule.ShootStyle.Burst;
+                            mod.burstShotCount = 3;
+                            mod.burstCooldownTime = 0.2f;
+                            mod.numberOfShotsInClip = 12;
+                            //hasShotkeeperSynergyAlready = true;
+                        }
                     }
                 }
-            }
-            else
-            {
-                if (gun.DefaultModule.numberOfShotsInClip == 12)
+                else
                 {
-                    gun.SetBaseMaxAmmo(200);
-                    foreach (ProjectileModule mod in gun.Volley.projectiles)
+                    if (gun.DefaultModule.numberOfShotsInClip == 12)
                     {
-                        mod.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
-                        mod.numberOfShotsInClip = 5;
-                        //hasShotkeeperSynergyAlready = false;
+                        gun.SetBaseMaxAmmo(200);
+                        foreach (ProjectileModule mod in gun.Volley.projectiles)
+                        {
+                            mod.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
+                            mod.numberOfShotsInClip = 5;
+                            //hasShotkeeperSynergyAlready = false;
+                        }
                     }
                 }
             }

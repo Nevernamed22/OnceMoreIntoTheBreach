@@ -17,13 +17,18 @@ namespace NevernamedsItems
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Doggun", "corgun");
             Game.Items.Rename("outdated_gun_mods:doggun", "nn:doggun");
-            gun.gameObject.AddComponent<Corgun>();
+          var behav =   gun.gameObject.AddComponent<Corgun>();
+            behav.preventNormalFireAudio = true;
+            behav.preventNormalReloadAudio = true;
+            behav.overrideNormalFireAudio = "Play_PET_dog_bark_02";
+            behav.overrideNormalReloadAudio = "Play_PET_dog_bark_02";
             gun.SetShortDescription("Bork Bork");
             gun.SetLongDescription("Lovingly carved in the image of Junior II, this gun has some fighting spirit, despite it's cuddly appearance."+"\n\n'Bork Bork' - Junior II");
 
             gun.SetupSprite(null, "corgun_idle_001", 8);
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(519) as Gun).gunSwitchGroup;
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
 
@@ -64,7 +69,9 @@ namespace NevernamedsItems
 
             projectile.transform.parent = gun.barrelOffset;
 
-            
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Doggun Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/doggun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/doggun_clipempty");
+
             gun.quality = PickupObject.ItemQuality.A;
             gun.encounterTrackable.EncounterGuid = "this is the Doggun";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
@@ -73,18 +80,7 @@ namespace NevernamedsItems
 
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.KILLED_DRAGUN_WITH_DOG, true);
         }
-        public static int DoggunID;
-        public override void OnPostFired(PlayerController player, Gun gun)
-        {
-            gun.PreventNormalFireAudio = true;
-            AkSoundEngine.PostEvent("Play_PET_dog_bark_02", gameObject);
-        }
-        public override void OnReload(PlayerController player, Gun gun)
-        {
-            base.OnReload(player, gun);
-            AkSoundEngine.PostEvent("Stop_WPN_All", base.gameObject);
-            AkSoundEngine.PostEvent("Play_PET_dog_bark_02", base.gameObject);
-        }
+        public static int DoggunID;       
         public Corgun()
         {
 
