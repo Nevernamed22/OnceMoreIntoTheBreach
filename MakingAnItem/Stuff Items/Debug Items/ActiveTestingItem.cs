@@ -56,6 +56,20 @@ namespace NevernamedsItems
         //float duration = 20f;
         protected override void DoEffect(PlayerController user)
         {
+            IPlayerInteractable nearestInteractable = user.CurrentRoom.GetNearestInteractable(user.CenterPosition, 1f, user);
+            if (!(nearestInteractable is Chest)) return;
+
+            Chest rerollChest = nearestInteractable as Chest;
+            if (rerollChest.IsMimic)
+            {
+                rerollChest.ForceOpen(user);
+                return;
+            }
+            rerollChest.contents = new List<PickupObject>()
+            {
+                PickupObjectDatabase.GetById(51)
+            };
+           
             //ProjectileImpactVFXPool hit = (PickupObjectDatabase.GetById(178) as Gun).GetComponent<FireOnReloadSynergyProcessor>().DirectedBurstSettings.ProjectileInterface.SpecifiedProjectile.hitEffects;
 
             //hit.DeconstructHitEffects();
@@ -363,7 +377,7 @@ namespace NevernamedsItems
             //GameManager.Instance.MainCameraController.Camera.transform.rotation = Quaternion.Euler(0, 0, 180);
             //CurseManager.AddCurse("Curse of Butterfingers", true);
             AkSoundEngine.PostEvent("Play_ClownHonk", user.gameObject);
-            foreach(Projectile proj in StaticReferenceManager.AllProjectiles)
+         /*   foreach(Projectile proj in StaticReferenceManager.AllProjectiles)
             {
 
                 ETGModConsole.Log($"<color=#ff0000ff>{proj.gameObject.name}</color>");
@@ -392,7 +406,7 @@ namespace NevernamedsItems
                     ETGModConsole.Log(component.GetType().ToString());
                 }
                 ETGModConsole.Log("<color=#ff0000ff>---------------------------------</color>");
-            }
+            }*/
 
             //Vector3 place = user.GetCursorPosition(4);
             //GameObject carto = UnityEngine.Object.Instantiate<GameObject>(Carto.CartoPrefab, place, Quaternion.identity);

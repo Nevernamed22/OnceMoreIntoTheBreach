@@ -8,11 +8,18 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using UnityEngine;
+using static NpcApi.CustomShopController;
 
 namespace NpcApi
 {
-    class ItsDaFuckinShopApi
+    static class ItsDaFuckinShopApi
     {
+
+        public static Dictionary<string, GameObject> builtShops = new Dictionary<string, GameObject>();
+
+        public static Vector3[] defaultItemPositions = new Vector3[] { new Vector3(1.125f, 2.125f, 1), new Vector3(2.625f, 1f, 1), new Vector3(4.125f, 2.125f, 1) };
+        public static Vector3 defaultTalkPointOffset = new Vector3(0.8125f, 2.1875f, -1.31f);
+
         /// <summary>
         /// Creates a shop object along with an npc
         /// </summary>
@@ -26,7 +33,7 @@ namespace NpcApi
         /// <param name="talkFps">Fps of the talk animation (base game tends to use around 8)</param> 
         /// 
         /// <param name="lootTable">Shop loot table</param> 
-        /// <param name="shopType">What base game shop this should be treated as. Probably best set to "TRUCK"</param> 
+        /// <param name="currency">What is used to buy items at the shop</param> 
         /// 
         /// <param name="runBasedMultilineGenericStringKey">String key for normal convos</param> 
         /// <param name="runBasedMultilineStopperStringKey">String key for if you try talking to an npc to much</param> 
@@ -34,20 +41,35 @@ namespace NpcApi
         /// <param name="purchaseItemFailedStringKey">String key for when the player tries but fails to buy something</param> 
         /// <param name="introStringKey">String key for when the player enters the room</param> 
         /// <param name="attackedStringKey">String key for when the player shoots at the npc</param> 
+        /// <param name="costModifier">The multiplier for shop prices</param> 
+        /// <param name="itemPositions">The offset for the item(s) sold by your npc, the amount of items sold is based off how many offsets you add here (if you just want the 3 normally items spots you can use ItsDaFuckinShopApi.defaultItemPositions)</param> 
+        /// <param name="giveStatsOnPurchase">Whether the shop modifies stats after the player buys an item for example how cursula gives curse</param> 
+        /// <param name="statsToGiveOnPurchase"> The stats given when the player buys an item (will be ingored if statsToGiveOnPurchase is false)</param> 
         /// 
-        /// <param name="hasCarpet">Wether the shop has a carpet or something else that they sit on</param> 
+        /// <param name="CustomCanBuy">The method that gets called to check if the player can buy an item (useless if currency isnt set to CUSTOM)</param> 
+        /// <param name="CustomRemoveCurrency">The method that gets called remove currency from the player (useless if currency isnt set to CUSTOM)</param> 
+        /// <param name="CustomPrice">The method that gets called to get the price of an item (useless if currency isnt set to CUSTOM)</param> 
+        /// 
+        /// <param name="currencyIconPath">Sprite path for your custom currency sprite</param> 
+        /// <param name="currencyName">The name you want your custom currecy sprite to have (i should probably remove this...)</param> 
+        ///
+        /// <param name="hasCarpet">Whether the shop has a carpet or something else that they sit on</param> 
         /// <param name="carpetSpritePath">Sprite path for the carpet or whatever</param> 
         /// <returns></returns>
-
-        public static GameObject SetUpShop(string name, string prefix, List<string> idleSpritePaths, int idleFps, List<string> talkSpritePaths, int talkFps, GenericLootTable lootTable, BaseShopController.AdditionalShopType shopType, string runBasedMultilineGenericStringKey,
-            string runBasedMultilineStopperStringKey, string purchaseItemStringKey, string purchaseItemFailedStringKey, string introStringKey, string attackedStringKey, float costModifier = 1, bool hasCarpet = false, string carpetSpritePath = "")
+        public static GameObject SetUpShop(string name, string prefix, List<string> idleSpritePaths, int idleFps, List<string> talkSpritePaths, int talkFps, GenericLootTable lootTable, CustomShopItemController.ShopCurrencyType currency, string runBasedMultilineGenericStringKey,
+            string runBasedMultilineStopperStringKey, string purchaseItemStringKey, string purchaseItemFailedStringKey, string introStringKey, string attackedStringKey, Vector3 talkPointOffset, Vector3[] itemPositions = null, float costModifier = 1, bool giveStatsOnPurchase = false,
+            StatModifier[] statsToGiveOnPurchase = null, Func<CustomShopController, PlayerController, int, bool> CustomCanBuy = null, Func<CustomShopController, PlayerController, int, int> CustomRemoveCurrency = null, Func<CustomShopController, CustomShopItemController, PickupObject, int> CustomPrice = null,
+            Action<PlayerController, PickupObject, int> OnPurchase = null, Action<PlayerController, PickupObject, int> OnSteal = null, string currencyIconPath = "", string currencyName = "", bool canBeRobbed = true, bool hasCarpet = false, string carpetSpritePath = "")
         {
 
             try
             {
+                //bool isBreachShop = false;
+                Vector3 breachPos = Vector3.zero;
+
                 var shared_auto_001 = ResourceManager.LoadAssetBundle("shared_auto_001");
                 var SpeechPoint = new GameObject("SpeechPoint");
-                SpeechPoint.transform.position = new Vector3(0.8125f, 2.1875f, -1.31f);
+                SpeechPoint.transform.position = talkPointOffset;
 
 
 
@@ -186,8 +208,17 @@ namespace NpcApi
 
                 npcObj.name = prefix + ":" + name;
 
+                var posList = new List<Transform>();
+                for (int i = 0; i < itemPositions.Length; i++)
+                {
 
-
+                    var ItemPoint = new GameObject("ItemPoint" + i);
+                    ItemPoint.transform.position = itemPositions[i];
+                    FakePrefab.MarkAsFakePrefab(ItemPoint);
+                    UnityEngine.Object.DontDestroyOnLoad(ItemPoint);
+                    ItemPoint.SetActive(true);
+                    posList.Add(ItemPoint.transform);
+                }
 
                 var ItemPoint1 = new GameObject("ItemPoint1");
                 ItemPoint1.transform.position = new Vector3(1.125f, 2.125f, 1);
@@ -206,22 +237,41 @@ namespace NpcApi
                 ItemPoint3.SetActive(true);
 
 
-                var shopObj = new GameObject(prefix + ":" + name + "_Shop").AddComponent<BaseShopController>();
+                var shopObj = new GameObject(prefix + ":" + name + "_Shop").AddComponent<CustomShopController>();
                 FakePrefab.MarkAsFakePrefab(shopObj.gameObject);
                 UnityEngine.Object.DontDestroyOnLoad(shopObj.gameObject);
 
                 shopObj.gameObject.SetActive(false);
 
+                shopObj.currencyType = currency;
+
+                shopObj.ActionAndFuncSetUp(CustomCanBuy, CustomRemoveCurrency, CustomPrice, OnPurchase, OnSteal);
+
+                if (!string.IsNullOrEmpty(currencyIconPath))
+                {
+                    shopObj.customPriceSprite = AddCustomCurrencyType(currencyIconPath, $"{prefix}:{currencyName}");
+                }
+                else
+                {
+                    shopObj.customPriceSprite = currencyName;
+                }
+
+
+                //GungeonAPI.ToolsGAPI.AddNewItemToAtlas()
+
+                shopObj.canBeRobbed = canBeRobbed;
+
                 shopObj.placeableHeight = 5;
                 shopObj.placeableWidth = 5;
                 shopObj.difficulty = 0;
                 shopObj.isPassable = true;
-                shopObj.baseShopType = shopType;
+                shopObj.baseShopType = BaseShopController.AdditionalShopType.TRUCK;//shopType;
+
                 shopObj.FoyerMetaShopForcedTiers = false;
                 shopObj.IsBeetleMerchant = false;
                 shopObj.ExampleBlueprintPrefab = null;
                 shopObj.shopItems = lootTable;
-                shopObj.spawnPositions = new Transform[] { ItemPoint1.transform, ItemPoint2.transform, ItemPoint3.transform };
+                shopObj.spawnPositions = posList.ToArray();//{ ItemPoint1.transform, ItemPoint2.transform, ItemPoint3.transform };
 
                 foreach (var pos in shopObj.spawnPositions)
                 {
@@ -235,13 +285,42 @@ namespace NpcApi
                 shopObj.spawnGroupTwoItem3Chance = 0.5f;
                 shopObj.shopkeepFSM = npcObj.GetComponent<PlayMakerFSM>();
                 shopObj.shopItemShadowPrefab = shared_auto_001.LoadAsset<GameObject>("Merchant_Key").GetComponent<BaseShopController>().shopItemShadowPrefab;
+                shopObj.shopItemShadowPrefab =
                 shopObj.cat = null;
                 shopObj.OptionalMinimapIcon = null;
                 shopObj.ShopCostModifier = costModifier;
                 shopObj.FlagToSetOnEncounter = GungeonFlags.NONE;
 
+                shopObj.giveStatsOnPurchase = giveStatsOnPurchase;
+                shopObj.statsToGive = statsToGiveOnPurchase;
+
+                /*if (isBreachShop)
+                {
+                    shopObj.gameObject.AddComponent<BreachShopComp>().offset = breachPos;
+                    BreachShopTools.registeredShops.Add(prefix + ":" + name, shopObj.gameObject);
+
+                    shopObj.FoyerMetaShopForcedTiers = true;
+
+                    var exampleBlueprintObj = SpriteBuilder.SpriteFromResource(carpetSpritePath, new GameObject(prefix + ":" + name + "_ExampleBlueprintPrefab"));
+                    exampleBlueprintObj.GetComponent<tk2dSprite>().SortingOrder = 2;
+                    FakePrefab.MarkAsFakePrefab(exampleBlueprintObj);
+                    UnityEngine.Object.DontDestroyOnLoad(exampleBlueprintObj);
+                    exampleBlueprintObj.SetActive(false);
+
+                    //var item = exampleBlueprintObj.AddComponent<ItemBlueprintItem>();
+                    //item.quality = PickupObject.ItemQuality.SPECIAL;
+                    //item.PickupObjectId = 99999999;
+                    
+
+
+                    shopObj.ExampleBlueprintPrefab = shared_auto_001.LoadAsset<GameObject>("NPC_Beetle_Merchant_Foyer").GetComponent<BaseShopController>().ExampleBlueprintPrefab;
+                }*/
+
                 npcObj.transform.parent = shopObj.gameObject.transform;
                 npcObj.transform.position = new Vector3(1.9375f, 3.4375f, 5.9375f);
+
+
+
 
                 if (hasCarpet)
                 {
@@ -256,6 +335,7 @@ namespace NpcApi
                     carpetObj.layer = 20;
                 }
                 npcObj.SetActive(true);
+                ItsDaFuckinShopApi.builtShops.Add(prefix + ":" + name, shopObj.gameObject);
                 return shopObj.gameObject;
             }
             catch (Exception message)
@@ -265,11 +345,21 @@ namespace NpcApi
             }
         }
 
-        public static void RegisterShopRoom(GameObject shop, PrototypeDungeonRoom protoroom, Vector2 offset)
+        public static string AddCustomCurrencyType(string ammoTypeSpritePath, string name)
+        {
+            return GameUIRoot.Instance.ConversationBar.portraitSprite.Atlas.AddNewItemToAtlas(NpcTools.GetTextureFromResource(ammoTypeSpritePath), name).name;
+        }
+
+
+
+
+
+
+        public static void RegisterShopRoom(GameObject shop, PrototypeDungeonRoom protoroom, Vector2 vector)
         {
             protoroom.category = PrototypeDungeonRoom.RoomCategory.NORMAL;
             DungeonPrerequisite[] array = new DungeonPrerequisite[0];
-            Vector2 vector = new Vector2((float)(protoroom.Width / 2) + offset.x, (float)(protoroom.Height / 2) + offset.y);
+            //Vector2 vector = new Vector2((float)(protoroom.Width / 2) + offset.x, (float)(protoroom.Height / 2) + offset.y);
             protoroom.placedObjectPositions.Add(vector);
             protoroom.placedObjects.Add(new PrototypePlacedObjectData
             {
@@ -361,6 +451,44 @@ namespace NpcApi
             aianimator.HitReactChance = 1f;
             aianimator.HitType = AIAnimator.HitStateType.Basic;
             return aianimator;
+        }
+
+        public static tk2dSpriteAnimationClip AddAnimation(tk2dSpriteAnimator animator, tk2dSpriteCollectionData collection, List<int> spriteIDs,
+            string clipName, tk2dSpriteAnimationClip.WrapMode wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop, float fps = 15)
+        {
+            if (animator.Library == null)
+            {
+                animator.Library = animator.gameObject.AddComponent<tk2dSpriteAnimation>();
+                animator.Library.clips = new tk2dSpriteAnimationClip[0];
+                animator.Library.enabled = true;
+
+            }
+
+            List<tk2dSpriteAnimationFrame> frames = new List<tk2dSpriteAnimationFrame>();
+            for (int i = 0; i < spriteIDs.Count; i++)
+            {
+                tk2dSpriteDefinition sprite = collection.spriteDefinitions[spriteIDs[i]];
+                if (sprite.Valid)
+                {
+                    frames.Add(new tk2dSpriteAnimationFrame()
+                    {
+                        spriteCollection = collection,
+                        spriteId = spriteIDs[i]
+                    });
+                }
+            }
+
+            var clip = new tk2dSpriteAnimationClip()
+            {
+                name = clipName,
+                fps = fps,
+                wrapMode = wrapMode,
+            };
+            Array.Resize(ref animator.Library.clips, animator.Library.clips.Length + 1);
+            animator.Library.clips[animator.Library.clips.Length - 1] = clip;
+
+            clip.frames = frames.ToArray();
+            return clip;
         }
 
         public static SpeculativeRigidbody GenerateOrAddToRigidBody(GameObject targetObject, CollisionLayer collisionLayer, PixelCollider.PixelColliderGeneration colliderGenerationMode = PixelCollider.PixelColliderGeneration.Tk2dPolygon, bool collideWithTileMap = false, bool CollideWithOthers = true, bool CanBeCarried = true, bool CanBePushed = false, bool RecheckTriggers = false, bool IsTrigger = false, bool replaceExistingColliders = false, bool UsesPixelsAsUnitSize = false, IntVector2? dimensions = null, IntVector2? offset = null)

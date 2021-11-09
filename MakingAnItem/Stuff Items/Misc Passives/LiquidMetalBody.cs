@@ -43,12 +43,13 @@ namespace NevernamedsItems
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_LIQUIDMETALBODY, true);
             item.AddItemToGooptonMetaShop(18);
+            LiquidMetalBodyID = item.PickupObjectId;
         }
         //float m_activeElapsed = 0f;
         float m_activeDuration;
         float duration = 3.5f;
         bool m_usedOverrideMaterial;
-
+        public static int LiquidMetalBodyID;
         private void DoLiquidEffect(PlayerController player)
         {
             PlayerController owner = base.Owner;

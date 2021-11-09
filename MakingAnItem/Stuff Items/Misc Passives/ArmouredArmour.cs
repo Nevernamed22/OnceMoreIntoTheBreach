@@ -44,7 +44,9 @@ namespace NevernamedsItems
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.B;
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PLAYERHELDMORETHANFIVEARMOUR, true);
+            ArmouredArmourID = item.PickupObjectId;
         }
+        public static int ArmouredArmourID;
         Hook healthPickupHook = new Hook(
                 typeof(HealthPickup).GetMethod("Pickup", BindingFlags.Instance | BindingFlags.Public),
                 typeof(ArmouredArmour).GetMethod("heartPickupHookMethod")

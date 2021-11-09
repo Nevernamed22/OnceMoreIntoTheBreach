@@ -107,6 +107,26 @@ namespace NevernamedsItems
             Rebondissement.NonSynergyGunId = Rebondir.RebondirID;
             Rebondissement.SynergyGunId = RedRebondir.RedRebondirID;
             Rebondissement.SynergyToCheck = "Rebondissement";
+            //DIAMOND CUTTER ------- Ranger Class
+            AdvancedTransformGunSynergyProcessor RangerClass = (PickupObjectDatabase.GetById(DiamondCutter.DiamondCutterID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
+            RangerClass.NonSynergyGunId = DiamondCutter.DiamondCutterID;
+            RangerClass.SynergyGunId = DiamondCutterRangerClass.RedDiamondCutterID;
+            RangerClass.SynergyToCheck = "Ranger Class";
+            //STICK GUN ---------- Quick, Draw!
+            AdvancedTransformGunSynergyProcessor QuickDraw = (PickupObjectDatabase.GetById(StickGun.StickGunID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
+            QuickDraw.NonSynergyGunId = StickGun.StickGunID;
+            QuickDraw.SynergyGunId = StickGunQuickDraw.FullAutoStickGunID;
+            QuickDraw.SynergyToCheck = "Quick, Draw!";
+            //LIGHTNING ROD ------ Storm Rod
+            AdvancedTransformGunSynergyProcessor StormRodSyn = (PickupObjectDatabase.GetById(LightningRod.LightningRodID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
+            StormRodSyn.NonSynergyGunId = LightningRod.LightningRodID;
+            StormRodSyn.SynergyGunId = StormRod.StormRodID;
+            StormRodSyn.SynergyToCheck = "Storm Rod";
+            //RUSTY SHOTGUN -------- Proper Care And Maintenance
+            AdvancedTransformGunSynergyProcessor ProperCareNMaintenance = (PickupObjectDatabase.GetById(RustyShotgun.RustyShotgunID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
+            ProperCareNMaintenance.NonSynergyGunId = RustyShotgun.RustyShotgunID;
+            ProperCareNMaintenance.SynergyGunId = UnrustyShotgun.UnrustyShotgunID;
+            ProperCareNMaintenance.SynergyToCheck = "Proper Care & Maintenance";
             #endregion
             //-------------------------------------------------------------DUAL WIELDING
             #region Dual Wielding

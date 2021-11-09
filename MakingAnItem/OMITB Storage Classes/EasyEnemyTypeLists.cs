@@ -145,6 +145,7 @@ namespace NevernamedsItems
             EnemyGuidDatabase.Entries["shotgat"],
             EnemyGuidDatabase.Entries["pirate_shotgun_kin"],
         };
+        
 
         public static List<string> VanillaSkeletonEnemies = new List<string>()
         {

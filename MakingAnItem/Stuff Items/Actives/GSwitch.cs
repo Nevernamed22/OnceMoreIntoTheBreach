@@ -46,8 +46,9 @@ namespace NevernamedsItems
             //Set some other fields
             item.consumable = false;
             item.quality = ItemQuality.D;
+            GSwitchID = item.PickupObjectId;
         }
-
+        public static int GSwitchID;
         // Token: 0x06007230 RID: 29232 RVA: 0x002D6104 File Offset: 0x002D4304
         protected override void DoEffect(PlayerController user)
         {

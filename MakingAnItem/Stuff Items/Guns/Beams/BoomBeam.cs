@@ -121,7 +121,9 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.S; //S
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
+            ID = gun.PickupObjectId;
         }
+        public static int ID;
         public BoomBeam()
         {
 

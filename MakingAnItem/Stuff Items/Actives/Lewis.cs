@@ -81,9 +81,12 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            hasSynergy = false;
-            needRestat = false;
-            LastOwner.stats.RecalculateStats(LastOwner, true, false);
+            if (LastOwner != null)
+            {
+                hasSynergy = false;
+                needRestat = false;
+                LastOwner.stats.RecalculateStats(LastOwner, true, false);
+            }
             base.OnDestroy();
         }
 

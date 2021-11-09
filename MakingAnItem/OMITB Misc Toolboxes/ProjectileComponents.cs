@@ -493,12 +493,17 @@ namespace NevernamedsItems
     {
         public InstantDestroyProjOnSpawn()
         {
+            chance = 1;
         }
         private void Start()
         {
             this.m_projectile = base.GetComponent<Projectile>();
-            UnityEngine.Object.DestroyImmediate(this.m_projectile.gameObject);
+            if (UnityEngine.Random.value <= chance)
+            {
+                UnityEngine.Object.DestroyImmediate(this.m_projectile.gameObject);
+            }
         }
+        public float chance;
         private Projectile m_projectile;
     } //Prevents the projectile from spawning.
     public class AdvancedMirrorProjectileModifier : MonoBehaviour
@@ -1159,10 +1164,12 @@ namespace NevernamedsItems
     {
         public float multiplier;
         public bool multOnFlyingEnemies;
+        public bool multOnStunnedEnemies;
         public SelectiveDamageMult()
         {
             this.multiplier = 1;
             this.multOnFlyingEnemies = false;
+            this.multOnStunnedEnemies = false;
         }
         private void Start()
         {
@@ -1176,6 +1183,7 @@ namespace NevernamedsItems
             {
                 Projectile me = myRigidbody.projectile;
                 if (multOnFlyingEnemies && otherRigidbody.aiActor.IsFlying) DoMult(me);
+                if (multOnStunnedEnemies && otherRigidbody.behaviorSpeculator.IsStunned) DoMult(me);
             }
         }
         private void DoMult(Projectile self)
@@ -1653,6 +1661,131 @@ namespace NevernamedsItems
             SpecialIdentifier = "NULL";
         }
         public string SpecialIdentifier;
+    }
+    public class OwnerConnectLightningModifier : MonoBehaviour
+    {
+        public GameObject linkPrefab;
+        public float DamagePerTick;
+        private GameActor owner;
+        private tk2dTiledSprite extantLink;
+        private Projectile self;
+        public OwnerConnectLightningModifier()
+        {
+            linkPrefab = St4ke.LinkVFXPrefab;
+            DamagePerTick = 2f;
+        }
+        private void OnDestroy()
+        {
+            if (extantLink)
+            {
+                SpawnManager.Despawn(extantLink.gameObject);
+            }
+        }
+        private void Start()
+        {
+            self = base.GetComponent<Projectile>();
+            if (self)
+            {
+                if (self.Owner) owner = self.Owner;
+            }
+        }
+        private void Update()
+        {
+            if (self && owner && this.extantLink == null)
+            {
+                tk2dTiledSprite component = SpawnManager.SpawnVFX(linkPrefab, false).GetComponent<tk2dTiledSprite>();
+                this.extantLink = component;
+            }
+            else if (self && owner && this.extantLink != null)
+            {
+                UpdateLink(owner, this.extantLink);
+            }
+            else if (extantLink != null)
+            {
+                SpawnManager.Despawn(extantLink.gameObject);
+                extantLink = null;
+            }
+        }
+        private void UpdateLink(GameActor target, tk2dTiledSprite m_extantLink)
+        {
+            Vector2 unitCenter = self.specRigidbody.UnitCenter;
+            Vector2 unitCenter2 = target.specRigidbody.HitboxPixelCollider.UnitCenter;
+            m_extantLink.transform.position = unitCenter;
+            Vector2 vector = unitCenter2 - unitCenter;
+            float num = BraveMathCollege.Atan2Degrees(vector.normalized);
+            int num2 = Mathf.RoundToInt(vector.magnitude / 0.0625f);
+            m_extantLink.dimensions = new Vector2((float)num2, m_extantLink.dimensions.y);
+            m_extantLink.transform.rotation = Quaternion.Euler(0f, 0f, num);
+            m_extantLink.UpdateZDepth();
+            this.ApplyLinearDamage(unitCenter, unitCenter2);
+        }
+        private void ApplyLinearDamage(Vector2 p1, Vector2 p2)
+        {
+            if (owner is PlayerController)
+            {
+                float damage = DamagePerTick;
+                damage *= self.ProjectilePlayerOwner().stats.GetStatValue(PlayerStats.StatType.Damage);
+                for (int i = 0; i < StaticReferenceManager.AllEnemies.Count; i++)
+                {
+                    AIActor aiactor = StaticReferenceManager.AllEnemies[i];
+                    if (!this.m_damagedEnemies.Contains(aiactor))
+                    {
+                        if (aiactor && aiactor.HasBeenEngaged && aiactor.IsNormalEnemy && aiactor.specRigidbody && aiactor.healthHaver)
+                        {
+                            if (aiactor.healthHaver.IsBoss) damage *= self.ProjectilePlayerOwner().stats.GetStatValue(PlayerStats.StatType.DamageToBosses);
+                            Vector2 zero = Vector2.zero;
+                            if (BraveUtility.LineIntersectsAABB(p1, p2, aiactor.specRigidbody.HitboxPixelCollider.UnitBottomLeft, aiactor.specRigidbody.HitboxPixelCollider.UnitDimensions, out zero))
+                            {
+                                aiactor.healthHaver.ApplyDamage(DamagePerTick, Vector2.zero, "Chain Lightning", CoreDamageTypes.Electric, DamageCategory.Normal, false, null, false);
+                                GameManager.Instance.StartCoroutine(this.HandleDamageCooldown(aiactor));
+                            }
+                        }
+                    }
+                }
+            }
+            else if (owner is AIActor)
+            {
+                if (GameManager.Instance.PrimaryPlayer != null)
+                {
+                    PlayerController player1 = GameManager.Instance.PrimaryPlayer;
+                    Vector2 zero = Vector2.zero;
+                    if (BraveUtility.LineIntersectsAABB(p1, p2, player1.specRigidbody.HitboxPixelCollider.UnitBottomLeft, player1.specRigidbody.HitboxPixelCollider.UnitDimensions, out zero))
+                    {
+                        if (player1.healthHaver && player1.healthHaver.IsVulnerable && !player1.IsEthereal && !player1.IsGhost)
+                        {
+                            string damageSource = "Electricity";
+                            if (owner.encounterTrackable) damageSource = owner.encounterTrackable.GetModifiedDisplayName();
+                            if (self.IsBlackBullet) player1.healthHaver.ApplyDamage(1f, Vector2.zero, damageSource, CoreDamageTypes.Electric, DamageCategory.BlackBullet, true);
+                            else player1.healthHaver.ApplyDamage(0.5f, Vector2.zero, damageSource, CoreDamageTypes.Electric, DamageCategory.Normal, false);
+                        }
+                    }
+                }
+                if (GameManager.Instance.SecondaryPlayer != null)
+                {
+                    PlayerController player2 = GameManager.Instance.SecondaryPlayer;
+                    Vector2 zero = Vector2.zero;
+                    if (BraveUtility.LineIntersectsAABB(p1, p2, player2.specRigidbody.HitboxPixelCollider.UnitBottomLeft, player2.specRigidbody.HitboxPixelCollider.UnitDimensions, out zero))
+                    {
+                        if (player2.healthHaver && player2.healthHaver.IsVulnerable && !player2.IsEthereal && !player2.IsGhost)
+                        {
+                            string damageSource = "Electricity";
+                            if (owner.encounterTrackable) damageSource = owner.encounterTrackable.GetModifiedDisplayName();
+                            if (self.IsBlackBullet) player2.healthHaver.ApplyDamage(1f, Vector2.zero, damageSource, CoreDamageTypes.Electric, DamageCategory.BlackBullet, true);
+                            else player2.healthHaver.ApplyDamage(0.5f, Vector2.zero, damageSource, CoreDamageTypes.Electric, DamageCategory.Normal, false);
+                        }
+                    }
+                }
+            }
+        }
+        private HashSet<AIActor> m_damagedEnemies = new HashSet<AIActor>();
+
+        private IEnumerator HandleDamageCooldown(AIActor damagedTarget)
+        {
+            this.m_damagedEnemies.Add(damagedTarget);
+            yield return new WaitForSeconds(0.1f);
+            this.m_damagedEnemies.Remove(damagedTarget);
+            yield break;
+        }
     }
 
     //PASSIVE ITEM EFFECTS AS COMPONENTS

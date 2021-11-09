@@ -10,6 +10,28 @@ namespace NevernamedsItems
 {
     static class OMITBMathsAndLogicExtensions
     {
+        public static Vector2 GetCenteredLookingPosForObj(this Vector2 originalValue, SpeculativeRigidbody rigidBody, bool centerX = true, bool centerY = false)
+        {
+            float UnitX = rigidBody.UnitDimensions.x;
+            float ReturnX = originalValue.x;
+            if (centerX) ReturnX -= (UnitX * 0.5f);
+
+            float UnitY = rigidBody.UnitDimensions.y;
+            float ReturnY = originalValue.y;
+            if (centerY) ReturnY -= (UnitY * 0.5f);
+
+            return new Vector2(ReturnX, ReturnY);
+        }
+        public static bool isEven(this float number)
+        {
+            if (number % 2 == 0) return true;
+            else return false;
+        }
+        public static bool isEven(this int number)
+        {
+            if (number % 2 == 0) return true;
+            else return false;
+        }
         public static bool IsBetweenRange(this float numberToCheck, float bottom, float top)
         {
             return (numberToCheck >= bottom && numberToCheck <= top);

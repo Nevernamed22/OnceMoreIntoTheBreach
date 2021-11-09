@@ -51,10 +51,9 @@ namespace NevernamedsItems
             List<string> optionalSynergyItems2 = new List<string>() { "nn:nitroglycylinder", "explosive_rounds", };
             CustomSynergies.Add("...Badda Boom!", mandatorySynergyItems2, optionalSynergyItems2);
 
-            //LIST OF SYNERGIES
-            // 'Bomb Voyage!' - With Explosive Rounds or Nitro Bullets
-
+            NitroglycylinderID = item.PickupObjectId;
         }
+        public static int NitroglycylinderID;
         private void HandleGunReloaded(PlayerController player, Gun playerGun)
         {
             DoSafeExplosion(Owner.specRigidbody.UnitCenter);

@@ -40,7 +40,9 @@ namespace NevernamedsItems
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D;
             //item.AddToSubShop(ItemBuilder.ShopType.Cursula);
+            GunpowderPheromonesID = item.PickupObjectId;
         }
+        public static int GunpowderPheromonesID;
         public static List<string> explosiveKin = new List<string>()
         {
             EnemyGuidDatabase.Entries["brollet"],

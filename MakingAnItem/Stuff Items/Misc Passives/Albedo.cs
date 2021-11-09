@@ -19,7 +19,7 @@ namespace NevernamedsItems
             var item = obj.AddComponent<Albedo>();
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
             string shortDesc = "Clarity";
-            string longDesc = "Speeds up Glass Guon Stones."+"\n\nThe second phase of the prime materia's transition into the Philosopher's Stone, where the murky darkness of the Nigredo is purified into a lunarily charged clarity.";
+            string longDesc = "Speeds up Glass Guon Stones." + "\n\nThe second phase of the prime materia's transition into the Philosopher's Stone, where the murky darkness of the Nigredo is purified into a lunarily charged clarity.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.C;
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
@@ -31,17 +31,17 @@ namespace NevernamedsItems
         protected override void Update()
         {
             base.Update();
-            if (Owner && Owner.orbitals.Count > 0)
+            if (Owner && Owner.orbitals.Count >= 0)
             {
                 float currentOrbitals = Owner.orbitals.Count();
                 if (currentOrbitals != lastOrbitals)
                 {
-                    UpdateOrbitals();
+                    if (currentOrbitals > 0) UpdateOrbitals();
                     lastOrbitals = currentOrbitals;
                 }
                 if (hadSynergyLastChecked != Owner.PlayerHasActiveSynergy("White Ethesia"))
                 {
-                    UpdateOrbitals();
+                    if (currentOrbitals > 0) UpdateOrbitals();
                     hadSynergyLastChecked = Owner.PlayerHasActiveSynergy("White Ethesia");
                 }
             }
@@ -123,7 +123,7 @@ namespace NevernamedsItems
         public override DebrisObject Drop(PlayerController player)
         {
             GameManager.Instance.OnNewLevelFullyLoaded -= this.NewFloor;
-         if (!(player.GetNumberOfItemInInventory(Albedo.AlbedoID) > 1))   ResetOrbitals(player);
+            if (!(player.GetNumberOfItemInInventory(Albedo.AlbedoID) > 1)) ResetOrbitals(player);
             return base.Drop(player);
         }
         protected override void OnDestroy()

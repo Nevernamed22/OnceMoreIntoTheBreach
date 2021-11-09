@@ -184,7 +184,7 @@ namespace NevernamedsItems
         private BeamController beamController;
         private PlayerController owner;
     } //Makes the end of the beam explode!
-    public class EmmisiveBeams : MonoBehaviour
+    internal class EmmisiveBeams : MonoBehaviour
     {
         public EmmisiveBeams()
         {
@@ -193,14 +193,22 @@ namespace NevernamedsItems
         }
         public void Start()
         {
-            Transform trna = base.transform.Find("beam impact vfx");
-            tk2dSprite sproot = trna.GetComponent<tk2dSprite>();
-            if (sproot != null)
+            Shader glowshader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTiltedCutoutEmissive");
+
+            foreach (Transform transform in base.transform)
             {
-                sproot.renderer.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
-                sproot.renderer.material.EnableKeyword("BRIGHTNESS_CLAMP_ON");
-                sproot.renderer.material.SetFloat("_EmissivePower", EmissivePower);
-                sproot.renderer.material.SetFloat("_EmissiveColorPower", EmissiveColorPower);
+                if (TransformList.Contains(transform.name))
+                {
+                    tk2dSprite sproot = transform.GetComponent<tk2dSprite>();
+                    if (sproot != null)
+                    {
+                        sproot.usesOverrideMaterial = true;
+                        sproot.renderer.material.shader = glowshader;
+                        sproot.renderer.material.EnableKeyword("BRIGHTNESS_CLAMP_ON");
+                        sproot.renderer.material.SetFloat("_EmissivePower", EmissivePower);
+                        sproot.renderer.material.SetFloat("_EmissiveColorPower", EmissiveColorPower);
+                    }
+                }
             }
             this.beamcont = base.GetComponent<BasicBeamController>();
             BasicBeamController beam = this.beamcont;
@@ -210,13 +218,41 @@ namespace NevernamedsItems
             bool flag2 = flag;
             if (flag2)
             {
-                component.sprite.renderer.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
+                component.sprite.renderer.material.shader = glowshader;
                 component.sprite.renderer.material.EnableKeyword("BRIGHTNESS_CLAMP_ON");
                 component.sprite.renderer.material.SetFloat("_EmissivePower", EmissivePower);
                 component.sprite.renderer.material.SetFloat("_EmissiveColorPower", EmissiveColorPower);
-
             }
         }
+
+
+        private List<string> TransformList = new List<string>()
+        {
+            "Sprite",
+            "beam impact vfx 2",
+            "beam impact vfx",
+        };
+
+
+        public void Update()
+        {
+
+            Shader glowshader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTiltedCutoutEmissive");
+            Transform trna = base.transform.Find("beam pierce impact vfx");
+            if (trna != null)
+            {
+                tk2dSprite sproot = trna.GetComponent<tk2dSprite>();
+                if (sproot != null)
+                {
+                    sproot.renderer.material.shader = glowshader;
+                    sproot.renderer.material.EnableKeyword("BRIGHTNESS_CLAMP_ON");
+                    sproot.renderer.material.SetFloat("_EmissivePower", EmissivePower);
+                    sproot.renderer.material.SetFloat("_EmissiveColorPower", EmissiveColorPower);
+                }
+            }
+
+        }
+
         private BasicBeamController beamcont;
         public float EmissivePower;
         public float EmissiveColorPower;

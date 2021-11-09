@@ -38,8 +38,9 @@ namespace NevernamedsItems
             item.IsKageBunshinItem = false;
 
             item.quality = PickupObject.ItemQuality.D;
+            InfantryGrenadeID = item.PickupObjectId;
         }
-
+        public static int InfantryGrenadeID;
 
         public static GameObject BuildPrefab()
         {

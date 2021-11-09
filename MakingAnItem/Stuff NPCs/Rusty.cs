@@ -11,14 +11,43 @@ namespace NevernamedsItems
 {
     public static class Rusty
     {
+        public static GenericLootTable RustyLootTable;
         public static void Init()
         {
-            ETGMod.Databases.Strings.Core.Set("#RUSTY_GENERIC_TALK", "I sell, yes, you! Buy! Cash yes money yes yes yes!");
-            ETGMod.Databases.Strings.Core.Set("#RUSTY_STOPPER_TALK", "You are boring. Rusty is bored yes bored no yes");
-            ETGMod.Databases.Strings.Core.Set("#RUSTY_PURCHASE_TALK", "YesYes! Deal Yes! Buy!");
-            ETGMod.Databases.Strings.Core.Set("#RUSTY_NOSALE_TALK", "No. TooCheap. Even for me, hehehehehehh");
-            ETGMod.Databases.Strings.Core.Set("#RUSTY_INTRO_TALK", "Oh! You are back! Yes! Heheh! BuyBuy!");
-            ETGMod.Databases.Strings.Core.Set("#RUSTY_ATTACKED_TALK", "Rusty no die. Rusty live forever.");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_GENERIC_TALK", "I sell, yes, you! Buy! Cash yes money yes yes yes!");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_GENERIC_TALK", "Rusty sells trash people throw at him. Make easy money. Heheh. Fools.");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_GENERIC_TALK", "You want to talk to Rusty? Nobody ever talks to Rusty.");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_GENERIC_TALK", "I used to be taaaaall once, yes, yes. Taaaall, and red. Red.");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_GENERIC_TALK", "They laugh at Rusty, yes... they all laugh...");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_GENERIC_TALK", "Rusty has seen things... things you are not ready to see.");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_GENERIC_TALK", "Chambers lurk below. Places you've never seen. Perhaps you will be ready one day, yes.");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_GENERIC_TALK", "Don't trust the mad bullet Alhazard. Rusty trusted him, and is now Rusty.");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_GENERIC_TALK", "What is it like. To have skin. Rusty wonders?");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_GENERIC_TALK", "One day you and Rusty will be not so different, rustythinks yes.");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_GENERIC_TALK", "One day, the skies will run black with the ichor of ages, and all will be unloaded...  what?");
+
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_STOPPER_TALK", "You are boring. Rusty is bored yes bored no yes");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_STOPPER_TALK", "Rusty has no more to say to you, no, no.");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_STOPPER_TALK", "Mmmmm, yesyesyesyesyesyesyes.");
+
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_PURCHASE_TALK", "YesYes! Deal Yes! Buy!");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_PURCHASE_TALK", "A good choice, yes!");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_PURCHASE_TALK", "A poor choice, yes!");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_PURCHASE_TALK", "Rusty lives another day.");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_PURCHASE_TALK", "Rusty will buy a new can of polish!");
+
+
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_NOSALE_TALK", "No. TooCheap. Even for me, hehehehehehh");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_NOSALE_TALK", "Cash, upfront. No credit.");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_NOSALE_TALK", "Rusty no give credit. You come back when you're richer!");
+
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_INTRO_TALK", "Oh! You are back! Yes! Heheh! BuyBuy!");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_INTRO_TALK", "You Live! Rusty is Glad! Yes!");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_INTRO_TALK", "Wallet person returns, yes, with wallet gold?");
+
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_ATTACKED_TALK", "Rusty no die. Rusty live forever.");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_ATTACKED_TALK", "If killing Rusty was that easy, Rusty would be dead.");
+            ETGMod.Databases.Strings.Core.AddComplex("#RUSTY_ATTACKED_TALK", "Rusty think you are a %&**@. Yes.");
 
             List<int> LootTable = new List<int>()
             {
@@ -92,7 +121,7 @@ namespace NevernamedsItems
                 HeatRay.HeatRayID,
             };
 
-            GenericLootTable RustyLootTable = LootTableTools.CreateLootTable();
+            RustyLootTable = LootTableTools.CreateLootTable();
             foreach (int i in LootTable)
             {
                 RustyLootTable.AddItemToPool(i);
@@ -121,20 +150,32 @@ namespace NevernamedsItems
                          },
                          12,
                          RustyLootTable,
-                         BaseShopController.AdditionalShopType.TRUCK,
+                         CustomShopItemController.ShopCurrencyType.COINS,
                          "#RUSTY_GENERIC_TALK",
                          "#RUSTY_STOPPER_TALK",
                          "#RUSTY_PURCHASE_TALK",
                          "#RUSTY_NOSALE_TALK",
                          "#RUSTY_INTRO_TALK",
                          "#RUSTY_ATTACKED_TALK",
+                         Vector3.zero,
+                         ItsDaFuckinShopApi.defaultItemPositions,
                          0.5f,
+                         false,
+                         null,
+                         null,
+                         null,
+                         null,
+                         null,
+                         null,
+                         null,
+                         null,
+                         true,
                          true,
                          "NevernamedsItems/Resources/NPCSprites/Rusty/rustycarpet"
                          );
 
             PrototypeDungeonRoom Mod_Shop_Room = RoomFactory.BuildFromResource("NevernamedsItems/Resources/EmbeddedRooms/RustyRoom.room").room;
-            ItsDaFuckinShopApi.RegisterShopRoom(rustyObj, Mod_Shop_Room, new UnityEngine.Vector2(-2.5f, -3));
+            ItsDaFuckinShopApi.RegisterShopRoom(rustyObj, Mod_Shop_Room, new UnityEngine.Vector2(7f, 6));
         }
     }
 }

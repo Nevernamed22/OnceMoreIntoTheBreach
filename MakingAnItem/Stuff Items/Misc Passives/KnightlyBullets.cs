@@ -23,7 +23,9 @@ namespace NevernamedsItems
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.C;
             item.CanBeDropped = true;
+            KnightlyBulletsID = item.PickupObjectId;
         }
+        public static int KnightlyBulletsID;
         private RoomHandler lastCheckedRoom;
         protected override void Update()
         {

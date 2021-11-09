@@ -43,7 +43,7 @@ namespace NevernamedsItems
             gun.SetBaseMaxAmmo(2500);
             gun.ammo = 2500;
             gun.gunClass = GunClass.FULLAUTO;
-
+            
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).frames[0].eventAudio = "Play_MouthPopSound";
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).frames[0].triggerEvent = true;
 

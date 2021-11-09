@@ -28,7 +28,9 @@ namespace NevernamedsItems
 
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.B;
+            TinHeartID = item.PickupObjectId;
         }
+        public static int TinHeartID;
         private void ModifyDamage(HealthHaver player, HealthHaver.ModifyDamageEventArgs args)
         {
             if (player.gameActor is PlayerController)

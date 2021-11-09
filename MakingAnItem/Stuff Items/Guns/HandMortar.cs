@@ -65,7 +65,9 @@ namespace NevernamedsItems
             gun.encounterTrackable.EncounterGuid = "this is the Hand Mortar";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
+            ID = gun.PickupObjectId;
         }
+        public static int ID;
         static ExplosionData bigExplosion = GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultExplosionData;
         static ExplosionData HandMortarExplosion = new ExplosionData()
         {

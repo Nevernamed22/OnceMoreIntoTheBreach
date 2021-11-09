@@ -19,7 +19,7 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:spear_of_justice", "nn:spear_of_justice");
             gun.gameObject.AddComponent<SpearOfJustice>();
             gun.SetShortDescription("NGAH!");
-            gun.SetLongDescription("Weapon of an ancient gundead warrior, who believed she could escape the Gungeon by harnessing the power of Gungeoneer souls."+"\n\nShe never achieved her goal.");
+            gun.SetLongDescription("Weapon of an ancient gundead warrior, who believed she could escape the Gungeon by harnessing the power of Gungeoneer souls." + "\n\nShe never achieved her goal.");
 
             gun.SetupSprite(null, "spearofjustice_idle_001", 8);
 
@@ -118,23 +118,26 @@ namespace NevernamedsItems
         protected override void Update()
         {
             base.Update();
-            PlayerController player = gun.CurrentOwner as PlayerController;
-            if (player.PlayerHasActiveSynergy("Undying"))
+            if (gun && gun.GunPlayerOwner())
             {
-                if (gun.DefaultModule.cooldownTime == 0.5f)
+                if (gun.GunPlayerOwner().PlayerHasActiveSynergy("Undying"))
                 {
-                    gun.DefaultModule.cooldownTime = 0.25f;
-                    gun.SetBaseMaxAmmo(400);
+                    if (gun.DefaultModule.cooldownTime == 0.5f)
+                    {
+                        gun.DefaultModule.cooldownTime = 0.25f;
+                        gun.SetBaseMaxAmmo(400);
+                    }
+                }
+                else
+                {
+                    if (gun.DefaultModule.cooldownTime == 0.25f)
+                    {
+                        gun.DefaultModule.cooldownTime = 0.5f;
+                        gun.SetBaseMaxAmmo(200);
+                    }
                 }
             }
-            else
-            {
-                if (gun.DefaultModule.cooldownTime == 0.25f)
-                {
-                    gun.DefaultModule.cooldownTime = 0.5f;
-                    gun.SetBaseMaxAmmo(200);
-                }
-            }
+
         }
         public SpearOfJustice()
         {

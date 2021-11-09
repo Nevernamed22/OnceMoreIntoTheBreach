@@ -184,6 +184,7 @@ namespace NevernamedsItems
             RainbowGuonStone.IndigoGuonTransitionVFX = CreateVFX("IndigoGuonPoof", IndigoPoofPaths, 14, new IntVector2(21, 22), tk2dBaseSprite.Anchor.MiddleCenter, false, 0);
             #endregion
         }
+        
         public static void DoStringSquirt(string text, Vector2 point, Color colour, float heightOffGround = 3f, float opacity = 1f)
         {
 
@@ -366,7 +367,7 @@ namespace NevernamedsItems
             pool.effects = new VFXComplex[] { complex };
             return complex;
         }
-        public static VFXPool CreateVFXPool(string name, List<string> spritePaths, int fps, IntVector2 Dimensions, tk2dBaseSprite.Anchor anchor, bool usesZHeight, float zHeightOffset, bool persist = false, float emissivePower = -1, Color? emissiveColour = null)
+        public static VFXPool CreateVFXPool(string name, List<string> spritePaths, int fps, IntVector2 Dimensions, tk2dBaseSprite.Anchor anchor, bool usesZHeight, float zHeightOffset, bool persist = false, VFXAlignment alignment = VFXAlignment.NormalAligned, float emissivePower = -1, Color? emissiveColour = null)
         {
             GameObject Obj = new GameObject(name);
             VFXPool pool = new VFXPool();
@@ -428,7 +429,7 @@ namespace NevernamedsItems
             vfObj.persistsOnDeath = persist;
             vfObj.usesZHeight = usesZHeight;
             vfObj.zHeight = zHeightOffset;
-            vfObj.alignment = VFXAlignment.NormalAligned;
+            vfObj.alignment = alignment;
             vfObj.destructible = false;
             vfObj.effect = Obj;
             complex.effects = new VFXObject[] { vfObj };

@@ -41,6 +41,12 @@ namespace NevernamedsItems
         public WholeAnimationData flightAnimation;
         public WholeAnimationData talkAnimation;
         public WholeAnimationData fidgetAnimation;
+        //Extra animations
+        public WholeAnimationData deathAnimation;
+        public WholeAnimationData pitfallAnimation;
+        public WholeAnimationData spawnAnimation;
+        public WholeAnimationData awakenAnimation;
+        //Other
         public List<WholeAnimationData> otherAnimations;
     }
     public class WholeAnimationData
@@ -401,6 +407,12 @@ namespace NevernamedsItems
                     ANIMATIONADDERS += spriteBuilderSegment;
                 }
             }
+            //Add weird animations to Otheranimations
+            if (Animations.deathAnimation != null) Animations.otherAnimations.Add(Animations.deathAnimation);
+            if (Animations.pitfallAnimation != null) Animations.otherAnimations.Add(Animations.pitfallAnimation);
+            if (Animations.spawnAnimation != null) Animations.otherAnimations.Add(Animations.spawnAnimation);
+            if (Animations.awakenAnimation != null) Animations.otherAnimations.Add(Animations.awakenAnimation);
+
             if (Animations.otherAnimations != null && Animations.otherAnimations.Count > 0)
             {
                 OTHERANIMINSERINSERT = SetupOtherAnimationSegments(Animations.otherAnimations);

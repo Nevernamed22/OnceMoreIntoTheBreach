@@ -58,6 +58,16 @@ namespace NevernamedsItems
 				return false;
 			}
 		}
+		/*
+		 string.Concat(new string[]
+				{
+					text2,
+					" (",
+					(this.Costs[0].cost * PlayerStats.GetTotalCurse()).ToString(),
+					" ",
+					StringTableManager.GetString("#COINS"),
+					")"
+				});*/
 
 		public static void Accept(PlayerController player, GameObject shrine)
 		{

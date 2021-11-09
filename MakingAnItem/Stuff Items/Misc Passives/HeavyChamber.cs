@@ -25,6 +25,8 @@ namespace NevernamedsItems
 
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.B;
+            HeavyChamberID = item.PickupObjectId;
         }
+        public static int HeavyChamberID;
     }
 }

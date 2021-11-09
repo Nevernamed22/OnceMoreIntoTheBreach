@@ -293,7 +293,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("Knockback", mandatorySynergyItemsKnockback, optionalSynergyItemsKnockback);
             //DIAMOND GUN - SHARPNESS
             List<string> mandatorySynergyItemsSharpness = new List<string>() { "nn:diamond_gun" };
-            List<string> optionalSynergyItemsSharpness = new List<string>() { "knife_shield", "katana_bullets", "vorpal_bullets", "excaliber" };
+            List<string> optionalSynergyItemsSharpness = new List<string>() { "knife_shield", "katana_bullets", "vorpal_bullets", "excaliber", "nn:longsword_shot" };
             CustomSynergies.Add("Sharpness", mandatorySynergyItemsSharpness, optionalSynergyItemsSharpness);
             //COPPER AMMOLET / LANTAKA - BROTHERS IN COPPER
             List<string> mandatorySynergyItemsBrothersInCopper = new List<string>() { "copper_ammolet" };
@@ -439,7 +439,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("Dirty Tricks", mandatorySynergyItemsDirtyTricks, optionalSynergyItemsDirtyTricks);
             //VACUUM GUN / TRANSMOG ITEMS
             List<string> mandatorySynergyItemsChickadoo = new List<string>() { "nn:vacuum_gun" };
-            List<string> optionalSynergyItemsChickadoo = new List<string>() { "magic_bullets", "bundle_of_wands", "witch_pistol", "hexagun" };
+            List<string> optionalSynergyItemsChickadoo = new List<string>() { "magic_bullets", "bundle_of_wands", "witch_pistol", "hexagun", "nn:fowl_ring" };
             CustomSynergies.Add("Chickadoo", mandatorySynergyItemsChickadoo, optionalSynergyItemsChickadoo);
             //BOOKLLET / ANTIMAGIC ROUNDS / MAGIC BULLETS / +1 BULLETS / ALCHEMY CRUCIBLE
             List<string> mandatorySynergyItemsAdvancedAmmomancy = new List<string>() { "nn:bookllet" };
@@ -1350,6 +1350,69 @@ namespace NevernamedsItems
             //REBONDIR / RICO
             List<string> mandatorySynergyItemsSuperBounceBros = new List<string>() { "nn:rebondir", "nn:rico" };
             CustomSynergies.Add("Super Bounce Bros", mandatorySynergyItemsSuperBounceBros);
+            //POP GUN / SHOTGA COLA
+            List<string> mandatorySynergyItemsSodaPop = new List<string>() { "nn:pop_gun", "shotga_cola" };
+            AdvancedSynergyEntry SodaPop = CustomSynergies.Add("Soda Pop", mandatorySynergyItemsSodaPop);
+            SodaPop.ActiveWhenGunUnequipped = false;
+            StatModifier SodaPopDMG = new StatModifier()
+            {
+                amount = 2f,
+                statToBoost = PlayerStats.StatType.ProjectileSpeed,
+                modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+            };
+            SodaPop.statModifiers.Add(SodaPopDMG);
+            //DIAMOND CUTTER / RANGER ITEMS
+            List<string> mandatorySynergyItemsRangerClass = new List<string>() { "nn:diamond_cutter" };
+            List<string> optionalSynergyItemsRangerClass = new List<string>() { "bow", "nn:magic_quiver", "nn:ranger" };
+            CustomSynergies.Add("Ranger Class", mandatorySynergyItemsRangerClass, optionalSynergyItemsRangerClass);
+            //STICK GUN / QUICK, DRAW!
+            List<string> mandatorySynergyItemsQuickDraw = new List<string>() { "nn:stick_gun" };
+            List<string> optionalSynergyItemsQuickDraw = new List<string>() { "nn:pencil", "hip_holster" };
+            CustomSynergies.Add("Quick, Draw!", mandatorySynergyItemsQuickDraw, optionalSynergyItemsQuickDraw);
+            //BOXING GLOVE / JOKES
+            List<string> mandatorySynergyItemsPunchLine = new List<string>() { "boxing_glove" };
+            List<string> optionalSynergyItemsPunchLine = new List<string>() { "nn:clown_shotgun", "clown_mask", "jk47" };
+            CustomSynergies.Add("Punch Line", mandatorySynergyItemsPunchLine, optionalSynergyItemsPunchLine);
+            //BOXING GLOVE / ICE
+            List<string> mandatorySynergyItemsNorthStar = new List<string>() { "boxing_glove" };
+            List<string> optionalSynergyItemsNorthStar = new List<string>() { "frost_bullets" };
+            CustomSynergies.Add("North Star", mandatorySynergyItemsNorthStar, optionalSynergyItemsNorthStar);
+            //COPPER SIDEARM / COPPER AMMOLET
+            List<string> mandatorySynergyItemsCopOut = new List<string>() { "nn:copper_sidearm", "copper_ammolet" };
+            CustomSynergies.Add("Cop-Out", mandatorySynergyItemsCopOut);
+            //MARBLED UZI / EYES
+            List<string> mandatorySynergyItemsGorgunsGaze = new List<string>() { "nn:marbled_uzi" };
+            List<string> optionalSynergyItemsGorgunsGaze = new List<string>() { "nn:kalibers_eye", "nn:bloodshot_eye", "bloody_eye", "nn:shades_eye", "nn:cartographers_eye", "eye_of_the_beholster" };
+            CustomSynergies.Add("Gorgun's Gaze", mandatorySynergyItemsGorgunsGaze, optionalSynergyItemsGorgunsGaze);
+            //LIGHTNING ROD / ELECTRIC ITEMS
+            List<string> mandatorySynergyItemsStormRod = new List<string>() { "nn:lightning_rod" };
+            List<string> optionalSynergyItemsStormRod = new List<string>() { "shock_rounds", "thunderclap", "sunlight_javelin" };
+            CustomSynergies.Add("Storm Rod", mandatorySynergyItemsStormRod, optionalSynergyItemsStormRod);
+            //RUSTY SHOTGUN
+            List<string> mandatorySynergyItemsProperCareAndMaintenance = new List<string>() { "nn:rusty_shotgun" };
+            List<string> optionalSynergyItemsProperCareAndMaintenance = new List<string>() { "nn:gun_grease", "sponge", "nn:toolbox" };
+            CustomSynergies.Add("Proper Care & Maintenance", mandatorySynergyItemsProperCareAndMaintenance, optionalSynergyItemsProperCareAndMaintenance);
+            //RUSTY SHOTGUN / RUST IN PEACE
+            List<string> mandatorySynergyItemsRustInPeace = new List<string>() { "nn:rusty_shotgun" };
+            List<string> optionalSynergyItemsRustInPeace = new List<string>() { "nn:rusty_casing" };
+            AdvancedSynergyEntry RustInPeace = CustomSynergies.Add("Rust In Peace", mandatorySynergyItemsRustInPeace, optionalSynergyItemsRustInPeace);
+            RustInPeace.ActiveWhenGunUnequipped = false;
+            RustInPeace.statModifiers.Add(new StatModifier()
+            {
+                amount = 1.2f,
+                statToBoost = PlayerStats.StatType.RateOfFire,
+                modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+            });
+            RustInPeace.statModifiers.Add(new StatModifier()
+            {
+                amount = 2f,
+                statToBoost = PlayerStats.StatType.AdditionalClipCapacityMultiplier,
+                modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+            });
+            //CLICKER / ONE CLICK AWAY
+            List<string> mandatorySynergyItemsOneClickAway = new List<string>() { "nn:clicker" };
+            List<string> optionalSynergyItemsOneClickAway = new List<string>() { "nn:big_shot", "mailbox" };
+            CustomSynergies.Add("One Click Away!", mandatorySynergyItemsOneClickAway, optionalSynergyItemsOneClickAway);
             #endregion
         }
 

@@ -40,8 +40,9 @@ namespace NevernamedsItems
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.B;
             item.AddToSubShop(ItemBuilder.ShopType.Flynt);
+          KeyBulwarkID =  item.PickupObjectId;
         }
-
+        public static int KeyBulwarkID;
         private void OnNewFloor()
         {
             PlayerController player = this.Owner;

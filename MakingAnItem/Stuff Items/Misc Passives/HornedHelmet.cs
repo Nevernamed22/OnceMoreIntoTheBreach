@@ -40,8 +40,9 @@ namespace NevernamedsItems
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.B;
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
+            HornedHelmetID = item.PickupObjectId;
         }
-
+        public static int HornedHelmetID;
         public override void Pickup(PlayerController player)
         {
             player.OnEnteredCombat += this.OnEnteredCombat;

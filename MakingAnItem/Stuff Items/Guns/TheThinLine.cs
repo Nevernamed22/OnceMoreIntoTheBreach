@@ -114,7 +114,9 @@ namespace NevernamedsItems
 
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_THETHINLINE, true);
             gun.AddItemToDougMetaShop(25);
+            ID = gun.PickupObjectId;
         }
+        public static int ID;
         public static ExplosionData DataForProjectiles = null;
         protected override void OnPickedUpByPlayer(PlayerController player)
         {

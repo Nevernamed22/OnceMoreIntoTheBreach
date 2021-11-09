@@ -141,7 +141,9 @@ namespace NevernamedsItems
             highPressurePoison.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(highPressurePoison.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(highPressurePoison);
+            ID = gun.PickupObjectId;
         }
+        public static int ID;
         public static Projectile highPressureBeam;
         public static Projectile highPressurePoison;
         public static ExplosionData bottleRocketBoom;

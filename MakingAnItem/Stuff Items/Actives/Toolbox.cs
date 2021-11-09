@@ -97,8 +97,6 @@ namespace NevernamedsItems
             AIActor randomActiveEnemy = room.GetRandomActiveEnemy(true);
             if (randomActiveEnemy.IsNormalEnemy && randomActiveEnemy.healthHaver && !randomActiveEnemy.healthHaver.IsBoss)
             {
-                Vector2 vector = (!randomActiveEnemy.specRigidbody) ? randomActiveEnemy.sprite.WorldBottomLeft : randomActiveEnemy.specRigidbody.UnitBottomLeft;
-                Vector2 vector2 = (!randomActiveEnemy.specRigidbody) ? randomActiveEnemy.sprite.WorldTopRight : randomActiveEnemy.specRigidbody.UnitTopRight;
                 UnityEngine.Object.Instantiate<GameObject>(EasyVFXDatabase.TeleporterPrototypeTelefragVFX, randomActiveEnemy.CenterPosition.ToVector3ZisY(0f), Quaternion.identity);
                 randomActiveEnemy.healthHaver.ApplyDamage(100000f, Vector2.zero, "His Grace", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
             }

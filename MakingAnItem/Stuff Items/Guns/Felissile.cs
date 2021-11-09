@@ -82,7 +82,9 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.B; //A
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
+            ID = gun.PickupObjectId;
         }
+        public static int ID;
         protected override void OnPickedUpByPlayer(PlayerController player)
         {
             base.OnPickedUpByPlayer(player);

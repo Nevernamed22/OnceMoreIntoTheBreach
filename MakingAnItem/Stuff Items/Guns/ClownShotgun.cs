@@ -13,14 +13,14 @@ namespace NevernamedsItems
 
     public class ClownShotgun : AdvancedGunBehavior
     {
-
-
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Clown Shotgun", "clownshotgun");
             Game.Items.Rename("outdated_gun_mods:clown_shotgun", "nn:clown_shotgun");
             var behav = gun.gameObject.AddComponent<ClownShotgun>();
             behav.preventNormalFireAudio = true;
+            behav.overrideNormalFireAudio = "Play_ClownHonk";
+            //behav.preventNormalFireAudio = true;
             gun.SetShortDescription("Honk Honk");
             gun.SetLongDescription("Filled to an excessive degree with bouncing shells. Once belonged to a real, genuine, pure-bred clown." + "\n\nAn essential tool in any clown's arsenal, along with a cute little car, a hula hoop, and space lubricant.");
 

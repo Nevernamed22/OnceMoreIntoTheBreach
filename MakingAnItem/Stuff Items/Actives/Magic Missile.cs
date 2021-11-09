@@ -46,7 +46,9 @@ namespace NevernamedsItems
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_MAGICMISSILE, true);
             item.AddItemToDougMetaShop(20);
 
+            ID = item.PickupObjectId;
         }
+        public static int ID;
         public bool isGivingDarknessImmunity = false;
         public override void Pickup(PlayerController player)
         {

@@ -82,8 +82,13 @@
     <Compile Include="GungeonAPI\Shrine API\ReloadBreachShrineHooks.cs" />
     <Compile Include="ItemAPI\CustomClipAmmoTypeToolbox.cs" />
     <Compile Include="ItemAPI\ThrowableAPI.cs" />
+    <Compile Include="NPCAPI\CustomShopController.cs" />
+    <Compile Include="NPCAPI\CustomShopItemController.cs" />
+    <Compile Include="NPCAPI\Examples.cs" />
+    <Compile Include="NPCAPI\Hooks.cs" />
+    <Compile Include="NPCAPI\ItsDaFuckinShopApi.cs" />
     <Compile Include="NPCAPI\LootTableTools.cs" />
-    <Compile Include="NPCAPI\NPCAPI.cs" />
+    <Compile Include="NPCAPI\NpcTools.cs" />
     <Compile Include="OMITB Companions\AdvEnemyBuilder.cs" />
     <Compile Include="OMITB Companions\BabyGoodDet.cs" />
     <Compile Include="OMITB Companions\MolotovBuddy.cs" />
@@ -92,6 +97,7 @@
     <Compile Include="OMITB Extensions and Hooks\ExplosionHooks.cs" />
     <Compile Include="OMITB Misc Game Changers\Curses.cs" />
     <Compile Include="OMITB Misc Toolboxes\AdvancedLogging.cs" />
+    <Compile Include="OMITB Misc Toolboxes\AnimationToolbox.cs" />
     <Compile Include="OMITB Misc Toolboxes\BeamComponents.cs" />
     <Compile Include="OMITB Misc Toolboxes\CustomDarknessHandler.cs" />
     <Compile Include="OMITB Misc Toolboxes\DeconstructHitEffects.cs" />
@@ -103,6 +109,7 @@
     <Compile Include="Stuff Items\Actives\InfantryGrenade.cs" />
     <Compile Include="Stuff Items\Actives\Lvl2Molotov.cs" />
     <Compile Include="Stuff Items\Actives\NecromancersRightHand.cs" />
+    <Compile Include="Stuff Items\Actives\TackShooter.cs" />
     <Compile Include="Stuff Items\Ammolets\BronzeAmmolet.cs" />
     <Compile Include="Stuff Items\Ammolets\HepatizonAmmolet.cs" />
     <Compile Include="Stuff Items\Ammolets\NeutroniumAmmolet.cs" />
@@ -114,6 +121,7 @@
     <Compile Include="Stuff Items\Guns\Beams\CarrionFormeThree.cs" />
     <Compile Include="Stuff Items\Guns\Beams\CarrionFormeTwo.cs" />
     <Compile Include="Stuff Items\Guns\Beams\Converter.cs" />
+    <Compile Include="Stuff Items\Guns\Beams\LightningRod.cs" />
     <Compile Include="Stuff Items\Guns\Beams\Rico.cs" />
     <Compile Include="Stuff Items\Guns\Beams\SickWorm.cs" />
     <Compile Include="Stuff Items\Guns\Beams\WallRay.cs" />
@@ -122,24 +130,38 @@
     <Compile Include="Stuff Items\Guns\BioTranstater2100.cs" />
     <Compile Include="Stuff Items\Guns\BolaGun.cs" />
     <Compile Include="Stuff Items\Guns\BottleRocket.cs" />
+    <Compile Include="Stuff Items\Guns\BurstRifle.cs" />
     <Compile Include="Stuff Items\Guns\ChromaGun.cs" />
+    <Compile Include="Stuff Items\Guns\Clicker.cs" />
+    <Compile Include="Stuff Items\Guns\CopperSidearm.cs" />
+    <Compile Include="Stuff Items\Guns\DiamondCutter.cs" />
     <Compile Include="Stuff Items\Guns\DoubleGun.cs" />
+    <Compile Include="Stuff Items\Guns\ElysiumCannon.cs" />
     <Compile Include="Stuff Items\Guns\GayK47.cs" />
     <Compile Include="Stuff Items\Guns\Glazerbeam.cs" />
     <Compile Include="Stuff Items\Guns\GrenadeShotgun.cs" />
     <Compile Include="Stuff Items\Guns\InitiateWand.cs" />
+    <Compile Include="Stuff Items\Guns\MarbledUzi.cs" />
     <Compile Include="Stuff Items\Guns\MarchGun.cs" />
+    <Compile Include="Stuff Items\Guns\OlReliable.cs" />
     <Compile Include="Stuff Items\Guns\Pandephonium.cs" />
     <Compile Include="Stuff Items\Guns\Paraglocks.cs" />
+    <Compile Include="Stuff Items\Guns\PopGun.cs" />
     <Compile Include="Stuff Items\Guns\PortalGun.cs" />
     <Compile Include="Stuff Items\Guns\RC360.cs" />
     <Compile Include="Stuff Items\Guns\RebarGun.cs" />
     <Compile Include="Stuff Items\Guns\Rebondir.cs" />
+    <Compile Include="Stuff Items\Guns\RustyShotgun.cs" />
     <Compile Include="Stuff Items\Guns\SaltGun.cs" />
     <Compile Include="Stuff Items\Guns\St4ke.cs" />
     <Compile Include="Stuff Items\Guns\StarterPistol.cs" />
+    <Compile Include="Stuff Items\Guns\StickGun.cs" />
+    <Compile Include="Stuff Items\Guns\Synergy Formes\DiamondCutterRangerClass.cs" />
     <Compile Include="Stuff Items\Guns\Synergy Formes\DiamondGaxe.cs" />
     <Compile Include="Stuff Items\Guns\Synergy Formes\RedRebondir.cs" />
+    <Compile Include="Stuff Items\Guns\Synergy Formes\StickGunQuickDraw.cs" />
+    <Compile Include="Stuff Items\Guns\Synergy Formes\StormRod.cs" />
+    <Compile Include="Stuff Items\Guns\Synergy Formes\UnrustyShotgun.cs" />
     <Compile Include="Stuff Items\Guns\Synergy Formes\UterinePolypWombular.cs" />
     <Compile Include="Stuff Items\Guns\TauCannon.cs" />
     <Compile Include="Stuff Items\Guns\TheBride.cs" />
@@ -390,7 +412,10 @@
     <Compile Include="Stuff Items\Misc Passives\EmptyRounds.cs" />
     <Compile Include="Stuff Items\Misc Passives\EndlessBullets.cs" />
     <Compile Include="ExampleGun.cs" />
+    <Compile Include="Stuff NPCs\Boomhildr.cs" />
     <Compile Include="Stuff NPCs\Carto.cs" />
+    <Compile Include="Stuff NPCs\CrossmodNPCLootPoolSetup.cs" />
+    <Compile Include="Stuff NPCs\Ironside.cs" />
     <Compile Include="Stuff NPCs\Rusty.cs" />
     <Compile Include="Stuff Shrines\ArtemissileShrine.cs" />
     <Compile Include="Stuff Shrines\DagunShrine.cs" />
@@ -522,6 +547,8 @@
     <Compile Include="Stuff Items\Guns\StasisRifle.cs" />
     <Compile Include="Stuff Items\Table Techs\TableTechNology.cs" />
     <Compile Include="Stuff Tweaks\ComplexProjModBeamCompatibility.cs" />
+    <Compile Include="Stuff Tweaks\Passive Item Tweaks\iBombChanges.cs" />
+    <Compile Include="Stuff Tweaks\Passive Item Tweaks\NapalmStrikeChanges.cs" />
     <Compile Include="StuffIStoleFromApacheThatIDontUnderstand.cs" />
     <Compile Include="Stuff Items\Guns\StunGun.cs" />
     <Compile Include="SynergyFormInitialiser.cs" />
@@ -3315,7 +3342,125 @@
     <EmbeddedResource Include="Resources\CustomGunAmmoTypes\butchersknife_clipfull.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\popgun_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\popgun_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\diamondcutter_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\diamondcutter_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\reddiamondcutter_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\stickgun_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\stickgun_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\StickGun\stickgun_enemyimpact_001.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\StickGun\stickgun_enemyimpact_002.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\StickGun\stickgun_enemyimpact_003.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\StickGun\stickgun_enemyimpact_004.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\StickGun\stickgun_impact_001.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\StickGun\stickgun_impact_002.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\StickGun\stickgun_impact_003.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\StickGun\stickgun_impact_004.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\StickGun\stickgun_muzzleflash_001.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\StickGun\stickgun_muzzleflash_002.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\StickGun\stickgun_muzzleflash_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\StickGun\stickgun_tilemaphoriz_001.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\StickGun\stickgun_tilemaphoriz_002.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\StickGun\stickgun_tilemaphoriz_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\StickGun\stickgun_tilemapvert_001.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\StickGun\stickgun_tilemapvert_002.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\StickGun\stickgun_tilemapvert_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\coppersidearm_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\coppersidearm_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BeamSprites\stormrodbeam_impact_001.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\stormrodbeam_impact_002.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\stormrodbeam_impact_003.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\stormrodbeam_impact_004.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\stormrodbeam_mid_001.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\stormrodbeam_mid_002.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\stormrodbeam_mid_003.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\stormrodbeam_mid_004.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\stormrodbeam_start_001.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\stormrodbeam_start_002.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\stormrodbeam_start_003.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\stormrodbeam_start_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NPCSprites\Ironside\ironside_carpet.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Ironside\ironside_idle_001.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Ironside\ironside_idle_002.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Ironside\ironside_idle_003.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Ironside\ironside_idle_004.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Ironside\ironside_talk_001.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Ironside\ironside_talk_002.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Ironside\ironside_talk_003.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Ironside\ironside_talk_004.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Ironside\ironside_talk_005.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Ironside\ironside_talk_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NPCSprites\Ironside\armourcurrency_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\EmbeddedRooms\IronsideRoom.room" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\MiscVFX\clicker_crosshair.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\EmbeddedRooms\BoomhildrRoom.room" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NPCSprites\Boomhildr\boomhildr_idle_001.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Boomhildr\boomhildr_idle_002.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Boomhildr\boomhildr_idle_003.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Boomhildr\boomhildr_idle_004.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Boomhildr\boomhildr_idle_005.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Boomhildr\boomhildr_talk_001.png" />
+    <EmbeddedResource Include="Resources\NPCSprites\Boomhildr\boomhildr_talk_002.png" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Resources\Sounds\OMITBSoundbank.bnk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\clicker_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\clicker_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NeoActiveSprites\tackshooter_fire_icon.png" />
+    <EmbeddedResource Include="Resources\NeoActiveSprites\tackshooter_generic.png" />
+    <EmbeddedResource Include="Resources\PlaceableObjects\TackShooter\tackshooter_fire_001.png" />
+    <EmbeddedResource Include="Resources\PlaceableObjects\TackShooter\tackshooter_fire_002.png" />
+    <EmbeddedResource Include="Resources\PlaceableObjects\TackShooter\tackshooter_fire_003.png" />
+    <EmbeddedResource Include="Resources\PlaceableObjects\TackShooter\tackshooter_fire_004.png" />
+    <EmbeddedResource Include="Resources\PlaceableObjects\TackShooter\tackshooter_fire_005.png" />
+    <EmbeddedResource Include="Resources\PlaceableObjects\TackShooter\tackshooter_fire_006.png" />
+    <EmbeddedResource Include="Resources\PlaceableObjects\TackShooter\tackshooter_fire_007.png" />
+    <EmbeddedResource Include="Resources\PlaceableObjects\TackShooter\tackshooter_fire_008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\PlaceableObjects\TackShooter\tackshooter_shoot_001.png" />
+    <EmbeddedResource Include="Resources\PlaceableObjects\TackShooter\tackshooter_shoot_002.png" />
+    <EmbeddedResource Include="Resources\PlaceableObjects\TackShooter\tackshooter_spawn_001.png" />
+    <EmbeddedResource Include="Resources\PlaceableObjects\TackShooter\tackshooter_spawn_002.png" />
+    <EmbeddedResource Include="Resources\PlaceableObjects\TackShooter\tackshooter_spawn_003.png" />
+    <EmbeddedResource Include="Resources\PlaceableObjects\TackShooter\tackshooter_spawn_004.png" />
+    <EmbeddedResource Include="Resources\PlaceableObjects\TackShooter\tackshooter_spawn_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\PlaceableObjects\TackShooter\tackshooter_idle_001.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

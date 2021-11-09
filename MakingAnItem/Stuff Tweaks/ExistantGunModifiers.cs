@@ -242,6 +242,8 @@ namespace NevernamedsItems
             PlayerController playerController = this.gun.CurrentOwner as PlayerController;
             base.PostProcessProjectile(projectile);
             if (playerController.PlayerHasActiveSynergy("Gun Punch Man")) projectile.baseData.damage *= 2;
+            if (playerController.PlayerHasActiveSynergy("Punch Line")) projectile.statusEffectsToApply.Add(StaticStatusEffects.charmingRoundsEffect);
+            if (playerController.PlayerHasActiveSynergy("North Star")) projectile.statusEffectsToApply.Add(StaticStatusEffects.chaosBulletsFreeze);
         }
     }
     public class SunlightJavelinModifiers : GunBehaviour

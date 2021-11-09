@@ -44,9 +44,9 @@ namespace NevernamedsItems
 
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_NITROBULLETS, true);
             item.AddItemToDougMetaShop(15);
-
+            NitroBulletsID = item.PickupObjectId;
         }
-
+        public static int NitroBulletsID;
         bool hasSynergy;
         //NAME SYNERGY '...Badda Boom!'
         private void OnEnemyDamaged(float damage, bool fatal, HealthHaver enemyHealth)

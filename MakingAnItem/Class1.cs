@@ -17,6 +17,7 @@ using Brave.BulletScript;
 using Random = System.Random;
 using FullSerializer;
 using Gungeon;
+using LootTableAPI;
 
 namespace NevernamedsItems
 {
@@ -61,7 +62,8 @@ namespace NevernamedsItems
 
                 CustomClipAmmoTypeToolbox.Init();
                 EnemyTools.Init();
-                Hooks.Init();
+                NpcApi.Hooks.Init();
+                EnemyAPI.Hooks.Init();
                 SaveAPIManager.Setup("nn");
                 AudioResourceLoader.InitAudio();
                 CurseManager.Init();
@@ -447,6 +449,7 @@ namespace NevernamedsItems
                 EqualityItem.Init();
                 BitBucket.Init();
                 Eraser.Init();
+                TackShooter.Init();
                 Moonrock.Init();
                 Telekinesis.Init();
                 TabletOfOrder.Init();
@@ -489,10 +492,13 @@ namespace NevernamedsItems
                 BackWarder.Add();
                 ToolGun.Add();
                 //GENERAL HANDGUNS
+                StickGun.Add();
                 Glock42.Add();
                 StarterPistol.Add();
+                PopGun.Add();
                 UnusCentum.Add();
                 StunGun.Add();
+                CopperSidearm.Add();
                 Rekeyter.Add();
                 HotGlueGun.Add();
                 UpNUp.Add();
@@ -501,6 +507,7 @@ namespace NevernamedsItems
                 Glasster.Add();
                 HandGun.Add();
                 Viper.Add();
+                DiamondCutter.Add();
                 MarchGun.Add();
                 RebarGun.Add();
                 MinuteGun.Add();
@@ -513,6 +520,7 @@ namespace NevernamedsItems
                 Octagun.Add();
                 ClownShotgun.Add();
                 Ranger.Add();
+                RustyShotgun.Add();
                 TheBride.Add();
                 TheGroom.Add();
                 GrenadeShotgun.Add();
@@ -523,6 +531,7 @@ namespace NevernamedsItems
                 Lantaka.Add();
                 GreekFire.Add();
                 EmberCannon.Add();
+                ElysiumCannon.Add();
                 DisplacerCannon.Add();
                 //SCI-FI GUNS
                 Blasmaster.Add();
@@ -556,6 +565,7 @@ namespace NevernamedsItems
                 GravityGun.Add();
                 //BOWS AND CROSSBOWS
                 IceBow.Add();
+                Clicker.Add();
                 //ANTIQUES
                 WheelLock.Add();
                 Welrod.Add();
@@ -585,6 +595,9 @@ namespace NevernamedsItems
                 Copygat.Add();
                 HeavyAssaultRifle.Add();
                 DynamiteLauncher.Add();
+                MarbledUzi.Add();
+                BurstRifle.Add();
+                OlReliable.Add();
                 //MISSILE LAUNCHERS
                 BottleRocket.Add();
                 NNBazooka.Add();
@@ -635,6 +648,7 @@ namespace NevernamedsItems
                 Icicle.Add();
                 GunjurersStaff.Add();
                 InitiateWand.Add();
+                LightningRod.Add();
                 OrbOfTheGun.Add();
                 SpearOfJustice.Add();
                 Protean.Add();
@@ -675,6 +689,10 @@ namespace NevernamedsItems
                 UterinePolypWombular.Add();
                 DiamondGaxe.Add();
                 RedRebondir.Add();
+                DiamondCutterRangerClass.Add();
+                StickGunQuickDraw.Add();
+                StormRod.Add();
+                UnrustyShotgun.Add();
                 #endregion
 
                 //-----------------------------------------------------SHRINES GET INITIALISED
@@ -690,6 +708,8 @@ namespace NevernamedsItems
                 //-----------------------------------------------------NPCS GET INITIALISED
                 #region NPCInitialisation
                 Rusty.Init();
+                Ironside.Init();
+                Boomhildr.Init();
                 #endregion
 
                 ChromaGun.Add();
@@ -807,13 +827,10 @@ namespace NevernamedsItems
 
                   SpecialAPIsStuffIDs.CrownOfTheJammedID,
                   SpecialAPIsStuffIDs.RoundKingID,
-
-                  FallenItemIDs.CircularKingID,
-                  FallenItemIDs.DavidID,
-                  FallenItemIDs.GunJesterID,
-                  FallenItemIDs.JankanID,
-                  FallenItemIDs.SpeadCrabID,
                 };
+
+                CrossmodNPCLootPoolSetup.CheckItems();
+
                 ETGModConsole.Log("(Also finished DelayedInitialisation)");
             }
             catch (Exception e)

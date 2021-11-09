@@ -23,7 +23,9 @@ namespace NevernamedsItems
             string longDesc = "Taking damage to armour heals half a heart." + "\n\nA simple recipe for recycling broken armour into medical supplies.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.D;
+            ArmourBandageID = item.PickupObjectId;
         }
+        public static int ArmourBandageID;
         public override void Pickup(PlayerController player)
         {
             player.LostArmor = (Action)Delegate.Combine(player.LostArmor, new Action(this.OnLostArmor));

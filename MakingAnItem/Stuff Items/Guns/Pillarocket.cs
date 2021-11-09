@@ -118,7 +118,9 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(shotproj);
             shotproj.SetProjectileSpriteRight("pillarocket_subprojectile", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 3, 3);
             PillarocketShotgunProj = shotproj;
+            ID = gun.PickupObjectId;
         }
+        public static int ID;
         public static Projectile PillarocketAKProj;
         public static Projectile PillarocketMagnumProj;
         public static Projectile PillarocketShotgunProj;

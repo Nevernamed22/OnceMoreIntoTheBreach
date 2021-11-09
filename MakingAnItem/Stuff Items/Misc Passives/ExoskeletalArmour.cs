@@ -42,7 +42,9 @@ namespace NevernamedsItems
 
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_MEATSHIELD, true);
             item.AddItemToDougMetaShop(15);
+            MeatShieldID = item.PickupObjectId;
         }
+        public static int MeatShieldID;
         protected override void Update()
         {
             if (Owner)

@@ -50,7 +50,9 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
-        }       
+            ID = gun.PickupObjectId;
+        }
+        public static int ID;
 
         public RocketPistol()
         {

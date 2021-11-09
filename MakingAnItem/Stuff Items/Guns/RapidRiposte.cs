@@ -61,7 +61,9 @@ namespace NevernamedsItems
 
             gun.quality = PickupObject.ItemQuality.A;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+            RapidRiposteID = gun.PickupObjectId;
         }
+        public static int RapidRiposteID;
         public override void PostProcessProjectile(Projectile projectile)
         {
             if (projectile.GetComponent<AdvancedMirrorProjectileModifier>())

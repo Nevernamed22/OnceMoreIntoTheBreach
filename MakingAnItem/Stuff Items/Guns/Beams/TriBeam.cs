@@ -116,7 +116,7 @@ namespace NevernamedsItems
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.LoopSection;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).loopStart = 1;
 
-            gun.quality = PickupObject.ItemQuality.C; //D
+            gun.quality = PickupObject.ItemQuality.C; 
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
         }
