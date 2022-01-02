@@ -10,6 +10,7 @@ namespace NevernamedsItems
 {
     class ExistantGunModifiers
     {
+        public static List<Projectile> Planets;
         public static void Init()
         {
             (PickupObjectDatabase.GetById(748) as Gun).gameObject.AddComponent<SunlightJavelinModifiers>();
@@ -28,6 +29,39 @@ namespace NevernamedsItems
             (PickupObjectDatabase.GetById(481) as Gun).gameObject.AddComponent<CameraModifiers>();
             (PickupObjectDatabase.GetById(402) as Gun).gameObject.AddComponent<SnowballerModifiers>();
             (PickupObjectDatabase.GetById(33) as Gun).gameObject.AddComponent<TearJerkerModifiers>();
+            (PickupObjectDatabase.GetById(596) as Gun).gameObject.AddComponent<TeapotModifiers>();
+
+            Planets = new List<Projectile>()
+        {
+            (PickupObjectDatabase.GetById(597) as Gun).DefaultModule.projectiles[0], //Mercury
+            (PickupObjectDatabase.GetById(597) as Gun).DefaultModule.projectiles[1], //Venus
+            (PickupObjectDatabase.GetById(597) as Gun).DefaultModule.projectiles[2], //Earty
+            (PickupObjectDatabase.GetById(597) as Gun).DefaultModule.projectiles[3],
+            (PickupObjectDatabase.GetById(597) as Gun).DefaultModule.projectiles[4],
+            (PickupObjectDatabase.GetById(597) as Gun).DefaultModule.projectiles[5],
+            (PickupObjectDatabase.GetById(597) as Gun).DefaultModule.projectiles[6],
+            (PickupObjectDatabase.GetById(597) as Gun).DefaultModule.projectiles[7],
+        };
+        }
+    }
+    public class TeapotModifiers : MonoBehaviour
+    {
+        private Gun self;
+        private void Start()
+        {
+            self = base.GetComponent<Gun>();
+            self.OnPreFireProjectileModifier += OnPreFireProjectileModifier;
+        }
+        private Projectile OnPreFireProjectileModifier(Gun sourceGun, Projectile sourceProjectile, ProjectileModule sourceModule)
+        {
+            if (sourceGun && sourceGun.GunPlayerOwner() && sourceGun.GunPlayerOwner().PlayerHasActiveSynergy("Russel's Teapot"))
+            {
+                if (UnityEngine.Random.value <= 0.15f)
+                {
+                    return BraveUtility.RandomElement(ExistantGunModifiers.Planets);
+                }
+            }
+            return sourceProjectile;
         }
     }
     public class CameraModifiers : GunBehaviour
@@ -345,7 +379,7 @@ namespace NevernamedsItems
     {
         public override void OnReloadPressed(PlayerController player, Gun gun, bool bSOMETHING)
         {
-            player.StartCoroutine(this.IncorporealityOnHit(player, 1));
+            if (player.PlayerHasActiveSynergy("Gunvana")) player.StartCoroutine(this.IncorporealityOnHit(player, 1));
             base.OnReloadPressed(player, gun, bSOMETHING);
         }
         private IEnumerator IncorporealityOnHit(PlayerController player, float incorporealityTime)

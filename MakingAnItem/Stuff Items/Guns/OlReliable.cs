@@ -59,9 +59,6 @@ namespace NevernamedsItems
             orAddComponent.penetratesBreakables = true;
             orAddComponent.penetration = 1;
 
-           
-            projectile.transform.parent = gun.barrelOffset;
-
 
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

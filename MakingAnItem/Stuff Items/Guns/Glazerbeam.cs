@@ -24,6 +24,7 @@ namespace NevernamedsItems
             gun.SetupSprite(null, "glazerbeam_idle_001", 8);
 
             gun.SetAnimationFPS(gun.shootAnimation, 14);
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(153) as Gun).gunSwitchGroup;
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(38) as Gun, true, false);
 
@@ -41,6 +42,12 @@ namespace NevernamedsItems
             gun.ammo = 300;
             gun.gunClass = GunClass.BEAM;
 
+            Projectile beamtofire = UnityEngine.Object.Instantiate<Projectile>(LaserBullets.SimpleRedBeam);
+            beamtofire.gameObject.SetActive(false);
+            FakePrefab.MarkAsFakePrefab(beamtofire.gameObject);
+            UnityEngine.Object.DontDestroyOnLoad(beamtofire);
+            beamtofire.baseData.damage = 5;
+
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
@@ -53,6 +60,7 @@ namespace NevernamedsItems
             projectile.transform.parent = gun.barrelOffset;
             BeamBulletsBehaviour beam = projectile.gameObject.AddComponent<BeamBulletsBehaviour>();
             beam.firetype = BeamBulletsBehaviour.FireType.FORWARDS;
+            beam.beamToFire = beamtofire;
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = "Punishment Ray Lasers";
             gun.quality = PickupObject.ItemQuality.B;

@@ -12,15 +12,16 @@ using ItemAPI;
 namespace NevernamedsItems
 {
 
-    public class Blowgun : GunBehaviour
+    public class Blowgun : AdvancedGunBehavior
     {
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Blowgun", "blowgun");
             Game.Items.Rename("outdated_gun_mods:blowgun", "nn:blowgun");
-            gun.gameObject.AddComponent<Blowgun>();
+         var behav =   gun.gameObject.AddComponent<Blowgun>();
+            behav.preventNormalReloadAudio = true;
             gun.SetShortDescription("Huff and Puff");
-            gun.SetLongDescription("Relies on lung strength to propel poisonous darts."+"\n\nRobots may need to hold it up to a cooling vent or something.");
+            gun.SetLongDescription("Relies on lung strength to propel poisonous darts." + "\n\nRobots may need to hold it up to a cooling vent or something.");
 
             gun.SetupSprite(null, "blowgun_idle_001", 8);
 
@@ -30,6 +31,7 @@ namespace NevernamedsItems
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(150) as Gun).gunSwitchGroup;
 
             //GUN STATS
+            gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(26) as Gun).muzzleFlashEffects;
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
@@ -52,6 +54,27 @@ namespace NevernamedsItems
             poisoning.procChance = 1;
             poisoning.useSpecialTint = false;
             projectile.SetProjectileSpriteRight("blowgun_projectile", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 15, 8);
+
+            VFXPool HorizVFXOBj = VFXToolbox.CreateVFXPool("Blowgun Tilemap VFX Horiz",
+                new List<string>()
+            {
+                "NevernamedsItems/Resources/MiscVFX/GunVFX/PoisonDarts/poisondart_impacthoriz_001",
+                "NevernamedsItems/Resources/MiscVFX/GunVFX/PoisonDarts/poisondart_impacthoriz_002",
+                "NevernamedsItems/Resources/MiscVFX/GunVFX/PoisonDarts/poisondart_impacthoriz_003",
+                "NevernamedsItems/Resources/MiscVFX/GunVFX/PoisonDarts/poisondart_impacthoriz_004",
+            },
+                10,
+                new IntVector2(12, 11),
+                tk2dBaseSprite.Anchor.MiddleLeft,
+                false,
+                0,
+                true);
+
+            projectile.hitEffects.deathTileMapHorizontal = HorizVFXOBj;
+            projectile.hitEffects.tileMapHorizontal = HorizVFXOBj;
+
+            projectile.hitEffects.deathTileMapVertical = HorizVFXOBj;
+            projectile.hitEffects.tileMapVertical = HorizVFXOBj;
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Blowgun Darts", "NevernamedsItems/Resources/CustomGunAmmoTypes/blowgun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/blowgun_clipempty");

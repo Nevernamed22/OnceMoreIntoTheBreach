@@ -11,13 +11,43 @@ namespace NevernamedsItems
 {
     static class OMITBEnemyExtensions
     {
-        public static AIActor AdvancedTransmogrify(this AIActor startEnemy, AIActor EnemyPrefab, GameObject EffectVFX, string audioEvent = "Play_ENM_wizardred_appear_01", bool ignoreAlreadyTransmogged = false, bool canTransmogMimics = false, bool defuseExplosives = true, bool carryOverRewards = false, bool maintainHealthPercent = false, bool maintainsJammedState = false, bool giveIsTransmogrifiedBool = true)
+        public static Vector2 ClosestPointOnEnemy(this AIActor target, Vector2 pointComparison)
+        {
+            Vector2 closestPointOnTarget = Vector2.zero;
+            if (target.specRigidbody != null && target.specRigidbody.HitboxPixelCollider != null)
+            {
+                closestPointOnTarget = BraveMathCollege.ClosestPointOnRectangle(pointComparison, target.specRigidbody.HitboxPixelCollider.UnitBottomLeft, target.specRigidbody.HitboxPixelCollider.UnitDimensions);
+            }
+            return closestPointOnTarget;
+        }
+        public static Vector2 ClosestPointOnRigidBody(this SpeculativeRigidbody target, Vector2 pointComparison)
+        {
+            Vector2 closestPointOnTarget = Vector2.zero;
+            if (target != null && target.HitboxPixelCollider != null)
+            {
+                closestPointOnTarget = BraveMathCollege.ClosestPointOnRectangle(pointComparison, target.HitboxPixelCollider.UnitBottomLeft, target.HitboxPixelCollider.UnitDimensions);
+            }
+            return closestPointOnTarget;
+        }
+        public static AIActor AdvancedTransmogrify(this AIActor startEnemy, AIActor EnemyPrefab, GameObject EffectVFX, string audioEvent = "Play_ENM_wizardred_appear_01", bool ignoreAlreadyTransmogged = false, bool canTransmogMimics = false, bool defuseExplosives = true, bool carryOverRewards = false, bool maintainHealthPercent = false, bool maintainsJammedState = false, bool giveIsTransmogrifiedBool = true, bool logEverything = false)
         {
             if (startEnemy == null) { Debug.LogError("Tried to transmog a null enemy!"); return null; }
             if (EnemyPrefab == null) { Debug.LogError("Tried to transmog to a null prefab!"); return startEnemy; }
-            if (startEnemy.ActorName == EnemyPrefab.ActorName) return startEnemy;
-            if (ignoreAlreadyTransmogged && startEnemy.IsTransmogrified) return startEnemy;
-            if (!startEnemy.healthHaver || startEnemy.healthHaver.IsBoss || startEnemy.ParentRoom == null) return startEnemy;
+            if (startEnemy.EnemyGuid == EnemyPrefab.EnemyGuid)
+            {
+                if (logEverything) Debug.Log($"Tried to transmog an enemy into an actor with the same guid!");
+                return startEnemy;
+            }
+            if (ignoreAlreadyTransmogged && startEnemy.IsTransmogrified)
+            {
+                if (logEverything) Debug.Log("Tried to transmog an enemy that has already been transmogged.");
+                return startEnemy;
+            }
+            if (!startEnemy.healthHaver || startEnemy.healthHaver.IsBoss || startEnemy.ParentRoom == null)
+            {
+                if (logEverything) Debug.Log("Either the healthhaver or parent room on the target was null, or they were a boss!");
+                return startEnemy;
+            }
 
             Vector2 centerPosition = startEnemy.CenterPosition;
             if (EffectVFX != null)
@@ -292,7 +322,7 @@ namespace NevernamedsItems
                     {
                         if (proj.GetComponent<BasicBeamController>().Owner != null && proj.GetComponent<BasicBeamController>().Owner == enemy) ownerValid = true;
                     }
-                    
+
                     if ((UnityEngine.Random.value <= chancePerProjectile) && ownerValid) BulletsOwnedByEnemy.Add(proj);
                 }
             }
@@ -300,7 +330,7 @@ namespace NevernamedsItems
             {
                 if (BulletsOwnedByEnemy[i] != null && BulletsOwnedByEnemy[i].isActiveAndEnabled)
                 {
-                    BulletsOwnedByEnemy[i].DieInAir(true, false, false, true);                   
+                    BulletsOwnedByEnemy[i].DieInAir(true, false, false, true);
                     if (BulletsOwnedByEnemy[i].GetComponent<BasicBeamController>() != null)
                     {
                         BulletsOwnedByEnemy[i].GetComponent<BasicBeamController>().CeaseAttack();

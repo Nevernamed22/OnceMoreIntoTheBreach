@@ -7,6 +7,7 @@ using ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -14,36 +15,18 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Rusty Casing";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/rustycasing_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<RustyCasing>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Heheheheheheh";
             string longDesc = "Yesyesyoulikestufffyouneeedmoney." + "\nThisgiveyoumoneyyesyesyes." + "\n\nHeheheheheheh";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D;
 
             RustyCasingID = item.PickupObjectId;
+            item.SetupUnlockOnCustomStat(CustomTrackedStats.RUSTY_ITEMS_PURCHASED, 2, DungeonPrerequisite.PrerequisiteOperation.GREATER_THAN);
         }
         public static int RustyCasingID;
 

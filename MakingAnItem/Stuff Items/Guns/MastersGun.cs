@@ -72,6 +72,7 @@ namespace NevernamedsItems
             Bouncing.numberOfBounces = 5;
             keepProjectile.SetProjectileSpriteRight("mastersgun_keep_projectile", 27, 12, false, tk2dBaseSprite.Anchor.MiddleCenter, 27, 12);
             keepProjectile.transform.parent = gun.barrelOffset;
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(37) as Gun).gunSwitchGroup;
 
             //PROPER BULLET STATS
             properProjectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);

@@ -51,7 +51,7 @@ namespace NevernamedsItems
             projectile.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(28) as Gun).DefaultModule.projectiles[0].hitEffects.tileMapVertical.effects[0].effects[0].effect;
 
             //Setup the Tack Shooter Object
-            GameObject prefab = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/PlaceableObjects/TackShooter/tackshooter_idle_001");
+            GameObject prefab = CompanionBuilder.BuildPrefab("Tack Shooter", "Tack_Shooter_GUID", TackShooter.RegTackShooterSprites[0], new IntVector2(6, 2), new IntVector2(7, 14));//SpriteBuilder.SpriteFromResource("Planetside/Resources2/testturret/testturret_idle_001");
             prefab.name = "Tack Shooter";
             var body = prefab.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(new IntVector2(6, 2), new IntVector2(7, 14));
             TackShooterBehaviour shooter = prefab.AddComponent<TackShooterBehaviour>();
@@ -59,39 +59,40 @@ namespace NevernamedsItems
 
 
             AIAnimator aiAnimator = prefab.GetOrAddComponent<AIAnimator>();
-            
+
             aiAnimator.IdleAnimation = new DirectionalAnimation
             {
                 Type = DirectionalAnimation.DirectionType.Single,
-                Flipped = new DirectionalAnimation.FlipType[0],
+                Flipped = new DirectionalAnimation.FlipType[1],
+                Prefix = "idle",
                 AnimNames = new string[]
                 { "idle" }
             };
 
             aiAnimator.OtherAnimations = new List<AIAnimator.NamedDirectionalAnimation> {
-                //Spawn
-                new AIAnimator.NamedDirectionalAnimation {
-                    name = "appear",
-                    anim = new DirectionalAnimation {
-                        Prefix = "appear",
-                        Type = DirectionalAnimation.DirectionType.Single,
-                        Flipped = new DirectionalAnimation.FlipType[0],
-                        AnimNames = new string[]
-                        { "appear" }
-                    }
-                },
-                //Shoot
-                new AIAnimator.NamedDirectionalAnimation {
-                    name = "shoot",
-                    anim = new DirectionalAnimation {
-                        Prefix = "shoot",
-                        Type = DirectionalAnimation.DirectionType.Single,
-                        Flipped = new DirectionalAnimation.FlipType[0],
-                        AnimNames = new string[]
-                        { "shoot" }
-                    }
-                },
-            };
+                    //Spawn
+                    new AIAnimator.NamedDirectionalAnimation {
+                        name = "appear",
+                        anim = new DirectionalAnimation {
+                            Prefix = "appear",
+                            Type = DirectionalAnimation.DirectionType.Single,
+                            Flipped = new DirectionalAnimation.FlipType[1],
+                            AnimNames = new string[]
+                            { "appear" }
+                        }
+                    },
+                    //Shoot
+                    new AIAnimator.NamedDirectionalAnimation {
+                        name = "shoot",
+                        anim = new DirectionalAnimation {
+                            Prefix = "shoot",
+                            Type = DirectionalAnimation.DirectionType.Single,
+                            Flipped = new DirectionalAnimation.FlipType[1],
+                            AnimNames = new string[]
+                            { "shoot" }
+                        }
+                    },
+                };
             tk2dSpriteAnimator spriteAnimator = prefab.GetOrAddComponent<tk2dSpriteAnimator>();
             tk2dSpriteCollectionData tackShooterCollection = SpriteBuilder.ConstructCollection(prefab, "TackShooterCollection");
             UnityEngine.Object.DontDestroyOnLoad(tackShooterCollection);
@@ -101,7 +102,7 @@ namespace NevernamedsItems
             }
             SpriteBuilder.AddAnimation(spriteAnimator, tackShooterCollection, new List<int> { 0 }, "idle", tk2dSpriteAnimationClip.WrapMode.Loop).fps = 12;
             SpriteBuilder.AddAnimation(spriteAnimator, tackShooterCollection, new List<int> { 1, 2 }, "shoot", tk2dSpriteAnimationClip.WrapMode.Once).fps = 12;
-            SpriteBuilder.AddAnimation(spriteAnimator, tackShooterCollection, new List<int> { 3, 4, 5, 6, 7 }, "appear", tk2dSpriteAnimationClip.WrapMode.Once).fps = 12;           
+            SpriteBuilder.AddAnimation(spriteAnimator, tackShooterCollection, new List<int> { 3, 4, 5, 6, 7 }, "appear", tk2dSpriteAnimationClip.WrapMode.Once).fps = 12;
 
             body.PixelColliders.Clear();
             body.PixelColliders.Add(new PixelCollider

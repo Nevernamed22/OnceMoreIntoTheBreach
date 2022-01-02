@@ -18,6 +18,7 @@ namespace NevernamedsItems
     }
     class VFXToolbox
     {
+
         private static GameObject VFXScapeGoat;
         private static tk2dSpriteCollectionData PrivateVFXCollection;
         public static tk2dSpriteCollectionData VFXCollection
@@ -70,6 +71,76 @@ namespace NevernamedsItems
             };
             GameObject SpeedUpVFXObj = CreateVFX("Speed Up VFX", SpeedUpVFX, 16, new IntVector2(27, 17), tk2dBaseSprite.Anchor.LowerCenter, true, 0.18f, 100, Color.yellow);
             EasyVFXDatabase.SpeedUpVFX = SpeedUpVFXObj;
+
+            EasyVFXDatabase.BigWhitePoofVFX = CreateVFX("Big White Poof",
+                  new List<string>()
+                  {
+                    "NevernamedsItems/Resources/MiscVFX/bigwhitepoof_001",
+                    "NevernamedsItems/Resources/MiscVFX/bigwhitepoof_002",
+                    "NevernamedsItems/Resources/MiscVFX/bigwhitepoof_003",
+                    "NevernamedsItems/Resources/MiscVFX/bigwhitepoof_004",
+                  },
+                 10, //FPS
+                  new IntVector2(36, 36), //Dimensions
+                  tk2dBaseSprite.Anchor.MiddleCenter, //Anchor
+                  false, //Uses a Z height off the ground
+                  0 //The Z height, if used
+                    );
+
+            EasyVFXDatabase.BloodExplosion = CreateVFX("Blood Explosion VFX",
+                  new List<string>()
+                  {
+                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_001",
+                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_002",
+                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_003",
+                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_004",
+                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_005",
+                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_006",
+                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_007",
+                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_008",
+                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_009",
+                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_010",
+                  },
+                 10, //FPS
+                  new IntVector2(71, 71), //Dimensions
+                  tk2dBaseSprite.Anchor.MiddleCenter, //Anchor
+                  false, //Uses a Z height off the ground
+                  0 //The Z height, if used
+                    );
+            GameObject debrislauncher = new GameObject();
+            debrislauncher.MakeFakePrefab();
+            debrislauncher.transform.parent = EasyVFXDatabase.BloodExplosion.transform;
+            debrislauncher.AddComponent<ExplosionDebrisLauncher>();
+
+            #region ArcExplosion
+            GameObject indevArcExplosion = CreateVFX("ARC Explosion",
+                 new List<string>()
+                 {
+                    "NevernamedsItems/Resources/MiscVFX/shittyarcsplosion_001",
+                    "NevernamedsItems/Resources/MiscVFX/shittyarcsplosion_002",
+                    "NevernamedsItems/Resources/MiscVFX/shittyarcsplosion_003",
+                    "NevernamedsItems/Resources/MiscVFX/shittyarcsplosion_004",
+                    "NevernamedsItems/Resources/MiscVFX/shittyarcsplosion_005",
+                    "NevernamedsItems/Resources/MiscVFX/shittyarcsplosion_006",
+                 },
+                10, //FPS
+                 new IntVector2(66, 64), //Dimensions
+                 tk2dBaseSprite.Anchor.MiddleCenter, //Anchor
+                 false, //Uses a Z height off the ground
+                 0 //The Z height, if used
+                   );
+
+            indevArcExplosion.GetComponent<tk2dBaseSprite>().sprite.usesOverrideMaterial = true;
+            Material mat = new Material(EnemyDatabase.GetOrLoadByName("GunNut").sprite.renderer.material);
+            mat.mainTexture = indevArcExplosion.GetComponent<tk2dBaseSprite>().sprite.renderer.material.mainTexture;
+            mat.SetColor("_EmissiveColor", ExtendedColours.skyblue);
+            mat.SetFloat("_EmissiveColorPower", 1.55f);
+            mat.SetFloat("_EmissivePower", 100);
+            indevArcExplosion.GetComponent<tk2dBaseSprite>().sprite.renderer.material = mat;
+
+            EasyVFXDatabase.ShittyElectricExplosion = indevArcExplosion;
+            #endregion
+
 
             #region RainbowGuonPoofs
             //RED
@@ -183,8 +254,41 @@ namespace NevernamedsItems
             };
             RainbowGuonStone.IndigoGuonTransitionVFX = CreateVFX("IndigoGuonPoof", IndigoPoofPaths, 14, new IntVector2(21, 22), tk2dBaseSprite.Anchor.MiddleCenter, false, 0);
             #endregion
+
+            laserSightPrefab = LoadHelper.LoadAssetFromAnywhere("assets/resourcesbundle/global vfx/vfx_lasersight.prefab") as GameObject;
         }
-        
+        public static GameObject laserSightPrefab;
+        public static GameObject RenderLaserSight(Vector2 position, float length, float width, float angle, bool alterColour = false, Color? colour = null)
+        {
+            GameObject gameObject = SpawnManager.SpawnVFX(laserSightPrefab, position, Quaternion.Euler(0, 0, angle));
+
+            tk2dTiledSprite component2 = gameObject.GetComponent<tk2dTiledSprite>();
+            float newWidth = 1f;
+            if (width != -1) newWidth = width;
+            component2.dimensions = new Vector2(length, newWidth);
+            if (alterColour && colour != null)
+            {
+                component2.usesOverrideMaterial = true;
+                component2.sprite.renderer.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
+                component2.sprite.renderer.material.SetColor("_OverrideColor", (Color)colour);
+                component2.sprite.renderer.material.SetColor("_EmissiveColor", (Color)colour);
+                component2.sprite.renderer.material.SetFloat("_EmissivePower", 100);
+                component2.sprite.renderer.material.SetFloat("_EmissiveColorPower", 1.55f);
+            }
+            return gameObject;
+        }
+        public static void GlitchScreenForSeconds(float seconds)
+        {
+            GameManager.Instance.StartCoroutine(DoScreenGlitch(seconds));
+        }
+        private static IEnumerator DoScreenGlitch(float seconds)
+        {
+            Material glitchPass = new Material(Shader.Find("Brave/Internal/GlitchUnlit"));
+            Pixelator.Instance.RegisterAdditionalRenderPass(glitchPass);
+            yield return new WaitForSeconds(seconds);
+            Pixelator.Instance.DeregisterAdditionalRenderPass(glitchPass);
+            yield break;
+        }
         public static void DoStringSquirt(string text, Vector2 point, Color colour, float heightOffGround = 3f, float opacity = 1f)
         {
 
@@ -557,5 +661,51 @@ namespace NevernamedsItems
             VFXCollection.spriteDefinitions[id] = def;
             return def;
         }
+    }
+    public class TiledSpriteConnector : MonoBehaviour
+    {
+        private void Start()
+        {
+            tiledSprite = base.GetComponent<tk2dTiledSprite>();
+        }
+        private void Update()
+        {
+            if (sourceRigidbody)
+            {
+                Vector2 unitCenter = sourceRigidbody.UnitCenter;
+                Vector2 unitCenter2 = Vector2.zero;
+                if (usesVector && targetVector != Vector2.zero) unitCenter2 = targetVector;
+                else if (targetRigidbody) unitCenter2 = targetRigidbody.UnitCenter;
+                if (unitCenter2 != Vector2.zero)
+                {
+                    tiledSprite.transform.position = unitCenter;
+                    Vector2 vector = unitCenter2 - unitCenter;
+                    float num = BraveMathCollege.Atan2Degrees(vector.normalized);
+                    int num2 = Mathf.RoundToInt(vector.magnitude / 0.0625f);
+                    tiledSprite.dimensions = new Vector2((float)num2, tiledSprite.dimensions.y);
+                    tiledSprite.transform.rotation = Quaternion.Euler(0f, 0f, num);
+                    tiledSprite.UpdateZDepth();
+
+                }
+                else
+                {
+                    if (eraseSpriteIfTargetOrSourceNull) UnityEngine.Object.Destroy(tiledSprite.gameObject);
+                    else if (eraseComponentIfTargetOrSourceNull) UnityEngine.Object.Destroy(this);
+                }
+            }
+            else
+            {
+                if (eraseSpriteIfTargetOrSourceNull) UnityEngine.Object.Destroy(tiledSprite.gameObject);
+                else if (eraseComponentIfTargetOrSourceNull) UnityEngine.Object.Destroy(this);
+            }
+        }
+
+        public SpeculativeRigidbody sourceRigidbody;
+        public SpeculativeRigidbody targetRigidbody;
+        public Vector2 targetVector;
+        public bool usesVector;
+        public bool eraseSpriteIfTargetOrSourceNull;
+        public bool eraseComponentIfTargetOrSourceNull;
+        private tk2dTiledSprite tiledSprite;
     }
 }

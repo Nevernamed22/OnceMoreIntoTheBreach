@@ -47,7 +47,8 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
-            projectile.baseData.damage *= 0.8f;
+            projectile.baseData.damage = 1f;
+            projectile.baseData.force *= 0.1f;
             projectile.baseData.speed *= 0.0001f;
             projectile.SetProjectileSpriteRight("pen_projectile", 4, 4, false, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
 

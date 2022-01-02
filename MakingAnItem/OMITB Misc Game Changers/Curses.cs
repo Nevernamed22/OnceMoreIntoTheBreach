@@ -17,6 +17,7 @@ namespace NevernamedsItems
             CurrentActiveCurses = new List<CurseData>();
             CursePrefabs = new List<CurseData>();
             FloorAndGenerationToolbox.OnFloorEntered += LevelLoaded;
+            FloorAndGenerationToolbox.OnNewGame += OnNewRun;
             VFXScapegoat = new GameObject("CurseVFXScapegoat");
             VFXScapegoat.gameObject.SetActive(false);
             UnityEngine.Object.DontDestroyOnLoad(VFXScapegoat);
@@ -67,8 +68,20 @@ namespace NevernamedsItems
         private static tk2dSpriteCollectionData CurseIconCollection;
         private static GameObject VFXScapegoat;
         public static bool levelOnCooldown = false;
+        public static void OnNewRun(PlayerController player)
+        {
+            cursesLastFloor = new List<string>();
+            bannedCursesThisRun = new List<string>();
+            previousCursesThisRun = new List<string>();
+            RemoveAllCurses();
+        }
         public static void LevelLoaded()
         {
+            if (cursesLastFloor == null) cursesLastFloor = new List<string>();
+            foreach (CurseData curse in CurrentActiveCurses)
+            {
+                cursesLastFloor.Add(curse.curseName);
+            }
             CurseManager.RemoveAllCurses();
             float allCurse = GameManager.Instance.GetCombinedPlayersStatAmount(PlayerStats.StatType.Curse);
             float ran = UnityEngine.Random.value;
@@ -94,6 +107,14 @@ namespace NevernamedsItems
                 for (int i = (refinedData.Count - 1); i >= 0; i--)
                 {
                     if (CurseManager.CurseIsActive(refinedData[i].curseName))
+                    {
+                        refinedData.RemoveAt(i);
+                    }
+                    else if (cursesLastFloor != null && cursesLastFloor.Contains(refinedData[i].curseName))
+                    {
+                        refinedData.RemoveAt(i);
+                    }
+                    else if (bannedCursesThisRun != null && bannedCursesThisRun.Contains(refinedData[i].curseName))
                     {
                         refinedData.RemoveAt(i);
                     }
@@ -145,6 +166,16 @@ namespace NevernamedsItems
             if (!(GameManager.Instance.AnyPlayerHasPickupID(HoleyWater.HoleyWaterID) && !GameManager.Instance.AnyPlayerHasActiveSynergy("The Last Crusade")))
             {
                 CurrentActiveCurses.Add(newCurse);
+                if (previousCursesThisRun == null) previousCursesThisRun = new List<string>();
+                if (previousCursesThisRun.Contains(newCurse.curseName))
+                {
+                    if (bannedCursesThisRun == null) bannedCursesThisRun = new List<string>();
+                    bannedCursesThisRun.Add(newCurse.curseName);
+                }
+                else
+                {
+                    previousCursesThisRun.Add(newCurse.curseName);
+                }
                 Debug.Log("Added New Curse: " + newCurse.curseName + " (Popup: " + dopopup + ")");
                 if (dopopup) DoSpecificCursePopup(CurseName, newCurse.curseSubtitle, newCurse.curseIconId);
             }
@@ -207,6 +238,10 @@ namespace NevernamedsItems
             }
             return false;
         }
+        public static List<string> previousCursesThisRun;
+        public static List<string> bannedCursesThisRun;
+        public static List<string> cursesLastFloor;
+
         public class CurseData
         {
             public string curseName = null;

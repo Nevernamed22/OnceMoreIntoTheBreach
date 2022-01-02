@@ -35,6 +35,7 @@ namespace NevernamedsItems
         }
         public override void Update()
         {
+            //ETGModConsole.Log("Lastowner is null: " + (LastOwner == null));
             currentLabel = storedProjectiles.Count().ToString();
             base.Update();
         }

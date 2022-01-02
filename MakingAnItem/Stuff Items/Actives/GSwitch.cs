@@ -60,12 +60,18 @@ namespace NevernamedsItems
         }
         private void DoSynergyShields(RoomHandler room, PlayerController user)
         {
+            //ETGModConsole.Log("Did Synergy Shields");
             CurrencyPickup[] allShit = FindObjectsOfType<CurrencyPickup>();
             foreach (CurrencyPickup shit in allShit)
             {
+                //ETGModConsole.Log("Found a casing");
+
                 if (shit.transform.position.GetAbsoluteRoom() == room)
                 {
+                    //ETGModConsole.Log("Casing was in room");
+
                     MiscToolbox.SpawnShield(user, shit.sprite.WorldCenter);
+                //ETGModConsole.Log("Spawned shield");
                 }
             }
         }

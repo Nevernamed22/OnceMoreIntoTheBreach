@@ -1089,7 +1089,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("The Sprinting Dead", mandatorySynergyItemsTheSprintingDead, optionalSynergyItemsTheSprintingDead);
             //NECROMANCERS RIGHT HAND / SKELETON ITEMS
             List<string> mandatorySynergyItemsRollDemBones = new List<string>() { "nn:necromancers_right_hand" };
-            List<string> optionalSynergyItemsRollDemBones = new List<string>() { "nn:grim_blanks", "shellegun", "vertebraek47", "skull_spitter" };
+            List<string> optionalSynergyItemsRollDemBones = new List<string>() { "nn:grim_blanks", "shellegun", "vertebraek47", "skull_spitter", "nn:uzi_spine_mm" };
             CustomSynergies.Add("Roll Dem Bones", mandatorySynergyItemsRollDemBones, optionalSynergyItemsRollDemBones);
             //ALBEDO / SPEED
             List<string> mandatorySynergyItemsWhiteEthesia = new List<string>() { "nn:albedo" };
@@ -1413,6 +1413,39 @@ namespace NevernamedsItems
             List<string> mandatorySynergyItemsOneClickAway = new List<string>() { "nn:clicker" };
             List<string> optionalSynergyItemsOneClickAway = new List<string>() { "nn:big_shot", "mailbox" };
             CustomSynergies.Add("One Click Away!", mandatorySynergyItemsOneClickAway, optionalSynergyItemsOneClickAway);
+            //Uzi Spinemm / Bones
+            List<string> mandatorySynergyItemsTheBoneZone = new List<string>() { "nn:uzi_spine_mm" };
+            List<string> optionalSynergyItemsTheBoneZone = new List<string>() { "skull_spitter", "vertebraek47" };
+            CustomSynergies.Add("The Bone Zone", mandatorySynergyItemsTheBoneZone, optionalSynergyItemsTheBoneZone);
+            //Obrien Fist / Green Items
+            List<string> mandatorySynergyItemsTheGreenRoomPale = new List<string>() { "nn:obrien_fist" };
+            List<string> optionalSynergyItemsTheGreenRoomPale = new List<string>() { "green_guon_stone", "the_membrane" };
+            CustomSynergies.Add("The Green Room Pale", mandatorySynergyItemsTheGreenRoomPale, optionalSynergyItemsTheGreenRoomPale);
+            //Barrel Chamber / The Barrel
+            List<string> mandatorySynergyItemsDoubleBarrelled = new List<string>() { "nn:barrel_chamber", "barrel" };
+            CustomSynergies.Add("Double Barrelled", mandatorySynergyItemsDoubleBarrelled);
+            //Teapot / Space items
+            List<string> mandatorySynergyItemsRusselsTeapot = new List<string>() { "teapot" };
+            List<string> optionalSynergyItemsRusselsTeapot = new List<string>() { "mr_accretion_jr", "nn:moonrock" };
+            CustomSynergies.Add("Russel's Teapot", mandatorySynergyItemsRusselsTeapot, optionalSynergyItemsRusselsTeapot);
+            //Fun Guy / Pointy
+            List<string> mandatorySynergyItemsPointiestOne = new List<string>() { "nn:fun_guy" };
+            List<string> optionalSynergyItemsPointiestOne = new List<string>() { "katana_bullets", "excaliber", "unicorn_horn", "kruller_glaive" };
+            CustomSynergies.Add("Pointiest One", mandatorySynergyItemsPointiestOne, optionalSynergyItemsPointiestOne);
+            //Big Shot / Keygen
+            List<string> mandatorySynergyItemsKEYGEN = new List<string>() { "nn:keygen", "nn:big_shot" };
+            CustomSynergies.Add("KEYGEN", mandatorySynergyItemsKEYGEN);
+            #endregion
+
+            #region OMITBGoBrrrSynergies
+            //RED ROBIN / BAT ITEMS
+            List<string> mandatorySynergyItemsManbatAndRobin = new List<string>() { "nn:red_robin" };
+            List<string> optionalSynergyItemsManbatAndRobin = new List<string>() { "nn:bullatterer" };
+            CustomSynergies.Add("Manbat and Robin", mandatorySynergyItemsManbatAndRobin, optionalSynergyItemsManbatAndRobin);
+            //RED ROBIN / BIRD ITEMS
+            List<string> mandatorySynergyItemsScarletTanager = new List<string>() { "nn:red_robin" };
+            List<string> optionalSynergyItemsScarletTanager = new List<string>() { "owl", "nn:birdshot", "nn:purpler", "chicken_flute", "nn:fowl_ring", "turkey" };
+            CustomSynergies.Add("Scarlet Tanager", mandatorySynergyItemsScarletTanager, optionalSynergyItemsScarletTanager);
             #endregion
         }
 

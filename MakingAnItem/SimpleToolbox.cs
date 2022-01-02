@@ -75,17 +75,21 @@ namespace NevernamedsItems
 
         public static void SpawnShield(PlayerController user, Vector3 location)
         {
-            Gun gun = PickupObjectDatabase.GetById(380) as Gun;
             Gun currentGun = user.CurrentGun;
-            GameObject gameObject = gun.ObjectToInstantiateOnReload.gameObject;
-            GameObject gameObject2 = UnityEngine.Object.Instantiate<GameObject>(gameObject, location, Quaternion.identity);
+            GameObject shieldObj = (PickupObjectDatabase.GetById(380) as Gun).ObjectToInstantiateOnReload.gameObject;
+            GameObject gameObject2 = UnityEngine.Object.Instantiate<GameObject>(shieldObj, location, Quaternion.identity);
+
             SingleSpawnableGunPlacedObject @interface = gameObject2.GetInterface<SingleSpawnableGunPlacedObject>();
             BreakableShieldController component = gameObject2.GetComponent<BreakableShieldController>();
-            bool flag3 = gameObject2;
-            if (flag3)
+            if (gameObject2)
             {
                 @interface.Initialize(currentGun);
                 component.Initialize(currentGun);
+            }
+            if (location != Vector3.zero)
+            {
+                component.transform.position = location;
+                component.specRigidbody.Reinitialize();
             }
         }
 

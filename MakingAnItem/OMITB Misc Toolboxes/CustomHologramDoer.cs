@@ -25,7 +25,7 @@ namespace NevernamedsItems
             {
                 return;
             }
-            if (base.aiActor)
+            if (base.gameActor)
             {
                 if (extantSprite) { Destroy(extantSprite); }
                 extantSprite = new GameObject("Item Hologram", new Type[] { typeof(tk2dSprite) }) { layer = 0 };
@@ -35,7 +35,7 @@ namespace NevernamedsItems
                 m_ItemSprite.SetSprite(encounterIconCollection, spriteID);
                 m_ItemSprite.PlaceAtPositionByAnchor(extantSprite.transform.position, tk2dBaseSprite.Anchor.LowerCenter);
                 m_ItemSprite.transform.localPosition = m_ItemSprite.transform.localPosition.Quantize(0.0625f);
-                if (base.aiActor != null) { extantSprite.transform.parent = base.aiActor.transform; }
+                if (base.gameActor != null) { extantSprite.transform.parent = base.gameActor.transform; }
 
                 if (m_ItemSprite)
                 {
@@ -72,7 +72,7 @@ namespace NevernamedsItems
 
         public void HideSprite()
         {
-            if (base.aiActor && extantSprite)
+            if (base.gameActor && extantSprite)
             {
                 Destroy(extantSprite);
             }

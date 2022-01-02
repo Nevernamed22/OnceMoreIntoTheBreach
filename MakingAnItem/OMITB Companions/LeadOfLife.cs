@@ -78,10 +78,11 @@ namespace NevernamedsItems
         public static LeadOfLifeCompanionStats AntimatterBulletsCompanion;
         public static LeadOfLifeCompanionStats BashfulShotCompanion;
         public static LeadOfLifeCompanionStats BashingBulletsCompanion;
-
         public static LeadOfLifeCompanionStats BirdshotCompanion;
         public static LeadOfLifeCompanionStats BlightShellCompanion;
         public static LeadOfLifeCompanionStats BloodthirstyBulletsCompanion;
+
+        public static LeadOfLifeCompanionStats TitanBulletsCompanion;
 
 
 
@@ -157,6 +158,7 @@ namespace NevernamedsItems
                 BirdshotCompanion = new LeadOfLifeCompanionStats();
                 BlightShellCompanion = new LeadOfLifeCompanionStats();
                 BloodthirstyBulletsCompanion = new LeadOfLifeCompanionStats();
+                TitanBulletsCompanion = new LeadOfLifeCompanionStats();
 
 
 
@@ -227,6 +229,7 @@ namespace NevernamedsItems
                 BirdshotCompanion.guid = "leadoflife_birdshot";
                 BlightShellCompanion.guid = "leadoflife_blightshell";
                 BloodthirstyBulletsCompanion.guid = "leadoflife_bloodthirstybullets";
+                TitanBulletsCompanion.guid = "leadoflife_titanbullets";
 
 
 
@@ -296,6 +299,7 @@ namespace NevernamedsItems
                     {Birdshot.BirdshotID, BirdshotCompanion.guid},
                     {BlightShell.BlightShellID, BlightShellCompanion.guid},
                     {BloodthirstyBullets.BloodthirstyBulletsID, BloodthirstyBulletsCompanion.guid},
+                    {TitanBullets.ID, TitanBulletsCompanion.guid},
 
 
 
@@ -1622,13 +1626,30 @@ namespace NevernamedsItems
                     var companionController = BloodthirstyBulletsCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
                     companionController.aiActor.MovementSpeed = 5f;
                     companionController.tiedItemID = BloodthirstyBullets.BloodthirstyBulletsID;
-                    companionController.dmgUpOnFlyingEnemies = true;
                     companionController.isBloodthirstyBullets = true;
                     BloodthirstyBulletsCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/bloodthirstybulletscompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
                     BloodthirstyBulletsCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/bloodthirstybulletscompanion_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
                     companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
                     companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
                     BehaviorSpeculator component = BloodthirstyBulletsCompanion.prefab.GetComponent<BehaviorSpeculator>();
+                    component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
+                    component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
+                }
+                if (TitanBulletsCompanion.prefab == null || !CompanionBuilder.companionDictionary.ContainsKey(TitanBulletsCompanion.guid))
+                {
+                    TitanBulletsCompanion.prefab = CompanionBuilder.BuildPrefab("LeadOfLife TitanBulletsCompanion", TitanBulletsCompanion.guid, "NevernamedsItems/Resources/Companions/LeadOfLifeModded/titanbulletscompanion_idle_001", new IntVector2(11, 2), new IntVector2(9, 9));
+                    var companionController = TitanBulletsCompanion.prefab.AddComponent<LeadOfLifeCompanion>();
+                    companionController.aiActor.MovementSpeed = 3f;
+                    companionController.bulletScaleMultiplier = 10000;
+                    companionController.damageMultiplier = 1.05f;
+                    companionController.stunInflictChance = 0.7f;
+                    companionController.inflictedStunDuration = 2f;
+                    companionController.tiedItemID = TitanBullets.ID;
+                    TitanBulletsCompanion.prefab.AddAnimation("idle", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/titanbulletscompanion_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    TitanBulletsCompanion.prefab.AddAnimation("run", "NevernamedsItems/Resources/Companions/LeadOfLifeModded/titanbulletscompanion_run", 7, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.Single, DirectionalAnimation.FlipType.None);
+                    companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+                    companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+                    BehaviorSpeculator component = TitanBulletsCompanion.prefab.GetComponent<BehaviorSpeculator>();
                     component.MovementBehaviors.Add(new CustomCompanionBehaviours.LeadOfLifeCompanionApproach());
                     component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior { IdleAnimations = new string[] { "idle" } });
                 }

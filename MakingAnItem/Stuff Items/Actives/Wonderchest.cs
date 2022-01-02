@@ -60,15 +60,14 @@ namespace NevernamedsItems
                 Chest spawnedBlack = Chest.Spawn(black_Chest, bestRewardLocation2);
                 bool IsAGun = UnityEngine.Random.value <= 0.5f;
                 spawnedBlack.lootTable.lootTable = (IsAGun ? GameManager.Instance.RewardManager.GunsLootTable : GameManager.Instance.RewardManager.ItemsLootTable);
-                //ETGModConsole.Log("Is a Gun: " + IsAGun);
                 spawnedBlack.RegisterChestOnMinimap(spawnedBlack.GetAbsoluteParentRoom());
             }
             if (UnityEngine.Random.value <= 0.001f) //RANDOM RARE RAINBOW
             {
                 IntVector2 bestRewardLocation = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
                 Chest rainbow_Chest = GameManager.Instance.RewardManager.Rainbow_Chest;
-                rainbow_Chest.IsLocked = false;
                 Chest spawnedRainbow = Chest.Spawn(rainbow_Chest, bestRewardLocation);
+                rainbow_Chest.IsLocked = false;
                 spawnedRainbow.RegisterChestOnMinimap(spawnedRainbow.GetAbsoluteParentRoom());
             }
             else

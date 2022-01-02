@@ -149,7 +149,7 @@ namespace NevernamedsItems
                          "#BOOMHILDR_NOSALE_TALK",
                          "#BOOMHILDR_INTRO_TALK",
                          "#BOOMHILDR_ATTACKED_TALK",
-                         new Vector3(0, 2, 0),
+                         new Vector3(0.5f, 4, 0),
                          ItsDaFuckinShopApi.defaultItemPositions,
                          1f,
                          false,
@@ -163,7 +163,11 @@ namespace NevernamedsItems
                          null,
                          true,
                          false,
-                         null
+                         null,
+                         true,
+                         "NevernamedsItems/Resources/NPCSprites/Boomhildr/boomhildr_mapicon",
+                         true,
+                         0.1f
                          );
 
             PrototypeDungeonRoom Mod_Shop_Room = RoomFactory.BuildFromResource("NevernamedsItems/Resources/EmbeddedRooms/BoomhildrRoom.room").room;

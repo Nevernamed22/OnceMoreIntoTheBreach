@@ -11,6 +11,7 @@ namespace NevernamedsItems
         //Fires
         public static GameActorFireEffect hotLeadEffect = PickupObjectDatabase.GetById(295).GetComponent<BulletStatusEffectItem>().FireModifierEffect;
         public static GameActorFireEffect greenFireEffect = PickupObjectDatabase.GetById(706).GetComponent<Gun>().DefaultModule.projectiles[0].fireEffect;
+        public static GameActorFireEffect SunlightBurn = PickupObjectDatabase.GetById(748).GetComponent<Gun>().DefaultModule.chargeProjectiles[0].Projectile.fireEffect;
 
 
         //Freezes
@@ -25,6 +26,7 @@ namespace NevernamedsItems
 
         //Cheeses
         public static GameActorCheeseEffect elimentalerCheeseEffect = (PickupObjectDatabase.GetById(626) as Gun).DefaultModule.projectiles[0].cheeseEffect;
+        public static GameActorCheeseEffect instantCheese = StatusEffectHelper.GenerateCheese(10, 150);
 
         //Speed Changes
         public static GameActorSpeedEffect tripleCrossbowSlowEffect = (PickupObjectDatabase.GetById(381) as Gun).DefaultModule.projectiles[0].speedEffect;
@@ -36,6 +38,9 @@ namespace NevernamedsItems
         public static GameActorSpeedEffect HoneySpeedMod;
         public static GameActorSpeedEffect FriendlyHoneySpeedMod;
         public static GameActorSpeedEffect PropulsionGoopSpeedMod;
+
+        //Confusion
+        public static GameActorConfusionEffect ConfusionEffect;
 
         //Plague Effects
         public static GameActorPlagueEffect StandardPlagueEffect;

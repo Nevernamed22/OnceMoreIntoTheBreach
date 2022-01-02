@@ -42,6 +42,8 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.EXCLUDED;
 
             BloodGlassGuonStoneID = item.PickupObjectId;
+            item.AddAsChamberGunMastery("OnceMoreIntoTheBreach", 4);
+
         }
 
         private void SpawnGuons(PlayerController player)

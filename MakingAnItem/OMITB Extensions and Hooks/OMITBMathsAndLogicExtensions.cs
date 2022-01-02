@@ -49,9 +49,11 @@ namespace NevernamedsItems
             }
             return key;
         }
-        public static Vector2 GetPositionOfNearestEnemy(this Vector2 startPosition, bool canTargetNonRoomClear, bool targetSprite = false)
+        public static Vector2 GetPositionOfNearestEnemy(this Vector2 startPosition, bool canTargetNonRoomClear, bool targetSprite = false, List<AIActor> excludedActors = null)
         {
-            Func<AIActor, bool> isValid = (AIActor a) => a && a.HasBeenEngaged && a.healthHaver && a.healthHaver.IsVulnerable;
+            List<AIActor> exclude = new List<AIActor>();
+            if (excludedActors != null && excludedActors.Count > 0) exclude.AddRange(excludedActors);
+            Func<AIActor, bool> isValid = (AIActor a) => a && a.HasBeenEngaged && a.healthHaver && a.healthHaver.IsVulnerable && a.healthHaver.IsAlive && !a.IsGone &&!exclude.Contains(a);
             IntVector2 intVectorStartPos = startPosition.ToIntVector2();
             RoomHandler.ActiveEnemyType enemyType = RoomHandler.ActiveEnemyType.RoomClear;
             if (canTargetNonRoomClear) enemyType = RoomHandler.ActiveEnemyType.All;
@@ -61,10 +63,12 @@ namespace NevernamedsItems
             else return closestToPosition.specRigidbody.UnitCenter;
         }
 
-        public static Vector2 GetVectorToNearestEnemy(this Vector2 bulletPosition, float angleFromAim = 0, float angleVariance = 0, PlayerController playerToScaleAccuracyOff = null)
+        public static Vector2 GetVectorToNearestEnemy(this Vector2 bulletPosition, float angleFromAim = 0, float angleVariance = 0, PlayerController playerToScaleAccuracyOff = null, List<AIActor> excludedActors = null)
         {
+            List<AIActor> exclude = new List<AIActor>();
+            if (excludedActors != null && excludedActors.Count > 0) exclude.AddRange(excludedActors);
             Vector2 dirVec = UnityEngine.Random.insideUnitCircle;
-            Func<AIActor, bool> isValid = (AIActor a) => a && a.HasBeenEngaged && a.healthHaver && a.healthHaver.IsVulnerable;
+            Func<AIActor, bool> isValid = (AIActor a) => a && a.HasBeenEngaged && a.healthHaver && a.healthHaver.IsVulnerable && !exclude.Contains(a);
             IntVector2 bulletPositionIntVector2 = bulletPosition.ToIntVector2();
             AIActor closestToPosition = BraveUtility.GetClosestToPosition<AIActor>(GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(bulletPositionIntVector2).GetActiveEnemies(RoomHandler.ActiveEnemyType.All), bulletPosition, isValid, new AIActor[]
             {

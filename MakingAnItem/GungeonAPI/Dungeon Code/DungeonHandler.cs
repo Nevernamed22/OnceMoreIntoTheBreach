@@ -26,8 +26,7 @@ namespace GungeonAPI
         public static void Init()
         {
             if (!initialized)
-            {
-                RoomFactory.LoadRoomsFromRoomDirectory();
+            {              
                 DungeonHooks.OnPreDungeonGeneration += OnPreDungeonGen;
                 initialized = true;
             }

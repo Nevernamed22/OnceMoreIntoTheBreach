@@ -31,7 +31,7 @@ namespace NevernamedsItems
         }
         public void onFired(Projectile bullet, float eventchancescaler)
         {
-            foreach (Component component in bullet.GetComponents<Component>())
+            foreach (Component component in bullet.GetComponentsInChildren<Component>())
             {
                 ETGModConsole.Log(component.GetType().ToString());
             }

@@ -93,8 +93,9 @@ namespace NevernamedsItems
                     def.MakeOffset(new Vector2(-2.12f, -1.75f));
                 }
             }
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(37) as Gun).gunSwitchGroup;
 
-
+            gun.gunScreenShake =  new ScreenShakeSettings(5f, 1f, 0.5f, 0.5f); 
             PumhartID = gun.PickupObjectId;
         }
         public static int PumhartID;

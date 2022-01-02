@@ -17,19 +17,19 @@ namespace NevernamedsItems
 
         public static void Add()
         {
-            
+
             Gun gun = ETGMod.Databases.Items.NewGun("Testinator", "testinator");
-            
+
             Game.Items.Rename("outdated_gun_mods:testinator", "nn:testinator");
-       var behav =      gun.gameObject.AddComponent<TestGun>();
+            var behav = gun.gameObject.AddComponent<TestGun>();
             behav.preventNormalFireAudio = true;
             behav.overrideNormalFireAudio = "Play_GoldenEye_BulletFire";
             gun.SetLongDescription("Made for fun. Probably broken.");
-            
+
             gun.SetupSprite(null, "wailingmagnum_idle_001", 8);
-            
+
             gun.SetAnimationFPS(gun.shootAnimation, 10);
-   
+
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
 
             gun.DefaultModule.ammoCost = 1;
@@ -45,13 +45,43 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
-            projectile.baseData.speed *= 0.5f;
-        
+            projectile.baseData.speed *= 10f;
+            projectile.sprite.renderer.enabled = false;
+
+            List<string> BeamAnimPaths = new List<string>()
+            {
+                "NevernamedsItems/Resources/TrailSprites/laserwelder_trail_001",
+                "NevernamedsItems/Resources/TrailSprites/laserwelder_trail_002",
+                "NevernamedsItems/Resources/TrailSprites/laserwelder_trail_003",
+                "NevernamedsItems/Resources/TrailSprites/laserwelder_trail_004",
+                "NevernamedsItems/Resources/TrailSprites/laserwelder_trail_005",
+            };
+            List<string> ImpactAnimPaths = new List<string>()
+            {
+                "NevernamedsItems/Resources/TrailSprites/laserwelder_trailstart_001",
+                "NevernamedsItems/Resources/TrailSprites/laserwelder_trailstart_002",
+                "NevernamedsItems/Resources/TrailSprites/laserwelder_trailstart_003",
+                "NevernamedsItems/Resources/TrailSprites/laserwelder_trailstart_004",
+                "NevernamedsItems/Resources/TrailSprites/laserwelder_trailstart_005",
+            };
+
+            projectile.AddTrailToProjectile(
+                "NevernamedsItems/Resources/TrailSprites/laserwelder_trail_001",
+                new Vector2(17, 5),
+                new Vector2(0, 6),
+                BeamAnimPaths, 20,
+                ImpactAnimPaths, 20, 
+                0.1f,
+                - 1,
+                -1,
+                true
+                );
+
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
         }
-        
+
         public override void PostProcessProjectile(Projectile projectile)
         {
             base.PostProcessProjectile(projectile);
@@ -60,6 +90,6 @@ namespace NevernamedsItems
         public TestGun()
         {
 
-        }      
+        }
     }
 }

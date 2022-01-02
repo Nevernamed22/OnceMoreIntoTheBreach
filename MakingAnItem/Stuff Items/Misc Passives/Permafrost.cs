@@ -35,6 +35,7 @@ namespace NevernamedsItems
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 2f, StatModifier.ModifyMethod.ADDITIVE);
 
             //Adds the actual passive effect to the item
 
@@ -58,7 +59,7 @@ namespace NevernamedsItems
                             float freezeAmount = 0;
                             if (aiactor.healthHaver.IsBoss) freezeAmount = 100;
                             else freezeAmount = 150;
-                            ApplyDirectStatusEffects.ApplyDirectFreeze(aiactor.gameActor, 5, freezeAmount, StaticStatusEffects.chaosBulletsFreeze.UnfreezeDamagePercent, ExtendedColours.freezeBlue, ExtendedColours.freezeBlue, EffectResistanceType.None, "Permafrost", true, true);
+                            ApplyDirectStatusEffects.ApplyDirectFreeze(aiactor.gameActor, 3, freezeAmount, StaticStatusEffects.chaosBulletsFreeze.UnfreezeDamagePercent, ExtendedColours.freezeBlue, ExtendedColours.freezeBlue, EffectResistanceType.None, "Permafrost", true, true);
                         }
                     }
                 }

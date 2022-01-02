@@ -187,7 +187,9 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.D;
 
             item.SetupUnlockOnCustomStat(CustomTrackedStats.TITAN_KIN_KILLED, 4, DungeonPrerequisite.PrerequisiteOperation.GREATER_THAN);
+            ID = item.PickupObjectId;
         }
+        public static int ID;
         public override void Pickup(PlayerController player)
         {
             base.Pickup(player);

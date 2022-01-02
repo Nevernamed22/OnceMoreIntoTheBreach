@@ -26,8 +26,40 @@ namespace NevernamedsItems
             ScrollOfExactKnowledge.BuildPrefab();
             ScrollOfExactKnowledgeID = companionItem.PickupObjectId;
             companionItem.SetupUnlockOnCustomFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_OFFICE, true);
+
+            ChestToolbox.OnChestPostSpawn += ScrollOfExactKnowledge.OnChestSpawned;
         }
         public static int ScrollOfExactKnowledgeID;
+
+        public static void OnChestSpawned(Chest chest)
+        {
+            if (!Dungeon.IsGenerating)
+            {
+                if (GameManager.Instance.AnyPlayerHasPickupID(ScrollOfExactKnowledge.ScrollOfExactKnowledgeID))
+                {
+                    if (GameManager.Instance.PrimaryPlayer != null)
+                    {
+                        foreach (PassiveItem item in GameManager.Instance.PrimaryPlayer.passiveItems)
+                        {
+                            if (item.GetComponent<ScrollOfExactKnowledge>() != null)
+                            {
+                                item.GetComponent<ScrollOfExactKnowledge>().ReactToRuntimeSpawnedChest(chest);
+                            }
+                        }
+                    }
+                    if (GameManager.Instance.SecondaryPlayer != null)
+                    {
+                        foreach (PassiveItem item in GameManager.Instance.SecondaryPlayer.passiveItems)
+                        {
+                            if (item.GetComponent<ScrollOfExactKnowledge>() != null)
+                            {
+                                item.GetComponent<ScrollOfExactKnowledge>().ReactToRuntimeSpawnedChest(chest);
+                            }
+                        }
+                    }
+                }
+            }
+        }
         public override DebrisObject Drop(PlayerController player)
         {
             DebrisObject droppedSelf = base.Drop(player);
@@ -97,6 +129,7 @@ namespace NevernamedsItems
                 self = this.aiActor;
                 Invoke("DoWelcomingDialogue", 0.5f);
             }
+            
             private void DoWelcomingDialogue()
             {
                 TextBubble.DoAmbientTalk(base.transform, new Vector3(0.5f, 2, 0), BraveUtility.RandomElement(WelcomingDialogues), 1.5f);

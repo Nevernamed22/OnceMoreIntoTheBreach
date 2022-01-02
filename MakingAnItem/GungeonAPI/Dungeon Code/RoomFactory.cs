@@ -366,6 +366,40 @@ namespace GungeonAPI
         {
             try
             {
+                //ETGModConsole.Log("Checking: " + assetPath);
+                if (overrideRoomPlaceables.ContainsKey(assetPath))
+                {
+                    //ETGModConsole.Log("FOUND: " + assetPath);
+                    if (overrideRoomPlaceables[assetPath] == null || overrideRoomPlaceables[assetPath].gameObject == null) ETGModConsole.Log("ERROR, THINGUM IS NULL IN DICTIONARY");
+                    DungeonPrerequisite[] emptyReqs = new DungeonPrerequisite[0];
+                    room.placedObjectPositions.Add(location);
+
+                    var placeableContents = ScriptableObject.CreateInstance<DungeonPlaceable>();
+                    placeableContents.width = 2;
+                    placeableContents.height = 2;
+                    placeableContents.respectsEncounterableDifferentiator = true;
+                    placeableContents.variantTiers = new List<DungeonPlaceableVariant>()
+                    {
+                        new DungeonPlaceableVariant()
+                            {
+                                percentChance = 1,
+                                nonDatabasePlaceable = overrideRoomPlaceables[assetPath],
+                                prerequisites = emptyReqs,
+                                materialRequirements= new DungeonPlaceableRoomMaterialRequirement[0]
+                            }
+                    };
+
+                    room.placedObjects.Add(new PrototypePlacedObjectData()
+                    {
+                        contentsBasePosition = location,
+                        fieldData = new List<PrototypePlacedObjectFieldData>(),
+                        instancePrerequisites = emptyReqs,
+                        linkedTriggerAreaIDs = new List<int>(),
+                        placeableContents = placeableContents
+                    });
+                    return;
+                }
+
                 GameObject asset = GetGameObjectFromBundles(assetPath);
                 if (asset)
                 {
@@ -631,7 +665,12 @@ namespace GungeonAPI
             {
                 Tools.PrintException(e);
             }
+
         }
+        public static Dictionary<string, GameObject> overrideRoomPlaceables = new Dictionary<string, GameObject>()
+        {
+            {"secret_room_skeleton", ExoticPlaceables.SecretRoomSkeleton},
+        };
 
         public struct RoomData
         {

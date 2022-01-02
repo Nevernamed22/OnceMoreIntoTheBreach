@@ -41,6 +41,8 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.EXCLUDED;
 
             GooeyHeartID = item.PickupObjectId;
+            item.AddAsChamberGunMastery("OnceMoreIntoTheBreach", 4);
+
         }
         public static List<string> blobEnemies = new List<string>()
         {

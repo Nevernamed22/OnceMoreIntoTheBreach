@@ -12,6 +12,38 @@ namespace NevernamedsItems
 {
     static class OMITBBulletExtensions
     {
+        public static ShaderProjModifier ApplyClonedShaderProjModifier( this Projectile self, ShaderProjModifier shaderToClone)
+        {
+            ShaderProjModifier tanglify = self.gameObject.AddComponent<ShaderProjModifier>();
+            tanglify.ProcessProperty = shaderToClone.ProcessProperty;
+            tanglify.ShaderProperty = shaderToClone.ShaderProperty;
+            tanglify.StartValue = shaderToClone.StartValue;
+            tanglify.EndValue = shaderToClone.EndValue;
+            tanglify.LerpTime = shaderToClone.LerpTime;
+            tanglify.ColorAttribute = shaderToClone.ColorAttribute;
+            tanglify.GlobalSparks = shaderToClone.GlobalSparks;
+            tanglify.StartColor = shaderToClone.StartColor;
+            tanglify.EndColor = shaderToClone.EndColor;
+            tanglify.OnDeath = shaderToClone.OnDeath;
+            tanglify.PreventCorpse = shaderToClone.PreventCorpse;
+            tanglify.DisablesOutlines = shaderToClone.DisablesOutlines;
+            tanglify.EnableEmission = shaderToClone.EnableEmission;
+            tanglify.GlobalSparksColor = shaderToClone.GlobalSparksColor;
+            tanglify.GlobalSparksForce = shaderToClone.GlobalSparksForce;
+            tanglify.GlobalSparksOverrideLifespan = shaderToClone.GlobalSparksOverrideLifespan;
+            tanglify.AddMaterialPass = shaderToClone.AddMaterialPass;
+            tanglify.AddPass = shaderToClone.AddPass;
+            tanglify.IsGlitter = shaderToClone.IsGlitter;
+            tanglify.ShouldAffectBosses = shaderToClone.ShouldAffectBosses;
+            tanglify.AddsEncircler = shaderToClone.AddsEncircler;
+            tanglify.AppliesLocalSlowdown = shaderToClone.AppliesLocalSlowdown;
+            tanglify.LocalTimescaleMultiplier = shaderToClone.LocalTimescaleMultiplier;
+            tanglify.AppliesParticleSystem = shaderToClone.AppliesParticleSystem;
+            tanglify.ParticleSystemToSpawn = shaderToClone.ParticleSystemToSpawn;
+            tanglify.GlobalSparkType = shaderToClone.GlobalSparkType;
+            tanglify.GlobalSparksRepeat = shaderToClone.GlobalSparksRepeat;
+            return tanglify;
+        }
         public static void RemoveFromPool(this Projectile proj)
         {
             SpawnManager.PoolManager.Remove(proj.transform);
@@ -175,12 +207,13 @@ namespace NevernamedsItems
     }
     static class ChainedShadowBulletsHandler
     {
-        public static void SpawnChainedShadowBullets(this Projectile source, int numberInChain, float pauseLength, float chainScaleMult = 1, Projectile overrideProj = null)
+        public static void SpawnChainedShadowBullets(this Projectile source, int numberInChain, float pauseLength, float chainScaleMult = 1, Projectile overrideProj = null, bool shadowcolour = false)
         {
-            GameManager.Instance.Dungeon.StartCoroutine(ChainedShadowBulletsHandler.HandleShadowChainDelay(source, numberInChain, pauseLength, chainScaleMult, overrideProj));
+            GameManager.Instance.Dungeon.StartCoroutine(ChainedShadowBulletsHandler.HandleShadowChainDelay(source, numberInChain, pauseLength, chainScaleMult, overrideProj, shadowcolour));
         }
-        private static IEnumerator HandleShadowChainDelay(Projectile proj, int amount, float delay, float scaleMult, Projectile overrideproj)
+        private static IEnumerator HandleShadowChainDelay(Projectile proj, int amount, float delay, float scaleMult, Projectile overrideproj, bool shadowcolour = false)
         {
+            yield return null;
             GameObject prefab = FakePrefab.Clone(proj.gameObject);
             if (overrideproj != null) prefab = FakePrefab.Clone(overrideproj.gameObject);
             Projectile prefabproj = prefab.GetComponent<Projectile>();
@@ -213,11 +246,11 @@ namespace NevernamedsItems
                         }
                     }
                 }
-                ChainedShadowBulletsHandler.SpawnShadowBullet(prefabproj, position, rotation, scaleMult);
+                ChainedShadowBulletsHandler.SpawnShadowBullet(prefabproj, position, rotation, scaleMult, shadowcolour);
             }
             yield break;
         }
-        public static Projectile SpawnShadowBullet(Projectile obj, Vector3 position, float rotation, float chainScaleMult = 1)
+        public static Projectile SpawnShadowBullet(Projectile obj, Vector3 position, float rotation, float chainScaleMult = 1, bool shadowcolour = false)
         {
             GameObject gameObject2 = UnityEngine.Object.Instantiate<GameObject>(obj.gameObject, position, Quaternion.Euler(0f, 0f, rotation));
             if (gameObject2.GetComponent<AutoDoShadowChainOnSpawn>()) UnityEngine.Object.Destroy(gameObject2.GetComponent<AutoDoShadowChainOnSpawn>());
@@ -233,6 +266,7 @@ namespace NevernamedsItems
             component2.baseData.force = obj.baseData.force;
             component2.RuntimeUpdateScale(chainScaleMult);
             component2.UpdateSpeed();
+            if (shadowcolour) component2.ChangeColor(0f, new Color(0.35f, 0.25f, 0.65f, 1f));
             return component2;
         }
     }

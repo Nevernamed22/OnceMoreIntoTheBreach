@@ -28,12 +28,27 @@ namespace NevernamedsItems
                 typeof(FloorAndGenerationToolbox).GetMethod("OnFloorDeparture", BindingFlags.Instance | BindingFlags.Public),
                 typeof(ElevatorDepartureController)
             );
+            NewSessionStarted = new Hook(
+                typeof(GameStatsManager).GetMethod("BeginNewSession", BindingFlags.Instance | BindingFlags.Public),
+                typeof(FloorAndGenerationToolbox).GetMethod("NewSession", BindingFlags.Static | BindingFlags.Public)
+            );
+
         }
         public static Hook ratMazeFailHook;
         public static Hook floorLoadPlayerHook;
         public static Hook floorDepartureHook;
+        public static Hook NewSessionStarted;
         public static Action OnFloorExited;
         public static Action OnFloorEntered;
+        public static Action<PlayerController> OnNewGame;
+        public static void NewSession(Action<GameStatsManager, PlayerController> orig, GameStatsManager self, PlayerController player)
+        {
+            orig(self, player);
+            if (OnNewGame != null)
+            {
+                OnNewGame(player);
+            }
+        }
         public static void OnFloorLoaded()
         {
             if (OnFloorEntered != null)

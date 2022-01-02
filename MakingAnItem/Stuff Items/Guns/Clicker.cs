@@ -21,11 +21,11 @@ namespace NevernamedsItems
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Clicker", "clicker");
             Game.Items.Rename("outdated_gun_mods:clicker", "nn:clicker");
-          var behav =  gun.gameObject.AddComponent<Clicker>();
+            var behav = gun.gameObject.AddComponent<Clicker>();
             behav.preventNormalFireAudio = true;
             behav.overrideNormalFireAudio = "Play_MouseClickNoise";
             gun.SetShortDescription("Clacker");
-            gun.SetLongDescription("A remarkably strange invention, this arrow requires no bow to fire."+"\n\nCan shred enemies apart as fast as you can click on them!");
+            gun.SetLongDescription("A remarkably strange invention, this arrow requires no bow to fire." + "\n\nCan shred enemies apart as fast as you can click on them!");
             gun.SetupSprite(null, "clicker_idle_001", 13);
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
@@ -67,7 +67,7 @@ namespace NevernamedsItems
 
             projectile.gameObject.AddComponent<ClickProjMod>();
             projectile.sprite.renderer.enabled = false;
-          
+
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             ID = gun.PickupObjectId;
@@ -158,13 +158,16 @@ namespace NevernamedsItems
                         {
                             if ((gun.GunPlayerOwner().CurrentGun.PickupObjectId == gun.PickupObjectId) || (gun.GunPlayerOwner().CurrentSecondaryGun.PickupObjectId == gun.PickupObjectId))
                             {
-                                this.UpdateReticlePosition();
 
                                 //Room change positional update
                                 if (gun.GunPlayerOwner().CurrentRoom != lastRoom)
                                 {
                                     regenerateExtantCrosshair(gun.GunPlayerOwner());
                                     lastRoom = gun.GunPlayerOwner().CurrentRoom;
+                                }
+                                else
+                                {
+                                    this.UpdateReticlePosition();
                                 }
                             }
                             else { removeManualCrosshair(); }

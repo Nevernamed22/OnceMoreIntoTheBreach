@@ -29,8 +29,8 @@ namespace NpcApi
 		public Func<CustomShopController, PlayerController, int, bool> customCanBuy;
 		public Func<CustomShopController, PlayerController, int, int> removeCurrency;
 		public Func<CustomShopController, CustomShopItemController, PickupObject, int> customPrice;
-		public Action<PlayerController, PickupObject, int> OnPurchase;
-		public Action<PlayerController, PickupObject, int> OnSteal;
+		public Func<PlayerController, PickupObject, int, bool> OnPurchase;
+		public Func<PlayerController, PickupObject, int, bool> OnSteal;
 		public string customPriceSprite;
 
 		public new bool Locked { get; set; }
@@ -634,3 +634,4 @@ namespace NpcApi
 		}
 	}
 }
+

@@ -97,6 +97,8 @@ namespace NevernamedsItems
 
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_THEOUTBREAK, true);
             gun.AddItemToDougMetaShop(45);
+            gun.AddToSubShop(ItemBuilder.ShopType.Goopton);
+
         }
         public static int TheOutbreakID;
         public override void PostProcessProjectile(Projectile projectile)

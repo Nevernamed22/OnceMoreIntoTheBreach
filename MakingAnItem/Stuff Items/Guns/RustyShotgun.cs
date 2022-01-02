@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -79,6 +80,7 @@ namespace NevernamedsItems
             gun.Volley.UsesShotgunStyleVelocityRandomizer = true;
 
             RustyShotgunID = gun.PickupObjectId;
+            gun.SetupUnlockOnCustomStat(CustomTrackedStats.RUSTY_ITEMS_STOLEN, 0, DungeonPrerequisite.PrerequisiteOperation.GREATER_THAN);
         }
         public static int RustyShotgunID;
     }

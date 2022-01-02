@@ -13,7 +13,7 @@ namespace NevernamedsItems
     {
         public static void DoSwordSlash(Vector2 position, float angle, PlayerController owner, float playerKnockbackForce, ProjInteractMode intmode, float damageToDeal, float enemyKnockbackForce, List<GameActorEffect> statusEffects, Transform parentTransform = null, float jammedDamageMult = 1, float bossDamageMult = 1)
         {
-            (ETGMod.Databases.Items["wonderboy"] as Gun).muzzleFlashEffects.SpawnAtPosition(position, angle, parentTransform, null, null, -0.05f);
+            (PickupObjectDatabase.GetById(417) as Gun).muzzleFlashEffects.SpawnAtPosition(position, angle, parentTransform, null, null, -0.05f);
             GameManager.Instance.StartCoroutine(HandleSlash(position, angle, owner, playerKnockbackForce, intmode, damageToDeal, enemyKnockbackForce, statusEffects, jammedDamageMult, bossDamageMult));
         }
         private static IEnumerator HandleSlash(Vector2 position, float angle, PlayerController owner, float knockbackForce, ProjInteractMode intmode, float damageToDeal, float enemyKnockback, List<GameActorEffect> statusEffects, float jammedDMGMult, float bossDMGMult)

@@ -1,6 +1,7 @@
 ﻿using Dungeonator;
 using GungeonAPI;
 using HutongGames.PlayMaker;
+using HutongGames.PlayMaker.Actions;
 using ItemAPI;
 using System;
 using System.Collections.Generic;
@@ -55,19 +56,34 @@ namespace NpcApi
         ///
         /// <param name="hasCarpet">Whether the shop has a carpet or something else that they sit on</param> 
         /// <param name="carpetSpritePath">Sprite path for the carpet or whatever</param> 
+        ///         
+        /// <param name="hasMinimapIcon">Whether the shop has a minimap icon to show what room theyre in</param> 
+        /// <param name="minimapIconSpritePath">Sprite path minimap icon leave blank to just use deafult smiley face</param> 
+        /// 
+        /// <param name="addToMainNpcPool">Whether the shop should be added to the pool of npcs that show up in the main shop a long side bello</param> 
+        /// <param name="percentChanceForMainPool">How likely it is for the shop to show up in the main pool base game shops use 0.1</param> 
+        /// 
+        /// <param name="prerequisites">These do unlocks and shit</param> 
         /// <returns></returns>
         public static GameObject SetUpShop(string name, string prefix, List<string> idleSpritePaths, int idleFps, List<string> talkSpritePaths, int talkFps, GenericLootTable lootTable, CustomShopItemController.ShopCurrencyType currency, string runBasedMultilineGenericStringKey,
             string runBasedMultilineStopperStringKey, string purchaseItemStringKey, string purchaseItemFailedStringKey, string introStringKey, string attackedStringKey, Vector3 talkPointOffset, Vector3[] itemPositions = null, float costModifier = 1, bool giveStatsOnPurchase = false,
             StatModifier[] statsToGiveOnPurchase = null, Func<CustomShopController, PlayerController, int, bool> CustomCanBuy = null, Func<CustomShopController, PlayerController, int, int> CustomRemoveCurrency = null, Func<CustomShopController, CustomShopItemController, PickupObject, int> CustomPrice = null,
-            Action<PlayerController, PickupObject, int> OnPurchase = null, Action<PlayerController, PickupObject, int> OnSteal = null, string currencyIconPath = "", string currencyName = "", bool canBeRobbed = true, bool hasCarpet = false, string carpetSpritePath = "")
+            Func<PlayerController, PickupObject, int, bool> OnPurchase = null, Func<PlayerController, PickupObject, int, bool> OnSteal = null, string currencyIconPath = "", string currencyName = "", bool canBeRobbed = true, bool hasCarpet = false, string carpetSpritePath = "", bool hasMinimapIcon = false,
+            string minimapIconSpritePath = "", bool addToMainNpcPool = false, float percentChanceForMainPool = 0.1f, DungeonPrerequisite[] prerequisites = null)
         {
 
             try
             {
+
+                if (prerequisites == null)
+                {
+                    prerequisites = new DungeonPrerequisite[0];
+                }
                 //bool isBreachShop = false;
                 Vector3 breachPos = Vector3.zero;
 
                 var shared_auto_001 = ResourceManager.LoadAssetBundle("shared_auto_001");
+                var shared_auto_002 = ResourceManager.LoadAssetBundle("shared_auto_002");
                 var SpeechPoint = new GameObject("SpeechPoint");
                 SpeechPoint.transform.position = talkPointOffset;
 
@@ -185,7 +201,6 @@ namespace NpcApi
 
                 UnityEngine.JsonUtility.FromJsonOverwrite(UnityEngine.JsonUtility.ToJson(basenpc.GetComponent<PlayMakerFSM>()), iHaveNoFuckingClueWhatThisIs);
 
-
                 FieldInfo fsmStringParams = typeof(ActionData).GetField("fsmStringParams", BindingFlags.NonPublic | BindingFlags.Instance);
 
                 (fsmStringParams.GetValue(iHaveNoFuckingClueWhatThisIs.FsmStates[1].ActionData) as List<FsmString>)[0].Value = runBasedMultilineGenericStringKey;
@@ -285,14 +300,34 @@ namespace NpcApi
                 shopObj.spawnGroupTwoItem3Chance = 0.5f;
                 shopObj.shopkeepFSM = npcObj.GetComponent<PlayMakerFSM>();
                 shopObj.shopItemShadowPrefab = shared_auto_001.LoadAsset<GameObject>("Merchant_Key").GetComponent<BaseShopController>().shopItemShadowPrefab;
-                shopObj.shopItemShadowPrefab =
+
+                shopObj.prerequisites = prerequisites;
+                //shopObj.shopItemShadowPrefab = 
+
                 shopObj.cat = null;
-                shopObj.OptionalMinimapIcon = null;
+
+
+                if (hasMinimapIcon)
+                {
+                    if (!string.IsNullOrEmpty(minimapIconSpritePath))
+                    {
+                        shopObj.OptionalMinimapIcon = SpriteBuilder.SpriteFromResource(minimapIconSpritePath);
+                        UnityEngine.Object.DontDestroyOnLoad(shopObj.OptionalMinimapIcon);
+                        FakePrefab.MarkAsFakePrefab(shopObj.OptionalMinimapIcon);
+                    }
+                    else
+                    {
+                        shopObj.OptionalMinimapIcon = ResourceCache.Acquire("Global Prefabs/Minimap_NPC_Icon") as GameObject;
+                    }
+                }
+
                 shopObj.ShopCostModifier = costModifier;
                 shopObj.FlagToSetOnEncounter = GungeonFlags.NONE;
 
                 shopObj.giveStatsOnPurchase = giveStatsOnPurchase;
                 shopObj.statsToGive = statsToGiveOnPurchase;
+
+                //shopObj.
 
                 /*if (isBreachShop)
                 {
@@ -335,6 +370,24 @@ namespace NpcApi
                     carpetObj.layer = 20;
                 }
                 npcObj.SetActive(true);
+
+                if (addToMainNpcPool)
+                {
+                    shared_auto_002.LoadAsset<DungeonPlaceable>("shopannex_contents_01").variantTiers.Add(new DungeonPlaceableVariant
+                    {
+                        percentChance = percentChanceForMainPool,
+                        unitOffset = new Vector2(-0.5f, -1.25f),
+                        nonDatabasePlaceable = shopObj.gameObject,
+                        enemyPlaceableGuid = "",
+                        pickupObjectPlaceableId = -1,
+                        forceBlackPhantom = false,
+                        addDebrisObject = false,
+                        prerequisites = prerequisites, //shit for unlocks gose here sooner or later
+                        materialRequirements = new DungeonPlaceableRoomMaterialRequirement[0],
+
+                    });
+                }
+
                 ItsDaFuckinShopApi.builtShops.Add(prefix + ":" + name, shopObj.gameObject);
                 return shopObj.gameObject;
             }
@@ -344,6 +397,130 @@ namespace NpcApi
                 return null;
             }
         }
+        /*
+        public static GameObject SetUpJailedNpc(string name, string prefix, List<string> idleSpritePaths, int idleFps, Vector3 talkPointOffset, GungeonFlags flag)
+        {
+            var shared_auto_001 = ResourceManager.LoadAssetBundle("shared_auto_001");
+            var shared_auto_002 = ResourceManager.LoadAssetBundle("shared_auto_002");
+            var SpeechPoint = new GameObject("SpeechPoint");
+            SpeechPoint.transform.position = talkPointOffset;
+
+
+
+            var npcObj = SpriteBuilder.SpriteFromResource(idleSpritePaths[0], new GameObject(prefix + ":" + name));
+
+            FakePrefab.MarkAsFakePrefab(npcObj);
+            UnityEngine.Object.DontDestroyOnLoad(npcObj);
+            npcObj.SetActive(false);
+
+            npcObj.layer = 22;
+
+            var collection = npcObj.GetComponent<tk2dSprite>().Collection;
+            SpeechPoint.transform.parent = npcObj.transform;
+
+            FakePrefab.MarkAsFakePrefab(SpeechPoint);
+            UnityEngine.Object.DontDestroyOnLoad(SpeechPoint);
+            SpeechPoint.SetActive(true);
+
+
+            var idleIdsList = new List<int>();
+
+            foreach (string sprite in idleSpritePaths)
+            {
+                idleIdsList.Add(SpriteBuilder.AddSpriteToCollection(sprite, collection));
+            }
+
+            tk2dSpriteAnimator spriteAnimator = npcObj.AddComponent<tk2dSpriteAnimator>();
+
+            SpriteBuilder.AddAnimation(spriteAnimator, collection, idleIdsList, name + "_idle", tk2dSpriteAnimationClip.WrapMode.Loop, idleFps);
+
+            PlayMakerFSM nightmareNightmareNightmare = npcObj.AddComponent<PlayMakerFSM>();
+
+            var basenpc = shared_auto_002.LoadAsset<GameObject>("NPC_Key_Jailed");
+
+            UnityEngine.JsonUtility.FromJsonOverwrite(UnityEngine.JsonUtility.ToJson(basenpc.GetComponent<PlayMakerFSM>()), nightmareNightmareNightmare);
+
+            foreach (var state in nightmareNightmareNightmare.Fsm.FsmComponent.FsmStates)
+            {
+                foreach (var action in state.Actions)
+                {
+                    if (action is SetSaveFlag)
+                    {
+                        ((SetSaveFlag)action).targetFlag = flag;
+                    }
+                }
+            }
+
+            AIAnimator aIAnimator = GenerateBlankAIAnimator(npcObj);
+            aIAnimator.spriteAnimator = spriteAnimator;
+            aIAnimator.IdleAnimation = new DirectionalAnimation
+            {
+                Type = DirectionalAnimation.DirectionType.Single,
+                Prefix = name + "_idle",
+                AnimNames = new string[]
+                {
+                        ""
+                },
+                Flipped = new DirectionalAnimation.FlipType[]
+                {
+                        DirectionalAnimation.FlipType.None
+                }
+
+            };
+
+            TalkDoerLite talkDoer = npcObj.AddComponent<TalkDoerLite>();
+
+            talkDoer.placeableWidth = 4;
+            talkDoer.placeableHeight = 3;
+            talkDoer.difficulty = 0;
+            talkDoer.isPassable = true;
+            talkDoer.usesOverrideInteractionRegion = false;
+            talkDoer.overrideRegionOffset = Vector2.zero;
+            talkDoer.overrideRegionDimensions = Vector2.zero;
+            talkDoer.overrideInteractionRadius = -1;
+            talkDoer.PreventInteraction = false;
+            talkDoer.AllowPlayerToPassEventually = true;
+            talkDoer.speakPoint = SpeechPoint.transform;
+            talkDoer.SpeaksGleepGlorpenese = false;
+            talkDoer.audioCharacterSpeechTag = "oldman";
+            talkDoer.playerApproachRadius = 5;
+            talkDoer.conversationBreakRadius = 5;
+            talkDoer.echo1 = null;
+            talkDoer.echo2 = null;
+            talkDoer.PreventCoopInteraction = false;
+            talkDoer.IsPaletteSwapped = false;
+            talkDoer.PaletteTexture = null;
+            talkDoer.OutlineDepth = 0.5f;
+            talkDoer.OutlineLuminanceCutoff = 0.05f;
+            talkDoer.MovementSpeed = 3;
+            talkDoer.PathableTiles = CellTypes.FLOOR;
+
+            UltraFortunesFavor dreamLuck = npcObj.AddComponent<UltraFortunesFavor>();
+
+            dreamLuck.goopRadius = 2;
+            dreamLuck.beamRadius = 2;
+            dreamLuck.bulletRadius = 2;
+            dreamLuck.bulletSpeedModifier = 0.8f;
+
+            dreamLuck.vfxOffset = 0.625f;
+            dreamLuck.sparkOctantVFX = shared_auto_001.LoadAsset<GameObject>("FortuneFavor_VFX_Spark");
+
+            shared_auto_002.LoadAsset<DungeonPlaceable>("Generic Jailed NPC").variantTiers.Insert(1, new DungeonPlaceableVariant
+            {
+                percentChance = 0.1f,
+                unitOffset = new Vector2(0f, 0f),
+                nonDatabasePlaceable = npcObj.gameObject,
+                enemyPlaceableGuid = "",
+                pickupObjectPlaceableId = -1,
+                forceBlackPhantom = false,
+                addDebrisObject = false,
+                prerequisites = new DungeonPrerequisite[0], //shit for unlocks gose here sooner or later
+                materialRequirements = new DungeonPlaceableRoomMaterialRequirement[0],
+
+            });
+
+            return npcObj;
+        }*/
 
         public static string AddCustomCurrencyType(string ammoTypeSpritePath, string name)
         {
@@ -358,7 +535,7 @@ namespace NpcApi
         public static void RegisterShopRoom(GameObject shop, PrototypeDungeonRoom protoroom, Vector2 vector)
         {
             protoroom.category = PrototypeDungeonRoom.RoomCategory.NORMAL;
-            DungeonPrerequisite[] array = new DungeonPrerequisite[0];
+            DungeonPrerequisite[] array = shop.GetComponent<CustomShopController>()?.prerequisites != null ? shop.GetComponent<CustomShopController>().prerequisites : new DungeonPrerequisite[0];
             //Vector2 vector = new Vector2((float)(protoroom.Width / 2) + offset.x, (float)(protoroom.Height / 2) + offset.y);
             protoroom.placedObjectPositions.Add(vector);
             protoroom.placedObjects.Add(new PrototypePlacedObjectData

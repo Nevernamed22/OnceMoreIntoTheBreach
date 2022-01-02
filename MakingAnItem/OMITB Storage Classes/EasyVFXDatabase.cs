@@ -8,7 +8,7 @@ using UnityEngine;
 namespace NevernamedsItems
 {
     public class EasyVFXDatabase
-    { 
+    {
         //Basegame VFX Objects
         public static GameObject WeakenedStatusEffectOverheadVFX = ResourceCache.Acquire("Global VFX/VFX_Debuff_Status") as GameObject;
         public static GameObject SpiratTeleportVFX;
@@ -18,6 +18,7 @@ namespace NevernamedsItems
         public static GameObject MachoBraceDustUpVFX = PickupObjectDatabase.GetById(665).GetComponent<MachoBraceItem>().DustUpVFX;
         public static GameObject MachoBraceBurstVFX = PickupObjectDatabase.GetById(665).GetComponent<MachoBraceItem>().BurstVFX;
         public static GameObject MachoBraceOverheadVFX = PickupObjectDatabase.GetById(665).GetComponent<MachoBraceItem>().OverheadVFX;
+        public static GameObject LastBulletStandingX;
         //Projectile Death Effects
         public static GameObject GreenLaserCircleVFX = (PickupObjectDatabase.GetById(89) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX;
         public static GameObject YellowLaserCircleVFX = (PickupObjectDatabase.GetById(651) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX;
@@ -36,7 +37,9 @@ namespace NevernamedsItems
         public static GameObject PlagueOverheadVFX() { return PlagueStatusEffectSetup.PlagueOverheadVFX; }
         public static GameObject GundetaleSpareVFX;
         public static GameObject ERRORShellsOverheadVFX;
-
+        public static GameObject BigWhitePoofVFX;
+        public static GameObject ShittyElectricExplosion;
+        public static GameObject BloodExplosion;
         //Stat Up VFX
         public static GameObject DamageUpVFX;
         public static GameObject ShotSpeedUpVFX;
@@ -47,6 +50,9 @@ namespace NevernamedsItems
         public static GameObject ReloadSpeedUpVFX;
         public static void Init()
         {
+            //Last Bullet Standing VFX
+            GameObject ChallengeManagerReference = LoadHelper.LoadAssetFromAnywhere<GameObject>("_ChallengeManager");
+            LastBulletStandingX = (ChallengeManagerReference.GetComponent<ChallengeManager>().PossibleChallenges[0].challenge as BestForLastChallengeModifier).KingVFX;
             //Spirat Teleportation VFX
             #region SpiratTP
             GameObject teleportBullet = EnemyDatabase.GetOrLoadByGuid("7ec3e8146f634c559a7d58b19191cd43").bulletBank.GetBullet("self").BulletObject;

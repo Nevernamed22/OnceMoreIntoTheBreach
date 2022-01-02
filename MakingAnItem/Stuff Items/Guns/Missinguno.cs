@@ -46,10 +46,19 @@ namespace NevernamedsItems
             MissingunoID = gun.PickupObjectId;
 
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.UNLOCKED_MISSINGUNO, true);
-
+            ChestToolbox.OnChestPreOpen += Missinguno.OnChestPreOpen;
         }
         public static int MissingunoID;
-
+        public static void OnChestPreOpen(Chest self, PlayerController opener)
+        {
+            if (self && self.IsGlitched)
+            {
+                if (!SaveAPIManager.GetFlag(CustomDungeonFlags.UNLOCKED_MISSINGUNO))
+                {
+                    SaveAPIManager.SetFlag(CustomDungeonFlags.UNLOCKED_MISSINGUNO, true);
+                }
+            }
+        }
         private void ReRandomiseGun(PlayerController player)
         {
             int amountOfBulletsToShoot = 1;

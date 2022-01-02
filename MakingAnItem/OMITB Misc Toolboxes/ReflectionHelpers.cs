@@ -14,5 +14,10 @@ namespace NevernamedsItems
             FieldInfo field = classType.GetField(fieldName, BindingFlags.Public | BindingFlags.NonPublic | ((o != null) ? BindingFlags.Instance : BindingFlags.Static));
             return (T)field.GetValue(o);
         }
+        public static void ReflectSetField<T>(Type classType, string fieldName, object value, object o = null)
+        {
+            FieldInfo field = classType.GetField(fieldName, BindingFlags.Public | BindingFlags.NonPublic | ((o != null) ? BindingFlags.Instance : BindingFlags.Static));
+            field.SetValue(o, value);
+        }
     }
 }

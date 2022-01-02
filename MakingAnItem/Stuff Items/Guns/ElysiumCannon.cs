@@ -55,7 +55,7 @@ namespace NevernamedsItems
                 projectile.baseData.force *= 0.5f;
                 projectile.baseData.speed *= 0.85f;
                 projectile.PenetratesInternalWalls = true;
-                projectile.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(541) as Gun).DefaultModule.chargeProjectiles[0].Projectile.hitEffects.enemy.effects[0].effects[0].effect;
+                projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.BigWhitePoofVFX;
                 projectile.hitEffects.alwaysUseMidair = true;
 
                     PierceProjModifier pierce = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();

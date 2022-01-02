@@ -30,7 +30,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "Marvellous Mechanism";
-            string longDesc = "Increases damage by 30% for the first half of the clip, but drecreases it by 20% for the second."+"\n\nA miraculous clockwork doodad cannibalised from the Wind Up Gun. Proof that springs are, and will always be, the best form of potential energy.";
+            string longDesc = "Increases damage by 30% for the first half of the clip, but decreases it by 20% for the second."+"\n\nA miraculous clockwork doodad cannibalised from the Wind Up Gun. Proof that springs are, and will always be, the best form of potential energy.";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!

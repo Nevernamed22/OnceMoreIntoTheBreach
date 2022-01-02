@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections;
+using NpcApi;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using GungeonAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -11,18 +14,47 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
+            //Generic stuff for when you type in nnchallenges
+            ETGMod.Databases.Strings.Core.Set("#NNCHALLENGES_TITLE", "List of Custom Challenges");
+            ETGMod.Databases.Strings.Core.Set("#NNCHALLENGES_DESCRIPTION", "Custom challenges present in Once More Into The Breach.");
+            ETGMod.Databases.Strings.Core.Set("#NNCHALLENGES_TECHEXPLANATION", "Type 'nnchallenges [challengeid]' to start the challenge (can only be done from the Breach).");
+            ETGMod.Databases.Strings.Core.Set("#NNCHALLENGES_DISABLEEXPLANATION", "Challenges will be automatically disabled if Blessed Mode or Rainbow Mode are enabled, if a shortcut is taken from the Breach, or if the player is the Gunslinger or Paradox.");
+
+            //Console Messages After Enabling Challenges
+            ETGMod.Databases.Strings.Core.Set("#NNCHALLENGES_NONBREACHDENIAL", "Challenges can only be activated or deactivated from the Breach.");
+            ETGMod.Databases.Strings.Core.Set("#NNCHALLENGES_RAINBOWDENIAL", "Challenges cannot be played in Rainbow Mode.");
+            ETGMod.Databases.Strings.Core.Set("#NNCHALLENGES_BLESSEDDENIAL", "Challenges cannot be played in Blessed Mode.");
+            ETGMod.Databases.Strings.Core.Set("#NNCHALLENGES_SLINGERDENIAL", "Challenges cannot be played as the Gunslinger.");
+            ETGMod.Databases.Strings.Core.Set("#NNCHALLENGES_PARADOXDENIAL", "Challenges cannot be played as the Paradox.");
+            ETGMod.Databases.Strings.Core.Set("#NNCHALLENGES_NOCHARDENIAL", "Please select a character before enabling the challenge.");
+            ETGMod.Databases.Strings.Core.Set("#NNCHALLENGES_NOWPLAYING", "You are now playing");
+
+            //Challenge Names
+            ETGMod.Databases.Strings.Core.Set("#CHAL_TOIL_NAME", "Toil and Trouble");
+            ETGMod.Databases.Strings.Core.Set("#CHAL_WHATARMY_NAME", "What Army?");
+            ETGMod.Databases.Strings.Core.Set("#CHAL_INVIS_NAME", "Invisible-O");
+            ETGMod.Databases.Strings.Core.Set("#CHAL_COOL_NAME", "Keep It Cool");
+
+            //Challenge Descriptions
+            ETGMod.Databases.Strings.Core.Set("#CHAL_TOIL_DESC", "All enemy spawns are doubled. Non-doubleable bosses gain a health boost.");
+            ETGMod.Databases.Strings.Core.Set("#CHAL_WHATARMY_DESC", "All enemy spawns are randomised.");
+            ETGMod.Databases.Strings.Core.Set("#CHAL_INVIS_DESC", "The player, their gun, and their bullets are all completely invisible!");
+            ETGMod.Databases.Strings.Core.Set("#CHAL_COOL_DESC", "Permanent ice physics. 45% chance to fire freezing shots.");
+
             CurrentChallenge = ChallengeType.NONE;
 
             ETGModConsole.Commands.AddGroup("nnchallenges", delegate (string[] args)
             {
-                ETGModConsole.Log("<size=100><color=#ff0000ff>List of Custom Challenges</color></size>", false);
-                ETGModConsole.Log("Custom challenges present in Once More Into The Breach.", false);
-                ETGModConsole.Log("Type 'nnchallenges [challengeid]' to start the challenge (can only be done from the Breach).", false);
-                ETGModConsole.Log("Toil and Trouble:  [id]<color=#ff0000ff>toilandtrouble</color> - All enemy spawns are doubled. Non-doubleable bosses gain a health boost", false);
-                ETGModConsole.Log("What Army?:  [id]<color=#ff0000ff>whatarmy</color> - All enemy spawns are randomised.", false);
-                ETGModConsole.Log("Invisible-O:  [id]<color=#ff0000ff>invisibleo</color> - The player, their gun, and their bullets are all completely invisible!", false);
-                ETGModConsole.Log("Keep It Cool:  [id]<color=#ff0000ff>keepitcool</color> - Permanent ice physics. 45% chance to fire freezing shots.", false);
-                ETGModConsole.Log("Challenges will be automatically disabled if Blessed Mode or Rainbow Mode are enabled, if a shortcut is taken from the Breach, or if the player is the Gunslinger or Paradox.", false);
+                ETGModConsole.Log($"<size=100><color=#ff0000ff>{StringTableManager.GetString("NNCHALLENGES_TITLE")}</color></size>", false);
+                ETGModConsole.Log(StringTableManager.GetString("NNCHALLENGES_DESCRIPTION"), false);
+                ETGModConsole.Log(StringTableManager.GetString("NNCHALLENGES_TECHEXPLANATION"), false);
+
+                ETGModConsole.Log($"{StringTableManager.GetString("CHAL_TOIL_NAME")}:  [id]<color=#ff0000ff>toilandtrouble</color> - {StringTableManager.GetString("CHAL_TOIL_DESC")}", false);
+                ETGModConsole.Log($"{StringTableManager.GetString("CHAL_WHATARMY_NAME")}: [id]<color=#ff0000ff>whatarmy</color> - {StringTableManager.GetString("CHAL_WHATARMY_DESC")}", false);
+                ETGModConsole.Log($"{StringTableManager.GetString("CHAL_INVIS_NAME")}:  [id]<color=#ff0000ff>invisibleo</color> - {StringTableManager.GetString("CHAL_INVIS_DESC")}", false);
+                ETGModConsole.Log($"{StringTableManager.GetString("CHAL_COOL_NAME")}:  [id]<color=#ff0000ff>keepitcool</color> - {StringTableManager.GetString("CHAL_COOL_DESC")}", false);
+                
+                ETGModConsole.Log(StringTableManager.GetString("NNCHALLENGES_DISABLEEXPLANATION"), false);
             });
 
             ETGModConsole.Commands.GetGroup("nnchallenges").AddUnit("clear", delegate (string[] args)
@@ -34,7 +66,7 @@ namespace NevernamedsItems
                 }
                 else
                 {
-                    ETGModConsole.Log("<color=#ff0000ff>Challenges can only be activated or deactivated from the Breach.</color>", false);
+                    ETGModConsole.Log($"<color=#ff0000ff>{StringTableManager.GetString("NNCHALLENGES_NONBREACHDENIAL")}</color>", false);
                 }
             });
             ETGModConsole.Commands.GetGroup("nnchallenges").AddUnit("whatarmy", delegate (string[] args)
@@ -42,48 +74,51 @@ namespace NevernamedsItems
                 string failure = FetchFailureType();
                 if (failure == "none")
                 {
-                    ETGModConsole.Log("You are now playing; What Army?");
+                    ETGModConsole.Log($"{StringTableManager.GetString("NNCHALLENGES_NOWPLAYING")}; {StringTableManager.GetString("CHAL_WHATARMY_NAME")}");
                     CurrentChallenge = ChallengeType.WHAT_ARMY;
                 }
                 else
                 {
-                    ETGModConsole.Log(string.Format("<color=#ff0000ff>{0}</color>", failure), false);
+                    ETGModConsole.Log($"<color=#ff0000ff>{failure}</color>");
                 }
             });
             ETGModConsole.Commands.GetGroup("nnchallenges").AddUnit("toilandtrouble", delegate (string[] args)
             {
-                if (GameManager.Instance.IsFoyer)
+                string failure = FetchFailureType();
+                if (failure == "none")
                 {
-                    ETGModConsole.Log("You are now playing; Toil and Trouble");
+                    ETGModConsole.Log($"{StringTableManager.GetString("NNCHALLENGES_NOWPLAYING")}; {StringTableManager.GetString("CHAL_TOIL_NAME")}");
                     CurrentChallenge = ChallengeType.TOIL_AND_TROUBLE;
                 }
                 else
                 {
-                    ETGModConsole.Log("<color=#ff0000ff>Challenges can only be activated or deactivated from the Breach.</color>", false);
+                    ETGModConsole.Log($"<color=#ff0000ff>{failure}</color>");
                 }
             });
             ETGModConsole.Commands.GetGroup("nnchallenges").AddUnit("invisibleo", delegate (string[] args)
             {
-                if (GameManager.Instance.IsFoyer)
+                string failure = FetchFailureType();
+                if (failure == "none")
                 {
-                    ETGModConsole.Log("You are now playing; Invisible-O");
+                    ETGModConsole.Log($"{StringTableManager.GetString("NNCHALLENGES_NOWPLAYING")}; {StringTableManager.GetString("CHAL_INVIS_NAME")}");
                     CurrentChallenge = ChallengeType.INVISIBLEO;
                 }
                 else
                 {
-                    ETGModConsole.Log("<color=#ff0000ff>Challenges can only be activated or deactivated from the Breach.</color>", false);
+                    ETGModConsole.Log($"<color=#ff0000ff>{failure}</color>");
                 }
             });
             ETGModConsole.Commands.GetGroup("nnchallenges").AddUnit("keepitcool", delegate (string[] args)
             {
-                if (GameManager.Instance.IsFoyer)
+                string failure = FetchFailureType();
+                if (failure == "none")
                 {
-                    ETGModConsole.Log("You are now playing; Keep it Cool");
+                    ETGModConsole.Log($"{StringTableManager.GetString("NNCHALLENGES_NOWPLAYING")}; {StringTableManager.GetString("CHAL_COOL_NAME")}");
                     CurrentChallenge = ChallengeType.KEEP_IT_COOL;
                 }
                 else
                 {
-                    ETGModConsole.Log("<color=#ff0000ff>Challenges can only be activated or deactivated from the Breach.</color>", false);
+                    ETGModConsole.Log($"<color=#ff0000ff>{failure}</color>");
                 }
             });
 
@@ -338,8 +373,8 @@ namespace NevernamedsItems
             PlayerController player1 = GameManager.Instance.PrimaryPlayer;
             if (player1 == null)
             {
-                ETGModConsole.Log("ERRA PLAYA NULLA");
-                failureMessage = "Please select a character before enabling the challenge.";
+                Debug.LogWarning("Attempted to set a challenge without a valid player, caught it though.");
+                failureMessage = StringTableManager.GetString("NNCHALLENGES_NOCHARDENIAL");
                 skipChecks = true;
             }
             PlayerController player2 = null;
@@ -347,19 +382,19 @@ namespace NevernamedsItems
 
             if (!skipChecks)
             {
-                if (!GameManager.Instance.IsFoyer) failureMessage = "Challenges can only be enabled or disabled from the Breach";
-                else if (GameStatsManager.Instance.IsRainbowRun) failureMessage = "Challenges cannot be played in Rainbow Mode";
+                if (!GameManager.Instance.IsFoyer) failureMessage = StringTableManager.GetString("NNCHALLENGES_NONBREACHDENIAL");
+                else if (GameStatsManager.Instance.IsRainbowRun) failureMessage = StringTableManager.GetString("NNCHALLENGES_RAINBOWDENIAL");
                 else if (player1.CharacterUsesRandomGuns || (player2 && player2.CharacterUsesRandomGuns))
                 {
-                    failureMessage = "Challenges cannot be played in Blessed Mode";
+                    failureMessage = StringTableManager.GetString("NNCHALLENGES_BLESSEDDENIAL");
                 }
                 else if (player1.characterIdentity == PlayableCharacters.Gunslinger || (player2 && player2.characterIdentity == PlayableCharacters.Gunslinger))
                 {
-                    failureMessage = "Challenges cannot be played as the Gunslinger";
+                    failureMessage = StringTableManager.GetString("NNCHALLENGES_SLINGERDENIAL");
                 }
                 else if (player1.characterIdentity == PlayableCharacters.Eevee || (player2 && player2.characterIdentity == PlayableCharacters.Eevee))
                 {
-                    failureMessage = "Challenges cannot be played as the Paradox";
+                    StringTableManager.GetString("NNCHALLENGES_PARADOXDENIAL");
                 }
             }
             return failureMessage;

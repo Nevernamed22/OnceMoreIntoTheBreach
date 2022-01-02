@@ -68,7 +68,7 @@ namespace NevernamedsItems
                 mod.chargeProjectiles = new List<ProjectileModule.ChargeProjectile> { chargeProj };
             }
             gun.reloadTime = 2f;
-            gun.SetBaseMaxAmmo(100);
+            gun.SetBaseMaxAmmo(50);
             gun.gunClass = GunClass.SHOTGUN;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.LoopSection;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).loopStart = 3;

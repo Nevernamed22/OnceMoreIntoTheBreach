@@ -68,6 +68,8 @@ namespace NevernamedsItems
 
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_VACUUMGUN, true);
             gun.AddItemToGooptonMetaShop(16);
+            gun.AddToSubShop(ItemBuilder.ShopType.Goopton);
+
         }
         public override void PostProcessProjectile(Projectile projectile)
         {

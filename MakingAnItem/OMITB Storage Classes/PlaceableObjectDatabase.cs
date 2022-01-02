@@ -15,6 +15,8 @@ namespace NevernamedsItems
         public static GameObject CoffinHoriz = LoadHelper.LoadAssetFromAnywhere<GameObject>("Coffin_Horizontal");
         public static GameObject Brazier = LoadHelper.LoadAssetFromAnywhere<DungeonPlaceable>("brazier").variantTiers[0].GetOrLoadPlaceableObject;
         public static GameObject CursedPot = LoadHelper.LoadAssetFromAnywhere<DungeonPlaceable>("Curse Pot").variantTiers[0].GetOrLoadPlaceableObject;
+        public static GameObject GenericBarrel = LoadHelper.LoadAssetFromAnywhere<DungeonPlaceable>("Barrel_collection").variantTiers[0].nonDatabasePlaceable;
+        public static DungeonPlaceable GenericBarrelDungeonPlaceable = LoadHelper.LoadAssetFromAnywhere<DungeonPlaceable>("Barrel_collection");
         public static GameObject PoisonBarrel = LoadHelper.LoadAssetFromAnywhere<GameObject>("Yellow Drum");
         public static GameObject MetalExplosiveBarrel = LoadHelper.LoadAssetFromAnywhere<GameObject>("Red Drum");
         public static GameObject ExplosiveBarrel = LoadHelper.LoadAssetFromAnywhere<GameObject>("Red Barrel");

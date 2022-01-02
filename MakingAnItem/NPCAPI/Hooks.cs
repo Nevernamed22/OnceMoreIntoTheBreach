@@ -60,7 +60,7 @@ namespace NpcApi
             }
         }
 
-        public static bool LockedHook(Func<ShopItemController, bool> orig, ShopItemController self)//your return type shoud be bool. for Func<> unlike Action its basically Func<Arg1,arg2,arg3... however many , return type
+        public static bool LockedHook(Func<ShopItemController, bool> orig, ShopItemController self)
         {
             if (self is CustomShopItemController)
             {
@@ -72,7 +72,7 @@ namespace NpcApi
             }
         }
 
-        public static int ModifiedPriceHook(Func<ShopItemController, int> orig, ShopItemController self)//your return type shoud be bool. for Func<> unlike Action its basically Func<Arg1,arg2,arg3... however many , return type
+        public static int ModifiedPriceHook(Func<ShopItemController, int> orig, ShopItemController self)
         {
             if (self is CustomShopItemController)
             {

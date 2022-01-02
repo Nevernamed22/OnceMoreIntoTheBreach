@@ -25,8 +25,10 @@ namespace NpcApi
 		public Func<CustomShopController, PlayerController, int, bool> customCanBuy;
 		public Func<CustomShopController, PlayerController, int, int> removeCurrency;
 		public Func<CustomShopController, CustomShopItemController, PickupObject, int> customPrice;
-		public Action<PlayerController, PickupObject, int> OnPurchase;
-		public Action<PlayerController, PickupObject, int> OnSteal;
+		public Func<PlayerController, PickupObject, int, bool> OnPurchase;
+		public Func<PlayerController, PickupObject, int, bool> OnSteal;
+
+		//public DungeonPrerequisite
 
 		public string customPriceSprite;
 
@@ -34,31 +36,46 @@ namespace NpcApi
 		public bool giveStatsOnPurchase;
 		public bool canBeRobbed;
 		public StatModifier[] statsToGive;
+		public DungeonPrerequisite[] prerequisites = new DungeonPrerequisite[0];
 
 		//public List<CustomShopItemController> m_customShopItemControllers;
 		//public List<ShopItemController> m_shopItemControllers;
 
 		public int CustomPriceMethod(CustomShopController shop, CustomShopItemController shopItem, PickupObject item)
 		{
-			return customPrice(shop, shopItem, item);
+			if (customPrice != null)
+				return customPrice(shop, shopItem, item);
+			return 0;
 		}
 		public int RemoveCurrencyMethod(CustomShopController shop, PlayerController player, int cost)
 		{
-			return removeCurrency(shop, player, cost);
+			if (removeCurrency != null)
+				return removeCurrency(shop, player, cost);
+			return 0;
 		}
 		public bool CustomCanBuyMethod(CustomShopController shop, PlayerController player, int cost)
 		{
-			return customCanBuy(shop, player, cost);
+			if (customCanBuy != null)
+				return customCanBuy(shop, player, cost);
+			return true;
 		}
 
-		public void OnStealMethod(PlayerController player, PickupObject item, int cost)
+		public bool OnStealMethod(PlayerController player, PickupObject item, int cost)
 		{
-			OnSteal(player, item, cost);
+			if (OnSteal != null)
+			{
+				return OnSteal(player, item, cost);
+			}
+			return false;
 		}
 
-		public void OnPurchaseMethod(PlayerController player, PickupObject item, int cost)
+		public bool OnPurchaseMethod(PlayerController player, PickupObject item, int cost)
 		{
-			OnPurchase(player, item, cost);
+			if (OnPurchase != null)
+			{
+				return OnPurchase(player, item, cost);
+			}
+			return false;
 		}
 
 		public void LockItems()
@@ -131,7 +148,7 @@ namespace NpcApi
 		}
 
 		public void ActionAndFuncSetUp(Func<CustomShopController, PlayerController, int, bool> CustomCanBuySetUp, Func<CustomShopController, PlayerController, int, int> RemoveCurrencySetUp, Func<CustomShopController, CustomShopItemController, PickupObject, int> CustomPriceSetUp,
-			Action<PlayerController, PickupObject, int> OnPurchase, Action<PlayerController, PickupObject, int> OnSteal)
+			Func<PlayerController, PickupObject, int, bool> OnPurchase, Func<PlayerController, PickupObject, int, bool> OnSteal)
 		{
 			this.customCanBuy = CustomCanBuySetUp;
 			this.removeCurrency = RemoveCurrencySetUp;

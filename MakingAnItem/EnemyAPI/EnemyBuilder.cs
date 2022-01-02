@@ -1,15 +1,16 @@
-﻿/*using Dungeonator;
-using MonoMod.RuntimeDetour;
-using System;
-using System.Collections;
+﻿using System;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
+using System.Text;
+using ItemAPI;
 using UnityEngine;
+using MonoMod.RuntimeDetour;
+using Brave.BulletScript;
 using DirectionType = DirectionalAnimation.DirectionType;
 using FlipType = DirectionalAnimation.FlipType;
 
-namespace ItemAPI
+namespace EnemyAPI
 {
     public static class EnemyBuilder
     {
@@ -18,7 +19,7 @@ namespace ItemAPI
 
         public static void Init()
         {
-            var actor = EnemyDatabase.GetOrLoadByGuid("f905765488874846b7ff257ff81d6d0c");
+            var actor = EnemyDatabase.GetOrLoadByGuid("6b7ef9e5d05b4f96b04f05ef4a0d1b18");
             behaviorSpeculatorPrefab = GameObject.Instantiate(actor.gameObject);
 
             foreach (Transform child in behaviorSpeculatorPrefab.transform)
@@ -38,10 +39,7 @@ namespace ItemAPI
             GameObject.DontDestroyOnLoad(behaviorSpeculatorPrefab);
             FakePrefab.MarkAsFakePrefab(behaviorSpeculatorPrefab);
             behaviorSpeculatorPrefab.SetActive(false);
-            if (actor.GetComponent<EncounterTrackable>() != null)
-            {
-                UnityEngine.Object.Destroy(actor.GetComponent<EncounterTrackable>());
-            }
+
             Hook enemyHook = new Hook(
                 typeof(EnemyDatabase).GetMethod("GetOrLoadByGuid", BindingFlags.Public | BindingFlags.Static),
                 typeof(EnemyBuilder).GetMethod("GetOrLoadByGuid")
@@ -59,55 +57,8 @@ namespace ItemAPI
             return orig(guid);
         }
 
-        public static void SetupEntry(this AIActor enemy, string shortDesc, string longDesc, string portrait, string AmmonomiconSprite, string EnemyName)
+        public static GameObject BuildPrefab(string name, string guid, string defaultSpritePath, IntVector2 hitboxOffset, IntVector2 hitBoxSize, bool HasAiShooter)
         {
-            SpriteBuilder.AddSpriteToCollection(AmmonomiconSprite, SpriteBuilder.ammonomiconCollection);
-            if (enemy.GetComponent<EncounterTrackable>() != null)
-            {
-                UnityEngine.Object.Destroy(enemy.GetComponent<EncounterTrackable>());
-            }
-            enemy.encounterTrackable = enemy.gameObject.AddComponent<EncounterTrackable>();
-            enemy.encounterTrackable.journalData = new JournalEntry();
-            enemy.encounterTrackable.EncounterGuid = enemy.EnemyGuid;
-            enemy.encounterTrackable.prerequisites = new DungeonPrerequisite[0];
-            enemy.encounterTrackable.journalData.SuppressKnownState = false;
-            enemy.encounterTrackable.journalData.IsEnemy = true;
-            enemy.encounterTrackable.journalData.SuppressInAmmonomicon = false;
-            enemy.encounterTrackable.journalData.AmmonomiconSprite = AmmonomiconSprite;
-            enemy.encounterTrackable.journalData.enemyPortraitSprite = ResourceExtractor.GetTextureFromResource(portrait + ".png");
-            enemy.encounterTrackable.ProxyEncounterGuid = "";
-            PlanetsideModule.Strings.Enemies.Set("#" + EnemyName.ToUpper(), EnemyName);
-            PlanetsideModule.Strings.Enemies.Set("#" + shortDesc.ToUpper(), shortDesc);
-            PlanetsideModule.Strings.Enemies.Set("#" + longDesc.ToUpper(), longDesc);
-            enemy.encounterTrackable.journalData.PrimaryDisplayName = "#" + EnemyName.ToUpper();
-            enemy.encounterTrackable.journalData.NotificationPanelDescription = "#" + shortDesc.ToUpper();
-            enemy.encounterTrackable.journalData.AmmonomiconFullEntry = "#" + longDesc.ToUpper();
-            enemy.encounterTrackable.journalData.SuppressKnownState = false;
-        }
-
-        public static GameObject BuildPrefab(string name, string guid, string defaultSpritePath, IntVector2 hitboxOffset, IntVector2 hitBoxSize, bool HasAiShooter, bool UsesAttackGroup = false)
-        {
-            if (HasAiShooter)
-            {
-                var actor = EnemyDatabase.GetOrLoadByGuid("3cadf10c489b461f9fb8814abc1a09c1");
-                behaviorSpeculatorPrefab = GameObject.Instantiate(actor.gameObject);
-                foreach (Transform child in behaviorSpeculatorPrefab.transform)
-                {
-                    if (child != behaviorSpeculatorPrefab.transform)
-                        GameObject.DestroyImmediate(child);
-                }
-                foreach (var comp in behaviorSpeculatorPrefab.GetComponents<Component>())
-                {
-                    if (comp.GetType() != typeof(BehaviorSpeculator))
-                    {
-                        GameObject.DestroyImmediate(comp);
-                    }
-                }
-                GameObject.DontDestroyOnLoad(behaviorSpeculatorPrefab);
-                FakePrefab.MarkAsFakePrefab(behaviorSpeculatorPrefab);
-                behaviorSpeculatorPrefab.SetActive(false);
-
-            }
             if (EnemyBuilder.Dictionary.ContainsKey(guid))
             {
                 ETGModConsole.Log("EnemyBuilder: Yea something went wrong. Complain to Neighborino about it.");
@@ -127,6 +78,7 @@ namespace ItemAPI
             var knockback = prefab.AddComponent<KnockbackDoer>();
             knockback.weight = 1;
 
+
             //setup health haver
             var healthHaver = prefab.AddComponent<HealthHaver>();
             healthHaver.RegisterBodySprite(sprite);
@@ -138,80 +90,52 @@ namespace ItemAPI
             var aiActor = prefab.AddComponent<AIActor>();
             aiActor.State = AIActor.ActorState.Normal;
             aiActor.EnemyGuid = guid;
-            aiActor.CanTargetPlayers = true;
-            aiActor.HasShadow = false;
-            aiActor.specRigidbody.CollideWithOthers = true;
-            aiActor.specRigidbody.CollideWithTileMap = true;
-            aiActor.specRigidbody.PixelColliders.Clear();
-            aiActor.specRigidbody.PixelColliders.Add(new PixelCollider
 
-            {
-                ColliderGenerationMode = PixelCollider.PixelColliderGeneration.Manual,
-                CollisionLayer = CollisionLayer.EnemyCollider,
-                IsTrigger = false,
-                BagleUseFirstFrameOnly = false,
-                SpecifyBagelFrame = string.Empty,
-                BagelColliderNumber = 0,
-                ManualOffsetX = 0,
-                ManualOffsetY = 0,
-                ManualWidth = 15,
-                ManualHeight = 17,
-                ManualDiameter = 0,
-                ManualLeftX = 0,
-                ManualLeftY = 0,
-                ManualRightX = 0,
-                ManualRightY = 0
-            });
-            aiActor.specRigidbody.PixelColliders.Add(new PixelCollider
-            {
-
-                ColliderGenerationMode = PixelCollider.PixelColliderGeneration.Manual,
-                CollisionLayer = CollisionLayer.EnemyHitBox,
-                IsTrigger = false,
-                BagleUseFirstFrameOnly = false,
-                SpecifyBagelFrame = string.Empty,
-                BagelColliderNumber = 0,
-                ManualOffsetX = 0,
-                ManualOffsetY = 0,
-                ManualWidth = 15,
-                ManualHeight = 17,
-                ManualDiameter = 0,
-                ManualLeftX = 0,
-                ManualLeftY = 0,
-                ManualRightX = 0,
-                ManualRightY = 0,
-            });
-            aiActor.CorpseObject = EnemyDatabase.GetOrLoadByGuid("01972dee89fc4404a5c408d50007dad5").CorpseObject;
-            aiActor.PreventBlackPhantom = false;
             //setup behavior speculator
             var bs = prefab.GetComponent<BehaviorSpeculator>();
+
             bs.MovementBehaviors = new List<MovementBehaviorBase>();
+            bs.AttackBehaviors = new List<AttackBehaviorBase>();
             bs.TargetBehaviors = new List<TargetBehaviorBase>();
             bs.OverrideBehaviors = new List<OverrideBehaviorBase>();
             bs.OtherBehaviors = new List<BehaviorBase>();
-            if (UsesAttackGroup)
+            AIBulletBank aibulletBank = prefab.AddComponent<AIBulletBank>();
+            if (HasAiShooter)
             {
-                bs.AttackBehaviorGroup.AttackBehaviors = new List<AttackBehaviorGroup.AttackGroupItem>();
+                var actor = EnemyDatabase.GetOrLoadByGuid("01972dee89fc4404a5c408d50007dad5");
+                behaviorSpeculatorPrefab = GameObject.Instantiate(actor.gameObject);
+                foreach (Transform child in behaviorSpeculatorPrefab.transform)
+                {
+                    if (child != behaviorSpeculatorPrefab.transform)
+                        GameObject.DestroyImmediate(child);
+                }
+
+                foreach (var comp in behaviorSpeculatorPrefab.GetComponents<Component>())
+                {
+                    if (comp.GetType() != typeof(BehaviorSpeculator))
+                    {
+                        GameObject.DestroyImmediate(comp);
+                    }
+                }
+
+                GameObject.DontDestroyOnLoad(behaviorSpeculatorPrefab);
+                FakePrefab.MarkAsFakePrefab(behaviorSpeculatorPrefab);
+                behaviorSpeculatorPrefab.SetActive(false);
+
             }
-            else
-            {
-                bs.AttackBehaviors = new List<AttackBehaviorBase>();
-            }
-            //allows enemies to be tinted
-            prefab.AddComponent<Tint>();
-            prefab.AddComponent<EngageLate>();
-            prefab.AddComponent<AIBulletBank>();
+
             //Add to enemy database
             EnemyDatabaseEntry enemyDatabaseEntry = new EnemyDatabaseEntry()
             {
                 myGuid = guid,
                 placeableWidth = 2,
                 placeableHeight = 2,
-                isNormalEnemy = true,
+                isNormalEnemy = true
             };
-
             EnemyDatabase.Instance.Entries.Add(enemyDatabaseEntry);
             EnemyBuilder.Dictionary.Add(guid, prefab);
+
+
             //finalize
             GameObject.DontDestroyOnLoad(prefab);
             FakePrefab.MarkAsFakePrefab(prefab);
@@ -220,29 +144,9 @@ namespace ItemAPI
             return prefab;
         }
 
-        public static void AddEnemyToDatabase(GameObject EnemyPrefab, string EnemyGUID)
-        {
-            EnemyDatabaseEntry item = new EnemyDatabaseEntry
-            {
-                myGuid = EnemyGUID,
-                placeableWidth = 2,
-                placeableHeight = 2,
-                isNormalEnemy = true,
-                path = EnemyGUID,
-                isInBossTab = false,
-                encounterGuid = EnemyGUID
-            };
-            EnemyDatabase.Instance.Entries.Add(item);
-            EncounterDatabaseEntry encounterDatabaseEntry = new EncounterDatabaseEntry(EnemyPrefab.GetComponent<AIActor>().encounterTrackable)
-            {
-                path = EnemyGUID,
-                myGuid = EnemyPrefab.GetComponent<AIActor>().encounterTrackable.EncounterGuid
-            };
-            EncounterDatabase.Instance.Entries.Add(encounterDatabaseEntry);
-        }
-
         public enum AnimationType { Move, Idle, Fidget, Flight, Hit, Talk, Other }
-        public static tk2dSpriteAnimationClip AddAnimation(this GameObject obj, string name, string spriteDirectory, int fps, AnimationType type, DirectionType directionType = DirectionType.None, tk2dSpriteAnimationClip.WrapMode wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop, FlipType flipType = FlipType.None, bool assignAnimation = true)
+        public static tk2dSpriteAnimationClip AddAnimation(this GameObject obj, string name, string spriteDirectory, int fps,
+            AnimationType type, DirectionType directionType = DirectionType.None, FlipType flipType = FlipType.None)
         {
             AIAnimator aiAnimator = obj.GetOrAddComponent<AIAnimator>();
             DirectionalAnimation animation = aiAnimator.GetDirectionalAnimation(name, directionType, type);
@@ -259,15 +163,11 @@ namespace ItemAPI
 
             animation.AnimNames = animation.AnimNames.Concat(new string[] { name }).ToArray();
             animation.Flipped = animation.Flipped.Concat(new FlipType[] { flipType }).ToArray();
-
-            if (assignAnimation)
-            {
-                aiAnimator.AssignDirectionalAnimation(name, animation, type);
-            }
-            return BuildAnimation(aiAnimator, name, spriteDirectory, fps, wrapMode);
+            aiAnimator.AssignDirectionalAnimation(name, animation, type);
+            return BuildAnimation(aiAnimator, name, spriteDirectory, fps);
         }
 
-        public static tk2dSpriteAnimationClip BuildAnimation(AIAnimator aiAnimator, string name, string spriteDirectory, int fps, tk2dSpriteAnimationClip.WrapMode wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop)
+        public static tk2dSpriteAnimationClip BuildAnimation(AIAnimator aiAnimator, string name, string spriteDirectory, int fps)
         {
             tk2dSpriteCollectionData collection = aiAnimator.GetComponent<tk2dSpriteCollectionData>();
             if (!collection)
@@ -282,9 +182,8 @@ namespace ItemAPI
                     indices.Add(SpriteBuilder.AddSpriteToCollection(resources[i], collection));
                 }
             }
-            tk2dSpriteAnimationClip clip = SpriteBuilder.AddAnimation(aiAnimator.spriteAnimator, collection, indices, name, tk2dSpriteAnimationClip.WrapMode.Loop);
+            tk2dSpriteAnimationClip clip = SpriteBuilder.AddAnimation(aiAnimator.spriteAnimator, collection, indices, name, tk2dSpriteAnimationClip.WrapMode.Once);
             clip.fps = fps;
-            clip.wrapMode = wrapMode;
             return clip;
         }
 
@@ -338,10 +237,11 @@ namespace ItemAPI
                     aiAnimator.IdleFidgetAnimations.Add(animation);
                     break;
                 default:
-                    if (aiAnimator.OtherAnimations == null)
+                    if(aiAnimator.OtherAnimations == null)
                     {
                         aiAnimator.OtherAnimations = new List<AIAnimator.NamedDirectionalAnimation>();
                     }
+
                     aiAnimator.OtherAnimations.Add(new AIAnimator.NamedDirectionalAnimation()
                     {
                         anim = animation,
@@ -350,7 +250,6 @@ namespace ItemAPI
                     break;
             }
         }
-
 
         public static void DuplicateAIShooterAndAIBulletBank(GameObject targetObject, AIShooter sourceShooter, AIBulletBank sourceBulletBank, int startingGunOverrideID = 0, Transform gunAttachPointOverride = null, Transform bulletScriptAttachPointOverride = null, PlayerHandController overrideHandObject = null)
         {
@@ -422,7 +321,7 @@ namespace ItemAPI
                 }
                 aibulletBank.RegenerateCache();
             }
-            if (!targetObject.GetComponent<AIShooter>())
+            if (!targetObject.GetComponent<AIShooter>() && sourceShooter != null)
             {
                 AIShooter aishooter = targetObject.AddComponent<AIShooter>();
                 aishooter.volley = sourceShooter.volley;
@@ -477,53 +376,8 @@ namespace ItemAPI
                 aishooter.IsReallyBigBoy = sourceShooter.IsReallyBigBoy;
                 aishooter.BackupAimInMoveDirection = sourceShooter.BackupAimInMoveDirection;
                 aishooter.RegenerateCache();
-
             }
         }
-    }
-
-    public class EngageLate : BraveBehaviour
-    {
-        private RoomHandler m_StartRoom;
-        private void Update()
-        {
-            if (!base.aiActor.HasBeenEngaged) { CheckPlayerRoom(); }
-        }
-        private void CheckPlayerRoom()
-        {
-
-            if (GameManager.Instance.PrimaryPlayer.GetAbsoluteParentRoom() != null && GameManager.Instance.PrimaryPlayer.GetAbsoluteParentRoom() == m_StartRoom)
-            {
-                GameManager.Instance.StartCoroutine(LateEngage());
-            }
-
-        }
-        private IEnumerator LateEngage()
-        {
-            yield return new WaitForSeconds(0.8f);
-            base.aiActor.HasBeenEngaged = true;
-            yield break;
-        }
-        private void Start()
-        {
-            m_StartRoom = aiActor.GetAbsoluteParentRoom();
-        }
-
 
     }
-    public class Tint : BraveBehaviour
-    {
-        private void Start()
-        {
-            DisableSuperTinting(base.aiActor);
-        }
-        public static void DisableSuperTinting(AIActor actor)
-        {
-            Material mat = actor.sprite.renderer.material;
-            mat.mainTexture = actor.sprite.renderer.material.mainTexture;
-            mat.EnableKeyword("BRIGHTNESS_CLAMP_ON");
-            mat.DisableKeyword("BRIGHTNESS_CLAMP_OFF");
-        }
-    }
-
-}*/
+}

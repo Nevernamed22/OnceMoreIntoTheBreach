@@ -180,6 +180,7 @@ namespace NevernamedsItems
                 Vector2 deathPosition = self.specRigidbody.UnitCenter;
                 float deceasedEnemyMaxHealth = self.healthHaver.GetMaxHealth();
 
+                List<PlayableCharacters> activeCharacters = new List<PlayableCharacters>();
                 foreach (var item in GameManager.Instance.AllPlayers)
                 {
                     if (!item)
@@ -187,18 +188,18 @@ namespace NevernamedsItems
                         continue;
                     }
                     isValidForMutagen |= item.healthHaver && ((item.healthHaver.GetCurrentHealth() <= 0f && item.healthHaver.Armor == 1) || (item.healthHaver.GetCurrentHealth() <= 0.5f && item.healthHaver.Armor == 0));
-                    usingParadox |= item.characterIdentity == PlayableCharacters.Eevee;
-                    usingConvict |= item.characterIdentity == PlayableCharacters.Convict;
+                    activeCharacters.Add(item.characterIdentity);
                     usingDog |= item.HasPickupID(300); // dog
                     usingShade |= item.ModdedCharacterIdentity() == ModdedCharacterID.Shade; // this also asks player2 but that doesn't hurt
+
                 }
-                ETGMod.StartGlobalCoroutine(SaveDeathsForUnlocks(enemyGuid, isJammed, isCharmed, isFloorBossOutsideTutorial, isValidForMutagen, usingParadox, usingDog, usingShade, usingConvict));
-                if (!isCharmed) ETGMod.StartGlobalCoroutine(HandleCurseDeathEffects(deathPosition, enemyGuid, deceasedEnemyMaxHealth));
+                ETGMod.StartGlobalCoroutine(SaveDeathsForUnlocks(enemyGuid, isJammed, isCharmed, isFloorBossOutsideTutorial, isValidForMutagen, usingDog, usingShade, activeCharacters));
+                if (!isCharmed) ETGMod.StartGlobalCoroutine(HandleCurseDeathEffects(deathPosition, enemyGuid, deceasedEnemyMaxHealth, isJammed));
             }
 
             orig(self, finalDamageDir);
         }
-        public static IEnumerator HandleCurseDeathEffects(Vector2 position, string guid, float maxHP)
+        public static IEnumerator HandleCurseDeathEffects(Vector2 position, string guid, float maxHP, bool isJammed)
         {
             if (CurseManager.CurseIsActive("Curse of Infestation"))
             {
@@ -220,6 +221,7 @@ namespace NevernamedsItems
                                 var enemyToSpawn = EnemyDatabase.GetOrLoadByGuid(BraveUtility.RandomElement(EasyEnemyTypeLists.SmallBullats));
                                 AIActor TargetActor = AIActor.Spawn(enemyToSpawn, position, GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(position.ToIntVector2()), true, AIActor.AwakenAnimationType.Default, true);
                                 PhysicsEngine.Instance.RegisterOverlappingGhostCollisionExceptions(TargetActor.specRigidbody, null, false);
+                                TargetActor.PreventBlackPhantom = true;
                             }
                         }
                     }
@@ -232,7 +234,9 @@ namespace NevernamedsItems
                     DeadlyDeadlyGoopManager goop = null;
                     if (GameManager.Instance.AnyPlayerHasActiveSynergy("The Last Crusade")) goop = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.PlayerFriendlyPoisonGoop);
                     else goop = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.EnemyFriendlyPoisonGoop);
-                    float radius = Math.Min((maxHP / 7.5f), 10);
+                    float hpMod = maxHP;
+                    if (isJammed) hpMod /= 3.5f;
+                    float radius = Math.Min((hpMod / 7.5f), 10);
                     goop.TimedAddGoopCircle(position, radius, 0.75f, true);
                 }
             }
@@ -240,16 +244,18 @@ namespace NevernamedsItems
             {
                 if (maxHP > 0)
                 {
-                        DeadlyDeadlyGoopManager goop = null;
+                    DeadlyDeadlyGoopManager goop = null;
                     if (GameManager.Instance.AnyPlayerHasActiveSynergy("The Last Crusade")) goop = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.PlayerFriendlyHoneyGoop);
                     else goop = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.HoneyGoop);
-                    float radius = Math.Min((maxHP / 5), 10);
+                    float hpMod = maxHP;
+                    if (isJammed) hpMod /= 3.5f;
+                    float radius = Math.Min((hpMod / 5), 10);
                     goop.TimedAddGoopCircle(position, radius, 0.75f, true);
                 }
             }
             yield break;
         }
-        public static IEnumerator SaveDeathsForUnlocks(string enemyGuid, bool isJammed, bool isCharmed, bool isFloorBossOutsideTutorial, bool isValidForMutagen, bool usingParadox, bool usingDog, bool usingShade, bool usingConvict)
+        public static IEnumerator SaveDeathsForUnlocks(string enemyGuid, bool isJammed, bool isCharmed, bool isFloorBossOutsideTutorial, bool isValidForMutagen, bool usingDog, bool usingShade, List<PlayableCharacters> activeCharacters)
         {
             if (isCharmed)
             {
@@ -366,18 +372,32 @@ namespace NevernamedsItems
                                 SaveAPIManager.SetFlag(CustomDungeonFlags.BOSSRUSH_SHADE, true);
                             }
                         }
-                        if (usingParadox)
+                        if (activeCharacters.Contains(PlayableCharacters.Eevee))
                         {
                             if (!SaveAPIManager.GetFlag(CustomDungeonFlags.BOSSRUSH_PARADOX))
                             {
                                 SaveAPIManager.SetFlag(CustomDungeonFlags.BOSSRUSH_PARADOX, true);
                             }
                         }
-                        if (usingConvict)
+                        if (activeCharacters.Contains(PlayableCharacters.Convict))
                         {
                             if (!SaveAPIManager.GetFlag(CustomDungeonFlags.BOSSRUSH_CONVICT))
                             {
                                 SaveAPIManager.SetFlag(CustomDungeonFlags.BOSSRUSH_CONVICT, true);
+                            }
+                        }
+                        if (activeCharacters.Contains(PlayableCharacters.Pilot))
+                        {
+                            if (!SaveAPIManager.GetFlag(CustomDungeonFlags.BOSSRUSH_PILOT))
+                            {
+                                SaveAPIManager.SetFlag(CustomDungeonFlags.BOSSRUSH_PILOT, true);
+                            }
+                        }
+                        if (activeCharacters.Contains(PlayableCharacters.Gunslinger))
+                        {
+                            if (!SaveAPIManager.GetFlag(CustomDungeonFlags.BOSSRUSH_GUNSLINGER))
+                            {
+                                SaveAPIManager.SetFlag(CustomDungeonFlags.BOSSRUSH_GUNSLINGER, true);
                             }
                         }
                     }
@@ -538,7 +558,7 @@ namespace NevernamedsItems
                                 SaveAPIManager.SetFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_HELL, true);
                             }
 
-                            if (usingParadox)
+                            if (activeCharacters.Contains(PlayableCharacters.Eevee))
                             {
                                 if (!SaveAPIManager.GetFlag(CustomDungeonFlags.UNLOCKED_MISSINGUNO))
                                 {

@@ -676,4 +676,27 @@ namespace NevernamedsItems
         private BeamController beamController;
         private PlayerController owner;
     }
+    public class TintingBeamModifier : MonoBehaviour
+    {
+        public TintingBeamModifier()
+        {
+            targetColour = Color.red;
+            designatedSource = "unset";
+        }
+        public void Start()
+        {
+            self = base.GetComponent<Projectile>();
+            self.OnHitEnemy += OnHitEnemy;
+        }
+        private Projectile self;
+        public Color targetColour;
+        public string designatedSource;
+        public void OnHitEnemy ( Projectile self, SpeculativeRigidbody enemy, bool fatal)
+        {
+            if (enemy && enemy.aiActor)
+            {
+                enemy.aiActor.RegisterOverrideColor(targetColour, designatedSource);
+            }
+        }
+    }
 }

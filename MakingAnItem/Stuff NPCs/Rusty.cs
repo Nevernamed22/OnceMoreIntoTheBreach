@@ -6,6 +6,7 @@ using System.Text;
 using LootTableAPI;
 using UnityEngine;
 using GungeonAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -128,9 +129,9 @@ namespace NevernamedsItems
             }
 
             GameObject rustyObj = ItsDaFuckinShopApi.SetUpShop(
-                         "Rusty",
-                         "omitb",
-                         new List<string>()
+                         "Rusty", //Name
+                         "omitb", //ModName
+                         new List<string>() //Idle Sprite Paths
                          {
                         "NevernamedsItems/Resources/NPCSprites/Rusty/rusty_idle_001",
                         "NevernamedsItems/Resources/NPCSprites/Rusty/rusty_idle_002",
@@ -139,8 +140,8 @@ namespace NevernamedsItems
                         "NevernamedsItems/Resources/NPCSprites/Rusty/rusty_idle_005",
                         "NevernamedsItems/Resources/NPCSprites/Rusty/rusty_idle_006",
                          },
-                         12,
-                         new List<string>()
+                         12, //Idle FPS
+                         new List<string>() //Talk Sprite Paths
                          {
                         "NevernamedsItems/Resources/NPCSprites/Rusty/rusty_talk_001",
                         "NevernamedsItems/Resources/NPCSprites/Rusty/rusty_talk_002",
@@ -148,34 +149,70 @@ namespace NevernamedsItems
                         "NevernamedsItems/Resources/NPCSprites/Rusty/rusty_talk_004",
                         "NevernamedsItems/Resources/NPCSprites/Rusty/rusty_talk_005",
                          },
-                         12,
-                         RustyLootTable,
+
+                         12, //Talk FPS
+                         //Loot Table
+                         RustyLootTable, 
+                         //Currency
                          CustomShopItemController.ShopCurrencyType.COINS,
-                         "#RUSTY_GENERIC_TALK",
+                         //Dialogue Strings
+                         "#RUSTY_GENERIC_TALK", 
                          "#RUSTY_STOPPER_TALK",
                          "#RUSTY_PURCHASE_TALK",
                          "#RUSTY_NOSALE_TALK",
                          "#RUSTY_INTRO_TALK",
                          "#RUSTY_ATTACKED_TALK",
-                         Vector3.zero,
+                         //Text Box Offset
+                         new Vector3(1, 1.5f, 0),
+                         //Item positions
                          ItsDaFuckinShopApi.defaultItemPositions,
+                         //Price mult
                          0.5f,
+                         //Give Stats on Purchase
                          false,
+                         //Stats to give on purchase
                          null,
+                         //Custom Can Buy
                          null,
+                         //Custom Remove Currency
                          null,
+                         //Custom Price
                          null,
+                         //On Purchase
+                         RustyBuy,
+                         // On Steal
+                         RustySteal,
+                         //Currency Icon
                          null,
+                         //Currency name
                          null,
-                         null,
-                         null,
+                         //Can be robbed
                          true,
+                         //Has Carpet
                          true,
-                         "NevernamedsItems/Resources/NPCSprites/Rusty/rustycarpet"
+                         //Carpet Sprite
+                         "NevernamedsItems/Resources/NPCSprites/Rusty/rustycarpet",
+                         //Has Minimap Icon
+                         true,
+                         //Minimap icon path
+                         "NevernamedsItems/Resources/NPCSprites/Rusty/rusty_mapicon",
+                         //Add to bello shop
+                         true,
+                         0.1f
                          );
 
             PrototypeDungeonRoom Mod_Shop_Room = RoomFactory.BuildFromResource("NevernamedsItems/Resources/EmbeddedRooms/RustyRoom.room").room;
             ItsDaFuckinShopApi.RegisterShopRoom(rustyObj, Mod_Shop_Room, new UnityEngine.Vector2(7f, 6));
+        }
+        public static bool RustyBuy(PlayerController player, PickupObject item, int idfk)
+        {
+            SaveAPIManager.RegisterStatChange(CustomTrackedStats.RUSTY_ITEMS_PURCHASED, 1);
+            return false;
+        }
+        public static bool RustySteal(PlayerController player, PickupObject item, int idfk)
+        {
+            SaveAPIManager.RegisterStatChange(CustomTrackedStats.RUSTY_ITEMS_STOLEN, 1);
+            return false;
         }
     }
 }

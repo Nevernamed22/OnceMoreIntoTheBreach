@@ -56,20 +56,25 @@ namespace NevernamedsItems
         //float duration = 20f;
         protected override void DoEffect(PlayerController user)
         {
-            IPlayerInteractable nearestInteractable = user.CurrentRoom.GetNearestInteractable(user.CenterPosition, 1f, user);
-            if (!(nearestInteractable is Chest)) return;
+            //IntVector2 bestRewardLocation = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
+            //ChestToolbox.ChestTier tier = RandomEnum<ChestToolbox.ChestTier>.Get();
+            //ChestToolbox.SpawnChestEasy(bestRewardLocation, tier, true, Chest.GeneralChestType.UNSPECIFIED);
+            //SpawnObjectManager.SpawnObject(ExoticPlaceables.SteelTableHorizontal, user.specRigidbody.UnitCenter, null);
 
-            Chest rerollChest = nearestInteractable as Chest;
-            if (rerollChest.IsMimic)
-            {
-                rerollChest.ForceOpen(user);
-                return;
-            }
-            rerollChest.contents = new List<PickupObject>()
-            {
-                PickupObjectDatabase.GetById(51)
-            };
-           
+            /*   IPlayerInteractable nearestInteractable = user.CurrentRoom.GetNearestInteractable(user.CenterPosition, 1f, user);
+               if (!(nearestInteractable is Chest)) return;
+
+               Chest rerollChest = nearestInteractable as Chest;
+               if (rerollChest.IsMimic)
+               {
+                   rerollChest.ForceOpen(user);
+                   return;
+               }
+               rerollChest.contents = new List<PickupObject>()
+               {
+                   PickupObjectDatabase.GetById(51)
+               };*/
+
             //ProjectileImpactVFXPool hit = (PickupObjectDatabase.GetById(178) as Gun).GetComponent<FireOnReloadSynergyProcessor>().DirectedBurstSettings.ProjectileInterface.SpecifiedProjectile.hitEffects;
 
             //hit.DeconstructHitEffects();
@@ -376,37 +381,35 @@ namespace NevernamedsItems
               FileLogger.Log(enemyCode,"OMITBOutput");*/
             //GameManager.Instance.MainCameraController.Camera.transform.rotation = Quaternion.Euler(0, 0, 180);
             //CurseManager.AddCurse("Curse of Butterfingers", true);
-            AkSoundEngine.PostEvent("Play_ClownHonk", user.gameObject);
-         /*   foreach(Projectile proj in StaticReferenceManager.AllProjectiles)
-            {
+            /* AkSoundEngine.PostEvent("Play_ClownHonk", user.gameObject);
+             foreach(Projectile proj in StaticReferenceManager.AllProjectiles)
+             {
 
-                ETGModConsole.Log($"<color=#ff0000ff>{proj.gameObject.name}</color>");
-                bool isBem = proj.GetComponent<BasicBeamController>() != null;
+                 ETGModConsole.Log($"<color=#ff0000ff>{proj.gameObject.name}</color>");
+                 bool isBem = proj.GetComponent<BasicBeamController>() != null;
 
-                ETGModConsole.Log($"<color=#ff0000ff>Is Beam: </color>{isBem}");
-                if (isBem)
-                {
-                    ETGModConsole.Log("Bone Count: " + proj.GetComponent<BasicBeamController>().GetBoneCount());
-                    ETGModConsole.Log("UsesBones: " + proj.GetComponent<BasicBeamController>().UsesBones);
-                    ETGModConsole.Log("Interpolate: " + proj.GetComponent<BasicBeamController>().interpolateStretchedBones);
-                }
-                ETGModConsole.Log("<color=#ff0000ff>Components</color>");
-                foreach (Component component in proj.GetComponents<Component>())
-                {
-                    ETGModConsole.Log(component.GetType().ToString());
-                }
-                ETGModConsole.Log("<color=#ff0000ff>Children</color>");
-                foreach (Component component in proj.GetComponentsInChildren<Component>())
-                {
-                    ETGModConsole.Log(component.GetType().ToString());
-                }
-                ETGModConsole.Log("<color=#ff0000ff>Parents</color>");
-                foreach (Component component in proj.GetComponentsInParent<Component>())
-                {
-                    ETGModConsole.Log(component.GetType().ToString());
-                }
-                ETGModConsole.Log("<color=#ff0000ff>---------------------------------</color>");
-            }*/
+                 ETGModConsole.Log($"<color=#ff0000ff>Is Beam: </color>{isBem}");
+                 if (isBem)
+                 {
+                     ETGModConsole.Log("Bone Count: " + proj.GetComponent<BasicBeamController>().GetBoneCount());
+                     ETGModConsole.Log("UsesBones: " + proj.GetComponent<BasicBeamController>().UsesBones);
+                     ETGModConsole.Log("Interpolate: " + proj.GetComponent<BasicBeamController>().interpolateStretchedBones);
+                 }
+                 ETGModConsole.Log("<color=#ff0000ff>Components</color>");
+                 ETGModConsole.Log("<color=#ff0000ff>Children</color>");
+                 foreach (Component component in proj.GetComponentsInChildren<Component>())
+                 {
+                     ETGModConsole.Log(component.GetType().ToString());
+                 }
+                 ETGModConsole.Log("<color=#ff0000ff>Parents</color>");
+                 foreach (Component component in proj.GetComponentsInParent<Component>())
+                 {
+                     ETGModConsole.Log(component.GetType().ToString());
+                 }
+                 ETGModConsole.Log("<color=#ff0000ff>---------------------------------</color>");
+             }*/
+
+
 
             //Vector3 place = user.GetCursorPosition(4);
             //GameObject carto = UnityEngine.Object.Instantiate<GameObject>(Carto.CartoPrefab, place, Quaternion.identity);
@@ -448,6 +451,17 @@ namespace NevernamedsItems
              {
                  ETGModConsole.Log(chest.name);
              }*/
+            List<AIActor> activeEnemies = user.CurrentRoom.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+            if (activeEnemies != null)
+            {
+                for (int i = 0; i < activeEnemies.Count; i++)
+                {
+                    AIActor aiactor = activeEnemies[i];
+
+                    GameActorConfusionEffect shrinky = StaticStatusEffects.ConfusionEffect;
+                    aiactor.ApplyEffect(shrinky);
+                }
+            }
         }
         public override void Update()
         {

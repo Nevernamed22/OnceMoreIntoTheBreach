@@ -122,7 +122,7 @@ namespace NevernamedsItems
                          "#IRONSIDE_NOSALE_TALK",
                          "#IRONSIDE_INTRO_TALK",
                          "#IRONSIDE_ATTACKED_TALK",
-                         Vector3.zero,
+                         new Vector3(1, 2.5f, 0),
                          ItsDaFuckinShopApi.defaultItemPositions,
                          1f,
                          false,
@@ -136,7 +136,11 @@ namespace NevernamedsItems
                          "Armor",
                          true,
                          true,
-                         "NevernamedsItems/Resources/NPCSprites/Ironside/ironside_carpet"
+                         "NevernamedsItems/Resources/NPCSprites/Ironside/ironside_carpet",
+                         true,
+                         "NevernamedsItems/Resources/NPCSprites/Ironside/ironside_mapicon",
+                         true,
+                         0.1f
                          );
 
             PrototypeDungeonRoom Mod_Shop_Room = RoomFactory.BuildFromResource("NevernamedsItems/Resources/EmbeddedRooms/IronsideRoom.room").room;

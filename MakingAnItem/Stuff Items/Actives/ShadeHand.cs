@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections;
 using UnityEngine;
 using ItemAPI;
+using TranslationAPI;
 
 namespace NevernamedsItems
 {
@@ -45,6 +46,10 @@ namespace NevernamedsItems
             item.consumable = false;
             item.quality = ItemQuality.EXCLUDED;
             item.CanBeDropped = false;
+
+            item.TranslateItemName(StringTableManager.GungeonSupportedLanguages.RUSSIAN, "Рука Ночи");
+            item.TranslateItemShortDescription(StringTableManager.GungeonSupportedLanguages.RUSSIAN, "Даёт и Забирает");
+            item.TranslateItemLongDescription(StringTableManager.GungeonSupportedLanguages.RUSSIAN, "Холодные и липкие руки давно сгинувшей и особенно яростной тени.");
         }
 
         //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!

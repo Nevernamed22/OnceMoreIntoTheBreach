@@ -6,6 +6,7 @@ using Dungeonator;
 using UnityEngine;
 using ItemAPI;
 using System.Collections;
+using TranslationAPI;
 
 namespace NevernamedsItems
 {
@@ -13,30 +14,14 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Shade Heart";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/shadeheart_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<ShadeHeart>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Heart of Darkness";
             string longDesc = "The ventricles of this shadowy organ are paper-thin, and ripple with a strange otherworldly energy." + "\n\nThough fragile, it holds fantastic power.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalShotPiercing, 10, StatModifier.ModifyMethod.ADDITIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.EnemyProjectileSpeedMultiplier, 0.95f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.GlobalPriceMultiplier, 0.7f, StatModifier.ModifyMethod.MULTIPLICATIVE);
@@ -44,10 +29,12 @@ namespace NevernamedsItems
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Coolness, 4, StatModifier.ModifyMethod.ADDITIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalItemCapacity, 1, StatModifier.ModifyMethod.ADDITIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.10f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.EXCLUDED;
             item.CanBeDropped = false;
+
+            item.TranslateItemName(StringTableManager.GungeonSupportedLanguages.RUSSIAN, "Теневое Сердце");
+            item.TranslateItemShortDescription(StringTableManager.GungeonSupportedLanguages.RUSSIAN, "Сердце Тьмы");
+            item.TranslateItemLongDescription(StringTableManager.GungeonSupportedLanguages.RUSSIAN, "Тонкие, как бумага, стенки этого тёмного сосуда излучают энергию прямиком из другого мира.\n\nИ хотя оно хрупкое, внутри него заточена огромная сила.");
         }
         private float currentArmour, lastArmour;
         private string currentRoom, lastRoom;

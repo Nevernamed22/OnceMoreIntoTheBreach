@@ -8,6 +8,41 @@ namespace NevernamedsItems
 {
     class StatusEffectHelper
     {
+        public static GameActorCheeseEffect GenerateCheese(float length = 10f, float intensity = 50f)
+        {
+            GameActorCheeseEffect customCheese = new GameActorCheeseEffect
+            {
+                duration = length,
+                TintColor = StaticStatusEffects.elimentalerCheeseEffect.TintColor,
+                DeathTintColor = StaticStatusEffects.elimentalerCheeseEffect.DeathTintColor,
+                effectIdentifier = "Cheese",
+                AppliesTint = true,
+                AppliesDeathTint = true,
+                resistanceType = EffectResistanceType.None,
+                CheeseAmount = intensity,
+
+                //Eh
+                OverheadVFX = StaticStatusEffects.elimentalerCheeseEffect.OverheadVFX,
+                AffectsPlayers = StaticStatusEffects.elimentalerCheeseEffect.AffectsPlayers,
+                AppliesOutlineTint = StaticStatusEffects.elimentalerCheeseEffect.AppliesOutlineTint,
+                OutlineTintColor = StaticStatusEffects.elimentalerCheeseEffect.OutlineTintColor,
+                PlaysVFXOnActor = StaticStatusEffects.elimentalerCheeseEffect.PlaysVFXOnActor,
+                AffectsEnemies = StaticStatusEffects.elimentalerCheeseEffect.AffectsEnemies,
+                debrisAngleVariance = StaticStatusEffects.elimentalerCheeseEffect.debrisAngleVariance,
+                debrisMaxForce = StaticStatusEffects.elimentalerCheeseEffect.debrisMaxForce,
+                debrisMinForce = StaticStatusEffects.elimentalerCheeseEffect.debrisMinForce,
+                CheeseCrystals = StaticStatusEffects.elimentalerCheeseEffect.CheeseCrystals,
+                CheeseGoop = StaticStatusEffects.elimentalerCheeseEffect.CheeseGoop,
+                CheeseGoopRadius = StaticStatusEffects.elimentalerCheeseEffect.CheeseGoopRadius,
+                crystalNum = StaticStatusEffects.elimentalerCheeseEffect.crystalNum,
+                crystalRot = StaticStatusEffects.elimentalerCheeseEffect.crystalRot,
+                crystalVariation = StaticStatusEffects.elimentalerCheeseEffect.crystalVariation,
+                maxStackedDuration = StaticStatusEffects.elimentalerCheeseEffect.maxStackedDuration,
+                stackMode = StaticStatusEffects.elimentalerCheeseEffect.stackMode,
+                vfxExplosion = StaticStatusEffects.elimentalerCheeseEffect.vfxExplosion,
+            };
+            return customCheese;
+        }
         public static GameActorHealthEffect GeneratePoison(float dps  = 3, bool damagesEnemies = true, float duration = 4, bool affectsPlayers = true)
         {
             GameActorHealthEffect customPoison = new GameActorHealthEffect
@@ -130,6 +165,21 @@ namespace NevernamedsItems
                 DeathTintColor = corpseTint,
             };
             return commonPlague;
+        }
+        public static GameActorConfusionEffect GenerateConfusionEfffect(float duration)
+        {
+            GameActorConfusionEffect confusion = new GameActorConfusionEffect
+            {
+                duration = duration,
+                effectIdentifier = "Confusion",
+                resistanceType = EffectResistanceType.None,
+                OverheadVFX = null,
+                AffectsEnemies = true,
+                AffectsPlayers = false,
+                AppliesOutlineTint = false,
+                PlaysVFXOnActor = false,
+            };
+            return confusion;
         }
         public static GameActorSizeEffect GenerateSizeEffect(float duration, Vector2 targetScale)
         {

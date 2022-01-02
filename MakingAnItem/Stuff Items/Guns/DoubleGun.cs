@@ -47,7 +47,7 @@ namespace NevernamedsItems
                 projectile.gameObject.SetActive(false);
                 FakePrefab.MarkAsFakePrefab(projectile.gameObject);
                 UnityEngine.Object.DontDestroyOnLoad(projectile);
-                projectile.baseData.damage = 15;
+                projectile.baseData.damage = 7.5f;
                 projectile.baseData.speed *= 0.7f;
                 mod.positionOffset = new Vector2(0, -0.3f);
                 if (mod != gun.DefaultModule)

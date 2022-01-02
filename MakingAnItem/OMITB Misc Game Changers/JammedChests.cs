@@ -10,30 +10,16 @@ using SaveAPI;
 
 namespace NevernamedsItems
 {
-    class JammedChests
+    static class JammedChests
     {
-        public static void Inithooks()
+        public static void Init()
         {
-            chestPostProcessHook = new Hook(
-                typeof(Chest).GetMethod("PossiblyCreateBowler", BindingFlags.Instance | BindingFlags.NonPublic),
-                typeof(JammedChests).GetMethod("PostProcessChest", BindingFlags.Static | BindingFlags.Public)
-            );
-            chestPreOpenHook = new Hook(
-                typeof(Chest).GetMethod("Open", BindingFlags.Instance | BindingFlags.NonPublic),
-                typeof(JammedChests).GetMethod("ChestPreOpen", BindingFlags.Static | BindingFlags.Public)
-            );
-            chestBrokenHook = new Hook(
-                typeof(Chest).GetMethod("OnBroken", BindingFlags.Instance | BindingFlags.NonPublic),
-                typeof(JammedChests).GetMethod("OnBroken", BindingFlags.Static | BindingFlags.Public)
-            );
+            ChestToolbox.OnChestPostSpawn += PostProcessChest;
+            ChestToolbox.OnChestPreOpen += ChestPreOpen;
+            ChestToolbox.OnChestBroken += OnBroken;
         }
-        public static Hook chestPostProcessHook;
-        public static Hook chestPreOpenHook;
-        public static Hook chestBrokenHook;
-
-        public static void PostProcessChest(Action<Chest, bool> orig, Chest self, bool uselssVar)
+        public static void PostProcessChest(Chest self)
         {
-            Debug.Log("PostProcessChest ran!");
             JammedChestBehav jammedMaybe = self.gameObject.GetComponent<JammedChestBehav>();
             PassedOverForJammedChest unjammedMaybe = self.gameObject.GetComponent<PassedOverForJammedChest>();
             if (jammedMaybe == null && unjammedMaybe == null)
@@ -77,45 +63,10 @@ namespace NevernamedsItems
                     }
                 }
             }
-            if (!Dungeon.IsGenerating)
-            {
-                if (GameManager.Instance.AnyPlayerHasPickupID(ScrollOfExactKnowledge.ScrollOfExactKnowledgeID))
-                {
-                    if (GameManager.Instance.PrimaryPlayer != null)
-                    {
-                        foreach (PassiveItem item in GameManager.Instance.PrimaryPlayer.passiveItems)
-                        {
-                            if (item.GetComponent<ScrollOfExactKnowledge>() != null)
-                            {
-                                item.GetComponent<ScrollOfExactKnowledge>().ReactToRuntimeSpawnedChest(self);
-                            }
-                        }
-                    }
-                    if (GameManager.Instance.SecondaryPlayer != null)
-                    {
-                        foreach (PassiveItem item in GameManager.Instance.SecondaryPlayer.passiveItems)
-                        {
-                            if (item.GetComponent<ScrollOfExactKnowledge>() != null)
-                            {
-                                item.GetComponent<ScrollOfExactKnowledge>().ReactToRuntimeSpawnedChest(self);
-                            }
-                        }
-                    }
-                }
-            }
-            orig(self, uselssVar);
         }
-
-        public static void ChestPreOpen(Action<Chest, PlayerController> orig, Chest self, PlayerController opener)
+        public static void ChestPreOpen(Chest self, PlayerController opener)
         {
             JammedChestBehav jamness = self.gameObject.GetComponent<JammedChestBehav>();
-            if (self && self.IsGlitched)
-            {
-                if (!SaveAPIManager.GetFlag(CustomDungeonFlags.UNLOCKED_MISSINGUNO))
-                {
-                    SaveAPIManager.SetFlag(CustomDungeonFlags.UNLOCKED_MISSINGUNO, true);
-                }
-            }
             if (jamness != null)
             {
                 self.PredictContents(opener);
@@ -137,16 +88,13 @@ namespace NevernamedsItems
                 LootEngine.SpawnCurrency(self.sprite.WorldCenter, UnityEngine.Random.Range(10, 21), false);
                 if (UnityEngine.Random.value <= 0.25f && opener.name != "PlayerShade(Clone)") opener.healthHaver.ApplyDamage(1f, Vector2.zero, "Jammed Chest");
             }
-            orig(self, opener);
-
         }
-        public static void OnBroken(Action<Chest> orig, Chest self)
+        public static void OnBroken(Chest self)
         {
             if (!self.IsOpen && self.GetComponent<JammedChestBehav>() != null)
             {
                 LootEngine.SpawnCurrency(self.sprite.WorldCenter, 10, false);
             }
-            orig(self);
         }
         private static List<int> LootIDs = new List<int>()
         {

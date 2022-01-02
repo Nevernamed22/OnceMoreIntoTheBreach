@@ -42,6 +42,8 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.EXCLUDED;
 
             BlobulonRageID = item.PickupObjectId;
+
+            item.AddAsChamberGunMastery("OnceMoreIntoTheBreach", 4);
         }
     }
 }
