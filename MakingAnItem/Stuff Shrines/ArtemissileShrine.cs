@@ -49,6 +49,7 @@ namespace NevernamedsItems
         {
             if ((shrine.GetComponent<CustomShrineController>().numUses == 0) || player.HasPickupID(PassiveTestingItem.DebugPassiveID))
             {
+                if (player.ModdedCharacterIdentity() == ModdedCharacterID.Shade) return true;
                 if (player.characterIdentity == PlayableCharacters.Robot)
                 {
                     if (player.healthHaver.Armor > 2)
@@ -92,7 +93,7 @@ namespace NevernamedsItems
             float start = 1;
             if (gun.DefaultModule != null && gun.DefaultModule.projectiles != null && gun.DefaultModule.projectiles[0] != null && gun.DefaultModule.projectiles[0].GetComponent<BeamController>() != null)
             {
-               if ( gun.DefaultModule.projectiles[0].GetComponent<BeamController>().usesChargeDelay == true)
+                if (gun.DefaultModule.projectiles[0].GetComponent<BeamController>().usesChargeDelay == true)
                 {
                     start += gun.DefaultModule.projectiles[0].GetComponent<BeamController>().chargeDelay;
                 }
@@ -103,7 +104,10 @@ namespace NevernamedsItems
         {
             if (player.characterIdentity == PlayableCharacters.Robot)
             {
-                player.healthHaver.Armor -= 2;
+                if (player.ModdedCharacterIdentity() != ModdedCharacterID.Shade)
+                {
+                    player.healthHaver.Armor -= 2;
+                }
             }
             else
             {

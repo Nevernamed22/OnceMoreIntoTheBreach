@@ -6,6 +6,7 @@ using System.Text;
 using LootTableAPI;
 using UnityEngine;
 using GungeonAPI;
+using System.Reflection;
 
 namespace NevernamedsItems
 {
@@ -130,7 +131,7 @@ namespace NevernamedsItems
                          Ironside.IronsideCustomCanBuy,
                          Ironside.IronsideCustomRemoveCurrency,
                          Ironside.IronsideCustomPrice,
-                         null,
+                         IronsideBuy,
                          null,
                          "NevernamedsItems/Resources/NPCSprites/Ironside/armourcurrency_icon.png",
                          "Armor",
@@ -146,6 +147,11 @@ namespace NevernamedsItems
             PrototypeDungeonRoom Mod_Shop_Room = RoomFactory.BuildFromResource("NevernamedsItems/Resources/EmbeddedRooms/IronsideRoom.room").room;
             ItsDaFuckinShopApi.RegisterShopRoom(ironsideObj, Mod_Shop_Room, new UnityEngine.Vector2(7f, 9));
         }
+        public static bool IronsideBuy(PlayerController player, PickupObject item, int idfk)
+        {
+
+            return false;
+        }
         public static int IronsideCustomPrice(CustomShopController shop, CustomShopItemController itemCont, PickupObject item)
         {
             if (item.quality == PickupObject.ItemQuality.A || item.quality == PickupObject.ItemQuality.S)
@@ -160,11 +166,20 @@ namespace NevernamedsItems
         }
         public static int IronsideCustomRemoveCurrency(CustomShopController shop, PlayerController player, int cost)
         {
-            player.healthHaver.Armor -= cost;
+            if (player.ModdedCharacterIdentity() != ModdedCharacterID.Shade) player.healthHaver.Armor -= cost;
+            else
+            {
+                FieldInfo _itemControllers = typeof(CustomShopController).GetField("m_itemControllers", BindingFlags.NonPublic | BindingFlags.Instance);
+                foreach (CustomShopItemController item in _itemControllers.GetValue(shop) as List<ShopItemController>)
+                {
+                    item.ForceOutOfStock();
+                }
+            }
             return 1;
         }
         public static bool IronsideCustomCanBuy(CustomShopController shop, PlayerController player, int cost)
         {
+            if (player.ModdedCharacterIdentity() == ModdedCharacterID.Shade) return true;
             if (player.healthHaver.Armor >= cost && player.healthHaver.GetCurrentHealth() > 0)
             {
                 return true;
@@ -173,6 +188,7 @@ namespace NevernamedsItems
             {
                 return true;
             }
+
             return false;
         }
     }

@@ -38,7 +38,7 @@ namespace NevernamedsItems
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
 
             //Set the cooldown type and duration of the cooldown
-            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 240);
+            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 540);
 
             //Set some other fields
             item.consumable = false;

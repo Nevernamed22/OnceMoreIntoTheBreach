@@ -120,49 +120,36 @@ namespace NevernamedsItems
         }
         protected override void DoEffect(PlayerController user)
         {
-            Chest chestToSpawn = null;
-            bool isRainbow = false;
+            ChestToolbox.ChestTier chestToSpawn = ChestToolbox.ChestTier.OTHER;
             switch (MemorisedTier)
             {
                 case PocketChestTier.BROWN:
-                    chestToSpawn = GameManager.Instance.RewardManager.D_Chest;
+                    chestToSpawn = ChestToolbox.ChestTier.BROWN;
                     break;
                 case PocketChestTier.BLUE:
-                    chestToSpawn = GameManager.Instance.RewardManager.C_Chest;
+                    chestToSpawn = ChestToolbox.ChestTier.BLUE;
                     break;
                 case PocketChestTier.GREEN:
-                    chestToSpawn = GameManager.Instance.RewardManager.B_Chest;
+                    chestToSpawn = ChestToolbox.ChestTier.GREEN;
                     break;
                 case PocketChestTier.RED:
-                    chestToSpawn = GameManager.Instance.RewardManager.A_Chest;
+                    chestToSpawn = ChestToolbox.ChestTier.RED;
                     break;
                 case PocketChestTier.BLACK:
-                    chestToSpawn = GameManager.Instance.RewardManager.S_Chest;
+                    chestToSpawn = ChestToolbox.ChestTier.BLACK;
                     break;
                 case PocketChestTier.SYNERGY:
-                    chestToSpawn = GameManager.Instance.RewardManager.Synergy_Chest;
+                    chestToSpawn = ChestToolbox.ChestTier.SYNERGY;
                     break;
                 case PocketChestTier.RAINBOW:
-                    chestToSpawn = GameManager.Instance.RewardManager.Rainbow_Chest;
-                    isRainbow = true;
+                    chestToSpawn = ChestToolbox.ChestTier.RAINBOW;
                     break;
             }
-            if (chestToSpawn != null)
+            if (chestToSpawn != ChestToolbox.ChestTier.OTHER)
             {
                 IntVector2 bestRewardLocation2 = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
-                if (isRainbow)
-                {
-                    chestToSpawn.IsLocked = false;
-                }
-                else
-                {
-                    chestToSpawn.IsLocked = true;
-                }
-                chestToSpawn.ChestType = BraveUtility.RandomElement(ChestyBois);
-                Chest spawnedChest = Chest.Spawn(chestToSpawn, bestRewardLocation2);
-                bool IsAGun = UnityEngine.Random.value <= 0.5f;
-                spawnedChest.lootTable.lootTable = (IsAGun ? GameManager.Instance.RewardManager.GunsLootTable : GameManager.Instance.RewardManager.ItemsLootTable);
-                spawnedChest.RegisterChestOnMinimap(spawnedChest.GetAbsoluteParentRoom());
+                ChestToolbox.SpawnChestEasy(bestRewardLocation2, chestToSpawn, !(chestToSpawn == ChestToolbox.ChestTier.RAINBOW || chestToSpawn == ChestToolbox.ChestTier.BROWN), Chest.GeneralChestType.UNSPECIFIED);
+
             }
         }
         public override bool CanBeUsed(PlayerController user)

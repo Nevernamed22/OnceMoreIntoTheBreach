@@ -344,7 +344,37 @@ namespace NevernamedsItems
             UnityEngine.Object.Destroy(damageLabel.gameObject, 1);
             yield break;
         }
-        public static GameObject CreateVFX(string name, List<string> spritePaths, int fps, IntVector2 Dimensions, tk2dBaseSprite.Anchor anchor, bool usesZHeight, float zHeightOffset, float emissivePower = -1, Color? emissiveColour = null)
+        public static GameObject CreateOverheadVFX(List<string> filepaths, string name, int fps)
+        {
+            //Setting up the Overhead Plague VFX
+            GameObject overheadderVFX = SpriteBuilder.SpriteFromResource(filepaths[0], new GameObject(name));
+            overheadderVFX.SetActive(false);
+            tk2dBaseSprite plaguevfxSprite = overheadderVFX.GetComponent<tk2dBaseSprite>();
+            plaguevfxSprite.GetCurrentSpriteDef().ConstructOffsetsFromAnchor(tk2dBaseSprite.Anchor.LowerCenter, plaguevfxSprite.GetCurrentSpriteDef().position3);
+            FakePrefab.MarkAsFakePrefab(overheadderVFX);
+            UnityEngine.Object.DontDestroyOnLoad(overheadderVFX);
+
+            //Animating the overhead
+            tk2dSpriteAnimator plagueanimator = overheadderVFX.AddComponent<tk2dSpriteAnimator>();
+            plagueanimator.Library = overheadderVFX.AddComponent<tk2dSpriteAnimation>();
+            plagueanimator.Library.clips = new tk2dSpriteAnimationClip[0];
+
+            tk2dSpriteAnimationClip clip = new tk2dSpriteAnimationClip { name = "NewOverheadVFX", fps = fps, frames = new tk2dSpriteAnimationFrame[0] };
+            foreach (string path in filepaths)
+            {
+                int spriteId = SpriteBuilder.AddSpriteToCollection(path, overheadderVFX.GetComponent<tk2dBaseSprite>().Collection);
+
+                overheadderVFX.GetComponent<tk2dBaseSprite>().Collection.spriteDefinitions[spriteId].ConstructOffsetsFromAnchor(tk2dBaseSprite.Anchor.LowerCenter);
+
+                tk2dSpriteAnimationFrame frame = new tk2dSpriteAnimationFrame { spriteId = spriteId, spriteCollection = overheadderVFX.GetComponent<tk2dBaseSprite>().Collection };
+                clip.frames = clip.frames.Concat(new tk2dSpriteAnimationFrame[] { frame }).ToArray();
+            }
+            plagueanimator.Library.clips = plagueanimator.Library.clips.Concat(new tk2dSpriteAnimationClip[] { clip }).ToArray();
+            plagueanimator.playAutomatically = true;
+            plagueanimator.DefaultClipId = plagueanimator.GetClipIdByName("NewOverheadVFX");
+            return overheadderVFX;
+        }
+        public static GameObject CreateVFX(string name, List<string> spritePaths, int fps, IntVector2 Dimensions, tk2dBaseSprite.Anchor anchor, bool usesZHeight, float zHeightOffset, float emissivePower = -1, Color? emissiveColour = null, tk2dSpriteAnimationClip.WrapMode wrap = tk2dSpriteAnimationClip.WrapMode.Once, bool persist = false)
         {
             GameObject Obj = new GameObject(name);
             VFXObject vfObj = new VFXObject();
@@ -388,12 +418,15 @@ namespace NevernamedsItems
             if (emissivePower > 0) sprite.renderer.material.SetFloat("_EmissiveColorPower", emissivePower);
             if (emissiveColour != null) sprite.renderer.material.SetColor("_EmissiveColor", (Color)emissiveColour);
             clip.frames = frames.ToArray();
-            clip.wrapMode = tk2dSpriteAnimationClip.WrapMode.Once;
+            clip.wrapMode = wrap;
             animation.clips = animation.clips.Concat(new tk2dSpriteAnimationClip[] { clip }).ToArray();
-            SpriteAnimatorKiller kill = animator.gameObject.AddComponent<SpriteAnimatorKiller>();
-            kill.fadeTime = -1f;
-            kill.animator = animator;
-            kill.delayDestructionTime = -1f;
+            if (!persist)
+            {
+                SpriteAnimatorKiller kill = animator.gameObject.AddComponent<SpriteAnimatorKiller>();
+                kill.fadeTime = -1f;
+                kill.animator = animator;
+                kill.delayDestructionTime = -1f;
+            }
             animator.playAutomatically = true;
             animator.DefaultClipId = animator.GetClipIdByName("start");
             vfObj.attached = true;

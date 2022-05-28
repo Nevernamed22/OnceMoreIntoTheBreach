@@ -57,7 +57,6 @@ namespace NevernamedsItems
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Dart Rifle Darts", "NevernamedsItems/Resources/CustomGunAmmoTypes/dartrifle_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/dartrifle_clipempty");
 
             gun.quality = PickupObject.ItemQuality.B;
-            gun.encounterTrackable.EncounterGuid = "this is the Dart Rifle";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_DARTRIFLE, true);
             DartRifleID = gun.PickupObjectId;

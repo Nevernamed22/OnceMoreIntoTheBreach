@@ -1059,7 +1059,7 @@ namespace NevernamedsItems
         {
             FieldInfo field = typeof(Projectile).GetField("m_hasPierced", BindingFlags.Instance | BindingFlags.NonPublic);
             field.SetValue(myRigidbody.projectile, false);
-            myRigidbody.projectile.baseData.damage *= damageMultOnPierce;
+            m_projectile.baseData.damage *= damageMultOnPierce;
         }
         public float damageMultOnPierce;
         private Projectile m_projectile;
@@ -1388,7 +1388,7 @@ namespace NevernamedsItems
             PlayerController player = m_projectile.ProjectilePlayerOwner();
             var Kin = EnemyDatabase.GetOrLoadByGuid(objToSpawn);
 
-            CompanionisedEnemyUtility.SpawnCompanionisedEnemy(player, objToSpawn, m_projectile.specRigidbody.UnitCenter.ToIntVector2(), false, Color.red, 5, 2, false);
+            CompanionisedEnemyUtility.SpawnCompanionisedEnemy(player, objToSpawn, m_projectile.specRigidbody.UnitCenter.ToIntVector2(), false, Color.red, 5, 2, false, true);
         }
         public List<string> EnemiesToSpawn = new List<string>();
         public bool pickRandom;

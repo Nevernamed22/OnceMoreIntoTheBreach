@@ -103,20 +103,27 @@ namespace NevernamedsItems
         GameActorFireEffect fireEffect = Gungeon.Game.Items["hot_lead"].GetComponent<BulletStatusEffectItem>().FireModifierEffect;
         private void applyFire(Projectile bullet, SpeculativeRigidbody enemy, bool fatal)
         {
-            enemy.gameActor.ApplyEffect(this.fireEffect, 1f, null);
+          if (enemy && enemy.gameActor)  enemy.gameActor.ApplyEffect(this.fireEffect, 1f, null);
         }
         private void killArthropods(Projectile bullet, SpeculativeRigidbody enemy, bool fatal)
         {
-            if (arthropods.Contains(enemy.aiActor.EnemyGuid))
+            if (enemy && enemy.aiActor && !string.IsNullOrEmpty(enemy.aiActor.EnemyGuid))
             {
-                enemy.aiActor.healthHaver.ApplyDamage(1E+07f, Vector2.zero, "BaneOfArthropods", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
+                if (arthropods.Contains(enemy.aiActor.EnemyGuid))
+                {
+                    enemy.aiActor.healthHaver.ApplyDamage(1E+07f, Vector2.zero, "BaneOfArthropods", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
+                }
             }
         }
         private void killUndead(Projectile bullet, SpeculativeRigidbody enemy, bool fatal)
         {
+            if (enemy && enemy.aiActor && !string.IsNullOrEmpty(enemy.aiActor.EnemyGuid))
+            {
             if (undead.Contains(enemy.aiActor.EnemyGuid))
             {
                 enemy.aiActor.healthHaver.ApplyDamage(1E+07f, Vector2.zero, "Smite", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
+            }
+
             }
         }
         public static List<string> undead = new List<string>()

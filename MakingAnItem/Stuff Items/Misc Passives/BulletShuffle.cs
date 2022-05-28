@@ -26,7 +26,7 @@ namespace NevernamedsItems
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.S;
 
-            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.BOSSRUSH_SHADE, true);
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.BOSSRUSH_GUNSLINGER, true);
         }
 
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)

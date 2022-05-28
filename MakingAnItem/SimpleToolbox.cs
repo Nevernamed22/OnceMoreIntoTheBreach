@@ -1307,6 +1307,20 @@ namespace NevernamedsItems
     }
     public static class AlterItemStats //----------------------------------------------------------------------------------------------------------------------
     {
+        public static void AddStatToActive(PlayerItem item, PlayerStats.StatType statType, float amount, StatModifier.ModifyMethod method = StatModifier.ModifyMethod.ADDITIVE)
+        {
+            StatModifier modifier = new StatModifier
+            {
+                amount = amount,
+                statToBoost = statType,
+                modifyType = method
+            };
+
+            if (item.passiveStatModifiers == null)
+                item.passiveStatModifiers = new StatModifier[] { modifier };
+            else
+                item.passiveStatModifiers = item.passiveStatModifiers.Concat(new StatModifier[] { modifier }).ToArray();
+        }
         public static void AddStatToPassive(PassiveItem item, PlayerStats.StatType statType, float amount, StatModifier.ModifyMethod method = StatModifier.ModifyMethod.ADDITIVE)
         {
             StatModifier modifier = new StatModifier
@@ -1322,6 +1336,16 @@ namespace NevernamedsItems
                 item.passiveStatModifiers = item.passiveStatModifiers.Concat(new StatModifier[] { modifier }).ToArray();
         }
         public static void RemoveStatFromPassive(PassiveItem item, PlayerStats.StatType statType)
+        {
+            var newModifiers = new List<StatModifier>();
+            for (int i = 0; i < item.passiveStatModifiers.Length; i++)
+            {
+                if (item.passiveStatModifiers[i].statToBoost != statType)
+                    newModifiers.Add(item.passiveStatModifiers[i]);
+            }
+            item.passiveStatModifiers = newModifiers.ToArray();
+        }
+        public static void RemoveStatFromActive(PlayerItem item, PlayerStats.StatType statType)
         {
             var newModifiers = new List<StatModifier>();
             for (int i = 0; i < item.passiveStatModifiers.Length; i++)

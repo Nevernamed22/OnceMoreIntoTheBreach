@@ -84,7 +84,7 @@ namespace NevernamedsItems
         {
             if (projectile && projectile.ProjectilePlayerOwner() && projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("There are some who call me..."))
             {
-                projectile.baseData.range *= 1000;
+                projectile.baseData.range = 1000;
                 projectile.baseData.speed *= 20;
             }
             base.PostProcessProjectile(projectile);

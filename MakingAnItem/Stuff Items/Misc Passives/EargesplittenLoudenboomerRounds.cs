@@ -107,9 +107,9 @@ namespace NevernamedsItems
         }
         public override DebrisObject Drop(PlayerController player)
         {
-            return base.Drop(player);
             player.PostProcessBeamChanceTick -= PostProcessBeam;
             player.PostProcessProjectile -= PostProcessProj;
+            return base.Drop(player);
         }
         protected override void OnDestroy()
         {

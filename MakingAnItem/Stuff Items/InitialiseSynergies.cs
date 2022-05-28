@@ -1446,6 +1446,18 @@ namespace NevernamedsItems
             List<string> mandatorySynergyItemsScarletTanager = new List<string>() { "nn:red_robin" };
             List<string> optionalSynergyItemsScarletTanager = new List<string>() { "owl", "nn:birdshot", "nn:purpler", "chicken_flute", "nn:fowl_ring", "turkey" };
             CustomSynergies.Add("Scarlet Tanager", mandatorySynergyItemsScarletTanager, optionalSynergyItemsScarletTanager);
+            //SKORPION
+            List<string> mandatorySynergyItemsSkorpionSting = new List<string>() { "nn:skorpion" };
+            List<string> optionalSynergyItemsSkorpionSting = new List<string>() { "rattler", "stinger" };
+            CustomSynergies.Add("Skorpion Sting", mandatorySynergyItemsSkorpionSting, optionalSynergyItemsSkorpionSting);
+            //DICE GRENADE / CHAOS ITEMS
+            List<string> mandatorySynergyItemsRollWithInitiative = new List<string>() { "nn:dice_grenade" };
+            List<string> optionalSynergyItemsRollWithInitiative = new List<string>() { "chaos_bullets", "nn:gayk47", "nn:bullet_shuffle" };
+            CustomSynergies.Add("Roll With Advantage", mandatorySynergyItemsRollWithInitiative, optionalSynergyItemsRollWithInitiative);
+            //PEARL AMMOLET / BUBBLE BLASTER
+            List<string> mandatorySynergyItemsBubbleBlowingBaby = new List<string>() { "nn:pearl_ammolet" };
+            List<string> optionalSynergyItemsBubbleBlowingBaby = new List<string>() { "bubble_blaster" };
+            CustomSynergies.Add("Bubble Blowing, Baby!", mandatorySynergyItemsBubbleBlowingBaby, optionalSynergyItemsBubbleBlowingBaby);
             #endregion
         }
 

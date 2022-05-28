@@ -40,11 +40,13 @@
     <Reference Include="Ionic.Zip">
       <HintPath>..\..\..\..\Desktop\Dependancies\Ionic.Zip.dll</HintPath>
     </Reference>
-    <Reference Include="MonoMod.RuntimeDetour">
-      <HintPath>..\..\..\..\Desktop\Dependancies\MonoMod.RuntimeDetour.dll</HintPath>
+    <Reference Include="MonoMod.RuntimeDetour, Version=18.11.10.6, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Enter the Gungeon\Mods\MakingAnItem\MonoMod.RuntimeDetour.dll</HintPath>
     </Reference>
-    <Reference Include="MonoMod.Utils">
-      <HintPath>..\..\..\..\Desktop\Dependancies\MonoMod.Utils.dll</HintPath>
+    <Reference Include="MonoMod.Utils, Version=18.11.10.6, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Enter the Gungeon\Mods\MakingAnItem\MonoMod.Utils.dll</HintPath>
     </Reference>
     <Reference Include="PlayMaker">
       <HintPath>..\..\..\..\Desktop\Dependancies\PlayMaker.dll</HintPath>
@@ -75,51 +77,69 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OMITB Extensions and Hooks\ShadeFlightHookFix.cs" />
+    <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\DieWhenOwnerNotInRoom.cs" />
+    <Compile Include="ProjectileSetupUtility.cs" />
+    <Compile Include="StandardAPI\BreakableAPI.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\-EXAMPLEPLEASELOOKATTHISFFS.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\CharacterBuilding\CharacterBuilder.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\CharacterBuilding\CustomCharacter.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\CharacterBuilding\FoyerCharacterHandler.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\CharacterBuilding\Loader.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\CharacterBuilding\SpriteHandler.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\CharacterBuilding\StringHandler.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\CharacterSwitcher.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\CharApi.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\CharApiHiveMind.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\CollectionDumper.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\CustomPlayableCharacters.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\SaveFileBullShit.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\Tools\CharApiHooks.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\Tools\CustomSimpleFlagDisabler.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\Tools\Enums.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\Tools\SaveFileHelper.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\Tools\TexturePacker.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\Tools\TextureStitcher.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\Tools\Tools.cs" />
     <Compile Include="CustomAPI\ChamberGunAPI.cs" />
     <Compile Include="CustomAPI\TrailAPI.cs" />
-    <Compile Include="EnemyAPI\BossBuilder.cs" />
-    <Compile Include="EnemyAPI\EnemyBuilder.cs" />
-    <Compile Include="EnemyAPI\EnemyTools.cs" />
-    <Compile Include="EnemyAPI\Hooks.cs" />
-    <Compile Include="EnemyAPI\OMITBEnemyBuilder.cs" />
-    <Compile Include="EnemyAPI\OverrideBehavior.cs" />
-    <Compile Include="GungeonAPI\Dungeon Code\ShrineTools.cs" />
-    <Compile Include="GungeonAPI\Shrine API\NPCInteractble.cs" />
-    <Compile Include="GungeonAPI\Shrine API\OldShrineFactory.cs" />
-    <Compile Include="GungeonAPI\Shrine API\ReloadBreachShrineHooks.cs" />
-    <Compile Include="ItemAPI\CustomClipAmmoTypeToolbox.cs" />
-    <Compile Include="ItemAPI\SynergyAPI\AdvancedCompanionSynergyProcessor.cs" />
-    <Compile Include="ItemAPI\SynergyAPI\AdvancedDualWieldSynergyProcessor.cs" />
-    <Compile Include="ItemAPI\SynergyAPI\AdvancedGunFormeData.cs" />
-    <Compile Include="ItemAPI\SynergyAPI\AdvancedGunFormeSynergyProcessor.cs" />
-    <Compile Include="ItemAPI\SynergyAPI\AdvancedHoveringGunSynergyProcessor.cs" />
-    <Compile Include="ItemAPI\SynergyAPI\AdvancedInfiniteAmmoSynergyProcessor.cs" />
-    <Compile Include="ItemAPI\SynergyAPI\AdvancedStringDB.cs" />
-    <Compile Include="ItemAPI\SynergyAPI\AdvancedStringDBTable.cs" />
-    <Compile Include="ItemAPI\SynergyAPI\AdvancedTransformGunSynergyProcessor.cs" />
-    <Compile Include="ItemAPI\SynergyAPI\SynergyBuilder.cs" />
-    <Compile Include="ItemAPI\ThrowableAPI.cs" />
-    <Compile Include="ItemAPI\TranslationAPI\CustomStringDBTable.cs" />
-    <Compile Include="ItemAPI\TranslationAPI\StringTableType.cs" />
-    <Compile Include="ItemAPI\TranslationAPI\Translation.cs" />
-    <Compile Include="ItemAPI\TranslationAPI\TranslationManager.cs" />
-    <Compile Include="NPCAPI\CustomShopController.cs" />
-    <Compile Include="NPCAPI\CustomShopItemController.cs" />
-    <Compile Include="NPCAPI\Examples.cs" />
-    <Compile Include="NPCAPI\Hooks.cs" />
-    <Compile Include="NPCAPI\ItsDaFuckinShopApi.cs" />
-    <Compile Include="NPCAPI\LootTableTools.cs" />
-    <Compile Include="NPCAPI\NpcTools.cs" />
-    <Compile Include="NPCAPI\SimplerShopSetupDoer.cs" />
-    <Compile Include="OMITB Companions\AdvEnemyBuilder.cs" />
-    <Compile Include="OMITB Companions\AngrySpirit.cs" />
-    <Compile Include="OMITB Companions\BabyGoodDet.cs" />
-    <Compile Include="OMITB Companions\DarkPrince.cs" />
-    <Compile Include="OMITB Companions\FunGuy.cs" />
-    <Compile Include="OMITB Companions\LilMunchy.cs" />
-    <Compile Include="OMITB Companions\MolotovBuddy.cs" />
-    <Compile Include="OMITB Companions\TemplateCompanion.cs" />
-    <Compile Include="OMITB Companions\TestEnemy.cs" />
+    <Compile Include="StandardAPI\EnemyAPI\BossBuilder.cs" />
+    <Compile Include="StandardAPI\EnemyAPI\EnemyBuilder.cs" />
+    <Compile Include="StandardAPI\EnemyAPI\EnemyTools.cs" />
+    <Compile Include="StandardAPI\EnemyAPI\Hooks.cs" />
+    <Compile Include="StandardAPI\EnemyAPI\OMITBEnemyBuilder.cs" />
+    <Compile Include="StandardAPI\EnemyAPI\OverrideBehavior.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\Dungeon Code\ShrineTools.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\Shrine API\NPCInteractble.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\Shrine API\OldShrineFactory.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\Shrine API\ReloadBreachShrineHooks.cs" />
+    <Compile Include="StandardAPI\ItemAPI\CustomClipAmmoTypeToolbox.cs" />
+    <Compile Include="StandardAPI\ItemAPI\SynergyTools\AdvancedFireOnReloadSynergyProcessor.cs" />
+    <Compile Include="StandardAPI\ItemAPI\SynergyTools\GunVolleyModificationSynergy.cs" />
+    <Compile Include="StandardAPI\ItemAPI\ThrowableAPI.cs" />
+    <Compile Include="StandardAPI\ItemAPI\TranslationAPI\CustomStringDBTable.cs" />
+    <Compile Include="StandardAPI\ItemAPI\TranslationAPI\StringTableType.cs" />
+    <Compile Include="StandardAPI\ItemAPI\TranslationAPI\Translation.cs" />
+    <Compile Include="StandardAPI\ItemAPI\TranslationAPI\TranslationManager.cs" />
+    <Compile Include="StandardAPI\NPCAPI\CustomShopController.cs" />
+    <Compile Include="StandardAPI\NPCAPI\CustomShopItemController.cs" />
+    <Compile Include="StandardAPI\NPCAPI\Examples.cs" />
+    <Compile Include="StandardAPI\NPCAPI\Hooks.cs" />
+    <Compile Include="StandardAPI\NPCAPI\ItsDaFuckinShopApi.cs" />
+    <Compile Include="StandardAPI\NPCAPI\LootTableTools.cs" />
+    <Compile Include="StandardAPI\NPCAPI\NpcTools.cs" />
+    <Compile Include="StandardAPI\NPCAPI\SimplerShopSetupDoer.cs" />
+    <Compile Include="Stuff Items\Actives\DiceGrenade.cs" />
+    <Compile Include="Stuff Items\Ammolets\PearlAmmolet.cs" />
+    <Compile Include="Stuff Items\Companions\AdvEnemyBuilder.cs" />
+    <Compile Include="Stuff Items\Companions\AngrySpirit.cs" />
+    <Compile Include="Stuff Items\Companions\BabyGoodDet.cs" />
+    <Compile Include="Stuff Items\Companions\DarkPrince.cs" />
+    <Compile Include="Stuff Items\Companions\FunGuy.cs" />
+    <Compile Include="Stuff Items\Companions\LilMunchy.cs" />
+    <Compile Include="Stuff Items\Companions\MolotovBuddy.cs" />
+    <Compile Include="Stuff Items\Companions\TemplateCompanion.cs" />
+    <Compile Include="Stuff Items\Companions\TestEnemy.cs" />
     <Compile Include="OMITB Extensions and Hooks\ExplosionHooks.cs" />
     <Compile Include="OMITB Extensions and Hooks\OMITBGameobjectExtensions.cs" />
     <Compile Include="OMITB Misc Game Changers\Commands\CheckUnlocks.cs" />
@@ -132,12 +152,58 @@
     <Compile Include="OMITB Misc Toolboxes\ChestToolbox.cs" />
     <Compile Include="OMITB Misc Toolboxes\CustomDarknessHandler.cs" />
     <Compile Include="OMITB Misc Toolboxes\DeconstructHitEffects.cs" />
+    <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\NewProjectileTypes\HelixProjButLessShit.cs" />
     <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\SlowDownOverTimeModifier.cs" />
     <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\StoutBulletsProjectileMod.cs" />
     <Compile Include="OMITB Misc Toolboxes\ProjectileTrailHelper.cs" />
     <Compile Include="OMITB Misc Toolboxes\SoundCode\AudioResourceLoader.cs" />
     <Compile Include="OMITB Misc Toolboxes\TentacleDraw.cs" />
     <Compile Include="OMITB Storage Classes\ExoticPlaceables.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\AssetBundleBuilder.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\AssetBundleTools.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\BinaryWriterExtensions.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\CommonString.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\CRC.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\EditorAssetBundle.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\EditorBuildTarget.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\EditorClassIDType.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\EditorComponent.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\EditorExtension.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\EditorGameObject.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\EditorNamedObject.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\EditorObject.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\EditorPPtr.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\EditorTextAsset.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\EditorTransform.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\EndianBinaryWriter.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\ICoder.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\IMatchFinder.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\LZ4Codec.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\LZ4CodecPartial.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\LZ4\ILZ4Service.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\LZ4\LZ4Codec.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\LZ4\LZ4Codec.Safe.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\LZ4\LZ4Codec.Safe32.Dirty.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\LZ4\LZ4Codec.Safe32HC.Dirty.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\LZ4\LZ4Codec.Safe64.Dirty.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\LZ4\LZ4Codec.Safe64HC.Dirty.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\LzBinTree.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\LzInWindow.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\LzmaBase.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\LzmaDecoder.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\LzmaEncoder.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\LzOutWindow.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\PPtr.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\PrefabBuilder.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\RangeCoder.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\RangeCoderBit.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\RangeCoderBitTree.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\Safe32LZ4Service.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\Safe64LZ4Service.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\SerializedType.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\SerializedTypeStorage.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\SevenZipHelper.cs" />
+    <Compile Include="StandardAPI\PrefabAPI\TypeTreeNode.cs" />
     <Compile Include="Stuff Items\Actives\BitBucket.cs" />
     <Compile Include="Stuff Items\Actives\FireBomb.cs" />
     <Compile Include="Stuff Items\Actives\InfantryGrenade.cs" />
@@ -145,6 +211,7 @@
     <Compile Include="Stuff Items\Actives\Lvl2Molotov.cs" />
     <Compile Include="Stuff Items\Actives\NecromancersRightHand.cs" />
     <Compile Include="Stuff Items\Actives\ShadowKey.cs" />
+    <Compile Include="Stuff Items\Actives\ShotInTheArm.cs" />
     <Compile Include="Stuff Items\Actives\TackShooter.cs" />
     <Compile Include="Stuff Items\Guns\AgarGun.cs" />
     <Compile Include="Stuff Items\Ammolets\BronzeAmmolet.cs" />
@@ -183,6 +250,7 @@
     <Compile Include="Stuff Items\Guns\DoubleGun.cs" />
     <Compile Include="Stuff Items\Guns\ElysiumCannon.cs" />
     <Compile Include="Stuff Items\Guns\Ferrobolt.cs" />
+    <Compile Include="Stuff Items\Guns\FlipFlop.cs" />
     <Compile Include="Stuff Items\Guns\GalaxyCrusher.cs" />
     <Compile Include="Stuff Items\Guns\GayK47.cs" />
     <Compile Include="Stuff Items\Guns\Glazerbeam.cs" />
@@ -205,10 +273,13 @@
     <Compile Include="Stuff Items\Guns\RedRobin.cs" />
     <Compile Include="Stuff Items\Guns\RustyShotgun.cs" />
     <Compile Include="Stuff Items\Guns\SaltGun.cs" />
+    <Compile Include="Stuff Items\Guns\Skorpion.cs" />
+    <Compile Include="Stuff Items\Guns\SoapGun.cs" />
     <Compile Include="Stuff Items\Guns\SquarePeg.cs" />
     <Compile Include="Stuff Items\Guns\St4ke.cs" />
     <Compile Include="Stuff Items\Guns\StarterPistol.cs" />
     <Compile Include="Stuff Items\Guns\StickGun.cs" />
+    <Compile Include="Stuff Items\Guns\Sweeper.cs" />
     <Compile Include="Stuff Items\Guns\Synergy Formes\DiamondCutterRangerClass.cs" />
     <Compile Include="Stuff Items\Guns\Synergy Formes\DiamondGaxe.cs" />
     <Compile Include="Stuff Items\Guns\Synergy Formes\RedRebondir.cs" />
@@ -222,6 +293,7 @@
     <Compile Include="Stuff Items\Guns\Ulfberht.cs" />
     <Compile Include="Stuff Items\Guns\UterinePolyp.cs" />
     <Compile Include="Stuff Items\Guns\UziSpineMM.cs" />
+    <Compile Include="Stuff Items\Guns\W3irdstar.cs" />
     <Compile Include="Stuff Items\Guns\Welgun.cs" />
     <Compile Include="Stuff Items\Guns\Welrod.cs" />
     <Compile Include="Stuff Items\Guon Stones\InfraRedGuonStone.cs" />
@@ -229,6 +301,7 @@
     <Compile Include="Stuff Items\Guon Stones\UltraVioletGuonStone.cs" />
     <Compile Include="Stuff Items\Misc Passives\1Shot.cs" />
     <Compile Include="Stuff Items\Misc Passives\50calrounds.cs" />
+    <Compile Include="Stuff Items\Misc Passives\88888888.cs" />
     <Compile Include="Stuff Items\Misc Passives\AcidAura.cs" />
     <Compile Include="Stuff Items\Debug Items\ActiveTestingItem.cs" />
     <Compile Include="Stuff Items\Ammolets\Ammolock.cs" />
@@ -251,6 +324,7 @@
     <Compile Include="Stuff Items\Misc Passives\BloodshotEye.cs" />
     <Compile Include="Stuff Items\Misc Passives\BloodThinner.cs" />
     <Compile Include="Stuff Items\Misc Passives\BoosterShot.cs" />
+    <Compile Include="Stuff Items\Misc Passives\BreachingRound.cs" />
     <Compile Include="Stuff Items\Misc Passives\BulletBoots.cs" />
     <Compile Include="Stuff Items\Misc Passives\BulletShuffle.cs" />
     <Compile Include="Stuff Items\Misc Passives\BulletsWithGuns.cs" />
@@ -268,13 +342,14 @@
     <Compile Include="Stuff Items\Guon Stones\CyanGuonStone.cs" />
     <Compile Include="Stuff Items\Actives\DeliveryBox.cs" />
     <Compile Include="Stuff Items\Guns\Dimensionaliser.cs" />
-    <Compile Include="OMITB Companions\Diode.cs" />
+    <Compile Include="Stuff Items\Companions\Diode.cs" />
     <Compile Include="Stuff Items\Misc Passives\CyclopeanChamber.cs" />
     <Compile Include="Stuff Items\Misc Passives\DrillBullets.cs" />
-    <Compile Include="OMITB Companions\DroneCompanion.cs" />
+    <Compile Include="Stuff Items\Companions\DroneCompanion.cs" />
     <Compile Include="Stuff Items\Guns\EmberCannon.cs" />
     <Compile Include="Stuff Items\Guns\Entropew.cs" />
     <Compile Include="Stuff Items\Misc Passives\EargesplittenLoudenboomerRounds.cs" />
+    <Compile Include="Stuff Items\Misc Passives\ElectrumRounds.cs" />
     <Compile Include="Stuff Items\Misc Passives\Equality.cs" />
     <Compile Include="Stuff Items\Misc Passives\Eraser.cs" />
     <Compile Include="Stuff Items\Misc Passives\FoamDarts.cs" />
@@ -296,31 +371,31 @@
     <Compile Include="Stuff Items\Guns\Gumgun.cs" />
     <Compile Include="Stuff Items\Guns\Guneonate.cs" />
     <Compile Include="Stuff Items\Guns\Gunger.cs" />
-    <Compile Include="GungoSaveAPI\AdvancedGameStats.cs" />
-    <Compile Include="GungoSaveAPI\AdvancedGameStatsManager.cs" />
-    <Compile Include="GungoSaveAPI\AdvancedMidGameSaveData.cs" />
-    <Compile Include="GungoSaveAPI\BreachShopTool.cs" />
-    <Compile Include="GungoSaveAPI\CustomDungeonPrerequisite.cs" />
-    <Compile Include="GungoSaveAPI\CustomHuntQuest.cs" />
-    <Compile Include="GungoSaveAPI\CustomHuntQuests.cs" />
-    <Compile Include="GungoSaveAPI\Enums\Comparers\CustomDungeonFlagsComparer.cs" />
-    <Compile Include="GungoSaveAPI\Enums\Comparers\CustomTrackedMaximumsComparer.cs" />
-    <Compile Include="GungoSaveAPI\Enums\Comparers\CustomTrackedStatsComparer.cs" />
-    <Compile Include="GungoSaveAPI\Enums\CustomCharacterSpecificGungeonFlags.cs" />
-    <Compile Include="GungoSaveAPI\Enums\CustomDungeonFlags.cs" />
-    <Compile Include="GungoSaveAPI\Enums\CustomTrackedMaximums.cs" />
-    <Compile Include="GungoSaveAPI\Enums\CustomTrackedStats.cs" />
-    <Compile Include="GungoSaveAPI\JammedEnemyState.cs" />
-    <Compile Include="GungoSaveAPI\SaveAPIManager.cs" />
-    <Compile Include="GungoSaveAPI\SaveTools.cs" />
-    <Compile Include="GungoSaveAPI\SpecialAIActor.cs" />
-    <Compile Include="GungoSaveAPI\SpecialPickupObject.cs" />
+    <Compile Include="StandardAPI\GungoSaveAPI\AdvancedGameStats.cs" />
+    <Compile Include="StandardAPI\GungoSaveAPI\AdvancedGameStatsManager.cs" />
+    <Compile Include="StandardAPI\GungoSaveAPI\AdvancedMidGameSaveData.cs" />
+    <Compile Include="StandardAPI\GungoSaveAPI\BreachShopTool.cs" />
+    <Compile Include="StandardAPI\GungoSaveAPI\CustomDungeonPrerequisite.cs" />
+    <Compile Include="StandardAPI\GungoSaveAPI\CustomHuntQuest.cs" />
+    <Compile Include="StandardAPI\GungoSaveAPI\CustomHuntQuests.cs" />
+    <Compile Include="StandardAPI\GungoSaveAPI\Enums\Comparers\CustomDungeonFlagsComparer.cs" />
+    <Compile Include="StandardAPI\GungoSaveAPI\Enums\Comparers\CustomTrackedMaximumsComparer.cs" />
+    <Compile Include="StandardAPI\GungoSaveAPI\Enums\Comparers\CustomTrackedStatsComparer.cs" />
+    <Compile Include="StandardAPI\GungoSaveAPI\Enums\CustomCharacterSpecificGungeonFlags.cs" />
+    <Compile Include="StandardAPI\GungoSaveAPI\Enums\CustomDungeonFlags.cs" />
+    <Compile Include="StandardAPI\GungoSaveAPI\Enums\CustomTrackedMaximums.cs" />
+    <Compile Include="StandardAPI\GungoSaveAPI\Enums\CustomTrackedStats.cs" />
+    <Compile Include="StandardAPI\GungoSaveAPI\JammedEnemyState.cs" />
+    <Compile Include="StandardAPI\GungoSaveAPI\SaveAPIManager.cs" />
+    <Compile Include="StandardAPI\GungoSaveAPI\SaveTools.cs" />
+    <Compile Include="StandardAPI\GungoSaveAPI\SpecialAIActor.cs" />
+    <Compile Include="StandardAPI\GungoSaveAPI\SpecialPickupObject.cs" />
     <Compile Include="Stuff Items\Actives\GunidaeSolvitHaatelis.cs" />
     <Compile Include="Stuff Items\Guns\GunjurersStaff.cs" />
     <Compile Include="Stuff Items\Misc Passives\GunknightAmulet.cs" />
     <Compile Include="Stuff Items\Guns\GunOfAThousandSins.cs" />
     <Compile Include="Stuff Items\Misc Passives\GunsmokePerfume.cs" />
-    <Compile Include="OMITB Companions\Gusty.cs" />
+    <Compile Include="Stuff Items\Companions\Gusty.cs" />
     <Compile Include="Stuff Items\Guns\HandGun.cs" />
     <Compile Include="Stuff Items\Guns\HeadOfTheOrder.cs" />
     <Compile Include="Stuff Items\Guns\Beams\HeatRay.cs" />
@@ -364,13 +439,13 @@
     <Compile Include="OMITB cAPI\HatController.cs" />
     <Compile Include="OMITB cAPI\HatDefinitions.cs" />
     <Compile Include="OMITB cAPI\HatUtility.cs" />
-    <Compile Include="OMITB Companions\GregTheEgg.cs" />
+    <Compile Include="Stuff Items\Companions\GregTheEgg.cs" />
     <Compile Include="Stuff Items\Misc Passives\HeavyChamber.cs" />
-    <Compile Include="OMITB Companions\CompanionBehaviours.cs" />
-    <Compile Include="OMITB Companions\CompanionisedEnemyUtility.cs" />
-    <Compile Include="OMITB Companions\LeadOfLife.cs" />
-    <Compile Include="OMITB Companions\Peanut.cs" />
-    <Compile Include="OMITB Companions\Potty.cs" />
+    <Compile Include="Stuff Items\Companions\CompanionBehaviours.cs" />
+    <Compile Include="Stuff Items\Companions\CompanionisedEnemyUtility.cs" />
+    <Compile Include="Stuff Items\Companions\LeadOfLife.cs" />
+    <Compile Include="Stuff Items\Companions\Peanut.cs" />
+    <Compile Include="Stuff Items\Companions\Potty.cs" />
     <Compile Include="OMITB Extensions and Hooks\EnemyHooks.cs" />
     <Compile Include="OMITB Extensions and Hooks\GoopHooksAndExtensions.cs" />
     <Compile Include="OMITB Extensions and Hooks\OMITBAttackBehavExtensions.cs" />
@@ -381,7 +456,7 @@
     <Compile Include="OMITB Extensions and Hooks\SimplerCrateController.cs" />
     <Compile Include="OMITB Extensions and Hooks\UIHooks.cs" />
     <Compile Include="OMITB Misc Game Changers\AdvancedDragunRewards.cs" />
-    <Compile Include="ItemAPI\AdvancedPlayerOrbital.cs" />
+    <Compile Include="StandardAPI\ItemAPI\AdvancedPlayerOrbital.cs" />
     <Compile Include="Stuff Items\Misc Passives\AlkaliBullets.cs" />
     <Compile Include="OMITB Gamemodes\AllJammedState.cs" />
     <Compile Include="Stuff Items\Guns\AM0.cs" />
@@ -392,7 +467,7 @@
     <Compile Include="Stuff Items\Misc Passives\AntimatterBullets.cs" />
     <Compile Include="Stuff Items\Misc Passives\ArmouredArmour.cs" />
     <Compile Include="Stuff Items\Misc Passives\AWholeBulletKin.cs" />
-    <Compile Include="OMITB Companions\BabyGoodChanceKin.cs" />
+    <Compile Include="Stuff Items\Companions\BabyGoodChanceKin.cs" />
     <Compile Include="Stuff Items\Misc Passives\BackwardsBullets.cs" />
     <Compile Include="Stuff Items\Misc Passives\BagOfHolding.cs" />
     <Compile Include="Stuff Items\Misc Passives\BalancedBullets.cs" />
@@ -510,10 +585,10 @@
     <Compile Include="Stuff Items\Guns\Icicle.cs" />
     <Compile Include="Stuff Items\InitialiseSynergies.cs" />
     <Compile Include="Stuff Items\New Item Classes\IntersectEnemyBulletsItem.cs" />
-    <Compile Include="ItemAPI\AdvancedGunBehaviour.cs" />
-    <Compile Include="ItemAPI\ApplyOffset.cs" />
-    <Compile Include="ItemAPI\DualWieldSynergyProcessor.cs" />
-    <Compile Include="ItemAPI\GunTools.cs" />
+    <Compile Include="StandardAPI\ItemAPI\AdvancedGunBehaviour.cs" />
+    <Compile Include="StandardAPI\ItemAPI\ApplyOffset.cs" />
+    <Compile Include="StandardAPI\ItemAPI\DualWieldSynergyProcessor.cs" />
+    <Compile Include="StandardAPI\ItemAPI\GunTools.cs" />
     <Compile Include="Stuff Items\Guns\Justice.cs" />
     <Compile Include="Stuff Items\Guns\Kalashnirang.cs" />
     <Compile Include="Stuff Items\Ammolets\Keymmolet.cs" />
@@ -582,7 +657,7 @@
     <Compile Include="Stuff Items\Guns\RiotGun.cs" />
     <Compile Include="Stuff Items\Guns\RiskRifle.cs" />
     <Compile Include="Stuff Items\Misc Passives\RiskyRing.cs" />
-    <Compile Include="OMITB Companions\ScrollOfExactKnowledge.cs" />
+    <Compile Include="Stuff Items\Companions\ScrollOfExactKnowledge.cs" />
     <Compile Include="SetupCrossModIDs.cs" />
     <Compile Include="Stuff Items\Misc Passives\Shatterblank.cs" />
     <Compile Include="Stuff Items\Misc Passives\Showdown.cs" />
@@ -671,23 +746,23 @@
     <Compile Include="Stuff Items\Guon Stones\GreyGuonStone.cs" />
     <Compile Include="Stuff Items\Actives\GSwitch.cs" />
     <Compile Include="Stuff Items\Actives\GTCWTVRP.cs" />
-    <Compile Include="GungeonAPI\Dungeon Code\DungeonHandler.cs" />
-    <Compile Include="GungeonAPI\Dungeon Code\DungeonHooks.cs" />
-    <Compile Include="GungeonAPI\Shrine API\HitboxMonitor.cs" />
-    <Compile Include="GungeonAPI\Shrine API\NPCBuilder.cs" />
-    <Compile Include="GungeonAPI\NuclearInteractable.cs" />
-    <Compile Include="GungeonAPI\Dungeon Code\OfficialFlows.cs" />
-    <Compile Include="GungeonAPI\ResourceExtractor.cs" />
-    <Compile Include="GungeonAPI\Dungeon Code\RoomFactory.cs" />
-    <Compile Include="GungeonAPI\Dungeon Code\SampleFlow.cs" />
-    <Compile Include="GungeonAPI\Shrine API\ShrineFactory.cs" />
-    <Compile Include="GungeonAPI\Shrine API\ShrineFakePrefab.cs" />
-    <Compile Include="GungeonAPI\Shrine API\ShrineFakePrefabHooks.cs" />
-    <Compile Include="GungeonAPI\Shrine API\SimpleInteractable.cs" />
-    <Compile Include="GungeonAPI\Shrine API\SimpleShrine.cs" />
-    <Compile Include="GungeonAPI\StaticReferences.cs" />
-    <Compile Include="GungeonAPI\TextureStitcher.cs" />
-    <Compile Include="GungeonAPI\Tools.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\Dungeon Code\DungeonHandler.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\Dungeon Code\DungeonHooks.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\Shrine API\HitboxMonitor.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\Shrine API\NPCBuilder.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\NuclearInteractable.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\Dungeon Code\OfficialFlows.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\ResourceExtractor.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\Dungeon Code\RoomFactory.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\Dungeon Code\SampleFlow.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\Shrine API\ShrineFactory.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\Shrine API\ShrineFakePrefab.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\Shrine API\ShrineFakePrefabHooks.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\Shrine API\SimpleInteractable.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\Shrine API\SimpleShrine.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\StaticReferences.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\TextureStitcher.cs" />
+    <Compile Include="StandardAPI\GungeonAPI\Tools.cs" />
     <Compile Include="Stuff Items\Misc Passives\GunGrease.cs" />
     <Compile Include="Stuff Items\Misc Passives\GunpowderPheromones.cs" />
     <Compile Include="Stuff Items\Guon Stones\GuonBoulder.cs" />
@@ -703,19 +778,19 @@
     <Compile Include="IngressBullets.cs" />
     <Compile Include="Stuff Items\Misc Passives\IronSights.cs" />
     <Compile Include="Stuff Items\Actives\FalseBlank.cs" />
-    <Compile Include="ItemAPI\CompanionBuilder.cs" />
-    <Compile Include="ItemAPI\CustomSynergies.cs" />
-    <Compile Include="ItemAPI\ExampleActive.cs" />
-    <Compile Include="ItemAPI\ExampleCompanion.cs" />
-    <Compile Include="ItemAPI\ExamplePassive.cs" />
-    <Compile Include="ItemAPI\FakePrefab.cs" />
-    <Compile Include="ItemAPI\FakePrefabHooks.cs" />
-    <Compile Include="ItemAPI\ItemBuilder.cs" />
-    <Compile Include="ItemAPI\SpriteBuilder.cs" />
+    <Compile Include="StandardAPI\ItemAPI\CompanionBuilder.cs" />
+    <Compile Include="StandardAPI\ItemAPI\CustomSynergies.cs" />
+    <Compile Include="StandardAPI\ItemAPI\ExampleActive.cs" />
+    <Compile Include="StandardAPI\ItemAPI\ExampleCompanion.cs" />
+    <Compile Include="StandardAPI\ItemAPI\ExamplePassive.cs" />
+    <Compile Include="StandardAPI\ItemAPI\FakePrefab.cs" />
+    <Compile Include="StandardAPI\ItemAPI\FakePrefabHooks.cs" />
+    <Compile Include="StandardAPI\ItemAPI\ItemBuilder.cs" />
+    <Compile Include="StandardAPI\ItemAPI\SpriteBuilder.cs" />
     <Compile Include="Stuff Items\Misc Passives\Junkllets.cs" />
     <Compile Include="Stuff Items\Misc Passives\Kevin.cs" />
     <Compile Include="Stuff Items\Misc Passives\KeyBulletEffigy.cs" />
-    <Compile Include="ItemAPI\ResourceExtractor.cs" />
+    <Compile Include="StandardAPI\ItemAPI\ResourceExtractor.cs" />
     <Compile Include="Stuff Items\Actives\ItemCoupon.cs" />
     <Compile Include="Stuff Items\Misc Passives\KalibersEye.cs" />
     <Compile Include="Stuff Items\Misc Passives\KeyBullwark.cs" />
@@ -780,7 +855,6 @@
     <Compile Include="Stuff Items\Misc Passives\Tabullets.cs" />
     <Compile Include="Stuff Items\Debug Items\TestGun.cs" />
     <Compile Include="Stuff Items\Misc Passives\TheBeholster.cs" />
-    <Compile Include="THECAGE.cs" />
     <Compile Include="TheJammomaster.cs" />
     <Compile Include="Stuff Items\Guns\TheLodger.cs" />
     <Compile Include="Stuff Items\Actives\TheShellactery.cs" />
@@ -1131,9 +1205,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\legboot_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\THECAGE_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\fullarmourjacket_icon.png" />
@@ -3541,6 +3612,7 @@
     <EmbeddedResource Include="Resources\CustomGunAmmoTypes\uzispinemm_clipfull.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Characters\Shade\newspritesetup\custom\" />
     <Folder Include="Resources\Orbitals\" />
   </ItemGroup>
   <ItemGroup>
@@ -3619,9 +3691,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\CustomGunAmmoTypes\ulfbehrt_clipempty.png" />
     <EmbeddedResource Include="Resources\CustomGunAmmoTypes\ulfbehrt_clipfull.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Sounds\OMITBSoundbank.bnk" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Companions\AngrySpirit\angryspirit_attackleft_001.png" />
@@ -3903,6 +3972,490 @@
     <EmbeddedResource Include="Resources\MiscVFX\GunVFX\redrobin_muzzleflash_003.png" />
     <EmbeddedResource Include="Resources\MiscVFX\GunVFX\redrobin_muzzleflash_004.png" />
     <EmbeddedResource Include="Resources\MiscVFX\GunVFX\redrobin_muzzleflash_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NeoItemSprites\breachrounds_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Shade\bosscard_001.png" />
+    <EmbeddedResource Include="Characters\Shade\characterdata.txt" />
+    <EmbeddedResource Include="Characters\Shade\facecard.png" />
+    <EmbeddedResource Include="Characters\Shade\icon.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_block_001.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_block_002.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_block_hit_001.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_dodge_left_001.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_dodge_left_002.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_dodge_left_003.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_dodge_right_001.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_dodge_right_002.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_dodge_right_003.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_duck_001.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_duck_002.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_duck_003.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_exhaust_001.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_exhaust_002.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_exhaust_003.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_hit_left_001.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_hit_left_002.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_hit_left_003.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_hit_right_001.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_hit_right_002.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_hit_right_003.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_idle_001.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_idle_002.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_idle_004.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_knockout_001.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_knockout_002.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_knockout_003.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_knockout_004.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_knockout_005.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_knockout_006.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_knockout_007.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_knockout_008.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_knockout_009.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_knockout_010.png" />
+    <EmbeddedResource Include="Resources\Moved Shade Punchout VFX\shade_punch_knockout_vfx_002.png" />
+    <EmbeddedResource Include="Resources\Moved Shade Punchout VFX\shade_punch_knockout_vfx_003.png" />
+    <EmbeddedResource Include="Resources\Moved Shade Punchout VFX\shade_punch_knockout_vfx_004.png" />
+    <EmbeddedResource Include="Resources\Moved Shade Punchout VFX\shade_punch_knockout_vfx_005.png" />
+    <EmbeddedResource Include="Resources\Moved Shade Punchout VFX\shade_punch_knockout_vfx_006.png" />
+    <EmbeddedResource Include="Resources\Moved Shade Punchout VFX\shade_punch_knockout_vfx_007.png" />
+    <EmbeddedResource Include="Resources\Moved Shade Punchout VFX\shade_punch_knockout_vfx_008.png" />
+    <EmbeddedResource Include="Resources\Moved Shade Punchout VFX\shade_punch_knockout_vfx_009.png" />
+    <EmbeddedResource Include="Resources\Moved Shade Punchout VFX\shade_punch_knockout_vfx_010.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_left_miss_002.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_left_miss_003.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_punch_left_001.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_punch_left_002.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_punch_left_003.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_punch_left_blocked_002.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_punch_left_blocked_003.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_punch_right_001.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_punch_right_002.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_punch_right_003.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_punch_right_blocked_002_copy.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_punch_right_blocked_003_copy.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_right_miss_002.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_right_miss_003.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_star_001.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_star_002.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_star_003.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_star_004.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_star_005.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_star_006.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_star_007.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_star_008.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_star_009.png" />
+    <EmbeddedResource Include="Resources\Moved Shade Punchout VFX\shade_punch_star_vfx_001.png" />
+    <EmbeddedResource Include="Resources\Moved Shade Punchout VFX\shade_punch_star_vfx_002.png" />
+    <EmbeddedResource Include="Resources\Moved Shade Punchout VFX\shade_punch_star_vfx_003.png" />
+    <EmbeddedResource Include="Resources\Moved Shade Punchout VFX\shade_punch_star_vfx_004.png" />
+    <EmbeddedResource Include="Resources\Moved Shade Punchout VFX\shade_punch_star_vfx_005.png" />
+    <EmbeddedResource Include="Resources\Moved Shade Punchout VFX\shade_punch_star_vfx_006.png" />
+    <EmbeddedResource Include="Resources\Moved Shade Punchout VFX\shade_punch_star_vfx_007.png" />
+    <EmbeddedResource Include="Resources\Moved Shade Punchout VFX\shade_punch_star_vfx_008.png" />
+    <EmbeddedResource Include="Resources\Moved Shade Punchout VFX\shade_punch_star_vfx_009.png" />
+    <EmbeddedResource Include="Resources\Moved Shade Punchout VFX\shade_punch_star_vfx_010.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_win_001.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_win_002.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\sprites\shade_punch_win_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Shade\punchout\facecard1.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\facecard2.png" />
+    <EmbeddedResource Include="Characters\Shade\punchout\facecard3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Shade\foyercard\robot_facecard_idle_001.png" />
+    <EmbeddedResource Include="Characters\Shade\foyercard\robot_facecard_idle_002.png" />
+    <EmbeddedResource Include="Characters\Shade\foyercard\robot_facecard_idle_003.png" />
+    <EmbeddedResource Include="Characters\Shade\foyercard\robot_facecard_idle_004.png" />
+    <EmbeddedResource Include="Characters\Shade\foyercard\robot_facecard_idle_005.png" />
+    <EmbeddedResource Include="Characters\Shade\foyercard\robot_facecard_appear_002.png" />
+    <EmbeddedResource Include="Characters\Shade\foyercard\robot_facecard_appear_003.png" />
+    <EmbeddedResource Include="Characters\Shade\foyercard\robot_facecard_appear_004.png" />
+    <EmbeddedResource Include="Characters\Shade\foyercard\robot_facecard_appear_005.png" />
+    <EmbeddedResource Include="Characters\Shade\foyercard\robot_facecard_appear_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Shade\win_pic_junkan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Shade\coop_page_death.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Shade\alt_skin_obj_sprite_001.png" />
+    <EmbeddedResource Include="Characters\Shade\alt_skin_obj_sprite_002.png" />
+    <EmbeddedResource Include="Characters\Shade\win_pic_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Shade\loadoutsprites\a_eldermagnum.png" />
+    <EmbeddedResource Include="Characters\Shade\loadoutsprites\b_handofnight.png" />
+    <EmbeddedResource Include="Characters\Shade\loadoutsprites\c_shadeheart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\error\robot_select_error_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\error\robot_select_error_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\error\robot_select_error_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\error\robot_select_error_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\error\robot_select_error_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\error\robot_select_error_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\error\robot_select_error_007.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\error\robot_select_error_008.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\error\robot_select_error_009.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\error\robot_select_error_010.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\error\robot_select_error_011.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\error\robot_select_error_012.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\error\robot_select_error_013.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\error\robot_select_error_014.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\error\robot_select_error_015.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\error\robot_select_error_016.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\head_spin\robot_select_headspin_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\head_spin\robot_select_headspin_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\head_spin\robot_select_headspin_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\head_spin\robot_select_headspin_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\head_spin\robot_select_headspin_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\head_spin\robot_select_headspin_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\off\robot_select_off_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\off\robot_select_off_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\off\robot_select_off_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\off\robot_select_off_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\off\robot_select_off_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\select_choose\robot_select_choose_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\select_choose\robot_select_choose_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\select_choose\robot_select_choose_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\select_choose\robot_select_choose_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\select_choose\robot_select_choose_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\select_choose\robot_select_choose_007.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\select_choose\robot_select_choose_008.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\select_choose\robot_select_choose_009.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\stargaze\robot_select_stargaze_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\stargaze\robot_select_stargaze_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\stargaze\robot_select_stargaze_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\stargaze_cry\robot_select_stargaze_cry_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\stargaze_cry\robot_select_stargaze_cry_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\stargaze_cry\robot_select_stargaze_cry_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\stargaze_cry\robot_select_stargaze_cry_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\stargaze_cry\robot_select_stargaze_cry_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\tummy\robot_select_tummy_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\tummy\robot_select_tummy_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\tummy\robot_select_tummy_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\tummy\robot_select_tummy_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\tummy\robot_select_tummy_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\tummy\robot_select_tummy_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\tummy\robot_select_tummy_007.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\tummy\robot_select_tummy_008.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\tummy\robot_select_tummy_009.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\chest_recover\cc_sprite_placeholder.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\death\robot_death_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\death\robot_death_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\death\robot_death_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\death\robot_death_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\death\robot_death_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\death\robot_death_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\death\robot_death_007.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\death\robot_death_008.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\death_coop\cc_sprite_placeholder.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\death_shot\robot_deathshot_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\death_shot\robot_deathshot_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\death_shot\robot_deathshot_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\death_shot\robot_deathshot_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\death_shot\robot_deathshot_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\death_shot\robot_deathshot_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge\robot_dodge_front_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge\robot_dodge_front_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge\robot_dodge_front_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge\robot_dodge_front_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge\robot_dodge_front_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge\robot_dodge_front_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge\robot_dodge_front_007.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge\robot_dodge_front_008.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge\robot_dodge_front_009.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_bw\robot_dodge_back_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_bw\robot_dodge_back_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_bw\robot_dodge_back_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_bw\robot_dodge_back_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_bw\robot_dodge_back_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_bw\robot_dodge_back_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_bw\robot_dodge_back_007.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_bw\robot_dodge_back_008.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_bw\robot_dodge_back_009.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_left\robot_dodge_side_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_left\robot_dodge_side_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_left\robot_dodge_side_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_left\robot_dodge_side_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_left\robot_dodge_side_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_left\robot_dodge_side_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_left\robot_dodge_side_007.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_left\robot_dodge_side_008.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_left\robot_dodge_side_009.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_left_bw\robot_dodge_bw_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_left_bw\robot_dodge_bw_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_left_bw\robot_dodge_bw_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_left_bw\robot_dodge_bw_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_left_bw\robot_dodge_bw_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_left_bw\robot_dodge_bw_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_left_bw\robot_dodge_bw_007.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_left_bw\robot_dodge_bw_008.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\dodge_left_bw\robot_dodge_bw_009.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\doorway\robot_pitfall_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\doorway\robot_pitfall_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\doorway\robot_pitfall_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\doorway\robot_pitfall_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\doorway\robot_pitfall_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_idle_back\robot_ghost_idle_back_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_idle_back\robot_ghost_idle_back_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_idle_back\robot_ghost_idle_back_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_idle_back_left\robot_ghost_idle_back_left_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_idle_back_left\robot_ghost_idle_back_left_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_idle_back_left\robot_ghost_idle_back_left_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_idle_back_right\robot_ghost_idle_back_right_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_idle_back_right\robot_ghost_idle_back_right_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_idle_back_right\robot_ghost_idle_back_right_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_idle_front\robot_ghost_idle_front_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_idle_front\robot_ghost_idle_front_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_idle_front\robot_ghost_idle_front_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_idle_left\robot_ghost_idle_left_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_idle_left\robot_ghost_idle_left_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_idle_left\robot_ghost_idle_left_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_idle_right\robot_ghost_idle_right_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_idle_right\robot_ghost_idle_right_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_idle_right\robot_ghost_idle_right_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_sneeze_left\robot_ghost_sneeze_left_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_sneeze_left\robot_ghost_sneeze_left_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_sneeze_left\robot_ghost_sneeze_left_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_sneeze_left\robot_ghost_sneeze_left_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_sneeze_right\robot_ghost_sneeze_right_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_sneeze_right\robot_ghost_sneeze_right_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_sneeze_right\robot_ghost_sneeze_right_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\ghost_sneeze_right\robot_ghost_sneeze_right_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\hand_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle\robot_idle_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle\robot_idle_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle\robot_idle_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle\robot_idle_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_backward\robot_idle_back_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_backward\robot_idle_back_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_backward\robot_idle_back_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_backward\robot_idle_back_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_backward_hand\robot_idle_back_hand_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_backward_hand\robot_idle_back_hand_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_backward_hand\robot_idle_back_hand_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_backward_hand\robot_idle_back_hand_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_backward_twohands\cc_sprite_placeholder.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_bw\robot_idle_bw_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_bw\robot_idle_bw_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_bw_hand\cc_sprite_placeholder.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_bw_twohands\cc_sprite_placeholder.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_forward\robot_idle_front_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_forward\robot_idle_front_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_forward\robot_idle_front_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_forward\robot_idle_front_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_forward_hand\robot_idle_front_hand_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_forward_hand\robot_idle_front_hand_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_forward_hand\robot_idle_front_hand_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_forward_hand\robot_idle_front_hand_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_forward_twohands\cc_sprite_placeholder.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_hand\robot_idle_hand_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_hand\robot_idle_hand_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_hand\robot_idle_hand_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_hand\robot_idle_hand_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_twohands\cc_sprite_placeholder.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\item_get\robot_item_get_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\item_get\robot_item_get_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\item_get\robot_item_get_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\item_get\robot_item_get_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\item_get\robot_item_get_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\item_get\robot_item_get_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\item_get\robot_item_get_007.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\item_get\robot_item_get_008.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\item_get\robot_item_get_009.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\jetpack_down\robot_jetpack_front_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\jetpack_down\robot_jetpack_front_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\jetpack_down_hand\cc_sprite_placeholder.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\jetpack_right\robot_jetpack_front_right_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\jetpack_right\robot_jetpack_front_right_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\jetpack_right_bw\robot_jetpack_back_right_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\jetpack_right_bw\robot_jetpack_back_right_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\jetpack_right_hand\cc_sprite_placeholder.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\jetpack_up\robot_jetpack_back_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\jetpack_up\robot_jetpack_back_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pet\robot_pet_right_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pet\robot_pet_right_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pitfall\robot_pitfall_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pitfall\robot_pitfall_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pitfall\robot_pitfall_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pitfall\robot_pitfall_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pitfall\robot_pitfall_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pitfall_down\robot_pitfall_front_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pitfall_down\robot_pitfall_front_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pitfall_down\robot_pitfall_front_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pitfall_down\robot_pitfall_front_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pitfall_down\robot_pitfall_front_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pitfall_return\robot_pitfall_return_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pitfall_return\robot_pitfall_return_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pitfall_return\robot_pitfall_return_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pitfall_return\robot_pitfall_return_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pitfall_return\robot_pitfall_return_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pitfall_return\robot_pitfall_return_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pitfall_return\robot_pitfall_return_007.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\pitfall_return\robot_pitfall_return_008.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_down\robot_run_front_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_down\robot_run_front_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_down\robot_run_front_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_down\robot_run_front_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_down\robot_run_front_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_down\robot_run_front_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_down_hand\robot_run_front_hand_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_down_hand\robot_run_front_hand_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_down_hand\robot_run_front_hand_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_down_hand\robot_run_front_hand_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_down_hand\robot_run_front_hand_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_down_hand\robot_run_front_hand_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_down_twohands\cc_sprite_placeholder.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right\robot_run_side_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right\robot_run_side_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right\robot_run_side_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right\robot_run_side_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right\robot_run_side_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right\robot_run_side_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right_bw\robot_run_bw_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right_bw\robot_run_bw_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right_bw\robot_run_bw_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right_bw\robot_run_bw_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right_bw\robot_run_bw_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right_bw\robot_run_bw_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right_bw_hand\cc_sprite_placeholder.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right_bw_twohands\cc_sprite_placeholder.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right_hand\robot_run_side_hand_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right_hand\robot_run_side_hand_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right_hand\robot_run_side_hand_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right_hand\robot_run_side_hand_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right_hand\robot_run_side_hand_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right_hand\robot_run_side_hand_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_right_twohands\cc_sprite_placeholder.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_up\robot_run_back_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_up\robot_run_back_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_up\robot_run_back_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_up\robot_run_back_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_up\robot_run_back_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_up\robot_run_back_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_up_hand\robot_run_back_hand_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_up_hand\robot_run_back_hand_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_up_hand\robot_run_back_hand_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_up_hand\robot_run_back_hand_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_up_hand\robot_run_back_hand_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_up_hand\robot_run_back_hand_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\run_up_twohands\cc_sprite_placeholder.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\slide_down\robot_slide_altright_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\slide_right\robot_slide_right_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\slide_up\robot_slide_up_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\spinfall\robot_select_headspin_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\spinfall\robot_select_headspin_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\spinfall\robot_select_headspin_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\spinfall\robot_select_headspin_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\spinfall\robot_select_headspin_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\spinfall\robot_select_headspin_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\spit_out\robot_tarnisher_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\spit_out\robot_tarnisher_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\spit_out\robot_tarnisher_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\spit_out\robot_tarnisher_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\spit_out\robot_tarnisher_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\spit_out\robot_tarnisher_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\tablekick_down\robot_tablekick_down_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\tablekick_down\robot_tablekick_down_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\tablekick_down_hand\robot_tablekick_down_hand_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\tablekick_down_hand\robot_tablekick_down_hand_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\tablekick_right\robot_tablekick_side_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\tablekick_right\robot_tablekick_side_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\tablekick_right\robot_tablekick_side_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\tablekick_right\robot_tablekick_side_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\tablekick_right_hand\robot_tablekick_side_hand_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\tablekick_right_hand\robot_tablekick_side_hand_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\tablekick_right_hand\robot_tablekick_side_hand_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\tablekick_right_hand\robot_tablekick_side_hand_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\tablekick_up\robot_tablekick_back_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\tablekick_up\robot_tablekick_back_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\timefall\robot_timefall_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\timefall\robot_timefall_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\timefall\robot_timefall_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\timefall\robot_timefall_004.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\timefall\robot_timefall_005.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\timefall\robot_timefall_006.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\timefall\robot_timefall_007.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\timefall\robot_timefall_008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\select_idle\robot_idle_001.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\select_idle\robot_idle_002.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\select_idle\robot_idle_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\breach_idles\select_idle\robot_idle_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_bw\robot_idle_bw_003.png" />
+    <EmbeddedResource Include="Characters\Shade\newspritesetup\idle_bw\robot_idle_bw_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\w3irdstar_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\w3irdstar_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\W3irdstar\w3irdstar_impact_001.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\W3irdstar\w3irdstar_impact_002.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\W3irdstar\w3irdstar_impact_003.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\W3irdstar\w3irdstar_impact_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NeoActiveSprites\shotinthearm_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\sweeper_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\sweeper_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Debris\sweeper_clip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Sounds\OMITBSoundbank.bnk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NeoItemSprites\88888888_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\MiscVFX\friendlyoverhead_vfx_001.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\friendlyoverhead_vfx_002.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\friendlyoverhead_vfx_003.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\friendlyoverhead_vfx_004.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\friendlyoverhead_vfx_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NeoItemSprites\electrumrounds_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ThrowableActives\dicegrenade_explode_001.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\dicegrenade_primed_001.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\dicegrenade_primed_002.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\dicegrenade_primed_003.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\dicegrenade_primed_004.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\dicegrenade_primed_005.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\dicegrenade_primed_006.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\dicegrenade_throw_001.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\dicegrenade_throw_002.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\dicegrenade_throw_003.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\dicegrenade_throw_004.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\dicegrenade_throw_005.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\dicegrenade_throw_006.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\dicegrenade_throw_007.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\dicegrenade_throw_008.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\dicegrenade_throw_009.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\dicegrenade_throw_010.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ThrowableActives\dicegrenade_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Ammolets\pearlammolet_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

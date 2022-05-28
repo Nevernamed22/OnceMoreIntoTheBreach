@@ -10,43 +10,21 @@ namespace NevernamedsItems
 {
     class Wonderchest : PlayerItem
     {
-        //Call this method from the Start() method of your ETGModule extension class
         public static void Init()
         {
-            //The name of the item
             string itemName = "Wonderchest";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it.
             string resourceName = "NevernamedsItems/Resources/wonderchest_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a ActiveItem component to the object
             var item = obj.AddComponent<Wonderchest>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "What could be inside?";
             string longDesc = "Extremely rare chests such as this one were particularly favoured by Alben Smallbore for storing his valuables." + "\n\nThe complicated magically encripted lock on this thing causes it to access a different pocket subreality depending on where it is opened.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //"kts" here is the item pool. In the console you'd type kts:sweating_bullets
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Set the cooldown type and duration of the cooldown
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 1000);
-
-            //Adds a passive modifier, like curse, coolness, damage, etc. to the item. Works for passives and actives.
-
-            //Set some other fields
             item.consumable = true;
             item.quality = ItemQuality.B;
 
             item.AddToSubShop(ItemBuilder.ShopType.Flynt);
-
         }
         protected override void DoEffect(PlayerController user)
         {
@@ -54,30 +32,20 @@ namespace NevernamedsItems
             if (GameManager.Instance.Dungeon.IsGlitchDungeon) //GLITCHED FLOOR BONUS
             {
                 IntVector2 bestRewardLocation2 = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
-                Chest black_Chest = GameManager.Instance.RewardManager.S_Chest;
-                black_Chest.IsLocked = true;
-                black_Chest.ChestType = BraveUtility.RandomElement(ChestyBois);
-                Chest spawnedBlack = Chest.Spawn(black_Chest, bestRewardLocation2);
-                bool IsAGun = UnityEngine.Random.value <= 0.5f;
-                spawnedBlack.lootTable.lootTable = (IsAGun ? GameManager.Instance.RewardManager.GunsLootTable : GameManager.Instance.RewardManager.ItemsLootTable);
-                spawnedBlack.RegisterChestOnMinimap(spawnedBlack.GetAbsoluteParentRoom());
+                ChestToolbox.SpawnChestEasy(bestRewardLocation2, ChestToolbox.ChestTier.BLACK, true, Chest.GeneralChestType.UNSPECIFIED);
             }
             if (UnityEngine.Random.value <= 0.001f) //RANDOM RARE RAINBOW
             {
                 IntVector2 bestRewardLocation = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
-                Chest rainbow_Chest = GameManager.Instance.RewardManager.Rainbow_Chest;
-                Chest spawnedRainbow = Chest.Spawn(rainbow_Chest, bestRewardLocation);
-                rainbow_Chest.IsLocked = false;
-                spawnedRainbow.RegisterChestOnMinimap(spawnedRainbow.GetAbsoluteParentRoom());
+                ChestToolbox.SpawnChestEasy(bestRewardLocation, ChestToolbox.ChestTier.RAINBOW, false, Chest.GeneralChestType.UNSPECIFIED, ChestToolbox.ThreeStateValue.FORCENO, ChestToolbox.ThreeStateValue.FORCENO);
             }
             else
             {
                 switch (GameManager.Instance.Dungeon.tileIndices.tilesetId)
                 {
                     case GlobalDungeonData.ValidTilesets.CASTLEGEON: //KEEP
-                        int pickupID;
+                        int pickupID = 224;
                         if (UnityEngine.Random.value <= .50f) pickupID = 120;
-                        else pickupID = 224;
                         LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(pickupID).gameObject, user);
                         LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(pickupID).gameObject, user);
                         hasDeterminedValidFloor = true;
@@ -90,12 +58,7 @@ namespace NevernamedsItems
                         for (int i = 0; i < 3; i++)
                         {
                             IntVector2 bestRewardLocation = user.CurrentRoom.GetRandomVisibleClearSpot(2, 2);
-                            Chest brown_Chest = GameManager.Instance.RewardManager.D_Chest;
-                            brown_Chest.IsLocked = false;
-                            brown_Chest.ChestType = Chest.GeneralChestType.UNSPECIFIED;
-                            Chest spawnedChest = Chest.Spawn(brown_Chest, bestRewardLocation);
-                            spawnedChest.lootTable.lootTable = (UnityEngine.Random.value <= 0.5f ? GameManager.Instance.RewardManager.GunsLootTable : GameManager.Instance.RewardManager.ItemsLootTable);
-                            spawnedChest.RegisterChestOnMinimap(spawnedChest.GetAbsoluteParentRoom());
+                            ChestToolbox.SpawnChestEasy(bestRewardLocation, ChestToolbox.ChestTier.BROWN, false, Chest.GeneralChestType.UNSPECIFIED);
                         }
                         hasDeterminedValidFloor = true;
                         break;
@@ -115,12 +78,7 @@ namespace NevernamedsItems
                         break;
                     case GlobalDungeonData.ValidTilesets.MINEGEON: //MINES
                         IntVector2 bestRewardLocation2 = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
-                        Chest red_Chest = GameManager.Instance.RewardManager.A_Chest;
-                        red_Chest.IsLocked = false;
-                        red_Chest.ChestType = BraveUtility.RandomElement(ChestyBois);
-                        Chest spawnedRed = Chest.Spawn(red_Chest, bestRewardLocation2);
-                        spawnedRed.lootTable.lootTable = (UnityEngine.Random.value <= 0.5f ? GameManager.Instance.RewardManager.GunsLootTable : GameManager.Instance.RewardManager.ItemsLootTable);
-                        spawnedRed.RegisterChestOnMinimap(spawnedRed.GetAbsoluteParentRoom());
+                        ChestToolbox.SpawnChestEasy(bestRewardLocation2, ChestToolbox.ChestTier.RED, false, Chest.GeneralChestType.UNSPECIFIED);
                         hasDeterminedValidFloor = true;
                         break;
                     case GlobalDungeonData.ValidTilesets.RATGEON: //RAT LAIR
@@ -129,7 +87,7 @@ namespace NevernamedsItems
                         break;
                     case GlobalDungeonData.ValidTilesets.CATACOMBGEON: // HOLLOW
                         IntVector2 bestRewardLocation3 = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
-                        Chest spawnedChestRandomHollow = GameManager.Instance.RewardManager.SpawnRewardChestAt(bestRewardLocation3);                        
+                        Chest spawnedChestRandomHollow = GameManager.Instance.RewardManager.SpawnRewardChestAt(bestRewardLocation3);
                         spawnedChestRandomHollow.RegisterChestOnMinimap(spawnedChestRandomHollow.GetAbsoluteParentRoom());
                         ChangeStatPermanent(user, PlayerStats.StatType.GlobalPriceMultiplier, 0.8f, StatModifier.ModifyMethod.MULTIPLICATIVE);
                         hasDeterminedValidFloor = true;
@@ -138,7 +96,7 @@ namespace NevernamedsItems
                         for (int i = 0; i < 2; i++)
                         {
                             IntVector2 bestRewardLocation4 = user.CurrentRoom.GetRandomVisibleClearSpot(2, 2);
-                            Chest spawnedChestRNG = GameManager.Instance.RewardManager.SpawnRewardChestAt(bestRewardLocation4);                            
+                            Chest spawnedChestRNG = GameManager.Instance.RewardManager.SpawnRewardChestAt(bestRewardLocation4);
                             spawnedChestRNG.RegisterChestOnMinimap(spawnedChestRNG.GetAbsoluteParentRoom());
                         }
                         hasDeterminedValidFloor = true;
@@ -160,12 +118,7 @@ namespace NevernamedsItems
                             for (int i = 0; i < 2; i++)
                             {
                                 IntVector2 bestRewardLocation5 = user.CurrentRoom.GetRandomVisibleClearSpot(2, 2);
-                                Chest black_Chest = GameManager.Instance.RewardManager.S_Chest;
-                                black_Chest.IsLocked = true;
-                                black_Chest.ChestType = BraveUtility.RandomElement(ChestyBois);
-                                Chest spawnedBlackGunslinger = Chest.Spawn(black_Chest, bestRewardLocation5);
-                                spawnedBlackGunslinger.lootTable.lootTable = (UnityEngine.Random.value <= 0.5f ? GameManager.Instance.RewardManager.GunsLootTable : GameManager.Instance.RewardManager.ItemsLootTable);
-                                spawnedBlackGunslinger.RegisterChestOnMinimap(spawnedBlackGunslinger.GetAbsoluteParentRoom());
+                                ChestToolbox.SpawnChestEasy(bestRewardLocation5, ChestToolbox.ChestTier.BLACK, true, Chest.GeneralChestType.UNSPECIFIED);
                             }
                             ChangeStatPermanent(user, PlayerStats.StatType.Curse, 5, StatModifier.ModifyMethod.ADDITIVE);
                         }
@@ -174,13 +127,13 @@ namespace NevernamedsItems
                             for (int i = 0; i < 2; i++)
                             {
                                 IntVector2 bestRewardLocation4 = user.CurrentRoom.GetRandomVisibleClearSpot(2, 2);
-                                Chest randomHellMagChest = GameManager.Instance.RewardManager.SpawnRewardChestAt(bestRewardLocation4);                               
+                                Chest randomHellMagChest = GameManager.Instance.RewardManager.SpawnRewardChestAt(bestRewardLocation4);
                                 randomHellMagChest.RegisterChestOnMinimap(randomHellMagChest.GetAbsoluteParentRoom());
                             }
                             for (int i = 0; i < 2; i++)
                             {
                                 IntVector2 bestRewardLocation4 = user.CurrentRoom.GetRandomVisibleClearSpot(2, 2);
-                                Chest randomHellRandoChest = GameManager.Instance.RewardManager.SpawnTotallyRandomChest(bestRewardLocation4);                             
+                                Chest randomHellRandoChest = GameManager.Instance.RewardManager.SpawnTotallyRandomChest(bestRewardLocation4);
                                 randomHellRandoChest.RegisterChestOnMinimap(randomHellRandoChest.GetAbsoluteParentRoom());
                             }
                             ChangeStatPermanent(user, PlayerStats.StatType.Curse, 3, StatModifier.ModifyMethod.ADDITIVE);
@@ -209,13 +162,7 @@ namespace NevernamedsItems
             ItemQuality.B,
             ItemQuality.A,
             ItemQuality.S,
-        };
-        public static List<Chest.GeneralChestType> ChestyBois = new List<Chest.GeneralChestType>()
-        {
-            Chest.GeneralChestType.ITEM,
-            Chest.GeneralChestType.WEAPON,
-        };
-
+        };    
         private void ChangeStatPermanent(PlayerController target, PlayerStats.StatType statToChance, float amount, StatModifier.ModifyMethod modifyMethod)
         {
             StatModifier statModifier = new StatModifier();

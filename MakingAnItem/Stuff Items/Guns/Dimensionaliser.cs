@@ -302,7 +302,7 @@ namespace NevernamedsItems
             yield return new WaitForSeconds(1);
             for (int i = 0; i < 3; i++)
             {
-                if (self.ProjectilePlayerOwner().IsInCombat) CompanionisedEnemyUtility.SpawnCompanionisedEnemy(self.ProjectilePlayerOwner(), "556e9f2a10f9411cb9dbfd61e0e0f1e1", self.specRigidbody.UnitCenter.ToIntVector2(), false, Color.red, 5, 2, false);
+                if (self.ProjectilePlayerOwner().IsInCombat) CompanionisedEnemyUtility.SpawnCompanionisedEnemy(self.ProjectilePlayerOwner(), "556e9f2a10f9411cb9dbfd61e0e0f1e1", self.specRigidbody.UnitCenter.ToIntVector2(), false, Color.red, 5, 2, false, true);
                 yield return new WaitForSeconds(0.8f);
             }
             Die();
@@ -384,7 +384,7 @@ namespace NevernamedsItems
             yield return new WaitForSeconds(1);
             for (int i = 0; i < 10; i++)
             {
-                if (self.ProjectilePlayerOwner().IsInCombat) CompanionisedEnemyUtility.SpawnCompanionisedEnemy(self.ProjectilePlayerOwner(), BraveUtility.RandomElement(EasyEnemyTypeLists.SmallBullats), self.specRigidbody.UnitCenter.ToIntVector2(), false, Color.red, 7, 2, false);
+                if (self.ProjectilePlayerOwner().IsInCombat) CompanionisedEnemyUtility.SpawnCompanionisedEnemy(self.ProjectilePlayerOwner(), BraveUtility.RandomElement(EasyEnemyTypeLists.SmallBullats), self.specRigidbody.UnitCenter.ToIntVector2(), false, Color.red, 7, 2, false, false);
                 yield return new WaitForSeconds(0.1f);
             }
             Die();

@@ -75,7 +75,7 @@ namespace NevernamedsItems
         {
             if (player && player.PlayerHasActiveSynergy("Manbat and Robin"))
             {
-                CompanionisedEnemyUtility.SpawnCompanionisedEnemy(player, "2feb50a6a40f4f50982e89fd276f6f15", gun.barrelOffset.position.XY().ToIntVector2(), true, Color.black, 10, 2, false);
+                CompanionisedEnemyUtility.SpawnCompanionisedEnemy(player, "2feb50a6a40f4f50982e89fd276f6f15", gun.barrelOffset.position.XY().ToIntVector2(), true, Color.black, 10, 2, false, false);
             }
             base.OnReload(player, gun);
         }

@@ -18,6 +18,7 @@ using Random = System.Random;
 using FullSerializer;
 using Gungeon;
 using LootTableAPI;
+using CustomCharacters;
 
 namespace NevernamedsItems
 {
@@ -60,7 +61,7 @@ namespace NevernamedsItems
                 FakePrefabHooks.Init();
 
                 ItemBuilder.Init();
-
+                CharApi.Init("nn");
                 CustomClipAmmoTypeToolbox.Init();
                 EnemyTools.Init();
                 NpcApi.Hooks.Init();
@@ -92,6 +93,7 @@ namespace NevernamedsItems
                 //VFX Setup
                 VFXToolbox.InitVFX();
                 EasyVFXDatabase.Init(); //Needs to occur before goop definition
+                ShadeFlightHookFix.Init();
 
                 //Status Effect Setup
                 StaticStatusEffects.InitCustomEffects();
@@ -101,13 +103,6 @@ namespace NevernamedsItems
                 //Goop Setup
                 EasyGoopDefinitions.DefineDefaultGoops();
                 DoGoopEffectHook.Init();
-
-                //Null Asset Bundles to prevent infini-load
-                /* for (int i = 0; i < RoomFactory.assetBundles.Length; i++)
-                 {
-                     RoomFactory.assetBundles[i] = null;
-                 }*/
-                //StaticReferences.AssetBundles.Clear();
 
                 //Commands and Other Console Utilities
                 Commands.Init();
@@ -130,7 +125,6 @@ namespace NevernamedsItems
                 PassiveTestingItem.Init();
                 BulletComponentLister.Init();
                 ObjectComponentLister.Init();
-                THECAGE.Init();
 
                 //-----------------------------------------------------ITEMS GET INITIALISED
                 #region ItemInitialisation
@@ -191,6 +185,8 @@ namespace NevernamedsItems
                 DrillBullets.Init();
                 FoamDarts.Init();
                 BatterBullets.Init();
+                ElectrumRounds.Init();
+                BreachingRounds.Init();
                 EargesplittenLoudenboomerRounds.Init();
                 TheShell.Init();
                 //Status Effect Bullet Mods
@@ -324,6 +320,7 @@ namespace NevernamedsItems
                 Ammolock.Init();
                 HepatizonAmmolet.Init();
                 BronzeAmmolet.Init();
+                PearlAmmolet.Init();
                 NeutroniumAmmolet.Init();
                 Shatterblank.Init();
                 // Boots
@@ -383,6 +380,7 @@ namespace NevernamedsItems
                 //Medicine
                 BloodThinner.Init();
                 BoosterShot.Init();
+                ShotInTheArm.Init();
                 //Knives and Blades
                 DaggerOfTheAimgel.Init();
                 CombatKnife.Init();
@@ -407,6 +405,7 @@ namespace NevernamedsItems
                 NecromancersRightHand.Init();
                 //Bombs
                 InfantryGrenade.Init();
+                DiceGrenade.Init();
                 //True Misc
                 Lvl2Molotov.Init();
                 GoldenAppleCore.Init();
@@ -458,6 +457,7 @@ namespace NevernamedsItems
                 GunjurersBelt.Init();
                 GoomperorsCrown.Init();
                 ChemGrenade.Init();
+                EightButton.Init();
                 TitaniumClip.Init();
                 PaperBadge.Init();
                 Permafrost.Init();
@@ -545,6 +545,7 @@ namespace NevernamedsItems
                 GrenadeShotgun.Add();
                 Jackhammer.Add();
                 SaltGun.Add();
+                SoapGun.Add();
                 //CANNONS
                 Felissile.Add();
                 HandCannon.Add();
@@ -625,6 +626,7 @@ namespace NevernamedsItems
                 MaidenRifle.Add();
                 Blizzkrieg.Add();
                 Copygat.Add();
+                Skorpion.Add();
                 HeavyAssaultRifle.Add();
                 DynamiteLauncher.Add();
                 MarbledUzi.Add();
@@ -667,6 +669,7 @@ namespace NevernamedsItems
                 OBrienFist.Add();
                 GolfRifle.Add();
                 Pandephonium.Add();
+                Sweeper.Add();
                 DeskFan.Add();
                 Pencil.Add();
                 SquarePeg.Add();
@@ -679,6 +682,7 @@ namespace NevernamedsItems
                 Autogun.Add();
                 Rebondir.Add();
                 BigShot.Add();
+                W3irdstar.Add();
                 BioTranstater2100.Add();
                 //MAGICAL GUNS
                 Icicle.Add();
@@ -753,6 +757,23 @@ namespace NevernamedsItems
 
                 //GOOD MIMIC (NEEDS TO BE INITIALISED LATER)
                 GoodMimic.Add();
+
+                //Characters
+                var data = Loader.BuildCharacter("NevernamedsItems/Characters/Shade", 
+                    CustomPlayableCharacters.Shade,
+                    new Vector3(12.3f ,21.3f),
+                    false,
+                     new Vector3(13.1f, 19.1f), 
+                     false, 
+                     false, 
+                     true, 
+                     true, //Sprites used by paradox
+                     false, //Glows
+                     null, //Glow Mat
+                     null, //Alt Skin Glow Mat
+                     0, //Hegemony Cost
+                     false, //HasPast
+                     "") ; //Past ID String
 
                 //Other Features
                 MasteryReplacementOub.InitDungeonHook();

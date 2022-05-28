@@ -26,18 +26,20 @@ namespace NevernamedsItems
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
             gun.SetAnimationFPS(gun.chargeAnimation, 6);
-            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(54) as Gun).gunSwitchGroup;
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(593) as Gun).gunSwitchGroup;
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
 
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.LoopSection;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).loopStart = 12;
 
             //GUN STATS
+            gun.doesScreenShake = true;
+            gun.gunScreenShake = (PickupObjectDatabase.GetById(37) as Gun).gunScreenShake;
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Charged;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
             gun.reloadTime = 1f;
-            gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(601) as Gun).muzzleFlashEffects;
+            gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(5) as Gun).muzzleFlashEffects;
             gun.DefaultModule.angleVariance = 2f;
             gun.DefaultModule.cooldownTime = 0.2f;
             gun.DefaultModule.numberOfShotsInClip = -1;

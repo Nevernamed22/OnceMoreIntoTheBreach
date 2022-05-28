@@ -71,7 +71,6 @@ namespace NevernamedsItems
                 {
                     component.Owner = base.Owner;
                     component.Shooter = base.Owner.specRigidbody;
-                    component.baseData.speed = 3f;
                     component.baseData.damage = 3f * player.stats.GetStatValue(PlayerStats.StatType.Damage); ;
                 }
                 yield return new WaitForSeconds(.1f);
@@ -85,7 +84,7 @@ namespace NevernamedsItems
                 {
                     component.Owner = base.Owner;
                     component.Shooter = base.Owner.specRigidbody;
-                    component.baseData.speed = 12f;
+                    component.baseData.speed *= 2f;
                     component.baseData.damage = 10f * player.stats.GetStatValue(PlayerStats.StatType.Damage); ;
                 }
             }

@@ -58,10 +58,15 @@ namespace NevernamedsItems
                 beam.GetComponent<BeamSplittingModifier>().amtToSplitTo++;
             }
         }
+        private void OnRoll(PlayerController player, Vector2 vec)
+        {
+            ETGModConsole.Log(player.specRigidbody.UnitCenter.ToString());
+        }
         public override void Pickup(PlayerController player)
         {
-            player.PostProcessProjectile += this.onFired;
-            player.PostProcessThrownGun += PostProcessGun;
+            // player.PostProcessProjectile += this.onFired;
+            //player.PostProcessThrownGun += PostProcessGun;
+            player.OnRollStarted += OnRoll;
            // player.PostProcessBeam += this.PostProcessBeam;
             base.Pickup(player);
         }

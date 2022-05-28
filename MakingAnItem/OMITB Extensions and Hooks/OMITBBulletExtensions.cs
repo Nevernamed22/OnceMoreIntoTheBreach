@@ -48,6 +48,7 @@ namespace NevernamedsItems
         {
             SpawnManager.PoolManager.Remove(proj.transform);
         }
+
         public static float ReturnRealDamageWithModifiers(this Projectile bullet, HealthHaver target)
         {
             float dmg = bullet.baseData.damage;
@@ -167,16 +168,13 @@ namespace NevernamedsItems
             Vector2 dirVec = bullet.GetVectorToNearestEnemy();
             bullet.SendInDirection(dirVec, false, true);
         }
-        public static Vector2 GetVectorToNearestEnemy(this Projectile bullet)
+        public static Vector2 GetVectorToNearestEnemy(this Projectile bullet, bool checkIsWorthShooting = true)
         {
             Vector2 dirVec = UnityEngine.Random.insideUnitCircle;
             Vector2 bulletPosition = bullet.sprite.WorldCenter;
-            Func<AIActor, bool> isValid = (AIActor a) => a && a.HasBeenEngaged && a.healthHaver && a.healthHaver.IsVulnerable;
+            Func<AIActor, bool> isValid = (AIActor a) => a && a.HasBeenEngaged && a.healthHaver && a.healthHaver.IsVulnerable && a.healthHaver.IsAlive && ((checkIsWorthShooting && a.IsWorthShootingAt) || !checkIsWorthShooting);
             IntVector2 bulletPositionIntVector2 = bulletPosition.ToIntVector2();
-            AIActor closestToPosition = BraveUtility.GetClosestToPosition<AIActor>(GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(bulletPositionIntVector2).GetActiveEnemies(RoomHandler.ActiveEnemyType.All), bullet.sprite.WorldCenter, isValid, new AIActor[]
-            {
-
-            });
+            AIActor closestToPosition = BraveUtility.GetClosestToPosition<AIActor>(GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(bulletPositionIntVector2).GetActiveEnemies(RoomHandler.ActiveEnemyType.All), bullet.sprite.WorldCenter, isValid, new AIActor[]{ });
             if (closestToPosition)
             {
                 dirVec = closestToPosition.CenterPosition - bullet.transform.position.XY();
@@ -201,10 +199,6 @@ namespace NevernamedsItems
             return MiscToolbox.Vector2ToDegree(dirVec);
         }
     }
-    static class OMITBBeamExtensions
-    {
-
-    }
     static class ChainedShadowBulletsHandler
     {
         public static void SpawnChainedShadowBullets(this Projectile source, int numberInChain, float pauseLength, float chainScaleMult = 1, Projectile overrideProj = null, bool shadowcolour = false)
@@ -213,15 +207,17 @@ namespace NevernamedsItems
         }
         private static IEnumerator HandleShadowChainDelay(Projectile proj, int amount, float delay, float scaleMult, Projectile overrideproj, bool shadowcolour = false)
         {
-            yield return null;
             GameObject prefab = FakePrefab.Clone(proj.gameObject);
             if (overrideproj != null) prefab = FakePrefab.Clone(overrideproj.gameObject);
             Projectile prefabproj = prefab.GetComponent<Projectile>();
             prefabproj.Owner = proj.Owner;
             prefabproj.Shooter = proj.Shooter;
             Vector3 position = proj.transform.position;
-            float rotation = proj.Direction.ToAngle();
+
+            float rotation = proj.Direction.ToAngle(); //Here's where the projectile direction is assigned
+
             bool isInitialProjectile = true;
+            yield return null;
             for (int i = 0; i < amount; i++)
             {
                 if (delay > 0f)
@@ -254,6 +250,10 @@ namespace NevernamedsItems
         {
             GameObject gameObject2 = UnityEngine.Object.Instantiate<GameObject>(obj.gameObject, position, Quaternion.Euler(0f, 0f, rotation));
             if (gameObject2.GetComponent<AutoDoShadowChainOnSpawn>()) UnityEngine.Object.Destroy(gameObject2.GetComponent<AutoDoShadowChainOnSpawn>());
+            if (gameObject2.GetComponent<HelixProjectileButLessShit>())
+            {
+                gameObject2.GetComponent<HelixProjectileButLessShit>().SpawnShadowBulletsOnSpawn = false;
+            }
             gameObject2.transform.position += gameObject2.transform.right * -0.5f;
             Projectile component2 = gameObject2.GetComponent<Projectile>();
             component2.specRigidbody.Reinitialize();

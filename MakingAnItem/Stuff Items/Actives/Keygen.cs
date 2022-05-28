@@ -26,7 +26,7 @@ namespace NevernamedsItems
             string longDesc = "A strange fragment of corrupted software initially developed to generate free access to the contents of chests within the Gungeon." + "\n\nIn the years since it's creation however, it has become... chaotic, unpredictable, and dangerous. Use with extreme caution.";
 
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 50);
+            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 70);
 
             item.consumable = false;
             item.quality = ItemQuality.B;
@@ -62,7 +62,6 @@ namespace NevernamedsItems
             AkSoundEngine.PostEvent("Play_ENM_electric_charge_01", user.gameObject);
 
             Chest rerollChest = nearestInteractable as Chest;
-            //ETGModConsole.Log(rerollChest.breakAnimName);
             int selected = UnityEngine.Random.Range(1, 15);
             ETGModConsole.Log(selected.ToString());
 

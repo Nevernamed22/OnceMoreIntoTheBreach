@@ -62,10 +62,10 @@ namespace NevernamedsItems
                     if (user.PlayerHasActiveSynergy("Shotgun Club") && UnityEngine.Random.value <= 0.5f) enemyToSpawnGUID = "128db2f0781141bcb505d8f00f9e4d47";
                     if (user.PlayerHasActiveSynergy("Friends On The Other Side")) shouldJam = true;
 
-                    CompanionisedEnemyUtility.SpawnCompanionisedEnemy(user, enemyToSpawnGUID, centerPoint.ToIntVector2(), false, ExtendedColours.brown, 15, 2, shouldJam);
+                    CompanionisedEnemyUtility.SpawnCompanionisedEnemy(user, enemyToSpawnGUID, centerPoint.ToIntVector2(), false, ExtendedColours.brown, 15, 2, shouldJam, true);
                     if ((user.PlayerHasActiveSynergy("Aim Twice, Shoot Once")))
                     {
-                        CompanionisedEnemyUtility.SpawnCompanionisedEnemy(user, enemyToSpawnGUID, centerPoint.ToIntVector2(), false, ExtendedColours.brown, 15, 2, shouldJam);
+                        CompanionisedEnemyUtility.SpawnCompanionisedEnemy(user, enemyToSpawnGUID, centerPoint.ToIntVector2(), false, ExtendedColours.brown, 15, 2, shouldJam, true);
                     }
                 }
             }

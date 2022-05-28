@@ -86,7 +86,7 @@ namespace NevernamedsItems
             float allCurse = GameManager.Instance.GetCombinedPlayersStatAmount(PlayerStats.StatType.Curse);
             float ran = UnityEngine.Random.value;
             Debug.Log("Running Curse Check on Floor Load - Random (" + ran + ") - CurseTotal (" + allCurse + ")");
-            if (UnityEngine.Random.value <= (allCurse / 10))
+            if (UnityEngine.Random.value <= (allCurse * 0.0666))
             {
                 float hellclears = GameStatsManager.Instance.GetPlayerStatValue(TrackedStats.TIMES_CLEARED_BULLET_HELL);
                 if (hellclears > 0)

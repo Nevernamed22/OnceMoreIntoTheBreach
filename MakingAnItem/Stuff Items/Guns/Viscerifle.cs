@@ -40,6 +40,8 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(1.5f, 0.81f, 0f);
             gun.SetBaseMaxAmmo(0);
             gun.gunClass = GunClass.SHITTY;
+
+
             //HEART BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);
@@ -59,6 +61,10 @@ namespace NevernamedsItems
             blood.InFlightSpawnRadius = 1f;
             blood.SpawnGoopOnCollision = true;
             blood.CollisionSpawnRadius = 2f;
+
+            //SHADE BULLETS
+            shadeProjectile = ProjectileSetupUtility.MakeProjectile(56, 20, 35, 23);
+            shadeProjectile.SetProjectileSpriteRight("shadeviscerifle_proj", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 16, 7);
 
             //ARMOUR
             armourProjectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -118,6 +124,7 @@ namespace NevernamedsItems
         public static Projectile armourProjectile;
         public static Projectile crestProjectile;
         public static Projectile fuckyouprojectile;
+        public static Projectile shadeProjectile;
         public override Projectile OnPreFireProjectileModifier(Gun gun, Projectile projectile, ProjectileModule mod)
         {
             PlayerController player = gun.CurrentOwner as PlayerController;
@@ -130,6 +137,8 @@ namespace NevernamedsItems
                     return armourProjectile;
                 case "crest":
                     return crestProjectile;
+                case "shade":
+                    return shadeProjectile;
             }
             return projectile;
         }
@@ -211,6 +220,10 @@ namespace NevernamedsItems
         }
         private string DeterminedUsedHealth(PlayerController player)
         {
+            if (player.ModdedCharacterIdentity() == ModdedCharacterID.Shade)
+            {
+                return "shade";
+            }
 
             if (player.HasPickupID(Gungeon.Game.Items["nn:meat_shield"].PickupObjectId))
             {

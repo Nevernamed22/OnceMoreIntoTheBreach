@@ -173,9 +173,7 @@ namespace NevernamedsItems
                 bool isCharmed = self.aiActor.CanTargetEnemies && !self.aiActor.CanTargetPlayers;
                 bool isFloorBossOutsideTutorial = self.IsBoss && !self.IsSubboss && !GameManager.Instance.InTutorial;
                 bool isValidForMutagen = false;
-                bool usingParadox = false;
                 bool usingDog = false;
-                bool usingConvict = false;
                 bool usingShade = false;
                 Vector2 deathPosition = self.specRigidbody.UnitCenter;
                 float deceasedEnemyMaxHealth = self.healthHaver.GetMaxHealth();
@@ -212,7 +210,7 @@ namespace NevernamedsItems
                         {
                             if (GameManager.Instance.AnyPlayerHasActiveSynergy("The Last Crusade"))
                             {
-                                AIActor targetActor = CompanionisedEnemyUtility.SpawnCompanionisedEnemy(GameManager.Instance.PrimaryPlayer, BraveUtility.RandomElement(EasyEnemyTypeLists.SmallBullats), position.ToIntVector2(), false, Color.red, 5, 2, false);
+                                AIActor targetActor = CompanionisedEnemyUtility.SpawnCompanionisedEnemy(GameManager.Instance.PrimaryPlayer, BraveUtility.RandomElement(EasyEnemyTypeLists.SmallBullats), position.ToIntVector2(), false, Color.red, 5, 2, false, false);
                                 PhysicsEngine.Instance.RegisterOverlappingGhostCollisionExceptions(targetActor.specRigidbody, null, false);
 
                             }
@@ -398,6 +396,34 @@ namespace NevernamedsItems
                             if (!SaveAPIManager.GetFlag(CustomDungeonFlags.BOSSRUSH_GUNSLINGER))
                             {
                                 SaveAPIManager.SetFlag(CustomDungeonFlags.BOSSRUSH_GUNSLINGER, true);
+                            }
+                        }
+                        if (activeCharacters.Contains(PlayableCharacters.Guide))
+                        {
+                            if (!SaveAPIManager.GetFlag(CustomDungeonFlags.BOSSRUSH_HUNTER))
+                            {
+                                SaveAPIManager.SetFlag(CustomDungeonFlags.BOSSRUSH_HUNTER, true);
+                            }
+                        }
+                        if (activeCharacters.Contains(PlayableCharacters.Soldier))
+                        {
+                            if (!SaveAPIManager.GetFlag(CustomDungeonFlags.BOSSRUSH_MARINE))
+                            {
+                                SaveAPIManager.SetFlag(CustomDungeonFlags.BOSSRUSH_MARINE, true);
+                            }
+                        }
+                        if (activeCharacters.Contains(PlayableCharacters.Robot))
+                        {
+                            if (!SaveAPIManager.GetFlag(CustomDungeonFlags.BOSSRUSH_ROBOT))
+                            {
+                                SaveAPIManager.SetFlag(CustomDungeonFlags.BOSSRUSH_ROBOT, true);
+                            }
+                        }
+                        if (activeCharacters.Contains(PlayableCharacters.Bullet))
+                        {
+                            if (!SaveAPIManager.GetFlag(CustomDungeonFlags.BOSSRUSH_BULLET))
+                            {
+                                SaveAPIManager.SetFlag(CustomDungeonFlags.BOSSRUSH_BULLET, true);
                             }
                         }
                     }

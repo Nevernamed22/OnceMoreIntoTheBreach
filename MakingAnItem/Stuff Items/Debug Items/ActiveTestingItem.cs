@@ -458,8 +458,21 @@ namespace NevernamedsItems
                 {
                     AIActor aiactor = activeEnemies[i];
 
-                    GameActorConfusionEffect shrinky = StaticStatusEffects.ConfusionEffect;
-                    aiactor.ApplyEffect(shrinky);
+                    GameActorDecorationEffect DummyEffect = new GameActorDecorationEffect()
+                    {
+                        AffectsEnemies = true,
+                        OverheadVFX = CompanionisedEnemyUtility.FriendlyVFX,
+                        AffectsPlayers = false,
+                        AppliesTint = false,
+                        AppliesDeathTint = false,
+                        AppliesOutlineTint = false,
+                        duration = float.MaxValue,
+                        effectIdentifier = "Friendly Overheader",
+                        resistanceType = EffectResistanceType.None,
+                        PlaysVFXOnActor = false,
+                        stackMode = GameActorEffect.EffectStackingMode.Ignore,
+                    };
+                    aiactor.ApplyEffect(DummyEffect);
                 }
             }
         }

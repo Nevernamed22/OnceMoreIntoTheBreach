@@ -115,10 +115,8 @@ namespace NevernamedsItems
                     foreach (Projectile bullet in ActiveBullets)
                     {
                         if (bullet)
-                        {
-                            Vector2 vector = player.CenterPosition;
-                            Vector2 normalized = (player.unadjustedAimPoint.XY() - vector).normalized;
-                            bullet.SendInDirection(normalized, false, true);
+                        {        
+                            bullet.SendInDirection(gun.CurrentAngle.DegreeToVector2(), false, true);
                             bullet.baseData.speed *= 10000;
                             //bullet.Speed *= 1000;
                             bullet.UpdateSpeed();

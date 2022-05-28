@@ -13,38 +13,7 @@ namespace NevernamedsItems
 
         public static void Init()
         {
-            //The VFX overhead for the Plague Effect
-            #region VFXSetup
-            //Setting up the Overhead Plague VFX
-            GameObject plagueVFXObject = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/StatusEffectVFX/plaguevfxframe_001", new GameObject("PlagueIcon"));
-            plagueVFXObject.SetActive(false);
-            tk2dBaseSprite plaguevfxSprite = plagueVFXObject.GetComponent<tk2dBaseSprite>();
-            plaguevfxSprite.GetCurrentSpriteDef().ConstructOffsetsFromAnchor(tk2dBaseSprite.Anchor.LowerCenter, plaguevfxSprite.GetCurrentSpriteDef().position3);
-            FakePrefab.MarkAsFakePrefab(plagueVFXObject);
-            UnityEngine.Object.DontDestroyOnLoad(plagueVFXObject);
-
-            //Animating the overhead
-            tk2dSpriteAnimator plagueanimator = plagueVFXObject.AddComponent<tk2dSpriteAnimator>();
-            plagueanimator.Library = plagueVFXObject.AddComponent<tk2dSpriteAnimation>();
-            plagueanimator.Library.clips = new tk2dSpriteAnimationClip[0];
-
-            tk2dSpriteAnimationClip clip = new tk2dSpriteAnimationClip { name = "PlagueIconClip", fps = 7, frames = new tk2dSpriteAnimationFrame[0] };
-            foreach (string path in PlagueVFXPaths)
-            {
-                int spriteId = SpriteBuilder.AddSpriteToCollection(path, plagueVFXObject.GetComponent<tk2dBaseSprite>().Collection);
-
-                plagueVFXObject.GetComponent<tk2dBaseSprite>().Collection.spriteDefinitions[spriteId].ConstructOffsetsFromAnchor(tk2dBaseSprite.Anchor.LowerCenter);
-
-                tk2dSpriteAnimationFrame frame = new tk2dSpriteAnimationFrame { spriteId = spriteId, spriteCollection = plagueVFXObject.GetComponent<tk2dBaseSprite>().Collection };
-                clip.frames = clip.frames.Concat(new tk2dSpriteAnimationFrame[] { frame }).ToArray();
-            }
-            plagueanimator.Library.clips = plagueanimator.Library.clips.Concat(new tk2dSpriteAnimationClip[] { clip }).ToArray();
-            plagueanimator.playAutomatically = true;
-            plagueanimator.DefaultClipId = plagueanimator.GetClipIdByName("PlagueIconClip");
-            PlagueOverheadVFX = plagueVFXObject;
-            #endregion
-
-            //Setup the standard Plague effect
+            PlagueOverheadVFX = VFXToolbox.CreateOverheadVFX(PlagueVFXPaths, "PlagueOverhead", 7);
             GameActorPlagueEffect StandPlague = StatusEffectHelper.GeneratePlagueEffect(100, 2, true, ExtendedColours.plaguePurple, true, ExtendedColours.plaguePurple);
             StaticStatusEffects.StandardPlagueEffect = StandPlague;
         }

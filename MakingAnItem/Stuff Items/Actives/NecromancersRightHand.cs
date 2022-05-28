@@ -53,7 +53,7 @@ namespace NevernamedsItems
 
                     string guid = "249db525a9464e5282d02162c88e0357";
                     if (user.PlayerHasActiveSynergy("Roll Dem Bones") && UnityEngine.Random.value <= 0.25f) guid = "336190e29e8a4f75ab7486595b700d4a";
-                    AIActor Spent = CompanionisedEnemyUtility.SpawnCompanionisedEnemy(user, guid, worldCenter.ToIntVector2(), true, ExtendedColours.purple, 5, 2, false);
+                    AIActor Spent = CompanionisedEnemyUtility.SpawnCompanionisedEnemy(user, guid, worldCenter.ToIntVector2(), true, ExtendedColours.purple, 5, 2, false, true);
                     if (Spent.GetComponent<SpawnEnemyOnDeath>()) UnityEngine.Object.Destroy(Spent.GetComponent<SpawnEnemyOnDeath>());
                     if (Spent.CorpseObject != null) Spent.CorpseObject = null;
 

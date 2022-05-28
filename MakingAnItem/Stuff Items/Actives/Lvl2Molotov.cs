@@ -112,7 +112,7 @@ namespace NevernamedsItems
             bomb.AddComponent<LvL2MolotovEffect>();
             return bomb;
         }
-        private class LvL2MolotovEffect : CustomThrowableEffectDoer
+        public class LvL2MolotovEffect : CustomThrowableEffectDoer
         {
             public override void OnEffect(GameObject obj)
             {

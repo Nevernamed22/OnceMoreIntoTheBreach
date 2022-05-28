@@ -256,6 +256,15 @@ namespace NevernamedsItems
             //Prop Fly
             if (gun.GunPlayerOwner())
             {
+                if (gun.GunPlayerOwner().CharacterUsesRandomGuns)
+                {
+                    if (isUsingPropFly)
+                    {
+                        HandlePropFly(false);
+                        isUsingPropFly = false;
+                    }
+                    gun.GunPlayerOwner().ChangeToRandomGun();
+                }
                 if (CurrentCaughtProjectile != null)
                 {
                     if (gun.GunPlayerOwner().PlayerHasActiveSynergy("Prop Fly") && isUsingPropFly == false)

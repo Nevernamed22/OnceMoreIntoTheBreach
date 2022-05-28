@@ -16,13 +16,13 @@ namespace NevernamedsItems
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Guneonate", "guneonate");
             Game.Items.Rename("outdated_gun_mods:guneonate", "nn:guneonate");
-       var behav =     gun.gameObject.AddComponent<Guneonate>();
+            var behav = gun.gameObject.AddComponent<Guneonate>();
             behav.overrideNormalFireAudio = "Play_VO_bashellisk_hiss_01";
             behav.overrideNormalReloadAudio = "Play_BOSS_bashellisk_swallow_01";
-                behav.preventNormalFireAudio = true;
+            behav.preventNormalFireAudio = true;
             behav.preventNormalReloadAudio = true;
             gun.SetShortDescription("Babyconda");
-            gun.SetLongDescription("A hatchling ammoconda, formed from fresh discarded bullet casings."+"\n\nIt seems to have self esteem issues.");
+            gun.SetLongDescription("A hatchling ammoconda, formed from fresh discarded bullet casings." + "\n\nIt seems to have self esteem issues.");
 
             gun.SetupSprite(null, "guneonate_idle_001", 8);
 
@@ -46,7 +46,8 @@ namespace NevernamedsItems
             gun.gunClass = GunClass.SILLY;
 
             //BULLET STATS
-            Projectile projectile = DataCloners.CopyFields<HelixProjectile>(Instantiate(gun.DefaultModule.projectiles[0]));
+            HelixProjectileButLessShit projectile = DataCloners.CopyFields<HelixProjectileButLessShit>(Instantiate(gun.DefaultModule.projectiles[0]));
+            projectile.SpawnShadowBulletsOnSpawn = true;
             projectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
@@ -57,9 +58,10 @@ namespace NevernamedsItems
             PierceProjModifier pierce = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();
             pierce.penetration++;
             pierce.penetratesBreakables = true;
-            AutoDoShadowChainOnSpawn snakeness = projectile.gameObject.GetOrAddComponent<AutoDoShadowChainOnSpawn>();
-            snakeness.NumberInChain = 5;
-            snakeness.pauseLength = 0.05f;
+            //AutoDoShadowChainOnSpawn snakeness = projectile.gameObject.GetOrAddComponent<AutoDoShadowChainOnSpawn>();
+
+            projectile.NumberInChain = 5;
+            projectile.pauseLength = 0.05f;
             projectile.SetProjectileSpriteRight("12x12_yellowenemy_projectile", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
 
 

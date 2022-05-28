@@ -166,7 +166,7 @@ namespace NevernamedsItems
         }
         public static void ApplyGlitter(this AIActor target)
         {
-            Material material2;
+            //Material material2;
             int cachedSpriteBodyCount = target.healthHaver.bodySprites.Count;
             List<tk2dBaseSprite> sprites = target.healthHaver.bodySprites;
             for (int i = 0; i < cachedSpriteBodyCount; i++)

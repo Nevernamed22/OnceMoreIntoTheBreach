@@ -45,7 +45,7 @@ namespace NevernamedsItems
             {
                 this.PostProcessProjectile(sourceBeam.projectile, 1);
             }
-        }  
+        }
         public override DebrisObject Drop(PlayerController player)
         {
             DebrisObject debrisObject = base.Drop(player);
@@ -55,8 +55,11 @@ namespace NevernamedsItems
         }
         protected override void OnDestroy()
         {
-            Owner.PostProcessProjectile -= this.PostProcessProjectile;
-            Owner.PostProcessBeam -= this.PostProcessBeam;
+            if (Owner)
+            {
+                Owner.PostProcessProjectile -= this.PostProcessProjectile;
+                Owner.PostProcessBeam -= this.PostProcessBeam;
+            }
             base.OnDestroy();
         }
 

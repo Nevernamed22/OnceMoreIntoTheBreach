@@ -19,8 +19,8 @@ namespace NevernamedsItems
             Gun gun = ETGMod.Databases.Items.NewGun("Agar Gun", "agargun");
             Game.Items.Rename("outdated_gun_mods:agar_gun", "nn:agar_gun");
             gun.gameObject.AddComponent<AgarGun>();
-            gun.SetShortDescription("");
-            gun.SetLongDescription("An old historical remnant reinvigorated for bio warfare.");
+            gun.SetShortDescription("Feeda Me");
+            gun.SetLongDescription("An old historical remnant reinvigorated for bio warfare."+"\n\nThe final shot launches a hungry macrobacteria, who gobbles up agar to fuel its own destructive power.");
 
             gun.SetupSprite(null, "agargun_idle_001", 8);
 

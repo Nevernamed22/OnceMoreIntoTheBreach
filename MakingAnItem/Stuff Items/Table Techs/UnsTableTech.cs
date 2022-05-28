@@ -109,11 +109,11 @@ namespace NevernamedsItems
                         LootEngine.SpawnCurrency(obj.specRigidbody.UnitCenter, UnityEngine.Random.Range(2, 6), true);
                         break;
                     case 20:
-                        CompanionisedEnemyUtility.SpawnCompanionisedEnemy(Owner, "01972dee89fc4404a5c408d50007dad5", Owner.sprite.WorldCenter.ToIntVector2(), false, Color.red, 7, 2, false);
+                        CompanionisedEnemyUtility.SpawnCompanionisedEnemy(Owner, "01972dee89fc4404a5c408d50007dad5", Owner.sprite.WorldCenter.ToIntVector2(), false, Color.red, 7, 2, false, true);
                         break;
                     case 21:
                         int numBullat = UnityEngine.Random.Range(2, 6);
-                        for (int i = 0; i < numBullat; i++) CompanionisedEnemyUtility.SpawnCompanionisedEnemy(Owner, "2feb50a6a40f4f50982e89fd276f6f15", Owner.sprite.WorldCenter.ToIntVector2(), false, Color.red, 15, 2, false);
+                        for (int i = 0; i < numBullat; i++) CompanionisedEnemyUtility.SpawnCompanionisedEnemy(Owner, "2feb50a6a40f4f50982e89fd276f6f15", Owner.sprite.WorldCenter.ToIntVector2(), false, Color.red, 15, 2, false, false);
                         break;
                     case 22:
                         FullRoomStatusEffect(StaticStatusEffects.hotLeadEffect);

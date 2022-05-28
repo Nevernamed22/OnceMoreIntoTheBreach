@@ -37,14 +37,12 @@ namespace NevernamedsItems
             item.TranslateItemLongDescription(StringTableManager.GungeonSupportedLanguages.RUSSIAN, "Тонкие, как бумага, стенки этого тёмного сосуда излучают энергию прямиком из другого мира.\n\nИ хотя оно хрупкое, внутри него заточена огромная сила.");
         }
         private float currentArmour, lastArmour;
-        private string currentRoom, lastRoom;
-        private bool currentCombatState, lastCombatState;
+
         protected override void Update()
         {
             if (Owner)
             {
                 CalculateHealth(Owner);
-                ShouldFlyCheck(Owner);
                 if (Owner.OverridePlayerSwitchState != PlayableCharacters.Pilot.ToString())
                 {
                     Owner.OverridePlayerSwitchState = PlayableCharacters.Pilot.ToString();
@@ -74,7 +72,7 @@ namespace NevernamedsItems
                         Owner.ownerlessStatModifiers.Add(statModifier);
                         Owner.stats.RecalculateStats(Owner, false, false);
 
-                        LootEngine.SpawnCurrency(player.sprite.WorldCenter, (15 * amountOfSurplus)); 
+                        LootEngine.SpawnCurrency(player.sprite.WorldCenter, (15 * amountOfSurplus));
                     }
                     hasDoneFirstArmourResetThisRun = true;
                     player.healthHaver.Armor = 1f;
@@ -82,94 +80,16 @@ namespace NevernamedsItems
                 lastArmour = currentArmour;
             }
         }
-        private void ShouldFlyCheck(PlayerController player)
-        {
-            if (player && Owner.CurrentRoom != null && !string.IsNullOrEmpty(Owner.CurrentRoom.GetRoomName()))
-            {
-            currentRoom = Owner.CurrentRoom.GetRoomName();
-            currentCombatState = Owner.IsInCombat;
-            bool roomFlag = !string.IsNullOrEmpty(currentRoom) && currentRoom != lastRoom;
-            bool combatCheck = currentCombatState != lastCombatState;
-            if (roomFlag || combatCheck)
-            {
-                FlyCheck(player);
-                lastRoom = currentRoom;
-                lastCombatState = currentCombatState;
-            }
-            }
-        }
-
-        private void FlyCheck(PlayerController player)
-        {
-            ResourcefulRatMinesHiddenTrapdoor TrapDoorInstance = null;
-
-            if (GameManager.Instance.Dungeon.tileIndices.tilesetId == GlobalDungeonData.ValidTilesets.MINEGEON)
-            {
-                TrapDoorInstance = FindObjectOfType<ResourcefulRatMinesHiddenTrapdoor>();
-            }
-            if ((!string.IsNullOrEmpty(Owner.CurrentRoom.GetRoomName()) && m_BannedRoomNames.Contains(Owner.CurrentRoom.GetRoomName())) | Owner.CurrentRoom.ForcePitfallForFliers)
-            {
-                SetCanFall(true);
-            }
-            else if (TrapDoorInstance != null && TrapDoorInstance.transform.position.GetAbsoluteRoom() == Owner.CurrentRoom)
-            {
-                SetCanFall(true);
-            }
-            else if (!string.IsNullOrEmpty(Owner.CurrentRoom.GetRoomName()) && Owner.CurrentRoom.GetRoomName() == "HelicopterRoom01" && Owner.IsInCombat == false)
-            {
-                SetCanFall(true);
-            }
-            else
-            {
-                SetCanFall(false);
-            }
-        }
-        private void SetCanFall(bool state)
-        {
-            if (state == false)
-            {
-                Owner.FallingProhibited = true;
-                DisableVFX(Owner);
-                lastRoom = currentRoom;
-            }
-            else if (state == true)
-            {
-                Owner.FallingProhibited = false;
-                EnableVFX(Owner);
-                lastRoom = currentRoom;
-            }
-        }
-        private void EnableVFX(PlayerController user)
-        {
-            Material outlineMaterial = SpriteOutlineManager.GetOutlineMaterial(user.sprite);
-            outlineMaterial.SetColor("_OverrideColor", new Color(100f, 1f, 1f));
-        }
-        private void onAnyEnemyTakeAnyDamage(float damageamount, bool fatal, HealthHaver enemy)
-        {
-
-        }
-        private void DisableVFX(PlayerController user)
-        {
-            Material outlineMaterial = SpriteOutlineManager.GetOutlineMaterial(user.sprite);
-            outlineMaterial.SetColor("_OverrideColor", new Color(0f, 0f, 0f));
-        }
-        public static List<string> m_BannedRoomNames = new List<string>()
-        {
-            "Castle_Special_SewersEntrance_01",
-            "Keep_TreeRoom",
-            "Keep_TreeRoom2",
-            "Exit_Room_Basic",
-            "Floor_02_Gungeon_Entrance",
-            "Elevator Entrance",
-            "SubShop_SellCreep_CatacombsSpecial",
-            "ResourcefulRat_SecondSecretRoom_01"
-        };
+        
+       
+        
         private DamageTypeModifier m_poisonImmunity;
         private DamageTypeModifier m_fireImmunity;
         public override void Pickup(PlayerController player)
         {
             base.Pickup(player);
-            player.OnAnyEnemyReceivedDamage += this.onAnyEnemyTakeAnyDamage;
+
+            //Setup Immunities
             this.m_poisonImmunity = new DamageTypeModifier();
             this.m_poisonImmunity.damageMultiplier = 0f;
             this.m_poisonImmunity.damageType = CoreDamageTypes.Poison;
@@ -178,25 +98,40 @@ namespace NevernamedsItems
             this.m_fireImmunity.damageMultiplier = 0f;
             this.m_fireImmunity.damageType = CoreDamageTypes.Fire;
             player.healthHaver.damageTypeModifiers.Add(this.m_fireImmunity);
+
+            //Make immune to pits
             player.ImmuneToPits.SetOverride("ShadeHeart", true, null);
-            //player.SetIsFlying(true, "shade", true, false);
+
+            //Add flight
+            player.SetIsFlying(true, "Shadeheart", false, false);
+            player.AdditionalCanDodgeRollWhileFlying.AddOverride("Shadeheart", null);
         }
         public override DebrisObject Drop(PlayerController player)
         {
-            player.OnAnyEnemyReceivedDamage -= this.onAnyEnemyTakeAnyDamage;
-            //player.SetIsFlying(false, "shade", true, false);
             DebrisObject debrisObject = base.Drop(player);
+
+            //Remove immunities
             player.healthHaver.damageTypeModifiers.Remove(this.m_poisonImmunity);
             player.healthHaver.damageTypeModifiers.Remove(this.m_fireImmunity);
             player.ImmuneToPits.SetOverride("ShadeHeart", false, null);
+
+            //Remove flight
+            player.SetIsFlying(false, "Shadeheart", false, false);
+            player.AdditionalCanDodgeRollWhileFlying.RemoveOverride("Shadeheart");
+
             return debrisObject;
         }
         protected override void OnDestroy()
         {
-            //Owner.SetIsFlying(false, "shade", true, false);
-            Owner.OnAnyEnemyReceivedDamage -= this.onAnyEnemyTakeAnyDamage;
-            Owner.healthHaver.damageTypeModifiers.Remove(this.m_poisonImmunity);
-            Owner.ImmuneToPits.SetOverride("ShadeHeart", false, null);
+            if (Owner)
+            {
+                Owner.healthHaver.damageTypeModifiers.Remove(this.m_poisonImmunity);
+                Owner.ImmuneToPits.SetOverride("ShadeHeart", false, null);
+
+                Owner.SetIsFlying(false, "Shadeheart", false, false);
+                Owner.AdditionalCanDodgeRollWhileFlying.RemoveOverride("Shadeheart");
+            }
+
             base.OnDestroy();
         }
     }

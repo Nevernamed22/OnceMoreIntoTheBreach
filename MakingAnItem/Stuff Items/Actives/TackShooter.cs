@@ -17,8 +17,8 @@ namespace NevernamedsItems
             GameObject obj = new GameObject(itemName);
             var item = obj.AddComponent<TackShooter>();
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "";
-            string longDesc = "";
+            string shortDesc = "Tacked On";
+            string longDesc = "Places a radial tack-spraying turret."+"\n\nLegends tell of a tiny monkey hiding inside, operating the device.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 200);
 

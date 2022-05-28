@@ -12,6 +12,16 @@ namespace NevernamedsItems
 {
     static class OMITBPlayerExtensions
     {
+        public static bool AnyPlayerIsInCombat(this GameManager instance)
+        {
+            bool toReturn = false;
+            if (instance)
+            {
+                if (instance.PrimaryPlayer != null && instance.PrimaryPlayer.IsInCombat) toReturn = true;
+                if (instance.SecondaryPlayer != null && instance.SecondaryPlayer.IsInCombat) toReturn = true;
+            }
+            return toReturn;
+        }
         public static bool IsStarterItem(this PlayerController player, int id)
         {
             return player.startingActiveItemIds.Contains(id) || player.startingAlternateGunIds.Contains(id) || player.startingGunIds.Contains(id) || player.startingPassiveItemIds.Contains(id);
