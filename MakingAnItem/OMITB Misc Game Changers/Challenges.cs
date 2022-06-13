@@ -46,15 +46,15 @@ namespace NevernamedsItems
             ETGModConsole.Commands.AddGroup("nnchallenges", delegate (string[] args)
             {
                 ETGModConsole.Log($"<size=100><color=#ff0000ff>{StringTableManager.GetString("NNCHALLENGES_TITLE")}</color></size>", false);
-                ETGModConsole.Log(StringTableManager.GetString("NNCHALLENGES_DESCRIPTION"), false);
-                ETGModConsole.Log(StringTableManager.GetString("NNCHALLENGES_TECHEXPLANATION"), false);
+                ETGModConsole.Log(StringTableManager.GetString("#NNCHALLENGES_DESCRIPTION"), false);
+                ETGModConsole.Log(StringTableManager.GetString("#NNCHALLENGES_TECHEXPLANATION"), false);
 
-                ETGModConsole.Log($"{StringTableManager.GetString("CHAL_TOIL_NAME")}:  [id]<color=#ff0000ff>toilandtrouble</color> - {StringTableManager.GetString("CHAL_TOIL_DESC")}", false);
-                ETGModConsole.Log($"{StringTableManager.GetString("CHAL_WHATARMY_NAME")}: [id]<color=#ff0000ff>whatarmy</color> - {StringTableManager.GetString("CHAL_WHATARMY_DESC")}", false);
-                ETGModConsole.Log($"{StringTableManager.GetString("CHAL_INVIS_NAME")}:  [id]<color=#ff0000ff>invisibleo</color> - {StringTableManager.GetString("CHAL_INVIS_DESC")}", false);
-                ETGModConsole.Log($"{StringTableManager.GetString("CHAL_COOL_NAME")}:  [id]<color=#ff0000ff>keepitcool</color> - {StringTableManager.GetString("CHAL_COOL_DESC")}", false);
+                ETGModConsole.Log($"{StringTableManager.GetString("#CHAL_TOIL_NAME")}:  [id]<color=#ff0000ff>toilandtrouble</color> - {StringTableManager.GetString("#CHAL_TOIL_DESC")}", false);
+                ETGModConsole.Log($"{StringTableManager.GetString("#CHAL_WHATARMY_NAME")}: [id]<color=#ff0000ff>whatarmy</color> - {StringTableManager.GetString("#CHAL_WHATARMY_DESC")}", false);
+                ETGModConsole.Log($"{StringTableManager.GetString("#CHAL_INVIS_NAME")}:  [id]<color=#ff0000ff>invisibleo</color> - {StringTableManager.GetString("#CHAL_INVIS_DESC")}", false);
+                ETGModConsole.Log($"{StringTableManager.GetString("#CHAL_COOL_NAME")}:  [id]<color=#ff0000ff>keepitcool</color> - {StringTableManager.GetString("#CHAL_COOL_DESC")}", false);
                 
-                ETGModConsole.Log(StringTableManager.GetString("NNCHALLENGES_DISABLEEXPLANATION"), false);
+                ETGModConsole.Log(StringTableManager.GetString("#NNCHALLENGES_DISABLEEXPLANATION"), false);
             });
 
             ETGModConsole.Commands.GetGroup("nnchallenges").AddUnit("clear", delegate (string[] args)
@@ -66,7 +66,7 @@ namespace NevernamedsItems
                 }
                 else
                 {
-                    ETGModConsole.Log($"<color=#ff0000ff>{StringTableManager.GetString("NNCHALLENGES_NONBREACHDENIAL")}</color>", false);
+                    ETGModConsole.Log($"<color=#ff0000ff>{StringTableManager.GetString("#NNCHALLENGES_NONBREACHDENIAL")}</color>", false);
                 }
             });
             ETGModConsole.Commands.GetGroup("nnchallenges").AddUnit("whatarmy", delegate (string[] args)
@@ -74,7 +74,7 @@ namespace NevernamedsItems
                 string failure = FetchFailureType();
                 if (failure == "none")
                 {
-                    ETGModConsole.Log($"{StringTableManager.GetString("NNCHALLENGES_NOWPLAYING")}; {StringTableManager.GetString("CHAL_WHATARMY_NAME")}");
+                    ETGModConsole.Log($"{StringTableManager.GetString("#NNCHALLENGES_NOWPLAYING")}; {StringTableManager.GetString("#CHAL_WHATARMY_NAME")}");
                     CurrentChallenge = ChallengeType.WHAT_ARMY;
                 }
                 else
@@ -87,7 +87,7 @@ namespace NevernamedsItems
                 string failure = FetchFailureType();
                 if (failure == "none")
                 {
-                    ETGModConsole.Log($"{StringTableManager.GetString("NNCHALLENGES_NOWPLAYING")}; {StringTableManager.GetString("CHAL_TOIL_NAME")}");
+                    ETGModConsole.Log($"{StringTableManager.GetString("#NNCHALLENGES_NOWPLAYING")}; {StringTableManager.GetString("#CHAL_TOIL_NAME")}");
                     CurrentChallenge = ChallengeType.TOIL_AND_TROUBLE;
                 }
                 else
@@ -100,7 +100,7 @@ namespace NevernamedsItems
                 string failure = FetchFailureType();
                 if (failure == "none")
                 {
-                    ETGModConsole.Log($"{StringTableManager.GetString("NNCHALLENGES_NOWPLAYING")}; {StringTableManager.GetString("CHAL_INVIS_NAME")}");
+                    ETGModConsole.Log($"{StringTableManager.GetString("#NNCHALLENGES_NOWPLAYING")}; {StringTableManager.GetString("#CHAL_INVIS_NAME")}");
                     CurrentChallenge = ChallengeType.INVISIBLEO;
                 }
                 else
@@ -113,7 +113,7 @@ namespace NevernamedsItems
                 string failure = FetchFailureType();
                 if (failure == "none")
                 {
-                    ETGModConsole.Log($"{StringTableManager.GetString("NNCHALLENGES_NOWPLAYING")}; {StringTableManager.GetString("CHAL_COOL_NAME")}");
+                    ETGModConsole.Log($"{StringTableManager.GetString("#NNCHALLENGES_NOWPLAYING")}; {StringTableManager.GetString("#CHAL_COOL_NAME")}");
                     CurrentChallenge = ChallengeType.KEEP_IT_COOL;
                 }
                 else
@@ -148,8 +148,9 @@ namespace NevernamedsItems
                             aiactor.AdditionalSimpleItemDrops = AIActor.AdditionalSimpleItemDrops;
                             aiactor.CanTargetEnemies = AIActor.CanTargetEnemies;
                             aiactor.CanTargetPlayers = AIActor.CanTargetPlayers;
-                            if (AIActor.IsInReinforcementLayer)
-                            {
+                            if (aiactor.EnemyGuid == "556e9f2a10f9411cb9dbfd61e0e0f1e1") aiactor.HandleReinforcementFallIntoRoom(0f);
+                            else if (AIActor.IsInReinforcementLayer)
+                            {                         
                                 aiactor.invisibleUntilAwaken = true;
                                 aiactor.specRigidbody.CollideWithOthers = false;
                                 aiactor.IsGone = true;
@@ -374,7 +375,7 @@ namespace NevernamedsItems
             if (player1 == null)
             {
                 Debug.LogWarning("Attempted to set a challenge without a valid player, caught it though.");
-                failureMessage = StringTableManager.GetString("NNCHALLENGES_NOCHARDENIAL");
+                failureMessage = StringTableManager.GetString("#NNCHALLENGES_NOCHARDENIAL");
                 skipChecks = true;
             }
             PlayerController player2 = null;
@@ -382,19 +383,19 @@ namespace NevernamedsItems
 
             if (!skipChecks)
             {
-                if (!GameManager.Instance.IsFoyer) failureMessage = StringTableManager.GetString("NNCHALLENGES_NONBREACHDENIAL");
-                else if (GameStatsManager.Instance.IsRainbowRun) failureMessage = StringTableManager.GetString("NNCHALLENGES_RAINBOWDENIAL");
+                if (!GameManager.Instance.IsFoyer) failureMessage = StringTableManager.GetString("#NNCHALLENGES_NONBREACHDENIAL");
+                else if (GameStatsManager.Instance.IsRainbowRun) failureMessage = StringTableManager.GetString("#NNCHALLENGES_RAINBOWDENIAL");
                 else if (player1.CharacterUsesRandomGuns || (player2 && player2.CharacterUsesRandomGuns))
                 {
-                    failureMessage = StringTableManager.GetString("NNCHALLENGES_BLESSEDDENIAL");
+                    failureMessage = StringTableManager.GetString("#NNCHALLENGES_BLESSEDDENIAL");
                 }
                 else if (player1.characterIdentity == PlayableCharacters.Gunslinger || (player2 && player2.characterIdentity == PlayableCharacters.Gunslinger))
                 {
-                    failureMessage = StringTableManager.GetString("NNCHALLENGES_SLINGERDENIAL");
+                    failureMessage = StringTableManager.GetString("#NNCHALLENGES_SLINGERDENIAL");
                 }
                 else if (player1.characterIdentity == PlayableCharacters.Eevee || (player2 && player2.characterIdentity == PlayableCharacters.Eevee))
                 {
-                    StringTableManager.GetString("NNCHALLENGES_PARADOXDENIAL");
+                    StringTableManager.GetString("#NNCHALLENGES_PARADOXDENIAL");
                 }
             }
             return failureMessage;

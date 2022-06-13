@@ -9,9 +9,7 @@ using MonoMod.RuntimeDetour;
 using Object = UnityEngine.Object;
 using IEnumerator = System.Collections.IEnumerator;
 
-
-using ItemAPI;
-
+using Dungeonator;
 
 namespace CustomCharacters
 {
@@ -84,10 +82,10 @@ namespace CustomCharacters
 					typeof(Hooks).GetMethod("SetWinPicHook", BindingFlags.Static | BindingFlags.NonPublic)
 				);
 
-				Hook interactHook = new Hook(
-					typeof(ArkController).GetMethod("Interact", BindingFlags.Instance | BindingFlags.Public),
-					typeof(Hooks).GetMethod("InteractHook", BindingFlags.Static | BindingFlags.Public)
-				);
+				//Hook interactHook = new Hook(
+				//	typeof(ArkController).GetMethod("Interact", BindingFlags.Instance | BindingFlags.Public),
+				//	typeof(Hooks).GetMethod("InteractHook", BindingFlags.Static | BindingFlags.Public)
+				//);
 
 				//Hook getNumMetasToQuickRestartHook = new Hook(
 				//	typeof(AmmonomiconDeathPageController).GetMethod("GetNumMetasToQuickRestart", BindingFlags.Static | BindingFlags.Public),
@@ -127,6 +125,11 @@ namespace CustomCharacters
 				Hook GetPlayerStatValueHook = new Hook(
 					typeof(GameStatsManager).GetMethod("GetPlayerStatValue", BindingFlags.Instance | BindingFlags.Public),
 					typeof(Hooks).GetMethod("GetPlayerStatValueHook", BindingFlags.Static | BindingFlags.Public)
+				);
+
+				Hook ClearStatValueGlobalHook = new Hook(
+					typeof(GameStatsManager).GetMethod("ClearStatValueGlobal", BindingFlags.Instance | BindingFlags.Public),
+					typeof(Hooks).GetMethod("ClearStatValueGlobalHook", BindingFlags.Static | BindingFlags.Public)
 				);
 
 				Hook LoadHook = new Hook(
@@ -179,8 +182,29 @@ namespace CustomCharacters
 					typeof(Hooks).GetMethod("InitHook", BindingFlags.Static | BindingFlags.Public)
 				);
 
+				Hook HandleClockhairHook = new Hook(
+					typeof(ArkController).GetMethod("HandleClockhair", BindingFlags.Instance | BindingFlags.NonPublic),
+					typeof(Hooks).GetMethod("HandleClockhairHook", BindingFlags.Static | BindingFlags.Public)
+				);
+
+
+				Hook ProcessPlayerEnteredFoyerHook = new Hook(
+					typeof(Foyer).GetMethod("ProcessPlayerEnteredFoyer", BindingFlags.Instance | BindingFlags.Public),
+					typeof(Hooks).GetMethod("ProcessPlayerEnteredFoyerHook", BindingFlags.Static | BindingFlags.Public)
+				);
+
+				Hook SwapToAlternateCostumeHook = new Hook(
+					typeof(PlayerController).GetMethod("SwapToAlternateCostume", BindingFlags.Instance | BindingFlags.Public),
+					typeof(Hooks).GetMethod("SwapToAlternateCostumeHook", BindingFlags.Static | BindingFlags.Public)
+				);
+
 				Hook hook3 = new Hook(typeof(PlayerController).GetProperty("LocalShaderName", BindingFlags.Instance | BindingFlags.Public).GetGetMethod(), typeof(Hooks).GetMethod("LocalShaderNameGetHook"));
 				//BotsModule.Log("hooks done");
+
+				Hook punchoutUIHook = new Hook(
+					typeof(PunchoutPlayerController).GetMethod("UpdateUI", BindingFlags.Public | BindingFlags.Instance),
+					typeof(Hooks).GetMethod("PunchoutUpdateUI")
+				);
 			}
 			catch (Exception e)
 			{
@@ -188,7 +212,414 @@ namespace CustomCharacters
 			}
 		}
 
-		
+
+
+
+		public static void SwapToAlternateCostumeHook(Action<PlayerController, tk2dSpriteAnimation> orig, PlayerController self, tk2dSpriteAnimation overrideTargetLibrary = null)
+		{
+			
+			if (self?.characterIdentity > (PlayableCharacters)10)
+			{
+				
+				if (self.gameObject.GetComponent<CustomCharacter>().data == null) self.gameObject.GetComponent<CustomCharacter>().GetData();
+
+				if (!self.IsUsingAlternateCostume && self.gameObject.GetComponent<CustomCharacter>()?.data.altGlowMaterial != null)
+				{
+					if (self.gameObject.GetComponent<CustomCharacter>()?.data?.altGlowMaterial?.GetTexture("_MainTex") != self.AlternateCostumeLibrary?.clips[0]?.frames[0]?.spriteCollection?.spriteDefinitions[0]?.material.GetTexture("_MainTex"))
+					{
+						self.gameObject.GetComponent<CustomCharacter>().data.altGlowMaterial.SetTexture("_MainTexture", self.AlternateCostumeLibrary.clips[0].frames[0].spriteCollection.spriteDefinitions[0].material.GetTexture("_MainTex"));
+					}
+					self.sprite.renderer.material = self.gameObject.GetComponent<CustomCharacter>().data.altGlowMaterial;					
+				}
+				else if (self.gameObject.GetComponent<CustomCharacter>()?.data.glowMaterial != null)
+				{
+					if (self.gameObject.GetComponent<CustomCharacter>().data.glowMaterial.GetTexture("_MainTex") != self.sprite.renderer.material.GetTexture("_MainTex"))
+					{
+						self.gameObject.GetComponent<CustomCharacter>().data.glowMaterial.SetTexture("_MainTexture", self.sprite.renderer.material.GetTexture("_MainTex"));
+					}
+					self.sprite.renderer.material = self.gameObject.GetComponent<CustomCharacter>().data.glowMaterial;
+				}
+
+				//var v = (((Vector2)typeof(PlayerController).GetMethod("DetermineAimPointInWorld", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(self, null)) - self.specRigidbody.GetUnitCenter(ColliderType.HitBox)).ToAngle();
+				//self.GetBaseAnimationName(v, 0, false, false);
+				//var anim = (string)typeof(PlayerController).GetMethod("GetBaseAnimationName", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(self, new object[] { v, 0, false, false });
+
+				//self.sprite.SetSprite(self.spriteAnimator.Library.GetClipByName(anim).frames[0].spriteId);
+			}
+
+			orig(self, overrideTargetLibrary);
+		}
+
+
+		public static void ProcessPlayerEnteredFoyerHook(Action<Foyer, PlayerController> orig, Foyer self, PlayerController p)
+		{
+			orig(self, p);
+			if (Dungeon.ShouldAttemptToLoadFromMidgameSave && GameManager.Instance.IsLoadingLevel)
+			{
+				return;
+			}
+			if (p && p.gameObject.GetComponent<CustomCharacter>())
+			{
+
+
+				if (p.gameObject.GetComponent<CustomCharacter>().data == null)
+				{
+					//ETGModConsole.Log($"[Charapi]: custom character data nulled... thats really bad");
+					if (!p.gameObject.GetComponent<CustomCharacter>().GetData())
+					{
+						ETGModConsole.Log($"[Charapi]: custom character data nulled... seems it dosent exists... fuck!");
+					}
+				}
+
+				p.ForceStaticFaceDirection(Vector2.up);
+				if (p.IsUsingAlternateCostume && p.gameObject.GetComponent<CustomCharacter>().data.altGlowMaterial != null)
+				{
+
+					if (p.gameObject.GetComponent<CustomCharacter>().data.altGlowMaterial.GetTexture("_MainTex") != p.sprite.renderer.material.GetTexture("_MainTex"))
+					{
+						p.gameObject.GetComponent<CustomCharacter>().data.altGlowMaterial.SetTexture("_MainTexture", p.sprite.renderer.material.GetTexture("_MainTex"));
+					}
+					p.SetOverrideMaterial(p.gameObject.GetComponent<CustomCharacter>().data.altGlowMaterial);
+
+					//ETGModConsole.Log($"[Charapi]: set shader for alt skin");
+
+				}
+				else if (p.gameObject.GetComponent<CustomCharacter>().data.glowMaterial != null)
+				{
+
+					if (p.gameObject.GetComponent<CustomCharacter>().data.glowMaterial.GetTexture("_MainTex") != p.sprite.renderer.material.GetTexture("_MainTex"))
+					{
+						p.gameObject.GetComponent<CustomCharacter>().data.glowMaterial.SetTexture("_MainTexture", p.sprite.renderer.material.GetTexture("_MainTex"));
+					}
+					p.SetOverrideMaterial(p.gameObject.GetComponent<CustomCharacter>().data.glowMaterial);
+
+					//ETGModConsole.Log($"[Charapi]: set shader for main skin");
+				}
+			}
+		}
+
+		public static string LocalShaderNameGetHook(Func<PlayerController, string> orig, PlayerController self)
+		{
+
+			bool flag = !GameOptions.SupportsStencil;
+			string result;
+			if (flag)
+			{
+				result = "Brave/PlayerShaderNoStencil";
+			}
+			else
+			{
+				if (self.characterIdentity > (PlayableCharacters)10)
+				{
+					if (self.gameObject.GetComponent<CustomCharacter>().data == null)
+					{
+						//ETGModConsole.Log($"[Charapi]: custom character data nulled... thats really bad");
+						if (!self.gameObject.GetComponent<CustomCharacter>().GetData())
+						{
+							ETGModConsole.Log($"[Charapi]: custom character data nulled... seems it dosent exists... fuck!");
+						}
+					}
+
+					if (self.IsUsingAlternateCostume && self.gameObject.GetComponent<CustomCharacter>().data.altGlowMaterial != null)
+					{
+
+						if (self.gameObject.GetComponent<CustomCharacter>().data.altGlowMaterial.GetTexture("_MainTex") != self.sprite.renderer.material.GetTexture("_MainTex"))
+						{
+							self.gameObject.GetComponent<CustomCharacter>().data.altGlowMaterial.SetTexture("_MainTexture", self.sprite.renderer.material.GetTexture("_MainTex"));
+						}
+						self.sprite.renderer.material = self.gameObject.GetComponent<CustomCharacter>().data.altGlowMaterial;
+						result = self.gameObject.GetComponent<CustomCharacter>().data.altGlowMaterial.shader.name;
+
+
+					}
+					else if (self.gameObject.GetComponent<CustomCharacter>().data.glowMaterial != null)
+					{
+
+						if (self.gameObject.GetComponent<CustomCharacter>().data.glowMaterial.GetTexture("_MainTex") != self.sprite.renderer.material.GetTexture("_MainTex"))
+						{
+							self.gameObject.GetComponent<CustomCharacter>().data.glowMaterial.SetTexture("_MainTexture", self.sprite.renderer.material.GetTexture("_MainTex"));
+						}
+						self.sprite.renderer.material = self.gameObject.GetComponent<CustomCharacter>().data.glowMaterial;
+						result = self.gameObject.GetComponent<CustomCharacter>().data.glowMaterial.shader.name;
+
+					}
+					else
+					{
+						result = orig(self);
+					}
+
+				}
+				else
+				{
+					result = orig(self);
+				}
+			}
+			return result;
+		}
+
+
+		public static IEnumerator HandleClockhairHook(Func<ArkController, PlayerController, IEnumerator> orig, ArkController self, PlayerController interactor)
+		{
+
+			if (interactor.GetComponent<CustomCharacter>() == null || (interactor.GetComponent<CustomCharacter>() && !interactor.GetComponent<CustomCharacter>().hasPast))
+			{
+				IEnumerator origEnum = orig(self, interactor);
+				while (origEnum.MoveNext()) { yield return null; }
+			}
+			else
+			{
+				FieldInfo _heldPastGun = typeof(ArkController).GetField("m_heldPastGun", BindingFlags.NonPublic | BindingFlags.Instance);
+
+				Transform clockhairTransform = ((GameObject)UnityEngine.Object.Instantiate(BraveResources.Load("Clockhair", ".prefab"))).transform;
+				ClockhairController clockhair = clockhairTransform.GetComponent<ClockhairController>();
+				float elapsed = 0f;
+				float duration = clockhair.ClockhairInDuration;
+				Vector2 clockhairTargetPosition = interactor.CenterPosition;
+				Vector2 clockhairStartPosition = clockhairTargetPosition + new Vector2(-20f, 5f);
+				clockhair.renderer.enabled = true;
+				clockhair.spriteAnimator.alwaysUpdateOffscreen = true;
+				clockhair.spriteAnimator.Play("clockhair_intro");
+				clockhair.hourAnimator.Play("hour_hand_intro");
+				clockhair.minuteAnimator.Play("minute_hand_intro");
+				clockhair.secondAnimator.Play("second_hand_intro");
+				BraveInput currentInput = BraveInput.GetInstanceForPlayer(interactor.PlayerIDX);
+				while (elapsed < duration)
+				{
+					typeof(ArkController).GetMethod("UpdateCameraPositionDuringClockhair", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(self, new object[] { interactor.CenterPosition });
+
+
+					if (GameManager.INVARIANT_DELTA_TIME == 0f)
+					{
+						elapsed += 0.05f;
+					}
+					elapsed += GameManager.INVARIANT_DELTA_TIME;
+					float t = elapsed / duration;
+					float smoothT = Mathf.SmoothStep(0f, 1f, t);
+					if (currentInput == null)
+					{
+						ETGModConsole.Log("currentInput null");
+					}
+
+					if (clockhairTargetPosition == null)
+					{
+						ETGModConsole.Log("clockhairTargetPosition null");
+					}
+					clockhairTargetPosition = (Vector2)typeof(ArkController).GetMethod("GetTargetClockhairPosition", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(self, new object[] { currentInput, clockhairTargetPosition });
+					//clockhairTargetPosition = self.GetTargetClockhairPosition(currentInput, clockhairTargetPosition);
+					Vector3 currentPosition = Vector3.Slerp(clockhairStartPosition, clockhairTargetPosition, smoothT);
+					clockhairTransform.position = currentPosition.WithZ(0f);
+					if (t > 0.5f)
+					{
+						clockhair.renderer.enabled = true;
+					}
+					if (t > 0.75f)
+					{
+						clockhair.hourAnimator.GetComponent<Renderer>().enabled = true;
+						clockhair.minuteAnimator.GetComponent<Renderer>().enabled = true;
+						clockhair.secondAnimator.GetComponent<Renderer>().enabled = true;
+						GameCursorController.CursorOverride.SetOverride("ark", true, null);
+					}
+					clockhair.sprite.UpdateZDepth();
+					typeof(ArkController).GetMethod("PointGunAtClockhair", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(self, new object[] { interactor, clockhairTransform });
+					yield return null;
+				}
+				clockhair.SetMotionType(1f);
+				float shotTargetTime = 0f;
+				float holdDuration = 4f;
+				PlayerController shotPlayer = null;
+				bool didShootHellTrigger = false;
+				Vector3 lastJitterAmount = Vector3.zero;
+				bool m_isPlayingChargeAudio = false;
+				for (; ; )
+				{
+					typeof(ArkController).GetMethod("UpdateCameraPositionDuringClockhair", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(self, new object[] { interactor.CenterPosition });
+					clockhair.transform.position = clockhair.transform.position - lastJitterAmount;
+					clockhair.transform.position = (Vector2)typeof(ArkController).GetMethod("GetTargetClockhairPosition", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(self, new object[] { currentInput, clockhair.transform.position.XY() });
+					clockhair.sprite.UpdateZDepth();
+					bool isTargetingValidTarget = (bool)typeof(ArkController).GetMethod("CheckPlayerTarget", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(self, new object[] { GameManager.Instance.PrimaryPlayer, clockhairTransform });
+					shotPlayer = GameManager.Instance.PrimaryPlayer;
+					if (!isTargetingValidTarget && GameManager.Instance.CurrentGameType == GameManager.GameType.COOP_2_PLAYER)
+					{
+						isTargetingValidTarget = (bool)typeof(ArkController).GetMethod("CheckPlayerTarget", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(self, new object[] { GameManager.Instance.SecondaryPlayer, clockhairTransform });
+						shotPlayer = GameManager.Instance.SecondaryPlayer;
+					}
+					if (!isTargetingValidTarget && GameStatsManager.Instance.AllCorePastsBeaten())
+					{
+						isTargetingValidTarget = (bool)typeof(ArkController).GetMethod("CheckHellTarget", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(self, new object[] { self.HellCrackSprite, clockhairTransform });
+						didShootHellTrigger = isTargetingValidTarget;
+					}
+					if (isTargetingValidTarget)
+					{
+						clockhair.SetMotionType(-10f);
+					}
+					else
+					{
+						clockhair.SetMotionType(1f);
+					}
+					if ((currentInput.ActiveActions.ShootAction.IsPressed || currentInput.ActiveActions.InteractAction.IsPressed) && isTargetingValidTarget)
+					{
+						if (!m_isPlayingChargeAudio)
+						{
+							m_isPlayingChargeAudio = true;
+							AkSoundEngine.PostEvent("Play_OBJ_pastkiller_charge_01", self.gameObject);
+						}
+						shotTargetTime += BraveTime.DeltaTime;
+					}
+					else
+					{
+						shotTargetTime = Mathf.Max(0f, shotTargetTime - BraveTime.DeltaTime * 3f);
+						if (m_isPlayingChargeAudio)
+						{
+							m_isPlayingChargeAudio = false;
+							AkSoundEngine.PostEvent("Stop_OBJ_pastkiller_charge_01", self.gameObject);
+						}
+					}
+					if ((currentInput.ActiveActions.ShootAction.WasReleased || currentInput.ActiveActions.InteractAction.WasReleased) && isTargetingValidTarget && shotTargetTime > holdDuration && !GameManager.Instance.IsPaused)
+					{
+						break;
+					}
+					if (shotTargetTime > 0f)
+					{
+						float distortionPower = Mathf.Lerp(0f, 0.35f, shotTargetTime / holdDuration);
+						float distortRadius = 0.5f;
+						float edgeRadius = Mathf.Lerp(4f, 7f, shotTargetTime / holdDuration);
+						clockhair.UpdateDistortion(distortionPower, distortRadius, edgeRadius);
+						float desatRadiusUV = Mathf.Lerp(2f, 0.25f, shotTargetTime / holdDuration);
+						clockhair.UpdateDesat(true, desatRadiusUV);
+						shotTargetTime = Mathf.Min(holdDuration + 0.25f, shotTargetTime + BraveTime.DeltaTime);
+						float d = Mathf.Lerp(0f, 0.5f, (shotTargetTime - 1f) / (holdDuration - 1f));
+						Vector3 vector = (UnityEngine.Random.insideUnitCircle * d).ToVector3ZUp(0f);
+						BraveInput.DoSustainedScreenShakeVibration(shotTargetTime / holdDuration * 0.8f);
+						clockhair.transform.position = clockhair.transform.position + vector;
+						lastJitterAmount = vector;
+						clockhair.SetMotionType(Mathf.Lerp(-10f, -2400f, shotTargetTime / holdDuration));
+					}
+					else
+					{
+						lastJitterAmount = Vector3.zero;
+						clockhair.UpdateDistortion(0f, 0f, 0f);
+						clockhair.UpdateDesat(false, 0f);
+						shotTargetTime = 0f;
+						BraveInput.DoSustainedScreenShakeVibration(0f);
+					}
+					typeof(ArkController).GetMethod("PointGunAtClockhair", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(self, new object[] { interactor, clockhairTransform });
+					yield return null;
+				}
+				BraveInput.DoSustainedScreenShakeVibration(0f);
+				BraveInput.DoVibrationForAllPlayers(Vibration.Time.Normal, Vibration.Strength.Hard);
+				clockhair.StartCoroutine(clockhair.WipeoutDistortionAndFade(0.5f));
+				clockhair.gameObject.SetLayerRecursively(LayerMask.NameToLayer("Unoccluded"));
+				Pixelator.Instance.FadeToColor(1f, Color.white, true, 0.2f);
+				Pixelator.Instance.DoRenderGBuffer = false;
+				clockhair.spriteAnimator.Play("clockhair_fire");
+				clockhair.hourAnimator.GetComponent<Renderer>().enabled = false;
+				clockhair.minuteAnimator.GetComponent<Renderer>().enabled = false;
+				clockhair.secondAnimator.GetComponent<Renderer>().enabled = false;
+				yield return null;
+				TimeTubeCreditsController ttcc = new TimeTubeCreditsController();
+				bool isShortTunnel = didShootHellTrigger || shotPlayer.characterIdentity == PlayableCharacters.CoopCultist || (bool)typeof(ArkController).GetMethod("CharacterStoryComplete", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(self, new object[] { shotPlayer.characterIdentity });
+				UnityEngine.Object.Destroy((_heldPastGun.GetValue(self) as Transform).gameObject);
+				interactor.ToggleGunRenderers(true, "ark");
+				GameCursorController.CursorOverride.RemoveOverride("ark");
+				Pixelator.Instance.LerpToLetterbox(0.35f, 0.25f);
+				yield return self.StartCoroutine(ttcc.HandleTimeTubeCredits(clockhair.sprite.WorldCenter, isShortTunnel, clockhair.spriteAnimator, (!didShootHellTrigger) ? shotPlayer.PlayerIDX : 0, false));
+				if (isShortTunnel)
+				{
+					Pixelator.Instance.FadeToBlack(1f, false, 0f);
+					yield return new WaitForSeconds(1f);
+				}
+				if (didShootHellTrigger)
+				{
+					GameManager.DoMidgameSave(GlobalDungeonData.ValidTilesets.HELLGEON);
+					GameManager.Instance.LoadCustomLevel("tt_bullethell");
+				}
+				else if ((bool)typeof(ArkController).GetMethod("CharacterStoryComplete", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(self, new object[] { shotPlayer.characterIdentity }) && shotPlayer.characterIdentity == PlayableCharacters.Gunslinger)
+				{
+					GameManager.DoMidgameSave(GlobalDungeonData.ValidTilesets.FINALGEON);
+					GameManager.IsGunslingerPast = true;
+					typeof(ArkController).GetMethod("ResetPlayers", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(self, new object[] { true });
+					GameManager.Instance.LoadCustomLevel("tt_bullethell");
+				}
+				else if ((bool)typeof(ArkController).GetMethod("CharacterStoryComplete", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(self, new object[] { shotPlayer.characterIdentity }))
+				{
+					bool flag = false;
+					GameManager.DoMidgameSave(GlobalDungeonData.ValidTilesets.FINALGEON);
+
+					if (shotPlayer.GetComponent<CustomCharacter>() != null)
+					{
+						flag = true;
+						typeof(ArkController).GetMethod("ResetPlayers", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(self, new object[] { false });
+						GameManager.Instance.LoadCustomLevel(shotPlayer.GetComponent<CustomCharacter>().past);
+					}
+
+					if (!flag)
+					{
+						AmmonomiconController.Instance.OpenAmmonomicon(true, true);
+					}
+					else
+					{
+						GameUIRoot.Instance.ToggleUICamera(false);
+					}
+				}
+				else
+				{
+					AmmonomiconController.Instance.OpenAmmonomicon(true, true);
+				}
+				for (; ; )
+				{
+					yield return null;
+				}
+				yield break;
+			}
+
+		}
+
+
+
+		public static void PunchoutUpdateUI(Action<PunchoutPlayerController> orig, PunchoutPlayerController self)
+		{
+			FieldInfo _PlayerUiNames = typeof(PunchoutPlayerController).GetField("PlayerUiNames", BindingFlags.NonPublic | BindingFlags.Static);
+			FieldInfo _playerId = typeof(PunchoutPlayerController).GetField("m_playerId", BindingFlags.NonPublic | BindingFlags.Instance);
+
+			if ((int)_playerId.GetValue(self) > 7)
+			{
+				string str = (_PlayerUiNames.GetValue(null) as string[])[(int)_playerId.GetValue(self)];
+				self.HealthBarUI.SpriteName = "punch_health_bar_001";
+				if (self.Health > 66f)
+				{
+					self.PlayerUiSprite.SpriteName = str + "1";
+				}
+				else if (self.Health > 33f)
+				{
+					self.PlayerUiSprite.SpriteName = str + "2";
+				}
+				else
+				{
+					self.PlayerUiSprite.SpriteName = str + "3";
+				}
+				if (self.IsEevee && self.PlayerUiSprite.OverrideMaterial == null)
+				{
+					Material material = UnityEngine.Object.Instantiate<Material>(self.PlayerUiSprite.Atlas.Material);
+					material.shader = Shader.Find("Brave/Internal/GlitchEevee");
+					material.SetTexture("_EeveeTex", self.CosmicTex);
+					material.SetFloat("_WaveIntensity", 0.1f);
+					material.SetFloat("_ColorIntensity", 0.015f);
+					self.PlayerUiSprite.OverrideMaterial = material;
+					return;
+				}
+				if (!self.IsEevee && self.PlayerUiSprite.OverrideMaterial != null)
+				{
+					self.PlayerUiSprite.OverrideMaterial = null;
+				}
+			}
+			else
+            {
+				orig(self);
+			}
+
+			
+		}
+
 
 		//one hook in and im already at the point of wanting to punch my screen thats gotta be a new record!! Update its like 3? (i think, ive lost track couldve been a week) days later and i can say it got worse 
 		public static void InitHook(Action<PunchoutController> orig, PunchoutController self)
@@ -233,6 +664,7 @@ namespace CustomCharacters
 
 				//ETGModConsole.Log("InitHook 1.5");
 				//ETGModConsole.Log(PunchoutPlayerController.PlayerNames.Length.ToString());
+				//ETGModConsole.Log($"[{(_PlayerUiNames.GetValue(null) as string[])[CustomCharacter.punchoutBullShit[name]]}]: {(_PlayerUiNames.GetValue(null) as string[]).Length} -=- {CustomCharacter.punchoutBullShit[name]}");
 				self.Player.SwapPlayer(new int?(CustomCharacter.punchoutBullShit[name]), false);
 				//ETGModConsole.Log("InitHook 2");
 
@@ -281,64 +713,7 @@ namespace CustomCharacters
 		}
 
 		
-		public static string LocalShaderNameGetHook(Func<PlayerController, string> orig, PlayerController self)
-		{
-
-			bool flag = !GameOptions.SupportsStencil;
-			string result;
-			if (flag)
-			{
-				result = "Brave/PlayerShaderNoStencil";
-			}
-			else
-			{
-				if (self.characterIdentity > (PlayableCharacters)10)
-				{
-					if (self.gameObject.GetComponent<CustomCharacter>().data == null)
-					{
-						//ETGModConsole.Log($"[Charapi]: custom character data nulled... thats really bad");
-						if (!self.gameObject.GetComponent<CustomCharacter>().GetData())
-						{
-							ETGModConsole.Log($"[Charapi]: custom character data nulled... seems it dosent exists... fuck!");
-						}						
-					}
-
-					if (self.IsUsingAlternateCostume && self.gameObject.GetComponent<CustomCharacter>().data.altGlowMaterial != null)
-					{
-
-						if (self.gameObject.GetComponent<CustomCharacter>().data.altGlowMaterial.GetTexture("_MainTex") != self.sprite.renderer.material.GetTexture("_MainTex"))
-						{
-							self.gameObject.GetComponent<CustomCharacter>().data.altGlowMaterial.SetTexture("_MainTexture", self.sprite.renderer.material.GetTexture("_MainTex"));
-						}
-						self.sprite.renderer.material = self.gameObject.GetComponent<CustomCharacter>().data.altGlowMaterial;
-						result = self.gameObject.GetComponent<CustomCharacter>().data.altGlowMaterial.shader.name;
-
-
-					}
-					else if (self.gameObject.GetComponent<CustomCharacter>().data.glowMaterial != null)
-					{
-						
-						if (self.gameObject.GetComponent<CustomCharacter>().data.glowMaterial.GetTexture("_MainTex") != self.sprite.renderer.material.GetTexture("_MainTex"))
-						{
-							self.gameObject.GetComponent<CustomCharacter>().data.glowMaterial.SetTexture("_MainTexture", self.sprite.renderer.material.GetTexture("_MainTex"));
-						}
-						self.sprite.renderer.material = self.gameObject.GetComponent<CustomCharacter>().data.glowMaterial;
-						result = self.gameObject.GetComponent<CustomCharacter>().data.glowMaterial.shader.name;
-
-					}
-					else
-					{
-						result = orig(self);
-					}
-
-				}
-				else
-				{
-					result = orig(self);
-				}
-			}
-			return result;
-		}
+		
 
 
 		/*public static bool SaveOptionsHook(Func<GameOptions, bool> orig)
@@ -430,18 +805,18 @@ namespace CustomCharacters
 			//
 			if (self is PlayerController && (int)(self as PlayerController).characterIdentity > 10 && self.gameObject.GetComponent<CustomCharacter>() != null)
 			{
-				ETGModConsole.Log($"[Charapi]: (RegisterOverrideColorHook) 1");
+				//ETGModConsole.Log($"[Charapi]: (RegisterOverrideColorHook) 1");
 				//self.gameObject.GetComponent<CustomCharacter>().data.normalMaterial.SetTexture("_MainTexture", self.sprite.renderer.material.GetTexture("_MainTex"));
 				if (self.gameObject.GetComponent<CustomCharacter>().data == null)
 				{
-					ETGModConsole.Log($"[Charapi]: custom character data nulled... thats really bad");
+					//ETGModConsole.Log($"[Charapi]: custom character data nulled... thats really bad");
 					if (!self.gameObject.GetComponent<CustomCharacter>().GetData())
 					{
 						ETGModConsole.Log($"[Charapi]: custom character data nulled... seems it dosent exists... fuck!");
 					}
-					ETGModConsole.Log($"[Charapi]: (RegisterOverrideColorHook) 2");
+					//ETGModConsole.Log($"[Charapi]: (RegisterOverrideColorHook) 2");
 				}
-				ETGModConsole.Log($"[Charapi]: (RegisterOverrideColorHook) 3");
+				//ETGModConsole.Log($"[Charapi]: (RegisterOverrideColorHook) 3");
 
 				for (int i = 0; i < self.healthHaver.bodySprites.Count; i++)
 				{
@@ -452,17 +827,17 @@ namespace CustomCharacters
 					}
 					else
                     {
-						ETGModConsole.Log($"[Charapi]: i hate you");
+						//ETGModConsole.Log($"[Charapi]: i hate you");
 					}
 				}
 
 				if (self.renderer == null)
                 {
-					ETGModConsole.Log($"[Charapi]: i hate you");
+					//ETGModConsole.Log($"[Charapi]: i hate you");
 				}
 
 				//self.renderer.material = self.gameObject.GetComponent<CustomCharacter>().data.normalMaterial;
-				ETGModConsole.Log($"[Charapi]: (RegisterOverrideColorHook) 4");
+				//ETGModConsole.Log($"[Charapi]: (RegisterOverrideColorHook) 4");
 			}
 			orig(self, overrideColor, source);
 		}
@@ -501,7 +876,7 @@ namespace CustomCharacters
             {
 				SaveFileBullShit.Load();
 			}
-
+			//ETGModConsole.Log($"{SaveFileBullShit.Instance.m_customCharacterStats.Count} - {GameStatsManager.Instance.m_characterStats.Count}");
 			foreach (var characterStats in SaveFileBullShit.Instance.m_customCharacterStats)
 			{
 				var character = characterStats.Key;
@@ -534,7 +909,7 @@ namespace CustomCharacters
             {
 				SaveFileBullShit.Load();
 			}
-
+			Dictionary<PlayableCharacters, GameStats> thingsToRemove = new Dictionary<PlayableCharacters, GameStats>();
 			foreach (var characterStats in GameStatsManager.Instance.m_characterStats)
 			{
 				
@@ -542,7 +917,7 @@ namespace CustomCharacters
 				var stats = characterStats.Value;
 				if ((int)character > 10)
                 {
-					ETGModConsole.Log($"Found character \"{character}\" moving them to the custom save file");
+					//ETGModConsole.Log($"Found character \"{character}\" moving them to the custom save file");
 					if (!SaveFileBullShit.Instance.m_customCharacterStats.ContainsKey((CustomPlayableCharacters)character))
 					{
 						SaveFileBullShit.Instance.m_customCharacterStats.Add((CustomPlayableCharacters)character, new GameStats());
@@ -551,43 +926,90 @@ namespace CustomCharacters
 					{
 						SaveFileBullShit.Instance.m_customCharacterStats[(CustomPlayableCharacters)character] = stats;				
 					}
+					else if (SaveFileBullShit.Instance.m_customCharacterStats.ContainsKey((CustomPlayableCharacters)character) && stats == null)
+					{
+						SaveFileBullShit.Instance.m_customCharacterStats[(CustomPlayableCharacters)character] = new GameStats();
+					}
+					thingsToRemove.Add(character, SaveFileBullShit.Instance.m_customCharacterStats[(CustomPlayableCharacters)character]);
 				}
 				
 			}
 			SaveFileBullShit.Save();
-			//foreach(var character in thingsToRemove)
-			//{
-			//	if (GameStatsManager.Instance.m_characterStats.ContainsKey(character))
-			//    {
-			//		GameStatsManager.Instance.m_characterStats.Remove(character);
-			//	}
-			//	
-			//}
-			return orig(GameStatsManager.Instance);
+			foreach(var character in thingsToRemove)
+			{
+				if (GameStatsManager.Instance.m_characterStats.ContainsKey(character.Key))
+			    {
+					GameStatsManager.Instance.m_characterStats.Remove(character.Key);
+				}
+				
+			}
+			var result = orig(GameStatsManager.Instance);
+
+			foreach (var character in thingsToRemove)
+			{
+				if (!GameStatsManager.Instance.m_characterStats.ContainsKey(character.Key))
+				{
+					GameStatsManager.Instance.m_characterStats.Add(character.Key, character.Value);
+				}
+
+			}
+
+			return result;
+
 		}
 
 
 		public static float GetPlayerStatValueHook(Func<GameStatsManager, TrackedStats, float> orig, GameStatsManager self, TrackedStats stat)
 		{			
 			float statValue = orig(self, stat);
-
-			foreach(var whydodgerollmustyouhurtmelikethis in self.m_characterStats)
-            {				
-				if(whydodgerollmustyouhurtmelikethis.Key > (PlayableCharacters)10)
+			foreach (var whydodgerollmustyouhurtmelikethis in self.m_characterStats)
+			{
+				if(Loader.myPlayableCharacters.Contains(whydodgerollmustyouhurtmelikethis.Key))
                 {
-					statValue += whydodgerollmustyouhurtmelikethis.Value.GetStatValue(stat);
+
+					if (whydodgerollmustyouhurtmelikethis.Value != null)
+					{
+						statValue += whydodgerollmustyouhurtmelikethis.Value.GetStatValue(stat);
+					}
+
+					// statValue += whydodgerollmustyouhurtmelikethis.Value.GetStatValue(stat);					
 				}				
 			}
-
+			/*
+			foreach (var character in Loader.myPlayableCharacters)
+			{
+				GameStats gameStats;
+				if (self.m_characterStats.TryGetValue(character, out gameStats))
+				{
+					statValue += gameStats.GetStatValue(stat);
+				}
+			}*/
 			return statValue;
 		}
 
+
+		public static void ClearStatValueGlobalHook(Action<GameStatsManager, TrackedStats> orig, GameStatsManager self, TrackedStats stat)
+		{
+			orig(self, stat);
+			foreach (var whydodgerollmustyouhurtmelikethis in self.m_characterStats)
+			{
+				if (Loader.myPlayableCharacters.Contains(whydodgerollmustyouhurtmelikethis.Key))
+				{
+
+					if (whydodgerollmustyouhurtmelikethis.Value != null)
+					{
+						whydodgerollmustyouhurtmelikethis.Value.SetStat(stat, 0);
+					}
+			
+				}
+			}
+		}
 
 		public static void ClearOverheadElementHook(Action<FoyerCharacterSelectFlag> orig, FoyerCharacterSelectFlag self)
 		{
 			FieldInfo _extantOverheadUIElement = typeof(FoyerCharacterSelectFlag).GetField("m_extantOverheadUIElement", BindingFlags.NonPublic | BindingFlags.Instance);
 
-			if ((_extantOverheadUIElement.GetValue(self) as dfControl) != null && FakePrefab.IsFakePrefab((_extantOverheadUIElement.GetValue(self) as dfControl).gameObject))
+			if ((_extantOverheadUIElement.GetValue(self) as dfControl) != null && ItemAPI.FakePrefab.IsFakePrefab((_extantOverheadUIElement.GetValue(self) as dfControl).gameObject))
 			{
 				(_extantOverheadUIElement.GetValue(self) as dfControl).gameObject.SetActive(false);
 				//UnityEngine.Object.Destroy((_extantOverheadUIElement.GetValue(self) as dfControl).gameObject);
@@ -922,6 +1344,8 @@ namespace CustomCharacters
 			{
 				sortedByX.Add(character);
 				//self.OnPlayerCharacterChanged = character.OnSelectedCharacterCallback;
+
+				
 			}
 
 			return sortedByX;

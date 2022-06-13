@@ -39,59 +39,64 @@ namespace NevernamedsItems
         {
             if (beam && beam.projectile)
             {
-            Exploder.DoRadialKnockback(beam.Origin, 40, 7);
-            List<AIActor> activeEnemies = beam.projectile.GetAbsoluteRoom().GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
-            if (activeEnemies != null)
-            {
-                for (int i = 0; i < activeEnemies.Count; i++)
+                Exploder.DoRadialKnockback(beam.Origin, 40, 7);
+                if (beam.projectile && beam.projectile.GetAbsoluteRoom() != null)
                 {
-                    AIActor aiactor = activeEnemies[i];
-                    if (aiactor.IsNormalEnemy)
+                    List<AIActor> activeEnemies = beam.projectile.GetAbsoluteRoom().GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+                    if (activeEnemies != null && activeEnemies.Count > 0)
                     {
-                        if (Vector2.Distance(beam.Origin, aiactor.sprite.WorldCenter) < 3)
+                        for (int i = 0; i < activeEnemies.Count; i++)
                         {
-                            if (UnityEngine.Random.value <= (0.25f * 2))
+                            AIActor aiactor = activeEnemies[i];
+                            if (aiactor.IsNormalEnemy && aiactor.behaviorSpeculator)
                             {
-                                aiactor.behaviorSpeculator.Stun(1);
-                            }
-                        }
-                        else if (Vector2.Distance(beam.Origin, aiactor.sprite.WorldCenter) < 6)
-                        {
-                            if (UnityEngine.Random.value <= (0.07f * 2))
-                            {
-                                aiactor.behaviorSpeculator.Stun(1);
+                                if (Vector2.Distance(beam.Origin, aiactor.sprite.WorldCenter) < 3)
+                                {
+                                    if (UnityEngine.Random.value <= (0.25f * 2))
+                                    {
+                                        aiactor.behaviorSpeculator.Stun(1);
+                                    }
+                                }
+                                else if (Vector2.Distance(beam.Origin, aiactor.sprite.WorldCenter) < 6)
+                                {
+                                    if (UnityEngine.Random.value <= (0.07f * 2))
+                                    {
+                                        aiactor.behaviorSpeculator.Stun(1);
+                                    }
+                                }
                             }
                         }
                     }
                 }
-            }
             }
         }
         private IEnumerator KnockbackDoer(Projectile proj, float flot)
         {
             yield return null;
             Exploder.DoRadialKnockback(proj.specRigidbody.UnitCenter, (20 * flot), 7);
-            //VFXToolbox.DoStringSquirt(flot.ToString(), proj.specRigidbody.UnitCenter, Color.red);
-            List<AIActor> activeEnemies = proj.GetAbsoluteRoom().GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
-            if (activeEnemies != null)
+            if (proj.GetAbsoluteRoom() != null)
             {
-                for (int i = 0; i < activeEnemies.Count; i++)
+                List<AIActor> activeEnemies = proj.GetAbsoluteRoom().GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+                if (activeEnemies != null && activeEnemies.Count >0)
                 {
-                    AIActor aiactor = activeEnemies[i];
-                    if (aiactor.IsNormalEnemy)
+                    for (int i = 0; i < activeEnemies.Count; i++)
                     {
-                        if (Vector2.Distance(proj.specRigidbody.UnitCenter, aiactor.sprite.WorldCenter) < 3)
+                        AIActor aiactor = activeEnemies[i];
+                        if (aiactor.IsNormalEnemy && aiactor.behaviorSpeculator)
                         {
-                            if (UnityEngine.Random.value <= (0.25f * flot))
+                            if (Vector2.Distance(proj.specRigidbody.UnitCenter, aiactor.sprite.WorldCenter) < 3)
                             {
-                                aiactor.behaviorSpeculator.Stun(1);
+                                if (UnityEngine.Random.value <= (0.25f * flot))
+                                {
+                                    aiactor.behaviorSpeculator.Stun(1);
+                                }
                             }
-                        }
-                        else if (Vector2.Distance(proj.specRigidbody.UnitCenter, aiactor.sprite.WorldCenter) < 6)
-                        {
-                            if (UnityEngine.Random.value <= (0.07f * flot))
+                            else if (Vector2.Distance(proj.specRigidbody.UnitCenter, aiactor.sprite.WorldCenter) < 6)
                             {
-                                aiactor.behaviorSpeculator.Stun(1);
+                                if (UnityEngine.Random.value <= (0.07f * flot))
+                                {
+                                    aiactor.behaviorSpeculator.Stun(1);
+                                }
                             }
                         }
                     }

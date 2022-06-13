@@ -53,7 +53,7 @@ namespace NevernamedsItems
         {
             List<AIActor> exclude = new List<AIActor>();
             if (excludedActors != null && excludedActors.Count > 0) exclude.AddRange(excludedActors);
-            Func<AIActor, bool> isValid = (AIActor a) => a && a.HasBeenEngaged && a.healthHaver && a.healthHaver.IsVulnerable && a.healthHaver.IsAlive && !a.IsGone &&!exclude.Contains(a);
+            Func<AIActor, bool> isValid = (AIActor a) => a && a.HasBeenEngaged && a.healthHaver && a.healthHaver.IsVulnerable && a.healthHaver.IsAlive && !a.IsGone &&!exclude.Contains(a) && a.IsWorthShootingAt && a.isActiveAndEnabled && a.CanTargetPlayers && a.GetComponent<CompanionController>() == null;
             IntVector2 intVectorStartPos = startPosition.ToIntVector2();
             RoomHandler.ActiveEnemyType enemyType = RoomHandler.ActiveEnemyType.RoomClear;
             if (canTargetNonRoomClear) enemyType = RoomHandler.ActiveEnemyType.All;
@@ -63,12 +63,21 @@ namespace NevernamedsItems
             else return closestToPosition.specRigidbody.UnitCenter;
         }
 
+        public static AIActor GetNearestEnemyToPosition(this Vector2 position, bool checkIsWorthShootingAt = true, RoomHandler.ActiveEnemyType type = RoomHandler.ActiveEnemyType.RoomClear, Func<AIActor, bool> overrideValidityCheck = null)
+        {
+            Func<AIActor, bool> isValid = (AIActor a) => a && a.HasBeenEngaged && a.healthHaver && a.healthHaver.IsVulnerable && a.healthHaver.IsAlive && ((checkIsWorthShootingAt && a.IsWorthShootingAt) || !checkIsWorthShootingAt);
+            if (overrideValidityCheck != null) isValid = overrideValidityCheck;
+            AIActor closestToPosition = BraveUtility.GetClosestToPosition<AIActor>(GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(position.ToIntVector2()).GetActiveEnemies(type), position, isValid, new AIActor[] { });
+            if (closestToPosition) return closestToPosition;
+            else return null;
+        }
+
         public static Vector2 GetVectorToNearestEnemy(this Vector2 bulletPosition, float angleFromAim = 0, float angleVariance = 0, PlayerController playerToScaleAccuracyOff = null, List<AIActor> excludedActors = null)
         {
             List<AIActor> exclude = new List<AIActor>();
             if (excludedActors != null && excludedActors.Count > 0) exclude.AddRange(excludedActors);
             Vector2 dirVec = UnityEngine.Random.insideUnitCircle;
-            Func<AIActor, bool> isValid = (AIActor a) => a && a.HasBeenEngaged && a.healthHaver && a.healthHaver.IsVulnerable && !exclude.Contains(a);
+            Func<AIActor, bool> isValid = (AIActor a) => a && a.HasBeenEngaged && a.healthHaver && a.healthHaver.IsVulnerable && !exclude.Contains(a) && a.IsWorthShootingAt && a.isActiveAndEnabled && a.CanTargetPlayers && a.GetComponent<CompanionController>() == null;
             IntVector2 bulletPositionIntVector2 = bulletPosition.ToIntVector2();
             AIActor closestToPosition = BraveUtility.GetClosestToPosition<AIActor>(GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(bulletPositionIntVector2).GetActiveEnemies(RoomHandler.ActiveEnemyType.All), bulletPosition, isValid, new AIActor[]
             {
@@ -206,18 +215,7 @@ namespace NevernamedsItems
             else if (random <= cChance) { return PickupObject.ItemQuality.C; }
             else { return PickupObject.ItemQuality.D; }
         }
-        public static void SetForSeconds(this bool boolToSet, bool targetVal, float time)
-        {
-            GameManager.Instance.StartCoroutine(HandleTimedBool(boolToSet, targetVal, time));
-        }
-        private static IEnumerator HandleTimedBool(bool boolToSet, bool targetVal, float time)
-        {
-            bool origVal = boolToSet;
-            boolToSet = targetVal;
-            yield return new WaitForSeconds(time);
-            boolToSet = origVal;
-            yield break;
-        }
+        
     }
     public static class RandomEnum<T>
     {

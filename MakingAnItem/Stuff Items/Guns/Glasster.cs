@@ -125,7 +125,7 @@ namespace NevernamedsItems
         {
             if (player == gun.CurrentOwner)
             {
-                if (player.PlayerHasActiveSynergy("No Pane, No Gain"))
+                if (player.CurrentGun.PickupObjectId == GlassterID &&  player.PlayerHasActiveSynergy("No Pane, No Gain"))
                 {
                     gun.CurrentAmmo = 0;
                 }

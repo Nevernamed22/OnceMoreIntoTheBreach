@@ -61,6 +61,9 @@ namespace NevernamedsItems
             gun.SetBaseMaxAmmo(80);
             gun.ammo = 80;
             gun.gunClass = GunClass.SILLY;
+            
+            GameObject baseproj = gun.DefaultModule.projectiles[0].gameObject.InstantiateAndFakeprefab();
+            gun.DefaultModule.projectiles[0] = baseproj.GetComponent<Projectile>();
 
             //BULLET STATS
             HelixProjectileButLessShit projectile = DataCloners.CopyFields<HelixProjectileButLessShit>(Instantiate(gun.DefaultModule.projectiles[0]));
@@ -82,7 +85,9 @@ namespace NevernamedsItems
 
 
             //MINI BULLETS
-            HelixProjectileButLessShit projectile2 = DataCloners.CopyFields<HelixProjectileButLessShit>(Instantiate(PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
+            GameObject split = (PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0].gameObject.InstantiateAndFakeprefab();
+
+            HelixProjectileButLessShit projectile2 = DataCloners.CopyFields<HelixProjectileButLessShit>(split.GetComponent<Projectile>());
             projectile2.SpawnShadowBulletsOnSpawn = false;
             projectile2.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile2.gameObject);

@@ -46,7 +46,7 @@ namespace NevernamedsItems
             beamtofire.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(beamtofire.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(beamtofire);
-            beamtofire.baseData.damage = 5;
+            beamtofire.baseData.damage = 10;
 
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);

@@ -9,23 +9,80 @@ using UnityEngine;
 
 namespace NevernamedsItems
 {
+    public class SlashData :ScriptableObject
+    {
+        public static SlashData CloneSlashData(SlashData original)
+        {
+            SlashData newData = new SlashData();
+            newData.doVFX = original.doVFX;
+            newData.VFX = original.VFX;
+            newData.doHitVFX = original.doHitVFX;
+            newData.hitVFX = original.hitVFX;
+            newData.projInteractMode = original.projInteractMode;
+            newData.playerKnockbackForce = original.playerKnockbackForce;
+            newData.enemyKnockbackForce = original.enemyKnockbackForce;
+            newData.statusEffects = original.statusEffects;
+            newData.jammedDamageMult = original.jammedDamageMult;
+            newData.bossDamageMult = original.bossDamageMult;
+            newData.doOnSlash = original.doOnSlash;
+            newData.doPostProcessSlash = original.doPostProcessSlash;
+            newData.slashRange = original.slashRange;
+            newData.slashDegrees = original.slashDegrees;
+            newData.damage = original.damage;
+            newData.damagesBreakables = original.damagesBreakables;
+            newData.soundEvent = original.soundEvent;
+            newData.OnHitTarget = original.OnHitTarget;
+            newData.OnHitBullet = original.OnHitBullet;
+            newData.OnHitMinorBreakable = original.OnHitMinorBreakable;
+            newData.OnHitMajorBreakable = original.OnHitMajorBreakable;
+            return newData;
+        }
+
+        public bool doVFX = true;
+        public VFXPool VFX = (PickupObjectDatabase.GetById(417) as Gun).muzzleFlashEffects;
+        public bool doHitVFX = true;
+        public VFXPool hitVFX = (PickupObjectDatabase.GetById(417) as Gun).DefaultModule.projectiles[0].hitEffects.enemy;
+        public SlashDoer.ProjInteractMode projInteractMode = SlashDoer.ProjInteractMode.IGNORE;
+        public float playerKnockbackForce = 5;
+        public float enemyKnockbackForce = 10;
+        public List<GameActorEffect> statusEffects = new List<GameActorEffect>();
+        public float jammedDamageMult = 1;
+        public float bossDamageMult = 1;
+        public bool doOnSlash = true;
+        public bool doPostProcessSlash = true;
+        public float slashRange = 2.5f;
+        public float slashDegrees = 90f;
+        public float damage = 5f;
+        public bool damagesBreakables = true;
+        public string soundEvent = "Play_WPN_blasphemy_shot_01";
+        public Action<GameActor, bool> OnHitTarget = null;
+        public Action<Projectile> OnHitBullet = null;
+        public Action<MinorBreakable> OnHitMinorBreakable = null;
+        public Action<MajorBreakable> OnHitMajorBreakable = null;
+    }
     public class SlashDoer
     {
-        public static void DoSwordSlash(Vector2 position, float angle, PlayerController owner, float playerKnockbackForce, ProjInteractMode intmode, float damageToDeal, float enemyKnockbackForce, List<GameActorEffect> statusEffects, Transform parentTransform = null, float jammedDamageMult = 1, float bossDamageMult = 1)
+        public static void DoSwordSlash(
+            Vector2 position,
+            float angle,
+            GameActor owner,
+            SlashData slashParameters,
+            Transform parentTransform = null)
         {
-            (PickupObjectDatabase.GetById(417) as Gun).muzzleFlashEffects.SpawnAtPosition(position, angle, parentTransform, null, null, -0.05f);
-            GameManager.Instance.StartCoroutine(HandleSlash(position, angle, owner, playerKnockbackForce, intmode, damageToDeal, enemyKnockbackForce, statusEffects, jammedDamageMult, bossDamageMult));
+            if (slashParameters.doVFX && slashParameters.VFX != null) slashParameters.VFX.SpawnAtPosition(position, angle, parentTransform, null, null, -0.05f);
+            if (!string.IsNullOrEmpty( slashParameters.soundEvent) && owner != null && owner.gameObject != null) AkSoundEngine.PostEvent(slashParameters.soundEvent, owner.gameObject);
+            GameManager.Instance.StartCoroutine(HandleSlash(position, angle, owner, slashParameters));
         }
-        private static IEnumerator HandleSlash(Vector2 position, float angle, PlayerController owner, float knockbackForce, ProjInteractMode intmode, float damageToDeal, float enemyKnockback, List<GameActorEffect> statusEffects, float jammedDMGMult, float bossDMGMult)
+        private static IEnumerator HandleSlash(Vector2 position, float angle, GameActor owner, SlashData slashParameters)
         {
             int slashId = Time.frameCount;
             List<SpeculativeRigidbody> alreadyHit = new List<SpeculativeRigidbody>();
-            if (knockbackForce != 0f && owner != null) owner.knockbackDoer.ApplyKnockback(BraveMathCollege.DegreesToVector(angle, 1f), knockbackForce, 0.25f, false);
+            if (slashParameters.playerKnockbackForce != 0f && owner != null) owner.knockbackDoer.ApplyKnockback(BraveMathCollege.DegreesToVector(angle, 1f), slashParameters.playerKnockbackForce, 0.25f, false);
             float ela = 0f;
             while (ela < 0.2f)
             {
                 ela += BraveTime.DeltaTime;
-                HandleHeroSwordSlash(alreadyHit, position, angle, slashId, owner, intmode, damageToDeal, enemyKnockback, statusEffects, jammedDMGMult, bossDMGMult);
+                HandleHeroSwordSlash(alreadyHit, position, angle, slashId, owner, slashParameters);
                 yield return null;
             }
             yield break;
@@ -34,12 +91,42 @@ namespace NevernamedsItems
         {
             IGNORE,
             DESTROY,
-            REFLECT
+            REFLECT,
+            REFLECTANDPOSTPROCESS,
         }
-        private static bool ProjectileIsValid(Projectile proj)
+        private static bool SlasherIsPlayerOrFriendly(GameActor slasher)
         {
-            if (proj && (!(proj.Owner is PlayerController) || proj.ForcePlayerBlankable)) return true;
-            else return false;
+            if (slasher is PlayerController) return true;
+            if (slasher is AIActor)
+            {
+                if (slasher.GetComponent<CompanionController>()) return true;
+                if (!slasher.aiActor.CanTargetPlayers && slasher.aiActor.CanTargetEnemies) return true;
+            }
+            return false;
+        }
+        private static bool ProjectileIsValid(Projectile proj, GameActor slashOwner)
+        {
+            if (proj)
+            {
+                if (slashOwner == null)
+                {
+                    return false;
+                }
+                if (SlasherIsPlayerOrFriendly(slashOwner))
+                {
+                    if ((proj.Owner && !(proj.Owner is PlayerController)) || proj.ForcePlayerBlankable) return true;
+                }
+                else if (slashOwner is AIActor)
+                {
+                    if (proj.Owner && proj.Owner is PlayerController) return true;
+                }
+                else
+                {
+                    if (proj.Owner) return true;
+                }
+            }
+
+            return false;
         }
         private static bool ObjectWasHitBySlash(Vector2 ObjectPosition, Vector2 SlashPosition, float slashAngle, float SlashRange, float SlashDimensions)
         {
@@ -67,27 +154,31 @@ namespace NevernamedsItems
             }
             return false;
         }
-        private static void HandleHeroSwordSlash(List<SpeculativeRigidbody> alreadyHit, Vector2 arcOrigin, float slashAngle, int slashId, PlayerController owner, ProjInteractMode intmode, float damageToDeal, float enemyKnockback, List<GameActorEffect> statusEffects, float jammedDMGMult, float bossDMGMult)
+        private static void HandleHeroSwordSlash(List<SpeculativeRigidbody> alreadyHit, Vector2 arcOrigin, float slashAngle, int slashId, GameActor owner, SlashData slashParameters)
         {
-            float degreesOfSlash = 90f;
-            float slashRange = 2.5f;
+            float degreesOfSlash = slashParameters.slashDegrees;
+            float slashRange = slashParameters.slashRange;
+
+            
+
             ReadOnlyCollection<Projectile> allProjectiles2 = StaticReferenceManager.AllProjectiles;
             for (int j = allProjectiles2.Count - 1; j >= 0; j--)
             {
                 Projectile projectile2 = allProjectiles2[j];
-                if (ProjectileIsValid(projectile2))
+                if (ProjectileIsValid(projectile2, owner))
                 {
                     Vector2 projectileCenter = projectile2.sprite.WorldCenter;
                     if (ObjectWasHitBySlash(projectileCenter, arcOrigin, slashAngle, slashRange, degreesOfSlash))
                     {
-                        if (intmode != ProjInteractMode.IGNORE || projectile2.collidesWithProjectiles)
+                        if (slashParameters.OnHitBullet != null) slashParameters.OnHitBullet(projectile2);
+                        if (slashParameters.projInteractMode != ProjInteractMode.IGNORE || projectile2.collidesWithProjectiles)
                         {
-                            if (intmode == ProjInteractMode.DESTROY || intmode == ProjInteractMode.IGNORE) projectile2.DieInAir(false, true, true, true);
-                            else if (intmode == ProjInteractMode.REFLECT)
+                            if (slashParameters.projInteractMode == ProjInteractMode.DESTROY || slashParameters.projInteractMode == ProjInteractMode.IGNORE) projectile2.DieInAir(false, true, true, true);
+                            else if (slashParameters.projInteractMode == ProjInteractMode.REFLECT || slashParameters.projInteractMode == ProjInteractMode.REFLECTANDPOSTPROCESS)
                             {
-                                if (projectile2.LastReflectedSlashId != slashId)
+                                if (projectile2.Owner != null && projectile2.LastReflectedSlashId != slashId)
                                 {
-                                    PassiveReflectItem.ReflectBullet(projectile2, true, owner, 2f, 1f, 1f, 0f);
+                                    projectile2.ReflectBullet(true, owner, 5, (slashParameters.projInteractMode == ProjInteractMode.REFLECTANDPOSTPROCESS), 1, 5, 0, null);
                                     projectile2.LastReflectedSlashId = slashId;
                                 }
                             }
@@ -95,90 +186,137 @@ namespace NevernamedsItems
                     }
                 }
             }
-            DealDamageToEnemiesInArc(owner, arcOrigin, slashAngle, slashRange, damageToDeal, enemyKnockback, statusEffects, jammedDMGMult, bossDMGMult, alreadyHit);
+            DealDamageToEnemiesInArc(owner, arcOrigin, slashAngle, slashRange, slashParameters, alreadyHit);
 
-            List<MinorBreakable> allMinorBreakables = StaticReferenceManager.AllMinorBreakables;
-            for (int k = allMinorBreakables.Count - 1; k >= 0; k--)
+            if (slashParameters.damagesBreakables)
             {
-                MinorBreakable minorBreakable = allMinorBreakables[k];
-                if (minorBreakable && minorBreakable.specRigidbody)
+                List<MinorBreakable> allMinorBreakables = StaticReferenceManager.AllMinorBreakables;
+                for (int k = allMinorBreakables.Count - 1; k >= 0; k--)
                 {
-                    if (!minorBreakable.IsBroken && minorBreakable.sprite)
+                    MinorBreakable minorBreakable = allMinorBreakables[k];
+                    if (minorBreakable && minorBreakable.specRigidbody)
                     {
-                        if (ObjectWasHitBySlash(minorBreakable.sprite.WorldCenter, arcOrigin, slashAngle, slashRange, degreesOfSlash))
+                        if (!minorBreakable.IsBroken && minorBreakable.sprite)
                         {
-                            minorBreakable.Break();
+                            if (ObjectWasHitBySlash(minorBreakable.sprite.WorldCenter, arcOrigin, slashAngle, slashRange, degreesOfSlash))
+                            {
+                                if (slashParameters.OnHitMinorBreakable != null) slashParameters.OnHitMinorBreakable(minorBreakable);
+                                minorBreakable.Break();
+                            }
                         }
                     }
                 }
-            }
-            List<MajorBreakable> allMajorBreakables = StaticReferenceManager.AllMajorBreakables;
-            for (int l = allMajorBreakables.Count - 1; l >= 0; l--)
-            {
-                MajorBreakable majorBreakable = allMajorBreakables[l];
-                if (majorBreakable && majorBreakable.specRigidbody)
+                List<MajorBreakable> allMajorBreakables = StaticReferenceManager.AllMajorBreakables;
+                for (int l = allMajorBreakables.Count - 1; l >= 0; l--)
                 {
-                    if (!alreadyHit.Contains(majorBreakable.specRigidbody))
+                    MajorBreakable majorBreakable = allMajorBreakables[l];
+                    if (majorBreakable && majorBreakable.specRigidbody)
                     {
-                        if (!majorBreakable.IsSecretDoor && !majorBreakable.IsDestroyed)
+                        if (!alreadyHit.Contains(majorBreakable.specRigidbody))
                         {
-                            if (ObjectWasHitBySlash(majorBreakable.specRigidbody.UnitCenter, arcOrigin, slashAngle, slashRange, degreesOfSlash))
+                            if (!majorBreakable.IsSecretDoor && !majorBreakable.IsDestroyed)
                             {
-                                float num9 = damageToDeal;
-                                if (majorBreakable.healthHaver)
+                                if (ObjectWasHitBySlash(majorBreakable.specRigidbody.UnitCenter, arcOrigin, slashAngle, slashRange, degreesOfSlash))
                                 {
-                                    num9 *= 0.2f;
+                                    float num9 = slashParameters.damage;
+                                    if (majorBreakable.healthHaver)
+                                    {
+                                        num9 *= 0.2f;
+                                    }
+                                    if (slashParameters.OnHitMajorBreakable != null) slashParameters.OnHitMajorBreakable(majorBreakable);
+                                    majorBreakable.ApplyDamage(num9, majorBreakable.specRigidbody.UnitCenter - arcOrigin, false, false, false);
+                                    alreadyHit.Add(majorBreakable.specRigidbody);
                                 }
-                                majorBreakable.ApplyDamage(num9, majorBreakable.specRigidbody.UnitCenter - arcOrigin, false, false, false);
-                                alreadyHit.Add(majorBreakable.specRigidbody);
                             }
                         }
                     }
                 }
             }
         }
-        private static void DealDamageToEnemiesInArc(PlayerController owner, Vector2 arcOrigin, float arcAngle, float arcRadius, float overrideDamage, float overrideForce, List<GameActorEffect> statusEffects, float jammedDMGMult, float bossDMGMult, List<SpeculativeRigidbody> alreadyHit = null)
+        private static void DealDamageToEnemiesInArc(GameActor owner, Vector2 arcOrigin, float arcAngle, float arcRadius, SlashData slashParameters, List<SpeculativeRigidbody> alreadyHit = null)
         {
-            RoomHandler roomHandler = owner.CurrentRoom;
+            RoomHandler roomHandler = arcOrigin.GetAbsoluteRoom();
             if (roomHandler == null) return;
-            List<AIActor> activeEnemies = roomHandler.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
-            if (activeEnemies == null) return;
-
-            for (int i = 0; i < activeEnemies.Count; i++)
+            if (SlasherIsPlayerOrFriendly(owner))
             {
-                AIActor aiactor = activeEnemies[i];
-                if (aiactor && aiactor.specRigidbody && aiactor.IsNormalEnemy && !aiactor.IsGone && aiactor.healthHaver)
+                List<AIActor> activeEnemies = roomHandler.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+                if (activeEnemies == null) return;
+
+                for (int i = 0; i < activeEnemies.Count; i++)
                 {
-                    if (alreadyHit == null || !alreadyHit.Contains(aiactor.specRigidbody))
+                    AIActor aiactor = activeEnemies[i];
+                    if (aiactor && aiactor.specRigidbody && aiactor.IsNormalEnemy && !aiactor.IsGone && aiactor.healthHaver)
                     {
-                        for (int j = 0; j < aiactor.healthHaver.NumBodyRigidbodies; j++)
+                        if (alreadyHit == null || !alreadyHit.Contains(aiactor.specRigidbody))
                         {
-                            SpeculativeRigidbody bodyRigidbody = aiactor.healthHaver.GetBodyRigidbody(j);
+                            for (int j = 0; j < aiactor.healthHaver.NumBodyRigidbodies; j++)
+                            {
+                                SpeculativeRigidbody bodyRigidbody = aiactor.healthHaver.GetBodyRigidbody(j);
+                                PixelCollider hitboxPixelCollider = bodyRigidbody.HitboxPixelCollider;
+                                if (hitboxPixelCollider != null)
+                                {
+                                    Vector2 vector = BraveMathCollege.ClosestPointOnRectangle(arcOrigin, hitboxPixelCollider.UnitBottomLeft, hitboxPixelCollider.UnitDimensions);
+                                    if (ObjectWasHitBySlash(vector, arcOrigin, arcAngle, arcRadius, 90))
+                                    {
+                                        bool attackIsNotBlocked = true;
+                                        int rayMask = CollisionMask.LayerToMask(CollisionLayer.HighObstacle, CollisionLayer.BulletBlocker, CollisionLayer.BulletBreakable);
+                                        RaycastResult raycastResult;
+                                        if (PhysicsEngine.Instance.Raycast(arcOrigin, vector - arcOrigin, Vector2.Distance(vector, arcOrigin), out raycastResult, true, true, rayMask, null, false, null, null) && raycastResult.SpeculativeRigidbody != bodyRigidbody)
+                                        {
+                                            attackIsNotBlocked = false;
+                                        }
+                                        RaycastResult.Pool.Free(ref raycastResult);
+                                        if (attackIsNotBlocked)
+                                        {
+                                            float damage = DealSwordDamageToEnemy(owner, aiactor, arcOrigin, vector, arcAngle, slashParameters);
+                                            if (alreadyHit != null)
+                                            {
+                                                if (alreadyHit.Count == 0) StickyFrictionManager.Instance.RegisterSwordDamageStickyFriction(damage);
+                                                alreadyHit.Add(aiactor.specRigidbody);
+                                            }
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                List<PlayerController> AllPlayers = new List<PlayerController>();
+                if (GameManager.Instance.PrimaryPlayer) AllPlayers.Add(GameManager.Instance.PrimaryPlayer);
+                if (GameManager.Instance.SecondaryPlayer) AllPlayers.Add(GameManager.Instance.SecondaryPlayer);
+                for (int i = 0; i < AllPlayers.Count; i++)
+                {
+                    PlayerController player = AllPlayers[i];
+                    if (player && player.specRigidbody && player.healthHaver && !player.IsGhost)
+                    {
+                        if (alreadyHit == null || !alreadyHit.Contains(player.specRigidbody))
+                        {
+                            SpeculativeRigidbody bodyRigidbody = player.specRigidbody;
                             PixelCollider hitboxPixelCollider = bodyRigidbody.HitboxPixelCollider;
                             if (hitboxPixelCollider != null)
                             {
                                 Vector2 vector = BraveMathCollege.ClosestPointOnRectangle(arcOrigin, hitboxPixelCollider.UnitBottomLeft, hitboxPixelCollider.UnitDimensions);
-                                float num = Vector2.Distance(vector, arcOrigin);
                                 if (ObjectWasHitBySlash(vector, arcOrigin, arcAngle, arcRadius, 90))
                                 {
-                                    bool flag = true;
+                                    bool attackIsNotBlocked = true;
                                     int rayMask = CollisionMask.LayerToMask(CollisionLayer.HighObstacle, CollisionLayer.BulletBlocker, CollisionLayer.BulletBreakable);
                                     RaycastResult raycastResult;
-                                    if (PhysicsEngine.Instance.Raycast(arcOrigin, vector - arcOrigin, num, out raycastResult, true, true, rayMask, null, false, null, null) && raycastResult.SpeculativeRigidbody != bodyRigidbody)
+                                    if (PhysicsEngine.Instance.Raycast(arcOrigin, vector - arcOrigin, Vector2.Distance(vector, arcOrigin), out raycastResult, true, true, rayMask, null, false, null, null) && raycastResult.SpeculativeRigidbody != bodyRigidbody)
                                     {
-                                        flag = false;
+                                        attackIsNotBlocked = false;
                                     }
                                     RaycastResult.Pool.Free(ref raycastResult);
-                                    if (flag)
+                                    if (attackIsNotBlocked)
                                     {
-                                        float damage = DealSwordDamageToEnemy(owner, aiactor, arcOrigin, vector, arcAngle, overrideDamage, overrideForce, statusEffects, bossDMGMult, jammedDMGMult);
+                                        float damage = DealSwordDamageToEnemy(owner, player, arcOrigin, vector, arcAngle, slashParameters);
                                         if (alreadyHit != null)
                                         {
-                                            if (alreadyHit.Count == 0)
-                                            {
-                                                StickyFrictionManager.Instance.RegisterSwordDamageStickyFriction(damage);
-                                            }
-                                            alreadyHit.Add(aiactor.specRigidbody);
+                                            if (alreadyHit.Count == 0) StickyFrictionManager.Instance.RegisterSwordDamageStickyFriction(damage);
+                                            alreadyHit.Add(player.specRigidbody);
                                         }
                                         break;
                                     }
@@ -187,29 +325,44 @@ namespace NevernamedsItems
                         }
                     }
                 }
+
             }
         }
-        private static float DealSwordDamageToEnemy(PlayerController owner, AIActor targetEnemy, Vector2 arcOrigin, Vector2 contact, float angle, float damage, float knockback, List<GameActorEffect> statusEffects, float bossDMGMult, float jammedDMGMult)
+        private static float DealSwordDamageToEnemy(GameActor owner, GameActor targetEnemy, Vector2 arcOrigin, Vector2 contact, float angle, SlashData slashParameters)
         {
             if (targetEnemy.healthHaver)
             {
-                float damageToDeal = damage;
-                if (targetEnemy.healthHaver.IsBoss) damageToDeal *= bossDMGMult;
-                if (targetEnemy.IsBlackPhantom) damageToDeal *= jammedDMGMult;
-                targetEnemy.healthHaver.ApplyDamage(damageToDeal, contact - arcOrigin, owner.ActorName, CoreDamageTypes.None, DamageCategory.Normal, false, null, false);
+                float damageToDeal = slashParameters.damage;
+                if (targetEnemy.healthHaver && targetEnemy.healthHaver.IsBoss) damageToDeal *= slashParameters.bossDamageMult;
+                if ((targetEnemy is AIActor) && (targetEnemy as AIActor).IsBlackPhantom) damageToDeal *= slashParameters.jammedDamageMult;
+                DamageCategory category = DamageCategory.Normal;
+                if ((owner is AIActor) && (owner as AIActor).IsBlackPhantom) category = DamageCategory.BlackBullet;
+
+                bool wasAlivePreviously = targetEnemy.healthHaver.IsAlive;
+                //VFX
+                if (slashParameters.doHitVFX && slashParameters.hitVFX != null)
+                {
+                    slashParameters.hitVFX.SpawnAtPosition(new Vector3(contact.x, contact.y), 0, targetEnemy.transform);
+                }
+                targetEnemy.healthHaver.ApplyDamage(damageToDeal, contact - arcOrigin, owner.ActorName, CoreDamageTypes.None, category, false, null, false);
+
+                bool fatal = false;
+                if (wasAlivePreviously && targetEnemy.healthHaver.IsDead) fatal = true;
+
+                if (slashParameters.OnHitTarget != null) slashParameters.OnHitTarget(targetEnemy, fatal);
             }
             if (targetEnemy.knockbackDoer)
             {
-                targetEnemy.knockbackDoer.ApplyKnockback(contact - arcOrigin, knockback, false);
+                targetEnemy.knockbackDoer.ApplyKnockback(contact - arcOrigin, slashParameters.enemyKnockbackForce, false);
             }
-            if (statusEffects != null && statusEffects.Count > 0)
+            if (slashParameters.statusEffects != null && slashParameters.statusEffects.Count > 0)
             {
-                foreach (GameActorEffect effect in statusEffects)
+                foreach (GameActorEffect effect in slashParameters.statusEffects)
                 {
                     targetEnemy.ApplyEffect(effect);
                 }
             }
-            return damage;
+            return slashParameters.damage;
         }
     }
 }

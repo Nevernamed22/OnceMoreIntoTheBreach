@@ -49,8 +49,10 @@ namespace NevernamedsItems
             List<string> mandatorySynergyItems = new List<string>() { "nn:flame_chamber" };
             List<string> optionalSynergyItems = new List<string>() { "charmed_bow", "charm_horn", "charming_rounds" };
             CustomSynergies.Add("Burning With Passion", mandatorySynergyItems, optionalSynergyItems);
-        }
 
+            ID = item.PickupObjectId;
+        }
+        public static int ID;
         private void HandleGunReloaded(PlayerController player, Gun playerGun)
         {
             if (playerGun.ClipShotsRemaining == 0)

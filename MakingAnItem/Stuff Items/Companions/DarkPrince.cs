@@ -32,7 +32,9 @@ namespace NevernamedsItems
             darkProj.baseData.damage = 1;
             darkProj.baseData.speed = 100;
             darkProj.SetProjectileSpriteRight("laserwelder_proj", 10, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 3);
-            darkProj.gameObject.AddComponent<DarkPrinceProjComp>();
+            ProjWeaknessModifier weakness = darkProj.gameObject.AddComponent<ProjWeaknessModifier>();
+            weakness.UsesSeparateStatsForBosses = true;
+            weakness.isDarkPrince = true;
             HomingModifier homin = darkProj.gameObject.AddComponent<HomingModifier>();
             homin.AngularVelocity = 400;
             homin.HomingRadius = 200;
@@ -199,41 +201,7 @@ namespace NevernamedsItems
             }
         }
         public class DebuffedByDarkPrince : MonoBehaviour { }
-        public class DarkPrinceProjComp : MonoBehaviour
-        {
-            private void Start()
-            {
-                base.GetComponent<Projectile>().OnHitEnemy += this.OnHitenemy;
-            }
-            private void OnHitenemy(Projectile self, SpeculativeRigidbody enemy, bool fatal)
-            {
-                if (enemy && enemy.aiActor && !fatal)
-                {
-                    
-                    if (enemy.healthHaver && enemy.healthHaver.IsBoss) enemy.aiActor.ApplyEffect(BossWeakenedDebuff, 1f, null);
-                    else enemy.aiActor.ApplyEffect(WeakenedDebuff, 1f, null);
-                    enemy.gameObject.AddComponent<DebuffedByDarkPrince>();
-                }
-            }
-            public static AIActorDebuffEffect WeakenedDebuff = new AIActorDebuffEffect
-            {
-                HealthMultiplier = 0.65f,
-                CooldownMultiplier = 1.2f,
-                SpeedMultiplier = 0.8f,
-                KeepHealthPercentage = true,
-                OverheadVFX = MagickeCauldron.overheadder,
-                duration = 1000000f
-            };
-            public static AIActorDebuffEffect BossWeakenedDebuff = new AIActorDebuffEffect
-            {
-                HealthMultiplier = 0.75f,
-                CooldownMultiplier = 1.2f,
-                SpeedMultiplier = 0.8f,
-                KeepHealthPercentage = true,
-                OverheadVFX = MagickeCauldron.overheadder,
-                duration = 1000000f
-            };
-        }
+        
         public class DarkPrinceController : CompanionController
         {
             private void Start()

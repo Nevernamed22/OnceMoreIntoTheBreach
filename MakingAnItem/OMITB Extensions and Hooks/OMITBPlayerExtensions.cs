@@ -25,7 +25,6 @@ namespace NevernamedsItems
         public static bool IsStarterItem(this PlayerController player, int id)
         {
             return player.startingActiveItemIds.Contains(id) || player.startingAlternateGunIds.Contains(id) || player.startingGunIds.Contains(id) || player.startingPassiveItemIds.Contains(id);
-
         }
         public static void RemoveItemFromInventory(this PlayerController player, PickupObject item)
         {

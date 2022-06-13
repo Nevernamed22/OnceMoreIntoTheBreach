@@ -74,10 +74,10 @@ namespace NevernamedsItems
             }
             base.PostProcessProjectile(projectile);
         }
-        public override void OnReloadPressedSafe(PlayerController player, Gun gun, bool manualReload)
+        public override void OnReloadSafe(PlayerController player, Gun gun)
         {
             if (gun.ClipShotsRemaining == 0 && UnityEngine.Random.value <= 0.5f && player.PlayerHasActiveSynergy("Concealed Carry")) StealthEffect();
-            base.OnReloadPressedSafe(player, gun, manualReload);
+            base.OnReloadSafe(player, gun);
         }
         private void StealthEffect()
         {

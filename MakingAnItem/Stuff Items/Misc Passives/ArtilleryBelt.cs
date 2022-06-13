@@ -51,6 +51,7 @@ namespace NevernamedsItems
             spawnedProjectileComp.baseData.range *= Owner.stats.GetStatValue(PlayerStats.StatType.RangeMultiplier);
             spawnedProjectileComp.baseData.force *= Owner.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
             Owner.DoPostProcessProjectile(spawnedProjectileComp);
+            spawnedProjectileComp.ApplyCompanionModifierToBullet(Owner);
         }
         public override void Pickup(PlayerController player)
         {

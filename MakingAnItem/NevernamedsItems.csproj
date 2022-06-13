@@ -78,7 +78,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OMITB Extensions and Hooks\ShadeFlightHookFix.cs" />
+    <Compile Include="OMITB Misc Game Changers\Commands\CheatUnlocks.cs" />
+    <Compile Include="OMITB Misc Toolboxes\GuonToolbox.cs" />
     <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\DieWhenOwnerNotInRoom.cs" />
+    <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\MagnetBehaviour.cs" />
+    <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\ProjectileSlashingBehaviour.cs" />
+    <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\ProjWeaknessModifier.cs" />
     <Compile Include="ProjectileSetupUtility.cs" />
     <Compile Include="StandardAPI\BreakableAPI.cs" />
     <Compile Include="StandardAPI\CharacterAPI\-EXAMPLEPLEASELOOKATTHISFFS.cs" />
@@ -97,6 +102,7 @@
     <Compile Include="StandardAPI\CharacterAPI\Tools\CharApiHooks.cs" />
     <Compile Include="StandardAPI\CharacterAPI\Tools\CustomSimpleFlagDisabler.cs" />
     <Compile Include="StandardAPI\CharacterAPI\Tools\Enums.cs" />
+    <Compile Include="StandardAPI\CharacterAPI\Tools\HooksToMakeDodgeRollsCodeForRobotGood.cs" />
     <Compile Include="StandardAPI\CharacterAPI\Tools\SaveFileHelper.cs" />
     <Compile Include="StandardAPI\CharacterAPI\Tools\TexturePacker.cs" />
     <Compile Include="StandardAPI\CharacterAPI\Tools\TextureStitcher.cs" />
@@ -240,8 +246,10 @@
     <Compile Include="Stuff Items\Guns\BigShot.cs" />
     <Compile Include="Stuff Items\Guns\BioTranstater2100.cs" />
     <Compile Include="Stuff Items\Guns\BolaGun.cs" />
+    <Compile Include="Stuff Items\Guns\Boltcaster.cs" />
     <Compile Include="Stuff Items\Guns\BottleRocket.cs" />
     <Compile Include="Stuff Items\Guns\BurstRifle.cs" />
+    <Compile Include="Stuff Items\Guns\Carnwennan.cs" />
     <Compile Include="Stuff Items\Guns\ChromaGun.cs" />
     <Compile Include="Stuff Items\Guns\Clicker.cs" />
     <Compile Include="Stuff Items\Guns\CopperSidearm.cs" />
@@ -270,9 +278,11 @@
     <Compile Include="Stuff Items\Guns\RC360.cs" />
     <Compile Include="Stuff Items\Guns\RebarGun.cs" />
     <Compile Include="Stuff Items\Guns\Rebondir.cs" />
+    <Compile Include="Stuff Items\Guns\Redhawk.cs" />
     <Compile Include="Stuff Items\Guns\RedRobin.cs" />
     <Compile Include="Stuff Items\Guns\RustyShotgun.cs" />
     <Compile Include="Stuff Items\Guns\SaltGun.cs" />
+    <Compile Include="Stuff Items\Guns\Seismograph.cs" />
     <Compile Include="Stuff Items\Guns\Skorpion.cs" />
     <Compile Include="Stuff Items\Guns\SoapGun.cs" />
     <Compile Include="Stuff Items\Guns\SquarePeg.cs" />
@@ -411,6 +421,7 @@
     <Compile Include="Stuff Items\Misc Passives\HoleyWater.cs" />
     <Compile Include="Stuff Items\Misc Passives\JawsOfDefeat.cs" />
     <Compile Include="Stuff Items\Misc Passives\LeadSoul.cs" />
+    <Compile Include="Stuff Items\Misc Passives\Magnet.cs" />
     <Compile Include="Stuff Items\Misc Passives\Nigredo.cs" />
     <Compile Include="Stuff Items\Misc Passives\PanicPendant.cs" />
     <Compile Include="Stuff Items\Misc Passives\Rubedo.cs" />
@@ -3613,7 +3624,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Characters\Shade\newspritesetup\custom\" />
-    <Folder Include="Resources\Orbitals\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\NeoItemSprites\barrelchamber_icon.png" />
@@ -4456,6 +4466,70 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Ammolets\pearlammolet_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\GuonStones\greyguon_animated_ingame1.png" />
+    <EmbeddedResource Include="Resources\GuonStones\greyguon_animated_ingame2.png" />
+    <EmbeddedResource Include="Resources\GuonStones\greyguon_animated_ingame3.png" />
+    <EmbeddedResource Include="Resources\GuonStones\greyguon_animated_ingame4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_barrel_001.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_barrel_002.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_barrel_003.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_barrel_004.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_cyclop_001.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_cyclop_002.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_cyclop_003.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_cyclop_004.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_flame_001.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_flame_002.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_flame_003.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_flame_004.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_glass_001.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_glass_002.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_glass_003.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_glass_004.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_heavy_001.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_heavy_002.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_heavy_003.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_heavy_004.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_nitro_001.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_nitro_002.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_nitro_003.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_nitro_004.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_oiled_001.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_oiled_002.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_oiled_003.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_oiled_004.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_recycle_001.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_recycle_002.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_recycle_003.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_recycle_004.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_sixth_001.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_sixth_002.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_sixth_003.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_sixth_004.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_spring_001.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_spring_002.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_spring_003.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_spring_004.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_withered_001.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_withered_002.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_withered_003.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_withered_004.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_yellow_001.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_yellow_002.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_yellow_003.png" />
+    <EmbeddedResource Include="Resources\GuonStones\LibramOrbitals\libramorbtial_yellow_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\Boltcaster\boltcaster_muzzleflash_001.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\Boltcaster\boltcaster_muzzleflash_002.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\Boltcaster\boltcaster_muzzleflash_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NeoItemSprites\magnet_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

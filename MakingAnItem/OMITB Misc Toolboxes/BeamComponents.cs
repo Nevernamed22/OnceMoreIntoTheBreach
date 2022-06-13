@@ -47,6 +47,7 @@ namespace NevernamedsItems
             if (nearestEnemyPosition != Vector2.zero)
             {
                 GameObject gameObject = ProjSpawnHelper.SpawnProjectileTowardsPoint(this.projectileToFire.gameObject, projectileSpawnPosition, nearestEnemyPosition, 0, 5);
+                gameObject.AddComponent<BulletIsFromBeam>();
                 Projectile component = gameObject.GetComponent<Projectile>();
                 if (component != null)
                 {
@@ -448,6 +449,7 @@ namespace NevernamedsItems
             if (UnityEngine.Random.value <= 0.5) variance *= -1;
             float angleVaried = angle + variance;
             GameObject spawnedBulletOBJ = SpawnManager.SpawnProjectile(bulletToSpew.gameObject, pos, Quaternion.Euler(0f, 0f, angleVaried), true);
+            spawnedBulletOBJ.AddComponent<BulletIsFromBeam>();
             Projectile component = spawnedBulletOBJ.GetComponent<Projectile>();
             if (component != null)
             {

@@ -13,6 +13,7 @@ namespace SaveAPI
         //Non unlock related flags
         ALLJAMMEDMODE_ENABLED_GENUINE,
         ALLJAMMEDMODE_ENABLED_CONSOLE,
+        CURSES_DISABLED,
         //---------------------------------------------Task Based Unlocks
         PLAYERHELDMORETHANFIVEARMOUR,
         KILLEDJAMMEDKEYBULLETKIN,
@@ -58,6 +59,9 @@ namespace SaveAPI
         BOSSRUSH_MARINE,
         BOSSRUSH_ROBOT,
         BOSSRUSH_BULLET,
+        //Advanced Dragun Unlocks
+        ADVDRAGUN_KILLED_ROBOT,
+        ADVDRAGUN_KILLED_SHADE,
         //Challenges
         CHALLENGE_WHATARMY_BEATEN,
         CHALLENGE_TOILANDTROUBLE_BEATEN,

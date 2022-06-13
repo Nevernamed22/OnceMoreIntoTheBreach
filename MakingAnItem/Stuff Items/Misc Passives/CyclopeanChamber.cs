@@ -41,7 +41,7 @@ namespace NevernamedsItems
             if (bullet.ProjectilePlayerOwner())
             {
                 Gun curGun = bullet.ProjectilePlayerOwner().CurrentGun;
-                if (curGun)
+                if (curGun && curGun.DefaultModule.shootStyle != ProjectileModule.ShootStyle.Beam)
                 {
                     float realClipShots = curGun.ClipCapacity;
                     float prefabClipShots = curGun.DefaultModule.numberOfShotsInClip;

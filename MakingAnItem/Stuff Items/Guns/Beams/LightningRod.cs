@@ -40,8 +40,8 @@ namespace NevernamedsItems
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = "Y-Beam Laser";
             gun.barrelOffset.transform.localPosition = new Vector3(0.75f, 0.81f, 0f);
-            gun.SetBaseMaxAmmo(1700);
-            gun.ammo = 1700;
+            gun.SetBaseMaxAmmo(1000);
+            gun.ammo = 1000;
             gun.gunClass = GunClass.BEAM;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.LoopSection;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).loopStart = 1;

@@ -32,23 +32,29 @@ namespace NevernamedsItems
         }
         protected override void DoEffect(PlayerController user)
         {
-            float dmg = 30 * user.stats.GetStatValue(PlayerStats.StatType.Damage);
-            float knockback = 10;
+            SlashData KnifeSlash = new SlashData();
+            KnifeSlash.damage = 30 * user.stats.GetStatValue(PlayerStats.StatType.Damage);
+            KnifeSlash.enemyKnockbackForce = 10 * user.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
+            KnifeSlash.projInteractMode = SlashDoer.ProjInteractMode.IGNORE;
+
             List<GameActorEffect> effectlist = null;
             if (user.PlayerHasActiveSynergy("1000 Degree Knife")) { effectlist = new List<GameActorEffect>(); effectlist.Add(StaticStatusEffects.hotLeadEffect); }
-            SlashDoer.ProjInteractMode mode = SlashDoer.ProjInteractMode.IGNORE;
-            if (user.PlayerHasActiveSynergy("Mirror Blade")) mode = SlashDoer.ProjInteractMode.REFLECT;
-            if (user.PlayerHasActiveSynergy("Tri-Tip Dagger")) knockback /= 3f;
-            if (user.PlayerHasActiveSynergy("Whirling Blade")) knockback = 0;
-            user.StartCoroutine(DoSlash(user, 0, dmg, knockback, 0, mode, effectlist));
+            KnifeSlash.statusEffects = effectlist;
+
+            if (user.PlayerHasActiveSynergy("Mirror Blade")) KnifeSlash.projInteractMode = SlashDoer.ProjInteractMode.REFLECT;
+
+            if (user.PlayerHasActiveSynergy("Tri-Tip Dagger")) KnifeSlash.enemyKnockbackForce /= 3f;
+            if (user.PlayerHasActiveSynergy("Whirling Blade")) KnifeSlash.enemyKnockbackForce = 0;
+
+            user.StartCoroutine(DoSlash(user, 0, 0, KnifeSlash));
             if (user.PlayerHasActiveSynergy("Whirling Blade"))
             {
-                user.StartCoroutine(DoSlash(user, 90, dmg, knockback, 0.25f, mode, effectlist));
-                user.StartCoroutine(DoSlash(user, 180, dmg, knockback, 0.5f, mode, effectlist));
-                user.StartCoroutine(DoSlash(user, 270, dmg, knockback, 0.75f, mode, effectlist));
+                user.StartCoroutine(DoSlash(user, 90, 0.25f, KnifeSlash));
+                user.StartCoroutine(DoSlash(user, 180, 0.5f, KnifeSlash));
+                user.StartCoroutine(DoSlash(user, 270, 0.75f, KnifeSlash));
             }
         }
-        private IEnumerator DoSlash(PlayerController user, float angle, float dmg, float knockback, float delay, SlashDoer.ProjInteractMode mode, List<GameActorEffect> effectList)
+        private IEnumerator DoSlash(PlayerController user, float angle, float delay, SlashData slashParameters)
         {
             yield return new WaitForSeconds(delay);
             AkSoundEngine.PostEvent("Play_WPN_blasphemy_shot_01", user.gameObject);
@@ -57,15 +63,16 @@ namespace NevernamedsItems
             normalized = normalized.Rotate(angle);
             Vector2 dir = (user.CenterPosition + normalized * 0.75f);
             float angleToUse = user.CurrentGun.CurrentAngle + angle;
-            SlashDoer.DoSwordSlash(dir, angleToUse, user, knockback, mode, dmg, 10, effectList, user.transform);
+
+            SlashDoer.DoSwordSlash(dir, angleToUse, user, slashParameters, user.transform);
             if (user.PlayerHasActiveSynergy("Tri-Tip Dagger"))
             {
                 Vector2 normalized2 = normalized.Rotate(45);
                 Vector2 dir2 = (user.CenterPosition + normalized2 * 0.75f);
-                SlashDoer.DoSwordSlash(dir2, angleToUse + 45, user, knockback, mode, dmg, 10, effectList, user.transform);
+                SlashDoer.DoSwordSlash(dir2, angleToUse + 45, user, slashParameters, user.transform);
                 Vector2 normalized3 = normalized.Rotate(-45);
                 Vector2 dir3 = (user.CenterPosition + normalized3 * 0.75f);
-                SlashDoer.DoSwordSlash(dir3, angleToUse + -45, user, knockback, mode, dmg, 10, effectList, user.transform);
+                SlashDoer.DoSwordSlash(dir3, angleToUse + -45, user, slashParameters, user.transform);
             }
             yield break;
         }

@@ -44,7 +44,7 @@ namespace NevernamedsItems
             //Set some other fields
             item.consumable = false;
             item.quality = ItemQuality.C;
-
+           
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
 
             List<string> mandatorySynergyItems = new List<string>() { "nn:lucky_coin", "seven_leaf_clover" };

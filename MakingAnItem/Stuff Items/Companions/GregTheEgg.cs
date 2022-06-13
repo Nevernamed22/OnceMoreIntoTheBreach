@@ -27,24 +27,6 @@ namespace NevernamedsItems
         }
         float cachedGregHealth = 3000;
 
-        public override DebrisObject Drop(PlayerController player)
-        {
-            if (ExtantCompanion && ExtantCompanion.GetComponent<GregTheEggBehaviour>())
-            {
-                player.OnRoomClearEvent -= ExtantCompanion.GetComponent<GregTheEggBehaviour>().OnRoomClear;
-            }
-            return base.Drop(player);
-        }
-        protected override void OnDestroy()
-        {
-            if (Owner != null && ExtantCompanion && ExtantCompanion.GetComponent<GregTheEggBehaviour>())
-            {
-                Owner.OnRoomClearEvent -= ExtantCompanion.GetComponent<GregTheEggBehaviour>().OnRoomClear;
-            }
-            base.OnDestroy();
-        }
-
-
         private static tk2dSpriteCollectionData GregAnimationCollection;
         public static void BuildPrefab()
         {
@@ -297,7 +279,9 @@ namespace NevernamedsItems
             {
                 if (Owner)
                 {
-                    Owner.OnRoomClearEvent += OnRoomClear;
+                    base.healthHaver.OnPreDeath -= this.OnPreDeath;
+                    base.specRigidbody.OnPreRigidbodyCollision -= this.OnPreCollision;
+                    Owner.OnRoomClearEvent -= OnRoomClear;
                 }
                 base.OnDestroy();
             }

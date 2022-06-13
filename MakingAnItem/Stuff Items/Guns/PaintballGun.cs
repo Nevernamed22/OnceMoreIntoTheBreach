@@ -35,23 +35,30 @@ namespace NevernamedsItems
             gun.DefaultModule.cooldownTime = 0.1f;
             gun.DefaultModule.numberOfShotsInClip = 10;
             gun.SetBaseMaxAmmo(300);
-            //gun.DefaultModule.positionOffset = new Vector3(1f, 0f, 0f);
             gun.gunClass = GunClass.PISTOL;
+
             //BULLET STATS
-            Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
-            projectile.gameObject.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(projectile);
+            Projectile projectile = gun.DefaultModule.projectiles[0].gameObject.InstantiateAndFakeprefab().GetComponent<Projectile>();
             gun.DefaultModule.projectiles[0] = projectile;
-            projectile.baseData.damage *= 1.5f;
+            projectile.baseData.damage = 7.5f;
             RandomiseProjectileColourComponent paintballController = projectile.gameObject.AddComponent<RandomiseProjectileColourComponent>();
             paintballController.ApplyColourToHitEnemies = true;
+            paintballController.paintballGun = true;
 
             gun.quality = PickupObject.ItemQuality.C;
 
             gun.encounterTrackable.EncounterGuid = "this is the Paintball Gun";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
+        }
+        public override void PostProcessProjectile(Projectile projectile)
+        {
+            if (projectile && projectile.ProjectilePlayerOwner() && projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Paint It Black"))
+            {
+                projectile.baseData.damage *= 1.2f;
+                projectile.BossDamageMultiplier *= 1.1f;
+            }
+            base.PostProcessProjectile(projectile);
         }
         public override void OnPostFired(PlayerController player, Gun gun)
         {

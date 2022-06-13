@@ -59,6 +59,8 @@ namespace NevernamedsItems
             ProjectileSlashingBehaviour slashing = projectile.gameObject.AddComponent<ProjectileSlashingBehaviour>();
             slashing.DestroyBaseAfterFirstSlash = true;
             slashing.SlashDamageUsesBaseProjectileDamage = true;
+            slashing.slashParameters = new SlashData();
+            slashing.slashParameters.hitVFX = (PickupObjectDatabase.GetById(369) as Gun).DefaultModule.chargeProjectiles[0].Projectile.hitEffects.tileMapVertical;
 
             gun.DefaultModule.projectiles[0] = projectile;
 
@@ -80,7 +82,7 @@ namespace NevernamedsItems
                 {
                     if (player.PlayerHasActiveSynergy("Bloodthirsty Blades") && UnityEngine.Random.value <= 0.07f)
                     {
-                        slash.InteractMode = SlashDoer.ProjInteractMode.DESTROY;
+                        slash.slashParameters.projInteractMode = SlashDoer.ProjInteractMode.DESTROY;
                     }
                 }
             }

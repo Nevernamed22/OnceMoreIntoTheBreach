@@ -40,7 +40,7 @@ namespace NevernamedsItems
             {
                 float chance = 1;
                 if (enemy.healthHaver.IsBoss) chance = 0.33f;
-                enemy.gameActor.DelelteOwnedBullets(chance);
+                enemy.gameActor.DeleteOwnedBullets(chance);
             }
         }
         private void PostProcessBeam(BeamController beam, SpeculativeRigidbody enemy, float tickrate)
@@ -57,7 +57,7 @@ namespace NevernamedsItems
                 {
                     float chance = 1;
                     if (enemy.healthHaver.IsBoss) chance = 0.33f;
-                    enemy.gameActor.DelelteOwnedBullets(chance);
+                    enemy.gameActor.DeleteOwnedBullets(chance);
                 }
             }
         }

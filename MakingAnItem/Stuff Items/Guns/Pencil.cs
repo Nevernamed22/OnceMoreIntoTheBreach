@@ -95,7 +95,7 @@ namespace NevernamedsItems
                 {
                     float chance = 1f;
                     if (enemy.healthHaver && enemy.healthHaver.IsBoss) chance = 0.33f;
-                    enemy.gameActor.DelelteOwnedBullets(chance);
+                    enemy.gameActor.DeleteOwnedBullets(chance);
                 }
             }
         }

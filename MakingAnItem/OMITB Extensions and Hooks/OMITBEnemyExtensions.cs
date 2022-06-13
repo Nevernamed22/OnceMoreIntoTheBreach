@@ -298,7 +298,7 @@ namespace NevernamedsItems
             }
             return null;
         }
-        public static void DelelteOwnedBullets(this GameActor enemy, float chancePerProjectile = 1, bool deleteBulletLimbs = false)
+        public static void DeleteOwnedBullets(this GameActor enemy, float chancePerProjectile = 1, bool deleteBulletLimbs = false)
         {
             List<Projectile> BulletsOwnedByEnemy = new List<Projectile>();
             if (deleteBulletLimbs && enemy.aiAnimator)

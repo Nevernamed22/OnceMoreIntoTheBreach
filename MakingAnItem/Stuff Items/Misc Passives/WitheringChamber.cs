@@ -21,18 +21,18 @@ namespace NevernamedsItems
             var item = obj.AddComponent<WitheringChamber>();
 
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-           /* ItemBuilder.AddAnimatedSpriteToObject(
-                itemName,
-                new List<string>
-                {
-                "NevernamedsItems/Resources/AnimatedItemSprites/witheringchamber_icon_001",
-                "NevernamedsItems/Resources/AnimatedItemSprites/witheringchamber_icon_002",
-                "NevernamedsItems/Resources/AnimatedItemSprites/witheringchamber_icon_003",
-                "NevernamedsItems/Resources/AnimatedItemSprites/witheringchamber_icon_004",
-                },
-                10,
-                obj
-                );*/
+            /* ItemBuilder.AddAnimatedSpriteToObject(
+                 itemName,
+                 new List<string>
+                 {
+                 "NevernamedsItems/Resources/AnimatedItemSprites/witheringchamber_icon_001",
+                 "NevernamedsItems/Resources/AnimatedItemSprites/witheringchamber_icon_002",
+                 "NevernamedsItems/Resources/AnimatedItemSprites/witheringchamber_icon_003",
+                 "NevernamedsItems/Resources/AnimatedItemSprites/witheringchamber_icon_004",
+                 },
+                 10,
+                 obj
+                 );*/
 
             string shortDesc = "Decay";
             string longDesc = "Guns with higher max ammo deal more damage, but suffering damage withers away your ammo capacity." + "\n\nThe spiteful creation of a cruel Chamberlord.";
@@ -40,7 +40,9 @@ namespace NevernamedsItems
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
 
             item.quality = PickupObject.ItemQuality.B;
+            ID = item.PickupObjectId;
         }
+        public static int ID;
         public override void Pickup(PlayerController player)
         {
             player.OnReceivedDamage += this.OnHit;
@@ -72,21 +74,20 @@ namespace NevernamedsItems
         {
             if (player)
             {
-                if (player.inventory.AllGuns.Count > 0)
+                if (player.CurrentGun)
                 {
                     float chance = 1;
                     if (player.PlayerHasActiveSynergy("Chamrock")) chance = 0.5f;
-                    foreach (Gun gun in player.inventory.AllGuns)
+
+                    if (!player.CurrentGun.InfiniteAmmo && player.CurrentGun.GetBaseMaxAmmo() > 0)
                     {
-                        if (!gun.InfiniteAmmo && gun.GetBaseMaxAmmo() > 0)
+                        if (UnityEngine.Random.value <= chance)
                         {
-                            if (UnityEngine.Random.value <= chance)
-                            {
-                                int currentAmmo = gun.CurrentAmmo;
-                                gun.SetBaseMaxAmmo(currentAmmo);
-                            }
+                            int currentAmmo = player.CurrentGun.CurrentAmmo;
+                            player.CurrentGun.SetBaseMaxAmmo(currentAmmo);
                         }
                     }
+
                 }
             }
         }

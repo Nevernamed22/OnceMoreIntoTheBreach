@@ -234,6 +234,7 @@ namespace NevernamedsItems
                     else goop = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.EnemyFriendlyPoisonGoop);
                     float hpMod = maxHP;
                     if (isJammed) hpMod /= 3.5f;
+                    hpMod /= AIActor.BaseLevelHealthModifier; 
                     float radius = Math.Min((hpMod / 7.5f), 10);
                     goop.TimedAddGoopCircle(position, radius, 0.75f, true);
                 }
@@ -247,6 +248,7 @@ namespace NevernamedsItems
                     else goop = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.HoneyGoop);
                     float hpMod = maxHP;
                     if (isJammed) hpMod /= 3.5f;
+                    hpMod /= AIActor.BaseLevelHealthModifier; 
                     float radius = Math.Min((hpMod / 5), 10);
                     goop.TimedAddGoopCircle(position, radius, 0.75f, true);
                 }
@@ -571,7 +573,21 @@ namespace NevernamedsItems
                                 SaveAPIManager.SetFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_FORGE, true);
                             }
                         }
+
+
+                        if (enemyGuid == "05b8afe0b6cc4fffa9dc6036fa24c8ec") //ADVANCED DRAGUN
+                        {
+                            if (usingShade)
+                            {
+                                if (!SaveAPIManager.GetFlag(CustomDungeonFlags.ADVDRAGUN_KILLED_SHADE))
+                                {
+                                    SaveAPIManager.SetFlag(CustomDungeonFlags.ADVDRAGUN_KILLED_SHADE, true);
+                                }
+                            }
+                        }
+
                     }
+
                 }
                 if (GameManager.Instance.Dungeon.tileIndices.tilesetId == GlobalDungeonData.ValidTilesets.HELLGEON)
                 {

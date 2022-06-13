@@ -7,6 +7,7 @@ using ItemAPI;
 using System.Collections;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -86,12 +87,17 @@ namespace NevernamedsItems
             float allCurse = GameManager.Instance.GetCombinedPlayersStatAmount(PlayerStats.StatType.Curse);
             float ran = UnityEngine.Random.value;
             Debug.Log("Running Curse Check on Floor Load - Random (" + ran + ") - CurseTotal (" + allCurse + ")");
-            if (UnityEngine.Random.value <= (allCurse * 0.0666))
+            float curseChance = 0.0666f;
+
+            if (!SaveAPIManager.GetFlag(CustomDungeonFlags.CURSES_DISABLED))
             {
-                float hellclears = GameStatsManager.Instance.GetPlayerStatValue(TrackedStats.TIMES_CLEARED_BULLET_HELL);
-                if (hellclears > 0)
+                if (UnityEngine.Random.value <= (allCurse * curseChance))
                 {
-                    AddRandomCurse();
+                    float hellclears = GameStatsManager.Instance.GetPlayerStatValue(TrackedStats.TIMES_CLEARED_BULLET_HELL);
+                    if (hellclears > 0)
+                    {
+                        AddRandomCurse();
+                    }
                 }
             }
             if (PostNewLevelCurseProcessing != null) CurseManager.PostNewLevelCurseProcessing();

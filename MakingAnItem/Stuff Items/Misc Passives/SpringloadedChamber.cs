@@ -43,10 +43,12 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.B; //B
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_SPRINGLOADEDCHAMBER, true);
             item.AddItemToTrorcMetaShop(19);
+
+            ID = item.PickupObjectId;
         }
         private int currentClip, lastClip;
         private Gun currentGun, lastGun;
-
+        public static int ID;
         protected override void Update()
         {
             if (Owner)

@@ -63,9 +63,17 @@ namespace NevernamedsItems
         }
         public static RoomHandler GetAbsoluteRoom(this Projectile bullet)
         {
-            Vector2 bulletPosition = bullet.sprite.WorldCenter;
-            IntVector2 bulletPositionIntVector2 = bulletPosition.ToIntVector2();
-            return GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(bulletPositionIntVector2);
+            Vector2 bulletPosition = Vector2.zero;
+            if (bullet.sprite) bulletPosition = bullet.sprite.WorldCenter;
+            else if (bullet.specRigidbody) bulletPosition = bullet.specRigidbody.UnitCenter;
+            else if (bullet.transform) bulletPosition = bullet.transform.position;
+
+            if (bulletPosition != Vector2.zero)
+            {
+                IntVector2 bulletPositionIntVector2 = bulletPosition.ToIntVector2();
+                return GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(bulletPositionIntVector2);
+            }
+            else return null;
         }
         public static void ReflectBullet(this Projectile p, bool retargetReflectedBullet, GameActor newOwner, float minReflectedBulletSpeed, bool doPostProcessing = false, float scaleModifier = 1f, float baseDamage = 10f, float spread = 0f, string sfx = null)
         {
@@ -81,8 +89,17 @@ namespace NevernamedsItems
             p.Owner = newOwner;
             p.SetNewShooter(newOwner.specRigidbody);
             p.allowSelfShooting = false;
-            p.collidesWithPlayer = false;
-            p.collidesWithEnemies = true;
+            if (newOwner is AIActor)
+            {
+                p.collidesWithPlayer = true;
+                p.collidesWithEnemies = false;
+            }
+            else if (newOwner is PlayerController)
+            {
+                p.collidesWithPlayer = false;
+                p.collidesWithEnemies = true;
+            }
+
             if (scaleModifier != 1f)
             {
                 SpawnManager.PoolManager.Remove(p.transform);
@@ -90,7 +107,7 @@ namespace NevernamedsItems
             }
             if (p.Speed < minReflectedBulletSpeed) p.Speed = minReflectedBulletSpeed;
             p.baseData.damage = baseDamage;
-            if (doPostProcessing)
+            if (doPostProcessing && newOwner is PlayerController)
             {
                 PlayerController player = (newOwner as PlayerController);
                 if (player != null)
@@ -103,6 +120,24 @@ namespace NevernamedsItems
                     p.BossDamageMultiplier *= player.stats.GetStatValue(PlayerStats.StatType.DamageToBosses);
                     p.RuntimeUpdateScale(player.stats.GetStatValue(PlayerStats.StatType.PlayerBulletScale));
                     player.DoPostProcessProjectile(p);
+                }
+            }
+            if (newOwner is AIActor)
+            {
+                p.baseData.damage = 0.5f;
+                p.baseData.SetAll((newOwner as AIActor).bulletBank.GetBullet("default").ProjectileData);
+                p.specRigidbody.CollideWithTileMap = false;
+                p.ResetDistance();
+                p.collidesWithEnemies = (newOwner as AIActor).CanTargetEnemies;
+                p.collidesWithPlayer = true;
+                p.UpdateCollisionMask();
+                p.sprite.color = new Color(1f, 0.1f, 0.1f);
+                p.MakeLookLikeEnemyBullet(true);
+                p.RemovePlayerOnlyModifiers();
+                if ((newOwner as AIActor).IsBlackPhantom)
+                {
+                    p.baseData.damage = 1;
+                    p.BecomeBlackBullet();
                 }
             }
             p.UpdateCollisionMask();
@@ -269,5 +304,6 @@ namespace NevernamedsItems
             if (shadowcolour) component2.ChangeColor(0f, new Color(0.35f, 0.25f, 0.65f, 1f));
             return component2;
         }
+        
     }
 }

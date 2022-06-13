@@ -46,6 +46,22 @@ namespace NevernamedsItems
                     ETGModConsole.Log("All-Jammed Mode has been enabled.");
                 }
             });
+            ETGModConsole.Commands.GetGroup("nn").AddUnit("togglecurses", delegate (string[] args)
+            {
+                if (AllJammedState.AllJammedActive == true)
+                {
+                    SaveAPIManager.SetFlag(CustomDungeonFlags.CURSES_DISABLED, true);
+                    ETGModConsole.Log("Y'know what sucks? Putting time and effort into something only for everyone to just disable it and tell you how much they hate it.");
+                    ETGModConsole.Log("Yeah this is a petty message, but consider it developer venting or something.");
+                    ETGModConsole.Log("Anyways... curses have been disabed.");
+                }
+                else
+                {
+                    SaveAPIManager.SetFlag(CustomDungeonFlags.CURSES_DISABLED, false);
+                    ETGModConsole.Log("Curses have been enabled.   ...thanks.");
+
+                }
+            });
             ETGModConsole.Commands.GetGroup("nn").AddUnit("listInstalledMods", delegate (string[] args)
             {
                 ETGModConsole.Log("<color=#ff0000ff>Prismatism:</color> " + ModInstallFlags.PrismatismInstalled);
@@ -114,7 +130,7 @@ namespace NevernamedsItems
                 }
             });
             CheckUnlocks.Init();
-
+            CheatUnlocks.Init();
             ETGModConsole.Commands.GetGroup("nn").AddUnit("givebyid", delegate (string[] args)
             {
                 if (args == null) ETGModConsole.Log("No args");

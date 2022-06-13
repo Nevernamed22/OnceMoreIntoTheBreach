@@ -19,7 +19,7 @@ namespace CustomCharacters
 				//legacyFilePattern = "charapiSlot{0}.txt"
 
 
-				encrypted = true,
+				encrypted = false,
 				backupCount = 3,
 				backupPattern = "Slot{0}." + CharApiHiveMind.modPrefix.ToLower() + "CharapiBackup.{1}",
 				backupMinTimeMin = 45,
@@ -58,7 +58,7 @@ namespace CustomCharacters
 					SaveSettingThing = new SaveManager.SaveType
 					{
 						filePattern = "Slot{0}." + CharApiHiveMind.modPrefix.ToLower() + "CharapiSave",
-						encrypted = true,
+						encrypted = false,
 						backupCount = 3,
 						backupPattern = "Slot{0}." + CharApiHiveMind.modPrefix.ToLower() + "CharapiBackup.{1}",
 						backupMinTimeMin = 45,

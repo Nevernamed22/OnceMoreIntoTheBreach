@@ -7,6 +7,6 @@ namespace CustomCharacters
 {
     public enum CustomPlayableCharacters
     {
-        Shade = 274131
+        Shade = 274131,
     }
 }

@@ -401,14 +401,17 @@ namespace NevernamedsItems
         };
             ApplyColourToHitEnemies = false;
             tintPriority = 1;
+            paintballGun = false;
         }
         public static List<Color> ListOfColours;
         public bool ApplyColourToHitEnemies;
         public int tintPriority;
+        public bool paintballGun;
         private void Start()
         {
             this.m_projectile = base.GetComponent<Projectile>();
             selectedColour = BraveUtility.RandomElement(ListOfColours);
+            if (paintballGun && m_projectile.ProjectilePlayerOwner() && m_projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Paint It Black")) selectedColour = Color.black;
             m_projectile.AdjustPlayerProjectileTint(selectedColour, tintPriority);
             if (ApplyColourToHitEnemies) m_projectile.OnHitEnemy += this.OnHitEnemy;
         }
@@ -598,9 +601,12 @@ namespace NevernamedsItems
         private void Start()
         {
             this.m_projectile = base.GetComponent<Projectile>();
-            IntVector2 newPosition = this.m_projectile.GetAbsoluteRoom().GetRandomVisibleClearSpot(3, 3);
-            this.m_projectile.transform.position = newPosition.ToVector3();
-            this.m_projectile.specRigidbody.Reinitialize();
+            if (this.m_projectile.GetAbsoluteRoom() != null)
+            {
+                IntVector2 newPosition = this.m_projectile.GetAbsoluteRoom().GetRandomVisibleClearSpot(3, 3);
+                this.m_projectile.transform.position = newPosition.ToVector3();
+                this.m_projectile.specRigidbody.Reinitialize();
+            }
         }
         private Projectile m_projectile;
     } //Teleports the bullet to a random position in the room on spawn.
@@ -853,91 +859,7 @@ namespace NevernamedsItems
         public List<string> EnemyTypeToKill = new List<string>();
         public List<string> BossesToBonusDMG = new List<string>();
     } //Allows for easy insta-killing
-    public class ProjectileSlashingBehaviour : MonoBehaviour
-    {
-        public ProjectileSlashingBehaviour()
-        {
-            DestroyBaseAfterFirstSlash = false;
-            timeBetweenSlashes = 1;
-            DoSound = true;
-            slashKnockback = 5;
-            SlashDamage = 15;
-            playerKnockback = 1;
-            SlashDamageUsesBaseProjectileDamage = true;
-            InteractMode = SlashDoer.ProjInteractMode.IGNORE;
-        }
-        private void Start()
-        {
-            this.m_projectile = base.GetComponent<Projectile>();
-            if (this.m_projectile.Owner && this.m_projectile.Owner is PlayerController) this.owner = this.m_projectile.Owner as PlayerController;
-        }
-        private void Update()
-        {
-            if (this.m_projectile)
-            {
-                if (timer > 0)
-                {
-                    timer -= BraveTime.DeltaTime;
-                }
-                if (timer <= 0)
-                {
-                    this.m_projectile.StartCoroutine(DoSlash(0, 0));
-                    if (doSpinAttack)
-                    {
-                        this.m_projectile.StartCoroutine(DoSlash(90, 0.15f));
-                        this.m_projectile.StartCoroutine(DoSlash(180, 0.30f));
-                        this.m_projectile.StartCoroutine(DoSlash(-90, 0.45f));
-                    }
-                    timer = timeBetweenSlashes;
-                }
-            }
-        }
-        private IEnumerator DoSlash(float angle, float delay)
-        {
-            yield return new WaitForSeconds(delay);
-            float actDamage = this.SlashDamage;
-            float actKnockback = this.slashKnockback;
-            float bossDMGMult = 1;
-            float jammedDMGMult = 1;
 
-            Projectile proj = this.m_projectile;
-            List<GameActorEffect> effects = new List<GameActorEffect>();
-            effects.AddRange(proj.statusEffectsToApply);
-            if (proj.AppliesFire && UnityEngine.Random.value <= proj.FireApplyChance) effects.Add(proj.fireEffect);
-            if (proj.AppliesCharm && UnityEngine.Random.value <= proj.CharmApplyChance) effects.Add(proj.charmEffect);
-            if (proj.AppliesCheese && UnityEngine.Random.value <= proj.CheeseApplyChance) effects.Add(proj.cheeseEffect);
-            if (proj.AppliesBleed && UnityEngine.Random.value <= proj.BleedApplyChance) effects.Add(proj.bleedEffect);
-            if (proj.AppliesFreeze && UnityEngine.Random.value <= proj.FreezeApplyChance) effects.Add(proj.freezeEffect);
-            if (proj.AppliesPoison && UnityEngine.Random.value <= proj.PoisonApplyChance) effects.Add(proj.healthEffect);
-            if (proj.AppliesSpeedModifier && UnityEngine.Random.value <= proj.SpeedApplyChance) effects.Add(proj.speedEffect);
-
-
-            if (SlashDamageUsesBaseProjectileDamage)
-            {
-                actDamage = this.m_projectile.baseData.damage;
-                bossDMGMult = this.m_projectile.BossDamageMultiplier;
-                jammedDMGMult = this.m_projectile.BlackPhantomDamageMultiplier;
-                actKnockback = this.m_projectile.baseData.force;
-            }
-            SlashDoer.DoSwordSlash(this.m_projectile.specRigidbody.UnitCenter, (this.m_projectile.Direction.ToAngle() + angle), owner, playerKnockback, this.InteractMode, actDamage, actKnockback, effects, null, jammedDMGMult, bossDMGMult);
-            if (DoSound) AkSoundEngine.PostEvent("Play_WPN_blasphemy_shot_01", this.m_projectile.gameObject);
-            if (DestroyBaseAfterFirstSlash) Invoke("Suicide", 0.01f);
-            yield break;
-        }
-        private void Suicide() { UnityEngine.Object.Destroy(this.m_projectile.gameObject); }
-        private float timer;
-        public float timeBetweenSlashes;
-        public bool doSpinAttack;
-        public float playerKnockback;
-        public float slashKnockback;
-        public bool DoSound;
-        public float SlashDamage;
-        public bool SlashDamageUsesBaseProjectileDamage;
-        public SlashDoer.ProjInteractMode InteractMode;
-        public bool DestroyBaseAfterFirstSlash;
-        private Projectile m_projectile;
-        private PlayerController owner;
-    } //Causes the projectile to slash it's way through the air
     public class SpawnEnemyOnBulletSpawn : MonoBehaviour
     {
         public SpawnEnemyOnBulletSpawn()
@@ -2339,6 +2261,10 @@ namespace NevernamedsItems
         public bool usesOverrideCenter;
         public SpeculativeRigidbody overrideCenter;
     } //Orbital Bullets as a Projectile Component.
+    public class BulletIsFromBeam : MonoBehaviour
+    {
+
+    }
     public class ChaosBulletsModifierComp : MonoBehaviour
     {
         public ChaosBulletsModifierComp()
@@ -2594,4 +2520,5 @@ namespace NevernamedsItems
             }
         }
     } //A projectile with no cooldown on how many times it can hit an enemy per second.
+
 }

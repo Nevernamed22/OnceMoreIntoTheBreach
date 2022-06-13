@@ -207,123 +207,51 @@ namespace NevernamedsItems
                 else { ETGModConsole.Log("Shade's Eye <color=#ff0000ff>[Locked]</color> - Take damage as the Shade... and live!"); }
 
                 //----------------------------------------------------------BOSSRUSH
-                ETGModConsole.Log("<color=#00d6e6>Bossrush Unlocks:</color>");
+                ETGModConsole.Log("<color=#00d6e6>Bossrush Unlocks:</color>");//------------------------------------------------------------
 
-                //Keygen
-                if (SaveAPIManager.GetFlag(CustomDungeonFlags.BOSSRUSH_PILOT))
-                {
-                    ETGModConsole.Log("Keygen <color=#04eb00>[Unlocked]</color>!");
-                }
-                else { ETGModConsole.Log("Keygen  <color=#ff0000ff>[Locked]</color> - Beat Bossrush as the Pilot."); }
-
-                //Lvl. 2 Molotov
-                if (SaveAPIManager.GetFlag(CustomDungeonFlags.BOSSRUSH_CONVICT))
-                {
-                    ETGModConsole.Log("Lvl. 2 Molotov <color=#04eb00>[Unlocked]</color>!");
-                }
-                else { ETGModConsole.Log("Lvl. 2 Molotov  <color=#ff0000ff>[Locked]</color> - Beat Bossrush as the Convict."); }
-
-                //Paraglocks
-                if (SaveAPIManager.GetFlag(CustomDungeonFlags.BOSSRUSH_PARADOX))
-                {
-                    ETGModConsole.Log("Paraglocks <color=#04eb00>[Unlocked]</color>!");
-                }
-                else { ETGModConsole.Log("Paraglocks  <color=#ff0000ff>[Locked]</color> - Beat Bossrush as the Paradox."); }
-
-                //Jaws of Defeat
-                if (SaveAPIManager.GetFlag(CustomDungeonFlags.BOSSRUSH_SHADE))
-                {
-                    ETGModConsole.Log("Jaws of Defeat <color=#04eb00>[Unlocked]</color>!");
-                }
-                else { ETGModConsole.Log("Jaws of Defeat  <color=#ff0000ff>[Locked]</color> - Beat Bossrush as the Shade."); }
+                PrintUnlock(CustomDungeonFlags.BOSSRUSH_PILOT, "Keygen", "Beat Bossrush as the Pilot.");
+                PrintUnlock(CustomDungeonFlags.BOSSRUSH_MARINE, "Shot in the Arm", "Beat Bossrush as the Marine.");
+                PrintUnlock(CustomDungeonFlags.BOSSRUSH_CONVICT, "Lvl. 2 Molotov", "Beat Bossrush as the Convict.");
+                PrintUnlock(CustomDungeonFlags.BOSSRUSH_HUNTER, "Boltcaster", "Beat Bossrush as the Hunter.");
+                PrintUnlock(CustomDungeonFlags.BOSSRUSH_BULLET, "Carnwennan", "Beat Bossrush as the Bullet.");
+                PrintUnlock(CustomDungeonFlags.BOSSRUSH_ROBOT, "Magnet", "Beat Bossrush as the Robot.");
+                PrintUnlock(CustomDungeonFlags.BOSSRUSH_PARADOX, "Paraglocks", "Beat Bossrush as the Paradox.");
+                PrintUnlock(CustomDungeonFlags.BOSSRUSH_GUNSLINGER, "Bullet Shuffle", "Beat Bossrush as the Gunslinger.");
+                PrintUnlock(CustomDungeonFlags.BOSSRUSH_SHADE, "Jaws of Defeat", "Beat Bossrush as the Shade.");           
 
                 //----------------------------------------------------------RAINBOW MODE
-                ETGModConsole.Log("<color=#00d6e6>Rainbow Mode Unlocks:</color>");
+                ETGModConsole.Log("<color=#00d6e6>Rainbow Mode Unlocks:</color>");//------------------------------------------------------------
 
-                //Rainbow Guon Stone
-                if (SaveAPIManager.GetFlag(CustomDungeonFlags.RAINBOW_KILLED_LICH))
-                {
-                    ETGModConsole.Log("Rainbow Guon Stone <color=#04eb00>[Unlocked]</color>!");
-                }
-                else { ETGModConsole.Log("Rainbow Guon Stone <color=#ff0000ff>[Locked]</color> - Kill the Lich in Rainbow Mode."); }
+                PrintUnlock(CustomDungeonFlags.RAINBOW_KILLED_LICH, "Rainbow Guon Stone", "Kill the Lich in Rainbow Mode.");
 
+                //----------------------------------------------------------TURBO MODE
                 ETGModConsole.Log("<color=#00d6e6>Turbo Mode Unlocks:</color>"); //------------------------------------------------------------
 
-                //Chaos Ruby
-                if (SaveAPIManager.GetFlag(CustomDungeonFlags.BEATEN_ANY_BOSS_TURBO_MODE))
-                {
-                    ETGModConsole.Log("Chaos Ruby <color=#04eb00>[Unlocked]</color>!");
-                }
-                else { ETGModConsole.Log("Chaos Ruby <color=#ff0000ff>[Locked]</color> - Beat any boss in Turbo Mode."); }
+                PrintUnlock(CustomDungeonFlags.BEATEN_ANY_BOSS_TURBO_MODE, "Chaos Ruby", "Beat any boss in Turbo Mode.");
+                PrintUnlock(CustomDungeonFlags.BEATEN_MINES_BOSS_TURBO_MODE, "Ringer", "Beat the Black Powder Mine on Turbo Mode.");
+                PrintUnlock(CustomDungeonFlags.BEATEN_HOLLOW_BOSS_TURBO_MODE, "Supersonic Shots", "Beat the Hollow on Turbo Mode.");
 
-                //Ringer
-                if (SaveAPIManager.GetFlag(CustomDungeonFlags.BEATEN_MINES_BOSS_TURBO_MODE))
-                {
-                    ETGModConsole.Log("Ringer <color=#04eb00>[Unlocked]</color>!");
-                }
-                else { ETGModConsole.Log("Ringer <color=#ff0000ff>[Locked]</color> - Beat the Black Powder Mine on Turbo Mode."); }
+                //----------------------------------------------------------ADVANCED DRAGUN
+                ETGModConsole.Log("<color=#00d6e6>Advanced Dragun Unlocks:</color>"); //------------------------------------------------------------
 
-                //Supersonic Shots
-                if (SaveAPIManager.GetFlag(CustomDungeonFlags.BEATEN_HOLLOW_BOSS_TURBO_MODE))
-                {
-                    ETGModConsole.Log("Supersonic Shots <color=#04eb00>[Unlocked]</color>!");
-                }
-                else { ETGModConsole.Log("Supersonic Shots <color=#ff0000ff>[Locked]</color> - Beat the Hollow on Turbo Mode."); }
+                PrintUnlock(CustomDungeonFlags.ADVDRAGUN_KILLED_ROBOT, "Electrum Rounds", "Kill the Advanced Dragun as the Robot.");
+                PrintUnlock(CustomDungeonFlags.ADVDRAGUN_KILLED_SHADE, "Redhawk", "Kill the Advanced Dragun as the Shade.");
 
-
-
+                //----------------------------------------------------------ALL JAMMED MODE
                 ETGModConsole.Log("<color=#00d6e6>All-Jammed Mode Unlocks:</color>"); //------------------------------------------------------------
-                if (SaveAPIManager.GetFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_KEEP))
-                {
-                    ETGModConsole.Log("Hallowed Bullets <color=#04eb00>[Unlocked]</color>!");
-                }
-                else { ETGModConsole.Log("Hallowed Bullets <color=#ff0000ff>[Locked]</color> - Beat the Keep on All-Jammed Mode"); }
-                if (SaveAPIManager.GetFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_OUB))
-                {
-                    ETGModConsole.Log("Chemical Burn <color=#04eb00>[Unlocked]</color>!");
-                }
-                else { ETGModConsole.Log("Chemical Burn <color=#ff0000ff>[Locked]</color> - Beat the Oubliette on All-Jammed Mode"); }
-                if (SaveAPIManager.GetFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_PROPER))
-                {
-                    ETGModConsole.Log("Silver Guon Stone <color=#04eb00>[Unlocked]</color>!");
-                }
-                else { ETGModConsole.Log("Silver Guon Stone <color=#ff0000ff>[Locked]</color> - Beat the Gungeon Proper on All-Jammed Mode"); }
-                if (SaveAPIManager.GetFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_ABBEY))
-                {
-                    ETGModConsole.Log("Gunidae solvit Haatelis <color=#04eb00>[Unlocked]</color>!");
-                }
-                else { ETGModConsole.Log("Gunidae solvit Haatelis <color=#ff0000ff>[Locked]</color> - Beat the Abbey on All-Jammed Mode"); }
-                if (SaveAPIManager.GetFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_MINES))
-                {
-                    ETGModConsole.Log("Bloodthirsty Bullets <color=#04eb00>[Unlocked]</color>!");
-                }
-                else { ETGModConsole.Log("Bloodthirsty Bullets <color=#ff0000ff>[Locked]</color> - Beat the Mines on All-Jammed Mode"); }
-                if (SaveAPIManager.GetFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_RAT))
-                {
-                    ETGModConsole.Log("Ammo Trap <color=#04eb00>[Unlocked]</color>!");
-                }
-                else { ETGModConsole.Log("Ammo Trap <color=#ff0000ff>[Locked]</color> - Beat the Rat's Lair on All-Jammed Mode"); }
-                if (SaveAPIManager.GetFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_HOLLOW))
-                {
-                    ETGModConsole.Log("Mirror Bullets <color=#04eb00>[Unlocked]</color>!");
-                }
-                else { ETGModConsole.Log("Mirror Bullets <color=#ff0000ff>[Locked]</color> - Beat the Hollow on All-Jammed Mode"); }
-                if (SaveAPIManager.GetFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_OFFICE))
-                {
-                    ETGModConsole.Log("Scroll of Exact Knowledge <color=#04eb00>[Unlocked]</color>!");
-                }
-                else { ETGModConsole.Log("Scroll of Exact Knowledge <color=#ff0000ff>[Locked]</color> - Beat the R&G Dept. on All-Jammed Mode"); }
-                if (SaveAPIManager.GetFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_FORGE))
-                {
-                    ETGModConsole.Log("Cloak of Darkness <color=#04eb00>[Unlocked]</color>!");
-                }
-                else { ETGModConsole.Log("Cloak of Darkness <color=#ff0000ff>[Locked]</color> - Beat the Forge on All-Jammed Mode"); }
-                if (SaveAPIManager.GetFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_HELL))
-                {
-                    ETGModConsole.Log("Gun of a Thousand Sins <color=#04eb00>[Unlocked]</color>!");
-                }
-                else { ETGModConsole.Log("Gun of a Thousand Sins <color=#ff0000ff>[Locked]</color> - Beat Bullet Hell on All-Jammed Mode"); }
 
+                PrintUnlock(CustomDungeonFlags.ALLJAMMED_BEATEN_KEEP, "Hallowed Bullets", "Beat the Keep on All-Jammed Mode.");
+                PrintUnlock(CustomDungeonFlags.ALLJAMMED_BEATEN_OUB, "Chemical Burn", "Beat the Oubliette on All-Jammed Mode.");
+                PrintUnlock(CustomDungeonFlags.ALLJAMMED_BEATEN_PROPER, "Silver Guon Stone", "Beat the Gungeon Proper on All-Jammed Mode.");
+                PrintUnlock(CustomDungeonFlags.ALLJAMMED_BEATEN_ABBEY, "Gunidae solvit Haatelis", "Beat the Abbey of the True Gun on All-Jammed Mode.");
+                PrintUnlock(CustomDungeonFlags.ALLJAMMED_BEATEN_MINES, "Bloodthirsty Bullets", "Beat the Black Powder Mines on All-Jammed Mode.");
+                PrintUnlock(CustomDungeonFlags.ALLJAMMED_BEATEN_RAT, "Ammo Trap", "Beat the Resourceful Rat on All-Jammed Mode.");
+                PrintUnlock(CustomDungeonFlags.ALLJAMMED_BEATEN_HOLLOW, "Mirror Bullets", "Beat the Hollow on All-Jammed Mode.");
+                PrintUnlock(CustomDungeonFlags.ALLJAMMED_BEATEN_OFFICE, "Scroll of Exact Knowledge", "Beat the R&G Dept on All-Jammed Mode.");
+                PrintUnlock(CustomDungeonFlags.ALLJAMMED_BEATEN_FORGE, "Cloak of Darkness", "Beat the Forge on All-Jammed Mode.");
+                PrintUnlock(CustomDungeonFlags.ALLJAMMED_BEATEN_HELL, "Gun of a Thousand Sins", "Beat Bullet Hell on All-Jammed Mode.");
+
+                
                 ETGModConsole.Log("<color=#00d6e6>Challenge Run Unlocks:</color>"); //------------------------------------------------------------
                 ETGModConsole.Log("View all challenges and how to activate them by entering 'nnchallenges' into the console.");
                 //Supersonic Shots
@@ -398,5 +326,14 @@ namespace NevernamedsItems
                 else { ETGModConsole.Log("Bullet Blade <color=#ff0000ff>[Locked]</color>."); }
             });
         }
+        public static void PrintUnlock(CustomDungeonFlags flag, string itemname, string unlockPrereqs)
+        {
+            if (SaveAPIManager.GetFlag(flag))
+            {
+                ETGModConsole.Log($"{itemname} <color=#04eb00>[Unlocked]</color>!");
+            }
+            else { ETGModConsole.Log($"{itemname}  <color=#ff0000ff>[Locked]</color> - {unlockPrereqs}"); }
+        }
+        
     }
 }

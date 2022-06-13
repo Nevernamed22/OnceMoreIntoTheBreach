@@ -56,7 +56,6 @@ namespace NevernamedsItems
             orAddComponent.penetratesBreakables = true;
             orAddComponent.penetration++;
             projectile.SetProjectileSpriteRight("antimaterielrifle_projectile", 15, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 15, 7);
-            projectile.transform.parent = gun.barrelOffset;
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = "Thinline Bullets";

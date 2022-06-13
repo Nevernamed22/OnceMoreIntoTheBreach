@@ -168,7 +168,7 @@ namespace NevernamedsItems
         }
         public static GoopDefinition GenerateBloodGoop(float dps, Color Color, float lifeSpan = 20)
         {
-            GoopDefinition Blood = new GoopDefinition();
+            GoopDefinition Blood = ScriptableObject.CreateInstance<GoopDefinition>();
             Blood.CanBeIgnited = false;
             Blood.damagesEnemies = true;
             Blood.damagesPlayers = false;
@@ -177,6 +177,11 @@ namespace NevernamedsItems
             Blood.lifespan = lifeSpan;
             Blood.usesLifespan = true;
             Blood.damagePerSecondtoEnemies = dps;
+            Blood.CanBeElectrified = true;
+            Blood.electrifiedTime = 1;
+            Blood.electrifiedDamagePerSecondToEnemies = 20;
+            Blood.electrifiedDamageToPlayer = 0.5f;
+            Blood.goopDamageTypeInteractions = new List<GoopDefinition.GoopDamageTypeInteraction> { new GoopDefinition.GoopDamageTypeInteraction { damageType = CoreDamageTypes.Electric, electrifiesGoop = true } };
             return Blood;
         }
         private static string[] goops = new string[]

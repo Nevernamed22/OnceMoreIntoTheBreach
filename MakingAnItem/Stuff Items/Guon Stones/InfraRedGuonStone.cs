@@ -96,8 +96,7 @@ namespace NevernamedsItems
         }
         public static void BuildSynergyPrefab()
         {
-            bool flag = InfraredGuonStone.upgradeOrbitalPrefab == null;
-            if (flag)
+            if (InfraredGuonStone.upgradeOrbitalPrefab == null)
             {
                 GameObject gameObject = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/GuonStones/infraredguonstone_synergy", null);
                 gameObject.name = "Infrared Guon Orbital Synergy Form";

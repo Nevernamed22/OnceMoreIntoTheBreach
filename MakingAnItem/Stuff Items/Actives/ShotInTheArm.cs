@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using Dungeonator;
 using ItemAPI;
+using SaveAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
@@ -25,6 +26,9 @@ namespace NevernamedsItems
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed,7);       
             item.consumable = false;
             item.quality = ItemQuality.D; //D
+
+            item.AddToSubShop(ItemBuilder.ShopType.Trorc);
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.BOSSRUSH_MARINE, true);
         }
         protected override void DoEffect(PlayerController user)
         {

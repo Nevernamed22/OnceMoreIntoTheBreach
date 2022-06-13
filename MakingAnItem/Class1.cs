@@ -71,6 +71,8 @@ namespace NevernamedsItems
                 CurseManager.Init();
                 ETGModMainBehaviour.Instance.gameObject.AddComponent<GlobalUpdate>();
                 ETGModMainBehaviour.Instance.gameObject.AddComponent<CustomDarknessHandler>();
+                GameOfLifeHandler.Init();
+                //ETGModMainBehaviour.Instance.gameObject.AddComponent<GameOfLifeHandler>();
 
                 //ETGModConsole.Log(Assembly.GetExecutingAssembly().FullName);
 
@@ -187,6 +189,7 @@ namespace NevernamedsItems
                 BatterBullets.Init();
                 ElectrumRounds.Init();
                 BreachingRounds.Init();
+                MagnetItem.Init();
                 EargesplittenLoudenboomerRounds.Init();
                 TheShell.Init();
                 //Status Effect Bullet Mods
@@ -506,6 +509,7 @@ namespace NevernamedsItems
                 GoldenRevolver.Add();
                 Nocturne.Add();
                 BackWarder.Add();
+                Redhawk.Add();
                 ToolGun.Add();
                 //GENERAL HANDGUNS
                 StickGun.Add();
@@ -597,6 +601,7 @@ namespace NevernamedsItems
                 ARCCannon.Add();
                 //BOWS AND CROSSBOWS
                 IceBow.Add();
+                Boltcaster.Add();
                 Clicker.Add();
                 //ANTIQUES
                 WheelLock.Add();
@@ -613,6 +618,9 @@ namespace NevernamedsItems
                 Gaxe.Add();
                 WoodenHorse.Add();
                 AgarGun.Add();
+                //KNIVES AND BLADES
+                Carnwennan.Add();
+                MantidAugment.Add();
                 //REALISTIC GUNS
                 HeatRay.Add();
                 BarcodeScanner.Add();
@@ -655,7 +663,6 @@ namespace NevernamedsItems
                 Wrinkler.Add();
                 //BLADES
                 ButchersKnife.Add();
-                MantidAugment.Add();
                 RapidRiposte.Add();
                 //FUN GUNS
                 Gumgun.Add();
@@ -683,6 +690,7 @@ namespace NevernamedsItems
                 Rebondir.Add();
                 BigShot.Add();
                 W3irdstar.Add();
+                Seismograph.Add();
                 BioTranstater2100.Add();
                 //MAGICAL GUNS
                 Icicle.Add();
@@ -734,6 +742,7 @@ namespace NevernamedsItems
                 StormRod.Add();
                 UnrustyShotgun.Add();
                 #endregion
+
 
                 //-----------------------------------------------------SHRINES GET INITIALISED
                 #region ShrineInitialisation
@@ -851,6 +860,8 @@ namespace NevernamedsItems
         {
             try
             {
+                LibramOfTheChambers.LateInit();
+
                 SetupCrossModIDs.DoSetup();
 
                 RoomFactory.LoadRoomsFromRoomDirectory();

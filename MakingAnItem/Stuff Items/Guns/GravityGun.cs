@@ -481,7 +481,7 @@ namespace NevernamedsItems
                     }
                     if (isTable && gun && gun.GunPlayerOwner() && gun.GunPlayerOwner().PlayerHasActiveSynergy("Hidden Tech Nitro"))
                     {
-                        ExplosiveModifier boom = projectile.gameObject.GetOrAddComponent<ExplosiveModifier>();
+                        ExplosiveModifier boom = projectile.gameObject.GetOrAddComponent<ExplosiveModifier>(); 
                         boom.explosionData = PickupObjectDatabase.GetById(398)?.GetComponent<TableFlipItem>().ProjectileExplosionData;
                         if (gun.GunPlayerOwner().HasActiveBonusSynergy(CustomSynergyType.ROCKET_POWERED_TABLES))
                         {

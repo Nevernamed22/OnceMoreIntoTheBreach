@@ -51,12 +51,12 @@ namespace NevernamedsItems
 
         private void onDodgeRoll(PlayerController player, Vector2 dirVec)
         {
-            int radius = -1;
-            if (Owner.HasPickupID(520)) radius = 20;
-            else radius = 10;
+            int radius = 10;
+            if (Owner.PlayerHasActiveSynergy("Let Loose")) radius = 20;
+
             Exploder.DoRadialKnockback(player.specRigidbody.UnitCenter, 100, radius);
-            //Exploder.DoRadialMinorBreakableBreak(player.specRigidbody.UnitCenter, radius);
-            if (Owner.HasPickupID(457))
+
+            if (Owner.PlayerHasActiveSynergy("Scytheclone"))
             {
                 float curDodgeDam = player.stats.GetStatValue(PlayerStats.StatType.DodgeRollDamage);
                 Exploder.DoRadialDamage(curDodgeDam * 3, player.specRigidbody.UnitCenter, radius, false, true, false, null);

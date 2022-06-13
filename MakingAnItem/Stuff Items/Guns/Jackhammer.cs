@@ -53,7 +53,6 @@ namespace NevernamedsItems
                 projectile.baseData.damage = 4;
                 projectile.baseData.force *= 0.5f;
                 if (mod != gun.DefaultModule) { mod.ammoCost = 0; }
-                projectile.transform.parent = gun.barrelOffset;
             }
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.BLUE_SHOTGUN;
             

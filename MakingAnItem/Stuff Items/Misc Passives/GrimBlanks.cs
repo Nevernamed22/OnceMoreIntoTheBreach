@@ -28,7 +28,7 @@ namespace NevernamedsItems
         {
             if (enemy && enemy.aiActor)
             {
-                enemy.aiActor.DelelteOwnedBullets(1, true);
+                enemy.aiActor.DeleteOwnedBullets(1, true);
             }
         }
         public override DebrisObject Drop(PlayerController player)

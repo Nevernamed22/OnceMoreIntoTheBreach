@@ -43,8 +43,8 @@ namespace NevernamedsItems
 
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
             BasicBeamController beamComp = projectile.GenerateBeamPrefab(
-                "NevernamedsItems/Resources/BeamSprites/redbeam_seg_001", new Vector2(18,2), new Vector2(0,8), BeamAnimPaths, 8, 
-                ImpactAnimPaths, 13, new Vector2(4, 4), new Vector2(7,7));
+                "NevernamedsItems/Resources/BeamSprites/redbeam_seg_001", new Vector2(18, 2), new Vector2(0, 8), BeamAnimPaths, 8,
+                ImpactAnimPaths, 13, new Vector2(4, 4), new Vector2(7, 7));
             projectile.gameObject.SetActive(false);
             projectile.baseData.damage *= 4;
             projectile.baseData.range *= 2;
@@ -61,7 +61,7 @@ namespace NevernamedsItems
         {
             float procChance = 0.2f;
             procChance *= thing;
-            if (UnityEngine.Random.value <= procChance && bullet.GetComponent<BeamBulletsBehaviour>() == null)
+            if (UnityEngine.Random.value <= procChance && bullet.GetComponent<BeamBulletsBehaviour>() == null && bullet.GetComponent<BulletIsFromBeam>() == null)
             {
                 BeamBulletsBehaviour beambullets = bullet.gameObject.AddComponent<BeamBulletsBehaviour>();
                 if (UnityEngine.Random.value <= 0.5f) beambullets.firetype = BeamBulletsBehaviour.FireType.PLUS;
@@ -114,5 +114,5 @@ namespace NevernamedsItems
             base.OnDestroy();
         }
     }
-    
+
 }

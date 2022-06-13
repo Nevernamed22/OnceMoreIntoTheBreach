@@ -26,7 +26,9 @@ namespace NevernamedsItems
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
 
             item.quality = PickupObject.ItemQuality.D;
+            ID = item.PickupObjectId;
         }
+        public static int ID;
         bool canFire = true;
         private void HandleGunReloaded(PlayerController player, Gun playerGun)
         {

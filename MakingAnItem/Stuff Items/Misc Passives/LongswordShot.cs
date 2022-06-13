@@ -34,6 +34,9 @@ namespace NevernamedsItems
                 procChance *= chanceScaler;
                 if (UnityEngine.Random.value <= procChance)
                 {
+                    SlashData slashParams = new SlashData();
+
+
                     PlayerController player = bullet.Owner as PlayerController;
                     bullet.baseData.speed *= 0.5f;
                     bullet.UpdateSpeed();
@@ -44,22 +47,25 @@ namespace NevernamedsItems
                     slashing.DestroyBaseAfterFirstSlash = false;
                     slashing.timeBetweenSlashes = 0.30f;
                     if (player.PlayerHasActiveSynergy("Sword Mage")) slashing.timeBetweenSlashes = 0.15f;
-                    slashing.DoSound = true;
+
                     slashing.SlashDamageUsesBaseProjectileDamage = true;
-                    if (player.PlayerHasActiveSynergy("Sabre Throw")) slashing.InteractMode = SlashDoer.ProjInteractMode.REFLECT;
+                    if (player.PlayerHasActiveSynergy("Sabre Throw")) slashParams.projInteractMode = SlashDoer.ProjInteractMode.REFLECT;
                     if (player.PlayerHasActiveSynergy("Whirling Blade")) slashing.doSpinAttack = true;
-                    if (player.PlayerHasActiveSynergy("Live By The Sword"))
-                    {
-                        bullet.OnDestruction += this.OnDestruction;
-                    }
+                    if (player.PlayerHasActiveSynergy("Live By The Sword")) bullet.OnDestruction += this.OnDestruction;
+
+                    slashing.slashParameters = slashParams;
                 }
             }
 
         }
         private void OnDestruction(Projectile bullet)
         {
-            ExplosionData LinearChainExplosionData = Gungeon.Game.Items["katana_bullets"].GetComponent<ComplexProjectileModifier>().LinearChainExplosionData;
-            Exploder.Explode(bullet.specRigidbody.UnitCenter, LinearChainExplosionData, Vector2.zero);
+            if (Owner && Owner.specRigidbody)
+            {
+                ExplosionData LinearChainExplosionData = Gungeon.Game.Items["katana_bullets"].GetComponent<ComplexProjectileModifier>().LinearChainExplosionData.CopyExplosionData();
+                LinearChainExplosionData.ignoreList.Add(Owner.specRigidbody);
+                Exploder.Explode(bullet.specRigidbody.UnitCenter, LinearChainExplosionData, Vector2.zero);
+            }
         }
         public override void Pickup(PlayerController player)
         {

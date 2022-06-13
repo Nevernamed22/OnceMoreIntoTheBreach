@@ -25,7 +25,7 @@ namespace CustomCharacters
         {
             //ETGModConsole.Commands.AddUnit("pos", s =>
             //{
-            //    Tools.Print(GameManager.Instance.PrimaryPlayer.transform.position, "55AAFF", true);
+            //    DebugUtility.Print(GameManager.Instance.PrimaryPlayer.transform.position, "55AAFF", true);
             //});
 
      
@@ -47,7 +47,7 @@ namespace CustomCharacters
             {
                 try
                 {
-                    Debug.Log($"Adding {character.Key} to the breach.");
+                    ToolsCharApi.Print($"Adding {character.Key} to the breach.");
                     var identity = character.Value.First.baseCharacter;
 
                     var selectCharacter = AddCharacterToFoyer(character.Key, GetFlagFromIdentity(identity, sortedByX).gameObject);
@@ -66,8 +66,8 @@ namespace CustomCharacters
                 }
                 catch (Exception e)
                 {
-                    Debug.LogError($"An error occured while adding character {character.Key} to the breach.");
-                    Debug.LogError(e);
+                    ToolsCharApi.PrintError($"An error occured while adding character {character.Key} to the breach.");
+                    ToolsCharApi.PrintException(e);
                 }
             }
             
@@ -96,8 +96,8 @@ namespace CustomCharacters
                 if (character == PlayableCharacters.Robot && path.Contains("robot")) return flag;
                 if (character == PlayableCharacters.Pilot && path.Contains("rogue")) return flag;
             }
-            Debug.LogError("Couldn't find foyer select flag for: " + character);
-            Debug.LogError("    Have you unlocked them yet?");
+            ToolsCharApi.PrintError("Couldn't find foyer select flag for: " + character);
+            ToolsCharApi.PrintError("    Have you unlocked them yet?");
             return sortedByX[1];
         }
 
@@ -106,13 +106,13 @@ namespace CustomCharacters
             //Gather character data
             var customCharacter = CharacterBuilder.storedCharacters[characterPath.ToLower()];
 
-            
+
             //if (!CheckUnlocked(customCharacter.First))
             //{
             //    return null;
             //}
 
-            Debug.Log("    Got custom character");
+            ToolsCharApi.Print("    Got custom character");
 
             //Create new object
 
@@ -128,11 +128,11 @@ namespace CustomCharacters
             selectFlag.transform.position = customCharacter.First.foyerPos;
             selectFlag.CharacterPrefabPath = characterPath;
             selectFlag.name = "NPC_FoyerCharacter_" + customCharacter.First.nameShort;
-            Debug.Log("    Made select flag");
+            ToolsCharApi.Print("    Made select flag");
 
             //Replace sprites
             HandleSprites(selectFlag, customCharacter.Second.GetComponent<PlayerController>());
-            Debug.Log("    Replaced sprites");
+            ToolsCharApi.Print("    Replaced sprites");
 
             var td = selectFlag.talkDoer;
 
@@ -186,7 +186,7 @@ namespace CustomCharacters
             //ETGModConsole.Log(selectFlag.OverheadElement.ToString());
             td.OverheadUIElementOnPreInteract = selectFlag.OverheadElement;
             //FakePrefab.MarkAsFakePrefab(td.OverheadUIElementOnPreInteract);
-            Debug.Log("    Made Overhead Card");
+            ToolsCharApi.Print("    Made Overhead Card");
 
             //Change the effect of talking to the character
             foreach (var state in selectFlag.playmakerFsm.Fsm.FsmComponent.FsmStates)
@@ -202,19 +202,19 @@ namespace CustomCharacters
 
 
             MakeSkinSwapper(customCharacter.First);
-            Debug.Log("    Added swapper");
+            ToolsCharApi.Print("    Added swapper");
 
             //Make interactable
             if (!Dungeonator.RoomHandler.unassignedInteractableObjects.Contains(td))
                 Dungeonator.RoomHandler.unassignedInteractableObjects.Add(td);
-            Debug.Log("    Adjusted Talk-Doer");
+            ToolsCharApi.Print("    Adjusted Talk-Doer");
 
             //Player changed callback - Hides and shows player select object
             Foyer.Instance.OnPlayerCharacterChanged += (player) =>
             {
                 OnPlayerCharacterChanged(player, selectFlag, characterPath);
             };
-            Debug.Log("    Added callback");
+            ToolsCharApi.Print("    Added callback");
 
             return selectFlag;
         }
@@ -273,12 +273,12 @@ namespace CustomCharacters
 
             if (sprite.transform == null)
             {
-                ETGModConsole.Log("somehow the transform nulled... god is fucking dead and BraveBehaviours killed him");
+                Debug.LogError("somehow the transform nulled... god is fucking dead and BraveBehaviours killed him");
             }
 
             if (altSprite.transform == null)
             {
-                ETGModConsole.Log("somehow the transform nulled... god is fucking dead (again) and BraveBehaviours killed him");
+                Debug.LogError("somehow the transform nulled... god is fucking dead (again) and BraveBehaviours killed him");
             }
 
             baseSwapper.gameObject.SetActive(true);
@@ -319,13 +319,13 @@ namespace CustomCharacters
 
                 if (selectCharacter.OverheadElement == null)
                 {
-                    ETGModConsole.Log($"CHR_{data.nameShort}Panel is null");
+                    Debug.LogError($"CHR_{data.nameShort}Panel is null");
                     return;
                 }
 
                 if (selectCharacter.OverheadElement?.name == $"CHR_{data.nameShort}Panel")
                 {
-                    ETGModConsole.Log($"CHR_{data.nameShort}Panel already exists");
+                    Debug.LogError($"CHR_{data.nameShort}Panel already exists");
                     return;
                 }
 
@@ -343,7 +343,7 @@ namespace CustomCharacters
                 var customFoyerController = selectCharacter.gameObject.AddComponent<CustomCharacterFoyerController>();
                 customFoyerController.metaCost = data.metaCost;
 
-
+                
 
                 customFoyerController.useGlow = data.useGlow;
                 customFoyerController.emissiveColor = data.emissiveColor;
@@ -365,7 +365,7 @@ namespace CustomCharacters
 
                 //infoPanel.textPanel.transform.Find("NameLabel").GetComponent<dfLabel>().Text = "my ass";
                 //BotsMod.BotsModule.Log((infoPanel.textPanel.transform.Find("NameLabel").GetComponent<dfLabel>().Text).ToStringIfNoString(), BotsMod.BotsModule.LOST_COLOR);
-
+                
                 dfLabel nameLabel = infoPanel.textPanel.transform.Find("NameLabel").GetComponent<dfLabel>();
                 //why? its 3:50am and this is currently the funniest shit to me and you are powerless to stop me :)
                 nameLabel.Text = "#CHAR_" + data.nameShort.ToString().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper().ToUpper()
@@ -397,7 +397,7 @@ namespace CustomCharacters
 
 
                 foreach (var child in infoPanel.itemsPanel.GetComponentsInChildren<dfSprite>())
-                {
+                { 
 
                     //BotsMod.BotsModule.Log(child.name + " " + child.transform.position + " -- " + child.transform.localPosition);
                     posList.Add(child.transform.position);
@@ -420,7 +420,7 @@ namespace CustomCharacters
                     sprite.transform.parent = infoPanel.itemsPanel.transform;
 
                     infoPanel.itemsPanel.Controls.Add(sprite);
-
+                    
 
                     sprite.transform.position = new Vector3(1 + ((i + 0.1f) * 0.1f), -((i + 0.1f) * 0.1f), 0);
                     sprite.transform.localPosition = new Vector3(((i + 0.1f) * 0.1f), 0, 0);
@@ -429,7 +429,7 @@ namespace CustomCharacters
 
                 }
 
-
+                
                 if (data.foyerCardSprites != null)
                 {
 
@@ -449,8 +449,8 @@ namespace CustomCharacters
                     //facecard.RegenerateCache();
 
 
-                    ETGModConsole.Log($"foyer cards arent null. {facecard.gameObject.transform.parent.position}");
-                    ETGModConsole.Log($"foyer cards arent null. {facecard.gameObject.activeSelf}");
+                    Debug.Log($"foyer cards arent null. {facecard.gameObject.transform.parent.position}");
+                    Debug.Log($"foyer cards arent null. {facecard.gameObject.activeSelf}");
 
                     var orig = facecard.sprite.Collection;
 
@@ -487,7 +487,7 @@ namespace CustomCharacters
                         if (sprite.name.ToLower().Contains("appear"))
                         {
                             appearAnimIds.Add(SpriteHandler.AddSpriteToCollectionWithAnchor(sprite, orig, tk2dBaseSprite.Anchor.LowerCenter, $"{data.nameShort}_{sprite.name}"));
-
+                            
                         }
                         else if (sprite.name.ToLower().Contains("idle"))
                         {
@@ -496,7 +496,7 @@ namespace CustomCharacters
                         //ETGModConsole.Log(sprite.name);
                     }
 
-                    ETGModConsole.Log($"anchors done");
+                    Debug.Log($"anchors done");
 
                     for (int i = 0; i < appearAnimIds.Count; i++)
                     {
@@ -525,7 +525,7 @@ namespace CustomCharacters
                         orig.spriteDefinitions[appearAnimIds[i]] = def;*/
                     }
 
-                    ETGModConsole.Log($"appearAnimIds position0-3 done");
+                    Debug.Log($"appearAnimIds position0-3 done");
 
                     for (int i = 0; i < idleAnimIds.Count; i++)
                     {
@@ -554,7 +554,7 @@ namespace CustomCharacters
 
                         orig.spriteDefinitions[idleAnimIds[i]] = def;*/
                     }
-                    ETGModConsole.Log($"idleAnimIds position0-3 done");
+                    Debug.Log($"idleAnimIds position0-3 done");
 
                     foreach (var def in orig.spriteDefinitions)
                     {
@@ -568,26 +568,26 @@ namespace CustomCharacters
 
                     SpriteBuilder.AddAnimation(facecard.spriteAnimator, orig, idleAnimIds, idleAnimName, tk2dSpriteAnimationClip.WrapMode.Loop, 4);
                     var name = SpriteBuilder.AddAnimation(facecard.spriteAnimator, orig, appearAnimIds, appearAnimName, tk2dSpriteAnimationClip.WrapMode.Once, 17);
-                    ETGModConsole.Log($"anims added");
+                    Debug.Log($"anims added");
                     facecard.spriteAnimator.DefaultClipId = facecard.spriteAnimator.Library.GetClipIdByName(appearAnimName);
 
-                    foreach (var anim in facecard.spriteAnimator.Library.clips)
+                    foreach(var anim in facecard.spriteAnimator.Library.clips)
                     {
                         //ETGModConsole.Log($"{anim.name}: {anim.frames.Length}");
                     }
-
+                    
                     facecard.appearAnimation = appearAnimName;
                     facecard.coreIdleAnimation = idleAnimName;
-                    ETGModConsole.Log($"foyer card done");
+                    Debug.Log($"foyer card done");
                 }
 
-                //selectCharacter.CreateOverheadElement();
+                    //selectCharacter.CreateOverheadElement();
 
             }
 
             catch (Exception e)
             {
-                ETGModConsole.Log("overhead thing broke: " + e);
+                Debug.LogError("overhead thing broke: " + e);
             }
         }
 
@@ -595,7 +595,7 @@ namespace CustomCharacters
         {
             if (player.name.ToLower().Contains(characterPath))
             {
-                Debug.Log("Selected: " + characterPath);
+                ToolsCharApi.Print("Selected: " + characterPath);
                 if (selectCharacter.gameObject.activeSelf)
                 {
                     selectCharacter.ClearOverheadElement();

@@ -55,7 +55,7 @@ namespace NevernamedsItems
                 slash.DestroyBaseAfterFirstSlash = false;
                 slash.timeBetweenSlashes = 1;
                 slash.SlashDamageUsesBaseProjectileDamage = true;
-                slash.playerKnockback = 0;
+                slash.slashParameters.playerKnockbackForce = 0;
             }
             base.PostProcessProjectile(projectile);
         }

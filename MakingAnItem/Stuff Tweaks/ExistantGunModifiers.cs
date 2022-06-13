@@ -377,11 +377,21 @@ namespace NevernamedsItems
     }
     public class SAAModifiers : GunBehaviour
     {
-        public override void OnReloadPressed(PlayerController player, Gun gun, bool bSOMETHING)
+        public override void OnReloadPressed(PlayerController player, Gun gun, bool manualReload)
         {
-            if (player.PlayerHasActiveSynergy("Gunvana")) player.StartCoroutine(this.IncorporealityOnHit(player, 1));
-            base.OnReloadPressed(player, gun, bSOMETHING);
+            if (gun.IsReloading)
+            {
+                if (!isReloading && player.PlayerHasActiveSynergy("Gunvana")) player.StartCoroutine(this.IncorporealityOnHit(player, 1));
+                isReloading = true;
+            }
+            base.OnReloadPressed(player, gun, manualReload);
         }
+        bool isReloading = false;
+        private void Update()
+        {
+            if (!gun.IsReloading && isReloading) isReloading = false;
+        }
+
         private IEnumerator IncorporealityOnHit(PlayerController player, float incorporealityTime)
         {
             int enemyMask = CollisionMask.LayerToMask(CollisionLayer.EnemyCollider, CollisionLayer.EnemyHitBox, CollisionLayer.Projectile);

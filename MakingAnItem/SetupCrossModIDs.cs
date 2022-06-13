@@ -26,43 +26,43 @@ namespace NevernamedsItems
                         if (mod.Metadata.Name.Contains("Prismatismas"))
                         {
                             ModInstallFlags.PrismatismInstalled = true;
-                            PrismatismItemIDs.JeremyTheBlobulonID = PickupObjectDatabase.GetByEncounterName("Jeremy the Blobulon").PickupObjectId;
+                            if (PickupObjectDatabase.GetByEncounterName("Jeremy the Blobulon")) PrismatismItemIDs.JeremyTheBlobulonID = PickupObjectDatabase.GetByEncounterName("Jeremy the Blobulon").PickupObjectId;
                         }
                         if (mod.Metadata.Name.Contains("SpecialAPI's Stuff"))
                         {
                             ModInstallFlags.SpecialAPIsStuffInstalled = true;
-                            SpecialAPIsStuffIDs.RoundKingID = PickupObjectDatabase.GetByEncounterName("Round King").PickupObjectId;
-                            SpecialAPIsStuffIDs.CrownOfTheJammedID = PickupObjectDatabase.GetByEncounterName("Crown of the Jammed").PickupObjectId;
+                            if (PickupObjectDatabase.GetByEncounterName("Round King")) SpecialAPIsStuffIDs.RoundKingID = PickupObjectDatabase.GetByEncounterName("Round King").PickupObjectId;
+                            if (PickupObjectDatabase.GetByEncounterName("Crown of the Jammed")) SpecialAPIsStuffIDs.CrownOfTheJammedID = PickupObjectDatabase.GetByEncounterName("Crown of the Jammed").PickupObjectId;
                         }
                         if (mod.Metadata.Name.Contains("ExpandTheGungeon"))
                         {
                             ModInstallFlags.ExpandTheGungeonInstalled = true;
-                            ExpandTheGungeonIDs.BabySitterID = PickupObjectDatabase.GetByEncounterName("Baby Sitter").PickupObjectId;
-                            ExpandTheGungeonIDs.BabyGoodHammerID = PickupObjectDatabase.GetByEncounterName("Baby Good Hammer").PickupObjectId;
+                            if (PickupObjectDatabase.GetByEncounterName("Baby Sitter")) ExpandTheGungeonIDs.BabySitterID = PickupObjectDatabase.GetByEncounterName("Baby Sitter").PickupObjectId;
+                            if (PickupObjectDatabase.GetByEncounterName("Baby Good Hammer")) ExpandTheGungeonIDs.BabyGoodHammerID = PickupObjectDatabase.GetByEncounterName("Baby Good Hammer").PickupObjectId;
                         }
                         if (mod.Metadata.Name.Contains("Hunter's ror2 items"))
                         {
                             ModInstallFlags.RORItemsInstalled = true;
-                            RORItemIDs.WillTheWispID = PickupObjectDatabase.GetByEncounterName("Will the Wisp").PickupObjectId;
+                            if (PickupObjectDatabase.GetByEncounterName("Will the Wisp")) RORItemIDs.WillTheWispID = PickupObjectDatabase.GetByEncounterName("Will the Wisp").PickupObjectId;
                         }
                         if (mod.Metadata.Name.Contains("CelsItems"))
                         {
                             ModInstallFlags.CelsItemsInstalled = true;
-                            CelsItemIDs.PetRockID = ETGMod.Databases.Items["Pet Rock"].PickupObjectId;
+                            if (PickupObjectDatabase.GetByEncounterName("Pet Rock")) CelsItemIDs.PetRockID = ETGMod.Databases.Items["Pet Rock"].PickupObjectId;
                         }
                         if (mod.Metadata.Name.Contains("KTS Item Pack"))
                         {
                             ModInstallFlags.KylesItemsInstalled = true;
-                            KylesItemIDs.CaptureSphereID = PickupObjectDatabase.GetByEncounterName("Capture Sphere").PickupObjectId;
+                            if (PickupObjectDatabase.GetByEncounterName("Capture Sphere")) KylesItemIDs.CaptureSphereID = PickupObjectDatabase.GetByEncounterName("Capture Sphere").PickupObjectId;
                         }
                         if (mod.Metadata.Name.Contains("Some Bunnys Item Pack"))
                         {
                             ModInstallFlags.SomeBunnysItemsInstalled = true;
-                            SomeBunnysItemIDs.SoulInAJarID = PickupObjectDatabase.GetByEncounterName("Soul In A Jar").PickupObjectId;
-                            SomeBunnysItemIDs.GunSoulPhylacteryID = PickupObjectDatabase.GetByEncounterName("Gun Soul Phylactery").PickupObjectId;
-                            SomeBunnysItemIDs.GunthemimicID = PickupObjectDatabase.GetByEncounterName("Gunthemimic").PickupObjectId;
-                            SomeBunnysItemIDs.CasemimicID = PickupObjectDatabase.GetByEncounterName("Casemimic").PickupObjectId;
-                            SomeBunnysItemIDs.BlasphemimicID = PickupObjectDatabase.GetByEncounterName("Blasphemimic").PickupObjectId;
+                       if (PickupObjectDatabase.GetByEncounterName("Soul In A Jar"))     SomeBunnysItemIDs.SoulInAJarID = PickupObjectDatabase.GetByEncounterName("Soul In A Jar").PickupObjectId;
+                            if (PickupObjectDatabase.GetByEncounterName("Gun Soul Phylactery")) SomeBunnysItemIDs.GunSoulPhylacteryID = PickupObjectDatabase.GetByEncounterName("Gun Soul Phylactery").PickupObjectId;
+                            if (PickupObjectDatabase.GetByEncounterName("Gunthemimic")) SomeBunnysItemIDs.GunthemimicID = PickupObjectDatabase.GetByEncounterName("Gunthemimic").PickupObjectId;
+                            if (PickupObjectDatabase.GetByEncounterName("Casemimic")) SomeBunnysItemIDs.CasemimicID = PickupObjectDatabase.GetByEncounterName("Casemimic").PickupObjectId;
+                            if (PickupObjectDatabase.GetByEncounterName("Blasphemimic")) SomeBunnysItemIDs.BlasphemimicID = PickupObjectDatabase.GetByEncounterName("Blasphemimic").PickupObjectId;
                         }
                         if (mod.Metadata.Name.Contains("[Retrash's] Custom Items Collection"))
                         {

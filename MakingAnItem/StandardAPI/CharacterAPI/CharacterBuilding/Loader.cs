@@ -23,6 +23,9 @@ namespace CustomCharacters
 
         public static List<CustomCharacterData> characterData = new List<CustomCharacterData>();
 
+
+        public static List<PlayableCharacters> myPlayableCharacters = new List<PlayableCharacters>();
+
         /*public static void Init()
         {
             try
@@ -71,16 +74,16 @@ namespace CustomCharacters
             }
             else
             {
-                ETGModConsole.Log($"No character found under the name \"{character}\" or tk2dSpriteAnimator is null");
+                Debug.LogError($"No character found under the name \"{character}\" or tk2dSpriteAnimator is null");
             }
         }
 
-        public static tk2dSpriteAnimationClip GetAnimation(string character, string animation)
+        public static tk2dSpriteAnimationClip GetAnimation(string character, string animation, bool alt = false)
         {
             character = character.ToLower();
             if (CharacterBuilder.storedCharacters.ContainsKey(character))
             {
-                var library = CharacterBuilder.storedCharacters[character].Second.GetComponent<PlayerController>().spriteAnimator.Library;
+                var library = !alt ? CharacterBuilder.storedCharacters[character].Second.GetComponent<PlayerController>().spriteAnimator.Library : CharacterBuilder.storedCharacters[character].Second.GetComponent<PlayerController>().AlternateCostumeLibrary;
                 if (library.GetClipByName(animation) != null)
                 {
                     return library.GetClipByName(animation);
@@ -88,7 +91,7 @@ namespace CustomCharacters
             }
             else
             {
-                ETGModConsole.Log($"No character found under the name \"{character}\" or tk2dSpriteAnimator is null");
+                Debug.LogError($"No character found under the name \"{character}\" or tk2dSpriteAnimator is null");
             }
             return null;
         }
@@ -108,7 +111,7 @@ namespace CustomCharacters
             }
             else
             {
-                ETGModConsole.Log($"No character found under the name \"{character}\" or tk2dSpriteAnimator is null");
+                Debug.LogError($"No character found under the name \"{character}\" or tk2dSpriteAnimator is null");
             }
         }
         public static void AddFoyerObject(string character, GameObject obj, Vector2 offset, CustomTrackedStats requiredStat, int amount)
@@ -128,7 +131,7 @@ namespace CustomCharacters
             }
             else
             {
-                ETGModConsole.Log($"No character found under the name \"{character}\" or tk2dSpriteAnimator is null");
+                Debug.LogError($"No character found under the name \"{character}\" or tk2dSpriteAnimator is null");
             }
         }
         public static void AddFoyerObject(string character, GameObject obj, Vector2 offset, int minRunCount = 2)
@@ -146,7 +149,7 @@ namespace CustomCharacters
             }
             else
             {
-                ETGModConsole.Log($"No character found under the name \"{character}\" or tk2dSpriteAnimator is null");
+                Debug.LogError($"No character found under the name \"{character}\" or tk2dSpriteAnimator is null");
             }
         }
 
@@ -174,12 +177,12 @@ namespace CustomCharacters
                 }
                 else
                 {
-                    ETGModConsole.Log($"No animation found under the name \"{animation}\"");
+                    Debug.LogError($"No animation found under the name \"{animation}\"");
                 }
             }
             else
             {
-                ETGModConsole.Log($"No character found under the name \"{character}\" or tk2dSpriteAnimator is null");
+                Debug.LogError($"No character found under the name \"{character}\" or tk2dSpriteAnimator is null");
             }
 
         }
@@ -252,12 +255,13 @@ namespace CustomCharacters
             {
                 ToolsCharApi.PrintError($"Duplicate Character ID found!! Character building for {identity} has been stopped to avoid horribly breaking things!");
                 success = false;
-            }
+            } 
             else
             {
                 try
                 {
                     CharacterBuilder.BuildCharacter(data, hasAltSkin, paradoxUsesSprites, removeFoyerExtras, hasArmourlessAnimations, usesArmourNotHealth, hasCustomPast, customPast, metaCost, useGlow, glowVars, altGlowVars);
+                    myPlayableCharacters.Add((PlayableCharacters)data.identity);
                 }
                 catch (Exception e)
                 {
@@ -267,7 +271,7 @@ namespace CustomCharacters
                 }
             }
 
-
+            
             if (success)
             {
                 ToolsCharApi.Print("Built prefab for: " + data.name);
@@ -317,7 +321,7 @@ namespace CustomCharacters
                 ToolsCharApi.PrintError($"No \"{DataFile}\" file found for " + Path.GetFileName(filePath));
                 return null;
             }
-
+            
 
             //var lines = ToolsCharApi.GetLinesFromFile(dataFilePath);
             var data = ParseCharacterData(lines);
@@ -333,7 +337,7 @@ namespace CustomCharacters
 
 
             string[] resources = ToolsCharApi.GetResourceNames();
-
+            
             for (int i = 0; i < resources.Length; i++)
             {
                 if (resources[i].Contains(filePath))
@@ -345,7 +349,7 @@ namespace CustomCharacters
                         data.sprites = ToolsCharApi.GetTexturesFromResource(spritesDir);
                     }
 
-
+                    
 
                     if (resources[i].StartsWith(altSpritesDir.Replace('/', '.'), StringComparison.OrdinalIgnoreCase) && data.altSprites == null)
                     {
@@ -365,15 +369,15 @@ namespace CustomCharacters
                         data.pathForAltSprites = newAltSpritesDir;
                     }
 
-
+                    
                     if (resources[i].StartsWith(foyerDir.Replace('/', '.'), StringComparison.OrdinalIgnoreCase) && data.foyerCardSprites == null)
                     {
                         //ToolsCharApi.PrintError("Found: Foyer card folder");
                         data.foyerCardSprites = ToolsCharApi.GetTexturesFromResource(foyerDir);
                     }
+                   
 
-
-
+                    
                     if (resources[i].StartsWith(loadoutDir.Replace('/', '.'), StringComparison.OrdinalIgnoreCase) && data.loadoutSprites == null)
                     {
                         //ToolsCharApi.PrintError("Found: Loadout card folder");
@@ -382,20 +386,19 @@ namespace CustomCharacters
 
                         //ToolsCharApi.PrintError(data.loadoutSprites.Count.ToString());
                     }
-
-
+                   
+                    
                     if (resources[i].StartsWith(punchoutSpritesDir.Replace('/', '.'), StringComparison.OrdinalIgnoreCase) && data.punchoutSprites == null)
                     {
                         ToolsCharApi.Print("Found: Punchout Sprites folder");
-                        ETGModConsole.Log("Found: Punchout Sprites folder");
+                        Debug.Log("Found: Punchout Sprites folder");
                         data.punchoutSprites = new Dictionary<string, Texture2D>();
                         foreach (var tex in ToolsCharApi.GetTexturesFromResource(punchoutSpritesDir))
                         {
-                            ETGModConsole.Log(tex.name);
                             data.punchoutSprites.Add(tex.name, tex);
                         }
 
-
+                        
                     }
 
                     if (resources[i].StartsWith(punchoutDir.Replace('/', '.'), StringComparison.OrdinalIgnoreCase) && data.punchoutFaceCards == null)
@@ -479,22 +482,22 @@ namespace CustomCharacters
 
             }
             //ToolsCharApi.PrintError("other sprites");
-
-
+           
+                
             //ToolsCharApi.StopTimerAndReport("Loading data for " + Path.GetFileName(directories[i]));
 
             return data;
-
-        }
+            
+        }       
 
         //Main parse loop
         public static CustomCharacterData ParseCharacterData(string[] lines)
         {
             CustomCharacterData data = new CustomCharacterData();
-
+            
             for (int i = 0; i < lines.Length; i++)
             {
-
+                
                 string line = lines[i].ToLower().Trim();
                 string lineCaseSensitive = lines[i].Trim();
 
@@ -547,7 +550,7 @@ namespace CustomCharacters
                 }*/
 
 
-
+               
                 if (line.StartsWith("name short:"))
                 {
                     data.nameShort = value.Replace(" ", "_");
@@ -558,7 +561,7 @@ namespace CustomCharacters
                 {
                     data.nickname = value;
                     continue;
-                }
+                }               
                 if (line.StartsWith("armor:"))
                 {
                     float floatValue;
@@ -601,7 +604,7 @@ namespace CustomCharacters
             return PlayableCharacters.Pilot;
         }
 
-
+        
 
         //Stats
         public static Dictionary<StatType, float> GetStats(string[] lines, int startIndex, out int endIndex)
@@ -759,7 +762,7 @@ namespace CustomCharacters
 
                 if (args.Length > 1 && args[1].Contains("infinite"))
                 {
-
+                    
 
                     if (gun != null)
                     {

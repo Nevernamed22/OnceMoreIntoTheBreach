@@ -124,7 +124,7 @@ namespace NevernamedsItems
             }
             CurrentRoom.DeregisterEnemy(enemy);
             CustomEnemyTagsSystem tags = enemy.gameObject.GetOrAddComponent<CustomEnemyTagsSystem>();
-            enemy.gameActor.DelelteOwnedBullets();
+            enemy.gameActor.DeleteOwnedBullets();
             if (tags != null)
             {
                 tags.isGundertaleFriendly = true;

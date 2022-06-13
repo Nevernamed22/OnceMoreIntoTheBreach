@@ -21,7 +21,7 @@ namespace CustomCharacters
         public static List<Gun> guns = new List<Gun>();
 
 
-
+        
 
         public static void BuildCharacter(CustomCharacterData data, bool hasAltSkin, bool paradoxUsesSprites, bool removeFoyerExtras, bool hasArmourlessAnimations = false, bool usesArmourNotHealth = false, bool hasCustomPast = false, string customPast = "", int metaCost = 0, bool useGlow = false,
             GlowMatDoer glowVars = null, GlowMatDoer altGlowVars = null)
@@ -35,7 +35,7 @@ namespace CustomCharacters
 
             ToolsCharApi.Print("");
             ToolsCharApi.Print("--Building Character: " + data.nameShort + "--", "0000FF");
-
+            
             PlayerController playerController;
             GameObject gameObject = GameObject.Instantiate(basePrefab);
 
@@ -51,7 +51,8 @@ namespace CustomCharacters
             playerController.hasArmorlessAnimations = hasArmourlessAnimations;
 
 
-
+            playerController.altHandName = "hand_alt";
+            playerController.SwapHandsOnAltCostume = true;
 
 
             GameObject.DontDestroyOnLoad(gameObject);
@@ -72,12 +73,14 @@ namespace CustomCharacters
             if (useGlow)
             {
                 var material = new Material(EnemyDatabase.GetOrLoadByName("GunNut").sprite.renderer.material);
+                //var material = new Material(ShaderCache.Acquire("Brave/UnlitTintableCutoutEmissive"));
                 material.DisableKeyword("BRIGHTNESS_CLAMP_ON");
                 material.EnableKeyword("BRIGHTNESS_CLAMP_OFF");
                 material.SetTexture("_MainTexture", material.GetTexture("_MainTex"));
                 material.SetColor("_EmissiveColor", glowVars.emissiveColor);
                 material.SetFloat("_EmissiveColorPower", glowVars.emissiveColorPower);
                 material.SetFloat("_EmissivePower", glowVars.emissivePower);
+                material.SetFloat("_EmissiveThresholdSensitivity", 0.5f);
 
                 data.glowMaterial = material;
             }
@@ -85,12 +88,14 @@ namespace CustomCharacters
             if (useGlow && hasAltSkin)
             {
                 var material = new Material(EnemyDatabase.GetOrLoadByName("GunNut").sprite.renderer.material);
+                //var material = new Material(ShaderCache.Acquire("Brave/UnlitTintableCutoutEmissive"));
                 material.DisableKeyword("BRIGHTNESS_CLAMP_ON");
                 material.EnableKeyword("BRIGHTNESS_CLAMP_OFF");
                 material.SetTexture("_MainTexture", material.GetTexture("_MainTex"));
                 material.SetColor("_EmissiveColor", altGlowVars.emissiveColor);
                 material.SetFloat("_EmissiveColorPower", altGlowVars.emissiveColorPower);
                 material.SetFloat("_EmissivePower", altGlowVars.emissivePower);
+                material.SetFloat("_EmissiveThresholdSensitivity", 0.5f);
 
                 data.altGlowMaterial = material;
             }
@@ -107,9 +112,9 @@ namespace CustomCharacters
 
             customCharacter.past = customPast;
             customCharacter.hasPast = hasCustomPast;
+            
 
-
-
+           
             gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(gameObject);
         }
@@ -136,7 +141,7 @@ namespace CustomCharacters
 
             player.characterIdentity = (PlayableCharacters)data.identity;
 
-            player.OverridePlayerSwitchState = "Ninja";
+            //player.OverridePlayerSwitchState = "Ninja";
             //AkSoundEngine.switch
 
             //AkSoundEngine.SetSwitch("CHR_Player", (player.OverridePlayerSwitchState == null) ? data.nameShort : player.OverridePlayerSwitchState, player.gameObject);
@@ -188,8 +193,8 @@ namespace CustomCharacters
                 }
             }
 
-
-
+            
+            
             //GameManager.Instance.PrimaryPlayer.GetComponent<CharacterAnimationRandomizer>().AddOverrideAnimLibrary(player.spriteAnimator.Library);
         }
 

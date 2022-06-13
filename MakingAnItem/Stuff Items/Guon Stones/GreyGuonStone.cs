@@ -16,7 +16,7 @@ namespace NevernamedsItems
         public static PlayerOrbital upgradeOrbitalPrefab;
         public static void Init()
         {
-            string itemName = "Grey Guon Stone"; 
+            string itemName = "Grey Guon Stone";
             string resourceName = "NevernamedsItems/Resources/greyguon_icon";
 
             GameObject obj = new GameObject();
@@ -31,7 +31,7 @@ namespace NevernamedsItems
             item.OrbitalPrefab = orbitalPrefab;
             BuildSynergyPrefab();
 
-            item.AddToSubShop(ItemBuilder.ShopType.Cursula);            
+            item.AddToSubShop(ItemBuilder.ShopType.Cursula);
 
             item.HasAdvancedUpgradeSynergy = true;
             item.AdvancedUpgradeSynergy = "Greyer Guon Stone";
@@ -40,7 +40,29 @@ namespace NevernamedsItems
         public static void BuildPrefab()
         {
             if (GreyGuonStone.orbitalPrefab != null) return;
-            GameObject prefab = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/greyguon_ingame");
+
+            GameObject orbital = GuonToolbox.MakeAnimatedOrbital("Grey Guon Orbital",
+                2.5f, //Orbital radius
+                120f, //Orbital degrees per second
+                0, //Orbital Tier
+                PlayerOrbital.OrbitalMotionStyle.ORBIT_PLAYER_ALWAYS, //Orbit mode
+                0, //Perfect orbital factor (synergy guons have it set around 10, other guons are 0)
+                new List<string>() 
+                {
+                     "NevernamedsItems/Resources/GuonStones/greyguon_animated_ingame1",
+                     "NevernamedsItems/Resources/GuonStones/greyguon_animated_ingame2",
+                     "NevernamedsItems/Resources/GuonStones/greyguon_animated_ingame3",
+                     "NevernamedsItems/Resources/GuonStones/greyguon_animated_ingame4",
+                },
+                6, //FPS
+                new Vector2(9, 9), //Collider Dimensions
+                new Vector2(0, 0), //Collider Offsets
+                tk2dBaseSprite.Anchor.LowerLeft, //Sprite Anchor
+                tk2dSpriteAnimationClip.WrapMode.Loop); //Wrap mode
+            orbitalPrefab = orbital.GetComponent<PlayerOrbital>();
+
+
+           /* GameObject prefab = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/greyguon_ingame");
             prefab.name = "Grey Guon Orbital";
             var body = prefab.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(7, 13));
             body.CollideWithTileMap = false;
@@ -56,7 +78,7 @@ namespace NevernamedsItems
 
             GameObject.DontDestroyOnLoad(prefab);
             FakePrefab.MarkAsFakePrefab(prefab);
-            prefab.SetActive(false);
+            prefab.SetActive(false);*/
         }
 
         public static void BuildSynergyPrefab()

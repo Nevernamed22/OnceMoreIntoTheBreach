@@ -46,16 +46,17 @@ namespace NevernamedsItems
         }
         private void Slash(PlayerController player)
         {
-            AkSoundEngine.PostEvent("Play_WPN_blasphemy_shot_01", player.gameObject);
             Vector2 vector = player.CenterPosition;
             Vector2 normalized = (player.unadjustedAimPoint.XY() - vector).normalized;
 
-            float damage = 15;
-            damage *= player.stats.GetStatValue(PlayerStats.StatType.Damage);
-
             Vector2 dir = (player.CenterPosition + normalized);
             float angleToUse = player.CurrentGun.CurrentAngle;
-            SlashDoer.DoSwordSlash(dir, angleToUse, player, 0, SlashDoer.ProjInteractMode.IGNORE, damage, 10, null);
+
+            SlashData slashParams = new SlashData();
+            slashParams.damage = 20f * player.stats.GetStatValue(PlayerStats.StatType.Damage);
+            slashParams.enemyKnockbackForce = 10f * player.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
+
+            SlashDoer.DoSwordSlash(dir, angleToUse, player, slashParams, null);
         }
         public override void Pickup(PlayerController player)
         {

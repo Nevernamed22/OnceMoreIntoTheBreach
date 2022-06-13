@@ -665,7 +665,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("Fortissimo", mandatorySynergyItemsFortissimo, optionalSynergyItemsFortissimo);
             //VARIABLE / BACKWARDS ITEMS
             List<string> mandatorySynergyItemsBackwardsCompatibility = new List<string>() { "nn:variable" };
-            List<string> optionalSynergyItemsBackwardsCompatibility = new List<string>() { "backup_gun" };
+            List<string> optionalSynergyItemsBackwardsCompatibility = new List<string>() { "backup_gun", "nn:backwards_bullets", "nn:back_warder" };
             CustomSynergies.Add("Backwards Compatible", mandatorySynergyItemsBackwardsCompatibility, optionalSynergyItemsBackwardsCompatibility);
             //AUTOLLET / COMPUTER ITEMS
             List<string> mandatorySynergyItemsCodeBanks = new List<string>() { "nn:autollet" };
@@ -707,7 +707,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("Rod of Iron", mandatorySynergyItemsRodOfIron, optionalSynergyItemsRodOfIron);
             //KALIBERS PRAYER + BOMBINOMICON
             List<string> mandatorySynergyItemsLiturgist = new List<string>() { "nn:kalibers_prayer" };
-            List<string> optionalSynergyItemsLiturgist = new List<string>() { "nn:bombinomicon" }; //Bookllet / The Book / Lorebook
+            List<string> optionalSynergyItemsLiturgist = new List<string>() { "nn:bombinomicon", "nn:bookllet", "nn:lorebook" }; 
             CustomSynergies.Add("Liturgist", mandatorySynergyItemsLiturgist, optionalSynergyItemsLiturgist);
             //KALIBERS PRAYER + SAA
             List<string> mandatorySynergyItemsGunvana = new List<string>() { "saa", "nn:kalibers_prayer" };
@@ -791,7 +791,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("Have A Heart", mandatorySynergyItemsHaveAHeart, optionalSynergyItemsHaveAHeart);
             //HAND GUN / DIGGING / KEY ITEMS
             List<string> mandatorySynergyItemsDigDeep = new List<string>() { "nn:hand_gun" }; //Add portable hole
-            List<string> optionalSynergyItemsDigDeep = new List<string>() { "knights_gun", "drill", "amulet_of_the_pit_lord" };
+            List<string> optionalSynergyItemsDigDeep = new List<string>() { "knights_gun", "drill", "amulet_of_the_pit_lord", "nn:portable_hole" };
             CustomSynergies.Add("Dig Deep", mandatorySynergyItemsDigDeep, optionalSynergyItemsDigDeep);
             //HAND GUN / DIAMOND ITEMS
             List<string> mandatorySynergyItemsGirlsBestFriend = new List<string>() { "nn:hand_gun" };
@@ -870,7 +870,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("Wouldn't You Agree?", mandatorySynergyItemsWouldntYouAgree, optionalSynergyItemsWouldntYouAgree);
             //HEAD OF THE ORDER / KALIBERS PRAYER
             List<string> mandatorySynergyItemsNonDesistasNonExieris = new List<string>() { "nn:head_of_the_order" }; //Add Cardinal's Mitre
-            List<string> optionalSynergyItemsNonDesistasNonExieris = new List<string>() { "nn:kalibers_prayer" };
+            List<string> optionalSynergyItemsNonDesistasNonExieris = new List<string>() { "nn:kalibers_prayer", "nn:cardinals_mitre" };
             CustomSynergies.Add("Non Desistas Non Exieris", mandatorySynergyItemsNonDesistasNonExieris, optionalSynergyItemsNonDesistasNonExieris);
             //PEANUT / PEA SHOOTER
             List<string> mandatorySynergyItemsPealadin = new List<string>() { "nn:peanut", "pea_shooter" };
@@ -913,7 +913,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("1000 Degree Knife", mandatorySynergyItems1000DegreeKnife, optionalSynergyItems1000DegreeKnife);
             //LASER BULLETS / HEAVILY VECTOR BASED ITEMS
             List<string> mandatorySynergyItemsNewVector = new List<string>() { "nn:laser_bullets" };
-            List<string> optionalSynergyItemsNewVector = new List<string>() { "nn:diode" };
+            List<string> optionalSynergyItemsNewVector = new List<string>() { "nn:diode", "nn:baby_good_det" };
             CustomSynergies.Add("new Vector2(x, y)", mandatorySynergyItemsNewVector, optionalSynergyItemsNewVector);
             //LASER BULLETS / BEAM WEAPONs
             List<string> mandatorySynergyItemsBeamMeUp = new List<string>() { "nn:laser_bullets" };
@@ -946,13 +946,13 @@ namespace NevernamedsItems
             CustomSynergies.Add("BLOOD IS FUEL", mandatorySynergyItemsBLOODISFUEL, optionalSynergyItemsBLOODISFUEL);
             //GRAVITY GUN PROPS
             List<string> mandatorySynergyItemsPropFly = new List<string>() { "nn:gravity_gun" }; //Add toolbox
-            List<string> optionalSynergyItemsPropFly = new List<string>() { "portable_table_device" };
+            List<string> optionalSynergyItemsPropFly = new List<string>() { "portable_table_device", "nn:toolbox" };
             CustomSynergies.Add("Prop Fly", mandatorySynergyItemsPropFly, optionalSynergyItemsPropFly);
             //GRAVITY GUN / TABLE TECH ROCKET
             List<string> mandatorySynergyItemsHiddenTechNitro = new List<string>() { "nn:gravity_gun", "table_tech_rocket" };
             CustomSynergies.Add("Hidden Tech Nitro", mandatorySynergyItemsHiddenTechNitro);
             //GRAVITY GUN / MATTER AND ANTIMATTER ITEMS
-            List<string> mandatorySynergyItemsNegativeMatter = new List<string>() { "nn:gravity_gun" }; //Add toolbox
+            List<string> mandatorySynergyItemsNegativeMatter = new List<string>() { "nn:gravity_gun" };
             List<string> optionalSynergyItemsNegativeMatter = new List<string>() { "dark_marker", "nn:antimatter_bullets", "mass_shotgun" };
             CustomSynergies.Add("Negative Matter", mandatorySynergyItemsNegativeMatter, optionalSynergyItemsNegativeMatter);
             //GRAVITY GUN / ALKALI BULLETS
@@ -1108,7 +1108,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("No Will To Break", mandatorySynergyItemsNoWillToBreak, optionalSynergyItemsNoWillToBreak);
             //STARTER PISTOL / FLARE GUN
             List<string> mandatorySynergyItemsMixedSignals = new List<string>() { "nn:starter_pistol", "flare_gun" };
-            CustomSynergies.Add("I Call Hacks", mandatorySynergyItemsMixedSignals);
+            CustomSynergies.Add("Mixed Signals", mandatorySynergyItemsMixedSignals);
             //Infraredder Guon Stone
             List<string> mandatorySynergyItemsInfraredderGuonStone = new List<string>() { "nn:infrared_guon_stone" };
             List<string> optionalSynergyItemsInfraredderGuonStone = new List<string>() { "nn:aimbot", "+1_bullets", "amulet_of_the_pit_lord" };
@@ -1456,8 +1456,33 @@ namespace NevernamedsItems
             CustomSynergies.Add("Roll With Advantage", mandatorySynergyItemsRollWithInitiative, optionalSynergyItemsRollWithInitiative);
             //PEARL AMMOLET / BUBBLE BLASTER
             List<string> mandatorySynergyItemsBubbleBlowingBaby = new List<string>() { "nn:pearl_ammolet" };
-            List<string> optionalSynergyItemsBubbleBlowingBaby = new List<string>() { "bubble_blaster" };
+            List<string> optionalSynergyItemsBubbleBlowingBaby = new List<string>() { "bubble_blaster", "nn:soap_gun" };
             CustomSynergies.Add("Bubble Blowing, Baby!", mandatorySynergyItemsBubbleBlowingBaby, optionalSynergyItemsBubbleBlowingBaby);
+            //REDHAWK / REDROBIN
+            List<string> mandatorySynergyItemsRedbirds = new List<string>() { "nn:red_robin", "nn:redhawk" };
+           AdvancedSynergyEntry RedBirds = CustomSynergies.Add("Redbirds", mandatorySynergyItemsRedbirds);
+            RedBirds.ActiveWhenGunUnequipped = false;
+            RedBirds.statModifiers.Add(new StatModifier()
+            {
+                amount = 1.3f,
+                statToBoost = PlayerStats.StatType.RateOfFire,
+                modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+            });
+            RedBirds.statModifiers.Add(new StatModifier()
+            {
+                amount = 0.8f,
+                statToBoost = PlayerStats.StatType.Accuracy,
+                modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+            });
+            //PAINTBALL GUN / BLACK ITEMS
+            List<string> mandatorySynergyItemsPaintItBlack = new List<string>() { "nn:paintball_gun" };
+            List<string> optionalSynergyItemsPaintItBlack = new List<string>() { "nn:black_holster", "black_hole_gun" };
+            AdvancedSynergyEntry PaintItBlack = CustomSynergies.Add("Paint It Black", mandatorySynergyItemsPaintItBlack, optionalSynergyItemsPaintItBlack);
+            //LIBRAM OF THE CHAMBER / CHAMBER MASTERS
+            List<string> mandatorySynergyItemsChamberMasters = new List<string>() { "nn:libram_of_the_chambers" };
+            List<string> optionalSynergyItemsChamberMasters = new List<string>() { "yellow_chamber", "sixth_chamber", "oiled_cylinder", 
+                "nn:nitroglycylinder", "nn:glass_chamber", "nn:flame_chamber", "nn:springloaded_chamber", "nn:withering_chamber", "nn:heavy_chamber", "nn:cyclopean_cylinder", "nn:recyclinder", "nn:barrel_chamber" };
+            CustomSynergies.Add("Chamber Masters", mandatorySynergyItemsChamberMasters, optionalSynergyItemsChamberMasters);
             #endregion
         }
 

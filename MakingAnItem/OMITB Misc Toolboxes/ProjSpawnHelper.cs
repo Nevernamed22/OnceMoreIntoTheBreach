@@ -33,5 +33,6 @@ namespace NevernamedsItems
             }
             return SpawnManager.SpawnProjectile(projectile, startingPosition, Quaternion.Euler(0f, 0f, dirVec.ToAngle()), true);
         }
+        
     }
 }

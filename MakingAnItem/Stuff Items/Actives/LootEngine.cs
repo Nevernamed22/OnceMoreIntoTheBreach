@@ -70,7 +70,7 @@ namespace NevernamedsItems
         }
         private List<DebrisObject> pickupsInRoom = new List<DebrisObject>()
         { };
-        private List<int> validIDs = new List<int>()
+        public static List<int> validIDs = new List<int>()
         {
             78, //Ammo
             600, //Spread Ammo

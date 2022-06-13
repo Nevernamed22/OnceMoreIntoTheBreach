@@ -37,15 +37,15 @@ namespace CustomCharacters
 			}
 			if (this.UsesStatComparisonInstead)
 			{
-				if (AdvancedGameStatsManager.Instance.GetPlayerStatValue(this.RelevantStat) < (float)this.minStatValue || (UseNumberOfAttempts && GameStatsManager.Instance.GetPlayerStatValue(TrackedStats.NUMBER_ATTEMPTS) < (float)this.minStatValue))
-				{
-					this.Disable();
-				}
+				//if (AdvancedGameStatsManager.Instance.GetPlayerStatValue(this.RelevantStat) < (float)this.minStatValue || (UseNumberOfAttempts && GameStatsManager.Instance.GetPlayerStatValue(TrackedStats.NUMBER_ATTEMPTS) < (float)this.minStatValue))
+				//{
+				//	this.Disable();
+				//}
 			}
-			else if (this.FlagToCheckFor != CustomDungeonFlags.NONE && AdvancedGameStatsManager.Instance.GetFlag(this.FlagToCheckFor) == this.DisableOnThisFlagValue)
-			{
-				this.Disable();
-			}
+			//else if (this.FlagToCheckFor != CustomDungeonFlags.NONE && AdvancedGameStatsManager.Instance.GetFlag(this.FlagToCheckFor) == this.DisableOnThisFlagValue)
+			//{
+			//	this.Disable();
+			//}
 			yield break;
 		}
 
