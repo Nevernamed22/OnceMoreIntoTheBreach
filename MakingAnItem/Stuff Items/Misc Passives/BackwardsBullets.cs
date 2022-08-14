@@ -46,7 +46,7 @@ namespace NevernamedsItems
             player.stats.RecalculateStats(player, false, false);
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

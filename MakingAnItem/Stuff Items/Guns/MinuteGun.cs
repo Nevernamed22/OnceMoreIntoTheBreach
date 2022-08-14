@@ -90,7 +90,7 @@ namespace NevernamedsItems
             GameManager.Instance.OnNewLevelFullyLoaded -= this.OnNewLevel;
             base.OnPostDroppedByPlayer(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             GameManager.Instance.OnNewLevelFullyLoaded -= this.OnNewLevel;
             base.OnDestroy();

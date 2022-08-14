@@ -68,7 +68,7 @@ namespace NevernamedsItems
             }
             else Debug.LogError("hatOwner was somehow null in hat Start() ???");
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (hatOwner)
             {

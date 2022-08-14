@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -72,6 +72,7 @@ namespace NevernamedsItems
             SporeLauncherID = gun.PickupObjectId;
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_SPORELAUNCHER, true);
             gun.AddItemToGooptonMetaShop(20);
+            gun.SetTag("non_companion_living_item");
         }
         public static int SporeLauncherID;
         public override void OnPostFired(PlayerController player, Gun gun)

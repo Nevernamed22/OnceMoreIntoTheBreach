@@ -309,7 +309,7 @@ namespace NevernamedsItems
         private int currentItems, lastItems;
         private int currentActives, lastActives;
         private int currentActiveID, lastActiveID;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {

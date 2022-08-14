@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -69,6 +69,7 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.A;
             gun.encounterTrackable.EncounterGuid = "this is the Hwacha";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+            gun.SetTag("arrow_bolt_weapon");
 
             HwachaID = gun.PickupObjectId;
         }
@@ -92,7 +93,7 @@ namespace NevernamedsItems
             base.OnReloadPressed(player, gun, bSOMETHING);
             AkSoundEngine.PostEvent("Play_WPN_crossbow_reload_01", gameObject);
         }
-        private void Update()
+        public override void Update()
         {
             if (gun && gun.CurrentOwner && gun.GunPlayerOwner())
             {

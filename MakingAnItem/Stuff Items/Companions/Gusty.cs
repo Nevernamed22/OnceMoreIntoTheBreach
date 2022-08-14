@@ -60,7 +60,7 @@ namespace NevernamedsItems
                 timer = 1.5f;
                 Owner.OnPreDodgeRoll += this.OnOwnerDodgeRolled;
             }
-            protected override void OnDestroy()
+            public override void OnDestroy()
             {
                 if (Owner)
                 {

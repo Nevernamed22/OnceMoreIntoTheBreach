@@ -275,7 +275,7 @@ namespace NevernamedsItems
                     //else ETGModConsole.Log("Item was not a greg.");
                 }
             }
-            protected override void OnDestroy()
+            public override void OnDestroy()
             {
                 if (Owner)
                 {

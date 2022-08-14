@@ -39,13 +39,13 @@ namespace NevernamedsItems
             base.Pickup(player);
             player.OnNewFloorLoaded += this.NewLevel;
         }
-        protected override void OnPreDrop(PlayerController user)
+        public override void OnPreDrop(PlayerController user)
         {
             base.OnPreDrop(user);
             user.OnNewFloorLoaded -= this.NewLevel;
 
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (LastOwner != null) LastOwner.OnNewFloorLoaded -= NewLevel;
             base.OnDestroy();
@@ -54,7 +54,7 @@ namespace NevernamedsItems
         {
             base.StartCoroutine(this.LaunchChestSpawns());
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             IPlayerInteractable nearestInteractable = user.CurrentRoom.GetNearestInteractable(user.CenterPosition, 1f, user);
             if (!(nearestInteractable is Chest)) return;

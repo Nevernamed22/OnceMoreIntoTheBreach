@@ -44,7 +44,7 @@ namespace NevernamedsItems
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ROBOT_HELD_FIVE_JUNK, true);
         }
         private int currentItems, lastItems;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {

@@ -65,7 +65,7 @@ namespace NevernamedsItems
             base.Pickup(player);
             player.PostProcessProjectile += this.PostProcessProjectile;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner) Owner.PostProcessProjectile -= this.PostProcessProjectile;
             base.OnDestroy();

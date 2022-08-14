@@ -48,7 +48,7 @@ namespace NevernamedsItems
 
 
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             Projectile projectile = ((Gun)ETGMod.Databases.Items[762]).DefaultModule.finalProjectile;
             GameObject gameObject = SpawnManager.SpawnProjectile(projectile.gameObject, user.sprite.WorldCenter, Quaternion.Euler(0f, 0f, (user.CurrentGun == null) ? 0f : user.CurrentGun.CurrentAngle), true);

@@ -176,7 +176,7 @@ namespace NevernamedsItems
                 this.curRoom.RegisterInteractable(this);
             }
             private RoomHandler curRoom;
-            private void Update()
+            public override void Update()
             {
                 if (base.aiActor && base.aiActor.CompanionOwner)
                 {

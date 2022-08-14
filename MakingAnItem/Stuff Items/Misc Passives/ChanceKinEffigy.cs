@@ -89,7 +89,7 @@ namespace NevernamedsItems
             ETGMod.AIActor.OnPreStart -= this.OnPreSpawn;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

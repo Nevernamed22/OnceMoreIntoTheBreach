@@ -66,7 +66,7 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4));
         }
         private static Projectile PotProjectile;
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             GameObject gameObject = SpawnManager.SpawnProjectile(PotProjectile.gameObject, user.sprite.WorldCenter, Quaternion.Euler(0f, 0f, (user.CurrentGun == null) ? 0f : user.CurrentGun.CurrentAngle), true);
             Projectile component = gameObject.GetComponent<Projectile>();

@@ -15,7 +15,7 @@ namespace NevernamedsItems
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Pump-Charge Shotgun", "pumpchargeshotgun");
-            Game.Items.Rename("outdated_gun_mods:pump-charge_shotgun", "nn:pump_charge_shotgun");
+            Game.Items.Rename("outdated_gun_mods:pumpcharge_shotgun", "nn:pump_charge_shotgun");
             gun.gameObject.AddComponent<PumpChargeShotgun>();
             gun.SetShortDescription("HELL IS FULL");
             gun.SetLongDescription("Continuing to reload this shotgun when it's already full will charge it up. Be careful not to overcharge it!"+"\n\nForged by a bloodthirsty adventurer who sought to cleanse Bullet Hell.");

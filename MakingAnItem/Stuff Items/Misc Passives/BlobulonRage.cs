@@ -43,7 +43,7 @@ namespace NevernamedsItems
 
             BlobulonRageID = item.PickupObjectId;
 
-            item.AddAsChamberGunMastery("OnceMoreIntoTheBreach", 4);
+            //item.AddAsChamberGunMastery("OnceMoreIntoTheBreach", 4);
         }
     }
 }

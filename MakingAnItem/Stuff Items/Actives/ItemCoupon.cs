@@ -48,7 +48,7 @@ namespace NevernamedsItems
 
         float duration = 5;
         bool playerHasMiserlyRing = false;
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             if (user.HasPickupID(132))
             {
@@ -139,7 +139,7 @@ namespace NevernamedsItems
                 LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(120).gameObject, LastOwner);
             }
         }
-        protected override void OnPreDrop(PlayerController user)
+        public override void OnPreDrop(PlayerController user)
         {
             if (base.IsCurrentlyActive)
             {

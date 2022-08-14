@@ -30,7 +30,7 @@ namespace NevernamedsItems
 
             //GUN STATS
             gun.doesScreenShake = false;
-            gun.DefaultModule.ammoCost = 7;
+            gun.DefaultModule.ammoCost = 15;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Beam;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
             gun.reloadTime = 1f;

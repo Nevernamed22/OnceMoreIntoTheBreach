@@ -78,7 +78,7 @@ namespace NevernamedsItems
             GameManager.Instance.OnNewLevelFullyLoaded -= this.OnNewFloor;
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             guonHook.Dispose();
             GameManager.Instance.OnNewLevelFullyLoaded -= this.OnNewFloor;
@@ -100,7 +100,7 @@ namespace NevernamedsItems
         }
         private int currentItems, lastItems;
         private int currentGuns, lastGuns;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {

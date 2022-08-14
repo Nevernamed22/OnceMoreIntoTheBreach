@@ -71,7 +71,7 @@ namespace NevernamedsItems
             GameManager.Instance.OnNewLevelFullyLoaded -= this.OnNewFloor;
             return result;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             GameManager.Instance.OnNewLevelFullyLoaded -= this.OnNewFloor;
             base.OnDestroy();

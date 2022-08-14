@@ -42,10 +42,11 @@ namespace NevernamedsItems
 
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_MEATSHIELD, true);
             item.AddItemToDougMetaShop(15);
+            item.ArmorToGainOnInitialPickup = 2;
             MeatShieldID = item.PickupObjectId;
         }
         public static int MeatShieldID;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {
@@ -62,8 +63,6 @@ namespace NevernamedsItems
         {
             if (!this.m_pickedUpThisRun)
             {
-                LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(120).gameObject, player);
-                LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(120).gameObject, player);
                 player.healthHaver.ApplyHealing(1);
             }
             base.Pickup(player);

@@ -17,7 +17,7 @@ namespace NevernamedsItems
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("GayK-47", "gayk47");
-            Game.Items.Rename("outdated_gun_mods:gayk-47", "nn:gayk47");
+            Game.Items.Rename("outdated_gun_mods:gayk47", "nn:gayk47");
             gun.gameObject.AddComponent<GayK47>();
             gun.SetShortDescription("Somewhere");
             gun.SetLongDescription("This shiny AK comes in all types of colours."+"\n\nThinks that the Machine Pistol is cute, but is too embarrassed to say anything.");

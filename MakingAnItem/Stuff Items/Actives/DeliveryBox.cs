@@ -75,12 +75,12 @@ namespace NevernamedsItems
             }
             base.Pickup(player);
         }
-        protected override void OnPreDrop(PlayerController user)
+        public override void OnPreDrop(PlayerController user)
         {
             base.sprite.SetSprite(DeliveryBox.spriteIDs[0]);
             base.OnPreDrop(user);
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             user.carriedConsumables.Currency -= CalculatePrice(CurrentConsumable);
             SpawnCrate(consumableIDDictionary[CurrentConsumable]);

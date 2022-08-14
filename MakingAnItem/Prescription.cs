@@ -53,7 +53,7 @@ namespace NevernamedsItems
             DebrisObject debrisObject = base.Drop(player);
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             base.OnDestroy();
         }

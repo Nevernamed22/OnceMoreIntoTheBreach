@@ -132,7 +132,7 @@ namespace NevernamedsItems
             }
         }
         private float timer;
-        protected override void Update()
+        public override void Update()
         {
             if (this.m_extantOrbital != null)
             {
@@ -184,7 +184,7 @@ namespace NevernamedsItems
         {
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             base.OnDestroy();
         }

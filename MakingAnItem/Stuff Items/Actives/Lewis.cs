@@ -3,65 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
 {
     class Lewis : PlayerItem
     {
-        //Call this method from the Start() method of your ETGModule extension class
         public static void Init()
         {
-            //The name of the item
             string itemName = "Lewis";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it.
             string resourceName = "NevernamedsItems/Resources/lewis_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a ActiveItem component to the object
             var item = obj.AddComponent<Lewis>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "With Friends Like These...";
             string longDesc = "This absolute freeloader just sits in your active item storage doing nothing.\n\n" + "At least he kinda pays rent through providing you some stats";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //"kts" here is the item pool. In the console you'd type kts:sweating_bullets
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Set the cooldown type and duration of the cooldown
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 1000);
-
-            //Adds a passive modifier, like curse, coolness, damage, etc. to the item. Works for passives and actives.
-
-            //Set some other fields
             item.consumable = false;
-            item.quality = ItemQuality.B;
-
-            List<string> mandatorySynergyItems = new List<string>() { "nn:lewis", "battle_standard" };
-            CustomSynergies.Add("Rally The Slacker", mandatorySynergyItems);
-
+            item.quality = ItemQuality.B;         
+            item.SetTag("non_companion_living_item");
             LewisID = item.PickupObjectId;
         }
         public static int LewisID;
-        //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!
 
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
-            //Play a sound effect
             AkSoundEngine.PostEvent("Play_ENM_blobulord_reform_01", base.gameObject);
-
-            //Activates the effect
-            StartEffect(user);
-
-            //start a coroutine which calls the EndEffect method when the item's effect duration runs out
         }
 
         public override void Pickup(PlayerController player)
@@ -79,7 +48,7 @@ namespace NevernamedsItems
             player.stats.RecalculateStats(player, true, false);
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (LastOwner != null)
             {
@@ -90,22 +59,9 @@ namespace NevernamedsItems
             base.OnDestroy();
         }
 
-        //Doubles the damage, makes the next shot kill the player, and stores the amount we buffed the player for later
-        private void StartEffect(PlayerController user)
-        {
-        }
 
-        //Resets the player back to their original stats
-        private void EndEffect(PlayerController user)
-        {
-        }
-
-        //Disable or enable the active whenever you need!
-        public override bool CanBeUsed(PlayerController user)
-        {
-            return base.CanBeUsed(user);
-        }
-
+        
+       
         //PSEUDOSYNERGY
         private void AddStat(PlayerStats.StatType statType, float amount, StatModifier.ModifyMethod method = StatModifier.ModifyMethod.ADDITIVE)
         {
@@ -145,7 +101,7 @@ namespace NevernamedsItems
             PlayerController player = this.LastOwner;
             if (player && player.HasActiveItem(this.PickupObjectId))
             {
-                if (player.HasPickupID(529) && hasSynergy == false)
+                if (player.PlayerHasActiveSynergy("Rally The Slacker") && hasSynergy == false)
                 {
                     hasSynergy = true;
                     needRestat = true;
@@ -164,7 +120,7 @@ namespace NevernamedsItems
                     player.stats.RecalculateStats(player, true, false);
                 }
 
-                else if (!player.HasPickupID(529) && needRestat == true)
+                else if (!player.PlayerHasActiveSynergy("Rally The Slacker") && needRestat == true)
                 {
                     needRestat = false;
                     hasSynergy = false;

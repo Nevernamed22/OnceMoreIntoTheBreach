@@ -68,7 +68,7 @@ namespace NevernamedsItems
             player.OnReceivedDamage -= this.charmAll;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

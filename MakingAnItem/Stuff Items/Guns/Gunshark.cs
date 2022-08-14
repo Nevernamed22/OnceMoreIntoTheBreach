@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -41,10 +41,7 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3(1.68f, 0.43f, 0f);
             gun.SetBaseMaxAmmo(3996);
             gun.ammo = 3996;
-            /*AdvancedTransformGunSynergyProcessor MegaSharkSynergyForme = gun.gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            MegaSharkSynergyForme.NonSynergyGunId = gun.PickupObjectId;
-            MegaSharkSynergyForme.SynergyGunId = 1;
-            MegaSharkSynergyForme.SynergyToCheck = "Megashark";*/
+            
             gun.gunClass = GunClass.FULLAUTO;
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
@@ -60,12 +57,11 @@ namespace NevernamedsItems
 
             projectile.transform.parent = gun.barrelOffset;
 
-            // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.
             gun.quality = PickupObject.ItemQuality.A;
-            gun.encounterTrackable.EncounterGuid = "this is the Gunshark";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             GunsharkID = gun.PickupObjectId;
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.JAMMEDBULLETSHARK_QUEST_REWARDED, true);
+            gun.SetTag("non_companion_living_item");
         }
         public override void PostProcessProjectile(Projectile projectile)
         {

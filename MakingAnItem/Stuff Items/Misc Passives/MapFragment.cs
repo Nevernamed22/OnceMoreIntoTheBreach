@@ -28,7 +28,7 @@ namespace NevernamedsItems
         }
         public static int MapFragmentID;
         public RoomHandler lastRoom;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner && Owner.CurrentRoom != null)
             {

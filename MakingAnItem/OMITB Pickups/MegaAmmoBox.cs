@@ -34,7 +34,7 @@ namespace NevernamedsItems
                 this.m_instanceMinimapIcon = null;
             }
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             base.OnDestroy();
             if (Minimap.HasInstance)

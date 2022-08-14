@@ -51,8 +51,20 @@ namespace NevernamedsItems
         }
         public override void Pickup(PlayerController player)
         {
+            bool pickemmed = m_pickedUpThisRun;
             player.PostProcessProjectile += this.DoEffect;
             base.Pickup(player);
+            if (!pickemmed)
+            {
+                for (int i = 0; i < Owner.inventory.AllGuns.Count; i++)
+                {
+                    if (Owner.inventory.AllGuns[i] != null && Owner.inventory.AllGuns[i].CanGainAmmo)
+                    {
+                        Owner.inventory.AllGuns[i].GainAmmo(Owner.inventory.AllGuns[i].AdjustedMaxAmmo);
+                        Owner.inventory.AllGuns[i].ForceImmediateReload(false);
+                    }
+                }
+            }
         }
         public override DebrisObject Drop(PlayerController player)
         {
@@ -60,7 +72,7 @@ namespace NevernamedsItems
             DebrisObject debrisObject = base.Drop(player);
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

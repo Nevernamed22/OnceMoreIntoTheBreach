@@ -57,7 +57,7 @@ namespace NevernamedsItems
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = "Y-Beam Laser";
 
-            gun.quality = PickupObject.ItemQuality.S;
+            gun.quality = PickupObject.ItemQuality.A;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             GravityGunID = gun.PickupObjectId;

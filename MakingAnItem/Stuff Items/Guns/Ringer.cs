@@ -83,7 +83,7 @@ namespace NevernamedsItems
             player.healthHaver.ModifyDamage += this.ModifyDamage;
             base.OnPickedUpByPlayer(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (gun && gun.CurrentOwner)
             {

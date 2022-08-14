@@ -74,11 +74,10 @@ namespace NevernamedsItems
             player.OnRollStarted -= this.onDodgeRoll;
             return result;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner) Owner.OnRollStarted -= this.onDodgeRoll;
             base.OnDestroy();
         }
     }
 }
-//Exploder.DoRadialKnockback(centerPoint.ToVector3ZUp(0f), knockbackForce * num3, knockbackRadius);

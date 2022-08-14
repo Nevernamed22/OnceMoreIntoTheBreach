@@ -32,7 +32,7 @@ namespace NevernamedsItems
                 }
             }
         }
-        protected override void Update()
+        public override void Update()
         {
             if (timer >= 0)
             {
@@ -115,7 +115,7 @@ namespace NevernamedsItems
             StaticReferenceManager.ProjectileAdded -= NewBulletAppeared;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

@@ -28,7 +28,7 @@ namespace NevernamedsItems
         public static int AlbedoID;
         private float lastOrbitals;
         private bool hadSynergyLastChecked;
-        protected override void Update()
+        public override void Update()
         {
             base.Update();
             if (Owner && Owner.orbitals.Count >= 0)
@@ -126,7 +126,7 @@ namespace NevernamedsItems
             if (!(player.GetNumberOfItemInInventory(Albedo.AlbedoID) > 1)) ResetOrbitals(player);
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             GameManager.Instance.OnNewLevelFullyLoaded -= this.NewFloor;
             if (Owner)

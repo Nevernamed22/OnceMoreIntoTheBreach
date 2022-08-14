@@ -46,7 +46,7 @@ namespace NevernamedsItems
         }
         int cachedKeys;
         int cachedBlanks;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {

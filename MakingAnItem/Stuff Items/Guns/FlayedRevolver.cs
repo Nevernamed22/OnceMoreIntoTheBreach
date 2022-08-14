@@ -132,7 +132,7 @@ namespace NevernamedsItems
                 }
             }
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (this.m_extantReticleQuad)
             {

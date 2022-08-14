@@ -72,7 +72,7 @@ namespace NevernamedsItems
                 ETGModConsole.Log(e.Message);
             }
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             //Play a sound effect
             //Activates the effect
@@ -95,7 +95,7 @@ namespace NevernamedsItems
             user.PostProcessProjectile -= this.PostProcessProjectile;
             user.PostProcessBeam -= this.PostProcessBeam;
         }
-        protected override void OnPreDrop(PlayerController user)
+        public override void OnPreDrop(PlayerController user)
         {
             if (base.IsCurrentlyActive)
             {
@@ -223,7 +223,7 @@ namespace NevernamedsItems
             player.PostProcessBeam -= this.PostProcessBeam;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             Owner.PostProcessProjectile -= this.PostProcessProjectile;
             Owner.PostProcessBeam -= this.PostProcessBeam;

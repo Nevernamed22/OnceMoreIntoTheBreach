@@ -285,7 +285,7 @@ namespace NevernamedsItems
             }
             return vector;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (this.m_projectile)
             {

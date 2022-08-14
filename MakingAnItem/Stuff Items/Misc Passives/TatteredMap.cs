@@ -52,7 +52,7 @@ namespace NevernamedsItems
 
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             GameManager.Instance.OnNewLevelFullyLoaded -= this.OnFloorLoaded;
 

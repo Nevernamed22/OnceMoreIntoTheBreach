@@ -38,7 +38,7 @@ namespace NevernamedsItems
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
 
             //Set the cooldown type and duration of the cooldown
-            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 0);
+            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 200);
 
             //Adds a passive modifier, like curse, coolness, damage, etc. to the item. Works for passives and actives.
 
@@ -53,7 +53,7 @@ namespace NevernamedsItems
         public static int RecyclinderID;
 
         PickupObject.ItemQuality itemToGiveQuality = PickupObject.ItemQuality.D;
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             if (user.CharacterUsesRandomGuns)
             {

@@ -58,7 +58,7 @@ namespace NevernamedsItems
         }
 
         public static Projectile synergyFungusProj;
-        protected override void Update()
+        public override void Update()
         {
             if (this.ExtantCompanion && Owner)
             {

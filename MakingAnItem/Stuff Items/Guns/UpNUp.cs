@@ -15,7 +15,7 @@ namespace NevernamedsItems
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Up-N-Up", "upnup");
-            Game.Items.Rename("outdated_gun_mods:up-n-up", "nn:up_n_up");
+            Game.Items.Rename("outdated_gun_mods:upnup", "nn:up_n_up");
             gun.gameObject.AddComponent<UpNUp>();
             gun.SetShortDescription("Great Potential");
             gun.SetLongDescription("Though this pistol on it's own is unremarkable, the damage of it's bullets is affected TWICE by any bullet stat modifiers you recieve.");

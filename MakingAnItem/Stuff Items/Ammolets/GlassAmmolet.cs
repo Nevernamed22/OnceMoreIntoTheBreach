@@ -63,7 +63,7 @@ namespace NevernamedsItems
             player.OnUsedBlank -= this.OnUsedBlank;
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner) Owner.OnUsedBlank -= this.OnUsedBlank;
             base.OnDestroy();

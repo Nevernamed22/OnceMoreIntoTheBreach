@@ -15,7 +15,7 @@ namespace NevernamedsItems
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Wall-Ray", "wallray");
-            Game.Items.Rename("outdated_gun_mods:wall-ray", "nn:wall_ray");
+            Game.Items.Rename("outdated_gun_mods:wallray", "nn:wall_ray");
             var behav = gun.gameObject.AddComponent<WallRay>();
             behav.preventNormalFireAudio = true;
             gun.SetShortDescription("90 Degrees Are Best Degrees");

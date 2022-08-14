@@ -40,8 +40,7 @@ namespace NevernamedsItems
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.B;
 
-            List<string> mandatorySynergyItems = new List<string>() { "nn:false_blank", "nn:forsaken_heart" };
-            CustomSynergies.Add("False Pretences", mandatorySynergyItems);
+            
 
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
 
@@ -51,7 +50,7 @@ namespace NevernamedsItems
 
         private float curse = 0f;
         private float lastCurse = -1f;
-        protected override void Update()
+        public override void Update()
         {
             base.Update();
             this.EvaluateStats();

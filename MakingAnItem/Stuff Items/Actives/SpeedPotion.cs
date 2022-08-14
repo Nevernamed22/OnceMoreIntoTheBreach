@@ -42,7 +42,7 @@ namespace NevernamedsItems
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 500);
 
             //Adds a passive modifier, like curse, coolness, damage, etc. to the item. Works for passives and actives.
-            
+
 
             //Set some other fields
             item.consumable = false;
@@ -56,7 +56,7 @@ namespace NevernamedsItems
         //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!
         float movementBuff = -1;
         float duration = 15f;
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             //Play a sound effect
             AkSoundEngine.PostEvent("Play_OBJ_power_up_01", base.gameObject);
@@ -140,7 +140,7 @@ namespace NevernamedsItems
             base.Pickup(player);
             CanBeDropped = true;
         }
-        protected override void OnPreDrop(PlayerController user)
+        public override void OnPreDrop(PlayerController user)
         {
             if (base.IsCurrentlyActive)
             {
@@ -157,11 +157,14 @@ namespace NevernamedsItems
             EndEffect(player);
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
-            LastOwner.healthHaver.OnDamaged -= this.PlayerTookDamage;
-            base.IsCurrentlyActive = false;
-            EndEffect(LastOwner);
+            if (LastOwner)
+            {
+                LastOwner.healthHaver.OnDamaged -= this.PlayerTookDamage;
+                base.IsCurrentlyActive = false;
+                EndEffect(LastOwner);
+            }
             base.OnDestroy();
         }
 

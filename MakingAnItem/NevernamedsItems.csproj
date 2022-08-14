@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,52 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\Desktop\Dependancies\Assembly-CSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Assembly-CSharp.Base.mm">
-      <HintPath>..\..\..\..\Desktop\Dependancies\Assembly-CSharp.Base.mm.dll</HintPath>
-    </Reference>
-    <Reference Include="Ionic.Zip">
-      <HintPath>..\..\..\..\Desktop\Dependancies\Ionic.Zip.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMod.RuntimeDetour, Version=18.11.10.6, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Enter the Gungeon\Mods\MakingAnItem\MonoMod.RuntimeDetour.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMod.Utils, Version=18.11.10.6, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Enter the Gungeon\Mods\MakingAnItem\MonoMod.Utils.dll</HintPath>
-    </Reference>
-    <Reference Include="PlayMaker">
-      <HintPath>..\..\..\..\Desktop\Dependancies\PlayMaker.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\Desktop\Dependancies\UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\..\Desktop\Dependancies\UnityEngine.CoreModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule.Base.mm">
-      <HintPath>..\..\..\..\Desktop\Dependancies\UnityEngine.CoreModule.Base.mm.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ImageConversionModule">
-      <HintPath>..\..\..\..\Desktop\Dependancies\UnityEngine.ImageConversionModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.JSONSerializeModule">
-      <HintPath>..\..\..\..\Desktop\Dependancies\UnityEngine.JSONSerializeModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>..\..\..\..\Desktop\Dependancies\UnityEngine.TextRenderingModule.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="OMITB Extensions and Hooks\ShadeFlightHookFix.cs" />
     <Compile Include="OMITB Misc Game Changers\Commands\CheatUnlocks.cs" />
     <Compile Include="OMITB Misc Toolboxes\GuonToolbox.cs" />
@@ -86,28 +43,6 @@
     <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\ProjWeaknessModifier.cs" />
     <Compile Include="ProjectileSetupUtility.cs" />
     <Compile Include="StandardAPI\BreakableAPI.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\-EXAMPLEPLEASELOOKATTHISFFS.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\CharacterBuilding\CharacterBuilder.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\CharacterBuilding\CustomCharacter.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\CharacterBuilding\FoyerCharacterHandler.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\CharacterBuilding\Loader.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\CharacterBuilding\SpriteHandler.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\CharacterBuilding\StringHandler.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\CharacterSwitcher.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\CharApi.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\CharApiHiveMind.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\CollectionDumper.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\CustomPlayableCharacters.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\SaveFileBullShit.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\Tools\CharApiHooks.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\Tools\CustomSimpleFlagDisabler.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\Tools\Enums.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\Tools\HooksToMakeDodgeRollsCodeForRobotGood.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\Tools\SaveFileHelper.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\Tools\TexturePacker.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\Tools\TextureStitcher.cs" />
-    <Compile Include="StandardAPI\CharacterAPI\Tools\Tools.cs" />
-    <Compile Include="CustomAPI\ChamberGunAPI.cs" />
     <Compile Include="CustomAPI\TrailAPI.cs" />
     <Compile Include="StandardAPI\EnemyAPI\BossBuilder.cs" />
     <Compile Include="StandardAPI\EnemyAPI\EnemyBuilder.cs" />
@@ -122,7 +57,6 @@
     <Compile Include="StandardAPI\ItemAPI\CustomClipAmmoTypeToolbox.cs" />
     <Compile Include="StandardAPI\ItemAPI\SynergyTools\AdvancedFireOnReloadSynergyProcessor.cs" />
     <Compile Include="StandardAPI\ItemAPI\SynergyTools\GunVolleyModificationSynergy.cs" />
-    <Compile Include="StandardAPI\ItemAPI\ThrowableAPI.cs" />
     <Compile Include="StandardAPI\ItemAPI\TranslationAPI\CustomStringDBTable.cs" />
     <Compile Include="StandardAPI\ItemAPI\TranslationAPI\StringTableType.cs" />
     <Compile Include="StandardAPI\ItemAPI\TranslationAPI\Translation.cs" />
@@ -152,7 +86,6 @@
     <Compile Include="OMITB Misc Game Changers\Commands\DeconstructGun.cs" />
     <Compile Include="OMITB Misc Game Changers\Confusion.cs" />
     <Compile Include="OMITB Misc Game Changers\Curses.cs" />
-    <Compile Include="OMITB Misc Toolboxes\AdvancedLogging.cs" />
     <Compile Include="OMITB Misc Toolboxes\AnimationToolbox.cs" />
     <Compile Include="OMITB Misc Toolboxes\BeamComponents.cs" />
     <Compile Include="OMITB Misc Toolboxes\ChestToolbox.cs" />
@@ -165,51 +98,6 @@
     <Compile Include="OMITB Misc Toolboxes\SoundCode\AudioResourceLoader.cs" />
     <Compile Include="OMITB Misc Toolboxes\TentacleDraw.cs" />
     <Compile Include="OMITB Storage Classes\ExoticPlaceables.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\AssetBundleBuilder.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\AssetBundleTools.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\BinaryWriterExtensions.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\CommonString.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\CRC.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\EditorAssetBundle.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\EditorBuildTarget.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\EditorClassIDType.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\EditorComponent.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\EditorExtension.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\EditorGameObject.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\EditorNamedObject.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\EditorObject.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\EditorPPtr.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\EditorTextAsset.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\EditorTransform.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\EndianBinaryWriter.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\ICoder.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\IMatchFinder.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\LZ4Codec.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\LZ4CodecPartial.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\LZ4\ILZ4Service.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\LZ4\LZ4Codec.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\LZ4\LZ4Codec.Safe.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\LZ4\LZ4Codec.Safe32.Dirty.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\LZ4\LZ4Codec.Safe32HC.Dirty.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\LZ4\LZ4Codec.Safe64.Dirty.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\LZ4\LZ4Codec.Safe64HC.Dirty.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\LzBinTree.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\LzInWindow.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\LzmaBase.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\LzmaDecoder.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\LzmaEncoder.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\LzOutWindow.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\PPtr.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\PrefabBuilder.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\RangeCoder.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\RangeCoderBit.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\RangeCoderBitTree.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\Safe32LZ4Service.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\Safe64LZ4Service.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\SerializedType.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\SerializedTypeStorage.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\SevenZipHelper.cs" />
-    <Compile Include="StandardAPI\PrefabAPI\TypeTreeNode.cs" />
     <Compile Include="Stuff Items\Actives\BitBucket.cs" />
     <Compile Include="Stuff Items\Actives\FireBomb.cs" />
     <Compile Include="Stuff Items\Actives\InfantryGrenade.cs" />
@@ -463,7 +351,6 @@
     <Compile Include="OMITB Extensions and Hooks\OMITBEnemyExtensions.cs" />
     <Compile Include="OMITB Extensions and Hooks\OMITBRoomhandlerExtensions.cs" />
     <Compile Include="OMITB Extensions and Hooks\PickupHooks.cs" />
-    <Compile Include="OMITB Extensions and Hooks\PedestalHooks.cs" />
     <Compile Include="OMITB Extensions and Hooks\SimplerCrateController.cs" />
     <Compile Include="OMITB Extensions and Hooks\UIHooks.cs" />
     <Compile Include="OMITB Misc Game Changers\AdvancedDragunRewards.cs" />
@@ -669,7 +556,6 @@
     <Compile Include="Stuff Items\Guns\RiskRifle.cs" />
     <Compile Include="Stuff Items\Misc Passives\RiskyRing.cs" />
     <Compile Include="Stuff Items\Companions\ScrollOfExactKnowledge.cs" />
-    <Compile Include="SetupCrossModIDs.cs" />
     <Compile Include="Stuff Items\Misc Passives\Shatterblank.cs" />
     <Compile Include="Stuff Items\Misc Passives\Showdown.cs" />
     <Compile Include="Stuff Items\Guns\ShroomedGun.cs" />
@@ -3623,6 +3509,7 @@
     <EmbeddedResource Include="Resources\CustomGunAmmoTypes\uzispinemm_clipfull.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Characters\Acolyte\newspritesetup\custom\" />
     <Folder Include="Characters\Shade\newspritesetup\custom\" />
   </ItemGroup>
   <ItemGroup>
@@ -4531,5 +4418,1320 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\NeoItemSprites\magnet_icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\foyercard\robot_facecard_idle_005.png" />
+    <EmbeddedResource Include="Characters\Acolyte\foyercard\robot_facecard_idle_004.png" />
+    <EmbeddedResource Include="Characters\Acolyte\foyercard\robot_facecard_idle_003.png" />
+    <EmbeddedResource Include="Characters\Acolyte\foyercard\robot_facecard_idle_002.png" />
+    <EmbeddedResource Include="Characters\Acolyte\foyercard\robot_facecard_idle_001.png" />
+    <EmbeddedResource Include="Characters\Acolyte\foyercard\robot_facecard_appear_006.png" />
+    <EmbeddedResource Include="Characters\Acolyte\foyercard\robot_facecard_appear_005.png" />
+    <EmbeddedResource Include="Characters\Acolyte\foyercard\robot_facecard_appear_004.png" />
+    <EmbeddedResource Include="Characters\Acolyte\foyercard\robot_facecard_appear_003.png" />
+    <EmbeddedResource Include="Characters\Acolyte\foyercard\robot_facecard_appear_002.png" />
+    <EmbeddedResource Include="Characters\Acolyte\win_pic_junkan.png" />
+    <EmbeddedResource Include="Characters\Acolyte\win_pic_001.png" />
+    <EmbeddedResource Include="Characters\Acolyte\icon.png" />
+    <EmbeddedResource Include="Characters\Acolyte\facecard.png" />
+    <EmbeddedResource Include="Characters\Acolyte\coop_page_death.png" />
+    <EmbeddedResource Include="Characters\Acolyte\characterdata.txt" />
+    <EmbeddedResource Include="Characters\Acolyte\bosscard_001.png" />
+    <EmbeddedResource Include="Characters\Acolyte\alt_skin_obj_sprite_002.png" />
+    <EmbeddedResource Include="Characters\Acolyte\alt_skin_obj_sprite_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\facecard1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\facecard2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\facecard3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_block_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_block_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_block_hit_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_dodge_left_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_dodge_left_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_dodge_left_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_dodge_right_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_dodge_right_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_dodge_right_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_duck_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_duck_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_duck_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_exhaust_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_exhaust_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_exhaust_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_hit_left_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_hit_left_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_hit_left_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_hit_right_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_hit_right_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_hit_right_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_idle_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_idle_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_idle_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_knockout_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_knockout_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_knockout_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_knockout_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_knockout_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_knockout_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_knockout_007.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_knockout_008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_knockout_009.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_knockout_010.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_left_miss_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_left_miss_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_punch_left_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_punch_left_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_punch_left_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_punch_left_blocked_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_punch_left_blocked_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_punch_right_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_punch_right_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_punch_right_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_punch_right_blocked_002_copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_punch_right_blocked_003_copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_right_miss_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_right_miss_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_star_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_star_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_star_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_star_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_star_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_star_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_star_007.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_star_008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_star_009.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_win_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_win_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\punchout\sprites\shade_punch_win_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\error\robot_select_error_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\error\robot_select_error_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\error\robot_select_error_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\error\robot_select_error_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\error\robot_select_error_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\error\robot_select_error_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\error\robot_select_error_007.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\error\robot_select_error_008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\error\robot_select_error_009.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\error\robot_select_error_010.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\error\robot_select_error_011.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\error\robot_select_error_012.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\error\robot_select_error_013.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\error\robot_select_error_014.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\error\robot_select_error_015.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\error\robot_select_error_016.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\head_spin\robot_select_headspin_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\head_spin\robot_select_headspin_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\head_spin\robot_select_headspin_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\head_spin\robot_select_headspin_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\head_spin\robot_select_headspin_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\head_spin\robot_select_headspin_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\off\robot_select_off_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\off\robot_select_off_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\off\robot_select_off_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\off\robot_select_off_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\off\robot_select_off_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\select_choose\robot_select_choose_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\select_choose\robot_select_choose_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\select_choose\robot_select_choose_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\select_choose\robot_select_choose_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\select_choose\robot_select_choose_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\select_choose\robot_select_choose_007.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\select_choose\robot_select_choose_008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\select_choose\robot_select_choose_009.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\select_idle\robot_idle_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\select_idle\robot_idle_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\select_idle\robot_idle_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\select_idle\robot_idle_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\stargaze\robot_select_stargaze_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\stargaze\robot_select_stargaze_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\stargaze\robot_select_stargaze_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\stargaze_cry\robot_select_stargaze_cry_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\stargaze_cry\robot_select_stargaze_cry_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\stargaze_cry\robot_select_stargaze_cry_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\stargaze_cry\robot_select_stargaze_cry_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\stargaze_cry\robot_select_stargaze_cry_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\tummy\robot_select_tummy_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\tummy\robot_select_tummy_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\tummy\robot_select_tummy_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\tummy\robot_select_tummy_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\tummy\robot_select_tummy_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\tummy\robot_select_tummy_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\tummy\robot_select_tummy_007.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\tummy\robot_select_tummy_008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\breach_idles\tummy\robot_select_tummy_009.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\chest_recover\cc_sprite_placeholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\death\robot_death_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\death\robot_death_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\death\robot_death_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\death\robot_death_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\death\robot_death_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\death\robot_death_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\death\robot_death_007.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\death\robot_death_008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\death_coop\cc_sprite_placeholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\death_shot\robot_deathshot_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\death_shot\robot_deathshot_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\death_shot\robot_deathshot_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\death_shot\robot_deathshot_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\death_shot\robot_deathshot_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\death_shot\robot_deathshot_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge\robot_dodge_front_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge\robot_dodge_front_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge\robot_dodge_front_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge\robot_dodge_front_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge\robot_dodge_front_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge\robot_dodge_front_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge\robot_dodge_front_007.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge\robot_dodge_front_008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge\robot_dodge_front_009.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_bw\robot_dodge_back_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_bw\robot_dodge_back_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_bw\robot_dodge_back_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_bw\robot_dodge_back_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_bw\robot_dodge_back_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_bw\robot_dodge_back_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_bw\robot_dodge_back_007.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_bw\robot_dodge_back_008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_bw\robot_dodge_back_009.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_left\robot_dodge_side_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_left\robot_dodge_side_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_left\robot_dodge_side_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_left\robot_dodge_side_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_left\robot_dodge_side_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_left\robot_dodge_side_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_left\robot_dodge_side_007.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_left\robot_dodge_side_008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_left\robot_dodge_side_009.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_left_bw\robot_dodge_bw_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_left_bw\robot_dodge_bw_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_left_bw\robot_dodge_bw_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_left_bw\robot_dodge_bw_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_left_bw\robot_dodge_bw_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_left_bw\robot_dodge_bw_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_left_bw\robot_dodge_bw_007.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_left_bw\robot_dodge_bw_008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\dodge_left_bw\robot_dodge_bw_009.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\doorway\robot_pitfall_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\doorway\robot_pitfall_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\doorway\robot_pitfall_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\doorway\robot_pitfall_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\doorway\robot_pitfall_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_idle_back\robot_ghost_idle_back_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_idle_back\robot_ghost_idle_back_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_idle_back\robot_ghost_idle_back_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_idle_back_left\robot_ghost_idle_back_left_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_idle_back_left\robot_ghost_idle_back_left_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_idle_back_left\robot_ghost_idle_back_left_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_idle_back_right\robot_ghost_idle_back_right_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_idle_back_right\robot_ghost_idle_back_right_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_idle_back_right\robot_ghost_idle_back_right_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_idle_front\robot_ghost_idle_front_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_idle_front\robot_ghost_idle_front_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_idle_front\robot_ghost_idle_front_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_idle_left\robot_ghost_idle_left_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_idle_left\robot_ghost_idle_left_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_idle_left\robot_ghost_idle_left_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_idle_right\robot_ghost_idle_right_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_idle_right\robot_ghost_idle_right_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_idle_right\robot_ghost_idle_right_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_sneeze_left\robot_ghost_sneeze_left_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_sneeze_left\robot_ghost_sneeze_left_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_sneeze_left\robot_ghost_sneeze_left_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_sneeze_left\robot_ghost_sneeze_left_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_sneeze_right\robot_ghost_sneeze_right_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_sneeze_right\robot_ghost_sneeze_right_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_sneeze_right\robot_ghost_sneeze_right_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\ghost_sneeze_right\robot_ghost_sneeze_right_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\hand_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle\robot_idle_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle\robot_idle_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle\robot_idle_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle\robot_idle_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_backward\robot_idle_back_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_backward\robot_idle_back_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_backward\robot_idle_back_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_backward\robot_idle_back_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_backward_hand\robot_idle_back_hand_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_backward_hand\robot_idle_back_hand_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_backward_hand\robot_idle_back_hand_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_backward_hand\robot_idle_back_hand_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_backward_twohands\cc_sprite_placeholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_bw\robot_idle_bw_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_bw\robot_idle_bw_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_bw\robot_idle_bw_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_bw\robot_idle_bw_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_bw_hand\cc_sprite_placeholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_bw_twohands\cc_sprite_placeholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_hand\robot_idle_hand_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_hand\robot_idle_hand_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_hand\robot_idle_hand_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_hand\robot_idle_hand_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_twohands\cc_sprite_placeholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\item_get\robot_item_get_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\item_get\robot_item_get_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\item_get\robot_item_get_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\item_get\robot_item_get_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\item_get\robot_item_get_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\item_get\robot_item_get_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\item_get\robot_item_get_007.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\item_get\robot_item_get_008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\item_get\robot_item_get_009.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\jetpack_down\robot_jetpack_front_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\jetpack_down\robot_jetpack_front_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\jetpack_down_hand\cc_sprite_placeholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\jetpack_right\robot_jetpack_front_right_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\jetpack_right\robot_jetpack_front_right_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\jetpack_right_bw\robot_jetpack_back_right_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\jetpack_right_bw\robot_jetpack_back_right_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\jetpack_right_hand\cc_sprite_placeholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\jetpack_up\robot_jetpack_back_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\jetpack_up\robot_jetpack_back_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pet\robot_pet_right_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pet\robot_pet_right_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pitfall\robot_pitfall_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pitfall\robot_pitfall_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pitfall\robot_pitfall_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pitfall\robot_pitfall_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pitfall\robot_pitfall_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pitfall_down\robot_pitfall_front_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pitfall_down\robot_pitfall_front_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pitfall_down\robot_pitfall_front_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pitfall_down\robot_pitfall_front_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pitfall_down\robot_pitfall_front_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pitfall_return\robot_pitfall_return_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pitfall_return\robot_pitfall_return_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pitfall_return\robot_pitfall_return_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pitfall_return\robot_pitfall_return_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pitfall_return\robot_pitfall_return_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pitfall_return\robot_pitfall_return_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pitfall_return\robot_pitfall_return_007.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\pitfall_return\robot_pitfall_return_008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_down\robot_run_front_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_down\robot_run_front_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_down\robot_run_front_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_down\robot_run_front_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_down\robot_run_front_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_down\robot_run_front_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_down_hand\robot_run_front_hand_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_down_hand\robot_run_front_hand_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_down_hand\robot_run_front_hand_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_down_hand\robot_run_front_hand_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_down_hand\robot_run_front_hand_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_down_hand\robot_run_front_hand_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_down_twohands\cc_sprite_placeholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right\robot_run_side_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right\robot_run_side_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right\robot_run_side_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right\robot_run_side_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right\robot_run_side_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right\robot_run_side_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right_bw\robot_run_bw_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right_bw\robot_run_bw_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right_bw\robot_run_bw_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right_bw\robot_run_bw_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right_bw\robot_run_bw_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right_bw\robot_run_bw_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right_bw_hand\cc_sprite_placeholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right_bw_twohands\cc_sprite_placeholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right_hand\robot_run_side_hand_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right_hand\robot_run_side_hand_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right_hand\robot_run_side_hand_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right_hand\robot_run_side_hand_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right_hand\robot_run_side_hand_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right_hand\robot_run_side_hand_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_right_twohands\cc_sprite_placeholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_up\robot_run_back_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_up\robot_run_back_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_up\robot_run_back_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_up\robot_run_back_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_up\robot_run_back_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_up\robot_run_back_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_up_hand\robot_run_back_hand_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_up_hand\robot_run_back_hand_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_up_hand\robot_run_back_hand_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_up_hand\robot_run_back_hand_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_up_hand\robot_run_back_hand_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_up_hand\robot_run_back_hand_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\run_up_twohands\cc_sprite_placeholder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\slide_down\robot_slide_altright_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\slide_right\robot_slide_right_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\slide_up\robot_slide_up_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\spinfall\robot_select_headspin_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\spinfall\robot_select_headspin_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\spinfall\robot_select_headspin_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\spinfall\robot_select_headspin_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\spinfall\robot_select_headspin_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\spinfall\robot_select_headspin_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\spit_out\robot_tarnisher_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\spit_out\robot_tarnisher_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\spit_out\robot_tarnisher_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\spit_out\robot_tarnisher_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\spit_out\robot_tarnisher_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\spit_out\robot_tarnisher_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\tablekick_down\robot_tablekick_down_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\tablekick_down\robot_tablekick_down_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\tablekick_down_hand\robot_tablekick_down_hand_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\tablekick_down_hand\robot_tablekick_down_hand_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\tablekick_right\robot_tablekick_side_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\tablekick_right\robot_tablekick_side_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\tablekick_right\robot_tablekick_side_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\tablekick_right\robot_tablekick_side_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\tablekick_right_hand\robot_tablekick_side_hand_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\tablekick_right_hand\robot_tablekick_side_hand_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\tablekick_right_hand\robot_tablekick_side_hand_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\tablekick_right_hand\robot_tablekick_side_hand_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\tablekick_up\robot_tablekick_back_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\tablekick_up\robot_tablekick_back_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\timefall\robot_timefall_001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\timefall\robot_timefall_002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\timefall\robot_timefall_003.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\timefall\robot_timefall_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\timefall\robot_timefall_005.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\timefall\robot_timefall_006.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\timefall\robot_timefall_007.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\timefall\robot_timefall_008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\loadoutsprites\a_eldermagnum.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\loadoutsprites\b_handofnight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\loadoutsprites\c_shadeheart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_forward\acolyte_idleopen_001.png" />
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_forward\acolyte_idleopen_002.png" />
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_forward\acolyte_idleopen_003.png" />
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_forward\acolyte_idleopen_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_forward_twohands\acolyte_idle_001.png" />
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_forward_twohands\acolyte_idle_002.png" />
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_forward_twohands\acolyte_idle_003.png" />
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_forward_twohands\acolyte_idle_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_forward_hand\acolyte_idlehand_001.png" />
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_forward_hand\acolyte_idlehand_002.png" />
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_forward_hand\acolyte_idlehand_003.png" />
+    <EmbeddedResource Include="Characters\Acolyte\newspritesetup\idle_forward_hand\acolyte_idlehand_004.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony, Version=2.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HarmonyX.2.7.0\lib\net35\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Alexandria, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.Alexandria.0.1.2.3\lib\net35\Alexandria.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.GameLibs.2.1.9-r.0\lib\net35\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.GameLibs.2.1.9-r.0\lib\net35\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <Reference Include="BepInEx, Version=5.4.21.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BepInEx.BaseLib.5.4.21\lib\net35\BepInEx.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ionic.Zip.1.9.1.8\lib\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="ModTheGungeonAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.ModTheGungeonAPI.1.5.3\lib\net35\ModTheGungeonAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil, Version=0.10.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.10.4\lib\net35\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb, Version=0.10.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.10.4\lib\net35\Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb, Version=0.10.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.10.4\lib\net35\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks, Version=0.10.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.10.4\lib\net35\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.RuntimeDetour, Version=21.12.13.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoMod.RuntimeDetour.21.12.13.1\lib\net35\MonoMod.RuntimeDetour.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.Utils, Version=21.12.13.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoMod.Utils.21.12.13.1\lib\net35\MonoMod.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net35\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PlayMaker, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.GameLibs.2.1.9-r.0\lib\net35\PlayMaker.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AccessibilityModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.AccessibilityModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.AIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.AnimationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ARModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.ARModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.AssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.AudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClothModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.ClothModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterInputModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.ClusterInputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterRendererModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.ClusterRendererModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CrashReportingModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.CrashReportingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.DirectorModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.DirectorModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GameCenterModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.GameCenterModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GridModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.GridModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.IMGUIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.InputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.JSONSerializeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ParticlesLegacyModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.ParticlesLegacyModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.ParticleSystemModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PerformanceReportingModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.PerformanceReportingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.Physics2DModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ScreenCaptureModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.ScreenCaptureModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SharedInternalsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.SharedInternalsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpatialTracking, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteMaskModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.SpriteMaskModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteShapeModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.SpriteShapeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.StandardEvents, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.StyleSheetsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.StyleSheetsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.TerrainModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainPhysicsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.TerrainPhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TilemapModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.TilemapModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Timeline, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.UIElementsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UNETModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.UNETModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityAnalyticsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityConnectModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.UnityConnectModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.UnityWebRequestModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestTextureModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestWWWModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VehiclesModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.VehiclesModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VideoModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.VideoModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VRModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.VRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.WebModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.WebModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.WindModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EtG.UnityEngine.1.0.0\lib\UnityEngine.WindModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\BepInEx.Core.5.4.21\build\BepInEx.Core.targets" Condition="Exists('..\packages\BepInEx.Core.5.4.21\build\BepInEx.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\BepInEx.Core.5.4.21\build\BepInEx.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\BepInEx.Core.5.4.21\build\BepInEx.Core.targets'))" />
+  </Target>
 </Project>

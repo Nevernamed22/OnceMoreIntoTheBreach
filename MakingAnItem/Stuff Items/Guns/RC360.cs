@@ -17,7 +17,7 @@ namespace NevernamedsItems
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("RC-360", "rc360");
-            Game.Items.Rename("outdated_gun_mods:rc-360", "nn:rc_360");
+            Game.Items.Rename("outdated_gun_mods:rc360", "nn:rc_360");
             gun.gameObject.AddComponent<RC360>();
             gun.SetShortDescription("Sentry Gun");
             gun.SetLongDescription("The final bullet in the clip of this strange gun is actually an entirely self-contained sentry-robot.");

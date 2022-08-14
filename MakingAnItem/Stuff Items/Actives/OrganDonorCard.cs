@@ -51,7 +51,7 @@ namespace NevernamedsItems
 
         //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!
 
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             int cashToGive = 20;
             if (LastOwner.HasPickupID(Gungeon.Game.Items["nn:rusty_casing"].PickupObjectId)) cashToGive *= 2;

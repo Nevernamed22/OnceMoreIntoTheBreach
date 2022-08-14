@@ -54,7 +54,7 @@ namespace NevernamedsItems
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
         }
-        private void Update()
+        public override void Update()
         {
             PlayerController player = gun.CurrentOwner as PlayerController;
             if (player.PlayerHasActiveSynergy("Polydactyly"))

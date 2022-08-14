@@ -109,7 +109,7 @@ namespace NevernamedsItems
             player.OnReceivedDamage -= this.DoLiquidEffect;
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner) Owner.OnReceivedDamage -= this.DoLiquidEffect;
             base.OnDestroy();

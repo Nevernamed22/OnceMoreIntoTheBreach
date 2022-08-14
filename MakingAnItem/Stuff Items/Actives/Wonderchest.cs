@@ -26,7 +26,7 @@ namespace NevernamedsItems
 
             item.AddToSubShop(ItemBuilder.ShopType.Flynt);
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             bool hasDeterminedValidFloor = false;
             if (GameManager.Instance.Dungeon.IsGlitchDungeon) //GLITCHED FLOOR BONUS

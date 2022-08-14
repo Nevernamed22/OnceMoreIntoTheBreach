@@ -53,7 +53,7 @@ namespace NevernamedsItems
             buffActive = true;
         }
         private bool buffActive;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {
@@ -75,7 +75,7 @@ namespace NevernamedsItems
             RemoveBuff();
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

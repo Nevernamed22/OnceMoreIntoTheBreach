@@ -40,7 +40,7 @@ namespace NevernamedsItems
         public static Projectile GlassShardProjectile;
         public static int GlassShardID;
         bool onCooldown = false;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner != null && Owner.IsInCombat)
             {
@@ -122,7 +122,7 @@ namespace NevernamedsItems
             GameManager.Instance.OnNewLevelFullyLoaded -= this.OnNewFloor;
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             GameManager.Instance.OnNewLevelFullyLoaded -= this.OnNewFloor;
             base.OnDestroy();

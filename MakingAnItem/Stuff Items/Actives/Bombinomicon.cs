@@ -52,7 +52,7 @@ namespace NevernamedsItems
         public static int ID;
 
         //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             int bombToSpawn = 108;
             if (user.HasPickupID(109) || user.HasPickupID(364) || user.HasPickupID(170)) bombToSpawn = 109;

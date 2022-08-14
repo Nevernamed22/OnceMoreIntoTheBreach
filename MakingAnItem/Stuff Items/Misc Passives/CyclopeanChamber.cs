@@ -54,7 +54,7 @@ namespace NevernamedsItems
                 }
             }
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner) Owner.PostProcessProjectile -= PostProcess;
             base.OnDestroy();

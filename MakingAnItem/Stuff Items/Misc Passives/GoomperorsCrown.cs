@@ -96,7 +96,7 @@ namespace NevernamedsItems
             player.OnRoomClearEvent -= this.onRoomCleared;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             ETGMod.AIActor.OnPreStart -= AIActorMods;
             base.OnDestroy();

@@ -30,7 +30,7 @@ namespace NevernamedsItems
 
 
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             SlashData KnifeSlash = new SlashData();
             KnifeSlash.damage = 30 * user.stats.GetStatValue(PlayerStats.StatType.Damage);

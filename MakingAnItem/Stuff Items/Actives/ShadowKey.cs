@@ -26,7 +26,7 @@ namespace NevernamedsItems
             item.quality = ItemQuality.D;
             item.AddToSubShop(ItemBuilder.ShopType.Flynt);
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             IPlayerInteractable nearestInteractable = user.CurrentRoom.GetNearestInteractable(user.CenterPosition, 1f, user);
             if (!(nearestInteractable is Chest)) return;

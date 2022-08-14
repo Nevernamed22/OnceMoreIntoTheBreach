@@ -45,7 +45,7 @@ namespace NevernamedsItems
 
         }
         public bool SpawnShadowBulletsOnSpawn;
-        protected override void Move()
+        public override void Move()
         {
             if (!this.m_helixInitialized)
             {
@@ -79,7 +79,7 @@ namespace NevernamedsItems
             base.specRigidbody.Velocity = vector2;
             base.LastVelocity = base.specRigidbody.Velocity;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             base.OnDestroy();
         }

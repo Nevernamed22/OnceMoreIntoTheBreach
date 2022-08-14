@@ -27,7 +27,7 @@ namespace NevernamedsItems
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.CHALLENGE_WHATARMY_BEATEN, true);
         }
         private RoomHandler lastCheckedRoom;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner && Owner.CurrentRoom != null)
             {
@@ -59,7 +59,7 @@ namespace NevernamedsItems
             ETGMod.AIActor.OnPreStart -= AIActorMods;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             ETGMod.AIActor.OnPreStart -= AIActorMods;
             base.OnDestroy();

@@ -23,7 +23,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.B;
         }
         private float timer;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {

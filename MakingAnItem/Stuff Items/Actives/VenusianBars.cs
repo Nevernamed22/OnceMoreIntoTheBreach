@@ -51,7 +51,7 @@ namespace NevernamedsItems
         //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!
         float firerateBuff = -1;
         float duration = 25f;
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             //Play a sound effect
             AkSoundEngine.PostEvent("Play_WPN_LowerCaseR_Bye_GameOver_01", base.gameObject);
@@ -90,7 +90,7 @@ namespace NevernamedsItems
             user.PostProcessProjectile -= this.Refill;
 
         }
-        protected override void OnPreDrop(PlayerController user)
+        public override void OnPreDrop(PlayerController user)
         {
             if (base.IsCurrentlyActive)
             {

@@ -37,7 +37,7 @@ namespace NevernamedsItems
             player.OnTableFlipped -= this.GiveWoodGuon;
             return result;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner) Owner.OnTableFlipped -= this.GiveWoodGuon;
             base.OnDestroy();

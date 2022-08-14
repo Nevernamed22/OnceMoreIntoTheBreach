@@ -78,11 +78,11 @@ namespace NevernamedsItems
                     statModifier.statToBoost = PlayerStats.StatType.Coolness;
                     break;
             }
-            Debug.Log("Citrinitas: Added stat " + statModifier.statToBoost);
+            //Debug.Log("Citrinitas: Added stat " + statModifier.statToBoost);
             Owner.ownerlessStatModifiers.Add(statModifier);
             Owner.stats.RecalculateStats(Owner, false, false);
         }
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {

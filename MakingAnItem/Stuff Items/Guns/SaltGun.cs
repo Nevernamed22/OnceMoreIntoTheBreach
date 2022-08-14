@@ -78,7 +78,7 @@ namespace NevernamedsItems
             player.OnTableFlipped -= this.Flip;
             base.OnPostDroppedByPlayer(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (gun && gun.GunPlayerOwner())
             {

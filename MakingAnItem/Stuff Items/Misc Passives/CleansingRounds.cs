@@ -108,7 +108,7 @@ namespace NevernamedsItems
             player.PostProcessBeam -= this.PostProcessBeam;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

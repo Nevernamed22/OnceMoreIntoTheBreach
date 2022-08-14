@@ -27,7 +27,7 @@ namespace NevernamedsItems
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.B;
         }
-        protected override void Update()
+        public override void Update()
         {
             if (Owner && Owner.CurrentRoom != null)
             {

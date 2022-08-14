@@ -19,34 +19,38 @@ using FullSerializer;
 using Gungeon;
 using LootTableAPI;
 using CustomCharacters;
+using BepInEx;
+using Alexandria;
 
 namespace NevernamedsItems
 {
-    public class Initialisation : ETGModule
+    [BepInPlugin(GUID, "Once More Into The Breach", "1.0.0")]
+    [BepInDependency(ETGModMainBehaviour.GUID)]
+    [BepInDependency("kyle.etg.gapi")]
+    [BepInDependency("alexandria.etgmod.alexandria")]
+    public class Initialisation : BaseUnityPlugin
     {
-        public static ETGModuleMetadata metadata = new ETGModuleMetadata();
-        public static string ZipFilePath;
-        public static string FilePath;
-        public static string ModName;
+        public const string GUID = "nevernamed.etg.omitb";
+        public static Initialisation instance;
         //public static AdvancedStringDB Strings;
-        public override void Exit()
+
+        public void Awake()
         {
         }
-
-        public override void Init()
+        public void Start()
         {
+            ETGModMainBehaviour.WaitForGameManagerStart(GMStart);
         }
-
-        public override void Start()
+        public void GMStart(GameManager manager)
         {
             try
             {
                 ETGModConsole.Log("Once More Into The Breach started initialising...");
 
-                //Rooms
-                ZipFilePath = this.Metadata.Archive;
-                FilePath = this.Metadata.Directory + "/rooms";
-                ModName = this.Metadata.Name;
+                instance = this;
+
+                //Bepin bullshit
+                ETGMod.Assets.SetupSpritesFromFolder(System.IO.Path.Combine(this.FolderPath(), "sprites"));
 
                 //Tools and Toolboxes
                 StaticReferences.Init();
@@ -61,7 +65,6 @@ namespace NevernamedsItems
                 FakePrefabHooks.Init();
 
                 ItemBuilder.Init();
-                CharApi.Init("nn");
                 CustomClipAmmoTypeToolbox.Init();
                 EnemyTools.Init();
                 NpcApi.Hooks.Init();
@@ -72,9 +75,6 @@ namespace NevernamedsItems
                 ETGModMainBehaviour.Instance.gameObject.AddComponent<GlobalUpdate>();
                 ETGModMainBehaviour.Instance.gameObject.AddComponent<CustomDarknessHandler>();
                 GameOfLifeHandler.Init();
-                //ETGModMainBehaviour.Instance.gameObject.AddComponent<GameOfLifeHandler>();
-
-                //ETGModConsole.Log(Assembly.GetExecutingAssembly().FullName);
 
                 //Challenges
                 Challenges.Init();
@@ -85,13 +85,12 @@ namespace NevernamedsItems
                 CompanionisedEnemyUtility.InitHooks();
                 MiscUnlockHooks.InitHooks();
                 FloorAndGenerationToolbox.Init();
-                PedestalHooks.Init();
                 ExplosionHooks.Init();
                 ChestToolbox.Inithooks();
                 UIHooks.Init();
                 ComplexProjModBeamCompatibility.Init();
                 ReloadBreachShrineHooks.Init();
-                metadata = this.Metadata;
+
                 //VFX Setup
                 VFXToolbox.InitVFX();
                 EasyVFXDatabase.Init(); //Needs to occur before goop definition
@@ -127,6 +126,8 @@ namespace NevernamedsItems
                 PassiveTestingItem.Init();
                 BulletComponentLister.Init();
                 ObjectComponentLister.Init();
+
+
 
                 //-----------------------------------------------------ITEMS GET INITIALISED
                 #region ItemInitialisation
@@ -436,7 +437,7 @@ namespace NevernamedsItems
                 Bullut.Init();
                 GSwitch.Init();
                 FaultyHoverboots.Init(); //Unfinished
-                AcidAura.Init();
+                Accelerant.Init();
                 HornedHelmet.Init();
                 RocketMan.Init();
                 Roulette.Init(); //Unfinished
@@ -768,22 +769,38 @@ namespace NevernamedsItems
                 GoodMimic.Add();
 
                 //Characters
-                var data = Loader.BuildCharacter("NevernamedsItems/Characters/Shade", 
-                    CustomPlayableCharacters.Shade,
-                    new Vector3(12.3f ,21.3f),
+                var data = Loader.BuildCharacter("NevernamedsItems/Characters/Shade",
+                   "nevernamed.etg.omitb",
+                    new Vector3(12.3f, 21.3f),
                     false,
-                     new Vector3(13.1f, 19.1f), 
-                     false, 
-                     false, 
-                     true, 
+                     new Vector3(13.1f, 19.1f),
+                     false,
+                     false,
+                     true,
                      true, //Sprites used by paradox
                      false, //Glows
                      null, //Glow Mat
                      null, //Alt Skin Glow Mat
                      0, //Hegemony Cost
                      false, //HasPast
-                     "") ; //Past ID String
-
+                     ""); //Past ID String
+                /*
+                           var acolyteData = Loader.BuildCharacter("NevernamedsItems/Characters/Acolyte",
+                           CustomPlayableCharacters.Acolyte,
+                           new Vector3(12.3f, 25.3f),
+                           false,
+                            new Vector3(13.1f, 19.1f),
+                            false,
+                            false,
+                            true,
+                            true, //Sprites used by paradox
+                            false, //Glows
+                            null, //Glow Mat
+                            null, //Alt Skin Glow Mat
+                            0, //Hegemony Cost
+                            false, //HasPast
+                            ""); //Past ID String
+                */
                 //Other Features
                 MasteryReplacementOub.InitDungeonHook();
                 CadenceAndOxShopPoolAdditions.Init();
@@ -799,7 +816,6 @@ namespace NevernamedsItems
                 SynergyFormInitialiser.AddSynergyForms();
                 ExistantGunModifiers.Init();
 
-                ChamberGunAPI.Init("OnceMoreIntoTheBreach");
 
                 //Late Hooks
                 AmmoPickupHooks.Init();
@@ -840,6 +856,9 @@ namespace NevernamedsItems
                  else ETGModConsole.Log("Pattern settings null");
                  keepDungeon = null;*/
 
+
+
+
                 ETGMod.StartGlobalCoroutine(this.delayedstarthandler());
                 ETGModConsole.Log("'If you're reading this, I must have done something right' - NN");
             }
@@ -848,8 +867,8 @@ namespace NevernamedsItems
                 ETGModConsole.Log(e.Message);
                 ETGModConsole.Log(e.StackTrace);
             }
-
         }
+        
         public IEnumerator delayedstarthandler()
         {
             yield return null;
@@ -861,47 +880,6 @@ namespace NevernamedsItems
             try
             {
                 LibramOfTheChambers.LateInit();
-
-                SetupCrossModIDs.DoSetup();
-
-                RoomFactory.LoadRoomsFromRoomDirectory();
-
-                ObsidianPistol.OverridePossibleItems = new List<int>()
-                {
-                  AWholeBulletKin.WholeBulletKinID,
-                  Lewis.LewisID,
-                  Kevin.KevinID,
-                  234, //Ibomb Companion App
-                  201, //Portable Turret
-                  338, //Gunther
-                  599, //Bubble Blaster
-                  563, //The Exotic
-                  176, //Gungeon Ant
-                  Gunshark.GunsharkID,
-                  PoisonDartFrog.PoisonDartFrogID,
-                  SporeLauncher.SporeLauncherID,
-                  PhaserSpiderling.PhaserSpiderlingID,
-
-                  PrismatismItemIDs.JeremyTheBlobulonID,
-
-                  SomeBunnysItemIDs.BlasphemimicID,
-                  SomeBunnysItemIDs.CasemimicID,
-                  SomeBunnysItemIDs.GunthemimicID,
-                  SomeBunnysItemIDs.GunSoulPhylacteryID,
-                  SomeBunnysItemIDs.SoulInAJarID,
-
-                  ExpandTheGungeonIDs.BabyGoodHammerID,
-                  ExpandTheGungeonIDs.BabySitterID,
-
-                  RORItemIDs.WillTheWispID,
-
-                  CelsItemIDs.PetRockID,
-
-                  KylesItemIDs.CaptureSphereID,
-
-                  SpecialAPIsStuffIDs.CrownOfTheJammedID,
-                  SpecialAPIsStuffIDs.RoundKingID,
-                };
 
                 CrossmodNPCLootPoolSetup.CheckItems();
 

@@ -17,7 +17,7 @@ namespace NevernamedsItems
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("AM-0 Spread Forme", "am0spreadforme");
-            Game.Items.Rename("outdated_gun_mods:am-0_spread_forme", "nn:am0+spreadshot");
+            Game.Items.Rename("outdated_gun_mods:am0_spread_forme", "nn:am0+spreadshot");
             gun.gameObject.AddComponent<AM0SpreadForme>();
             gun.SetShortDescription("Fires Ammunition");
             gun.SetLongDescription("" + "\n\nThis gun is comically stuffed with whole ammo boxes.");

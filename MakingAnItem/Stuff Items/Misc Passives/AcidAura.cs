@@ -8,7 +8,7 @@ using ItemAPI;
 
 namespace NevernamedsItems
 {
-    public class AcidAura : PassiveItem
+    public class Accelerant : PassiveItem
     {
         public static void Init()
         {
@@ -22,7 +22,7 @@ namespace NevernamedsItems
             GameObject obj = new GameObject(itemName);
 
             //Add a PassiveItem component to the object
-            var item = obj.AddComponent<AcidAura>();
+            var item = obj.AddComponent<Accelerant>();
 
             //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
@@ -80,7 +80,7 @@ namespace NevernamedsItems
             ETGMod.AIActor.OnPreStart -= AIActorMods;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             ETGMod.AIActor.OnPreStart -= AIActorMods;
             base.OnDestroy();

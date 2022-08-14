@@ -61,7 +61,7 @@ namespace NevernamedsItems
             player.PostProcessBeam += this.PostProcessBeam;
 
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

@@ -49,7 +49,7 @@ namespace NevernamedsItems
 
         }
         public bool goUp;
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             if (user.HasPickupID(Gungeon.Game.Items["space_friend"].PickupObjectId))
             {

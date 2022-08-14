@@ -422,6 +422,12 @@ namespace NevernamedsItems
             List<string> mandatorySynergyItemsNewRunNewMe = new List<string>() { "nn:identity_crisis" };
             List<string> optionalSynergyItemsNewRunNewMe = new List<string>() { "clone", "shadow_clone", "gun_soul" };
             CustomSynergies.Add("New run, New me", mandatorySynergyItemsNewRunNewMe, optionalSynergyItemsNewRunNewMe);
+            //FALSE BLANK / FORSAKEN HEART
+            List<string> mandatorySynergyItemsFalsePretences = new List<string>() { "nn:false_blank", "nn:forsaken_heart" };
+            CustomSynergies.Add("False Pretences", mandatorySynergyItemsFalsePretences);
+            //LEWIS / BATTLE STANDARD
+            List<string> mandatorySynergyItemsRallyTheSlacker = new List<string>() { "nn:lewis", "battle_standard" };
+            CustomSynergies.Add("Rally The Slacker", mandatorySynergyItemsRallyTheSlacker);
             #endregion
 
             #region BigUpdate (1.14) Synergies

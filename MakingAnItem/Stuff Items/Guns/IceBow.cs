@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -71,6 +71,7 @@ namespace NevernamedsItems
 
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+            gun.SetTag("arrow_bolt_weapon");
             IceBowID = gun.PickupObjectId;
         }
         public static int IceBowID;

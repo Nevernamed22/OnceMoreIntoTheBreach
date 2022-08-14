@@ -32,12 +32,53 @@ namespace NevernamedsItems
             {
                 Diode.prefab = CompanionBuilder.BuildPrefab("Diode Companion", Diode.guid, "NevernamedsItems/Resources/Companions/Diode/diode_idle_001", new IntVector2(4, 0), new IntVector2(8, 8));
                 var companionController = Diode.prefab.AddComponent<DiodeCompanionBehaviour>();
-                prefab.AddAnimation("idle_left", "NevernamedsItems/Resources/Companions/Diode/diode_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.TwoWayHorizontal, DirectionalAnimation.FlipType.None);
-                prefab.AddAnimation("idle_right", "NevernamedsItems/Resources/Companions/Diode/diode_idle", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.TwoWayHorizontal, DirectionalAnimation.FlipType.None);
-                prefab.AddAnimation("run_left", "NevernamedsItems/Resources/Companions/Diode/diode_moveright", 12, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.TwoWayHorizontal, DirectionalAnimation.FlipType.None);
-                prefab.AddAnimation("run_right", "NevernamedsItems/Resources/Companions/Diode/diode_moveleft", 12, CompanionBuilder.AnimationType.Move, DirectionalAnimation.DirectionType.TwoWayHorizontal, DirectionalAnimation.FlipType.None);
-                companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
-                companionController.aiAnimator.GetDirectionalAnimation("move").Prefix = "run";
+
+                AIAnimator animator = prefab.GetOrAddComponent<AIAnimator>();
+
+                animator.AdvAddAnimation("idle",
+                    DirectionalAnimation.DirectionType.TwoWayHorizontal,
+                    CompanionBuilder.AnimationType.Idle,
+                    new List<AnimationUtilityExtensions.DirectionalAnimationData>()
+                    {
+                        new AnimationUtilityExtensions.DirectionalAnimationData()
+                        {
+                            subAnimationName = "idle_right",
+                            wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop,
+                            fps = 7,
+                            pathDirectory = "NevernamedsItems/Resources/Companions/Diode/diode_idle",
+                        },
+                        new AnimationUtilityExtensions.DirectionalAnimationData()
+                        {
+                            subAnimationName = "idle_left",
+                            wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop,
+                            fps = 7,
+                            pathDirectory = "NevernamedsItems/Resources/Companions/Diode/diode_idle",
+                        }
+                    }
+                    );
+                animator.AdvAddAnimation("move",
+                    DirectionalAnimation.DirectionType.TwoWayHorizontal,
+                    CompanionBuilder.AnimationType.Move,
+                    new List<AnimationUtilityExtensions.DirectionalAnimationData>()
+                    {
+                        new AnimationUtilityExtensions.DirectionalAnimationData()
+                        {
+                            subAnimationName = "move_right",
+                            wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop,
+                            fps = 12,
+                            pathDirectory = "NevernamedsItems/Resources/Companions/Diode/diode_moveright",
+                        },
+                        new AnimationUtilityExtensions.DirectionalAnimationData()
+                        {
+                            subAnimationName = "move_left",
+                            wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop,
+                            fps = 12,
+                            pathDirectory = "NevernamedsItems/Resources/Companions/Diode/diode_moveleft",
+                        }
+                    }
+                    );
+
+
                 companionController.CanInterceptBullets = false;
                 companionController.companionID = CompanionController.CompanionIdentifier.NONE;
                 companionController.aiActor.MovementSpeed = 7f;
@@ -65,7 +106,7 @@ namespace NevernamedsItems
             {
                 this.DamagePerHit = 3.5f;
             }
-            protected override void OnDestroy()
+            public override void OnDestroy()
             {
                 if (extantLink != null)
                 {

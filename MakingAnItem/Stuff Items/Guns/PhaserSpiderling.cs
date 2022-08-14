@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -161,6 +161,7 @@ namespace NevernamedsItems
             gun.gunClass = GunClass.FULLAUTO;
             gun.quality = PickupObject.ItemQuality.S;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+            gun.SetTag("non_companion_living_item");
 
             PhaserSpiderlingID = gun.PickupObjectId;
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PHASERSPIDER_QUEST_REWARDED, true);

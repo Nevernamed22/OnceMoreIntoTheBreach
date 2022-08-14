@@ -49,7 +49,7 @@ namespace NevernamedsItems
         private int currentClip, lastClip;
         private Gun currentGun, lastGun;
         public static int ID;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {

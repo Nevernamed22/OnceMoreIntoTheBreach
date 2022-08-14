@@ -133,7 +133,7 @@ namespace NevernamedsItems
             player.OnHitByProjectile -= this.OwnerHitByProjectile;
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner) Owner.OnHitByProjectile -= this.OwnerHitByProjectile;
             base.OnDestroy();

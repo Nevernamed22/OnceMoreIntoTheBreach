@@ -44,7 +44,7 @@ namespace NevernamedsItems
         }
         public static int OverpricedHeadbandID;
         private float currentCash, lastCash;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {
@@ -107,7 +107,7 @@ namespace NevernamedsItems
             DebrisObject debrisObject = base.Drop(player);
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             //Owner.SetIsFlying(false, "shade", true, false);
             base.OnDestroy();

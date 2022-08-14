@@ -30,7 +30,7 @@ namespace NevernamedsItems
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
         }
 
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             float currentCurse = user.stats.GetBaseStatValue(PlayerStats.StatType.Curse);
             user.stats.SetBaseStatValue(PlayerStats.StatType.Curse, currentCurse + 1f, user);

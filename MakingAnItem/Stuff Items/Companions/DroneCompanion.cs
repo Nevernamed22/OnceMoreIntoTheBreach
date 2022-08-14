@@ -212,7 +212,7 @@ namespace NevernamedsItems
                     base.aiActor.CompanionWarp(Owner.specRigidbody.UnitCenter);
                 }
             }
-            protected override void OnDestroy()
+            public override void OnDestroy()
             {
                 if (Owner)
                 {

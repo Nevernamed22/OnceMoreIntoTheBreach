@@ -1,5 +1,4 @@
 ﻿using Dungeonator;
-using Ionic.Zip;
 using ItemAPI;
 using NevernamedsItems;
 using System;
@@ -21,89 +20,9 @@ namespace GungeonAPI
         private static FieldInfo m_cellData = typeof(PrototypeDungeonRoom).GetField("m_cellData", BindingFlags.Instance | BindingFlags.NonPublic);
         private static RoomEventDefinition sealOnEnterWithEnemies = new RoomEventDefinition(RoomEventTriggerCondition.ON_ENTER_WITH_ENEMIES, RoomEventTriggerAction.SEAL_ROOM);
         private static RoomEventDefinition unsealOnRoomClear = new RoomEventDefinition(RoomEventTriggerCondition.ON_ENEMIES_CLEARED, RoomEventTriggerAction.UNSEAL_ROOM);
-        public static void LoadRoomsFromRoomDirectory()
-        {
-            string roomDirectory = Initialisation.ZipFilePath;
-            string unzippedDirectory = Initialisation.FilePath;
+        
 
-            if (File.Exists(roomDirectory))
-            {
-
-                using (ZipFile zip = ZipFile.Read(roomDirectory))
-
-                    foreach (ZipEntry f in zip.Entries)
-                    {
-                        if (f.FileName.Contains("rooms") && !FailSafeCheck)
-                        {
-                            FailSafeCheck = true;
-                            //ItemAPI.Tools.PrintNoID("this is being read");
-                            var roomData = BuildFromZipFile(roomDirectory);
-                            foreach (var roomsData in roomData)
-                            {
-                                string name = roomsData.room.name;
-                                //Debug.Log("Found room: "+name);
-                                DungeonHandler.Register(roomsData);
-                                rooms.Add(roomsData.room.name, roomsData);
-
-                            }
-
-                        }
-
-                    }
-            }
-            else
-            {
-                Directory.CreateDirectory(unzippedDirectory);
-                foreach (string g in Directory.GetFiles(unzippedDirectory, "*", SearchOption.AllDirectories))
-                {
-                    if (g.EndsWith(".room", StringComparison.OrdinalIgnoreCase))
-                    {
-                        string name = Path.GetFullPath(g).RemovePrefix(unzippedDirectory).RemoveSuffix(".room");
-                       // Debug.Log("Found room: " + name);
-                        var roomData = BuildFromRoomFile(g);
-                        DungeonHandler.Register(roomData);
-                        rooms.Add(name, roomData);
-                    }
-                }
-            }
-        }
-
-        public static IEnumerable<RoomData> BuildFromZipFile(string zipFilePath)
-        {
-            if (!ZipFile.IsZipFile(zipFilePath))
-            {
-                Tools.Log($"Not a valid zip file!");
-                yield break;
-            }
-            using (var zipFile = ZipFile.Read(zipFilePath))
-            {
-                //Tools.PrintNoID("did it work?");
-                foreach (var entry in zipFile.Entries)
-                {
-                    var fileName = Path.GetFileNameWithoutExtension(entry.FileName);
-                    var extension = Path.GetExtension(entry.FileName);
-                    if (!string.Equals(extension, ".room", StringComparison.OrdinalIgnoreCase))
-                        continue;
-
-                    byte[] zipData;
-                    int capacity = (int)entry.UncompressedSize;
-                    if (capacity < 0)
-                        continue;
-
-                    using (var ms = new MemoryStream(capacity))
-                    {
-                        entry.Extract(ms);
-                        zipData = ms.ToArray();
-                    }
-
-                    var texture = ResourceExtractor.BytesToTexture(zipData, fileName);
-                    var roomData = ExtractRoomDataFromBytes(zipData);
-                    roomData.room = Build(texture, roomData);
-
-                    yield return roomData;
-                }
-            }
-        }
+        
 
         public static RoomData BuildFromRoomFile(string roomPath)
         {

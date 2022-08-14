@@ -111,7 +111,7 @@ namespace NevernamedsItems
                 this.Owner = this.m_owner;
                 Owner.PostProcessProjectile += OwnerPostProcess;
             }
-            protected override void OnDestroy()
+            public override void OnDestroy()
             {
                 if (Owner) Owner.PostProcessProjectile -= OwnerPostProcess;
                 base.OnDestroy();

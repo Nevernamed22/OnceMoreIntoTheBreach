@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -63,6 +63,8 @@ namespace NevernamedsItems
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             gun.barrelOffset.transform.localPosition = new Vector3(1.37f, 0.37f, 0f);
             PoisonDartFrogID = gun.PickupObjectId;
+            gun.SetTag("non_companion_living_item");
+
         }
         public static int PoisonDartFrogID;
         public PoisonDartFrog()

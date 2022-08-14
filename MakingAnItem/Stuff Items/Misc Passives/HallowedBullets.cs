@@ -40,7 +40,7 @@ namespace NevernamedsItems
             player.PostProcessProjectile -= this.onFiredGun;
             return result;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             Owner.PostProcessProjectile -= this.onFiredGun;
             base.OnDestroy();

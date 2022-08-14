@@ -75,7 +75,7 @@ namespace NevernamedsItems
                     MidCheckGUIDS.Add(key, EnemyGuidDatabase.Entries[key]);
                 }
             }
-            if (ModInstallFlags.PlanetsideOfGunymededInstalled)
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("somebunny.etg.planetsideofgunymede"))
             {
                 foreach (string key in ModdedGUIDDatabase.PlanetsideOfGunymedeGUIDs.Keys)
                 {
@@ -85,7 +85,7 @@ namespace NevernamedsItems
                     }
                 }
             }
-            if (ModInstallFlags.FrostAndGunfireInstalled)
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("frostandgunfireplaceholder"))
             {
                 foreach (string key in ModdedGUIDDatabase.FrostAndGunfireGUIDs.Keys)
                 {
@@ -282,7 +282,7 @@ namespace NevernamedsItems
 
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

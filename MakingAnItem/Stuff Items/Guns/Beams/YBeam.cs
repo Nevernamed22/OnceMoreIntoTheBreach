@@ -15,7 +15,7 @@ namespace NevernamedsItems
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Y-Beam", "ybeam");
-            Game.Items.Rename("outdated_gun_mods:y-beam", "nn:y_beam");
+            Game.Items.Rename("outdated_gun_mods:ybeam", "nn:y_beam");
             var behav = gun.gameObject.AddComponent<YBeam>();
             behav.preventNormalFireAudio = true;
             gun.SetShortDescription("Energy Fissure");

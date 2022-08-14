@@ -77,7 +77,7 @@ namespace NevernamedsItems
             base.OnReloadPressed(player, gun, bSOMETHING);
         }
         private bool HasReloaded;
-        protected void Update()
+        public override void Update()
         {
             if (gun.CurrentOwner)
             {

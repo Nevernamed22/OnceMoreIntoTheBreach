@@ -42,7 +42,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.EXCLUDED;
 
             BloodGlassGuonStoneID = item.PickupObjectId;
-            item.AddAsChamberGunMastery("OnceMoreIntoTheBreach", 4);
+            //item.AddAsChamberGunMastery("OnceMoreIntoTheBreach", 4);
 
         }
 
@@ -73,9 +73,9 @@ namespace NevernamedsItems
             player.OnReceivedDamage -= this.SpawnGuons;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
-            Owner.OnReceivedDamage -= this.SpawnGuons;
+          if (Owner)  Owner.OnReceivedDamage -= this.SpawnGuons;
             base.OnDestroy();
         }
     }

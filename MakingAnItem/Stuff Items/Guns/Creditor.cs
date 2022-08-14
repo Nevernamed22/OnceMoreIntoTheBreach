@@ -142,7 +142,7 @@ namespace NevernamedsItems
             player.OnKilledEnemyContext -= this.OnKilledEnemy;
             base.OnPostDroppedByPlayer(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (gun && gun.CurrentOwner && gun.GunPlayerOwner())
             {

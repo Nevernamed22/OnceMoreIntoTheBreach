@@ -64,8 +64,8 @@ namespace NevernamedsItems
         float movementDeBuff = -1;
         float damageBuff = -1;
         float damageDeBuff = -1;
-        float duration = 25f; 
-        protected override void DoEffect(PlayerController user)
+        float duration = 25f;
+        public override void DoEffect(PlayerController user)
         {
             if (user.HasPickupID(289))
             {
@@ -210,7 +210,7 @@ namespace NevernamedsItems
             damageDeBuff = -1;
             this.CanBeDropped = true;
         }
-        protected override void OnPreDrop(PlayerController user)
+        public override void OnPreDrop(PlayerController user)
         {
             if (base.IsCurrentlyActive)
             {

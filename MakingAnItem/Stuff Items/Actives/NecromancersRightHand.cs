@@ -41,7 +41,7 @@ namespace NevernamedsItems
             if (user != null && user.CurrentRoom != null && user.CurrentRoom.IsSealed) return true;
             else return false;
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             AkSoundEngine.PostEvent("Play_OBJ_dead_again_01", base.gameObject);
             for (int i = 0; i < StaticReferenceManager.AllCorpses.Count; i++)

@@ -47,7 +47,7 @@ namespace NevernamedsItems
 
 
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             ChangeStatPermanent(user, PlayerStats.StatType.Curse, 2, StatModifier.ModifyMethod.ADDITIVE);
             ChangeStatPermanent(user, PlayerStats.StatType.EnemyProjectileSpeedMultiplier, 1.5f, StatModifier.ModifyMethod.MULTIPLICATIVE);

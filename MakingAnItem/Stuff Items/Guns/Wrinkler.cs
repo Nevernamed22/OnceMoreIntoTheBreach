@@ -99,7 +99,7 @@ namespace NevernamedsItems
             {
                 if (gun.IsReloading)
                 {
-                    if (StaticReferenceManager.AllProjectiles.Count > 0)
+                    if (StaticReferenceManager.AllProjectiles != null && StaticReferenceManager.AllProjectiles.Count > 0)
                     {
                         for (int i = (StaticReferenceManager.AllProjectiles.Count - 1); i >= 0; i--)
                         {

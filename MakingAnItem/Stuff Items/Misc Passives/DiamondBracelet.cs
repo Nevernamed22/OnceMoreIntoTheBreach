@@ -75,7 +75,7 @@ namespace NevernamedsItems
             player.PostProcessThrownGun -= this.PostProcessThrownGun;
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner) Owner.PostProcessThrownGun -= this.PostProcessThrownGun;
             base.OnDestroy();

@@ -71,7 +71,7 @@ namespace NevernamedsItems
             player.OnTableFlipCompleted -= this.DoLaser;
             return result;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner) Owner.OnTableFlipCompleted -= this.DoLaser;
             base.OnDestroy();

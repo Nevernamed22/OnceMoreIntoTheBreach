@@ -36,7 +36,7 @@ namespace NevernamedsItems
         public static int RingOfInvisibilityID;
         private float unstealthyTimer;
         private bool isCurrentlyStealthed;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner != null)
             {
@@ -97,7 +97,7 @@ namespace NevernamedsItems
             player.OnDidUnstealthyAction -= this.OnUnstealthy;
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

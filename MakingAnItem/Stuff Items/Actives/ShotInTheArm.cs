@@ -30,7 +30,7 @@ namespace NevernamedsItems
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.BOSSRUSH_MARINE, true);
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             if (user)
             {

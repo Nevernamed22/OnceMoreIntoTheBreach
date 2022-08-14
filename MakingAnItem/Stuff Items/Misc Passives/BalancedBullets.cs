@@ -59,7 +59,7 @@ namespace NevernamedsItems
             player.healthHaver.OnDamaged -= this.charmAll;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             Owner.healthHaver.OnDamaged -= this.charmAll;
             base.OnDestroy();

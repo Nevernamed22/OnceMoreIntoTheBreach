@@ -103,7 +103,7 @@ namespace NevernamedsItems
             base.Pickup(player);
         }
         bool hadOilCanWhatLastWeChecked;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {
@@ -131,7 +131,7 @@ namespace NevernamedsItems
             player.healthHaver.OnPreDeath -= this.OnPreDeath;
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

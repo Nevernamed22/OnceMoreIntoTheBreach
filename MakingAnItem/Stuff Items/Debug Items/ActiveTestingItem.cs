@@ -54,7 +54,7 @@ namespace NevernamedsItems
             return true;
         }
         //float duration = 20f;
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             //IntVector2 bestRewardLocation = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
             //ChestToolbox.ChestTier tier = RandomEnum<ChestToolbox.ChestTier>.Get();
@@ -451,30 +451,8 @@ namespace NevernamedsItems
              {
                  ETGModConsole.Log(chest.name);
              }*/
-            List<AIActor> activeEnemies = user.CurrentRoom.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
-            if (activeEnemies != null)
-            {
-                for (int i = 0; i < activeEnemies.Count; i++)
-                {
-                    AIActor aiactor = activeEnemies[i];
-
-                    GameActorDecorationEffect DummyEffect = new GameActorDecorationEffect()
-                    {
-                        AffectsEnemies = true,
-                        OverheadVFX = CompanionisedEnemyUtility.FriendlyVFX,
-                        AffectsPlayers = false,
-                        AppliesTint = false,
-                        AppliesDeathTint = false,
-                        AppliesOutlineTint = false,
-                        duration = float.MaxValue,
-                        effectIdentifier = "Friendly Overheader",
-                        resistanceType = EffectResistanceType.None,
-                        PlaysVFXOnActor = false,
-                        stackMode = GameActorEffect.EffectStackingMode.Ignore,
-                    };
-                    aiactor.ApplyEffect(DummyEffect);
-                }
-            }
+            PlayerItem itemOfTypeAndQuality = LootEngine.GetItemOfTypeAndQuality<PlayerItem>( ItemQuality.A, GameManager.Instance.RewardManager.ItemsLootTable, true);
+            LootEngine.SpawnItem(itemOfTypeAndQuality.gameObject, LastOwner.specRigidbody.UnitCenter, Vector2.left, 1f, false, true, false);
         }
         public override void Update()
         {

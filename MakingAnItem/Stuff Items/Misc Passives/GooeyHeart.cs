@@ -41,7 +41,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.EXCLUDED;
 
             GooeyHeartID = item.PickupObjectId;
-            item.AddAsChamberGunMastery("OnceMoreIntoTheBreach", 4);
+            //item.AddAsChamberGunMastery("OnceMoreIntoTheBreach", 4);
 
         }
         public static List<string> blobEnemies = new List<string>()
@@ -68,7 +68,7 @@ namespace NevernamedsItems
             player.OnAnyEnemyReceivedDamage -= this.HandleHeal;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             Owner.OnAnyEnemyReceivedDamage -= this.HandleHeal;
             base.OnDestroy();

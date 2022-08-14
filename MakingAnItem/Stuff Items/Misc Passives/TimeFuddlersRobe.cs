@@ -57,7 +57,7 @@ namespace NevernamedsItems
             timeSlow.RadialSlowTimeModifier = 0.01f;
             timeSlow.DoRadialSlow(user.specRigidbody.UnitCenter, user.CurrentRoom); //or whatever
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner) Owner.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
             base.OnDestroy();

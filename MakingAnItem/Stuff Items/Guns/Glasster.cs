@@ -146,7 +146,7 @@ namespace NevernamedsItems
 
             base.OnPostDroppedByPlayer(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (gun.CurrentOwner != null && gun.CurrentOwner is PlayerController)
             {

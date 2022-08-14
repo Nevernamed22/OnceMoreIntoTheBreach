@@ -29,7 +29,7 @@ namespace NevernamedsItems
             item.quality = ItemQuality.C;
         }
 
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {    
             pickupsInRoom.Clear();
             DebrisObject[] shitOnGround = FindObjectsOfType<DebrisObject>();

@@ -40,7 +40,7 @@ namespace NevernamedsItems
                 Owner.ForceBlank(45f, 0.5f, false, true, null, true, -1f);
             }
         }
-        protected override void Update()
+        public override void Update()
         {
             if (Owner && Owner.CurrentRoom != null)
             {

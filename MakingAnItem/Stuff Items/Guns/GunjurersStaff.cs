@@ -16,7 +16,7 @@ namespace NevernamedsItems
         public float aimDirection;
         public float overrideSpeed = 10;
 
-        protected override IEnumerator Top()
+        public override IEnumerator Top()
         {
             base.EndOnBlank = false;
             switch (UnityEngine.Random.Range(0, 4))
@@ -90,7 +90,7 @@ namespace NevernamedsItems
                 this.m_parent = parent;
                 this.m_offset = offset;
             }
-            protected override IEnumerator Top()
+            public override IEnumerator Top()
             {
 
                 base.ManualControl = true;

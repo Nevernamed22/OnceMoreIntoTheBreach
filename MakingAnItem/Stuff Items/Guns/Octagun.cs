@@ -80,7 +80,8 @@ namespace NevernamedsItems
                 projectile.baseData.speed *= 3f;
             }
         }
-        private void Update()
+        
+        public override void Update()
         {
             PlayerController player = gun.CurrentOwner as PlayerController;
             if (player.PlayerHasActiveSynergy("Shapes N' Beats"))

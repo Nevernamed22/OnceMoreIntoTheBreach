@@ -417,7 +417,7 @@ namespace NevernamedsItems
             }
             if (this.numTeleports > 0 && this.ShouldTeleport()) { base.StartCoroutine(this.DoTeleport()); }
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             base.StopAllCoroutines();
             base.OnDestroy();
@@ -1271,7 +1271,7 @@ namespace NevernamedsItems
             RoomHandler parentRoom = base.aiActor.ParentRoom;
             parentRoom.OnEnemiesCleared = (Action)Delegate.Combine(parentRoom.OnEnemiesCleared, new Action(this.RoomCleared));
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (base.aiActor && base.aiActor.ParentRoom != null)
             {

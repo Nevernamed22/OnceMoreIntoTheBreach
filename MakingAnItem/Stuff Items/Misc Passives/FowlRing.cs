@@ -43,7 +43,7 @@ namespace NevernamedsItems
             player.OnEnteredCombat -= this.EnteredCombat;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

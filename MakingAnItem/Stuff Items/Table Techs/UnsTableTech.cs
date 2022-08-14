@@ -35,7 +35,7 @@ namespace NevernamedsItems
             player.OnTableFlipped -= this.OnTableFlipped;
             return result;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

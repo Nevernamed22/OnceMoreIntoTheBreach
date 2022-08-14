@@ -92,7 +92,7 @@ namespace NevernamedsItems
             player.PostProcessProjectile += this.PostProcessProjectile;
             player.PostProcessBeam += this.PostProcessBeam;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

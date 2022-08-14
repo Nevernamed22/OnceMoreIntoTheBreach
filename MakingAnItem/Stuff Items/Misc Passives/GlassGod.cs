@@ -69,7 +69,7 @@ namespace NevernamedsItems
             player.OnReceivedDamage -= this.breakItem;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner) Owner.OnReceivedDamage -= this.breakItem;
             base.OnDestroy();

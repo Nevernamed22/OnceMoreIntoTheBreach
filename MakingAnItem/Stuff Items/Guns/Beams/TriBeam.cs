@@ -15,7 +15,7 @@ namespace NevernamedsItems
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Tri-Beam", "tribeam");
-            Game.Items.Rename("outdated_gun_mods:tri-beam", "nn:tri_beam");
+            Game.Items.Rename("outdated_gun_mods:tribeam", "nn:tri_beam");
             var behav = gun.gameObject.AddComponent<TriBeam>();
             behav.preventNormalFireAudio = true;
             gun.SetShortDescription("Revolutionary Tech");

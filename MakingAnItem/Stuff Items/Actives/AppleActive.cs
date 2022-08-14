@@ -59,7 +59,7 @@ namespace NevernamedsItems
             }
             base.Update();
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             AkSoundEngine.PostEvent("Play_OBJ_heart_heal_01", user.gameObject);
             user.PlayEffectOnActor((PickupObjectDatabase.GetById(73).GetComponent<HealthPickup>().healVFX), Vector3.zero, true, false, false);
@@ -205,7 +205,7 @@ namespace NevernamedsItems
         }
         public static int AppleCoreID;
         public bool givesFlight = false;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {
@@ -221,7 +221,7 @@ namespace NevernamedsItems
         {
             base.Pickup(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner && givesFlight)
             {
@@ -263,7 +263,7 @@ namespace NevernamedsItems
         }
         public static int GoldenAppleCoreID;
         public bool givesFlight = false;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {
@@ -279,7 +279,7 @@ namespace NevernamedsItems
         {
             base.Pickup(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner && givesFlight)
             {

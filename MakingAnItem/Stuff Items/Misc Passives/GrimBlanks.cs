@@ -42,7 +42,7 @@ namespace NevernamedsItems
             base.Pickup(player);
             player.OnKilledEnemyContext += OnEnemyKilled;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

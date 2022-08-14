@@ -5,7 +5,7 @@ using System.Text;
 using System.Collections;
 using Gungeon;
 using MonoMod;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using SaveAPI;
 namespace NevernamedsItems
@@ -76,6 +76,7 @@ namespace NevernamedsItems
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.BOSSRUSH_HUNTER, true);
+            gun.SetTag("arrow_bolt_weapon");
         }
     }
 }

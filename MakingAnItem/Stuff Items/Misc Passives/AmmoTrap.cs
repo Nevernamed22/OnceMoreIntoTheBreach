@@ -62,7 +62,7 @@ namespace NevernamedsItems
             }
         }
         float lastCheckedRatItemStoleded;
-        protected override void Update()
+        public override void Update()
         {
             if (GameStatsManager.Instance.GetPlayerStatValue(TrackedStats.ITEMS_TAKEN_BY_RAT) != lastCheckedRatItemStoleded)
             {

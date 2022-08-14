@@ -30,7 +30,7 @@ namespace NevernamedsItems
             item.TranslateItemShortDescription(StringTableManager.GungeonSupportedLanguages.RUSSIAN, "Даёт и Забирает");
             item.TranslateItemLongDescription(StringTableManager.GungeonSupportedLanguages.RUSSIAN, "Холодные и липкие руки давно сгинувшей и особенно яростной тени.");
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             StealthEffect();
             base.StartCoroutine(ItemBuilder.HandleDuration(this, this.duration, user, new Action<PlayerController>(this.BreakStealth)));

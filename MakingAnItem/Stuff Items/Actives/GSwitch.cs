@@ -50,7 +50,7 @@ namespace NevernamedsItems
         }
         public static int GSwitchID;
         // Token: 0x06007230 RID: 29232 RVA: 0x002D6104 File Offset: 0x002D4304
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             if (user.PlayerHasActiveSynergy("G is for Gain")) user.carriedConsumables.Currency -= 1;
             else user.carriedConsumables.Currency -= 3;

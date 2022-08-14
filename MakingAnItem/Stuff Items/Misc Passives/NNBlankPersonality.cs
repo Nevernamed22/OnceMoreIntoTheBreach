@@ -70,7 +70,7 @@ namespace NevernamedsItems
             player.OnItemPurchased -= this.OnItemPurchased;
             return result;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner) Owner.OnItemPurchased -= this.OnItemPurchased;
             base.OnDestroy();

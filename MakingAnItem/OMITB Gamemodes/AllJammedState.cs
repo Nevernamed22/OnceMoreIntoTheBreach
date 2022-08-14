@@ -115,7 +115,7 @@ namespace NevernamedsItems
 
     public class JammedCircleBurst12 : Script
     {
-        protected override IEnumerator Top()
+        public override IEnumerator Top()
         {
             float num = base.RandomAngle();
             float num2 = 30f;

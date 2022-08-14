@@ -107,7 +107,7 @@ namespace NevernamedsItems
             {
                 for (int i = 0; i < (amountOfBulletsToShoot - 1); i++)
                 {
-                    gun.AddProjectileModuleToRawVolleyFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
+                    gun.AddProjectileModuleToRawVolleyFrom(PickupObjectDatabase.GetById(86) as Gun, true);
                 }
             }
             //ETGModConsole.Log("Amount of Bullets: " + amountOfBulletsToShoot);
@@ -207,7 +207,7 @@ namespace NevernamedsItems
             GameManager.Instance.OnNewLevelFullyLoaded -= this.NewLevelLoaded;
             base.OnPostDroppedByPlayer(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             GameManager.Instance.OnNewLevelFullyLoaded -= this.NewLevelLoaded;
             base.OnDestroy();

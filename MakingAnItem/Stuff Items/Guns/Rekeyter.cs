@@ -76,7 +76,7 @@ namespace NevernamedsItems
         {
 
         }
-        private void Update()
+        public override void Update()
         {
             if (gun.CurrentOwner is PlayerController)
             {

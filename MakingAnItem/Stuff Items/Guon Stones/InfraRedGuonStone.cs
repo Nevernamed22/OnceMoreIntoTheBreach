@@ -117,7 +117,7 @@ namespace NevernamedsItems
             }
         }
         private BeamController extantBeam;
-        protected override void Update()
+        public override void Update()
         {
             if (this.m_extantOrbital != null & Owner)
             {
@@ -164,7 +164,7 @@ namespace NevernamedsItems
             }
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (extantBeam)
             {

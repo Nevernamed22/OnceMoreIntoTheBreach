@@ -63,7 +63,7 @@ namespace NevernamedsItems
             player.OnEnteredCombat -= this.resetCash;
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner) Owner.OnEnteredCombat -= this.resetCash;
             base.OnDestroy();

@@ -48,7 +48,7 @@ namespace ItemAPI
 
         //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!
         float duration = 10f;
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             StartEffect(user);
 
@@ -69,7 +69,7 @@ namespace ItemAPI
             user.stats.RecalculateStats(user, force: true, recursive: true);
         }
 
-        protected override void OnPreDrop(PlayerController user)
+        public override void OnPreDrop(PlayerController user)
         {
             base.OnPreDrop(user);
             //Forcing the effect to end in case the player drops the item while it is active.

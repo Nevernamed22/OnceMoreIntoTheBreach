@@ -50,7 +50,7 @@ namespace NevernamedsItems
             item.quality = ItemQuality.C;
         }
 
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             try
             {
@@ -111,13 +111,13 @@ namespace NevernamedsItems
                 ETGModConsole.Log(e.StackTrace);
             }
         }
-        private List<string> GenerateChaosPalette()
+        public static List<string> GenerateChaosPalette()
         {
             List<string> ChaosPalette = new List<string>();
             ChaosPalette.AddRange(chaosEnemyPalette);
-            if (ModInstallFlags.ExpandTheGungeonInstalled) ChaosPalette.AddRange(ExpandTheGungeonChaosPalette);
-            if (ModInstallFlags.FrostAndGunfireInstalled) ChaosPalette.AddRange(FrostAndGunfireChaosPalette);
-            if (ModInstallFlags.PlanetsideOfGunymededInstalled) ChaosPalette.AddRange(PlanetsideOfGunymedeChaosPalette);
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("ApacheThunder.etg.ExpandTheGungeon")) ChaosPalette.AddRange(ExpandTheGungeonChaosPalette);
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("kp.etg.frostandgunfire")) ChaosPalette.AddRange(FrostAndGunfireChaosPalette);
+            if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("somebunny.etg.planetsideofgunymede")) ChaosPalette.AddRange(PlanetsideOfGunymedeChaosPalette);
             return ChaosPalette;
         }
         public void HandlePostTransmogLootEnemies(AIActor enemy)

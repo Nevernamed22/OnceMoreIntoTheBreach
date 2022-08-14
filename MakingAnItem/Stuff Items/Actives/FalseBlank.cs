@@ -59,23 +59,15 @@ namespace NevernamedsItems
             base.Pickup(player);    
         }
         int timesUsed = 0;
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
-            if (user.HasPickupID(Gungeon.Game.Items["nn:forsaken_heart"].PickupObjectId))
+            if (!(user.PlayerHasActiveSynergy("False Pretences") && UnityEngine.Random.value < .50f))
             {
-                if (UnityEngine.Random.value < .50f)
-                {
-                    //No curse >:)
-                }
-                else
-                {
+
                     giveSomeCurse(user);
-                }
+                
             }
-            else
-            {
-                giveSomeCurse(user);
-            }            
+    
             if (user.PlayerHasActiveSynergy("Transparent Lies"))
             {
                 PickupObject byId = PickupObjectDatabase.GetById(565);

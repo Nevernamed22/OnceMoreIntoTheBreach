@@ -159,7 +159,7 @@ namespace NpcApi
 		}
 
 
-		protected override void DoSetup()
+		public override void DoSetup()
 		{
 
 			base.m_shopItems = new List<GameObject>();

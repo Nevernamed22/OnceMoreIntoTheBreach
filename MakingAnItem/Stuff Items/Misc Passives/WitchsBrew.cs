@@ -142,7 +142,7 @@ namespace NevernamedsItems
             ETGMod.AIActor.OnPreStart -= AIActorMods;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             ETGMod.AIActor.OnPreStart -= AIActorMods;
             base.OnDestroy();

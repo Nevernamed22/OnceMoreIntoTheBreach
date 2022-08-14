@@ -63,8 +63,16 @@ namespace NevernamedsItems
         public override void OnPostFired(PlayerController player, Gun gun)
         {
             Vector2 vec = gun.CurrentAngle.DegreeToVector2().Rotate(180);
-            player.knockbackDoer.ApplyKnockback(vec, 30);
+            player.knockbackDoer.ApplyKnockback(vec, (30 * player.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier)));
             base.OnPostFired(player, gun);
+        }
+        public override void PostProcessProjectile(Projectile projectile)
+        {
+            if (projectile && projectile.ProjectilePlayerOwner())
+            {
+                projectile.baseData.damage *= projectile.ProjectilePlayerOwner().stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
+            }
+            base.PostProcessProjectile(projectile);
         }
         public KineticBlaster()
         {

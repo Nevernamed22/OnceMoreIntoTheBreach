@@ -79,7 +79,7 @@ namespace NevernamedsItems
             player.healthHaver.damageTypeModifiers.Remove(this.poisonReduc);
             return result;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

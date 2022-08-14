@@ -54,9 +54,8 @@ namespace NevernamedsItems
 
         //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!
 
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
-            //Play a sound effect
             AkSoundEngine.PostEvent("Play_OBJ_shrine_accept_01", base.gameObject);
             if (user.HasPickupID(169))
             {
@@ -64,8 +63,6 @@ namespace NevernamedsItems
                 LootEngine.SpawnItem(PickupObjectDatabase.GetById(600).gameObject, LastOwner.specRigidbody.UnitCenter, Vector2.zero, 1f, false, true, false);
             }
             else LootEngine.SpawnItem(PickupObjectDatabase.GetById(78).gameObject, LastOwner.specRigidbody.UnitCenter, Vector2.zero, 1f, false, true, false);
-
-            //start a coroutine which calls the EndEffect method when the item's effect duration runs out
         }
     }
 }

@@ -53,7 +53,7 @@ namespace NevernamedsItems
             item.DoScreenFlash = false;
             item.reticleQuad = (PickupObjectDatabase.GetById(443) as TargetedAttackPlayerItem).reticleQuad;
         }
-        protected override void DoActiveEffect(PlayerController user)
+        public override void DoActiveEffect(PlayerController user)
         {
             tk2dBaseSprite cursor = OMITBReflectionHelpers.ReflectGetField<tk2dBaseSprite>(typeof(TargetedAttackPlayerItem), "m_extantReticleQuad", this);
             Vector2 overridePos = cursor.WorldCenter;

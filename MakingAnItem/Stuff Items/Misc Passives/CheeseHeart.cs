@@ -44,12 +44,10 @@ namespace NevernamedsItems
             player.OnReceivedDamage -= this.charmAll;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner) Owner.OnReceivedDamage -= this.charmAll;
             base.OnDestroy();
         }
     }
 }
-
-//GoopDefinition GreenFireDef = (PickupObjectDatabase.GetById(698) as Gun).DefaultModule.projectiles[0].GetComponent<GoopModifier>().goopDefinition;

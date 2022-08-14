@@ -97,7 +97,7 @@ namespace NevernamedsItems
             player.OnReloadedGun -= this.HandleGunReloaded;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner) Owner.OnReloadedGun -= this.HandleGunReloaded;
             base.OnDestroy();

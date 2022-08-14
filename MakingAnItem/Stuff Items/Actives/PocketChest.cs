@@ -113,12 +113,12 @@ namespace NevernamedsItems
             base.Pickup(player);
             player.OnAnyEnemyReceivedDamage += this.HurtEnemy;
         }
-        protected override void OnPreDrop(PlayerController user)
+        public override void OnPreDrop(PlayerController user)
         {
             user.OnAnyEnemyReceivedDamage -= this.HurtEnemy;
             base.OnPreDrop(user);
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             ChestToolbox.ChestTier chestToSpawn = ChestToolbox.ChestTier.OTHER;
             switch (MemorisedTier)

@@ -26,7 +26,7 @@ namespace NevernamedsItems
             gun.RawSourceVolley.projectiles.Add(projectile);
             return projectile;
         }
-        public static ProjectileModule AddProjectileModuleToRawVolleyFrom(this Gun gun, Gun other, bool cloned = true, bool clonedProjectiles = true)
+        public static ProjectileModule AddProjectileModuleToRawVolleyFrom(this Gun gun, Gun other, bool cloned = true)
         {
             ProjectileModule defaultModule = other.DefaultModule;
             if (!cloned)
@@ -37,7 +37,7 @@ namespace NevernamedsItems
             projectileModule.projectiles = new List<Projectile>(defaultModule.projectiles.Capacity);
             for (int i = 0; i < defaultModule.projectiles.Count; i++)
             {
-                projectileModule.projectiles.Add((!clonedProjectiles) ? defaultModule.projectiles[i] : defaultModule.projectiles[i].ClonedPrefab());
+                projectileModule.projectiles.Add(defaultModule.projectiles[i]);
             }
             return gun.AddProjectileModuleToRawVolley(projectileModule);
         }

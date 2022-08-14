@@ -15,7 +15,7 @@ namespace NevernamedsItems
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Q-Beam", "qbeam");
-            Game.Items.Rename("outdated_gun_mods:q-beam", "nn:q_beam");
+            Game.Items.Rename("outdated_gun_mods:qbeam", "nn:q_beam");
             var behav = gun.gameObject.AddComponent<QBeam>();
             behav.preventNormalFireAudio = true;
             gun.SetShortDescription("");

@@ -45,12 +45,12 @@ namespace NevernamedsItems
             player.PostProcessProjectile += this.PostProcessProjectile;
             base.Pickup(player);
         }
-        protected override void OnPreDrop(PlayerController user)
+        public override void OnPreDrop(PlayerController user)
         {
             user.PostProcessProjectile -= this.PostProcessProjectile;
             base.OnPreDrop(user);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (LastOwner)
             {
@@ -86,7 +86,7 @@ namespace NevernamedsItems
             if (storedProjectiles.Count() > 0) return true;
             else return false;
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             int amountOfBullets = storedProjectiles.Count();
             float direction = UnityEngine.Random.insideUnitCircle.ToAngle();

@@ -42,7 +42,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.C;
         }
         private Gun currentHeldGun, lastHeldGun;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {

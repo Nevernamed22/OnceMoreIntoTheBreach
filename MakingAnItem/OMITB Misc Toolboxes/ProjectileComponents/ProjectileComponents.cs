@@ -146,7 +146,7 @@ namespace NevernamedsItems
             return vector;
         }
 
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (this.m_projectile)
             {
@@ -788,7 +788,7 @@ namespace NevernamedsItems
         {
             self = base.GetComponent<Projectile>();
             if (self) self.OnHitEnemy += this.OnHitEnemy;
-            if (chaosPalette) RandomStringList = Challenges.GenerateChaosPalette();
+            if (chaosPalette) RandomStringList = MagickeCauldron.GenerateChaosPalette();
         }
         private void OnHitEnemy(Projectile bullet, SpeculativeRigidbody enemy, bool fatal)
         {
@@ -1925,7 +1925,7 @@ namespace NevernamedsItems
         }
         private void OnDestroy()
         {
-            if (laserVFX.Count > 0) ETGMod.StartGlobalCoroutine(deleteLasers(laserVFX, LightningTime, logDebug));
+            if (laserVFX != null && laserVFX.Count > 0) ETGMod.StartGlobalCoroutine(deleteLasers(laserVFX, LightningTime, logDebug));
         }
         private static IEnumerator deleteLasers(List<GameObject> lasers, float delay, bool logDebug)
         {
@@ -2509,7 +2509,7 @@ namespace NevernamedsItems
             this.shouldRemoveCooldown = true;
         }
         public bool shouldRemoveCooldown;
-        protected override void OnRigidbodyCollision(CollisionData rigidbodyCollision)
+        public override void OnRigidbodyCollision(CollisionData rigidbodyCollision)
         {
             base.OnRigidbodyCollision(rigidbodyCollision);
             if (shouldRemoveCooldown)

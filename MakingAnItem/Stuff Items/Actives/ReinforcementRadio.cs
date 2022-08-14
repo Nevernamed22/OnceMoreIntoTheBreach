@@ -85,7 +85,7 @@ namespace NevernamedsItems
             { "Bomb+", "4d37ce3d666b4ddda8039929225b7ede"}, //Bomb, Ice Bomb, Lil Bomber, or Cluster Mine --> Pinhead.
             { "Magic+", "206405acad4d4c33aac6717d184dc8d4"},//Bundle of Wands, Hexagun, Magic Bullets --> Apprentice Gunjurer
         };
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             AkSoundEngine.PostEvent("Play_OBJ_supplydrop_activate_01", base.gameObject);
             List<string> reinforcements = new List<string>();

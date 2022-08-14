@@ -51,7 +51,7 @@ namespace NevernamedsItems
 
         //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!
 
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             float length = 13;
             float width = 2.5f;

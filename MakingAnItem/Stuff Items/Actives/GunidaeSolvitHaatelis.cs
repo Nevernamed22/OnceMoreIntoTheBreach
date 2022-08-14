@@ -29,7 +29,7 @@ namespace NevernamedsItems
             item.quality = ItemQuality.B;
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_ABBEY, true);
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             List<AIActor> activeEnemies = user.CurrentRoom.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
             if (activeEnemies != null)

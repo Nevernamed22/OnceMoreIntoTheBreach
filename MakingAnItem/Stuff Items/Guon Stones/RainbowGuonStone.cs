@@ -134,7 +134,7 @@ namespace NevernamedsItems
             }
         }
 
-        protected override void Update()
+        public override void Update()
         {
             if (m_poisonImmunity == null)
             {
@@ -586,7 +586,7 @@ namespace NevernamedsItems
             player.OnHitByProjectile -= this.OnTookDamageFromProjectile;
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             //GameManager.Instance.OnNewLevelFullyLoaded -= this.AssignOrbitalCollisionEffects;
             if (Owner)

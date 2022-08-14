@@ -88,7 +88,7 @@ namespace NevernamedsItems
             player.OnDodgedProjectile -= this.onDodgeRolledOverBullet;
             return result;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner) Owner.OnDodgedProjectile -= this.onDodgeRolledOverBullet;
             base.OnDestroy();

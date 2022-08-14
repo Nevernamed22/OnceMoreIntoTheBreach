@@ -58,7 +58,7 @@ namespace NevernamedsItems
                 base.sprite.UpdateZDepth();
             }
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             base.OnDestroy();
         }

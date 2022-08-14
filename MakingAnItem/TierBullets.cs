@@ -61,7 +61,7 @@ namespace NevernamedsItems
         private int currentItems, lastItems;
         private int currentGuns, lastGuns;
         private int currentActives, lastActives;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {

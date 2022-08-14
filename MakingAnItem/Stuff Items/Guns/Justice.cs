@@ -77,7 +77,7 @@ namespace NevernamedsItems
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.ANGERED_BELLO, true);
         }
         public static int JusticeID;
-        private void Update()
+        public override void Update()
         {
             if (gun && gun.CurrentOwner && gun.CurrentOwner is PlayerController)
             {

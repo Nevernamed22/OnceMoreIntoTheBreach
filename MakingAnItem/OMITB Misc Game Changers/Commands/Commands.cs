@@ -29,7 +29,7 @@ namespace NevernamedsItems
                 // ETGModConsole.Log("<color=#ff0000ff>togglelooping</color> - Turns on and off the experimental looping mode.", false);
                 ETGModConsole.Log("<color=#ff0000ff>togglerarityboost</color> - Greatly increases the loot weight of modded items, making them show up much more.", false);
                 ETGModConsole.Log("<color=#ff0000ff>roomdata</color> - Displays data about the current room (currently only it's name)", false);
-                ETGModConsole.Log("<color=#ff0000ff>listInstalledMods</color> - Shows what other mods Once More Into The Breach thinks are active. Debug command.", false);
+                
             });
             ETGModConsole.Commands.GetGroup("nn").AddUnit("togglealljammed", delegate (string[] args)
             {
@@ -62,20 +62,7 @@ namespace NevernamedsItems
 
                 }
             });
-            ETGModConsole.Commands.GetGroup("nn").AddUnit("listInstalledMods", delegate (string[] args)
-            {
-                ETGModConsole.Log("<color=#ff0000ff>Prismatism:</color> " + ModInstallFlags.PrismatismInstalled);
-                ETGModConsole.Log("<color=#ff0000ff>Expand The Gungeon:</color> " + ModInstallFlags.ExpandTheGungeonInstalled);
-                ETGModConsole.Log("<color=#ff0000ff>Cel's Items:</color> " + ModInstallFlags.CelsItemsInstalled);
-                ETGModConsole.Log("<color=#ff0000ff>Fallen Items:</color> " + ModInstallFlags.FallenItemsInstalled);
-                ETGModConsole.Log("<color=#ff0000ff>Retrash's Items:</color> " + ModInstallFlags.RetrashItemsInstalled);
-                ETGModConsole.Log("<color=#ff0000ff>Some Bunny's Content Pack:</color> " + ModInstallFlags.SomeBunnysItemsInstalled);
-                ETGModConsole.Log("<color=#ff0000ff>SpecialAPI's Stuff:</color> " + ModInstallFlags.SpecialAPIsStuffInstalled);
-                ETGModConsole.Log("<color=#ff0000ff>Hunter's ROR Items:</color> " + ModInstallFlags.RORItemsInstalled);
-                ETGModConsole.Log("<color=#ff0000ff>Kyle's Items:</color> " + ModInstallFlags.KylesItemsInstalled);
-                ETGModConsole.Log("<color=#ff0000ff>Frost and Gunfire:</color> " + ModInstallFlags.FrostAndGunfireInstalled);
-                ETGModConsole.Log("<color=#ff0000ff>Planetside of Gunymede:</color> " + ModInstallFlags.PlanetsideOfGunymededInstalled);
-            });
+           
             ETGModConsole.Commands.GetGroup("nn").AddUnit("roomdata", delegate (string[] args)
             {
                 PlayerController player = GameManager.Instance.PrimaryPlayer;

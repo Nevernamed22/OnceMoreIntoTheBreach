@@ -35,7 +35,7 @@ namespace NevernamedsItems
             player.GunChanged -= GunChanged;
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

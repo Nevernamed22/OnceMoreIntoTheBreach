@@ -70,7 +70,7 @@ namespace NevernamedsItems
                 }
             }
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (LastOwner)
             {
@@ -83,7 +83,7 @@ namespace NevernamedsItems
             }
             base.OnDestroy();
         }
-        protected override void OnPreDrop(PlayerController user)
+        public override void OnPreDrop(PlayerController user)
         {
             base.OnPreDrop(user);
             user.OnEnteredCombat -= OnEnteredCombat;
@@ -94,7 +94,7 @@ namespace NevernamedsItems
                 isGivingDarknessImmunity = false;
             }
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             SpawnMissile();
             if (user.PlayerHasActiveSynergy("Magic-er Missile"))

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Dungeonator;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using System.Collections;
 
 namespace NevernamedsItems
@@ -27,7 +27,7 @@ namespace NevernamedsItems
             item.quality = ItemQuality.C;
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             //ETGModConsole.Log("Item was used");
 
@@ -124,12 +124,6 @@ namespace NevernamedsItems
         private IEnumerator DoReward(PlayerController user, Vector2 positionToSpawn, int pickupObject)
         {
             float curseAmount = 1;
-            if (pickupObject == SpecialAPIsStuffIDs.CrownOfTheJammedID)
-            {
-                GameObject superReaper = PrefabDatabase.Instance.SuperReaper;
-                Vector2 vector = positionToSpawn - new Vector2(5, 3);
-                Instantiate(superReaper, vector.ToVector3ZUp(0f), Quaternion.identity);
-            }
             if (pickupObject == 442)
             {
                 curseAmount = 3;
@@ -202,8 +196,7 @@ namespace NevernamedsItems
             MulticompanionItem multiCompanion = item.GetComponent<MulticompanionItem>();
             BankMaskItem clownCompanion = item.GetComponent<BankMaskItem>();
             PlayerOrbitalItem orbitalItem = item.GetComponent<PlayerOrbitalItem>();
-            IounStoneOrbitalItem GuonStone = item.GetComponent<IounStoneOrbitalItem>();
-            if ((companion != null) || (multiCompanion != null) || (clownCompanion != null) || (orbitalItem != null && GuonStone == null) || OverridePossibleItems.Contains(item.PickupObjectId))
+            if ((companion != null) || (multiCompanion != null) || (clownCompanion != null) || (orbitalItem != null && !item.HasTag("guon_stone")) || item.HasTag("non_companion_living_item"))
             {
                 if (!BannedItems.Contains(item.PickupObjectId))
                 {
@@ -257,7 +250,6 @@ namespace NevernamedsItems
             263, //Orange Guon Stone
             262, // White Guon Stone
         };
-        public static List<int> OverridePossibleItems;
         public override bool CanBeUsed(PlayerController user)
         {
             return true;

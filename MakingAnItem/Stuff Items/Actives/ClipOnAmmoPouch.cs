@@ -27,7 +27,7 @@ namespace NevernamedsItems
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
 
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             Gun instanceGun = user.CurrentGun;
             instanceGun.SetBaseMaxAmmo(Mathf.CeilToInt(instanceGun.GetBaseMaxAmmo() * 1.5f));

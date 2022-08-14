@@ -23,7 +23,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.C;
         }
         private int currentItems, lastItems;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {
@@ -101,7 +101,7 @@ namespace NevernamedsItems
             GameManager.Instance.OnNewLevelFullyLoaded -= this.OnNewFloor;
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             GameManager.Instance.OnNewLevelFullyLoaded -= this.OnNewFloor;
             base.OnDestroy();

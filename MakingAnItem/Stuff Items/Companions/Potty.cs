@@ -31,7 +31,7 @@ namespace NevernamedsItems
             this.CompanionGuid = Potty.guid;
             base.Pickup(player);
         }
-        protected override void Update()
+        public override void Update()
         {
             if (this.ExtantCompanion && this.ExtantCompanion.GetComponent<PottyCompanionBehaviour>() && Owner)
             {
@@ -378,7 +378,7 @@ namespace NevernamedsItems
                 RadialTimer = 0.25f;
             }
 
-            protected override void OnDestroy()
+            public override void OnDestroy()
             {
                 if (Owner)
                 {

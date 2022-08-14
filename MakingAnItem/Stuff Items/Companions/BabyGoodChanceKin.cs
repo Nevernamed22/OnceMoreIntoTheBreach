@@ -55,7 +55,7 @@ namespace NevernamedsItems
                 this.Owner = this.m_owner;
                 Owner.OnReceivedDamage += OnDamaged;
             }
-            protected override void OnDestroy()
+            public override void OnDestroy()
             {
                 if (this.Owner)
                 {

@@ -173,7 +173,7 @@ namespace NevernamedsItems
             }
             base.OnPostDroppedByPlayer(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (extantCompanion)
             {
@@ -232,7 +232,7 @@ namespace NevernamedsItems
                 Owner.OnPitfall += this.OnPitfall;
 
             }
-            protected override void OnDestroy()
+            public override void OnDestroy()
             {
                 if (Owner)
                 {

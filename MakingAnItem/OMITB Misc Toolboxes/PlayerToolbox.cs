@@ -16,7 +16,7 @@ namespace NevernamedsItems
         public static void Init()
         {
             playerStartHook = new Hook(
-                typeof(PlayerController).GetMethod("orig_Start", BindingFlags.Public | BindingFlags.Instance),
+                typeof(PlayerController).GetMethod("Start", BindingFlags.Public | BindingFlags.Instance),
                 typeof(PlayerToolsSetup).GetMethod("DoSetup"));
         }
         public static void DoSetup(Action<PlayerController> action, PlayerController player)

@@ -24,6 +24,7 @@ namespace NevernamedsItems
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.D;
             ArmourBandageID = item.PickupObjectId;
+            item.ArmorToGainOnInitialPickup = 1;
         }
         public static int ArmourBandageID;
         public override void Pickup(PlayerController player)
@@ -36,7 +37,7 @@ namespace NevernamedsItems
             player.LostArmor = (Action)Delegate.Remove(player.LostArmor, new Action(this.OnLostArmor));
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

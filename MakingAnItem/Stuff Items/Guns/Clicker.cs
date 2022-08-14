@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 using Dungeonator;
 
@@ -71,6 +71,7 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             ID = gun.PickupObjectId;
+            gun.SetTag("arrow_bolt_weapon");
 
             clickerCollection = SpriteBuilder.ConstructCollection(gun.gameObject, "Clicker_Collection");
             crosshairSpriteID = SpriteBuilder.AddSpriteToCollection("NevernamedsItems/Resources/MiscVFX/clicker_crosshair", clickerCollection);

@@ -176,7 +176,7 @@ namespace NevernamedsItems
             player.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

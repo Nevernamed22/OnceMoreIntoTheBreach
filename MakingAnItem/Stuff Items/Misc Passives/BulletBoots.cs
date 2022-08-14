@@ -42,7 +42,7 @@ namespace NevernamedsItems
         public static int BulletBootsID;
         bool onCooldown = false;
         float cooldownSeconds = 0.25f;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner != null && Owner.IsInCombat)
             {

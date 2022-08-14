@@ -116,7 +116,7 @@ namespace NevernamedsItems
             player.PostProcessBeam -= this.onFiredBeam;
             return result;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {
@@ -127,7 +127,7 @@ namespace NevernamedsItems
         }
         private int currentItems, lastItems;
         private int currentGuns, lastGuns;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {

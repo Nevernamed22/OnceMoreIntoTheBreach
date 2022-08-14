@@ -131,11 +131,9 @@ namespace NevernamedsItems
 
             return prefab;
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             Vector2 position = user.PositionInDistanceFromAimDir(1);
-            //Vector2 pos2 = position.GetCenteredLookingPosForObj(TackShooterObject.GetComponent<SpeculativeRigidbody>());
-            //LootEngine.DoDefaultItemPoof(position);
             GameObject tackShooter = UnityEngine.Object.Instantiate<GameObject>(TackShooterObject, position, Quaternion.identity);
             tackShooter.GetComponent<tk2dSprite>().PlaceAtLocalPositionByAnchor(position, tk2dBaseSprite.Anchor.MiddleCenter);
             TackShooterBehaviour shooterComp = tackShooter.GetComponent<TackShooterBehaviour>();

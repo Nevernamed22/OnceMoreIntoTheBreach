@@ -86,7 +86,7 @@ namespace NevernamedsItems
             gun.SetupUnlockOnCustomMaximum(CustomTrackedMaximums.MAX_HEART_CONTAINERS_EVER, 7, DungeonPrerequisite.PrerequisiteOperation.GREATER_THAN);
         }
         public static int OrgunID;
-        private void Update()
+        public override void Update()
         {
             if (gun && gun.CurrentOwner && gun.CurrentOwner is PlayerController)
             {

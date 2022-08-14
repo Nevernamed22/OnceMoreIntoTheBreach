@@ -46,7 +46,7 @@ namespace NevernamedsItems
             EasyPlaceableObjects.IceBomb,
             //EasyPlaceableObjects.Brazier,
         };
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             try
             {

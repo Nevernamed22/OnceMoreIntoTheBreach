@@ -78,7 +78,7 @@ namespace NevernamedsItems
                 ETGModConsole.Log("Flight was given.");
             }
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             GameManager.Instance.OnNewLevelFullyLoaded -= this.OnNewFloor;
             Owner.OnRollStarted -= this.onDodgeRoll;

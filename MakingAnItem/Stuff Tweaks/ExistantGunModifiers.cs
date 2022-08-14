@@ -115,7 +115,7 @@ namespace NevernamedsItems
     }
     public class FaceMelterModifiers : GunBehaviour
     {
-        private void Update()
+        public override void Update()
         {
             if (movementMod == null)
             {
@@ -168,10 +168,6 @@ namespace NevernamedsItems
                     }
                 }
             }
-        }
-        private void OnDestroy()
-        {
-
         }
         public override void OnDropped()
         {
@@ -347,7 +343,7 @@ namespace NevernamedsItems
                 }
             }
         }
-        private void Update()
+        public override void Update()
         {
             if (this && this.gun)
             {
@@ -366,7 +362,7 @@ namespace NevernamedsItems
             }
         }
         private PlayerController lastPlayerOwner;
-        private void OnDestroy()
+        public override void OnDestroy()
         {
             if (this.gun.GunPlayerOwner() || lastPlayerOwner != null)
             {
@@ -387,7 +383,7 @@ namespace NevernamedsItems
             base.OnReloadPressed(player, gun, manualReload);
         }
         bool isReloading = false;
-        private void Update()
+        public override void Update()
         {
             if (!gun.IsReloading && isReloading) isReloading = false;
         }

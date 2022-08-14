@@ -54,7 +54,7 @@ namespace NevernamedsItems
                 b.projectile.baseData.damage *= (1 + (0.05f * timesHit));
             }
         }
-        protected override void Update()
+        public override void Update()
         {
             if (Owner && Owner.CurrentRoom != null)
             {
@@ -66,7 +66,7 @@ namespace NevernamedsItems
             }
             base.Update();
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

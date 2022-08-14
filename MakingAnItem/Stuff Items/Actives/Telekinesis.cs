@@ -26,7 +26,7 @@ namespace NevernamedsItems
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
 
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             Vector2 vector = user.CenterPosition;
             Vector2 normalized = (user.unadjustedAimPoint.XY() - vector).normalized;

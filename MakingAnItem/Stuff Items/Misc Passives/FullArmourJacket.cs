@@ -38,11 +38,12 @@ namespace NevernamedsItems
             //Adds the actual passive effect to the item            
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.B;
+            item.ArmorToGainOnInitialPickup = 1;
             FullArmourJacketID = item.PickupObjectId;
         }
         public static int FullArmourJacketID;
         private float currentArmour, lastArmour;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {
@@ -77,11 +78,6 @@ namespace NevernamedsItems
         }
         private void AddStat(PlayerStats.StatType statType, float amount, StatModifier.ModifyMethod method = StatModifier.ModifyMethod.ADDITIVE)
         {
-            /*foreach (var m in passiveStatModifiers)
-            {
-                if (m.statToBoost == statType) return; //don't add duplicates
-            }*/
-
             StatModifier modifier = new StatModifier
             {
                 amount = amount,
@@ -107,23 +103,16 @@ namespace NevernamedsItems
         }
         public override void Pickup(PlayerController player)
         {
-            //player.SetIsFlying(true, "shade", true, false);
-            bool hasntAlreadyBeenCollected = !this.m_pickedUpThisRun;
-            if (hasntAlreadyBeenCollected)
-            {
-                LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(120).gameObject, player);
-            }
+
             base.Pickup(player);
         }
         public override DebrisObject Drop(PlayerController player)
         {
-            //player.SetIsFlying(false, "shade", true, false);
             DebrisObject debrisObject = base.Drop(player);
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
-            //Owner.SetIsFlying(false, "shade", true, false);
             base.OnDestroy();
         }
     }

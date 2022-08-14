@@ -32,7 +32,7 @@ namespace NevernamedsItems
         {
             return true;
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             try
             {

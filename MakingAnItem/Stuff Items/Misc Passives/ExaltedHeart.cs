@@ -42,7 +42,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.EXCLUDED;
 
             ExaltedHeartID = item.PickupObjectId;
-            item.AddAsChamberGunMastery("OnceMoreIntoTheBreach", 8);
+            //item.AddAsChamberGunMastery("OnceMoreIntoTheBreach", 8);
 
         }
     }

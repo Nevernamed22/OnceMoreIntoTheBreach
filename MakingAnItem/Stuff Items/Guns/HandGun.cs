@@ -744,7 +744,7 @@ namespace NevernamedsItems
             player.healthHaver.ModifyDamage -= this.modifyDamage;
             base.OnPostDroppedByPlayer(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (gun.CurrentOwner && gun.CurrentOwner is PlayerController)
             {

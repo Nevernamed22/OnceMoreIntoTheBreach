@@ -16,7 +16,7 @@ namespace NevernamedsItems
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Uzi SPINE-mm", "uzispinemm");
-            Game.Items.Rename("outdated_gun_mods:uzi_spine-mm", "nn:uzi_spine_mm");
+            Game.Items.Rename("outdated_gun_mods:uzi_spinemm", "nn:uzi_spine_mm");
             var behav = gun.gameObject.AddComponent<UziSpineMM>();
             gun.SetShortDescription("Boned");
             gun.SetLongDescription("The favoured sidearm of the dark sorcerer Nuign, and his first foray into the apocryphal field of necro-gunsmithing.");

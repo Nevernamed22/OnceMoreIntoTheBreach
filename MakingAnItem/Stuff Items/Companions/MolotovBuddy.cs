@@ -28,7 +28,7 @@ namespace NevernamedsItems
         float respawnTimer2 = 0;
         GameObject extantBud = null;
         GameObject extantBud2 = null;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {

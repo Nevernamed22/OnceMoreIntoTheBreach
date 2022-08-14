@@ -46,7 +46,7 @@ namespace NevernamedsItems
             HoleProjectile.SetProjectileSpriteRight("portablehole_projectile", 17, 17, false, tk2dBaseSprite.Anchor.MiddleCenter, 17, 17);
         }
         private static Projectile HoleProjectile;
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             GameObject gameObject = SpawnManager.SpawnProjectile(HoleProjectile.gameObject, user.sprite.WorldCenter, Quaternion.Euler(0f, 0f, (user.CurrentGun == null) ? 0f : user.CurrentGun.CurrentAngle), true);
             Projectile component = gameObject.GetComponent<Projectile>();

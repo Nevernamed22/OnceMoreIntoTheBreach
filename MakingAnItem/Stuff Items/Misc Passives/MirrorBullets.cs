@@ -67,7 +67,7 @@ namespace NevernamedsItems
             player.PostProcessBeam -= this.onFiredBeam;
             return result;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

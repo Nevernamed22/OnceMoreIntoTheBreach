@@ -75,7 +75,7 @@ namespace NevernamedsItems
             player.OnRoomClearEvent -= this.HandleChestSpawnSynergy;
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {
@@ -96,7 +96,7 @@ namespace NevernamedsItems
             }
 
         }
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {

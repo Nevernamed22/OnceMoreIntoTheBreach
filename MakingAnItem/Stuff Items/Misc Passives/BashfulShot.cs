@@ -46,7 +46,7 @@ namespace NevernamedsItems
         public static int BashfulShotID;
         private int currentItems, lastItems;
         private int currentGuns, lastGuns;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {

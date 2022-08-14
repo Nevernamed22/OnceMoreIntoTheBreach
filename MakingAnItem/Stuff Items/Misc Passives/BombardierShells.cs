@@ -148,7 +148,7 @@ namespace NevernamedsItems
             player.PostProcessBeamChanceTick += this.PostProcessBeamTick;
 
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

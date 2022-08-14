@@ -58,9 +58,12 @@ namespace NevernamedsItems
 
         protected override void Update()
         {
-            if (!this.gun.RuntimeModuleData[this.gun.DefaultModule].onCooldown)
+            if (this.gun != null && this.gun.DefaultModule != null && this.gun.RuntimeModuleData[this.gun.DefaultModule] != null)
             {
-                this.gun.RuntimeModuleData[this.gun.DefaultModule].onCooldown = true;
+                if (!this.gun.RuntimeModuleData[this.gun.DefaultModule].onCooldown)
+                {
+                    this.gun.RuntimeModuleData[this.gun.DefaultModule].onCooldown = true;
+                }
             }
             base.Update();
         }
@@ -118,7 +121,7 @@ namespace NevernamedsItems
             HandleSpawnLoot(enemy);
             var CurrentRoom = enemy.transform.position.GetAbsoluteRoom();
             UnityEngine.Object.Instantiate<GameObject>(EasyVFXDatabase.GundetaleSpareVFX, (enemy.sprite.WorldTopCenter + new Vector2(0, 0.25f)), Quaternion.identity);
-           if (enemy.GetComponent<KillOnRoomUnseal>())
+            if (enemy.GetComponent<KillOnRoomUnseal>())
             {
                 UnityEngine.Object.Destroy(enemy.GetComponent<KillOnRoomUnseal>());
             }
@@ -161,7 +164,7 @@ namespace NevernamedsItems
             player.OnRolledIntoEnemy -= this.onDodgeRolledIntoEnemy;
             base.OnPostDroppedByPlayer(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (gun.GunPlayerOwner())
             {

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using UnityEngine;
+using Alexandria;
+using CustomCharacters;
 
 namespace NevernamedsItems
 {
@@ -25,7 +27,8 @@ namespace NevernamedsItems
         public delegate TResult FuncC<T, T2, T3, T4, T5, TResult>(T arg, T2 arg2, T3 arg3, T4 arg4, T5 arg5);
         private static string GetBaseAnimationNameHook(FuncC<PlayerController, Vector2, float, bool, bool, string> orig, PlayerController self, Vector2 v, float gunAngle, bool invertThresholds = false, bool forceTwoHands = false)
         {
-            if (self.characterIdentity == (PlayableCharacters)274131)
+            
+            if (self.characterIdentity == ETGModCompatibility.ExtendEnum<PlayableCharacters>(Initialisation.GUID, "Shade"))
             {
 
 

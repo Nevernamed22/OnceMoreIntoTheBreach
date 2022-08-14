@@ -25,7 +25,7 @@ namespace NevernamedsItems
             item.quality = ItemQuality.D;
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             for (int i = 0; i < StaticReferenceManager.AllProjectiles.Count; i++)
             {

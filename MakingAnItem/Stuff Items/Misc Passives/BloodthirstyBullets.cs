@@ -24,7 +24,7 @@ namespace NevernamedsItems
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
 
-            
+
 
             item.quality = PickupObject.ItemQuality.B;
 
@@ -67,18 +67,21 @@ namespace NevernamedsItems
             {
                 PostProcessProjectile(sourceBeam.projectile, 1);
             }
-        }  
+        }
         public override DebrisObject Drop(PlayerController player)
-       {
+        {
             DebrisObject debrisObject = base.Drop(player);
             player.PostProcessProjectile -= this.PostProcessProjectile;
             player.PostProcessBeam -= this.PostProcessBeam;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
-            Owner.PostProcessProjectile -= this.PostProcessProjectile;
-            Owner.PostProcessBeam -= this.PostProcessBeam;
+            if (Owner)
+            {
+                Owner.PostProcessProjectile -= this.PostProcessProjectile;
+                Owner.PostProcessBeam -= this.PostProcessBeam;
+            }
             base.OnDestroy();
         }
 

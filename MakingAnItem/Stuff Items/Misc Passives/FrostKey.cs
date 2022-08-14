@@ -42,7 +42,7 @@ namespace NevernamedsItems
         }
         private float currentKeys, lastKeys;
         private float currentItems, lastItems;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {

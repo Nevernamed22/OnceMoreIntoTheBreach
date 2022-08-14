@@ -138,7 +138,7 @@ namespace NevernamedsItems
                         if (AIActor.GetAbsoluteParentRoom().area.PrototypeRoomCategory == PrototypeDungeonRoom.RoomCategory.BOSS && AIActor.GetAbsoluteParentRoom().RoomContainsMineFlayer()) proc = 0.2f;
                         if (UnityEngine.Random.value <= proc)
                         {
-                            List<string> ChaosPalette = GenerateChaosPalette();
+                            List<string> ChaosPalette = MagickeCauldron.GenerateChaosPalette();
                             string guid = BraveUtility.RandomElement(ChaosPalette);
                             var enemyPrefab = EnemyDatabase.GetOrLoadByGuid(guid);
                             AIActor aiactor = AIActor.Spawn(enemyPrefab, AIActor.gameActor.CenterPosition.ToIntVector2(VectorConversions.Floor), AIActor.GetAbsoluteParentRoom(), true, AIActor.AwakenAnimationType.Default, true);
@@ -358,15 +358,7 @@ namespace NevernamedsItems
                 }
             }
         }
-        public static List<string> GenerateChaosPalette()
-        {
-            List<string> ChaosPalette = new List<string>();
-            ChaosPalette.AddRange(MagickeCauldron.chaosEnemyPalette);
-            if (ModInstallFlags.ExpandTheGungeonInstalled) ChaosPalette.AddRange(MagickeCauldron.ExpandTheGungeonChaosPalette);
-            if (ModInstallFlags.FrostAndGunfireInstalled) ChaosPalette.AddRange(MagickeCauldron.FrostAndGunfireChaosPalette);
-            if (ModInstallFlags.PlanetsideOfGunymededInstalled) ChaosPalette.AddRange(MagickeCauldron.PlanetsideOfGunymedeChaosPalette);
-            return ChaosPalette;
-        }
+    
         private static string FetchFailureType()
         {
             string failureMessage = "none";

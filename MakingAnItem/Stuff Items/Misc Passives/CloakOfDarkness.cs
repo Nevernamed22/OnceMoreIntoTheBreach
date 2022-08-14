@@ -63,7 +63,7 @@ namespace NevernamedsItems
         }
         private float particleCounter;
 
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {
@@ -135,7 +135,7 @@ namespace NevernamedsItems
             ETGMod.AIActor.OnPostStart -= AIActorMods;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

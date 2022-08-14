@@ -119,7 +119,7 @@ namespace NevernamedsItems
                 }
             }
         }
-        protected override void Update()
+        public override void Update()
         {
             if ((enemiesKilledSinceShieldReset >= 15) && !shieldCharged) shieldCharged = true;
 
@@ -154,7 +154,7 @@ namespace NevernamedsItems
                 extantOverhead = null;
             }
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (extantOverhead)
             {

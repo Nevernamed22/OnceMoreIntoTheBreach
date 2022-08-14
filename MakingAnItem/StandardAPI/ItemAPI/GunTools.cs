@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Linq;
 
 namespace ItemAPI
 {
@@ -112,7 +113,7 @@ namespace ItemAPI
         }
 
         public static tk2dSpriteDefinition SetupDefinitionForProjectileSprite(string name, int id, int pixelWidth, int pixelHeight, bool lightened = true, int? overrideColliderPixelWidth = null, int? overrideColliderPixelHeight = null,
-            int? overrideColliderOffsetX = null, int? overrideColliderOffsetY = null, Projectile overrideProjectileToCopyFrom = null)
+           int? overrideColliderOffsetX = null, int? overrideColliderOffsetY = null, Projectile overrideProjectileToCopyFrom = null)
         {
             if (overrideColliderPixelWidth == null)
             {
@@ -153,7 +154,12 @@ namespace ItemAPI
             def.colliderVertices[0] = new Vector3(colliderOffsetX, colliderOffsetY, 0f);
             def.colliderVertices[1] = new Vector3(colliderWidth / 2, colliderHeight / 2);
             def.name = name;
+
+            def.materialInst.mainTexture = ETGMod.Databases.Items.ProjectileCollection.inst.spriteDefinitions[id].materialInst.mainTexture;
+            def.uvs = ETGMod.Databases.Items.ProjectileCollection.inst.spriteDefinitions[id].uvs.ToArray();
+
             ETGMod.Databases.Items.ProjectileCollection.inst.spriteDefinitions[id] = def;
+
             return def;
         }
 

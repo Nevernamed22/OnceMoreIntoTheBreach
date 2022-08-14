@@ -398,7 +398,7 @@ namespace NevernamedsItems
             player.OnNewFloorLoaded -= this.OnNewFloor;
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {
@@ -479,7 +479,7 @@ namespace NevernamedsItems
             }
         }
         private int currentItems, lastItems;
-        protected override void Update()
+        public override void Update()
         {
             if (!Dungeon.IsGenerating)
             {
@@ -1661,6 +1661,51 @@ namespace NevernamedsItems
                 ETGModConsole.Log(e.StackTrace);
             }
         }
+        public void LOLCompAnimSetter(AIAnimator animator, CompanionBuilder.AnimationType type, int fps, string path)
+        {
+            string id = "idle";
+            if (type == CompanionBuilder.AnimationType.Move) id = "move";
+            animator.AdvAddAnimation(id,
+                   DirectionalAnimation.DirectionType.Single,
+                   type,
+                   new List<AnimationUtilityExtensions.DirectionalAnimationData>()
+                   {
+                        new AnimationUtilityExtensions.DirectionalAnimationData()
+                        {
+                            subAnimationName = id,
+                            wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop,
+                            fps = fps,
+                            pathDirectory = path,
+                        },
+                   }
+                   );          
+        }
+        public void LOLCompTwoWayAnimSetter(AIAnimator animator, CompanionBuilder.AnimationType type, int fps, string leftpath, string rightpath)
+        {
+            string id = "idle";
+            if (type == CompanionBuilder.AnimationType.Move) id = "move";
+            animator.AdvAddAnimation(id,
+                   DirectionalAnimation.DirectionType.TwoWayHorizontal,
+                   type,
+                   new List<AnimationUtilityExtensions.DirectionalAnimationData>()
+                   {
+                        new AnimationUtilityExtensions.DirectionalAnimationData()
+                        {
+                            subAnimationName = $"{id}_right",
+                            wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop,
+                            fps = fps,
+                            pathDirectory = rightpath,
+                        },
+                        new AnimationUtilityExtensions.DirectionalAnimationData()
+                        {
+                            subAnimationName = $"{id}_left",
+                            wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop,
+                            fps = fps,
+                            pathDirectory = leftpath,
+                        }
+                   }
+                   );
+        }
     }
 
     public class LeadOfLifeCompanionStats
@@ -2110,7 +2155,7 @@ namespace NevernamedsItems
                 if (bombsprite) bombsprite.PlaceAtPositionByAnchor(base.sprite.WorldCenter, tk2dBaseSprite.Anchor.MiddleCenter);
             }
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

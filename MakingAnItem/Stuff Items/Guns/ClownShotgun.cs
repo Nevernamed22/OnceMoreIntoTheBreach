@@ -74,7 +74,8 @@ namespace NevernamedsItems
             ClownShotgunID = gun.PickupObjectId;
         }
         public static int ClownShotgunID;
-        private void Update()
+       
+        public void Update()
         {
             if (gun && gun.GunPlayerOwner())
             {

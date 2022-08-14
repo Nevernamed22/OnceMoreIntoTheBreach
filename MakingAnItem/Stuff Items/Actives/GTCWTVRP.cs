@@ -49,7 +49,7 @@ namespace NevernamedsItems
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
 
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             if (GameManager.Instance.Dungeon.IsGlitchDungeon)
             {

@@ -68,7 +68,7 @@ namespace NevernamedsItems
             StartCoroutine(HandleDeathTimer());        
         }
         public bool shouldBeKilledNextOpportunity;
-        protected override void Update()
+        public override void Update()
         {
             if (!Dungeon.IsGenerating && Owner && shouldBeKilledNextOpportunity) InstaKillGuon();
             base.Update();

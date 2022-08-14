@@ -6,6 +6,7 @@ using Gungeon;
 using ItemAPI;
 using SaveAPI;
 using UnityEngine;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -28,9 +29,36 @@ namespace NevernamedsItems
             companionItem.SetupUnlockOnCustomFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_OFFICE, true);
 
             ChestToolbox.OnChestPostSpawn += ScrollOfExactKnowledge.OnChestSpawned;
+            CustomActions.OnRewardPedestalSpawned += OnPedestalSpawned;
         }
         public static int ScrollOfExactKnowledgeID;
 
+        public static void OnPedestalSpawned(RewardPedestal target) 
+        {
+            if (GameManager.Instance.AnyPlayerHasPickupID(ScrollOfExactKnowledge.ScrollOfExactKnowledgeID))
+            {
+                if (GameManager.Instance.PrimaryPlayer != null)
+                {
+                    foreach (PassiveItem item in GameManager.Instance.PrimaryPlayer.passiveItems)
+                    {
+                        if (item.GetComponent<ScrollOfExactKnowledge>() != null)
+                        {
+                            item.GetComponent<ScrollOfExactKnowledge>().ReactToSpawnedPedestal(target);
+                        }
+                    }
+                }
+                if (GameManager.Instance.SecondaryPlayer != null)
+                {
+                    foreach (PassiveItem item in GameManager.Instance.SecondaryPlayer.passiveItems)
+                    {
+                        if (item.GetComponent<ScrollOfExactKnowledge>() != null)
+                        {
+                            item.GetComponent<ScrollOfExactKnowledge>().ReactToSpawnedPedestal(target);
+                        }
+                    }
+                }
+            }
+        }
         public static void OnChestSpawned(Chest chest)
         {
             if (!Dungeon.IsGenerating)
@@ -110,7 +138,7 @@ namespace NevernamedsItems
                 companionController.aiActor.ActorShadowOffset = new Vector3(0, -0.5f);
                 ScrollOfExactKnowledge.prefab.AddAnimation("idle_right", "NevernamedsItems/Resources/Companions/ScrollOfExactKnowledge/scrollofexactknowledge_idleright", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.TwoWayHorizontal, DirectionalAnimation.FlipType.None);
                 ScrollOfExactKnowledge.prefab.AddAnimation("idle_left", "NevernamedsItems/Resources/Companions/ScrollOfExactKnowledge/scrollofexactknowledge_idleleft", 7, CompanionBuilder.AnimationType.Idle, DirectionalAnimation.DirectionType.TwoWayHorizontal, DirectionalAnimation.FlipType.None);
-                companionController.aiAnimator.GetDirectionalAnimation("idle").Prefix = "idle";
+
                 BehaviorSpeculator component = ScrollOfExactKnowledge.prefab.GetComponent<BehaviorSpeculator>();
                 component.MovementBehaviors.Add(new CompanionFollowPlayerBehavior
                 {

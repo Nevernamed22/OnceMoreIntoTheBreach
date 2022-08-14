@@ -41,7 +41,7 @@ namespace NevernamedsItems
             Destroy(obj.gameObject, 1f);
             return obj;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

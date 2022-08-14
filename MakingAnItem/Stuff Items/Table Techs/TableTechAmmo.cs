@@ -58,12 +58,12 @@ namespace NevernamedsItems
             player.OnTableFlipCompleted = (Action<FlippableCover>)Delegate.Remove(player.OnTableFlipCompleted, new Action<FlippableCover>(this.DoEffectCompleted));
             return result;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {
                 Owner.OnTableFlipped -= SpeedEffect;
-                Owner.OnTableFlipCompleted -= DoEffectCompleted;
+                Owner.OnTableFlipCompleted -= TableFlipCompleted;
             }
             base.OnDestroy();
         }
@@ -76,11 +76,11 @@ namespace NevernamedsItems
             Owner.CurrentGun.GainAmmo(ammoToGive);
         }
         public bool TableFlockingYes = true;
-        private void DoEffectCompleted(FlippableCover obj)
+        private void TableFlipCompleted(FlippableCover obj)
         {
-            this.HandleTableFlocking(obj);
+            this.DoTableFlocking(obj);
         }
-        private void HandleTableFlocking(FlippableCover table)
+        private void DoTableFlocking(FlippableCover table)
         {
             if (this.TableFlockingYes)
             {

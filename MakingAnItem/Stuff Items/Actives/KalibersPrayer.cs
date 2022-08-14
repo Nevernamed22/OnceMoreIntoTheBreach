@@ -32,7 +32,7 @@ namespace NevernamedsItems
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.GUNCULTIST_QUEST_REWARDED, true);
         }
 
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             float incorporealitySeconds = 2;
             if (user.PlayerHasActiveSynergy("Gunsignor") && UnityEngine.Random.value <= 0.1) incorporealitySeconds = 8f;

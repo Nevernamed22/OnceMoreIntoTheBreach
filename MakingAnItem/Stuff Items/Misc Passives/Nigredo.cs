@@ -25,7 +25,7 @@ namespace NevernamedsItems
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
         }
         private float lastCurse;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {

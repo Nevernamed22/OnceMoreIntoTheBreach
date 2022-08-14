@@ -17,7 +17,7 @@ namespace NevernamedsItems
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Bio-Transtater 2100", "biotranstater2100");
-            Game.Items.Rename("outdated_gun_mods:bio-transtater_2100", "nn:bio_transtater_2100");
+            Game.Items.Rename("outdated_gun_mods:biotranstater_2100", "nn:bio_transtater_2100");
             var behav = gun.gameObject.AddComponent<BioTranstater2100>();
             behav.overrideNormalFireAudio = "Play_WPN_dl45heavylaser_shot_01";
             behav.preventNormalFireAudio = true;

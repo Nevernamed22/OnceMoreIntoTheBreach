@@ -25,7 +25,7 @@ namespace NevernamedsItems
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
         }
         private float timer;
-        protected override void Update()
+        public override void Update()
         {
             if (Owner)
             {
@@ -53,7 +53,7 @@ namespace NevernamedsItems
             GameManager.Instance.OnNewLevelFullyLoaded -= this.NewFloor;
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             GameManager.Instance.OnNewLevelFullyLoaded -= this.NewFloor;
             base.OnDestroy();

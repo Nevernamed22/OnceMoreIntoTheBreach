@@ -67,7 +67,7 @@ namespace NevernamedsItems
             player.OnRolledIntoEnemy -= this.onDodgeRolledIntoEnemy;
             return result;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

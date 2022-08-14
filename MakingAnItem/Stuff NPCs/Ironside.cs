@@ -52,7 +52,7 @@ namespace NevernamedsItems
                 162,
                 163,
                 450, //Armor Synthesizer
-                147, //Armor of Thorns
+                457, //Armor of Thorns
                 64, //Potion of Lead Skin
                 65, //Knife Shield
                 380, //Betrayers Shield
@@ -147,6 +147,7 @@ namespace NevernamedsItems
             PrototypeDungeonRoom Mod_Shop_Room = RoomFactory.BuildFromResource("NevernamedsItems/Resources/EmbeddedRooms/IronsideRoom.room").room;
             ItsDaFuckinShopApi.RegisterShopRoom(ironsideObj, Mod_Shop_Room, new UnityEngine.Vector2(7f, 9));
         }
+        
         public static bool IronsideBuy(PlayerController player, PickupObject item, int idfk)
         {
 
@@ -154,15 +155,30 @@ namespace NevernamedsItems
         }
         public static int IronsideCustomPrice(CustomShopController shop, CustomShopItemController itemCont, PickupObject item)
         {
-            if (item.quality == PickupObject.ItemQuality.A || item.quality == PickupObject.ItemQuality.S)
+            int price = 1;
+            switch (item.quality)
             {
-                return 4;
+                case PickupObject.ItemQuality.S:
+                    price = 4;
+                    break;
+                case PickupObject.ItemQuality.A:
+                    price = 3;
+                    break;
+                case PickupObject.ItemQuality.B:
+                    price = 2;
+                    break;
+                case PickupObject.ItemQuality.C:
+                    price = 2;
+                    break;
             }
-            else if (item.quality == PickupObject.ItemQuality.B || item.quality == PickupObject.ItemQuality.C)
-            {
-                return 3;
-            }
-            else return 2;
+            if (item is PassiveItem && (item as PassiveItem).ArmorToGainOnInitialPickup > 0) price += (item as PassiveItem).ArmorToGainOnInitialPickup;
+            else if (item is Gun && (item as Gun).ArmorToGainOnPickup > 0) price += (item as Gun).ArmorToGainOnPickup;
+
+            List<int> AdditionalArmorIDs = new List<int>() { ArmouredArmour.ArmouredArmourID };
+
+            if (AdditionalArmorIDs.Contains(item.PickupObjectId)) price++;
+            price = Mathf.Min(price, 5);
+            return price;
         }
         public static int IronsideCustomRemoveCurrency(CustomShopController shop, PlayerController player, int cost)
         {
