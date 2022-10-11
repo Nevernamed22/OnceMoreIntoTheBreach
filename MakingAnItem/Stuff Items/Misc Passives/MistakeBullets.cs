@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI ;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -23,6 +24,7 @@ namespace NevernamedsItems
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.KnockbackMultiplier, -3, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.RateOfFire, 1.2f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ReloadSpeed, 0.7f, StatModifier.ModifyMethod.MULTIPLICATIVE);
+            item.SetTag("bullet_modifier");
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D;

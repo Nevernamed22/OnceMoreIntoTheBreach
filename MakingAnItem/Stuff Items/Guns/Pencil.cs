@@ -6,7 +6,9 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
+using Alexandria.EnemyAPI;
 
 namespace NevernamedsItems
 {

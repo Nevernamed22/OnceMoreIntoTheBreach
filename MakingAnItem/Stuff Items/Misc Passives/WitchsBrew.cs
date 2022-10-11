@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Alexandria.ItemAPI;
 using UnityEngine;
-using ItemAPI;
 using SaveAPI;
 using System.Collections;
+using Alexandria.EnemyAPI;
 
 namespace NevernamedsItems
 {
@@ -73,7 +73,7 @@ namespace NevernamedsItems
                     UnityEngine.Object.Destroy(aiactor.gameObject.GetComponent<SpawnEnemyOnDeath>());
                 }
             }
-            else if (EasyEnemyTypeLists.VanillaMimics.Contains(aiactor.EnemyGuid))
+            else if (aiactor.HasTag("mimic"))
             {
                 if (AIActor.AdditionalSafeItemDrops != null && aiactor.AdditionalSafeItemDrops != null)
                 {

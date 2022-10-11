@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Dungeonator;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 using UnityEngine;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -156,7 +157,7 @@ namespace NevernamedsItems
             {
                 if (!bullet.TreatedAsNonProjectileForChallenge)
                 {
-                    if (bullet.gameObject.GetComponent<DroneBulletComponent>() == null)
+                    if (bullet.gameObject.GetComponent<DroneBulletComponent>() == null && bullet.gameObject.GetComponent<BulletsWithGuns.BulletFromBulletWithGun>() == null)
                     {
                         TriggerShootBullet(bullet.baseData.range, bullet.baseData.speed);
                     }

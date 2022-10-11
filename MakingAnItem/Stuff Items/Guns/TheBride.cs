@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -74,7 +75,7 @@ namespace NevernamedsItems
             gun.gunClass = GunClass.SHOTGUN;
             //BULLET STATS
             gun.quality = PickupObject.ItemQuality.B;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             gun.Volley.UsesShotgunStyleVelocityRandomizer = true;
 

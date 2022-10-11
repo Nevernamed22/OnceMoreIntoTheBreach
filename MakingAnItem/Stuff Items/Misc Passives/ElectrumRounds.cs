@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
@@ -25,6 +25,7 @@ namespace NevernamedsItems
             string longDesc = "Fast, penetrative bullets made of gold and silver alloy. Highly conductive, it maintains a powerful electric bond with it's home holster.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.S;
+            item.SetTag("bullet_modifier");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ProjectileSpeed, 1.7f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalShotPiercing, 1, StatModifier.ModifyMethod.ADDITIVE);
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -17,12 +17,11 @@ namespace NevernamedsItems
             GameObject obj = new GameObject(itemName);
             var item = obj.AddComponent<BulletBullets>();
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
             string shortDesc = "Score!";
-            string longDesc = "When your bullets pass through enemy bullets, a single bullet will be reloaded into your clip."+ "\n\nStrategic aiming can allow a gungeoneer to avoid the irritation of reloading.";
-            
+            string longDesc = "When your bullets pass through enemy bullets, a single bullet will be reloaded into your clip."+ "\n\nStrategic aiming can allow a gungeoneer to avoid the irritation of reloading.";       
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.D;
+            item.SetTag("bullet_modifier");
         }       
         private Projectile lastProjectile = null;
         public override void DoIntersectionEffect(Projectile playerBullet, Projectile enemyBullet)

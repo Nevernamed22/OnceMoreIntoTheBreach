@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -50,9 +50,9 @@ namespace NevernamedsItems
             orAddComponent.penetratesBreakables = true;
             orAddComponent.penetration = 5;
 
+            gun.SetTag("kalashnikov");
             gun.quality = PickupObject.ItemQuality.C;
-            gun.encounterTrackable.EncounterGuid = "this is the Kalashnirang";
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             KalashnirangID = gun.PickupObjectId;
         }

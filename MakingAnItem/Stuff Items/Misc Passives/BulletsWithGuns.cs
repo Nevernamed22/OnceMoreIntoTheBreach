@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +22,9 @@ namespace NevernamedsItems
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
 
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ProjectileSpeed, 0.6f, StatModifier.ModifyMethod.MULTIPLICATIVE);
+            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 0.85f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = PickupObject.ItemQuality.B;
+            item.SetTag("bullet_modifier");
 
             Projectile projectile = UnityEngine.Object.Instantiate(((Gun)ETGMod.Databases.Items[86]).DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);

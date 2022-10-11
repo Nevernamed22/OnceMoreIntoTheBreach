@@ -1,4 +1,5 @@
-﻿using Dungeonator;
+﻿using Alexandria.Misc;
+using Dungeonator;
 using MonoMod.RuntimeDetour;
 using SaveAPI;
 using System;
@@ -161,7 +162,7 @@ namespace NevernamedsItems
         {
             //ETGModConsole.Log("OnDamaged ran");
             //ETGModConsole.Log("Initial Damage: "+args.InitialDamage);
-            if (args.InitialDamage > 0 && m_attachedPlayer.ModdedCharacterIdentity() == ModdedCharacterID.Shade)
+            if (args.InitialDamage > 0 && m_attachedPlayer.characterIdentity == OMITBChars.Shade)
             {
                 GameManager.Instance.StartCoroutine(PostDamageCheck(m_attachedPlayer));
             }
@@ -230,7 +231,7 @@ namespace NevernamedsItems
                     if (!SaveAPIManager.GetFlag(CustomDungeonFlags.PLAYERHELDMORETHANFIVEARMOUR))
                     {
                         int threshHold = 5;
-                        if (m_attachedPlayer.characterIdentity == PlayableCharacters.Robot) threshHold = 11;
+                        if (m_attachedPlayer.ForceZeroHealthState) threshHold = 11;
                         if (m_attachedPlayer.healthHaver.Armor >= threshHold) SaveAPIManager.SetFlag(CustomDungeonFlags.PLAYERHELDMORETHANFIVEARMOUR, true);
                     }
                     armourLastChecked = (int)m_attachedPlayer.healthHaver.Armor;

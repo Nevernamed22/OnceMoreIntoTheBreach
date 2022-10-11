@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -13,34 +13,16 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Mirror Bullets";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/mirrorbullets_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<MirrorBullets>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Upon Further Reflection...";
             string longDesc = "Scoring a direct hit on enemy bullets sends them right back at their owners." + "\n\nOf all the greatest horrors, and most abhorrent foes one may face, perhaps the most dangerous is the one that stares back at you from the mirror.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.S;
-
+            item.SetTag("bullet_modifier");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 3, StatModifier.ModifyMethod.ADDITIVE);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_HOLLOW, true);
         }

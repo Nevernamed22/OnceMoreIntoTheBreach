@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Dungeonator;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 using UnityEngine;
 

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
 using System.Collections;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -23,6 +23,7 @@ namespace NevernamedsItems
             string longDesc = "This opulent stone will occasionally suck the casings right off of enemy bullets that make contact with it."+"\n\nDespite being illogical, bullets in the Gungeon are often fired casing and all for extra damage. That's 65% more bullet per bullet!";
             
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            item.SetTag("guon_stone");
 
             item.quality = PickupObject.ItemQuality.C;
             GoldGuonStone.BuildPrefab();
@@ -31,8 +32,6 @@ namespace NevernamedsItems
         public static int cashSpawnedThisRoom;
         public static void BuildPrefab()
         {
-            string value = "I don't know what this string is for";
-            string.IsNullOrEmpty(value);
             bool flag = GoldGuonStone.orbitalPrefab != null;
             if (!flag)
             {

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections;
-using System.Reflection;
+﻿using Alexandria.ItemAPI;
 using Gungeon;
-using MonoMod;
+using System.Collections.Generic;
 using UnityEngine;
-using ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -51,6 +45,7 @@ namespace NevernamedsItems
             projectile.baseData.damage = 6f;
             projectile.SetProjectileSpriteRight("arc_proj", 8, 2, false, tk2dBaseSprite.Anchor.MiddleCenter, 8, 2);
             LightningProjectileComp lightning = projectile.gameObject.GetOrAddComponent<LightningProjectileComp>();
+            lightning.targetEnemies = true;
             projectile.gameObject.AddComponent<PierceDeadActors>();
 
             projectile.hitEffects.overrideMidairDeathVFX = VFXToolbox.CreateVFX("ARC Impact",
@@ -68,11 +63,31 @@ namespace NevernamedsItems
                    );
             projectile.hitEffects.alwaysUseMidair = true;
 
+            List<string> BeamAnimPaths = new List<string>()
+            {
+                "NevernamedsItems/Resources/TrailSprites/arctrail_mid_001",
+                "NevernamedsItems/Resources/TrailSprites/arctrail_mid_002",
+                "NevernamedsItems/Resources/TrailSprites/arctrail_mid_003",
+            };
+
+            projectile.AddTrailToProjectile(
+                "NevernamedsItems/Resources/TrailSprites/arctrail_mid_001",
+                new Vector2(3, 2),
+                new Vector2(1, 1),
+                BeamAnimPaths, 20,
+                BeamAnimPaths, 20,
+                -1,
+                0.0001f,
+                -1,
+                true
+                );
+            EmmisiveTrail emis = projectile.gameObject.GetOrAddComponent<EmmisiveTrail>();
+
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("ARC Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/arcweapon_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/arcweapon_clipempty");
 
             gun.quality = PickupObject.ItemQuality.C;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
 
             ID = gun.PickupObjectId;

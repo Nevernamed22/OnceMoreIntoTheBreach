@@ -18,7 +18,7 @@ namespace NevernamedsItems
             string itemName = "Flame Chamber";
 
             //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/flamechamber_icon";
+            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/flamechamber_icon";
 
             //Create new GameObject
             GameObject obj = new GameObject(itemName);

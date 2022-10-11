@@ -76,7 +76,7 @@ namespace NevernamedsItems
 
             if (user.HasPickupID(WickerAmmoletID))
             {
-                //AkSoundEngine.PostEvent("Play_ENM_bombshee_scream_01", Owner.gameObject);
+                AkSoundEngine.PostEvent("Play_ENM_bombshee_scream_01", user.gameObject);
                 RoomHandler currentRoom = user.CurrentRoom;
                 if (currentRoom.HasActiveEnemies(RoomHandler.ActiveEnemyType.All))
                 {

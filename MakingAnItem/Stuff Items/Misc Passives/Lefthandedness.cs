@@ -31,10 +31,10 @@ namespace NevernamedsItems
                 bullet.RuntimeUpdateScale(1.2f);
                 if (Owner.PlayerHasActiveSynergy("Sinister Handed"))
                 {
-                    AdvancedTransmogrifyComponent transmog = bullet.gameObject.GetOrAddComponent<AdvancedTransmogrifyComponent>();
-                    AdvancedTransmogrifyComponent.TransmogData newData = new AdvancedTransmogrifyComponent.TransmogData()
+                    AdvancedTransmogrifyBehaviour transmog = bullet.gameObject.GetOrAddComponent<AdvancedTransmogrifyBehaviour>();
+                    AdvancedTransmogrifyBehaviour.TransmogData newData = new AdvancedTransmogrifyBehaviour.TransmogData()
                     {
-                        TargetGuid = "76bc43539fc24648bff4568c75c686d1",
+                        TargetGuids =  new List<string>() { "76bc43539fc24648bff4568c75c686d1" },
                         TransmogChance = 0.06f,
                         identifier = "SinisterHanded",
                     };

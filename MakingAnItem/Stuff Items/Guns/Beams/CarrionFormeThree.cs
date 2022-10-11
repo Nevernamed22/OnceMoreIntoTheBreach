@@ -6,7 +6,8 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -47,7 +48,7 @@ namespace NevernamedsItems
 
             //SUB TENTACLE
             #region subtentacle
-            Projectile subTendrilProj = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
+            Projectile subTendrilProj = ProjectileUtility.SetupProjectile(86);
 
             BasicBeamController subTendrilComp = subTendrilProj.GenerateBeamPrefab(
                 "NevernamedsItems/Resources/BeamSprites/carrionsubtendril_mid_001",
@@ -74,9 +75,6 @@ namespace NevernamedsItems
                 0
                 );
 
-            subTendrilProj.gameObject.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(subTendrilProj.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(subTendrilProj);
             subTendrilProj.baseData.damage = 10f;
             subTendrilProj.baseData.force *= 1f;
             subTendrilProj.baseData.range = 5.5f;
@@ -108,7 +106,7 @@ namespace NevernamedsItems
             };
 
             //BULLET STATS
-            Projectile projectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
+            Projectile projectile = ProjectileUtility.SetupProjectile(86);
 
             BasicBeamController beamComp = projectile.GenerateBeamPrefab(
                 "NevernamedsItems/Resources/BeamSprites/carrionformthree_mid_001",
@@ -135,9 +133,7 @@ namespace NevernamedsItems
                 0
                 );
 
-            projectile.gameObject.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(projectile);
+            
             projectile.baseData.damage = 50f;
             projectile.baseData.force *= 1f;
             projectile.baseData.range = 16;

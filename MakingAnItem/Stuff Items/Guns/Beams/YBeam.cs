@@ -6,7 +6,8 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.Misc;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -120,7 +121,7 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles[0] = projectile;
 
             gun.quality = PickupObject.ItemQuality.B;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
         }
         protected override void PostProcessBeam(BeamController beam)

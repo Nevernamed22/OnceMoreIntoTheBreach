@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -44,15 +44,14 @@ namespace NevernamedsItems
             gun.DefaultModule.customAmmoType = "ARC Bullets";
 
             //BULLET STATS
-            Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
-            projectile.gameObject.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(projectile);
-            gun.DefaultModule.projectiles[0] = projectile;
+            Projectile projectile = gun.DefaultModule.projectiles[0].gameObject.InstantiateAndFakeprefab().GetComponent<Projectile>();
             projectile.baseData.damage = 26f;
+            PierceProjModifier pierce = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();
+            pierce.penetration++;
+            gun.DefaultModule.projectiles[0] = projectile;
 
             gun.quality = PickupObject.ItemQuality.B;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             ID = gun.PickupObjectId;
         }

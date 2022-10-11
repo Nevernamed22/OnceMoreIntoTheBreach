@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -39,10 +40,11 @@ namespace NevernamedsItems
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.20f, StatModifier.ModifyMethod.MULTIPLICATIVE);
 
             //Set the rarity of the item
-            item.quality = PickupObject.ItemQuality.EXCLUDED;
+            item.quality = PickupObject.ItemQuality.C;
 
             BlobulonRageID = item.PickupObjectId;
 
+            item.RemovePickupFromLootTables();
             //item.AddAsChamberGunMastery("OnceMoreIntoTheBreach", 4);
         }
     }

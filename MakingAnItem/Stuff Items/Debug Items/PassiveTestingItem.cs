@@ -6,6 +6,7 @@ using ItemAPI;
 using UnityEngine;
 using Gungeon;
 using System.Collections;
+using UnityEngine.Events;
 
 namespace NevernamedsItems
 {
@@ -31,6 +32,8 @@ namespace NevernamedsItems
             item.CanBeDropped = true;
             item.CanBeSold = true;
             DebugPassiveID = item.PickupObjectId;
+
+           
         }
         public static int DebugPassiveID;
         public void onFired(Projectile bullet, float eventchancescaler)
@@ -40,9 +43,9 @@ namespace NevernamedsItems
                  StartCoroutine(doLateFrameProcessing(bullet));
                  bullet.gameObject.AddComponent<HasBeenDoubleProcessed>();
              }*/
-            bullet.sprite.renderer.enabled = false;
+            if (bullet.sprite) bullet.sprite.renderer.enabled = false;
             bullet.baseData.range = 5;
-          
+
         }
         private IEnumerator doLateFrameProcessing(Projectile projectile)
         {
@@ -64,10 +67,10 @@ namespace NevernamedsItems
         }
         public override void Pickup(PlayerController player)
         {
-            // player.PostProcessProjectile += this.onFired;
+            player.PostProcessProjectile += this.onFired;
             //player.PostProcessThrownGun += PostProcessGun;
-            player.OnRollStarted += OnRoll;
-           // player.PostProcessBeam += this.PostProcessBeam;
+            // player.OnRollStarted += OnRoll;
+            // player.PostProcessBeam += this.PostProcessBeam;
             base.Pickup(player);
         }
         private void PostProcessGun(Projectile fucker)
@@ -80,7 +83,7 @@ namespace NevernamedsItems
             // player.PostProcessBeam -= this.PostProcessBeam;
 
             DebrisObject result = base.Drop(player);
-           return result;
+            return result;
         }
         public class HasBeenDoubleProcessed : MonoBehaviour { }
 

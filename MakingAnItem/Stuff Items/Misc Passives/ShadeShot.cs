@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using SaveAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -24,8 +25,8 @@ namespace NevernamedsItems
             string longDesc = "Double Shot, with no cost."+"\nA fitting reward for a hard-won victory!"+"\n\nAncient Bullets, buried in a nameless lord's tomb to be taken with them to the next life.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.S;
-
-            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.DRAGUN_BEATEN_SHADE, true);
+            item.SetTag("bullet_modifier");
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.DRAGUN_KILLED_SHADE, true);
 
         }
 

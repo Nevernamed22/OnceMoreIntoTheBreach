@@ -6,7 +6,8 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.Misc;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -62,11 +63,11 @@ namespace NevernamedsItems
             gun.ammo = 80;
             gun.gunClass = GunClass.SILLY;
             
-            GameObject baseproj = gun.DefaultModule.projectiles[0].gameObject.InstantiateAndFakeprefab();
-            gun.DefaultModule.projectiles[0] = baseproj.GetComponent<Projectile>();
+            Projectile baseproj = ProjectileUtility.SetupProjectile(56);
+            gun.DefaultModule.projectiles[0] = baseproj;
 
             //BULLET STATS
-            HelixProjectileButLessShit projectile = DataCloners.CopyFields<HelixProjectileButLessShit>(Instantiate(gun.DefaultModule.projectiles[0]));
+            ImprovedHelixProjectile projectile = DataCloners.CopyFields<ImprovedHelixProjectile>(Instantiate(gun.DefaultModule.projectiles[0]));
             projectile.SpawnShadowBulletsOnSpawn = false;
             projectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
@@ -85,9 +86,9 @@ namespace NevernamedsItems
 
 
             //MINI BULLETS
-            GameObject split = (PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0].gameObject.InstantiateAndFakeprefab();
+            Projectile split = ProjectileUtility.SetupProjectile(56);
 
-            HelixProjectileButLessShit projectile2 = DataCloners.CopyFields<HelixProjectileButLessShit>(split.GetComponent<Projectile>());
+            ImprovedHelixProjectile projectile2 = DataCloners.CopyFields<ImprovedHelixProjectile>(split);
             projectile2.SpawnShadowBulletsOnSpawn = false;
             projectile2.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile2.gameObject);
@@ -114,7 +115,7 @@ namespace NevernamedsItems
 
 
             gun.quality = PickupObject.ItemQuality.A;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
             W3irdstarID = gun.PickupObjectId;
         }
         public static int W3irdstarID;

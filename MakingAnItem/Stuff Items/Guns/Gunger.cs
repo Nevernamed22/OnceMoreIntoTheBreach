@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -61,7 +61,7 @@ namespace NevernamedsItems
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Gunger Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/gunger_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/gunger_clipempty");
 
             gun.quality = PickupObject.ItemQuality.A;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
         }
         public override void PostProcessProjectile(Projectile projectile)
         {

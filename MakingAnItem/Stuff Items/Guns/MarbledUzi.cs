@@ -6,9 +6,9 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
 using Dungeonator;
 using GungeonAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -168,7 +168,7 @@ namespace NevernamedsItems
                                 aiactor.behaviorSpeculator.Stun(2f);
                                 if ((aiactor.healthHaver && aiactor.healthHaver.GetCurrentHealthPercentage() < 0.5f) || gun.GunPlayerOwner().PlayerHasActiveSynergy("Gorgun's Gaze"))
                                 {
-                                    if (EasyEnemyTypeLists.VanillaShotgunKin.Contains(aiactor.EnemyGuid))
+                                    if (aiactor.HasTag("shotgun_kin"))
                                     {
                                         UnityEngine.Object.Instantiate<GameObject>((PickupObjectDatabase.GetById(37) as Gun).DefaultModule.chargeProjectiles[0].Projectile.hitEffects.overrideMidairDeathVFX, aiactor.specRigidbody.UnitCenter, Quaternion.identity);
                                         aiactor.EraseFromExistenceWithRewards();

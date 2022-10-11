@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -12,35 +12,16 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Bashful Shot";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/bashfulshot_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<BashfulShot>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Travel Light";
             string longDesc = "These remarkably compatible musket balls prefer to keep to themselves, and don’t like other items getting in the way."+"\n\nMaybe don’t pick up that Junk.";
-
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.S;
-
+            item.SetTag("bullet_modifier");
             BashfulShotID = item.PickupObjectId;
         }
         public static int BashfulShotID;

@@ -1,4 +1,5 @@
-﻿using MonoMod.RuntimeDetour;
+﻿using Alexandria.ItemAPI;
+using MonoMod.RuntimeDetour;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using UnityEngine;
+using Alexandria.EnemyAPI;
 
 namespace NevernamedsItems
 {
@@ -72,14 +74,14 @@ namespace NevernamedsItems
                         if (attkOwner.CompanionOwner != null) companionisedBullets.enemyOwner = attkOwner.CompanionOwner;
 
                         image.ApplyEffect(GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultPermanentCharmEffect, 1f, null);
-                        image.gameObject.AddComponent<KillOnRoomClear>();
 
-
-                        if (EasyEnemyTypeLists.MultiPhaseEnemies.Contains(image.EnemyGuid) || EasyEnemyTypeLists.EnemiesWithInvulnerablePhases.Contains(image.EnemyGuid))
+                        ContinualKillOnRoomClear contKill = image.gameObject.AddComponent<ContinualKillOnRoomClear>();
+                        if (image.HasTag("multiple_phase_enemy"))
                         {
-                            EraseFromExistenceOnRoomClear destroyTrickyEnemy = image.gameObject.AddComponent<EraseFromExistenceOnRoomClear>();
-                            destroyTrickyEnemy.Delay = 1f;
+                            contKill.forceExplode = true;
+                            contKill.eraseInsteadOfKill = true;
                         }
+
                         image.IsHarmlessEnemy = true;
                         image.RegisterOverrideColor(Color.grey, "Ressurection");
                         image.IgnoreForRoomClear = true;
@@ -115,7 +117,7 @@ namespace NevernamedsItems
             TargetActor.ApplyEffect(GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultPermanentCharmEffect, 1f, null);
             TargetActor.gameObject.AddComponent<KillOnRoomClear>();
             ContinualKillOnRoomClear contKill = TargetActor.gameObject.AddComponent<ContinualKillOnRoomClear>();
-            if (EasyEnemyTypeLists.MultiPhaseEnemies.Contains(TargetActor.EnemyGuid))
+            if (TargetActor.HasTag("multiple_phase_enemy"))
             {
                 contKill.forceExplode = true;
                 contKill.eraseInsteadOfKill = true;
@@ -158,7 +160,7 @@ namespace NevernamedsItems
         }
         private void Update()
         {
-            if (!GameManager.Instance.AnyPlayerIsInCombat())
+            if (!GameManager.Instance.PrimaryPlayer.IsInCombat)
             {
                 if (!ithasBegun)
                 {

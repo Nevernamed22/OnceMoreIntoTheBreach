@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
@@ -24,7 +24,7 @@ namespace NevernamedsItems
             string longDesc = "Smacks enemies on fatal damage."+"\n\nThere are two types of people in this world; people who enjoy beating others with baseball bats, and the rest of you weirdos.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.C;
-
+            item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_BATTERBULLETS, true);
             item.AddItemToDougMetaShop(45);
         }
@@ -54,21 +54,15 @@ namespace NevernamedsItems
                 UnityEngine.Object.Instantiate<GameObject>(hitVFX, self.specRigidbody.UnitCenter, Quaternion.identity);
             }
         }
-        public override DebrisObject Drop(PlayerController player)
-        {
-            DebrisObject debrisObject = base.Drop(player);
-            player.PostProcessProjectile -= this.PostProcessProjectile;
-            return debrisObject;
-        }
         public override void Pickup(PlayerController player)
         {
             base.Pickup(player);
             player.PostProcessProjectile += this.PostProcessProjectile;
         }
-        public override void OnDestroy()
+        public override void DisableEffect(PlayerController player)
         {
-            if (Owner) Owner.PostProcessProjectile -= this.PostProcessProjectile;
-            base.OnDestroy();
+            player.PostProcessProjectile -= this.PostProcessProjectile;
+            base.DisableEffect(player);
         }
     }
 }

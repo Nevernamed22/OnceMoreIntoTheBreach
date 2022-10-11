@@ -18,7 +18,7 @@ namespace NevernamedsItems
         }
         private void Update()
         {
-            if (!Owner || Owner.CurrentRoom != m_projectile.GetAbsoluteRoom())
+            if (!Owner || Owner.CurrentRoom != m_projectile.transform.position.GetAbsoluteRoom())
             {
                 m_projectile.DieInAir(true, false, false, false);
             }

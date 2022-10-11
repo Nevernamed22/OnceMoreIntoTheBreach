@@ -6,8 +6,9 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -41,12 +42,12 @@ namespace NevernamedsItems
             gun.ammo = 200;
             gun.gunClass = GunClass.SILLY;
             gun.quality = PickupObject.ItemQuality.B;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             MissingunoID = gun.PickupObjectId;
 
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.UNLOCKED_MISSINGUNO, true);
-            ChestToolbox.OnChestPreOpen += Missinguno.OnChestPreOpen;
+            CustomActions.OnChestPreOpen += Missinguno.OnChestPreOpen;
         }
         public static int MissingunoID;
         public static void OnChestPreOpen(Chest self, PlayerController opener)

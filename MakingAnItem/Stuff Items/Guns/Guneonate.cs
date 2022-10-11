@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -46,7 +46,7 @@ namespace NevernamedsItems
             gun.gunClass = GunClass.SILLY;
 
             //BULLET STATS
-            HelixProjectileButLessShit projectile = DataCloners.CopyFields<HelixProjectileButLessShit>(Instantiate(gun.DefaultModule.projectiles[0]));
+            ImprovedHelixProjectile projectile = DataCloners.CopyFields<ImprovedHelixProjectile>(Instantiate(gun.DefaultModule.projectiles[0]));
             projectile.SpawnShadowBulletsOnSpawn = true;
             projectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);

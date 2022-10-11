@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -13,34 +13,17 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Snail Bullets";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/snailbullets_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<SnailBullets>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Slow as Slugs";
             string longDesc = "It looks like a colony of snails has made it’s home in this empty shell to hide from predatory birds. \n\n" + "While the shell itself cannot be fired, the slime it oozes from the generations of snails within has interesting properties when paired with other ammunition.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ProjectileSpeed, 0.6f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.A;
+            item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_SNAILBULLETS, true);
             item.AddItemToGooptonMetaShop(30);
         }

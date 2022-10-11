@@ -6,8 +6,9 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
 using Dungeonator;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -104,7 +105,7 @@ namespace NevernamedsItems
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Ferrobolt Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/ferrobolt_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/ferrobolt_clipempty");
 
             gun.quality = PickupObject.ItemQuality.C;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
             ID = gun.PickupObjectId;
 
 

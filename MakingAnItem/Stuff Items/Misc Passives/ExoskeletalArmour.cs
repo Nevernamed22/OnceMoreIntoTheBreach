@@ -50,7 +50,7 @@ namespace NevernamedsItems
         {
             if (Owner)
             {
-                if (Owner.characterIdentity != PlayableCharacters.Robot)
+                if (!Owner.ForceZeroHealthState)
                 {
                     if (!Owner.healthHaver.NextDamageIgnoresArmor && Owner.healthHaver.GetCurrentHealth() >= 0.5f)
                     {

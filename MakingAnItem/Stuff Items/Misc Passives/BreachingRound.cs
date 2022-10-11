@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 
@@ -23,6 +23,7 @@ namespace NevernamedsItems
             string longDesc = "Gives a damage boost upon entering combat, which quickly deteriorates over time. Speed is key."+"\n\nUsed by ancient dungeon crawlers to blast open locks and hidden walls, though the Gungeon's secret rooms are a little too tough for that.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.C;
+            item.SetTag("bullet_modifier");
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
             ID = item.PickupObjectId;
         }
@@ -61,7 +62,7 @@ namespace NevernamedsItems
                 AlterItemStats.RemoveStatFromPassive(this, PlayerStats.StatType.PlayerBulletScale);
                 AlterItemStats.AddStatToPassive(this, PlayerStats.StatType.Damage, damagemodifier, StatModifier.ModifyMethod.MULTIPLICATIVE);
                 AlterItemStats.AddStatToPassive(this, PlayerStats.StatType.PlayerBulletScale, scaleMod, StatModifier.ModifyMethod.MULTIPLICATIVE);
-                Owner.stats.RecalculateStats(Owner, false, false);
+               if (Owner) Owner.stats.RecalculateStats(Owner, false, false);
               
                 yield return null;
             }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -12,38 +12,18 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Cleansing Rounds";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/cleansingrounds_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<CleansingRounds>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Undo What Is Done";
             string longDesc = "These holy shells are capable of saving the Gundead from eternal Jamnation.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
             List<string> mandatorySynergyItems = new List<string>() { "nn:cleansing_rounds", "silver_bullets" };
             CustomSynergies.Add("Holy Smackerel", mandatorySynergyItems);
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.B;
-
-
+            item.SetTag("bullet_modifier");
         }
         public override void Pickup(PlayerController player)
         {
@@ -53,16 +33,7 @@ namespace NevernamedsItems
         }
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
-            try
-            {
-                //ETGModConsole.Log("posting the process to the projectile in the mail");
-                //ETGModConsole.Log($"Proj Null: {projectile == null} | OnHitEnemy null: {projectile?.OnHitEnemy == null}");
                 sourceProjectile.OnHitEnemy += this.OnHitEnemy;
-            }
-            catch (Exception e)
-            {
-                ETGModConsole.Log(e.Message);
-            }
         }
         private void PostProcessBeam(BeamController sourceBeam)
         {

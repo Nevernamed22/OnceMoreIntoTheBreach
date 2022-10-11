@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
@@ -23,6 +23,7 @@ namespace NevernamedsItems
             string longDesc = "Your bullets no longer damage tables, and are allowed to pass right through. Passing through a table increases a bullet's damage." + "\n\nAn initiation gift among the Knights of the Octagonal Table.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.C;
+            item.SetTag("bullet_modifier");
         }
 
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)

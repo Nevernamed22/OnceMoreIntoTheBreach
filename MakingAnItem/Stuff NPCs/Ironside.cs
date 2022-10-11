@@ -182,7 +182,7 @@ namespace NevernamedsItems
         }
         public static int IronsideCustomRemoveCurrency(CustomShopController shop, PlayerController player, int cost)
         {
-            if (player.ModdedCharacterIdentity() != ModdedCharacterID.Shade) player.healthHaver.Armor -= cost;
+            if (player.characterIdentity != OMITBChars.Shade) player.healthHaver.Armor -= cost;
             else
             {
                 FieldInfo _itemControllers = typeof(CustomShopController).GetField("m_itemControllers", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -195,7 +195,7 @@ namespace NevernamedsItems
         }
         public static bool IronsideCustomCanBuy(CustomShopController shop, PlayerController player, int cost)
         {
-            if (player.ModdedCharacterIdentity() == ModdedCharacterID.Shade) return true;
+            if (player.characterIdentity == OMITBChars.Shade) return true;
             if (player.healthHaver.Armor >= cost && player.healthHaver.GetCurrentHealth() > 0)
             {
                 return true;

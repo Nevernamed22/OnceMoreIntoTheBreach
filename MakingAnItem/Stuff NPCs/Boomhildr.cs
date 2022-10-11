@@ -115,6 +115,7 @@ namespace NevernamedsItems
                 NNBazooka.BazookaID,
                 BoomBeam.ID,
                 Pillarocket.ID,
+                BlastingCap.ID,
             };
 
             BoomhildrLootTable = LootTableTools.CreateLootTable();

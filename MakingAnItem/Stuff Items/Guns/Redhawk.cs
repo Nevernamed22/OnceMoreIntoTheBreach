@@ -7,7 +7,8 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using SaveAPI;
 
 namespace NevernamedsItems
 {
@@ -91,13 +92,14 @@ namespace NevernamedsItems
                 );
 
             gun.quality = PickupObject.ItemQuality.A;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             ID = gun.PickupObjectId;
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.ADVDRAGUN_KILLED_SHADE, true);
 
-            
+
         }
-        
+
         public static int ID;
     }
 }

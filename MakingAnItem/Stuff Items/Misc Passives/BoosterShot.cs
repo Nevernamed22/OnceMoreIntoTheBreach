@@ -5,6 +5,8 @@ using System.Text;
 using Dungeonator;
 using UnityEngine;
 using ItemAPI;
+using Alexandria.Misc;
+using static Alexandria.Misc.PlayerUtility;
 
 namespace NevernamedsItems
 {
@@ -26,7 +28,7 @@ namespace NevernamedsItems
         {
             if (UnityEngine.Random.value <= 0.05f)
             {
-                if (user.characterIdentity != PlayableCharacters.Robot)
+                if (!user.ForceZeroHealthState)
                 {
                     user.healthHaver.ApplyHealing(10000);
                 }
@@ -70,7 +72,7 @@ namespace NevernamedsItems
             if (player && player.gameActor && player.gameActor is PlayerController)
             {
                 PlayerController playercont = player.gameActor as PlayerController;
-                if (playercont.ModdedCharacterIdentity() == ModdedCharacterID.Shade)
+                if (playercont.characterIdentity == OMITBChars.Shade)
                 {
                     if (UnityEngine.Random.value <= 0.1f)
                     {

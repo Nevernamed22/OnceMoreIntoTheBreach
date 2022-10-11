@@ -7,7 +7,8 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.EnemyAPI;
 
 namespace NevernamedsItems
 {
@@ -89,7 +90,7 @@ namespace NevernamedsItems
                 );
 
             gun.quality = PickupObject.ItemQuality.B;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             ID = gun.PickupObjectId;
 
@@ -192,7 +193,7 @@ namespace NevernamedsItems
                 else if (RepairableEnemies.ContainsKey(enemy.aiActor.EnemyGuid))
                 {
                     //ETGModConsole.Log("Met requirements for transmog");
-                    enemy.aiActor.AdvancedTransmogrify(EnemyDatabase.GetOrLoadByGuid(RepairableEnemies[enemy.aiActor.EnemyGuid]), null, null, false, false, true, true, true, true, false, false);
+                    enemy.aiActor.AdvancedTransmogrify(EnemyDatabase.GetOrLoadByGuid(RepairableEnemies[enemy.aiActor.EnemyGuid]), null, null, false, null, null, true, true, true, true, true, false);
                 }
                 //ETGModConsole.Log("OnHitEnemyFinished");
             }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
@@ -24,6 +24,7 @@ namespace NevernamedsItems
             string longDesc = "These shells are loaded with a potent viral slurry, capable of quickly spreading through an enemy legion."+"\n\nFar removed from the ancient days of plague warfare, which typically involved corpses and catapults.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.A;
+            item.SetTag("bullet_modifier");
             //Unlock
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_PESTIFEROUSLEAD, true);
             item.AddItemToDougMetaShop(30);

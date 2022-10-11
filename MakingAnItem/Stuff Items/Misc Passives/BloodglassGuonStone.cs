@@ -5,6 +5,7 @@ using System.Text;
 using Dungeonator;
 using UnityEngine;
 using ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -39,10 +40,11 @@ namespace NevernamedsItems
             //Adds the actual passive effect to the item
 
             //Set the rarity of the item
-            item.quality = PickupObject.ItemQuality.EXCLUDED;
+            item.quality = PickupObject.ItemQuality.C;
 
             BloodGlassGuonStoneID = item.PickupObjectId;
             //item.AddAsChamberGunMastery("OnceMoreIntoTheBreach", 4);
+            item.RemovePickupFromLootTables();
 
         }
 

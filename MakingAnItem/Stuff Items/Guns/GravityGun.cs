@@ -6,10 +6,12 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 using System.Reflection;
 using System.Collections.ObjectModel;
+using Alexandria.Misc;
+using Alexandria.EnemyAPI;
 
 namespace NevernamedsItems
 {
@@ -58,7 +60,7 @@ namespace NevernamedsItems
             gun.DefaultModule.customAmmoType = "Y-Beam Laser";
 
             gun.quality = PickupObject.ItemQuality.A;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             GravityGunID = gun.PickupObjectId;
 

@@ -73,7 +73,7 @@ namespace NevernamedsItems
 
             gun.quality = PickupObject.ItemQuality.B;
 
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.BOSSRUSH_HUNTER, true);
             gun.SetTag("arrow_bolt_weapon");

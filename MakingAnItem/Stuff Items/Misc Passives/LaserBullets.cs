@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 
@@ -25,7 +25,7 @@ namespace NevernamedsItems
 
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.B;
-
+            item.SetTag("bullet_modifier");
             List<string> BeamAnimPaths = new List<string>()
             {
                 "NevernamedsItems/Resources/BeamSprites/redbeam_seg_001",

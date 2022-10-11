@@ -34,6 +34,54 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Characters\OMITBChars.cs" />
+    <Compile Include="OMITB Misc Game Changers\Challenges\ChallengeEffects.cs" />
+    <Compile Include="OMITB Misc Game Changers\Challenges\ChallengeUnlocks.cs" />
+    <Compile Include="OMITB Misc Game Changers\Curses\CurseEffects.cs" />
+    <Compile Include="OMITB Misc Toolboxes\EnemyComponents\AdvancedKillOnRoomClear.cs" />
+    <Compile Include="OMITB Misc Toolboxes\GeneralComponents\GameObjectDamageAura.cs" />
+    <Compile Include="OMITB Misc Toolboxes\GeneralComponents\GameObjectDestroyTimer.cs" />
+    <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\BlankProjModifier.cs" />
+    <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\EmissiveTrail.cs" />
+    <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\LightningProjectileComp.cs" />
+    <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\ProjectileInstakillBehaviour.cs" />
+    <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\ScaleProjectileStatOffConsumableCount.cs" />
+    <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\ScaleProjectileStatOffPlayerStat.cs" />
+    <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\SelfReAimBehaviour.cs" />
+    <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\SpawnObjectBehaviour.cs" />
+    <Compile Include="StandardAPI\PersistentActions.cs" />
+    <Compile Include="Stuff Items\Actives\Bambarrage.cs" />
+    <Compile Include="Stuff Items\Companions\CustomMovementBehaviours\EnemyApproachingHopper.cs" />
+    <Compile Include="Stuff Items\Companions\Hapulon.cs" />
+    <Compile Include="Stuff Items\Companions\LeadOfLife\CompanionControllerVariants\LeadOfLifeBasicShooter.cs" />
+    <Compile Include="Stuff Items\Companions\LeadOfLife\CompanionControllerVariants\LeadOfLifeClipBasedShooter.cs" />
+    <Compile Include="Stuff Items\Companions\LeadOfLife\CompanionControllerVariants\LeadOfLifeCompanionCountReactiveShooter.cs" />
+    <Compile Include="Stuff Items\Companions\LeadOfLife\CompanionControllerVariants\LeadOfLifeComplexShooter.cs" />
+    <Compile Include="Stuff Items\Companions\LeadOfLife\CompanionControllerVariants\LeadOfLifeExploder.cs" />
+    <Compile Include="Stuff Items\Companions\LeadOfLife\CompanionControllerVariants\LeadOfLifeGooper.cs" />
+    <Compile Include="Stuff Items\Companions\LeadOfLife\CompanionControllerVariants\LeadOfLifeMassRoomDamager.cs" />
+    <Compile Include="Stuff Items\Companions\LeadOfLife\CompanionControllerVariants\LeadOfLifeProximityShooter.cs" />
+    <Compile Include="Stuff Items\Companions\LeadOfLife\CompanionControllerVariants\LeadOfLifeRandomShooter.cs" />
+    <Compile Include="Stuff Items\Companions\LeadOfLife\CompanionControllerVariants\LeadOfLifeTimeSlower.cs" />
+    <Compile Include="Stuff Items\Companions\LeadOfLife\LeadOfLifeCompanionController.cs" />
+    <Compile Include="Stuff Items\Companions\LeadOfLife\LeadOfLifeInitCompanions.cs" />
+    <Compile Include="Stuff Items\Guns\Beams\PocoLoco.cs" />
+    <Compile Include="Stuff Items\Guns\Bleech.cs" />
+    <Compile Include="Stuff Items\Guns\Robogun.cs" />
+    <Compile Include="Stuff Items\Guns\Schwarzlose.cs" />
+    <Compile Include="Stuff Items\Guns\Synergy Formes\DARCPistol.cs" />
+    <Compile Include="Stuff Items\Guns\WaveformLens.cs" />
+    <Compile Include="Stuff Items\Guon Stones\BlackGuonStone.cs" />
+    <Compile Include="Stuff Items\Misc Passives\BlastingCap.cs" />
+    <Compile Include="Stuff Items\Misc Passives\PercussionCap.cs" />
+    <Compile Include="Stuff Items\Misc Passives\IridiumSnakeMilk.cs" />
+    <Compile Include="Stuff Items\Misc Passives\PepperPoppers.cs" />
+    <Compile Include="Stuff Items\Misc Passives\PickledPepper.cs" />
+    <Compile Include="Stuff Items\Misc Passives\SculptorsChisel.cs" />
+    <Compile Include="Stuff Items\Misc Passives\Starfruit.cs" />
+    <Compile Include="Stuff Items\New Item Classes\AffectEnemiesInProximityTickItem.cs" />
+    <Compile Include="Stuff Items\Misc Passives\RectangularMirror.cs" />
+    <Compile Include="Stuff Tweaks\EnemyHealthModifiers.cs" />
     <Compile Include="OMITB Extensions and Hooks\ShadeFlightHookFix.cs" />
     <Compile Include="OMITB Misc Game Changers\Commands\CheatUnlocks.cs" />
     <Compile Include="OMITB Misc Toolboxes\GuonToolbox.cs" />
@@ -43,7 +91,6 @@
     <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\ProjWeaknessModifier.cs" />
     <Compile Include="ProjectileSetupUtility.cs" />
     <Compile Include="StandardAPI\BreakableAPI.cs" />
-    <Compile Include="CustomAPI\TrailAPI.cs" />
     <Compile Include="StandardAPI\EnemyAPI\BossBuilder.cs" />
     <Compile Include="StandardAPI\EnemyAPI\EnemyBuilder.cs" />
     <Compile Include="StandardAPI\EnemyAPI\EnemyTools.cs" />
@@ -80,18 +127,14 @@
     <Compile Include="Stuff Items\Companions\MolotovBuddy.cs" />
     <Compile Include="Stuff Items\Companions\TemplateCompanion.cs" />
     <Compile Include="Stuff Items\Companions\TestEnemy.cs" />
-    <Compile Include="OMITB Extensions and Hooks\ExplosionHooks.cs" />
-    <Compile Include="OMITB Extensions and Hooks\OMITBGameobjectExtensions.cs" />
     <Compile Include="OMITB Misc Game Changers\Commands\CheckUnlocks.cs" />
     <Compile Include="OMITB Misc Game Changers\Commands\DeconstructGun.cs" />
     <Compile Include="OMITB Misc Game Changers\Confusion.cs" />
-    <Compile Include="OMITB Misc Game Changers\Curses.cs" />
+    <Compile Include="OMITB Misc Game Changers\Curses\Curses.cs" />
     <Compile Include="OMITB Misc Toolboxes\AnimationToolbox.cs" />
     <Compile Include="OMITB Misc Toolboxes\BeamComponents.cs" />
-    <Compile Include="OMITB Misc Toolboxes\ChestToolbox.cs" />
     <Compile Include="OMITB Misc Toolboxes\CustomDarknessHandler.cs" />
     <Compile Include="OMITB Misc Toolboxes\DeconstructHitEffects.cs" />
-    <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\NewProjectileTypes\HelixProjButLessShit.cs" />
     <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\SlowDownOverTimeModifier.cs" />
     <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\StoutBulletsProjectileMod.cs" />
     <Compile Include="OMITB Misc Toolboxes\ProjectileTrailHelper.cs" />
@@ -342,18 +385,9 @@
     <Compile Include="Stuff Items\Misc Passives\HeavyChamber.cs" />
     <Compile Include="Stuff Items\Companions\CompanionBehaviours.cs" />
     <Compile Include="Stuff Items\Companions\CompanionisedEnemyUtility.cs" />
-    <Compile Include="Stuff Items\Companions\LeadOfLife.cs" />
+    <Compile Include="Stuff Items\Companions\LeadOfLife\LeadOfLife.cs" />
     <Compile Include="Stuff Items\Companions\Peanut.cs" />
     <Compile Include="Stuff Items\Companions\Potty.cs" />
-    <Compile Include="OMITB Extensions and Hooks\EnemyHooks.cs" />
-    <Compile Include="OMITB Extensions and Hooks\GoopHooksAndExtensions.cs" />
-    <Compile Include="OMITB Extensions and Hooks\OMITBAttackBehavExtensions.cs" />
-    <Compile Include="OMITB Extensions and Hooks\OMITBEnemyExtensions.cs" />
-    <Compile Include="OMITB Extensions and Hooks\OMITBRoomhandlerExtensions.cs" />
-    <Compile Include="OMITB Extensions and Hooks\PickupHooks.cs" />
-    <Compile Include="OMITB Extensions and Hooks\SimplerCrateController.cs" />
-    <Compile Include="OMITB Extensions and Hooks\UIHooks.cs" />
-    <Compile Include="OMITB Misc Game Changers\AdvancedDragunRewards.cs" />
     <Compile Include="StandardAPI\ItemAPI\AdvancedPlayerOrbital.cs" />
     <Compile Include="Stuff Items\Misc Passives\AlkaliBullets.cs" />
     <Compile Include="OMITB Gamemodes\AllJammedState.cs" />
@@ -384,7 +418,7 @@
     <Compile Include="Stuff Items\Misc Passives\BloodyAmmo.cs" />
     <Compile Include="Stuff Items\Actives\BloodyBox.cs" />
     <Compile Include="Stuff Items\Guns\Blowgun.cs" />
-    <Compile Include="Stuff Items\Guns\BlueGun.cs" />
+    <Compile Include="Stuff Items\Guns\Blankannon.cs" />
     <Compile Include="Stuff Items\Misc Passives\BombardierShells.cs" />
     <Compile Include="Stuff Items\Actives\BomberJacket.cs" />
     <Compile Include="Stuff Items\Actives\Bombinomicon.cs" />
@@ -418,24 +452,20 @@
     <Compile Include="Stuff Items\Guns\DisplacerCannon.cs" />
     <Compile Include="Stuff Items\Guns\DynamiteLauncher.cs" />
     <Compile Include="OMITB Misc Game Changers\CadenceAndOxShopPoolAdditions.cs" />
-    <Compile Include="OMITB Misc Game Changers\Challenges.cs" />
+    <Compile Include="OMITB Misc Game Changers\Challenges\Challenges.cs" />
     <Compile Include="OMITB Misc Game Changers\CustomHuntingQuest.cs" />
     <Compile Include="OMITB Misc Game Changers\JammedChests.cs" />
     <Compile Include="OMITB Misc Game Changers\PlagueStatusEffect.cs" />
     <Compile Include="OMITB Misc Game Changers\ShrinkStatusEffect.cs" />
-    <Compile Include="OMITB Misc Toolboxes\BeamToolbox.cs" />
     <Compile Include="OMITB Misc Toolboxes\CustomHologramDoer.cs" />
     <Compile Include="OMITB Misc Toolboxes\EnemyComponents.cs" />
     <Compile Include="OMITB Misc Toolboxes\FloorAndGenerationToolbox.cs" />
     <Compile Include="OMITB Misc Toolboxes\GlobalUpdate.cs" />
-    <Compile Include="OMITB Misc Toolboxes\LootHelpers.cs" />
     <Compile Include="OMITB Misc Toolboxes\MagicCircleDoer.cs" />
     <Compile Include="OMITB Extensions and Hooks\MiscUnlockHooks.cs" />
     <Compile Include="OMITB Misc Toolboxes\PlayerToolbox.cs" />
     <Compile Include="OMITB Misc Toolboxes\VFXToolbox.cs" />
     <Compile Include="OMITB Misc Toolboxes\StatusEffectHelper.cs" />
-    <Compile Include="OMITB Pickups\MegaAmmoBox.cs" />
-    <Compile Include="OMITB Storage Classes\EasyEnemyTypeLists.cs" />
     <Compile Include="OMITB Storage Classes\EasyGoopDefinitions.cs" />
     <Compile Include="OMITB Storage Classes\PlaceableObjectDatabase.cs" />
     <Compile Include="Stuff Items\Misc Passives\EmptyRounds.cs" />
@@ -506,10 +536,6 @@
     <Compile Include="Stuff Items\Guns\Multiplicator.cs" />
     <Compile Include="Stuff Items\Actives\ObsidianPistol.cs" />
     <Compile Include="Stuff Items\Guns\Octagun.cs" />
-    <Compile Include="OMITB Extensions and Hooks\OMITBBulletExtensions.cs" />
-    <Compile Include="OMITB Extensions and Hooks\OMITBGunExtensions.cs" />
-    <Compile Include="OMITB Extensions and Hooks\OMITBMathsAndLogicExtensions.cs" />
-    <Compile Include="OMITB Extensions and Hooks\OMITBPlayerExtensions.cs" />
     <Compile Include="OMITB Misc Toolboxes\DataCloners.cs" />
     <Compile Include="OMITB Misc Toolboxes\ProjSpawnHelper.cs" />
     <Compile Include="OMITB Misc Toolboxes\ProjectileComponents\ProjectileComponents.cs" />
@@ -601,6 +627,8 @@
     <Compile Include="Stuff Items\Guns\Viscerifle.cs" />
     <Compile Include="Stuff Items\Misc Passives\WarpBullets.cs" />
     <Compile Include="Stuff Items\Guns\WheelLock.cs" />
+    <Compile Include="KillUnlockHandler.cs" />
+    <Compile Include="TempAPIUntilAlexandriaUpdate.cs" />
     <Compile Include="WhereTheMagicHappens.cs" />
     <Compile Include="Stuff Items\Misc Passives\ClaySculpture.cs" />
     <Compile Include="Stuff Items\Misc Passives\CleansingRounds.cs" />
@@ -701,7 +729,7 @@
     <Compile Include="Stuff Items\Actives\LuckyCoin.cs" />
     <Compile Include="Stuff Items\Actives\MagickeCauldron.cs" />
     <Compile Include="Stuff Items\Misc Passives\MaidenShapedBox.cs" />
-    <Compile Include="OMITB Misc Game Changers\MasteryReplacement.cs" />
+    <Compile Include="OMITB Misc Game Changers\AdditionalMasteries.cs" />
     <Compile Include="Stuff Items\Misc Passives\MicroAIContact.cs" />
     <Compile Include="Stuff Items\Misc Passives\MinersBullets.cs" />
     <Compile Include="Stuff Items\Guns\Minigun.cs" />
@@ -889,9 +917,6 @@
     <EmbeddedResource Include="Resources\caseymimic_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\forsakenheart_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\shopcoupon_icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -976,9 +1001,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\blackholster_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\liquidmetalbody_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\tabletechammo_icon.png" />
@@ -5521,13 +5543,13 @@
       <HintPath>..\packages\HarmonyX.2.7.0\lib\net35\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Alexandria, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EtG.Alexandria.0.1.2.3\lib\net35\Alexandria.dll</HintPath>
+      <HintPath>..\packages\EtG.Alexandria.0.2.6\lib\net35\Alexandria.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EtG.GameLibs.2.1.9-r.0\lib\net35\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\packages\EtG.GameLibs.2.1.9.1\lib\net35\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EtG.GameLibs.2.1.9-r.0\lib\net35\Assembly-CSharp-firstpass.dll</HintPath>
+      <HintPath>..\packages\EtG.GameLibs.2.1.9.1\lib\net35\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx, Version=5.4.21.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\BepInEx.BaseLib.5.4.21\lib\net35\BepInEx.dll</HintPath>
@@ -5536,7 +5558,7 @@
       <HintPath>..\packages\Ionic.Zip.1.9.1.8\lib\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="ModTheGungeonAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EtG.ModTheGungeonAPI.1.5.3\lib\net35\ModTheGungeonAPI.dll</HintPath>
+      <HintPath>..\packages\EtG.ModTheGungeonAPI.1.5.5\lib\net35\ModTheGungeonAPI.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.10.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
       <HintPath>..\packages\Mono.Cecil.0.10.4\lib\net35\Mono.Cecil.dll</HintPath>
@@ -5560,7 +5582,7 @@
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net35\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PlayMaker, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EtG.GameLibs.2.1.9-r.0\lib\net35\PlayMaker.dll</HintPath>
+      <HintPath>..\packages\EtG.GameLibs.2.1.9.1\lib\net35\PlayMaker.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -5724,7 +5746,145 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\NeoItemSprites\flamechamber_icon.png" />
+    <EmbeddedResource Include="Resources\NeoItemSprites\heartofgold_icon.png" />
+    <EmbeddedResource Include="Resources\NeoActiveSprites\venusianbars_icon.png" />
+    <EmbeddedResource Include="Resources\BulletModifiers\gildedlead_icon.png" />
+    <EmbeddedResource Include="Resources\NeoItemSprites\forsakenheart_icon.png" />
+    <EmbeddedResource Include="Resources\NeoItemSprites\liquidmetalbody_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NeoItemSprites\pickledpepper_icon.png" />
+    <EmbeddedResource Include="Resources\NeoItemSprites\pepperpoppers_icon.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\PepperPopper\popper_deactivate_001.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\PepperPopper\popper_deactivate_002.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\PepperPopper\popper_deactivate_003.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\PepperPopper\popper_deactivate_004.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\PepperPopper\popper_deactivate_005.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\PepperPopper\popper_deactivate_006.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\PepperPopper\popper_deactivate_007.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\PepperPopper\popper_deactivate_008.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\PepperPopper\popper_deactivate_009.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\PepperPopper\popper_idle_001.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\PepperPopper\popper_idle_002.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\PepperPopper\popper_idle_003.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\PepperPopper\popper_idle_004.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\PepperPopper\popper_idle_005.png" />
+    <EmbeddedResource Include="Resources\ThrowableActives\PepperPopper\popper_idle_006.png" />
+    <EmbeddedResource Include="Resources\GuonStones\blackguonstone_icon.png" />
+    <EmbeddedResource Include="Resources\GuonStones\blackguonstone_orbital.png" />
+    <EmbeddedResource Include="Resources\GuonStones\blackguonstone_synergy.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\pocolocobeam_mid_001.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\pocolocobeam_mid_002.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\pocolocobeam_mid_003.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\pocolocobeam_mid_004.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\pocolocobeam_mid_005.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\pocolocobeam_mid_006.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\pocolocobeam_mid_007.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\pocolocobeam_mid_008.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\pocolocobeam_mid_009.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\pocolocobeam_mid_010.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\pocolocobeam_mid_011.png" />
+    <EmbeddedResource Include="Resources\BeamSprites\pocolocobeam_mid_012.png" />
+    <EmbeddedResource Include="Resources\NeoActiveSprites\bambarrage_icon.png" />
+    <EmbeddedResource Include="Resources\NeoItemSprites\iridiumsnakemilk_icon.png" />
+    <EmbeddedResource Include="Resources\NeoItemSprites\starfruit_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_attack_001.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_attack_002.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_attack_003.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_attack_004.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_attack_005.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_attack_006.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_idleeast_001.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_idleeast_002.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_idleeast_003.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_idleeast_004.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_idlenorth_001.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_idlenorth_002.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_idlenorth_003.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_idlenorth_004.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_idlesouth_001.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_idlesouth_002.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_idlesouth_003.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_idlesouth_004.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_idlewest_001.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_idlewest_002.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_idlewest_003.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_idlewest_004.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_moveeast_001.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_movenorth_001.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_movesouth_001.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_movewest_001.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_spawn_001.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_spawn_002.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_spawn_003.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_spawn_004.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_spawn_005.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_spawn_006.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_spawn_007.png" />
+    <EmbeddedResource Include="Resources\Companions\OrganDonorCompanions\organdonorcompanion_spawn_008.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="icon.ico" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\red_electricimpact_001.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\red_electricimpact_002.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\red_electricimpact_003.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\darcweapon_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\darcweapon_clipfull.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\bigdarctrail_mid_001.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\bigdarctrail_mid_002.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\bigdarctrail_mid_003.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\darctrail_mid_001.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\darctrail_mid_002.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\darctrail_mid_003.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\bigarctrail_mid_001.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\bigarctrail_mid_002.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\bigarctrail_mid_003.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\arctrail_mid_001.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\arctrail_mid_002.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\arctrail_mid_003.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_icon.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\CompanionVFX\loveburstaoe_vfx_001.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\CompanionVFX\loveburstaoe_vfx_002.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\CompanionVFX\loveburstaoe_vfx_003.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\CompanionVFX\loveburstaoe_vfx_004.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\CompanionVFX\loveburstaoe_vfx_005.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_hopback_001.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_hopback_002.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_hopback_003.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_hopback_004.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_hopback_005.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_hopback_006.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_hopleft_001.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_hopleft_002.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_hopleft_003.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_hopleft_004.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_hopleft_005.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_hopleft_006.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_hopright_001.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_hopright_002.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_hopright_003.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_hopright_004.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_hopright_005.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_hopright_006.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_idlebackright_001.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_idlebackright_002.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_idlebackright_003.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_idlebackright_004.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_idleleft_001.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_idleleft_002.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_idleleft_003.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_idleleft_004.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_idleright_001.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_idleright_002.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_idleright_003.png" />
+    <EmbeddedResource Include="Resources\Companions\Hapulon\hapulon_idleright_004.png" />
+    <EmbeddedResource Include="Resources\NeoItemSprites\blastingcap_icon.png" />
+    <EmbeddedResource Include="Resources\NeoItemSprites\bluecap_icon.png" />
+    <EmbeddedResource Include="Resources\NeoItemSprites\rectangularmirror_icon.png" />
+    <EmbeddedResource Include="Resources\NeoItemSprites\sculptorschisel_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\BepInEx.Core.5.4.21\build\BepInEx.Core.targets" Condition="Exists('..\packages\BepInEx.Core.5.4.21\build\BepInEx.Core.targets')" />

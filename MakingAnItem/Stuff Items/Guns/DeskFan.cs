@@ -10,6 +10,7 @@ using ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using Dungeonator;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {

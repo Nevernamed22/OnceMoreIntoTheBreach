@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -13,36 +13,17 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Tracer Rounds";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/tracerrounds_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<TracerRound>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Follow The Red Line";
             string longDesc = "Shots have a chance to leave a trail of fire, marking their exact trajectory." + "\n\nStandard issue for military training exercises, weapons tests, and really bad assassins.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
-
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D;
-
+            item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_TRACERROUNDS, true);
             item.AddItemToTrorcMetaShop(8);
 

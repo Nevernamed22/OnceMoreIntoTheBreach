@@ -6,7 +6,8 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 
@@ -79,12 +80,21 @@ namespace NevernamedsItems
             {
                 if (opener.CurrentGun.ammo >= 150)
                 {
+                    List<PickupObject.ItemQuality> Qualities = new List<PickupObject.ItemQuality>()
+                    {
+                        PickupObject.ItemQuality.D,
+                        PickupObject.ItemQuality.C,
+                        PickupObject.ItemQuality.B,
+                        PickupObject.ItemQuality.A,
+                        PickupObject.ItemQuality.S,
+                    };
+
                     chest.PredictContents(opener);
                     List<PickupObject> newCont = new List<PickupObject>();
                     int itemNum = chest.contents.Count;
                     for (int i = 0; i < itemNum; i++)
                     {
-                        PickupObject item = LootEngine.GetItemOfTypeAndQuality<PickupObject>(LootHelpers.RandomTier(), null, false);
+                        PickupObject item = LootEngine.GetItemOfTypeAndQuality<PickupObject>(BraveUtility.RandomElement(Qualities), null, false);
                         newCont.Add(item);
                     }
                     chest.contents.Clear();
@@ -94,6 +104,7 @@ namespace NevernamedsItems
             }
             orig(chest, opener);
         }
+        
         public Entropew()
         {
 

@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -83,7 +84,7 @@ namespace NevernamedsItems
                                 float angle = 0;
                                 for (int i = 0; i < 8; i++)
                                 {
-                                    BeamToolbox.FreeFireBeamFromAnywhere(InfraredGuonStone.InfraredBeam, player, orbital, Vector2.zero, false, angle, 1);
+                                    BeamAPI.FreeFireBeamFromAnywhere(InfraredGuonStone.InfraredBeam, player, orbital, Vector2.zero, angle, 1);
                                     angle += 45;
                                 }
                             }

@@ -47,7 +47,7 @@ namespace NevernamedsItems
         {
             if (user.Blanks <= 0 && user.HasPickupID(BlankhID))
             {
-                if(user.ModdedCharacterIdentity() == ModdedCharacterID.Shade)
+                if(user.characterIdentity == OMITBChars.Shade)
                 {
                     if (user.carriedConsumables.Currency > 15)
                     {
@@ -64,7 +64,7 @@ namespace NevernamedsItems
                     }
                     else
                     {
-                        if (user.characterIdentity == PlayableCharacters.Robot && user.healthHaver.Armor > 1)
+                        if (user.ForceZeroHealthState && user.healthHaver.Armor > 1)
                         {
                             user.healthHaver.Armor -= 1;
                             user.ForceBlank(25f, 0.5f, false, true, null, true, -1f);

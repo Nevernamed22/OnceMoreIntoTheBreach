@@ -139,7 +139,14 @@ namespace NevernamedsItems
                 if (playerController.PlayerHasActiveSynergy("Discworld"))
                 {
                     PlayableCharacters characterIdentity = playerController.characterIdentity;
-                    if (characterIdentity != PlayableCharacters.Robot)
+                    if(playerController.ForceZeroHealthState)
+                    {
+                        if (playerController.healthHaver.Armor <= 1)
+                        {
+                            isProtectedByDiscworld = true;
+                        }
+                    }
+                    else 
                     {
                         if (playerController.healthHaver.Armor == 0 || playerController.healthHaver.NextDamageIgnoresArmor)
                         {
@@ -157,14 +164,7 @@ namespace NevernamedsItems
                         {
                             isProtectedByDiscworld = true;
                         }
-                    }
-                    else
-                    {
-                        if (playerController.healthHaver.Armor <= 1)
-                        {
-                            isProtectedByDiscworld = true;
-                        }
-                    }
+                    }                    
                 }
                 PlayerController component = otherRigidbody.GetComponent<PlayerController>();
                 if (component && !component.IsGhost)

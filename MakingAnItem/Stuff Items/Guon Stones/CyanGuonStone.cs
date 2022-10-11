@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
 using System.Collections;
 using System.Reflection;
+using Alexandria.Misc;
 using MonoMod.RuntimeDetour;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -30,6 +31,7 @@ namespace NevernamedsItems
 
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.A;
+            item.SetTag("guon_stone");
 
             BuildPrefab();
             item.OrbitalPrefab = orbitalPrefab;
@@ -102,7 +104,7 @@ namespace NevernamedsItems
             {
                 if (Owner && Owner.IsInCombat && Owner.specRigidbody.Velocity == Vector2.zero && canFire)
                 {
-                    GameObject gameObject = SpawnManager.SpawnProjectile(cyanGuonProj.gameObject, this.m_extantOrbital.GetComponent<tk2dSprite>().WorldCenter, Quaternion.Euler(0f, 0f, this.m_extantOrbital.GetComponent<tk2dSprite>().WorldCenter.GetVectorToNearestEnemy(0, 5, Owner).ToAngle()), true);
+                    GameObject gameObject = SpawnManager.SpawnProjectile(cyanGuonProj.gameObject, this.m_extantOrbital.GetComponent<tk2dSprite>().WorldCenter, Quaternion.Euler(0f, 0f, this.m_extantOrbital.GetComponent<tk2dSprite>().WorldCenter.CalculateVectorBetween(this.m_extantOrbital.GetComponent<tk2dSprite>().WorldCenter.GetNearestEnemyToPosition(true, Dungeonator.RoomHandler.ActiveEnemyType.All, null, null).CenterPosition).ToAngle()), true);
                     Projectile component = gameObject.GetComponent<Projectile>();
                     if (component != null)
                     {

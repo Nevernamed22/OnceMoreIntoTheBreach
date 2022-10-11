@@ -7,8 +7,9 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -40,53 +41,29 @@ namespace NevernamedsItems
             gun.SetBaseMaxAmmo(200);
             gun.gunClass = GunClass.PISTOL;
             //BULLET STATS
-            Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
-            projectile.gameObject.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(projectile);
+            Projectile projectile = gun.DefaultModule.projectiles[0].InstantiateAndFakeprefab();
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.transform.parent = gun.barrelOffset;
             projectile.baseData.speed *= 0.65f;
             projectile.baseData.range *= 2f;
             projectile.baseData.damage *= 1.6f;
+            SelfReAimBehaviour reaim = projectile.gameObject.GetOrAddComponent<SelfReAimBehaviour>();
+            reaim.maxReloadReAims = 1;
+            reaim.trigger = SelfReAimBehaviour.ReAimTrigger.RELOAD;
 
             gun.quality = PickupObject.ItemQuality.C;
-            gun.encounterTrackable.EncounterGuid = "this is the Pista";
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             PistaID = gun.PickupObjectId;
         }
         public static int PistaID;
         public override void PostProcessProjectile(Projectile projectile)
         {
-            ActiveBullets.Add(projectile);
-            base.PostProcessProjectile(projectile);
-        }
-        public override void OnReloadPressed(PlayerController player, Gun gun, bool bSOMETHING)
-        {
-            if (ActiveBullets.Count > 0)
+            if (projectile.gameObject.GetComponent<SelfReAimBehaviour>() && projectile.ProjectilePlayerOwner() && projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Pistols Requiem"))
             {
-                foreach (Projectile bullet in ActiveBullets)
-                {
-                    if (bullet)
-                    {
-                        bullet.ReAimToNearestEnemy();
-                        if (!player.PlayerHasActiveSynergy("Pistols Requiem")) BulletsToRemoveFromActiveBullets.Add(bullet);
-                    }
-                }
-                foreach (Projectile bullet in BulletsToRemoveFromActiveBullets)
-                {
-                    ActiveBullets.Remove(bullet);
-                }
-                BulletsToRemoveFromActiveBullets.Clear();
+                projectile.gameObject.GetComponent<SelfReAimBehaviour>().maxReloadReAims = 100;
             }
-            base.OnReloadPressed(player, gun, bSOMETHING);
-        }
-        public static List<Projectile> ActiveBullets = new List<Projectile>() { };
-        public static List<Projectile> BulletsToRemoveFromActiveBullets = new List<Projectile>() { };
-        public Pista()
-        {
-
-        }
+            base.PostProcessProjectile(projectile);
+        }        
     }
 }

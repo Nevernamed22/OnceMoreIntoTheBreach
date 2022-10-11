@@ -18,14 +18,15 @@ using Random = System.Random;
 using FullSerializer;
 using Gungeon;
 using LootTableAPI;
-using CustomCharacters;
+using Alexandria.CharacterAPI;
 using BepInEx;
 using Alexandria;
 
 namespace NevernamedsItems
 {
-    [BepInPlugin(GUID, "Once More Into The Breach", "1.0.0")]
+    [BepInPlugin(GUID, "Once More Into The Breach", "1.28.1")]
     [BepInDependency(ETGModMainBehaviour.GUID)]
+    [BepInDependency("etgmodding.etg.mtgapi")]
     [BepInDependency("kyle.etg.gapi")]
     [BepInDependency("alexandria.etgmod.alexandria")]
     public class Initialisation : BaseUnityPlugin
@@ -81,13 +82,9 @@ namespace NevernamedsItems
 
                 //Hooks n Shit
                 PlayerToolsSetup.Init();
-                EnemyHooks.InitEnemyHooks();
                 CompanionisedEnemyUtility.InitHooks();
-                MiscUnlockHooks.InitHooks();
+
                 FloorAndGenerationToolbox.Init();
-                ExplosionHooks.Init();
-                ChestToolbox.Inithooks();
-                UIHooks.Init();
                 ComplexProjModBeamCompatibility.Init();
                 ReloadBreachShrineHooks.Init();
 
@@ -121,13 +118,18 @@ namespace NevernamedsItems
                 //VFX
                 LockdownStatusEffect.Initialise();
 
+                //Tweaks and Changes
+                EnemyHealthModifiers.Init();
+
+                //Unlock Handlers and Hooks
+
+                MiscUnlockHooks.InitHooks();
+
                 //Testing / Debug Items
                 ActiveTestingItem.Init();
                 PassiveTestingItem.Init();
                 BulletComponentLister.Init();
                 ObjectComponentLister.Init();
-
-
 
                 //-----------------------------------------------------ITEMS GET INITIALISED
                 #region ItemInitialisation
@@ -228,6 +230,8 @@ namespace NevernamedsItems
                 MobiusClip.Init();
                 ClipOnAmmoPouch.Init();
                 JawsOfDefeat.Init();
+                IridiumSnakeMilk.Init();
+                Starfruit.Init();
                 //Armour
                 ArmourBandage.Init();
                 GoldenArmour.Init();
@@ -296,10 +300,12 @@ namespace NevernamedsItems
                 TableTechGuon.Init();
                 TableTechNology.Init();
                 UnsTableTech.Init();
+                RectangularMirror.Init();
                 //Guon Stones
                 WoodGuonStone.Init();
                 YellowGuonStone.Init();
                 GreyGuonStone.Init();
+                BlackGuonStone.Init();
                 GoldGuonStone.Init();
                 BrownGuonStone.Init();
                 CyanGuonStone.Init();
@@ -368,6 +374,7 @@ namespace NevernamedsItems
                 Gusty.Init();
                 ScrollOfExactKnowledge.Init();
                 LilMunchy.Init();
+                Hapulon.Init();
                 //Potions / Jars 
                 SpeedPotion.Init();
                 LovePotion.Init();
@@ -410,6 +417,12 @@ namespace NevernamedsItems
                 //Bombs
                 InfantryGrenade.Init();
                 DiceGrenade.Init();
+                //Peppers
+                PickledPepper.Init();
+                PepperPoppers.Init();
+                //Mushrooms
+                PercussionCap.Init();
+                BlastingCap.Init();
                 //True Misc
                 Lvl2Molotov.Init();
                 GoldenAppleCore.Init();
@@ -464,6 +477,7 @@ namespace NevernamedsItems
                 EightButton.Init();
                 TitaniumClip.Init();
                 PaperBadge.Init();
+                SculptorsChisel.Init();
                 Permafrost.Init();
                 GlassShard.Init();
                 EqualityItem.Init();
@@ -473,6 +487,7 @@ namespace NevernamedsItems
                 Moonrock.Init();
                 Telekinesis.Init();
                 TabletOfOrder.Init();
+                Bambarrage.Init();
                 LeadSoul.Init();
                 LeadOfLife.Init();
                 AWholeBulletKin.Init();
@@ -562,6 +577,7 @@ namespace NevernamedsItems
                 //SCI-FI GUNS
                 Blasmaster.Add();
                 St4ke.Add();
+                Robogun.Add();
                 RedBlaster.Add();
                 BeamBlade.Add();
                 Neutrino.Add();
@@ -574,6 +590,7 @@ namespace NevernamedsItems
                 VacuumGun.Add();
                 Oxygun.Add();
                 TriBeam.Add();
+                WaveformLens.Add();
                 KineticBlaster.Add();
                 LaserWelder.Add();
                 QBeam.Add();
@@ -632,6 +649,7 @@ namespace NevernamedsItems
                 RiskRifle.Add();
                 RiotGun.Add();
                 Kalashnirang.Add();
+                Schwarzlose.Add();
                 MaidenRifle.Add();
                 Blizzkrieg.Add();
                 Copygat.Add();
@@ -692,6 +710,7 @@ namespace NevernamedsItems
                 BigShot.Add();
                 W3irdstar.Add();
                 Seismograph.Add();
+                PocoLoco.Add();
                 BioTranstater2100.Add();
                 //MAGICAL GUNS
                 Icicle.Add();
@@ -742,6 +761,7 @@ namespace NevernamedsItems
                 StickGunQuickDraw.Add();
                 StormRod.Add();
                 UnrustyShotgun.Add();
+                DARCPistol.Add();
                 #endregion
 
 
@@ -802,7 +822,7 @@ namespace NevernamedsItems
                             ""); //Past ID String
                 */
                 //Other Features
-                MasteryReplacementOub.InitDungeonHook();
+                AdditionalMasteries.Init();
                 CadenceAndOxShopPoolAdditions.Init();
                 CustomHuntingQuest.Init();
 
@@ -816,10 +836,10 @@ namespace NevernamedsItems
                 SynergyFormInitialiser.AddSynergyForms();
                 ExistantGunModifiers.Init();
 
+                //Setup lead of life companions
+                LeadOfLifeInitCompanions.BuildPrefabs();
 
-                //Late Hooks
-                AmmoPickupHooks.Init();
-                HealthPickupHooks.Init();
+                KillUnlockHandler.Init();
 
                 ETGModConsole.Commands.AddUnit("nndebugflow", (args) => { DungeonHandler.debugFlow = !DungeonHandler.debugFlow; string status = DungeonHandler.debugFlow ? "enabled" : "disabled"; string color = DungeonHandler.debugFlow ? "00FF00" : "FF0000"; ETGModConsole.Log($"OMITB flow {status}", false); });
 
@@ -868,7 +888,7 @@ namespace NevernamedsItems
                 ETGModConsole.Log(e.StackTrace);
             }
         }
-        
+
         public IEnumerator delayedstarthandler()
         {
             yield return null;
@@ -882,6 +902,8 @@ namespace NevernamedsItems
                 LibramOfTheChambers.LateInit();
 
                 CrossmodNPCLootPoolSetup.CheckItems();
+
+                OMITBChars.Shade = ETGModCompatibility.ExtendEnum<PlayableCharacters>(Initialisation.GUID, "Shade");
 
                 ETGModConsole.Log("(Also finished DelayedInitialisation)");
             }

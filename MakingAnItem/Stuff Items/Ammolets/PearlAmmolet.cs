@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 using System.Collections;
 using System;
@@ -8,6 +8,7 @@ using System.Reflection;
 using Gungeon;
 using System.Collections.Generic;
 using SaveAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {

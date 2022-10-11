@@ -107,10 +107,7 @@ namespace NevernamedsItems
                 specRigidbody2.OnPreRigidbodyCollision = (SpeculativeRigidbody.OnPreRigidbodyCollisionDelegate)Delegate.Remove(specRigidbody2.OnPreRigidbodyCollision, new SpeculativeRigidbody.OnPreRigidbodyCollisionDelegate(this.OnPreCollision));
                 //IsCurrentlyActive = false;
             }
-            if (this)
-            {
-                AkSoundEngine.PostEvent("Play_OBJ_metalskin_end_01", base.gameObject);
-            }
+            
             yield break;
         }
         private void OnPreCollision(SpeculativeRigidbody myRigidbody, PixelCollider myCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherCollider)

@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -78,8 +78,8 @@ namespace NevernamedsItems
             armourProjectile.pierceMinorBreakables = true;
             armourProjectile.SetProjectileSpriteRight("viscerifle_armour_projectile", 12, 8, false, tk2dBaseSprite.Anchor.MiddleCenter, 12, 8);
             armourProjectile.transform.parent = gun.barrelOffset;
-            BlankOnHitModifier blankingArmour = armourProjectile.gameObject.GetOrAddComponent<BlankOnHitModifier>();
-            blankingArmour.useTinyBlank = false;
+            BlankProjModifier blankingArmor = armourProjectile.gameObject.GetOrAddComponent<BlankProjModifier>();
+            blankingArmor.blankType = Alexandria.Misc.EasyBlankType.FULL;
 
 
             //CREST
@@ -94,8 +94,8 @@ namespace NevernamedsItems
             crestProjectile.pierceMinorBreakables = true;
             crestProjectile.SetProjectileSpriteRight("viscerifle_crest_projectile", 12, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 12, 9);
             crestProjectile.transform.parent = gun.barrelOffset;
-            BlankOnHitModifier blankingCrest = crestProjectile.gameObject.GetOrAddComponent<BlankOnHitModifier>();
-            blankingCrest.useTinyBlank = false;
+            BlankProjModifier blankingCrest = crestProjectile.gameObject.GetOrAddComponent<BlankProjModifier>();
+            blankingCrest.blankType = Alexandria.Misc.EasyBlankType.FULL;
             BounceProjModifier Bouncing = crestProjectile.gameObject.GetOrAddComponent<BounceProjModifier>();
             Bouncing.numberOfBounces = 1;
 
@@ -116,7 +116,7 @@ namespace NevernamedsItems
 
             gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "this is the Viscerifle";
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_VISCERIFLE, true);
             gun.AddItemToGooptonMetaShop(23);
@@ -220,7 +220,7 @@ namespace NevernamedsItems
         }
         private string DeterminedUsedHealth(PlayerController player)
         {
-            if (player.ModdedCharacterIdentity() == ModdedCharacterID.Shade)
+            if (player.characterIdentity == OMITBChars.Shade)
             {
                 return "shade";
             }
@@ -252,41 +252,7 @@ namespace NevernamedsItems
 
         }
     }
-    public class BlankOnHitModifier : MonoBehaviour
-    {
-        public bool useTinyBlank;
-        public BlankOnHitModifier()
-        {
-        }
-        private void Awake()
-        {
-            this.m_projectile = base.GetComponent<Projectile>();
-            this.m_projectile.OnDestruction += this.HandleBlankOnDestruction;
-        }
-        private void HandleBlankOnDestruction(Projectile obj)
-        {
-            GameObject silencerVFX = (GameObject)ResourceCache.Acquire("Global VFX/BlankVFX_Ghost");
-            GameObject bigSilencerVFX = (GameObject)ResourceCache.Acquire("Global VFX/BlankVFX");
-            if (useTinyBlank) AkSoundEngine.PostEvent("Play_OBJ_silenceblank_small_01", base.gameObject);
-            else AkSoundEngine.PostEvent("Play_OBJ_silenceblank_use_01", base.gameObject);
-            GameObject gameObject = new GameObject("silencer");
-            SilencerInstance silencerInstance = gameObject.AddComponent<SilencerInstance>();
-            float additionalTimeAtMaxRadius = 0.25f;
-            PlayerController player = obj.Owner as PlayerController;
-            if (player)
-            {
-                if (useTinyBlank)
-                {
-                    silencerInstance.TriggerSilencer(((!obj.specRigidbody) ? obj.transform.position.XY() : obj.specRigidbody.UnitCenter), 20f, 10f, silencerVFX, 0f, 3f, 3f, 3f, 30f, 3f, additionalTimeAtMaxRadius, player, true, false);
-                }
-                else
-                {
-                    silencerInstance.TriggerSilencer(((!obj.specRigidbody) ? obj.transform.position.XY() : obj.specRigidbody.UnitCenter), 50f, 25f, bigSilencerVFX, 0.15f, 0.2f, 50f, 10f, 140f, 15f, 0.5f, player, true, false);
-                }
-            }
-        }
-        private Projectile m_projectile;
-    }
+    
     public class DieFuckYou : MonoBehaviour
     {
         public DieFuckYou()

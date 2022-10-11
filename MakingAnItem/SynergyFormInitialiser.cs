@@ -128,6 +128,8 @@ namespace NevernamedsItems
             ProperCareNMaintenance.SynergyGunId = UnrustyShotgun.UnrustyShotgunID;
             ProperCareNMaintenance.SynergyToCheck = "Proper Care & Maintenance";
             #endregion
+
+            AddSynergyForm(ARCPistol.ID, DARCPistol.ID, "DARC Pistol");
             //-------------------------------------------------------------DUAL WIELDING
             #region Dual Wielding
             //STUN GUN & TRANQ GUN
@@ -173,6 +175,13 @@ namespace NevernamedsItems
             SBBRebondir.PartnerGunID = Rico.RicoID;
             SBBRebondir.SynergyNameToCheck = "Super Bounce Bros";
             #endregion
+        }
+        public static void AddSynergyForm(int baseGun, int newGun, string synergy)
+        {
+            AdvancedTransformGunSynergyProcessor forme = (PickupObjectDatabase.GetById(baseGun) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
+            forme.NonSynergyGunId = baseGun;
+            forme.SynergyGunId = newGun;
+            forme.SynergyToCheck = synergy;
         }
     }
 }

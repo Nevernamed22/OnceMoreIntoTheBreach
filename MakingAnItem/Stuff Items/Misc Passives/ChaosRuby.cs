@@ -39,7 +39,7 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D;
-            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.BEATEN_ANY_BOSS_TURBO_MODE, true);
+            item.SetupUnlockOnCustomFlag(CustomDungeonFlags.BEATEN_KEEP_TURBO_MODE, true);
 
         }
         bool hasPicked = false;
@@ -59,7 +59,7 @@ namespace NevernamedsItems
                 }
                 else
                 {
-                    if (effect.statToEffect == PlayerStats.StatType.Health && characterIdentity == PlayableCharacters.Robot)
+                    if (effect.statToEffect == PlayerStats.StatType.Health && Owner.ForceZeroHealthState)
                     {
                         LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(120).gameObject, Owner);
                     }

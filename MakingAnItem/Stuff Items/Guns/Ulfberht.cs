@@ -6,7 +6,8 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -58,7 +59,8 @@ namespace NevernamedsItems
             spawner.spawnOnObjectCollisions = true;
             spawner.spawnCollisionProjectilesOnBounce = true;
             spawner.randomRadialStartAngle = true;
-            GameObject proj2 = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].gameObject.InstantiateAndFakeprefab();
+
+            GameObject proj2 =  (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].gameObject.InstantiateAndFakeprefab();
             proj2.GetComponent<Projectile>().AdditionalScaleMultiplier = 0.8f;
             proj2.GetComponent<Projectile>().baseData.damage = 3;
             spawner.projectileToSpawnOnCollision = proj2.GetComponent<Projectile>();
@@ -74,7 +76,7 @@ namespace NevernamedsItems
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Ulfbehrt Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/ulfbehrt_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/ulfbehrt_clipempty");
 
             gun.quality = PickupObject.ItemQuality.D;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
             ID = gun.PickupObjectId;
 
         }

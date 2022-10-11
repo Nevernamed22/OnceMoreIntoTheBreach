@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Alexandria.ItemAPI;
 using Dungeonator;
 using Gungeon;
-using ItemAPI;
 using SaveAPI;
 using UnityEngine;
 
@@ -97,7 +97,7 @@ namespace NevernamedsItems
                     int angle = 135;
                     for (int i = 0; i < 4; i++)
                     {
-                        BeamController beam = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.gameObject, Vector2.zero, false, angle, 1, true);
+                        BeamController beam = BeamAPI.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.gameObject, Vector2.zero,  angle, 1, true);
                         Projectile beamprojcomponent = beam.GetComponent<Projectile>();
                         beamprojcomponent.baseData.damage *= 3f;
                         if (PassiveItem.IsFlagSetForCharacter(this.Owner, typeof(BattleStandardItem))) beamprojcomponent.baseData.damage *= BattleStandardItem.BattleStandardCompanionDamageMultiplier;
@@ -110,7 +110,7 @@ namespace NevernamedsItems
                     int angle = 180;
                     for (int i = 0; i < 4; i++)
                     {
-                        BeamController beam = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.gameObject, Vector2.zero, false, angle, 1, true);
+                        BeamController beam = BeamAPI.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.gameObject, Vector2.zero,  angle, 1, true);
                         Projectile beamprojcomponent = beam.GetComponent<Projectile>();
                         beamprojcomponent.baseData.damage *= 3f;
                         if (PassiveItem.IsFlagSetForCharacter(this.Owner, typeof(BattleStandardItem))) beamprojcomponent.baseData.damage *= BattleStandardItem.BattleStandardCompanionDamageMultiplier;

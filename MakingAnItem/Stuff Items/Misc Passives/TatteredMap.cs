@@ -35,7 +35,7 @@ namespace NevernamedsItems
                     Minimap.Instance.RevealMinimapRoom(roomHandler, true, false, roomHandler == GameManager.Instance.PrimaryPlayer.CurrentRoom);
                 }
             }
-            Minimap.Instance.RegenerateMapTilemap();
+            Minimap.Instance.m_shouldBuildTilemap = true;
         }
         public override void Pickup(PlayerController player)
         {

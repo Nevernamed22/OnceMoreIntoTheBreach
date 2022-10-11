@@ -46,11 +46,11 @@ namespace NevernamedsItems
         public static string spriteDefinition = "NevernamedsItems/Resources/Shrines/turtle_icon";
         public static bool CanUse(PlayerController player, GameObject shrine)
         {
-            if (player.characterIdentity != PlayableCharacters.Robot && player.healthHaver.GetCurrentHealth() > 0.5f)
+            if (!player.ForceZeroHealthState && player.healthHaver.GetCurrentHealth() > 0.5f)
             {
                 return true;
             }
-            else if (player.characterIdentity == PlayableCharacters.Robot && player.healthHaver.Armor > 1)
+            else if (player.ForceZeroHealthState && player.healthHaver.Armor > 1)
             {
                 return true;
             }

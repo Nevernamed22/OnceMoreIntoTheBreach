@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -49,7 +49,7 @@ namespace NevernamedsItems
             projectile.gameObject.AddComponent<ChromaGunBulletBehav>();
             projectile.transform.parent = gun.barrelOffset;
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
             ChromaGunId = gun.PickupObjectId;
             gun.gunClass = GunClass.SILLY;
             SetupChromaDroids();

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Dungeonator;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using System.Collections;
 
 namespace NevernamedsItems
@@ -13,37 +13,19 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Voodoollets";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/voodoollets_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<Voodoollets>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Doll-ay, Oh, Oh, We Come Doll-ay!";
             string longDesc = "Whenever any enemy suffers damage, another shall be wounded in kind." + "\n\nA relic left behind by a strange cult of voodoo worshippers, who sought to open a portal to Bullet Heaven." + "\nThey vanished without a trace. Perhaps what awaited them was not the heaven they had hoped." + "\n\nKaliba Eléison";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.A;
+            item.SetTag("bullet_modifier");
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
         }
 
-        //SYNERGY WITH SPARE KEY --> "Spare Keybullet Kin"
         private void OnEnemyDamaged(float damage, bool fatal, HealthHaver enemy)
         {
             try

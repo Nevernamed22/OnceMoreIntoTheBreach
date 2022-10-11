@@ -6,8 +6,9 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -63,7 +64,7 @@ namespace NevernamedsItems
             projectile.transform.parent = gun.barrelOffset;
 
             gun.quality = PickupObject.ItemQuality.A; 
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             gun.AddToSubShop(ItemBuilder.ShopType.Cursula);
             SpiralID = gun.PickupObjectId;

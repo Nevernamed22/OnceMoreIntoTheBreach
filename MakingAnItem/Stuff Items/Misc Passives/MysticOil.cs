@@ -30,7 +30,7 @@ namespace NevernamedsItems
 
             //Ammonomicon entry variables
             string shortDesc = "Soyled It";
-            string longDesc = "Oil supposedly used to shine the glittering barrels and gleaming chambers of Bullet Heaven, though the existence of the place is but a mere rumour.\n\n" + "Works best on Automatic weapons.";
+            string longDesc = "Drastically increases firerate, and removes the need to reload- but greatly stunts damage.\n\n"+"Oil supposedly used to shine the glittering barrels and gleaming chambers of Bullet Heaven, though the existence of the place is but a mere rumour.\n\n" + "Works best on Automatic weapons.";
 
             //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
             //Do this after ItemBuilder.AddSpriteToObject!
@@ -39,7 +39,7 @@ namespace NevernamedsItems
             //Adds the actual passive effect to the item
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.RateOfFire, 100f, StatModifier.ModifyMethod.ADDITIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 0.2f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AmmoCapacityMultiplier, 5f, StatModifier.ModifyMethod.MULTIPLICATIVE);
+            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AmmoCapacityMultiplier, 15f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ReloadSpeed, 0.01f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ChargeAmountMultiplier, 100f, StatModifier.ModifyMethod.MULTIPLICATIVE);
 
@@ -52,7 +52,7 @@ namespace NevernamedsItems
         public override void Pickup(PlayerController player)
         {
             bool pickemmed = m_pickedUpThisRun;
-            player.PostProcessProjectile += this.DoEffect;
+            player.PostProcessProjectile += this.PostProcess;
             base.Pickup(player);
             if (!pickemmed)
             {
@@ -68,28 +68,34 @@ namespace NevernamedsItems
         }
         public override DebrisObject Drop(PlayerController player)
         {
-            player.PostProcessProjectile -= this.DoEffect;
-            DebrisObject debrisObject = base.Drop(player);
-            return debrisObject;
+            player.PostProcessProjectile -= this.PostProcess;
+            return base.Drop(player);
+        }
+        public override void Update()
+        {
+            if (Owner && Owner.CurrentGun)
+            {
+                if (Owner.CurrentGun.ammo > Owner.CurrentGun.ClipCapacity)
+                {
+                    if (Owner.CurrentGun.ClipShotsRemaining < Owner.CurrentGun.ClipCapacity)
+                    {
+                        Owner.CurrentGun.MoveBulletsIntoClip(Owner.CurrentGun.ClipCapacity - Owner.CurrentGun.ClipShotsRemaining);
+                    }
+                }
+            }
+            base.Update();
         }
         public override void OnDestroy()
         {
             if (Owner)
             {
-                Owner.PostProcessProjectile -= this.DoEffect;
+                Owner.PostProcessProjectile -= this.PostProcess;
             }
             base.OnDestroy();
         }
-        private void DoEffect(Projectile projectile, float effectChanceScalar)
+        private void PostProcess(Projectile projectile, float effectChanceScalar)
         {
-            if (Owner.CurrentGun != null)
-            {
-                Invoke("GiveBulletBack", 0.1f);
-            }
-        }
-        private void GiveBulletBack()
-        {
-            Owner.CurrentGun.MoveBulletsIntoClip(1);
+            projectile.gameObject.GetOrAddComponent<PierceDeadActors>();
         }
     }
 }

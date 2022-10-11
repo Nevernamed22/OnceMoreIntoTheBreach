@@ -4,6 +4,7 @@ using UnityEngine;
 using GungeonAPI;
 using System.Collections.Generic;
 using ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {

@@ -63,7 +63,7 @@ namespace NevernamedsItems
         {
             AkSoundEngine.PostEvent("Play_OBJ_heart_heal_01", user.gameObject);
             user.PlayEffectOnActor((PickupObjectDatabase.GetById(73).GetComponent<HealthPickup>().healVFX), Vector3.zero, true, false, false);
-            if (user.characterIdentity == PlayableCharacters.Robot)
+            if (user.ForceZeroHealthState)
             {
                 if (user.PlayerHasActiveSynergy("Apple A Day")) LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(120).gameObject, user);
                 LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(120).gameObject, user);

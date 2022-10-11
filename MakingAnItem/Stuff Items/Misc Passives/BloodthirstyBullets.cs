@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -20,14 +21,10 @@ namespace NevernamedsItems
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
             string shortDesc = "Born in the Fray";
             string longDesc = "Bullets either deal massive bonus damage to enemies, or enjam them." + "\n\nThese bullets were designed, cast, and shaped in the middle of combat to train them for the battlefield.";
-
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
-
-
-
             item.quality = PickupObject.ItemQuality.B;
-
+            item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_MINES, true);
             BloodthirstyBulletsID = item.PickupObjectId;
         }

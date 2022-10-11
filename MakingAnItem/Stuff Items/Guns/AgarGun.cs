@@ -9,6 +9,7 @@ using UnityEngine;
 using ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {

@@ -106,8 +106,7 @@ namespace NevernamedsItems
                 {
                     PickupObject byId = PickupObjectDatabase.GetById(132);
                     player.AcquirePassiveItemPrefabDirectly(byId as PassiveItem);
-                    PlayableCharacters characterIdentity = LastOwner.characterIdentity;
-                    if (characterIdentity == PlayableCharacters.Robot)
+                    if (player.ForceZeroHealthState)
                     {
                         LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(120).gameObject, LastOwner);
                         LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(120).gameObject, LastOwner);
@@ -128,12 +127,10 @@ namespace NevernamedsItems
 
         private void applyWeirdHealing()
         {
-            PlayableCharacters characterIdentity = LastOwner.characterIdentity;
-            if (characterIdentity != PlayableCharacters.Robot)
-            {
+            
                 LastOwner.healthHaver.ApplyHealing(2);
-            }
-            else if (characterIdentity == PlayableCharacters.Robot)
+            
+            if (LastOwner.ForceZeroHealthState)
             {
                 LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(120).gameObject, LastOwner);
                 LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(120).gameObject, LastOwner);

@@ -9,6 +9,7 @@ using MonoMod;
 using UnityEngine;
 using ItemAPI;
 using SaveAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -51,7 +52,7 @@ namespace NevernamedsItems
             gun.gunClass = GunClass.SILLY;
 
             //BULLET STATS
-            Projectile projectile = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].gameObject.InstantiateAndFakeprefab().GetComponent<Projectile>();
+            Projectile projectile = ProjectileUtility.SetupProjectile(86);
             gun.DefaultModule.projectiles[0] = projectile;
             gun.InfiniteAmmo = true;
             projectile.baseData.damage = 4f;
@@ -92,7 +93,7 @@ namespace NevernamedsItems
                 }
             }
 
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
             ID = gun.PickupObjectId;
 
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.BOSSRUSH_BULLET, true);

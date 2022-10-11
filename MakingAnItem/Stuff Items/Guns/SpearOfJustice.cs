@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -55,7 +55,7 @@ namespace NevernamedsItems
 
             gun.quality = PickupObject.ItemQuality.A;
             gun.encounterTrackable.EncounterGuid = "this is the Spear of Justice";
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
             SpearOfJusticeID = gun.PickupObjectId;
         }
         public static int SpearOfJusticeID;

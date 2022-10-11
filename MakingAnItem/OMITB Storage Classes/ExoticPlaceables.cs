@@ -1,4 +1,5 @@
-﻿using Dungeonator;
+﻿using Alexandria.ItemAPI;
+using Dungeonator;
 using System;
 using System.Collections.Generic;
 using System.Linq;

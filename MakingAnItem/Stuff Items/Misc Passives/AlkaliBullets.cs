@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -22,6 +22,7 @@ namespace NevernamedsItems
             string longDesc = "The alkali metals that make up these slugs react violently with the copious amounts of fluid present in Blobulonian creatures.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.A;
+            item.SetTag("bullet_modifier");
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_ALKALIBULLETS, true);
             item.AddItemToGooptonMetaShop(30);
@@ -36,32 +37,20 @@ namespace NevernamedsItems
         }
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
-            InstaKillEnemyTypeBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<InstaKillEnemyTypeBehaviour>();
-            instakill.EnemyTypeToKill.AddRange(EasyEnemyTypeLists.ModInclusiveBlobsALL);
+            ProjectileInstakillBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
+            instakill.tagsToKill.Add("blobulon");
+            instakill.protectBosses = false;
+            instakill.enemyGUIDSToEraseFromExistence.Add(EnemyGuidDatabase.Entries["bloodbulon"]);
         }
         private void PostProcessBeam(BeamController sourceBeam)
         {
-            if (sourceBeam.projectile)
-            {
-                this.PostProcessProjectile(sourceBeam.projectile, 1);
-            }
+            if (sourceBeam.projectile) this.PostProcessProjectile(sourceBeam.projectile, 1);
         }
-        public override DebrisObject Drop(PlayerController player)
+        public override void DisableEffect(PlayerController player)
         {
-            DebrisObject debrisObject = base.Drop(player);
             player.PostProcessProjectile -= this.PostProcessProjectile;
             player.PostProcessBeam -= this.PostProcessBeam;
-            return debrisObject;
+            base.DisableEffect(player);
         }
-        public override void OnDestroy()
-        {
-            if (Owner)
-            {
-                Owner.PostProcessProjectile -= this.PostProcessProjectile;
-                Owner.PostProcessBeam -= this.PostProcessBeam;
-            }
-            base.OnDestroy();
-        }
-
     }
 }

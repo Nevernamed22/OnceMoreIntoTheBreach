@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -19,7 +19,7 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:red_robin", "nn:red_robin");
             gun.gameObject.AddComponent<RedRobin>();
             gun.SetShortDescription("Healthy Option");
-            gun.SetLongDescription("Deals bonus damage at full health."+"\n\nThe signature weapon of Gungeoneer 'Hearts Ferros', famous for never being shot in a gunfight... until he was.");
+            gun.SetLongDescription("Deals bonus damage at full health." + "\n\nThe signature weapon of Gungeoneer 'Hearts Ferros', famous for never being shot in a gunfight... until he was.");
 
             gun.SetupSprite(null, "redrobin_idle_001", 8);
 
@@ -67,7 +67,7 @@ namespace NevernamedsItems
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.SMALL_BLASTER;
             gun.quality = PickupObject.ItemQuality.D;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
             ID = gun.PickupObjectId;
         }
         public static int ID;
@@ -83,16 +83,17 @@ namespace NevernamedsItems
         {
             if (projectile && gun && gun.GunPlayerOwner())
             {
-                if (gun.GunPlayerOwner().characterIdentity == PlayableCharacters.Robot)
+                if (gun.GunPlayerOwner().ForceZeroHealthState)
                 {
-                    if (gun.GunPlayerOwner().healthHaver.Armor > 6)
+                    if (gun.GunPlayerOwner().characterIdentity == OMITBChars.Shade)
                     {
                         BuffProj(projectile);
                     }
-                    else if (gun.GunPlayerOwner().ModdedCharacterIdentity() == ModdedCharacterID.Shade)
+                    else if (gun.GunPlayerOwner().healthHaver.Armor > 6)
                     {
                         BuffProj(projectile);
                     }
+
                 }
                 else if (gun.GunPlayerOwner().healthHaver.GetCurrentHealthPercentage() == 1)
                 {

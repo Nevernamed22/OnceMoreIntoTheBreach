@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -13,32 +13,16 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Rando Rounds";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/rando6_icon";
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<RandoRounds>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Something Up";
             string longDesc = "Increases two random bullet related stats by 15%."+"\n\nThese shells were hand-crafted by Chancelot, the disgraced Ex-Knight of the Octagonal Table."+"\n\nOne of the order's most popular members, he was cast out after being caught in Princess Gunivere's chambers.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.C;
+            item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_RANDOROUNDS, true);
             item.AddItemToDougMetaShop(19);
         }

@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
+using Alexandria.ChestAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -34,26 +36,26 @@ namespace NevernamedsItems
 
             IntVector2 bestRewardLocation = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
 
-            ChestToolbox.ChestTier tier = dupeChest.GetChestTier();
+            ChestUtility.ChestTier tier = dupeChest.GetChestTier();
 
-            if (tier == ChestToolbox.ChestTier.RAT)
+            if (tier == ChestUtility.ChestTier.RAT)
             {
-                tier = ChestToolbox.ChestTier.RED;
+                tier = ChestUtility.ChestTier.RED;
             }
-            else if (tier == ChestToolbox.ChestTier.TRUTH)
+            else if (tier == ChestUtility.ChestTier.TRUTH)
             {
-                tier = ChestToolbox.ChestTier.BLUE;
+                tier = ChestUtility.ChestTier.BLUE;
             }
 
-            ChestToolbox.ThreeStateValue isMimic = ChestToolbox.ThreeStateValue.UNSPECIFIED;
-            if (dupeChest.IsMimic) isMimic = ChestToolbox.ThreeStateValue.FORCEYES;
-            else isMimic = ChestToolbox.ThreeStateValue.FORCENO;
+            ThreeStateValue isMimic = ThreeStateValue.UNSPECIFIED;
+            if (dupeChest.IsMimic) isMimic = ThreeStateValue.FORCEYES;
+            else isMimic = ThreeStateValue.FORCENO;
 
-            ChestToolbox.ThreeStateValue isFused = ChestToolbox.ThreeStateValue.UNSPECIFIED;
-            if (dupeChest.GetFuse() != null) isFused = ChestToolbox.ThreeStateValue.FORCEYES;
-            else isFused = ChestToolbox.ThreeStateValue.FORCENO;
+            ThreeStateValue isFused = ThreeStateValue.UNSPECIFIED;
+            if (dupeChest.GetFuse() != null) isFused = ThreeStateValue.FORCEYES;
+            else isFused = ThreeStateValue.FORCENO;
 
-            Chest spawnedChest = ChestToolbox.SpawnChestEasy(bestRewardLocation, tier, dupeChest.IsLocked, Chest.GeneralChestType.UNSPECIFIED, isMimic, isFused);
+            Chest spawnedChest = ChestUtility.SpawnChestEasy(bestRewardLocation, tier, dupeChest.IsLocked, Chest.GeneralChestType.UNSPECIFIED, isMimic, isFused);
 
             if (dupeChest.GetComponent<JammedChestBehav>()) spawnedChest.gameObject.AddComponent<JammedChestBehav>();
             else if (dupeChest.GetComponent<PassedOverForJammedChest>()) spawnedChest.gameObject.AddComponent<PassedOverForJammedChest>();

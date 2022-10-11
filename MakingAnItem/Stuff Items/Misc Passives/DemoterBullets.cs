@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using Gungeon;
 using Dungeonator;
@@ -22,6 +22,7 @@ namespace NevernamedsItems
             string longDesc = "Chance to downgrade enemies into a less powerful form." + "\n\nBusiness is Business, and Business is universal. The Gungeon is no exception. It's unfortunate, but those not up to the Gungeon's rigorous standards may have to be... fired." + "\n\nDemoter? I hardly even know her!";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.C;
+            item.SetTag("bullet_modifier");
         }
         public void onFired(Projectile bullet, float eventchancescaler)
         {

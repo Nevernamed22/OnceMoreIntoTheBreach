@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -57,17 +57,19 @@ namespace NevernamedsItems
             orAddComponent.penetratesBreakables = true;
             orAddComponent.penetration = 1;
 
+
+
             projectile.SetProjectileSpriteRight("accelerator_projectile", 11, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 8);
             
             projectile.transform.parent = gun.barrelOffset;
 
 
             gun.quality = PickupObject.ItemQuality.C;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
-            WelrodID = gun.PickupObjectId;
+            ID = gun.PickupObjectId;
         }
-        public static int WelrodID;
+        public static int ID;
         public Accelerator()
         {
 

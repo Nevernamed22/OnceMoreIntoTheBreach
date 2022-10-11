@@ -34,49 +34,41 @@ namespace NevernamedsItems
 
         public override void DoEffect(PlayerController user)
         {
-            //Activates the effect
-            PlayableCharacters characterIdentity = user.characterIdentity;
-            
-            if (characterIdentity != PlayableCharacters.Robot)
-            {
-                AkSoundEngine.PostEvent("Play_VO_lichA_cackle_01", base.gameObject);
-                float MaxHP2 = user.stats.GetBaseStatValue(PlayerStats.StatType.Health);
-                MaxHP2 -= 1;
-                user.stats.SetBaseStatValue(PlayerStats.StatType.Health, MaxHP2, user);
-                float currentCurse = user.stats.GetBaseStatValue(PlayerStats.StatType.Curse);
-                currentCurse += 1f;
-                user.stats.SetBaseStatValue(PlayerStats.StatType.Curse, currentCurse, user);
-                float currentDamage = user.stats.GetBaseStatValue(PlayerStats.StatType.Damage);
-                currentDamage *= 1.20f;
-                user.stats.SetBaseStatValue(PlayerStats.StatType.Damage, currentDamage, user);
-            }
-            else if (characterIdentity == PlayableCharacters.Robot)
-            {
-                AkSoundEngine.PostEvent("Play_VO_lichA_cackle_01", base.gameObject);
-                user.healthHaver.Armor = user.healthHaver.Armor - 2;
-                float currentCurse = user.stats.GetBaseStatValue(PlayerStats.StatType.Curse);
-                currentCurse += 1f;
-                user.stats.SetBaseStatValue(PlayerStats.StatType.Curse, currentCurse, user);
-                float currentDamage = user.stats.GetBaseStatValue(PlayerStats.StatType.Damage);
-                currentDamage *= 1.20f;
-                user.stats.SetBaseStatValue(PlayerStats.StatType.Damage, currentDamage, user);
-            }
-            
-            //start a coroutine which calls the EndEffect method when the item's effect duration runs out
+            AkSoundEngine.PostEvent("Play_VO_lichA_cackle_01", base.gameObject);
 
+            if (user.ForceZeroHealthState) { user.healthHaver.Armor -= 2; }
+            else
+            {
+                StatModifier hp = new StatModifier()
+                {
+                    amount = -1f,
+                    statToBoost = PlayerStats.StatType.Health,
+                    modifyType = StatModifier.ModifyMethod.ADDITIVE,
+                };
+                user.ownerlessStatModifiers.Add(hp);
+            }
+
+            StatModifier curse = new StatModifier()
+            {
+                amount = 1.5f,
+                statToBoost = PlayerStats.StatType.Curse,
+                modifyType = StatModifier.ModifyMethod.ADDITIVE,
+            };
+            StatModifier dmg = new StatModifier()
+            {
+                amount = 1.20f,
+                statToBoost = PlayerStats.StatType.Damage,
+                modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+            };
+
+            user.ownerlessStatModifiers.Add(dmg);
+            user.ownerlessStatModifiers.Add(curse);
+            user.stats.RecalculateStats(user);
         }
         public override bool CanBeUsed(PlayerController user)
         {
-            PlayableCharacters characterIdentity = user.characterIdentity;
-            if (characterIdentity == PlayableCharacters.Robot)
-            {
-                return user.healthHaver.Armor > 2;
-            }
-            else
-            {
-                return user.healthHaver.GetMaxHealth() > 1f;
-            }
-
+            if (user.ForceZeroHealthState) { return user.healthHaver.Armor > 2; }
+            else return user.healthHaver.GetMaxHealth() > 1f;
         }
     }
 }

@@ -63,7 +63,7 @@ namespace NevernamedsItems
             shrine.GetComponent<CustomShrineController>().numUses++;
             if (UnityEngine.Random.value <= 0.5f)
             {
-                if (player.characterIdentity == PlayableCharacters.Robot)
+                if (player.ForceZeroHealthState)
                 {
                     player.healthHaver.Armor += 4;
                 }
@@ -84,7 +84,7 @@ namespace NevernamedsItems
             }
             else
             {
-                if (player.characterIdentity == PlayableCharacters.Robot)
+                if (player.ForceZeroHealthState)
                 {
                     player.healthHaver.Armor = 1;
                 }

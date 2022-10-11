@@ -6,7 +6,8 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -56,8 +57,7 @@ namespace NevernamedsItems
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Fire Lance Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/firelance_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/firelance_clipempty");
 
             gun.quality = PickupObject.ItemQuality.D;
-            gun.encounterTrackable.EncounterGuid = "this is the Fire Lance";
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
             FireLanceID = gun.PickupObjectId;
         }
         public static int FireLanceID;

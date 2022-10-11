@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 
@@ -23,15 +23,10 @@ namespace NevernamedsItems
             string longDesc = "The arcane runes and nullifying antimagic field of these bullets allows them to break through the protective wards of Gunjurers with ease.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.B;
-
+            item.SetTag("bullet_modifier");
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
 
-            AntimagicRoundsID = item.PickupObjectId;
-
-            GunjurerCatchHook = new Hook(
-                typeof(WizardSpinShootBehavior).GetMethod("OnTriggerCollision", BindingFlags.Instance | BindingFlags.NonPublic),
-                typeof(AntimagicRounds).GetMethod("GunjurerPreCatch", BindingFlags.Static | BindingFlags.Public)
-            );
+            AntimagicRoundsID = item.PickupObjectId;        
         }
         public static int AntimagicRoundsID;
         public override void Pickup(PlayerController player)
@@ -42,44 +37,20 @@ namespace NevernamedsItems
         }
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
-            InstaKillEnemyTypeBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<InstaKillEnemyTypeBehaviour>();
-            instakill.EnemyTypeToKill.AddRange(EasyEnemyTypeLists.ModInclusiveMagicEnemies);
+            ProjectileInstakillBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
+            instakill.tagsToKill.AddRange(new List<string>{ "gunjurer", "gunsinger", "bookllet"});
+            instakill.enemyGUIDsToKill.AddRange(new List<string> { EnemyGuidDatabase.Entries["wizbang"], EnemyGuidDatabase.Entries["pot_fairy"] });
         }
         private void PostProcessBeam(BeamController sourceBeam)
         {
-            if (sourceBeam.projectile)
-            {
-                this.PostProcessProjectile(sourceBeam.projectile, 1);
-            }
+            if (sourceBeam.projectile) this.PostProcessProjectile(sourceBeam.projectile, 1);
         }
-        public override DebrisObject Drop(PlayerController player)
+        public override void DisableEffect(PlayerController player)
         {
-            DebrisObject debrisObject = base.Drop(player);
             player.PostProcessProjectile -= this.PostProcessProjectile;
             player.PostProcessBeam -= this.PostProcessBeam;
-            return debrisObject;
+            base.DisableEffect(player);
         }
-        public override void OnDestroy()
-        {
-            if (Owner)
-            {
-                Owner.PostProcessProjectile -= this.PostProcessProjectile;
-                Owner.PostProcessBeam -= this.PostProcessBeam;
-            }
-            base.OnDestroy();
-        }
-        public static Hook GunjurerCatchHook;
-        public static void GunjurerPreCatch(Action<WizardSpinShootBehavior, SpeculativeRigidbody, SpeculativeRigidbody, CollisionData> orig, WizardSpinShootBehavior self, SpeculativeRigidbody specRigidbody, SpeculativeRigidbody sourceSpecRigidbody, CollisionData collisionData)
-        {
-            Projectile proj = collisionData.OtherRigidbody.GetComponent<Projectile>();
-            bool flag = proj && proj.ProjectilePlayerOwner() && proj.ProjectilePlayerOwner().HasPickupID(AntimagicRoundsID);
-            if (!flag)
-            {
-                orig(self, specRigidbody, sourceSpecRigidbody, collisionData);
-            }
-        }
-
     }
-
 }
 

@@ -8,6 +8,7 @@ using System.Collections;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
 using Dungeonator;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {

@@ -11,7 +11,7 @@ using ItemAPI;
 using Dungeonator;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
-
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -49,8 +49,8 @@ namespace NevernamedsItems
         {
             if ((shrine.GetComponent<CustomShrineController>().numUses == 0) || player.HasPickupID(PassiveTestingItem.DebugPassiveID))
             {
-                if (player.ModdedCharacterIdentity() == ModdedCharacterID.Shade) return true;
-                if (player.characterIdentity == PlayableCharacters.Robot)
+                if (player.characterIdentity == OMITBChars.Shade) return true;
+                if (player.ForceZeroHealthState)
                 {
                     if (player.healthHaver.Armor > 2)
                     {
@@ -102,9 +102,9 @@ namespace NevernamedsItems
         }
         public static void Accept(PlayerController player, GameObject shrine)
         {
-            if (player.characterIdentity == PlayableCharacters.Robot)
+            if (player.ForceZeroHealthState)
             {
-                if (player.ModdedCharacterIdentity() != ModdedCharacterID.Shade)
+                if (player.characterIdentity != OMITBChars.Shade)
                 {
                     player.healthHaver.Armor -= 2;
                 }
@@ -130,6 +130,8 @@ namespace NevernamedsItems
             player.stats.RecalculateStats(player);
 
             Gun gun = LootEngine.GetItemOfTypeAndQuality<Gun>(PickupObjectDatabase.Instance.GetRandomQuality(), GameManager.Instance.RewardManager.GunsLootTable, false);
+
+            Debug.Log($"Tryget gun for Artemissile, ID: {gun.PickupObjectId}");
 
             GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(ResourceCache.Acquire("Global Prefabs/HoveringGun") as GameObject, player.CenterPosition.ToVector3ZisY(0f), Quaternion.identity);
             gameObject.transform.parent = player.transform;

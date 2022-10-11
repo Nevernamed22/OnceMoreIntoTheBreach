@@ -63,7 +63,7 @@ namespace NevernamedsItems
 
             gun.DefaultModule.projectiles[0] = projectile;
             gun.quality = PickupObject.ItemQuality.D;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             BarcodeScannerID = gun.PickupObjectId;
         }

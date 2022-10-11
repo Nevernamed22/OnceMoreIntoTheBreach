@@ -6,7 +6,8 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -53,7 +54,7 @@ namespace NevernamedsItems
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).loopStart = 0;
 
             gun.quality = PickupObject.ItemQuality.C;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             GatlingGunID = gun.PickupObjectId;
         }

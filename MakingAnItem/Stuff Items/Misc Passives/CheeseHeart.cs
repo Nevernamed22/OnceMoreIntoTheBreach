@@ -29,25 +29,19 @@ namespace NevernamedsItems
             CheeseHeartID = item.PickupObjectId;
         }
         public static int CheeseHeartID;
-        private void charmAll(PlayerController user)
-        {
-            DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.CheeseDef).TimedAddGoopCircle(Owner.sprite.WorldCenter, 10, 1, false);
-        }
         public override void Pickup(PlayerController player)
         {
+            player.OnReceivedDamage += OnHitEffect;
             base.Pickup(player);
-            player.OnReceivedDamage += this.charmAll;
         }
-        public override DebrisObject Drop(PlayerController player)
+        public override void DisableEffect(PlayerController player)
         {
-            DebrisObject debrisObject = base.Drop(player);
-            player.OnReceivedDamage -= this.charmAll;
-            return debrisObject;
-        }
-        public override void OnDestroy()
+            player.OnReceivedDamage -= OnHitEffect;
+            base.DisableEffect(player);
+        }       
+        private void OnHitEffect(PlayerController user)
         {
-            if (Owner) Owner.OnReceivedDamage -= this.charmAll;
-            base.OnDestroy();
+            DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.CheeseDef).TimedAddGoopCircle(Owner.sprite.WorldCenter, 10, 1, false);
         }
     }
 }

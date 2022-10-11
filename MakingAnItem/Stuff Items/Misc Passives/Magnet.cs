@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using Dungeonator;
 using SaveAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -25,6 +26,7 @@ namespace NevernamedsItems
             string longDesc = "A mysterious artifact. Nobody is quite sure how it works."+"\n\nBullets draw in enemies. Don't take the fight to them, take them to the fight.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.D;
+            item.SetTag("bullet_modifier");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.KnockbackMultiplier, 3, StatModifier.ModifyMethod.ADDITIVE);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.BOSSRUSH_ROBOT, true);
         }

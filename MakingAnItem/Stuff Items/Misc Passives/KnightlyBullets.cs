@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -22,6 +23,7 @@ namespace NevernamedsItems
             string longDesc = "These high class slugs are reluctant to harm those higher than them in status, but they have no problem squashing the peasantry." + "\n\nFavoured by the mighty Ser Lammorack, famed Knight of the Octagonal Table, before his untimely demise...";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.C;
+            item.SetTag("bullet_modifier");
             item.CanBeDropped = true;
             KnightlyBulletsID = item.PickupObjectId;
         }

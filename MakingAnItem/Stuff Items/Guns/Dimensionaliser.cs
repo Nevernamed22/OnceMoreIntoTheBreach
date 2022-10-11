@@ -6,7 +6,8 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -342,9 +343,9 @@ namespace NevernamedsItems
         private IEnumerator HentaiTime()
         {
             yield return new WaitForSeconds(1);
-            BeamToolbox.FreeFireBeamFromAnywhere((PickupObjectDatabase.GetById(474) as Gun).DefaultModule.projectiles[0], self.ProjectilePlayerOwner(), self.gameObject, Vector2.zero, false, 90, 5, true);
-            BeamToolbox.FreeFireBeamFromAnywhere((PickupObjectDatabase.GetById(474) as Gun).DefaultModule.projectiles[0], self.ProjectilePlayerOwner(), self.gameObject, Vector2.zero, false, -45, 5, true);
-            BeamToolbox.FreeFireBeamFromAnywhere((PickupObjectDatabase.GetById(474) as Gun).DefaultModule.projectiles[0], self.ProjectilePlayerOwner(), self.gameObject, Vector2.zero, false, -135, 5, true);
+            BeamAPI.FreeFireBeamFromAnywhere((PickupObjectDatabase.GetById(474) as Gun).DefaultModule.projectiles[0], self.ProjectilePlayerOwner(), self.gameObject, Vector2.zero,  90, 5, true);
+            BeamAPI.FreeFireBeamFromAnywhere((PickupObjectDatabase.GetById(474) as Gun).DefaultModule.projectiles[0], self.ProjectilePlayerOwner(), self.gameObject, Vector2.zero,  -45, 5, true);
+            BeamAPI.FreeFireBeamFromAnywhere((PickupObjectDatabase.GetById(474) as Gun).DefaultModule.projectiles[0], self.ProjectilePlayerOwner(), self.gameObject, Vector2.zero,  -135, 5, true);
             yield return new WaitForSeconds(6);
             Die();
             yield break;
@@ -384,7 +385,7 @@ namespace NevernamedsItems
             yield return new WaitForSeconds(1);
             for (int i = 0; i < 10; i++)
             {
-                if (self.ProjectilePlayerOwner().IsInCombat) CompanionisedEnemyUtility.SpawnCompanionisedEnemy(self.ProjectilePlayerOwner(), BraveUtility.RandomElement(EasyEnemyTypeLists.SmallBullats), self.specRigidbody.UnitCenter.ToIntVector2(), false, Color.red, 7, 2, false, false);
+                if (self.ProjectilePlayerOwner().IsInCombat) CompanionisedEnemyUtility.SpawnCompanionisedEnemy(self.ProjectilePlayerOwner(), BraveUtility.RandomElement(AlexandriaTags.GetAllEnemyGuidsWithTag("small_bullat")), self.specRigidbody.UnitCenter.ToIntVector2(), false, Color.red, 7, 2, false, false);
                 yield return new WaitForSeconds(0.1f);
             }
             Die();

@@ -4,43 +4,25 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
 {
     class Junkllets : PassiveItem
     {
-        public static void Init()
+       public static void Init()
         {
-            //The name of the item
             string itemName = "Junkllets";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/junkllets_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<Junkllets>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Hunky Junk";
             string longDesc = "+5% damage for every piece of Junk the bearer posesses."+"\n\nTechnology such as this already comes pre-installed on most Hegemony Issue machine intelligences... for some reason.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.C;
-
+            item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ROBOT_HELD_FIVE_JUNK, true);
         }
         private int currentItems, lastItems;

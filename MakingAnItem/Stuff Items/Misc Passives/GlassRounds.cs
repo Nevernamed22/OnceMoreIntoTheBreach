@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -21,6 +20,7 @@ namespace NevernamedsItems
             string longDesc = "+5% damage for every Glass Guon Stone the bearer posesses."+"\n\nDisciples of the Lady of Pane are known for using these special bullets in reverence to their goddess.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.C;
+            item.SetTag("bullet_modifier");
         }
         private int currentItems, lastItems;
         public override void Update()

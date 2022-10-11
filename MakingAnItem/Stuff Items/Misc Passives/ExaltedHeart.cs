@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -39,10 +40,11 @@ namespace NevernamedsItems
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Health, 1, StatModifier.ModifyMethod.ADDITIVE);
 
             //Set the rarity of the item
-            item.quality = PickupObject.ItemQuality.EXCLUDED;
+            item.quality = PickupObject.ItemQuality.C;
 
             ExaltedHeartID = item.PickupObjectId;
             //item.AddAsChamberGunMastery("OnceMoreIntoTheBreach", 8);
+            item.RemovePickupFromLootTables();
 
         }
     }

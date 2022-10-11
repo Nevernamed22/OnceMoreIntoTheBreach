@@ -8,6 +8,7 @@ using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using SaveAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {

@@ -4,51 +4,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 using System.Text;
 using UnityEngine;
+using Alexandria.EnemyAPI;
 
 namespace NevernamedsItems
 {
     //CUSTOM PROJECTILE COMPONENTS
-    public class AutoDoShadowChainOnSpawn : MonoBehaviour
-    {
-        public AutoDoShadowChainOnSpawn()
-        {
-            this.NumberInChain = 1;
-            this.pauseLength = 0.2f;
-            this.chainScaleMult = 1;
-            this.overrideProjectile = null;
-            this.randomChainMin = 1;
-            this.randomChainMax = 4;
-            this.randomiseChainNum = false;
-        }
-        private void Start()
-        {
-            this.m_projectile = base.GetComponent<Projectile>();
 
-            if (randomiseChainNum)
-            {
-                int selectednum = UnityEngine.Random.Range(randomChainMin, randomChainMax + 1);
-                if (selectednum > 0)
-                {
-                    this.m_projectile.SpawnChainedShadowBullets(selectednum, pauseLength, chainScaleMult, overrideProjectile);
-                }
-            }
-            else
-            {
-                this.m_projectile.SpawnChainedShadowBullets(NumberInChain, pauseLength, chainScaleMult, overrideProjectile);
-            }
-        }
-        public Projectile overrideProjectile;
-        public int NumberInChain;
-        public float pauseLength;
-        public float chainScaleMult;
-        public bool randomiseChainNum;
-        public int randomChainMin;
-        public int randomChainMax;
-        private Projectile m_projectile;
-    } //Spawns a chain of shadow bullets after the host projectile.
     public class CollideWithPlayerBehaviour : MonoBehaviour
     {
         public CollideWithPlayerBehaviour()
@@ -729,55 +694,7 @@ namespace NevernamedsItems
         public float maxOrbitalRadius;
         public float damageMultOnOrbitStart;
     } //Causes the Bullets to orbit enemies they hit.
-    public class AdvancedTransmogrifyComponent : MonoBehaviour
-    {
-        public AdvancedTransmogrifyComponent()
-        {
-        }
-        private void Start()
-        {
-            self = base.GetComponent<Projectile>();
-            if (self) self.OnHitEnemy += this.OnHitEnemy;
-        }
-        private void OnHitEnemy(Projectile bullet, SpeculativeRigidbody enemy, bool fatal)
-        {
-            if (bullet && enemy && enemy.aiActor && enemy.healthHaver && !fatal && !enemy.healthHaver.IsBoss)
-            {
-                List<TransmogData> RandomisedList = RandomiseListOrder(TransmogDataList);
-                foreach (TransmogData data in RandomisedList)
-                {
-                    if (UnityEngine.Random.value <= data.TransmogChance)
-                    {
-                        enemy.aiActor.Transmogrify(EnemyDatabase.GetOrLoadByGuid(data.TargetGuid), (GameObject)ResourceCache.Acquire("Global VFX/VFX_Item_Spawn_Poof"));
-                        return;
-                    }
-                }
-            }
-        }
-        private List<TransmogData> RandomiseListOrder(List<TransmogData> oldList)
-        {
-            List<TransmogData> oldList2 = new List<TransmogData>();
-            oldList2.AddRange(oldList);
-            List<TransmogData> newList = new List<TransmogData>();
-            int oldListcount = oldList2.Count;
-            for (int i = 0; i < oldListcount; i++)
-            {
-                TransmogData selectedData = BraveUtility.RandomElement(oldList2);
-                newList.Add(selectedData);
-                oldList2.Remove(selectedData);
-            }
-            return newList;
-        }
-        private Projectile self;
-        public List<TransmogData> TransmogDataList = new List<TransmogData>();
-        public class TransmogData
-        {
-            public string TargetGuid;
-            public float TransmogChance;
-            public string identifier;
-            public bool maintainHPPercent = false;
-        }
-    } //Allows for much easier transmogrification (has a more complex list where each entry can have it's own chance and variables)
+      //Allows for much easier transmogrification (has a more complex list where each entry can have it's own chance and variables)
     public class SimpleRandomTransmogrifyComponent : MonoBehaviour
     {
         public SimpleRandomTransmogrifyComponent()
@@ -807,11 +724,13 @@ namespace NevernamedsItems
                         (GameObject)ResourceCache.Acquire("Global VFX/VFX_Item_Spawn_Poof"),
                         "Play_ENM_wizardred_appear_01",
                         false,
-                        true,
+                        null,
+                        null,
                         true,
                         true,
                         maintainHPPercent,
                         true,
+                        false,
                         false
                         );
                 }
@@ -823,42 +742,7 @@ namespace NevernamedsItems
         private Projectile self;
         public bool chaosPalette;
     } //Allows for much easier transmogrification (Picks a random GUID from a List)
-    public class InstaKillEnemyTypeBehaviour : MonoBehaviour
-    {
-        public InstaKillEnemyTypeBehaviour()
-        {
-            bossBonusDMG = 1;
-        }
-        public void Start()
-        {
-            this.m_projectile = base.GetComponent<Projectile>();
-            if (m_projectile && EnemyTypeToKill != null && EnemyTypeToKill.Count > 0)
-            {
-                this.m_projectile.OnHitEnemy += this.OnHitEnemy;
-            }
-        }
-        private void OnHitEnemy(Projectile bullet, SpeculativeRigidbody enemy, bool fatal)
-        {
-            if (enemy && enemy.aiActor && enemy.healthHaver)
-            {
-                if (!fatal)
-                {
-                    if (EnemyTypeToKill.Contains(enemy.aiActor.EnemyGuid) && !BossesToBonusDMG.Contains(enemy.aiActor.EnemyGuid))
-                    {
-                        enemy.healthHaver.ApplyDamage(1E+07f, Vector2.zero, "Erasure", CoreDamageTypes.None, DamageCategory.Unstoppable, true, null, false);
-                    }
-                    if (BossesToBonusDMG.Contains(enemy.aiActor.EnemyGuid))
-                    {
-                        enemy.healthHaver.ApplyDamage(bossBonusDMG, Vector2.zero, "Erasure", CoreDamageTypes.None, DamageCategory.Environment, true, null, false);
-                    }
-                }
-            }
-        }
-        public float bossBonusDMG;
-        private Projectile m_projectile;
-        public List<string> EnemyTypeToKill = new List<string>();
-        public List<string> BossesToBonusDMG = new List<string>();
-    } //Allows for easy insta-killing
+
 
     public class SpawnEnemyOnBulletSpawn : MonoBehaviour
     {
@@ -1430,49 +1314,49 @@ namespace NevernamedsItems
         {
             if (firetype == FireType.FORWARDS)
             {
-                BeamController beam = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, 0, 1000, true, true);
+                BeamController beam = BeamAPI.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, 0, 1000, true, true);
                 Projectile beamprojcomponent = beam.GetComponent<Projectile>();
             }
             if (firetype == FireType.BACKWARDS)
             {
-                BeamController beam = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, 180, 1000, true, true, 180);
+                BeamController beam = BeamAPI.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, 180, 1000, true, true, 180);
                 Projectile beamprojcomponent = beam.GetComponent<Projectile>();
             }
             if (firetype == FireType.CROSS || firetype == FireType.STAR)
             {
                 //NorthEast
-                BeamController beam = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, 45, 1000, true);
+                BeamController beam = BeamAPI.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, 45, 1000, true);
                 Projectile beamprojcomponent = beam.GetComponent<Projectile>();
                 beamprojcomponent.baseData.damage *= m_owner.stats.GetStatValue(PlayerStats.StatType.Damage);
                 //SouthEast
-                BeamController beam2 = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, 135, 1000, true);
+                BeamController beam2 = BeamAPI.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, 135, 1000, true);
                 Projectile beamprojcomponent2 = beam2.GetComponent<Projectile>();
                 beamprojcomponent2.baseData.damage *= m_owner.stats.GetStatValue(PlayerStats.StatType.Damage);
                 //SouthWest
-                BeamController beam3 = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, -45, 1000, true);
+                BeamController beam3 = BeamAPI.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, -45, 1000, true);
                 Projectile beamprojcomponent3 = beam3.GetComponent<Projectile>();
                 beamprojcomponent3.baseData.damage *= m_owner.stats.GetStatValue(PlayerStats.StatType.Damage);
                 //NorthWest
-                BeamController beam4 = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, -135, 1000, true);
+                BeamController beam4 = BeamAPI.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, -135, 1000, true);
                 Projectile beamprojcomponent4 = beam4.GetComponent<Projectile>();
                 beamprojcomponent4.baseData.damage *= m_owner.stats.GetStatValue(PlayerStats.StatType.Damage);
             }
             if (firetype == FireType.PLUS || firetype == FireType.STAR)
             {
                 //Right
-                BeamController beam = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, 0, 1000, true);
+                BeamController beam = BeamAPI.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, 0, 1000, true);
                 Projectile beamprojcomponent = beam.GetComponent<Projectile>();
                 beamprojcomponent.baseData.damage *= m_owner.stats.GetStatValue(PlayerStats.StatType.Damage);
                 //Up
-                BeamController beam2 = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, 90, 1000, true);
+                BeamController beam2 = BeamAPI.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, 90, 1000, true);
                 Projectile beamprojcomponent2 = beam2.GetComponent<Projectile>();
                 beamprojcomponent2.baseData.damage *= m_owner.stats.GetStatValue(PlayerStats.StatType.Damage);
                 //Left
-                BeamController beam3 = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, 180, 1000, true);
+                BeamController beam3 = BeamAPI.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, 180, 1000, true);
                 Projectile beamprojcomponent3 = beam3.GetComponent<Projectile>();
                 beamprojcomponent3.baseData.damage *= m_owner.stats.GetStatValue(PlayerStats.StatType.Damage);
                 //Down
-                BeamController beam4 = BeamToolbox.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, false, -90, 1000, true);
+                BeamController beam4 = BeamAPI.FreeFireBeamFromAnywhere(beamToFire, this.m_owner, this.m_projectile.gameObject, Vector2.zero, -90, 1000, true);
                 Projectile beamprojcomponent4 = beam4.GetComponent<Projectile>();
                 beamprojcomponent4.baseData.damage *= m_owner.stats.GetStatValue(PlayerStats.StatType.Damage);
             }
@@ -1792,188 +1676,7 @@ namespace NevernamedsItems
         }
 
     }
-    public class LightningProjectileComp : MonoBehaviour
-    {
-        public LightningProjectileComp()
-        {
-            initialAngle = float.NegativeInfinity;
-            lightningWidth = -1;
-            targetEnemies = true;
-        }
-        private void Start()
-        {
-            self = base.GetComponent<Projectile>();
-            self.OnHitEnemy += OnHitEnemy;
-            laserVFX = new List<GameObject>();
-            owner = self.ProjectilePlayerOwner();
-            if (self.GetComponent<BounceProjModifier>()) self.GetComponent<BounceProjModifier>().OnBounceContext += OnBounce;
-            StartCoroutine(moveLightning());
-
-        }
-        private void OnBounce(BounceProjModifier mod, SpeculativeRigidbody collider)
-        {
-            initialAngle = self.Direction.ToAngle();
-        }
-        private void Update()
-        {
-            if (self)
-            {
-                if (self.GetElapsedDistance() > tilesSinceLastCheck)
-                {
-                    tilesSinceLastCollision += (self.GetElapsedDistance() - tilesSinceLastCheck);
-
-                    tilesSinceLastCheck = self.GetElapsedDistance();
-                }
-            }
-            if (tilesSinceLastCollision > 3 && midEnemyZapping) midEnemyZapping = false;
-        }
-        private void OnHitEnemy(Projectile self, SpeculativeRigidbody enemy, bool fatal)
-        {
-            if (enemy && enemy.aiActor)
-            {
-                if (enemy.aiActor != lastHitEnemy)
-                {
-                    if (lastHitEnemy != null) secondToLastHitEnemy = lastHitEnemy;
-                    lastHitEnemy = enemy.aiActor;
-                }
-                tilesSinceLastCollision = 0;
-
-                //Check if there's another valid enemy around to arc to
-                if (targetEnemies)
-                {
-                    if (Vector2.Distance(enemy.UnitCenter, enemy.UnitCenter.GetPositionOfNearestEnemy(true, true, new List<AIActor>() { lastHitEnemy, secondToLastHitEnemy })) < 3)
-                    {
-                        PierceProjModifier piercing = self.gameObject.GetComponent<PierceProjModifier>();
-                        if (piercing != null)
-                        {
-                            piercing.penetration++;
-                        }
-                        else
-                        {
-                            self.gameObject.AddComponent<PierceProjModifier>();
-                        }
-
-                        //midEnemyZapping = true;
-                        float newArc = self.specRigidbody.UnitCenter.GetVectorToNearestEnemy(0, 0, self.ProjectilePlayerOwner(), new List<AIActor>() { lastHitEnemy, secondToLastHitEnemy }).ToAngle();
-                        self.SendInDirection(newArc.DegreeToVector2(), true, true); //Send the projectile in the new direction
-
-                        TriggerLightningBreak();
-
-                    }
-                }
-
-            }
-        }
-        private IEnumerator moveLightning()
-        {
-            while (self)
-            {
-                yield return new WaitForSeconds(LightningTime);
-                if (!midEnemyZapping)
-                {
-
-                    //Determine the new direction of the projectile
-                    if (initialAngle == float.NegativeInfinity) initialAngle = self.Direction.ToAngle(); //If initial angle is not set to the placeholder, set it
-                    float newArc = ProjSpawnHelper.GetAccuracyAngled(initialAngle, 80, owner); //Determine accuracy
-
-                    if (targetEnemies)
-                    {
-                        if (Vector2.Distance(self.specRigidbody.UnitCenter, self.specRigidbody.UnitCenter.GetPositionOfNearestEnemy(true, true, new List<AIActor>() { lastHitEnemy, secondToLastHitEnemy })) < 3)
-                        {
-                            newArc = self.specRigidbody.UnitCenter.GetVectorToNearestEnemy(0, 5, self.ProjectilePlayerOwner(), new List<AIActor>() { lastHitEnemy, secondToLastHitEnemy }).ToAngle();
-                        }
-                    }
-
-                    self.SendInDirection(newArc.DegreeToVector2(), true, true); //Send the projectile in the new direction
-
-
-                    TriggerLightningBreak();
-                }
-
-            }
-            yield break;
-        }
-        private void TriggerLightningBreak()
-        {
-            //Erase the TiledSpriteConnector from the last laser created, if the last laser exists.
-            if (lastLaser != null)
-            {
-                if (lastLaser.GetComponent<TiledSpriteConnector>() != null) UnityEngine.Object.Destroy(lastLaser.GetComponent<TiledSpriteConnector>());
-                lastLaser = null;
-            }
-
-            //Create New Laser Sight
-            GameObject laserSight = VFXToolbox.RenderLaserSight(self.specRigidbody.UnitCenter, 1, lightningWidth, self.Direction.ToAngle(), true, ExtendedColours.skyblue);
-
-            TiledSpriteConnector connector = laserSight.AddComponent<TiledSpriteConnector>();
-            connector.eraseSpriteIfTargetOrSourceNull = false;
-            connector.sourceRigidbody = self.specRigidbody;
-            connector.eraseComponentIfTargetOrSourceNull = true;
-            connector.targetVector = self.specRigidbody.UnitCenter;
-            connector.usesVector = true;
-
-            lastLaser = laserSight;
-            laserVFX.Add(laserSight);
-        }
-        private float LightningTime
-        {
-            get
-            {
-                //ETGModConsole.Log(BraveTime.DeltaTime.ToString());
-                return (0.005f / Time.timeScale);
-            }
-        }
-        private void OnDestroy()
-        {
-            if (laserVFX != null && laserVFX.Count > 0) ETGMod.StartGlobalCoroutine(deleteLasers(laserVFX, LightningTime, logDebug));
-        }
-        private static IEnumerator deleteLasers(List<GameObject> lasers, float delay, bool logDebug)
-        {
-            if (logDebug) ETGModConsole.Log("Running laser deletion code");
-            yield return new WaitForSeconds(delay);
-
-            List<GameObject> reversedList = new List<GameObject>();
-            for (int i = lasers.Count - 1; i >= 0; i--)
-            {
-                if (logDebug) ETGModConsole.Log($"Checking laser at index ({i}) in laser List.");
-                if (lasers[i] != null)
-                {
-                    reversedList.Add(lasers[i]);
-                    if (logDebug) ETGModConsole.Log($"Laser at index ({i}) was valid, adding to reversedList at index ({reversedList.Count - 1}).");
-                }
-            }
-            for (int i = reversedList.Count - 1; i >= 0; i--)
-            {
-                if (logDebug) ETGModConsole.Log($"Checking laser at index ({i}) in reversedList.");
-                if (reversedList[i] != null)
-                {
-                    if (logDebug) ETGModConsole.Log($"Laser at index ({i}) in reversedList exists and will be destroyed.");
-
-                    UnityEngine.Object.Destroy(reversedList[i]);
-                }
-                else { if (logDebug) ETGModConsole.Log($"Laser at index ({i}) was NULL in reversedList."); }
-                yield return new WaitForSeconds(delay);
-
-            }
-            yield break;
-        }
-        //Public
-        public bool logDebug;
-        public float lightningWidth;
-        public bool targetEnemies;
-        //Private
-        private float initialAngle;
-        private GameObject lastLaser;
-        private List<GameObject> laserVFX;
-        private Projectile self;
-        private PlayerController owner;
-
-        private AIActor lastHitEnemy;
-        private AIActor secondToLastHitEnemy;
-        private bool midEnemyZapping;
-        private float tilesSinceLastCollision;
-        private float tilesSinceLastCheck;
-    }
+    
 
     //PASSIVE ITEM EFFECTS AS COMPONENTS
     public class AngryBulletsProjectileBehaviour : MonoBehaviour
@@ -2046,49 +1749,7 @@ namespace NevernamedsItems
         public float ActivationsPerSecond;
         public float MinActivationChance;
     } //The Angry Bullets Effect as a Projectile Component.
-    public class FlakBulletsProjectileBehaviour : MonoBehaviour
-    {
-        public FlakBulletsProjectileBehaviour()
-        {
-            this.ScaleMod = 0.5f;
-            this.InheritsAppearance = true;
-            this.NumberOfFlakBullets = 3;
-            this.projectileToSpawn = Gungeon.Game.Items["flak_bullets"].GetComponent<ComplexProjectileModifier>().CollisionSpawnProjectile;
-        }
 
-        public void Start()
-        {
-            try
-            {
-                this.m_projectile = base.GetComponent<Projectile>();
-
-                SpawnProjModifier spawnProjModifier = this.m_projectile.gameObject.AddComponent<SpawnProjModifier>();
-                spawnProjModifier.SpawnedProjectilesInheritAppearance = this.InheritsAppearance;
-                spawnProjModifier.SpawnedProjectileScaleModifier = this.ScaleMod;
-                spawnProjModifier.SpawnedProjectilesInheritData = true;
-                spawnProjModifier.spawnProjectilesOnCollision = true;
-                spawnProjModifier.spawnProjecitlesOnDieInAir = true;
-                spawnProjModifier.doOverrideObjectCollisionSpawnStyle = true;
-                spawnProjModifier.startAngle = UnityEngine.Random.Range(0, 180);
-                int numberToSpawnOnCollison = this.NumberOfFlakBullets;
-                if (this.m_projectile.SpawnedFromOtherPlayerProjectile) numberToSpawnOnCollison = 2;
-
-                spawnProjModifier.numberToSpawnOnCollison = numberToSpawnOnCollison;
-                spawnProjModifier.projectileToSpawnOnCollision = this.projectileToSpawn;
-                spawnProjModifier.collisionSpawnStyle = SpawnProjModifier.CollisionSpawnStyle.FLAK_BURST;
-            }
-            catch (Exception e)
-            {
-                ETGModConsole.Log(e.Message);
-                ETGModConsole.Log(e.StackTrace);
-            }
-        }
-        private Projectile m_projectile;
-        public int NumberOfFlakBullets;
-        public float ScaleMod;
-        public bool InheritsAppearance;
-        public Projectile projectileToSpawn;
-    } //The Flak Bullets Effect as a Projectile Component.
     public class RemoteBulletsProjectileBehaviour : MonoBehaviour
     {
         public RemoteBulletsProjectileBehaviour()

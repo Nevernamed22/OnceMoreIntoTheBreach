@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using System.Collections.Generic;
@@ -24,6 +24,7 @@ namespace NevernamedsItems
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.B;
+            item.SetTag("bullet_modifier");
         }
 
         public void PostProcess(Projectile bullet, float chanceScaler)
@@ -53,6 +54,7 @@ namespace NevernamedsItems
                     if (player.PlayerHasActiveSynergy("Whirling Blade")) slashing.doSpinAttack = true;
                     if (player.PlayerHasActiveSynergy("Live By The Sword")) bullet.OnDestruction += this.OnDestruction;
 
+                    slashParams.playerKnockbackForce = 0;
                     slashing.slashParameters = slashParams;
                 }
             }

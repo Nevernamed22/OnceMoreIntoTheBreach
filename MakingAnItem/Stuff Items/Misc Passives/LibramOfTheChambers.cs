@@ -7,6 +7,7 @@ using UnityEngine;
 using ItemAPI;
 using Dungeonator;
 using System.Collections;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {

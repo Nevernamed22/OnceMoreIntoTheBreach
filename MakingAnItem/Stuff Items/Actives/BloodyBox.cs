@@ -30,29 +30,21 @@ namespace NevernamedsItems
         }
         public override void DoEffect(PlayerController user)
         {
-            PlayableCharacters characterIdentity = user.characterIdentity;
             var locationToSpawn = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
 
             AkSoundEngine.PostEvent("Play_VO_lichA_cackle_01", base.gameObject);
             Chest spawnedChest = GameManager.Instance.RewardManager.SpawnTotallyRandomChest(locationToSpawn);
             spawnedChest.RegisterChestOnMinimap(spawnedChest.GetAbsoluteParentRoom());
 
-            if (characterIdentity != PlayableCharacters.Robot) user.healthHaver.ApplyHealing(-2.5f);
-            else if (characterIdentity == PlayableCharacters.Robot) user.healthHaver.Armor = user.healthHaver.Armor - 2;
+            if (user.ForceZeroHealthState) user.healthHaver.Armor = user.healthHaver.Armor - 2;
+            else { user.healthHaver.ApplyHealing(-2.5f); }
         }
 
         public override bool CanBeUsed(PlayerController user)
         {
             PlayableCharacters characterIdentity = user.characterIdentity;
-            if (characterIdentity == PlayableCharacters.Robot)
-            {
-                return user.healthHaver.Armor > 2;
-            }
-            else
-            {
-                return user.healthHaver.GetCurrentHealth() > 2.5f;
-            }
-
+            if (user.ForceZeroHealthState) { return user.healthHaver.Armor > 2; }
+            else { return user.healthHaver.GetCurrentHealth() > 2.5f; }
         }
     }
 }

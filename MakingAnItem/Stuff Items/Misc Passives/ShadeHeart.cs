@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using Dungeonator;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using System.Collections;
 using TranslationAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -80,15 +81,34 @@ namespace NevernamedsItems
                 lastArmour = currentArmour;
             }
         }
-        
-       
-        
+        public void OnNudgedHP(PlayerController playerCont, HealthPickup self)
+        {
+            if (self.armorAmount <= 0 && self.healAmount > 0)
+            {
+                if (playerCont.HasPickupID(BloodshotEye.BloodshotEyeID))
+                {
+                    float percentPerHalfHeart = 0.02f;
+                    StatModifier statModifier = new StatModifier();
+                    statModifier.amount = (percentPerHalfHeart * Mathf.CeilToInt(self.healAmount / 0.5f)) + 1;
+                    statModifier.modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE;
+                    statModifier.statToBoost = PlayerStats.StatType.Damage;
+                    playerCont.ownerlessStatModifiers.Add(statModifier);
+                    playerCont.stats.RecalculateStats(playerCont, false, false);
+                }
+                self.m_pickedUp = true;
+                AkSoundEngine.PostEvent("Play_OBJ_coin_medium_01", self.gameObject);
+                int amountToDrop = (self.healAmount >= 1f) ? UnityEngine.Random.Range(5, 12) : UnityEngine.Random.Range(3, 7);
+                LootEngine.SpawnCurrency((!self.sprite) ? self.specRigidbody.UnitCenter : self.sprite.WorldCenter, amountToDrop, false);
+                self.GetRidOfMinimapIcon();
+                self.ToggleLabel(false);
+                UnityEngine.Object.Destroy(self.gameObject);
+            }
+        }
+
         private DamageTypeModifier m_poisonImmunity;
         private DamageTypeModifier m_fireImmunity;
         public override void Pickup(PlayerController player)
         {
-            base.Pickup(player);
-
             //Setup Immunities
             this.m_poisonImmunity = new DamageTypeModifier();
             this.m_poisonImmunity.damageMultiplier = 0f;
@@ -102,37 +122,29 @@ namespace NevernamedsItems
             //Make immune to pits
             player.ImmuneToPits.SetOverride("ShadeHeart", true, null);
 
-            //Add flight
+            //Flight
             player.SetIsFlying(true, "Shadeheart", false, false);
             player.AdditionalCanDodgeRollWhileFlying.AddOverride("Shadeheart", null);
-        }
-        public override DebrisObject Drop(PlayerController player)
-        {
-            DebrisObject debrisObject = base.Drop(player);
 
+            //Other
+            player.GetExtComp().OnNudgedHP += OnNudgedHP;
+            base.Pickup(player);
+        }
+        public override void DisableEffect(PlayerController player)
+        {
             //Remove immunities
             player.healthHaver.damageTypeModifiers.Remove(this.m_poisonImmunity);
             player.healthHaver.damageTypeModifiers.Remove(this.m_fireImmunity);
             player.ImmuneToPits.SetOverride("ShadeHeart", false, null);
 
-            //Remove flight
+            //Flight
             player.SetIsFlying(false, "Shadeheart", false, false);
             player.AdditionalCanDodgeRollWhileFlying.RemoveOverride("Shadeheart");
 
-            return debrisObject;
-        }
-        public override void OnDestroy()
-        {
-            if (Owner)
-            {
-                Owner.healthHaver.damageTypeModifiers.Remove(this.m_poisonImmunity);
-                Owner.ImmuneToPits.SetOverride("ShadeHeart", false, null);
+            //Other
+            player.GetExtComp().OnNudgedHP -= OnNudgedHP;
 
-                Owner.SetIsFlying(false, "Shadeheart", false, false);
-                Owner.AdditionalCanDodgeRollWhileFlying.RemoveOverride("Shadeheart");
-            }
-
-            base.OnDestroy();
+            base.DisableEffect(player);
         }
     }
 }

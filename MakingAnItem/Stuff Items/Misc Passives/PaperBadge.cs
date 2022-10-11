@@ -1,10 +1,11 @@
 ﻿using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using System.Collections.Generic;
 using Dungeonator;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -28,8 +29,11 @@ namespace NevernamedsItems
 
         public void PostProcess(Projectile bullet, float chanceScaler)
         {
+            if (bullet && bullet.ProjectilePlayerOwner())
+            {
             float procChance = 0.5f;
-            if (Owner.PlayerHasActiveSynergy("Lucky Day")) procChance = 0.8f;
+                procChance += bullet.ProjectilePlayerOwner().stats.GetStatValue(PlayerStats.StatType.Coolness) * 0.05f;
+            if (Owner.PlayerHasActiveSynergy("Lucky Day")) procChance += 0.3f;
             if (UnityEngine.Random.value <= procChance)
             {
                 bullet.baseData.damage *= 2;
@@ -40,27 +44,17 @@ namespace NevernamedsItems
                 bullet.baseData.damage *= 0.01f;
                 bullet.RuntimeUpdateScale(0.5f);
             }
+            }
         }
         public override void Pickup(PlayerController player)
         {
             player.PostProcessProjectile += this.PostProcess;
             base.Pickup(player);
         }
-        public override DebrisObject Drop(PlayerController player)
+        public override void DisableEffect(PlayerController player)
         {
-
             player.PostProcessProjectile -= this.PostProcess;
-
-            return base.Drop(player);
-        }
-        public override void OnDestroy()
-        {
-            if (Owner)
-            {
-                Owner.PostProcessProjectile -= this.PostProcess;
-            }
-            base.OnDestroy();
+            base.DisableEffect(player);
         }
     }
-
 }

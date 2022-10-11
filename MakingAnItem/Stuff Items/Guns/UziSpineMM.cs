@@ -8,6 +8,7 @@ using MonoMod;
 using UnityEngine;
 using ItemAPI;
 using SaveAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -61,7 +62,7 @@ namespace NevernamedsItems
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("UziSpineMM Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/uzispinemm_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/uzispinemm_clipempty");
 
             gun.quality = PickupObject.ItemQuality.C;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
             gun.AddToSubShop(ItemBuilder.ShopType.Cursula);
 
             ID = gun.PickupObjectId;

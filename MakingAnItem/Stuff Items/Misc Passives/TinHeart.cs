@@ -8,6 +8,7 @@ using MonoMod.RuntimeDetour;
 using System.Reflection;
 using Dungeonator;
 using System.Collections;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -36,7 +37,7 @@ namespace NevernamedsItems
             if (player.gameActor is PlayerController)
             {
                 PlayerController playerCont = player.gameActor as PlayerController;
-                if (playerCont.characterIdentity == PlayableCharacters.Robot)
+                if (playerCont.ForceZeroHealthState)
                 {
                     if (UnityEngine.Random.value <= 0.25f) { args.ModifiedDamage = 0; HandleRemoveHeart(); }
                 }
@@ -64,7 +65,7 @@ namespace NevernamedsItems
             Owner.ForceBlank();
             StartCoroutine(HandleShield(Owner, 7));
             if (Owner.PlayerHasActiveSynergy("Woodcutter") && Owner.CurrentGun.PickupObjectId == 346 && Owner.CurrentGun.IsReloading) return;
-            if (Owner.characterIdentity != PlayableCharacters.Robot)
+            if (!Owner.ForceZeroHealthState)
             {
                 StatModifier healthDown = new StatModifier();
                 healthDown.statToBoost = PlayerStats.StatType.Health;
@@ -86,17 +87,18 @@ namespace NevernamedsItems
         {
             if (!this.m_pickedUpThisRun)
             {
-                if (player.characterIdentity != PlayableCharacters.Robot)
+                if (player.ForceZeroHealthState)
+                {
+                    for (int i = 0; i < 2; i++) LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(120).gameObject, player);
+                }
+                else
                 {
                     if (player.healthHaver.GetCurrentHealth() > 1)
                     {
                         player.healthHaver.ApplyHealing(-1);
                     }
                 }
-                else
-                {
-                    for (int i = 0; i < 2; i++) LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(120).gameObject, player);
-                }
+                
             }
             player.healthHaver.ModifyDamage += this.ModifyDamage;
             player.healthHaver.OnPreDeath += this.OnPreDeath;

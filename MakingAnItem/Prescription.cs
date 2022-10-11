@@ -127,7 +127,7 @@ namespace NevernamedsItems
         GameActorHealthEffect poisonEffect = Gungeon.Game.Items["irradiated_lead"].GetComponent<BulletStatusEffectItem>().HealthModifierEffect;
         public void BadTrip(PlayerController user)
         {
-            if (user.characterIdentity != PlayableCharacters.Robot)
+            if (user.characterIdentity == PlayableCharacters.Robot)
             {
                 if (user.healthHaver.GetCurrentHealth() > 1) Owner.healthHaver.ApplyDamage(1f, Vector2.zero, "Pills", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
                 else if (user.healthHaver.GetCurrentHealth() == 1) Owner.healthHaver.ApplyDamage(0.5f, Vector2.zero, "Pills", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);

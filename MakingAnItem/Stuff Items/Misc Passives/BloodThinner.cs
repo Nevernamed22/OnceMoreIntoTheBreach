@@ -72,7 +72,7 @@ namespace NevernamedsItems
             else if (GameManager.Instance.SecondaryPlayer != null && GameManager.Instance.SecondaryPlayer.HasPickupID(BloodThinnerID)) { owner = GameManager.Instance.SecondaryPlayer; }
             if (owner != null)
             {
-                if (owner.healthHaver.GetCurrentHealthPercentage() == 1 || owner.characterIdentity == PlayableCharacters.Robot) shouldRerollHearts = true;
+                if (owner.healthHaver.GetCurrentHealthPercentage() == 1 || owner.ForceZeroHealthState) shouldRerollHearts = true;
                 if (shouldRerollHearts)
                 {
                     Vector2 pos = thing.transform.position;

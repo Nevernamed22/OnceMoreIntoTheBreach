@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -23,6 +24,7 @@ namespace NevernamedsItems
             string longDesc = "Bullets spend the beginning of their lives clustered close together, before splitting apart in a hearbreaking parable about the pain of growing up.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.B;
+            item.SetTag("bullet_modifier");
         }
 
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)

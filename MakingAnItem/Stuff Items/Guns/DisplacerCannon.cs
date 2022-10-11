@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 
 namespace NevernamedsItems
@@ -257,7 +257,7 @@ namespace NevernamedsItems
             {
                 if (otherRigidBody != null && otherRigidBody.aiActor != null && otherRigidBody.healthHaver != null)
                 {
-                    if (!otherRigidBody.healthHaver.IsBoss && otherRigidBody.healthHaver.IsVulnerable && !EasyEnemyTypeLists.ModInclusiveMimics.Contains(otherRigidBody.aiActor.EnemyGuid) && !DisplacerIgnoreList.Contains(otherRigidBody.aiActor.EnemyGuid) && !EasyEnemyTypeLists.Companions.Contains(otherRigidBody.aiActor.EnemyGuid))
+                    if (!otherRigidBody.healthHaver.IsBoss && otherRigidBody.healthHaver.IsVulnerable && !otherRigidBody.aiActor.HasTag("mimic") && !DisplacerIgnoreList.Contains(otherRigidBody.aiActor.EnemyGuid) && otherRigidBody.GetComponent<CompanionController>() == null && otherRigidBody.aiActor.CompanionOwner == null)
                     {
                         //VFX
                         //ETGModConsole.Log("We made it past the initial checks");

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Alexandria.Misc;
 using Dungeonator;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
@@ -322,7 +323,8 @@ namespace NevernamedsItems
                     if (Owner && Owner.IsInCombat && !isOnScramblerCooldown)
                     {
                         Projectile projectile2 = (PickupObjectDatabase.GetById(445) as Gun).DefaultModule.projectiles[0];
-                        GameObject gameObject = SpawnManager.SpawnProjectile(projectile2.gameObject, base.GetComponent<tk2dSprite>().WorldCenter, Quaternion.Euler(0f, 0f, base.GetComponent<tk2dSprite>().WorldCenter.GetVectorToNearestEnemy(0, 7, Owner).ToAngle()), true);
+                        
+                        GameObject gameObject = projectile2.InstantiateAndFireTowardsPosition(base.GetComponent<tk2dSprite>().WorldCenter, base.GetComponent<tk2dSprite>().WorldCenter.GetPositionOfNearestEnemy(ActorCenter.SPRITE), 0, 7, Owner);
                         Projectile component = gameObject.GetComponent<Projectile>();
                         if (component != null)
                         {

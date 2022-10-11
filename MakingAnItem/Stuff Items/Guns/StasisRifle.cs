@@ -99,7 +99,7 @@ namespace NevernamedsItems
             timeSlow.RadialSlowHoldTime = this.lengthOfEffect;
             timeSlow.RadialSlowTimeModifier = this.timeMultiplier;
             timeSlow.UpdatesForNewEnemies = true;
-            timeSlow.DoRadialSlow(self.specRigidbody.UnitCenter, self.GetAbsoluteRoom());
+            timeSlow.DoRadialSlow(self.specRigidbody.UnitCenter, self.transform.position.GetAbsoluteRoom());
             MagicCircleDoer.DoMagicCircle(self.specRigidbody.UnitCenter, this.radius, lengthOfEffect, ExtendedColours.freezeBlue, false);
         }
         private Projectile m_projectile;

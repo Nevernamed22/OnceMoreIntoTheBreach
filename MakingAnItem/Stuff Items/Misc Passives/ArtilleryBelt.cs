@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -42,7 +43,7 @@ namespace NevernamedsItems
         private void Fire()
         {
             AkSoundEngine.PostEvent("Play_WPN_smileyrevolver_shot_01", gameObject);
-            GameObject spawnedProj = ProjSpawnHelper.SpawnProjectileTowardsPoint((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].gameObject, Owner.specRigidbody.UnitCenter, Owner.specRigidbody.UnitCenter.GetPositionOfNearestEnemy(true, true), 0, 20, Owner);
+            GameObject spawnedProj = ProjSpawnHelper.SpawnProjectileTowardsPoint((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].gameObject, Owner.specRigidbody.UnitCenter, Owner.specRigidbody.UnitCenter.GetNearestEnemyToPosition().Position, 0, 20, Owner);
             Projectile spawnedProjectileComp = spawnedProj.GetComponent<Projectile>();
             spawnedProjectileComp.Owner = Owner;
             spawnedProjectileComp.Shooter = Owner.specRigidbody;

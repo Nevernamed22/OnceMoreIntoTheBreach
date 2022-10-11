@@ -53,7 +53,7 @@ namespace NevernamedsItems
                     }
                 }
             }
-            Minimap.Instance.RegenerateMapTilemap();
+            Minimap.Instance.m_shouldBuildTilemap = true;
         }
         public override void Pickup(PlayerController player)
         {

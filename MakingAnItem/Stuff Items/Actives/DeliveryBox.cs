@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 using SaveAPI;
 using Dungeonator;
 
@@ -121,15 +122,8 @@ namespace NevernamedsItems
         }
         private void SpawnCrate(int item)
         {
-            GameObject gameObject = (GameObject)BraveResources.Load("EmergencyCrate", ".prefab");
-            GameObject gameObject2 = UnityEngine.Object.Instantiate<GameObject>(gameObject);
-            EmergencyCrateController component = gameObject2.GetComponent<EmergencyCrateController>();
-            SimplerCrateBehaviour simpleCrate = component.TurnIntoSimplerCrate();
-            simpleCrate.LootID = item;
-
             IntVector2 bestRewardLocation = LastOwner.CurrentRoom.GetBestRewardLocation(new IntVector2(1, 1), RoomHandler.RewardLocationStyle.CameraCenter, true);
-            simpleCrate.Trigger(new Vector3(-5f, -5f, -5f), bestRewardLocation.ToVector3() + new Vector3(15f, 15f, 15f), LastOwner.CurrentRoom);
-            LastOwner.CurrentRoom.ExtantEmergencyCrate = gameObject2;
+            SupplyDropDoer.SpawnSupplyDrop(bestRewardLocation.ToVector2(), item);
         }
         private ConsumableType RandomConsumable()
         {

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -38,7 +39,8 @@ namespace NevernamedsItems
             //Adds the actual passive effect to the item
 
             //Set the rarity of the item
-            item.quality = PickupObject.ItemQuality.EXCLUDED;
+            item.quality = PickupObject.ItemQuality.C;
+            item.RemovePickupFromLootTables();
 
             GooeyHeartID = item.PickupObjectId;
             //item.AddAsChamberGunMastery("OnceMoreIntoTheBreach", 4);
@@ -84,19 +86,18 @@ namespace NevernamedsItems
             {
                 if (UnityEngine.Random.value < 0.05f)
                 {
-                    PlayableCharacters characterIdentity = Owner.characterIdentity;
-                    if (characterIdentity != PlayableCharacters.Robot)
-                    {
-                        Owner.PlayEffectOnActor(ResourceCache.Acquire("Global VFX/vfx_healing_sparkles_001") as GameObject, Vector3.zero, true, false, false);
-                        Owner.healthHaver.ApplyHealing(0.5f);
-                    }
-                    else if (characterIdentity == PlayableCharacters.Robot)
+                    if (Owner.ForceZeroHealthState)
                     {
                         if (UnityEngine.Random.value < 0.5f)
                         {
                             Owner.PlayEffectOnActor(ResourceCache.Acquire("Global VFX/vfx_healing_sparkles_001") as GameObject, Vector3.zero, true, false, false);
                             Owner.healthHaver.Armor = Owner.healthHaver.Armor + 1;
                         }
+                    }
+                    else
+                    {
+                        Owner.PlayEffectOnActor(ResourceCache.Acquire("Global VFX/vfx_healing_sparkles_001") as GameObject, Vector3.zero, true, false, false);
+                        Owner.healthHaver.ApplyHealing(0.5f);
                     }
                 }
             }

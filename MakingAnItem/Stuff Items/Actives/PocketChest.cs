@@ -6,6 +6,7 @@ using System.Text;
 using UnityEngine;
 using ItemAPI;
 using Dungeonator;
+using Alexandria.ChestAPI;
 
 namespace NevernamedsItems
 {
@@ -120,35 +121,35 @@ namespace NevernamedsItems
         }
         public override void DoEffect(PlayerController user)
         {
-            ChestToolbox.ChestTier chestToSpawn = ChestToolbox.ChestTier.OTHER;
+            ChestUtility.ChestTier chestToSpawn = ChestUtility.ChestTier.OTHER;
             switch (MemorisedTier)
             {
                 case PocketChestTier.BROWN:
-                    chestToSpawn = ChestToolbox.ChestTier.BROWN;
+                    chestToSpawn = ChestUtility.ChestTier.BROWN;
                     break;
                 case PocketChestTier.BLUE:
-                    chestToSpawn = ChestToolbox.ChestTier.BLUE;
+                    chestToSpawn = ChestUtility.ChestTier.BLUE;
                     break;
                 case PocketChestTier.GREEN:
-                    chestToSpawn = ChestToolbox.ChestTier.GREEN;
+                    chestToSpawn = ChestUtility.ChestTier.GREEN;
                     break;
                 case PocketChestTier.RED:
-                    chestToSpawn = ChestToolbox.ChestTier.RED;
+                    chestToSpawn = ChestUtility.ChestTier.RED;
                     break;
                 case PocketChestTier.BLACK:
-                    chestToSpawn = ChestToolbox.ChestTier.BLACK;
+                    chestToSpawn = ChestUtility.ChestTier.BLACK;
                     break;
                 case PocketChestTier.SYNERGY:
-                    chestToSpawn = ChestToolbox.ChestTier.SYNERGY;
+                    chestToSpawn = ChestUtility.ChestTier.SYNERGY;
                     break;
                 case PocketChestTier.RAINBOW:
-                    chestToSpawn = ChestToolbox.ChestTier.RAINBOW;
+                    chestToSpawn = ChestUtility.ChestTier.RAINBOW;
                     break;
             }
-            if (chestToSpawn != ChestToolbox.ChestTier.OTHER)
+            if (chestToSpawn != ChestUtility.ChestTier.OTHER)
             {
                 IntVector2 bestRewardLocation2 = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
-                ChestToolbox.SpawnChestEasy(bestRewardLocation2, chestToSpawn, !(chestToSpawn == ChestToolbox.ChestTier.RAINBOW || chestToSpawn == ChestToolbox.ChestTier.BROWN), Chest.GeneralChestType.UNSPECIFIED);
+                ChestUtility.SpawnChestEasy(bestRewardLocation2, chestToSpawn, !(chestToSpawn == ChestUtility.ChestTier.RAINBOW || chestToSpawn == ChestUtility.ChestTier.BROWN), Chest.GeneralChestType.UNSPECIFIED);
 
             }
         }

@@ -50,7 +50,7 @@ namespace NevernamedsItems
         {
             if (enemy.aiActor && enemy.IsBoss && fatal == true)
             {
-                if (Owner.characterIdentity == PlayableCharacters.Robot)
+                if (Owner.ForceZeroHealthState)
                 {
                     LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(120).gameObject, Owner);
                     Owner.PlayEffectOnActor(ResourceCache.Acquire("Global VFX/vfx_healing_sparkles_001") as GameObject, Vector3.zero, true, false, false);
@@ -64,7 +64,7 @@ namespace NevernamedsItems
                         LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(120).gameObject, Owner);
                     }
                 }
-                else if (Owner.characterIdentity != PlayableCharacters.Robot)
+                else 
                 {
                     float amountToHeal = 1;
                     if (Owner.HasPickupID(259))

@@ -7,11 +7,13 @@ using System.Text;
 using UnityEngine;
 using static GungeonAPI.OldShrineFactory;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.ChestAPI;
 using Dungeonator;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
-
+using Alexandria.ChestAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -46,7 +48,7 @@ namespace NevernamedsItems
         public static string spriteDefinition = "NevernamedsItems/Resources/Shrines/kliklok_icon";
         public static bool CanUse(PlayerController player, GameObject shrine)
         {
-            if (player.characterIdentity == PlayableCharacters.Robot)
+            if (player.ForceZeroHealthState)
             {
                 if (player.healthHaver.Armor > 2)
                 {
@@ -72,14 +74,14 @@ namespace NevernamedsItems
             {
                 if (chest && !chest.IsBroken && !chest.IsOpen && !chest.IsGlitched && !chest.IsLockBroken)
                 {
-                    List<ChestToolbox.ChestTier> BannedTiers = new List<ChestToolbox.ChestTier>()
+                    List<ChestUtility.ChestTier> BannedTiers = new List<ChestUtility.ChestTier>()
                     {
-                           ChestToolbox.ChestTier.OTHER,
-                           ChestToolbox.ChestTier.GLITCHED,
-                           ChestToolbox.ChestTier.RAINBOW,
-                           ChestToolbox.ChestTier.RAT,
-                           ChestToolbox.ChestTier.SECRETRAINBOW,
-                           ChestToolbox.ChestTier.TRUTH,
+                           ChestUtility.ChestTier.OTHER,
+                           ChestUtility.ChestTier.GLITCHED,
+                           ChestUtility.ChestTier.RAINBOW,
+                           ChestUtility.ChestTier.RAT,
+                           ChestUtility.ChestTier.SECRETRAINBOW,
+                           ChestUtility.ChestTier.TRUTH,
                     };
                     if (!BannedTiers.Contains (chest.GetChestTier())) Validchests.Add(chest);
                 }
@@ -88,7 +90,7 @@ namespace NevernamedsItems
         }
         public static void Accept(PlayerController player, GameObject shrine)
         {
-            if (player.characterIdentity == PlayableCharacters.Robot)
+            if (player.ForceZeroHealthState)
             {
                 player.healthHaver.Armor -= 2;
 
@@ -106,40 +108,40 @@ namespace NevernamedsItems
             }
             foreach (Chest chest in GetAllChests())
             {
-                ChestToolbox.ChestTier targetTier = ChestToolbox.ChestTier.OTHER;
-                ChestToolbox.ChestTier curTier = chest.GetChestTier();
+                ChestUtility.ChestTier targetTier = ChestUtility.ChestTier.OTHER;
+                ChestUtility.ChestTier curTier = chest.GetChestTier();
                 switch (curTier)
                 {
-                    case ChestToolbox.ChestTier.BROWN:
-                        targetTier = ChestToolbox.ChestTier.BLUE;
+                    case ChestUtility.ChestTier.BROWN:
+                        targetTier = ChestUtility.ChestTier.BLUE;
                         break;
-                    case ChestToolbox.ChestTier.BLUE:
-                        targetTier = ChestToolbox.ChestTier.GREEN;
+                    case ChestUtility.ChestTier.BLUE:
+                        targetTier = ChestUtility.ChestTier.GREEN;
                         break;
-                    case ChestToolbox.ChestTier.GREEN:
-                        if (UnityEngine.Random.value <= 0.75f) targetTier = ChestToolbox.ChestTier.RED;
-                        else targetTier = ChestToolbox.ChestTier.SYNERGY;
+                    case ChestUtility.ChestTier.GREEN:
+                        if (UnityEngine.Random.value <= 0.75f) targetTier = ChestUtility.ChestTier.RED;
+                        else targetTier = ChestUtility.ChestTier.SYNERGY;
                         break;
-                    case ChestToolbox.ChestTier.RED:
-                        targetTier = ChestToolbox.ChestTier.BLACK;
+                    case ChestUtility.ChestTier.RED:
+                        targetTier = ChestUtility.ChestTier.BLACK;
                         break;
-                    case ChestToolbox.ChestTier.BLACK:
-                        if (UnityEngine.Random.value <= 0.05f) targetTier = ChestToolbox.ChestTier.RAINBOW;
+                    case ChestUtility.ChestTier.BLACK:
+                        if (UnityEngine.Random.value <= 0.05f) targetTier = ChestUtility.ChestTier.RAINBOW;
                         else chest.ForceUnlock();
                         break;
-                    case ChestToolbox.ChestTier.SYNERGY:
-                        if (UnityEngine.Random.value <= 0.5f) targetTier = ChestToolbox.ChestTier.RED;
-                        else targetTier = ChestToolbox.ChestTier.BLACK;
+                    case ChestUtility.ChestTier.SYNERGY:
+                        if (UnityEngine.Random.value <= 0.5f) targetTier = ChestUtility.ChestTier.RED;
+                        else targetTier = ChestUtility.ChestTier.BLACK;
                         break;
                 }
 
-                ChestToolbox.ThreeStateValue isMimic = ChestToolbox.ThreeStateValue.UNSPECIFIED;
-                if (chest.IsMimic) isMimic = ChestToolbox.ThreeStateValue.FORCEYES;
-                else isMimic = ChestToolbox.ThreeStateValue.FORCENO;
+                ThreeStateValue isMimic = ThreeStateValue.UNSPECIFIED;
+                if (chest.IsMimic) isMimic = ThreeStateValue.FORCEYES;
+                else isMimic = ThreeStateValue.FORCENO;
 
-                if (targetTier != ChestToolbox.ChestTier.OTHER)
+                if (targetTier != ChestUtility.ChestTier.OTHER)
                 {
-                    Chest newChest = ChestToolbox.SpawnChestEasy(chest.sprite.WorldBottomLeft.ToIntVector2(), targetTier, chest.IsLocked, chest.ChestType, isMimic, ChestToolbox.ThreeStateValue.FORCENO);
+                    Chest newChest = ChestUtility.SpawnChestEasy(chest.sprite.WorldBottomLeft.ToIntVector2(), targetTier, chest.IsLocked, chest.ChestType, isMimic, ThreeStateValue.FORCENO);
                     if (chest.GetComponent<JammedChestBehav>()) newChest.gameObject.AddComponent<JammedChestBehav>();
 
                     player.CurrentRoom.DeregisterInteractable(chest);

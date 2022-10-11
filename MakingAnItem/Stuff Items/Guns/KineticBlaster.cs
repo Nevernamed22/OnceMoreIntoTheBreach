@@ -6,7 +6,8 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -58,7 +59,7 @@ namespace NevernamedsItems
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Kinetic Blaster Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/kineticblaster_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/kineticblaster_clipempty");
 
             gun.quality = PickupObject.ItemQuality.C;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
         }
         public override void OnPostFired(PlayerController player, Gun gun)
         {

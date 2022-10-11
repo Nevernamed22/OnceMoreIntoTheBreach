@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 
@@ -23,6 +23,7 @@ namespace NevernamedsItems
             string longDesc = "This is the first shotgun shell ever to be created, by the great Gunsmith Geddian" + "\n\nHas an affinity with all shotguns.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.B;
+            item.SetTag("bullet_modifier");
         }
         public override void Pickup(PlayerController player)
         {

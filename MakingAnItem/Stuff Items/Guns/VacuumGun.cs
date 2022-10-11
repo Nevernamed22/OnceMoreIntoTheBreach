@@ -6,8 +6,9 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -69,8 +70,9 @@ namespace NevernamedsItems
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_VACUUMGUN, true);
             gun.AddItemToGooptonMetaShop(16);
             gun.AddToSubShop(ItemBuilder.ShopType.Goopton);
-
+            ID = gun.PickupObjectId;
         }
+        public static int ID;
         public override void PostProcessProjectile(Projectile projectile)
         {
             if (projectile && projectile.ProjectilePlayerOwner())
@@ -147,19 +149,11 @@ namespace NevernamedsItems
         }
         private void ProcessEnemy(AIActor target, float distance)
         {
-            if (target && target.healthHaver && !target.healthHaver.IsBoss && EasyEnemyTypeLists.ModInclusiveBlobsALL.Contains(target.EnemyGuid))
+            if (target && target.healthHaver && !target.healthHaver.IsBoss && target.HasTag("blobulon"))
             {
                 GameManager.Instance.Dungeon.StartCoroutine(this.HandleEnemySuck(target));
                 target.EraseFromExistence(true);
-                int AmmoWorth = 0;
-                if (EasyEnemyTypeLists.BlobulonEnemiesSMALL.Contains(target.EnemyGuid)) AmmoWorth = 5;
-                else if (EasyEnemyTypeLists.BlobulonEnemiesMEDIUM.Contains(target.EnemyGuid)) AmmoWorth = 14;
-                else if (EasyEnemyTypeLists.ModInclusiveBlobsLARGE.Contains(target.EnemyGuid)) AmmoWorth = 20;
-                else if (EasyEnemyTypeLists.BlobulonEnemiesMEGA.Contains(target.EnemyGuid)) AmmoWorth = 30;
-                if (AmmoWorth > 0)
-                {
-                    gun.ammo += AmmoWorth;
-                }
+                gun.ammo += Math.Max(Mathf.CeilToInt(target.healthHaver.GetMaxHealth() * 1.5f), 5);
             }
             else if (target.EnemyGuid == EnemyGuidDatabase.Entries["chicken"])
             {

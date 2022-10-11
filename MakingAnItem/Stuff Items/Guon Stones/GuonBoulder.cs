@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
 using System.Collections;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -33,6 +33,7 @@ namespace NevernamedsItems
 
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.A;
+            item.SetTag("guon_stone");
 
             BuildPrefab();
             item.OrbitalPrefab = orbitalPrefab;

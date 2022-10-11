@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
 using System.Collections;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
+using Alexandria.Misc;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -54,17 +55,15 @@ namespace NevernamedsItems
                 "NevernamedsItems/Resources/BeamSprites/redbeam_impact_004",
             };
 
-            Projectile projectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
+            Projectile projectile = ProjectileUtility.SetupProjectile(86);
+
             BasicBeamController beamComp = projectile.GenerateBeamPrefab(
                 "NevernamedsItems/Resources/BeamSprites/redbeam_seg_001", new Vector2(18, 2), new Vector2(0, 8), BeamAnimPaths, 8,
                 ImpactAnimPaths, 13, new Vector2(4, 4), new Vector2(7, 7));
-            projectile.gameObject.SetActive(false);
+
             projectile.baseData.damage = 50;
             projectile.baseData.range = 100;
             projectile.baseData.speed = 25;
-
-            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(projectile);
             beamComp.boneType = BasicBeamController.BeamBoneType.Straight;
             beamComp.interpolateStretchedBones = false;
             beamComp.endAudioEvent = "Stop_WPN_All";
@@ -123,7 +122,7 @@ namespace NevernamedsItems
             {
                 if (Owner.IsInCombat && extantBeam == null)
                 {
-                    extantBeam = BeamToolbox.FreeFireBeamFromAnywhere(InfraredBeam, Owner, this.m_extantOrbital, Vector2.zero, false, 0, float.MaxValue);
+                    extantBeam = BeamAPI.FreeFireBeamFromAnywhere(InfraredBeam, Owner, this.m_extantOrbital, Vector2.zero,  0, float.MaxValue);
                     extantBeam.projectile.gameObject.AddComponent<AlwaysPointAwayFromPlayerBeam>();
                     if (Owner.PlayerHasActiveSynergy("Infraredder Guon Stone")) extantBeam.projectile.baseData.damage *= 2;
                     if (Owner.PlayerHasActiveSynergy("Xenochrome"))

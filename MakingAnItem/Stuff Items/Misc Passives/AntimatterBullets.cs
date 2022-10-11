@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -21,7 +21,7 @@ namespace NevernamedsItems
             string longDesc = "Your bullets have a chance to create an explosion upon intersecting with enemy bullets." + "\n\nWhy does't this trigger when you actually hit an enemy?... don't ask questions.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.A;
-
+            item.SetTag("bullet_modifier");
             AntimatterBulletsID = item.PickupObjectId;
 
         }

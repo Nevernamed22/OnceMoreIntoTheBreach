@@ -1,5 +1,7 @@
-﻿using Dungeonator;
-using ItemAPI;
+﻿using Alexandria.ChestAPI;
+using Alexandria.Misc;
+using Dungeonator;
+using Alexandria.ItemAPI;
 using Pathfinding;
 using SaveAPI;
 using System.Collections;
@@ -80,7 +82,7 @@ namespace NevernamedsItems
                         Exploder.DoDefaultExplosion(rerollChest.specRigidbody.UnitCenter, Vector2.zero);
                         if (rerollChest.IsMimic) OMITBReflectionHelpers.ReflectSetField<bool>(typeof(Chest), "m_isMimic", false, rerollChest);
                         rerollChest.majorBreakable.Break(Vector2.zero);
-                        if (rerollChest.GetChestTier() == ChestToolbox.ChestTier.RAT) UnityEngine.Object.Destroy(rerollChest.gameObject);
+                        if (rerollChest.GetChestTier() == ChestUtility.ChestTier.RAT) UnityEngine.Object.Destroy(rerollChest.gameObject);
                     }
                     break;
                 case 2: //Open Chest
@@ -193,35 +195,35 @@ namespace NevernamedsItems
         private List<CachedChestData> m_chestos = new List<CachedChestData>();
         private void UpgradeChest(Chest chest, PlayerController user)
         {
-            ChestToolbox.ChestTier tier = chest.GetChestTier();
-            ChestToolbox.ChestTier targetTier = ChestToolbox.ChestTier.OTHER;
+            ChestUtility.ChestTier tier = chest.GetChestTier();
+            ChestUtility.ChestTier targetTier = ChestUtility.ChestTier.OTHER;
             switch (tier)
             {
-                case ChestToolbox.ChestTier.BROWN:
-                    targetTier = ChestToolbox.ChestTier.BLUE;
+                case ChestUtility.ChestTier.BROWN:
+                    targetTier = ChestUtility.ChestTier.BLUE;
                     break;
-                case ChestToolbox.ChestTier.BLUE:
-                    targetTier = ChestToolbox.ChestTier.GREEN;
+                case ChestUtility.ChestTier.BLUE:
+                    targetTier = ChestUtility.ChestTier.GREEN;
                     break;
-                case ChestToolbox.ChestTier.GREEN:
-                    targetTier = ChestToolbox.ChestTier.RED;
+                case ChestUtility.ChestTier.GREEN:
+                    targetTier = ChestUtility.ChestTier.RED;
                     break;
-                case ChestToolbox.ChestTier.RED:
-                    targetTier = ChestToolbox.ChestTier.BLACK;
+                case ChestUtility.ChestTier.RED:
+                    targetTier = ChestUtility.ChestTier.BLACK;
                     break;
-                case ChestToolbox.ChestTier.BLACK:
-                    targetTier = ChestToolbox.ChestTier.RAINBOW;
+                case ChestUtility.ChestTier.BLACK:
+                    targetTier = ChestUtility.ChestTier.RAINBOW;
                     break;
-                case ChestToolbox.ChestTier.SYNERGY:
-                    targetTier = ChestToolbox.ChestTier.BLACK;
+                case ChestUtility.ChestTier.SYNERGY:
+                    targetTier = ChestUtility.ChestTier.BLACK;
                     break;
             }
 
-            ChestToolbox.ThreeStateValue isMimic = ChestToolbox.ThreeStateValue.UNSPECIFIED;
-            if (chest.IsMimic) isMimic = ChestToolbox.ThreeStateValue.FORCEYES;
-            else isMimic = ChestToolbox.ThreeStateValue.FORCENO;
+            ThreeStateValue isMimic = ThreeStateValue.UNSPECIFIED;
+            if (chest.IsMimic) isMimic = ThreeStateValue.FORCEYES;
+            else isMimic = ThreeStateValue.FORCENO;
 
-            if (targetTier != ChestToolbox.ChestTier.OTHER) ChestToolbox.SpawnChestEasy(chest.sprite.WorldBottomLeft.ToIntVector2(), targetTier, chest.IsLocked, Chest.GeneralChestType.UNSPECIFIED, isMimic);
+            if (targetTier != ChestUtility.ChestTier.OTHER) ChestUtility.SpawnChestEasy(chest.sprite.WorldBottomLeft.ToIntVector2(), targetTier, chest.IsLocked, Chest.GeneralChestType.UNSPECIFIED, isMimic);
             else GameManager.Instance.RewardManager.SpawnRewardChestAt(chest.sprite.WorldBottomLeft.ToIntVector2());
             user.CurrentRoom.DeregisterInteractable(chest);
             chest.DeregisterChestOnMinimap();
@@ -237,22 +239,22 @@ namespace NevernamedsItems
         private void DupeChest(Chest chest, PlayerController user)
         {
             IntVector2 bestRewardLocation = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
-            ChestToolbox.ChestTier tier = chest.GetChestTier();
-            if (tier == ChestToolbox.ChestTier.RAT)
+            ChestUtility.ChestTier tier = chest.GetChestTier();
+            if (tier == ChestUtility.ChestTier.RAT)
             {
-                tier = ChestToolbox.ChestTier.RED;
+                tier = ChestUtility.ChestTier.RED;
             }
-            else if (tier == ChestToolbox.ChestTier.TRUTH)
+            else if (tier == ChestUtility.ChestTier.TRUTH)
             {
-                tier = ChestToolbox.ChestTier.BLUE;
+                tier = ChestUtility.ChestTier.BLUE;
 
             }
 
-            ChestToolbox.ThreeStateValue isMimic = ChestToolbox.ThreeStateValue.UNSPECIFIED;
-            if (chest.IsMimic) isMimic = ChestToolbox.ThreeStateValue.FORCEYES;
-            else isMimic = ChestToolbox.ThreeStateValue.FORCENO;
+            ThreeStateValue isMimic = ThreeStateValue.UNSPECIFIED;
+            if (chest.IsMimic) isMimic = ThreeStateValue.FORCEYES;
+            else isMimic = ThreeStateValue.FORCENO;
 
-            ChestToolbox.SpawnChestEasy(bestRewardLocation, tier, chest.IsLocked, Chest.GeneralChestType.UNSPECIFIED, isMimic);
+            ChestUtility.SpawnChestEasy(bestRewardLocation, tier, chest.IsLocked, Chest.GeneralChestType.UNSPECIFIED, isMimic);
         }
 
         public override bool CanBeUsed(PlayerController user)

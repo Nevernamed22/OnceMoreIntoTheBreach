@@ -47,7 +47,7 @@ namespace NevernamedsItems
         public static string spriteDefinition = "NevernamedsItems/Resources/Shrines/dagun_popup";
         public static bool CanUse(PlayerController player, GameObject shrine)
         {
-            if (player.characterIdentity == PlayableCharacters.Robot)
+            if (player.ForceZeroHealthState)
             {
                 if (player.healthHaver.Armor > 2)
                 {
@@ -67,7 +67,7 @@ namespace NevernamedsItems
 
         public static void Accept(PlayerController player, GameObject shrine)
         {
-            if (player.characterIdentity == PlayableCharacters.Robot)
+            if (player.ForceZeroHealthState)
             {
                 player.healthHaver.Armor -= 2;
             }

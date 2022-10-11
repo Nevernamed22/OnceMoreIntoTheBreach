@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using System.Collections;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
 using Dungeonator;
 using SaveAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -110,8 +111,8 @@ namespace NevernamedsItems
         bool canDoBlueSynergyRoomDMG = true;
         private void FireProjectileFromGuon(GameObject projectile, bool scaleStats, bool postProcess, float specialDamageScaling = 1, float angleFromAim = 0, float angleVariance = 0, bool playerStatScalesAccuracy = false)
         {
-
-            GameObject gameObject = SpawnManager.SpawnProjectile(projectile, this.m_extantOrbital.GetComponent<tk2dSprite>().WorldCenter, Quaternion.Euler(0f, 0f, this.m_extantOrbital.GetComponent<tk2dSprite>().WorldCenter.GetVectorToNearestEnemy(angleVariance, angleFromAim, (playerStatScalesAccuracy ? Owner : null)).ToAngle()), true);
+            
+            GameObject gameObject = projectile.GetComponent<Projectile>().InstantiateAndFireTowardsPosition(this.m_extantOrbital.GetComponent<tk2dSprite>().WorldCenter, this.m_extantOrbital.GetComponent<tk2dSprite>().WorldCenter.GetPositionOfNearestEnemy(ActorCenter.SPRITE), angleVariance, angleVariance, (playerStatScalesAccuracy ? Owner : null));
             Projectile component = gameObject.GetComponent<Projectile>();
             if (component != null)
             {

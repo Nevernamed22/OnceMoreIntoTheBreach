@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -80,7 +80,7 @@ namespace NevernamedsItems
             gun.SetBaseMaxAmmo(140);
             gun.gunClass = GunClass.SHITTY;
             gun.quality = PickupObject.ItemQuality.D;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.HURT_BY_SHROOMER, true);
             ShroomedGunID = gun.PickupObjectId;
         }

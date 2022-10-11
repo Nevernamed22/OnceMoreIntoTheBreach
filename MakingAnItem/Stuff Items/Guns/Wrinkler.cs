@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -76,7 +76,7 @@ namespace NevernamedsItems
 
             gun.DefaultModule.projectiles[0] = projectile;
             gun.quality = PickupObject.ItemQuality.A;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             WrinklerID = gun.PickupObjectId;
         }
@@ -95,7 +95,7 @@ namespace NevernamedsItems
         }
         protected override void Update()
         {
-            if (gun && gun.GunPlayerOwner() && gun.GunPlayerOwner().CurrentGun && gun.GunPlayerOwner().CurrentGun.PickupObjectId == WrinklerID)
+            if (gun && gun.GunPlayerOwner() && gun.GunPlayerOwner().CurrentGun != null && gun.GunPlayerOwner().CurrentGun.PickupObjectId == WrinklerID)
             {
                 if (gun.IsReloading)
                 {
@@ -106,7 +106,7 @@ namespace NevernamedsItems
                             Projectile bullet = StaticReferenceManager.AllProjectiles[i];
                             if (bullet && (bullet.Owner == null || !(bullet.Owner is PlayerController)))
                             {
-                                if (!bullet.ImmuneToBlanks)
+                                if (!bullet.ImmuneToBlanks && bullet.specRigidbody != null)
                                 {
                                     if (Vector2.Distance(EatPosition(), bullet.specRigidbody.UnitCenter) < 1.5f)
                                     {

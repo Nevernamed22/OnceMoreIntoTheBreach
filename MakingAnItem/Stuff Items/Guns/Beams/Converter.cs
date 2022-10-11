@@ -6,8 +6,9 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
 using SaveAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -30,7 +31,7 @@ namespace NevernamedsItems
 
             //GUN STATS
             gun.doesScreenShake = false;
-            gun.DefaultModule.ammoCost = 15;
+            gun.DefaultModule.ammoCost = 20;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Beam;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
             gun.reloadTime = 1f;
@@ -40,8 +41,8 @@ namespace NevernamedsItems
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = "Y-Beam Laser";
             gun.barrelOffset.transform.localPosition = new Vector3(0.93f, 0.5f, 0f);
-            gun.SetBaseMaxAmmo(3000);
-            gun.ammo = 3000;
+            gun.SetBaseMaxAmmo(2000);
+            gun.ammo = 2000;
             gun.gunClass = GunClass.BEAM;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.LoopSection;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).loopStart = 1;
@@ -62,7 +63,7 @@ namespace NevernamedsItems
             };
 
             //BULLET STATS
-            Projectile projectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
+            Projectile projectile = ProjectileUtility.SetupProjectile(86);
 
             BasicBeamController beamComp = projectile.GenerateBeamPrefab(
                 "NevernamedsItems/Resources/BeamSprites/yellowbeam_mid_001",
@@ -87,10 +88,7 @@ namespace NevernamedsItems
                 null,
                 50
                 );
-
-            projectile.gameObject.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(projectile);
+            
             projectile.baseData.damage = 7f;
             projectile.baseData.force *= 1f;
             projectile.baseData.range = 12;
@@ -105,7 +103,7 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles[0] = projectile;
 
             gun.quality = PickupObject.ItemQuality.A; 
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_CONVERTER, true);
             ConverterID = gun.PickupObjectId;

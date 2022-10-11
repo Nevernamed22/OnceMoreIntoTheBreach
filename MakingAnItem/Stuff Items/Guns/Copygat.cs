@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -59,7 +59,7 @@ namespace NevernamedsItems
 
             gun.DefaultModule.projectiles[0] = projectile;
             gun.quality = PickupObject.ItemQuality.A;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             CopygatID = gun.PickupObjectId;
         }

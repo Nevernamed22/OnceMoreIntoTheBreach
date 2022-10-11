@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
 using System.Collections;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
 using Dungeonator;
+using Alexandria.Misc;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -42,11 +43,11 @@ namespace NevernamedsItems
                 "NevernamedsItems/Resources/BeamSprites/redbeam_impact_004",
             };
 
-            Projectile projectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
+            Projectile projectile = ProjectileUtility.SetupProjectile(86);
             BasicBeamController beamComp = projectile.GenerateBeamPrefab(
                 "NevernamedsItems/Resources/BeamSprites/redbeam_seg_001", new Vector2(18, 2), new Vector2(0, 8), BeamAnimPaths, 8,
                 ImpactAnimPaths, 13, new Vector2(4, 4), new Vector2(7, 7));
-            projectile.gameObject.SetActive(false);
+
             projectile.baseData.damage = 20;
             projectile.baseData.range *= 2;
             projectile.baseData.speed *= 4;
@@ -82,7 +83,7 @@ namespace NevernamedsItems
             
             PlayerController owner = base.Owner;
             Vector2 vector = DungeonData.GetIntVector2FromDirection(obj.DirectionFlipped).ToVector2();
-            BeamController cont = BeamToolbox.FreeFireBeamFromAnywhere(lasa, owner, obj.gameObject, rigidBody.UnitCenter, false, vector.ToAngle(), 20, true);
+            BeamController cont = BeamAPI.FreeFireBeamFromAnywhere(lasa, owner, obj.gameObject, rigidBody.UnitCenter,  vector.ToAngle(), 20, true);
 
 
             GameObject gameObject = SpawnManager.SpawnProjectile(lasa.gameObject, rigidBody.UnitCenter, Quaternion.identity, true);

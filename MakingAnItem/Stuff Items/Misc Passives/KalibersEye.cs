@@ -136,7 +136,8 @@ namespace NevernamedsItems
                     companionisedBullets.enemyOwner = Owner;
 
                     TargetActor.ApplyEffect(GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultPermanentCharmEffect, 1f, null);
-                    TargetActor.gameObject.AddComponent<KillOnRoomClear>();
+                    AdvancedKillOnRoomClear advKill = TargetActor.gameObject.AddComponent<AdvancedKillOnRoomClear>();
+                    advKill.triggersOnRoomUnseal = true;
 
                     if (isDisplaced)
                     {
@@ -144,11 +145,7 @@ namespace NevernamedsItems
                         displacedness.Init();
                     }
 
-                    if (EasyEnemyTypeLists.MultiPhaseEnemies.Contains(TargetActor.EnemyGuid) || EasyEnemyTypeLists.EnemiesWithInvulnerablePhases.Contains(TargetActor.EnemyGuid))
-                    {
-                        EraseFromExistenceOnRoomClear destroyTrickyEnemy = TargetActor.gameObject.AddComponent<EraseFromExistenceOnRoomClear>();
-                        destroyTrickyEnemy.Delay = 1f;
-                    }
+                    
                     TargetActor.IsHarmlessEnemy = true;
                     TargetActor.RegisterOverrideColor(Color.grey, "Ressurection");
                     TargetActor.IgnoreForRoomClear = true;

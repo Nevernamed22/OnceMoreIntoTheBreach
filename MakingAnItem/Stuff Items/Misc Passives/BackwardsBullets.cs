@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -24,6 +24,7 @@ namespace NevernamedsItems
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 2f, StatModifier.ModifyMethod.MULTIPLICATIVE);
 
             item.quality = PickupObject.ItemQuality.C;
+            item.SetTag("bullet_modifier");
         }
         public void ModifyVolley(ProjectileVolleyData volleyToModify)
         {

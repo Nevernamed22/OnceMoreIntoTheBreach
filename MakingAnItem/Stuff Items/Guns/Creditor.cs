@@ -6,9 +6,10 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
+using Alexandria.Misc;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -83,13 +84,19 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles[0] = projectile;
 
             gun.quality = PickupObject.ItemQuality.A;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_CREDITOR, true);
 
+            gun.SetTag("override_cangainammo_check");
             CreditorID = gun.PickupObjectId;
         }
         public static int CreditorID;
-
+        public override bool CollectedAmmoPickup(PlayerController player, Gun self, AmmoPickup pickup)
+        {
+            LootEngine.SpawnCurrency(player.sprite.WorldCenter, 10, true);
+            pickup.ForcePickupWithoutGainingAmmo(player);
+            return false;
+        }
         public override void PostProcessProjectile(Projectile projectile)
         {
             if (UnityEngine.Random.value <= 0.25)
@@ -159,20 +166,6 @@ namespace NevernamedsItems
                 LootEngine.SpawnCurrency(player.sprite.WorldCenter, 10, true);
             }
             base.OnPickedUpByPlayer(player);
-        }
-
-        Hook ammoPickupHook = new Hook(
-                typeof(AmmoPickup).GetMethod("Pickup", BindingFlags.Instance | BindingFlags.Public),
-                typeof(Creditor).GetMethod("ammoPickupHookMethod")
-            );
-
-        public static void ammoPickupHookMethod(Action<AmmoPickup, PlayerController> orig, AmmoPickup self, PlayerController player)
-        {
-            orig(self, player);
-            if (player && player.CurrentGun && player.CurrentGun.PickupObjectId == Creditor.CreditorID)
-            {
-                LootEngine.SpawnCurrency(player.sprite.WorldCenter, 10, true);
-            }
         }
             public Creditor()
         {

@@ -7,6 +7,7 @@ using System.Text;
 using UnityEngine;
 using Dungeonator;
 using SaveAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -14,9 +15,9 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            ChestToolbox.OnChestPostSpawn += PostProcessChest;
-            ChestToolbox.OnChestPreOpen += ChestPreOpen;
-            ChestToolbox.OnChestBroken += OnBroken;
+            CustomActions.OnChestPostSpawn += PostProcessChest;
+            CustomActions.OnChestPreOpen += ChestPreOpen;
+            CustomActions.OnChestBroken += OnBroken;
         }
         public static void PostProcessChest(Chest self)
         {
@@ -25,8 +26,8 @@ namespace NevernamedsItems
             if (jammedMaybe == null && unjammedMaybe == null)
             {
                 PlayerController TumblerPlayer = null;
-                if (GameManager.Instance.PrimaryPlayer && GameManager.Instance.PrimaryPlayer.HasPickupID(CursedTumbler.CursedTumblerID)) TumblerPlayer = GameManager.Instance.PrimaryPlayer;
-                else if (GameManager.Instance.SecondaryPlayer && GameManager.Instance.SecondaryPlayer.HasPickupID(CursedTumbler.CursedTumblerID)) TumblerPlayer = GameManager.Instance.SecondaryPlayer;
+                if (GameManager.Instance && GameManager.Instance.PrimaryPlayer && GameManager.Instance.PrimaryPlayer.HasPickupID(CursedTumbler.CursedTumblerID)) TumblerPlayer = GameManager.Instance.PrimaryPlayer;
+                else if (GameManager.Instance && GameManager.Instance.SecondaryPlayer && GameManager.Instance.SecondaryPlayer.HasPickupID(CursedTumbler.CursedTumblerID)) TumblerPlayer = GameManager.Instance.SecondaryPlayer;
 
                 if (AllJammedState.AllJammedActive || TumblerPlayer != null)
                 {

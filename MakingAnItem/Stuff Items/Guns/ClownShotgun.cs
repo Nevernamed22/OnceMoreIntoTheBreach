@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -66,7 +66,7 @@ namespace NevernamedsItems
             gun.gunClass = GunClass.SHOTGUN;
             //BULLET STATS
             gun.quality = PickupObject.ItemQuality.C;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Clown Shotgun Shells", "NevernamedsItems/Resources/CustomGunAmmoTypes/clownshotgun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/clownshotgun_clipempty");
             gun.Volley.UsesShotgunStyleVelocityRandomizer = true;

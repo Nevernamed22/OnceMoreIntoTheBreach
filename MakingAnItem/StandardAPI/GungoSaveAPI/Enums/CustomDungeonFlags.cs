@@ -26,14 +26,13 @@ namespace SaveAPI
         USED_FALSE_BLANK_TEN_TIMES,
         KILLED_TITAN_KIN,
         HAS_BEATEN_BOSS_BY_SKIN_OF_TEETH,
-        KILLED_DRAGUN_WITH_DOG,
         ANGERED_BELLO,
         ROBOT_HELD_FIVE_JUNK,
         HURT_BY_SHROOMER,
         UNLOCKED_MISSINGUNO,
         FLOOR_CLEARED_WITH_CURSE,
         //Turbo
-        BEATEN_ANY_BOSS_TURBO_MODE,
+        BEATEN_KEEP_TURBO_MODE,
         BEATEN_MINES_BOSS_TURBO_MODE,
         BEATEN_HOLLOW_BOSS_TURBO_MODE,
         //Rainbow
@@ -59,6 +58,9 @@ namespace SaveAPI
         BOSSRUSH_MARINE,
         BOSSRUSH_ROBOT,
         BOSSRUSH_BULLET,
+        //Dragun Unlocks
+        DRAGUN_KILLED_HUNTER,
+        DRAGUN_KILLED_SHADE,
         //Advanced Dragun Unlocks
         ADVDRAGUN_KILLED_ROBOT,
         ADVDRAGUN_KILLED_SHADE,
@@ -68,7 +70,6 @@ namespace SaveAPI
         CHALLENGE_INVISIBLEO_BEATEN,
         CHALLENGE_KEEPITCOOL_BEATEN,
         //Shade  Unlocks
-        DRAGUN_BEATEN_SHADE,
         LICH_BEATEN_SHADE,
         CHEATED_DEATH_SHADE,
         //---------------------------------------------Hunting Quests

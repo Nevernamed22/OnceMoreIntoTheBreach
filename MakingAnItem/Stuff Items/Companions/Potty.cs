@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Dungeonator;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -430,23 +431,27 @@ namespace NevernamedsItems
                             if (Owner.PlayerHasActiveSynergy("They Grow Inside")) chance = 0.50f;
                             if (UnityEngine.Random.value <= chance)
                             {
+                                AIActor target = base.specRigidbody.UnitCenter.GetNearestEnemyToPosition();
                                 doAnim = true;
-                                VolleyReplacementSynergyProcessor shotgrubProcessor = (PickupObjectDatabase.GetById(347) as Gun).GetComponent<VolleyReplacementSynergyProcessor>();
-                                Projectile bullet = shotgrubProcessor.SynergyVolley.projectiles[0].projectiles[0].projectile;
-                                GameObject spawnedProj = ProjSpawnHelper.SpawnProjectileTowardsPoint(bullet.gameObject, base.sprite.WorldCenter, base.specRigidbody.UnitCenter.GetPositionOfNearestEnemy(false, true), 0, 15);
-                                Projectile component = spawnedProj.GetComponent<Projectile>();
-                                if (component != null)
+                                if (target)
                                 {
-                                    component.Owner = Owner;
-                                    component.Shooter = Owner.specRigidbody;
-                                    //COMPANION SHIT
-                                    component.TreatedAsNonProjectileForChallenge = true;
-                                    component.baseData.damage *= Owner.stats.GetStatValue(PlayerStats.StatType.Damage);
-                                    component.baseData.speed *= Owner.stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed);
-                                    component.baseData.force *= Owner.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
-                                    component.AdditionalScaleMultiplier *= Owner.stats.GetStatValue(PlayerStats.StatType.PlayerBulletScale);
-                                    component.UpdateSpeed();
-                                    base.HandleCompanionPostProcessProjectile(component);
+                                    VolleyReplacementSynergyProcessor shotgrubProcessor = (PickupObjectDatabase.GetById(347) as Gun).GetComponent<VolleyReplacementSynergyProcessor>();
+                                    Projectile bullet = shotgrubProcessor.SynergyVolley.projectiles[0].projectiles[0].projectile;
+                                    GameObject spawnedProj = ProjSpawnHelper.SpawnProjectileTowardsPoint(bullet.gameObject, base.sprite.WorldCenter, target.Position, 0, 15);
+                                    Projectile component = spawnedProj.GetComponent<Projectile>();
+                                    if (component != null)
+                                    {
+                                        component.Owner = Owner;
+                                        component.Shooter = Owner.specRigidbody;
+                                        //COMPANION SHIT
+                                        component.TreatedAsNonProjectileForChallenge = true;
+                                        component.baseData.damage *= Owner.stats.GetStatValue(PlayerStats.StatType.Damage);
+                                        component.baseData.speed *= Owner.stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed);
+                                        component.baseData.force *= Owner.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
+                                        component.AdditionalScaleMultiplier *= Owner.stats.GetStatValue(PlayerStats.StatType.PlayerBulletScale);
+                                        component.UpdateSpeed();
+                                        base.HandleCompanionPostProcessProjectile(component);
+                                    }
                                 }
                             }
                         }

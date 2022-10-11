@@ -6,7 +6,8 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.Misc;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -61,7 +62,7 @@ namespace NevernamedsItems
             };
 
             //BULLET STATS
-            Projectile projectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
+            Projectile projectile = ProjectileUtility.SetupProjectile(86);
 
             BasicBeamController beamComp = projectile.GenerateBeamPrefab(
                 "NevernamedsItems/Resources/BeamSprites/limebeam_mid_001",
@@ -86,9 +87,6 @@ namespace NevernamedsItems
                 null
                 );
 
-            projectile.gameObject.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(projectile);
             projectile.baseData.damage = 7f;
             projectile.baseData.force *= 1f;
             projectile.baseData.range *= 200;
@@ -102,8 +100,8 @@ namespace NevernamedsItems
 
             gun.DefaultModule.projectiles[0] = projectile;
 
-            gun.quality = PickupObject.ItemQuality.C; //D
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            gun.quality = PickupObject.ItemQuality.C; 
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
             RicoID = gun.PickupObjectId;
         }
         public static int RicoID;

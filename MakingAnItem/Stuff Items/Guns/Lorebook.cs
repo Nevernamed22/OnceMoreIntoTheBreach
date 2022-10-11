@@ -329,7 +329,7 @@ namespace NevernamedsItems
                                 duration = StaticStatusEffects.charmingRoundsEffect.duration * 3,
                                 TintColor = StaticStatusEffects.charmingRoundsEffect.TintColor,
                                 DeathTintColor = StaticStatusEffects.charmingRoundsEffect.DeathTintColor,
-                                effectIdentifier = "Upgraded Bard Charm",
+                                effectIdentifier = "Charm",
                                 AppliesTint = true,
                                 AppliesDeathTint = true,
                                 resistanceType = EffectResistanceType.Charm,

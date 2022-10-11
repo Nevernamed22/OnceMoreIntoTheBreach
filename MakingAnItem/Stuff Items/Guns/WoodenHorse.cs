@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 using Dungeonator;
 
@@ -57,7 +57,7 @@ namespace NevernamedsItems
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Wooden Horse Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/woodenhorse_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/thinline_clipempty");
 
             gun.quality = PickupObject.ItemQuality.A;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
             WoodenHorseID = gun.PickupObjectId;
 
         }

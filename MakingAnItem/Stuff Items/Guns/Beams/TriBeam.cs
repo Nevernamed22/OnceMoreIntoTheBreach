@@ -6,7 +6,8 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -61,7 +62,7 @@ namespace NevernamedsItems
                 "NevernamedsItems/Resources/BeamSprites/bluebeam_impact_004",
             };
 
-                Projectile projectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
+                Projectile projectile = ProjectileUtility.SetupProjectile(86);
 
                 BasicBeamController beamComp = projectile.GenerateBeamPrefab(
                     "NevernamedsItems/Resources/BeamSprites/tribeam_mid_001", 
@@ -86,9 +87,6 @@ namespace NevernamedsItems
                     new Vector2(0, 4)
                     );
 
-                projectile.gameObject.SetActive(false);
-                FakePrefab.MarkAsFakePrefab(projectile.gameObject);
-                UnityEngine.Object.DontDestroyOnLoad(projectile);
                 projectile.baseData.damage = 18f;
                 projectile.baseData.force *= 1f;
                 projectile.baseData.range *= 5;
@@ -117,11 +115,7 @@ namespace NevernamedsItems
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).loopStart = 1;
 
             gun.quality = PickupObject.ItemQuality.C; 
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
-
-        }
-        public TriBeam()
-        {
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
         }
     }

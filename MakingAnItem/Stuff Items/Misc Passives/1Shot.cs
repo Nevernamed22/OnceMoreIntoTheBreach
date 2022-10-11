@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
@@ -20,7 +20,6 @@ namespace NevernamedsItems
             string shortDesc = "+1 to Everything";
             string longDesc = "Increases almost every single stat by exactly 1.\n\n" + "How good or bad that is really depends on the stat.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1, StatModifier.ModifyMethod.ADDITIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Accuracy, 1, StatModifier.ModifyMethod.ADDITIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalBlanksPerFloor, 1, StatModifier.ModifyMethod.ADDITIVE);
@@ -44,8 +43,8 @@ namespace NevernamedsItems
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.RateOfFire, 1, StatModifier.ModifyMethod.ADDITIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ReloadSpeed, 1, StatModifier.ModifyMethod.ADDITIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ThrownGunDamage, 1, StatModifier.ModifyMethod.ADDITIVE);
-
             item.quality = PickupObject.ItemQuality.S;
+            item.SetTag("bullet_modifier");
             OneShotID = item.PickupObjectId;
         }
         public static int OneShotID;

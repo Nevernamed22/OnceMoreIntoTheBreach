@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
@@ -25,6 +25,7 @@ namespace NevernamedsItems
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.KnockbackMultiplier, 1.45f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = PickupObject.ItemQuality.D;
+            item.SetTag("bullet_modifier");
         }
 
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
@@ -68,7 +69,7 @@ namespace NevernamedsItems
             {
                 return;
             }
-            RoomHandler absoluteRoomFromPosition = self.GetAbsoluteRoom();
+            RoomHandler absoluteRoomFromPosition = self.transform.position.GetAbsoluteRoom();
             List<DeadlyDeadlyGoopManager> roomGoops = absoluteRoomFromPosition.RoomGoops;
             if (roomGoops != null)
             {

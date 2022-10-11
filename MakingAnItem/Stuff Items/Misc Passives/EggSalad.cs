@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Alexandria.Misc;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -41,18 +41,11 @@ namespace NevernamedsItems
 
             //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D;
+            
         }
         public override void Pickup(PlayerController player)
         {
-            PlayableCharacters characterIdentity = player.characterIdentity;
-            if (characterIdentity == PlayableCharacters.Robot)
-            {
-                bool hasntAlreadyBeenCollected = !this.m_pickedUpThisRun;
-                if (hasntAlreadyBeenCollected)
-                {
-                    player.healthHaver.Armor += 1;
-                }
-            }
+            if (player.ForceZeroHealthState && !m_pickedUpThisRun) { player.healthHaver.Armor += 1;  }
             base.Pickup(player);
         }
 
@@ -93,15 +86,7 @@ namespace NevernamedsItems
         }
         public override void Pickup(PlayerController player)
         {
-            PlayableCharacters characterIdentity = player.characterIdentity;
-            if (characterIdentity == PlayableCharacters.Robot)
-            {
-                bool hasntAlreadyBeenCollected = !this.m_pickedUpThisRun;
-                if (hasntAlreadyBeenCollected)
-                {
-                    player.healthHaver.Armor += 3;
-                }
-            }
+            if (player.ForceZeroHealthState && !m_pickedUpThisRun) { player.healthHaver.Armor += 3;  }
             base.Pickup(player);
         }
 
@@ -110,82 +95,37 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Bashing Bullets";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/BulletModifiers/bashingbullets_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<BashingBullets>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Punch Out";
             string longDesc = "The thick leather gloves glued to the slugs of these bullets increases the kinetic force they apply to the target.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.KnockbackMultiplier, 10, StatModifier.ModifyMethod.ADDITIVE);
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D;
-
+            item.SetTag("bullet_modifier");
             BashingBulletsID = item.PickupObjectId;
         }
         public static int BashingBulletsID;
-        public override void Pickup(PlayerController player)
-        {
-            base.Pickup(player);
-        }
-        public override DebrisObject Drop(PlayerController player)
-        {
-            DebrisObject debrisObject = base.Drop(player);
-            return debrisObject;
-        }
     }
     public class TitanBullets : PassiveItem
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Titan Bullets";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/titanbullets_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<TitanBullets>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Absolute Unit";
             string longDesc = "Bullets increase massively in size, and slightly in damage."+"\n\nThese bullets are so big that enemies are left in shock and awe.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.PlayerBulletScale, 10, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.05f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.D;
-
+            item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomStat(CustomTrackedStats.TITAN_KIN_KILLED, 4, DungeonPrerequisite.PrerequisiteOperation.GREATER_THAN);
             ID = item.PickupObjectId;
         }

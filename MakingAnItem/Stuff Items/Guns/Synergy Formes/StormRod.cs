@@ -6,7 +6,8 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -66,7 +67,7 @@ namespace NevernamedsItems
                 "NevernamedsItems/Resources/BeamSprites/stormrodbeam_impact_004",
             };
 
-                Projectile projectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
+                Projectile projectile = ProjectileUtility.SetupProjectile(86); 
 
                 BasicBeamController beamComp = projectile.GenerateBeamPrefab(
                "NevernamedsItems/Resources/BeamSprites/stormrodbeam_mid_001",
@@ -92,10 +93,7 @@ namespace NevernamedsItems
                10,
                10
                );
-
-                projectile.gameObject.SetActive(false);
-                FakePrefab.MarkAsFakePrefab(projectile.gameObject);
-                UnityEngine.Object.DontDestroyOnLoad(projectile);
+                
                 projectile.baseData.damage = 30f;
                 projectile.baseData.force *= 1f;
                 projectile.damageTypes |= CoreDamageTypes.Electric;
@@ -124,7 +122,7 @@ namespace NevernamedsItems
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).loopStart = 1;
 
             gun.quality = PickupObject.ItemQuality.EXCLUDED; 
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
             StormRodID = gun.PickupObjectId;
 
         }

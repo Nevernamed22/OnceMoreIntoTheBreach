@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 //using static MonoMod.Cil.RuntimeILReferenceBag.FastDelegateInvokers;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 
@@ -39,21 +40,21 @@ namespace NevernamedsItems
                 this.m_poisonImmunity.damageType = CoreDamageTypes.Poison;
             }
             player.healthHaver.damageTypeModifiers.Add(this.m_poisonImmunity);
+            CustomActions.OnExplosionComplex += Explosion;
             base.Pickup(player);
         }
-        public override DebrisObject Drop(PlayerController player)
+        public void Explosion(Vector3 position, ExplosionData data, Vector2 dir, Action onbegin, bool ignoreQueues, CoreDamageTypes damagetypes, bool ignoreDamageCaps)
         {
-            DebrisObject result = base.Drop(player);
+            float radius = 5;
+            if (GameManager.Instance.AnyPlayerHasActiveSynergy("Toxic Shock")) radius = 8;
+            DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.PoisonDef).TimedAddGoopCircle(position, radius, 1, false);
+        }
+        public override void DisableEffect(PlayerController player)
+        {
+            CustomActions.OnExplosionComplex -= Explosion;
             player.healthHaver.damageTypeModifiers.Remove(this.m_poisonImmunity);
-            return result;
+            base.DisableEffect(player);
         }
-        public override void OnDestroy()
-        {
-            if (Owner != null)
-            {
-                Owner.healthHaver.damageTypeModifiers.Remove(this.m_poisonImmunity);
-            }
-            base.OnDestroy();
-        }
+
     }
 }

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using Dungeonator;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 using UnityEngine;
 
 namespace NevernamedsItems
@@ -73,10 +74,7 @@ namespace NevernamedsItems
             {
                 if (dodger && dodger.PlayerHasActiveSynergy("Gale Force"))
                 {
-                    this.aiAnimator.PlayUntilFinished("attack", false, null, -1f, false);
-                    Exploder.DoRadialKnockback(this.specRigidbody.UnitCenter, 70, 10);
-                    Exploder.DoRadialDamage(2.5f, this.specRigidbody.UnitCenter, 10, false, true, false, null);
-                    timer = 1.5f;
+                    DoPloomph();
                 }
             }
             public override void Update()
@@ -89,14 +87,27 @@ namespace NevernamedsItems
                     }
                     if (timer <= 0)
                     {
-                        this.aiAnimator.PlayUntilFinished("attack", false, null, -1f, false);
-                        Exploder.DoRadialKnockback(this.specRigidbody.UnitCenter, 70, 10);
-                        float dmg = 2.5f;
-                        if (PassiveItem.IsFlagSetForCharacter(this.Owner, typeof(BattleStandardItem))) dmg *= BattleStandardItem.BattleStandardCompanionDamageMultiplier;
-                        if (this.Owner.CurrentGun && this.Owner.CurrentGun.LuteCompanionBuffActive) dmg *= 2;
-                        Exploder.DoRadialDamage(dmg, this.specRigidbody.UnitCenter, 10, false, true, false, null);
-                        timer = 1.5f;
+                        DoPloomph();
                     }
+                }
+            }
+            private void DoPloomph()
+            {
+                this.aiAnimator.PlayUntilFinished("attack", false, null, -1f, false);
+                ExtendedPlayerComponent.QueriedCompanionStats query = Owner.GetExtComp().QueryCompanionStats(this.gameObject, 2.5f, 1f, 0, 0, 0, 0, KnockBackForce, 0);
+
+                Exploder.DoRadialKnockback(this.specRigidbody.UnitCenter, query.modifiedKnockback, 10);
+                Exploder.DoRadialDamage(query.modifiedDamage, this.specRigidbody.UnitCenter, 10, false, true, false, null);
+
+                timer = 1.5f / query.modifiedFirerate;
+            }
+            private float KnockBackForce
+            {
+                get
+                {
+                    float initial = 70f;
+                    if (Owner) initial *= Owner.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
+                    return initial;
                 }
             }
             private float timer;

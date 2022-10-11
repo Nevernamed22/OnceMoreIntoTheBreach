@@ -8,6 +8,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -175,27 +176,31 @@ namespace NevernamedsItems
         {
             float HunterChance = 0.9f;
             if (HasSynergyHunterSpores) HunterChance = 0.5f;
-            PlayerController owner = m_projectile.Owner as PlayerController;
-            if (UnityEngine.Random.value <= HunterChance || !owner.IsInCombat)
+            if (m_projectile && m_projectile.ProjectilePlayerOwner())
             {
-                m_projectile.baseData.speed = 0.1f;
-                m_projectile.UpdateSpeed();
-                int timesToFloat = UnityEngine.Random.Range(3, 6);
-                for (int i = 0; i < timesToFloat; i++)
+                if (UnityEngine.Random.value <= HunterChance || !m_projectile.ProjectilePlayerOwner().IsInCombat)
                 {
-                    m_projectile.SendInRandomDirection();
-                    yield return new WaitForSeconds(1f);
+                    m_projectile.baseData.speed = 0.1f;
+                    m_projectile.UpdateSpeed();
+                    int timesToFloat = UnityEngine.Random.Range(3, 6);
+                    for (int i = 0; i < timesToFloat; i++)
+                    {
+                        m_projectile.SendInRandomDirection();
+                        yield return new WaitForSeconds(1f);
+                    }
+                    if (m_projectile) m_projectile.DieInAir();
                 }
-                m_projectile.DieInAir();
+                else
+                {
+                    float HunterSpeed = 5f;
+                    if (HasSynergyHunterSpores) HunterSpeed = 10f;
+                    m_projectile.baseData.speed = HunterSpeed;
+                    m_projectile.UpdateSpeed();
+                    Vector2 dirVec = m_projectile.GetVectorToNearestEnemy();
+                    if (dirVec != Vector2.zero) m_projectile.SendInDirection(dirVec, false, true);
+                }
             }
-            else
-            {
-                float HunterSpeed = 5f;
-                if (HasSynergyHunterSpores) HunterSpeed = 10f;
-                m_projectile.baseData.speed = HunterSpeed;
-                m_projectile.UpdateSpeed();
-                m_projectile.ReAimToNearestEnemy();
-            }
+
             yield break;
         }
     }

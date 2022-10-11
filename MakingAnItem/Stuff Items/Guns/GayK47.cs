@@ -6,9 +6,9 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -50,12 +50,14 @@ namespace NevernamedsItems
             projectile.baseData.damage = 6f;
             projectile.baseData.speed *= 1f;
             projectile.baseData.range *= 2f;
-            
+
+            gun.SetTag("kalashnikov");
+
             projectile.gameObject.AddComponent<GayK47Mod>();
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Gayk47 Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/gayk47_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/gayk47_clipempty");
             gun.quality = PickupObject.ItemQuality.A;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             GayK47ID = gun.PickupObjectId;
         }

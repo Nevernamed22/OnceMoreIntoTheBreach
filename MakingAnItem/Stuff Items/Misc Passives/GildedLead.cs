@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
@@ -14,34 +14,16 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Gilded Lead";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/gildedlead_icon";
-
-            //Create new GameObject
+            string resourceName = "NevernamedsItems/Resources/BulletModifiers/gildedlead_icon";
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<GildedLead>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Pays Off";
             string longDesc = "Chance to consume a casing when you fire a bullet. If a bullet consumes a casing it will have it's damage doubled." + "\nBuffed bullets that hit enemies will drop their casing onto the floor again. You miss, you lose out." + "\n\nBullets found scattered at the seat of the Charthurian Throne.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.B;
-
+            item.SetTag("bullet_modifier");
         }
         public static Color gold = new Color(230f / 255f, 174f / 255f, 21f / 255f);
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)

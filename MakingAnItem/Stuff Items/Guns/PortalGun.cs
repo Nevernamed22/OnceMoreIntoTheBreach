@@ -87,7 +87,7 @@ namespace NevernamedsItems
             m_rigidBoy.specRigidbody.OnPreRigidbodyCollision += Collision;
             foreach (OMITBPortalController portal in PortalGun.allPortals)
             {
-                if (portal && portal.m_projectile.GetAbsoluteRoom() == this.m_projectile.GetAbsoluteRoom() && portal.linkedOther == null)
+                if (portal && portal.m_projectile.transform.position.GetAbsoluteRoom() == this.m_projectile.transform.position.GetAbsoluteRoom() && portal.linkedOther == null)
                 {
                     if (portal.isOrangePortal && !this.isOrangePortal)
                     {

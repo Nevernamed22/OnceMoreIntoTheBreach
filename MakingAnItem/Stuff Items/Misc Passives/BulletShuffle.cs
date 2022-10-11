@@ -9,6 +9,7 @@ using MonoMod.RuntimeDetour;
 using System.Reflection;
 using Dungeonator;
 using SaveAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -48,14 +49,14 @@ namespace NevernamedsItems
                             sourceProjectile.UpdateSpeed();
                             break;
                         case 3: //Devolver Bullets ------------------------------- WORKS
-                            AdvancedTransmogrifyComponent advancedTransmog = sourceProjectile.gameObject.AddComponent<AdvancedTransmogrifyComponent>();
-                            advancedTransmog.TransmogDataList = new List<AdvancedTransmogrifyComponent.TransmogData>()
+                            AdvancedTransmogrifyBehaviour advancedTransmog = sourceProjectile.gameObject.AddComponent<AdvancedTransmogrifyBehaviour>();
+                            advancedTransmog.TransmogDataList = new List<AdvancedTransmogrifyBehaviour.TransmogData>()
                         {
-                            new AdvancedTransmogrifyComponent.TransmogData()
+                            new AdvancedTransmogrifyBehaviour.TransmogData()
                             {
                                 identifier = "BulletShuffle",
                                 maintainHPPercent = false,
-                                TargetGuid = "05891b158cd542b1a5f3df30fb67a7ff",
+                                TargetGuids =  new List<string>(){"05891b158cd542b1a5f3df30fb67a7ff" },
                                 TransmogChance = 1,
                             }
                         };
@@ -114,14 +115,14 @@ namespace NevernamedsItems
                             sourceProjectile.AdjustPlayerProjectileTint(ExtendedColours.charmPink, 1);
                             break;
                         case 16: //Magic Bullets ------------------------------- WORKS
-                            AdvancedTransmogrifyComponent advancedTransmog2 = sourceProjectile.gameObject.AddComponent<AdvancedTransmogrifyComponent>();
-                            advancedTransmog2.TransmogDataList = new List<AdvancedTransmogrifyComponent.TransmogData>()
+                            AdvancedTransmogrifyBehaviour advancedTransmog2 = sourceProjectile.gameObject.AddComponent<AdvancedTransmogrifyBehaviour>();
+                            advancedTransmog2.TransmogDataList = new List<AdvancedTransmogrifyBehaviour.TransmogData>()
                         {
-                            new AdvancedTransmogrifyComponent.TransmogData()
+                            new AdvancedTransmogrifyBehaviour.TransmogData()
                             {
                                 identifier = "BulletShuffle",
                                 maintainHPPercent = false,
-                                TargetGuid = "76bc43539fc24648bff4568c75c686d1",
+                                TargetGuids = new List<string>(){"76bc43539fc24648bff4568c75c686d1" },
                                 TransmogChance = 1,
                             }
                         };
@@ -135,8 +136,7 @@ namespace NevernamedsItems
                             AngryBulletsProjectileBehaviour angry = sourceProjectile.gameObject.AddComponent<AngryBulletsProjectileBehaviour>();
                             break;
                         case 19: //Blank Bullets
-                            BlankOnHitModifier blanking = sourceProjectile.gameObject.GetOrAddComponent<BlankOnHitModifier>();
-                            blanking.useTinyBlank = true;
+                            sourceProjectile.gameObject.GetOrAddComponent<BlankProjModifier>();
                             break;
                         case 20: //Orbital Bullets Behaviour ------------------------------- WORKS
                             OrbitalBulletsBehaviour orbiting = sourceProjectile.gameObject.GetOrAddComponent<OrbitalBulletsBehaviour>();
@@ -162,7 +162,17 @@ namespace NevernamedsItems
                             sourceProjectile.OnDestruction += HandleZombieEffect;
                             break;
                         case 26: //Flak Bullets ------------------------------- WORKS
-                            sourceProjectile.gameObject.GetOrAddComponent<FlakBulletsProjectileBehaviour>();
+                            SpawnProjModifier flakspawnProjModifier = sourceProjectile.gameObject.AddComponent<SpawnProjModifier>();
+                            flakspawnProjModifier.SpawnedProjectilesInheritAppearance = true;
+                            flakspawnProjModifier.SpawnedProjectileScaleModifier = 0.5f;
+                            flakspawnProjModifier.SpawnedProjectilesInheritData = true;
+                            flakspawnProjModifier.spawnProjectilesOnCollision = true;
+                            flakspawnProjModifier.spawnProjecitlesOnDieInAir = true;
+                            flakspawnProjModifier.doOverrideObjectCollisionSpawnStyle = true;
+                            flakspawnProjModifier.startAngle = UnityEngine.Random.Range(0, 180);
+                            flakspawnProjModifier.numberToSpawnOnCollison = 3;
+                            flakspawnProjModifier.projectileToSpawnOnCollision = Gungeon.Game.Items["flak_bullets"].GetComponent<ComplexProjectileModifier>().CollisionSpawnProjectile;
+                            flakspawnProjModifier.collisionSpawnStyle = SpawnProjModifier.CollisionSpawnStyle.FLAK_BURST;
                             break;
                         case 27: //Silver Bullets ------------------------------- WORKS
                             sourceProjectile.BossDamageMultiplier *= 1.25f;
@@ -192,7 +202,7 @@ namespace NevernamedsItems
                             DoChanceBulletsEffect(sourceProjectile);
                             break;
                         case 31: //Bumbullets
-                            StartCoroutine(SpawnAdditionalProjectile(sourceProjectile, (PickupObjectDatabase.GetById(14) as Gun).DefaultModule.projectiles[0], 0));
+                            StartCoroutine(SpawnAdditionalProjectile(sourceProjectile.ProjectilePlayerOwner(), sourceProjectile.specRigidbody.UnitCenter, sourceProjectile.Direction.ToAngle(), (PickupObjectDatabase.GetById(14) as Gun).DefaultModule.projectiles[0], 0));
                             break;
                         case 32: //Bloody 9mm
                             StartCoroutine(EraseAndReplace(sourceProjectile, PickupObjectDatabase.GetById(524).GetComponent<RandomProjectileReplacementItem>().ReplacementProjectile));
@@ -252,14 +262,14 @@ namespace NevernamedsItems
                             newEvap.ParticleSystemToSpawn = origEvap.ParticleSystemToSpawn;
                             break;
                         case 46: //Snakemaker Snakify
-                            AdvancedTransmogrifyComponent advancedTransmogSnek = sourceProjectile.gameObject.AddComponent<AdvancedTransmogrifyComponent>();
-                            advancedTransmogSnek.TransmogDataList = new List<AdvancedTransmogrifyComponent.TransmogData>()
+                            AdvancedTransmogrifyBehaviour advancedTransmogSnek = sourceProjectile.gameObject.AddComponent<AdvancedTransmogrifyBehaviour>();
+                            advancedTransmogSnek.TransmogDataList = new List<AdvancedTransmogrifyBehaviour.TransmogData>()
                         {
-                            new AdvancedTransmogrifyComponent.TransmogData()
+                            new AdvancedTransmogrifyBehaviour.TransmogData()
                             {
                                 identifier = "BulletShuffle",
                                 maintainHPPercent = false,
-                                TargetGuid = "1386da0f42fb4bcabc5be8feb16a7c38",
+                                TargetGuids = new List<string>(){ "1386da0f42fb4bcabc5be8feb16a7c38" },
                                 TransmogChance = 1,
                             }
                         };
@@ -325,7 +335,7 @@ namespace NevernamedsItems
                 Projectile toSpawn = source.PossibleSourceGun.DefaultModule.GetCurrentProjectile();
                 if (toSpawn != null)
                 {
-                   StartCoroutine( SpawnAdditionalProjectile(source, toSpawn, AngleVariance, angleFromAim, helix));
+                   StartCoroutine( SpawnAdditionalProjectile(source.ProjectilePlayerOwner(), source.specRigidbody.UnitCenter, source.Direction.ToAngle(), toSpawn, AngleVariance, angleFromAim, helix));
                 }
                 //else ETGModConsole.Log("Tospawn nulled");
             }
@@ -334,29 +344,31 @@ namespace NevernamedsItems
             //ETGModConsole.Log("bonus shot finished");
             yield break;
         }
-        private IEnumerator SpawnAdditionalProjectile(Projectile source, Projectile toSpawn, float variance = 0f, float FromAim = 0f, bool helix = false)
+        private IEnumerator SpawnAdditionalProjectile(PlayerController Owner, Vector2 Position, float angle, Projectile toSpawn, float variance = 0f, float FromAim = 0f, bool helix = false)
         {
             //ETGModConsole.Log("spawn additional ran");
 
             yield return null;
-            GameObject spawnBee = SpawnManager.SpawnProjectile(toSpawn.gameObject, source.specRigidbody.UnitCenter, Quaternion.Euler(0f, 0f, ProjSpawnHelper.GetAccuracyAngled(source.Direction.ToAngle() + FromAim, variance, source.ProjectilePlayerOwner())), true);
-            if (spawnBee.GetComponent<Projectile>())
+            if (toSpawn != null && toSpawn.gameObject != null)
             {
-                Projectile beeproj = spawnBee.GetComponent<Projectile>();
-                beeproj.Owner = source.Owner;
-                beeproj.Shooter = source.Shooter;
-                beeproj.baseData.damage *= Owner.stats.GetStatValue(PlayerStats.StatType.Damage);
-                beeproj.baseData.speed *= Owner.stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed);
-                beeproj.baseData.range *= Owner.stats.GetStatValue(PlayerStats.StatType.RangeMultiplier);
-                beeproj.baseData.force *= Owner.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
-                beeproj.BossDamageMultiplier *= Owner.stats.GetStatValue(PlayerStats.StatType.DamageToBosses);
-                beeproj.UpdateSpeed();
+                GameObject spawnBee = SpawnManager.SpawnProjectile(toSpawn.gameObject, Position, Quaternion.Euler(0f, 0f, ProjSpawnHelper.GetAccuracyAngled(angle + FromAim, variance, Owner)), true);
+                if (spawnBee.GetComponent<Projectile>())
+                {
+                    Projectile beeproj = spawnBee.GetComponent<Projectile>();
+                    beeproj.Owner = Owner;
+                    beeproj.Shooter = Owner.specRigidbody;
+                    beeproj.baseData.damage *= Owner.stats.GetStatValue(PlayerStats.StatType.Damage);
+                    beeproj.baseData.speed *= Owner.stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed);
+                    beeproj.baseData.range *= Owner.stats.GetStatValue(PlayerStats.StatType.RangeMultiplier);
+                    beeproj.baseData.force *= Owner.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
+                    beeproj.BossDamageMultiplier *= Owner.stats.GetStatValue(PlayerStats.StatType.DamageToBosses);
+                    beeproj.UpdateSpeed();
 
-                if (helix) beeproj.ConvertToHelixMotion(true);
+                    if (helix) beeproj.ConvertToHelixMotion(true);
 
-                beeproj.PossibleSourceGun = source.PossibleSourceGun;
-                beeproj.gameObject.AddComponent<HasBeenBulletShuffled>();
-                Owner.DoPostProcessProjectile(beeproj);
+                    beeproj.gameObject.AddComponent<HasBeenBulletShuffled>();
+                    Owner.DoPostProcessProjectile(beeproj);
+                }
             }
             yield break;
         }

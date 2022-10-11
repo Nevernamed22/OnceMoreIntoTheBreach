@@ -6,9 +6,10 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -107,7 +108,7 @@ namespace NevernamedsItems
 
 
             gun.quality = PickupObject.ItemQuality.B;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             BigShotID = gun.PickupObjectId;
 
@@ -235,7 +236,7 @@ namespace NevernamedsItems
                 {
                     AkSoundEngine.PostEvent("Play_OBJ_heart_heal_01", gun.GunPlayerOwner().gameObject);
                     gun.GunPlayerOwner().PlayEffectOnActor((PickupObjectDatabase.GetById(73).GetComponent<HealthPickup>().healVFX), Vector3.zero, true, false, false);
-                    if (gun.GunPlayerOwner().characterIdentity == PlayableCharacters.Robot)
+                    if (gun.GunPlayerOwner().ForceZeroHealthState)
                     {
                         gun.GunPlayerOwner().healthHaver.Armor += 1;
                     }

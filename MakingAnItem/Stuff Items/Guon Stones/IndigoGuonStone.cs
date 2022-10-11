@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
 using System.Collections;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
 using Dungeonator;
+using Alexandria.Misc;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -37,6 +38,7 @@ namespace NevernamedsItems
             BuildSynergyPrefab();
 
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);
+            item.SetTag("guon_stone");
 
             item.HasAdvancedUpgradeSynergy = true;
             item.AdvancedUpgradeSynergy = "Indigoer Guon Stone";

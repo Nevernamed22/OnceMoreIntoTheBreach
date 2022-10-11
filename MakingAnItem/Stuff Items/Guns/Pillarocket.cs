@@ -6,7 +6,8 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -16,13 +17,13 @@ namespace NevernamedsItems
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Pillarocket", "pillarocket");
             Game.Items.Rename("outdated_gun_mods:pillarocket", "nn:pillarocket");
-        var behav =    gun.gameObject.AddComponent<Pillarocket>();
+            var behav = gun.gameObject.AddComponent<Pillarocket>();
             behav.preventNormalFireAudio = true;
             behav.preventNormalReloadAudio = true;
             behav.overrideNormalFireAudio = "Play_ENM_statue_stomp_01";
             behav.overrideNormalReloadAudio = "Play_ENM_statue_charge_01";
             gun.SetShortDescription("Ancient Shrine");
-            gun.SetLongDescription("Fires vengeful effigies, under your command."+"\n\nInhabited by the souls of ancient gundead heroes.");
+            gun.SetLongDescription("Fires vengeful effigies, under your command." + "\n\nInhabited by the souls of ancient gundead heroes.");
 
             gun.SetupSprite(null, "pillarocket_idle_001", 8);
 
@@ -80,14 +81,14 @@ namespace NevernamedsItems
                 "pillarocket_proj_014",
             }, 20, //FPS
             true, //LOOPS
-            AnimateBullet.ConstructListOfSameValues<IntVector2>(new IntVector2(15,8), 20), //PIXELSIZES
+            AnimateBullet.ConstructListOfSameValues<IntVector2>(new IntVector2(15, 8), 20), //PIXELSIZES
             AnimateBullet.ConstructListOfSameValues(false, 20), //LIGHTENEDS
             AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleLeft, 20), //ANCHORS
             AnimateBullet.ConstructListOfSameValues(false, 20), //ANCHORSCHANGECOLLIDERS
             AnimateBullet.ConstructListOfSameValues(false, 20),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 20), 
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(15, 6), 20), 
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 20), 
+            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 20),
+            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(15, 6), 20),
+            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 20),
             AnimateBullet.ConstructListOfSameValues<Projectile>(null, 20));
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
@@ -177,18 +178,20 @@ namespace NevernamedsItems
                 {
                     for (int i = 0; i < numToFire; i++)
                     {
-                        Vector2 projectileSpawnPosition = this.m_projectile.sprite.WorldCenter;
-                        Vector2 nearestEnemyPosition = projectileSpawnPosition.GetPositionOfNearestEnemy(true, true);
-                        if (nearestEnemyPosition != Vector2.zero)
+                        if (m_projectile.sprite.WorldCenter.GetNearestEnemyToPosition())
                         {
-                            GameObject gameObject = ProjSpawnHelper.SpawnProjectileTowardsPoint(this.projectileToFire.gameObject, projectileSpawnPosition, nearestEnemyPosition, 0, AngleVariance);
-                            Projectile component = gameObject.GetComponent<Projectile>();
-                            if (component != null)
+                            Vector2 projectileSpawnPosition = this.m_projectile.sprite.WorldCenter;
+                            Vector2 nearestEnemyPosition = projectileSpawnPosition.GetNearestEnemyToPosition().Position;
+                            if (nearestEnemyPosition != Vector2.zero)
                             {
-                                component.Owner = this.m_player;
-                                component.TreatedAsNonProjectileForChallenge = true;
-                                component.Shooter = this.m_rigidBody;
-                                component.collidesWithPlayer = false;                     
+                                GameObject gameObject = ProjSpawnHelper.SpawnProjectileTowardsPoint(this.projectileToFire.gameObject, projectileSpawnPosition, nearestEnemyPosition, 0, AngleVariance);
+                                Projectile component = gameObject.GetComponent<Projectile>();
+                                if (component != null)
+                                {
+                                    component.Owner = this.m_player;
+                                    component.TreatedAsNonProjectileForChallenge = true;
+                                    component.Shooter = this.m_rigidBody;
+                                    component.collidesWithPlayer = false;
                                     component.baseData.damage *= this.m_player.stats.GetStatValue(PlayerStats.StatType.Damage);
                                     component.baseData.speed *= this.m_player.stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed);
                                     component.baseData.range *= this.m_player.stats.GetStatValue(PlayerStats.StatType.RangeMultiplier);
@@ -196,10 +199,11 @@ namespace NevernamedsItems
                                     component.baseData.force *= this.m_player.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
                                     component.BossDamageMultiplier *= this.m_player.stats.GetStatValue(PlayerStats.StatType.DamageToBosses);
                                     this.m_player.DoPostProcessProjectile(component);
+                                }
                             }
                         }
                     }
-                        timer = TimeBetweenAttacks;
+                    timer = TimeBetweenAttacks;
                 }
             }
         }

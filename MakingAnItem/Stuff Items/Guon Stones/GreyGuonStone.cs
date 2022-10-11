@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
 using System.Collections;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -32,6 +32,7 @@ namespace NevernamedsItems
             BuildSynergyPrefab();
 
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
+            item.SetTag("guon_stone");
 
             item.HasAdvancedUpgradeSynergy = true;
             item.AdvancedUpgradeSynergy = "Greyer Guon Stone";

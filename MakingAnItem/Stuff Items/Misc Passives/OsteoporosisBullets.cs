@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -22,6 +22,7 @@ namespace NevernamedsItems
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.quality = PickupObject.ItemQuality.A;
+            item.SetTag("bullet_modifier");
         }
         public override void Pickup(PlayerController player)
         {
@@ -31,19 +32,16 @@ namespace NevernamedsItems
         }
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
-            InstaKillEnemyTypeBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<InstaKillEnemyTypeBehaviour>();
-            instakill.EnemyTypeToKill.AddRange(EasyEnemyTypeLists.ModInclusiveSkeletonEnemies);
-            instakill.BossesToBonusDMG.AddRange(Skellebosses);
+            ProjectileInstakillBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
+            instakill.tagsToKill.Add("skeleton");
             instakill.bossBonusDMG = 7;
         }
         private void PostProcessBeam(BeamController sourceBeam)
         {
-            Projectile proj = sourceBeam.GetComponent<Projectile>();
-            if (proj)
+            if (sourceBeam.projectile)
             {
-                InstaKillEnemyTypeBehaviour instakill = proj.gameObject.GetOrAddComponent<InstaKillEnemyTypeBehaviour>();
-                instakill.EnemyTypeToKill.AddRange(EasyEnemyTypeLists.ModInclusiveSkeletonEnemies);
-                instakill.BossesToBonusDMG.AddRange(Skellebosses);
+                ProjectileInstakillBehaviour instakill = sourceBeam.projectile.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
+                instakill.tagsToKill.Add("skeleton");
                 instakill.bossBonusDMG = 1;
             }
         }

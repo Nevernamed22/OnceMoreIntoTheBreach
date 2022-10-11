@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
@@ -24,6 +24,7 @@ namespace NevernamedsItems
             string longDesc = "Chance to shrink enemies, allowing them to be stomped on."+"\n\nA portal accident.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.B;
+            item.SetTag("bullet_modifier");
             //Unlock
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_SHRINKSHOT, true);
             item.AddItemToDougMetaShop(40);

@@ -60,7 +60,7 @@ namespace NevernamedsItems
 
             //BULLET STATS
             gun.quality = PickupObject.ItemQuality.B;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = "ARC Bullets";
             gun.Volley.UsesShotgunStyleVelocityRandomizer = true;

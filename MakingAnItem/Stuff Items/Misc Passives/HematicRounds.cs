@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using Dungeonator;
@@ -25,7 +25,7 @@ namespace NevernamedsItems
             string longDesc = "Increases damage the more times it's bearer takes damage. Resets per room." + "\n\nThese red blood shells are sloshing with the good stuff.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.C;
-
+            item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_HEMATICROUNDS, true);
             item.AddItemToDougMetaShop(50);
         }
@@ -45,13 +45,13 @@ namespace NevernamedsItems
         private RoomHandler lastCheckedRoom;
         private void PostProj(Projectile proj, float i)
         {
-            proj.baseData.damage *= (1 + (0.05f * timesHit));
+            proj.baseData.damage *= (1 + (0.1f * timesHit));
         }
         private void PostBeam(BeamController b)
         {
             if (b.projectile)
             {
-                b.projectile.baseData.damage *= (1 + (0.05f * timesHit));
+                b.projectile.baseData.damage *= (1 + (0.1f * timesHit));
             }
         }
         public override void Update()

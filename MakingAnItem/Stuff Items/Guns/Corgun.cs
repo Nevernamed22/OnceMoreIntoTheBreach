@@ -78,7 +78,7 @@ namespace NevernamedsItems
 
             DoggunID = gun.PickupObjectId;
 
-            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.KILLED_DRAGUN_WITH_DOG, true);
+            gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.DRAGUN_KILLED_HUNTER, true);
         }
         public static int DoggunID;       
         public Corgun()

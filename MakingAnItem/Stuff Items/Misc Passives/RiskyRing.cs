@@ -30,8 +30,12 @@ namespace NevernamedsItems
         private float currentGuns, lastGuns;
         private float GetModifierAmount(PlayerController owner, bool ShouldBePositive)
         {
-
-            if (owner.characterIdentity != PlayableCharacters.Robot)
+            if (owner.ForceZeroHealthState)
+            {
+                if (owner.PlayerHasActiveSynergy("Double Risk, Double Reward")) return 6f;
+                else return 3f;
+            }
+            else
             {
                 if (ShouldBePositive)
                 {
@@ -47,11 +51,7 @@ namespace NevernamedsItems
                     else { return owner.stats.GetStatValue(PlayerStats.StatType.Coolness) * -1f; }
                 }
             }
-            else
-            {
-                if (owner.PlayerHasActiveSynergy("Double Risk, Double Reward")) return 6f;
-                else return 3f;
-            }
+            
         }
         private void RecalculateShit()
         {

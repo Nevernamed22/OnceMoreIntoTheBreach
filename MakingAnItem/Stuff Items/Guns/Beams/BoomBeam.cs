@@ -6,7 +6,8 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -29,7 +30,7 @@ namespace NevernamedsItems
 
             //GUN STATS
             gun.doesScreenShake = false;
-            gun.DefaultModule.ammoCost = 5;
+            gun.DefaultModule.ammoCost = 15;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Beam;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
             gun.reloadTime = 1f;
@@ -67,7 +68,7 @@ namespace NevernamedsItems
             };
 
             //BULLET STATS
-            Projectile projectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
+            Projectile projectile = ProjectileUtility.SetupProjectile(86);
 
             BasicBeamController beamComp = projectile.GenerateBeamPrefab(
                 "NevernamedsItems/Resources/BeamSprites/largeredbeam_mid_001",
@@ -94,9 +95,6 @@ namespace NevernamedsItems
                 100
                 );
 
-            projectile.gameObject.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(projectile);
             projectile.baseData.damage = 30f;
             projectile.baseData.force *= 1f;
             projectile.baseData.range *= 200;
@@ -119,7 +117,7 @@ namespace NevernamedsItems
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("BoomBeam Laser", "NevernamedsItems/Resources/CustomGunAmmoTypes/boombeam_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/boombeam_clipempty");
 
             gun.quality = PickupObject.ItemQuality.S; //S
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             ID = gun.PickupObjectId;
         }

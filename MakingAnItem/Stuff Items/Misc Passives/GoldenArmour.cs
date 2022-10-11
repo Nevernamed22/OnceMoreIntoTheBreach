@@ -29,7 +29,7 @@ namespace NevernamedsItems
         {
             PlayableCharacters characterIdentity = Owner.characterIdentity;
 
-            if (characterIdentity != PlayableCharacters.Robot)
+            if (!Owner.ForceZeroHealthState)
             {
                 if (source.GetCurrentHealth() <= 0.5 && source.Armor <= 0)
                 {

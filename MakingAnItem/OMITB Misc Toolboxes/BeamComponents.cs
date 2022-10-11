@@ -1,4 +1,5 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
+using Alexandria.Misc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +44,7 @@ namespace NevernamedsItems
         private void DoProjectileSpawn()
         {
             Vector2 projectileSpawnPosition = this.m_basicBeam.GetPointOnBeam(UnityEngine.Random.value);
-            Vector2 nearestEnemyPosition = projectileSpawnPosition.GetPositionOfNearestEnemy(true, true);
+            Vector2 nearestEnemyPosition = projectileSpawnPosition.GetNearestEnemyToPosition().CenterPosition;
             if (nearestEnemyPosition != Vector2.zero)
             {
                 GameObject gameObject = ProjSpawnHelper.SpawnProjectileTowardsPoint(this.projectileToFire.gameObject, projectileSpawnPosition, nearestEnemyPosition, 0, 5);

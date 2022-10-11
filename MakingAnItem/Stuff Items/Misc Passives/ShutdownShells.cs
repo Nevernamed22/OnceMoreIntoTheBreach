@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -22,7 +22,7 @@ namespace NevernamedsItems
             string longDesc = "These brutal shells are designed to burrow into the long spines of the Gungeon's Shotgun Gundead and wreak havoc, causing a complete shutdown of the central nervous system.\n\n" + "Not compatible with other lifeforms.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.B;
-
+            item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_SHUTDOWNSHELLS, true);
             item.AddItemToDougMetaShop(30);
         }
@@ -34,8 +34,8 @@ namespace NevernamedsItems
         }
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
-            InstaKillEnemyTypeBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<InstaKillEnemyTypeBehaviour>();
-            instakill.EnemyTypeToKill.AddRange(EasyEnemyTypeLists.ModInclusiveShotgunKin);
+            ProjectileInstakillBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
+            instakill.tagsToKill.Add("shotgun_kin");
         }
         private void PostProcessBeam(BeamController sourceBeam)
         {
@@ -44,22 +44,11 @@ namespace NevernamedsItems
                 this.PostProcessProjectile(sourceBeam.projectile, 1);
             }
         }
-        public override DebrisObject Drop(PlayerController player)
+        public override void DisableEffect(PlayerController player)
         {
-            DebrisObject debrisObject = base.Drop(player);
             player.PostProcessProjectile -= this.PostProcessProjectile;
             player.PostProcessBeam -= this.PostProcessBeam;
-            return debrisObject;
-        }
-        public override void OnDestroy()
-        {
-            if (Owner)
-            {
-                Owner.PostProcessProjectile -= this.PostProcessProjectile;
-                Owner.PostProcessBeam -= this.PostProcessBeam;
-            }
-            base.OnDestroy();
-        }
-
+            base.DisableEffect(player);
+        }      
     }
 }

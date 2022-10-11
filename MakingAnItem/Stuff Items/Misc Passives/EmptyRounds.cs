@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +23,7 @@ namespace NevernamedsItems
 
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.A;
+            item.SetTag("bullet_modifier");
         }
         private void PostProcessBeam(BeamController beam)
         {

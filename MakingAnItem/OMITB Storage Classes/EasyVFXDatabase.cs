@@ -40,6 +40,7 @@ namespace NevernamedsItems
         public static GameObject BigWhitePoofVFX;
         public static GameObject ShittyElectricExplosion;
         public static GameObject BloodExplosion;
+        public static GameObject LoveBurstAOE;
         //Stat Up VFX
         public static GameObject DamageUpVFX;
         public static GameObject ShotSpeedUpVFX;

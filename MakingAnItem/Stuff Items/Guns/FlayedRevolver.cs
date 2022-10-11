@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -49,7 +49,7 @@ namespace NevernamedsItems
             projectile.baseData.range *= 1f;
 
             gun.quality = PickupObject.ItemQuality.B;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
             FlayedRevolverID = gun.PickupObjectId;
 
             gun.SetupUnlockOnCustomStat(CustomTrackedStats.MINEFLAYER_KILLS, 9, DungeonPrerequisite.PrerequisiteOperation.GREATER_THAN);

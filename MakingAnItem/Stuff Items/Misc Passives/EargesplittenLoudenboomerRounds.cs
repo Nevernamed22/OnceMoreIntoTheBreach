@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Dungeonator;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 using UnityEngine;
 
@@ -26,6 +26,7 @@ namespace NevernamedsItems
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.15f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ProjectileSpeed, 1.25f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = PickupObject.ItemQuality.B;
+            item.SetTag("bullet_modifier");
             EargesplittenLoudenboomerRoundsID = item.PickupObjectId;
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_LOUDENBOOMER, true);
             item.AddItemToTrorcMetaShop(50);
@@ -40,9 +41,9 @@ namespace NevernamedsItems
             if (beam && beam.projectile)
             {
                 Exploder.DoRadialKnockback(beam.Origin, 40, 7);
-                if (beam.projectile && beam.projectile.GetAbsoluteRoom() != null)
+                if (beam.projectile && beam.projectile.transform.position.GetAbsoluteRoom() != null)
                 {
-                    List<AIActor> activeEnemies = beam.projectile.GetAbsoluteRoom().GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+                    List<AIActor> activeEnemies = beam.projectile.transform.position.GetAbsoluteRoom().GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
                     if (activeEnemies != null && activeEnemies.Count > 0)
                     {
                         for (int i = 0; i < activeEnemies.Count; i++)
@@ -74,9 +75,9 @@ namespace NevernamedsItems
         {
             yield return null;
             Exploder.DoRadialKnockback(proj.specRigidbody.UnitCenter, (20 * flot), 7);
-            if (proj.GetAbsoluteRoom() != null)
+            if (proj.LastPosition.GetAbsoluteRoom() != null)
             {
-                List<AIActor> activeEnemies = proj.GetAbsoluteRoom().GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+                List<AIActor> activeEnemies = proj.LastPosition.GetAbsoluteRoom().GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
                 if (activeEnemies != null && activeEnemies.Count >0)
                 {
                     for (int i = 0; i < activeEnemies.Count; i++)

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -22,7 +22,7 @@ namespace NevernamedsItems
             string longDesc = "Picks a random selection of enemies to become highly efficient against.\n\n" + "These bullets were moulded by the numerous errors that went into making them, thanks to their incompetent smith.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.A;
-
+            item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_ERRORSHELLS, true);
             item.AddItemToDougMetaShop(30);
 
@@ -114,8 +114,8 @@ namespace NevernamedsItems
         }
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
-            InstaKillEnemyTypeBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<InstaKillEnemyTypeBehaviour>();
-            instakill.EnemyTypeToKill.AddRange(badMenGoByeBye);
+            ProjectileInstakillBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
+            instakill.enemyGUIDsToKill.AddRange(badMenGoByeBye);
         }
         private void PostProcessBeam(BeamController sourceBeam)
         {

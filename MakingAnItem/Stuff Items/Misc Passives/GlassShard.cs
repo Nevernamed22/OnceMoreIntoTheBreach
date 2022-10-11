@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -77,8 +78,8 @@ namespace NevernamedsItems
             base.Update();
         }
         private void FireBullet(Transform pos, float angleOffset, float anglevariance)
-        {
-            GameObject gameObject = SpawnManager.SpawnProjectile(GlassShardProjectile.gameObject, pos.position, Quaternion.Euler(0f, 0f, pos.position.GetVectorToNearestEnemy(angleOffset, anglevariance, null).ToAngle()), true);
+        {        
+            GameObject gameObject = GlassShardProjectile.InstantiateAndFireTowardsPosition(pos.position, ((Vector2)pos.position).GetPositionOfNearestEnemy(ActorCenter.SPRITE), angleOffset, anglevariance);
             Projectile component = gameObject.GetComponent<Projectile>();
             if (component != null)
             {

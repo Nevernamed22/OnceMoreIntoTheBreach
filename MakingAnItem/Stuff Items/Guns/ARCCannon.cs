@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -52,7 +52,26 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.damage = 20f;
             LightningProjectileComp lightning = projectile.gameObject.GetComponent<LightningProjectileComp>();
-            lightning.lightningWidth = 7;
+
+            UnityEngine.Object.Destroy(projectile.GetComponent<TrailController>());
+            List<string> BeamAnimPaths = new List<string>()
+            {
+                "NevernamedsItems/Resources/TrailSprites/bigarctrail_mid_001",
+                "NevernamedsItems/Resources/TrailSprites/bigarctrail_mid_002",
+                "NevernamedsItems/Resources/TrailSprites/bigarctrail_mid_003",
+            };
+
+            projectile.AddTrailToProjectile(
+                "NevernamedsItems/Resources/TrailSprites/bigarctrail_mid_001",
+                new Vector2(8, 7),
+                new Vector2(1, 1),
+                BeamAnimPaths, 20,
+                BeamAnimPaths, 20,
+                -1,
+                0.0001f,
+                -1,
+                true
+                );
 
             ExplosiveModifier explode = projectile.gameObject.AddComponent<ExplosiveModifier>();
             explode.explosionData = new ExplosionData()
@@ -78,6 +97,8 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(subLightning.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(subLightning);
             subLightning.baseData.damage = 5f;
+
+
             LightningProjectileComp lightning2 = subLightning.gameObject.GetComponent<LightningProjectileComp>();
             subLightning.projectile.gameObject.AddComponent<PierceProjModifier>();
             lightning2.targetEnemies = false;
@@ -96,12 +117,12 @@ namespace NevernamedsItems
             flakLightning.alignToSurfaceNormal = true;
 
             gun.quality = PickupObject.ItemQuality.A;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
 
             ID = gun.PickupObjectId;
         }
-     
+
         public static int ID;
     }
 }

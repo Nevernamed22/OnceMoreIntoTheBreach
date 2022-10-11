@@ -6,7 +6,8 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -43,7 +44,7 @@ namespace NevernamedsItems
             gun.gunClass = GunClass.SHITTY;
 
             gun.quality = PickupObject.ItemQuality.D;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
             BackWarderID = gun.PickupObjectId;
 
         }

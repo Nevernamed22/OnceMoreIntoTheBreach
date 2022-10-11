@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using System.Collections.Generic;
@@ -24,7 +24,7 @@ namespace NevernamedsItems
 
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.A;
-
+            item.SetTag("bullet_modifier");
             CrossBulletsID = item.PickupObjectId;
         }
         public static int CrossBulletsID;

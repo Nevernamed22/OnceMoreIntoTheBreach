@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Alexandria.ChestAPI;
+using Alexandria.Misc;
 using Dungeonator;
 using ItemAPI;
 using UnityEngine;
@@ -32,12 +34,12 @@ namespace NevernamedsItems
             if (GameManager.Instance.Dungeon.IsGlitchDungeon) //GLITCHED FLOOR BONUS
             {
                 IntVector2 bestRewardLocation2 = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
-                ChestToolbox.SpawnChestEasy(bestRewardLocation2, ChestToolbox.ChestTier.BLACK, true, Chest.GeneralChestType.UNSPECIFIED);
+                ChestUtility.SpawnChestEasy(bestRewardLocation2, ChestUtility.ChestTier.BLACK, true, Chest.GeneralChestType.UNSPECIFIED);
             }
             if (UnityEngine.Random.value <= 0.001f) //RANDOM RARE RAINBOW
             {
                 IntVector2 bestRewardLocation = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
-                ChestToolbox.SpawnChestEasy(bestRewardLocation, ChestToolbox.ChestTier.RAINBOW, false, Chest.GeneralChestType.UNSPECIFIED, ChestToolbox.ThreeStateValue.FORCENO, ChestToolbox.ThreeStateValue.FORCENO);
+                ChestUtility.SpawnChestEasy(bestRewardLocation, ChestUtility.ChestTier.RAINBOW, false, Chest.GeneralChestType.UNSPECIFIED, ThreeStateValue.FORCENO, ThreeStateValue.FORCENO);
             }
             else
             {
@@ -58,7 +60,7 @@ namespace NevernamedsItems
                         for (int i = 0; i < 3; i++)
                         {
                             IntVector2 bestRewardLocation = user.CurrentRoom.GetRandomVisibleClearSpot(2, 2);
-                            ChestToolbox.SpawnChestEasy(bestRewardLocation, ChestToolbox.ChestTier.BROWN, false, Chest.GeneralChestType.UNSPECIFIED);
+                            ChestUtility.SpawnChestEasy(bestRewardLocation, ChestUtility.ChestTier.BROWN, false, Chest.GeneralChestType.UNSPECIFIED);
                         }
                         hasDeterminedValidFloor = true;
                         break;
@@ -69,7 +71,7 @@ namespace NevernamedsItems
                     case GlobalDungeonData.ValidTilesets.CATHEDRALGEON: //ABBEY
                         ChangeStatPermanent(user, PlayerStats.StatType.Health, 2, StatModifier.ModifyMethod.ADDITIVE);
                         ChangeStatPermanent(user, PlayerStats.StatType.Curse, 2, StatModifier.ModifyMethod.ADDITIVE);
-                        if (user.characterIdentity == PlayableCharacters.Robot)
+                        if (user.ForceZeroHealthState)
                         {
                             LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(120).gameObject, user);
                             LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(120).gameObject, user);
@@ -78,7 +80,7 @@ namespace NevernamedsItems
                         break;
                     case GlobalDungeonData.ValidTilesets.MINEGEON: //MINES
                         IntVector2 bestRewardLocation2 = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
-                        ChestToolbox.SpawnChestEasy(bestRewardLocation2, ChestToolbox.ChestTier.RED, false, Chest.GeneralChestType.UNSPECIFIED);
+                        ChestUtility.SpawnChestEasy(bestRewardLocation2, ChestUtility.ChestTier.RED, false, Chest.GeneralChestType.UNSPECIFIED);
                         hasDeterminedValidFloor = true;
                         break;
                     case GlobalDungeonData.ValidTilesets.RATGEON: //RAT LAIR
@@ -118,7 +120,7 @@ namespace NevernamedsItems
                             for (int i = 0; i < 2; i++)
                             {
                                 IntVector2 bestRewardLocation5 = user.CurrentRoom.GetRandomVisibleClearSpot(2, 2);
-                                ChestToolbox.SpawnChestEasy(bestRewardLocation5, ChestToolbox.ChestTier.BLACK, true, Chest.GeneralChestType.UNSPECIFIED);
+                                ChestUtility.SpawnChestEasy(bestRewardLocation5, ChestUtility.ChestTier.BLACK, true, Chest.GeneralChestType.UNSPECIFIED);
                             }
                             ChangeStatPermanent(user, PlayerStats.StatType.Curse, 5, StatModifier.ModifyMethod.ADDITIVE);
                         }
@@ -143,7 +145,7 @@ namespace NevernamedsItems
                     case GlobalDungeonData.ValidTilesets.BELLYGEON: //BELLY
                         ChangeStatPermanent(user, PlayerStats.StatType.Health, 1, StatModifier.ModifyMethod.ADDITIVE);
                         user.healthHaver.ApplyHealing(100f);
-                        if (user.characterIdentity == PlayableCharacters.Robot)
+                        if (user.ForceZeroHealthState)
                         {
                             for (int i = 0; i < 5; i++) LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(120).gameObject, user);
                         }

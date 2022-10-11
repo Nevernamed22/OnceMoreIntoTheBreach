@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -22,7 +22,7 @@ namespace NevernamedsItems
             string longDesc = "Allows for the effortless destruction of cubes.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.D;
-
+            item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_MINERSBULLETS, true);
             item.AddItemToDougMetaShop(8);
         }
@@ -36,53 +36,30 @@ namespace NevernamedsItems
 
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
-            InstaKillEnemyTypeBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<InstaKillEnemyTypeBehaviour>();
-            instakill.EnemyTypeToKill.AddRange(EasyEnemyTypeLists.CubicEnemies);
-            if (Owner.PlayerHasActiveSynergy("Eye of the Spider")) instakill.EnemyTypeToKill.Add(EnemyGuidDatabase.Entries["phaser_spider"]);
+            ProjectileInstakillBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
+            instakill.tagsToKill.AddRange(new List<string>() { "sliding_cube", "cube_blobulon" });
+            if (Owner.PlayerHasActiveSynergy("Eye of the Spider")) instakill.enemyGUIDsToKill.Add(EnemyGuidDatabase.Entries["phaser_spider"]);
         }
         private void PostProcessBeam(BeamController sourceBeam)
         {
-            if (sourceBeam.projectile)
-            {
-                this.PostProcessProjectile(sourceBeam.projectile, 1);
-            }
+            if (sourceBeam.projectile) this.PostProcessProjectile(sourceBeam.projectile, 1);
         }
         private void OnEnemyDamaged(float damage, bool fatal, HealthHaver enemyHealth)
         {
-            if (fatal && Owner)
+            if (fatal && enemyHealth && enemyHealth.aiActor && Owner && Owner.PlayerHasActiveSynergy("Miiiining Away~"))
             {
-                if (Owner.PlayerHasActiveSynergy("Miiiining Away~"))
-                {
-                    string enemyGuid = enemyHealth?.aiActor?.EnemyGuid;
-                    if (enemyHealth?.aiActor?.EnemyGuid == "98ca70157c364750a60f5e0084f9d3e2" && Owner.PlayerHasActiveSynergy("Eye of the Spider"))
-                    {
-                        LootEngine.SpawnCurrency(enemyHealth.sprite.WorldCenter, 5);
-                    }
-                    else if (EasyEnemyTypeLists.CubicEnemies.Contains(enemyGuid))
-                    {
-                        LootEngine.SpawnCurrency(enemyHealth.sprite.WorldCenter, 5);
-                    }
-                }
+                string enemyGuid = enemyHealth.aiActor.EnemyGuid;
+                if (enemyGuid == "98ca70157c364750a60f5e0084f9d3e2" && Owner.PlayerHasActiveSynergy("Eye of the Spider")) LootEngine.SpawnCurrency(enemyHealth.sprite.WorldCenter, 5);
+                else if (enemyHealth.aiActor.HasTag("sliding_cube") || enemyHealth.aiActor.HasTag("cube_blobulon")) LootEngine.SpawnCurrency(enemyHealth.sprite.WorldCenter, 5);
             }
         }
-        public override DebrisObject Drop(PlayerController player)
+        public override void DisableEffect(PlayerController player)
         {
-            DebrisObject debrisObject = base.Drop(player);
             player.PostProcessProjectile -= this.PostProcessProjectile;
             player.PostProcessBeam -= this.PostProcessBeam;
             player.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
-            return debrisObject;
-        }
-        public override void OnDestroy()
-        {
-            if (Owner)
-            {
-                Owner.PostProcessProjectile -= this.PostProcessProjectile;
-            Owner.PostProcessBeam -= this.PostProcessBeam;
-            Owner.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
-            }
-            base.OnDestroy();
-        }
+            base.DisableEffect(player);
+        }       
     }
 }
 

@@ -21,14 +21,14 @@ namespace NevernamedsItems
     CustomDungeonFlags.     USED_FALSE_BLANK_TEN_TIMES,
     CustomDungeonFlags.     KILLED_TITAN_KIN,
    CustomDungeonFlags.      HAS_BEATEN_BOSS_BY_SKIN_OF_TEETH,
-   CustomDungeonFlags.      KILLED_DRAGUN_WITH_DOG,
+   CustomDungeonFlags.      DRAGUN_KILLED_HUNTER,
    CustomDungeonFlags.      ANGERED_BELLO,
    CustomDungeonFlags.      ROBOT_HELD_FIVE_JUNK,
    CustomDungeonFlags.      HURT_BY_SHROOMER,
    CustomDungeonFlags.      UNLOCKED_MISSINGUNO,
    CustomDungeonFlags.      FLOOR_CLEARED_WITH_CURSE,
         //Turbo
-     CustomDungeonFlags.    BEATEN_ANY_BOSS_TURBO_MODE,
+     CustomDungeonFlags.    BEATEN_KEEP_TURBO_MODE,
       CustomDungeonFlags.   BEATEN_MINES_BOSS_TURBO_MODE,
       CustomDungeonFlags.   BEATEN_HOLLOW_BOSS_TURBO_MODE,
         //Rainbow
@@ -63,7 +63,7 @@ CustomDungeonFlags. BOSSRUSH_BULLET,
      CustomDungeonFlags.    CHALLENGE_INVISIBLEO_BEATEN,
      CustomDungeonFlags.    CHALLENGE_KEEPITCOOL_BEATEN,
         //Shade  Unlocks
-     CustomDungeonFlags.    DRAGUN_BEATEN_SHADE,
+     CustomDungeonFlags.    DRAGUN_KILLED_SHADE,
       CustomDungeonFlags.   LICH_BEATEN_SHADE,
      CustomDungeonFlags.    CHEATED_DEATH_SHADE,
         //---------------------------------------------Hunting Quests
@@ -155,7 +155,7 @@ CustomDungeonFlags. BOSSRUSH_BULLET,
 
             ETGModConsole.Commands.GetGroup("nn").AddUnit("cheatunlocks", delegate (string[] args)
                 {
-                    foreach(CustomDungeonFlags flag in flagsToSet)
+                    foreach (CustomDungeonFlags flag in flagsToSet)
                     {
                         if (!SaveAPIManager.GetFlag(flag)) SaveAPIManager.SetFlag(flag, true);
                     }

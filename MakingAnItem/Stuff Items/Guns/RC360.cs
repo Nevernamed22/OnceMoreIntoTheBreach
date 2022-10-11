@@ -8,6 +8,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -66,7 +67,7 @@ namespace NevernamedsItems
             gun.DefaultModule.finalProjectile = projectile;
 
             gun.quality = PickupObject.ItemQuality.B; 
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             RC360ID = gun.PickupObjectId;
         }

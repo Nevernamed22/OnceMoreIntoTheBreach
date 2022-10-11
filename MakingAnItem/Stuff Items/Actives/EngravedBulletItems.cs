@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using System.Collections;
 using SaveAPI;
@@ -13,35 +13,17 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Unengraved Bullets";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/unengravedbullets_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<UnengravedBullets>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "Waiting for the right moment...";
             string longDesc = "The first enemy shot while this item is active becomes permanently insta-killable.\n\n" + "These bullets, while unremarkable at the moment, are brimming with murderous potential.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 500);
-
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.B;
-
+            item.SetTag("bullet_modifier");
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_UNENGRAVEDBULLETS, true);
             item.AddItemToTrorcMetaShop(15);
@@ -50,16 +32,7 @@ namespace NevernamedsItems
         float duration = 4;
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
-            try
-            {
-                //ETGModConsole.Log("posting the process to the projectile in the mail");
-                //ETGModConsole.Log($"Proj Null: {projectile == null} | OnHitEnemy null: {projectile?.OnHitEnemy == null}");
-                sourceProjectile.OnHitEnemy += this.OnHitEnemy;
-            }
-            catch (Exception e)
-            {
-                ETGModConsole.Log(e.Message);
-            }
+            sourceProjectile.OnHitEnemy += this.OnHitEnemy;
         }
         private void PostProcessBeam(BeamController sourceBeam)
         {
@@ -195,6 +168,7 @@ namespace NevernamedsItems
             string shortDesc = "Bullet with your name on it";
             string longDesc = "These bullets are specially made to absolutely annihilate one specific foe.\n\n" + "They may run. They may hide. But you will find them";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            item.SetTag("bullet_modifier");
             item.quality = PickupObject.ItemQuality.EXCLUDED;
         }
         string enemyToKillEngraved = UnengravedBullets.engravedEnemy;
@@ -203,31 +177,21 @@ namespace NevernamedsItems
             base.Pickup(player);
             player.PostProcessProjectile += this.PostProcessProjectile;
             player.PostProcessBeam += this.PostProcessBeam;
-        }                 
+        }
         private void PostProcessBeam(BeamController sourceBeam)
         {
-            if (sourceBeam.projectile)
-            {
-                this.PostProcessProjectile(sourceBeam.projectile, 1);
-            }
+            if (sourceBeam.projectile) this.PostProcessProjectile(sourceBeam.projectile, 1);
         }
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
-            InstaKillEnemyTypeBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<InstaKillEnemyTypeBehaviour>();
-            instakill.EnemyTypeToKill.Add(enemyToKillEngraved);
+            ProjectileInstakillBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
+            instakill.enemyGUIDsToKill.Add(enemyToKillEngraved);
         }
-        public override DebrisObject Drop(PlayerController player)
+        public override void DisableEffect(PlayerController player)
         {
-            DebrisObject debrisObject = base.Drop(player);
             player.PostProcessProjectile -= this.PostProcessProjectile;
             player.PostProcessBeam -= this.PostProcessBeam;
-            return debrisObject;
-        }
-        public override void OnDestroy()
-        {
-            Owner.PostProcessProjectile -= this.PostProcessProjectile;
-            Owner.PostProcessBeam -= this.PostProcessBeam;
-            base.OnDestroy();
+            base.DisableEffect(player);
         }
     }
 }

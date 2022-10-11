@@ -34,15 +34,20 @@ namespace NevernamedsItems
             orig(self, actor, goopPosition);
             try
             {
+                
                 SpecialGoopBehaviours specialBehaviours = self.gameObject.GetComponent<SpecialGoopBehaviours>();
                 if (specialBehaviours != null)
                 {
+                    if (actor && !(actor.aiAnimator.IsPlaying("spawn") && !actor.aiAnimator.IsPlaying("awaken")))
+                    {
+
                     if (specialBehaviours.ForcesEnemiesToFall == true)
                     {
                         if (!actor.healthHaver.IsBoss)
                         {
                             actor.ForceFall();
                         }
+                    }
                     }
                 }
             }

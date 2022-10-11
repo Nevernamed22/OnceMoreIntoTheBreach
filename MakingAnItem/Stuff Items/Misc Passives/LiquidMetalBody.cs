@@ -13,32 +13,14 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Liquid-Metal Body";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/liquidmetalbody_icon";
-
-            //Create new GameObject
+            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/liquidmetalbody_icon";
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<LiquidMetalBody>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "1000";
             string longDesc = "Grants a liquid-metal state for a brief time upon taking damage."+"\n\nBlobulonian science, once used to formulate the terrifying Leadbulon, now modified by Professor Goopton to affect other lifeforms.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.B;
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_LIQUIDMETALBODY, true);

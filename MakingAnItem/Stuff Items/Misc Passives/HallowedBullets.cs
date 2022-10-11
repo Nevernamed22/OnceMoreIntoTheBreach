@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 using SaveAPI;
 
@@ -23,6 +23,7 @@ namespace NevernamedsItems
             string longDesc = "These bullets are so blessed that they will preach to other projectiles mid-air. Usually this does nothing, but it does give Jammed projectiles a chance at redemption.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.D;
+            item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_KEEP, true);
         }
         public void onFiredGun(Projectile bullet, float eventchancescaler)

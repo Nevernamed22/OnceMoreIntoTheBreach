@@ -87,7 +87,7 @@ namespace NevernamedsItems
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Thousand Sins Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/thousandsins_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/thousandsins_clipempty");
 
             gun.quality = PickupObject.ItemQuality.S;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             GunOfAThousandSinsID = gun.PickupObjectId;
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_HELL, true);

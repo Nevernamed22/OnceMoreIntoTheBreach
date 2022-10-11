@@ -428,6 +428,12 @@ namespace NevernamedsItems
             //LEWIS / BATTLE STANDARD
             List<string> mandatorySynergyItemsRallyTheSlacker = new List<string>() { "nn:lewis", "battle_standard" };
             CustomSynergies.Add("Rally The Slacker", mandatorySynergyItemsRallyTheSlacker);
+            //HEART PADLOCK / HEART LOCKET
+            List<string> mandatorySynergyItemsAllLockedUp = new List<string>() { "nn:heart_padlock", "heart_locket" };
+            CustomSynergies.Add("All Locked Up", mandatorySynergyItemsAllLockedUp);
+            //HEART PADLOCK / SHELLETON KEY
+            List<string> mandatorySynergyItemsKeyDeath = new List<string>() { "nn:heart_padlock", "shelleton_key" };
+            CustomSynergies.Add("Key Death", mandatorySynergyItemsKeyDeath);
             #endregion
 
             #region BigUpdate (1.14) Synergies
@@ -1489,6 +1495,42 @@ namespace NevernamedsItems
             List<string> optionalSynergyItemsChamberMasters = new List<string>() { "yellow_chamber", "sixth_chamber", "oiled_cylinder", 
                 "nn:nitroglycylinder", "nn:glass_chamber", "nn:flame_chamber", "nn:springloaded_chamber", "nn:withering_chamber", "nn:heavy_chamber", "nn:cyclopean_cylinder", "nn:recyclinder", "nn:barrel_chamber" };
             CustomSynergies.Add("Chamber Masters", mandatorySynergyItemsChamberMasters, optionalSynergyItemsChamberMasters);
+            #endregion
+
+            #region TheIntermediaryFrontier
+            //BLACKER GUON STONE
+            List<string> mandatorySynergyItemsBlackerGuonStone = new List<string>() { "nn:black_guon_stone" };
+            List<string> optionalSynergyItemsBlackerGuonStone = new List<string>() { "+1_bullets", "amulet_of_the_pit_lord", "nn:black_holster" };
+            CustomSynergies.Add("Blacker Guon Stone", mandatorySynergyItemsBlackerGuonStone, optionalSynergyItemsBlackerGuonStone);
+            //BLACK GUON STONE + SHRINKSHOT
+            List<string> mandatorySynergyItemsSchwarzschildRadius = new List<string>() { "nn:black_guon_stone", "nn:shrinkshot" };
+            CustomSynergies.Add("Schwarzschild Radius", mandatorySynergyItemsSchwarzschildRadius);
+            //Pepper Poppers + Gungeon Pepper
+            List<string> mandatorySynergyItemsPepperX = new List<string>() { "nn:pepper_poppers", "gungeon_pepper" };
+            CustomSynergies.Add("Pepper X", mandatorySynergyItemsPepperX);
+            //Pepper Poppers + Pickled Pepper
+            List<string> mandatorySynergyItemsPickledPoppers = new List<string>() { "nn:pepper_poppers", "nn:pickled_pepper" };
+            CustomSynergies.Add("Pickled Poppers", mandatorySynergyItemsPickledPoppers);
+            //Schwarzlose / Water items
+            List<string> mandatorySynergyItemsWaterJacket = new List<string>() { "nn:schwarzlose" };
+            List<string> optionalSynergyItemsWaterJacket = new List<string>() { "mega_douser", "bottle", "heart_bottle", "nn:holey_water", "nn:bottle_rocket" };
+            CustomSynergies.Add("Water Jacket", mandatorySynergyItemsWaterJacket, optionalSynergyItemsWaterJacket);
+            //RECTANGULAR MIRROR + TABLE TECH SPEED
+            List<string> mandatorySynergyItemsFastPass = new List<string>() { "nn:rectangular_mirror", "nn:table_tech_speed" };
+            CustomSynergies.Add("Fast Pass", mandatorySynergyItemsFastPass);
+            //RECTANGULAR MIRROR + SCULPTORS CHISEL
+            List<string> mandatorySynergyItemsSterling = new List<string>() { "nn:rectangular_mirror", "nn:sculptors_chisel" };
+            CustomSynergies.Add("Sterling", mandatorySynergyItemsSterling);
+            //BLASTING CAP / PERCUSSION CAP
+            List<string> mandatorySynergyItemsScreamosynthesis = new List<string>() { "nn:blasting_cap", "nn:percussion_cap" };
+            CustomSynergies.Add("Screamosynthesis", mandatorySynergyItemsScreamosynthesis);
+            //PERCUSSION CAP / FUN GUY
+            List<string> mandatorySynergyItemsMushAdoAboutNothing = new List<string>() { "nn:fun_guy", "nn:percussion_cap" };
+            CustomSynergies.Add("Mush Ado About Nothing", mandatorySynergyItemsMushAdoAboutNothing);
+            //DARC PISTOL
+            List<string> mandatorySynergyItemsDARCPistol = new List<string>() { "nn:arc_pistol" };
+            List<string> optionalSynergyItemsDARCPistol = new List<string>() { "riddle_of_lead", "nn:cloak_of_darkness", "dark_marker" };
+            CustomSynergies.Add("DARC Pistol", mandatorySynergyItemsDARCPistol, optionalSynergyItemsDARCPistol);
             #endregion
         }
 

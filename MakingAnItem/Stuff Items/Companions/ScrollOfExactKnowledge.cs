@@ -28,7 +28,7 @@ namespace NevernamedsItems
             ScrollOfExactKnowledgeID = companionItem.PickupObjectId;
             companionItem.SetupUnlockOnCustomFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_OFFICE, true);
 
-            ChestToolbox.OnChestPostSpawn += ScrollOfExactKnowledge.OnChestSpawned;
+            CustomActions.OnChestPostSpawn += ScrollOfExactKnowledge.OnChestSpawned;
             CustomActions.OnRewardPedestalSpawned += OnPedestalSpawned;
         }
         public static int ScrollOfExactKnowledgeID;
@@ -329,7 +329,7 @@ namespace NevernamedsItems
                 {
                     if (enemy.EnemyGuid == "479556d05c7c44f3b6abb3b2067fc778")
                     {
-                        if (enemy.specRigidbody && enemy.CurrentRoom() == room)
+                        if (enemy.specRigidbody && enemy.Position.GetAbsoluteRoom() == room)
                         {
                             if (enemy.GetComponent<WallMimicController>() != null)
                             {

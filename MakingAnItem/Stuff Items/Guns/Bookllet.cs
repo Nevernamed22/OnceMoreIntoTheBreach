@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -89,7 +90,8 @@ namespace NevernamedsItems
                 {
                     if (bullet)
                     {
-                        bullet.ReAimToNearestEnemy();
+                        Vector2 dirVec = bullet.GetVectorToNearestEnemy();
+                        bullet.SendInDirection(dirVec, false, true);
                         bullet.baseData.speed *= 7500;
                         bullet.UpdateSpeed();
                         BulletsToRemoveFromActiveBullets.Add(bullet);
@@ -192,7 +194,8 @@ namespace NevernamedsItems
         }
         private void ChangeSpeedAndReAim()
         {
-            m_projectile.ReAimToNearestEnemy();
+            Vector2 dirVec = m_projectile.GetVectorToNearestEnemy();
+            m_projectile.SendInDirection(dirVec, false, true);
             m_projectile.baseData.speed *= 7500;
             m_projectile.UpdateSpeed();
         }

@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using ItemAPI;
 using UnityEngine;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -38,17 +39,15 @@ namespace NevernamedsItems
             gun.gunClass = GunClass.PISTOL;
 
             //BULLET STATS
-            Projectile projectile = gun.DefaultModule.projectiles[0].gameObject.InstantiateAndFakeprefab().GetComponent<Projectile>();
+            Projectile projectile = ProjectileUtility.SetupProjectile(86);
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.damage = 7.5f;
             RandomiseProjectileColourComponent paintballController = projectile.gameObject.AddComponent<RandomiseProjectileColourComponent>();
             paintballController.ApplyColourToHitEnemies = true;
             paintballController.paintballGun = true;
-
             gun.quality = PickupObject.ItemQuality.C;
 
-            gun.encounterTrackable.EncounterGuid = "this is the Paintball Gun";
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
         }
         public override void PostProcessProjectile(Projectile projectile)

@@ -6,6 +6,7 @@ using UnityEngine;
 using Dungeonator;
 using ItemAPI;
 using System.Collections;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -136,7 +137,7 @@ namespace NevernamedsItems
                         Owner.StartCoroutine(this.HandleSlowBullets());
                         break;
                     case 27:
-                        Owner.Enrage(4f);
+                        Owner.GetExtComp().Enrage(4f, false);
                         break;
                 }
             }

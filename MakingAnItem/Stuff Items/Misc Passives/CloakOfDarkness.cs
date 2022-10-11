@@ -49,13 +49,8 @@ namespace NevernamedsItems
                         target.ApplyEffect(charm);
                         if (UnityEngine.Random.value <= 0.5f)
                         {
-                            target.IgnoreForRoomClear = true;
-                            KillOnRoomClear kill = target.gameObject.GetOrAddComponent<KillOnRoomClear>();
-                            if (EasyEnemyTypeLists.MultiPhaseEnemies.Contains(target.EnemyGuid) || EasyEnemyTypeLists.EnemiesWithInvulnerablePhases.Contains(target.EnemyGuid))
-                            {
-                                EraseFromExistenceOnRoomClear destroyTrickyEnemy = target.gameObject.AddComponent<EraseFromExistenceOnRoomClear>();
-                                destroyTrickyEnemy.Delay = 1f;
-                            }
+                            AdvancedKillOnRoomClear advKill = target.gameObject.AddComponent<AdvancedKillOnRoomClear>();
+                            advKill.triggersOnRoomUnseal = true;
                         }
                     }
                 }

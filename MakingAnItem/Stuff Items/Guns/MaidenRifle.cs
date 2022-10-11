@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -152,7 +153,8 @@ namespace NevernamedsItems
             }
 
             this.m_projectile.SendInDirection(MiscToolbox.DegreeToVector2(this.directionOfNearestEnemy), false, true);*/
-            this.m_projectile.ReAimToNearestEnemy();
+            Vector2 dirVec = m_projectile.GetVectorToNearestEnemy();
+            m_projectile.SendInDirection(dirVec, false, true);
             this.m_projectile.baseData.speed *= 10000;
             this.m_projectile.UpdateSpeed();
 

@@ -680,8 +680,8 @@ namespace NevernamedsItems
                 if (projOwner.PlayerHasActiveSynergy("Suicide King"))
                 {
                     projectile.baseData.damage *= 2;
-                    InstaKillEnemyTypeBehaviour instakill2 = projectile.gameObject.GetOrAddComponent<InstaKillEnemyTypeBehaviour>();
-                    instakill2.EnemyTypeToKill.AddRange(EasyEnemyTypeLists.RoyalEnemies);
+                    ProjectileInstakillBehaviour instakill2 = projectile.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
+                    instakill2.tagsToKill.Add("royalty");
                     if (cardness.Suit == HandGunCardBullet.CardSuit.HEARTS && cardness.Value == HandGunCardBullet.CardValue.KING)
                     {
                         projectile.baseData.damage *= 2;
@@ -701,7 +701,7 @@ namespace NevernamedsItems
                     if (cardness.Suit == HandGunCardBullet.CardSuit.HEARTS)
                     {
                         projectile.baseData.damage *= 2;
-                        if (projOwner.characterIdentity != PlayableCharacters.Robot) projectile.baseData.damage *= ((0.025f * projOwner.healthHaver.GetCurrentHealth()) + 1);
+                        if (!projOwner.ForceZeroHealthState) projectile.baseData.damage *= ((0.025f * projOwner.healthHaver.GetCurrentHealth()) + 1);
                         else projectile.baseData.damage *= ((0.025f * projOwner.healthHaver.Armor) + 1);
                     }
                 }

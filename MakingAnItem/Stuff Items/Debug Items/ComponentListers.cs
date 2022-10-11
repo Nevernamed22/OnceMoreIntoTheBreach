@@ -34,6 +34,19 @@ namespace NevernamedsItems
             foreach (Component component in bullet.GetComponentsInChildren<Component>())
             {
                 ETGModConsole.Log(component.GetType().ToString());
+                if (component is TrailController)
+                {
+                    TrailController cont = (component as TrailController);
+                    ETGModConsole.Log($"<color=#ff0000ff>    usesStartAnimation: </color>{cont.usesStartAnimation}");
+                    ETGModConsole.Log($"<color=#ff0000ff>    usesAnimation: </color>{cont.usesAnimation}");
+                    ETGModConsole.Log($"<color=#ff0000ff>    usesCascadeTimer: </color>{cont.usesCascadeTimer}");
+                    ETGModConsole.Log($"<color=#ff0000ff>    cascadeTimer: </color>{cont.cascadeTimer}");
+                    ETGModConsole.Log($"<color=#ff0000ff>    usesSoftMaxLength: </color>{cont.usesSoftMaxLength}");
+                    ETGModConsole.Log($"<color=#ff0000ff>    softMaxLength: </color>{cont.softMaxLength}");
+                    ETGModConsole.Log($"<color=#ff0000ff>    usesGlobalTimer: </color>{cont.usesGlobalTimer}");
+                    ETGModConsole.Log($"<color=#ff0000ff>    globalTimer: </color>{cont.globalTimer}");
+                    ETGModConsole.Log($"<color=#ff0000ff>    destroyOnEmpty: </color>{cont.destroyOnEmpty}");
+                }
             }
             ETGModConsole.Log("<color=#ff0000ff>---------------------------------</color>");
         }

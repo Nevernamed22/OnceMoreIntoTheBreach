@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -65,7 +66,7 @@ namespace NevernamedsItems
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("CopperSidearm Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/coppersidearm_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/coppersidearm_clipempty");
 
             gun.quality = PickupObject.ItemQuality.C;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             CopperSidearmID = gun.PickupObjectId;
         }
