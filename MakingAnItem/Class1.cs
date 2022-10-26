@@ -97,10 +97,12 @@ namespace NevernamedsItems
                 StaticStatusEffects.InitCustomEffects();
                 PlagueStatusEffectSetup.Init();
                 Confusion.Init();
+                ExsanguinationSetup.Init();
 
                 //Goop Setup
                 EasyGoopDefinitions.DefineDefaultGoops();
-                DoGoopEffectHook.Init();
+                HoleGoop.Init();
+                JarateGoop.Init();
 
                 //Commands and Other Console Utilities
                 Commands.Init();
@@ -344,6 +346,7 @@ namespace NevernamedsItems
                 PanicPendant.Init();
                 GunknightAmulet.Init();
                 AmuletOfShelltan.Init();
+                CrosshairNecklace.Init();
                 //Rings
                 RingOfOddlySpecificBenefits.Init();
                 FowlRing.Init();
@@ -386,6 +389,7 @@ namespace NevernamedsItems
                 Citrinitas.Init();
                 Rubedo.Init();
                 HoleyWater.Init();
+                Jarate.Init();
                 //Remotes
                 ReinforcementRadio.Init();
                 //Medicine
@@ -608,6 +612,7 @@ namespace NevernamedsItems
                 StasisRifle.Add();
                 Gravitron.Add();
                 Ferrobolt.Add();
+                ParticleBeam.Add();
                 TauCannon.Add();
                 GravityGun.Add();
                 GalaxyCrusher.Add();
@@ -620,6 +625,7 @@ namespace NevernamedsItems
                 //BOWS AND CROSSBOWS
                 IceBow.Add();
                 Boltcaster.Add();
+                VulcanRepeater.Add();
                 Clicker.Add();
                 //ANTIQUES
                 WheelLock.Add();
@@ -636,6 +642,7 @@ namespace NevernamedsItems
                 Gaxe.Add();
                 WoodenHorse.Add();
                 AgarGun.Add();
+                TheBlackSpot.Add();
                 //KNIVES AND BLADES
                 Carnwennan.Add();
                 MantidAugment.Add();
@@ -658,6 +665,7 @@ namespace NevernamedsItems
                 DynamiteLauncher.Add();
                 MarbledUzi.Add();
                 BurstRifle.Add();
+                DublDuck.Add();
                 OlReliable.Add();
                 //MISSILE LAUNCHERS
                 BottleRocket.Add();
@@ -702,6 +710,7 @@ namespace NevernamedsItems
                 Ringer.Add();
                 Snaker.Add();
                 GayK47.Add();
+                LaundromaterielRifle.Add();
                 DecretionCarbine.Add();
                 RC360.Add();
                 UziSpineMM.Add();
@@ -710,9 +719,11 @@ namespace NevernamedsItems
                 BigShot.Add();
                 W3irdstar.Add();
                 Seismograph.Add();
+                CashBlaster.Add();
                 PocoLoco.Add();
                 BioTranstater2100.Add();
                 //MAGICAL GUNS
+                TotemOfGundying.Add();
                 Icicle.Add();
                 GunjurersStaff.Add();
                 InitiateWand.Add();
@@ -762,6 +773,11 @@ namespace NevernamedsItems
                 StormRod.Add();
                 UnrustyShotgun.Add();
                 DARCPistol.Add();
+                DARCRifle.Add();
+                DARCShotgun.Add();
+                DARCTactical.Add();
+                DARCCannon.Add();
+                Bloodwash.Add();
                 #endregion
 
 

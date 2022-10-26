@@ -51,8 +51,8 @@ namespace NevernamedsItems
             ReShelletonKeyterForme.SynergyGunId = ReShelletonKeyter.ReShelletonKeyterID;
             ReShelletonKeyterForme.SynergyToCheck = "ReShelletonKeyter";
             //AM0 - SPREAD FORME
-            AdvancedTransformGunSynergyProcessor AM0SpreadForm = (PickupObjectDatabase.GetById(AM0.AM0ID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            AM0SpreadForm.NonSynergyGunId = AM0.AM0ID;
+            AdvancedTransformGunSynergyProcessor AM0SpreadForm = (PickupObjectDatabase.GetById(AM0.ID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
+            AM0SpreadForm.NonSynergyGunId = AM0.ID;
             AM0SpreadForm.SynergyGunId = AM0SpreadForme.AM0SpreadFormeID;
             AM0SpreadForm.SynergyToCheck = "Spreadshot";
             //BULLET BLADE - GHOST SWORD
@@ -97,39 +97,24 @@ namespace NevernamedsItems
             WombularPolypForme.NonSynergyGunId = UterinePolyp.UterinePolypID;
             WombularPolypForme.SynergyGunId = UterinePolypWombular.WombularPolypID;
             WombularPolypForme.SynergyToCheck = "Wombular";
-            //GAXE ---- DIAMOND GAXE
-            AdvancedTransformGunSynergyProcessor DiamondGaxeSyn = (PickupObjectDatabase.GetById(Gaxe.GaxeID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            DiamondGaxeSyn.NonSynergyGunId = Gaxe.GaxeID;
-            DiamondGaxeSyn.SynergyGunId = DiamondGaxe.DiamondGaxeID;
-            DiamondGaxeSyn.SynergyToCheck = "Diamond Gaxe";
-            //REBONDIR ---- Rebondissement
-            AdvancedTransformGunSynergyProcessor Rebondissement = (PickupObjectDatabase.GetById(Rebondir.RebondirID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            Rebondissement.NonSynergyGunId = Rebondir.RebondirID;
-            Rebondissement.SynergyGunId = RedRebondir.RedRebondirID;
-            Rebondissement.SynergyToCheck = "Rebondissement";
-            //DIAMOND CUTTER ------- Ranger Class
-            AdvancedTransformGunSynergyProcessor RangerClass = (PickupObjectDatabase.GetById(DiamondCutter.DiamondCutterID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            RangerClass.NonSynergyGunId = DiamondCutter.DiamondCutterID;
-            RangerClass.SynergyGunId = DiamondCutterRangerClass.RedDiamondCutterID;
-            RangerClass.SynergyToCheck = "Ranger Class";
-            //STICK GUN ---------- Quick, Draw!
-            AdvancedTransformGunSynergyProcessor QuickDraw = (PickupObjectDatabase.GetById(StickGun.StickGunID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            QuickDraw.NonSynergyGunId = StickGun.StickGunID;
-            QuickDraw.SynergyGunId = StickGunQuickDraw.FullAutoStickGunID;
-            QuickDraw.SynergyToCheck = "Quick, Draw!";
-            //LIGHTNING ROD ------ Storm Rod
-            AdvancedTransformGunSynergyProcessor StormRodSyn = (PickupObjectDatabase.GetById(LightningRod.LightningRodID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            StormRodSyn.NonSynergyGunId = LightningRod.LightningRodID;
-            StormRodSyn.SynergyGunId = StormRod.StormRodID;
-            StormRodSyn.SynergyToCheck = "Storm Rod";
-            //RUSTY SHOTGUN -------- Proper Care And Maintenance
-            AdvancedTransformGunSynergyProcessor ProperCareNMaintenance = (PickupObjectDatabase.GetById(RustyShotgun.RustyShotgunID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            ProperCareNMaintenance.NonSynergyGunId = RustyShotgun.RustyShotgunID;
-            ProperCareNMaintenance.SynergyGunId = UnrustyShotgun.UnrustyShotgunID;
-            ProperCareNMaintenance.SynergyToCheck = "Proper Care & Maintenance";
+
+
+
+            AddSynergyForm(Gaxe.ID, DiamondGaxe.ID, "Diamond Gaxe");
+            AddSynergyForm(Rebondir.ID, RedRebondir.ID, "Rebondissement");
+            AddSynergyForm(DiamondCutter.ID, DiamondCutterRangerClass.ID, "Ranger Class");
+            AddSynergyForm(StickGun.ID, StickGunQuickDraw.ID, "Quick, Draw!");
+            AddSynergyForm(LightningRod.ID, StormRod.ID, "Storm Rod");
+            AddSynergyForm(RustyShotgun.ID, UnrustyShotgun.ID, "Proper Care & Maintenance");
             #endregion
 
             AddSynergyForm(ARCPistol.ID, DARCPistol.ID, "DARC Pistol");
+            AddSynergyForm(ARCRifle.ID, DARCRifle.ID, "DARC Rifle");
+            AddSynergyForm(ARCShotgun.ID, DARCShotgun.ID, "DARC Shotgun");
+            AddSynergyForm(ARCTactical.ID, DARCTactical.ID, "DARC Tactical");
+            AddSynergyForm(ARCCannon.ID, DARCCannon.ID, "DARC Cannon");
+            AddSynergyForm(LaundromaterielRifle.ID, Bloodwash.ID, "Bloodwash");
+
             //-------------------------------------------------------------DUAL WIELDING
             #region Dual Wielding
             //STUN GUN & TRANQ GUN
@@ -169,11 +154,13 @@ namespace NevernamedsItems
             WeddingGroom.SynergyNameToCheck = "Shotgun Wedding";
             //SUPER BOUNCE BROS
             AdvancedDualWieldSynergyProcessor SBBRico = (PickupObjectDatabase.GetById(Rico.RicoID) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
-            SBBRico.PartnerGunID = Rebondir.RebondirID;
+            SBBRico.PartnerGunID = Rebondir.ID;
             SBBRico.SynergyNameToCheck = "Super Bounce Bros";
-            AdvancedDualWieldSynergyProcessor SBBRebondir = (PickupObjectDatabase.GetById(Rebondir.RebondirID) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
+            AdvancedDualWieldSynergyProcessor SBBRebondir = (PickupObjectDatabase.GetById(Rebondir.ID) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
             SBBRebondir.PartnerGunID = Rico.RicoID;
             SBBRebondir.SynergyNameToCheck = "Super Bounce Bros";
+
+            AddDualWield(Gaxe.ID, TotemOfGundying.ID, "Offhand Immortal");
             #endregion
         }
         public static void AddSynergyForm(int baseGun, int newGun, string synergy)
@@ -182,6 +169,15 @@ namespace NevernamedsItems
             forme.NonSynergyGunId = baseGun;
             forme.SynergyGunId = newGun;
             forme.SynergyToCheck = synergy;
+        }
+        public static void AddDualWield(int gun1, int gun2, string synergy)
+        {
+            AdvancedDualWieldSynergyProcessor gun1DUAL = (PickupObjectDatabase.GetById(gun1) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
+            gun1DUAL.PartnerGunID = gun2;
+            gun1DUAL.SynergyNameToCheck = synergy;
+            AdvancedDualWieldSynergyProcessor gun2DUAL = (PickupObjectDatabase.GetById(gun2) as Gun).gameObject.AddComponent<AdvancedDualWieldSynergyProcessor>();
+            gun2DUAL.PartnerGunID = gun1;
+            gun2DUAL.SynergyNameToCheck = synergy;
         }
     }
 }
