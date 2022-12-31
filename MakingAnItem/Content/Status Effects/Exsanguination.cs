@@ -56,6 +56,7 @@ namespace NevernamedsItems
 
             BloodParticleDoer = FakePrefab.Clone(PickupObjectDatabase.GetById(449).GetComponent<TeleporterPrototypeItem>().TelefragVFXPrefab.gameObject);
             BloodParticleDoer.GetComponent<ParticleSystem>().emission.SetBurst(0, new ParticleSystem.Burst { count = 1, time = 0, cycleCount = 1, repeatInterval = 0.010f, maxCount = 1, minCount = 1 });
+
         }
         public static Dictionary<int, GameObject> effectStackVFX;
         public static GameObject labelStackVFX;
@@ -88,7 +89,7 @@ namespace NevernamedsItems
         }
         private void OnTargetDeath(Vector2 dir)
         {
-            if (extantOverheadder != null) { UnityEngine.Object.Destroy(extantOverheadder); }           
+            if (extantOverheadder != null) { UnityEngine.Object.Destroy(extantOverheadder); }
         }
         public void ChangeOverheadVFX(int stackamount, GameActor target, bool lethal = false)
         {
@@ -118,7 +119,7 @@ namespace NevernamedsItems
 
                 if (stackamount > 5)
                 {
-                    RelativeLabelAttacher label =  extantOverheadder.AddComponent<RelativeLabelAttacher>();
+                    RelativeLabelAttacher label = extantOverheadder.AddComponent<RelativeLabelAttacher>();
                     label.colour = ExtendedColours.carrionRed;
                     label.offset = new Vector3(0, 0.75f, 0);
                     label.labelValue = stackamount.ToString();

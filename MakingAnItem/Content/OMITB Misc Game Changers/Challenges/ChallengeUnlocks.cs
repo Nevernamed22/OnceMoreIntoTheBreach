@@ -27,7 +27,7 @@ namespace NevernamedsItems
             AIActor prefabForGUID = EnemyDatabase.GetOrLoadByGuid(guid);
             GlobalDungeonData.ValidTilesets currentTileset = GameManager.Instance.Dungeon.tileIndices.tilesetId;
 
-            if (prefabForGUID.healthHaver && prefabForGUID.healthHaver.IsBoss && !prefabForGUID.healthHaver.IsSubboss)
+            if (prefabForGUID != null && prefabForGUID.healthHaver && prefabForGUID.healthHaver.IsBoss && !prefabForGUID.healthHaver.IsSubboss)
             {
                 if (GameManager.Instance.CurrentGameMode != GameManager.GameMode.BOSSRUSH)
                 {

@@ -35,7 +35,7 @@ namespace NevernamedsItems
         }
         public override void DisableEffect(PlayerController player)
         {
-            player.OnTableFlipCompleted -= OnFlip;
+           if (player) player.OnTableFlipCompleted -= OnFlip;
             base.DisableEffect(player);
         }
         public void OnFlip(FlippableCover table)

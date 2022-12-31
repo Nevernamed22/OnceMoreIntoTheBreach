@@ -46,7 +46,7 @@ namespace NevernamedsItems
         }
         private void Recalc()
         {
-            AlterItemStats.RemoveStatFromPassive(this, PlayerStats.StatType.Damage);
+            this.RemovePassiveStatModifier( PlayerStats.StatType.Damage);
             float multiplier = 1;
             float amtPerMod = 0.05f;
             if (Owner.PlayerHasActiveSynergy("ShellllehS llehSShell")) amtPerMod = 0.07f;
@@ -63,7 +63,7 @@ namespace NevernamedsItems
                 }
                 multiplier = Mathf.Min(multiplier, 3);
             }
-            AlterItemStats.AddStatToPassive(this, PlayerStats.StatType.Damage, multiplier, StatModifier.ModifyMethod.MULTIPLICATIVE);
+            this.AddPassiveStatModifier( PlayerStats.StatType.Damage, multiplier, StatModifier.ModifyMethod.MULTIPLICATIVE);
             Owner.stats.RecalculateStats(Owner, false, false);
         }
         private void GunChanged(Gun gun, Gun gun2, bool idk)

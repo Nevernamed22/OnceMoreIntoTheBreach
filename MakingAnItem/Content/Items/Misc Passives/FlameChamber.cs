@@ -5,7 +5,7 @@ using Gungeon;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 
 namespace NevernamedsItems

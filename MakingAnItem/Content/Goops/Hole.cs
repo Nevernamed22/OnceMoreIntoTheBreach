@@ -26,7 +26,7 @@ namespace NevernamedsItems
         }
         public override void DoGoopEffectUpdate(DeadlyDeadlyGoopManager goop, GameActor actor, IntVector2 position)
         {
-            if (actor && actor is AIActor && actor.aiAnimator &&!(actor.aiAnimator.IsPlaying("spawn") && !actor.aiAnimator.IsPlaying("awaken")) && actor.healthHaver && !actor.healthHaver.IsBoss && actor.aiActor.HasBeenEngaged)
+            if (actor && actor is AIActor && actor.aiAnimator && !actor.aiAnimator.IsPlaying("spawn") && !actor.aiAnimator.IsPlaying("awaken") && actor.healthHaver && !actor.healthHaver.IsBoss && actor.aiActor.HasBeenEngaged)
             {
                 actor.ForceFall();
             }

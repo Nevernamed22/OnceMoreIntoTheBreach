@@ -34,7 +34,6 @@ C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\Mon
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\UnityEngine.CoreModule.dll
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\UnityEngine.ImageConversionModule.dll
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\UnityEngine.JSONSerializeModule.dll
-C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\NevernamedsItems.csprojAssemblyReference.cache
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\NevernamedsItems.csproj.CoreCompileInputs.cache
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\NevernamedsItems.csproj.CopyComplete
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\MakingAnItem.dll
@@ -152,3 +151,4 @@ C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\Uni
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\UnityEngine.VRModule.xml
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\UnityEngine.WebModule.xml
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\UnityEngine.WindModule.xml
+C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\NevernamedsItems.csproj.AssemblyReference.cache

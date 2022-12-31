@@ -5,7 +5,7 @@ using System.Text;
 using System.Collections;
 using Gungeon;
 using MonoMod;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using System.Reflection;
 

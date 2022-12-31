@@ -87,6 +87,24 @@ namespace NevernamedsItems
                   0 //The Z height, if used
                     );
 
+            EasyVFXDatabase.PurpleLaserCircleVFX = CreateVFX("Purple Laser Impact",
+                  new List<string>()
+                  {
+                    "NevernamedsItems/Resources/MiscVFX/GunVFX/purple_lasercircle_001",
+                    "NevernamedsItems/Resources/MiscVFX/GunVFX/purple_lasercircle_002",
+                    "NevernamedsItems/Resources/MiscVFX/GunVFX/purple_lasercircle_003",
+                    "NevernamedsItems/Resources/MiscVFX/GunVFX/purple_lasercircle_004",
+                    "NevernamedsItems/Resources/MiscVFX/GunVFX/purple_lasercircle_005",
+                    "NevernamedsItems/Resources/MiscVFX/GunVFX/purple_lasercircle_006",
+                    "NevernamedsItems/Resources/MiscVFX/GunVFX/purple_lasercircle_007",
+                  },
+                 12, //FPS
+                  new IntVector2(15, 14), //Dimensions
+                  tk2dBaseSprite.Anchor.MiddleCenter, //Anchor
+                  false, //Uses a Z height off the ground
+                  0 //The Z height, if used
+                    );
+
             EasyVFXDatabase.BloodExplosion = CreateVFX("Blood Explosion VFX",
                   new List<string>()
                   {

@@ -35,22 +35,48 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\GeneralComponents\RelativeLabelAttacher.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\BeamAngleMovementBehaviour.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\DamageAverageBehaviour.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\DriftModifier.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\InherentExsanguinationEffect.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\NoCollideBehaviour.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\ProjectileShootbackMod.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\ProjectileSplitController.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\ProjectileTilemapGracePeriod.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\RandomRoomPosBehaviour.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\SneakyShotgunComponent.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\SquareMotionHandler.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\StatusEffectBulletSynergy.cs" />
     <Compile Include="Characters\OMITBChars.cs" />
     <Compile Include="Content\Goops\Hole.cs" />
     <Compile Include="Content\Goops\JarateGoop.cs" />
+    <Compile Include="Content\Items\Actives\LaserKnife.cs" />
+    <Compile Include="Content\Items\Companions\Cubud.cs" />
+    <Compile Include="Content\Items\Companions\PrismaticSnail.cs" />
+    <Compile Include="Content\Items\Guns\AverageJoe.cs" />
     <Compile Include="Content\Items\Guns\Beams\ParticleBeam.cs" />
     <Compile Include="Content\Items\Guns\CashBlaster.cs" />
+    <Compile Include="Content\Items\Guns\CortexBlaster.cs" />
     <Compile Include="Content\Items\Guns\DublDuck.cs" />
     <Compile Include="Content\Items\Guns\LaundromaterielRifle.cs" />
+    <Compile Include="Content\Items\Guns\LtBluesPhaser.cs" />
+    <Compile Include="Content\Items\Guns\Musket.cs" />
+    <Compile Include="Content\Items\Guns\RazorRifle.cs" />
+    <Compile Include="Content\Items\Guns\SalvatorDormus.cs" />
+    <Compile Include="Content\Items\Guns\Smoker.cs" />
+    <Compile Include="Content\Items\Guns\SpacersFancy.cs" />
+    <Compile Include="Content\Items\Guns\SquareBracket.cs" />
     <Compile Include="Content\Items\Guns\Synergy Formes\Bloodwash.cs" />
+    <Compile Include="Content\Items\Guns\Synergy Formes\SalvatorDormusM1893.cs" />
     <Compile Include="Content\Items\Guns\TheBlackSpot.cs" />
     <Compile Include="Content\Items\Guns\TotemOfGundying.cs" />
     <Compile Include="Content\Items\Guns\VulcanRepeater.cs" />
+    <Compile Include="Content\Items\Guon Stones\LimeGuonStone.cs" />
+    <Compile Include="Content\Items\Misc Passives\AmethystBracelet.cs" />
+    <Compile Include="Content\Items\Misc Passives\BlankDie.cs" />
     <Compile Include="Content\Items\Misc Passives\CrosshairNecklace.cs" />
+    <Compile Include="Content\Items\Misc Passives\DeathMask.cs" />
+    <Compile Include="Content\Items\Misc Passives\LaserPepper.cs" />
     <Compile Include="Content\OMITB Misc Game Changers\Challenges\ChallengeEffects.cs" />
     <Compile Include="Content\OMITB Misc Game Changers\Challenges\ChallengeUnlocks.cs" />
     <Compile Include="Content\OMITB Misc Game Changers\Curses\CurseEffects.cs" />
@@ -125,8 +151,6 @@
     <Compile Include="APIs and Toolboxes\StandardAPI\GungeonAPI\Shrine API\OldShrineFactory.cs" />
     <Compile Include="APIs and Toolboxes\StandardAPI\GungeonAPI\Shrine API\ReloadBreachShrineHooks.cs" />
     <Compile Include="APIs and Toolboxes\StandardAPI\ItemAPI\CustomClipAmmoTypeToolbox.cs" />
-    <Compile Include="APIs and Toolboxes\StandardAPI\ItemAPI\SynergyTools\AdvancedFireOnReloadSynergyProcessor.cs" />
-    <Compile Include="APIs and Toolboxes\StandardAPI\ItemAPI\SynergyTools\GunVolleyModificationSynergy.cs" />
     <Compile Include="APIs and Toolboxes\StandardAPI\ItemAPI\TranslationAPI\CustomStringDBTable.cs" />
     <Compile Include="APIs and Toolboxes\StandardAPI\ItemAPI\TranslationAPI\StringTableType.cs" />
     <Compile Include="APIs and Toolboxes\StandardAPI\ItemAPI\TranslationAPI\Translation.cs" />
@@ -537,7 +561,6 @@
     <Compile Include="Content\Items\New Item Classes\IntersectEnemyBulletsItem.cs" />
     <Compile Include="APIs and Toolboxes\StandardAPI\ItemAPI\AdvancedGunBehaviour.cs" />
     <Compile Include="APIs and Toolboxes\StandardAPI\ItemAPI\ApplyOffset.cs" />
-    <Compile Include="APIs and Toolboxes\StandardAPI\ItemAPI\DualWieldSynergyProcessor.cs" />
     <Compile Include="APIs and Toolboxes\StandardAPI\ItemAPI\GunTools.cs" />
     <Compile Include="Content\Items\Guns\Justice.cs" />
     <Compile Include="Content\Items\Guns\Kalashnirang.cs" />
@@ -650,7 +673,6 @@
     <Compile Include="Content\Items\Guns\WheelLock.cs" />
     <Compile Include="KillUnlockHandler.cs" />
     <Compile Include="TempAPIUntilAlexandriaUpdate.cs" />
-    <Compile Include="WhereTheMagicHappens.cs" />
     <Compile Include="Content\Items\Misc Passives\ClaySculpture.cs" />
     <Compile Include="Content\Items\Misc Passives\CleansingRounds.cs" />
     <Compile Include="Content\Items\Misc Passives\ComicallyGiganticBullets.cs" />
@@ -726,9 +748,6 @@
     <Compile Include="Content\Items\Actives\FalseBlank.cs" />
     <Compile Include="APIs and Toolboxes\StandardAPI\ItemAPI\CompanionBuilder.cs" />
     <Compile Include="APIs and Toolboxes\StandardAPI\ItemAPI\CustomSynergies.cs" />
-    <Compile Include="APIs and Toolboxes\StandardAPI\ItemAPI\ExampleActive.cs" />
-    <Compile Include="APIs and Toolboxes\StandardAPI\ItemAPI\ExampleCompanion.cs" />
-    <Compile Include="APIs and Toolboxes\StandardAPI\ItemAPI\ExamplePassive.cs" />
     <Compile Include="APIs and Toolboxes\StandardAPI\ItemAPI\FakePrefab.cs" />
     <Compile Include="APIs and Toolboxes\StandardAPI\ItemAPI\FakePrefabHooks.cs" />
     <Compile Include="APIs and Toolboxes\StandardAPI\ItemAPI\ItemBuilder.cs" />
@@ -5564,7 +5583,7 @@
       <HintPath>..\packages\HarmonyX.2.7.0\lib\net35\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Alexandria, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EtG.Alexandria.0.2.10\lib\net35\Alexandria.dll</HintPath>
+      <HintPath>..\packages\EtG.Alexandria.0.2.21\lib\net35\Alexandria.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EtG.GameLibs.2.1.9.1\lib\net35\Assembly-CSharp.dll</HintPath>
@@ -5579,7 +5598,7 @@
       <HintPath>..\packages\Ionic.Zip.1.9.1.8\lib\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="ModTheGungeonAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EtG.ModTheGungeonAPI.1.5.5\lib\net35\ModTheGungeonAPI.dll</HintPath>
+      <HintPath>..\packages\EtG.ModTheGungeonAPI.1.6.0\lib\net35\ModTheGungeonAPI.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.10.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
       <HintPath>..\packages\Mono.Cecil.0.10.4\lib\net35\Mono.Cecil.dll</HintPath>
@@ -5983,11 +6002,113 @@
     <EmbeddedResource Include="Resources\ThrowableActives\Jarate\jarate_toss_004.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="icon.ico" />
+    <EmbeddedResource Include="Resources\NeoItemSprites\blankdie_icon.png" />
+    <EmbeddedResource Include="Resources\GuonStones\limeguonstone_icon.png" />
+    <EmbeddedResource Include="Resources\GuonStones\limeguonstone_ingame.png" />
+    <EmbeddedResource Include="Resources\GuonStones\limeguonstone_synergy.png" />
+    <EmbeddedResource Include="Resources\Companions\PrismaticSnail\prismaticsnail_icon.png" />
+    <EmbeddedResource Include="Resources\Companions\PrismaticSnail\prismatismsnail_attackleft_001.png" />
+    <EmbeddedResource Include="Resources\Companions\PrismaticSnail\prismatismsnail_attackright_001.png" />
+    <EmbeddedResource Include="Resources\Companions\PrismaticSnail\prismatismsnail_idleleft_001.png" />
+    <EmbeddedResource Include="Resources\Companions\PrismaticSnail\prismatismsnail_idleleft_002.png" />
+    <EmbeddedResource Include="Resources\Companions\PrismaticSnail\prismatismsnail_idleleft_003.png" />
+    <EmbeddedResource Include="Resources\Companions\PrismaticSnail\prismatismsnail_idleleft_004.png" />
+    <EmbeddedResource Include="Resources\Companions\PrismaticSnail\prismatismsnail_idleright_001.png" />
+    <EmbeddedResource Include="Resources\Companions\PrismaticSnail\prismatismsnail_idleright_002.png" />
+    <EmbeddedResource Include="Resources\Companions\PrismaticSnail\prismatismsnail_idleright_003.png" />
+    <EmbeddedResource Include="Resources\Companions\PrismaticSnail\prismatismsnail_idleright_004.png" />
+    <EmbeddedResource Include="Resources\Companions\PrismaticSnail\prismatismsnail_moveleft_001.png" />
+    <EmbeddedResource Include="Resources\Companions\PrismaticSnail\prismatismsnail_moveleft_002.png" />
+    <EmbeddedResource Include="Resources\Companions\PrismaticSnail\prismatismsnail_moveleft_003.png" />
+    <EmbeddedResource Include="Resources\Companions\PrismaticSnail\prismatismsnail_moveleft_004.png" />
+    <EmbeddedResource Include="Resources\Companions\PrismaticSnail\prismatismsnail_moveright_001.png" />
+    <EmbeddedResource Include="Resources\Companions\PrismaticSnail\prismatismsnail_moveright_002.png" />
+    <EmbeddedResource Include="Resources\Companions\PrismaticSnail\prismatismsnail_moveright_003.png" />
+    <EmbeddedResource Include="Resources\Companions\PrismaticSnail\prismatismsnail_moveright_004.png" />
+    <EmbeddedResource Include="Resources\NeoItemSprites\amethystbracelet_icon.png" />
+    <EmbeddedResource Include="Resources\NeoItemSprites\deathmask_icon.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\smallbluetrail_001.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\smallbluetrail_002.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\smallbluetrail_003.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\smallgreentrail_001.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\smallgreentrail_002.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\smallgreentrail_003.png" />
+    <EmbeddedResource Include="Resources\NeoItemSprites\laserpepper_icon.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\laserslashundertale_vfx_001.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\laserslashundertale_vfx_002.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\laserslashundertale_vfx_003.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\laserslashundertale_vfx_004.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\laserslashundertale_vfx_005.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\laserslashundertale_vfx_006.png" />
+    <EmbeddedResource Include="Resources\NeoActiveSprites\laserknife_icon.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\laserslash_vfx_001.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\laserslash_vfx_002.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\laserslash_vfx_003.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\laserslash_vfx_004.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\laserslash_vfx_005.png" />
     <EmbeddedResource Include="Resources\CustomGunAmmoTypes\cashblaster_clipempty.png" />
     <EmbeddedResource Include="Resources\CustomGunAmmoTypes\cashblaster_clipfull.png" />
     <EmbeddedResource Include="Resources\Debris\cashdebris.png" />
     <EmbeddedResource Include="Resources\NeoItemSprites\crosshairnecklace_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\smokeenemyimpact_vfx_001.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\smokeenemyimpact_vfx_002.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\smokeenemyimpact_vfx_003.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\smokeenemyimpact_vfx_004.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\smokeenemyimpact_vfx_005.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\smokeenemyimpact_vfx_006.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\smokeimpact_vfx_001.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\smokeimpact_vfx_002.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\smokeimpact_vfx_003.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\smokeimpact_vfx_004.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\smokeimpact_vfx_005.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\smokeimpact_vfx_006.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_icon.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_attackback_001.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_attackback_002.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_attackback_003.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_attackback_004.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_attackleft_001.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_attackleft_002.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_attackleft_003.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_attackleft_004.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_attackright_001.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_attackright_002.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_attackright_003.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_attackright_004.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_idleback_001.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_idleback_002.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_idleback_003.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_idleback_004.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_idleback_005.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_idleleft_001.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_idleleft_002.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_idleleft_003.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_idleleft_004.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_idleleft_005.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_idleright_001.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_idleright_002.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_idleright_003.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_idleright_004.png" />
+    <EmbeddedResource Include="Resources\Companions\Cubud\cubud_idleright_005.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\smoker_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\smoker_clipfull.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\cortexblaster_trail_001.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\cortexblaster_trail_002.png" />
+    <EmbeddedResource Include="Resources\TrailSprites\cortexblaster_trail_003.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\purple_lasercircle_001.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\purple_lasercircle_002.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\purple_lasercircle_003.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\purple_lasercircle_004.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\purple_lasercircle_005.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\purple_lasercircle_006.png" />
+    <EmbeddedResource Include="Resources\MiscVFX\GunVFX\purple_lasercircle_007.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\razorrifle_clipempty.png" />
+    <EmbeddedResource Include="Resources\CustomGunAmmoTypes\razorrifle_clipfull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\BepInEx.Core.5.4.21\build\BepInEx.Core.targets" Condition="Exists('..\packages\BepInEx.Core.5.4.21\build\BepInEx.Core.targets')" />

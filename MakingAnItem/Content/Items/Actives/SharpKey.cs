@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -21,7 +21,7 @@ namespace NevernamedsItems
             string longDesc = "This key is hungry for sustenance so that it may lay its eggs, and spawn the next generation of keys.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 5);
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
+            item.AddPassiveStatModifier( PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.consumable = false;
             item.quality = ItemQuality.B;
             item.AddToSubShop(ItemBuilder.ShopType.Flynt);

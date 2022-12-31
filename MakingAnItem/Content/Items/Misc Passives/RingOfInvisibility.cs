@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using System.Collections;
@@ -22,7 +22,7 @@ namespace NevernamedsItems
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
             string shortDesc = "Precious";
             string longDesc = "Grants invisibility while standing perfectly still." + "\n\nThis ancient ring has been coveted throughout generations of Gungeoneers and Gundead alike. The idea of removing it seems unthinkable.";
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1, StatModifier.ModifyMethod.ADDITIVE);
+            item.AddPassiveStatModifier( PlayerStats.StatType.Curse, 1, StatModifier.ModifyMethod.ADDITIVE);
 
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);

@@ -19,8 +19,8 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:particle_beam", "nn:particle_beam");
             var behav = gun.gameObject.AddComponent<ParticleBeam>();
             behav.preventNormalFireAudio = true;
-            gun.SetShortDescription("");
-            gun.SetLongDescription("");
+            gun.SetShortDescription("Stonefaced");
+            gun.SetLongDescription("An invisible laser which tears chunks from intersecting walls in the form of superheated shrapnel."+"\n\nFavoured by Gargoyle Hunters.");
 
             gun.SetupSprite(null, "particlebeam_idle_001", 8);
 

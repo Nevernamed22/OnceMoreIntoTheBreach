@@ -44,6 +44,11 @@ namespace NevernamedsItems
                 PrintUnlock(CustomTrackedStats.BEHOLSTER_KILLS, "The Beholster", "Kill 15 Beholsters;", 15);
                 PrintUnlock(CustomTrackedStats.MINEFLAYER_KILLS, "Flayed Revolver", "Kill 10 Mine Flayers;", 10);
 
+                //----------------------------------------------------------Rat Unlocks
+                ETGModConsole.Log("<color=#00d6e6>Resourceful Rat Unlocks:</color>");//------------------------------------------------------------
+
+                PrintUnlock(CustomDungeonFlags.RAT_KILLED_SHADE, "Death Mask", "Kill the Resourceful Rat as the Shade.");
+
                 //----------------------------------------------------------Dragun Unlocks
                 ETGModConsole.Log("<color=#00d6e6>Dragun Unlocks:</color>");//------------------------------------------------------------
 

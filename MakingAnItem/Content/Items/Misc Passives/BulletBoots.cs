@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 
@@ -20,7 +20,7 @@ namespace NevernamedsItems
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
             string shortDesc = "Run and Gun";
             string longDesc = "Fires bullets in the direction you're running."+"\n\nThe best offence is running directly at the enemy completely unguarded.";
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.MovementSpeed, 1, StatModifier.ModifyMethod.ADDITIVE);
+            item.AddPassiveStatModifier( PlayerStats.StatType.MovementSpeed, 1, StatModifier.ModifyMethod.ADDITIVE);
 
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
 

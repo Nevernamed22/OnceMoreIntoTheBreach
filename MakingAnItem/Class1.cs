@@ -250,6 +250,7 @@ namespace NevernamedsItems
                 OpulentBlank.Init();
                 GrimBlanks.Init();
                 NNBlankPersonality.Init();
+                BlankDie.Init();
                 Blombk.Init();
                 Blankh.Init();
                 //Key Themed Items
@@ -316,6 +317,7 @@ namespace NevernamedsItems
                 MaroonGuonStone.Init();
                 UltraVioletGuonStone.Init();
                 InfraredGuonStone.Init();
+                LimeGuonStone.Init();
                 RainbowGuonStone.Init();
                 KaleidoscopicGuonStone.Init();
                 GuonBoulder.Init();
@@ -343,6 +345,7 @@ namespace NevernamedsItems
                 //Bracelets and Jewelry
                 DiamondBracelet.Init();
                 PearlBracelet.Init();
+                AmethystBracelet.Init();
                 PanicPendant.Init();
                 GunknightAmulet.Init();
                 AmuletOfShelltan.Init();
@@ -377,7 +380,9 @@ namespace NevernamedsItems
                 Gusty.Init();
                 ScrollOfExactKnowledge.Init();
                 LilMunchy.Init();
+                Cubud.Init();
                 Hapulon.Init();
+                PrismaticSnail.Init();
                 //Potions / Jars 
                 SpeedPotion.Init();
                 LovePotion.Init();
@@ -400,6 +405,7 @@ namespace NevernamedsItems
                 DaggerOfTheAimgel.Init();
                 CombatKnife.Init();
                 Bayonet.Init();
+                LaserKnife.Init();
                 //Books
                 BookOfMimicAnatomy.Init();
                 KalibersPrayer.Init();
@@ -423,6 +429,7 @@ namespace NevernamedsItems
                 DiceGrenade.Init();
                 //Peppers
                 PickledPepper.Init();
+                LaserPepper.Init();
                 PepperPoppers.Init();
                 //Mushrooms
                 PercussionCap.Init();
@@ -490,6 +497,7 @@ namespace NevernamedsItems
                 TackShooter.Init();
                 Moonrock.Init();
                 Telekinesis.Init();
+                DeathMask.Init();
                 TabletOfOrder.Init();
                 Bambarrage.Init();
                 LeadSoul.Init();
@@ -553,6 +561,8 @@ namespace NevernamedsItems
                 RebarGun.Add();
                 MinuteGun.Add();
                 Ulfberht.Add();
+                SpacersFancy.Add();
+                SalvatorDormus.Add();
                 HeadOfTheOrder.Add();
                 GunOfAThousandSins.Add();
                 DoubleGun.Add();
@@ -582,6 +592,7 @@ namespace NevernamedsItems
                 Blasmaster.Add();
                 St4ke.Add();
                 Robogun.Add();
+                CortexBlaster.Add();
                 RedBlaster.Add();
                 BeamBlade.Add();
                 Neutrino.Add();
@@ -593,6 +604,7 @@ namespace NevernamedsItems
                 Purpler.Add();
                 VacuumGun.Add();
                 Oxygun.Add();
+                LtBluesPhaser.Add();
                 TriBeam.Add();
                 WaveformLens.Add();
                 KineticBlaster.Add();
@@ -639,9 +651,11 @@ namespace NevernamedsItems
                 GrandfatherGlock.Add();
                 GatlingGun.Add();
                 Blowgun.Add();
+                Smoker.Add();
                 Gaxe.Add();
                 WoodenHorse.Add();
                 AgarGun.Add();
+                MusketRifle.Add();
                 TheBlackSpot.Add();
                 //KNIVES AND BLADES
                 Carnwennan.Add();
@@ -654,6 +668,7 @@ namespace NevernamedsItems
                 DartRifle.Add();
                 AM0.Add();
                 RiskRifle.Add();
+                AverageJoe.Add();
                 RiotGun.Add();
                 Kalashnirang.Add();
                 Schwarzlose.Add();
@@ -706,6 +721,7 @@ namespace NevernamedsItems
                 Sweeper.Add();
                 DeskFan.Add();
                 Pencil.Add();
+                SquareBracket.Add();
                 SquarePeg.Add();
                 Ringer.Add();
                 Snaker.Add();
@@ -713,6 +729,7 @@ namespace NevernamedsItems
                 LaundromaterielRifle.Add();
                 DecretionCarbine.Add();
                 RC360.Add();
+                RazorRifle.Add();
                 UziSpineMM.Add();
                 Autogun.Add();
                 Rebondir.Add();
@@ -778,6 +795,7 @@ namespace NevernamedsItems
                 DARCTactical.Add();
                 DARCCannon.Add();
                 Bloodwash.Add();
+                SalvatorDormusM1893.Add();
                 #endregion
 
 

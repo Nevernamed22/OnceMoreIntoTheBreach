@@ -133,8 +133,20 @@ namespace NevernamedsItems
             }
             yield break;
         }
-        private IEnumerator ButterfingersLateReTeleport(Projectile proj)
+        private void ButterfingersBabyMode(DebrisObject obj)
         {
+            obj.PreventFallingInPits = true;
+            
+
+            PickupMover pickupMover = obj.gameObject.AddComponent<PickupMover>();
+            if (pickupMover.specRigidbody) { pickupMover.specRigidbody.CollideWithTileMap = false; }
+            pickupMover.minRadius = 1f;
+            pickupMover.moveIfRoomUnclear = false;
+            pickupMover.stopPathingOnContact = false;
+        }
+            private IEnumerator ButterfingersLateReTeleport(Projectile proj)
+        {
+            proj.OnBecameDebris += ButterfingersBabyMode;
             yield return null;
             bool hasTeleportedOnce = false;
             while (hasTeleportedOnce == false)

@@ -53,7 +53,7 @@ namespace NevernamedsItems
         }
         public override void DisableEffect(PlayerController player)
         {
-            player.PostProcessProjectile -= this.PostProcess;
+           if (player) player.PostProcessProjectile -= this.PostProcess;
             base.DisableEffect(player);
         }
     }

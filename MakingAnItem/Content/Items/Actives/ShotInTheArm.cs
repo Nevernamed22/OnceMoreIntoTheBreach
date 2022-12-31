@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using Alexandria.ItemAPI;
 using Dungeonator;
-using ItemAPI;
 using SaveAPI;
 using UnityEngine;
 
@@ -51,10 +51,10 @@ namespace NevernamedsItems
                 float damagemodifier = Mathf.Lerp(multiplier, 1, t);
                 float scaleMod = Mathf.Lerp(scaleMult, 1, t);
 
-                AlterItemStats.RemoveStatFromActive(this, PlayerStats.StatType.Damage);
-                AlterItemStats.RemoveStatFromActive(this, PlayerStats.StatType.PlayerBulletScale);
-                AlterItemStats.AddStatToActive(this, PlayerStats.StatType.Damage, damagemodifier, StatModifier.ModifyMethod.MULTIPLICATIVE);
-                AlterItemStats.AddStatToActive(this, PlayerStats.StatType.PlayerBulletScale, scaleMod, StatModifier.ModifyMethod.MULTIPLICATIVE);
+                this.RemovePassiveStatModifier(PlayerStats.StatType.Damage);
+                this.RemovePassiveStatModifier( PlayerStats.StatType.PlayerBulletScale);
+                this.AddPassiveStatModifier(PlayerStats.StatType.Damage, damagemodifier, StatModifier.ModifyMethod.MULTIPLICATIVE);
+                this.AddPassiveStatModifier( PlayerStats.StatType.PlayerBulletScale, scaleMod, StatModifier.ModifyMethod.MULTIPLICATIVE);
                 coroutineTarget.stats.RecalculateStats(coroutineTarget, false, false);
 
                 yield return null;

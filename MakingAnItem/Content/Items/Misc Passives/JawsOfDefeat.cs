@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 using UnityEngine;
 
@@ -37,8 +37,8 @@ namespace NevernamedsItems
                 {
                     float multiplier = (0.005f * deaths) + 1;
                     float finalMult = Mathf.Min(multiplier, 6);
-                    AlterItemStats.AddStatToPassive(this, PlayerStats.StatType.Damage, finalMult, StatModifier.ModifyMethod.MULTIPLICATIVE);
-                    AlterItemStats.AddStatToPassive(this, PlayerStats.StatType.RateOfFire, finalMult, StatModifier.ModifyMethod.MULTIPLICATIVE);
+                    this.AddPassiveStatModifier( PlayerStats.StatType.Damage, finalMult, StatModifier.ModifyMethod.MULTIPLICATIVE);
+                    this.AddPassiveStatModifier( PlayerStats.StatType.RateOfFire, finalMult, StatModifier.ModifyMethod.MULTIPLICATIVE);
                 }
             }
             base.Pickup(player);

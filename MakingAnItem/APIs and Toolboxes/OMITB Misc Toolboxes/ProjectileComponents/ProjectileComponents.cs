@@ -125,65 +125,7 @@ namespace NevernamedsItems
         public float AngularVelocity = 180f;
         protected Projectile m_projectile;
     } //Causes the projectile to home in on the Playercontroller that fired it.
-    public class NoCollideBehaviour : MonoBehaviour
-    {
-        public NoCollideBehaviour()
-        {
-            worksOnProjectiles = false;
-            worksOnEnemies = true;
-        }
 
-        public void Start()
-        {
-            try
-            {
-                this.m_projectile = base.GetComponent<Projectile>();
-                this.m_projectile.specRigidbody.OnPreRigidbodyCollision += this.HandlePreCollision;
-            }
-            catch (Exception e)
-            {
-                ETGModConsole.Log(e.Message);
-                ETGModConsole.Log(e.StackTrace);
-            }
-        }
-
-        private void HandlePreCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherPixelCollider)
-        {
-            try
-            {
-                if (otherRigidbody)
-                {
-                    if (otherRigidbody.aiActor != null && otherRigidbody.healthHaver != null)
-                    {
-                        if (worksOnEnemies)
-                        {
-                            PhysicsEngine.SkipCollision = true;
-                        }
-                    }
-                    else if (otherRigidbody.projectile != null && otherRigidbody.projectile.collidesWithProjectiles)
-                    {
-                        if (worksOnProjectiles)
-                        {
-                            PhysicsEngine.SkipCollision = true;
-                        }
-                    }
-                    else
-                    {
-                        PhysicsEngine.SkipCollision = true;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                ETGModConsole.Log(e.Message);
-                ETGModConsole.Log(e.StackTrace);
-            }
-        }
-        private Projectile m_projectile;
-
-        public bool worksOnEnemies = false;
-        public bool worksOnProjectiles = false;
-    } //Prevents the projectile from colliding with other rigid bodies.
     public class TickDamageBehaviour : MonoBehaviour
     {
         public TickDamageBehaviour()
@@ -558,23 +500,7 @@ namespace NevernamedsItems
         private int TimesMirrored = 0;
         private Projectile m_projectile;
     } //Causes the projectile to reflect bullets, mirror bullets style, but with more variety.
-    public class RandomRoomPosBehaviour : MonoBehaviour
-    {
-        public RandomRoomPosBehaviour()
-        {
-        }
-        private void Start()
-        {
-            this.m_projectile = base.GetComponent<Projectile>();
-            if (this.m_projectile.GetAbsoluteRoom() != null)
-            {
-                IntVector2 newPosition = this.m_projectile.GetAbsoluteRoom().GetRandomVisibleClearSpot(3, 3);
-                this.m_projectile.transform.position = newPosition.ToVector3();
-                this.m_projectile.specRigidbody.Reinitialize();
-            }
-        }
-        private Projectile m_projectile;
-    } //Teleports the bullet to a random position in the room on spawn.
+
     public class GravitronBulletsBehaviour : MonoBehaviour
     {
         public GravitronBulletsBehaviour()
@@ -985,11 +911,11 @@ namespace NevernamedsItems
         }
         private void HandlePreCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherPixelCollider)
         {
-            if (otherRigidbody && otherRigidbody.healthHaver && otherRigidbody.healthHaver.aiActor)
+            if (otherRigidbody && otherRigidbody.healthHaver && otherRigidbody.healthHaver.aiActor && myRigidbody.projectile)
             {
                 Projectile me = myRigidbody.projectile;
                 if (multOnFlyingEnemies && otherRigidbody.aiActor.IsFlying) DoMult(me);
-                if (multOnStunnedEnemies && otherRigidbody.behaviorSpeculator.IsStunned) DoMult(me);
+                if (multOnStunnedEnemies && otherRigidbody.behaviorSpeculator != null && otherRigidbody.behaviorSpeculator.IsStunned) DoMult(me);
             }
         }
         private void DoMult(Projectile self)
@@ -1533,77 +1459,7 @@ namespace NevernamedsItems
             yield break;
         }
     }
-    public class SneakyShotgunComponent : MonoBehaviour
-    {
-        public SneakyShotgunComponent()
-        {
-            scaleOffOwnerAccuracy = true;
-            eraseSource = true;
-            numToFire = 5;
-            projPrefabToFire = (PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0];
-            postProcess = true;
-            doVelocityRandomiser = true;
-            angleVariance = 40;
-            scaleMult = 1;
-            damageMult = 1;
-            overrideProjectileSynergy = null;
-            synergyProjectilePrefab = null;
-        }
-        public bool scaleOffOwnerAccuracy;
-        public bool eraseSource;
-        public float angleVariance;
-        public int numToFire;
-        public Projectile projPrefabToFire;
-        public string overrideProjectileSynergy;
-        public Projectile synergyProjectilePrefab;
-        public bool postProcess;
-        public bool doVelocityRandomiser;
-        public float damageMult;
-        public float scaleMult;
-        private void Start()
-        {
-            self = base.GetComponent<Projectile>();
-            StartCoroutine(handleShotgunBlast());
-        }
-        private Projectile self;
-        private IEnumerator handleShotgunBlast()
-        {
-            yield return null;
-            GameObject prefabtouse = projPrefabToFire.gameObject;
-            if (!string.IsNullOrEmpty(overrideProjectileSynergy) && synergyProjectilePrefab != null && self.ProjectilePlayerOwner())
-            {
-                if (self.ProjectilePlayerOwner().PlayerHasActiveSynergy(overrideProjectileSynergy))
-                {
-                    prefabtouse = synergyProjectilePrefab.gameObject;
-                }
-            }
-            for (int i = 0; i < numToFire; i++)
-            {
-                PlayerController accuracyOwner = null;
-                if (scaleOffOwnerAccuracy && self.ProjectilePlayerOwner()) accuracyOwner = self.ProjectilePlayerOwner();
-                float angle = ProjSpawnHelper.GetAccuracyAngled(self.Direction.ToAngle(), angleVariance, accuracyOwner);
-                GameObject spawnObj = SpawnManager.SpawnProjectile(prefabtouse, self.transform.position, Quaternion.Euler(new Vector3(0f, 0f, angle)));
-                Projectile component = spawnObj.GetComponent<Projectile>();
-                if (component != null)
-                {
-                    component.Owner = self.Owner;
-                    component.Shooter = self.Shooter;
-                    if (doVelocityRandomiser) component.baseData.speed *= (1f + UnityEngine.Random.Range(-5f, 5f) / 100f);
-                    component.UpdateSpeed();
-                    component.baseData.damage *= damageMult;
-                    component.baseData.force *= damageMult;
-                    component.RuntimeUpdateScale(scaleMult);
-                    if (postProcess && self.ProjectilePlayerOwner()) self.ProjectilePlayerOwner().DoPostProcessProjectile(component);
-                }
-            }
-            if (eraseSource)
-            {
-                UnityEngine.Object.Destroy(self.gameObject);
-            }
-            yield break;
-        }
-
-    }
+    
     
 
     //PASSIVE ITEM EFFECTS AS COMPONENTS

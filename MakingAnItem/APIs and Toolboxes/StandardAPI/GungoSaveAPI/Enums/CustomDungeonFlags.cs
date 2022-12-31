@@ -58,6 +58,8 @@ namespace SaveAPI
         BOSSRUSH_MARINE,
         BOSSRUSH_ROBOT,
         BOSSRUSH_BULLET,
+        //Rat Unlocks
+        RAT_KILLED_SHADE,
         //Dragun Unlocks
         DRAGUN_KILLED_HUNTER,
         DRAGUN_KILLED_SHADE,

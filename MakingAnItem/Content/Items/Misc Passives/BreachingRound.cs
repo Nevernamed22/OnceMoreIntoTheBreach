@@ -20,7 +20,7 @@ namespace NevernamedsItems
             var item = obj.AddComponent<BreachingRounds>();
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
             string shortDesc = "Breach and Clear";
-            string longDesc = "Gives a damage boost upon entering combat, which quickly deteriorates over time. Speed is key."+"\n\nUsed by ancient dungeon crawlers to blast open locks and hidden walls, though the Gungeon's secret rooms are a little too tough for that.";
+            string longDesc = "Gives a damage boost upon entering combat, which quickly deteriorates over time. Speed is key." + "\n\nUsed by ancient dungeon crawlers to blast open locks and hidden walls, though the Gungeon's secret rooms are a little too tough for that.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("bullet_modifier");
@@ -39,8 +39,8 @@ namespace NevernamedsItems
             if (Owner)
             {
                 Owner.StopCoroutine(HandleDamageDrainCoroutine(Owner));
-                AlterItemStats.RemoveStatFromPassive(this, PlayerStats.StatType.Damage);
-                AlterItemStats.RemoveStatFromPassive(this, PlayerStats.StatType.PlayerBulletScale);
+                this.RemovePassiveStatModifier(PlayerStats.StatType.Damage);
+                this.RemovePassiveStatModifier(PlayerStats.StatType.PlayerBulletScale);
                 Owner.StartCoroutine(HandleDamageDrainCoroutine(Owner));
             }
         }
@@ -49,7 +49,7 @@ namespace NevernamedsItems
             float multiplier = 3.5f;
             float scaleMult = 2f;
             float realTime = 7.5f;
-            
+
             float elapsed = 0f;
             while (elapsed < realTime)
             {
@@ -58,12 +58,12 @@ namespace NevernamedsItems
                 float damagemodifier = Mathf.Lerp(multiplier, 1, t);
                 float scaleMod = Mathf.Lerp(scaleMult, 1, t);
 
-                AlterItemStats.RemoveStatFromPassive(this, PlayerStats.StatType.Damage);
-                AlterItemStats.RemoveStatFromPassive(this, PlayerStats.StatType.PlayerBulletScale);
-                AlterItemStats.AddStatToPassive(this, PlayerStats.StatType.Damage, damagemodifier, StatModifier.ModifyMethod.MULTIPLICATIVE);
-                AlterItemStats.AddStatToPassive(this, PlayerStats.StatType.PlayerBulletScale, scaleMod, StatModifier.ModifyMethod.MULTIPLICATIVE);
-               if (Owner) Owner.stats.RecalculateStats(Owner, false, false);
-              
+                this.RemovePassiveStatModifier(PlayerStats.StatType.Damage);
+                this.RemovePassiveStatModifier(PlayerStats.StatType.PlayerBulletScale);
+                this.AddPassiveStatModifier(PlayerStats.StatType.Damage, damagemodifier, StatModifier.ModifyMethod.MULTIPLICATIVE);
+                this.AddPassiveStatModifier(PlayerStats.StatType.PlayerBulletScale, scaleMod, StatModifier.ModifyMethod.MULTIPLICATIVE);
+                if (Owner) Owner.stats.RecalculateStats(Owner, false, false);
+
                 yield return null;
             }
             yield break;

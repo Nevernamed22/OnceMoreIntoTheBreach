@@ -1557,6 +1557,30 @@ namespace NevernamedsItems
 
             CustomSynergies.Add("Offhand Immortal",
                 new List<string>() { "nn:gaxe", "nn:totem_of_gundying" });
+
+            CustomSynergies.Add("Artemisfire",
+                new List<string>() { "nn:amethyst_bracelet" },
+                new List<string>() { "ring_of_triggers" });
+
+            CustomSynergies.Add("Limer Guon Stone",
+                new List<string>() { "nn:lime_guon_stone" },
+                new List<string>() { "+1_bullets", "amulet_of_the_pit_lord", "nn:prima_bean" });
+
+            CustomSynergies.Add("Mag-2-Zap",
+                new List<string>() { "nn:spacers_fancy" },
+                new List<string>() { "shock_rifle", "thunderclap", "cobalt_hammer" });
+
+            CustomSynergies.Add("M1893",
+                new List<string>() { "nn:salvator_dormus" },
+                new List<string>() { "m1", "m1911", "m16" });
+
+            CustomSynergies.Add("It's About Rime",
+                new List<string>() { "nn:cortex_blaster" },
+                new List<string>() { "frost_bullets", "glacier", "nn:icicle", "nn:frost_key" });
+
+            CustomSynergies.Add("Hidden Gem",
+                new List<string>() { "nn:cortex_blaster" },
+                new List<string>() { "ruby_bracelet", "nn:chaos_ruby", "nn:diamond_gun", "nn:diamond_bracelet", "nn:diamond_cutter" });
             #endregion
 
 

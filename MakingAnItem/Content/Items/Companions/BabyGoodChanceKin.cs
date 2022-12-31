@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace NevernamedsItems

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -58,10 +58,10 @@ namespace NevernamedsItems
             bool atMaxHP;
             if (Owner.healthHaver.GetCurrentHealthPercentage() == 1f) { atMaxHP = true; }
             else { atMaxHP = false; }
-            AlterItemStats.RemoveStatFromPassive(this, PlayerStats.StatType.Coolness);
+            this.RemovePassiveStatModifier(PlayerStats.StatType.Coolness);
             Owner.stats.RecalculateStats(Owner, false, false);
             float amountToMod = GetModifierAmount(Owner, atMaxHP);
-            AlterItemStats.AddStatToPassive(this, PlayerStats.StatType.Coolness, amountToMod, StatModifier.ModifyMethod.ADDITIVE);
+            this.AddPassiveStatModifier( PlayerStats.StatType.Coolness, amountToMod, StatModifier.ModifyMethod.ADDITIVE);
             Owner.stats.RecalculateStats(Owner, false, false);
         }
         public override void Pickup(PlayerController player)

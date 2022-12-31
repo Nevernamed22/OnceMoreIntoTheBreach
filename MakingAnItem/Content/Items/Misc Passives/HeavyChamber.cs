@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +18,8 @@ namespace NevernamedsItems
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
             string shortDesc = "Trade-off";
             string longDesc = "Doubles clip size, but also doubles the time it takes to reload." + "\n\nThis chamber is sturdy enough to carry many more bullets, but reloading it is a pain.";
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ReloadSpeed, 2, StatModifier.ModifyMethod.MULTIPLICATIVE);
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalClipCapacityMultiplier, 2, StatModifier.ModifyMethod.MULTIPLICATIVE);
+            item.AddPassiveStatModifier( PlayerStats.StatType.ReloadSpeed, 2, StatModifier.ModifyMethod.MULTIPLICATIVE);
+            item.AddPassiveStatModifier( PlayerStats.StatType.AdditionalClipCapacityMultiplier, 2, StatModifier.ModifyMethod.MULTIPLICATIVE);
 
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
 

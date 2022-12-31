@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
@@ -114,6 +114,7 @@ namespace NevernamedsItems
             AddSynergyForm(ARCTactical.ID, DARCTactical.ID, "DARC Tactical");
             AddSynergyForm(ARCCannon.ID, DARCCannon.ID, "DARC Cannon");
             AddSynergyForm(LaundromaterielRifle.ID, Bloodwash.ID, "Bloodwash");
+            AddSynergyForm(SalvatorDormus.ID, SalvatorDormusM1893.ID, "M1893");
 
             //-------------------------------------------------------------DUAL WIELDING
             #region Dual Wielding

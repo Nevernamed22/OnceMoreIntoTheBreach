@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Dungeonator;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
@@ -40,7 +40,7 @@ namespace NevernamedsItems
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 240);
 
             //Adds a passive modifier, like curse, coolness, damage, etc. to the item. Works for passives and actives.
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
+            item.AddPassiveStatModifier( PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
 
             //Set some other fields
             item.consumable = false;

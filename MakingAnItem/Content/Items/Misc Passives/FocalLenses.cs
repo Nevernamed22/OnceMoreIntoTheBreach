@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
@@ -24,7 +24,7 @@ namespace NevernamedsItems
             string longDesc = "Doubles beam damage."+"\n\nA set of lenses capable of increasing the firepower of laserbeams... and the waterpower of the Mega Douser, somehow.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.D;
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Accuracy, 0.9f, StatModifier.ModifyMethod.MULTIPLICATIVE);
+            item.AddPassiveStatModifier( PlayerStats.StatType.Accuracy, 0.9f, StatModifier.ModifyMethod.MULTIPLICATIVE);
         }
         private void PostProcessBeam(BeamController beam)
         {

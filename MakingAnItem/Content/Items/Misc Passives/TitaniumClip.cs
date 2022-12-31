@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 
@@ -41,14 +41,14 @@ namespace NevernamedsItems
         private void RemoveBuff()
         {
             Owner.stats.AdditionalVolleyModifiers -= this.ModifyVolley;
-            AlterItemStats.RemoveStatFromPassive(this, PlayerStats.StatType.Damage);
+            this.RemovePassiveStatModifier(PlayerStats.StatType.Damage);
             Owner.stats.RecalculateStats(Owner, false, false);
             buffActive = false;
         }
         private void AddBuff()
         {
             Owner.stats.AdditionalVolleyModifiers += this.ModifyVolley;
-            AlterItemStats.AddStatToPassive(this, PlayerStats.StatType.Damage, 2, StatModifier.ModifyMethod.MULTIPLICATIVE);
+            this.AddPassiveStatModifier( PlayerStats.StatType.Damage, 2, StatModifier.ModifyMethod.MULTIPLICATIVE);
             Owner.stats.RecalculateStats(Owner, false, false);
             buffActive = true;
         }

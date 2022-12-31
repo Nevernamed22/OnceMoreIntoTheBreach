@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -65,10 +65,6 @@ namespace NevernamedsItems
                 if (gun)
                 {
                     gun.GainAmmo(Mathf.FloorToInt(gun.AdjustedMaxAmmo * restorePercent));
-                }
-                else
-                {
-                    ETGModConsole.Log("Could not find gun component.");
                 }
             }
         }

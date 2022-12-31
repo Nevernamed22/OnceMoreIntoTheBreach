@@ -6,8 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
-using SynergyTools;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using SaveAPI;
@@ -55,7 +54,7 @@ namespace NevernamedsItems
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.SMALL_BULLET;
 
             gun.quality = PickupObject.ItemQuality.C;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             AdvancedFireOnReloadSynergyProcessor reloadfire = gun.gameObject.AddComponent<AdvancedFireOnReloadSynergyProcessor>();
             reloadfire.synergyToCheck = "Skorpion Sting";

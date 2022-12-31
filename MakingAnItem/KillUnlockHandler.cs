@@ -42,6 +42,10 @@ namespace NevernamedsItems
                 { //Advanced Dragun
                    { PlayableCharacters.Robot, CustomDungeonFlags.ADVDRAGUN_KILLED_ROBOT },
                    { ETGModCompatibility.ExtendEnum<PlayableCharacters>(Initialisation.GUID, "Shade"), CustomDungeonFlags.ADVDRAGUN_KILLED_SHADE },
+                }},
+                { "4d164ba3f62648809a4a82c90fc22cae", new Dictionary<PlayableCharacters, CustomDungeonFlags>()
+                { //Rat Mech
+                    { ETGModCompatibility.ExtendEnum<PlayableCharacters>(Initialisation.GUID, "Shade"), CustomDungeonFlags.RAT_KILLED_SHADE }
                 }}
             };
             //Flags changed when a specific character beats bossrush
@@ -140,8 +144,11 @@ namespace NevernamedsItems
             }
 
             //Tag Based Unlocks
-            if (prefabForGUID.HasTag("titan_bullet_kin")) SaveAPIManager.RegisterStatChange(CustomTrackedStats.TITAN_KIN_KILLED, 1);
-            if (prefabForGUID.HasTag("mimic") && jammed && !SaveAPIManager.GetFlag(CustomDungeonFlags.KILLEDJAMMEDMIMIC)) SaveAPIManager.SetFlag(CustomDungeonFlags.KILLEDJAMMEDMIMIC, true);
+            if (prefabForGUID != null)
+            {
+                if (prefabForGUID.HasTag("titan_bullet_kin")) SaveAPIManager.RegisterStatChange(CustomTrackedStats.TITAN_KIN_KILLED, 1);
+                if (prefabForGUID.HasTag("mimic") && jammed && !SaveAPIManager.GetFlag(CustomDungeonFlags.KILLEDJAMMEDMIMIC)) SaveAPIManager.SetFlag(CustomDungeonFlags.KILLEDJAMMEDMIMIC, true);
+            }
 
             //Specific GUID incrementation
             if (StatsToIncrementOnEnemyKill.ContainsKey(guid)) SaveAPIManager.RegisterStatChange(StatsToIncrementOnEnemyKill[guid], 1);
@@ -163,11 +170,11 @@ namespace NevernamedsItems
                 //Killing specific boss guids in turbo mode
                 if (GameStatsManager.Instance.IsRainbowRun && RainbowModeSpecificBossUnlocks.ContainsKey(guid) && !SaveAPIManager.GetFlag(RainbowModeSpecificBossUnlocks[guid])) SaveAPIManager.SetFlag(RainbowModeSpecificBossUnlocks[guid], true);
             }
-           
+
 
             //Floor Based Boss Kill Unlocks
             // These are based on beating floor bosses like 'hollow boss' or 'oubliette boss', and not for specific bosses. For Lich, Rat, and Advanced Dragun, see above
-            if (prefabForGUID.healthHaver && prefabForGUID.healthHaver.IsBoss && !prefabForGUID.healthHaver.IsSubboss)
+            if (prefabForGUID != null && prefabForGUID.healthHaver && prefabForGUID.healthHaver.IsBoss && !prefabForGUID.healthHaver.IsSubboss)
             {
                 //Mutagen unlock, killing any boss in any mode on half a heart
                 if (anyPlayerOnHalfHeart && !SaveAPIManager.GetFlag(CustomDungeonFlags.HAS_BEATEN_BOSS_BY_SKIN_OF_TEETH)) SaveAPIManager.SetFlag(CustomDungeonFlags.HAS_BEATEN_BOSS_BY_SKIN_OF_TEETH, true);
@@ -191,7 +198,7 @@ namespace NevernamedsItems
 
                         //Beating floors in all-jammed mode. Doesn't take into account character or specific bosses like the Lich, only whole floors
                         if (allJammed && AllJammedFloorUnlocks.ContainsKey(currentTileset) && !SaveAPIManager.GetFlag(AllJammedFloorUnlocks[currentTileset])) SaveAPIManager.SetFlag(AllJammedFloorUnlocks[currentTileset], true);
-                       
+
                         //Beating floors in rainbow mode. Doesn't take into account character or specific bosses like the Lich, only whole floors
                         if (GameStatsManager.Instance.IsRainbowRun && RainbowModeFloorUnlocks.ContainsKey(currentTileset) && !SaveAPIManager.GetFlag(RainbowModeFloorUnlocks[currentTileset])) SaveAPIManager.SetFlag(RainbowModeFloorUnlocks[currentTileset], true);
 

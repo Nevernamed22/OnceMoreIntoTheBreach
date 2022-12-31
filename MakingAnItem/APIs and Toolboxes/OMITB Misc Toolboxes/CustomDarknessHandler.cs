@@ -43,7 +43,7 @@ namespace NevernamedsItems
 
             if (isDark)
             {
-                if (Pixelator.Instance.AdditionalCoreStackRenderPass == null)
+                if (Pixelator.Instance && Pixelator.Instance.AdditionalCoreStackRenderPass == null)
                 {
                     m_material = new Material(DarknessEffectShader);
                     Pixelator.Instance.AdditionalCoreStackRenderPass = m_material;

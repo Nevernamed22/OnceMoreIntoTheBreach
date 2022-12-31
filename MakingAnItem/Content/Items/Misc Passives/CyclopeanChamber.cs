@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Alexandria.Misc;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
@@ -20,8 +20,8 @@ namespace NevernamedsItems
             string shortDesc = "Make It Count";
             string longDesc = "Reduces clips to one shot, but increases damage for every bullet removed." + "\n\nOnce thought to be the cylinder of a powerful one-chambered firerarm, further research suggests this artefact may be the chamber of an ancient Elephant Gun.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalClipCapacityMultiplier, 0.000000001f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1, StatModifier.ModifyMethod.ADDITIVE);
+            item.AddPassiveStatModifier( PlayerStats.StatType.AdditionalClipCapacityMultiplier, 0.000000001f, StatModifier.ModifyMethod.MULTIPLICATIVE);
+            item.AddPassiveStatModifier( PlayerStats.StatType.Curse, 1, StatModifier.ModifyMethod.ADDITIVE);
 
             item.quality = PickupObject.ItemQuality.B;
             ID = item.PickupObjectId;

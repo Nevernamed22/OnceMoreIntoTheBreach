@@ -4,7 +4,7 @@ using System.Linq;
 using Dungeonator;
 using System.Text;
 
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace NevernamedsItems

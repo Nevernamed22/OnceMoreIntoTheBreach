@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Dungeonator;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Alexandria.Misc;
 using static Alexandria.Misc.PlayerUtility;
 
@@ -51,12 +51,12 @@ namespace NevernamedsItems
             {
                 if (Owner.PlayerHasActiveSynergy("Spun") != spunSynergyLastChecked)
                 {
-                    AlterItemStats.RemoveStatFromPassive(this, PlayerStats.StatType.Damage);
+                    this.RemovePassiveStatModifier(PlayerStats.StatType.Damage);
                     Owner.stats.RecalculateStats(Owner, false, false);
 
                     if (Owner.PlayerHasActiveSynergy("Spun"))
                     {
-                        AlterItemStats.AddStatToPassive(this, PlayerStats.StatType.Damage, 2, StatModifier.ModifyMethod.MULTIPLICATIVE);
+                        this.AddPassiveStatModifier(PlayerStats.StatType.Damage, 2, StatModifier.ModifyMethod.MULTIPLICATIVE);
                         Owner.stats.RecalculateStats(Owner, false, false);
                     }
 

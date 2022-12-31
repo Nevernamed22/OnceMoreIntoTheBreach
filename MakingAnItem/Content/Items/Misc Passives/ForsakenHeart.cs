@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -19,7 +19,7 @@ namespace NevernamedsItems
             string shortDesc = "And lo, it shall embroil within";
             string longDesc = "A cursed heart embiggens the smallest of wretches.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
+            item.AddPassiveStatModifier( PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.quality = PickupObject.ItemQuality.B;
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
             ForsakenHeartID = item.PickupObjectId;

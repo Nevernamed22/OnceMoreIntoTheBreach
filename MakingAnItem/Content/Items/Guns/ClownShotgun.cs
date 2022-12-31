@@ -74,8 +74,8 @@ namespace NevernamedsItems
             ClownShotgunID = gun.PickupObjectId;
         }
         public static int ClownShotgunID;
-       
-        public void Update()
+
+        protected override void Update()
         {
             if (gun && gun.GunPlayerOwner())
             {
@@ -101,6 +101,7 @@ namespace NevernamedsItems
                     }
                 }
             }
+            base.Update();
 
         }
         public ClownShotgun()
