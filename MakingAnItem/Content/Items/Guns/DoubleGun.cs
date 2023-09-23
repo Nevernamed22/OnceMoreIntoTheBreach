@@ -56,8 +56,11 @@ namespace NevernamedsItems
                     mod.positionOffset = new Vector2(0, 0.3f);
                     mod.ammoCost = 0;
                 }
-                projectile.transform.parent = gun.barrelOffset;
             }
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("DoubleGun Ammo", "NevernamedsItems/Resources/CustomGunAmmoTypes/doublegun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/doublegun_clipempty");
+
 
             gun.reloadTime = 1f;
             gun.barrelOffset.transform.localPosition = new Vector3(1.43f, 0.87f, 0f);

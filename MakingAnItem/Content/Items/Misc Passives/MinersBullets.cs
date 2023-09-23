@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Miners Bullets";
-            string resourceName = "NevernamedsItems/Resources/minersbullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<MinersBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "So we back in the mine";
-            string longDesc = "Allows for the effortless destruction of cubes.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<MinersBullets>(
+            "Miners Bullets",
+            "So we back in the mine",
+            "Allows for the effortless destruction of cubes.",
+            "minersbullets_icon");
             item.quality = PickupObject.ItemQuality.D;
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_MINERSBULLETS, true);

@@ -17,7 +17,7 @@ namespace NevernamedsItems
             string itemName = "Elevator Button";
 
             //Refers to an embedded png in the project. Make sure to embed your resources! Google it.
-            string resourceName = "NevernamedsItems/Resources/elevatorbutton_icon";
+            string resourceName = "NevernamedsItems/Resources/NeoActiveSprites/elevatorbutton_improved";
 
             //Create new GameObject
             GameObject obj = new GameObject(itemName);

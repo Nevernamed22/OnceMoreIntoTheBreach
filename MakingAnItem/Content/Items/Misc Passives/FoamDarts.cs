@@ -15,14 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Foam Darts";
-            string resourceName = "NevernamedsItems/Resources/foamdarts_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<FoamDarts>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Or Nothing";
-            string longDesc = "Knockback slightly up. Bullets soak up goop off the floor, and inflict it upon enemies!" + "\n\nPart of an 'Epix Ammo Expansion Pak' by the manufacturer that made the Dart Gun.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<FoamDarts>(
+            "Foam Darts",
+            "Or Nothing",
+            "Knockback slightly up. Bullets soak up goop off the floor, and inflict it upon enemies!" + "\n\nPart of an 'Epix Ammo Expansion Pak' by the manufacturer that made the Dart Gun.",
+            "foamdarts_icon");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.KnockbackMultiplier, 1.45f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = PickupObject.ItemQuality.D;
             item.SetTag("bullet_modifier");

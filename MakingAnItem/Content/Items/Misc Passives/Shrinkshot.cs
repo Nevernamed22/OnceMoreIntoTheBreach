@@ -15,20 +15,15 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Shrinkshot";
-            string resourceName = "NevernamedsItems/Resources/shrinkshot_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Shrinkshot>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "A Person's A Person";
-            string longDesc = "Chance to shrink enemies, allowing them to be stomped on."+"\n\nA portal accident.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<Shrinkshot>(
+            "Shrinkshot",
+            "A Person's A Person",
+            "Chance to shrink enemies, allowing them to be stomped on." + "\n\nA portal accident.",
+            "shrinkshot_icon");
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
-            //Unlock
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_SHRINKSHOT, true);
             item.AddItemToDougMetaShop(40);
-
         }
 
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)

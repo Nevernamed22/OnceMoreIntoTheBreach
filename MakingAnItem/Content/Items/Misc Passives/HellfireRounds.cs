@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Hellfire Rounds";
-            string resourceName = "NevernamedsItems/Resources/hellfirerounds_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<HellfireRounds>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Lead and Brimstone";
-            string longDesc = "These bullets hit harder the closer they get to the fires of Bullet Hell." + "\n\nMany years ago, the red flames of the pit were used one single time to soften metal for the Blacksmith's anvil. That was a bad idea.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<HellfireRounds>(
+             "Hellfire Rounds",
+             "Lead and Brimstone",
+             "These bullets hit harder the closer they get to the fires of Bullet Hell." + "\n\nMany years ago, the red flames of the pit were used one single time to soften metal for the Blacksmith's anvil. That was a bad idea.",
+             "hellfirerounds_icon");
             item.quality = PickupObject.ItemQuality.S;
             item.SetTag("bullet_modifier");
         }

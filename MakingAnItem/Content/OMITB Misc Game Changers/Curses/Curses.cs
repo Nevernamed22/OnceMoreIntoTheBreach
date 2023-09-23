@@ -9,6 +9,7 @@ using System.Collections;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
 using SaveAPI;
+using Dungeonator;
 
 namespace NevernamedsItems
 {
@@ -18,8 +19,8 @@ namespace NevernamedsItems
         {
             CurrentActiveCurses = new List<CurseData>();
             CursePrefabs = new List<CurseData>();
-            FloorAndGenerationToolbox.OnFloorEntered += LevelLoaded;
-            FloorAndGenerationToolbox.OnNewGame += OnNewRun;
+            CustomActions.OnRunStart += OnNewRun;
+            CustomActions.PostDungeonTrueStart += LevelLoaded;
             CurseEffects.Init();
             VFXScapegoat = new GameObject("CurseVFXScapegoat");
             VFXScapegoat.gameObject.SetActive(false);
@@ -67,18 +68,17 @@ namespace NevernamedsItems
             CursePrefabs.Add(curseOfDarkness);
             #endregion
         }
-        public static Hook floorLoadPlayerHook;
         private static tk2dSpriteCollectionData CurseIconCollection;
         private static GameObject VFXScapegoat;
         public static bool levelOnCooldown = false;
-        public static void OnNewRun(PlayerController player)
+        public static void OnNewRun(PlayerController player, PlayerController p2, GameManager.GameMode mode)
         {
             cursesLastFloor = new List<string>();
             bannedCursesThisRun = new List<string>();
             previousCursesThisRun = new List<string>();
             RemoveAllCurses();
         }
-        public static void LevelLoaded()
+        public static void LevelLoaded(Dungeon instance)
         {
             if (cursesLastFloor == null) cursesLastFloor = new List<string>();
             foreach (CurseData curse in CurrentActiveCurses)
@@ -88,8 +88,8 @@ namespace NevernamedsItems
             CurseManager.RemoveAllCurses();
             float allCurse = GameManager.Instance.GetCombinedPlayersStatAmount(PlayerStats.StatType.Curse);
             float ran = UnityEngine.Random.value;
-            Debug.Log("Running Curse Check on Floor Load - Random (" + ran + ") - CurseTotal (" + allCurse + ")");
             float curseChance = 0.0666f;
+            Debug.Log($"Running Curse Check on Floor Load | Random ({ran}) | Required ({allCurse * curseChance}) | CurseTotal ({allCurse})");
 
             if (!SaveAPIManager.GetFlag(CustomDungeonFlags.CURSES_DISABLED))
             {

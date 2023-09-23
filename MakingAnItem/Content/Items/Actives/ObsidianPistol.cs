@@ -13,15 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Obsidian Pistol";
-            string resourceName = "NevernamedsItems/Resources/obsidianpistol_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<ObsidianPistol>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Sacrifice I’m Willing to Take";
-            string longDesc = "Sacrifices those you hold dear in a bloody ritual of reverence to Kaliber, the Gun Mother." + "\n\nThose who worship shall be rewarded for their faith." + "\n\nPraise Be";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<ObsidianPistol>(
+            "Obsidian Pistol",
+            "Sacrifice I’m Willing to Take",
+            "Sacrifices those you hold dear in a bloody ritual of reverence to Kaliber, the Gun Mother." + "\n\nThose who worship shall be rewarded for their faith." + "\n\nPraise Be",
+            "obsidianpistol_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 0.5f);
             item.consumable = false;
             item.quality = ItemQuality.C;

@@ -11,16 +11,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Bullets With Guns";
-            string resourceName = "NevernamedsItems/Resources/bulletswithguns_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BulletsWithGuns>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Bullets From Bullets";
-            string longDesc = "Your bullets move slower, but they take that extra time to aim and shoot more bullets at enemies mid-air!" + "\n\n...this is getting a little ridiculous.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PickupObject item = ItemSetup.NewItem<BulletsWithGuns>(
+            "Bullets With Guns",
+            "Bullets From Bullets",
+            "Your bullets move slower, but they take that extra time to aim and shoot more bullets at enemies mid-air!" + "\n\n...this is getting a little ridiculous.",
+            "bulletswithguns_icon");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ProjectileSpeed, 0.6f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 0.85f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = PickupObject.ItemQuality.B;

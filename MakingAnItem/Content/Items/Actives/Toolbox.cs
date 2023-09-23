@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Toolbox";
-            string resourceName = "NevernamedsItems/Resources/toolbox_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Toolbox>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Robust";
-            string longDesc = "Makes a random object." + "\n\nA blunt object popular for it's usefulness in bludgeoning other people (or yourself) in the head." + "\n\nAlso holds tools, or whatever.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<Toolbox>(
+            "Toolbox",
+            "Robust",
+            "Makes a random object." + "\n\nA blunt object popular for it's usefulness in bludgeoning other people (or yourself) in the head." + "\n\nAlso holds tools, or whatever.",
+            "toolbox_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 60);
             item.consumable = false;
             item.quality = ItemQuality.D;

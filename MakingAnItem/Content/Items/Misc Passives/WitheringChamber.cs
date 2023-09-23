@@ -15,31 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Withering Chamber";
-            string resourceName = "NevernamedsItems/Resources/AnimatedItemSprites/witheringchamber_icon_001";
-            GameObject obj = new GameObject(itemName);
-
-            var item = obj.AddComponent<WitheringChamber>();
-
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            /* ItemBuilder.AddAnimatedSpriteToObject(
-                 itemName,
-                 new List<string>
-                 {
-                 "NevernamedsItems/Resources/AnimatedItemSprites/witheringchamber_icon_001",
-                 "NevernamedsItems/Resources/AnimatedItemSprites/witheringchamber_icon_002",
-                 "NevernamedsItems/Resources/AnimatedItemSprites/witheringchamber_icon_003",
-                 "NevernamedsItems/Resources/AnimatedItemSprites/witheringchamber_icon_004",
-                 },
-                 10,
-                 obj
-                 );*/
-
-            string shortDesc = "Decay";
-            string longDesc = "Guns with higher max ammo deal more damage, but suffering damage withers away your ammo capacity." + "\n\nThe spiteful creation of a cruel Chamberlord.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PickupObject item = ItemSetup.NewItem<WitheringChamber>(
+            "Withering Chamber",
+            "Decay",
+            "Guns with higher max ammo deal more damage, but suffering damage withers away your ammo capacity." + "\n\nThe spiteful creation of a cruel Chamberlord.",
+            "witheringchamber_icon_001");
             item.quality = PickupObject.ItemQuality.B;
             ID = item.PickupObjectId;
         }

@@ -12,16 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Autollet";
-            string resourceName = "NevernamedsItems/Resources/autollet_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Autollet>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Automatic and Effective";
-            string longDesc = "Automatically triggers a free blank upon entering an unvisited room with enemies." + "\n\nThe end product of using science to reverse engineer the strange and esoteric Elder Blank.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PickupObject item = ItemSetup.NewItem<Autollet>(
+            "Autollet",
+            "Automatic and Effective",
+            "Automatically triggers a free blank upon entering an unvisited room with enemies." + "\n\nThe end product of using science to reverse engineer the strange and esoteric Elder Blank.",
+            "autollet_icon");
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.C;
 

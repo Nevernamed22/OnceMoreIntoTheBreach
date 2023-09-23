@@ -13,17 +13,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Black Holster";
-            string resourceName = "NevernamedsItems/Resources/blackholster_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BlackHolster>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Unload";
-            string longDesc = "Chance to unholster the full power of the void upon reloading." + "\n\nOnce sat on the hip of a gunslinger that was neither man nor beast, nor even flesh, but given form by the void itself.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PickupObject item = ItemSetup.NewItem<BlackHolster>(
+            "Black Holster",
+            "Unload",
+            "Chance to unholster the full power of the void upon reloading." + "\n\nOnce sat on the hip of a gunslinger that was neither man nor beast, nor even flesh, but given form by the void itself.",
+            "blackholster_icon");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
-
             item.quality = PickupObject.ItemQuality.A;
         }
         private void HandleGunReloaded(PlayerController player, Gun playerGun)

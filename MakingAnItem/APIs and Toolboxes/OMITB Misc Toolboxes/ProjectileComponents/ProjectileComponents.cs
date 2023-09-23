@@ -379,7 +379,7 @@ namespace NevernamedsItems
             this.m_projectile = base.GetComponent<Projectile>();
 
         }
-        private void FixedUpdate()
+        private void Update()
         {
             if (this.m_projectile != null)
             {
@@ -823,44 +823,7 @@ namespace NevernamedsItems
         public float damageToDeal;
         private Projectile m_projectile;
     } //Makes the projectile damage secret room walls
-    public class AntimatterBulletsModifier : MonoBehaviour
-    {
-
-        public AntimatterBulletsModifier()
-        {
-
-        }
-
-        public ExplosionData explosionData;
-        private void Start()
-        {
-            this.m_projectile = base.GetComponent<Projectile>();
-            this.m_projectile.collidesWithProjectiles = true;
-            this.m_projectile.UpdateCollisionMask();
-            SpeculativeRigidbody specRigidbody = this.m_projectile.specRigidbody;
-            specRigidbody.OnPreRigidbodyCollision += this.HandlePreCollision;
-        }
-        private void HandlePreCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherPixelCollider)
-        {
-            if (otherRigidbody && otherRigidbody.projectile)
-            {
-                if (otherRigidbody.projectile.Owner is AIActor)
-                {
-                    if (otherRigidbody.projectile != lastCollidedProjectile)
-                    {
-                        if (explosionData != null)
-                        {
-                            Exploder.Explode(m_projectile.specRigidbody.UnitCenter, explosionData, Vector2.zero, null, true);
-                        }
-                        lastCollidedProjectile = otherRigidbody.projectile;
-                    }
-                }
-                PhysicsEngine.SkipCollision = true;
-            }
-        }
-        private Projectile m_projectile;
-        private Projectile lastCollidedProjectile;
-    } //Makes the projectile explode when intersecting enemy bullets
+    //Makes the projectile explode when intersecting enemy bullets
     public class BlockEnemyProjectilesMod : MonoBehaviour
     {
         public bool projectileSurvives;

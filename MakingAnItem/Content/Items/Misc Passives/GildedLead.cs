@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Gilded Lead";
-            string resourceName = "NevernamedsItems/Resources/BulletModifiers/gildedlead_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<GildedLead>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Pays Off";
-            string longDesc = "Chance to consume a casing when you fire a bullet. If a bullet consumes a casing it will have it's damage doubled." + "\nBuffed bullets that hit enemies will drop their casing onto the floor again. You miss, you lose out." + "\n\nBullets found scattered at the seat of the Charthurian Throne.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<GildedLead>(
+             "Gilded Lead",
+             "Pays Off",
+             "Chance to consume a casing when you fire a bullet. If a bullet consumes a casing it will have it's damage doubled." + "\nBuffed bullets that hit enemies will drop their casing onto the floor again. You miss, you lose out." + "\n\nBullets found scattered at the seat of the Charthurian Throne.",
+             "gildedlead_icon");          
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
         }

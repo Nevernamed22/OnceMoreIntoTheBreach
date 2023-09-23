@@ -15,19 +15,14 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string name = "Cubud";
-            string resourcePath = "NevernamedsItems/Resources/Companions/Cubud/cubud_icon";
-            GameObject gameObject = new GameObject();
-            CompanionItem companionItem = gameObject.AddComponent<CompanionItem>();
-            ItemBuilder.AddSpriteToObject(name, resourcePath, gameObject);
-
-            string shortDesc = "Stanking Officer";
-            string longDesc = "An up and coming officer in the Blobulonian army before it's fall- they were one of the few members of the aerial corps to volunteer for the genetic modification program.";
-            companionItem.SetupItem(shortDesc, longDesc, "nn");
+            CompanionItem companionItem = ItemSetup.NewItem<CompanionItem>(
+           "Cubud",
+           "Stanking Officer",
+           "An up and coming officer in the Blobulonian army before it's fall- they were one of the few members of the aerial corps to volunteer for the genetic modification program.",
+           "cubud_icon") as CompanionItem;
             companionItem.quality = PickupObject.ItemQuality.C;
             companionItem.CompanionGuid = guid;
             BuildPrefab();
-
             companionItem.AddToSubShop(ItemBuilder.ShopType.Goopton);
         }
 

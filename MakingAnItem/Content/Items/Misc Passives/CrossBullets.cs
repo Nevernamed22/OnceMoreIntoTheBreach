@@ -12,17 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Cross Bullets";
-            string resourceName = "NevernamedsItems/Resources/crossbullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<CrossBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Quad Shot";
-            string longDesc = "Occasionally grants quad shot along the cardinal directions." + "\n\nTrademark ability of an ancient nordic gunslinger.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            item.CanBeDropped = true;
+            PickupObject item = ItemSetup.NewItem<CrossBullets>(
+            "Cross Bullets",
+            "Quad Shot",
+            "Occasionally grants quad shot along the cardinal directions." + "\n\nTrademark ability of an ancient viking gunslinger.",
+            "crossbullets_icon");
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("bullet_modifier");
             CrossBulletsID = item.PickupObjectId;

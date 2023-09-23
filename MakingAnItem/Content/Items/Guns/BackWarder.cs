@@ -47,6 +47,7 @@ namespace NevernamedsItems
             ETGMod.Databases.Items.Add(gun, false, "ANY");
             BackWarderID = gun.PickupObjectId;
 
+            gun.AddToGunslingKingTable();
         }
         public override void PostProcessProjectile(Projectile projectile)
         {

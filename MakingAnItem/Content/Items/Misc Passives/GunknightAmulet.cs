@@ -13,16 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Gunknight Amulet";
-            string resourceName = "NevernamedsItems/Resources/gunknightamulet_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<GunknightAmulet>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Banished Reload";
-            string longDesc = "Chance to skip reload." + "\n\nThe lost amulet of Cormorant, the Aimless Gunknight. It was given to him by his father, who obtained it from his father before him, and his father before him, and his father before him...";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PickupObject item = ItemSetup.NewItem<GunknightAmulet>(
+            "Gunknight Amulet",
+            "Banished Reload",
+            "Chance to skip reload." + "\n\nThe lost amulet of Cormorant, the Aimless Gunknight. It was given to him by his father, who obtained it from his father before him, and his father before him, and his father before him...",
+            "gunknightamulet_icon");
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.D;
         }

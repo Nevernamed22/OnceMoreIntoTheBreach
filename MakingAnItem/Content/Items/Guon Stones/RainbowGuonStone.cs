@@ -20,24 +20,12 @@ namespace NevernamedsItems
         public static PlayerOrbital upgradeOrbitalPrefab;
         public static void Init()
         {
-            string itemName = "Rainbow Guon Stone"; //The name of the item
-            string resourceName = "NevernamedsItems/Resources/GuonStones/rainbowguon_icon3"; //Refers to an embedded png in the project. Make sure to embed your resources!
-
-            GameObject obj = new GameObject();
-
-            var item = obj.AddComponent<RainbowGuonStone>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            string shortDesc = "Insanity Stone";
-            string longDesc = "Proof of Alben Smallbore's theory of magical unpredictability." + "\n\nThis guon stone has been stuffed with so much magic that it erratically shifts it's effects like a child unable to sit still.";
-
-            Material material = new Material(ShaderCache.Acquire("Brave/Internal/RainbowChestShader"));
-            material.SetFloat("_AllColorsToggle", 1f);
-            var def = item.sprite.GetCurrentSpriteDef();
-            def.material = item.sprite.renderer.material;
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            AdvancedPlayerOrbitalItem item = ItemSetup.NewItem<RainbowGuonStone>(
+            "Rainbow Guon Stone",
+            "Insanity Stone",
+            "Proof of Alben Smallbore's theory of magical unpredictability." + "\n\nThis guon stone has been stuffed with so much magic that it erratically shifts it's effects like a child unable to sit still.",
+            "rainbowguon_icon3") as AdvancedPlayerOrbitalItem;         
             item.quality = PickupObject.ItemQuality.C;
-
 
             BuildPrefab();
             item.OrbitalPrefab = orbitalPrefab;
@@ -63,7 +51,8 @@ namespace NevernamedsItems
         public static void BuildPrefab()
         {
             if (RainbowGuonStone.orbitalPrefab != null) return;
-            GameObject prefab = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/GuonStones/rainbowguon_ingame");
+
+            GameObject prefab = ItemBuilder.SpriteFromBundle("RainbowGuonOrbital", Initialisation.itemCollection.GetSpriteIdByName("rainbowguon_ingame"), Initialisation.itemCollection);            
             prefab.name = "Rainbow Guon Orbital";
             var body = prefab.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(5, 9));
             prefab.GetComponent<tk2dSprite>().GetCurrentSpriteDef().ConstructOffsetsFromAnchor(tk2dBaseSprite.Anchor.MiddleCenter, body.GetComponent<tk2dSprite>().GetCurrentSpriteDef().position3);
@@ -87,7 +76,9 @@ namespace NevernamedsItems
             bool flag = RainbowGuonStone.upgradeOrbitalPrefab == null;
             if (flag)
             {
-                GameObject gameObject = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/GuonStones/rainbowguon_synergy", null);
+                
+
+                GameObject gameObject = ItemBuilder.SpriteFromBundle("RainbowGuonOrbitalSynergy", Initialisation.itemCollection.GetSpriteIdByName("rainbowguon_synergy"), Initialisation.itemCollection);
                 gameObject.name = "Rainbow Guon Orbital Synergy Form";
                 SpeculativeRigidbody speculativeRigidbody = gameObject.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(9, 14));
                 gameObject.GetComponent<tk2dSprite>().GetCurrentSpriteDef().ConstructOffsetsFromAnchor(tk2dBaseSprite.Anchor.MiddleCenter, gameObject.GetComponent<tk2dSprite>().GetCurrentSpriteDef().position3);

@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Shutdown Shells";
-            string resourceName = "NevernamedsItems/Resources/shutdownshells_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<ShutdownShells>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "No, shut them all down!";
-            string longDesc = "These brutal shells are designed to burrow into the long spines of the Gungeon's Shotgun Gundead and wreak havoc, causing a complete shutdown of the central nervous system.\n\n" + "Not compatible with other lifeforms.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<ShutdownShells>(
+            "Shutdown Shells",
+            "No, shut them all down!",
+            "These brutal shells are designed to burrow into the long spines of the Gungeon's Shotgun Gundead and wreak havoc, causing a complete shutdown of the central nervous system.\n\n" + "Not compatible with other lifeforms.",
+            "shutdownshells_icon");
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_SHUTDOWNSHELLS, true);

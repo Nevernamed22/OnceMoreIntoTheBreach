@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Spectre Bullets";
-            string resourceName = "NevernamedsItems/Resources/spectrebullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<SpectreBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "SpoOOOooOOoky!";
-            string longDesc = "These terrifying rounds are modelled after a spirit that shouldn’t even exist.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<SpectreBullets>(
+             "Spectre Bullets",
+             "SpoOOOooOOoky!",
+             "These terrifying rounds are modelled after a spirit that shouldn’t even exist.",
+             "spectrebullets_icon");
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
         }

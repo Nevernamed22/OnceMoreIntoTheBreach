@@ -16,18 +16,14 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Shade Shot";
-            string resourceName = "NevernamedsItems/Resources/shadeshot_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<ShadeShot>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Astral Disentanglement";
-            string longDesc = "Double Shot, with no cost."+"\nA fitting reward for a hard-won victory!"+"\n\nAncient Bullets, buried in a nameless lord's tomb to be taken with them to the next life.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<ShadeShot>(
+            "Shade Shot",
+            "Astral Disentanglement",
+            "Double Shot, with no cost." + "\nA fitting reward for a hard-won victory!" + "\n\nAncient Bullets, buried in a nameless lord's tomb to be taken with them to the next life.",
+            "shadeshot_icon");
             item.quality = PickupObject.ItemQuality.S;
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.DRAGUN_KILLED_SHADE, true);
-
         }
 
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)

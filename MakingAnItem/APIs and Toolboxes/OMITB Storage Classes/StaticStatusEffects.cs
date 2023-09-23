@@ -31,6 +31,8 @@ namespace NevernamedsItems
         //Speed Changes
         public static GameActorSpeedEffect tripleCrossbowSlowEffect = (PickupObjectDatabase.GetById(381) as Gun).DefaultModule.projectiles[0].speedEffect;
 
+        //Debuffs
+        public static AIActorDebuffEffect wolfDebuff = (EnemyDatabase.GetOrLoadByGuid("ededff1deaf3430eaf8321d0c6b2bd80").behaviorSpeculator.AttackBehaviors.Find(x => x is WolfCompanionAttackBehavior) as WolfCompanionAttackBehavior).EnemyDebuff;
 
         //----------------------------------------CUSTOM STATUS EFFECTS
         //Speed Mods

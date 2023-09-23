@@ -13,16 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Laser Bullets";
-            string resourceName = "NevernamedsItems/Resources/laserbullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<LaserBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Hybrid";
-            string longDesc = "A beam and bullet crossbreed that defies nature, these bullets make your bullets shoot... beams!";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PickupObject item = ItemSetup.NewItem<LaserBullets>(
+            "Laser Bullets",
+            "Hybrid",
+            "A beam and bullet crossbreed that defies nature, these bullets make your bullets shoot... beams!",
+            "laserbullets_icon");            
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");

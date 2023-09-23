@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using Alexandria.Misc;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -109,7 +111,7 @@ namespace NevernamedsItems
                 var tro = base.gameObject.AddChild("trail object");
                 tro.transform.position = base.transform.position;
                 tro.transform.localPosition = TrailPos;
-                
+
                 tr = tro.AddComponent<TrailRenderer>();
                 tr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
                 tr.receiveShadows = false;

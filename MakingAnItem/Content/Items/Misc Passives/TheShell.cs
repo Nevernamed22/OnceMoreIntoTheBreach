@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "The Shell";
-            string resourceName = "NevernamedsItems/Resources/BulletModifiers/theshell_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<TheShell>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "The First";
-            string longDesc = "This is the first shotgun shell ever to be created, by the great Gunsmith Geddian" + "\n\nHas an affinity with all shotguns.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<TheShell>(
+            "The Shell",
+            "The First",
+            "This is the first shotgun shell ever to be created, by the great Gunsmith Geddian" + "\n\nHas an affinity with all shotguns.",
+            "theshell_icon");
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
         }

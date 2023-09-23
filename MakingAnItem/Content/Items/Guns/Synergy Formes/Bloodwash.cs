@@ -10,7 +10,7 @@ using Alexandria.ItemAPI;
 using Alexandria.Misc;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
-using BreakAbleAPI;
+using Alexandria.BreakableAPI;
 using Dungeonator;
 
 namespace NevernamedsItems
@@ -233,7 +233,7 @@ namespace NevernamedsItems
                 $"{projName}_proj_006",
                 $"{projName}_proj_007",
                 $"{projName}_proj_008",
-            }, 12, true,
+            }, 12, tk2dSpriteAnimationClip.WrapMode.Loop,
             AnimateBullet.ConstructListOfSameValues(new IntVector2(12, 12), 8),
             AnimateBullet.ConstructListOfSameValues(false, 8),
             AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 8),
@@ -242,7 +242,7 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 8),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 8),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 8),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 8));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 8), 0);
         }
         public static int ID;
     }

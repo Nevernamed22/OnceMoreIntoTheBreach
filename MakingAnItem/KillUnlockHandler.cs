@@ -41,6 +41,7 @@ namespace NevernamedsItems
                 { "05b8afe0b6cc4fffa9dc6036fa24c8ec", new Dictionary<PlayableCharacters, CustomDungeonFlags>()
                 { //Advanced Dragun
                    { PlayableCharacters.Robot, CustomDungeonFlags.ADVDRAGUN_KILLED_ROBOT },
+                   { PlayableCharacters.Bullet, CustomDungeonFlags.ADVDRAGUN_KILLED_BULLET },
                    { ETGModCompatibility.ExtendEnum<PlayableCharacters>(Initialisation.GUID, "Shade"), CustomDungeonFlags.ADVDRAGUN_KILLED_SHADE },
                 }},
                 { "4d164ba3f62648809a4a82c90fc22cae", new Dictionary<PlayableCharacters, CustomDungeonFlags>()

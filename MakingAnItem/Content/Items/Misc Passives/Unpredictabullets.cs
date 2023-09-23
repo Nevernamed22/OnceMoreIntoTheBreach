@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Unpredictabullets";
-            string resourceName = "NevernamedsItems/Resources/unpredictabullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Unpredictabullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Who? What? When? Where?";
-            string longDesc = "Unpredictably modifies bullet stats."+"\n\nCreated by firing enough bullets at the wall and seeing what stuck.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<Unpredictabullets>(
+            "Unpredictabullets",
+            "Who? What? When? Where?",
+            "Unpredictably modifies bullet stats." + "\n\nCreated by firing enough bullets at the wall and seeing what stuck.",
+            "unpredictabullets_icon");
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
         }

@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "1 Shot";
-            string resourceName = "NevernamedsItems/Resources/1shot_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<OneShot>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "+1 to Everything";
-            string longDesc = "Increases almost every single stat by exactly 1.\n\n" + "How good or bad that is really depends on the stat.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<OneShot>(
+             "1 Shot",
+             "+1 to Everything",
+             "Increases almost every single stat by exactly 1.\n\n" + "How good or bad that is really depends on the stat.",
+             "1shot_icon");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1, StatModifier.ModifyMethod.ADDITIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Accuracy, 1, StatModifier.ModifyMethod.ADDITIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalBlanksPerFloor, 1, StatModifier.ModifyMethod.ADDITIVE);

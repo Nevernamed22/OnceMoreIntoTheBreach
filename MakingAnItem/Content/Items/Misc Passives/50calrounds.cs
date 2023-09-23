@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Alexandria.ItemAPI;
+using Gungeon;
 using UnityEngine;
 
 namespace NevernamedsItems
@@ -12,14 +13,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "50. Cal Rounds";
-            string resourceName = "NevernamedsItems/Resources/50calrounds_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<FiftyCalRounds>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Randy's Favourite";
-            string longDesc = "These bullets are nothing special by Gungeon standards, but they do pack a decent punch.\n\n" + "Favoured by a peculiar young Gungeoneer with even more peculiar tastes.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<FiftyCalRounds>(
+            "50. Cal Rounds",
+            "Randy's Favourite",
+            "These bullets are nothing special by Gungeon standards, but they do pack a decent punch.\n\n" + "Favoured by a peculiar young Gungeoneer with even more peculiar tastes.",
+            "50calrounds_icon");
+            Game.Items.Rename("nn:50._cal_rounds", "nn:50_cal_rounds");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.16f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ProjectileSpeed, 1.25f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = PickupObject.ItemQuality.C;

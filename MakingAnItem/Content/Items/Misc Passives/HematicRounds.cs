@@ -16,14 +16,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Hematic Rounds";
-            string resourceName = "NevernamedsItems/Resources/BulletModifiers/hematicrounds_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<HematicRounds>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Blood... So Much Blood...";
-            string longDesc = "Increases damage the more times it's bearer takes damage. Resets per room." + "\n\nThese red blood shells are sloshing with the good stuff.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<HematicRounds>(
+             "Hematic Rounds",
+             "Blood... So Much Blood...",
+             "Increases damage the more times it's bearer takes damage. Resets per room." + "\n\nThese red blood shells are sloshing with the good stuff.",
+             "hematicrounds_icon");           
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_HEMATICROUNDS, true);

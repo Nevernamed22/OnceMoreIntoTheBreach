@@ -12,20 +12,15 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Clip-On Ammo Pouch";
-            string resourceName = "NevernamedsItems/Resources/cliponammopouch_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<ClipOnAmmoPouch>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Ammo Up";
-            string longDesc = "Increases the ammo capacity of the held gun by 50%."+"\n\nClips on easy, and doesn't leave a mark!";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<ClipOnAmmoPouch>(
+            "Clip-On Ammo Pouch",
+            "Ammo Up",
+            "Increases the ammo capacity of the held gun by 50%." + "\n\nClips on easy, and doesn't leave a mark!",
+            "cliponammopouch_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 1000);
             item.consumable = true;
             item.quality = ItemQuality.D;
-
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
-
         }
         public override void DoEffect(PlayerController user)
         {

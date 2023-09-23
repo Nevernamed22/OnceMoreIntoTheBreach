@@ -13,34 +13,13 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Chaos Ruby";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/chaosruby_icon";
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<ChaosRuby>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "(Un)Control";
-            string longDesc = "Increases one random stat by 20%, at least in most cases."+"\n\nRumour has it that these gemstones are what drew Tonic the Sledge Dog to The Gungeon in the first place.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
+            PickupObject item = ItemSetup.NewItem<ChaosRuby>(
+            "Chaos Ruby",
+            "(Un)Control",
+            "Increases one random stat by 20%, at least in most cases." + "\n\nRumour has it that these gemstones are what drew Tonic the Sledge Dog to The Gungeon in the first place.",
+            "chaosruby_icon");
             item.quality = PickupObject.ItemQuality.D;
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.BEATEN_KEEP_TURBO_MODE, true);
-
         }
         bool hasPicked = false;
         public int randomNumber;

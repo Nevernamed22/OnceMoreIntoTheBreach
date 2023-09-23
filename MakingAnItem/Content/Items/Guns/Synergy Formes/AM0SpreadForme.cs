@@ -77,7 +77,7 @@ namespace NevernamedsItems
                 "spreadammoproj_14",
                 "spreadammoproj_15",
                 "spreadammoproj_16"
-            }, 16, true, new List<IntVector2> {
+            }, 16, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                 new IntVector2(11, 14), //1
                 new IntVector2(13, 16), //2            All frames are 13x16 except select ones that are 11-14
                 new IntVector2(13, 16), //3
@@ -95,7 +95,7 @@ namespace NevernamedsItems
                 new IntVector2(13, 16),//15
                 new IntVector2(13, 16),//16
             }, AnimateBullet.ConstructListOfSameValues(false, 16), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 16), AnimateBullet.ConstructListOfSameValues(true, 16), AnimateBullet.ConstructListOfSameValues(false, 16),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 16), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 16), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 16), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 16));
+            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 16), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 16), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 16), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 16), 0);
 
                 projectile.SetProjectileSpriteRight("spreadammoproj_1", 11, 14, false, tk2dBaseSprite.Anchor.MiddleCenter, 11, 14);
 

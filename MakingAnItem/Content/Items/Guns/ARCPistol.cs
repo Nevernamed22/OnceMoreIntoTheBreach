@@ -63,7 +63,7 @@ namespace NevernamedsItems
                    );
             projectile.hitEffects.alwaysUseMidair = true;
 
-            List<string> BeamAnimPaths = new List<string>()
+            List<string> trailAnimpaths = new List<string>()
             {
                 "NevernamedsItems/Resources/TrailSprites/arctrail_mid_001",
                 "NevernamedsItems/Resources/TrailSprites/arctrail_mid_002",
@@ -74,8 +74,8 @@ namespace NevernamedsItems
                 "NevernamedsItems/Resources/TrailSprites/arctrail_mid_001",
                 new Vector2(3, 2),
                 new Vector2(1, 1),
-                BeamAnimPaths, 20,
-                BeamAnimPaths, 20,
+                trailAnimpaths, 20,
+                trailAnimpaths, 20,
                 -1,
                 0.0001f,
                 -1,

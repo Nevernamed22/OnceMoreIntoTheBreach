@@ -13,37 +13,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Hive Holster";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/hiveholster_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<HiveHolster>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Beeload";
-            string longDesc = "A small hive of bees seems to have taken up residence in this old holster." + "\n\nBears striking resemblance to THE Hive Holster, that sits on the hip of the legendary Gunstinger. But it couldn't be THAT one... right?";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
+            PickupObject item = ItemSetup.NewItem<HiveHolster>(
+            "Hive Holster",
+            "Beeload",
+            "A small hive of bees seems to have taken up residence in this old holster." + "\n\nBears striking resemblance to THE Hive Holster, that sits on the hip of the legendary Gunstinger. But it couldn't be THAT one... right?",
+            "hiveholster_icon");
             item.quality = PickupObject.ItemQuality.B;
-
-            //LIST OF SYNERGIES
-
-
         }
         public bool canActivate = true;
         private void HandleGunReloaded(PlayerController player, Gun playerGun)

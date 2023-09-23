@@ -64,7 +64,7 @@ namespace NevernamedsItems
                 "agargun_smallproj_2",
                 "agargun_smallproj_1",
                 "agargun_smallproj_3",
-            }, 12, true, AnimateBullet.ConstructListOfSameValues(new IntVector2(12, 11), 4), 
+            }, 12, tk2dSpriteAnimationClip.WrapMode.Loop, AnimateBullet.ConstructListOfSameValues(new IntVector2(12, 11), 4), 
             AnimateBullet.ConstructListOfSameValues(true, 4), 
             AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4), 
             AnimateBullet.ConstructListOfSameValues(true, 4), 
@@ -72,7 +72,7 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), 
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), 
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), 
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
 
             projectile.SetProjectileSpriteRight("agargun_smallproj_1", 12, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 12, 11);
             #endregion
@@ -96,7 +96,7 @@ namespace NevernamedsItems
                 "agargun_bigproj_2",
                 "agargun_bigproj_1",
                 "agargun_bigproj_3",
-            }, 12, true, AnimateBullet.ConstructListOfSameValues(new IntVector2(17, 12), 4),
+            }, 12, tk2dSpriteAnimationClip.WrapMode.Loop, AnimateBullet.ConstructListOfSameValues(new IntVector2(17, 12), 4),
             AnimateBullet.ConstructListOfSameValues(true, 4),
             AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4),
             AnimateBullet.ConstructListOfSameValues(true, 4),
@@ -104,7 +104,7 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
 
             subProj.SetProjectileSpriteRight("agargun_bigproj_1", 17, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 17, 12);
             #endregion
@@ -113,8 +113,11 @@ namespace NevernamedsItems
             gun.DefaultModule.usesOptionalFinalProjectile = true;
             gun.DefaultModule.numberOfFinalProjectiles = 1;
 
-            //gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
-            //gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("AM0 Ammo Boxes", "NevernamedsItems/Resources/CustomGunAmmoTypes/am0_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/am0_clipempty");
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Agar Gun Ammo", "NevernamedsItems/Resources/CustomGunAmmoTypes/agargun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/agargun_clipempty");
+            gun.DefaultModule.finalAmmoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.finalCustomAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Agar Gun Glob", "NevernamedsItems/Resources/CustomGunAmmoTypes/agargun_final_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/agargun_final_clipempty");
+
             gun.quality = PickupObject.ItemQuality.C;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 

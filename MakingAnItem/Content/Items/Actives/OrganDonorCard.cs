@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Organ Donor Card";
-            string resourceName = "NevernamedsItems/Resources/organdonorcard_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<OrganDonorCard>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Gift of Life";
-            string longDesc = "Donate your hearts to someone who needs them." + "\n\nCompensates you handsomely- You might even make a new friend! (The hole left in your  body is also a nifty place to store active items)" + "\n\nNot reccomended for use by perverted Turtles.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<OrganDonorCard>(
+            "Organ Donor Card",
+            "Gift of Life",
+            "Donate your hearts to someone who needs them." + "\n\nCompensates you handsomely- You might even make a new friend! (The hole left in your  body is also a nifty place to store active items)" + "\n\nNot reccomended for use by perverted Turtles.",
+            "organdonorcard_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 5);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalItemCapacity, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.consumable = false;

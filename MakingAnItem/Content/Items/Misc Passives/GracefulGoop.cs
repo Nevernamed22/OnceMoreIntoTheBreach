@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using Dungeonator;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -13,84 +14,68 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
             string itemName = "Graceful Goop";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
             string resourceName = "NevernamedsItems/Resources/gracefulgoop_icon";
-
-            //Create new GameObject
             GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
             var item = obj.AddComponent<GracefulGoop>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
             string shortDesc = "They Have Died... Inside";
-            string longDesc = "Bullets trail poison." + "\n\nBrewed (and probably drunk) by a comedian who IS actually funny, no matter what he tells you.";
+            string longDesc = "Bullets trail poison." + "\n\nBrewed (and probably drunk) by a tragic comedian on the brink.";
 
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
 
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.B;
-            AssetBundle assetBundle = ResourceManager.LoadAssetBundle("shared_auto_001");
-            GracefulGoop.goopDefs = new List<GoopDefinition>();
-            foreach (string text in GracefulGoop.goops)
-            {
-                GoopDefinition goopDefinition;
-                try
-                {
-                    GameObject gameObject = assetBundle.LoadAsset(text) as GameObject;
-                    goopDefinition = gameObject.GetComponent<GoopDefinition>();
-                }
-                catch
-                {
-                    goopDefinition = (assetBundle.LoadAsset(text) as GoopDefinition);
-                }
-                goopDefinition.name = text.Replace("assets/data/goops/", "").Replace(".asset", "");
-                GracefulGoop.goopDefs.Add(goopDefinition);
-            }
-            List<GoopDefinition> list = GracefulGoop.goopDefs;
 
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_GRACEFULGOOP, true);
             item.AddItemToGooptonMetaShop(25);
+            ID = item.PickupObjectId;
         }
+        public static int ID;
         public void onFired(Projectile bullet, float eventchancescaler)
         {
-            if (!Owner.HasPickupID(Gungeon.Game.Items["nn:tracer_rounds"].PickupObjectId))
+            GoopModifier poisonTrail = bullet.gameObject.AddComponent<GoopModifier>();
+            poisonTrail.SpawnGoopInFlight = true;
+            poisonTrail.SpawnGoopOnCollision = false;
+            poisonTrail.InFlightSpawnRadius = 0.5f;
+            poisonTrail.InFlightSpawnFrequency = 0.01f;
+            poisonTrail.goopDefinition = GoopUtility.PoisonDef;
+            if (Owner.PlayerHasActiveSynergy("Hot Tempered") && (UnityEngine.Random.value < 0.1f || Owner.PlayerHasActiveSynergy("Ring of Fire")))
             {
-                TrailFireModifier mirrorProjectileModifier = bullet.gameObject.AddComponent<TrailFireModifier>();
-                mirrorProjectileModifier.goopRadius = 0.5f;
-                mirrorProjectileModifier.goopType = 1;
+                poisonTrail.goopDefinition = GoopUtility.GreenFireDef;
+                if (Owner.PlayerHasActiveSynergy("Even More Visible!")) poisonTrail.InFlightSpawnRadius = 1;
+
+                bullet.baseData.speed *= 1.25f;
+                bullet.UpdateSpeed();
+
+                bullet.OnDestruction += OnProjectileDeath;
             }
-            else if (Owner.HasPickupID(Gungeon.Game.Items["nn:tracer_rounds"].PickupObjectId))
-            {
-                if (UnityEngine.Random.value < 0.1f || Owner.HasPickupID(661))
-                {
-                    TrailFireModifier mirrorProjectileModifier = bullet.gameObject.AddComponent<TrailFireModifier>();
-                    if (Owner.HasPickupID(275)) mirrorProjectileModifier.goopRadius = 1;
-                    else mirrorProjectileModifier.goopRadius = 0.5f;
-                    mirrorProjectileModifier.goopType = 0;
-                    mirrorProjectileModifier.needsToUseGreenFire = true;
-                }
-                else
-                {
-                    TrailFireModifier mirrorProjectileModifier = bullet.gameObject.AddComponent<TrailFireModifier>();
-                    mirrorProjectileModifier.goopRadius = 0.5f;
-                    mirrorProjectileModifier.goopType = 1;
-                }
-            }
-            if (Owner.CurrentGun.PickupObjectId == 481) spawnCameraFirePool();
+
             if (Owner.CurrentGun.PickupObjectId == 33) IsaacIsDeadLetsCrabDance();
+        }
+        private void OnProjectileDeath(Projectile self)
+        {
+            UnityEngine.Object.Instantiate<GameObject>((PickupObjectDatabase.GetById(Owner.PlayerHasActiveSynergy("Hot Tempered") ? 722 : 336) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX, self.LastPosition, Quaternion.identity);
+            for (int i = 0; i < 5; i++)
+            {
+                GameObject spawned = (PickupObjectDatabase.GetById(83) as Gun).DefaultModule.projectiles[0].InstantiateAndFireInDirection(self.LastPosition, UnityEngine.Random.Range(0, 360));
+                Projectile proj = spawned.GetComponent<Projectile>();
+                proj.baseData.damage = 3f;
+                proj.AssignToPlayer(Owner);
+                ScaleChangeOverTimeModifier shrink = spawned.AddComponent<ScaleChangeOverTimeModifier>();
+                shrink.destroyAfterChange = true;
+                shrink.scaleMultAffectsDamage = false;
+                shrink.ScaleToChangeTo = 0.1f;
+                shrink.suppressDeathFXIfdestroyed = true;
+                shrink.timeToChangeOver = 0.5f;
+                proj.IgnoreTileCollisionsFor(0.1f);
+
+                GoopModifier fireTrail = spawned.gameObject.AddComponent<GoopModifier>();
+                fireTrail.InFlightSpawnRadius = Owner.PlayerHasActiveSynergy("Even More Visible!") ? 1 : 0.5f;
+                fireTrail.SpawnGoopInFlight = true;
+                fireTrail.InFlightSpawnFrequency = 0.05f;
+                fireTrail.goopDefinition = Owner.PlayerHasActiveSynergy("Hot Tempered") ? GoopUtility.GreenFireDef : GoopUtility.FireDef;
+            }
         }
         private void IsaacIsDeadLetsCrabDance()
         {
@@ -116,18 +101,20 @@ namespace NevernamedsItems
                 Chest.Spawn(Synergy_Chest, bestRewardLocation);
             }
         }
-        private void spawnCameraFirePool()
-        {
-            if (!Owner.HasPickupID(Gungeon.Game.Items["nn:tracer_rounds"].PickupObjectId))
-            {
 
-                var ddgm = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(GracefulGoop.goopDefs[0]);
-                ddgm.AddGoopCircle(Owner.sprite.WorldCenter, 10);
-            }
-        }
         private void onFiredBeam(BeamController sourceBeam)
         {
-
+            if (sourceBeam && sourceBeam.gameObject && sourceBeam.gameObject.GetComponent<GoopModifier>() == null && sourceBeam.GetComponent<BasicBeamController>())
+            {
+                GoopModifier goop = sourceBeam.gameObject.AddComponent<GoopModifier>();
+                goop.goopDefinition = GoopUtility.PoisonDef;
+                goop.SpawnGoopInFlight = true;
+                goop.InFlightSpawnRadius = 0.5f;
+                goop.InFlightSpawnFrequency = 0.05f;
+                goop.BeamEndRadius = 1f;
+                goop.CollisionSpawnRadius = 3f;
+                sourceBeam.GetComponent<BasicBeamController>().m_beamGoopModifier = goop;
+            }
         }
         private DamageTypeModifier m_poisonImmunity;
         private void SpawnCasingSynergy(float damage, bool fatal, HealthHaver enemy)
@@ -142,38 +129,26 @@ namespace NevernamedsItems
         }
         public override void Pickup(PlayerController player)
         {
-            player.PostProcessProjectile += this.onFired;
-            player.OnAnyEnemyReceivedDamage += this.SpawnCasingSynergy;
-            player.PostProcessBeam += this.onFiredBeam;
-            this.m_poisonImmunity = new DamageTypeModifier();
-            this.m_poisonImmunity.damageMultiplier = 0f;
-            this.m_poisonImmunity.damageType = CoreDamageTypes.Poison;
-            player.healthHaver.damageTypeModifiers.Add(this.m_poisonImmunity);
+            player.PostProcessProjectile += onFired;
+            player.OnAnyEnemyReceivedDamage += SpawnCasingSynergy;
+            player.PostProcessBeam += onFiredBeam;
+
+            m_poisonImmunity = new DamageTypeModifier();
+            m_poisonImmunity.damageMultiplier = 0f;
+            m_poisonImmunity.damageType = CoreDamageTypes.Poison;
+            player.healthHaver.damageTypeModifiers.Add(m_poisonImmunity);
             base.Pickup(player);
         }
-        public override DebrisObject Drop(PlayerController player)
+        public override void DisableEffect(PlayerController player)
         {
-            DebrisObject result = base.Drop(player);
-            player.OnAnyEnemyReceivedDamage -= this.SpawnCasingSynergy;
-            player.PostProcessProjectile -= this.onFired;
-            player.PostProcessBeam -= this.onFiredBeam;
-            player.healthHaver.damageTypeModifiers.Remove(this.m_poisonImmunity);
-            return result;
-        }
-        public override void OnDestroy()
-        {
-            if (Owner)
+            if (player)
             {
-                Owner.PostProcessProjectile -= this.onFired;
-                Owner.PostProcessBeam -= this.onFiredBeam;
+                player.OnAnyEnemyReceivedDamage -= SpawnCasingSynergy;
+                player.PostProcessProjectile -= onFired;
+                player.PostProcessBeam -= onFiredBeam;
+                player.healthHaver.damageTypeModifiers.Remove(m_poisonImmunity);
             }
-            base.OnDestroy();
+            base.DisableEffect(player);
         }
-        private static List<GoopDefinition> goopDefs;
-
-        private static string[] goops = new string[]
-        {
-            "assets/data/goops/poison goop.asset",
-        };
     }
 }

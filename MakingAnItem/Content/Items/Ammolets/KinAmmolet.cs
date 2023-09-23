@@ -16,16 +16,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Kin Ammolet";
-            string resourceName = "NevernamedsItems/Resources/kinammolet_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<KinAmmolet>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Blanks Reinforce";
-            string longDesc = "Blanks summon reinforcements to aid you in combat!" + "\n\nThe little pendant is sentient, and very, very confused.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-
+            BlankModificationItem item = ItemSetup.NewItem<KinAmmolet>(
+            "Kin Ammolet",
+            "Blanks Reinforce",
+            "Blanks summon reinforcements to aid you in combat!" + "\n\nThe little pendant is sentient, and very, very confused.",
+            "kinammolet_icon") as BlankModificationItem;
             item.quality = PickupObject.ItemQuality.D;
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalBlanksPerFloor, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);

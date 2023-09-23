@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Warp Bullets";
-            string resourceName = "NevernamedsItems/Resources/warpbullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<WarpBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Bullets Teleport";
-            string longDesc = "Your bullets have a chance to teleport behind enemies.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<WarpBullets>(
+            "Warp Bullets",
+            "Bullets Teleport",
+            "Your bullets have a chance to teleport behind enemies.",
+            "warpbullets_icon");           
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("bullet_modifier");
         }

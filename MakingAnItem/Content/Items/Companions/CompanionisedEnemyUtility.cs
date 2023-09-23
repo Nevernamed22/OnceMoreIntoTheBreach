@@ -42,7 +42,7 @@ namespace NevernamedsItems
             {
                 if (attkOwner.GetComponent<CustomEnemyTagsSystem>() != null && attkOwner.GetComponent<CustomEnemyTagsSystem>().isKalibersEyeMinion)
                 {
-                    AIActor image = OMITBReflectionHelpers.ReflectGetField<AIActor>(typeof(DisplaceBehavior), "m_image", sourceBehaviour);
+                    AIActor image = sourceBehaviour.m_image;  
                     if (image != null)
                     {
                         PhysicsEngine.Instance.RegisterOverlappingGhostCollisionExceptions(image.specRigidbody, null, false);

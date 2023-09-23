@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Drill Bullets";
-            string resourceName = "NevernamedsItems/Resources/drillbullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<DrillBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Drrrrrrrrr";
-            string longDesc = "Bullets gain in damage the more they pierce!"+"\n\nKilling people is probably the most legal thing you can do with these.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<DrillBullets>(
+            "Drill Bullets",
+            "Drrrrrrrrr",
+            "Bullets gain in damage the more they pierce!" + "\n\nKilling people is probably the most legal thing you can do with these.",
+            "drillbullets_icon");
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("bullet_modifier");
         }

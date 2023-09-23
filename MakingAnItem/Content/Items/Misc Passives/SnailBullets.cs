@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Snail Bullets";
-            string resourceName = "NevernamedsItems/Resources/snailbullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<SnailBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Slow as Slugs";
-            string longDesc = "It looks like a colony of snails has made it’s home in this empty shell to hide from predatory birds. \n\n" + "While the shell itself cannot be fired, the slime it oozes from the generations of snails within has interesting properties when paired with other ammunition.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<SnailBullets>(
+            "Snail Bullets",
+            "Slow as Slugs",
+            "It looks like a colony of snails has made it’s home in this empty shell to hide from predatory birds. \n\n" + "While the shell itself cannot be fired, the slime it oozes from the generations of snails within has interesting properties when paired with other ammunition.",
+            "snailbullets_icon");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ProjectileSpeed, 0.6f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("bullet_modifier");

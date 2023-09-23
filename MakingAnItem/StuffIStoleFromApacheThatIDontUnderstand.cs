@@ -367,7 +367,7 @@ namespace NevernamedsItems
             Owner.PlayEffectOnActor(EasyVFXDatabase.BloodiedScarfPoofVFX, Vector3.zero, false, true, false);
 
             AkSoundEngine.PostEvent("Play_ENM_wizardred_vanish_01", Owner.gameObject);
-            List<AIActor> m_rollDamagedEnemies = OMITBReflectionHelpers.ReflectGetField<List<AIActor>>(typeof(PlayerController), "m_rollDamagedEnemies", Owner);
+            List<AIActor> m_rollDamagedEnemies = Owner.m_rollDamagedEnemies;
             if (m_rollDamagedEnemies != null)
             {
                 m_rollDamagedEnemies.Clear();

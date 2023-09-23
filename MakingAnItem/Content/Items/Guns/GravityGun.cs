@@ -67,6 +67,10 @@ namespace NevernamedsItems
             ElectricImmunity = new DamageTypeModifier();
             ElectricImmunity.damageMultiplier = 0f;
             ElectricImmunity.damageType = CoreDamageTypes.Electric;
+
+
+                MajorBreakableImpactVFX = (PickupObjectDatabase.GetById(37) as Gun).DefaultModule.chargeProjectiles[0].Projectile.hitEffects.overrideMidairDeathVFX;
+            
         }
         private static DamageTypeModifier ElectricImmunity;
         public static int GravityGunID;
@@ -78,10 +82,7 @@ namespace NevernamedsItems
                 ChestExplosionData.breakSecretWalls = true;
                 if (!ChestExplosionData.ignoreList.Contains(player.specRigidbody)) ChestExplosionData.ignoreList.Add(player.specRigidbody);
             }
-            if (MajorBreakableImpactVFX == null)
-            {
-                MajorBreakableImpactVFX = (PickupObjectDatabase.GetById(37) as Gun).DefaultModule.chargeProjectiles[0].Projectile.hitEffects.overrideMidairDeathVFX;
-            }
+            
             base.OnPickedUpByPlayer(player);
         }
         public override void OnSwitchedAwayFromThisGun()

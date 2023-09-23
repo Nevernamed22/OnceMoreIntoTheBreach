@@ -10,35 +10,26 @@ using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
-    class YellowGuonStone : IounStoneOrbitalItem
+    class YellowGuonStone : AdvancedPlayerOrbitalItem
     {
         public static PlayerOrbital orbitalPrefab;
         public static void Init()
         {
-            string itemName = "Yellow Guon Stone"; //The name of the item
-            string resourceName = "NevernamedsItems/Resources/yellowguon_icon"; //Refers to an embedded png in the project. Make sure to embed your resources!
+            AdvancedPlayerOrbitalItem item = ItemSetup.NewItem<YellowGuonStone>(
+            "Yellow Guon Stone",
+            "Yellowstone",
+            "Grants brief invulnerability on killing an enemy." + "\n\nThe Yellow Guon handles defense, so that it's bearer may never stop attacking. At least, in theory.",
+            "yellowguon_icon") as AdvancedPlayerOrbitalItem;
 
-            GameObject obj = new GameObject();
-
-            var item = obj.AddComponent<YellowGuonStone>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            string shortDesc = "Yellowstone";
-            string longDesc = "Grants brief invulnerability on killing an enemy." + "\n\nThe Yellow Guon handles defense, so that it's bearer may never stop attacking. At least, in theory.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("guon_stone");
-
             BuildPrefab();
             item.OrbitalPrefab = orbitalPrefab;
-            item.Identifier = IounStoneIdentifier.GENERIC;
         }
 
         public static void BuildPrefab()
         {
-            if (YellowGuonStone.orbitalPrefab != null) return;
-            GameObject prefab = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/yellowguon_ingame");
+            GameObject prefab = ItemBuilder.SpriteFromBundle("YellowGuonOrbital", Initialisation.itemCollection.GetSpriteIdByName("yellowguon_ingame"), Initialisation.itemCollection);
             prefab.name = "Yellow Guon Orbital";
             var body = prefab.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(7, 13));
             body.CollideWithTileMap = false;
@@ -52,9 +43,7 @@ namespace NevernamedsItems
             orbitalPrefab.orbitDegreesPerSecond = 120f;
             orbitalPrefab.SetOrbitalTier(0);
 
-            GameObject.DontDestroyOnLoad(prefab);
-            FakePrefab.MarkAsFakePrefab(prefab);
-            prefab.SetActive(false);
+            prefab.MakeFakePrefab();
         }
 
         public override void Pickup(PlayerController player)

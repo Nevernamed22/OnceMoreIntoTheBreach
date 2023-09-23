@@ -156,8 +156,8 @@ namespace NevernamedsItems
                             {
                                
                                 breakable.GetComponent<Chest>().ForceKillFuse();
-                                int idleID = OMITBReflectionHelpers.ReflectGetField<int>(typeof(Chest), "m_cachedSpriteForCoop", breakable.GetComponent<Chest>());
-                                OMITBReflectionHelpers.ReflectSetField<bool>(typeof(MajorBreakable), "m_inZeroHPState", false, breakable);
+                                int idleID = breakable.GetComponent<Chest>().m_cachedSpriteForCoop;
+                                breakable.m_inZeroHPState = false;
                                 breakable.sprite.SetSprite(idleID);
                             }
                         }

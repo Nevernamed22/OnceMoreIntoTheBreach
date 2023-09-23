@@ -60,7 +60,7 @@ namespace NevernamedsItems
                 "wrinklerproj_005",
             },
             14, //FPS
-            true, //Loops
+            tk2dSpriteAnimationClip.WrapMode.Loop, //Loops
             AnimateBullet.ConstructListOfSameValues(new IntVector2(18, 10), 5), //Sprite Sizes
             AnimateBullet.ConstructListOfSameValues(false, 5), //Lightened
             AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 5), //Anchors
@@ -69,7 +69,7 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 5),  //Manual Offsets
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(14, 8), 5), //Collider Pixel Sizes
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 5), //Override Collider Offsets
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 5));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 5), 0);
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Wrinkler Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/wrinkler_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/wrinkler_clipempty");

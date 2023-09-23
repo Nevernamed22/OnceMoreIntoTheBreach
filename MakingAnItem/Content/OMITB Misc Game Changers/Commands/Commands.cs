@@ -141,8 +141,28 @@ namespace NevernamedsItems
                 }
 
             });
-
+            ETGModConsole.Commands.GetGroup("nn").AddUnit("zoom", delegate (string[] args)
+            {
+                if (args != null && args.Length > 0)
+                {
+                    if (args.Length == 1)
+                    {
+                        if (float.TryParse(args[0], out float numValue))
+                        {
+                            GameManager.Instance.MainCameraController.OverrideZoomScale = numValue;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Error: '{args[0]}' is not a valid integer.");
+                        }
+                    }
+                    else ETGModConsole.Log("<color=#ff1500>Error: Too many arguments!</color>");
+                }
+                else ETGModConsole.Log("<color=#ff1500>Error: Please input a value for how much you want to zoom (eg: 'nn zoom 4')</color>");
+            });
             DeconstructGun.Init();
+            DeconstructDungeon.Init();
+            LoadRoom.Init();
 
             #region LoadRoomCommands
             /* ETGModConsole.Commands.GetGroup("nn").AddUnit("removegun", delegate (string[] args)

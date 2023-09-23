@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Knightly Bullets";
-            string resourceName = "NevernamedsItems/Resources/knightlybullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<KnightlyBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Charthurian";
-            string longDesc = "These high class slugs are reluctant to harm those higher than them in status, but they have no problem squashing the peasantry." + "\n\nFavoured by the mighty Ser Lammorack, famed Knight of the Octagonal Table, before his untimely demise...";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<KnightlyBullets>(
+            "Knightly Bullets",
+            "Charthurian",
+            "These high class slugs are reluctant to harm those higher than them in status, but they have no problem squashing the peasantry." + "\n\nFavoured by the mighty Ser Lammorack, famed Knight of the Octagonal Table, before his untimely demise...",
+            "knightlybullets_icon");
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("bullet_modifier");
             item.CanBeDropped = true;

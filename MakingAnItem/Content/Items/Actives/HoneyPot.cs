@@ -47,7 +47,7 @@ namespace NevernamedsItems
                 "honeypotproj_2",
                 "honeypotproj_3",
                 "honeypotproj_4",
-            }, 8, true, new List<IntVector2> {
+            }, 8, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                 new IntVector2(19, 16), //1
                 new IntVector2(16, 19), //2            
                 new IntVector2(19, 16), //3
@@ -63,7 +63,7 @@ namespace NevernamedsItems
                 new IntVector2(14, 14), //3
             },
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
         }
         private static Projectile PotProjectile;
         public override void DoEffect(PlayerController user)

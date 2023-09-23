@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string name = "Angry Spirit";
-            string resourcePath = "NevernamedsItems/Resources/Companions/AngrySpirit/angryspirit_icon";
-            GameObject gameObject = new GameObject();
-            CompanionItem companionItem = gameObject.AddComponent<CompanionItem>();
-            ItemBuilder.AddSpriteToObject(name, resourcePath, gameObject);
-            string shortDesc = "Furious Friend";
-            string longDesc = "Aches to kill, but cannot generate it's own bullets, merely copying the firepower of it's owner."+"\n\nDon't let him in.";
-            companionItem.SetupItem(shortDesc, longDesc, "nn");
+            CompanionItem companionItem = ItemSetup.NewItem<CompanionItem>(
+            "Angry Spirit",
+            "Furious Friend",
+            "Aches to kill, but cannot generate it's own bullets, merely copying the firepower of it's owner." + "\n\nDon't let him in.",
+            "angryspirit_icon") as CompanionItem;
             companionItem.quality = PickupObject.ItemQuality.B;
             companionItem.CompanionGuid = AngrySpirit.guid;
             AngrySpirit.BuildPrefab();

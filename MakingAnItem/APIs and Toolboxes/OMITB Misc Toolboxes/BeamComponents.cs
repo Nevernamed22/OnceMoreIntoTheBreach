@@ -150,7 +150,7 @@ namespace NevernamedsItems
             if (UnityEngine.Random.value < chancePerTick)
             {
                 LinkedList<BasicBeamController.BeamBone> bones;
-                bones = OMITBReflectionHelpers.ReflectGetField<LinkedList<BasicBeamController.BeamBone>>(typeof(BasicBeamController), "m_bones", basicBeamController);
+                bones = basicBeamController.m_bones;
                 LinkedListNode<BasicBeamController.BeamBone> linkedListNode = bones.Last;
                 Vector2 bonePosition = basicBeamController.GetBonePosition(linkedListNode.Value);
                 Explode(bonePosition);
@@ -310,7 +310,7 @@ namespace NevernamedsItems
             for (int i = 0; i < amtToSplitTo; i++)
             {
                 LinkedList<BasicBeamController.BeamBone> bones;
-                bones = OMITBReflectionHelpers.ReflectGetField<LinkedList<BasicBeamController.BeamBone>>(typeof(BasicBeamController), "m_bones", basicBeamController);
+                bones = basicBeamController.m_bones; 
                 LinkedListNode<BasicBeamController.BeamBone> linkedListNode = null;
                 if (bones != null) linkedListNode = bones.Last;
                 else { Debug.LogError("Bones was NULL"); return; }
@@ -372,7 +372,7 @@ namespace NevernamedsItems
                 {
                     BasicBeamController particularSubBeam = subBeams.ElementAt(i).Key;
                     LinkedList<BasicBeamController.BeamBone> bones;
-                    bones = OMITBReflectionHelpers.ReflectGetField<LinkedList<BasicBeamController.BeamBone>>(typeof(BasicBeamController), "m_bones", basicBeamController);
+                    bones = basicBeamController.m_bones; 
                     LinkedListNode<BasicBeamController.BeamBone> linkedListNode = bones.Last;
                     Vector2 bonePosition = basicBeamController.GetBonePosition(linkedListNode.Value);
 
@@ -437,7 +437,7 @@ namespace NevernamedsItems
             if (UnityEngine.Random.value < chancePerTick)
             {
                 LinkedList<BasicBeamController.BeamBone> bones;
-                bones = OMITBReflectionHelpers.ReflectGetField<LinkedList<BasicBeamController.BeamBone>>(typeof(BasicBeamController), "m_bones", basicBeamController);
+                bones = basicBeamController.m_bones;
                 LinkedListNode<BasicBeamController.BeamBone> linkedListNode = bones.Last;
                 Vector2 bonePosition = basicBeamController.GetBonePosition(linkedListNode.Value);
 
@@ -535,7 +535,7 @@ namespace NevernamedsItems
             if (UnityEngine.Random.value < chancePerTick)
             {
                 LinkedList<BasicBeamController.BeamBone> bones;
-                bones = OMITBReflectionHelpers.ReflectGetField<LinkedList<BasicBeamController.BeamBone>>(typeof(BasicBeamController), "m_bones", basicBeamController);
+                bones = basicBeamController.m_bones; 
                 LinkedListNode<BasicBeamController.BeamBone> linkedListNode = bones.Last;
                 Vector2 bonePosition = basicBeamController.GetBonePosition(linkedListNode.Value);
                 Blank(bonePosition);

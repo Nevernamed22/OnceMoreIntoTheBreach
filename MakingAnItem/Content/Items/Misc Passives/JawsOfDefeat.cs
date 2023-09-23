@@ -13,20 +13,15 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Jaws Of Defeat";
-            string resourceName = "NevernamedsItems/Resources/jawsofdefeat_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<JawsOfDefeat>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Press To See Graveyard";
-            string longDesc = "Increases Damage and Firerate by 0.5% for every death on the current save file, up to 1000 deaths."+"\n\nA charm worn by the very first adventurer... ever.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PickupObject item = ItemSetup.NewItem<JawsOfDefeat>(
+            "Jaws Of Defeat",
+            "Press To See Graveyard",
+            "Increases Damage and Firerate by 0.5% for every death on the current save file, up to 1000 deaths." + "\n\nA charm worn by the very first adventurer... ever.",
+            "jawsofdefeat_icon");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 3f, StatModifier.ModifyMethod.ADDITIVE);
             item.quality = PickupObject.ItemQuality.S;
             JawsOfDefeatID = item.PickupObjectId;
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.BOSSRUSH_SHADE, true);
-
         }
         public override void Pickup(PlayerController player)
         {

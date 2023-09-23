@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Bashful Shot";
-            string resourceName = "NevernamedsItems/Resources/bashfulshot_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BashfulShot>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Travel Light";
-            string longDesc = "These remarkably compatible musket balls prefer to keep to themselves, and don’t like other items getting in the way."+"\n\nMaybe don’t pick up that Junk.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<BashfulShot>(
+             "Bashful Shot",
+             "Travel Light",
+             "Grants a large damage and firerate boost which decreases with each item and gun held." + "\n\nThese remarkably compatible musket balls prefer to keep to themselves, and don’t like other items getting in the way." + "\n\nMaybe don’t pick up that Junk.",
+             "bashfulshot_improved");
             item.quality = PickupObject.ItemQuality.S;
             item.SetTag("bullet_modifier");
             BashfulShotID = item.PickupObjectId;

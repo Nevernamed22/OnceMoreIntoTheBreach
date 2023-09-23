@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string name = "Diode";
-            string resourcePath = "NevernamedsItems/Resources/Companions/Diode/diode_icon";
-            GameObject gameObject = new GameObject();
-            var companionItem = gameObject.AddComponent<CompanionItem>();
-            ItemBuilder.AddSpriteToObject(name, resourcePath, gameObject);
-            string shortDesc = "Electric Buddy";
-            string longDesc = "This little guy connects to you via an electric arc." + "\n\nOne of the first creations of a young tinker, it wandered out of her workshop in search of adventure, and somehow wound up down here.";
-            companionItem.SetupItem(shortDesc, longDesc, "nn");
+            CompanionItem companionItem = ItemSetup.NewItem<CompanionItem>(
+            "Diode",
+            "Electric Buddy",
+            "This little guy connects to you via an electric arc." + "\n\nOne of the first creations of a young tinker, it wandered out of her workshop in search of adventure, and somehow wound up down here.",
+            "diode_icon") as CompanionItem;
             companionItem.quality = PickupObject.ItemQuality.C;
             companionItem.CompanionGuid = Diode.guid;
 

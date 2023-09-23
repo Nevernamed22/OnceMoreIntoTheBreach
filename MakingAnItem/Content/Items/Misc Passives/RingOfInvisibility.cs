@@ -15,20 +15,15 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Ring of Invisibility";
-            string resourceName = "NevernamedsItems/Resources/ringofinvisibility_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<RingOfInvisibility>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Precious";
-            string longDesc = "Grants invisibility while standing perfectly still." + "\n\nThis ancient ring has been coveted throughout generations of Gungeoneers and Gundead alike. The idea of removing it seems unthinkable.";
+            PickupObject item = ItemSetup.NewItem<RingOfInvisibility>(
+            "Ring of Invisibility",
+            "Precious",
+            "Grants invisibility while standing perfectly still." + "\n\nThis ancient ring has been coveted throughout generations of Gungeoneers and Gundead alike. The idea of removing it seems unthinkable.",
+            "ringofinvisibility_icon");
             item.AddPassiveStatModifier( PlayerStats.StatType.Curse, 1, StatModifier.ModifyMethod.ADDITIVE);
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
             item.CanBeDropped = false;
             item.quality = PickupObject.ItemQuality.S;
-
             RingOfInvisibilityID = item.PickupObjectId;
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.CHALLENGE_INVISIBLEO_BEATEN, true);
 

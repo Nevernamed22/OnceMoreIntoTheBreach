@@ -16,14 +16,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Wicker Ammolet";
-            string resourceName = "NevernamedsItems/Resources/wickerammolet_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<WickerAmmolet>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Blanks Terrify";
-            string longDesc = "Modifies the elegant sigh of your blanks into a horrifying screech, sure to terrify all who hear it.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            BlankModificationItem item = ItemSetup.NewItem<WickerAmmolet>(
+            "Wicker Ammolet",
+            "Blanks Terrify",
+            "Modifies the elegant sigh of your blanks into a horrifying screech, sure to terrify all who hear it.",
+            "wickerammolet_improved") as BlankModificationItem;
             item.quality = PickupObject.ItemQuality.B;
 
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalBlanksPerFloor, 1f, StatModifier.ModifyMethod.ADDITIVE);

@@ -552,7 +552,7 @@ namespace NevernamedsItems
                 LeadOfLife.AntimatterBulletsCompanion.prefab = BuildIndividualPrefab(LeadOfLife.AntimatterBulletsCompanion, "antimatterbulletscompanion", AntimatterBullets.AntimatterBulletsID, 7, new IntVector2(7, 7), new IntVector2(6, 1), false, false, true);
                 LeadOfLifeBasicShooter AntimatterBulletsCompanionattackComp = LeadOfLifeBasicShooter.AddToPrefab(LeadOfLife.AntimatterBulletsCompanion.prefab, AntimatterBullets.AntimatterBulletsID);
                 Projectile AntimatterBulletsCompanionBullet = GetProjectileForID(86);
-                AntimatterBulletsModifier antimattermod = AntimatterBulletsCompanionBullet.gameObject.GetOrAddComponent<AntimatterBulletsModifier>();
+                ExplodeOnBulletIntersection antimattermod = AntimatterBulletsCompanionBullet.gameObject.GetOrAddComponent<ExplodeOnBulletIntersection>();
                 antimattermod.explosionData = AntimatterBullets.smallPlayerSafeExplosion;
                 AntimatterBulletsCompanionattackComp.bulletsToFire = new List<Projectile>() { AntimatterBulletsCompanionBullet };
 
@@ -563,7 +563,7 @@ namespace NevernamedsItems
                 BashfulShotCompanionAttackComp.bulletsToFire = new List<Projectile>() { BashfulShotCompanionBullet };
                 BashfulShotCompanionAttackComp.bashfulShot = true;
 
-                LeadOfLife.BashingBulletsCompanion.prefab = BuildIndividualPrefab(LeadOfLife.BashingBulletsCompanion, "bashingbulletscompanion", BashingBullets.BashingBulletsID, 7, new IntVector2(7, 7), new IntVector2(7, 1), false, false, true);
+                LeadOfLife.BashingBulletsCompanion.prefab = BuildIndividualPrefab(LeadOfLife.BashingBulletsCompanion, "bashingbulletscompanion", BashingBullets.BashingBulletsID, 7, new IntVector2(7, 7), new IntVector2(8, 1), false, false, true);
                 LeadOfLifeBasicShooter BashingBulletsCompanionattackComp = LeadOfLifeBasicShooter.AddToPrefab(LeadOfLife.BashingBulletsCompanion.prefab, BashingBullets.BashingBulletsID);
                 Projectile BashingBulletsBullet = GetProjectileForID(541);
                 BashingBulletsBullet.baseData.damage *= 0.125f;
@@ -600,7 +600,7 @@ namespace NevernamedsItems
 
                 LeadOfLife.TitanBulletsCompanion.prefab = BuildIndividualPrefab(LeadOfLife.TitanBulletsCompanion, "titanbulletscompanion", TitanBullets.ID, 5, new IntVector2(9, 9), new IntVector2(11, 2), false, false, true);
                 LeadOfLifeBasicShooter TitanBulletsCompanionattackComp = LeadOfLifeBasicShooter.AddToPrefab(LeadOfLife.TitanBulletsCompanion.prefab, TitanBullets.ID, 3);
-                Projectile TitanBulletsBullet = GetProjectileForID(541);
+                Projectile TitanBulletsBullet = GetProjectileForID(86);
                 TitanBulletsBullet.AdditionalScaleMultiplier = 10000;
                 TitanBulletsBullet.baseData.damage *= 1.05f;
                 TitanBulletsBullet.AppliesStun = true;

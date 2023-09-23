@@ -76,13 +76,13 @@ namespace NevernamedsItems
                 "theoutbreakfinalproj_2",
                 "theoutbreakfinalproj_1",
                 "theoutbreakfinalproj_3",
-            }, 12, true, new List<IntVector2> {
+            }, 12, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                 new IntVector2(13, 8), //1
                 new IntVector2(11, 10), //2            
                 new IntVector2(13, 8), //3
                 new IntVector2(10, 11), //4
             }, AnimateBullet.ConstructListOfSameValues(false, 4), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4), AnimateBullet.ConstructListOfSameValues(true, 4), AnimateBullet.ConstructListOfSameValues(false, 4),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4));
+            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
 
             gun.DefaultModule.usesOptionalFinalProjectile = true;
             gun.DefaultModule.finalProjectile = projectile2;
@@ -94,6 +94,11 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.A;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             TheOutbreakID = gun.PickupObjectId;
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Outbreak Ammo", "NevernamedsItems/Resources/CustomGunAmmoTypes/outbreak_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/outbreak_clipempty");
+            gun.DefaultModule.finalAmmoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.finalCustomAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Outbreak Glob", "NevernamedsItems/Resources/CustomGunAmmoTypes/outbreak_plagueprojectile_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/outbreak_plagueprojectile_clipempty");
 
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_THEOUTBREAK, true);
             gun.AddItemToDougMetaShop(45);

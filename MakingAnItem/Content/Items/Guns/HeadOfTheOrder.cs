@@ -65,8 +65,8 @@ namespace NevernamedsItems
                 "atomic_projectile_008",
                 "atomic_projectile_009",
                 "atomic_projectile_010",
-            }, 15, true, AnimateBullet.ConstructListOfSameValues<IntVector2>(new IntVector2(24, 20), 10), AnimateBullet.ConstructListOfSameValues(true, 10), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 10), AnimateBullet.ConstructListOfSameValues(true, 10), AnimateBullet.ConstructListOfSameValues(false, 10),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 10), AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(8, 8), 10), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 10), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 10));
+            }, 15, tk2dSpriteAnimationClip.WrapMode.Loop, AnimateBullet.ConstructListOfSameValues<IntVector2>(new IntVector2(24, 20), 10), AnimateBullet.ConstructListOfSameValues(true, 10), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 10), AnimateBullet.ConstructListOfSameValues(true, 10), AnimateBullet.ConstructListOfSameValues(false, 10),
+            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 10), AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(8, 8), 10), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 10), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 10), 0);
 
             gun.DefaultModule.projectiles[0] = projectile;
 

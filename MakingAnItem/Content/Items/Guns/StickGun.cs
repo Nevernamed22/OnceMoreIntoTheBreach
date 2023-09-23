@@ -6,7 +6,8 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -142,6 +143,6 @@ namespace NevernamedsItems
             ID = gun.PickupObjectId;
 
         }
-        public static int ID;
+        public static int ID;       
     }
 }

@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Voodoollets";
-            string resourceName = "NevernamedsItems/Resources/voodoollets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Voodoollets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Doll-ay, Oh, Oh, We Come Doll-ay!";
-            string longDesc = "Whenever any enemy suffers damage, another shall be wounded in kind." + "\n\nA relic left behind by a strange cult of voodoo worshippers, who sought to open a portal to Bullet Heaven." + "\nThey vanished without a trace. Perhaps what awaited them was not the heaven they had hoped." + "\n\nKaliba Eléison";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<Voodoollets>(
+             "Voodoollets",
+             "Doll-ay, Oh, Oh, We Come Doll-ay!",
+             "Whenever any enemy suffers damage, another shall be wounded in kind." + "\n\nA relic left behind by a strange cult of voodoo worshippers, who sought to open a portal to Bullet Heaven." + "\nThey vanished without a trace. Perhaps what awaited them was not the heaven they had hoped." + "\n\nKaliba Eleison",
+             "voodoollets_icon");
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("bullet_modifier");
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);

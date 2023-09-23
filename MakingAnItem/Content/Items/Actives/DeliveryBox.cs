@@ -15,27 +15,24 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Delivery Box";
-            string resourceName = "NevernamedsItems/Resources/MultiStageActives/deliverybox_closed";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<DeliveryBox>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Ready To Order";
-            string longDesc = "Allows for the high-speed delivery of goods purchased straight from the manufacturer!"+"\n\nCut out the middle man!";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<DeliveryBox>(
+            "Delivery Box",
+            "Ready To Order",
+            "Allows for the high-speed delivery of goods purchased straight from the manufacturer!" + "\n\nCut out the middle man!",
+            "deliverybox_closed") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 0.2f);
 
-            DeliveryBox.spriteIDs = new int[DeliveryBox.spritePaths.Length];
+            DeliveryBox.spriteIDs = new int[9];
 
             DeliveryBox.spriteIDs[0] = item.sprite.spriteId; //empty
-            DeliveryBox.spriteIDs[1] = SpriteBuilder.AddSpriteToCollection(DeliveryBox.spritePaths[1], item.sprite.Collection); //Ammo
-            DeliveryBox.spriteIDs[2] = SpriteBuilder.AddSpriteToCollection(DeliveryBox.spritePaths[2], item.sprite.Collection); //SpreadAmmo
-            DeliveryBox.spriteIDs[3] = SpriteBuilder.AddSpriteToCollection(DeliveryBox.spritePaths[3], item.sprite.Collection); //Armour
-            DeliveryBox.spriteIDs[4] = SpriteBuilder.AddSpriteToCollection(DeliveryBox.spritePaths[4], item.sprite.Collection); //Half Heart
-            DeliveryBox.spriteIDs[5] = SpriteBuilder.AddSpriteToCollection(DeliveryBox.spritePaths[5], item.sprite.Collection); //full heart
-            DeliveryBox.spriteIDs[6] = SpriteBuilder.AddSpriteToCollection(DeliveryBox.spritePaths[6], item.sprite.Collection); //Key
-            DeliveryBox.spriteIDs[7] = SpriteBuilder.AddSpriteToCollection(DeliveryBox.spritePaths[7], item.sprite.Collection); //Glass Guon
-            DeliveryBox.spriteIDs[8] = SpriteBuilder.AddSpriteToCollection(DeliveryBox.spritePaths[8], item.sprite.Collection); //blank
+            DeliveryBox.spriteIDs[1] = Initialisation.itemCollection.GetSpriteIdByName("deliverybox_ammo"); //Ammo
+            DeliveryBox.spriteIDs[2] = Initialisation.itemCollection.GetSpriteIdByName("deliverybox_spreadammo"); //SpreadAmmo
+            DeliveryBox.spriteIDs[3] = Initialisation.itemCollection.GetSpriteIdByName("deliverybox_armour"); //Armour
+            DeliveryBox.spriteIDs[4] = Initialisation.itemCollection.GetSpriteIdByName("deliverybox_halfheart"); //Half Heart
+            DeliveryBox.spriteIDs[5] = Initialisation.itemCollection.GetSpriteIdByName("deliverybox_heart"); //full heart
+            DeliveryBox.spriteIDs[6] = Initialisation.itemCollection.GetSpriteIdByName("deliverybox_key"); //Key
+            DeliveryBox.spriteIDs[7] = Initialisation.itemCollection.GetSpriteIdByName("deliverybox_glassguon"); //Glass Guon
+            DeliveryBox.spriteIDs[8] = Initialisation.itemCollection.GetSpriteIdByName("deliverybox_blank"); //blank
 
             item.consumable = false;
             item.quality = ItemQuality.B;
@@ -106,18 +103,15 @@ namespace NevernamedsItems
                 PickupObject databaseObject = PickupObjectDatabase.GetById(consumableIDDictionary[consumable]);
                 if (databaseObject != null)
                 {
-                    int price = databaseObject.PurchasePrice;
-                    GameLevelDefinition lastLoadedLevelDefinition = GameManager.Instance.GetLastLoadedLevelDefinition();
-                    float num4 = (lastLoadedLevelDefinition == null) ? 1f : lastLoadedLevelDefinition.priceMultiplier;
-                    float moddedPrice = price * num4;
+                    float price = databaseObject.PurchasePrice;
                     if (LastOwner)
                     {
-                        moddedPrice = price * LastOwner.stats.GetStatValue(PlayerStats.StatType.GlobalPriceMultiplier);
-                        return Mathf.RoundToInt(moddedPrice);
+                        price = price * LastOwner.stats.GetStatValue(PlayerStats.StatType.GlobalPriceMultiplier);
+                        return Mathf.RoundToInt(price);
                     }
                     else
                     {
-                        return Mathf.RoundToInt(moddedPrice);
+                        return Mathf.RoundToInt(price);
                     }
                 }
                 else return 420;
@@ -167,18 +161,6 @@ namespace NevernamedsItems
             }
             return false;
         }
-        private static readonly string[] spritePaths = new string[]
-        {
-            "NevernamedsItems/Resources/MultiStageActives/deliverybox_closed",
-            "NevernamedsItems/Resources/MultiStageActives/deliverybox_ammo",
-            "NevernamedsItems/Resources/MultiStageActives/deliverybox_spreadammo",
-            "NevernamedsItems/Resources/MultiStageActives/deliverybox_armour",
-            "NevernamedsItems/Resources/MultiStageActives/deliverybox_halfheart",
-            "NevernamedsItems/Resources/MultiStageActives/deliverybox_heart",
-            "NevernamedsItems/Resources/MultiStageActives/deliverybox_key",
-            "NevernamedsItems/Resources/MultiStageActives/deliverybox_glassguon",
-            "NevernamedsItems/Resources/MultiStageActives/deliverybox_blank",
-        };
         private static int[] spriteIDs;
     }
 }

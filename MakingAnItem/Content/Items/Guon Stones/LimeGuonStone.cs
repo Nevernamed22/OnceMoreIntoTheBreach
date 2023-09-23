@@ -18,18 +18,11 @@ namespace NevernamedsItems
 
         public static void Init()
         {
-            string itemName = "Lime Guon Stone";
-            string resourceName = "NevernamedsItems/Resources/GuonStones/limeguonstone_icon";
-
-            GameObject obj = new GameObject();
-
-            var item = obj.AddComponent<LimeGuonStone>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            string shortDesc = "Bright and Trig";
-            string longDesc = "Releases orbital energy when struck. \n\nThis guon stone has been somewhat overenchanted, and is unable to fully constrain all of it's rotational magic.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            AdvancedPlayerOrbitalItem item = ItemSetup.NewItem<LimeGuonStone>(
+            "Lime Guon Stone",
+            "Bright and Trig",
+            "Releases orbital energy when struck. \n\nThis guon stone has been somewhat overenchanted, and is unable to fully constrain all of it's rotational magic.",
+            "limeguonstone_icon") as AdvancedPlayerOrbitalItem;
             item.quality = PickupObject.ItemQuality.C;
 
             BuildPrefab();
@@ -54,7 +47,7 @@ namespace NevernamedsItems
         public static void BuildPrefab()
         {
             if (orbitalPrefab != null) return;
-            GameObject prefab = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/GuonStones/limeguonstone_ingame");
+            GameObject prefab = ItemBuilder.SpriteFromBundle("LimeGuonOrbital", Initialisation.itemCollection.GetSpriteIdByName("limeguonstone_ingame"), Initialisation.itemCollection);
             prefab.name = "Lime Guon Orbital";
             var body = prefab.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(8, 8));
 
@@ -73,11 +66,11 @@ namespace NevernamedsItems
 
 
             prefab.MakeFakePrefab();
-        }
+        }       
         public static void BuildSynergyPrefab()
         {
             if (upgradeOrbitalPrefab != null) return;
-            GameObject gameObject = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/GuonStones/limeguonstone_synergy", null);
+            GameObject gameObject = ItemBuilder.SpriteFromBundle("LimeGuonOrbitalSynergy", Initialisation.itemCollection.GetSpriteIdByName("limeguonstone_synergy"), Initialisation.itemCollection);
             gameObject.name = "Lime Guon Orbital Synergy Form";
             SpeculativeRigidbody speculativeRigidbody = gameObject.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(12, 12));
             gameObject.AddComponent<LimeGuonStoneController>();

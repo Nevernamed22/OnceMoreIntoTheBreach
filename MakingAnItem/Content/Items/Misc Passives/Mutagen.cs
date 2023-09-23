@@ -13,37 +13,14 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Mutagen";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/mutagen_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<Mutagen>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Rampant Mutation";
-            string longDesc = "Heals a small amount whenever the afflicted individual defeats a boss."+"\n\nThis mutagen progresses in stages, just like the Gungeon itself.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
+            PickupObject item = ItemSetup.NewItem<Mutagen>(
+            "Mutagen",
+            "Rampant Mutation",
+            "Heals a small amount whenever the afflicted individual defeats a boss." + "\n\nThis mutagen progresses in stages, just like the Gungeon itself.",
+            "mutagen_icon");
             item.quality = PickupObject.ItemQuality.C;
-
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.HAS_BEATEN_BOSS_BY_SKIN_OF_TEETH, true);
-
         }
 
         private void OnEnemyDamaged(float damage, bool fatal, HealthHaver enemy)

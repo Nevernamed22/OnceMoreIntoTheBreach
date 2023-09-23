@@ -65,7 +65,7 @@ namespace NevernamedsItems
                 "proteanproj_6",
                 "proteanproj_7",
                 "proteanproj_8",
-            }, 8, true, new List<IntVector2> {
+            }, 8, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                 new IntVector2(9, 9), //1
                 new IntVector2(9, 9), //2            
                 new IntVector2(9,9), //3
@@ -75,7 +75,7 @@ namespace NevernamedsItems
                 new IntVector2(9,9), //7
                 new IntVector2(9, 9), //8
             }, AnimateBullet.ConstructListOfSameValues(true, 8), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 8), AnimateBullet.ConstructListOfSameValues(true, 8), AnimateBullet.ConstructListOfSameValues(false, 8),
-                        AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 8), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 8), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 8), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 8));
+                        AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 8), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 8), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 8), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 8), 0);
 
             projectile.transform.parent = gun.barrelOffset;
 

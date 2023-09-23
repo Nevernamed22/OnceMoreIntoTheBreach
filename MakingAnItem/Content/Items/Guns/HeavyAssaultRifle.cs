@@ -62,7 +62,6 @@ namespace NevernamedsItems
 
             gun.DefaultModule.projectiles[0] = projectile;
             gun.quality = PickupObject.ItemQuality.S;
-            gun.encounterTrackable.EncounterGuid = "this is the Heavy Assault Rifle";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             HeavyAssaultRifleID = gun.PickupObjectId;

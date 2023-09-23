@@ -56,7 +56,7 @@ namespace NevernamedsItems
                 "razorrifle_proj_002",
                 "razorrifle_proj_003",
                 "razorrifle_proj_004",
-            }, 12, true, AnimateBullet.ConstructListOfSameValues(new IntVector2(10, 12), 4),
+            }, 12, tk2dSpriteAnimationClip.WrapMode.Loop, AnimateBullet.ConstructListOfSameValues(new IntVector2(10, 12), 4),
             AnimateBullet.ConstructListOfSameValues(true, 4),
             AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4),
             AnimateBullet.ConstructListOfSameValues(true, 4),
@@ -64,7 +64,7 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
             InherentExsanguinationEffect bleed = projectile.gameObject.AddComponent<InherentExsanguinationEffect>();
             bleed.duration = 10;
 

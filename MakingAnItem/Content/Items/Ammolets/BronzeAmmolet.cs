@@ -16,16 +16,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Bronze Ammolet";
-            string resourceName = "NevernamedsItems/Resources/bronzeammolet_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BronzeAmmolet>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Blanks Diminish";
-            string longDesc = "This ammolet appears to have shrunk in the wash, and is eager to take out it's vengeance against any home appliances or Gundead fiends that get in it's way by shrinking them as well!"+"\n\nShrunken enemies can be stomped on to kill them.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-
+            BlankModificationItem item = ItemSetup.NewItem<BronzeAmmolet>(
+            "Bronze Ammolet",
+            "Blanks Diminish",
+            "This ammolet appears to have shrunk in the wash, and is eager to take out it's vengeance against any home appliances or Gundead fiends that get in it's way by shrinking them as well!" + "\n\nShrunken enemies can be stomped on to kill them.",
+            "bronzeammolet_icon") as BlankModificationItem;
             item.quality = PickupObject.ItemQuality.C;
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalBlanksPerFloor, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);

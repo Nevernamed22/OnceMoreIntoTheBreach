@@ -12,15 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Longsword shot";
-            string resourceName = "NevernamedsItems/Resources/longswordshot_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<LongswordShot>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Foreign Technology";
-            string longDesc = "Your bullets cut through the air!" + "\n\nPhased into our dimension through a tear in the curtain from a terrible and heretical place known as the 'Swordtress'.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<LongswordShot>(
+            "Longsword Shot",
+            "Foreign Technology",
+            "Your bullets cut through the air!" + "\n\nPhased into our dimension through a tear in the curtain from a terrible and heretical place known as the 'Swordtress'.",
+            "longswordshot_icon");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.B;
@@ -51,7 +47,7 @@ namespace NevernamedsItems
 
                     slashing.SlashDamageUsesBaseProjectileDamage = true;
                     if (player.PlayerHasActiveSynergy("Sabre Throw")) slashParams.projInteractMode = SlashDoer.ProjInteractMode.REFLECT;
-                    if (player.PlayerHasActiveSynergy("Whirling Blade")) slashing.doSpinAttack = true;
+                    if (player.PlayerHasActiveSynergy("Whirling Blade")) slashing.customSequence = new List<float>() { 0, 90, 180, 270 };
                     if (player.PlayerHasActiveSynergy("Live By The Sword")) bullet.OnDestruction += this.OnDestruction;
 
                     slashParams.playerKnockbackForce = 0;

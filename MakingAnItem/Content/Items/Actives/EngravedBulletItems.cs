@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Unengraved Bullets";
-            string resourceName = "NevernamedsItems/Resources/unengravedbullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<UnengravedBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Waiting for the right moment...";
-            string longDesc = "The first enemy shot while this item is active becomes permanently insta-killable.\n\n" + "These bullets, while unremarkable at the moment, are brimming with murderous potential.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<UnengravedBullets>(
+            "Unengraved Bullets",
+            "Waiting for the right moment...",
+            "The first enemy shot while this item is active becomes permanently insta-killable.\n\n" + "These bullets, while unremarkable at the moment, are brimming with murderous potential.",
+            "unengravedbullets_icon") as PlayerItem;          
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 500);
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
@@ -160,14 +157,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Engraved Bullets";
-            string resourceName = "NevernamedsItems/Resources/engravedbullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<EngravedBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Bullet with your name on it";
-            string longDesc = "These bullets are specially made to absolutely annihilate one specific foe.\n\n" + "They may run. They may hide. But you will find them";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<EngravedBullets>(
+            "Engraved Bullets",
+            "Bullet with your name on it",
+            "These bullets are specially made to absolutely annihilate one specific foe.\n\n" + "They may run. They may hide. But you will find them.",
+            "engravedbullets_icon");
             item.SetTag("bullet_modifier");
             item.quality = PickupObject.ItemQuality.EXCLUDED;
         }

@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -21,18 +22,14 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:octagun", "nn:octagun");
             gun.gameObject.AddComponent<Octagun>();
             gun.SetShortDescription("Welcome To The 2nd Dimension");
-            gun.SetLongDescription("A simple shape, with a name that kinda sounds like it has 'gun' in it."+"\n\nOften confused by preschoolers for it's much more fashionable cousin, the Pentagon.");
+            gun.SetLongDescription("A simple shape, with a name that kinda sounds like it has 'gun' in it." + "\n\nOften confused by preschoolers for it's much more fashionable cousin, the Pentagon.");
 
             gun.SetupSprite(null, "octagun_idle_001", 8);
-            //ItemBuilder.AddPassiveStatModifier(gun, PlayerStats.StatType.GlobalPriceMultiplier, 0.925f, StatModifier.ModifyMethod.MULTIPLICATIVE);
 
             gun.SetAnimationFPS(gun.shootAnimation, 8);
             gun.SetAnimationFPS(gun.idleAnimation, 5);
 
-            for (int i = 0; i < 8; i++)
-            {
-                gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
-            }
+            for (int i = 0; i < 8; i++) { gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false); }
 
             //GUN STATS
             foreach (ProjectileModule mod in gun.Volley.projectiles)
@@ -63,9 +60,7 @@ namespace NevernamedsItems
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Octagun Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/octagun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/octagun_clipempty");
 
-            // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.
             gun.quality = PickupObject.ItemQuality.C;
-            gun.encounterTrackable.EncounterGuid = "this is the Octagun";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             OctagunID = gun.PickupObjectId;
@@ -73,42 +68,26 @@ namespace NevernamedsItems
         public static int OctagunID;
         public override void PostProcessProjectile(Projectile projectile)
         {
+            if (projectile.ProjectilePlayerOwner() != null && projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Shapes N' Beats")) { projectile.baseData.speed *= 3f; }
             base.PostProcessProjectile(projectile);
-            PlayerController player = projectile.Owner as PlayerController;
-            if (player.PlayerHasActiveSynergy("Shapes N' Beats"))
-            {
-                projectile.baseData.speed *= 3f;
-            }
         }
-        
+        public bool hasSynergyLastFrame = false;
         public override void Update()
         {
-            PlayerController player = gun.CurrentOwner as PlayerController;
-            if (player.PlayerHasActiveSynergy("Shapes N' Beats"))
+            if (gun.GunPlayerOwner() != null)
             {
-                if (gun.DefaultModule.cooldownTime == 0.8f)
+                bool hasSynergy = gun.GunPlayerOwner().PlayerHasActiveSynergy("Shapes N' Beats");
+                if (hasSynergy != hasSynergyLastFrame)
                 {
-                    foreach (ProjectileModule mod in gun.Volley.projectiles)
-                    {
-                        mod.cooldownTime = 0.2f;       
-                    }
-                }
-            }
-            else
-            {
-                if (gun.DefaultModule.cooldownTime == 0.2f)
-                {
-                    foreach (ProjectileModule mod in gun.Volley.projectiles)
-                    {
-                        mod.cooldownTime = 0.8f;                     
-                    }
+                    Recalc(hasSynergy);
+                    hasSynergyLastFrame = hasSynergy;
                 }
             }
         }
-        public Octagun()
+        private void Recalc(bool hasSynergy)
         {
-
+            gun.RemoveCurrentGunStatModifier(PlayerStats.StatType.RateOfFire);
+            if (hasSynergy) { gun.AddCurrentGunStatModifier(PlayerStats.StatType.RateOfFire, 4f, StatModifier.ModifyMethod.MULTIPLICATIVE); }
         }
     }
-   
 }

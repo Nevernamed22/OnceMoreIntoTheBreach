@@ -15,15 +15,12 @@ namespace NevernamedsItems
     public class NeutroniumAmmolet : BlankModificationItem
     {
         public static void Init()
-        {       
-            string itemName = "Neutronium Ammolet";
-            string resourceName = "NevernamedsItems/Resources/Ammolets/neutroniumammolet_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<NeutroniumAmmolet>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Blanks Unravel";
-            string longDesc = "An impossible element with no protons, created in the mantle of a neutron star."+"\n\nCrushes nearby spacetime when agitated by a blank.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+        {
+            BlankModificationItem item = ItemSetup.NewItem<NeutroniumAmmolet>(
+            "Neutronium Ammolet",
+            "Blanks Unravel",
+            "An impossible element with no protons, created in the mantle of a neutron star." + "\n\nCrushes nearby spacetime when agitated by a blank.",
+            "neutroniumammolet_icon") as BlankModificationItem;
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalBlanksPerFloor, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.quality = PickupObject.ItemQuality.A;

@@ -84,13 +84,13 @@ namespace NevernamedsItems
                 "goopyproj_002",
                 "goopyproj_003",
                 "goopyproj_004",
-            }, 10, true, new List<IntVector2> { 
+            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> { 
                 new IntVector2(16, 16),
                 new IntVector2(20, 20),
                 new IntVector2(24, 24),
                 new IntVector2(20, 20),
             }, AnimateBullet.ConstructListOfSameValues(true, 4), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4), AnimateBullet.ConstructListOfSameValues(true, 4), AnimateBullet.ConstructListOfSameValues(false, 4),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(16, 16), 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4));
+            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(16, 16), 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
 
             gun.DefaultModule.projectiles[0] = projectile;
 

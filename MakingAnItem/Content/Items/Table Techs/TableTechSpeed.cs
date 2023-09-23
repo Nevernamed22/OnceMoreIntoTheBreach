@@ -11,14 +11,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Table Tech Speed";
-            string resourceName = "NevernamedsItems/Resources/tabletechspeed_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<TableTechSpeed>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Flip Acceleration";
-            string longDesc = "Flipping a table increases the bearer's movement speed temporarily." + "\n\nAppendix F of the \"Tabla Sutra\". Flipping is to create motion. In motion there is life, and joy. To flip, is to live.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            TableFlipItem item = ItemSetup.NewItem<TableTechSpeed>(
+              "Table Tech Speed",
+              "Flip Acceleration",
+              "Flipping a table increases the bearer's movement speed temporarily." + "\n\nAppendix F of the \"Tabla Sutra\". Flipping is to create motion. In motion there is life, and joy. To flip, is to live.",
+              "tabletechspeed_icon") as TableFlipItem;
             item.quality = PickupObject.ItemQuality.D;
             item.SetTag("table_tech");
         }

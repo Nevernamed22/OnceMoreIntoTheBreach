@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string name = "Fun Guy";
-            string resourcePath = "NevernamedsItems/Resources/Companions/FunGuy/funguy_icon";
-            GameObject gameObject = new GameObject();
-            CompanionItem companionItem = gameObject.AddComponent<FunGuy>();
-            ItemBuilder.AddSpriteToObject(name, resourcePath, gameObject);
-            string shortDesc = "Myc-inda Fella";
-            string longDesc = "This young fungun has become dissilusioned with the ways of the Gungeon. Or at least, it seems that way. It's unclear if it really knows what's going on.";
-            companionItem.SetupItem(shortDesc, longDesc, "nn");
+            CompanionItem companionItem = ItemSetup.NewItem<FunGuy>(
+            "Fun Guy",
+            "Myc-inda Fella",
+            "This young fungun has become dissilusioned with the ways of the Gungeon. Or at least, it seems that way. It's unclear if it really knows what's going on.",
+            "funguy_icon") as CompanionItem;
             companionItem.quality = PickupObject.ItemQuality.C;
             companionItem.CompanionGuid = FunGuy.guid;
             FunGuy.BuildPrefab();
@@ -42,7 +39,7 @@ namespace NevernamedsItems
                 "yellowtriangleproj_002",
                 "yellowtriangleproj_003",
                 "yellowtriangleproj_004",
-            }, 10, true, new List<IntVector2> {
+            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                 new IntVector2(19, 17), 
                 new IntVector2(19, 17), 
                 new IntVector2(19, 17), 
@@ -55,7 +52,7 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), 
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(9, 9),4), 
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(5, 3), 4), 
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
         }
 
         public static Projectile synergyFungusProj;

@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Crowded Clips";
-            string resourceName = "NevernamedsItems/Resources/crowdedclips_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<CrowdedClip>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "More the Merrier";
-            string longDesc = "+1% Damage and Firerate but -1% accuracy for every item or gun held." + "\n\nThis extroverted artefact enjoys the company of other items, and rewards their presence.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<CrowdedClip>(
+             "Crowded Clips",
+             "More the Merrier",
+             "+1% Damage and Firerate but -1% accuracy for every item or gun held." + "\n\nThis extroverted artefact enjoys the company of other items, and rewards their presence.",
+             "crowdedclips_icon");
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("bullet_modifier");
         }

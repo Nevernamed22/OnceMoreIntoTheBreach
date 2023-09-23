@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Glass Chamber";
-            string resourceName = "NevernamedsItems/Resources/glasschamber_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<GlassChamber>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Seeload";
-            string longDesc = "Reloading is 10% faster for every Glass Guon Stone the bearer has." + "\n\nA symbol of the tentative peace between the fragile Lady of Pane, and the mighty king-god Relodin.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<GlassChamber>(
+            "Glass Chamber",
+            "Seeload",
+            "Reloading is 10% faster for every Glass Guon Stone the bearer has." + "\n\nA symbol of the tentative peace between the fragile Lady of Pane, and the mighty king-god Relodin.",
+            "glasschamber_icon");
             item.quality = PickupObject.ItemQuality.C;
             GlassChamberID = item.PickupObjectId;
         }

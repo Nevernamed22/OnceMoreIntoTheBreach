@@ -12,31 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Blank Key";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/blankkey_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<BlankKey>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Implosive Openings";
-            string longDesc = "Spending a key triggers a blank effect." + "\n\nFlynt and Old Red don't often see eye to eye, but there are some... exceptions.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item            
-            //Set the rarity of the item
+            PickupObject item = ItemSetup.NewItem<BlankKey>(
+            "Blank Key",
+            "Implosive Openings",
+            "Spending a key triggers a blank effect." + "\n\nFlynt and Old Red don't often see eye to eye, but there are some... exceptions.",
+            "blankkey_icon");
             item.quality = PickupObject.ItemQuality.C;
         }
         private float currentKeys, lastKeys;

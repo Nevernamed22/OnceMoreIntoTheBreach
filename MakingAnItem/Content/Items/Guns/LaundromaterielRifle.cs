@@ -10,7 +10,7 @@ using Alexandria.ItemAPI;
 using Alexandria.Misc;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
-using BreakAbleAPI;
+using Alexandria.BreakableAPI;
 using Dungeonator;
 
 namespace NevernamedsItems
@@ -55,12 +55,12 @@ namespace NevernamedsItems
                 false,
                VFXAlignment.Fixed
                   );
-
+            CustomClipAmmoTypeToolbox.AddCustomAmmoType("Laundromateriel Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/laundromaterielrifle_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/laundromaterielrifle_clipempty");
             for (int i = 0; i < 4; i++)
             {
                 gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
             }
-
+            
             foreach (ProjectileModule mod in gun.Volley.projectiles)
             {
                 mod.ammoCost = mod != gun.DefaultModule ? 0 : 1;
@@ -83,7 +83,7 @@ namespace NevernamedsItems
                 mod.projectiles.Add(MakeProj("pinkshirt", "pinkpants"));
             }
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
-            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Laundromateriel Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/laundromaterielrifle_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/laundromaterielrifle_clipempty");
+            gun.DefaultModule.customAmmoType = "Laundromateriel Bullets";
             gun.quality = PickupObject.ItemQuality.C;
 
             ETGMod.Databases.Items.Add(gun, false, "ANY");
@@ -268,7 +268,7 @@ namespace NevernamedsItems
                 $"{projName}_proj_006",
                 $"{projName}_proj_007",
                 $"{projName}_proj_008",
-            }, 12, true,
+            }, 12, tk2dSpriteAnimationClip.WrapMode.Loop,
             AnimateBullet.ConstructListOfSameValues(new IntVector2(12, 12), 8),
             AnimateBullet.ConstructListOfSameValues(false, 8),
             AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 8),
@@ -277,7 +277,7 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 8),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 8),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 8),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 8));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 8), 0);
         }
         public static int ID;
     }

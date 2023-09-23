@@ -15,14 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Widow's Ring";
-            string resourceName = "NevernamedsItems/Resources/widowsring_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<WidowsRing>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Deadly Charms";
-            string longDesc = "Charmed enemies can be instantly slain." + "\n\nThe previous owner of this ring was banished to the Gungeon for murdering five of his ex-husbands."+"\nThere's even a small compartment inside containing poison.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<WidowsRing>(
+            "Widow's Ring",
+            "Deadly Charms",
+            "Charmed enemies can be instantly slain." + "\n\nThe previous owner of this ring was banished to the Gungeon for murdering five of his ex-husbands." + "\nThere's even a small compartment inside containing poison.",
+            "widowsring_icon");
             item.quality = PickupObject.ItemQuality.C;
         }
         private void OnHitEnemy(Projectile self, SpeculativeRigidbody enemy, bool fatal)

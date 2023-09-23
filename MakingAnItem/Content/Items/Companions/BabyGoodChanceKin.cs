@@ -6,22 +6,17 @@ using UnityEngine;
 
 namespace NevernamedsItems
 {
-    // Token: 0x02000018 RID: 24
     public class BabyGoodChanceKin : PassiveItem
     {
-        // Token: 0x0600009D RID: 157 RVA: 0x00006538 File Offset: 0x00004738
         public static void Init()
         {
-            string name = "Baby Good Chance Kin";
-            string resourcePath = "NevernamedsItems/Resources/babygoodchancekin_icon";
-            GameObject gameObject = new GameObject();
-            CompanionItem companionItem = gameObject.AddComponent<CompanionItem>();
-            ItemBuilder.AddSpriteToObject(name, resourcePath, gameObject);
-            string shortDesc = "Confused Friend";
-            string longDesc = "Can spawn supplies whenever the person they follow suffers damage." + "\n\nThis cute little lad is unable to look directly in front of himself, but in spite of this predicament he is eager to help you on your journey.";
-            companionItem.SetupItem(shortDesc, longDesc, "nn");
-            companionItem.quality = PickupObject.ItemQuality.C;
-            companionItem.CompanionGuid = BabyGoodChanceKin.guid;
+            CompanionItem item = ItemSetup.NewItem<CompanionItem>(
+            "Baby Good Chance Kin",
+            "Confused Friend",
+            "Can spawn supplies whenever the person they follow suffers damage." + "\n\nThis cute little lad is unable to look directly in front of himself, but in spite of this predicament he is eager to help you on your journey.",
+            "babygoodchancekin_icon") as CompanionItem;
+            item.quality = PickupObject.ItemQuality.C;
+            item.CompanionGuid = BabyGoodChanceKin.guid;
             BabyGoodChanceKin.BuildPrefab();
         }
 

@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Panic Pendant";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/panicpendant_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<PanicPendant>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "AAAAA";
-            string longDesc = "Makes all enemy bullets friendly for a short time after taking damage."+"\n\nMade of crystalised adrenaline.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<PanicPendant>(
+            "Panic Pendant",
+            "AAAAA",
+            "Makes all enemy bullets friendly for a short time after taking damage." + "\n\nMade of crystalised adrenaline.",
+            "panicpendant_icon");
             item.quality = PickupObject.ItemQuality.D;
         }
         private void NewBulletAppeared(Projectile proj)

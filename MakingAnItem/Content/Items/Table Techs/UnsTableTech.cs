@@ -14,15 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Uns-Table Tech";
-            string resourceName = "NevernamedsItems/Resources/unstabletech_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<UnsTableTech>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Flip Chaos";
-            string longDesc = "Triggers a random effect upon the flipping of a table." + "\n\n\"He who flips without reason may outwit not only his foes, but himself\" - Addendum 8 of the Tabla Sutra.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            TableFlipItem item = ItemSetup.NewItem<UnsTableTech>(
+              "Uns-Table Tech",
+              "Flip Chaos",
+              "Triggers a random effect upon the flipping of a table." + "\n\n\"He who flips without reason may outwit not only his foes, but himself\" - Addendum 8 of the Tabla Sutra.",
+              "unstabletech_icon") as TableFlipItem;
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("table_tech");
         }

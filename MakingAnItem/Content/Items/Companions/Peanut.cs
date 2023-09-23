@@ -12,16 +12,13 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string name = "Peanut";
-            string resourcePath = "NevernamedsItems/Resources/Companions/PeanutCompanion/peanut_icon";
-            GameObject gameObject = new GameObject();
-            var companionItem = gameObject.AddComponent<CompanionItem>();
-            ItemBuilder.AddSpriteToObject(name, resourcePath, gameObject);
-            string shortDesc = "Prince of the Pea";
-            string longDesc = "This young, soft-shelled Gun Nut sought the teachings of Ser Manuel, but was lost in the labyrinthine and confusing Halls of Knowledge for many years."+"\n\nHe now wields the mighty Peablade, made from a Peashooter that he found in a chest.";
-            companionItem.SetupItem(shortDesc, longDesc, "nn");
-            companionItem.quality = PickupObject.ItemQuality.A;
-            companionItem.CompanionGuid = Peanut.guid;
+            CompanionItem item = ItemSetup.NewItem<CompanionItem>(
+            "Peanut",
+            "Prince of the Pea",
+            "This young, soft-shelled Gun Nut sought the teachings of Ser Manuel, but was lost in the labyrinthine and confusing Halls of Knowledge for many years." + "\n\nHe now wields the mighty Peablade, made from a Peashooter that he found in a chest.",
+            "peanut_icon") as CompanionItem;
+            item.quality = PickupObject.ItemQuality.A;
+            item.CompanionGuid = Peanut.guid;
 
             Peanut.BuildPrefab();
         }

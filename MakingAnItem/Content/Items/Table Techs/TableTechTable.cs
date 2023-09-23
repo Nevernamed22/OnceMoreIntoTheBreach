@@ -12,37 +12,13 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Table Tech Table";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/tabletechtable_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<TableTechTable>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Flip Recursion";
-            string longDesc = "This ancient technique has a chance to create a new table whenever a table is flipped." + "\n\nChapter 8 of the \"Tabla Sutra.\" Flip unto flip unto flip unto flip unto flip unto flip unto flip unto flip unto flip. Never stop flipping.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-
-            //Set the rarity of the item
+            TableFlipItem item = ItemSetup.NewItem<TableTechTable>(
+              "Table Tech Table",
+              "Flip Recursion",
+              "This ancient technique has a chance to create a new table whenever a table is flipped." + "\n\nChapter 8 of the \"Tabla Sutra.\" Flip unto flip unto flip unto flip unto flip unto flip unto flip unto flip unto flip. Never stop flipping.",
+              "tabletechtable_icon") as TableFlipItem;
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("table_tech");
-
-
         }
         public override void Pickup(PlayerController player)
         {

@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Ivory Ammolet";
-            string resourceName = "NevernamedsItems/Resources/ivoryammolet_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<IvoryAmmolet>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Tiny Blanks";
-            string longDesc = "Makes your blanks weaker, but gives you more of them." + "\n\nCarved from rare Dragun ivory.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<IvoryAmmolet>(
+            "Ivory Ammolet",
+            "Tiny Blanks",
+            "Makes your blanks weaker, but gives you more of them." + "\n\nCarved from rare Dragun ivory.",
+            "ivoryammolet_icon");
             item.quality = PickupObject.ItemQuality.C;
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalBlanksPerFloor, 2f, StatModifier.ModifyMethod.ADDITIVE);
 

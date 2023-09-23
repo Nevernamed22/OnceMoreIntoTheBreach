@@ -12,39 +12,15 @@ namespace NevernamedsItems
 {
     class SpeedPotion : PlayerItem
     {
-        //Call this method from the Start() method of your ETGModule extension class
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Speed Potion";
+            PlayerItem item = ItemSetup.NewItem<SpeedPotion>(
+            "Speed Potion",
+            "Gotta Go Fast",
+            "This is either made of pure magic, or pure back-alleyway-snowflakes if ya know what I mean.",
+            "speedpotion2_icon") as PlayerItem;
 
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it.
-            string resourceName = "NevernamedsItems/Resources/speedpotion2_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a ActiveItem component to the object
-            var item = obj.AddComponent<SpeedPotion>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Gotta Go Fast";
-            string longDesc = "This is either made of pure magic, or pure back-alleyway-snowflakes if ya know what I mean.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //"kts" here is the item pool. In the console you'd type kts:sweating_bullets
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Set the cooldown type and duration of the cooldown
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 500);
-
-            //Adds a passive modifier, like curse, coolness, damage, etc. to the item. Works for passives and actives.
-
-
-            //Set some other fields
             item.consumable = false;
             item.quality = ItemQuality.C;
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
@@ -53,7 +29,6 @@ namespace NevernamedsItems
             SpeedPotionID = item.PickupObjectId;
         }
         public static int SpeedPotionID;
-        //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!
         float movementBuff = -1;
         float duration = 15f;
         public override void DoEffect(PlayerController user)

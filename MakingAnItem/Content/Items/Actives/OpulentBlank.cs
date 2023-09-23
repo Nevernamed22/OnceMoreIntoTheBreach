@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Opulent Blank";
-            string resourceName = "NevernamedsItems/Resources/opulentblank_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<OpulentBlank>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Spin Bullets To Gold";
-            string longDesc = "Turns all enemy bullets to gold. One use."+"\n\nAn extremely rare variant of the regular Blank.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<OpulentBlank>(
+            "Opulent Blank",
+            "Spin Bullets To Gold",
+            "Turns all enemy bullets to gold. One use." + "\n\nAn extremely rare variant of the regular Blank.",
+            "opulentblank_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 1000);
             item.consumable = true;
             item.quality = ItemQuality.D;

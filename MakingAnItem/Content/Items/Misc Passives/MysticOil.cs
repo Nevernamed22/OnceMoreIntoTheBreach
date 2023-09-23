@@ -13,30 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Sanctified Oil";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/mysticoil_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<MysticOil>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Soyled It";
-            string longDesc = "Drastically increases firerate, and removes the need to reload- but greatly stunts damage.\n\n"+"Oil supposedly used to shine the glittering barrels and gleaming chambers of Bullet Heaven, though the existence of the place is but a mere rumour.\n\n" + "Works best on Automatic weapons.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
+            PickupObject item = ItemSetup.NewItem<MysticOil>(
+            "Sanctified Oil",
+            "Soyled It",
+            "Drastically increases firerate, and removes the need to reload- but greatly stunts damage.\n\n" + "Oil supposedly used to shine the glittering barrels and gleaming chambers of Bullet Heaven, though the existence of the place is but a mere rumour.\n\n" + "Works best on Automatic weapons.",
+            "mysticoil_icon");
             item.AddPassiveStatModifier( PlayerStats.StatType.RateOfFire, 100f, StatModifier.ModifyMethod.ADDITIVE);
             item.AddPassiveStatModifier( PlayerStats.StatType.Damage, 0.2f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.AddPassiveStatModifier( PlayerStats.StatType.AmmoCapacityMultiplier, 15f, StatModifier.ModifyMethod.MULTIPLICATIVE);

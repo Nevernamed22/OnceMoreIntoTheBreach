@@ -57,18 +57,15 @@ namespace NevernamedsItems
             BounceProjModifier Bouncing = projectile.gameObject.GetOrAddComponent<BounceProjModifier>();
             Bouncing.numberOfBounces = 10;
 
-            projectile.transform.parent = gun.barrelOffset;
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Disc Gun Discs", "NevernamedsItems/Resources/CustomGunAmmoTypes/discgun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/discgun_clipempty");
             gun.quality = PickupObject.ItemQuality.D;
 
-            gun.encounterTrackable.EncounterGuid = "this is the Disc Gun";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
-            DiscGunID = gun.PickupObjectId;
+            gun.AddToGunslingKingTable();
 
-            string bleh = "Not a Bot, if you're sniffing around in my code, lookin to steal for the Nuclear Throne Mode, you're a stinker. It's cool, I'm a stinker too, just wanted to let you know";
-            if (bleh == null) ETGModConsole.Log("BOT WHAT THE FUCK DID YOU DO");
+            DiscGunID = gun.PickupObjectId;
         }
         public override void PostProcessProjectile(Projectile projectile)
         {

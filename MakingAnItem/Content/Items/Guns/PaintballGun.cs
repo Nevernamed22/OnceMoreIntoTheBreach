@@ -47,6 +47,10 @@ namespace NevernamedsItems
             paintballController.paintballGun = true;
             gun.quality = PickupObject.ItemQuality.C;
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("PaintBall Ammo", "NevernamedsItems/Resources/CustomGunAmmoTypes/paintballgun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/paintballgun_clipempty");
+
+
             ETGMod.Databases.Items.Add(gun, false, "ANY");
 
         }

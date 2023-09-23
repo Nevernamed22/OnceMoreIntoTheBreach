@@ -14,15 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string name = "Gold Guon Stone";
-            string resourcePath = "NevernamedsItems/Resources/goldguonstone_icon";
-            GameObject gameObject = new GameObject();
-            GoldGuonStone item = gameObject.AddComponent<GoldGuonStone>();
-            ItemBuilder.AddSpriteToObject(name, resourcePath, gameObject);
-            string shortDesc = "Greedy Rock";
-            string longDesc = "This opulent stone will occasionally suck the casings right off of enemy bullets that make contact with it."+"\n\nDespite being illogical, bullets in the Gungeon are often fired casing and all for extra damage. That's 65% more bullet per bullet!";
-            
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            AdvancedPlayerOrbitalItem item = ItemSetup.NewItem<GoldGuonStone>(
+            "Gold Guon Stone",
+            "Greedy Rock",
+            "This opulent stone will occasionally suck the casings right off of enemy bullets that make contact with it." + "\n\nDespite being illogical, bullets in the Gungeon are often fired casing and all for extra damage. That's 65% more bullet per bullet!",
+            "goldguonstone_icon") as AdvancedPlayerOrbitalItem;
             item.SetTag("guon_stone");
 
             item.quality = PickupObject.ItemQuality.C;
@@ -35,7 +31,9 @@ namespace NevernamedsItems
             bool flag = GoldGuonStone.orbitalPrefab != null;
             if (!flag)
             {
-                GameObject gameObject = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/goldguonstone_ingame");
+                
+
+                GameObject gameObject = ItemBuilder.SpriteFromBundle("GoldGuonOrbital", Initialisation.itemCollection.GetSpriteIdByName("goldguonstone_ingame"), Initialisation.itemCollection);
                 gameObject.name = "Gold Guon Orbital";
                 SpeculativeRigidbody speculativeRigidbody = gameObject.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(7, 13));
                 speculativeRigidbody.CollideWithTileMap = false;

@@ -77,7 +77,7 @@ namespace NevernamedsItems
                 "ferrobolt_orb_002",
                 "ferrobolt_orb_003",
                 "ferrobolt_orb_004",
-            }, 10, true, new List<IntVector2> {
+            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                  new IntVector2(14, 14), //1
                  new IntVector2(14, 14), //1
                  new IntVector2(14, 14), //1
@@ -90,7 +90,7 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(8, 8), 4),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
 
             projectile.SetProjectileSpriteRight("ferrobolt_orb_001", 14, 14, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
 

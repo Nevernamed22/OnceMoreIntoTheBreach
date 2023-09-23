@@ -18,18 +18,11 @@ namespace NevernamedsItems
         public static PlayerOrbital upgradeOrbitalPrefab;
         public static void Init()
         {
-            string itemName = "Maroon Guon Stone"; //The name of the item
-            string resourceName = "NevernamedsItems/Resources/GuonStones/maroonguon_icon"; //Refers to an embedded png in the project. Make sure to embed your resources!
-
-            GameObject obj = new GameObject();
-
-            var item = obj.AddComponent<MaroonGuonStone>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            string shortDesc = "Unapologetically Offensive";
-            string longDesc = "Has zero defensive capabilities, but empowers bullets that it's owner shoots through it."+"\n\nLost in the Gungeon by the infamous Jammomaster, many years ago...";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            AdvancedPlayerOrbitalItem item = ItemSetup.NewItem<MaroonGuonStone>(
+            "Maroon Guon Stone",
+            "Unapologetically Offensive",
+            "Has zero defensive capabilities, but empowers bullets that it's owner shoots through it." + "\n\nLost in the Gungeon by the infamous Jammomaster, many years ago...",
+            "maroonguon_icon") as AdvancedPlayerOrbitalItem;
             item.quality = PickupObject.ItemQuality.A;
 
             BuildPrefab();
@@ -47,8 +40,10 @@ namespace NevernamedsItems
         }
         public static void BuildPrefab()
         {
+            
+
             if (MaroonGuonStone.orbitalPrefab != null) return;
-            GameObject prefab = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/GuonStones/maroonguon_ingame");
+            GameObject prefab = ItemBuilder.SpriteFromBundle("MaroonGuonOrbital", Initialisation.itemCollection.GetSpriteIdByName("maroonguon_ingame"), Initialisation.itemCollection);
             prefab.name = "Maroon Guon Orbital";
             var body = prefab.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(10, 16));
 
@@ -76,7 +71,7 @@ namespace NevernamedsItems
             bool flag = MaroonGuonStone.upgradeOrbitalPrefab == null;
             if (flag)
             {
-                GameObject gameObject = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/GuonStones/maroonguon_synergy", null);
+                GameObject gameObject = ItemBuilder.SpriteFromBundle("MaroonGuonOrbitalSynergy", Initialisation.itemCollection.GetSpriteIdByName("maroonguon_synergy"), Initialisation.itemCollection);
                 gameObject.name = "Maroon Guon Orbital Synergy Form";
                 SpeculativeRigidbody speculativeRigidbody = gameObject.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(13, 20));
                 //gameObject.GetComponent<tk2dSprite>().GetCurrentSpriteDef().ConstructOffsetsFromAnchor(tk2dBaseSprite.Anchor.MiddleCenter, gameObject.GetComponent<tk2dSprite>().GetCurrentSpriteDef().position3);

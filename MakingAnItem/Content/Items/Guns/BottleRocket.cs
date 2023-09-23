@@ -88,7 +88,7 @@ namespace NevernamedsItems
             projectile.AnimateProjectile(new List<string> {
                 "bottlerocketproj_001",
                 "bottlerocketproj_002",
-            }, 10, true, new List<IntVector2> {
+            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                  new IntVector2(24, 16), //1
                   new IntVector2(24, 16), //2
             },
@@ -99,7 +99,7 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 2),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(15, 8), 2),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 2),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 2));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 2), 0);
             projectile.SetProjectileSpriteRight("bottlerocketproj_001", 24, 16, true, tk2dBaseSprite.Anchor.MiddleCenter, 15, 8);
             projectile.gameObject.AddComponent<ProjectileMotionDrift>();
             projectile.gameObject.AddComponent<BounceProjModifier>();

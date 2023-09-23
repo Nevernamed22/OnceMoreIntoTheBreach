@@ -82,6 +82,9 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.D;
             ETGMod.Databases.Items.Add(gun, false, "ANY");
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.HURT_BY_SHROOMER, true);
+
+            gun.AddToGunslingKingTable();
+
             ShroomedGunID = gun.PickupObjectId;
         }
         public static int ShroomedGunID;

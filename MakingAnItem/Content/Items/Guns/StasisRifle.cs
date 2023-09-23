@@ -100,7 +100,12 @@ namespace NevernamedsItems
             timeSlow.RadialSlowTimeModifier = this.timeMultiplier;
             timeSlow.UpdatesForNewEnemies = true;
             timeSlow.DoRadialSlow(self.specRigidbody.UnitCenter, self.transform.position.GetAbsoluteRoom());
-            MagicCircleDoer.DoMagicCircle(self.specRigidbody.UnitCenter, this.radius, lengthOfEffect, ExtendedColours.freezeBlue, false);
+            GameObject magicCircleDummy = new GameObject();
+            magicCircleDummy.transform.position = self.specRigidbody.UnitCenter;
+            MagicCircle circle = magicCircleDummy.AddComponent<MagicCircle>();
+            circle.radius = this.radius;
+            circle.autoEnableAutoDisableTimer = lengthOfEffect;
+            circle.colour = ExtendedColours.freezeBlue;          
         }
         private Projectile m_projectile;
         public float radius;

@@ -12,32 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Pearl Bracelet";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/pearlbracelet_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<PearlBracelet>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Thrown Guns Afflict";
-            string longDesc = "Thrown guns afflict a whole host of status effects, and return to their owner."+"\n\nPearls aren't really proper gemstones, but the people who make these are Wizards, not Geologists.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
+            PickupObject item = ItemSetup.NewItem<PearlBracelet>(
+            "Pearl Bracelet",
+            "Thrown Guns Afflict",
+            "Thrown guns afflict a whole host of status effects, and return to their owner." + "\n\nPearls aren't really proper gemstones, but the people who make these are Wizards, not Geologists.",
+            "pearlbracelet_icon");
             item.quality = PickupObject.ItemQuality.D;
             PearlBraceletID = item.PickupObjectId;
         }

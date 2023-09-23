@@ -17,18 +17,11 @@ namespace NevernamedsItems
         public static PlayerOrbital upgradeOrbitalPrefab;
         public static void Init()
         {
-            string itemName = "Ultraviolet Guon Stone"; //The name of the item
-            string resourceName = "NevernamedsItems/Resources/GuonStones/ultravioletguonstone_icon"; //Refers to an embedded png in the project. Make sure to embed your resources!
-
-            GameObject obj = new GameObject();
-
-            var item = obj.AddComponent<UltraVioletGuonStone>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            string shortDesc = "Beyond the Pale";
-            string longDesc = "A jittery crystal from a realm beyond the Gungeon." + "\n\nErratically jumps to different orbits.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            AdvancedPlayerOrbitalItem item = ItemSetup.NewItem<UltraVioletGuonStone>(
+            "Ultraviolet Guon Stone",
+            "Beyond the Pale",
+            "A jittery crystal from a realm beyond the Gungeon." + "\n\nErratically jumps to different orbits.",
+            "ultravioletguonstone_icon") as AdvancedPlayerOrbitalItem;
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("guon_stone");
 
@@ -53,7 +46,7 @@ namespace NevernamedsItems
                 "thinline_pinkproj_004",
                 "thinline_pinkproj_005",
                 "thinline_pinkproj_006",
-            }, 10, true, new List<IntVector2> {
+            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                 new IntVector2(10, 10),
                 new IntVector2(10, 10),
                 new IntVector2(10, 10),
@@ -61,7 +54,7 @@ namespace NevernamedsItems
                 new IntVector2(10, 10),
                 new IntVector2(10, 10),
             }, AnimateBullet.ConstructListOfSameValues(true, 6), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 6), AnimateBullet.ConstructListOfSameValues(true, 6), AnimateBullet.ConstructListOfSameValues(false, 6),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 6), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 6), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 6), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 6));
+            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 6), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 6), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 6), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 6), 0);
             BulletLifeTimer timer = xenochromePrefab.gameObject.AddComponent<BulletLifeTimer>();
             timer.secondsTillDeath = 2;
             ExplosiveModifier splode = xenochromePrefab.gameObject.AddComponent<ExplosiveModifier>();
@@ -71,9 +64,9 @@ namespace NevernamedsItems
         }
         public static Projectile xenochromePrefab;
         public static void BuildPrefab()
-        {
+        {           
             if (UltraVioletGuonStone.orbitalPrefab != null) return;
-            GameObject prefab = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/GuonStones/ultravioletguon_ingame");
+            GameObject prefab = ItemBuilder.SpriteFromBundle("UltravioletGuonOrbital", Initialisation.itemCollection.GetSpriteIdByName("ultravioletguon_ingame"), Initialisation.itemCollection);
             prefab.name = "Ultraviolet Guon Orbital";
             var body = prefab.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(8, 9));
             body.CollideWithTileMap = false;
@@ -104,8 +97,8 @@ namespace NevernamedsItems
         {
             bool flag = UltraVioletGuonStone.upgradeOrbitalPrefab == null;
             if (flag)
-            {
-                GameObject gameObject = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/GuonStones/ultravioletguon_synergy", null);
+            {          
+                GameObject gameObject = ItemBuilder.SpriteFromBundle("UltravioletGuonOrbitalSynergy", Initialisation.itemCollection.GetSpriteIdByName("ultravioletguon_synergy"), Initialisation.itemCollection);
                 gameObject.name = "Ultraviolet Guon Orbital Synergy Form";
                 SpeculativeRigidbody speculativeRigidbody = gameObject.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(14, 14));
                 UltraVioletGuonStone.upgradeOrbitalPrefab = gameObject.AddComponent<PlayerOrbital>();

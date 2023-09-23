@@ -30,6 +30,10 @@ namespace NevernamedsItems
             GlassGuonPlaceable.GetComponent<PickupObject>().IgnoredByRat = true;
             GlassGuonPlaceable.GetOrAddComponent<SquishyBounceWiggler>();
 
+            dragunSkull.GetComponent<MajorBreakable>().SpawnItemOnBreak = false;
+            if (dragunSkull.GetComponent<DebrisObject>()) UnityEngine.Object.Destroy(dragunSkull.GetComponent<DebrisObject>());
+            if (dragunVertebrae.GetComponent<DebrisObject>()) UnityEngine.Object.Destroy(dragunVertebrae.GetComponent<DebrisObject>());
+
             FiftyCasingPlaceable = PickupObjectDatabase.GetById(74).gameObject.InstantiateAndFakeprefab();
             if (FiftyCasingPlaceable.GetComponent<PickupMover>()) UnityEngine.Object.Destroy(FiftyCasingPlaceable.GetComponent<PickupMover>());
 
@@ -71,17 +75,27 @@ namespace NevernamedsItems
                     }
                 }
             }
+            abbeylight = abbeyDungeon.roomMaterialDefinitions[0].facewallLightStamps[0].objectReference;
+            abbeylightside = abbeyDungeon.roomMaterialDefinitions[0].sidewallLightStamps[0].objectReference;
+            tanpot = abbeyDungeon.stampData.objectStamps[14].objectReference;
+
             abbeyDungeon = null;
             #endregion
             #region R&GDept
             Dungeon rngDungeon = DungeonDatabase.GetOrLoadByName("base_nakatomi");
             if (rngDungeon)
             {
+                rnglight = rngDungeon.roomMaterialDefinitions[0].facewallLightStamps[0].objectReference;
+                rnglightside = rngDungeon.roomMaterialDefinitions[0].sidewallLightStamps[0].objectReference;
+
+                futurelight = rngDungeon.roomMaterialDefinitions[7].facewallLightStamps[0].objectReference;
+                futurelightside = rngDungeon.roomMaterialDefinitions[7].sidewallLightStamps[0].objectReference;
+
                 if (rngDungeon.PatternSettings.flows[0].name == "FS4_Nakatomi_Flow")
                 {
                     if (rngDungeon.PatternSettings.flows[0].AllNodes.Count == 14)
-                    {               
-                        MopAndBucket =  rngDungeon.PatternSettings.flows[0].AllNodes[0].overrideExactRoom.placedObjects[0].nonenemyBehaviour.gameObject.InstantiateAndFakeprefab();
+                    {
+                        MopAndBucket = rngDungeon.PatternSettings.flows[0].AllNodes[0].overrideExactRoom.placedObjects[0].nonenemyBehaviour.gameObject.InstantiateAndFakeprefab();
                         CardboardBox3 = rngDungeon.PatternSettings.flows[0].AllNodes[0].overrideExactRoom.placedObjects[2].nonenemyBehaviour.gameObject.InstantiateAndFakeprefab();
                         ACUnit = rngDungeon.PatternSettings.flows[0].AllNodes[1].overrideExactRoom.placedObjects[1].nonenemyBehaviour.gameObject.InstantiateAndFakeprefab();
                         ACVent = rngDungeon.PatternSettings.flows[0].AllNodes[1].overrideExactRoom.placedObjects[2].nonenemyBehaviour.gameObject.InstantiateAndFakeprefab();
@@ -123,6 +137,14 @@ namespace NevernamedsItems
             #endregion
             #region Forge
             Dungeon forgeDungeon = DungeonDatabase.GetOrLoadByName("base_forge");
+
+            anvil1 = forgeDungeon.stampData.objectStamps[6].objectReference;
+            anvil2 = forgeDungeon.stampData.objectStamps[7].objectReference;
+
+
+            forgelight = forgeDungeon.roomMaterialDefinitions[0].facewallLightStamps[0].objectReference;
+            forgelightside = forgeDungeon.roomMaterialDefinitions[0].sidewallLightStamps[0].objectReference;
+
             foreach (WeightedRoom wRoom in forgeDungeon.PatternSettings.flows[0].fallbackRoomTable.includedRooms.elements)
             {
                 if (wRoom.room != null && !string.IsNullOrEmpty(wRoom.room.name))
@@ -155,11 +177,102 @@ namespace NevernamedsItems
                     }
                 }
             }
+
+            helleton = hellDungeon.roomMaterialDefinitions[0].facewallLightStamps[0].objectReference;
+            helletonside = hellDungeon.roomMaterialDefinitions[0].sidewallLightStamps[0].objectReference;
+
+
             hellDungeon = null;
             #endregion
+
+            #region Hollow
+            Dungeon hollowDungeon = DungeonDatabase.GetOrLoadByName("base_catacombs");
+
+            skel0 = hollowDungeon.stampData.objectStamps[0].objectReference;
+            skel1 = hollowDungeon.stampData.objectStamps[1].objectReference;
+            skel2 = hollowDungeon.stampData.objectStamps[2].objectReference;
+            skel3 = hollowDungeon.stampData.objectStamps[3].objectReference;
+            skel6 = hollowDungeon.stampData.objectStamps[6].objectReference;
+            skel7 = hollowDungeon.stampData.objectStamps[7].objectReference;
+
+            hollowDungeon = null;
+            #endregion
+
+            #region BulletPast
+            Dungeon bulletPast = DungeonDatabase.GetOrLoadByName("finalscenario_bullet");
+
+            crumbletrap = bulletPast.PatternSettings.flows[0].AllNodes[3].overrideExactRoom.placedObjects[1].nonenemyBehaviour.gameObject.InstantiateAndFakeprefab();
+
+            bulletPast = null;
+            #endregion
+
+            #region Keep
+            Dungeon keepdungeon = DungeonDatabase.GetOrLoadByName("base_castle");
+
+            FireplaceRoomTable = keepdungeon.PatternSettings.flows[0].sharedInjectionData[1].InjectionData[1].roomTable;
+
+            RewardCellTable = keepdungeon.PatternSettings.flows[0].sharedInjectionData[0].InjectionData[1].roomTable;
+            OubTrapdoor = keepdungeon.PatternSettings.flows[0].sharedInjectionData[1].InjectionData[0].exactRoom.placedObjects[0].nonenemyBehaviour.gameObject;
+
+            keepdungeon = null;
+            #endregion
+
+            Dungeon tutorialDungeon = DungeonDatabase.GetOrLoadByName("base_tutorial");
+
+            SignRight = tutorialDungeon.PatternSettings.flows[0].AllNodes[11].overrideExactRoom.placedObjects[13].nonenemyBehaviour.gameObject;
+            SignLeft = tutorialDungeon.PatternSettings.flows[0].AllNodes[11].overrideExactRoom.placedObjects[14].nonenemyBehaviour.gameObject;
+            SignUp = tutorialDungeon.PatternSettings.flows[0].AllNodes[9].overrideExactRoom.placedObjects[1].nonenemyBehaviour.gameObject;
+
+            secretroomlayout = tutorialDungeon.PatternSettings.flows[0].AllNodes[15].overrideExactRoom.placedObjects[0].nonenemyBehaviour.gameObject.transform.GetChild(2).gameObject;
+      
+            tutorialDungeon = null;
+
+            PrototypeDungeonRoom roomPrefab = LoadHelper.LoadAssetFromAnywhere<PrototypeDungeonRoom>("shop02");
+            TeleporterSign = roomPrefab.placedObjects[10].nonenemyBehaviour.gameObject;
+            ShopLayout = roomPrefab.placedObjects[12].nonenemyBehaviour.gameObject;
+            Crates = ShopLayout.transform.GetChild(1).gameObject;
+            Crate = ShopLayout.transform.GetChild(5).gameObject;
+            Sack = ShopLayout.transform.GetChild(3).gameObject;
+            ShellBarrel = ShopLayout.transform.GetChild(10).gameObject;
+            Shelf = ShopLayout.transform.GetChild(7).gameObject;
+            Mask = ShopLayout.transform.GetChild(6).gameObject;
+            Wallsword = ShopLayout.transform.GetChild(11).gameObject;
+            StandingShelf = ShopLayout.transform.GetChild(8).gameObject;
+            AKBarrel = ShopLayout.transform.GetChild(9).gameObject;
+            Stool = ShopLayout.transform.GetChild(12).gameObject;
+            roomPrefab = null;
+
+
         }
 
         #region Objects
+        public static GameObject secretroomlayout;
+
+        public static GameObject SignUp;
+        public static GameObject SignLeft;
+        public static GameObject SignRight;
+
+
+        public static GameObject Crates;
+        public static GameObject Crate;
+        public static GameObject Sack;
+        public static GameObject ShellBarrel;
+        public static GameObject Shelf;
+        public static GameObject Mask;
+        public static GameObject Wallsword;
+        public static GameObject StandingShelf;
+        public static GameObject AKBarrel;
+        public static GameObject Stool;
+
+
+        public static GameObject TeleporterSign;
+        public static GameObject ShopLayout;
+
+        public static GenericRoomTable FireplaceRoomTable;
+        public static GenericRoomTable RewardCellTable;
+
+        public static GameObject OubTrapdoor;
+        public static GameObject OubButton;
         //Loot
         public static GameObject NonRatStealableArmor;
         public static GameObject NonRatStealableAmmo;
@@ -214,6 +327,38 @@ namespace NevernamedsItems
         public static GameObject ACVent;
         public static GameObject ACUnit;
         public static GameObject CardboardBox3;
+
+        public static GameObject abbeylight;
+        public static GameObject abbeylightside;
+        public static GameObject tanpot;
+
+        public static GameObject skel0;
+        public static GameObject skel1;
+        public static GameObject skel2;
+        public static GameObject skel3;
+        public static GameObject skel6;
+        public static GameObject skel7;
+
+        public static GameObject anvil1;
+        public static GameObject anvil2;
+
+        public static GameObject helleton;
+        public static GameObject helletonside;
+
+        public static GameObject rnglight;
+        public static GameObject rnglightside;
+
+        public static GameObject futurelight;
+        public static GameObject futurelightside;
+
+        public static GameObject forgelight;
+        public static GameObject forgelightside;
+
+        public static GameObject crumbletrap;
+
+
+        public static GameObject dragunVertebrae = EnemyDatabase.GetOrLoadByGuid("465da2bb086a4a88a803f79fe3a27677").GetComponent<DraGunDeathController>().neckDebris.InstantiateAndFakeprefab();
+        public static GameObject dragunSkull = EnemyDatabase.GetOrLoadByGuid("465da2bb086a4a88a803f79fe3a27677").GetComponent<DraGunDeathController>().skullDebris.InstantiateAndFakeprefab();
         #endregion
     }
 }

@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Bloodthirsty Bullets";
-            string resourceName = "NevernamedsItems/Resources/bloodthirstybullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BloodthirstyBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Born in the Fray";
-            string longDesc = "Bullets either deal massive bonus damage to enemies, or enjam them." + "\n\nThese bullets were designed, cast, and shaped in the middle of combat to train them for the battlefield.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<BloodthirstyBullets>(
+             "Bloodthirsty Bullets",
+             "Born in the Fray",
+             "Bullets either deal massive bonus damage to enemies, or enjam them." + "\n\nThese bullets were designed, cast, and shaped in the middle of combat to train them for the battlefield.",
+             "bloodthirstybullets_improved");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");

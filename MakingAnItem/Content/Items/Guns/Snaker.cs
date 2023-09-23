@@ -79,6 +79,10 @@ namespace NevernamedsItems
 
             gun.DefaultModule.projectiles[0] = projectile;
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Snaker Ammo", "NevernamedsItems/Resources/CustomGunAmmoTypes/snaker_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/snaker_clipempty");
+
+
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
         }

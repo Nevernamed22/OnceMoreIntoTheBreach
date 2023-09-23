@@ -12,17 +12,13 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Cyclopean Cylinder";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/cyclopeancylinder_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<CyclopeanChamber>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Make It Count";
-            string longDesc = "Reduces clips to one shot, but increases damage for every bullet removed." + "\n\nOnce thought to be the cylinder of a powerful one-chambered firerarm, further research suggests this artefact may be the chamber of an ancient Elephant Gun.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<CyclopeanChamber>(
+            "Cyclopean Cylinder",
+            "Make It Count",
+            "Reduces clips to one shot, but increases damage for every bullet removed." + "\n\nOnce thought to be the cylinder of a powerful one-chambered firerarm, further research suggests this artefact may be the chamber of an ancient Elephant Gun.",
+            "cyclopeancylinder_icon");
             item.AddPassiveStatModifier( PlayerStats.StatType.AdditionalClipCapacityMultiplier, 0.000000001f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.AddPassiveStatModifier( PlayerStats.StatType.Curse, 1, StatModifier.ModifyMethod.ADDITIVE);
-
             item.quality = PickupObject.ItemQuality.B;
             ID = item.PickupObjectId;
         }

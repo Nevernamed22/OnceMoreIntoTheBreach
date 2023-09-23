@@ -13,93 +13,28 @@ namespace NevernamedsItems
         {
             //------------------------------------------------------SYNERGY FORMES
             #region PreBigUpdate
-            //GUNSHARK - MEGASHARK SYNERGY FORM
-            AdvancedTransformGunSynergyProcessor MegaSharkSynergyForme = (PickupObjectDatabase.GetById(Gunshark.GunsharkID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            MegaSharkSynergyForme.NonSynergyGunId = Gunshark.GunsharkID;
-            MegaSharkSynergyForme.SynergyGunId = GunsharkMegasharkSynergyForme.GunsharkMegasharkSynergyFormeID;
-            MegaSharkSynergyForme.SynergyToCheck = "Megashark";
-            //DISC GUN - SUPER DISC FORM
-            AdvancedTransformGunSynergyProcessor SuperDiscSynergyForme = (PickupObjectDatabase.GetById(DiscGun.DiscGunID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            SuperDiscSynergyForme.NonSynergyGunId = DiscGun.DiscGunID;
-            SuperDiscSynergyForme.SynergyGunId = DiscGunSuperDiscForme.DiscGunSuperDiscSynergyFormeID;
-            SuperDiscSynergyForme.SynergyToCheck = "Super Disc";
-            //ORGUN - HEADACHE FORM
-            AdvancedTransformGunSynergyProcessor HeadacheSynergyForme = (PickupObjectDatabase.GetById(Orgun.OrgunID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            HeadacheSynergyForme.NonSynergyGunId = Orgun.OrgunID;
-            HeadacheSynergyForme.SynergyGunId = OrgunHeadacheSynergyForme.OrgunHeadacheSynergyFormeID;
-            HeadacheSynergyForme.SynergyToCheck = "Headache";
-            //MINI GUN - MINI SHOTGUN FORM
-            AdvancedTransformGunSynergyProcessor MiniShotgunSynergyForme = (PickupObjectDatabase.GetById(NNMinigun.MiniGunID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            MiniShotgunSynergyForme.NonSynergyGunId = NNMinigun.MiniGunID;
-            MiniShotgunSynergyForme.SynergyGunId = MinigunMiniShotgunSynergyForme.MiniShotgunID;
-            MiniShotgunSynergyForme.SynergyToCheck = "Mini Shotgun";
-            //DOGGUN - DISCORD AND RHYME (WOLFGUN) FORME
-            AdvancedTransformGunSynergyProcessor WolfgunSynergyForme = (PickupObjectDatabase.GetById(Corgun.DoggunID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            WolfgunSynergyForme.NonSynergyGunId = Corgun.DoggunID;
-            WolfgunSynergyForme.SynergyGunId = Wolfgun.WolfgunID;
-            WolfgunSynergyForme.SynergyToCheck = "Discord and Rhyme";
+            AddSynergyForm(Gunshark.GunsharkID, GunsharkMegasharkSynergyForme.GunsharkMegasharkSynergyFormeID, "Megashark");
+            AddSynergyForm(DiscGun.DiscGunID, DiscGunSuperDiscForme.DiscGunSuperDiscSynergyFormeID, "Super Disc");
+            AddSynergyForm(Orgun.OrgunID, OrgunHeadacheSynergyForme.OrgunHeadacheSynergyFormeID, "Headache");
+            AddSynergyForm(NNMinigun.MiniGunID, MinigunMiniShotgunSynergyForme.MiniShotgunID, "Mini Shotgun");
+            AddSynergyForm(Corgun.DoggunID, Wolfgun.WolfgunID, "Discord and Rhyme");
             #endregion
+
             #region BigUpdate (1.14)
-            //PENCIL - MIGHTIER THAN THE GUN FORME
-            AdvancedTransformGunSynergyProcessor MightierThanTheGunForme = (PickupObjectDatabase.GetById(Pencil.pencilID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            MightierThanTheGunForme.NonSynergyGunId = Pencil.pencilID;
-            MightierThanTheGunForme.SynergyGunId = PenPencilSynergy.penID;
-            MightierThanTheGunForme.SynergyToCheck = "Mightier Than The Gun";
-            //REKEYTER - RESHELLETONKEYTER
-            AdvancedTransformGunSynergyProcessor ReShelletonKeyterForme = (PickupObjectDatabase.GetById(Rekeyter.RekeyterID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            ReShelletonKeyterForme.NonSynergyGunId = Rekeyter.RekeyterID;
-            ReShelletonKeyterForme.SynergyGunId = ReShelletonKeyter.ReShelletonKeyterID;
-            ReShelletonKeyterForme.SynergyToCheck = "ReShelletonKeyter";
-            //AM0 - SPREAD FORME
-            AdvancedTransformGunSynergyProcessor AM0SpreadForm = (PickupObjectDatabase.GetById(AM0.ID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            AM0SpreadForm.NonSynergyGunId = AM0.ID;
-            AM0SpreadForm.SynergyGunId = AM0SpreadForme.AM0SpreadFormeID;
-            AM0SpreadForm.SynergyToCheck = "Spreadshot";
-            //BULLET BLADE - GHOST SWORD
-            AdvancedTransformGunSynergyProcessor GhostBladeForme = (PickupObjectDatabase.GetById(BulletBlade.BulletBladeID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            GhostBladeForme.NonSynergyGunId = BulletBlade.BulletBladeID;
-            GhostBladeForme.SynergyGunId = BulletBladeGhostForme.GhostBladeID;
-            GhostBladeForme.SynergyToCheck = "GHOST SWORD!!!";
-            //HOT GLUE GUN - GLUE GUNNER
-            AdvancedTransformGunSynergyProcessor GlueGunnerForme = (PickupObjectDatabase.GetById(HotGlueGun.HotGlueGunID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            GlueGunnerForme.NonSynergyGunId = HotGlueGun.HotGlueGunID;
-            GlueGunnerForme.SynergyGunId = GlueGunGlueGunnerSynergy.GlueGunnerID;
-            GlueGunnerForme.SynergyToCheck = "Glue Gunner";
-            //BULLATTERER - KING BULLATTERER
-            AdvancedTransformGunSynergyProcessor KingBullattererForme = (PickupObjectDatabase.GetById(Bullatterer.BullattererID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            KingBullattererForme.NonSynergyGunId = Bullatterer.BullattererID;
-            KingBullattererForme.SynergyGunId = KingBullatterer.KingBullattererID;
-            KingBullattererForme.SynergyToCheck = "King Bullatterer";
-            //WRENCH - NULL REFERENCE EXCEPTION
-            AdvancedTransformGunSynergyProcessor NullReferenceExceptionForme = (PickupObjectDatabase.GetById(Wrench.WrenchID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            NullReferenceExceptionForme.NonSynergyGunId = Wrench.WrenchID;
-            NullReferenceExceptionForme.SynergyGunId = WrenchNullRefException.NullWrenchID;
-            NullReferenceExceptionForme.SynergyToCheck = "NullReferenceException";
-            //GRAVITY GUN - NEGATIVE MATTER
-            AdvancedTransformGunSynergyProcessor NegativeMatterSynergyForm = (PickupObjectDatabase.GetById(GravityGun.GravityGunID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            NegativeMatterSynergyForm.NonSynergyGunId = GravityGun.GravityGunID;
-            NegativeMatterSynergyForm.SynergyGunId = GravityGunNegativeMatterForm.GravityGunNegativeMatterID;
-            NegativeMatterSynergyForm.SynergyToCheck = "Negative Matter";
-            //GATLING GUN - GATTER UP
-            AdvancedTransformGunSynergyProcessor GatGunSynergy = (PickupObjectDatabase.GetById(GatlingGun.GatlingGunID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            GatGunSynergy.NonSynergyGunId = GatlingGun.GatlingGunID;
-            GatGunSynergy.SynergyGunId = GatlingGunGatterUp.GatGunID;
-            GatGunSynergy.SynergyToCheck = "Gatter Up";
-            //GONNE - DISCWORLD
-            AdvancedTransformGunSynergyProcessor DiscworldSynergy = (PickupObjectDatabase.GetById(Gonne.GonneID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            DiscworldSynergy.NonSynergyGunId = Gonne.GonneID;
-            DiscworldSynergy.SynergyGunId = GonneElder.ElderGonneId;
-            DiscworldSynergy.SynergyToCheck = "Discworld";
+            AddSynergyForm(Pencil.pencilID, PenPencilSynergy.penID, "Mightier Than The Gun");
+            AddSynergyForm(Rekeyter.RekeyterID, ReShelletonKeyter.ReShelletonKeyterID, "ReShelletonKeyter");
+            AddSynergyForm(AM0.ID, AM0SpreadForme.AM0SpreadFormeID, "Spreadshot");
+            AddSynergyForm(BulletBlade.BulletBladeID, BulletBladeGhostForme.GhostBladeID, "GHOST SWORD!!!");
+            AddSynergyForm(HotGlueGun.HotGlueGunID, GlueGunGlueGunnerSynergy.GlueGunnerID, "Glue Gunner");
+            AddSynergyForm(Bullatterer.BullattererID, KingBullatterer.KingBullattererID, "King Bullatterer");
+            AddSynergyForm(Wrench.WrenchID, WrenchNullRefException.NullWrenchID, "NullReferenceException");
+            AddSynergyForm(GravityGun.GravityGunID, GravityGunNegativeMatterForm.GravityGunNegativeMatterID, "Negative Matter");
+            AddSynergyForm(GatlingGun.GatlingGunID, GatlingGunGatterUp.GatGunID, "Gatter Up");
+            AddSynergyForm(Gonne.GonneID, GonneElder.ElderGonneId, "Discworld");
             #endregion
+
             #region ShadowsAndSorcery
-            //UTERINE POLYP --- WOMBULAR
-            AdvancedTransformGunSynergyProcessor WombularPolypForme = (PickupObjectDatabase.GetById(UterinePolyp.UterinePolypID) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            WombularPolypForme.NonSynergyGunId = UterinePolyp.UterinePolypID;
-            WombularPolypForme.SynergyGunId = UterinePolypWombular.WombularPolypID;
-            WombularPolypForme.SynergyToCheck = "Wombular";
-
-
-
+            AddSynergyForm(UterinePolyp.UterinePolypID, UterinePolypWombular.WombularPolypID, "Wombular");
             AddSynergyForm(Gaxe.ID, DiamondGaxe.ID, "Diamond Gaxe");
             AddSynergyForm(Rebondir.ID, RedRebondir.ID, "Rebondissement");
             AddSynergyForm(DiamondCutter.ID, DiamondCutterRangerClass.ID, "Ranger Class");
@@ -115,6 +50,12 @@ namespace NevernamedsItems
             AddSynergyForm(ARCCannon.ID, DARCCannon.ID, "DARC Cannon");
             AddSynergyForm(LaundromaterielRifle.ID, Bloodwash.ID, "Bloodwash");
             AddSynergyForm(SalvatorDormus.ID, SalvatorDormusM1893.ID, "M1893");
+            AddSynergyForm(Borz.ID, BigBorz.ID, "Big Borz");
+
+            AddSwappableSynergyForm(ServiceWeapon.ID, ServiceWeaponShatter.ID, "<shatter/break/unmake>");
+            AddSwappableSynergyForm(ServiceWeapon.ID, ServiceWeaponSpin.ID, "<spin/rotate/shred>");
+            AddSwappableSynergyForm(ServiceWeapon.ID, ServiceWeaponPierce.ID, "<pierce/penetrate/eviscerate>");
+            AddSwappableSynergyForm(ServiceWeapon.ID, ServiceWeaponCharge.ID, "<charge/decimate/kaboom>");
 
             //-------------------------------------------------------------DUAL WIELDING
             #region Dual Wielding
@@ -166,10 +107,11 @@ namespace NevernamedsItems
         }
         public static void AddSynergyForm(int baseGun, int newGun, string synergy)
         {
-            AdvancedTransformGunSynergyProcessor forme = (PickupObjectDatabase.GetById(baseGun) as Gun).gameObject.AddComponent<AdvancedTransformGunSynergyProcessor>();
-            forme.NonSynergyGunId = baseGun;
-            forme.SynergyGunId = newGun;
-            forme.SynergyToCheck = synergy;
+            (PickupObjectDatabase.GetById(baseGun) as Gun).AddTransformSynergy(newGun, true, synergy, true);
+        }
+        public static void AddSwappableSynergyForm(int baseGun, int newGun, string synergy)
+        {
+            (PickupObjectDatabase.GetById(baseGun) as Gun).AddTransformSynergy(newGun, true, synergy, false);
         }
         public static void AddDualWield(int gun1, int gun2, string synergy)
         {

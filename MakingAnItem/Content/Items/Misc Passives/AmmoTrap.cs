@@ -16,14 +16,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Ammo Trap";
-            string resourceName = "NevernamedsItems/Resources/ammotrap_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<AmmoTrap>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Clickity Clack";
-            string longDesc = "Prevents ammo from being stolen by the dastardly Rat, and even causes him to drop some of his own upon going in for the grabby."+"\n\nWhy didn't we think of this sooner.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<AmmoTrap>(
+            "Ammo Trap",
+            "Clickity Clack",
+            "Prevents ammo from being stolen by the dastardly Rat, and even causes him to drop some of his own upon going in for the grabby." + "\n\nWhy didn't we think of this sooner.",
+            "ammotrap_icon");
             item.quality = PickupObject.ItemQuality.B;
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_RAT, true);
             AmmoTrapID = item.PickupObjectId;

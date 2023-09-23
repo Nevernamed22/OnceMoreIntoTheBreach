@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Heart Padlock";
-            string resourceName = "NevernamedsItems/Resources/heartpadlock_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<HeartPadlock>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Locked Life";
-            string longDesc = "Spend keys to heal." + "\n\nLocks such as these are commonly used by powerful Gunjurers to secure their souls to their bodies in case of catastrophic injury.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<HeartPadlock>(
+            "Heart Padlock",
+            "Locked Life",
+            "Spend keys to heal." + "\n\nLocks such as these are commonly used by powerful Gunjurers to secure their souls to their bodies in case of catastrophic injury.",
+            "heartpadlock_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 2);
             item.consumable = false;
             item.quality = ItemQuality.D;

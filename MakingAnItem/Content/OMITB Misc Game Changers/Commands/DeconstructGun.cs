@@ -85,6 +85,18 @@ namespace NevernamedsItems
                         ETGModConsole.Log("<color=#ff0000ff>    Req Synergy: </color>" + (component as DualWieldSynergyProcessor).SynergyToCheck);
                         ETGModConsole.Log("<color=#ff0000ff>    Other Gun: </color>" + PickupObjectDatabase.GetById((component as DualWieldSynergyProcessor).PartnerGunID).DisplayName + " (" + (component as DualWieldSynergyProcessor).PartnerGunID + ")");
                     }
+                    if (component is GunFormeSynergyProcessor)
+                    {
+                        int formenum = 0;
+                        foreach (GunFormeData forme in (component as GunFormeSynergyProcessor).Formes)
+                        {
+                            ETGModConsole.Log($"<color=#ff0000ff>    Forme ({formenum})</color>");
+                            ETGModConsole.Log("<color=#ff0000ff>        Requires Synergy: </color>" + forme.RequiresSynergy);
+                            if (forme.RequiresSynergy) { ETGModConsole.Log("<color=#ff0000ff>        Required Synergy: </color>" + forme.RequiredSynergy); }
+                            ETGModConsole.Log("<color=#ff0000ff>        Forme ID: </color>" + forme.FormeID + $"({PickupObjectDatabase.GetById(forme.FormeID).DisplayName})");
+                            formenum++;
+                        }
+                    }
                     else if (component is FireOnReloadSynergyProcessor)
                     {
                         ETGModConsole.Log("<color=#ff0000ff>    Req Synergy: </color>" + (component as FireOnReloadSynergyProcessor).SynergyToCheck);

@@ -16,15 +16,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Table Tech-Nology";
-            string resourceName = "NevernamedsItems/Resources/tabletechguon_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<TableTechNology>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "";
-            string longDesc = "";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<TableTechNology>(
+              "Table Tech-Nology",
+              "lorem ipsum",
+              "lorem ipsum",
+              "tabletechguon_icon") as PickupObject;
 
             item.quality = PickupObject.ItemQuality.EXCLUDED;
 

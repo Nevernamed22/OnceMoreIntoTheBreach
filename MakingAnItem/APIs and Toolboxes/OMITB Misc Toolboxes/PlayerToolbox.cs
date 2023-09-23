@@ -72,11 +72,17 @@ namespace NevernamedsItems
                 {
                     for (int i = 0; i < 5; i++)
                     {
-                        IntVector2 pos = (IntVector2)m_attachedPlayer.CurrentRoom.GetRandomAvailableCell(null, CellTypes.FLOOR);
-                        DeadlyDeadlyGoopManager goop = null;
-                        if (GameManager.Instance.AnyPlayerHasActiveSynergy("The Last Crusade")) goop = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.PlayerFriendlyFireGoop);
-                        else goop = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.EnemyFriendlyFireGoop);
-                        goop.TimedAddGoopCircle(pos.ToVector2(), UnityEngine.Random.Range(2.5f, 4f), 0.75f, true);
+                        var room = m_attachedPlayer.CurrentRoom;
+                        var exits = room.roomCells.FindAll(x => !room.roomCellsWithoutExits.Contains(x));
+                        var randompos = room.GetRandomAvailableCell(null, CellTypes.FLOOR, false, x => !exits.Exists(x2 => Vector2.Distance(x.ToVector2(), x2.ToVector2()) < 4));
+                        if (randompos.HasValue)
+                        {
+                            var pos = randompos.Value;
+                            DeadlyDeadlyGoopManager goop = null;
+                            if (GameManager.Instance.AnyPlayerHasActiveSynergy("The Last Crusade")) goop = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.PlayerFriendlyFireGoop);
+                            else goop = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(EasyGoopDefinitions.EnemyFriendlyFireGoop);
+                            goop.TimedAddGoopCircle(pos.ToVector2(), UnityEngine.Random.Range(2.5f, 4f), 0.75f, true);
+                        }
                     }
                 }
             }
@@ -133,18 +139,9 @@ namespace NevernamedsItems
             }
             yield break;
         }
-        private void ButterfingersBabyMode(DebrisObject obj)
-        {
-            obj.PreventFallingInPits = true;
-            
-
-            PickupMover pickupMover = obj.gameObject.AddComponent<PickupMover>();
-            if (pickupMover.specRigidbody) { pickupMover.specRigidbody.CollideWithTileMap = false; }
-            pickupMover.minRadius = 1f;
-            pickupMover.moveIfRoomUnclear = false;
-            pickupMover.stopPathingOnContact = false;
-        }
-            private IEnumerator ButterfingersLateReTeleport(Projectile proj)
+        private void ButterfingersBabyMode(DebrisObject obj) { obj.PreventFallingInPits = true; }
+        
+        private IEnumerator ButterfingersLateReTeleport(Projectile proj)
         {
             proj.OnBecameDebris += ButterfingersBabyMode;
             yield return null;
@@ -154,7 +151,7 @@ namespace NevernamedsItems
                 try
                 {
                     proj.specRigidbody.Position = new Position(m_attachedPlayer.specRigidbody.UnitCenter);
-                    //ETGModConsole.Log("LateTeleported gun");
+                    UnityEngine.Object.Destroy(proj.gameObject.GetComponent<ButterfingersedGun>());                 
                     hasTeleportedOnce = true;
                 }
                 catch (Exception e)
@@ -168,12 +165,9 @@ namespace NevernamedsItems
         {
             if (gun.GetComponentInChildren<ButterfingersedGun>() != null) StartCoroutine(ButterfingersLateReTeleport(gun));
             gun.OnHitEnemy += this.OnThrownGunHitEnemy;
-
         }
         private void ModifyDamage(HealthHaver player, HealthHaver.ModifyDamageEventArgs args)
         {
-            //ETGModConsole.Log("OnDamaged ran");
-            //ETGModConsole.Log("Initial Damage: "+args.InitialDamage);
             if (args.InitialDamage > 0 && m_attachedPlayer.characterIdentity == OMITBChars.Shade)
             {
                 GameManager.Instance.StartCoroutine(PostDamageCheck(m_attachedPlayer));

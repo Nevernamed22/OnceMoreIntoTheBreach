@@ -15,14 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Keymmolet";
-            string resourceName = "NevernamedsItems/Resources/keymmolet_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Keymmolet>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Blanks are Key";
-            string longDesc = "Using a blank unlocks all chests in the room!" + "\n\nA brilliant evolution in ammolet technology, combining the radial power of a blank with the opening power of a key.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            BlankModificationItem item = ItemSetup.NewItem<Keymmolet>(
+            "Keymmolet",
+            "Blanks are Key",
+            "Using a blank unlocks all chests in the room!" + "\n\nA brilliant evolution in ammolet technology, combining the radial power of a blank with the opening power of a key.",
+            "keymmolet_icon") as BlankModificationItem;
             item.quality = PickupObject.ItemQuality.A;
 
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);

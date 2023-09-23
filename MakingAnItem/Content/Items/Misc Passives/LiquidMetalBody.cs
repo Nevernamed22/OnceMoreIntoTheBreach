@@ -40,8 +40,6 @@ namespace NevernamedsItems
         }
         private IEnumerator HandleShield(PlayerController user)
         {
-            //bool IsCurrentlyActive = true;
-            //float m_activeElapsed = 0f;
             m_activeDuration = this.duration;
             m_usedOverrideMaterial = user.sprite.usesOverrideMaterial;
             user.sprite.usesOverrideMaterial = true;

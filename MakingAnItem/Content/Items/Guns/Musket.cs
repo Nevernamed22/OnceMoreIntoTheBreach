@@ -13,7 +13,7 @@ using Alexandria.Misc;
 namespace NevernamedsItems
 {
 
-    public class MusketRifle : GunBehaviour
+    public class MusketRifle : AdvancedGunBehavior
     {
         public static void Add()
         {
@@ -21,7 +21,7 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:musket_rifle", "nn:musket_rifle");
             gun.gameObject.AddComponent<MusketRifle>();
             gun.SetShortDescription("Civil");
-            gun.SetLongDescription("");
+            gun.SetLongDescription("An antique musket rifle. Thoroughly inefficient, but charged with a sense of bloodthirsty ancient optimism about it's potential.");
 
             gun.SetupSprite(null, "musketrifle_idle_001", 8);
 
@@ -58,6 +58,7 @@ namespace NevernamedsItems
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.MUSKETBALL;
             gun.TrimGunSprites();
 
+            
 
             gun.quality = PickupObject.ItemQuality.D;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
@@ -65,5 +66,14 @@ namespace NevernamedsItems
            ID = gun.PickupObjectId;
         }
         public static int ID;
+        public override void OnPostFired(PlayerController player, Gun gun)
+        {
+            if (player && player.PlayerHasActiveSynergy("Flash In The Pan"))
+            {
+              GameObject smoke =  StandardisedProjectiles.smoke.InstantiateAndFireInDirection(gun.barrelOffset.position, gun.CurrentAngle, 0, player);
+                smoke.GetComponent<Projectile>().AssignToPlayer(player, true);
+            }
+            base.OnPostFired(player, gun);
+        }
     }
 }

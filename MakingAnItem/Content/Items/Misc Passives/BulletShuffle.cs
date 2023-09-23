@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using Dungeonator;
 using SaveAPI;
 using Alexandria.Misc;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -17,16 +17,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Bullet Shuffle";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/bulletshuffle_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BulletShuffle>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Ask Questions Later";
-            string longDesc = "Grants completely random bullet effects on every shot."+"\n\nA belt of infinite potential, you can pluck any type of ammunition from it's ample supply.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<BulletShuffle>(
+            "Bullet Shuffle",
+            "Ask Questions Later",
+            "Grants completely random bullet effects on every shot." + "\n\nA belt of infinite potential, you can pluck any type of ammunition from it's ample supply.",
+            "bulletshuffle_icon");
             item.quality = PickupObject.ItemQuality.S;
-
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.BOSSRUSH_GUNSLINGER, true);
         }
 

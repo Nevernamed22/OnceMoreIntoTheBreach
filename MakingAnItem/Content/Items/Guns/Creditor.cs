@@ -69,7 +69,7 @@ namespace NevernamedsItems
                 "creditorproj_010",
             }, 
             10, //FPS
-            true, //Loops
+            tk2dSpriteAnimationClip.WrapMode.Loop, //Loops
             AnimateBullet.ConstructListOfSameValues<IntVector2>(new IntVector2(15, 11), 10), //Pixel Sizes
             AnimateBullet.ConstructListOfSameValues(true, 10), //Lightened
             AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 10), //Anchors
@@ -78,7 +78,7 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 10), 
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(13, 7), 10), //Override Colliders
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 10), //Override Collider Offsets
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 10)); //Override Proj to Copy From
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 10), 0); //Override Proj to Copy From
 
 
             gun.DefaultModule.projectiles[0] = projectile;

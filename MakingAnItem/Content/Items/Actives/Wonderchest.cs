@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Wonderchest";
-            string resourceName = "NevernamedsItems/Resources/wonderchest_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Wonderchest>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "What could be inside?";
-            string longDesc = "Extremely rare chests such as this one were particularly favoured by Alben Smallbore for storing his valuables." + "\n\nThe complicated magically encripted lock on this thing causes it to access a different pocket subreality depending on where it is opened.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<Wonderchest>(
+            "Wonderchest",
+            "What could be inside?",
+            "Extremely rare chests such as this one were particularly favoured by Alben Smallbore for storing his valuables." + "\n\nThe complicated magically encripted lock on this thing causes it to access a different pocket subreality depending on where it is opened.",
+            "wonderchest_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 1000);
             item.consumable = true;
             item.quality = ItemQuality.B;

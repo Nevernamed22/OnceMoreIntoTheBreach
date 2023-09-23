@@ -19,18 +19,11 @@ namespace NevernamedsItems
         public static PlayerOrbital upgradeOrbitalPrefab;
         public static void Init()
         {
-            string itemName = "Indigo Guon Stone"; //The name of the item
-            string resourceName = "NevernamedsItems/Resources/GuonStones/indigoguon_icon"; //Refers to an embedded png in the project. Make sure to embed your resources!
-
-            GameObject obj = new GameObject();
-
-            var item = obj.AddComponent<IndigoGuonStone>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            string shortDesc = "Close To Your Heart";
-            string longDesc = "Orbits close, offering bullet banishing protection." + "\n\nThe blood stone of an ancient frost giant, hardened by time and cold.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            AdvancedPlayerOrbitalItem item = ItemSetup.NewItem<IndigoGuonStone>(
+            "Indigo Guon Stone",
+            "Close To Your Heart",
+            "Orbits close, offering bullet banishing protection." + "\n\nThe blood stone of an ancient frost giant, hardened by time and cold.",
+            "indigoguon_icon") as AdvancedPlayerOrbitalItem;
             item.quality = PickupObject.ItemQuality.A;
 
             BuildPrefab();
@@ -47,7 +40,7 @@ namespace NevernamedsItems
         public static void BuildPrefab()
         {
             if (IndigoGuonStone.orbitalPrefab != null) return;
-            GameObject prefab = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/GuonStones/indigoguon_ingame");
+            GameObject prefab = ItemBuilder.SpriteFromBundle("IndigoGuonOrbital", Initialisation.itemCollection.GetSpriteIdByName("indigoguon_ingame"), Initialisation.itemCollection);
             prefab.name = "Indigo Guon Orbital";
             //prefab.GetComponent<tk2dSprite>().GetCurrentSpriteDef().ConstructOffsetsFromAnchor(tk2dBaseSprite.Anchor.MiddleCenter, prefab.GetComponent<tk2dSprite>().GetCurrentSpriteDef().position3);
             var body = prefab.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(5, 9));
@@ -74,7 +67,7 @@ namespace NevernamedsItems
             bool flag = IndigoGuonStone.upgradeOrbitalPrefab == null;
             if (flag)
             {
-                GameObject gameObject = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/GuonStones/indigoguon_synergy", null);
+                GameObject gameObject = ItemBuilder.SpriteFromBundle("IndigoGuonOrbitalSynergy", Initialisation.itemCollection.GetSpriteIdByName("indigoguon_synergy"), Initialisation.itemCollection);
                 gameObject.name = "Indigo Guon Orbital Synergy Form";
                 SpeculativeRigidbody speculativeRigidbody = gameObject.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(9, 13));
                 //gameObject.GetComponent<tk2dSprite>().GetCurrentSpriteDef().ConstructOffsetsFromAnchor(tk2dBaseSprite.Anchor.MiddleCenter, gameObject.GetComponent<tk2dSprite>().GetCurrentSpriteDef().position3);

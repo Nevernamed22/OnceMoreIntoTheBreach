@@ -12,33 +12,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Blank Stare";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/blankpersonality_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<NNBlankPersonality>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Unreadable";
-            string longDesc = "Mysterious, boring, and a bit creepy, your newfound personality will sometimes make shopkeepers give you blanks just to make you go away and stop staring.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
+            PickupObject item = ItemSetup.NewItem<NNBlankPersonality>(
+            "Blank Stare",
+            "Unreadable",
+            "Mysterious, boring, and a bit creepy, your newfound personality will sometimes make shopkeepers give you blanks just to make you go away and stop staring.",
+            "blankpersonality_icon");
             item.AddPassiveStatModifier(PlayerStats.StatType.Coolness, 1, StatModifier.ModifyMethod.ADDITIVE);
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.C;
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);
         }

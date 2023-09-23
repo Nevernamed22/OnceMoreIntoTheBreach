@@ -13,19 +13,13 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Cheese Heart";
-            string resourceName = "NevernamedsItems/Resources/cheeseheart_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<CheeseHeart>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Eat Your Heart Out";
-            string longDesc = "Sprays cheese everywhere on hit."+"\n\nCarefully sculpted, and completely anatomically correct!";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PickupObject item = ItemSetup.NewItem<CheeseHeart>(
+            "Cheese Heart",
+            "Eat Your Heart Out",
+            "Sprays cheese everywhere on hit." + "\n\nCarefully sculpted, and completely anatomically correct!",
+            "cheeseheart_icon");
             item.quality = PickupObject.ItemQuality.C;
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.FAILEDRATMAZE, true);
-
             CheeseHeartID = item.PickupObjectId;
         }
         public static int CheeseHeartID;

@@ -15,14 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Batter Bullets";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/batterbullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BatterBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Up";
-            string longDesc = "Smacks enemies on fatal damage."+"\n\nThere are two types of people in this world; people who enjoy beating others with baseball bats, and the rest of you weirdos.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<BatterBullets>(
+            "Batter Bullets",
+            "Up",
+            "Smacks enemies on fatal damage." + "\n\nThere are two types of people in this world; people who enjoy beating others with baseball bats, and the rest of you weirdos.",
+            "batterbullets_icon");
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_BATTERBULLETS, true);

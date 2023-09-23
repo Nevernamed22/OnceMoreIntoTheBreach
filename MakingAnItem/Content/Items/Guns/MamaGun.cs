@@ -6,7 +6,8 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -69,17 +70,15 @@ namespace NevernamedsItems
         public PutAGunAgainstHisHeadPulledMyTriggerNowHesDeadBehaviour()
         {
         }
-
-        // Token: 0x06007294 RID: 29332 RVA: 0x002CA328 File Offset: 0x002C8528
         private void Start()
         {
             this.m_projectile = base.GetComponent<Projectile>();
             m_projectile.OnPostUpdate += this.HandlePostUpdate;
             m_projectile.AdditionalScaleMultiplier *= 2;
             m_projectile.baseData.damage *= 5;
+            m_projectile.OnHitEnemy += OnHitEnemy;
         }
-        private Projectile m_projectile;
-
+        private Projectile m_projectile;  
         private void HandlePostUpdate(Projectile proj)
         {
             if (proj && proj.GetElapsedDistance() > 1)
@@ -88,6 +87,19 @@ namespace NevernamedsItems
                 proj.baseData.damage /= 5;
                 proj.OnPostUpdate -= this.HandlePostUpdate;
             }
-        }       
+        }      
+        private void OnHitEnemy(Projectile proj, SpeculativeRigidbody enemy, bool fatal)
+        {
+            if (enemy && enemy.healthHaver && fatal && proj && proj.GetElapsedDistance() < 1 &&proj.ProjectilePlayerOwner() && proj.ProjectilePlayerOwner().PlayerHasActiveSynergy("Any Way The Wind Blows"))
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    GameObject spawned = (PickupObjectDatabase.GetById(520) as Gun).DefaultModule.projectiles[0].InstantiateAndFireInDirection(proj.LastPosition, UnityEngine.Random.Range(0, 360));
+                    Projectile proj2 = spawned.GetComponent<Projectile>();
+                    proj2.AssignToPlayer(proj.ProjectilePlayerOwner());
+                    proj2.gameObject.AddComponent<PierceDeadActors>();                   
+                }
+            }
+        }
     }
 }

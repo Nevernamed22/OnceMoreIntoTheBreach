@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Epimethian Bullets";
-            string resourceName = "NevernamedsItems/Resources/epimethianbullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<EpimethianBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Afterthought";
-            string longDesc = "Deals 50% more damage to enemies who have less than half their health."+"\n\nCreated by the mighty titan bullet Epimetheus.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<EpimethianBullets>(
+             "Epimethian Bullets",
+             "Afterthought",
+             "Deals 50% more damage to enemies who have less than half their health." + "\n\nCreated by the mighty titan bullet Epimetheus.",
+             "epimethianbullets_icon");
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
         }

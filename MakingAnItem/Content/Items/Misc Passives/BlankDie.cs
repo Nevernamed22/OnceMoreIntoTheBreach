@@ -15,14 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Blank Die";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/blankdie_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BlankDie>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Roll On";
-            string longDesc = "Triggers blanks at random.\n\nA six sided die with no pips on any of it's faces. Used by gamblers to clumsily cheat games in ages gone by.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<BlankDie>(
+            "Blank Die",
+            "Roll On",
+            "Triggers blanks at random.\n\nA six sided die with no pips on any of it's faces. Used by gamblers to clumsily cheat games in ages gone by.",
+            "blankdie_icon");
             item.quality = PickupObject.ItemQuality.D;
             ID = item.PickupObjectId;
         }

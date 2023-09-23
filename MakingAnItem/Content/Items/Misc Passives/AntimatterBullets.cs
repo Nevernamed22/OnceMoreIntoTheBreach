@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Antimatter Bullets";
-            string resourceName = "NevernamedsItems/Resources/antimatterbullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<AntimatterBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Prime Antimaterial";
-            string longDesc = "Your bullets have a chance to create an explosion upon intersecting with enemy bullets." + "\n\nWhy does't this trigger when you actually hit an enemy?... don't ask questions.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<AntimatterBullets>(
+             "Antimatter Bullets",
+             "Prime Antimaterial",
+             "Your bullets have a chance to create an explosion upon intersecting with enemy bullets." + "\n\nWhy does't this trigger when you actually hit an enemy?... don't ask questions.",
+             "antimatterbullets_improved");
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("bullet_modifier");
             AntimatterBulletsID = item.PickupObjectId;
@@ -29,7 +26,7 @@ namespace NevernamedsItems
 
         private void PostProcessProjectile(Projectile proj, float flot)
         {
-            AntimatterBulletsModifier mod = proj.gameObject.GetOrAddComponent<AntimatterBulletsModifier>();
+            ExplodeOnBulletIntersection mod = proj.gameObject.GetOrAddComponent<ExplodeOnBulletIntersection>();
             mod.explosionData = smallPlayerSafeExplosion;
         }
         public override void Pickup(PlayerController player)
@@ -37,20 +34,11 @@ namespace NevernamedsItems
             player.PostProcessProjectile += PostProcessProjectile;
             base.Pickup(player);
         }
-        public override DebrisObject Drop(PlayerController player)
+        public override void DisableEffect(PlayerController player)
         {
-            player.PostProcessProjectile -= PostProcessProjectile;
-            return base.Drop(player);
-        }
-        public override void OnDestroy()
-        {
-            if (Owner)
-            {
-                Owner.PostProcessProjectile -= PostProcessProjectile;
-            }
-            base.OnDestroy();
-        }
-
+            if (player) { player.PostProcessProjectile -= PostProcessProjectile; }
+            base.DisableEffect(player);
+        }      
         public static ExplosionData smallPlayerSafeExplosion = new ExplosionData()
         {
             effect = GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultSmallExplosionData.effect,

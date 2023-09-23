@@ -88,7 +88,7 @@ namespace NevernamedsItems
                 "playerwizardprojectile_002",
                 "playerwizardprojectile_003",
                 "playerwizardprojectile_004",
-            }, 10, true, new List<IntVector2> {
+            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                 new IntVector2(17, 22), //1
                 new IntVector2(17, 22), //2            
                 new IntVector2(17, 22), //3
@@ -105,7 +105,7 @@ namespace NevernamedsItems
                 new IntVector2(11, 16), //3
             },
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
             wizardProjectile.shouldFlipHorizontally = true;
 
             Projectile bardProjectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
@@ -131,7 +131,7 @@ namespace NevernamedsItems
                 "playerbardbullet_002",
                 "playerbardbullet_003",
                 "playerbardbullet_004",
-            }, 10, true, new List<IntVector2> {
+            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                 new IntVector2(16, 15), //1
                 new IntVector2(16, 15), //2            
                 new IntVector2(16, 15), //3
@@ -148,7 +148,7 @@ namespace NevernamedsItems
                 new IntVector2(10, 9), //3
             },
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
             bardProjectile.shouldFlipHorizontally = true;
 
 
@@ -196,7 +196,7 @@ namespace NevernamedsItems
                 "playerroguebullet_002",
                 "playerroguebullet_003",
                 "playerroguebullet_004",
-            }, 10, true, new List<IntVector2> {
+            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                 new IntVector2(16, 15), //1
                 new IntVector2(16, 15), //2            
                 new IntVector2(16, 15), //3
@@ -213,7 +213,7 @@ namespace NevernamedsItems
                 new IntVector2(10, 9), //3
             },
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
 
             //BULLET STATS
             Projectile knightProjectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
@@ -236,7 +236,7 @@ namespace NevernamedsItems
                 "playerknightbullet_002",
                 "playerknightbullet_003",
                 "playerknightbullet_004",
-            }, 10, true, new List<IntVector2> {
+            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                 new IntVector2(19, 15), //1
                 new IntVector2(19, 15), //2            
                 new IntVector2(19, 15), //3
@@ -253,7 +253,7 @@ namespace NevernamedsItems
                 new IntVector2(13, 9), //3
             },
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
             knightProjectile.shouldFlipHorizontally = true;
 
 

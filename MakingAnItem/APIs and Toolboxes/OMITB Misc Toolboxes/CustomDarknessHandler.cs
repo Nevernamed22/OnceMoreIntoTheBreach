@@ -21,7 +21,7 @@ namespace NevernamedsItems
         }
         private bool ReturnShouldBeDark()
         {
-            if (shouldBeDark.Value && !shouldBeLightOverride.Value)
+            if (shouldBeDark.Value && !shouldBeLightOverride.Value && GameManager.Instance.PrimaryPlayer != null && !GameManager.Instance.IsFoyer)
             {
                 return true;
             }
@@ -32,40 +32,27 @@ namespace NevernamedsItems
         }
         private void Update()
         {
-            if (ReturnShouldBeDark() && !isDark)
+            if (GameManager.Instance && GameManager.Instance.MainCameraController && !Dungeon.IsGenerating)
             {
-                EnableDarkness();
-            }
-            else if (!ReturnShouldBeDark() && isDark)
-            {
-                DisableDarkness();
-            }
-
-            if (isDark)
-            {
-                if (Pixelator.Instance && Pixelator.Instance.AdditionalCoreStackRenderPass == null)
+                if (ReturnShouldBeDark() && !isDark)
                 {
-                    m_material = new Material(DarknessEffectShader);
-                    Pixelator.Instance.AdditionalCoreStackRenderPass = m_material;
+                    EnableDarkness();
                 }
-                if (m_material != null)
+                else if (!ReturnShouldBeDark() && isDark)
                 {
-                    float num = GameManager.Instance.PrimaryPlayer.FacingDirection;
-                    if (num > 270f)
+                    DisableDarkness();
+                }
+
+                if (isDark)
+                {
+                    if (Pixelator.Instance && Pixelator.Instance.AdditionalCoreStackRenderPass == null)
                     {
-                        num -= 360f;
+                        m_material = new Material(DarknessEffectShader);
+                        Pixelator.Instance.AdditionalCoreStackRenderPass = m_material;
                     }
-                    if (num < -270f)
+                    if (m_material != null && GameManager.Instance.PrimaryPlayer != null && GameManager.Instance.MainCameraController != null && GameManager.Instance.MainCameraController.Camera != null)
                     {
-                        num += 360f;
-                    }
-                    m_material.SetFloat("_ConeAngle", this.FlashlightAngle);
-                    Vector4 centerPointInScreenUV = GetCenterPointInScreenUV(GameManager.Instance.PrimaryPlayer.CenterPosition);
-                    centerPointInScreenUV.z = num;
-                    Vector4 vector = centerPointInScreenUV;
-                    if (GameManager.Instance.CurrentGameType == GameManager.GameType.COOP_2_PLAYER)
-                    {
-                        num = GameManager.Instance.SecondaryPlayer.FacingDirection;
+                        float num = GameManager.Instance.PrimaryPlayer.FacingDirection;
                         if (num > 270f)
                         {
                             num -= 360f;
@@ -74,11 +61,27 @@ namespace NevernamedsItems
                         {
                             num += 360f;
                         }
-                        vector = GetCenterPointInScreenUV(GameManager.Instance.SecondaryPlayer.CenterPosition);
-                        vector.z = num;
+                        m_material.SetFloat("_ConeAngle", this.FlashlightAngle);
+                        Vector4 centerPointInScreenUV = GetCenterPointInScreenUV(GameManager.Instance.PrimaryPlayer.CenterPosition);
+                        centerPointInScreenUV.z = num;
+                        Vector4 vector = centerPointInScreenUV;
+                        if (GameManager.Instance.CurrentGameType == GameManager.GameType.COOP_2_PLAYER)
+                        {
+                            num = GameManager.Instance.SecondaryPlayer.FacingDirection;
+                            if (num > 270f)
+                            {
+                                num -= 360f;
+                            }
+                            if (num < -270f)
+                            {
+                                num += 360f;
+                            }
+                            vector = GetCenterPointInScreenUV(GameManager.Instance.SecondaryPlayer.CenterPosition);
+                            vector.z = num;
+                        }
+                        m_material.SetVector("_Player1ScreenPosition", centerPointInScreenUV);
+                        m_material.SetVector("_Player2ScreenPosition", vector);
                     }
-                    m_material.SetVector("_Player1ScreenPosition", centerPointInScreenUV);
-                    m_material.SetVector("_Player2ScreenPosition", vector);
                 }
             }
         }
@@ -87,7 +90,7 @@ namespace NevernamedsItems
             Vector3 vector = GameManager.Instance.MainCameraController.Camera.WorldToViewportPoint(centerPoint.ToVector3ZUp(0f));
             return new Vector4(vector.x, vector.y, 0f, 0f);
         }
-       private void EnableDarkness()
+        private void EnableDarkness()
         {
             if (isDark) return;
 

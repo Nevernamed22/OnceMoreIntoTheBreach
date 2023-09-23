@@ -13,14 +13,11 @@ namespace NevernamedsItems
         public static int GooeyHeartID;
         public static void Init()
         {
-            string itemName = "Gooey Heart";
-            string resourceName = "NevernamedsItems/Resources/gooeyheart_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<GooeyHeart>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Squelchy";
-            string longDesc = "Chance to heal upon killing a blob." + "\n\nThe heart of the Mighty Blobulord, gained through showing enough skill to leave it intact throughout the entire fight." + "\n\nWatch as it jiggles";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<GooeyHeart>(
+            "Gooey Heart",
+            "Squelchy",
+            "Chance to heal upon killing a blob." + "\n\nThe heart of the Mighty Blobulord, gained through showing enough skill to leave it intact throughout the entire fight." + "\n\nWatch as it jiggles",
+            "gooeyheart_icon");           
             item.quality = PickupObject.ItemQuality.C;
             item.RemovePickupFromLootTables();
             GooeyHeartID = item.PickupObjectId;

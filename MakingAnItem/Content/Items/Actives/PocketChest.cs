@@ -14,32 +14,24 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Pocket Chest";
-            string resourceName = PocketChest.spritePaths[0]; 
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<PocketChest>();
+            PlayerItem item = ItemSetup.NewItem<PocketChest>(
+            "Pocket Chest",
+            "Baby Box",
+            "An infant chest, containing many mysteries." + "\n\nLevels up as you deal damage, and grows up when used.",
+            "pocketchest_brown_icon") as PlayerItem;
 
-            PocketChest.spriteIDs = new int[PocketChest.spritePaths.Length];
-
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Baby Box";
-            string longDesc = "An infant chest, containing many mysteries."+"\n\nLevels up as you deal damage, and grows up when used.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            PocketChest.spriteIDs[0] = item.sprite.spriteId; //Brown
-            PocketChest.spriteIDs[1] = SpriteBuilder.AddSpriteToCollection(PocketChest.spritePaths[1], item.sprite.Collection); //Blue
-            PocketChest.spriteIDs[2] = SpriteBuilder.AddSpriteToCollection(PocketChest.spritePaths[2], item.sprite.Collection); //Green
-            PocketChest.spriteIDs[3] = SpriteBuilder.AddSpriteToCollection(PocketChest.spritePaths[3], item.sprite.Collection); //Red
-            PocketChest.spriteIDs[4] = SpriteBuilder.AddSpriteToCollection(PocketChest.spritePaths[4], item.sprite.Collection); //Synergy
-            PocketChest.spriteIDs[5] = SpriteBuilder.AddSpriteToCollection(PocketChest.spritePaths[5], item.sprite.Collection); //Black
-            PocketChest.spriteIDs[6] = SpriteBuilder.AddSpriteToCollection(PocketChest.spritePaths[6], item.sprite.Collection); //Rainbow
-
+            PocketChest.spriteIDs = new int[7];
+            PocketChest.spriteIDs[0] = Initialisation.itemCollection.GetSpriteIdByName("pocketchest_brown_icon"); //Brown
+            PocketChest.spriteIDs[1] = Initialisation.itemCollection.GetSpriteIdByName("pocketchest_blue_icon"); //Blue
+            PocketChest.spriteIDs[2] = Initialisation.itemCollection.GetSpriteIdByName("pocketchest_green_icon"); //Green
+            PocketChest.spriteIDs[3] = Initialisation.itemCollection.GetSpriteIdByName("pocketchest_red_icon"); //Red
+            PocketChest.spriteIDs[4] = Initialisation.itemCollection.GetSpriteIdByName("pocketchest_synergy_icon"); //Synergy
+            PocketChest.spriteIDs[5] = Initialisation.itemCollection.GetSpriteIdByName("pocketchest_black_icon"); //Black
+            PocketChest.spriteIDs[6] = Initialisation.itemCollection.GetSpriteIdByName("pocketchest_rainbow_icon"); //Rainbow
 
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 500);
-
             item.consumable = true;
             item.quality = ItemQuality.D;
-
         }
         public PocketChestTier MemorisedTier = PocketChestTier.BROWN;
         public float storedDamage = 0f;
@@ -157,16 +149,6 @@ namespace NevernamedsItems
         {
             return base.CanBeUsed(user);
         }
-        private static readonly string[] spritePaths = new string[]
-        {
-            "NevernamedsItems/Resources/pocketchest_brown_icon",
-            "NevernamedsItems/Resources/pocketchest_blue_icon",
-            "NevernamedsItems/Resources/pocketchest_green_icon",
-            "NevernamedsItems/Resources/pocketchest_red_icon",
-            "NevernamedsItems/Resources/pocketchest_synergy_icon",
-            "NevernamedsItems/Resources/pocketchest_black_icon",
-            "NevernamedsItems/Resources/pocketchest_rainbow_icon"
-        };
         public static List<Chest.GeneralChestType> ChestyBois = new List<Chest.GeneralChestType>()
         {
             Chest.GeneralChestType.ITEM,

@@ -16,7 +16,7 @@ namespace NevernamedsItems
             string itemName = "Purple Prose";
 
             //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/purpleprose_icon";
+            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/purpleprose_improved";
 
             //Create new GameObject
             GameObject obj = new GameObject(itemName);

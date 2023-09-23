@@ -50,9 +50,9 @@ namespace NevernamedsItems
             orAddComponent.penetratesBreakables = true;
             orAddComponent.penetration = 5;
 
-            gun.SetTag("kalashnikov");
             gun.quality = PickupObject.ItemQuality.C;
             ETGMod.Databases.Items.Add(gun, false, "ANY");
+            gun.SetTag("kalashnikov");
 
             KalashnirangID = gun.PickupObjectId;
         }

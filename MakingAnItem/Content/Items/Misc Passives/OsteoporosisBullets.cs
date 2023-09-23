@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Osteoporosis Bullets";
-            string resourceName = "NevernamedsItems/Resources/osteoporosisbullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<OsteoporosisBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Bad To The Bone";
-            string longDesc = "These bullets are a skele-TON of trouble for the various BONEheads found throughout the Gungeon, leaving them well and truly BONED";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<OsteoporosisBullets>(
+            "Osteoporosis Bullets",
+            "Bad To The Bone",
+            "These bullets are a skele-TON of trouble for the various BONEheads found throughout the Gungeon, leaving them well and truly BONED",
+            "osteoporosisbullets_icon");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("bullet_modifier");

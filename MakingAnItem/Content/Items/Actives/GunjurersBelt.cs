@@ -55,7 +55,7 @@ namespace NevernamedsItems
         }
         public override void DoActiveEffect(PlayerController user)
         {
-            tk2dBaseSprite cursor = OMITBReflectionHelpers.ReflectGetField<tk2dBaseSprite>(typeof(TargetedAttackPlayerItem), "m_extantReticleQuad", this);
+            tk2dBaseSprite cursor = this.m_extantReticleQuad;
             Vector2 overridePos = cursor.WorldCenter;
             TeleportPlayerToCursorPosition.StartTeleport(user, overridePos);            
             base.DoActiveEffect(user);

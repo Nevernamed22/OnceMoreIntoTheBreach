@@ -15,14 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Lockdown Bullets";
-            string resourceName = "NevernamedsItems/Resources/lockdownbullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<LockdownBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Clapped In Irons";
-            string longDesc = "Chance to lock enemies in place."+"\n\nComissioned by an elderly Gungeoneer whose reaction times weren't enough to keep up with all those fast young whippersnapper bullet kin.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<LockdownBullets>(
+            "Lockdown Bullets",
+            "Clapped In Irons",
+            "Chance to lock enemies in place." + "\n\nComissioned by an elderly Gungeoneer whose reaction times weren't enough to keep up with all those fast young whippersnapper bullet kin.",
+            "lockdownbullets_icon");
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_LOCKDOWNBULLETS, true);

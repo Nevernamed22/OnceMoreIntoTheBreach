@@ -53,6 +53,10 @@ namespace NevernamedsItems
             projectile.AppliedStunDuration = 5f;
             projectile.SetProjectileSpriteRight("stungun_projectile", 8, 4, false, tk2dBaseSprite.Anchor.MiddleCenter, 8, 4);
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("StunGun Ammo", "NevernamedsItems/Resources/CustomGunAmmoTypes/stungun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/stungun_clipempty");
+
+
             gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "this is the Stun Gun";
             ETGMod.Databases.Items.Add(gun, null, "ANY");

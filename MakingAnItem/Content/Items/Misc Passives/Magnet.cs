@@ -17,14 +17,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Magnet";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/magnet_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<MagnetItem>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Mysterious Magic";
-            string longDesc = "A mysterious artifact. Nobody is quite sure how it works."+"\n\nBullets draw in enemies. Don't take the fight to them, take them to the fight.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<MagnetItem>(
+            "Magnet",
+            "Mysterious Magic",
+            "A mysterious artifact. Nobody is quite sure how it works." + "\n\nBullets draw in enemies. Don't take the fight to them, take them to the fight.",
+            "magnet_icon");
             item.quality = PickupObject.ItemQuality.D;
             item.SetTag("bullet_modifier");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.KnockbackMultiplier, 3, StatModifier.ModifyMethod.ADDITIVE);

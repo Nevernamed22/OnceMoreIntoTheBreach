@@ -366,6 +366,70 @@ namespace NevernamedsItems
             Pixelator.Instance.DeregisterAdditionalRenderPass(glitchPass);
             yield break;
         }
+
+
+
+
+
+
+
+        public static void DoRisingStringFade(string text, Vector2 point, Color colour, float heightOffGround = 3f, float opacity = 1f)
+        {
+
+             GameObject gameObject = (GameObject)UnityEngine.Object.Instantiate(BraveResources.Load("DamagePopupLabel", ".prefab"), GameUIRoot.Instance.transform);
+
+            dfLabel label = gameObject.GetComponent<dfLabel>();
+            label.gameObject.SetActive(true);
+            label.Text = text;
+            label.Color = colour;
+            label.Opacity = opacity;
+            label.TextAlignment = TextAlignment.Center;
+            label.Anchor = dfAnchorStyle.Bottom;
+            label.Pivot = dfPivotPoint.BottomCenter;
+            label.Invalidate();
+            label.transform.position = dfFollowObject.ConvertWorldSpaces(point, GameManager.Instance.MainCameraController.Camera, GameManager.Instance.MainCameraController.Camera).WithZ(0f);
+            label.transform.position = label.transform.position.QuantizeFloor(label.PixelsToUnits() / (Pixelator.Instance.ScaleTileScale / Pixelator.Instance.CurrentTileScale));
+
+            label.StartCoroutine(HandleDamageNumberRiseCR(point, point.y - heightOffGround, label));
+        }
+        private static IEnumerator HandleDamageNumberRiseCR(Vector3 startWorldPosition, float worldFloorHeight, dfLabel damageLabel)
+        {
+            float elapsed = 0f;
+            float duration = 1.5f;
+            float holdTime = 0f;
+            Camera mainCam = GameManager.Instance.MainCameraController.Camera;
+            Vector3 worldPosition = startWorldPosition;
+            Vector3 lastVelocity = new Vector3(Mathf.Lerp(-8f, 8f, UnityEngine.Random.value), UnityEngine.Random.Range(15f, 25f), 0f);
+            while (elapsed < duration)
+            {
+                float dt = BraveTime.DeltaTime;
+                elapsed += dt;
+                if (GameManager.Instance.IsPaused)
+                {
+                    break;
+                }
+                if (elapsed > holdTime)
+                {
+
+                    damageLabel.transform.position = dfFollowObject.ConvertWorldSpaces(new Vector3(worldPosition.x, worldPosition.y + (elapsed / duration)), mainCam, GameUIRoot.Instance.Manager.RenderCamera).WithZ(0f);
+                }
+                float t = elapsed / duration;
+                damageLabel.Opacity = 1f - t;
+                yield return null;
+            }
+            damageLabel.gameObject.SetActive(false);
+            UnityEngine.Object.Destroy(damageLabel.gameObject, 1);
+            yield break;
+        }
+
+
+
+
+
+
+
+
+
         public static void DoStringSquirt(string text, Vector2 point, Color colour, float heightOffGround = 3f, float opacity = 1f)
         {
 
@@ -451,7 +515,7 @@ namespace NevernamedsItems
             plagueanimator.DefaultClipId = plagueanimator.GetClipIdByName("NewOverheadVFX");
             return overheadderVFX;
         }
-        public static GameObject CreateVFX(string name, List<string> spritePaths, int fps, IntVector2 Dimensions, tk2dBaseSprite.Anchor anchor, bool usesZHeight, float zHeightOffset, float emissivePower = -1, Color? emissiveColour = null, tk2dSpriteAnimationClip.WrapMode wrap = tk2dSpriteAnimationClip.WrapMode.Once, bool persist = false)
+        public static GameObject CreateVFX(string name, List<string> spritePaths, int fps, IntVector2 Dimensions, tk2dBaseSprite.Anchor anchor, bool usesZHeight, float zHeightOffset, float emissivePower = -1, Color? emissiveColour = null, tk2dSpriteAnimationClip.WrapMode wrap = tk2dSpriteAnimationClip.WrapMode.Once, bool persist = false, int loopStart = 0)
         {
             GameObject Obj = new GameObject(name);
             VFXObject vfObj = new VFXObject();
@@ -496,6 +560,7 @@ namespace NevernamedsItems
             if (emissiveColour != null) sprite.renderer.material.SetColor("_EmissiveColor", (Color)emissiveColour);
             clip.frames = frames.ToArray();
             clip.wrapMode = wrap;
+            clip.loopStart = loopStart;
             animation.clips = animation.clips.Concat(new tk2dSpriteAnimationClip[] { clip }).ToArray();
             if (!persist)
             {
@@ -593,7 +658,7 @@ namespace NevernamedsItems
         {
             return new VFXPool { type = VFXPoolType.None, effects = new VFXComplex[] { new VFXComplex() { effects = new VFXObject[] { new VFXObject() { effect = effect } } } } };
         }
-        public static VFXPool CreateVFXPool(string name, List<string> spritePaths, int fps, IntVector2 Dimensions, tk2dBaseSprite.Anchor anchor, bool usesZHeight, float zHeightOffset, bool persist = false, VFXAlignment alignment = VFXAlignment.NormalAligned, float emissivePower = -1, Color? emissiveColour = null)
+        public static VFXPool CreateVFXPool(string name, List<string> spritePaths, int fps, IntVector2 Dimensions, tk2dBaseSprite.Anchor anchor, bool usesZHeight, float zHeightOffset, bool persist = false, VFXAlignment alignment = VFXAlignment.NormalAligned, float emissivePower = -1, Color? emissiveColour = null, tk2dSpriteAnimationClip.WrapMode wrapmode = tk2dSpriteAnimationClip.WrapMode.Once, int loopStart =0)
         {
             GameObject Obj = new GameObject(name);
             VFXPool pool = new VFXPool();
@@ -640,7 +705,8 @@ namespace NevernamedsItems
             if (emissivePower > 0) sprite.renderer.material.SetFloat("_EmissiveColorPower", emissivePower);
             if (emissiveColour != null) sprite.renderer.material.SetColor("_EmissiveColor", (Color)emissiveColour);
             clip.frames = frames.ToArray();
-            clip.wrapMode = tk2dSpriteAnimationClip.WrapMode.Once;
+            clip.wrapMode = wrapmode;
+            clip.loopStart = loopStart;
             animation.clips = animation.clips.Concat(new tk2dSpriteAnimationClip[] { clip }).ToArray();
             if (!persist)
             {
@@ -662,70 +728,7 @@ namespace NevernamedsItems
             pool.effects = new VFXComplex[] { complex };
             return pool;
         }
-        public static VFXPool CreateMuzzleflash(string name, List<string> spriteNames, int fps, List<IntVector2> spriteSizes, List<tk2dBaseSprite.Anchor> anchors, List<Vector2> manualOffsets, bool orphaned, bool attached, bool persistsOnDeath,
-            bool usesZHeight, float zHeight, VFXAlignment alignment, bool destructible, List<float> emissivePowers, List<Color> emissiveColors)
-        {
-            VFXPool pool = new VFXPool();
-            pool.type = VFXPoolType.All;
-            VFXComplex complex = new VFXComplex();
-            VFXObject vfObj = new VFXObject();
-            GameObject obj = new GameObject(name);
-            obj.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(obj);
-            UnityEngine.Object.DontDestroyOnLoad(obj);
-            tk2dSprite sprite = obj.AddComponent<tk2dSprite>();
-            tk2dSpriteAnimator animator = obj.AddComponent<tk2dSpriteAnimator>();
-            tk2dSpriteAnimationClip clip = new tk2dSpriteAnimationClip();
-            clip.fps = fps;
-            clip.frames = new tk2dSpriteAnimationFrame[0];
-            for (int i = 0; i < spriteNames.Count; i++)
-            {
-                string spriteName = spriteNames[i];
-                IntVector2 spriteSize = spriteSizes[i];
-                tk2dBaseSprite.Anchor anchor = anchors[i];
-                Vector2 manualOffset = manualOffsets[i];
-                float emissivePower = emissivePowers[i];
-                Color emissiveColor = emissiveColors[i];
-                tk2dSpriteAnimationFrame frame = new tk2dSpriteAnimationFrame();
-                frame.spriteId = VFXCollection.GetSpriteIdByName(spriteName);
-                tk2dSpriteDefinition def = VFXToolbox.SetupDefinitionForShellSprite(spriteName, frame.spriteId, spriteSize.x, spriteSize.y);
-                def.ConstructOffsetsFromAnchor(anchor, def.position3);
-                def.MakeOffset(manualOffset);
-                def.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
-                def.material.SetFloat("_EmissiveColorPower", emissivePower);
-                def.material.SetColor("_EmissiveColor", emissiveColor);
-                def.materialInst.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
-                def.materialInst.SetFloat("_EmissiveColorPower", emissivePower);
-                def.materialInst.SetColor("_EmissiveColor", emissiveColor);
-                frame.spriteCollection = VFXCollection;
-                clip.frames = clip.frames.Concat(new tk2dSpriteAnimationFrame[] { frame }).ToArray();
-            }
-            sprite.renderer.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
-            sprite.renderer.material.SetFloat("_EmissiveColorPower", emissivePowers[0]);
-            sprite.renderer.material.SetColor("_EmissiveColor", emissiveColors[0]);
-            clip.wrapMode = tk2dSpriteAnimationClip.WrapMode.Once;
-            clip.name = "start";
-            animator.spriteAnimator.Library = animator.gameObject.AddComponent<tk2dSpriteAnimation>();
-            animator.spriteAnimator.Library.clips = new tk2dSpriteAnimationClip[] { clip };
-            animator.spriteAnimator.Library.enabled = true;
-            SpriteAnimatorKiller kill = animator.gameObject.AddComponent<SpriteAnimatorKiller>();
-            kill.fadeTime = -1f;
-            kill.animator = animator;
-            kill.delayDestructionTime = -1f;
-            vfObj.orphaned = orphaned;
-            vfObj.attached = attached;
-            vfObj.persistsOnDeath = persistsOnDeath;
-            vfObj.usesZHeight = usesZHeight;
-            vfObj.zHeight = zHeight;
-            vfObj.alignment = alignment;
-            vfObj.destructible = destructible;
-            vfObj.effect = obj;
-            complex.effects = new VFXObject[] { vfObj };
-            pool.effects = new VFXComplex[] { complex };
-            animator.playAutomatically = true;
-            animator.DefaultClipId = animator.GetClipIdByName("start");
-            return pool;
-        }
+       
         public static GameObject CreateCustomClip(string spriteName, int pixelWidth, int pixelHeight)
         {
             GameObject clip = UnityEngine.Object.Instantiate((PickupObjectDatabase.GetById(95) as Gun).clipObject);

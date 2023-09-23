@@ -10,40 +10,32 @@ using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
-    class BrownGuonStone : IounStoneOrbitalItem
+    class BrownGuonStone : AdvancedPlayerOrbitalItem
     {
 
         public static Hook guonHook;
-        public static bool speedUp = false;
         public static PlayerOrbital orbitalPrefab;
 
-        //Call this method from the Start() method of your ETGModule extension
         public static void Init()
         {
-            string itemName = "Brown Guon Stone"; //The name of the item
-            string resourceName = "NevernamedsItems/Resources/brownguonstone_icon"; //Refers to an embedded png in the project. Make sure to embed your resources!
-
-            GameObject obj = new GameObject();
-
-            var item = obj.AddComponent<BrownGuonStone>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            string shortDesc = "Humble Stone";
-            string longDesc = "This simple river rock was given meagre magical abilities by the mad wizard Alben Smallbore as part of his experiments. While it can’t do fancy things like heal it’s bearer’s wounds, slow time, or create black holes, it doesn’t mind." + "\n\nGets excited at the appearance of other relics of a similar calibre to itself.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            AdvancedPlayerOrbitalItem item = ItemSetup.NewItem<BrownGuonStone>(
+            "Brown Guon Stone",
+            "Humble Stone",
+            "This simple river rock was given meagre magical abilities by the mad wizard Alben Smallbore as part of his experiments. While it can’t do fancy things like heal it’s bearer’s wounds, slow time, or create black holes, it doesn’t mind." + "\n\nGets excited at the appearance of other relics of a similar calibre to itself.",
+            "brownguonstone_icon") as AdvancedPlayerOrbitalItem;
             item.quality = PickupObject.ItemQuality.D;
             item.SetTag("guon_stone");
 
             BuildPrefab();
             item.OrbitalPrefab = orbitalPrefab;
-            item.Identifier = IounStoneIdentifier.GENERIC;
         }
 
         public static void BuildPrefab()
         {
+            
+
             if (BrownGuonStone.orbitalPrefab != null) return;
-            GameObject prefab = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/brownguonstone_ingame");
+            GameObject prefab = ItemBuilder.SpriteFromBundle("BrownGuonOrbital", Initialisation.itemCollection.GetSpriteIdByName("brownguonstone_ingame"), Initialisation.itemCollection);
             prefab.name = "Brown Guon Orbital";
             var body = prefab.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(7, 13));
             body.CollideWithTileMap = false;
@@ -92,10 +84,8 @@ namespace NevernamedsItems
         public static void GuonInit(Action<PlayerOrbital, PlayerController> orig, PlayerOrbital self, PlayerController player)
         {
             orig(self, player);
-            //ETGModConsole.Log(self.name);
             if (self.name == "Brown Guon Orbital(Clone)")
             {
-                //ETGModConsole.Log("You have the Brown Guon");
                 brownGuonOrbital = self;
             }
         }

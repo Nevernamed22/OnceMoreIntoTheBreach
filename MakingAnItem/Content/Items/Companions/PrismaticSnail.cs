@@ -16,14 +16,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string name = "Prismatic Snail";
-            string resourcePath = "NevernamedsItems/Resources/Companions/PrismaticSnail/prismaticsnail_icon";
-            GameObject gameObject = new GameObject();
-            CompanionItem companionItem = gameObject.AddComponent<CompanionItem>();
-            ItemBuilder.AddSpriteToObject(name, resourcePath, gameObject);
-            string shortDesc = "27616";
-            string longDesc = "A curious mollusc in a crystal shell. When you put your ear to the opening, you can hear it frantically reciting the same string of numbers over and over again...";
-            companionItem.SetupItem(shortDesc, longDesc, "nn");
+            CompanionItem companionItem = ItemSetup.NewItem<CompanionItem>(
+          "Prismatic Snail",
+          "27616",
+          "A curious mollusc in a crystal shell. When you put your ear to the opening, you can hear it frantically reciting the same string of numbers over and over again...",
+          "prismaticsnail_icon") as CompanionItem;
             companionItem.quality = PickupObject.ItemQuality.B;
             companionItem.CompanionGuid = guid;
             BuildPrefab();

@@ -14,15 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Amethyst Bracelet";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/amethystbracelet_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<AmethystBracelet>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Thrown Guns Hunt";
-            string longDesc = "This shimmering brace was once clasped around the wrist of Artemissile, goddess of the hunt." + "\n\nIt imbues thrown weaponry with that same hunter instinct.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PickupObject item = ItemSetup.NewItem<AmethystBracelet>(
+            "Amethyst Bracelet",
+            "Thrown Guns Hunt",
+            "This shimmering brace was once clasped around the wrist of Artemissile, goddess of the hunt." + "\n\nIt imbues thrown weaponry with that same hunter instinct.",
+            "amethystbracelet_icon");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ThrownGunDamage, 1.5f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = PickupObject.ItemQuality.D;
             ID = item.PickupObjectId;

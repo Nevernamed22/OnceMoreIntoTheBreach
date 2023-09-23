@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string name = "Gusty";
-            string resourcePath = "NevernamedsItems/Resources/Companions/Gusty/gusty_icon";
-            GameObject gameObject = new GameObject();
-            CompanionItem companionItem = gameObject.AddComponent<CompanionItem>();
-            ItemBuilder.AddSpriteToObject(name, resourcePath, gameObject);
-            string shortDesc = "Windbag";
-            string longDesc = "Plomphs around, and doesn't let anyone get in his way." + "\n\nStore in a cool, dry place.";
-            companionItem.SetupItem(shortDesc, longDesc, "nn");
+            CompanionItem companionItem = ItemSetup.NewItem<CompanionItem>(
+            "Gusty",
+            "Windbag",
+            "Plomphs around, and doesn't let anyone get in his way." + "\n\nStore in a cool, dry place.",
+            "gusty_icon") as CompanionItem;
             companionItem.quality = PickupObject.ItemQuality.D;
             companionItem.CompanionGuid = Gusty.guid;
             Gusty.BuildPrefab();

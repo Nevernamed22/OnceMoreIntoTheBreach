@@ -19,6 +19,7 @@ namespace NevernamedsItems
         public static GameObject MachoBraceBurstVFX = PickupObjectDatabase.GetById(665).GetComponent<MachoBraceItem>().BurstVFX;
         public static GameObject MachoBraceOverheadVFX = PickupObjectDatabase.GetById(665).GetComponent<MachoBraceItem>().OverheadVFX;
         public static GameObject LastBulletStandingX;
+        public static GameObject HealingSparkles = BraveResources.Load<GameObject>("Global VFX/VFX_Healing_Sparkles_001", ".prefab");
         //Projectile Death Effects
         public static GameObject GreenLaserCircleVFX = (PickupObjectDatabase.GetById(89) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX;
         public static GameObject YellowLaserCircleVFX = (PickupObjectDatabase.GetById(651) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX;
@@ -32,6 +33,7 @@ namespace NevernamedsItems
         public static GameObject SmallMagicPuffVFX = (PickupObjectDatabase.GetById(338) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX;
         //Basegame VFX Pools
         public static VFXPool SpiratTeleportVFXPool;
+        public static GameObject HighPriestImplosionRing;
 
         //Custom VFX Objects
         public static GameObject PlagueOverheadVFX() { return PlagueStatusEffectSetup.PlagueOverheadVFX; }
@@ -72,6 +74,23 @@ namespace NevernamedsItems
                 }
             }
             #endregion
+
+            //High Priest Slorp
+            AIAnimator aiAnimator = EnemyDatabase.GetOrLoadByGuid("6c43fddfd401456c916089fdd1c99b1c").aiAnimator;
+            List<AIAnimator.NamedVFXPool> namedVFX = aiAnimator.OtherVFX;
+            foreach (AIAnimator.NamedVFXPool pool in namedVFX)
+            {
+                if (pool.name == "mergo")
+                {
+                    foreach (VFXComplex vFXComplex in pool.vfxPool.effects)
+                    {
+                        foreach (VFXObject vFXObject in vFXComplex.effects)
+                        {
+                            HighPriestImplosionRing = vFXObject.effect;
+                        }
+                    }
+                }
+            }
         }
     }
 }

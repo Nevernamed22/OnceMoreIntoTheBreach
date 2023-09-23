@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Birdshot";
-            string resourceName = "NevernamedsItems/Resources/birdshot_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Birdshot>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Angry";
-            string longDesc = "+40% damage to flying enemies." + "\n\nA collection of tiny pellets enchanted with an inherent hatred for anything that dares to leave the ground." + "\nQuarantined in the Gungeon after several unfortunate incidents in an airport.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<Birdshot>(
+             "Birdshot",
+             "Angry",
+             "+40% damage to flying enemies." + "\n\nA collection of tiny pellets enchanted with an inherent hatred for anything that dares to leave the ground." + "\nQuarantined in the Gungeon after several unfortunate incidents in an airport.",
+             "birdshot_icon");           
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
             BirdshotID = item.PickupObjectId;

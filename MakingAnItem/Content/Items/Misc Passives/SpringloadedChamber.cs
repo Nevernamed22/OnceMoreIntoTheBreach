@@ -13,37 +13,15 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Springloaded Chamber";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/springloadedchamber_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<SpringloadedChamber>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Marvellous Mechanism";
-            string longDesc = "Increases damage by 30% for the first half of the clip, but decreases it by 20% for the second."+"\n\nA miraculous clockwork doodad cannibalised from the Wind Up Gun. Proof that springs are, and will always be, the best form of potential energy.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<SpringloadedChamber>(
+            "Springloaded Chamber",
+            "Marvellous Mechanism",
+            "Increases damage by 30% for the first half of the clip, but decreases it by 20% for the second." + "\n\nA miraculous clockwork doodad cannibalised from the Wind Up Gun. Proof that springs are, and will always be, the best form of potential energy.",
+            "springloadedchamber_icon");
             item.AddPassiveStatModifier( PlayerStats.StatType.ReloadSpeed, 0.8f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-
-            //Adds the actual passive effect to the item
-            //ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ProjectileSpeed, -1f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-            //Set the rarity of the item
-            item.quality = PickupObject.ItemQuality.B; //B
+            item.quality = PickupObject.ItemQuality.B; 
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_SPRINGLOADEDCHAMBER, true);
             item.AddItemToTrorcMetaShop(19);
-
             ID = item.PickupObjectId;
         }
         private int currentClip, lastClip;

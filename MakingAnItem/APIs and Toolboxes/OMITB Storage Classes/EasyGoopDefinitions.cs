@@ -83,6 +83,16 @@ namespace NevernamedsItems
             HoneyGoop.AppliesSpeedModifier = true;
             HoneyGoop.AppliesSpeedModifierContinuously = true;
             HoneyGoop.SpeedModifierEffect = StaticStatusEffects.HoneySpeedMod;
+            HoneyGoop.goopDamageTypeInteractions = new List<GoopDefinition.GoopDamageTypeInteraction>()
+            {
+                new GoopDefinition.GoopDamageTypeInteraction()
+                {
+                    freezesGoop = false,
+                    electrifiesGoop = false,
+                    ignitionMode = GoopDefinition.GoopDamageTypeInteraction.GoopIgnitionMode.NONE,
+                    damageType = CoreDamageTypes.None
+                }
+            };
 
             PlayerFriendlyHoneyGoop = UnityEngine.Object.Instantiate<GoopDefinition>(HoneyGoop);
             PlayerFriendlyHoneyGoop.SpeedModifierEffect = StaticStatusEffects.FriendlyHoneySpeedMod;
@@ -102,6 +112,16 @@ namespace NevernamedsItems
             PropulsionGoop.AppliesSpeedModifier = true;
             PropulsionGoop.AppliesSpeedModifierContinuously = true;
             PropulsionGoop.SpeedModifierEffect = StaticStatusEffects.PropulsionGoopSpeedMod;
+            PropulsionGoop.goopDamageTypeInteractions = new List<GoopDefinition.GoopDamageTypeInteraction>()
+            {
+                new GoopDefinition.GoopDamageTypeInteraction()
+                {
+                    freezesGoop = false,
+                    electrifiesGoop = false,
+                    ignitionMode = GoopDefinition.GoopDamageTypeInteraction.GoopIgnitionMode.NONE,
+                    damageType = CoreDamageTypes.None
+                }
+            };
             #endregion 
 
             //PLAYER FRIENDLY WEB GOOP - A web-textured goop that slows down enemies, but not players.
@@ -114,7 +134,7 @@ namespace NevernamedsItems
 
             //PLAGUE GOOP - A sickly purple goop that damages enemies over time, and makes them leave a trail that enplagues other enemies.
             #region PlagueGoop
-            PlagueGoop = new GoopDefinition();
+            PlagueGoop = ScriptableObject.CreateInstance<GoopDefinition>();
             PlagueGoop.CanBeIgnited = false;
             PlagueGoop.damagesEnemies = false;
             PlagueGoop.damagesPlayers = false;
@@ -124,6 +144,16 @@ namespace NevernamedsItems
             PlagueGoop.usesLifespan = true;
             PlagueGoop.HealthModifierEffect = StaticStatusEffects.StandardPlagueEffect;
             PlagueGoop.AppliesDamageOverTime = true;
+            PlagueGoop.goopDamageTypeInteractions = new List<GoopDefinition.GoopDamageTypeInteraction>()
+            {
+                new GoopDefinition.GoopDamageTypeInteraction()
+                {
+                    freezesGoop = false,
+                    electrifiesGoop = false,
+                    ignitionMode = GoopDefinition.GoopDamageTypeInteraction.GoopIgnitionMode.NONE,
+                    damageType = CoreDamageTypes.None
+                }
+            };
             #endregion
 
             //ENEMYFRIENDLY POISON - Poison that doesnt hurt enemies

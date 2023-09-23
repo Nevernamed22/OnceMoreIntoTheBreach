@@ -11,36 +11,15 @@ namespace NevernamedsItems
 {
     class LovePotion : PlayerItem
     {
-        //Call this method from the Start() method of your ETGModule extension class
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Love Potion";
+            PlayerItem item = ItemSetup.NewItem<LovePotion>(
+           "Love Potion",
+           "The Sausage Principle",
+           "This potent potion of love was made by the Three Witches as part of a dashing romantic plot that was doomed to fail" + "\n\nIf you like something, never learn how it was made",
+           "lovepotion_icon") as PlayerItem;
 
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it.
-            string resourceName = "NevernamedsItems/Resources/lovepotion_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a ActiveItem component to the object
-            var item = obj.AddComponent<LovePotion>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "The Sausage Principle";
-            string longDesc = "This potent potion of love was made by the Three Witches as part of a dashing romantic plot that was doomed to fail"+"\n\nIf you like something, never learn how it was made";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //"kts" here is the item pool. In the console you'd type kts:sweating_bullets
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Set the cooldown type and duration of the cooldown
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 150);
-
-            //Set some other fields
             item.consumable = false;
             item.quality = ItemQuality.D;
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);

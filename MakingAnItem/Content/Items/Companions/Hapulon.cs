@@ -16,14 +16,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string name = "Hapulon";
-            string resourcePath = "NevernamedsItems/Resources/Companions/Hapulon/hapulon_icon";
-            GameObject gameObject = new GameObject();
-            CompanionItem companionItem = gameObject.AddComponent<CompanionItem>();
-            ItemBuilder.AddSpriteToObject(name, resourcePath, gameObject);
-            string shortDesc = "Bouncing Bundle of Joy";
-            string longDesc = "The result of a catastrauphic malfunction in Blobulonian genetic engineering, the Hapulon knows nothing but love and joy. For this reason, they have been almost hunted to extinction.";
-            companionItem.SetupItem(shortDesc, longDesc, "nn");
+            CompanionItem companionItem = ItemSetup.NewItem<CompanionItem>(
+          "Hapulon",
+          "Bouncing Bundle of Joy",
+          "The result of a catastrauphic malfunction in Blobulonian genetic engineering, the Hapulon knows nothing but love and joy. For this reason, they have been almost hunted to extinction.",
+          "hapulon_icon") as CompanionItem;
             companionItem.quality = PickupObject.ItemQuality.A;
             companionItem.CompanionGuid = Hapulon.guid;
             Hapulon.BuildPrefab();

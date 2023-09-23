@@ -17,7 +17,7 @@ namespace NevernamedsItems
         {
             Obj = base.GetComponent<SpeculativeRigidbody>();
         }
-      
+
         private void Update()
         {
             player.specRigidbody.Position = new Position(Obj.Position);
@@ -73,7 +73,20 @@ namespace NevernamedsItems
     }
     public static class MiscToolbox
     {
-
+        public static void AssignToPlayer(this Projectile bullet, PlayerController player, bool postProcess = false)
+        {
+            if (player && bullet)
+            {
+                bullet.Owner = player;
+                bullet.Shooter = player.specRigidbody;
+                bullet.baseData.damage *= player.stats.GetStatValue(PlayerStats.StatType.Damage);
+                bullet.baseData.speed *= player.stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed);
+                bullet.baseData.range *= player.stats.GetStatValue(PlayerStats.StatType.RangeMultiplier);
+                bullet.baseData.force *= player.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
+                bullet.BossDamageMultiplier *= player.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
+                if (postProcess) player.DoPostProcessProjectile(bullet);
+            }
+        }
         public static void SpawnShield(PlayerController user, Vector3 location)
         {
             Gun currentGun = user.CurrentGun;
@@ -659,8 +672,8 @@ namespace NevernamedsItems
         public bool useSpecialTint;
         public float procChance;
     }
-    
-    
+
+
     public class SimpleFreezingBulletBehaviour : MonoBehaviour
     {
         public SimpleFreezingBulletBehaviour()
@@ -1166,8 +1179,8 @@ namespace NevernamedsItems
             }
             return list;
         }
-        public static void AnimateProjectile(this Projectile proj, List<string> names, int fps, bool loops, List<IntVector2> pixelSizes, List<bool> lighteneds, List<tk2dBaseSprite.Anchor> anchors, List<bool> anchorsChangeColliders,
-            List<bool> fixesScales, List<Vector3?> manualOffsets, List<IntVector2?> overrideColliderPixelSizes, List<IntVector2?> overrideColliderOffsets, List<Projectile> overrideProjectilesToCopyFrom)
+        public static void AnimateProjectile(this Projectile proj, List<string> names, int fps, tk2dSpriteAnimationClip.WrapMode wrapmode, List<IntVector2> pixelSizes, List<bool> lighteneds, List<tk2dBaseSprite.Anchor> anchors, List<bool> anchorsChangeColliders,
+            List<bool> fixesScales, List<Vector3?> manualOffsets, List<IntVector2?> overrideColliderPixelSizes, List<IntVector2?> overrideColliderOffsets, List<Projectile> overrideProjectilesToCopyFrom, int framesToLoopAfter)
         {
             tk2dSpriteAnimationClip clip = new tk2dSpriteAnimationClip();
             clip.name = "idle";
@@ -1219,7 +1232,8 @@ namespace NevernamedsItems
                     proj.GetAnySprite().SetSprite(frame.spriteCollection, frame.spriteId);
                 }
             }
-            clip.wrapMode = loops ? tk2dSpriteAnimationClip.WrapMode.Loop : tk2dSpriteAnimationClip.WrapMode.Once;
+            clip.wrapMode = wrapmode;
+            if (wrapmode == tk2dSpriteAnimationClip.WrapMode.LoopSection) clip.loopStart = framesToLoopAfter;
             clip.frames = frames.ToArray();
             if (proj.sprite.spriteAnimator == null)
             {

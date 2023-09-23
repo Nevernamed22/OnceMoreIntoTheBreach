@@ -18,7 +18,7 @@ namespace NevernamedsItems
             Gun gun = ETGMod.Databases.Items.NewGun("Vulcan Repeater", "vulcanrepeater");
             Game.Items.Rename("outdated_gun_mods:vulcan_repeater", "nn:vulcan_repeater");
             gun.gameObject.AddComponent<VulcanRepeater>();
-            gun.SetShortDescription("");
+            gun.SetShortDescription("Glocram Rises");
             gun.SetLongDescription("Fires powerful explosive bolts which have a chance to split in two for double the power."+"\n\nForged with the soul of an impossible beast, by warriors of a forgotten age.");
             gun.SetupSprite(null, "vulcanrepeater_idle_001", 8);
 

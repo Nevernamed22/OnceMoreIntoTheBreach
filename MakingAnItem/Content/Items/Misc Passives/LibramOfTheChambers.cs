@@ -15,14 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Libram of The Chambers";
-            string resourceName = "NevernamedsItems/Resources/libramofthechambers_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<LibramOfTheChambers>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Behold the Boss Eater!";
-            string longDesc = "Converts Master Rounds from vitality upgrades to bullet damage instead." + "\n\nAn ancient tome of unreadable scripts and texts with regards to the many Chambers of the Gungeon.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<LibramOfTheChambers>(
+            "Libram of The Chambers",
+            "Behold the Boss Eater!",
+            "Converts Master Rounds from vitality upgrades to bullet damage instead." + "\n\nAn ancient tome of unreadable scripts and texts with regards to the many Chambers of the Gungeon.",
+            "libramofthechambers_icon");
             item.quality = PickupObject.ItemQuality.C;
         }
         public static void LateInit()

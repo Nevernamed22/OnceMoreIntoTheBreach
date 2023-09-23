@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Dungeonator;
-using EnemyAPI;
+using Alexandria.EnemyAPI;
 using GungeonAPI;
 using ItemAPI;
 using NpcApi;
@@ -21,10 +21,12 @@ using LootTableAPI;
 using Alexandria.CharacterAPI;
 using BepInEx;
 using Alexandria;
+using Alexandria.Misc;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
-    [BepInPlugin(GUID, "Once More Into The Breach", "1.28.1")]
+    [BepInPlugin(GUID, "Once More Into The Breach", "1.30.0")]
     [BepInDependency(ETGModMainBehaviour.GUID)]
     [BepInDependency("etgmodding.etg.mtgapi")]
     [BepInDependency("kyle.etg.gapi")]
@@ -34,14 +36,23 @@ namespace NevernamedsItems
         public const string GUID = "nevernamed.etg.omitb";
         public static Initialisation instance;
         //public static AdvancedStringDB Strings;
+        public static string FilePathFolder;
 
+        //Assets
+        public static AssetBundle assetBundle;
+        public static tk2dSpriteCollectionData itemCollection;
+        public static tk2dSpriteCollectionData gunCollection;
+        public static tk2dSpriteCollectionData companionCollection;
+        public static tk2dSpriteCollectionData VFXCollection;
+        public static tk2dSpriteCollectionData NPCCollection;
+        public static tk2dSpriteCollectionData ProjectileCollection;
         public void Awake()
         {
         }
         public void Start()
         {
             ETGModMainBehaviour.WaitForGameManagerStart(GMStart);
-        }
+        }        
         public void GMStart(GameManager manager)
         {
             try
@@ -52,6 +63,14 @@ namespace NevernamedsItems
 
                 //Bepin bullshit
                 ETGMod.Assets.SetupSpritesFromFolder(System.IO.Path.Combine(this.FolderPath(), "sprites"));
+                FilePathFolder = this.FolderPath();
+
+                //Assets
+                assetBundle = AssetBundleLoader.LoadAssetBundleFromLiterallyAnywhere("omitbbundle", true);
+                itemCollection = AssetBundleLoader.FastLoadSpriteCollection(assetBundle, "ItemCollection", "ItemCollectionMaterial.mat");
+                gunCollection = AssetBundleLoader.FastLoadSpriteCollection(assetBundle, "GunCollection", "GunCollectionMaterial.mat");
+
+                JsonEmbedder.EmbedJsonDataFromAssembly(Assembly.GetExecutingAssembly(), gunCollection, "NevernamedsItems/Resources/GunJsons");
 
                 //Tools and Toolboxes
                 StaticReferences.Init();
@@ -69,7 +88,6 @@ namespace NevernamedsItems
                 CustomClipAmmoTypeToolbox.Init();
                 EnemyTools.Init();
                 NpcApi.Hooks.Init();
-                EnemyAPI.Hooks.Init();
                 SaveAPIManager.Setup("nn");
                 AudioResourceLoader.InitAudio();
                 CurseManager.Init();
@@ -133,6 +151,8 @@ namespace NevernamedsItems
                 BulletComponentLister.Init();
                 ObjectComponentLister.Init();
 
+                StandardisedProjectiles.Init();
+
                 //-----------------------------------------------------ITEMS GET INITIALISED
                 #region ItemInitialisation
                 //Character Starters
@@ -159,7 +179,6 @@ namespace NevernamedsItems
                 PromethianBullets.Init();
                 EpimethianBullets.Init();
                 RandoRounds.Init();
-                IngressBullets.Init(); //Unfinished
                 HematicRounds.Init();
                 FullArmourJacket.Init();
                 MirrorBullets.Init();
@@ -183,7 +202,6 @@ namespace NevernamedsItems
                 WarpBullets.Init();
                 BulletsWithGuns.Init();
                 LaserBullets.Init();
-                BalancedBullets.Init(); //Unfinished
                 WoodenBullets.Init();
                 ComicallyGiganticBullets.Init(); //Excluded
                 KnightlyBullets.Init();
@@ -196,6 +214,7 @@ namespace NevernamedsItems
                 BreachingRounds.Init();
                 MagnetItem.Init();
                 EargesplittenLoudenboomerRounds.Init();
+                RoundsOfTheReaver.Init();
                 TheShell.Init();
                 //Status Effect Bullet Mods
                 SnailBullets.Init();
@@ -252,6 +271,7 @@ namespace NevernamedsItems
                 NNBlankPersonality.Init();
                 BlankDie.Init();
                 Blombk.Init();
+                Blanket.Init();
                 Blankh.Init();
                 //Key Themed Items
                 BlankKey.Init();
@@ -272,6 +292,7 @@ namespace NevernamedsItems
                 //Boxes and Stuff
                 BloodyBox.Init();
                 MaidenShapedBox.Init();
+                SetOfAllSets.Init();
                 Toolbox.Init();
                 PocketChest.Init();
                 DeliveryBox.Init();
@@ -302,6 +323,7 @@ namespace NevernamedsItems
                 TableTechAmmo.Init();
                 TableTechGuon.Init();
                 TableTechNology.Init();
+                TableTechSpectre.Init();
                 UnsTableTech.Init();
                 RectangularMirror.Init();
                 //Guon Stones
@@ -350,6 +372,7 @@ namespace NevernamedsItems
                 GunknightAmulet.Init();
                 AmuletOfShelltan.Init();
                 CrosshairNecklace.Init();
+                HauntedAmulet.Init();
                 //Rings
                 RingOfOddlySpecificBenefits.Init();
                 FowlRing.Init();
@@ -443,6 +466,7 @@ namespace NevernamedsItems
                 BagOfHolding.Init();
                 ItemCoupon.Init();
                 IdentityCrisis.Init();
+                Pyromania.Init();
                 LiquidMetalBody.Init();
                 GunGrease.Init();
                 BomberJacket.Init();
@@ -494,6 +518,7 @@ namespace NevernamedsItems
                 EqualityItem.Init();
                 BitBucket.Init();
                 Eraser.Init();
+                GunpowderGreen.Init();
                 TackShooter.Init();
                 Moonrock.Init();
                 Telekinesis.Init();
@@ -562,7 +587,9 @@ namespace NevernamedsItems
                 MinuteGun.Add();
                 Ulfberht.Add();
                 SpacersFancy.Add();
+                FractalGun.Add();
                 SalvatorDormus.Add();
+                ServiceWeapon.Add();
                 HeadOfTheOrder.Add();
                 GunOfAThousandSins.Add();
                 DoubleGun.Add();
@@ -589,6 +616,7 @@ namespace NevernamedsItems
                 ElysiumCannon.Add();
                 DisplacerCannon.Add();
                 //SCI-FI GUNS
+                Rewarp.Add();
                 Blasmaster.Add();
                 St4ke.Add();
                 Robogun.Add();
@@ -636,6 +664,7 @@ namespace NevernamedsItems
                 ARCCannon.Add();
                 //BOWS AND CROSSBOWS
                 IceBow.Add();
+                TitanSlayer.Add();
                 Boltcaster.Add();
                 VulcanRepeater.Add();
                 Clicker.Add();
@@ -656,12 +685,16 @@ namespace NevernamedsItems
                 WoodenHorse.Add();
                 AgarGun.Add();
                 MusketRifle.Add();
+                Arquebus.Add();
                 TheBlackSpot.Add();
                 //KNIVES AND BLADES
                 Carnwennan.Add();
                 MantidAugment.Add();
+                Claymore.Add();
+                Scythe.Add();
                 //REALISTIC GUNS
                 HeatRay.Add();
+                BlueGun.Add();
                 BarcodeScanner.Add();
                 AntimaterielRifle.Add();
                 Primos1.Add();
@@ -678,15 +711,25 @@ namespace NevernamedsItems
                 Skorpion.Add();
                 HeavyAssaultRifle.Add();
                 DynamiteLauncher.Add();
+                BouncerUzi.Add();
+                Borz.Add();
+                Borchardt.Add();
                 MarbledUzi.Add();
                 BurstRifle.Add();
                 DublDuck.Add();
+                Type56.Add();
+                G11.Add();
                 OlReliable.Add();
+                //FLAMETHROWERS
+                FlamethrowerMk1.Add();
+                FlamethrowerMk2.Add();
                 //MISSILE LAUNCHERS
+                BouncerRPG.Add();
                 BottleRocket.Add();
                 NNBazooka.Add();
                 BoomBeam.Add();
                 Pillarocket.Add();
+                DoomBoom.Add();
                 //ANIMAL / ORGANIC GUNS
                 SporeLauncher.Add();
                 PoisonDartFrog.Add();
@@ -703,12 +746,16 @@ namespace NevernamedsItems
                 Carrion.Add();
                 UterinePolyp.Add();
                 Wrinkler.Add();
+                //SNAKE GUNS
+                SnakePistol.Add();
                 //BLADES
                 ButchersKnife.Add();
                 RapidRiposte.Add();
                 //FUN GUNS
+                ConfettiCannon.Add();
                 Gumgun.Add();
                 Glooper.Add();
+                Makatov.Add();
                 Accelerator.Add();
                 PaintballGun.Add();
                 Converter.Add();
@@ -728,9 +775,11 @@ namespace NevernamedsItems
                 GayK47.Add();
                 LaundromaterielRifle.Add();
                 DecretionCarbine.Add();
+                Amalgun.Add();
                 RC360.Add();
                 RazorRifle.Add();
                 UziSpineMM.Add();
+                AlternatingFire.Add();
                 Autogun.Add();
                 Rebondir.Add();
                 BigShot.Add();
@@ -740,6 +789,7 @@ namespace NevernamedsItems
                 PocoLoco.Add();
                 BioTranstater2100.Add();
                 //MAGICAL GUNS
+                Bejeweler.Add();
                 TotemOfGundying.Add();
                 Icicle.Add();
                 GunjurersStaff.Add();
@@ -796,9 +846,14 @@ namespace NevernamedsItems
                 DARCCannon.Add();
                 Bloodwash.Add();
                 SalvatorDormusM1893.Add();
+                ServiceWeaponShatter.Add();
+                ServiceWeaponSpin.Add();
+                ServiceWeaponPierce.Add();
+                ServiceWeaponCharge.Add();
+                BigBorz.Add();
                 #endregion
 
-
+                 
                 //-----------------------------------------------------SHRINES GET INITIALISED
                 #region ShrineInitialisation
                 InvestmentShrine.Add();
@@ -877,40 +932,75 @@ namespace NevernamedsItems
 
                 ETGModConsole.Commands.AddUnit("nndebugflow", (args) => { DungeonHandler.debugFlow = !DungeonHandler.debugFlow; string status = DungeonHandler.debugFlow ? "enabled" : "disabled"; string color = DungeonHandler.debugFlow ? "00FF00" : "FF0000"; ETGModConsole.Log($"OMITB flow {status}", false); });
 
-                //PoopySchloopy
-                /* Dungeon keepDungeon = DungeonDatabase.GetOrLoadByName("base_jungle");
-                 if (keepDungeon == null) ETGModConsole.Log("Jungle null!");
-                 if (keepDungeon && keepDungeon.PatternSettings != null)
-                 {
-                     if (keepDungeon.PatternSettings.flows != null && keepDungeon.PatternSettings.flows.Count > 0)
-                     {
-                         if (keepDungeon.PatternSettings.flows[0].fallbackRoomTable)
-                         {
-                             if (keepDungeon.PatternSettings.flows[0].fallbackRoomTable.includedRooms != null)
-                             {
-                                 if (keepDungeon.PatternSettings.flows[0].fallbackRoomTable.includedRooms.elements != null)
-                                 {
-                                     foreach (WeightedRoom wRoom in keepDungeon.PatternSettings.flows[0].fallbackRoomTable.includedRooms.elements)
-                                     {
+                ETGModConsole.Commands.GetGroup("nn").AddUnit("listassets", delegate (string[] args)
+                {
+                    foreach (string name in BundlePrereqs)
+                    {
+                        string[] names = ResourceManager.LoadAssetBundle(name).GetAllAssetNames();
+                        foreach (string n in names)
+                        {
+                            ETGModConsole.Log(n);
+                        }
+                    }
+                }, null);
 
-                                         if (wRoom.room != null && !string.IsNullOrEmpty(wRoom.room.name))
-                                         {
-                                             ETGModConsole.Log(wRoom.room.name);
-                                         }
-                                     }
-                                 }
-                                 else ETGModConsole.Log("No elements");
-                             }
-                             else ETGModConsole.Log("No included rooms");
-                         }
-                         else ETGModConsole.Log("No fallback room table");
-                     }
-                     else ETGModConsole.Log("Flow was null or empty");
-                 }
-                 else ETGModConsole.Log("Pattern settings null");
-                 keepDungeon = null;*/
+               
+                ETGModConsole.Commands.GetGroup("nn").AddUnit("setObj", delegate (string[] args)
+                {
+                    if (tempdict == null)
+                    {
+                        tempdict = new Dictionary<string, GameObject>()
+                        {
+                            {"rattrap", (EnemyDatabase.GetOrLoadByGuid("6868795625bd46f3ae3e4377adce288b").GetComponent<ResourcefulRatController>().MouseTraps[1]) },
+                            {"oubdrop", ExoticPlaceables.OubTrapdoor },
+                            {"telesign", ExoticPlaceables.TeleporterSign },
+                            {"shoplayout", ExoticPlaceables.ShopLayout },
 
+                            {"shopcrates", ExoticPlaceables.Crates },
+                            {"shopcrate", ExoticPlaceables.Crate },
+                            {"shopsack", ExoticPlaceables.Sack },
+                            {"shopshellbarrel", ExoticPlaceables.ShellBarrel },
+                            {"shopshelf", ExoticPlaceables.Shelf },
+                            {"shopmask", ExoticPlaceables.Mask },
+                            {"shopwallsword", ExoticPlaceables.Wallsword },
+                            {"shopstandingshelf", ExoticPlaceables.StandingShelf },
+                            {"shopakbarrel", ExoticPlaceables.AKBarrel },
+                            {"shopstool", ExoticPlaceables.Stool },
 
+                            {"upsign", ExoticPlaceables.SignUp },
+                            {"rightsign", ExoticPlaceables.SignRight },
+                            {"leftsign", ExoticPlaceables.SignLeft },
+
+                            {"secretroom", ExoticPlaceables.secretroomlayout },
+
+                         };
+                    }
+
+                    string floorToCheck = "UNDEFINED";
+                    if (args != null && args.Length > 0 && args[0] != null) { if (!string.IsNullOrEmpty(args[0])) { floorToCheck = args[0]; } }
+                    floorToCheck = floorToCheck.Replace("=", " ");
+                    bool set = false;
+                    if (tempdict.ContainsKey(floorToCheck))
+                    {
+                        toSpawn = tempdict[floorToCheck];
+                        set = true;
+                    }
+                    else
+                    {
+                    if (LoadHelper.LoadAssetFromAnywhere<GameObject>(floorToCheck))
+                    {
+                        toSpawn = LoadHelper.LoadAssetFromAnywhere<GameObject>(floorToCheck);
+                        set = true;
+                    }
+                    else if (LoadHelper.LoadAssetFromAnywhere<DungeonPlaceable>(floorToCheck))
+                    {
+                        toSpawn = LoadHelper.LoadAssetFromAnywhere<DungeonPlaceable>(floorToCheck).variantTiers[0].GetOrLoadPlaceableObject;
+                        set = true;
+                    }
+                    }
+                    if (!set) { ETGModConsole.Log("FAILED"); }
+
+                }, null);
 
 
                 ETGMod.StartGlobalCoroutine(this.delayedstarthandler());
@@ -923,6 +1013,40 @@ namespace NevernamedsItems
             }
         }
 
+        public static SharedInjectionData GungeonProperInjections;
+
+        public static Dictionary<string, GameObject> tempdict;
+        public static GameObject toSpawn;
+        public static string[] BundlePrereqs = new string[]
+                {
+                    "dungeon_scene_001",
+                    "encounters_base_001",
+                    "enemies_base_001",
+                    "flows_base_001",
+                    "foyer_001",
+                    "foyer_002",
+                    "foyer_003",
+                    "shared_base_001",
+                    "dungeons/base_bullethell",
+                    "dungeons/base_castle",
+                    "dungeons/base_catacombs",
+                    "dungeons/base_cathedral",
+                    "dungeons/base_forge",
+                    "dungeons/base_foyer",
+                    "dungeons/base_gungeon",
+                    "dungeons/base_mines",
+                    "dungeons/base_nakatomi",
+                    "dungeons/base_resourcefulrat",
+                    "dungeons/base_sewer",
+                    "dungeons/base_tutorial",
+                    "dungeons/finalscenario_bullet",
+                    "dungeons/finalscenario_convict",
+                    "dungeons/finalscenario_coop",
+                    "dungeons/finalscenario_guide",
+                    "dungeons/finalscenario_pilot",
+                    "dungeons/finalscenario_robot",
+                    "dungeons/finalscenario_soldier"
+                };
         public IEnumerator delayedstarthandler()
         {
             yield return null;

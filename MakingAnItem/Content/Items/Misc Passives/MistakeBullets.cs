@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Mistake Bullets";
-            string resourceName = "NevernamedsItems/Resources/mistakebullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<MistakeBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Your Bullets Suck!";
-            string longDesc = "Gain a firerate and reload speed bonus, in exchange for negative knockback.\n\n" + "No relation to the actual Mistake though. These bullets were made by a hunchbacked hermit living in space Albania or something.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<MistakeBullets>(
+            "Mistake Bullets",
+            "Your Bullets Suck!",
+            "Gain a firerate and reload speed bonus, in exchange for negative knockback.\n\n" + "No relation to the actual Mistake though. These bullets were made by a hunchbacked hermit living in space Albania or something.",
+            "mistakebullets_icon");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.KnockbackMultiplier, -3, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.RateOfFire, 1.2f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ReloadSpeed, 0.7f, StatModifier.ModifyMethod.MULTIPLICATIVE);

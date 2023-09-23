@@ -15,14 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Pestiferous Lead";
-            string resourceName = "NevernamedsItems/Resources/pestiferouslead_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<PestiferousLead>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "The Fester Pours";
-            string longDesc = "These shells are loaded with a potent viral slurry, capable of quickly spreading through an enemy legion."+"\n\nFar removed from the ancient days of plague warfare, which typically involved corpses and catapults.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<PestiferousLead>(
+            "Pestiferous Lead",
+            "The Fester Pours",
+            "These shells are loaded with a potent viral slurry, capable of quickly spreading through an enemy legion." + "\n\nFar removed from the ancient days of plague warfare, which typically involved corpses and catapults.",
+            "pestiferouslead_icon");
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("bullet_modifier");
             //Unlock

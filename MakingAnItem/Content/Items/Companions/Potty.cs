@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string name = "Potto";
-            string resourcePath = "NevernamedsItems/Resources/Companions/Potty/potty_spawnobject_002";
-            GameObject gameObject = new GameObject();
-            var companionItem = gameObject.AddComponent<Potty>();
-            ItemBuilder.AddSpriteToObject(name, resourcePath, gameObject);
-            string shortDesc = "Clay Companion";
-            string longDesc = "Occasionally pops out some money on room clear, and hides some... other secrets." + "\n\nThis little pot appears to have gained sentience. It's empty head contains many things, but most of all it is full of friendship!";
-            companionItem.SetupItem(shortDesc, longDesc, "nn");
+            CompanionItem companionItem = ItemSetup.NewItem<Potty>(
+            "Potto",
+            "Clay Companion",
+            "Occasionally pops out some money on room clear, and hides some... other secrets." + "\n\nThis little pot appears to have gained sentience. It's empty head contains many things, but most of all it is full of friendship!",
+            "potto_icon") as CompanionItem;
             companionItem.quality = PickupObject.ItemQuality.C;
             companionItem.CompanionGuid = Potty.guid;
 

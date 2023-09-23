@@ -14,16 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Table Tech Guon";
-            string resourceName = "NevernamedsItems/Resources/tabletechguon_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<TableTechGuon>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Spinflip";
-            string longDesc = "This highly special spinning flip technique causes chunks of table to become detatched and orbit their creator in a guon stone form before disintegrating from sheer awe." + "\n\nChapter ??? of the 'Tabla Sutra'. A true flip does not protect only once, but many times after as well.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            TableFlipItem item = ItemSetup.NewItem<TableTechGuon>(
+              "Table Tech Guon",
+              "Spinflip",
+              "This highly special spinning flip technique causes chunks of table to become detatched and orbit their creator in a guon stone form before disintegrating from sheer awe." + "\n\nChapter ??? of the 'Tabla Sutra'. A true flip does not protect only once, but many times after as well.",
+              "tabletechguon_icon") as TableFlipItem;
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("table_tech");
         }

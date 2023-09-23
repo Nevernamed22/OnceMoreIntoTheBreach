@@ -361,8 +361,7 @@ namespace NevernamedsItems
         {
             if (basicBeamControllerSelf)
             {
-                LinkedList<BasicBeamController.BeamBone> bones;
-                bones = OMITBReflectionHelpers.ReflectGetField<LinkedList<BasicBeamController.BeamBone>>(typeof(BasicBeamController), "m_bones", basicBeamControllerSelf);
+                LinkedList<BasicBeamController.BeamBone> bones = basicBeamControllerSelf.m_bones;
                 if (bones != null)
                 {
                     if (bones.Count > boneNumLastChecked)

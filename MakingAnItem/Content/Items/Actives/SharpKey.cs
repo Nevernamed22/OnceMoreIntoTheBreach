@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Sharp Key";
-            string resourceName = "NevernamedsItems/Resources/sharpkey_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<SharpKey>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "SaKeyfice";
-            string longDesc = "This key is hungry for sustenance so that it may lay its eggs, and spawn the next generation of keys.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<SharpKey>(
+            "Sharp Key",
+            "SaKeyfice",
+            "This key is hungry for sustenance so that it may lay its eggs, and spawn the next generation of keys.",
+            "sharpkey_improved") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 5);
             item.AddPassiveStatModifier( PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.consumable = false;

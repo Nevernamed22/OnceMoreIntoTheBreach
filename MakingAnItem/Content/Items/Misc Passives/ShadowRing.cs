@@ -13,18 +13,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Shadow Ring";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/shadowring_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<ShadowRing>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Umbral";
-            string longDesc = "Creates a shadow realm duplicate upon damage."+"\n\nForged of darkness and misery, mined from the shrunken dead heart of an emo teenager.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PickupObject item = ItemSetup.NewItem<ShadowRing>(
+            "Shadow Ring",
+            "Umbral",
+            "Creates a shadow realm duplicate upon damage." + "\n\nForged of darkness and misery, mined from the shrunken dead heart of an emo teenager.",
+            "shadowring_icon");
             item.quality = PickupObject.ItemQuality.D;
-
             ID = item.PickupObjectId;
         }
         public static int ID;

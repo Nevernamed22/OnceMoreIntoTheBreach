@@ -11,14 +11,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Forsaken Heart";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/forsakenheart_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<ForsakenHeart>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "And lo, it shall embroil within";
-            string longDesc = "A cursed heart embiggens the smallest of wretches.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<ForsakenHeart>(
+            "Forsaken Heart",
+            "And lo, it shall embroil within",
+            "A cursed heart embiggens the smallest of wretches.",
+            "forsakenheart_icon");
             item.AddPassiveStatModifier( PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.quality = PickupObject.ItemQuality.B;
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);

@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Keybullet Effigy";
-            string resourceName = "NevernamedsItems/Resources/keybulleteffigy_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<KeyBulletEffigy>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Aimgels on High";
-            string longDesc = "Keybullet Kin drop bonus keys." + "\n\nA holy item from a historical sect of Gun Cultists that worshipped Keybullet Kin as Aimgels of Kaliber, sent down from Bullet Heaven to deliver holy gifts.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<KeyBulletEffigy>(
+            "Keybullet Effigy",
+            "Aimgels on High",
+            "Keybullet Kin drop bonus keys." + "\n\nA holy item from a historical sect of Gun Cultists that worshipped Keybullet Kin as Aimgels of Kaliber, sent down from Bullet Heaven to deliver holy gifts.",
+            "keybulleteffigy_icon");
             item.quality = PickupObject.ItemQuality.D;
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
             item.AddToSubShop(ItemBuilder.ShopType.Flynt);

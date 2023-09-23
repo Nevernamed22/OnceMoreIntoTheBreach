@@ -12,31 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Frost Key";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/frostkey_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<FrostKey>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Cold Open";
-            string longDesc = "Keys increase coolness."+"\n\nDespite his age, Flynt remains stubbornly convinced that he is, and always will be, a 'cool dude' (as the kids say).";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item            
-            //Set the rarity of the item
+            PickupObject item = ItemSetup.NewItem<FrostKey>(
+            "Frost Key",
+            "Cold Open",
+            "Keys increase coolness." + "\n\nDespite his age, Flynt remains stubbornly convinced that he is, and always will be, a 'cool dude' (as the kids say).",
+            "frostkey_icon");
             item.AddToSubShop(ItemBuilder.ShopType.Flynt);
             item.quality = PickupObject.ItemQuality.B;
         }

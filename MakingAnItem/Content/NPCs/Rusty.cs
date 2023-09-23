@@ -102,7 +102,7 @@ namespace NevernamedsItems
 
                 //MY ITEMS
                 MistakeBullets.MistakeBulletsID,
-                TracerRound.TracerRoundsID,
+                TracerRound.ID,
                 IronSights.IronSightsID,
                 GlassChamber.GlassChamberID,
                 BulletBoots.BulletBootsID,

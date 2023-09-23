@@ -15,14 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Grim Blanks";
-            string resourceName = "NevernamedsItems/Resources/grimblanks_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<GrimBlanks>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Bullets Die With You";
-            string longDesc = "Killing an enemy erases all of their bullets."+"\n\nThese special blanks are subtle, quiet, and highly targeted.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<GrimBlanks>(
+            "Grim Blanks",
+            "Bullets Die With You",
+            "Killing an enemy erases all of their bullets." + "\n\nThese special blanks are subtle, quiet, and highly targeted.",
+            "grimblanks_icon");
             item.quality = PickupObject.ItemQuality.D;
         }
         private void OnEnemyKilled(PlayerController player, HealthHaver enemy)

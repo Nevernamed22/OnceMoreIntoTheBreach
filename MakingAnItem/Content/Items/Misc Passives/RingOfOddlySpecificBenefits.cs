@@ -12,31 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Ring of Oddly Specific Benefits";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/ringofoddlyspecificbenefits_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<RingOfOddlySpecificBenefits>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Picky Picky";
-            string longDesc = "Gives certain boons in... oddly specific situation." + "\n\nThis ring was created by the mad wizard Alben Smallbore, though even he has no clue what it actually does.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item            
-            //Set the rarity of the item
+            PickupObject item = ItemSetup.NewItem<RingOfOddlySpecificBenefits>(
+            "Ring of Oddly Specific Benefits",
+            "Picky Picky",
+            "Gives certain boons in... oddly specific situations." + "\n\nThis ring was created by the mad wizard Alben Smallbore, though even he has no clue what it actually does.",
+            "ringofoddlyspecificbenefits_icon");
             item.quality = PickupObject.ItemQuality.D;
         }
         private float currentArmour, lastArmour;

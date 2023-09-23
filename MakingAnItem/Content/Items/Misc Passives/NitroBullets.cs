@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Nitro Bullets";
-            string resourceName = "NevernamedsItems/Resources/nitrobullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<NitroBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Badda Bing...";
-            string longDesc = "50% chance for enemies to explode violently on death."+"\n\nMade by a lunatic who loved the way the ground shook when he used his special brand of... making things go away."+"\n\nYou are not immune to these explosions. You have been warned.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<NitroBullets>(
+            "Nitro Bullets",
+            "Badda Bing...",
+            "50% chance for enemies to explode violently on death." + "\n\nMade by a lunatic who loved the way the ground shook when he used his special brand of... making things go away." + "\n\nYou are not immune to these explosions. You have been warned.",
+            "nitrobullets_icon");           
             item.quality = PickupObject.ItemQuality.C;
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
             item.SetTag("bullet_modifier");

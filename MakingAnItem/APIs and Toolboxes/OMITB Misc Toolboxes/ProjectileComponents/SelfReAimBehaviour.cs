@@ -47,7 +47,7 @@ namespace NevernamedsItems
                 if (m_projectile)
                 {
                     Vector2 dirVec = m_projectile.GetVectorToNearestEnemy();
-                    m_projectile.SendInDirection(dirVec, false, true);
+                   if (dirVec != Vector2.zero) m_projectile.SendInDirection(dirVec, false, true);
                 }
             }
             yield break;

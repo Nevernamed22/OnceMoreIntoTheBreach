@@ -15,14 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Silver Ammolet";
-            string resourceName = "NevernamedsItems/Resources/silverammolet_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<SilverAmmolet>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Blanks Cleanse";
-            string longDesc = "A holy artefact from The Order of The True Gun's archives." + "\n\nMade of 200% Silver, and capable of bestowing a holy cleanse upon the Jammed.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            BlankModificationItem item = ItemSetup.NewItem<SilverAmmolet>(
+            "Silver Ammolet",
+            "Blanks Cleanse",
+            "A holy artefact from The Order of The True Gun's archives." + "\n\nMade of 200% Silver, and capable of bestowing a holy cleanse upon the Jammed.",
+            "silverammolet_icon") as BlankModificationItem;
             item.quality = PickupObject.ItemQuality.C;
 
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalBlanksPerFloor, 1f, StatModifier.ModifyMethod.ADDITIVE);

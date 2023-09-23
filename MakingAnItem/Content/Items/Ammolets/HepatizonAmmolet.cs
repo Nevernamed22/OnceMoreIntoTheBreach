@@ -16,16 +16,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Hepatizon Ammolet";
-            string resourceName = "NevernamedsItems/Resources/hepatizonammolet_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<HepatizonAmmolet>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Blanks Infect";
-            string longDesc = "Blanks blast out microparticles of infected fluid, spreading the plague to enemies." + "\n\nSome say the original plague virus was brought to the Gungeon by the Resourceful Rat.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-
+            BlankModificationItem item = ItemSetup.NewItem<HepatizonAmmolet>(
+            "Hepatizon Ammolet",
+            "Blanks Infect",
+            "Blanks blast out microparticles of infected fluid, spreading the plague to enemies." + "\n\nSome say the original plague virus was brought to the Gungeon by the Resourceful Rat.",
+            "hepatizonammolet_icon") as BlankModificationItem;
             item.quality = PickupObject.ItemQuality.B;
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalBlanksPerFloor, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);

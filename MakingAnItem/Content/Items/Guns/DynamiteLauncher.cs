@@ -64,13 +64,13 @@ namespace NevernamedsItems
                 "dynamiteproj_2",
                 "dynamiteproj_3",
                 "dynamiteproj_4",
-            }, 8, true, new List<IntVector2> {
+            }, 8, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                 new IntVector2(14, 15), //1
                 new IntVector2(15, 14), //2            
                 new IntVector2(14,15), //3
                 new IntVector2(15, 14), //4
             }, AnimateBullet.ConstructListOfSameValues(false, 4), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4), AnimateBullet.ConstructListOfSameValues(true, 4), AnimateBullet.ConstructListOfSameValues(false, 4),
-                        AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4));
+                        AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Dynamite Launcher Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/dynamitelauncher_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/dynamitelauncher_clipempty");

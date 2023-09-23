@@ -14,15 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Cursed Tumbler";
-            string resourceName = "NevernamedsItems/Resources/cursedtumbler_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<CursedTumbler>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "What's In The Box?";
-            string longDesc = "Gives chests a chance to be Jammed."+"\n\nAn 4th dimensional set of mechanisms designed to lock away all evil in this world.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<CursedTumbler>(
+            "Cursed Tumbler",
+            "What's In The Box?",
+            "Gives chests a chance to be Jammed." + "\n\nAn 4th dimensional set of mechanisms designed to lock away all evil in this world.",
+            "cursedtumbler_icon");
             item.AddPassiveStatModifier( PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.B;

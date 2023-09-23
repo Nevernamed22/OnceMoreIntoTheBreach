@@ -55,7 +55,11 @@ namespace NevernamedsItems
             projectile.baseData.range *= 1f;
             projectile.SetProjectileSpriteRight("enemystyle_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
             InstantTeleportToPlayerCursorBehav tp = projectile.gameObject.GetOrAddComponent<InstantTeleportToPlayerCursorBehav>();
-            
+
+
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Beastclaw Ammo", "NevernamedsItems/Resources/CustomGunAmmoTypes/beastclaw_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/beastclaw_clipempty");
+
 
             gun.quality = PickupObject.ItemQuality.A;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

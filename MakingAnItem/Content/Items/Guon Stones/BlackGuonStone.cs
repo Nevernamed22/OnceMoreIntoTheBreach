@@ -18,18 +18,11 @@ namespace NevernamedsItems
         public static PlayerOrbital upgradeOrbitalPrefab;
         public static void Init()
         {
-            string itemName = "Black Guon Stone";
-            string resourceName = "NevernamedsItems/Resources/GuonStones/blackguonstone_icon";
-
-            GameObject obj = new GameObject();
-
-            var item = obj.AddComponent<BlackGuonStone>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            string shortDesc = "No Bullets Can Escape";
-            string longDesc = "Chance to crush enemy bullets into a single point of infinite density."+"\n\nThis ancient stone, though appearing arcane, is entirely based on scientific principles. Batteries are included.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            AdvancedPlayerOrbitalItem item = ItemSetup.NewItem<BlackGuonStone>(
+            "Black Guon Stone",
+            "No Bullets Can Escape",
+            "Chance to crush enemy bullets into a single point of infinite density." + "\n\nThis ancient stone, though appearing arcane, is entirely based on scientific principles. Batteries are included.",
+            "blackguonstone_icon") as AdvancedPlayerOrbitalItem;
             item.quality = PickupObject.ItemQuality.B;
 
             item.OrbitalPrefab = BuildPrefab();
@@ -42,7 +35,8 @@ namespace NevernamedsItems
         }
         public static PlayerOrbital BuildPrefab()
         {
-            GameObject prefab = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/GuonStones/blackguonstone_orbital");
+            
+            GameObject prefab = ItemBuilder.SpriteFromBundle("BlackGuonOrbital", Initialisation.itemCollection.GetSpriteIdByName("blackguonstone_orbital"), Initialisation.itemCollection);
             prefab.name = "Black Guon Orbital";
             var body = prefab.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(6, 9));
             body.CollideWithTileMap = false;
@@ -61,7 +55,8 @@ namespace NevernamedsItems
         }
         public static PlayerOrbital BuildSynergyPrefab()
         {
-            GameObject gameObject = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/GuonStones/blackguonstone_synergy", null);
+            
+            GameObject gameObject = ItemBuilder.SpriteFromBundle("BlackGuonOrbitalSynergy", Initialisation.itemCollection.GetSpriteIdByName("blackguonstone_synergy"), Initialisation.itemCollection);
             gameObject.name = "Black Guon Orbital Synergy Form";
             SpeculativeRigidbody speculativeRigidbody = gameObject.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(9, 13));
             upgradeOrbitalPrefab = gameObject.AddComponent<PlayerOrbital>();

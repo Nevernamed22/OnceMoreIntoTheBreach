@@ -18,18 +18,11 @@ namespace NevernamedsItems
         public static PlayerOrbital upgradeOrbitalPrefab;
         public static void Init()
         {
-            string itemName = "Cyan Guon Stone"; //The name of the item
-            string resourceName = "NevernamedsItems/Resources/GuonStones/cyanguon_icon"; //Refers to an embedded png in the project. Make sure to embed your resources!
-
-            GameObject obj = new GameObject();
-
-            var item = obj.AddComponent<CyanGuonStone>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            string shortDesc = "Slow and Steady";
-            string longDesc = "Targets enemies when you stand still."+"\n\nThis rock is inhabited by a powerful spirit of lethargy.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            AdvancedPlayerOrbitalItem item = ItemSetup.NewItem<CyanGuonStone>(
+            "Cyan Guon Stone",
+            "Slow and Steady",
+            "Targets enemies when you stand still." + "\n\nThis rock is inhabited by a powerful spirit of lethargy.",
+            "cyanguon_icon") as AdvancedPlayerOrbitalItem;
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("guon_stone");
 
@@ -54,8 +47,10 @@ namespace NevernamedsItems
         public static Projectile cyanGuonProj;
         public static void BuildPrefab()
         {
+            
+
             if (CyanGuonStone.orbitalPrefab != null) return;
-            GameObject prefab = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/GuonStones/cyanguon_ingame");
+            GameObject prefab = ItemBuilder.SpriteFromBundle("CyanGuonOrbital", Initialisation.itemCollection.GetSpriteIdByName("cyanguon_ingame"), Initialisation.itemCollection);
             prefab.name = "Cyan Guon Orbital";
             var body = prefab.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(5, 9));
             //prefab.GetComponent<tk2dSprite>().GetCurrentSpriteDef().ConstructOffsetsFromAnchor(tk2dBaseSprite.Anchor.MiddleCenter, body.GetComponent<tk2dSprite>().GetCurrentSpriteDef().position3);
@@ -78,8 +73,8 @@ namespace NevernamedsItems
         {
             bool flag = CyanGuonStone.upgradeOrbitalPrefab == null;
             if (flag)
-            {
-                GameObject gameObject = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/GuonStones/cyanguon_synergy", null);
+            {                
+                GameObject gameObject = ItemBuilder.SpriteFromBundle("CyanGuonOrbitalSynergy", Initialisation.itemCollection.GetSpriteIdByName("cyanguon_synergy"), Initialisation.itemCollection);
                 gameObject.name = "Cyan Guon Orbital Synergy Form";
                 SpeculativeRigidbody speculativeRigidbody = gameObject.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(9, 13));
                 //gameObject.GetComponent<tk2dSprite>().GetCurrentSpriteDef().ConstructOffsetsFromAnchor(tk2dBaseSprite.Anchor.MiddleCenter, gameObject.GetComponent<tk2dSprite>().GetCurrentSpriteDef().position3);

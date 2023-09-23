@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Supersonic Shots";
-            string resourceName = "NevernamedsItems/Resources/supersonicshot_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<SupersonicShots>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Nyoom";
-            string longDesc = "Makes your bullets travel at supersonic speeds." + "\n\nBrought to the Gungeon by the infamous speedster Tonic.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<SupersonicShots>(
+            "Supersonic Shots",
+            "Nyoom",
+            "Makes your bullets travel at supersonic speeds." + "\n\nBrought to the Gungeon by the infamous speedster Tonic.",
+            "supersonicshot_icon");           
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ProjectileSpeed, 10, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("bullet_modifier");

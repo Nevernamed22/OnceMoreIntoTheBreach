@@ -12,40 +12,28 @@ using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
-    class WoodGuonStone : IounStoneOrbitalItem
+    class WoodGuonStone : AdvancedPlayerOrbitalItem
     {
-        public static bool speedUp = false;
         public static PlayerOrbital orbitalPrefab;
-
-        //Call this method from the Start() method of your ETGModule extension
         public static void Init()
         {
-            string itemName = "Wood Guon Stone"; //The name of the item
-            string resourceName = "NevernamedsItems/Resources/woodguon_icon"; //Refers to an embedded png in the project. Make sure to embed your resources!
-
-            GameObject obj = new GameObject();
-
-            var item = obj.AddComponent<WoodGuonStone>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            string shortDesc = "Fleeting Protection";
-            string longDesc = "Provides brief protection, but destroys itself after a short time.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            AdvancedPlayerOrbitalItem item = ItemSetup.NewItem<WoodGuonStone>(
+            "Wood Guon Stone",
+            "Fleeting Protection",
+            "Provides brief protection, but destroys itself after a short time.",
+            "woodguon_icon") as AdvancedPlayerOrbitalItem;
+      
             item.quality = PickupObject.ItemQuality.EXCLUDED;
             item.SetTag("guon_stone");
 
             BuildPrefab();
             item.OrbitalPrefab = orbitalPrefab;
-            item.Identifier = IounStoneIdentifier.GENERIC;
-
             item.CanBeDropped = false;
         }
 
-        public static void BuildPrefab()
+        private static void BuildPrefab()
         {
-            if (WoodGuonStone.orbitalPrefab != null) return;
-            GameObject prefab = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/woodguon_ingame");
+            GameObject prefab = ItemBuilder.SpriteFromBundle("WoodGuonOrbital", Initialisation.itemCollection.GetSpriteIdByName("woodguon_ingame"), Initialisation.itemCollection);
             prefab.name = "Wood Guon Orbital";
             var body = prefab.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(7, 13));
             body.CollideWithTileMap = false;
@@ -59,9 +47,7 @@ namespace NevernamedsItems
             orbitalPrefab.orbitDegreesPerSecond = 120f;
             orbitalPrefab.SetOrbitalTier(0);
 
-            GameObject.DontDestroyOnLoad(prefab);
-            FakePrefab.MarkAsFakePrefab(prefab);
-            prefab.SetActive(false);
+            prefab.MakeFakePrefab();
         }
 
         public override void Pickup(PlayerController player)

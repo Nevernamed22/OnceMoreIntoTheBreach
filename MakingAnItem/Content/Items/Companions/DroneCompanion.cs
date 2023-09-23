@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string name = "Drone";
-            string resourcePath = "NevernamedsItems/Resources/Companions/DroneCompanion/drone_icon";
-            GameObject gameObject = new GameObject();
-            var companionItem = gameObject.AddComponent<CompanionItem>();
-            ItemBuilder.AddSpriteToObject(name, resourcePath, gameObject);
-            string shortDesc = "Beep Boop I'm A Drone";
-            string longDesc = "This little drone seems friendly despite it's objective lack of most defining features." + "\n\nIt seems accustomed to descending...";
-            companionItem.SetupItem(shortDesc, longDesc, "nn");
+            CompanionItem companionItem = ItemSetup.NewItem<CompanionItem>(
+            "Drone",
+            "Beep Boop I'm A Drone",
+            "This little drone seems friendly despite it's objective lack of most defining features." + "\n\nIt seems accustomed to descending...",
+            "drone_icon") as CompanionItem;
             companionItem.quality = PickupObject.ItemQuality.B;
             companionItem.CompanionGuid = DroneCompanion.guid;
 

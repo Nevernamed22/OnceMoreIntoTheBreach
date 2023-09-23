@@ -15,18 +15,17 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Shadow Key";
-            string resourceName = "NevernamedsItems/Resources/NeoActiveSprites/shadowkey_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<ShadowKey>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Dark Realmed";
-            string longDesc = "Duplicates a chest. One use."+"\n\nRecovered from a mysterious chest in a far off dungeon, this key is capable of turning a chest's shadow into an exact duplicate of the original.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<ShadowKey>(
+            "Shadow Key",
+            "Dark Realmed",
+            "Duplicates a chest. One use." + "\n\nRecovered from a mysterious chest in a far off dungeon, this key is capable of turning a chest's shadow into an exact duplicate of the original.",
+            "shadowkey_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 5);
             item.consumable = true;
             item.quality = ItemQuality.D;
             item.AddToSubShop(ItemBuilder.ShopType.Flynt);
+
+           
         }
         public override void DoEffect(PlayerController user)
         {

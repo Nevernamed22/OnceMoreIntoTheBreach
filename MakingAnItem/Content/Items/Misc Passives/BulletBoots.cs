@@ -13,17 +13,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Bullet Boots";
-            string resourceName = "NevernamedsItems/Resources/bulletboots_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BulletBoots>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Run and Gun";
-            string longDesc = "Fires bullets in the direction you're running."+"\n\nThe best offence is running directly at the enemy completely unguarded.";
+            PickupObject item = ItemSetup.NewItem<BulletBoots>(
+            "Bullet Boots",
+            "Run and Gun",
+            "Fires bullets in the direction you're running." + "\n\nThe best offence is running directly at the enemy completely unguarded.",
+            "bulletboots_icon");
             item.AddPassiveStatModifier( PlayerStats.StatType.MovementSpeed, 1, StatModifier.ModifyMethod.ADDITIVE);
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.D;
 

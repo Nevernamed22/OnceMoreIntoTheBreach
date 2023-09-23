@@ -12,15 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Wooden Bullets";
-            string resourceName = "NevernamedsItems/Resources/woodenbullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<WoodenBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Staple Material";
-            string longDesc = "Gives a minor increase to all bullet related stats.\n\n" + "Will you even notice it?";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PickupObject item = ItemSetup.NewItem<WoodenBullets>(
+            "Wooden Bullets",
+            "Staple Material",
+            "Gives a very minor increase to all bullet related stats.\n\n" + "Made of rich mahoguny.",
+            "woodenbullets_improved");          
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.KnockbackMultiplier, 1.05f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.RateOfFire, 1.05f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ReloadSpeed, 0.95f, StatModifier.ModifyMethod.MULTIPLICATIVE);

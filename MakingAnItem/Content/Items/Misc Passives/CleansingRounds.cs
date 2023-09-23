@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Cleansing Rounds";
-            string resourceName = "NevernamedsItems/Resources/cleansingrounds_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<CleansingRounds>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Undo What Is Done";
-            string longDesc = "These holy shells are capable of saving the Gundead from eternal Jamnation.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<CleansingRounds>(
+             "Cleansing Rounds",
+             "Undo What Is Done",
+             "These holy shells are capable of saving the Gundead from eternal Jamnation.",
+             "cleansingrounds_improved");
             List<string> mandatorySynergyItems = new List<string>() { "nn:cleansing_rounds", "silver_bullets" };
             CustomSynergies.Add("Holy Smackerel", mandatorySynergyItems);
             item.quality = PickupObject.ItemQuality.B;

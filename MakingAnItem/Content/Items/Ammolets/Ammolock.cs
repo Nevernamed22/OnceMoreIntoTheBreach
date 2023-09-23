@@ -16,16 +16,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Ammolock";
-            string resourceName = "NevernamedsItems/Resources/ammolock_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Ammolock>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Blanks Clamp";
-            string longDesc = "Blanks lock enemies in place, unable to move!" + "\n\nForged out of impossible Neutronium Alloy, this Ammolet saps Gundead of all their energy.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-
+            BlankModificationItem item = ItemSetup.NewItem<Ammolock>(
+            "Ammolock",
+            "Blanks Clamp",
+            "Blanks lock enemies in place, unable to move!" + "\n\nForged out of impossible Neutronium Alloy, this Ammolet saps Gundead of all their energy.",
+            "ammolock_icon") as BlankModificationItem;
             item.quality = PickupObject.ItemQuality.C;
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalBlanksPerFloor, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);

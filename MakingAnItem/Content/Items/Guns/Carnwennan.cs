@@ -62,7 +62,7 @@ namespace NevernamedsItems
 
             CarnwennanSlashModifier slash = projectile.gameObject.AddComponent<CarnwennanSlashModifier>();
             slash.DestroyBaseAfterFirstSlash = true;
-            slash.slashParameters = new SlashData();
+            slash.slashParameters = ScriptableObject.CreateInstance<SlashData>();
             slash.slashParameters.soundEvent = null;
             slash.slashParameters.projInteractMode = SlashDoer.ProjInteractMode.IGNORE;
             slash.slashParameters.playerKnockbackForce = 0;

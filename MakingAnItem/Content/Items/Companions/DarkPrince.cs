@@ -15,14 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string name = "Dark Prince";
-            string resourcePath = "NevernamedsItems/Resources/Companions/DarkPrince/darkprince_icon";
-            GameObject gameObject = new GameObject();
-            CompanionItem companionItem = gameObject.AddComponent<CompanionItem>();
-            ItemBuilder.AddSpriteToObject(name, resourcePath, gameObject);
-            string shortDesc = "Wicked Heir";
-            string longDesc = "This young Gunjurer is the unlikely heir to a vast magical empire, operating from beyond the curtain... he is also very impressionable, with his dark magics able to be put to fantastic use.";
-            companionItem.SetupItem(shortDesc, longDesc, "nn");
+            CompanionItem companionItem = ItemSetup.NewItem<CompanionItem>(
+            "Dark Prince",
+            "Wicked Heir",
+            "This young Gunjurer is the unlikely heir to a vast magical empire, operating from beyond the curtain... he is also very impressionable, with his dark magics able to be put to fantastic use.",
+            "darkprince_icon") as CompanionItem;
             companionItem.quality = PickupObject.ItemQuality.S;
             companionItem.CompanionGuid = DarkPrince.guid;
             DarkPrince.BuildPrefab();

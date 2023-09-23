@@ -11,14 +11,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Glass Rounds";
-            string resourceName = "NevernamedsItems/Resources/glassrounds_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<GlassRounds>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Right Through You";
-            string longDesc = "+5% damage for every Glass Guon Stone the bearer posesses."+"\n\nDisciples of the Lady of Pane are known for using these special bullets in reverence to their goddess.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<GlassRounds>(
+             "Glass Rounds",
+             "Right Through You",
+             "+5% damage for every Glass Guon Stone the bearer posesses." + "\n\nDisciples of the Lady of Pane are known for using these special bullets in reverence to their goddess.",
+             "glassrounds_icon");
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("bullet_modifier");
         }

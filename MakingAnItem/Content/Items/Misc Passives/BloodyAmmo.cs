@@ -15,14 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Bloody Ammo";
-            string resourceName = "NevernamedsItems/Resources/bloodyammo_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BloodyAmmo>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Lead Vessel";
-            string longDesc = "Heals the owner upon picking up ammo." + "\n\nAn ammo box with it's skin removed.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<BloodyAmmo>(
+            "Bloody Ammo",
+            "Lead Vessel",
+            "Heals the owner upon picking up ammo." + "\n\nAn ammo box with it's skin removed.",
+            "bloodyammo_icon");
             item.quality = PickupObject.ItemQuality.B;
             BloodyAmmoID = item.PickupObjectId;
         }

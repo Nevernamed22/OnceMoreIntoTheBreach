@@ -16,16 +16,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Barrel Chamber";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/barrelchamber_icon";
-
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BarrelChamber>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Wooden Shield";
-            string longDesc = "A hilariously pathetic example of the forgotten art of doliumancy." + "\n\nCreates a weak, albeit free defence upon reloading an empty clip.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PickupObject item = ItemSetup.NewItem<BarrelChamber>(
+            "Barrel Chamber",
+            "Wooden Shield",
+            "A hilariously pathetic example of the forgotten art of doliumancy." + "\n\nCreates a weak, albeit free defence upon reloading an empty clip.",
+            "barrelchamber_icon");
             item.quality = PickupObject.ItemQuality.D;
             ID = item.PickupObjectId;
         }
@@ -40,7 +35,8 @@ namespace NevernamedsItems
         }
         private IEnumerator BreakBarrel (MinorBreakable breakable)
         {
-            yield return new WaitForSeconds(15f);
+            float wait = UnityEngine.Random.Range(15f, 20f);
+            yield return new WaitForSeconds(wait);
             breakable.Break();
             yield break;
         }
@@ -66,9 +62,12 @@ namespace NevernamedsItems
                         barrel.GetComponentInChildren<SpeculativeRigidbody>().PrimaryPixelCollider.CollisionLayer = CollisionLayer.EnemyBulletBlocker;
                         barrel.GetComponentInChildren<tk2dSprite>().PlaceAtPositionByAnchor(barrelPos, tk2dSprite.Anchor.LowerCenter);
                         StartCoroutine(BreakBarrel(barrel.GetComponentInChildren<MinorBreakable>()));
+                        barrel = null;
                     }
+                    cell = null;
                 }
-
+                playerPosition = Vector2.zero;
+                listToUse = null;
                 Invoke("HandleCooldown", 0.5f);
             }
             yield break;

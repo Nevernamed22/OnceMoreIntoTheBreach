@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Hard Reload Bullets";
-            string resourceName = "NevernamedsItems/Resources/hardreloadbullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<HardReloadBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Slippery Buggers";
-            string longDesc = "These bullets were made by a narcissistic gunslinger purely to flex his highly trained fine motor skills on others.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<HardReloadBullets>(
+            "Hard Reload Bullets",
+            "Slippery Buggers",
+            "These bullets were made by a narcissistic gunslinger purely to flex his highly trained fine motor skills on others.",
+            "hardreloadbullets_icon");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ReloadSpeed, 1.5f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.30f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = PickupObject.ItemQuality.C;

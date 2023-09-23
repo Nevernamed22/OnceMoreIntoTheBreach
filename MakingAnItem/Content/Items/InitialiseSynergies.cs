@@ -900,7 +900,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("Lightning Fast Strike", mandatorySynergyItemsLightningFastStrike, optionalSynergyItemsLightningFastStrike);
             //VIPER / SNIPER RIFLE / AWP / 50 CALIBER ROUNDS / TRACER ROUND
             List<string> mandatorySynergyItemsSniperViper = new List<string>() { "nn:viper" };
-            List<string> optionalSynergyItemsSniperViper = new List<string>() { "sniper_rifle", "awp", "nn:50._cal_rounds", "nn:tracer_rounds" };
+            List<string> optionalSynergyItemsSniperViper = new List<string>() { "sniper_rifle", "awp", "nn:50_cal_rounds", "nn:tracer_rounds" };
             CustomSynergies.Add("Sniper Viper", mandatorySynergyItemsSniperViper, optionalSynergyItemsSniperViper);
             //SNAKER / SNAKE GUNS
             List<string> mandatorySynergyItemsSnakeWorldChampion = new List<string>() { "nn:snaker" };
@@ -1581,6 +1581,96 @@ namespace NevernamedsItems
             CustomSynergies.Add("Hidden Gem",
                 new List<string>() { "nn:cortex_blaster" },
                 new List<string>() { "ruby_bracelet", "nn:chaos_ruby", "nn:diamond_gun", "nn:diamond_bracelet", "nn:diamond_cutter" });
+
+            CustomSynergies.Add("Flash In The Pan",
+                new List<string>() { "nn:musket_rifle" },
+                new List<string>() { "dueling_pistol", "nn:gunpowder_pheromones", "flash_ray" });
+
+            AdvancedSynergyEntry SwordStance = CustomSynergies.Add("Sword Stance",
+                new List<string>() { "nn:claymore" },
+                new List<string>() { "katana_bullets", "nn:longsword_shot" });
+            SwordStance.ActiveWhenGunUnequipped = false;
+            SwordStance.statModifiers.Add(new StatModifier()
+            {
+                amount = 2f,
+                statToBoost = PlayerStats.StatType.RateOfFire,
+                modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+            });
+
+            CustomSynergies.Add("<shatter/break/unmake>",
+                new List<string>() { "nn:service_weapon" },
+                new List<string>() { "regular_shotgun", "old_goldie", "big_shotgun", "zilla_shotgun", "nn:double_gun", "nn:irregular_shotgun" });
+
+            CustomSynergies.Add("<spin/rotate/shred>",
+                new List<string>() { "nn:service_weapon" },
+                new List<string>() { "vulcan_cannon", "nn:gatling_gun", "oiled_cylinder", "orbital_bullets", "mr_accretion_jr", "nn:gravitron" });
+
+            CustomSynergies.Add("<pierce/penetrate/eviscerate>",
+               new List<string>() { "nn:service_weapon" },
+               new List<string>() { "ghost_bullets","sniper_rifle","nn:antimateriel_rifle", "nn:tau_cannon","nn:diamond_cutter" });
+
+            CustomSynergies.Add("<charge/decimate/kaboom>",
+               new List<string>() { "nn:service_weapon" },
+               new List<string>() { "rpg", "deck4rd" });
+
+            CustomSynergies.Add("Meet The Pyro",
+                new List<string>() { "nn:pyromania" },
+                new List<string>() { "gas_mask" });
+
+            CustomSynergies.Add("Recursive Recursions",
+                new List<string>() { "nn:set_of_all_sets" },
+                new List<string>() { "nn:repetitron", "nn:repeatovolver", "nn:mobius_clip"});
+
+            CustomSynergies.Add("Added Effect - Reave",
+                new List<string>() { "nn:rounds_of_the_reaver", "alpha_bullets" });
+
+            CustomSynergies.Add("My Favourite Blankie",
+                new List<string>() { "nn:blanket" },
+                new List<string>() { "nn:bullet_kin_plushie" });
+
+            CustomSynergies.Add("Bounce To The Rhythm",
+                new List<string>() { "nn:bouncer_uzi" },
+                new List<string>() { "metronome", "bouncy_bullets", "nn:riot_gun", "nn:pandephonium" });
+
+            CustomSynergies.Add("Purple Gungeon Eater",
+                new List<string>() { "nn:bouncer_uzi" },
+                new List<string>() { "gungeon_ant", "hungry_bullets", "charm_horn", "nn:warp_bullets" });
+
+            CustomSynergies.Add("Critical Success",
+                new List<string>() { "nn:g20" },
+                new List<string>() { "nn:blank_die", "nn:rando_rounds", "nn:amber_die", "nn:dice_grenade" });
+
+            CustomSynergies.Add("The Sum Of It's Parts",
+                new List<string>() { "nn:amalgun" },
+                new List<string>() { "blunderbuss", "gamma_ray", "ak47", "mac10", "m1911" });
+
+            CustomSynergies.Add("Prima Materia",
+                new List<string>() { "nn:antimateriel_rifle", "nn:prima_bean" });
+
+            CustomSynergies.Add("Ice Queen",
+                new List<string>() { "nn:blizzkrieg", "cold_45" });
+
+            CustomSynergies.Add("Back in Grozny",
+                new List<string>() { "nn:borz" },
+                new List<string>() { "ak47", "makarov" });
+
+            CustomSynergies.Add("Big Borz",
+                new List<string>() { "nn:borz" },
+                new List<string>() { "trank_gun", "saa", "patriot", "vulcan_cannon", "rc_rocket","machine_fist","ration","chaff_grenade","box","fortunes_favor", "nanomachines", "ancient_heros_bandana" });
+
+            CustomSynergies.Add("Any Way The Wind Blows",
+                new List<string>() { "nn:mama" },
+                new List<string>() { "nn:desk_fan", "balloon_gun","nn:cyclone_boots","nn:gusty" });
+
+            CustomSynergies.Add("Molotovs Revenge",
+                new List<string>() { "nn:makatov", "molotov_launcher" });
+
+            CustomSynergies.Add("Pac is Back!",
+                new List<string>() { "nn:haunted_amulet", "partially_eaten_cheese" });
+
+            CustomSynergies.Add("Spectrecular",
+                new List<string>() { "nn:haunted_amulet" },
+                new List<string>() { "gunslingers_ashes", "skull_spitter", "vertebraek47", "nn:uzi_spine_mm" });
             #endregion
 
 

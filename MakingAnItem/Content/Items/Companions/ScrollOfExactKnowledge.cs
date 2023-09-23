@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string name = "Scroll of Exact Knowledge";
-            string resourcePath = "NevernamedsItems/Resources/Companions/ScrollOfExactKnowledge/scrollofexactknowledge_icon";
-            GameObject gameObject = new GameObject();
-            CompanionItem companionItem = gameObject.AddComponent<ScrollOfExactKnowledge>();
-            ItemBuilder.AddSpriteToObject(name, resourcePath, gameObject);
-            string shortDesc = "Nerd";
-            string longDesc = "Offers useful information on the Gungeon around you."+"\n\nSeems to have a fear of being alone, and enjoys company.";
-            companionItem.SetupItem(shortDesc, longDesc, "nn");
+            CompanionItem companionItem = ItemSetup.NewItem<ScrollOfExactKnowledge>(
+            "Scroll of Exact Knowledge",
+            "Nerd",
+            "Offers useful information on the Gungeon around you." + "\n\nSeems to have a fear of being alone, and enjoys company.",
+            "scrollofexactknowledge_icon") as CompanionItem;
             companionItem.quality = PickupObject.ItemQuality.C;
             companionItem.CompanionGuid = ScrollOfExactKnowledge.guid;
             ScrollOfExactKnowledge.BuildPrefab();
@@ -335,13 +332,9 @@ namespace NevernamedsItems
                     {
                         if (enemy.specRigidbody && enemy.Position.GetAbsoluteRoom() == room)
                         {
-                            if (enemy.GetComponent<WallMimicController>() != null)
+                            if (enemy.GetComponent<WallMimicController>() != null && enemy.GetComponent<WallMimicController>().m_isHidden)
                             {
-                                bool isHidden = OMITBReflectionHelpers.ReflectGetField<bool>(typeof(WallMimicController), "m_isHidden", enemy.GetComponent<WallMimicController>());
-                                if (isHidden)
-                                {
                                     dialoguesToSay.Add("The walls in here look hungry...");
-                                }
                             }
                         }
                     }

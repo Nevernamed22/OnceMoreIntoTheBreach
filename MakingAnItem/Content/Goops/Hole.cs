@@ -22,6 +22,16 @@ namespace NevernamedsItems
             EasyGoopDefinitions.PitGoop.lifespan = 30f;
             EasyGoopDefinitions.PitGoop.overrideOpaqueness = 1f;
             EasyGoopDefinitions.PitGoop.name = "omitbpitgoop";
+            EasyGoopDefinitions.PitGoop.goopDamageTypeInteractions = new List<GoopDefinition.GoopDamageTypeInteraction>()
+            {
+                new GoopDefinition.GoopDamageTypeInteraction()
+                {
+                    freezesGoop = false,
+                    electrifiesGoop = false,
+                    ignitionMode = GoopDefinition.GoopDamageTypeInteraction.GoopIgnitionMode.NONE,
+                    damageType = CoreDamageTypes.None
+                }
+            };
             GoopUtility.RegisterComponentToGoopDefinition(EasyGoopDefinitions.PitGoop, typeof(HoleGoop));
         }
         public override void DoGoopEffectUpdate(DeadlyDeadlyGoopManager goop, GameActor actor, IntVector2 position)

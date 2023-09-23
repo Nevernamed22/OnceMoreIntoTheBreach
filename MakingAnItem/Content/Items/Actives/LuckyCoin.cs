@@ -10,41 +10,16 @@ namespace NevernamedsItems
 {
     class LuckyCoin : PlayerItem
     {
-        //Call this method from the Start() method of your ETGModule extension class
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Lucky Coin";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it.
-            string resourceName = "NevernamedsItems/Resources/luckycoin_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a ActiveItem component to the object
-            var item = obj.AddComponent<LuckyCoin>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Heads or Tails";
-            string longDesc = "50/50 change for a temporary stat bonus or a temporary stat penalty when used.\n\n" + "Legends tell of a time when coins such as this one were commonplace in the gungeon. They've since been exchanged for more...modern currency.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //"kts" here is the item pool. In the console you'd type kts:sweating_bullets
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Set the cooldown type and duration of the cooldown
+            PlayerItem item = ItemSetup.NewItem<LuckyCoin>(
+            "Lucky Coin",
+            "Heads or Tails",
+            "50/50 change for a temporary stat bonus or a temporary stat penalty when used.\n\n" + "Legends tell of a time when coins such as this one were commonplace in the gungeon. They've since been exchanged for more...modern currency.",
+            "luckycoin_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 500);
-
-            //Adds a passive modifier, like curse, coolness, damage, etc. to the item. Works for passives and actives.
-
-            //Set some other fields
             item.consumable = false;
             item.quality = ItemQuality.C;
-           
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
 
             List<string> mandatorySynergyItems = new List<string>() { "nn:lucky_coin", "seven_leaf_clover" };

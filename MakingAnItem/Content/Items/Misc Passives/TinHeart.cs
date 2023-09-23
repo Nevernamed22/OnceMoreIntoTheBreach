@@ -16,17 +16,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Tin Heart";
-            string resourceName = "NevernamedsItems/Resources/tinheart_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<TinHeart>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "If I Only Had A Heart";
-            string longDesc = "The empty heart of a loving gungeoneer who was tragically turned to tin by Meduzi, the jealous gunwitch." + "\n\nWhen you are truly empty inside, it sacrifices the only things you have left to keep you alive.";
+            PickupObject item = ItemSetup.NewItem<TinHeart>(
+            "Tin Heart",
+            "If I Only Had A Heart",
+            "The empty heart of a loving gungeoneer who was tragically turned to tin by Meduzi, the jealous gunwitch." + "\n\nWhen you are truly empty inside, it sacrifices the only things you have left to keep you alive.",
+            "tinheart_improved");          
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Health, 1, StatModifier.ModifyMethod.ADDITIVE);
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.B;
             TinHeartID = item.PickupObjectId;

@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Hallowed Bullets";
-            string resourceName = "NevernamedsItems/Resources/hallowedrounds_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<HallowedBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Bullet Holeys";
-            string longDesc = "These bullets are so blessed that they will preach to other projectiles mid-air. Usually this does nothing, but it does give Jammed projectiles a chance at redemption.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<HallowedBullets>(
+             "Hallowed Bullets",
+             "Bullet Holeys",
+             "These bullets are so blessed that they will preach to other projectiles mid-air. Usually this does nothing, but it does give Jammed projectiles a chance at redemption.",
+             "hallowedbullets_improved");
             item.quality = PickupObject.ItemQuality.D;
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_KEEP, true);

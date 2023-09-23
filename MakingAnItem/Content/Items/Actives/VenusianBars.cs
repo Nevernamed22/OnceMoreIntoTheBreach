@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Venusian Bars";
-            string resourceName = "NevernamedsItems/Resources/NeoActiveSprites/venusianbars_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<VenusianBars>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Verified";
-            string longDesc = "A charm forged out of pure, condensed talent by the one and only Gun God. While it doesn't allow the bearer to come even close to matching his skillz, they can still spit some mad bars and bullets.\n" + "Works best on Automatic weapons.\n\n\n\n" + "Pop Pop.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<VenusianBars>(
+            "Venusian Bars",
+            "Verified",
+            "A charm forged out of pure, condensed talent by the one and only Gun God. While it doesn't allow the bearer to come even close to matching his skillz, they can still spit some mad bars and bullets.\n" + "Works best on Automatic weapons.\n\n\n\n" + "Pop Pop.",
+            "venusianbars_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 1000);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Coolness, 1f, StatModifier.ModifyMethod.ADDITIVE);

@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -25,6 +26,8 @@ namespace NevernamedsItems
             gun.SetAnimationFPS(gun.shootAnimation, 14);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(38) as Gun).gunSwitchGroup;
+            gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(83) as Gun).muzzleFlashEffects;
 
             //GUN STATS
             gun.DefaultModule.ammoCost = 1;
@@ -33,20 +36,32 @@ namespace NevernamedsItems
             gun.reloadTime = 1f;
             gun.DefaultModule.cooldownTime = 0.5f;
             gun.DefaultModule.numberOfShotsInClip = 10;
-            gun.barrelOffset.transform.localPosition = new Vector3(1.56f, 0.87f, 0f);
+            gun.barrelOffset.transform.localPosition = new Vector3(33f / 16f, 18f / 16f, 0f);
             gun.SetBaseMaxAmmo(350);
             gun.gunClass = GunClass.PISTOL;
             //BULLET STATS
-            Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
-            projectile.gameObject.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(projectile);
+            Projectile projectile = gun.DefaultModule.projectiles[0].InstantiateAndFakeprefab();
             gun.DefaultModule.projectiles[0] = projectile;
-            projectile.transform.parent = gun.barrelOffset;
-            projectile.baseData.speed *= 1f;
-            projectile.baseData.damage *= 2f;
-            projectile.baseData.range *= 1f;
-            projectile.SetProjectileSpriteRight("g20_projectile", 11, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
+            projectile.baseData.damage = 10f;
+            projectile.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(519) as Gun).DefaultModule.projectiles[0].hitEffects.tileMapVertical.effects[0].effects[0].effect;
+            projectile.hitEffects.alwaysUseMidair = true;
+            projectile.AnimateProjectile(new List<string> {
+                "g20_newproj_001",
+                "g20_newproj_002",
+                "g20_newproj_003",
+                "g20_newproj_003",
+            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop,
+      AnimateBullet.ConstructListOfSameValues(new IntVector2(11, 10), 4),
+      AnimateBullet.ConstructListOfSameValues(true, 4),
+      AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4),
+      AnimateBullet.ConstructListOfSameValues(true, 4),
+      AnimateBullet.ConstructListOfSameValues(false, 4),
+      AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4),
+      AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
+      AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
+      AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
+
+            gun.TrimGunSprites();
 
             gun.quality = PickupObject.ItemQuality.D;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
@@ -95,17 +110,19 @@ namespace NevernamedsItems
         {
             gun.reloadTime = UnityEngine.Random.Range(10f, 191f) / 100f;
 
-            CooldownTime = UnityEngine.Random.Range(10f, 81f) / 100f;
+            CooldownTime = (gun.GunPlayerOwner().PlayerHasActiveSynergy("Critical Success")) ? UnityEngine.Random.Range(0.05f, 0.5f) : UnityEngine.Random.Range(0.1f, 0.8f);
             ClipSize = UnityEngine.Random.Range(1, 31);
 
             gun.DefaultModule.numberOfShotsInClip = ClipSize;
             gun.DefaultModule.cooldownTime = CooldownTime;
 
-            damageMod = UnityEngine.Random.Range(10f, 211f) / 100f;
-            rangeMod = UnityEngine.Random.Range(10f, 191f) / 100f;
-            speedMod = UnityEngine.Random.Range(10f, 191f) / 100f;
-            knockbackMod = UnityEngine.Random.Range(10f, 191f) / 100f;
-            scaleMod = UnityEngine.Random.Range(10f, 191f) / 100f;
+            damageMod = (gun.GunPlayerOwner() && gun.GunPlayerOwner().PlayerHasActiveSynergy("Critical Success")) ? UnityEngine.Random.Range(0.5f, 2.5f) : UnityEngine.Random.Range(0.1f, 2f);
+            rangeMod = UnityEngine.Random.Range(0.1f, 2f);
+            speedMod = UnityEngine.Random.Range(0.1f, 2f);
+            knockbackMod = UnityEngine.Random.Range(0.1f, 2f);
+            scaleMod = UnityEngine.Random.Range(0.5f, 2f);
+
+            if (gun.IsCurrentGun()) AkSoundEngine.PostEvent("Play_OBJ_Chest_Synergy_Slots_01", gameObject);
         }
         private int ClipSize = -1;
         private float CooldownTime = -1;

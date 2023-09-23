@@ -64,7 +64,7 @@ namespace NevernamedsItems
                 "thinline_pinkproj_004",
                 "thinline_pinkproj_005",
                 "thinline_pinkproj_006",
-            }, 10, true, new List<IntVector2> {
+            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                 new IntVector2(10, 10),
                 new IntVector2(10, 10),
                 new IntVector2(10, 10),
@@ -72,7 +72,7 @@ namespace NevernamedsItems
                 new IntVector2(10, 10),
                 new IntVector2(10, 10),
             }, AnimateBullet.ConstructListOfSameValues(true, 6), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 6), AnimateBullet.ConstructListOfSameValues(true, 6), AnimateBullet.ConstructListOfSameValues(false, 6),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 6), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 6), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 6), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 6));
+            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 6), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 6), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 6), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 6), 0);
                     mod.projectiles[0] = projectile;
 
                 }
@@ -91,7 +91,7 @@ namespace NevernamedsItems
                 "thinline_blueproj_004",
                 "thinline_blueproj_005",
                 "thinline_blueproj_006",
-            }, 10, true, new List<IntVector2> {
+            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                 new IntVector2(10, 10),
                 new IntVector2(10, 10),
                 new IntVector2(10, 10),
@@ -99,7 +99,7 @@ namespace NevernamedsItems
                 new IntVector2(10, 10),
                 new IntVector2(10, 10),
             }, AnimateBullet.ConstructListOfSameValues(true, 6), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 6), AnimateBullet.ConstructListOfSameValues(true, 6), AnimateBullet.ConstructListOfSameValues(false, 6),
-           AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 6), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 6), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 6), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 6));
+           AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 6), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 6), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 6), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 6), 0);
                     mod.ammoCost = 1;
                     ThinLineCollision collider = projectile.gameObject.GetOrAddComponent<ThinLineCollision>();
                     mod.projectiles[0] = projectile;

@@ -12,19 +12,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Blank Boots";
-            string resourceName = "NevernamedsItems/Resources/blankboots_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BlankBoots>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            string shortDesc = "Boots of Banishment";
-            string longDesc = "Rolling over enemy bullets has a chance to trigger a microblank." + "\n\nMade by a senile old man who misheard a conversation about the legendary 'Blank Bullets'.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PickupObject item = ItemSetup.NewItem<BlankBoots>(
+            "Blank Boots",
+            "Boots of Banishment",
+            "Rolling over enemy bullets has a chance to trigger a microblank." + "\n\nMade by a senile old man who misheard a conversation about the legendary 'Blank Bullets'.",
+            "blankboots_icon");
             item.AddPassiveStatModifier( PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
-
             item.quality = PickupObject.ItemQuality.A;
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);
         }

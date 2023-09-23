@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Full Armour Jacket";
-            string resourceName = "NevernamedsItems/Resources/fullarmourjacket_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<FullArmourJacket>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Live n' Lerm";
-            string longDesc = "Every piece of Armour increases damage by 6%." + "\n\nThe best defence is a good offence.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<FullArmourJacket>(
+             "Full Armour Jacket",
+             "Live n' Lerm",
+             "Every piece of Armour increases damage by 6%." + "\n\nThe best defence is a good offence.",
+             "fullarmourjacket_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
             item.ArmorToGainOnInitialPickup = 1;

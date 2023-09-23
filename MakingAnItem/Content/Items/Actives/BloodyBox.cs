@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Bloody Box";
-            string resourceName = "NevernamedsItems/Resources/bloodybox_icon2";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BloodyBox>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Oozing and Gurgling";
-            string longDesc = "Sacrifice blood to the gods of infinity, in return for a chest." + "\n\nA neatly layered series of chests, emerging upwards infinitely from the gaping maw of the eternal void. The screaming voices from the abyss rattle up through the tower, and they demand sustenance.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<BloodyBox>(
+            "Bloody Box",
+            "Oozing and Gurgling",
+            "Sacrifice blood to the gods of infinity, in return for a chest." + "\n\nA neatly layered series of chests, emerging upwards infinitely from the gaping maw of the eternal void. The screaming voices from the abyss rattle up through the tower, and they demand sustenance.",
+            "bloodybox_icon2")as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 5);
             item.AddPassiveStatModifier(PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.consumable = false;

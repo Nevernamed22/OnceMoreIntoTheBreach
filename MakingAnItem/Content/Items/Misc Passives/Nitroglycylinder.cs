@@ -13,34 +13,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Nitroglycylinder";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/nitroglycylinder_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<Nitroglycylinder>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Reloader 'sploder";
-            string longDesc = "Explodes safely (for you at least) upon reloading."+"\n\nThis attatchment was favoured by a masochistic gungeoneer who liked the smell of burnt hair just a little too much. After his inevitable death, it was modified to not actually hurt it's bearer.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
+            PickupObject item = ItemSetup.NewItem<Nitroglycylinder>(
+            "Nitroglycylinder",
+            "Reloader 'sploder",
+            "Explodes safely (for you at least) upon reloading." + "\n\nThis attatchment was favoured by a masochistic gungeoneer who liked the smell of burnt hair just a little too much. After his inevitable death, it was modified to not actually hurt it's bearer.",
+            "nitroglycylinder_icon");
             item.quality = PickupObject.ItemQuality.D;
-
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
 
             List<string> mandatorySynergyItems = new List<string>() { "nn:nitroglycylinder" };

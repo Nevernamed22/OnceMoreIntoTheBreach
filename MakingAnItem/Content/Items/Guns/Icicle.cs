@@ -69,6 +69,10 @@ namespace NevernamedsItems
             projectile.SetProjectileSpriteRight("icicle_projectile", 13, 5, false, tk2dBaseSprite.Anchor.MiddleCenter, 13, 5);
             gun.DefaultModule.projectiles[0] = projectile;
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Icicle Ammo", "NevernamedsItems/Resources/CustomGunAmmoTypes/icicle_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/icicle_clipempty");
+
+
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             IcicleID = gun.PickupObjectId;

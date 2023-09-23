@@ -15,19 +15,14 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Blankh";
-            string resourceName = "NevernamedsItems/Resources/blankh_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Blankh>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "My Body Is A Temple";
-            string longDesc = "Gives ones' body to Kaliber in order to recieve her bullet-banishing blessings."+"\n\nTriggered by attempting to Blank with no Blanks remaining.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<Blankh>(
+            "Blankh",
+            "My Body Is A Temple",
+            "Gives ones' body to Kaliber in order to recieve her bullet-banishing blessings." + "\n\nTriggered by attempting to Blank with no Blanks remaining.",
+            "blankh_icon");
             item.quality = PickupObject.ItemQuality.A;
-
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
-
             BlankhID = item.PickupObjectId;
         }
 

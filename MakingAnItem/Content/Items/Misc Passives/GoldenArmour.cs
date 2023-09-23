@@ -12,16 +12,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Golden Armour";
-            string resourceName = "NevernamedsItems/Resources/goldenarmour_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<GoldenArmour>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "You Can't Take It With You";
-            string longDesc = "If the bearer has money, and takes damage that would kill them, the cash has a chance to take the hit instead." + "\n\nGold is a soft metal, and doesn't make for very good protection. Whoever decided to make gold armour probably isn't very smart."+"\n\nActivation chance is equal to cash amount. More than 100 cash guarantees a safety net.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<GoldenArmour>(
+            "Golden Armour",
+            "You Can't Take It With You",
+            "If the bearer has money, and takes damage that would kill them, the cash has a chance to take the hit instead." + "\n\nGold is a soft metal, and doesn't make for very good protection. Whoever decided to make gold armour probably isn't very smart." + "\n\nActivation chance is equal to cash amount. More than 100 cash guarantees a safety net.",
+            "goldenarmour_icon");
             item.quality = PickupObject.ItemQuality.D;
-
             GoldenArmourID = item.PickupObjectId;
         }
         public static int GoldenArmourID;

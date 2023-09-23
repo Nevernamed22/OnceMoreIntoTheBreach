@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using TranslationAPI;
 
 namespace NevernamedsItems
@@ -14,10 +14,10 @@ namespace NevernamedsItems
         public static void Init()
         {
             string itemName = "Hand of Night";
-            string resourceName = "NevernamedsItems/Resources/shadehand_icon";
+           
             GameObject obj = new GameObject(itemName);
             var item = obj.AddComponent<ShadeHand>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
+            ItemBuilder.AddSpriteToObjectAssetbundle(itemName, Initialisation.itemCollection.GetSpriteIdByName("shadehand_icon"), Initialisation.itemCollection, obj);
             string shortDesc = "Giveth and Taketh Away";
             string longDesc = "The cold and clammy hands of a long-dead, particularly wrathful shade.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");

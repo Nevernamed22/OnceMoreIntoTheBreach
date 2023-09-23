@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string name = "Baby Good Det";
-            string resourcePath = "NevernamedsItems/Resources/Companions/BabyGoodDet/babygooddet_icon";
-            GameObject gameObject = new GameObject();
-            CompanionItem companionItem = gameObject.AddComponent<CompanionItem>();
-            ItemBuilder.AddSpriteToObject(name, resourcePath, gameObject);
-            string shortDesc = "Laserbrained";
-            string longDesc = "A scale model Det, constructed as part of some asinine Gundead school project."+"\n\nFires powerful lasers, but can have a hard time hitting her target.";
-            companionItem.SetupItem(shortDesc, longDesc, "nn");
+            CompanionItem companionItem = ItemSetup.NewItem<CompanionItem>(
+            "Baby Good Det",
+            "Laserbrained",
+            "A scale model Det, constructed as part of some asinine Gundead school project." + "\n\nFires powerful lasers, but can have a hard time hitting her target.",
+            "babygooddet_icon") as CompanionItem;
             companionItem.quality = PickupObject.ItemQuality.C;
             companionItem.CompanionGuid = BabyGoodDet.guid;
             BabyGoodDet.BuildPrefab();

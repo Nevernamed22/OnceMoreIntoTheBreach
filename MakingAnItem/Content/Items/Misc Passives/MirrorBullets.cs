@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Mirror Bullets";
-            string resourceName = "NevernamedsItems/Resources/mirrorbullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<MirrorBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Upon Further Reflection...";
-            string longDesc = "Scoring a direct hit on enemy bullets sends them right back at their owners." + "\n\nOf all the greatest horrors, and most abhorrent foes one may face, perhaps the most dangerous is the one that stares back at you from the mirror.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<MirrorBullets>(
+             "Mirror Bullets",
+             "Upon Further Reflection...",
+             "Scoring a direct hit on enemy bullets sends them right back at their owners." + "\n\nOf all the greatest horrors, and most abhorrent foes one may face, perhaps the most dangerous is the one that stares back at you from the mirror.",
+             "mirrorbullets_icon");           
             item.quality = PickupObject.ItemQuality.S;
             item.SetTag("bullet_modifier");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 3, StatModifier.ModifyMethod.ADDITIVE);

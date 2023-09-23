@@ -13,17 +13,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Crosshair Necklace";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/crosshairnecklace_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<CrosshairNecklace>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Via Crucis";
-            string longDesc = "Jammed enemies have a chance to drop pickups."+"\n\nA necklace worn on occasion by Cultists of the True Gun for protection and prosperity.";
-          
+            PickupObject item = ItemSetup.NewItem<CrosshairNecklace>(
+            "Crosshair Necklace",
+            "Via Crucis",
+            "Jammed enemies have a chance to drop pickups." + "\n\nA necklace worn on occasion by Cultists of the True Gun for protection and prosperity.",
+            "crosshairnecklace_icon");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1, StatModifier.ModifyMethod.ADDITIVE);
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.quality = PickupObject.ItemQuality.D;
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
             ID = item.PickupObjectId;

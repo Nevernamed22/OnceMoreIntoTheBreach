@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string name = "Greg The Egg";
-            string resourcePath = "NevernamedsItems/Resources/Companions/Greg/gregtheegg_icon";
-            GameObject gameObject = new GameObject();
-            var companionItem = gameObject.AddComponent<GregTheEgg>();
-            ItemBuilder.AddSpriteToObject(name, resourcePath, gameObject);
-            string shortDesc = "I'm About To Break!";
-            string longDesc = "A strange friendly egg." + "\n\nLegends of this creature span history, with him accompanying hundreds of ancient heroes upon their adventures.";
-            companionItem.SetupItem(shortDesc, longDesc, "nn");
+            CompanionItem companionItem = ItemSetup.NewItem<GregTheEgg>(
+            "Greg The Egg",
+            "I'm About To Break!",
+            "A strange friendly egg." + "\n\nLegends of this creature span history, with him accompanying hundreds of ancient heroes upon their adventures.",
+            "gregtheegg_icon") as CompanionItem;
             companionItem.quality = PickupObject.ItemQuality.B;
             companionItem.CompanionGuid = GregTheEgg.guid;
 

@@ -15,16 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Shatterblank";
-            string resourceName = "NevernamedsItems/Resources/shatterblank_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Shatterblank>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Fragmentation";
-            string longDesc = "Blanks release dangerous shrapnel." + "\n\nThis artefact was originally part of a brittle Ammolet, before the whole thing was shattered into a thousand tiny pieces.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-
+            BlankModificationItem item = ItemSetup.NewItem<Shatterblank>(
+            "Shatterblank",
+            "Fragmentation",
+            "Blanks release dangerous shrapnel." + "\n\nThis artefact was originally part of a brittle Ammolet, before the whole thing was shattered into a thousand tiny pieces.",
+            "shatterblank_icon") as BlankModificationItem;
             item.quality = PickupObject.ItemQuality.D;
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalBlanksPerFloor, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);

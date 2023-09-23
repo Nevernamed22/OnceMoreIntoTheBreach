@@ -13,35 +13,13 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Maiden-Shaped Box";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/maidenshapedbox_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<MaidenShapedBox>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Singlehandedly Ruining This Game";
-            string longDesc = "The itty bitty nanites contained within this peculiarly shaped container are specifically programmed to seek, destroy, and transmute Lead Maidens.\n\n" + "Whoever made this thing must have really hated Lead Maidens.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
+            PickupObject item = ItemSetup.NewItem<MaidenShapedBox>(
+            "Maiden-Shaped Box",
+            "Singlehandedly Ruining This Game",
+            "The itty bitty nanites contained within this peculiarly shaped container are specifically programmed to seek, destroy, and transmute Lead Maidens.\n\n" + "Whoever made this thing must have really hated Lead Maidens.",
+            "maidenshapedbox_icon");
             item.AddPassiveStatModifier( PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.B;
-
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.JAMMEDLEADMAIDEN_QUEST_REWARDED, true);
         }
         public override void Pickup(PlayerController player)

@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "ERROR Shells";
-            string resourceName = "NevernamedsItems/Resources/errorshells_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<ERRORShells>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "What do you mean 74 errors!?";
-            string longDesc = "Picks a random selection of enemies to become highly efficient against.\n\n" + "These bullets were moulded by the numerous errors that went into making them, thanks to their incompetent smith.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<ERRORShells>(
+            "ERROR Shells",
+            "What do you mean 74 errors!?",
+            "Picks a random selection of enemies to become highly efficient against.\n\n" + "These bullets were moulded by the numerous errors that went into making them, thanks to their incompetent smith.",
+            "errorshells_icon");
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_ERRORSHELLS, true);

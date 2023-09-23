@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Demoter Bullets";
-            string resourceName = "NevernamedsItems/Resources/demoterbullets_icon";
-            GameObject obj = new GameObject();
-            var item = obj.AddComponent<DemoterBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "You're Fired!";
-            string longDesc = "Chance to downgrade enemies into a less powerful form." + "\n\nBusiness is Business, and Business is universal. The Gungeon is no exception. It's unfortunate, but those not up to the Gungeon's rigorous standards may have to be... fired." + "\n\nDemoter? I hardly even know her!";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<DemoterBullets>(
+             "Demoter Bullets",
+             "You're Fired!",
+             "Chance to downgrade enemies into a less powerful form." + "\n\nBusiness is Business, and Business is universal. The Gungeon is no exception. It's unfortunate, but those not up to the Gungeon's rigorous standards may have to be... fired." + "\n\nDemoter? I hardly even know her!",
+             "demoterbullets_icon");
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("bullet_modifier");
         }

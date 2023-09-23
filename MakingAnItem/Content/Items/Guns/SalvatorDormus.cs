@@ -75,12 +75,14 @@ namespace NevernamedsItems
             gun.RemoveCurrentGunStatModifier(PlayerStats.StatType.ReloadSpeed);
             gun.RemoveCurrentGunStatModifier(PlayerStats.StatType.Damage);
             gun.RemoveCurrentGunStatModifier(PlayerStats.StatType.ProjectileSpeed);
+            gun.RemoveCurrentGunStatModifier(PlayerStats.StatType.AdditionalClipCapacityMultiplier);
             if (gun.GunPlayerOwner())
             {
                 gun.AddCurrentGunStatModifier(PlayerStats.StatType.RateOfFire, 1 + (0.05f * gun.GunPlayerOwner().inventory.AllGuns.FindAll((Gun x) => x.DefaultModule != null && x.DefaultModule.shootStyle == ProjectileModule.ShootStyle.Automatic).Count), StatModifier.ModifyMethod.MULTIPLICATIVE);
-                gun.AddCurrentGunStatModifier(PlayerStats.StatType.ReloadSpeed, 1 - (0.05f * gun.GunPlayerOwner().inventory.AllGuns.FindAll((Gun x) => x.DefaultModule != null && x.DefaultModule.shootStyle == ProjectileModule.ShootStyle.SemiAutomatic).Count), StatModifier.ModifyMethod.MULTIPLICATIVE);
+                gun.AddCurrentGunStatModifier(PlayerStats.StatType.ReloadSpeed, Mathf.Max(0, 1 - (0.05f * gun.GunPlayerOwner().inventory.AllGuns.FindAll((Gun x) => x.DefaultModule != null && x.DefaultModule.shootStyle == ProjectileModule.ShootStyle.SemiAutomatic).Count)), StatModifier.ModifyMethod.MULTIPLICATIVE);
                 gun.AddCurrentGunStatModifier(PlayerStats.StatType.Damage, 1 + (0.05f * gun.GunPlayerOwner().inventory.AllGuns.FindAll((Gun x) => x.DefaultModule != null && x.DefaultModule.shootStyle == ProjectileModule.ShootStyle.Charged).Count), StatModifier.ModifyMethod.MULTIPLICATIVE);
                 gun.AddCurrentGunStatModifier(PlayerStats.StatType.ProjectileSpeed, 1 + (0.05f * gun.GunPlayerOwner().inventory.AllGuns.FindAll((Gun x) => x.DefaultModule != null && x.DefaultModule.shootStyle == ProjectileModule.ShootStyle.Burst).Count), StatModifier.ModifyMethod.MULTIPLICATIVE);
+                gun.AddCurrentGunStatModifier(PlayerStats.StatType.AdditionalClipCapacityMultiplier, 1 + (0.05f * gun.GunPlayerOwner().inventory.AllGuns.FindAll((Gun x) => x.DefaultModule != null && x.DefaultModule.shootStyle == ProjectileModule.ShootStyle.Beam).Count), StatModifier.ModifyMethod.MULTIPLICATIVE);
                 gun.GunPlayerOwner().stats.RecalculateStats(gun.GunPlayerOwner());
             }
         }

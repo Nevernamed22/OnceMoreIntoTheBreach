@@ -16,14 +16,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Furious Ammolet";
-            string resourceName = "NevernamedsItems/Resources/furiousammolet_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<FuriousAmmolet>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Blanks Enrage";
-            string longDesc = "Using a blank sends the bearer of this Ammolet into a bloody rage."+"\n\nMade of a disgusting alloy of blood and iron, this ammolet is warm to the touch.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            BlankModificationItem item = ItemSetup.NewItem<FuriousAmmolet>(
+            "Furious Ammolet",
+            "Blanks Enrage",
+            "Using a blank sends the bearer of this Ammolet into a bloody rage." + "\n\nMade of a disgusting alloy of blood and iron, this ammolet is warm to the touch.",
+            "furiousammolet_icon") as BlankModificationItem;
             item.quality = PickupObject.ItemQuality.B;
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalBlanksPerFloor, 1f, StatModifier.ModifyMethod.ADDITIVE);

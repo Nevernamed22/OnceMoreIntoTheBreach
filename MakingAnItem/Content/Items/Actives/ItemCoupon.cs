@@ -16,7 +16,7 @@ namespace NevernamedsItems
             string itemName = "Coupon";
 
             //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/shopcoupon_icon";
+            string resourceName = "NevernamedsItems/Resources/NeoActiveSprites/coupon_improved";
 
             //Create new GameObject
             GameObject obj = new GameObject(itemName);

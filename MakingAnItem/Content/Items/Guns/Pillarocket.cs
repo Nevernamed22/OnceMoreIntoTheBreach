@@ -80,7 +80,7 @@ namespace NevernamedsItems
                 "pillarocket_proj_013",
                 "pillarocket_proj_014",
             }, 20, //FPS
-            true, //LOOPS
+            tk2dSpriteAnimationClip.WrapMode.Loop, //LOOPS
             AnimateBullet.ConstructListOfSameValues<IntVector2>(new IntVector2(15, 8), 20), //PIXELSIZES
             AnimateBullet.ConstructListOfSameValues(false, 20), //LIGHTENEDS
             AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleLeft, 20), //ANCHORS
@@ -89,7 +89,7 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 20),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(15, 6), 20),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 20),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 20));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 20), 0);
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Pillarocket Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/pillarocket_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/pillarocket_clipempty");

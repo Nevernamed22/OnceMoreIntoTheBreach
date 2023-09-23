@@ -13,21 +13,14 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Shoulder Holster";
-            string resourceName = "NevernamedsItems/Resources/shoulderholster_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<ShoulderHolster>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Bonus Bullets";
-            string longDesc = "Chance for random bonus shots." + "\n\nA more than awkward shooting style, that's for certain.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PickupObject item = ItemSetup.NewItem<ShoulderHolster>(
+            "Shoulder Holster",
+            "Bonus Bullets",
+            "Chance for random bonus shots." + "\n\nA more than awkward shooting style, that's for certain.",
+            "shoulderholster_icon");
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.C;
-
             ShoulderHolsterID = item.PickupObjectId;
-
             hipHolsterShootHook = new Hook(
             typeof(FireOnReloadItem).GetMethod("HandleHipHolsterProcessing", BindingFlags.Instance | BindingFlags.NonPublic),
             typeof(ShoulderHolster).GetMethod("HipHolsterHook", BindingFlags.Instance | BindingFlags.Public),

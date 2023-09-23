@@ -13,16 +13,13 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string name = "Lil Munchy";
-            string resourcePath = "NevernamedsItems/Resources/Companions/LilMunchy/lilmunchy_icon";
-            GameObject gameObject = new GameObject();
-            CompanionItem companionItem = gameObject.AddComponent<CompanionItem>();
-            ItemBuilder.AddSpriteToObject(name, resourcePath, gameObject);
-            string shortDesc = "Hungry Hungry";
-            string longDesc = "A juvenile muncher that hasn't yet found a suitable generic dungeon room in which to take root."+"\n\nHe has an endless appetite!";
-            companionItem.SetupItem(shortDesc, longDesc, "nn");
-            companionItem.quality = PickupObject.ItemQuality.C;
-            companionItem.CompanionGuid = LilMunchy.guid;
+            CompanionItem item = ItemSetup.NewItem<CompanionItem>(
+            "Lil Munchy",
+            "Hungry Hungry",
+            "A juvenile muncher that hasn't yet found a suitable generic dungeon room in which to take root." + "\n\nHe has an endless appetite!",
+            "lilmunchy_icon") as CompanionItem;
+            item.quality = PickupObject.ItemQuality.C;
+            item.CompanionGuid = LilMunchy.guid;
             LilMunchy.BuildPrefab();
         }
 

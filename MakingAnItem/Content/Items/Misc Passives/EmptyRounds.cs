@@ -11,16 +11,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Empty Rounds";
-            string resourceName = "NevernamedsItems/Resources/emptyrounds_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<EmptyRounds>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Less is More";
-            string longDesc = "Increases damage by how empty your guns are of ammo." + "\n\nBrought to the Gungeon by a dopey gnome who felt it suited his spray-and-pray combat style." + "\nHe lost it within an hour." + "\nTypical.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PickupObject item = ItemSetup.NewItem<EmptyRounds>(
+            "Empty Rounds",
+            "Less is More",
+            "Increases damage by how empty your guns are of ammo." + "\n\nBrought to the Gungeon by a dopey gnome who felt it suited his spray-and-pray combat style." + "\nHe lost it within an hour." + "\nTypical.",
+            "emptybullets_improved");
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("bullet_modifier");

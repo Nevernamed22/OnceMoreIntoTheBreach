@@ -65,7 +65,7 @@ namespace NevernamedsItems
                 "gunofathousandsins_projectile_002",
                 "gunofathousandsins_projectile_003",
                 "gunofathousandsins_projectile_004",
-            }, 12, true, new List<IntVector2> {
+            }, 12, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                 new IntVector2(23, 22), //1
                 new IntVector2(23, 22), //2            
                 new IntVector2(23, 22), //3
@@ -77,7 +77,7 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), //Offsets
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(20, 11), 4), //Override Collider Sizes
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(2, 5), 4), //Override Collider Offsets
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
 
             projectile.SetProjectileSpriteRight("gunofathousandsins_projectile_001", 23, 22, true, tk2dBaseSprite.Anchor.MiddleCenter, 20, 11);
 

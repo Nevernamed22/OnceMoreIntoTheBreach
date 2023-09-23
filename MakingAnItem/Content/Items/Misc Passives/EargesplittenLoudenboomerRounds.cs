@@ -14,15 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Eargesplitten Loudenboomers";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/loudenboomer_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<EargesplittenLoudenboomerRounds>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Big Cat";
-            string longDesc = "These whimsical rounds were designed to pack a big punch." + "\n\nTheir sonic boom is capable of pushing foes away and stunning them.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PickupObject item = ItemSetup.NewItem<EargesplittenLoudenboomerRounds>(
+            "Eargesplitten Loudenboomers",
+            "Big Cat",
+            "These whimsical rounds were designed to pack a big punch." + "\n\nTheir sonic boom is capable of pushing foes away and stunning them.",
+            "loudenboomer_icon");            
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.15f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ProjectileSpeed, 1.25f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = PickupObject.ItemQuality.B;

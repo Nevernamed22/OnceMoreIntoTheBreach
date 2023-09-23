@@ -9,7 +9,7 @@ using UnityEngine;
 using Alexandria.ItemAPI;
 using SaveAPI;
 using Alexandria.Misc;
-using BreakAbleAPI;
+using Alexandria.BreakableAPI;
 
 namespace NevernamedsItems
 {
@@ -67,7 +67,7 @@ namespace NevernamedsItems
                 "cashproj_008",
                 "cashproj_009",
                 "cashproj_010",
-            }, 10, new IntVector2(12, 8), 7, false, true);
+            }, 10, new IntVector2(12, 8), 7, false, tk2dSpriteAnimationClip.WrapMode.Loop);
 
             SlowDownOverTimeModifier slowDown = projectile.gameObject.AddComponent<SlowDownOverTimeModifier>();
             slowDown.extendTimeByRangeStat = true;

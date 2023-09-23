@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Tabullets";
-            string resourceName = "NevernamedsItems/Resources/tabullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Tabullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Surface Level";
-            string longDesc = "Your bullets no longer damage tables, and are allowed to pass right through. Passing through a table increases a bullet's damage." + "\n\nAn initiation gift among the Knights of the Octagonal Table.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<Tabullets>(
+             "Tabullets",
+             "Surface Level",
+             "Your bullets no longer damage tables, and are allowed to pass right through. Passing through a table increases a bullet's damage." + "\n\nAn initiation gift among the Knights of the Octagonal Table.",
+             "tabullets_icon");            
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("bullet_modifier");
         }

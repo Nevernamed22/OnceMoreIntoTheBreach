@@ -89,6 +89,7 @@ namespace NevernamedsItems
                 ETGModConsole.Log("<color=#00d6e6>Advanced Dragun Unlocks:</color>"); //------------------------------------------------------------
 
                 PrintUnlock(CustomDungeonFlags.ADVDRAGUN_KILLED_ROBOT, "Electrum Rounds", "Kill the Advanced Dragun as the Robot.");
+                PrintUnlock(CustomDungeonFlags.ADVDRAGUN_KILLED_BULLET, "Claymore", "Kill the Advanced Dragun as the Bullet.");
                 PrintUnlock(CustomDungeonFlags.ADVDRAGUN_KILLED_SHADE, "Redhawk", "Kill the Advanced Dragun as the Shade.");
 
                 //----------------------------------------------------------ALL JAMMED MODE

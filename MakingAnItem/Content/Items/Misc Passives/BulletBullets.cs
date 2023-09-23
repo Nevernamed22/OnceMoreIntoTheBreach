@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Bullet Bullets";
-            string resourceName = "NevernamedsItems/Resources/bulletbullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BulletBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Score!";
-            string longDesc = "When your bullets pass through enemy bullets, a single bullet will be reloaded into your clip."+ "\n\nStrategic aiming can allow a gungeoneer to avoid the irritation of reloading.";       
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<BulletBullets>(
+             "Bullet Bullets",
+             "Score!",
+             "When your bullets pass through enemy bullets, a single bullet will be reloaded into your clip." + "\n\nStrategic aiming can allow a gungeoneer to avoid the irritation of reloading.",
+             "bulletbullets_icon");
             item.quality = PickupObject.ItemQuality.D;
             item.SetTag("bullet_modifier");
         }       

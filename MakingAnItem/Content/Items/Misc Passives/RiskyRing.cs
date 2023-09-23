@@ -13,16 +13,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Risky Ring";
-            string resourceName = "NevernamedsItems/Resources/riskyring_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<RiskyRing>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "This Ring Has Fangs";
-            string longDesc = "More drops when at full HP, less drops when not." + "\n\nThis ring feels slightly irradiated.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-            item.quality = PickupObject.ItemQuality.D; //D
-
+            PickupObject item = ItemSetup.NewItem<RiskyRing>(
+            "Risky Ring",
+            "This Ring Has Fangs",
+            "More drops when at full HP, less drops when not." + "\n\nThis ring feels slightly irradiated.",
+            "riskyring_icon");
+            item.quality = PickupObject.ItemQuality.D; 
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.HASBEENDAMAGEDBYRISKRIFLE, true);
         }
         private float currentHP, lastHP;

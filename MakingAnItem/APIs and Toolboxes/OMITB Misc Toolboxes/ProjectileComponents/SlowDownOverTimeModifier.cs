@@ -42,7 +42,7 @@ namespace NevernamedsItems
         {
             float realTime = timeToSlowOver;
             if (doRandomTimeMultiplier) realTime *= UnityEngine.Random.Range(0.5f, 1f);
-            if (extendTimeByRangeStat) realTime *= self.ProjectilePlayerOwner().stats.GetStatValue(PlayerStats.StatType.RangeMultiplier);
+            if (extendTimeByRangeStat && self.ProjectilePlayerOwner()) realTime *= self.ProjectilePlayerOwner().stats.GetStatValue(PlayerStats.StatType.RangeMultiplier);
 
             float elapsed = 0f;
             while (elapsed < realTime)

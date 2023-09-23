@@ -92,6 +92,11 @@ namespace NevernamedsItems
                     }
 
                 }
+                if (player.PlayerHasActiveSynergy("Behind the Goops"))
+                {
+                    DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(player.PlayerHasActiveSynergy("Hot Pics") ? GoopUtility.GreenFireDef : GoopUtility.PoisonDef).AddGoopCircle(player.sprite.WorldCenter, 10);
+                }
+                else if (player.PlayerHasActiveSynergy("Hot Pics")) { DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(GoopUtility.FireDef).AddGoopCircle(player.sprite.WorldCenter, 10); }
             }
             base.PostProcessProjectile(projectile);
         }

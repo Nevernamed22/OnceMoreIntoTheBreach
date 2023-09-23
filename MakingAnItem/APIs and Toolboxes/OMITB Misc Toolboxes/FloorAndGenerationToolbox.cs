@@ -150,9 +150,8 @@ namespace NevernamedsItems
                     foreach (RoomHandler room in ddata.rooms)
                     {
                         //Debug.Log("-------- Checking ROOM: " + room.GetRoomName());
-                        List<PrototypeRoomObjectLayer> hiddenlist;
+                        List<PrototypeRoomObjectLayer> hiddenlist = room.remainingReinforcementLayers;
 
-                        hiddenlist = OMITBReflectionHelpers.ReflectGetField<List<PrototypeRoomObjectLayer>>(typeof(RoomHandler), "remainingReinforcementLayers", room);
                         //Debug.Log("Wavecheck passed the Reflection");
                         if (hiddenlist != null && hiddenlist.Count > 0)
                         {

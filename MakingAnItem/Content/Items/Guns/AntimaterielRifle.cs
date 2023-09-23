@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -60,12 +60,25 @@ namespace NevernamedsItems
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = "Thinline Bullets";
 
+            
+
             gun.quality = PickupObject.ItemQuality.S;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc);
             AntimaterielRifleID = gun.PickupObjectId;
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_ANTIMATERIELRIFLE, true);
             gun.AddItemToTrorcMetaShop(28);
+
+
+            AdvancedHoveringGunSynergyProcessor hoveringGun = gun.gameObject.AddComponent<AdvancedHoveringGunSynergyProcessor>();
+            hoveringGun.RequiredSynergy = "Prima Materia";
+            hoveringGun.TriggerDuration = 2f;
+            hoveringGun.requiresBaseGunInHand = true;
+            hoveringGun.FireType = HoveringGunController.FireType.ON_COOLDOWN;
+            hoveringGun.fireDelayBasedOnGun = true;
+            hoveringGun.Trigger = AdvancedHoveringGunSynergyProcessor.TriggerStyle.ON_DAMAGE;
+            hoveringGun.PositionType = HoveringGunController.HoverPosition.CIRCULATE;
+            hoveringGun.IDsToSpawn = new int[] { AntimaterielRifleID };
         }
         public static int AntimaterielRifleID;
         public override void OnPostFired(PlayerController player, Gun gun)

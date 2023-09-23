@@ -57,12 +57,12 @@ namespace NevernamedsItems
                 "mitreproj_1",
                 "mitreproj_2",
                 "mitreproj_3",
-            }, 10, true, new List<IntVector2> {
+            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                 new IntVector2(22, 22), //1
                 new IntVector2(20, 20), //2            
                 new IntVector2(20, 20), //3
             }, AnimateBullet.ConstructListOfSameValues(true, 3), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 3), AnimateBullet.ConstructListOfSameValues(true, 3), AnimateBullet.ConstructListOfSameValues(false, 3),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 3), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 3), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 3), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 3));
+            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 3), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 3), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 3), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 3), 0);
         }
         public static Projectile MitreProjectile;
         bool canFire = true;

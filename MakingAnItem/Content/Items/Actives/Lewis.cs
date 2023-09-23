@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Lewis";
-            string resourceName = "NevernamedsItems/Resources/lewis_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Lewis>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "With Friends Like These...";
-            string longDesc = "This absolute freeloader just sits in your active item storage doing nothing.\n\n" + "At least he kinda pays rent through providing you some stats";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<Lewis>(
+            "Lewis",
+            "With Friends Like These...",
+            "This absolute freeloader just sits in your active item storage doing nothing.\n\n" + "At least he kinda pays rent through providing you some stats",
+            "lewis_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 1000);
             item.consumable = false;
             item.quality = ItemQuality.B;         

@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Bombardier Shells";
-            string resourceName = "NevernamedsItems/Resources/bombardiershells_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BombardierShells>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Heavy Ammunition";
-            string longDesc = "Increases damage and gives a chance for projectiles to be explosive." + "\n\nThe explosive force necessary to fire these shells creates a lot of recoil.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<BombardierShells>(
+             "Bombardier Shells",
+             "Heavy Ammunition",
+             "Increases damage and gives a chance for projectiles to be explosive." + "\n\nThe explosive force necessary to fire these shells creates a lot of recoil.",
+             "bombardiershells_icon");            
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 2f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.PlayerBulletScale, 1.3f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = PickupObject.ItemQuality.A;
@@ -47,7 +44,7 @@ namespace NevernamedsItems
                         float knockbackAmt = 40f;
                         float projDamage = 10;
 
-                        Dictionary<ProjectileModule, ModuleShootData> moduleData = OMITBReflectionHelpers.ReflectGetField<Dictionary<ProjectileModule, ModuleShootData>>(typeof(Gun), "m_moduleData", self);
+                        Dictionary<ProjectileModule, ModuleShootData> moduleData = self.m_moduleData;
                   
                         if (overrideObject)
                         {

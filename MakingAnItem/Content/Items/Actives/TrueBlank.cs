@@ -11,44 +11,19 @@ namespace NevernamedsItems
 {
     class TrueBlank : ReusableBlankitem
     {
-        //Call this method from the Start() method of your ETGModule extension class
         public static void Init()
         {
-            //The name of the item
-            string itemName = "True Blank";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it.
-            string resourceName = "NevernamedsItems/Resources/trueblank_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a ActiveItem component to the object
-            var item = obj.AddComponent<TrueBlank>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Blanktism";
-            string longDesc = "Triggers a blank with no cooldown, but costs 0.5 curse to use.\n\n" + "Of all the blanks that have ever shaken the Gungeon's halls, this one is rumoured to be the very first. Torn from the casing of Kaliber and moulded with her blessing.\n\n" + "Gives 2.5 curse to get the ball rolling.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //"kts" here is the item pool. In the console you'd type kts:sweating_bullets
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Set the cooldown type and duration of the cooldown
+            PlayerItem item = ItemSetup.NewItem<TrueBlank>(
+            "True Blank",
+            "Blanktism",
+            "Triggers a blank with no cooldown, but costs 0.5 curse to use.\n\n" + "Of all the blanks that have ever shaken the Gungeon's halls, this one is rumoured to be the very first. Torn from the casing of Kaliber and moulded with her blessing.\n\n" + "Gives 2.5 curse to get the ball rolling.",
+            "trueblank_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 5);
-
-            //Adds a passive modifier, like curse, coolness, damage, etc. to the item. Works for passives and actives.
             item.AddPassiveStatModifier( PlayerStats.StatType.Curse, 2.5f, StatModifier.ModifyMethod.ADDITIVE);
-
-            //Set some other fields
             item.consumable = false;
             item.quality = ItemQuality.S;
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.USED_FALSE_BLANK_TEN_TIMES, true);
-
         }
 
 

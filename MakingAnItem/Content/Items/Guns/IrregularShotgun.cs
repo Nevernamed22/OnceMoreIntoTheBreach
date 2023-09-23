@@ -68,6 +68,9 @@ namespace NevernamedsItems
             AddProj(9, gun, genericProj, 0.1111f, 0.6f);
             AddProj(10, gun, genericProj, 0.1f, 0.55f);
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Irregular Shotgun Slugs", "NevernamedsItems/Resources/CustomGunAmmoTypes/irregularshotgun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/irregularshotgun_clipempty");
+
 
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

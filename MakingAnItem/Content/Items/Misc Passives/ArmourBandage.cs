@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Armour Bandage";
-            string resourceName = "NevernamedsItems/Resources/armourbandage_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<ArmourBandage>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Hurtful Heals";
-            string longDesc = "Taking damage to armour heals half a heart." + "\n\nA simple recipe for recycling broken armour into medical supplies.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<ArmourBandage>(
+            "Armour Bandage",
+            "Hurtful Heals",
+            "Taking damage to armour heals half a heart." + "\n\nA simple recipe for recycling broken armour into medical supplies.",
+            "armourbandage_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.D;
             ArmourBandageID = item.PickupObjectId;
             item.ArmorToGainOnInitialPickup = 1;

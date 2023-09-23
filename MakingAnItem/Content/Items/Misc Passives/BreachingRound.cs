@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Breaching Rounds";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/breachrounds_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BreachingRounds>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Breach and Clear";
-            string longDesc = "Gives a damage boost upon entering combat, which quickly deteriorates over time. Speed is key." + "\n\nUsed by ancient dungeon crawlers to blast open locks and hidden walls, though the Gungeon's secret rooms are a little too tough for that.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<BreachingRounds>(
+            "Breaching Rounds",
+            "Breach and Clear",
+            "Gives a damage boost upon entering combat, which quickly deteriorates over time. Speed is key." + "\n\nUsed by ancient dungeon crawlers to blast open locks and hidden walls, though the Gungeon's secret rooms are a little too tough for that.",
+            "breachrounds_icon");
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("bullet_modifier");
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);

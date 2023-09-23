@@ -20,6 +20,9 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:pandephonium", "nn:pandephonium");
             var behav = gun.gameObject.AddComponent<Pandephonium>();
 
+            behav.preventNormalFireAudio = true;
+            behav.overrideNormalFireAudio = "Play_PandephoniumSound";
+
             gun.SetShortDescription("Chaostric Melody");
             gun.SetLongDescription("The bullets from this peculiar brass shotgun seem to want revenge against their creator. Even though they can't do any real harm, this won't stop them trying.");
 

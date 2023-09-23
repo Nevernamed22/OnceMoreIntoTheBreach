@@ -19,18 +19,11 @@ namespace NevernamedsItems
         public static PlayerOrbital upgradeOrbitalPrefab;
         public static void Init()
         {
-            string itemName = "Kaleidoscopic Guon Stone"; //The name of the item
-            string resourceName = "NevernamedsItems/Resources/GuonStones/kaleidoscopicguon_icon"; //Refers to an embedded png in the project. Make sure to embed your resources!
-
-            GameObject obj = new GameObject();
-
-            var item = obj.AddComponent<KaleidoscopicGuonStone>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            string shortDesc = "Twisted!";
-            string longDesc = "Spirals in beautiful patterns. Capable of twisting the fabric of bullet-based matter to leave you with more bullet than you started with.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            AdvancedPlayerOrbitalItem item = ItemSetup.NewItem<KaleidoscopicGuonStone>(
+            "Kaleidoscopic Guon Stone",
+            "Twisted!",
+            "Spirals in beautiful patterns. Capable of twisting the fabric of bullet-based matter to leave you with more bullet than you started with.",
+            "kaleidoscopicguon_icon") as AdvancedPlayerOrbitalItem;
             item.quality = PickupObject.ItemQuality.S;
 
             BuildPrefab();
@@ -47,7 +40,10 @@ namespace NevernamedsItems
         public static void BuildPrefab()
         {
             if (KaleidoscopicGuonStone.orbitalPrefab != null) return;
-            GameObject prefab = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/GuonStones/kaleidoscopicguon_icon");
+
+            
+
+            GameObject prefab = ItemBuilder.SpriteFromBundle("KaleidoscopicGuonOrbital", Initialisation.itemCollection.GetSpriteIdByName("kaleidoscopicguon_icon"), Initialisation.itemCollection);
             prefab.name = "Kaleidoscopic Guon Orbital";
             var body = prefab.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(14, 14));
 
@@ -75,7 +71,9 @@ namespace NevernamedsItems
             bool flag = KaleidoscopicGuonStone.upgradeOrbitalPrefab == null;
             if (flag)
             {
-                GameObject gameObject = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/GuonStones/kaleidoscopicguon_synergy", null);
+                
+
+                GameObject gameObject = ItemBuilder.SpriteFromBundle("KaleidoscopicGuonOrbitalSynergy", Initialisation.itemCollection.GetSpriteIdByName("kaleidoscopicguon_synergy"), Initialisation.itemCollection);
                 gameObject.name = "Kaleidoscopic Guon Orbital Synergy Form";
                 SpeculativeRigidbody speculativeRigidbody = gameObject.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(20, 20));
                 //gameObject.GetComponent<tk2dSprite>().GetCurrentSpriteDef().ConstructOffsetsFromAnchor(tk2dBaseSprite.Anchor.MiddleCenter, gameObject.GetComponent<tk2dSprite>().GetCurrentSpriteDef().position3);

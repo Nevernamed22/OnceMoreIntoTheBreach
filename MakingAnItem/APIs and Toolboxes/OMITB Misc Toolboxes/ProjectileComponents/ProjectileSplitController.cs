@@ -17,7 +17,6 @@ namespace NevernamedsItems
             amtToSplitTo = 0;
             dmgMultAfterSplit = 0.66f;
             sizeMultAfterSplit = 0.8f;
-            removeComponentAfterUse = true;
             chanceToSplit = 1;
         }
         private void Start()
@@ -57,9 +56,13 @@ namespace NevernamedsItems
                         component.baseData.damage *= dmgMultAfterSplit;
                         component.RuntimeUpdateScale(sizeMultAfterSplit);
                         ProjectileSplitController split2 = component.gameObject.GetComponent<ProjectileSplitController>();
-                        if (split2 && removeComponentAfterUse)
+                        if (split2)
                         {
-                            UnityEngine.Object.Destroy(split2);
+                            if (curRecursionAmount < maxRecursionAmount)
+                            {
+                                split2.curRecursionAmount = curRecursionAmount + 1;
+                            }
+                            else { UnityEngine.Object.Destroy(split2); }
                         }
                     }
 
@@ -84,6 +87,7 @@ namespace NevernamedsItems
         public float dmgMultAfterSplit;
         public float sizeMultAfterSplit;
 
-        public bool removeComponentAfterUse;
+        public int maxRecursionAmount;
+        private int curRecursionAmount;
     }
 }

@@ -8,7 +8,7 @@ namespace NevernamedsItems
     public static class OMITBChars
     {
         public static PlayableCharacters Shade;
-        public static PlayableCharacters Acolyte;
-        public static PlayableCharacters Tinker;
+        //public static PlayableCharacters Acolyte;
+        //public static PlayableCharacters Tinker;
     }
 }

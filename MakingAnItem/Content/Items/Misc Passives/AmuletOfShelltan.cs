@@ -14,18 +14,15 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Amulet of Shell'tan";
-            string resourceName = "NevernamedsItems/Resources/amuletofshelltan_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<AmuletOfShelltan>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Promise of Ammo";
-            string longDesc = "All bosses drop ammo." + "\n\nThis pendant denotes devotion to the elemental lord of ammunition, Shell'tan.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<AmuletOfShelltan>(
+            "Amulet of Shell'tan",
+            "Promise of Ammo",
+            "All bosses drop ammo." + "\n\nThis pendant denotes devotion to the elemental lord of ammunition, Shell'tan.",
+            "amuletofshelltan_icon");
             item.quality = PickupObject.ItemQuality.D;
 
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
-
+ 
             Game.Items.Rename("nn:amulet_of_shell'tan", "nn:amulet_of_shelltan");
         }
 

@@ -64,7 +64,7 @@ namespace NevernamedsItems
             projectile.AnimateProjectile(new List<string> {
                 $"totemofgundying_proj_001",
                 $"totemofgundying_proj_002",
-            }, 12, true,
+            }, 12, tk2dSpriteAnimationClip.WrapMode.Loop,
             AnimateBullet.ConstructListOfSameValues(new IntVector2(9, 9), 2),
             AnimateBullet.ConstructListOfSameValues(true, 2),
             AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 2),
@@ -73,7 +73,7 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 2),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 2),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 2),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 2));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 2), 0);
 
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             ETGMod.Databases.Items.Add(gun, false, "ANY");

@@ -14,37 +14,13 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "The Beholster";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/thebeholster_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<TheBeholster>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "CreEyetion";
-            string longDesc = "Summons disgusting Beholsterspawn upon reloading an empty clip."+"\n\nThe infamous holster of the... Beholster."+"\nSome of these names sound strange when used in a sentence.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
+            PickupObject item = ItemSetup.NewItem<TheBeholster>(
+            "The Beholster",
+            "CreEyetion",
+            "Summons disgusting Beholsterspawn upon reloading an empty clip." + "\n\nThe infamous holster of the... Beholster." + "\nSome of these names sound strange when used in a sentence.",
+            "thebeholster_icon");
             item.quality = PickupObject.ItemQuality.B;
-
-            //LIST OF SYNERGIES
             item.SetupUnlockOnCustomStat(CustomTrackedStats.BEHOLSTER_KILLS, 14, DungeonPrerequisite.PrerequisiteOperation.GREATER_THAN);
-
         }
         public bool canActivate = true;
         private void HandleGunReloaded(PlayerController player, Gun playerGun)

@@ -16,16 +16,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Pearl Ammolet";
-            string resourceName = "NevernamedsItems/Resources/Ammolets/pearlammolet_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<PearlAmmolet>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Blanks Bubble";
-            string longDesc = "Blanks convert enemy bullets into bubbles."+"\n\n Stolen from the Mother Clam, in a daring heist along the floor of a bottomless ocean.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-
+            BlankModificationItem item = ItemSetup.NewItem<PearlAmmolet>(
+            "Pearl Ammolet",
+            "Blanks Bubble",
+            "Blanks convert enemy bullets into bubbles." + "\n\n Stolen from the Mother Clam, in a daring heist along the floor of a bottomless ocean.",
+            "pearlammolet_icon") as BlankModificationItem;
             item.quality = PickupObject.ItemQuality.C;
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalBlanksPerFloor, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);

@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Antimagic Rounds";
-            string resourceName = "NevernamedsItems/Resources/antimagicrounds_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<AntimagicRounds>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Casting Time: 1 Action";
-            string longDesc = "The arcane runes and nullifying antimagic field of these bullets allows them to break through the protective wards of Gunjurers with ease.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<AntimagicRounds>(
+            "Antimagic Rounds",
+            "Casting Time: 1 Action",
+            "The arcane runes and nullifying antimagic field of these bullets allows them to break through the protective wards of Gunjurers with ease.",
+            "antimagicrounds_icon");
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);

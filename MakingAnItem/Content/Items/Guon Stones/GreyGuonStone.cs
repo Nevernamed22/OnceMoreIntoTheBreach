@@ -16,15 +16,11 @@ namespace NevernamedsItems
         public static PlayerOrbital upgradeOrbitalPrefab;
         public static void Init()
         {
-            string itemName = "Grey Guon Stone";
-            string resourceName = "NevernamedsItems/Resources/greyguon_icon";
-
-            GameObject obj = new GameObject();
-            var item = obj.AddComponent<GreyGuonStone>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Vengeful Rock";
-            string longDesc = "Any creature that harms this stone's bearer shall be harmed in kind." + "\n\nBlood unto blood, as it has always been.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            AdvancedPlayerOrbitalItem item = ItemSetup.NewItem<GreyGuonStone>(
+            "Grey Guon Stone",
+            "Vengeful Rock",
+            "Any creature that harms this stone's bearer shall be harmed in kind." + "\n\nBlood unto blood, as it has always been.",
+            "greyguon_icon") as AdvancedPlayerOrbitalItem;
             item.quality = PickupObject.ItemQuality.C;
 
             BuildPrefab();
@@ -50,10 +46,10 @@ namespace NevernamedsItems
                 0, //Perfect orbital factor (synergy guons have it set around 10, other guons are 0)
                 new List<string>() 
                 {
-                     "NevernamedsItems/Resources/GuonStones/greyguon_animated_ingame1",
-                     "NevernamedsItems/Resources/GuonStones/greyguon_animated_ingame2",
-                     "NevernamedsItems/Resources/GuonStones/greyguon_animated_ingame3",
-                     "NevernamedsItems/Resources/GuonStones/greyguon_animated_ingame4",
+                     "greyguon_animated_ingame1",
+                     "greyguon_animated_ingame2",
+                     "greyguon_animated_ingame3",
+                     "greyguon_animated_ingame4",
                 },
                 6, //FPS
                 new Vector2(9, 9), //Collider Dimensions
@@ -87,7 +83,8 @@ namespace NevernamedsItems
             bool flag = GreyGuonStone.upgradeOrbitalPrefab == null;
             if (flag)
             {
-                GameObject gameObject = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/greyguon_synergy", null);
+                
+                GameObject gameObject = ItemBuilder.SpriteFromBundle("GreyGuonOrbitalSynergy", Initialisation.itemCollection.GetSpriteIdByName("greyguon_synergy"), Initialisation.itemCollection);
                 gameObject.name = "Grey Guon Orbital Synergy Form";
                 SpeculativeRigidbody speculativeRigidbody = gameObject.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(12, 12));
                 GreyGuonStone.upgradeOrbitalPrefab = gameObject.AddComponent<PlayerOrbital>();

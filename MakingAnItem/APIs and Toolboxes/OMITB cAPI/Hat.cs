@@ -94,7 +94,7 @@ namespace NevernamedsItems
                 HatDirection checkedDir = FetchOwnerFacingDirection();
                 if (checkedDir != currentDirection) UpdateHatFacingDirection(checkedDir);
 
-                HandleAttachedSpriteDepth(m_currentGunAngle.GetTypedValue<float>(hatOwner));
+                HandleAttachedSpriteDepth(hatOwner.m_currentGunAngle);
             }
         }
         private void FixedUpdate()
@@ -207,8 +207,8 @@ namespace NevernamedsItems
             {
                 if (hatOwner.CurrentGun == null)
                 {
-                    Vector2 m_playerCommandedDirection = commandedField.GetTypedValue<Vector2>(hatOwner);
-                    Vector2 m_lastNonzeroCommandedDirection = lastNonZeroField.GetTypedValue<Vector2>(hatOwner);
+                    Vector2 m_playerCommandedDirection = hatOwner.m_playerCommandedDirection;
+                    Vector2 m_lastNonzeroCommandedDirection = hatOwner.m_lastNonzeroCommandedDirection;
 
                     float playerCommandedDir = BraveMathCollege.Atan2Degrees((!(m_playerCommandedDirection == Vector2.zero)) ? m_playerCommandedDirection : m_lastNonzeroCommandedDirection);
 
@@ -331,8 +331,8 @@ namespace NevernamedsItems
                 float num = 1f;
                 if (hatOwner.CurrentGun is null)
                 {
-                    Vector2 m_playerCommandedDirection = commandedField.GetTypedValue<Vector2>(hatOwner);
-                    Vector2 m_lastNonzeroCommandedDirection = lastNonZeroField.GetTypedValue<Vector2>(hatOwner);
+                    Vector2 m_playerCommandedDirection = hatOwner.m_playerCommandedDirection;
+                    Vector2 m_lastNonzeroCommandedDirection = hatOwner.m_lastNonzeroCommandedDirection;
                     gunAngle = BraveMathCollege.Atan2Degrees((!(m_playerCommandedDirection == Vector2.zero)) ? m_playerCommandedDirection : m_lastNonzeroCommandedDirection);
                 }
                 float num2;

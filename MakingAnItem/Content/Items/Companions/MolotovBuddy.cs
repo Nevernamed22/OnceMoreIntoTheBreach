@@ -12,15 +12,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string name = "Molotov Buddy";
-            string resourcePath = "NevernamedsItems/Resources/Companions/MolotovBud/molotovbud_icon";
-            GameObject gameObject = new GameObject();
-            var companionItem = gameObject.AddComponent<MolotovBuddy>();
-            ItemBuilder.AddSpriteToObject(name, resourcePath, gameObject);
-            string shortDesc = "Hot Headed Friend";
-            string longDesc = "This regular molotov was given sentience by the magic of the Gungeon, and with it he gained a firey attitude." + "\n\nIf he could, he would burn the world. What he hates most of all is people calling him cute.";
-            companionItem.SetupItem(shortDesc, longDesc, "nn");
-            companionItem.quality = PickupObject.ItemQuality.D;
+            PickupObject item = ItemSetup.NewItem<MolotovBuddy>(
+            "Molotov Buddy",
+            "Hot Headed Friend",
+            "This regular molotov was given sentience by the magic of the Gungeon, and with it he gained a firey attitude." + "\n\nIf he could, he would burn the world. What he hates most of all is people calling him cute.",
+            "molotovbud_icon");
+            item.quality = PickupObject.ItemQuality.D;
 
             MolotovBuddy.BuildPrefab();
         }

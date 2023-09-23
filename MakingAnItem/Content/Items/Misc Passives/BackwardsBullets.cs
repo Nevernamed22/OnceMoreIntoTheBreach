@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Backwards Bullets";
-            string resourceName = "NevernamedsItems/Resources/backwardsbullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BackwardsBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "gnaB gnaB ytoohS";
-            string longDesc = "...thgin ymrots dna dloc a no tnemirepxe cifirroh a fo tluser eht era stellub esehT" + "\n\n!sdrawkcab levart meht sekam osla tub, lufrewop erom stellub ruoy sekaM";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<BackwardsBullets>(
+            "Backwards Bullets",
+            "gnaB gnaB ytoohS",
+            "...thgin ymrots dna dloc a no tnemirepxe cifirroh a fo tluser eht era stellub esehT" + "\n\n!sdrawkcab levart meht sekam osla tub, lufrewop erom stellub ruoy sekaM",
+            "backwardsbullets_icon");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Accuracy, 0.5f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 2f, StatModifier.ModifyMethod.MULTIPLICATIVE);
 

@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Table Tech Ammo";
-            string resourceName = "NevernamedsItems/Resources/tabletechammo_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<TableTechAmmo>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Flip Replenishment";
-            string longDesc = "Grants a small amount of ammo each time a table is flipped." + "\n\nChapter 10 of the \"Tabla Sutra.\" And he who flips shall never be hungry, for he will always have the flip within his heart.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            TableFlipItem item = ItemSetup.NewItem<TableTechAmmo>(
+              "Table Tech Ammo",
+              "Flip Replenishment",
+              "Grants a small amount of ammo each time a table is flipped." + "\n\nChapter 10 of the \"Tabla Sutra.\" And he who flips shall never be hungry, for he will always have the flip within his heart.",
+              "tabletechammo_icon") as TableFlipItem;
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("table_tech");
             item.TableFlocking = true;

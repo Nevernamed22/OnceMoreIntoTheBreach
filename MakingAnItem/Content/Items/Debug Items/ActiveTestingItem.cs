@@ -117,11 +117,11 @@ namespace NevernamedsItems
 
 
 
-            //Vector3 place = user.GetCursorPosition(4);
-            //GameObject carto = UnityEngine.Object.Instantiate<GameObject>(Carto.CartoPrefab, place, Quaternion.identity);
-            //DungeonPlaceableUtility.InstantiateDungeonPlaceable(carto, user.CurrentRoom, ((Vector2)carto.transform.position).ToIntVector2(), false);
+            Vector3 place = user.GetCursorPosition(4);
+            GameObject carto = UnityEngine.Object.Instantiate<GameObject>(Initialisation.toSpawn, place, Quaternion.identity);
+            if (carto.GetComponent<DungeonPlaceable>()) DungeonPlaceableUtility.InstantiateDungeonPlaceable(carto, user.CurrentRoom, ((Vector2)carto.transform.position).ToIntVector2(), false);
             //SaveAPIManager.SetFlag(CustomDungeonFlags.CHEATED_DEATH_SHADE, true);
-            //CurseManager.AddCurse("Curse of Infestation");
+            // CurseManager.AddCurse("Curse of Butterfingers");
             /*  ChamberGunProcessor processor = user.CurrentGun.GetComponentInChildren<ChamberGunProcessor>();
               if (processor)
               {
@@ -178,7 +178,10 @@ namespace NevernamedsItems
             // UnityEngine.Object.Instantiate(blood, user.specRigidbody.UnitCenter, Quaternion.identity);
 
 
-            GameObject obj = UnityEngine.Object.Instantiate(magicCircle, user.specRigidbody.UnitCenter, Quaternion.identity);
+            //GameObject obj = UnityEngine.Object.Instantiate(magicCircle, user.specRigidbody.UnitCenter, Quaternion.identity);
+
+            //VFXToolbox.DoRisingStringFade("Test String Wowza", user.sprite.WorldTopCenter, Color.white);
+            //VFXToolbox.DoStringSquirt("Test String Wow3", user.specRigidbody.UnitTopCenter, Color.red);
 
         }
 

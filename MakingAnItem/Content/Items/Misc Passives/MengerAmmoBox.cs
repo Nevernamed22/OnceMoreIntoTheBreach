@@ -15,16 +15,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Menger Ammo Box";
-            string resourceName = "NevernamedsItems/Resources/mengerammobox_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<MengerAmmoBox>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Fractal Replenishment";
-            string longDesc = "Equalises regular and spread ammo boxes."+"\n\nA delicate fractal of infinitely patterned bullets. Occasionally coughs up lead from the void.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<MengerAmmoBox>(
+            "Menger Ammo Box",
+            "Fractal Replenishment",
+            "Equalises regular and spread ammo boxes." + "\n\nA delicate fractal of infinitely patterned bullets. Occasionally coughs up lead from the void.",
+            "mengerammobox_icon");
             item.quality = PickupObject.ItemQuality.B;
-
             MengerAmmoBoxID = item.PickupObjectId;
         }
         public static int MengerAmmoBoxID;

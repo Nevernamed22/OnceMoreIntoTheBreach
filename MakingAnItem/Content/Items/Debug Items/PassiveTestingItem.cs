@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 using UnityEngine;
 using Gungeon;
 using System.Collections;
 using UnityEngine.Events;
+using Dungeonator;
 
 namespace NevernamedsItems
 {
@@ -35,6 +37,7 @@ namespace NevernamedsItems
 
            
         }
+        
         public static int DebugPassiveID;
         public void onFired(Projectile bullet, float eventchancescaler)
         {
@@ -43,9 +46,29 @@ namespace NevernamedsItems
                  StartCoroutine(doLateFrameProcessing(bullet));
                  bullet.gameObject.AddComponent<HasBeenDoubleProcessed>();
              }*/
-            if (bullet.sprite) bullet.sprite.renderer.enabled = false;
-            bullet.baseData.range = 5;
+            // if (bullet.sprite) bullet.sprite.renderer.enabled = false;
+            //bullet.baseData.range = 5;
+            bullet.specRigidbody.OnPreTileCollision += OnPreTileCollision;
+        }
+        public void OnPreTileCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, PhysicsEngine.Tile tile, PixelCollider tilePixelCollider)
+        {
+            RoomHandler baseRoom = myRigidbody.projectile.GetAbsoluteRoom();
+            IntVector2 position = tile.Position;
+            CellData cellData = GameManager.Instance.Dungeon.data[position];
+            if (cellData != null )
+            {
+                cellData.breakable = true;
+                cellData.occlusionData.overrideOcclusion = true;
+                cellData.occlusionData.cellOcclusionDirty = true;
+                tk2dTileMap tilemap = GameManager.Instance.Dungeon.DestroyWallAtPosition(position.x, position.y, true);
 
+                baseRoom.Cells.Add(cellData.position);
+                baseRoom.CellsWithoutExits.Add(cellData.position);
+                baseRoom.RawCells.Add(cellData.position);
+                Pixelator.Instance.MarkOcclusionDirty();
+                Pixelator.Instance.ProcessOcclusionChange(baseRoom.Epicenter, 1f, baseRoom, false);
+                if (tilemap) { GameManager.Instance.Dungeon.RebuildTilemap(tilemap); }
+            }
         }
         private IEnumerator doLateFrameProcessing(Projectile projectile)
         {
@@ -67,6 +90,7 @@ namespace NevernamedsItems
         }
         public override void Pickup(PlayerController player)
         {
+            //player.SetIsStealthed(true, "blehp");
             player.PostProcessProjectile += this.onFired;
             //player.PostProcessThrownGun += PostProcessGun;
             // player.OnRollStarted += OnRoll;
@@ -76,10 +100,22 @@ namespace NevernamedsItems
         private void PostProcessGun(Projectile fucker)
         {
         }
+        public override void Update()
+        {
+            if (Owner && Owner.SuperAutoAimTarget != null)
+            {
+                Instantiate(EasyVFXDatabase.GreenLaserCircleVFX, Owner.SuperAutoAimTarget.AimCenter, Quaternion.identity);
+            }
+            if (Owner && Owner.SuperDuperAimTarget != null)
+            {
+                Instantiate(EasyVFXDatabase.BlueLaserCircleVFX, Owner.SuperAutoAimTarget.AimCenter, Quaternion.identity);
+            }
+            base.Update();
+        }
         public override DebrisObject Drop(PlayerController player)
         {
-            player.PostProcessThrownGun -= PostProcessGun;
-            player.PostProcessProjectile -= this.onFired;
+           // player.PostProcessThrownGun -= PostProcessGun;
+           // player.PostProcessProjectile -= this.onFired;
             // player.PostProcessBeam -= this.PostProcessBeam;
 
             DebrisObject result = base.Drop(player);

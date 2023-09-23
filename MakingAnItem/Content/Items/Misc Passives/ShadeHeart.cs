@@ -16,10 +16,10 @@ namespace NevernamedsItems
         public static void Init()
         {
             string itemName = "Shade Heart";
-            string resourceName = "NevernamedsItems/Resources/shadeheart_icon";
             GameObject obj = new GameObject(itemName);
             var item = obj.AddComponent<ShadeHeart>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
+            ItemBuilder.AddSpriteToObjectAssetbundle(itemName, Initialisation.itemCollection.GetSpriteIdByName("shadeheart_icon"), Initialisation.itemCollection, obj);
+
             string shortDesc = "Heart of Darkness";
             string longDesc = "The ventricles of this shadowy organ are paper-thin, and ripple with a strange otherworldly energy." + "\n\nThough fragile, it holds fantastic power.";
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");

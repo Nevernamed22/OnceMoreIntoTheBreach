@@ -11,30 +11,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Glass God";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/glassgod_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<GlassGod>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Fragile Divinity";
-            string longDesc = "Grants great power, but shatters upon it's bearer taking damage."+"\n\nThe emblem of the Lady of Pane's greatest champion, a shining titan known only as 'The Glass One'. After his fall in battle, outnumbered ten to one, his crest somehow made it's way to the Gungeon.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
+            PickupObject item = ItemSetup.NewItem<GlassGod>(
+            "Glass God",
+            "Fragile Divinity",
+            "Grants great power, but shatters upon it's bearer taking damage." + "\n\nThe emblem of the Lady of Pane's greatest champion, a shining titan known only as 'The Glass One'. After his fall in battle, outnumbered ten to one, his crest somehow made it's way to the Gungeon.",
+            "glassgod_icon");
             item.AddPassiveStatModifier( PlayerStats.StatType.Coolness, 5, StatModifier.ModifyMethod.ADDITIVE);
             item.AddPassiveStatModifier( PlayerStats.StatType.Damage, 1.5f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.AddPassiveStatModifier( PlayerStats.StatType.ReloadSpeed, 0.5f, StatModifier.ModifyMethod.MULTIPLICATIVE);
@@ -44,9 +25,7 @@ namespace NevernamedsItems
             item.AddPassiveStatModifier( PlayerStats.StatType.RateOfFire, 1.5f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.AddPassiveStatModifier( PlayerStats.StatType.ProjectileSpeed, 1.5f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.AddPassiveStatModifier( PlayerStats.StatType.Accuracy, 0.5f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-
-            //Set the rarity of the item
-            item.quality = PickupObject.ItemQuality.S;
+            item.quality = PickupObject.ItemQuality.A;
         }
         private void breakItem(PlayerController player)
         {
@@ -63,17 +42,12 @@ namespace NevernamedsItems
             base.Pickup(player);
             player.OnReceivedDamage += this.breakItem;
         }
-        public override DebrisObject Drop(PlayerController player)
+        public override void DisableEffect(PlayerController player)
         {
-            DebrisObject debrisObject = base.Drop(player);
-            player.OnReceivedDamage -= this.breakItem;
-            return debrisObject;
+            if (player) player.OnReceivedDamage -= this.breakItem;
+            base.DisableEffect(player);
         }
-        public override void OnDestroy()
-        {
-            if (Owner) Owner.OnReceivedDamage -= this.breakItem;
-            base.OnDestroy();
-        }
+
 
     }
 }

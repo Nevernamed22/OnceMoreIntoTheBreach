@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Alkali Bullets";
-            string resourceName = "NevernamedsItems/Resources/alkalibullets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<AlkaliBullets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Violent Reaction";
-            string longDesc = "The alkali metals that make up these slugs react violently with the copious amounts of fluid present in Blobulonian creatures.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<AlkaliBullets>(
+            "Alkali Bullets",
+            "Violent Reaction",
+            "The alkali metals that make up these slugs react violently with the copious amounts of fluid present in Blobulonian creatures.",
+            "alkalibullets_icon");
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("bullet_modifier");
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);

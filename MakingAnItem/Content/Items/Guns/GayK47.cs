@@ -51,13 +51,13 @@ namespace NevernamedsItems
             projectile.baseData.speed *= 1f;
             projectile.baseData.range *= 2f;
 
-            gun.SetTag("kalashnikov");
 
             projectile.gameObject.AddComponent<GayK47Mod>();
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Gayk47 Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/gayk47_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/gayk47_clipempty");
             gun.quality = PickupObject.ItemQuality.A;
             ETGMod.Databases.Items.Add(gun, false, "ANY");
+            gun.SetTag("kalashnikov");
 
             GayK47ID = gun.PickupObjectId;
         }

@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
        public static void Init()
         {
-            string itemName = "Junkllets";
-            string resourceName = "NevernamedsItems/Resources/junkllets_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Junkllets>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Hunky Junk";
-            string longDesc = "+5% damage for every piece of Junk the bearer posesses."+"\n\nTechnology such as this already comes pre-installed on most Hegemony Issue machine intelligences... for some reason.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<Junkllets>(
+            "Junkllets",
+            "Hunky Junk",
+            "+5% damage for every piece of Junk the bearer posesses." + "\n\nTechnology such as this already comes pre-installed on most Hegemony Issue machine intelligences... for some reason.",
+            "junkllets_icon");
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ROBOT_HELD_FIVE_JUNK, true);

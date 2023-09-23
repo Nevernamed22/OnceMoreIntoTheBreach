@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -83,6 +83,16 @@ namespace NevernamedsItems
             gun.gunClass = GunClass.ICE;
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Blizzkrieg Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/blizzkreig_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/blizzkreig_clipempty");
+
+            AdvancedHoveringGunSynergyProcessor hoveringGun = gun.gameObject.AddComponent<AdvancedHoveringGunSynergyProcessor>();
+            hoveringGun.RequiredSynergy = "Ice Queen";
+            hoveringGun.TriggerDuration = 1f;
+            hoveringGun.requiresBaseGunInHand = true;
+            hoveringGun.FireType = HoveringGunController.FireType.ON_COOLDOWN;
+            hoveringGun.FireCooldown = 0.25f;
+            hoveringGun.Trigger = AdvancedHoveringGunSynergyProcessor.TriggerStyle.ON_DODGE_ROLL;
+            hoveringGun.PositionType = HoveringGunController.HoverPosition.CIRCULATE;
+            hoveringGun.IDsToSpawn = new int[] { 223, 223, 223 };
 
 
             gun.quality = PickupObject.ItemQuality.S;

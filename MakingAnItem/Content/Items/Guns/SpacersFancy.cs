@@ -81,7 +81,7 @@ namespace NevernamedsItems
         }
         public override void OnDestroy()
         {
-            if (gun && gun.GunPlayerOwner()) { gun.GunPlayerOwner().OnItemPurchased += Purchase; }
+            if (gun && gun.GunPlayerOwner()) { gun.GunPlayerOwner().OnItemPurchased -= Purchase; }
             base.OnDestroy();
         }
 

@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Blombk";
-            string resourceName = "NevernamedsItems/Resources/blombk_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Blombk>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Boomer Blanks";
-            string longDesc = "Triggers a small blank whenever an explosion goes off." + "\n\nA Fuselier egg painted blue.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<Blombk>(
+            "Blombk",
+            "Boomer Blanks",
+            "Triggers a small blank whenever an explosion goes off." + "\n\nA Fuselier egg painted blue.",
+            "blombk_icon");
             item.quality = PickupObject.ItemQuality.C;
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);
             BlombkID = item.PickupObjectId;

@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using ItemAPI;
+using Alexandria.BreakableAPI;
 
 namespace NevernamedsItems
 {
@@ -116,7 +117,7 @@ namespace NevernamedsItems
 
             //CLIP OBJECT
             gun.gameObject.transform.Find("Clip").transform.position = new Vector3(6 / 16f, 9 / 16f);//used to position where your clips will spawn
-            gun.clipObject = BreakAbleAPI.BreakableAPIToolbox.GenerateDebrisObject("NevernamedsItems/Resources/Debris/sweeper_clip.png", true, 1, 5, 60, 20, null, 1, null, null, 1).gameObject;
+            gun.clipObject = BreakableAPIToolbox.GenerateDebrisObject("NevernamedsItems/Resources/Debris/sweeper_clip.png", true, 1, 5, 60, 20, null, 1, null, null, 1).gameObject;
             gun.reloadClipLaunchFrame = 3; //the frame on which the clip/s will spawn when the gun reloads
             gun.clipsToLaunchOnReload = 1;//self explanatory
 

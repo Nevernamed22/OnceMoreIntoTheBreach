@@ -15,24 +15,14 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Keygen";
-            string resourceName = "NevernamedsItems/Resources/NeoActiveSprites/keygen_icon";
-
-            GameObject obj = new GameObject(itemName);
-
-            var item = obj.AddComponent<Keygen>();
-
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            string shortDesc = "wHO n n n eEDS KEYs?!1!";
-            string longDesc = "A strange fragment of corrupted software initially developed to generate free access to the contents of chests within the Gungeon." + "\n\nIn the years since it's creation however, it has become... chaotic, unpredictable, and dangerous. Use with extreme caution.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<Keygen>(
+            "Keygen",
+            "wHO n n n eEDS KEYs?!1!",
+            "A strange fragment of corrupted software initially developed to generate free access to the contents of chests within the Gungeon." + "\n\nIn the years since it's creation however, it has become... chaotic, unpredictable, and dangerous. Use with extreme caution.",
+            "keygen_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 70);
-
             item.consumable = false;
             item.quality = ItemQuality.B;
-
             item.AddToSubShop(ItemBuilder.ShopType.Flynt);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.BOSSRUSH_PILOT, true);
         }
@@ -80,7 +70,7 @@ namespace NevernamedsItems
                     else
                     {
                         Exploder.DoDefaultExplosion(rerollChest.specRigidbody.UnitCenter, Vector2.zero);
-                        if (rerollChest.IsMimic) OMITBReflectionHelpers.ReflectSetField<bool>(typeof(Chest), "m_isMimic", false, rerollChest);
+                        if (rerollChest.IsMimic) rerollChest.m_isMimic = false;
                         rerollChest.majorBreakable.Break(Vector2.zero);
                         if (rerollChest.GetChestTier() == ChestUtility.ChestTier.RAT) UnityEngine.Object.Destroy(rerollChest.gameObject);
                     }

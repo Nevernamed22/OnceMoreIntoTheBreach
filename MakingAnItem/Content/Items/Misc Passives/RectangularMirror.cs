@@ -15,16 +15,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Rectangular Mirror";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/rectangularmirror_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<RectangularMirror>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Table Reflection";
-            string longDesc = "Flipped tables reflect bullets. \n\nThis artefact was used by ancient acolytes of the Tabla Sutra to study their own flips from a new perspective. In time it gained an almost mystical reputation.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<RectangularMirror>(
+            "Rectangular Mirror",
+            "Table Reflection",
+            "Flipped tables reflect bullets. \n\nThis artefact was used by ancient acolytes of the Tabla Sutra to study their own flips from a new perspective. In time it gained an almost mystical reputation.",
+            "rectangularmirror_icon");
             item.quality = PickupObject.ItemQuality.C;
-
             glint = Shader.Find("Brave/ItemSpecific/LootGlintAdditivePass");
         }
         public override void Pickup(PlayerController player)

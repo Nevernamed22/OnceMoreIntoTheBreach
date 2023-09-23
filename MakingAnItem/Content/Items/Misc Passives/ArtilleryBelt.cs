@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Artillery Belt";
-            string resourceName = "NevernamedsItems/Resources/artillerybelt_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<ArtilleryBelt>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "From The Hip";
-            string longDesc = "Takes pot-shots at your foes."+"\n\nA relic of Alben Smallbore's research on garmentosapience.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<ArtilleryBelt>(
+            "Artillery Belt",
+            "From The Hip",
+            "Takes pot-shots at your foes." + "\n\nA relic of Alben Smallbore's research on garmentosapience.",
+            "artillerybelt_icon");
             item.quality = PickupObject.ItemQuality.B;
         }
         private float timer;

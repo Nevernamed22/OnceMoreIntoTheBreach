@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Fowl Ring";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/fowlring_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<FowlRing>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Cluck Up";
-            string longDesc = "One enemy per room becomes a chicken."+"\n\nA symbol of poultry affinity, manifesting one's most fowl desires.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<FowlRing>(
+            "Fowl Ring",
+            "Cluck Up",
+            "One enemy per room becomes a chicken." + "\n\nA symbol of poultry affinity, manifesting one's most fowl desires.",
+            "fowlring_icon");
             item.quality = PickupObject.ItemQuality.D;
             FowlRingID = item.PickupObjectId;
         }

@@ -15,14 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Splattershot";
-            string resourceName = "NevernamedsItems/Resources/splattershot_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Splattershot>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "SPLAT";
-            string longDesc = "Bullets spend the beginning of their lives clustered close together, before splitting apart in a hearbreaking parable about the pain of growing up.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<Splattershot>(
+            "Splattershot",
+            "SPLAT",
+            "Bullets spend the beginning of their lives clustered close together, before splitting apart in a hearbreaking parable about the pain of growing up.",
+            "splattershot_icon");
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
         }

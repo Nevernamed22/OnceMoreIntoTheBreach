@@ -59,7 +59,7 @@ namespace NevernamedsItems
                 "bigshot_orangeproj_001",
                 "bigshot_orangeproj_002",
                 "bigshot_orangeproj_003",
-            }, 10, true, new List<IntVector2> {
+            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                  new IntVector2(17, 16), //1
                   new IntVector2(17, 16), //2
                    new IntVector2(17, 16), //3
@@ -71,7 +71,7 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 3),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 3),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 3),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 3));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 3), 0);
             projectile.gameObject.AddComponent<BigShotProjectileComp>();
             projectile.DestroyMode = Projectile.ProjectileDestroyMode.BecomeDebris;
             projectile.SetProjectileSpriteRight("bigshot_orangeproj_001", 17, 16, true, tk2dBaseSprite.Anchor.MiddleCenter, 17, 16);
@@ -89,7 +89,7 @@ namespace NevernamedsItems
                 "bigshot_pinkproj_001",
                 "bigshot_pinkproj_002",
                 "bigshot_pinkproj_003",
-            }, 16, true, new List<IntVector2> {
+            }, 16, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                 new IntVector2(17, 15), //1
                 new IntVector2(17, 15), //2
                 new IntVector2(17, 15), //3
@@ -100,7 +100,7 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 3),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 3),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 3),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 3));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 3), 0);
             projectile2.SetProjectileSpriteRight("bigshot_pinkproj_001", 17, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 17, 15);
             projectile2.DestroyMode = Projectile.ProjectileDestroyMode.BecomeDebris;
             projectile2.gameObject.AddComponent<BigShotProjectileComp>();
@@ -113,6 +113,8 @@ namespace NevernamedsItems
             BigShotID = gun.PickupObjectId;
 
 
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Round King", "NevernamedsItems/Resources/CustomGunAmmoTypes/bigshot_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/bigshot_clipempty");
 
 
 
@@ -128,7 +130,7 @@ namespace NevernamedsItems
             spamtonHead.AnimateProjectile(new List<string> {
                 "spamtonhead_001",
                 "spamtonhead_002",
-            }, 4, true, new List<IntVector2> {
+            }, 4, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                 new IntVector2(10, 13), //1
                 new IntVector2(10, 11), //2
             }, AnimateBullet.ConstructListOfSameValues(true, 2),
@@ -138,7 +140,7 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 2),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(5, 5), 2),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 2),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 2));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 2), 0);
             spamtonHead.SetProjectileSpriteRight("spamtonhead_001", 10, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 5, 5);
 
             //PIPIS
@@ -154,7 +156,7 @@ namespace NevernamedsItems
                 "pipis_002",
                 "pipis_003",
                 "pipis_004",
-            }, 8, true, new List<IntVector2> {
+            }, 8, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
                 new IntVector2(12, 12), //1
                 new IntVector2(12, 12), //2
                 new IntVector2(12, 12), //3
@@ -166,7 +168,7 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(5, 5), 4),
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
             pipisProj.SetProjectileSpriteRight("pipis_001", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 5, 5);
             pipisProj.DestroyMode = Projectile.ProjectileDestroyMode.BecomeDebris;
             pipisProj.gameObject.AddComponent<BigShotProjectileComp>();

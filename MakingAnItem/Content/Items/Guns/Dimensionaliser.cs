@@ -159,7 +159,7 @@ namespace NevernamedsItems
                 "dimensionaliser_portal_090", //TEN
             },
             40, //FPS
-            true, //Loops
+            tk2dSpriteAnimationClip.WrapMode.Loop, //Loops
             AnimateBullet.ConstructListOfSameValues(new IntVector2(55, 55), 90), //Sprite Sizes
             AnimateBullet.ConstructListOfSameValues(true, 90), //Lightened
             AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 90), //Anchors
@@ -168,7 +168,7 @@ namespace NevernamedsItems
             AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 90),  //Manual Offsets
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(30, 30), 90), //Collider Pixel Sizes
             AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 90), //Override Collider Offsets
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 90));
+            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 90), 0);
 
 
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
