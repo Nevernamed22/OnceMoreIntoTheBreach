@@ -1,19 +1,29 @@
-﻿using NpcApi;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using LootTableAPI;
 using UnityEngine;
-using GungeonAPI;
+using Alexandria.DungeonAPI;
+using Alexandria.NPCAPI;
+using Alexandria.BreakableAPI;
+using Dungeonator;
+using Alexandria.Misc;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
     public static class Boomhildr
     {
+        public static GameObject mapIcon;
         public static GenericLootTable BoomhildrLootTable;
+        public static void AddToLootPool(int id)
+        {
+            if (BoomhildrLootTable == null) { BoomhildrLootTable = LootUtility.CreateLootTable(); }
+            BoomhildrLootTable.AddItemToPool(id);
+        }
         public static void Init()
         {
+            #region Strings
             ETGMod.Databases.Strings.Core.AddComplex("#BOOMHILDR_GENERIC_TALK", "Explosions are the spice of life! ...and death.");
             ETGMod.Databases.Strings.Core.AddComplex("#BOOMHILDR_GENERIC_TALK", "Name's Boomhildr, demolitions expert, self taught, at yer service.");
             ETGMod.Databases.Strings.Core.AddComplex("#BOOMHILDR_GENERIC_TALK", "My legs? Got taken clean off by a dynamite explosion! It's what made me want to go into pyrotechnics!");
@@ -49,6 +59,9 @@ namespace NevernamedsItems
             ETGMod.Databases.Strings.Core.AddComplex("#BOOMHILDR_ATTACKED_TALK", "No need to be jealous.");
             ETGMod.Databases.Strings.Core.AddComplex("#BOOMHILDR_ATTACKED_TALK", "You're gonna blow your chances.");
             ETGMod.Databases.Strings.Core.AddComplex("#BOOMHILDR_ATTACKED_TALK", "I can bring this whole chamber down on our heads, and you're attacking me?");
+
+            ETGMod.Databases.Strings.Core.AddComplex("#BOOMHILDR_STEAL_TALK", "Thief!");
+            #endregion
 
             List<int> LootTable = new List<int>()
             {
@@ -117,62 +130,81 @@ namespace NevernamedsItems
                 Pillarocket.ID,
                 BlastingCap.ID,
             };
+            foreach (int i in LootTable) { AddToLootPool(i); }
 
-            BoomhildrLootTable = LootTableTools.CreateLootTable();
-            foreach (int i in LootTable)
+            mapIcon = ItemBuilder.SpriteFromBundle("boomhildr_mapicon", Initialisation.NPCCollection.GetSpriteIdByName("boomhildr_mapicon"), Initialisation.NPCCollection, new GameObject("boomhildr_mapicon"));
+            mapIcon.MakeFakePrefab();
+
+            var boomhildr = ItemBuilder.SpriteFromBundle("boomhildr_idle_001", Initialisation.NPCCollection.GetSpriteIdByName("boomhildr_idle_001"), Initialisation.NPCCollection, new GameObject("Boomhildr"));
+            SpeculativeRigidbody rigidbody = ShopAPI.GenerateOrAddToRigidBody(boomhildr, CollisionLayer.LowObstacle, PixelCollider.PixelColliderGeneration.Manual, true, true, true, false, false, false, false, true, new IntVector2(12, 16), new IntVector2(4, -1));
+            rigidbody.AddCollisionLayerOverride(CollisionMask.LayerToMask(CollisionLayer.BulletBlocker));
+
+            var shadow = ItemBuilder.SpriteFromBundle("boomhildr_shadow", Initialisation.NPCCollection.GetSpriteIdByName("boomhildr_shadow"), Initialisation.NPCCollection, new GameObject("shadow"));
+            tk2dSprite shadowSprite = shadow.GetComponent<tk2dSprite>();
+            shadowSprite.HeightOffGround = -1.7f;
+            shadowSprite.SortingOrder = 0;
+            shadowSprite.IsPerpendicular = false;
+            shadowSprite.renderer.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTilted");
+            shadowSprite.usesOverrideMaterial = true;
+            shadow.transform.SetParent(boomhildr.transform);
+            shadow.transform.localPosition = new Vector3(-4f/16f, -7f/16f);
+
+            GameObject shopObj = TempNPCTools.MakeIntoShopkeeper("Boomhildr", "nn", boomhildr, "boomhildr_idle", "boomhildr_talk", Initialisation.NPCCollection, Initialisation.npcAnimationCollection,
+                   BoomhildrLootTable,
+                   CustomShopItemController.ShopCurrencyType.COINS,
+                   "#BOOMHILDR_GENERIC_TALK",
+                   "#BOOMHILDR_STOPPER_TALK",
+                   "#BOOMHILDR_PURCHASE_TALK",
+                   "#BOOMHILDR_NOSALE_TALK",
+                   "#BOOMHILDR_INTRO_TALK",
+                   "#BOOMHILDR_ATTACKED_TALK",
+                   "#BOOMHILDR_STEAL_TALK",
+                   new Vector3(12f / 16f, 52f / 16f, 0), //Textbox Offset
+                   new Vector3(31f / 16f, 54f / 16f, 0),
+                   itemPositions: new List<Vector3> { new Vector3(0.5f, 1.5f, 1), new Vector3(2.625f, 1.5f, 1), new Vector3(4.5f, 1.5f, 1) }.ToArray(),
+                   hasMinimapIcon: true,
+                   minimapIcon: mapIcon,
+                   Carpet: "boomhildr_carpet",
+                   costModifier: 0.8f,
+                   addToShopAnnex: true,
+                   shopAnnexWeight: 0.1f,
+                   voice: "lady"
+                   );
+
+
+            Dictionary<GameObject, float> dict = new Dictionary<GameObject, float>() { { shopObj, 1f } };
+            DungeonPlaceable placeable = BreakableAPIToolbox.GenerateDungeonPlaceable(dict);
+            placeable.isPassable = true;
+            placeable.width = 5;
+            placeable.height = 5;
+            StaticReferences.StoredDungeonPlaceables.Add("boomhildr", placeable);
+            Alexandria.DungeonAPI.StaticReferences.customPlaceables.Add("nn:boomhildr", placeable);
+
+
+            SharedInjectionData npcTable = GameManager.Instance.GlobalInjectionData.entries[2].injectionData;
+            npcTable.InjectionData.Add(new ProceduralFlowModifierData()
             {
-                BoomhildrLootTable.AddItemToPool(i);
-            }
-
-            GameObject boomhildrObj = ItsDaFuckinShopApi.SetUpShop(
-                         "Boomhildr",
-                         "omitb",
-                         new List<string>()
-                         {
-                        "NevernamedsItems/Resources/NPCSprites/Boomhildr/boomhildr_idle_001",
-                        "NevernamedsItems/Resources/NPCSprites/Boomhildr/boomhildr_idle_002",
-                        "NevernamedsItems/Resources/NPCSprites/Boomhildr/boomhildr_idle_003",
-                        "NevernamedsItems/Resources/NPCSprites/Boomhildr/boomhildr_idle_004",
-                        "NevernamedsItems/Resources/NPCSprites/Boomhildr/boomhildr_idle_005",
-                         },
-                         7,
-                         new List<string>()
-                         {
-                        "NevernamedsItems/Resources/NPCSprites/Boomhildr/boomhildr_talk_001",
-                        "NevernamedsItems/Resources/NPCSprites/Boomhildr/boomhildr_talk_002",
-                         },
-                         3,
-                         BoomhildrLootTable,
-                         CustomShopItemController.ShopCurrencyType.COINS,
-                         "#BOOMHILDR_GENERIC_TALK",
-                         "#BOOMHILDR_STOPPER_TALK",
-                         "#BOOMHILDR_PURCHASE_TALK",
-                         "#BOOMHILDR_NOSALE_TALK",
-                         "#BOOMHILDR_INTRO_TALK",
-                         "#BOOMHILDR_ATTACKED_TALK",
-                         new Vector3(0.5f, 4, 0),
-                         ItsDaFuckinShopApi.defaultItemPositions,
-                         1f,
-                         false,
-                         null,
-                         null,
-                         null,
-                         null,
-                         null,
-                         null,
-                         null,
-                         null,
-                         true,
-                         false,
-                         null,
-                         true,
-                         "NevernamedsItems/Resources/NPCSprites/Boomhildr/boomhildr_mapicon",
-                         true,
-                         0.1f
-                         );
-
-            PrototypeDungeonRoom Mod_Shop_Room = RoomFactory.BuildFromResource("NevernamedsItems/Resources/EmbeddedRooms/BoomhildrRoom.room").room;
-            ItsDaFuckinShopApi.RegisterShopRoom(boomhildrObj, Mod_Shop_Room, new UnityEngine.Vector2(9f, 11));
+                annotation = "Boomhildr",
+                DEBUG_FORCE_SPAWN = false,
+                OncePerRun = false,
+                placementRules = new List<ProceduralFlowModifierData.FlowModifierPlacementType>()
+                {
+                    ProceduralFlowModifierData.FlowModifierPlacementType.END_OF_CHAIN
+                },
+                roomTable = null,
+                exactRoom = RoomFactory.BuildNewRoomFromResource("NevernamedsItems/Content/NPCs/Rooms/BoomhildrRoom.newroom").room,
+                IsWarpWing = false,
+                RequiresMasteryToken = false,
+                chanceToLock = 0,
+                selectionWeight = 1f,
+                chanceToSpawn = 1,
+                RequiredValidPlaceable = null,
+                prerequisites = new DungeonPrerequisite[0],
+                CanBeForcedSecret = false,
+                RandomNodeChildMinDistanceFromEntrance = 0,
+                exactSecondaryRoom = null,
+                framedCombatNodes = 0,
+            });
         }
     }
 }

@@ -7,8 +7,8 @@ using UnityEngine;
 
 namespace NevernamedsItems
 {
-        internal class AssetBundleLoader
-        {
+    internal class AssetBundleLoader
+    {
         public static tk2dSpriteCollectionData FastLoadSpriteCollection(AssetBundle bundle, string CollectionName, string MaterialName)
         {
             tk2dSpriteCollectionData Colection = bundle.LoadAsset<GameObject>(CollectionName).GetComponent<tk2dSpriteCollectionData>();
@@ -36,32 +36,58 @@ namespace NevernamedsItems
         }
 
         public static AssetBundle LoadAssetBundleFromLiterallyAnywhere(string name, bool logs = false)
+        {
+            AssetBundle result = null;
             {
-                AssetBundle result = null;
+                if (File.Exists(Initialisation.FilePathFolder + "/" + name))
                 {
-                    if (File.Exists(Initialisation.FilePathFolder + "/" + name))
+                    try
                     {
-                        try
+                        result = AssetBundle.LoadFromFile(Path.Combine(Initialisation.FilePathFolder, name));
+                        if (logs == true)
                         {
-                            result = AssetBundle.LoadFromFile(Path.Combine(Initialisation.FilePathFolder, name));
-                            if (logs == true)
-                            {
-                                global::ETGModConsole.Log("Successfully loaded assetbundle!", false);
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            global::ETGModConsole.Log("Failed loading asset bundle from file.", false);
-                            global::ETGModConsole.Log(ex.ToString(), false);
+                            global::ETGModConsole.Log("Successfully loaded assetbundle!", false);
                         }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        global::ETGModConsole.Log("AssetBundle NOT FOUND!", false);
+                        global::ETGModConsole.Log("Failed loading asset bundle from file.", false);
+                        global::ETGModConsole.Log(ex.ToString(), false);
                     }
                 }
-                return result;
+                else
+                {
+                    global::ETGModConsole.Log("AssetBundle NOT FOUND!", false);
+                }
             }
-        
+            if (result != null)
+            {
+                var colls = result.LoadAllAssets<GameObject>().SelectMany(x => x.GetComponents<tk2dSpriteCollectionData>());
+
+                var shaderDict = new Dictionary<string, string>()
+            {
+                { "GunCollection", "tk2d/CutoutVertexColorTilted" }
+                // if you have multiple gun collections, copy this line for all of them
+            };
+
+                foreach (var coll in colls)
+                {
+                    if (!shaderDict.TryGetValue(coll.spriteCollectionName, out var shaderName))
+                        continue;
+
+                    var shader = ShaderCache.Acquire(shaderName);
+
+                    foreach (var mat in coll.materials)
+                    {
+                        if (mat == null)
+                            continue;
+
+                        mat.shader = shader;
+                    }
+                }
+            }
+            return result;
+        }
+
     }
 }

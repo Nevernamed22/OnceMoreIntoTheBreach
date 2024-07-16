@@ -26,6 +26,7 @@ namespace NevernamedsItems
             item.SetTag("bullet_modifier");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.KnockbackMultiplier, 3, StatModifier.ModifyMethod.ADDITIVE);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.BOSSRUSH_ROBOT, true);
+            Doug.AddToLootPool(item.PickupObjectId);
         }
 
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)

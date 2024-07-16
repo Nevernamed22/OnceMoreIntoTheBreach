@@ -24,6 +24,7 @@ namespace NevernamedsItems
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_TRACERROUNDS, true);
             item.AddItemToTrorcMetaShop(8);
+            Doug.AddToLootPool(item.PickupObjectId);
 
             ID = item.PickupObjectId;
         }
@@ -47,7 +48,7 @@ namespace NevernamedsItems
         }
         private void OnProjectileDeath(Projectile self)
         {
-            UnityEngine.Object.Instantiate<GameObject>((PickupObjectDatabase.GetById(Owner.PlayerHasActiveSynergy("Hot Tempered") ? 722 : 336) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX, self.LastPosition, Quaternion.identity);
+            UnityEngine.Object.Instantiate<GameObject>((PickupObjectDatabase.GetById((Owner != null && Owner.PlayerHasActiveSynergy("Hot Tempered")) ? 722 : 336) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX, self.LastPosition, Quaternion.identity);
             for (int i = 0; i < 5; i++)
             {
                 GameObject spawned = (PickupObjectDatabase.GetById(83) as Gun).DefaultModule.projectiles[0].InstantiateAndFireInDirection(self.LastPosition, UnityEngine.Random.Range(0, 360));
@@ -66,7 +67,7 @@ namespace NevernamedsItems
                 fireTrail.InFlightSpawnRadius = Owner.PlayerHasActiveSynergy("Even More Visible!") ? 1 : 0.5f;
                 fireTrail.SpawnGoopInFlight = true;
                 fireTrail.InFlightSpawnFrequency = 0.05f;
-                fireTrail.goopDefinition = Owner.PlayerHasActiveSynergy("Hot Tempered") ? GoopUtility.GreenFireDef : GoopUtility.FireDef;
+                fireTrail.goopDefinition = (Owner != null && Owner.PlayerHasActiveSynergy("Hot Tempered")) ? GoopUtility.GreenFireDef : GoopUtility.FireDef;
             }
         }
         public override void Pickup(PlayerController player)

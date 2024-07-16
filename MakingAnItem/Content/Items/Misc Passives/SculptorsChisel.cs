@@ -14,16 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Sculptors Chisel";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/sculptorschisel_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<SculptorsChisel>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            string shortDesc = "A Real Boy";
-            string longDesc = "Chance to sculpt flipped tables into immaculate decoys." + "\n\nThe chisel of an ancient sculptor who came to the gungeon in search of a way to cure his petrified beloved.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PassiveItem item = ItemSetup.NewItem<SculptorsChisel>(
+              "Sculptors Chisel",
+              "A Real Boy",
+              "Chance to sculpt flipped tables into immaculate decoys." + "\n\nThe chisel of an ancient sculptor who came to the gungeon in search of a way to cure his petrified beloved.",
+              "sculptorschisel_icon") as PassiveItem;        
             item.quality = PickupObject.ItemQuality.C;
             ID = item.PickupObjectId;
         }

@@ -1068,21 +1068,24 @@ namespace NevernamedsItems
         public void Start()
         {
             enemy = base.aiActor;
-            AIBulletBank bulletBank2 = enemy.bulletBank;
-            foreach (AIBulletBank.Entry bullet in bulletBank2.Bullets)
+            if (enemy && enemy.bulletBank)
             {
-                bullet.BulletObject.GetComponent<Projectile>().BulletScriptSettings.preventPooling = true;
-            }
-            if (enemy.aiShooter != null)
-            {
-                AIShooter aiShooter = enemy.aiShooter;
-                aiShooter.PostProcessProjectile = (Action<Projectile>)Delegate.Combine(aiShooter.PostProcessProjectile, new Action<Projectile>(this.PostProcessSpawnedEnemyProjectiles));
-            }
+                AIBulletBank bulletBank2 = enemy.bulletBank;
+                foreach (AIBulletBank.Entry bullet in bulletBank2.Bullets)
+                {
+                    bullet.BulletObject.GetComponent<Projectile>().BulletScriptSettings.preventPooling = true;
+                }
+                if (enemy.aiShooter != null)
+                {
+                    AIShooter aiShooter = enemy.aiShooter;
+                    aiShooter.PostProcessProjectile = (Action<Projectile>)Delegate.Combine(aiShooter.PostProcessProjectile, new Action<Projectile>(this.PostProcessSpawnedEnemyProjectiles));
+                }
 
-            if (enemy.bulletBank != null)
-            {
-                AIBulletBank bulletBank = enemy.bulletBank;
-                bulletBank.OnProjectileCreated = (Action<Projectile>)Delegate.Combine(bulletBank.OnProjectileCreated, new Action<Projectile>(this.PostProcessSpawnedEnemyProjectiles));
+                if (enemy.bulletBank != null)
+                {
+                    AIBulletBank bulletBank = enemy.bulletBank;
+                    bulletBank.OnProjectileCreated = (Action<Projectile>)Delegate.Combine(bulletBank.OnProjectileCreated, new Action<Projectile>(this.PostProcessSpawnedEnemyProjectiles));
+                }
             }
         }
         private void PostProcessSpawnedEnemyProjectiles(Projectile proj)

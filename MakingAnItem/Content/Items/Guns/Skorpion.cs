@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Model 59");
             gun.SetLongDescription("A military sidearm most notable for not actually incorporating scorpions at any stage during construction.");
 
-            gun.SetupSprite(null, "skorpion_idle_001", 8);
+            gun.SetGunSprites("skorpion");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 

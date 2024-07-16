@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Energy Fissure");
             gun.SetLongDescription("The ion-plate in this powerful anti-air laser is faulty, causing the fired beam to delaminate after travelling a certain distance." + "\n\nThe unregulated energy state of the bifurcated segments causes them to do much more damage to combatant targets than the singular beam.");
 
-            gun.SetupSprite(null, "ybeam_idle_001", 8);
+            gun.SetGunSprites("ybeam");
 
             gun.SetAnimationFPS(gun.shootAnimation, 20);
             gun.isAudioLoop = true;

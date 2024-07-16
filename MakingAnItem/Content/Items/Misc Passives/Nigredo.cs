@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Nigredo";
-            string resourceName = "NevernamedsItems/Resources/nigredo_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Nigredo>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Decay";
-            string longDesc = "Curse increases rate of fire."+"\n\nA toxic solution of putrifying chemicals, making up the first state of the process to formulate the Philosopher's Stone.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<Nigredo>(
+           "Nigredo",
+           "Decay",
+           "Curse increases rate of fire." + "\n\nA toxic solution of putrifying chemicals, making up the first state of the process to formulate the Philosopher's Stone.",
+           "nigredo_icon") as PassiveItem;
             item.AddPassiveStatModifier( PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.quality = PickupObject.ItemQuality.D;
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);

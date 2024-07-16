@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Fires Blanks");
             gun.SetLongDescription("It takes a very delicate pin to fire blanks instead of simply destroying them." + "\n\nThis elaborate device was put together from the scrapped parts of a laser-accurate surgical machine.");
 
-            gun.SetupSprite(null, "blankannon_idle_001", 8);
+            gun.SetGunSprites("blankannon");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.AddPassiveStatModifier(PlayerStats.StatType.AdditionalBlanksPerFloor, 2f, StatModifier.ModifyMethod.ADDITIVE);
@@ -53,7 +53,7 @@ namespace NevernamedsItems
             projectile.baseData.range *= 10f;
             BlankProjModifier blankingArmour = projectile.gameObject.GetOrAddComponent<BlankProjModifier>();
             blankingArmour.blankType = EasyBlankType.FULL;
-            projectile.SetProjectileSpriteRight("blankannon_projectile", 10, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 7);
+            projectile.SetProjectileSprite("blankannon_projectile", 10, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 7);
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Blank UI Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/blankannon_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/blankannon_clipempty");
             projectile.transform.parent = gun.barrelOffset;

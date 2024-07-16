@@ -30,7 +30,7 @@ namespace NevernamedsItems
             Projectile darkProj = DarkPrinceProjectile.GetComponent<Projectile>();
             darkProj.baseData.damage = 1;
             darkProj.baseData.speed = 100;
-            darkProj.SetProjectileSpriteRight("laserwelder_proj", 10, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 3);
+            darkProj.SetProjectileSprite("laserwelder_proj", 10, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 3);
             ProjWeaknessModifier weakness = darkProj.gameObject.AddComponent<ProjWeaknessModifier>();
             weakness.UsesSeparateStatsForBosses = true;
             weakness.isDarkPrince = true;

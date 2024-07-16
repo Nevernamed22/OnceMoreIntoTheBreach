@@ -7,7 +7,8 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -22,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("What's New?");
             gun.SetLongDescription("Fires a rocket on the first shot of it's clip."+"\n\nOnce part of a peculiar XXXS Size mech suit.");
 
-            gun.SetupSprite(null, "felissile_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "felissile_idle_001", 8, "felissile_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
@@ -55,8 +56,8 @@ namespace NevernamedsItems
             explosiveModifier.explosionData = FelissileExplosion;
             missileProjectile.baseData.range *= 0.5f;
             missileProjectile.baseData.speed *= 3f;
-            missileProjectile.transform.parent = gun.barrelOffset;
-            missileProjectile.SetProjectileSpriteRight("felissile_rocket_projectile", 16, 11, false, tk2dBaseSprite.Anchor.MiddleCenter, 14, 3);
+            missileProjectile.transform.parent = gun.barrelOffset;         
+            missileProjectile.SetProjectileCollisionRight("felissile_rocket_projectile", Initialisation.ProjectileCollection, 16, 11, false, tk2dBaseSprite.Anchor.MiddleCenter, 14, 3);
 
            
 
@@ -66,7 +67,7 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             projectile.baseData.speed *= 1.1f;
             projectile.baseData.damage = 11f;
-            projectile.SetProjectileSpriteRight("felissile_normal_projectile", 10, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 8);
+            projectile.SetProjectileCollisionRight("felissile_normal_projectile", Initialisation.ProjectileCollection, 10, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 8);
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.WhiteCircleVFX;
 

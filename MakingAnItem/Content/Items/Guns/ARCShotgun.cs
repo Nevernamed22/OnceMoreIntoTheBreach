@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Crack The Heavens");
             gun.SetLongDescription("Part of a short-lived campaign from the ARC Private Security Company to advertise their weaponry to the public as valuable home defence tools."+"\n\nAfter the fourth lawsuit from a disgruntled customer blasting their own legs off, ARC pulled the campaign.");
 
-            gun.SetupSprite(null, "arcshotgun_idle_001", 8);
+            gun.SetGunSprites("arcshotgun");
 
             gun.SetAnimationFPS(gun.shootAnimation, 13);
             gun.SetAnimationFPS(gun.idleAnimation, 5);

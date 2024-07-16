@@ -13,24 +13,13 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Necromancer's Right Hand";
-            string resourceName = "NevernamedsItems/Resources/necromancersrighthand_icon";
-
-            GameObject obj = new GameObject(itemName);
-
-            var item = obj.AddComponent<NecromancersRightHand>();
-
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            string shortDesc = "Spacebar To Necromance";
-            string longDesc = "The severed hand of an ancient purple necromancer." + "\n\nRaise an army of the dead!";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PlayerItem item = ItemSetup.NewItem<NecromancersRightHand>(
+               "Necromancer's Right Hand",
+               "Spacebar To Necromance",
+               "The severed hand of an ancient purple necromancer." + "\n\nRaise an army of the dead!",
+               "necromancersrighthand_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 210);
-
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
-
             item.consumable = false;
             item.quality = ItemQuality.D;
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);

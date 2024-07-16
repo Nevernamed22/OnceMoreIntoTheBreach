@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Filled With Determination");
             gun.SetLongDescription("Doesnt shoot. Befriends your enemies with your masterful dodges." + "\n\nAn antique Revolver. On days like these...");
 
-            gun.SetupSprite(null, "gundertale_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "gundertale_idle_001", 8, "gundertale_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 
@@ -59,7 +59,7 @@ namespace NevernamedsItems
 
         protected override void Update()
         {
-            if (this.gun != null && this.gun.DefaultModule != null && this.gun.RuntimeModuleData[this.gun.DefaultModule] != null)
+            if (this.gun != null && this.gun.DefaultModule != null && this.gun.RuntimeModuleData != null && this.gun.RuntimeModuleData.ContainsKey(this.gun.DefaultModule))
             {
                 if (!this.gun.RuntimeModuleData[this.gun.DefaultModule].onCooldown)
                 {

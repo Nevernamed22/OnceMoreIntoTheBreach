@@ -23,7 +23,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Kalt Action");
             gun.SetLongDescription("Fires chunks of hypercold H2O."+"\n\nSecret Blobulonian technology, developed during their ill-fated winter campaign.");
 
-            gun.SetupSprite(null, "blizzkrieg_idle_001", 8);
+            gun.SetGunSprites("blizzkrieg");
+
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(38) as Gun).gunSwitchGroup;
 
 
@@ -65,7 +66,7 @@ namespace NevernamedsItems
                 watering.SpawnGoopOnCollision = true;
                 watering.SpawnGoopInFlight = false;
                 watering.goopDefinition = EasyGoopDefinitions.WaterGoop;
-                projectile2.SetProjectileSpriteRight("icicle_projectile", 13, 5, false, tk2dBaseSprite.Anchor.MiddleCenter, 13, 5);
+                projectile2.SetProjectileSprite("icicle_projectile", 13, 5, false, tk2dBaseSprite.Anchor.MiddleCenter, 13, 5);
                 mod.projectiles.Add(projectile2);
 
 

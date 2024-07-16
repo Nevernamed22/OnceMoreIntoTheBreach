@@ -23,7 +23,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("The Ultimate Gun");
             gun.SetLongDescription("A collection of seemingly random guns duct taped together." + "\n\nHas a penchant for jamming in firing mode, reload to clear the jam.");
 
-            gun.SetupSprite(null, "amalgun_idle_001", 8);
+            gun.SetGunSprites("amalgun");
+
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(124) as Gun).gunSwitchGroup;
 
             gun.SetAnimationFPS(gun.shootAnimation, 16);

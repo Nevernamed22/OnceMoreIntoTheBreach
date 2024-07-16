@@ -12,17 +12,13 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Kevin";
-            string resourceName = "NevernamedsItems/Resources/kevin_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Kevin>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Long Live the Keving";
-            string longDesc = "What may appear at first to be the skinned face of a Bullet Kin is in fact the flag of the Sovereign Nation of Kevin."+"\n\nIn your time of need, the Sovereign Nation of Kevin's sole resident (Kevin) will join you in battle. No matter how many times he gets knocked down, he'll just keep getting back up.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<Kevin>(
+               "Kevin",
+               "Long Live the Keving",
+               "What may appear at first to be the skinned face of a Bullet Kin is in fact the flag of the Sovereign Nation of Kevin." + "\n\nIn your time of need, the Sovereign Nation of Kevin's sole resident (Kevin) will join you in battle. No matter how many times he gets knocked down, he'll just keep getting back up.",
+               "kevin_icon") as PassiveItem;          
             item.quality = PickupObject.ItemQuality.D;
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
-
             List<string> mandatorySynergyItems = new List<string>() { "nn:kevin", "eyepatch" };
             CustomSynergies.Add("High Lord Kevin", mandatorySynergyItems);
             item.SetTag("non_companion_living_item");

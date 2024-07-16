@@ -6,8 +6,9 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using System.Reflection;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -21,7 +22,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Slippery");
             gun.SetLongDescription("Made of strange soapy goo, this weapon slips out of your hands when reloaded.");
 
-            gun.SetupSprite(null, "glooper_idle_001", 8);
+            gun.SetGunSprites("glooper");
+
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(599) as Gun).gunSwitchGroup;
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
@@ -51,18 +53,25 @@ namespace NevernamedsItems
             projectile.baseData.range *= 1f;
             projectile.baseData.force *= 2.5f;
 
-            projectile.AnimateProjectile(new List<string> {
-                "glooperproj_1",
-                "glooperproj_2",
-                "glooperproj_1",
-                "glooperproj_3",
-            }, 8, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(7, 7), //1
-                new IntVector2(5, 9), //2            
-                new IntVector2(7, 7), //3
-                new IntVector2(9, 5), //4
-            }, AnimateBullet.ConstructListOfSameValues(false, 4), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4), AnimateBullet.ConstructListOfSameValues(true, 4), AnimateBullet.ConstructListOfSameValues(false, 4),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
+            projectile.AnimateProjectileBundle("GlooperProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "GlooperProjectile",
+                   new List<IntVector2> {
+                        new IntVector2(7, 7), //1
+                        new IntVector2(5, 9), //2            
+                        new IntVector2(7, 7), //3
+                        new IntVector2(9, 5), //4
+                   }, //Pixel Sizes
+                   MiscTools.DupeList(false, 4), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                   MiscTools.DupeList(true, 4), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 4), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 4), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 4)); // Override to copy from    
+
             gun.DefaultModule.projectiles[0] = projectile;
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;

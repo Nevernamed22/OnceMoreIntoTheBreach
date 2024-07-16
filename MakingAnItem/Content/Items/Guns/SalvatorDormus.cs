@@ -22,7 +22,9 @@ namespace NevernamedsItems
             gun.gameObject.AddComponent<SalvatorDormus>();
             gun.SetShortDescription("Type Match");
             gun.SetLongDescription("Increases it's own stats based on what other types of gun are in it's owner's possession" + "\n\nOne of the earliest models of semiautomatic pistol ever invented, it's ancestral promenance grants it more power the more of it's descendants are held.");
-            gun.SetupSprite(null, "salvatordormus_idle_001", 8);
+           
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "salvatordormus_idle_001", 8, "salvatordormus_ammonomicon_001");
+
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);
 

@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Mod The Gun");
             gun.SetLongDescription("While appearing unremarkable, this wonky wrench is actually an artefact of great power."+"\n\nResponsible for the tear in the dimensional curtain through which new strange artefacts migrate to the Gungeon to this very day."+"\n\nGrows stronger for each esoteric artefact in your possession.");
 
-            gun.SetupSprite(null, "wrench_idle_001", 8);
+            gun.SetGunSprites("wrench");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 1);
@@ -151,9 +151,9 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:null_reference_exwrenchion", "nn:wrench+null_reference_exception");
             gun.gameObject.AddComponent<WrenchNullRefException>();
             gun.SetShortDescription("Mod The Gun");
-            gun.SetLongDescription("i am so tired while coding this");
+            gun.SetLongDescription("i am so tired while coding this.                            revisiting this some years later, I am still tired.");
 
-            gun.SetupSprite(null, "wrenchnull_idle_001", 8);
+            gun.SetGunSprites("wrenchnull", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 1);

@@ -21,6 +21,7 @@ namespace NevernamedsItems
             item.SetTag("bullet_modifier");
             item.ArmorToGainOnInitialPickup = 1;
             FullArmourJacketID = item.PickupObjectId;
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public static int FullArmourJacketID;
         private float currentArmour, lastArmour;

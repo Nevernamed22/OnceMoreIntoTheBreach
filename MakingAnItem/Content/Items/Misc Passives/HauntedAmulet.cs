@@ -7,6 +7,7 @@ using UnityEngine;
 using Alexandria.ItemAPI;
 using SaveAPI;
 using Alexandria.Misc;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -24,21 +25,19 @@ namespace NevernamedsItems
 
 
             blinky = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            blinky.AnimateProjectile(new List<string> {
-                "blinkyproj_001",
-                "blinkyproj_002",
-                "blinkyproj_003",
-                "blinkyproj_004",
-                "blinkyproj_005"
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, AnimateBullet.ConstructListOfSameValues(new IntVector2(14, 27), 5),
-            AnimateBullet.ConstructListOfSameValues(false, 5),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 5),
-            AnimateBullet.ConstructListOfSameValues(true, 5),
-            AnimateBullet.ConstructListOfSameValues(false, 5),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 5),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(8, 8), 5),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 5),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 5), 0);
+            blinky.AnimateProjectileBundle("GhostProjectileBlinky",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "GhostProjectileBlinky",
+                   MiscTools.DupeList(new IntVector2(14, 27), 5), //Pixel Sizes
+                   MiscTools.DupeList(false, 5), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 5), //Anchors
+                   MiscTools.DupeList(true, 5), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 5), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 5), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(8, 8), 5), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 5), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 5)); // Override to copy from    
             blinky.baseData.speed *= 0.2f;
             blinky.baseData.force = 0;
             blinky.baseData.damage = 15;
@@ -59,21 +58,19 @@ namespace NevernamedsItems
             blinky.hitEffects.alwaysUseMidair = true;
 
             pinky = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            pinky.AnimateProjectile(new List<string> {
-                "pinkyproj_001",
-                "pinkyproj_002",
-                "pinkyproj_003",
-                "pinkyproj_004",
-                "pinkyproj_005"
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, AnimateBullet.ConstructListOfSameValues(new IntVector2(14, 27), 5),
-            AnimateBullet.ConstructListOfSameValues(false, 5),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 5),
-            AnimateBullet.ConstructListOfSameValues(true, 5),
-            AnimateBullet.ConstructListOfSameValues(false, 5),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 5),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(8, 8), 5),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 5),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 5), 0);
+            pinky.AnimateProjectileBundle("GhostProjectilePinky",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "GhostProjectilePinky",
+                   MiscTools.DupeList(new IntVector2(14, 27), 5), //Pixel Sizes
+                   MiscTools.DupeList(false, 5), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 5), //Anchors
+                   MiscTools.DupeList(true, 5), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 5), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 5), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(8, 8), 5), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 5), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 5)); // Override to copy from               
             pinky.baseData.speed *= 0.2f;
             pinky.baseData.force = 0;
             pinky.baseData.damage = 15;
@@ -94,21 +91,19 @@ namespace NevernamedsItems
             pinky.hitEffects.alwaysUseMidair = true;
 
             inky = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            inky.AnimateProjectile(new List<string> {
-                "inkyproj_001",
-                "inkyproj_002",
-                "inkyproj_003",
-                "inkyproj_004",
-                "inkyproj_005"
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, AnimateBullet.ConstructListOfSameValues(new IntVector2(14, 27), 5),
-            AnimateBullet.ConstructListOfSameValues(false, 5),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 5),
-            AnimateBullet.ConstructListOfSameValues(true, 5),
-            AnimateBullet.ConstructListOfSameValues(false, 5),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 5),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(8, 8), 5),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 5),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 5), 0);
+            inky.AnimateProjectileBundle("GhostProjectileInky",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "GhostProjectileInky",
+                   MiscTools.DupeList(new IntVector2(14, 27), 5), //Pixel Sizes
+                   MiscTools.DupeList(false, 5), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 5), //Anchors
+                   MiscTools.DupeList(true, 5), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 5), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 5), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(8, 8), 5), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 5), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 5)); // Override to copy from                  
             inky.baseData.speed *= 0.2f;
             inky.baseData.force = 0;
             inky.baseData.damage = 15;
@@ -129,21 +124,19 @@ namespace NevernamedsItems
             inky.hitEffects.alwaysUseMidair = true;
 
             clyde = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            clyde.AnimateProjectile(new List<string> {
-                "clydeproj_001",
-                "clydeproj_002",
-                "clydeproj_003",
-                "clydeproj_004",
-                "clydeproj_005"
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, AnimateBullet.ConstructListOfSameValues(new IntVector2(14, 27), 5),
-            AnimateBullet.ConstructListOfSameValues(false, 5),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 5),
-            AnimateBullet.ConstructListOfSameValues(true, 5),
-            AnimateBullet.ConstructListOfSameValues(false, 5),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 5),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(8, 8), 5),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 5),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 5), 0);
+            clyde.AnimateProjectileBundle("GhostProjectileClyde",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "GhostProjectileClyde",
+                   MiscTools.DupeList(new IntVector2(14, 27), 5), //Pixel Sizes
+                   MiscTools.DupeList(false, 5), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 5), //Anchors
+                   MiscTools.DupeList(true, 5), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 5), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 5), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(8, 8), 5), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 5), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 5)); // Override to copy from  
             clyde.baseData.speed *= 0.2f;
             clyde.baseData.force = 0;
             clyde.baseData.damage = 15;

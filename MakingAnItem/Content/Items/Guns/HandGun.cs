@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("The Hand You've Been Dealt");
             gun.SetLongDescription("Brought to the Gungeon by infamous gambler Blast Eddie after the losing streak of his lifetime."+"\n\nThe characters depicted on the cards go back eons.");
 
-            gun.SetupSprite(null, "nnhandgun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "nnhandgun_idle_001", 8, "nnhandgun_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 14);
 
@@ -48,7 +48,7 @@ namespace NevernamedsItems
             AceOfHearts.baseData.damage *= 4f;
             AceOfHearts.baseData.range *= 3f;
             AceOfHearts.baseData.speed *= 0.5f;
-            AceOfHearts.SetProjectileSpriteRight("aceofhearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            AceOfHearts.SetProjectileSprite("aceofhearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(AceOfHearts, HandGunCardBullet.CardSuit.HEARTS, HandGunCardBullet.CardValue.ACE);
             //Queen
             Projectile QueenOfHearts = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -60,7 +60,7 @@ namespace NevernamedsItems
             QueenOfHearts.baseData.speed *= 0.5f;
             HomingModifier heartsHoming = QueenOfHearts.gameObject.GetOrAddComponent<HomingModifier>();
             heartsHoming.HomingRadius = 100;
-            QueenOfHearts.SetProjectileSpriteRight("queenofhearts_projectile", 12, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            QueenOfHearts.SetProjectileSprite("queenofhearts_projectile", 12, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(QueenOfHearts, HandGunCardBullet.CardSuit.HEARTS, HandGunCardBullet.CardValue.QUEEN);
             //King
             Projectile KingOfHearts = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -74,7 +74,7 @@ namespace NevernamedsItems
             heartsPiercing.penetration += 5;
             BounceProjModifier heartsBouncing = KingOfHearts.gameObject.GetOrAddComponent<BounceProjModifier>();
             heartsBouncing.numberOfBounces += 5;
-            KingOfHearts.SetProjectileSpriteRight("kingofhearts_projectile", 12, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            KingOfHearts.SetProjectileSprite("kingofhearts_projectile", 12, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(KingOfHearts, HandGunCardBullet.CardSuit.HEARTS, HandGunCardBullet.CardValue.KING);
             //Knave
             Projectile KnaveOfHearts = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -85,7 +85,7 @@ namespace NevernamedsItems
             KnaveOfHearts.baseData.damage *= 2.2f;
             KnaveOfHearts.baseData.range *= 4f;
             KnaveOfHearts.baseData.speed *= 0.5f;
-            KnaveOfHearts.SetProjectileSpriteRight("knaveofhearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            KnaveOfHearts.SetProjectileSprite("knaveofhearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(KnaveOfHearts, HandGunCardBullet.CardSuit.HEARTS, HandGunCardBullet.CardValue.KNAVE);
             //Two of Hearts
             Projectile TwoOfHearts = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -95,7 +95,7 @@ namespace NevernamedsItems
             TwoOfHearts.baseData.damage *= 0.4f;
             TwoOfHearts.baseData.range *= 3f;
             TwoOfHearts.baseData.speed *= 0.5f;
-            TwoOfHearts.SetProjectileSpriteRight("generichearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            TwoOfHearts.SetProjectileSprite("generichearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(TwoOfHearts, HandGunCardBullet.CardSuit.HEARTS, HandGunCardBullet.CardValue.GENERIC);
             //Three of Hearts 
             Projectile ThreeOfHearts = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -105,7 +105,7 @@ namespace NevernamedsItems
             ThreeOfHearts.baseData.damage *= 0.6f;
             ThreeOfHearts.baseData.range *= 3f;
             ThreeOfHearts.baseData.speed *= 0.5f;
-            ThreeOfHearts.SetProjectileSpriteRight("generichearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            ThreeOfHearts.SetProjectileSprite("generichearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(ThreeOfHearts, HandGunCardBullet.CardSuit.HEARTS, HandGunCardBullet.CardValue.GENERIC);
             //Four of Hearts
             Projectile FourOfHearts = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -115,7 +115,7 @@ namespace NevernamedsItems
             FourOfHearts.baseData.damage *= 0.8f;
             FourOfHearts.baseData.range *= 3f;
             FourOfHearts.baseData.speed *= 0.5f;
-            FourOfHearts.SetProjectileSpriteRight("generichearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            FourOfHearts.SetProjectileSprite("generichearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(FourOfHearts, HandGunCardBullet.CardSuit.HEARTS, HandGunCardBullet.CardValue.GENERIC);
             //Five of Hearts
             Projectile FiveOfHearts = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -125,7 +125,7 @@ namespace NevernamedsItems
             FiveOfHearts.baseData.damage *= 1f;
             FiveOfHearts.baseData.range *= 3f;
             FiveOfHearts.baseData.speed *= 0.5f;
-            FiveOfHearts.SetProjectileSpriteRight("generichearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            FiveOfHearts.SetProjectileSprite("generichearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(FiveOfHearts, HandGunCardBullet.CardSuit.HEARTS, HandGunCardBullet.CardValue.GENERIC);
             //Six of Hearts
             Projectile SixOfHearts = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -135,7 +135,7 @@ namespace NevernamedsItems
             SixOfHearts.baseData.damage *= 1.2f;
             SixOfHearts.baseData.range *= 3f;
             SixOfHearts.baseData.speed *= 0.5f;
-            SixOfHearts.SetProjectileSpriteRight("generichearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            SixOfHearts.SetProjectileSprite("generichearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(SixOfHearts, HandGunCardBullet.CardSuit.HEARTS, HandGunCardBullet.CardValue.GENERIC);
             //Seven of Hearts
             Projectile SevenOfHearts = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -145,7 +145,7 @@ namespace NevernamedsItems
             SevenOfHearts.baseData.damage *= 1.4f;
             SevenOfHearts.baseData.range *= 3f;
             SevenOfHearts.baseData.speed *= 0.5f;
-            SevenOfHearts.SetProjectileSpriteRight("generichearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            SevenOfHearts.SetProjectileSprite("generichearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(SevenOfHearts, HandGunCardBullet.CardSuit.HEARTS, HandGunCardBullet.CardValue.GENERIC);
             //Eight of Hearts
             Projectile EightOfHearts = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -155,7 +155,7 @@ namespace NevernamedsItems
             EightOfHearts.baseData.damage *= 1.6f;
             EightOfHearts.baseData.range *= 3f;
             EightOfHearts.baseData.speed *= 0.5f;
-            EightOfHearts.SetProjectileSpriteRight("generichearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            EightOfHearts.SetProjectileSprite("generichearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(EightOfHearts, HandGunCardBullet.CardSuit.HEARTS, HandGunCardBullet.CardValue.GENERIC);
             //Nine of Hearts
             Projectile NineOfHearts = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -165,7 +165,7 @@ namespace NevernamedsItems
             NineOfHearts.baseData.damage *= 1.8f;
             NineOfHearts.baseData.range *= 3f;
             NineOfHearts.baseData.speed *= 0.5f;
-            NineOfHearts.SetProjectileSpriteRight("generichearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            NineOfHearts.SetProjectileSprite("generichearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(NineOfHearts, HandGunCardBullet.CardSuit.HEARTS, HandGunCardBullet.CardValue.GENERIC);
             //Ten of Hearts
             Projectile TenOfHearts = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -175,7 +175,7 @@ namespace NevernamedsItems
             TenOfHearts.baseData.damage *= 2f;
             TenOfHearts.baseData.range *= 3f;
             TenOfHearts.baseData.speed *= 0.5f;
-            TenOfHearts.SetProjectileSpriteRight("generichearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            TenOfHearts.SetProjectileSprite("generichearts_projectile", 11, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(TenOfHearts, HandGunCardBullet.CardSuit.HEARTS, HandGunCardBullet.CardValue.GENERIC);
 
 
@@ -188,7 +188,7 @@ namespace NevernamedsItems
             AceOfDiamonds.baseData.damage *= 4f;
             AceOfDiamonds.baseData.range *= 3f;
             AceOfDiamonds.baseData.speed *= 0.5f;
-            AceOfDiamonds.SetProjectileSpriteRight("aceofdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
+            AceOfDiamonds.SetProjectileSprite("aceofdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
             DesignateType(AceOfDiamonds, HandGunCardBullet.CardSuit.DIAMONDS, HandGunCardBullet.CardValue.ACE);
             //Queen
             Projectile QueenOfDiamonds = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -200,7 +200,7 @@ namespace NevernamedsItems
             QueenOfDiamonds.baseData.speed *= 0.5f;
             HomingModifier diamondsHoming = QueenOfDiamonds.gameObject.GetOrAddComponent<HomingModifier>();
             diamondsHoming.HomingRadius = 100;
-            QueenOfDiamonds.SetProjectileSpriteRight("queenofdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
+            QueenOfDiamonds.SetProjectileSprite("queenofdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
             DesignateType(QueenOfDiamonds, HandGunCardBullet.CardSuit.DIAMONDS, HandGunCardBullet.CardValue.QUEEN);
             //King
             Projectile KingOfDiamonds = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -214,7 +214,7 @@ namespace NevernamedsItems
             diamondsPiercing.penetration += 5;
             BounceProjModifier diamondsBouncing = KingOfDiamonds.gameObject.GetOrAddComponent<BounceProjModifier>();
             diamondsBouncing.numberOfBounces += 5;
-            KingOfDiamonds.SetProjectileSpriteRight("kingofdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
+            KingOfDiamonds.SetProjectileSprite("kingofdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
             DesignateType(KingOfDiamonds, HandGunCardBullet.CardSuit.DIAMONDS, HandGunCardBullet.CardValue.KING);
             //Knave
             Projectile KnaveOfDiamonds = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -225,7 +225,7 @@ namespace NevernamedsItems
             KnaveOfDiamonds.baseData.damage *= 2.2f;
             KnaveOfDiamonds.baseData.range *= 4f;
             KnaveOfDiamonds.baseData.speed *= 0.5f;
-            KnaveOfDiamonds.SetProjectileSpriteRight("knaveofdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
+            KnaveOfDiamonds.SetProjectileSprite("knaveofdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
             DesignateType(KnaveOfDiamonds, HandGunCardBullet.CardSuit.DIAMONDS, HandGunCardBullet.CardValue.KNAVE);
             //Two of Diamonds
             Projectile TwoOfDiamonds = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -235,7 +235,7 @@ namespace NevernamedsItems
             TwoOfDiamonds.baseData.damage *= 0.4f;
             TwoOfDiamonds.baseData.range *= 3f;
             TwoOfDiamonds.baseData.speed *= 0.5f;
-            TwoOfDiamonds.SetProjectileSpriteRight("genericdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
+            TwoOfDiamonds.SetProjectileSprite("genericdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
             DesignateType(TwoOfDiamonds, HandGunCardBullet.CardSuit.DIAMONDS, HandGunCardBullet.CardValue.GENERIC);
             //Three of Diamonds 
             Projectile ThreeOfDiamonds = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -245,7 +245,7 @@ namespace NevernamedsItems
             ThreeOfDiamonds.baseData.damage *= 0.6f;
             ThreeOfDiamonds.baseData.range *= 3f;
             ThreeOfDiamonds.baseData.speed *= 0.5f;
-            ThreeOfDiamonds.SetProjectileSpriteRight("genericdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
+            ThreeOfDiamonds.SetProjectileSprite("genericdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
             DesignateType(ThreeOfDiamonds, HandGunCardBullet.CardSuit.DIAMONDS, HandGunCardBullet.CardValue.GENERIC);
             //Four of Diamonds
             Projectile FourOfDiamonds = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -255,7 +255,7 @@ namespace NevernamedsItems
             FourOfDiamonds.baseData.damage *= 0.8f;
             FourOfDiamonds.baseData.range *= 3f;
             FourOfDiamonds.baseData.speed *= 0.5f;
-            FourOfDiamonds.SetProjectileSpriteRight("genericdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
+            FourOfDiamonds.SetProjectileSprite("genericdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
             DesignateType(FourOfDiamonds, HandGunCardBullet.CardSuit.DIAMONDS, HandGunCardBullet.CardValue.GENERIC);
             //Five of Diamonds
             Projectile FiveOfDiamonds = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -265,7 +265,7 @@ namespace NevernamedsItems
             FiveOfDiamonds.baseData.damage *= 1f;
             FiveOfDiamonds.baseData.range *= 3f;
             FiveOfDiamonds.baseData.speed *= 0.5f;
-            FiveOfDiamonds.SetProjectileSpriteRight("genericdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
+            FiveOfDiamonds.SetProjectileSprite("genericdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
             DesignateType(FiveOfDiamonds, HandGunCardBullet.CardSuit.DIAMONDS, HandGunCardBullet.CardValue.GENERIC);
             //Six of Diamonds
             Projectile SixOfDiamonds = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -275,7 +275,7 @@ namespace NevernamedsItems
             SixOfDiamonds.baseData.damage *= 1.2f;
             SixOfDiamonds.baseData.range *= 3f;
             SixOfDiamonds.baseData.speed *= 0.5f;
-            SixOfDiamonds.SetProjectileSpriteRight("genericdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
+            SixOfDiamonds.SetProjectileSprite("genericdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
             DesignateType(SixOfDiamonds, HandGunCardBullet.CardSuit.DIAMONDS, HandGunCardBullet.CardValue.GENERIC);
             //Seven of Diamonds
             Projectile SevenOfDiamonds = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -285,7 +285,7 @@ namespace NevernamedsItems
             SevenOfDiamonds.baseData.damage *= 1.4f;
             SevenOfDiamonds.baseData.range *= 3f;
             SevenOfDiamonds.baseData.speed *= 0.5f;
-            SevenOfDiamonds.SetProjectileSpriteRight("genericdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
+            SevenOfDiamonds.SetProjectileSprite("genericdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
             DesignateType(SevenOfDiamonds, HandGunCardBullet.CardSuit.DIAMONDS, HandGunCardBullet.CardValue.GENERIC);
             //Eight of Diamonds
             Projectile EightOfDiamonds = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -295,7 +295,7 @@ namespace NevernamedsItems
             EightOfDiamonds.baseData.damage *= 1.6f;
             EightOfDiamonds.baseData.range *= 3f;
             EightOfDiamonds.baseData.speed *= 0.5f;
-            EightOfDiamonds.SetProjectileSpriteRight("genericdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
+            EightOfDiamonds.SetProjectileSprite("genericdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
             DesignateType(EightOfDiamonds, HandGunCardBullet.CardSuit.DIAMONDS, HandGunCardBullet.CardValue.GENERIC);
             //Nine of Diamonds
             Projectile NineOfDiamonds = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -305,7 +305,7 @@ namespace NevernamedsItems
             NineOfDiamonds.baseData.damage *= 1.8f;
             NineOfDiamonds.baseData.range *= 3f;
             NineOfDiamonds.baseData.speed *= 0.5f;
-            NineOfDiamonds.SetProjectileSpriteRight("genericdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
+            NineOfDiamonds.SetProjectileSprite("genericdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
             DesignateType(NineOfDiamonds, HandGunCardBullet.CardSuit.DIAMONDS, HandGunCardBullet.CardValue.GENERIC);
             //Ten of Diamonds
             Projectile TenOfDiamonds = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -315,7 +315,7 @@ namespace NevernamedsItems
             TenOfDiamonds.baseData.damage *= 2f;
             TenOfDiamonds.baseData.range *= 3f;
             TenOfDiamonds.baseData.speed *= 0.5f;
-            TenOfDiamonds.SetProjectileSpriteRight("genericdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
+            TenOfDiamonds.SetProjectileSprite("genericdiamonds_projectile", 18, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 7);
             DesignateType(TenOfDiamonds, HandGunCardBullet.CardSuit.DIAMONDS, HandGunCardBullet.CardValue.GENERIC);
 
 
@@ -329,7 +329,7 @@ namespace NevernamedsItems
             AceOfSpades.baseData.range *= 3f;
             AceOfSpades.baseData.speed *= 0.5f;
             AceOfSpades.ignoreDamageCaps = true;
-            AceOfSpades.SetProjectileSpriteRight("aceofspades_projectile", 20, 17, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 7);
+            AceOfSpades.SetProjectileSprite("aceofspades_projectile", 20, 17, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 7);
             DesignateType(AceOfSpades, HandGunCardBullet.CardSuit.SPADES, HandGunCardBullet.CardValue.ACE);
             //Queen
             Projectile QueenOfSpades = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -341,7 +341,7 @@ namespace NevernamedsItems
             QueenOfSpades.baseData.speed *= 0.5f;
             HomingModifier spadesHoming = QueenOfSpades.gameObject.GetOrAddComponent<HomingModifier>();
             spadesHoming.HomingRadius = 100;
-            QueenOfSpades.SetProjectileSpriteRight("queenofspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            QueenOfSpades.SetProjectileSprite("queenofspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(QueenOfSpades, HandGunCardBullet.CardSuit.SPADES, HandGunCardBullet.CardValue.QUEEN);
             //King
             Projectile KingOfSpades = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -355,7 +355,7 @@ namespace NevernamedsItems
             spadesPiercing.penetration += 5;
             BounceProjModifier spadesBouncing = KingOfSpades.gameObject.GetOrAddComponent<BounceProjModifier>();
             spadesBouncing.numberOfBounces += 5;
-            KingOfSpades.SetProjectileSpriteRight("kingofspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            KingOfSpades.SetProjectileSprite("kingofspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(KingOfSpades, HandGunCardBullet.CardSuit.SPADES, HandGunCardBullet.CardValue.KING);
             //Knave
             Projectile KnaveOfSpades = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -366,7 +366,7 @@ namespace NevernamedsItems
             KnaveOfSpades.baseData.damage *= 2.2f;
             KnaveOfSpades.baseData.range *= 4f;
             KnaveOfSpades.baseData.speed *= 0.5f;
-            KnaveOfSpades.SetProjectileSpriteRight("knaveofspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            KnaveOfSpades.SetProjectileSprite("knaveofspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(KnaveOfSpades, HandGunCardBullet.CardSuit.SPADES, HandGunCardBullet.CardValue.KNAVE);
             //Two of Spades
             Projectile TwoOfSpades = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -376,7 +376,7 @@ namespace NevernamedsItems
             TwoOfSpades.baseData.damage *= 0.4f;
             TwoOfSpades.baseData.range *= 3f;
             TwoOfSpades.baseData.speed *= 0.5f;
-            TwoOfSpades.SetProjectileSpriteRight("genericspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            TwoOfSpades.SetProjectileSprite("genericspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(TwoOfSpades, HandGunCardBullet.CardSuit.SPADES, HandGunCardBullet.CardValue.GENERIC);
             //Three of Spades 
             Projectile ThreeOfSpades = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -386,7 +386,7 @@ namespace NevernamedsItems
             ThreeOfSpades.baseData.damage *= 0.6f;
             ThreeOfSpades.baseData.range *= 3f;
             ThreeOfSpades.baseData.speed *= 0.5f;
-            ThreeOfSpades.SetProjectileSpriteRight("genericspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            ThreeOfSpades.SetProjectileSprite("genericspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(ThreeOfSpades, HandGunCardBullet.CardSuit.SPADES, HandGunCardBullet.CardValue.GENERIC);
             //Four of Spades
             Projectile FourOfSpades = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -396,7 +396,7 @@ namespace NevernamedsItems
             FourOfSpades.baseData.damage *= 0.8f;
             FourOfSpades.baseData.range *= 3f;
             FourOfSpades.baseData.speed *= 0.5f;
-            FourOfSpades.SetProjectileSpriteRight("genericspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            FourOfSpades.SetProjectileSprite("genericspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(FourOfSpades, HandGunCardBullet.CardSuit.SPADES, HandGunCardBullet.CardValue.GENERIC);
             //Five of Spades
             Projectile FiveOfSpades = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -406,7 +406,7 @@ namespace NevernamedsItems
             FiveOfSpades.baseData.damage *= 1f;
             FiveOfSpades.baseData.range *= 3f;
             FiveOfSpades.baseData.speed *= 0.5f;
-            FiveOfSpades.SetProjectileSpriteRight("genericspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            FiveOfSpades.SetProjectileSprite("genericspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(FiveOfSpades, HandGunCardBullet.CardSuit.SPADES, HandGunCardBullet.CardValue.GENERIC);
             //Six of Spades
             Projectile SixOfSpades = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -416,7 +416,7 @@ namespace NevernamedsItems
             SixOfSpades.baseData.damage *= 1.2f;
             SixOfSpades.baseData.range *= 3f;
             SixOfSpades.baseData.speed *= 0.5f;
-            SixOfSpades.SetProjectileSpriteRight("genericspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            SixOfSpades.SetProjectileSprite("genericspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(SixOfSpades, HandGunCardBullet.CardSuit.SPADES, HandGunCardBullet.CardValue.GENERIC);
             //Seven of Spades
             Projectile SevenOfSpades = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -426,7 +426,7 @@ namespace NevernamedsItems
             SevenOfSpades.baseData.damage *= 1.4f;
             SevenOfSpades.baseData.range *= 3f;
             SevenOfSpades.baseData.speed *= 0.5f;
-            SevenOfSpades.SetProjectileSpriteRight("genericspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            SevenOfSpades.SetProjectileSprite("genericspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(SevenOfSpades, HandGunCardBullet.CardSuit.SPADES, HandGunCardBullet.CardValue.GENERIC);
             //Eight of Spades
             Projectile EightOfSpades = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -436,7 +436,7 @@ namespace NevernamedsItems
             EightOfSpades.baseData.damage *= 1.6f;
             EightOfSpades.baseData.range *= 3f;
             EightOfSpades.baseData.speed *= 0.5f;
-            EightOfSpades.SetProjectileSpriteRight("genericspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            EightOfSpades.SetProjectileSprite("genericspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(EightOfSpades, HandGunCardBullet.CardSuit.SPADES, HandGunCardBullet.CardValue.GENERIC);
             //Nine of Spades
             Projectile NineOfSpades = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -446,7 +446,7 @@ namespace NevernamedsItems
             NineOfSpades.baseData.damage *= 1.8f;
             NineOfSpades.baseData.range *= 3f;
             NineOfSpades.baseData.speed *= 0.5f;
-            NineOfSpades.SetProjectileSpriteRight("genericspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            NineOfSpades.SetProjectileSprite("genericspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(NineOfSpades, HandGunCardBullet.CardSuit.SPADES, HandGunCardBullet.CardValue.GENERIC);
             //Ten of Spades
             Projectile TenOfSpades = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -456,7 +456,7 @@ namespace NevernamedsItems
             TenOfSpades.baseData.damage *= 2f;
             TenOfSpades.baseData.range *= 3f;
             TenOfSpades.baseData.speed *= 0.5f;
-            TenOfSpades.SetProjectileSpriteRight("genericspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            TenOfSpades.SetProjectileSprite("genericspades_projectile", 14, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
             DesignateType(TenOfSpades, HandGunCardBullet.CardSuit.SPADES, HandGunCardBullet.CardValue.GENERIC);
 
 
@@ -469,7 +469,7 @@ namespace NevernamedsItems
             AceOfClubs.baseData.damage *= 4f;
             AceOfClubs.baseData.range *= 3f;
             AceOfClubs.baseData.speed *= 0.5f;
-            AceOfClubs.SetProjectileSpriteRight("aceofclubs_projectile", 15, 17, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
+            AceOfClubs.SetProjectileSprite("aceofclubs_projectile", 15, 17, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
             DesignateType(AceOfClubs, HandGunCardBullet.CardSuit.CLUBS, HandGunCardBullet.CardValue.ACE);
             //Queen
             Projectile QueenOfClubs = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -481,7 +481,7 @@ namespace NevernamedsItems
             QueenOfClubs.baseData.speed *= 0.5f;
             HomingModifier clubsHoming = QueenOfClubs.gameObject.GetOrAddComponent<HomingModifier>();
             clubsHoming.HomingRadius = 100;
-            QueenOfClubs.SetProjectileSpriteRight("queenofclubs_projectile", 15, 17, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
+            QueenOfClubs.SetProjectileSprite("queenofclubs_projectile", 15, 17, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
             DesignateType(QueenOfClubs, HandGunCardBullet.CardSuit.CLUBS, HandGunCardBullet.CardValue.QUEEN);
             //King
             Projectile KingOfClubs = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -495,7 +495,7 @@ namespace NevernamedsItems
             clubsPiercing.penetration += 5;
             BounceProjModifier clubsBouncing = KingOfClubs.gameObject.GetOrAddComponent<BounceProjModifier>();
             clubsBouncing.numberOfBounces += 5;
-            KingOfClubs.SetProjectileSpriteRight("kingofclubs_projectile", 15, 17, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
+            KingOfClubs.SetProjectileSprite("kingofclubs_projectile", 15, 17, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
             DesignateType(KingOfClubs, HandGunCardBullet.CardSuit.CLUBS, HandGunCardBullet.CardValue.KING);
             //Knave
             Projectile KnaveOfClubs = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -506,7 +506,7 @@ namespace NevernamedsItems
             KnaveOfClubs.baseData.damage *= 2.2f;
             KnaveOfClubs.baseData.range *= 4f;
             KnaveOfClubs.baseData.speed *= 0.5f;
-            KnaveOfClubs.SetProjectileSpriteRight("knaveofclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
+            KnaveOfClubs.SetProjectileSprite("knaveofclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
             DesignateType(KnaveOfClubs, HandGunCardBullet.CardSuit.CLUBS, HandGunCardBullet.CardValue.KNAVE);
             //Two of Clubs
             Projectile TwoOfClubs = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -516,7 +516,7 @@ namespace NevernamedsItems
             TwoOfClubs.baseData.damage *= 0.4f;
             TwoOfClubs.baseData.range *= 3f;
             TwoOfClubs.baseData.speed *= 0.5f;
-            TwoOfClubs.SetProjectileSpriteRight("genericclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
+            TwoOfClubs.SetProjectileSprite("genericclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
             DesignateType(TwoOfClubs, HandGunCardBullet.CardSuit.CLUBS, HandGunCardBullet.CardValue.GENERIC);
             //Three of Clubs 
             Projectile ThreeOfClubs = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -526,7 +526,7 @@ namespace NevernamedsItems
             ThreeOfClubs.baseData.damage *= 0.6f;
             ThreeOfClubs.baseData.range *= 3f;
             ThreeOfClubs.baseData.speed *= 0.5f;
-            ThreeOfClubs.SetProjectileSpriteRight("genericclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
+            ThreeOfClubs.SetProjectileSprite("genericclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
             DesignateType(ThreeOfClubs, HandGunCardBullet.CardSuit.CLUBS, HandGunCardBullet.CardValue.GENERIC);
             //Four of Clubs
             Projectile FourOfClubs = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -536,7 +536,7 @@ namespace NevernamedsItems
             FourOfClubs.baseData.damage *= 0.8f;
             FourOfClubs.baseData.range *= 3f;
             FourOfClubs.baseData.speed *= 0.5f;
-            FourOfClubs.SetProjectileSpriteRight("genericclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
+            FourOfClubs.SetProjectileSprite("genericclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
             DesignateType(FourOfClubs, HandGunCardBullet.CardSuit.CLUBS, HandGunCardBullet.CardValue.GENERIC);
             //Five of Clubs
             Projectile FiveOfClubs = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -546,7 +546,7 @@ namespace NevernamedsItems
             FiveOfClubs.baseData.damage *= 1f;
             FiveOfClubs.baseData.range *= 3f;
             FiveOfClubs.baseData.speed *= 0.5f;
-            FiveOfClubs.SetProjectileSpriteRight("genericclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
+            FiveOfClubs.SetProjectileSprite("genericclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
             DesignateType(FiveOfClubs, HandGunCardBullet.CardSuit.CLUBS, HandGunCardBullet.CardValue.GENERIC);
             //Six of Clubs
             Projectile SixOfClubs = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -556,7 +556,7 @@ namespace NevernamedsItems
             SixOfClubs.baseData.damage *= 1.2f;
             SixOfClubs.baseData.range *= 3f;
             SixOfClubs.baseData.speed *= 0.5f;
-            SixOfClubs.SetProjectileSpriteRight("genericclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
+            SixOfClubs.SetProjectileSprite("genericclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
             DesignateType(SixOfClubs, HandGunCardBullet.CardSuit.CLUBS, HandGunCardBullet.CardValue.GENERIC);
             //Seven of Clubs
             Projectile SevenOfClubs = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -566,7 +566,7 @@ namespace NevernamedsItems
             SevenOfClubs.baseData.damage *= 1.4f;
             SevenOfClubs.baseData.range *= 3f;
             SevenOfClubs.baseData.speed *= 0.5f;
-            SevenOfClubs.SetProjectileSpriteRight("genericclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
+            SevenOfClubs.SetProjectileSprite("genericclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
             DesignateType(SevenOfClubs, HandGunCardBullet.CardSuit.CLUBS, HandGunCardBullet.CardValue.GENERIC);
             //Eight of Clubs
             Projectile EightOfClubs = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -576,7 +576,7 @@ namespace NevernamedsItems
             EightOfClubs.baseData.damage *= 1.6f;
             EightOfClubs.baseData.range *= 3f;
             EightOfClubs.baseData.speed *= 0.5f;
-            EightOfClubs.SetProjectileSpriteRight("genericclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
+            EightOfClubs.SetProjectileSprite("genericclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
             DesignateType(EightOfClubs, HandGunCardBullet.CardSuit.CLUBS, HandGunCardBullet.CardValue.GENERIC);
             //Nine of Clubs
             Projectile NineOfClubs = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -586,7 +586,7 @@ namespace NevernamedsItems
             NineOfClubs.baseData.damage *= 1.8f;
             NineOfClubs.baseData.range *= 3f;
             NineOfClubs.baseData.speed *= 0.5f;
-            NineOfClubs.SetProjectileSpriteRight("genericclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
+            NineOfClubs.SetProjectileSprite("genericclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
             DesignateType(NineOfClubs, HandGunCardBullet.CardSuit.CLUBS, HandGunCardBullet.CardValue.GENERIC);
             //Ten of Clubs
             Projectile TenOfClubs = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -596,7 +596,7 @@ namespace NevernamedsItems
             TenOfClubs.baseData.damage *= 2f;
             TenOfClubs.baseData.range *= 3f;
             TenOfClubs.baseData.speed *= 0.5f;
-            TenOfClubs.SetProjectileSpriteRight("genericclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
+            TenOfClubs.SetProjectileSprite("genericclubs_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
             DesignateType(TenOfClubs, HandGunCardBullet.CardSuit.CLUBS, HandGunCardBullet.CardValue.GENERIC);
 
             //HEARTS

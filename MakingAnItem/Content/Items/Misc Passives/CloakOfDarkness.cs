@@ -15,14 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Cloak of Darkness";
-            string resourceName = "NevernamedsItems/Resources/cloakofdarkness_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<CloakOfDarkness>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Shrouded in Mystery";
-            string longDesc = "Temporarily fools the Jammed by robing you in the shadows typical of their lord."+"\nAlso occasionally allows one to themselves become a shadow.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<CloakOfDarkness>(
+            "Cloak of Darkness",
+            "Shrouded in Mystery",
+            "Temporarily fools the Jammed by robing you in the shadows typical of their lord." + "\nAlso occasionally allows one to themselves become a shadow.",
+            "cloakofdarkness_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.S;
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 2f, StatModifier.ModifyMethod.ADDITIVE);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_FORGE, true);

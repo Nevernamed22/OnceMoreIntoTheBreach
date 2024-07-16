@@ -21,6 +21,7 @@ namespace NevernamedsItems
             "theshell_icon");
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public override void Pickup(PlayerController player)
         {

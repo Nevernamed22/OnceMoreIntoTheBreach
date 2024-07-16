@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Outstanding In It's Field");
             gun.SetLongDescription("Bullets orbit enemies."+"\n\nMilitary adaptation of orbtial projectile technology, these bullets are clever enough to latch onto the target instead of their owner.");
 
-            gun.SetupSprite(null, "gravitron_idle_001", 8);
+            gun.SetGunSprites("gravitron");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(13) as Gun).gunSwitchGroup;

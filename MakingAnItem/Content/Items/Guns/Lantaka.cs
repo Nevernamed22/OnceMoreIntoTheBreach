@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Head on a Swivel");
             gun.SetLongDescription("Used once upon a time by ships to protect against pirates, this ancient gun sat in the back room of a museum for many years until a daring heist saw it make it's way to the Gungeon.");
 
-            gun.SetupSprite(null, "lantaka_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "lantaka_idle_001", 8, "lantaka_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(49) as Gun).gunSwitchGroup;
@@ -57,7 +57,7 @@ namespace NevernamedsItems
             Piercing.penetration += 10;
             BounceProjModifier Bouncing = projectile.gameObject.GetOrAddComponent<BounceProjModifier>();
             Bouncing.numberOfBounces = 2;
-            projectile.SetProjectileSpriteRight("lantaka_projectile", 15, 15, false, tk2dBaseSprite.Anchor.MiddleCenter, 14, 14);
+            projectile.SetProjectileSprite("lantaka_projectile", 15, 15, false, tk2dBaseSprite.Anchor.MiddleCenter, 14, 14);
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Lantaka Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/lantaka_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/lantaka_clipempty");

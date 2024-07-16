@@ -16,16 +16,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Blasting Cap";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/blastingcap_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BlastingCap>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Dire Spore";
-            string longDesc = "Empowers explosions with damaging spores."+"\n\nThe fruiting caps of this fantastic fungus is known to contain a small gunpowder payload- allowing it to violently detonate in order to spread it's spores.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-
+            PassiveItem item = ItemSetup.NewItem<BlastingCap>(
+               "Blasting Cap",
+               "Dire Spore",
+               "Empowers explosions with damaging spores." + "\n\nThe fruiting caps of this fantastic fungus is known to contain a small gunpowder payload- allowing it to violently detonate in order to spread it's spores.",
+               "blastingcap_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.C;
             ID = item.PickupObjectId;
         }

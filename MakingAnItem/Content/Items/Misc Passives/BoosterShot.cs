@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Booster Shot";
-            string resourceName = "NevernamedsItems/Resources/boostershot_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BoosterShot>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Have you had your shots?";
-            string longDesc = "5% chance to fully heal upon taking damage." + "\n\nThe mad wizard Alben Smallbore theorised that if one could train the body's immune system to fight pathogens, it may also be possible to vaccinate a Gungeoneer against bullets." + "\n\nAlben Smallbore did not have a medical license.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<BoosterShot>(
+            "Booster Shot",
+            "Have you had your shots?",
+            "5% chance to fully heal upon taking damage." + "\n\nThe mad wizard Alben Smallbore theorised that if one could train the body's immune system to fight pathogens, it may also be possible to vaccinate a Gungeoneer against bullets." + "\n\nAlben Smallbore did not have a medical license.",
+            "boostershot_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.C;
         }
         private void Boost(PlayerController user)

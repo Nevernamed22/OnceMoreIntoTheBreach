@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Protogun");
             gun.SetLongDescription("The earliest recorded type of real firearm. Though it is little more than a small cannon on a stick, it can spit some damaging shrapnel.");
 
-            gun.SetupSprite(null, "handcannon_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "handcannon_idle_001", 8, "handcannon_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
@@ -53,7 +53,7 @@ namespace NevernamedsItems
             Bouncing.numberOfBounces = 10;
             projectile.baseData.range *= 0.5f;
             projectile.transform.parent = gun.barrelOffset;
-            projectile.SetProjectileSpriteRight("handcannon_projectile", 17, 15, false, tk2dBaseSprite.Anchor.MiddleCenter, 15, 13);
+            projectile.SetProjectileSprite("handcannon_projectile", 17, 15, false, tk2dBaseSprite.Anchor.MiddleCenter, 15, 13);
 
             projectile.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(37) as Gun).DefaultModule.chargeProjectiles[0].Projectile.hitEffects.overrideMidairDeathVFX;
             projectile.hitEffects.alwaysUseMidair = true;

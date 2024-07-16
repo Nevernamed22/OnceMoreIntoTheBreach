@@ -12,6 +12,7 @@ using MonoMod.RuntimeDetour;
 using System.Reflection;
 using Alexandria.BreakableAPI;
 using Dungeonator;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -25,7 +26,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Washed Up");
             gun.SetLongDescription("This washing machine was stolen from the long lost communal washroom in the Breach- for use as a weapon within the Gungeon." + "\n\n Contains several prized artefacts, such as Winchesters lucky shorts.");
 
-            gun.SetupSprite(null, "laundromaterielriflebloodwash_idle_001", 8);
+            gun.SetGunSprites("laundromaterielriflebloodwash", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(404) as Gun).gunSwitchGroup;
@@ -67,8 +68,9 @@ namespace NevernamedsItems
 
             ETGMod.Databases.Items.Add(gun, false, "ANY");
             ID = gun.PickupObjectId;
+            gun.SetName("Laundromateriel Rifle");
         }
-       
+
         private static Projectile MakeProj(string projName, string debrisname)
         {
             Projectile projectile = ((Gun)PickupObjectDatabase.GetById(86)).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
@@ -223,26 +225,19 @@ namespace NevernamedsItems
         }
         private static void AnimateIndiv(Projectile projectile, string projName)
         {
-            projectile.SetProjectileSpriteRight($"{projName}_proj_001", 12, 12, false, tk2dBaseSprite.Anchor.MiddleCenter, 12, 12);
-            projectile.AnimateProjectile(new List<string> {
-                $"{projName}_proj_001",
-                $"{projName}_proj_002",
-                $"{projName}_proj_003",
-                $"{projName}_proj_004",
-                $"{projName}_proj_005",
-                $"{projName}_proj_006",
-                $"{projName}_proj_007",
-                $"{projName}_proj_008",
-            }, 12, tk2dSpriteAnimationClip.WrapMode.Loop,
-            AnimateBullet.ConstructListOfSameValues(new IntVector2(12, 12), 8),
-            AnimateBullet.ConstructListOfSameValues(false, 8),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 8),
-            AnimateBullet.ConstructListOfSameValues(true, 8),
-            AnimateBullet.ConstructListOfSameValues(false, 8),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 8),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 8),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 8),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 8), 0);
+            projectile.AnimateProjectileBundle("LaundromaterielRedShirt",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "LaundromaterielRedShirt",
+                   MiscTools.DupeList(new IntVector2(12, 12), 8), //Pixel Sizes
+                   MiscTools.DupeList(false, 8), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 8), //Anchors
+                   MiscTools.DupeList(true, 8), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 8), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 8), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(null, 8), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 8), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 8)); // Override to copy from    
         }
         public static int ID;
     }

@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("By Jove!");
             gun.SetLongDescription("An ancient magical staff that harnesses the electric power of the sky."+"\n\nUsed for forestry, battery charging, and sometimes for dungeon crawling.");
 
-            gun.SetupSprite(null, "lightningrod_idle_001", 8);
+            gun.SetGunSprites("lightningrod");
 
             gun.SetAnimationFPS(gun.shootAnimation, 9);
             gun.isAudioLoop = true;

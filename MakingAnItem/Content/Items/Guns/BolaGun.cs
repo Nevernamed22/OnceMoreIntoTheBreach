@@ -6,10 +6,11 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 using System.Reflection;
 using Alexandria.Misc;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -24,7 +25,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Deathly Strands");
             gun.SetLongDescription("Fires swinging bolas connected by frazzling energy beams."+"\n\nThe wide swing of the bolas renders the weapon ineffective in narrow corridors.");
 
-            gun.SetupSprite(null, "bolagun_idle_001", 8);
+            gun.SetGunSprites("bolagun");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 
@@ -50,7 +51,9 @@ namespace NevernamedsItems
             projectile2.baseData.speed *= 1f;
             projectile2.baseData.range *= 1f;
             projectile2.baseData.damage *= 2f;
-            projectile2.SetProjectileSpriteRight("bolagun_projectile", 9, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+
+
+            projectile2.SetProjectileCollisionRight("bolagun_projectile", Initialisation.ProjectileCollection, 9, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
 
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
@@ -127,8 +130,7 @@ namespace NevernamedsItems
                     float t = elapsed / duration;
                     float currentRadius = Mathf.Lerp(0.1f, 3, t);
 
-                    FieldInfo field = typeof(OrbitProjectileMotionModule).GetField("m_radius", BindingFlags.Instance | BindingFlags.NonPublic);
-                    field.SetValue(motionMod, currentRadius);
+                    motionMod.m_radius = currentRadius;
                     yield return null;
                 }
             }

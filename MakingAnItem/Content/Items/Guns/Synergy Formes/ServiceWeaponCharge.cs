@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("");
             gun.SetLongDescription("");
 
-            gun.SetupSprite(null, "serviceweaponcharge_idle_001", 8);
+            gun.SetGunSprites("serviceweaponcharge", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 12);
@@ -60,7 +60,7 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.damage = 10;
             projectile.baseData.speed *= 1.2f;
-            projectile.SetProjectileSpriteRight("serviceweapon_proj", 11, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 5);
+            projectile.SetProjectileSprite("serviceweapon_proj", 11, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 5);
             projectile.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(178) as Gun).GetComponent<FireOnReloadSynergyProcessor>().DirectedBurstSettings.ProjectileInterface.SpecifiedProjectile.hitEffects.tileMapHorizontal.effects[0].effects[0].effect;
             projectile.hitEffects.alwaysUseMidair = true;
             ImplosionBehaviour implosion = projectile.gameObject.AddComponent<ImplosionBehaviour>();
@@ -88,7 +88,7 @@ namespace NevernamedsItems
             Projectile projectile2 = (PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
             projectile2.baseData.damage = 10;
             projectile2.baseData.speed *= 1.4f;
-            projectile2.SetProjectileSpriteRight("serviceweapon_proj", 11, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 5);
+            projectile2.SetProjectileSprite("serviceweapon_proj", 11, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 5);
             projectile2.AdditionalScaleMultiplier = 1.1f;
             projectile2.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(178) as Gun).GetComponent<FireOnReloadSynergyProcessor>().DirectedBurstSettings.ProjectileInterface.SpecifiedProjectile.hitEffects.tileMapHorizontal.effects[0].effects[0].effect;
             projectile2.hitEffects.alwaysUseMidair = true;
@@ -119,7 +119,7 @@ namespace NevernamedsItems
             Projectile projectile3 = (PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
             projectile3.baseData.damage = 10;
             projectile3.baseData.speed *= 1.6f;
-                            projectile3.SetProjectileSpriteRight("serviceweapon_proj", 11, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 5);
+                            projectile3.SetProjectileSprite("serviceweapon_proj", 11, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 5);
             projectile3.AdditionalScaleMultiplier = 1.2f;
             projectile3.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(178) as Gun).GetComponent<FireOnReloadSynergyProcessor>().DirectedBurstSettings.ProjectileInterface.SpecifiedProjectile.hitEffects.tileMapHorizontal.effects[0].effects[0].effect;
             projectile3.hitEffects.alwaysUseMidair = true;

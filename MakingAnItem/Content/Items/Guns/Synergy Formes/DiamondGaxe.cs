@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -18,11 +18,11 @@ namespace NevernamedsItems
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Diamond Gaxe", "diamondgaxe");
             Game.Items.Rename("outdated_gun_mods:diamond_gaxe", "nn:gaxe+diamond_gaxe");
-            gun.gameObject.AddComponent<Gaxe>();
+            gun.gameObject.AddComponent<DiamondGaxe>();
             gun.SetShortDescription("Diggy Diggy+");
             gun.SetLongDescription("Never spend your diamonds on a hoe");
 
-            gun.SetupSprite(null, "diamondgaxe_idle_001", 8);
+            gun.SetGunSprites("diamondgaxe", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 16);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(335) as Gun).gunSwitchGroup;

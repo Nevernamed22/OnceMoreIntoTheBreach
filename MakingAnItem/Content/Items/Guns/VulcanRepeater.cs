@@ -20,7 +20,8 @@ namespace NevernamedsItems
             gun.gameObject.AddComponent<VulcanRepeater>();
             gun.SetShortDescription("Glocram Rises");
             gun.SetLongDescription("Fires powerful explosive bolts which have a chance to split in two for double the power."+"\n\nForged with the soul of an impossible beast, by warriors of a forgotten age.");
-            gun.SetupSprite(null, "vulcanrepeater_idle_001", 8);
+           
+            gun.SetGunSprites("vulcanrepeater");
 
             gun.SetAnimationFPS(gun.shootAnimation, 8);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);
@@ -57,7 +58,7 @@ namespace NevernamedsItems
             split.distanceBasedSplit = true;
             split.distanceTillSplit = 5f;
             split.dmgMultAfterSplit = 0.5f;
-            projectile.SetProjectileSpriteRight("vulcanrepeater_proj", 16, 5, false, tk2dBaseSprite.Anchor.MiddleCenter, 14, 3);
+            projectile.SetProjectileSprite("vulcanrepeater_proj", 16, 5, false, tk2dBaseSprite.Anchor.MiddleCenter, 14, 3);
 
             ID = gun.PickupObjectId;
             gun.SetTag("arrow_bolt_weapon");

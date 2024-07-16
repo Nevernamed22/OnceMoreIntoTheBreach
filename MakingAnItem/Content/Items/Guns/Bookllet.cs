@@ -30,7 +30,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Ammomancy For Beginners");
             gun.SetLongDescription("A powerful ammomantic textbook studied by Apprentice Gunjurers");
 
-            gun.SetupSprite(null, "bookllet_idle_001", 8);
+            gun.SetGunSprites("bookllet");
 
             gun.SetAnimationFPS(gun.shootAnimation, 18);
 
@@ -56,7 +56,7 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.damage *= 1f;
             projectile.baseData.speed *= 0.0001f;
-            projectile.SetProjectileSpriteRight("yellow_enemystyle_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
+            projectile.SetProjectileSprite("yellow_enemystyle_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
             projectile.transform.parent = gun.barrelOffset;
             BooklletTimedReAim timedReAim = projectile.gameObject.AddComponent<BooklletTimedReAim>();
 
@@ -68,7 +68,7 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(Ringbullet);
             Ringbullet.baseData.damage *= 1.4f;
             Ringbullet.baseData.speed *= 0.6f;
-            Ringbullet.SetProjectileSpriteRight("yellow_enemystyle_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
+            Ringbullet.SetProjectileSprite("yellow_enemystyle_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
             Ringbullet.transform.parent = gun.barrelOffset;
 
             // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.

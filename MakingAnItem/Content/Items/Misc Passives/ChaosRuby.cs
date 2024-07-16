@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -17,7 +17,7 @@ namespace NevernamedsItems
             "Chaos Ruby",
             "(Un)Control",
             "Increases one random stat by 20%, at least in most cases." + "\n\nRumour has it that these gemstones are what drew Tonic the Sledge Dog to The Gungeon in the first place.",
-            "chaosruby_icon");
+            "chaosruby_improved");
             item.quality = PickupObject.ItemQuality.D;
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.BEATEN_KEEP_TURBO_MODE, true);
         }

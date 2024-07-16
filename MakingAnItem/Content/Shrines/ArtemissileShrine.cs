@@ -5,9 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using static GungeonAPI.OldShrineFactory;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
@@ -15,63 +14,103 @@ using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
-    public static class ArtemissileShrine
+    public class ArtemissileShrine : GenericShrine
     {
-
-        public static void Add()
+        public static GameObject Setup(GameObject pedestal)
         {
-            OldShrineFactory aa = new OldShrineFactory
-            {
-
-                name = "ArtemissileShrine",
-                modID = "omitb",
-                text = "A shrine to Artemissile, goddess of the eternal hunt. Grants enchanted arms to her most devout followers.",
-                spritePath = "NevernamedsItems/Resources/Shrines/artemissile_shrine.png",
-                room = RoomFactory.BuildFromResource("NevernamedsItems/Resources/EmbeddedRooms/ArtemissileShrine.room").room,
-                RoomWeight = 1f,
-                acceptText = "Prove your devotion to the hunt <Lose HP>",
-                declineText = "Leave",
-                OnAccept = Accept,
-                OnDecline = null,
-                CanUse = CanUse,
-                offset = new Vector3(-1.5f, -1, 0),
-                talkPointOffset = new Vector3(0, 3, 0),
-                isToggle = false,
-                isBreachShrine = false,
-
-
-            };
-            aa.Build();
-            spriteId = SpriteBuilder.AddSpriteToCollection(spriteDefinition, ShrineFactory.ShrineIconCollection);
+            var shrineobj = ItemBuilder.SpriteFromBundle("shrine_artemissile", Initialisation.NPCCollection.GetSpriteIdByName("shrine_artemissile"), Initialisation.NPCCollection, new GameObject("Shrine Artemissile Statue"));
+            shrineobj.GetComponent<tk2dSprite>().HeightOffGround = 1.25f;
+            shrineobj.GetComponent<tk2dSprite>().renderer.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTiltedCutout");
+            shrineobj.GetComponent<tk2dSprite>().usesOverrideMaterial = true;
+            pedestal.AddComponent<ArtemissileShrine>();
+            GameObject talkpoint = new GameObject("talkpoint");
+            talkpoint.transform.SetParent(pedestal.transform);
+            talkpoint.transform.localPosition = new Vector3(1f, 36f / 16f, 0f);
+            return shrineobj;
         }
-        public static string spriteDefinition = "NevernamedsItems/Resources/Shrines/artemissile_popup";
-        public static bool CanUse(PlayerController player, GameObject shrine)
+        public override bool CanAccept(PlayerController interactor)
         {
-            if ((shrine.GetComponent<CustomShrineController>().numUses == 0) || player.HasPickupID(PassiveTestingItem.DebugPassiveID))
+            if (timesAccepted > 0) { return false; }
+            if (interactor.characterIdentity == OMITBChars.Shade) return true;
+            if (interactor.ForceZeroHealthState && interactor.healthHaver.Armor > 2) { return true; }
+            else if (interactor.healthHaver.GetMaxHealth() > 1) { return true; }
+            return false;
+        }
+        public override void OnAccept(PlayerController Interactor)
+        {
+            if (Interactor.ForceZeroHealthState)
             {
-                if (player.characterIdentity == OMITBChars.Shade) return true;
-                if (player.ForceZeroHealthState)
+                if (Interactor.characterIdentity != OMITBChars.Shade)
                 {
-                    if (player.healthHaver.Armor > 2)
-                    {
-                        return true;
-                    }
-                    else return false;
-                }
-                else
-                {
-                    if (player.healthHaver.GetMaxHealth() > 1)
-                    {
-                        return true;
-                    }
-                    else return false;
+                    Interactor.healthHaver.Armor -= 2;
                 }
             }
             else
             {
-                return false;
+                StatModifier HP = new StatModifier
+                {
+                    statToBoost = PlayerStats.StatType.Health,
+                    amount = -1f,
+                    modifyType = StatModifier.ModifyMethod.ADDITIVE
+                };
+                Interactor.ownerlessStatModifiers.Add(HP);
+                Interactor.stats.RecalculateStats(Interactor);
             }
+            StatModifier statModifier = new StatModifier
+            {
+                statToBoost = PlayerStats.StatType.Curse,
+                amount = 2.5f,
+                modifyType = StatModifier.ModifyMethod.ADDITIVE
+            };
+            Interactor.ownerlessStatModifiers.Add(statModifier);
+            Interactor.stats.RecalculateStats(Interactor);
+
+            Gun gun = LootEngine.GetItemOfTypeAndQuality<Gun>(PickupObjectDatabase.Instance.GetRandomQuality(), GameManager.Instance.RewardManager.GunsLootTable, false);
+
+            Debug.Log($"Tryget gun for Artemissile, ID: {gun.PickupObjectId}");
+
+            GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(ResourceCache.Acquire("Global Prefabs/HoveringGun") as GameObject, Interactor.CenterPosition.ToVector3ZisY(0f), Quaternion.identity);
+            gameObject.transform.parent = Interactor.transform;
+            HoveringGunController hover = gameObject.GetComponent<HoveringGunController>();
+            hover.ConsumesTargetGunAmmo = false;
+            hover.ChanceToConsumeTargetGunAmmo = 0f;
+            hover.Position = HoveringGunController.HoverPosition.CIRCULATE;
+            hover.Aim = HoveringGunController.AimType.PLAYER_AIM;
+            hover.Trigger = HoveringGunController.FireType.ON_RELOAD;
+            hover.CooldownTime = GetProperShootingSpeed(gun);
+            hover.ShootDuration = GetProperShootDuration(gun);
+            hover.OnlyOnEmptyReload = false;
+            hover.Initialize(gun, Interactor);
+
+            Interactor.stats.RecalculateStats(Interactor, false, false);
+            DeregisterMapIcon();
+
+            GameUIRoot.Instance.notificationController.DoCustomNotification(
+                    "Enchanted Gun",
+                    "Blessing Of The Hunt",
+                    Initialisation.NPCCollection,
+                    Initialisation.NPCCollection.GetSpriteIdByName("artemissile_popup"),
+                    UINotificationController.NotificationColor.SILVER,
+                    true,
+                    false
+                    );
+            AkSoundEngine.PostEvent("Play_OBJ_shrine_accept_01", base.gameObject);
         }
+        public override string AcceptText(PlayerController interactor)
+        {
+            if (interactor.characterIdentity == OMITBChars.Shade) { return "Prove your devotion to the hunt <Lose Nothing>"; }
+            if (interactor.ForceZeroHealthState) { return $"Prove your devotion to the hunt <Lose 2 [sprite \"armor_money_icon_001\"]>"; }
+            return $"Prove your devotion to the hunt <Lose 1 [sprite \"heart_big_idle_001\"] Container>";
+        }
+        public override string DeclineText(PlayerController Interactor)
+        {
+            return "Leave";
+        }
+        public override string PanelText(PlayerController Interactor)
+        {
+            return timesAccepted == 0 ? "A shrine to Artemissile, goddess of the eternal hunt. She grants enchanted arms to her most devout followers." : "The spirits inhabiting this shrine have departed...";
+        }
+
         public static float GetProperShootingSpeed(Gun gun)
         {
             float start = gun.DefaultModule.cooldownTime;
@@ -100,68 +139,6 @@ namespace NevernamedsItems
             }
             return start;
         }
-        public static void Accept(PlayerController player, GameObject shrine)
-        {
-            if (player.ForceZeroHealthState)
-            {
-                if (player.characterIdentity != OMITBChars.Shade)
-                {
-                    player.healthHaver.Armor -= 2;
-                }
-            }
-            else
-            {
-                StatModifier HP = new StatModifier
-                {
-                    statToBoost = PlayerStats.StatType.Health,
-                    amount = -1f,
-                    modifyType = StatModifier.ModifyMethod.ADDITIVE
-                };
-                player.ownerlessStatModifiers.Add(HP);
-                player.stats.RecalculateStats(player);
-            }
-            StatModifier statModifier = new StatModifier
-            {
-                statToBoost = PlayerStats.StatType.Curse,
-                amount = 2.5f,
-                modifyType = StatModifier.ModifyMethod.ADDITIVE
-            };
-            player.ownerlessStatModifiers.Add(statModifier);
-            player.stats.RecalculateStats(player);
-
-            Gun gun = LootEngine.GetItemOfTypeAndQuality<Gun>(PickupObjectDatabase.Instance.GetRandomQuality(), GameManager.Instance.RewardManager.GunsLootTable, false);
-
-            Debug.Log($"Tryget gun for Artemissile, ID: {gun.PickupObjectId}");
-
-            GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(ResourceCache.Acquire("Global Prefabs/HoveringGun") as GameObject, player.CenterPosition.ToVector3ZisY(0f), Quaternion.identity);
-            gameObject.transform.parent = player.transform;
-            HoveringGunController hover = gameObject.GetComponent<HoveringGunController>();
-            hover.ConsumesTargetGunAmmo = false;
-            hover.ChanceToConsumeTargetGunAmmo = 0f;
-            hover.Position = HoveringGunController.HoverPosition.CIRCULATE;
-            hover.Aim = HoveringGunController.AimType.PLAYER_AIM;
-            hover.Trigger = HoveringGunController.FireType.ON_RELOAD;
-            hover.CooldownTime = GetProperShootingSpeed(gun);
-            hover.ShootDuration = GetProperShootDuration(gun);
-            hover.OnlyOnEmptyReload = false;
-            hover.Initialize(gun, player);
-
-            player.stats.RecalculateStats(player, false, false);
-            shrine.GetComponent<CustomShrineController>().numUses++;
-            shrine.GetComponent<CustomShrineController>().GetRidOfMinimapIcon();
-
-            GameUIRoot.Instance.notificationController.DoCustomNotification(
-                   "Enchanted Gun",
-                    "Blessing Of The Hunt",
-                    ShrineFactory.ShrineIconCollection,
-                spriteId,
-                    UINotificationController.NotificationColor.SILVER,
-                    true,
-                    false
-                    );
-            AkSoundEngine.PostEvent("Play_OBJ_shrine_accept_01", shrine);
-        }
-        public static int spriteId;
     }
 }
 

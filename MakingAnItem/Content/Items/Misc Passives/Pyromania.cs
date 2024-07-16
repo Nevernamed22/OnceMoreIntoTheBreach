@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Pyromania";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/pyromania_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Pyromania>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Reign of Fire";
-            string longDesc = "Spawns additional explosive barrels in each room."+"\n\nSome people just want to watch the world burn. And you're one of them.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<Pyromania>(
+               "Pyromania",
+               "Reign of Fire",
+               "Spawns additional explosive barrels in each room." + "\n\nSome people just want to watch the world burn. And you're one of them.",
+               "pyromania_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.D;
             ID = item.PickupObjectId;
         }

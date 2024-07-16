@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Trifling Matters");
             gun.SetLongDescription("Designed by famous gunsmith Algernon Burst, this classic weapon features a stylish leather grip."+"\n\nPuts the tat-tat in 'ratta tat-tat'. Whatever the hell that means.");
 
-            gun.SetupSprite(null, "burstrifle_idle_001", 8);
+            gun.SetGunSprites("burstrifle");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);
@@ -60,7 +60,7 @@ namespace NevernamedsItems
 
             PierceDeadActors piercedead = projectile.gameObject.AddComponent<PierceDeadActors>();
             
-            projectile.SetProjectileSpriteRight("burstrifle_proj", 7, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 4);
+            projectile.SetProjectileSprite("burstrifle_proj", 7, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 4);
             EasyTrailBullet trail4 = projectile.gameObject.AddComponent<EasyTrailBullet>();
             trail4.TrailPos = projectile.transform.position;
             trail4.StartWidth = 0.25f;

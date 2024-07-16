@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Boned");
             gun.SetLongDescription("The favoured sidearm of the dark sorcerer Nuign, and his first foray into the apocryphal field of necro-gunsmithing.");
 
-            gun.SetupSprite(null, "uzispinemm_idle_001", 8);
+            gun.SetGunSprites("uzispinemm");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(29) as Gun).gunSwitchGroup;
@@ -56,7 +56,7 @@ namespace NevernamedsItems
             homing.AngularVelocity = 40f;
             homing.HomingRadius = 50f;
 
-            projectile.SetProjectileSpriteRight("uzispinemm_proj", 8, 11, false, tk2dBaseSprite.Anchor.MiddleCenter, 8, 7);
+            projectile.SetProjectileSprite("uzispinemm_proj", 8, 11, false, tk2dBaseSprite.Anchor.MiddleCenter, 8, 7);
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("UziSpineMM Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/uzispinemm_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/uzispinemm_clipempty");

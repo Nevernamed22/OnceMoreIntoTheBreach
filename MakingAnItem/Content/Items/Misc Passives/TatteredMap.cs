@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using System.Collections.Generic;
@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Tattered Map";
-            string resourceName = "NevernamedsItems/Resources/tatteredmap_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<TatteredMap>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Reveals Some Rooms";
-            string longDesc = "Partially reveals the floor." + "\n\nThis moth-eaten parchment has seen better days.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<TatteredMap>(
+            "Tattered Map",
+            "Reveals Some Rooms",
+            "Partially reveals the floor." + "\n\nThis moth-eaten parchment has seen better days.",
+            "tatteredmap_icon") as PassiveItem;
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.D;
             TatteredMapID = item.PickupObjectId;

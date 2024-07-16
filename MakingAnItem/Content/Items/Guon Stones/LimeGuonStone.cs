@@ -36,7 +36,7 @@ namespace NevernamedsItems
             item.AdvancedUpgradeOrbitalPrefab = upgradeOrbitalPrefab.gameObject;
 
             orbitalShot = ((Gun)PickupObjectDatabase.GetById(86)).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            orbitalShot.SetProjectileSpriteRight("limebullet", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 3, 3);
+            orbitalShot.SetProjectileSprite("limebullet", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 3, 3);
             orbitalShot.baseData.range = 1000;
             orbitalShot.gameObject.AddComponent<PierceProjModifier>();
             orbitalShot.gameObject.AddComponent<PierceDeadActors>();

@@ -8,6 +8,7 @@ using MonoMod;
 using UnityEngine;
 using Alexandria.ItemAPI;
 using Alexandria.Misc;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -25,8 +26,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Ancient Shrine");
             gun.SetLongDescription("Fires vengeful effigies, under your command." + "\n\nInhabited by the souls of ancient gundead heroes.");
 
-            gun.SetupSprite(null, "pillarocket_idle_001", 8);
-
+            gun.SetGunSprites("pillarocket");
 
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(37) as Gun).gunSwitchGroup;
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(39) as Gun, true, false);
@@ -58,38 +58,19 @@ namespace NevernamedsItems
             remote.trackingTime = 1000;
             PillarocketFiring firing = projectile.gameObject.GetOrAddComponent<PillarocketFiring>();
 
-            projectile.AnimateProjectile(new List<string> {
-                "pillarocket_proj_001",
-                "pillarocket_proj_002",
-                "pillarocket_proj_003",
-                "pillarocket_proj_004",
-                "pillarocket_proj_005",
-                "pillarocket_proj_006",
-                "pillarocket_proj_007",
-                "pillarocket_proj_008",
-                "pillarocket_proj_008",
-                "pillarocket_proj_008",
-                "pillarocket_proj_008",
-                "pillarocket_proj_008",
-                "pillarocket_proj_008",
-                "pillarocket_proj_008",
-                "pillarocket_proj_009",
-                "pillarocket_proj_010",
-                "pillarocket_proj_011",
-                "pillarocket_proj_012",
-                "pillarocket_proj_013",
-                "pillarocket_proj_014",
-            }, 20, //FPS
-            tk2dSpriteAnimationClip.WrapMode.Loop, //LOOPS
-            AnimateBullet.ConstructListOfSameValues<IntVector2>(new IntVector2(15, 8), 20), //PIXELSIZES
-            AnimateBullet.ConstructListOfSameValues(false, 20), //LIGHTENEDS
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleLeft, 20), //ANCHORS
-            AnimateBullet.ConstructListOfSameValues(false, 20), //ANCHORSCHANGECOLLIDERS
-            AnimateBullet.ConstructListOfSameValues(false, 20),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 20),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(15, 6), 20),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 20),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 20), 0);
+            projectile.AnimateProjectileBundle("PillarocketProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "PillarocketProjectile",
+                   MiscTools.DupeList(new IntVector2(15, 8), 20), //Pixel Sizes
+                   MiscTools.DupeList(false, 20), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 20), //Anchors
+                   MiscTools.DupeList(false, 20), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 20), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 20), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(15, 6), 20), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 20), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 20)); // Override to copy from    
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Pillarocket Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/pillarocket_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/pillarocket_clipempty");
@@ -103,21 +84,21 @@ namespace NevernamedsItems
             akproj.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(akproj.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(akproj);
-            akproj.SetProjectileSpriteRight("pillarocket_subprojectile", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 3, 3);
+            akproj.SetProjectileSprite("pillarocket_subprojectile", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 3, 3);
             PillarocketAKProj = akproj;
 
             Projectile magnum = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(38) as Gun).DefaultModule.projectiles[0]);
             magnum.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(magnum.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(magnum);
-            magnum.SetProjectileSpriteRight("pillarocket_subprojectile", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 3, 3);
+            magnum.SetProjectileSprite("pillarocket_subprojectile", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 3, 3);
             PillarocketMagnumProj = magnum;
 
             Projectile shotproj = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(51) as Gun).DefaultModule.projectiles[0]);
             shotproj.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(shotproj.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(shotproj);
-            shotproj.SetProjectileSpriteRight("pillarocket_subprojectile", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 3, 3);
+            shotproj.SetProjectileSprite("pillarocket_subprojectile", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 3, 3);
             PillarocketShotgunProj = shotproj;
             ID = gun.PickupObjectId;
         }

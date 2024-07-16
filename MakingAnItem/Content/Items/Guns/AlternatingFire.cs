@@ -20,10 +20,10 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:alternating_fire", "nn:alternating_fire");
             var behav = gun.gameObject.AddComponent<AlternatingFire>();
 
-            gun.SetShortDescription("");
-            gun.SetLongDescription("");
+            gun.SetShortDescription("Worth the Risk");
+            gun.SetLongDescription("Alternates every two seconds between smaller, punchier bullets and larger, more powerful projectiles. \n\nThis gun exists simultaneously in both the elemental planes of light and darkness, and is constantly phasing between the two.");
 
-            gun.SetupSprite(null, "alternatingfire_idle_001", 8);
+            gun.SetGunSprites("alternatingfire");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 7);
@@ -46,7 +46,7 @@ namespace NevernamedsItems
             //BULLET STATS
             Projectile projectile = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
             projectile.gameObject.name = "alternatingfire_proj";
-            projectile.SetProjectileSpriteRight("alternatingfire_proj", 7, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
+            projectile.SetProjectileSprite("alternatingfire_proj", 7, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.WhiteCircleVFX;
             projectile.baseData.damage = 6;
@@ -55,7 +55,7 @@ namespace NevernamedsItems
             
 
             alternateProj = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            alternateProj.SetProjectileSpriteRight("alternatingfire_proj2", 7, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
+            alternateProj.SetProjectileSprite("alternatingfire_proj2", 7, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
             alternateProj.hitEffects.alwaysUseMidair = true;
             alternateProj.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.WhiteCircleVFX;
             alternateProj.baseData.damage = 3;

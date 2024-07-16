@@ -24,6 +24,7 @@ namespace NevernamedsItems
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_ALKALIBULLETS, true);
             item.AddItemToGooptonMetaShop(30);
             AlkaliBulletsID = item.PickupObjectId;
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public static int AlkaliBulletsID;
         public override void Pickup(PlayerController player)

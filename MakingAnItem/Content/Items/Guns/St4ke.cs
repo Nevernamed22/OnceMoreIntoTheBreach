@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("For Robot Vampires");
             gun.SetLongDescription("Fires miniature tesla coils that stick into walls."+"\n\nFollowing the success of her remote diote transmitter experiment, the tinker set about seeing if she could make both ends of the tesla-relay mobile.");
 
-            gun.SetupSprite(null, "st4ke_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "st4ke_idle_001", 8, "st4ke_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 17);
 

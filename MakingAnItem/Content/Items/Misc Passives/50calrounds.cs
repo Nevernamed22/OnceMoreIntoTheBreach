@@ -25,6 +25,7 @@ namespace NevernamedsItems
             item.SetTag("bullet_modifier");
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
             FiftyCalRoundsID = item.PickupObjectId;
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public static int FiftyCalRoundsID;
     }

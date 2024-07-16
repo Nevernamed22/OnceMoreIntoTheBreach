@@ -26,7 +26,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Tail As Old As Time");
             gun.SetLongDescription("Firing creates red 'apples' around the room. Shooting through these 'apples' buffs shots." + "\n\nA very hungry snake... or maybe it's a worm? It's hard to tell with so few pixels.");
 
-            gun.SetupSprite(null, "snaker_idle_001", 8);
+            gun.SetGunSprites("snaker");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.idleAnimation, 8);
@@ -58,7 +58,7 @@ namespace NevernamedsItems
             projectile.baseData.range *= 2f;
             projectile.BossDamageMultiplier = 5;
             projectile.baseData.damage *= 2;
-            projectile.SetProjectileSpriteRight("snaker_projectile", 6, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
+            projectile.SetProjectileSprite("snaker_projectile", 6, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
             
 
             //APPLE BULLET
@@ -74,7 +74,7 @@ namespace NevernamedsItems
             nocollide.worksOnEnemies = true;
             nocollide.worksOnProjectiles = false;
             apple.specRigidbody.CollideWithTileMap = false;
-            apple.SetProjectileSpriteRight("snakerapple_projectile", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 12, 12);
+            apple.SetProjectileSprite("snakerapple_projectile", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 12, 12);
             AppleBullet = apple;
 
             gun.DefaultModule.projectiles[0] = projectile;

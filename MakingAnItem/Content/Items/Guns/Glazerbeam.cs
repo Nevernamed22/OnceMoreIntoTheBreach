@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Static Lasers");
             gun.SetLongDescription("Fires lasers that hang in the air. Repurposed from arbitrarily menacing 'laser walls' salvaged from an abandoned supervillain hideout.");
 
-            gun.SetupSprite(null, "glazerbeam_idle_001", 8);
+            gun.SetGunSprites("glazerbeam");
 
             gun.SetAnimationFPS(gun.shootAnimation, 14);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(153) as Gun).gunSwitchGroup;

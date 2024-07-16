@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Yeeeeehaw!");
             gun.SetLongDescription("Six tiny spirits inhabit this gun, gleefully riding it's bullets into battle, and re-aiming them towards the nearest target when the owner signals them via reloading."+"\n\nThis gun smells vaguely Italian.");
 
-            gun.SetupSprite(null, "pista_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "pista_idle_001", 8, "pista_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 

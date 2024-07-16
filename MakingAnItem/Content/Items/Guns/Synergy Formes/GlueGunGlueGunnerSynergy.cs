@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -20,7 +20,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("yes this is a btd reference");
             gun.SetLongDescription("im too tired to write a snarky description");
 
-            gun.SetupSprite(null, "gluegunner_idle_001", 8);
+            gun.SetGunSprites("gluegunner", 8, true);
+
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(199) as Gun).gunSwitchGroup;
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);

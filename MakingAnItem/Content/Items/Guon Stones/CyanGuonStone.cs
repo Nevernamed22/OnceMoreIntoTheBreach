@@ -41,13 +41,13 @@ namespace NevernamedsItems
             projectile2.baseData.speed *= 2f;
             projectile2.baseData.damage = 2;
             projectile2.baseData.range *= 2f;
-            projectile2.SetProjectileSpriteRight("cyanguon_proj", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 5, 5);
+            projectile2.SetProjectileSprite("cyanguon_proj", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 5, 5);
             cyanGuonProj = projectile2;
         }
         public static Projectile cyanGuonProj;
         public static void BuildPrefab()
         {
-            
+
 
             if (CyanGuonStone.orbitalPrefab != null) return;
             GameObject prefab = ItemBuilder.SpriteFromBundle("CyanGuonOrbital", Initialisation.itemCollection.GetSpriteIdByName("cyanguon_ingame"), Initialisation.itemCollection);
@@ -73,7 +73,7 @@ namespace NevernamedsItems
         {
             bool flag = CyanGuonStone.upgradeOrbitalPrefab == null;
             if (flag)
-            {                
+            {
                 GameObject gameObject = ItemBuilder.SpriteFromBundle("CyanGuonOrbitalSynergy", Initialisation.itemCollection.GetSpriteIdByName("cyanguon_synergy"), Initialisation.itemCollection);
                 gameObject.name = "Cyan Guon Orbital Synergy Form";
                 SpeculativeRigidbody speculativeRigidbody = gameObject.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(9, 13));
@@ -95,28 +95,36 @@ namespace NevernamedsItems
         bool canFire = true;
         public override void Update()
         {
-            if (this.m_extantOrbital != null)
+            if (this.m_extantOrbital != null && Owner && Owner.specRigidbody)
             {
                 if (Owner && Owner.IsInCombat && Owner.specRigidbody.Velocity == Vector2.zero && canFire)
                 {
-                    GameObject gameObject = SpawnManager.SpawnProjectile(cyanGuonProj.gameObject, this.m_extantOrbital.GetComponent<tk2dSprite>().WorldCenter, Quaternion.Euler(0f, 0f, this.m_extantOrbital.GetComponent<tk2dSprite>().WorldCenter.CalculateVectorBetween(this.m_extantOrbital.GetComponent<tk2dSprite>().WorldCenter.GetNearestEnemyToPosition(true, Dungeonator.RoomHandler.ActiveEnemyType.All, null, null).CenterPosition).ToAngle()), true);
-                    Projectile component = gameObject.GetComponent<Projectile>();
-                    if (component != null)
+                    tk2dSprite OrbitalSprite = this.m_extantOrbital.GetComponent<tk2dSprite>();
+                    if (OrbitalSprite)
                     {
-                        component.Owner = Owner;
-                        component.Shooter = Owner.specRigidbody;
-                        component.baseData.damage *= Owner.stats.GetStatValue(PlayerStats.StatType.Damage);
-                        component.baseData.speed *= Owner.stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed);
-                        component.baseData.force *= Owner.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
-                        component.AdditionalScaleMultiplier *= Owner.stats.GetStatValue(PlayerStats.StatType.PlayerBulletScale);
-                        component.UpdateSpeed();
-                        Owner.DoPostProcessProjectile(component);
+                        AIActor nearestEnemy = OrbitalSprite.WorldCenter.GetNearestEnemyToPosition(true, Dungeonator.RoomHandler.ActiveEnemyType.All, null, null);
+                        if (nearestEnemy != null)
+                        {
+                            GameObject gameObject = SpawnManager.SpawnProjectile(cyanGuonProj.gameObject, OrbitalSprite.WorldCenter, Quaternion.Euler(0f, 0f, OrbitalSprite.WorldCenter.CalculateVectorBetween(nearestEnemy.CenterPosition).ToAngle()), true);
+                            Projectile component = gameObject.GetComponent<Projectile>();
+                            if (component != null)
+                            {
+                                component.Owner = Owner;
+                                component.Shooter = Owner.specRigidbody;
+                                component.baseData.damage *= Owner.stats.GetStatValue(PlayerStats.StatType.Damage);
+                                component.baseData.speed *= Owner.stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed);
+                                component.baseData.force *= Owner.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
+                                component.AdditionalScaleMultiplier *= Owner.stats.GetStatValue(PlayerStats.StatType.PlayerBulletScale);
+                                component.UpdateSpeed();
+                                Owner.DoPostProcessProjectile(component);
+                            }
+                            //component.ReAimBulletToNearestEnemy(100, 0);
+                            canFire = false;
+                            float cooldownTime = 0.35f;
+                            if (Owner.PlayerHasActiveSynergy("Cyaner Guon Stone")) cooldownTime = 0.16f;
+                            Invoke("resetFireCooldown", cooldownTime);
+                        }
                     }
-                    //component.ReAimBulletToNearestEnemy(100, 0);
-                    canFire = false;
-                    float cooldownTime = 0.35f;
-                    if (Owner.PlayerHasActiveSynergy("Cyaner Guon Stone")) cooldownTime = 0.16f;
-                    Invoke("resetFireCooldown", cooldownTime);
                 }
             }
             base.Update();

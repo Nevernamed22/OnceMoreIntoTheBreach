@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Controlled Chaos");
             gun.SetLongDescription("An icon of disorder and displacement, given form by the Gungeon's Magickes." + "\n\nStrange things seem to happen when a chest is opened while holding this gun...");
 
-            gun.SetupSprite(null, "entropew_idle_001", 8);
+            gun.SetGunSprites("entropew");
 
             gun.SetAnimationFPS(gun.shootAnimation, 16);
 
@@ -48,7 +48,7 @@ namespace NevernamedsItems
                 UnityEngine.Object.DontDestroyOnLoad(projectile);
                 projectile.baseData.range *= 10;
                 projectile.baseData.damage = 6;
-                projectile.SetProjectileSpriteRight("entropew_projectile", 5, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 6);
+                projectile.SetProjectileSprite("entropew_projectile", 5, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 6);
 
                 if (mod != gun.DefaultModule)
                 {

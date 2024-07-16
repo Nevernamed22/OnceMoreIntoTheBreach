@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "88888888";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/88888888_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<EightButton>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "88888888";
-            string longDesc = "8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<EightButton>(
+              "88888888",
+              "88888888",
+              "8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888",
+              "88888888_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.C;
         }
         public int trackedShots = 0;

@@ -24,7 +24,8 @@ namespace NevernamedsItems
             ID = item.PickupObjectId;
         }
         public static int ID;
-        private void Update()
+
+        public override void Update()
         {
             if (Owner)
             {
@@ -38,6 +39,7 @@ namespace NevernamedsItems
                     timer = UnityEngine.Random.Range(1f, 70f);
                 }
             }
+            base.Update();
         }
         private float timer = 10;
     }

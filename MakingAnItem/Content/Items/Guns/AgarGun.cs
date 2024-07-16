@@ -6,10 +6,11 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using Alexandria.Misc;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -23,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Feeda Me");
             gun.SetLongDescription("An old historical remnant reinvigorated for bio warfare."+"\n\nThe final shot launches a hungry macrobacteria, who gobbles up agar to fuel its own destructive power.");
 
-            gun.SetupSprite(null, "agargun_idle_001", 8);
+            gun.SetGunSprites("agargun");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);
@@ -59,22 +60,19 @@ namespace NevernamedsItems
             projectile.hitEffects.alwaysUseMidair = true;
 
             //ANIMATE BULLET
-            projectile.AnimateProjectile(new List<string> {
-                "agargun_smallproj_1",
-                "agargun_smallproj_2",
-                "agargun_smallproj_1",
-                "agargun_smallproj_3",
-            }, 12, tk2dSpriteAnimationClip.WrapMode.Loop, AnimateBullet.ConstructListOfSameValues(new IntVector2(12, 11), 4), 
-            AnimateBullet.ConstructListOfSameValues(true, 4), 
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4), 
-            AnimateBullet.ConstructListOfSameValues(true, 4), 
-            AnimateBullet.ConstructListOfSameValues(false, 4),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), 
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), 
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), 
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
-
-            projectile.SetProjectileSpriteRight("agargun_smallproj_1", 12, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 12, 11);
+            projectile.AnimateProjectileBundle("AgarGunProjectile",
+                    Initialisation.ProjectileCollection,
+                    Initialisation.projectileAnimationCollection,
+                    "AgarGunProjectile",
+                    MiscTools.DupeList(new IntVector2(12, 11), 4), //Pixel Sizes
+                    MiscTools.DupeList(true, 4), //Lightened
+                    MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                    MiscTools.DupeList(true, 4), //Anchors Change Colliders
+                    MiscTools.DupeList(false, 4), //Fixes Scales
+                    MiscTools.DupeList<Vector3?>(null, 4), //Manual Offsets
+                    MiscTools.DupeList<IntVector2?>(null, 4), //Override colliders
+                    MiscTools.DupeList<IntVector2?>(null, 4), //Override collider offsets
+                    MiscTools.DupeList<Projectile>(null, 4)); // Override to copy from                   
             #endregion
             #region SubProjectile
             Projectile subProj = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -91,22 +89,19 @@ namespace NevernamedsItems
             subProj.gameObject.AddComponent<AgarGunBigProj>();
 
             //ANIMATE BULLET
-            subProj.AnimateProjectile(new List<string> {
-                "agargun_bigproj_1",
-                "agargun_bigproj_2",
-                "agargun_bigproj_1",
-                "agargun_bigproj_3",
-            }, 12, tk2dSpriteAnimationClip.WrapMode.Loop, AnimateBullet.ConstructListOfSameValues(new IntVector2(17, 12), 4),
-            AnimateBullet.ConstructListOfSameValues(true, 4),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4),
-            AnimateBullet.ConstructListOfSameValues(true, 4),
-            AnimateBullet.ConstructListOfSameValues(false, 4),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
-
-            subProj.SetProjectileSpriteRight("agargun_bigproj_1", 17, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 17, 12);
+            subProj.AnimateProjectileBundle("AgarGunAgarProjectile",
+                    Initialisation.ProjectileCollection,
+                    Initialisation.projectileAnimationCollection,
+                    "AgarGunAgarProjectile",
+                    MiscTools.DupeList(new IntVector2(17, 12), 4), //Pixel Sizes
+                    MiscTools.DupeList(true, 4), //Lightened
+                    MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                    MiscTools.DupeList(true, 4), //Anchors Change Colliders
+                    MiscTools.DupeList(false, 4), //Fixes Scales
+                    MiscTools.DupeList<Vector3?>(null, 4), //Manual Offsets
+                    MiscTools.DupeList<IntVector2?>(null, 4), //Override colliders
+                    MiscTools.DupeList<IntVector2?>(null, 4), //Override collider offsets
+                    MiscTools.DupeList<Projectile>(null, 4)); // Override to copy from             
             #endregion
 
             gun.DefaultModule.finalProjectile = subProj;

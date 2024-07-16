@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Boollet Value");
             gun.SetLongDescription("Deals double damage if the target you're shooting is different to the last enemy you shot." + "\n\nFavoured sidearm of a famous programmer, who came to the gungeon after being driven insane by the inane questions asked of him by other people.");
 
-            gun.SetupSprite(null, "variable_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "variable_idle_001", 8, "variable_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
 
@@ -47,7 +47,7 @@ namespace NevernamedsItems
             projectile.baseData.force *= 1.2f;
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.WhiteCircleVFX;
-            projectile.SetProjectileSpriteRight("variable1_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter,8, 8);
+            projectile.SetProjectileSprite("variable1_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter,8, 8);
 
             Projectile projectile2 = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
             projectile2.gameObject.SetActive(false);
@@ -57,7 +57,7 @@ namespace NevernamedsItems
             projectile2.baseData.force *= 1.2f;
             projectile2.hitEffects.alwaysUseMidair = true;
             projectile2.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.WhiteCircleVFX;
-            projectile2.SetProjectileSpriteRight("variable2_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
+            projectile2.SetProjectileSprite("variable2_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
 
             gun.DefaultModule.projectiles[0] = projectile;
             gun.DefaultModule.projectiles.Add(projectile2);

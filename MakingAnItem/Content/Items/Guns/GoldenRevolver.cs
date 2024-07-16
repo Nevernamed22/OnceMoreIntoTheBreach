@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Pop Pop");
             gun.SetLongDescription("A flashy weapon made entirely out of solid gold."+"\n\nNot to be confused with the AU gun, which is meant to be hidden. This gun is meant to be shown off.");
 
-            gun.SetupSprite(null, "goldenrevolver_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "goldenrevolver_idle_001", 8, "goldenrevolver_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
 

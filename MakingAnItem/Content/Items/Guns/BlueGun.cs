@@ -22,7 +22,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Why So Blue?");
             gun.SetLongDescription("Blue Guns like these are often used by Hegemony Soldiers to simulate combat situations without live weapons. This has, as per the usual, been convoluted within the Gungeon."+"\n\nCan be reloaded with blanks to refill ammo.");
 
-            gun.SetupSprite(null, "bluegun_idle_001", 8);
+            gun.SetGunSprites("bluegun");
+
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
 
             //GUN STATS

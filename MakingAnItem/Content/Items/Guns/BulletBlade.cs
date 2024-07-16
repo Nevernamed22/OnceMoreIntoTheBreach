@@ -26,7 +26,9 @@ namespace NevernamedsItems
 
             gun.SetShortDescription("Forged of Pure Bullet");
             gun.SetLongDescription("The hefty blade of the fearsome armoured sentinels that tread the Gungeon's Halls." + "\n\nHas claimed the life of many a careless gungeoneer with it's wide spread.");
-            gun.SetupSprite(null, "bulletblade_idle_001", 8);
+           
+            gun.SetGunSprites("bulletblade");
+
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.chargeAnimation, 6);
 
@@ -57,7 +59,7 @@ namespace NevernamedsItems
                 projectile.baseData.damage *= 1.6f;
                 projectile.baseData.speed *= 0.6f;
                 projectile.baseData.range *= 1f;
-                projectile.SetProjectileSpriteRight("enemystyle_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
+                projectile.SetProjectileSprite("enemystyle_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
                 if (mod != gun.DefaultModule) { mod.ammoCost = 0; }
                 projectile.transform.parent = gun.barrelOffset;
 

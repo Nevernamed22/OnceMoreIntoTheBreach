@@ -13,32 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Showdown";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/showdown_improved";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<Showdown>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Now it's just you and me...";
-            string longDesc = "Prevents bosses from being able to spawn additional backup." + "\n\nAn icon of the one-on-one gunfights of days gone by.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
+            PassiveItem item = ItemSetup.NewItem<Showdown>(
+              "Showdown",
+              "Now it's just you and me...",
+              "Prevents bosses from being able to spawn additional backup." + "\n\nAn icon of the one-on-one gunfights of days gone by.",
+              "showdown_improved") as PassiveItem;        
             item.quality = PickupObject.ItemQuality.D; 
         }
         public void AIActorMods(AIActor target)

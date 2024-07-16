@@ -19,7 +19,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("");
             gun.SetLongDescription("");
 
-            gun.SetupSprite(null, "serviceweaponshatter_idle_001", 8);
+            gun.SetGunSprites("serviceweaponshatter", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 12);
@@ -56,7 +56,7 @@ namespace NevernamedsItems
                 projectile.baseData.speed *= 2;
                 projectile.baseData.force *= 2;
                 projectile.baseData.range = 8f;
-                projectile.SetProjectileSpriteRight("serviceweapon_proj", 11, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 5);
+                projectile.SetProjectileSprite("serviceweapon_proj", 11, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 5);
                 projectile.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(98) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX;
                 projectile.hitEffects.alwaysUseMidair = true;
 

@@ -22,6 +22,7 @@ namespace NevernamedsItems
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_ERRORSHELLS, true);
             item.AddItemToDougMetaShop(30);
+            Doug.AddToLootPool(item.PickupObjectId);
 
             ERRORShellsDummyEffect = new GameActorDecorationEffect()
             {

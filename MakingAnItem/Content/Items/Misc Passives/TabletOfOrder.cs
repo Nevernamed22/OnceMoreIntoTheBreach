@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 using SaveAPI;
 
@@ -14,16 +14,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Tablet Of Order";
-            string resourceName = "NevernamedsItems/Resources/tabletoforder_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<TabletOfOrder>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Everything In It's Place";
-            string longDesc = "Buffs enemies, but removes their ability to call in reinforcements." + "\n\nAn ancient magical artefact once used by the Order of the True Gun to quell dissent in their ranks.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<TabletOfOrder>(
+              "Tablet Of Order",
+              "Everything In It's Place",
+              "Buffs enemies, but removes their ability to call in reinforcements." + "\n\nAn ancient magical artefact once used by the Order of the True Gun to quell dissent in their ranks.",
+              "tabletoforder_icon") as PassiveItem;          
             item.quality = PickupObject.ItemQuality.B;
-
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.CHALLENGE_WHATARMY_BEATEN, true);
         }
         private RoomHandler lastCheckedRoom;

@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Gunpowder Green";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/gunpowdergreen_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<GunpowderGreen>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Soothed Trigger Finger";
-            string longDesc = "Reload faster the more full the clip already is." + "\n\nIntroduces a certain zen into the process of reloading, allowing you to refill your guns more effectively.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<GunpowderGreen>(
+              "Gunpowder Green",
+              "Soothed Trigger Finger",
+              "Reload faster the more full the clip already is." + "\n\nIntroduces a certain zen into the process of reloading, allowing you to refill your guns more effectively.",
+              "gunpowdergreen_icon") as PassiveItem;          
             item.quality = PickupObject.ItemQuality.D;
             ID = item.PickupObjectId;
         }

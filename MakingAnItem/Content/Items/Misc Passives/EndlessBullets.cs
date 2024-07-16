@@ -19,6 +19,7 @@ namespace NevernamedsItems
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.RangeMultiplier, 100, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("bullet_modifier");
+            Doug.AddToLootPool(item.PickupObjectId);
         }
     }
 }

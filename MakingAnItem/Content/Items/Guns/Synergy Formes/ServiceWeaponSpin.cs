@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("");
             gun.SetLongDescription("");
 
-            gun.SetupSprite(null, "serviceweaponspin_idle_001", 8);
+            gun.SetGunSprites("serviceweaponspin", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 12);

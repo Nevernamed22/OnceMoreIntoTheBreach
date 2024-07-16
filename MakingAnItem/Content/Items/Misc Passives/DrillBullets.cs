@@ -17,10 +17,11 @@ namespace NevernamedsItems
             PickupObject item = ItemSetup.NewItem<DrillBullets>(
             "Drill Bullets",
             "Drrrrrrrrr",
-            "Bullets gain in damage the more they pierce!" + "\n\nKilling people is probably the most legal thing you can do with these.",
-            "drillbullets_icon");
+            "Bullets increase in damage the more they pierce!" + "\n\nKilling people is probably the most legal thing you can do with these.",
+            "drillbullets_improved");
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("bullet_modifier");
+            Doug.AddToLootPool(item.PickupObjectId);
         }
 
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)

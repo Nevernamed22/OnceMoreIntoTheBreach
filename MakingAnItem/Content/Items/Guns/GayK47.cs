@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Somewhere");
             gun.SetLongDescription("This shiny AK comes in all types of colours."+"\n\nThinks that the Machine Pistol is cute, but is too embarrassed to say anything.");
 
-            gun.SetupSprite(null, "gayk47_idle_001", 8);
+            gun.SetGunSprites("gayk47");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(15) as Gun).gunSwitchGroup;

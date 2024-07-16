@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Krasniy Wolf");
             gun.SetLongDescription("A homemade insurgency weapon- slapped together and barely able to function. Flipping the gun upside down with a dodge roll seems to boost it's effectiveness." + "\n\nUsed for a short time by a brief splinter-state of the Hegemony of Man.");
 
-            gun.SetupSprite(null, "borz_idle_001", 8);
+            gun.SetGunSprites("borz");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);
@@ -47,7 +47,7 @@ namespace NevernamedsItems
             //BULLET STATS
             Projectile projectile = gun.DefaultModule.projectiles[0].InstantiateAndFakeprefab();
             projectile.baseData.speed *= 1.5f;
-            projectile.SetProjectileSpriteRight("spacersfancy_proj", 9, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 4);
+            projectile.SetProjectileSprite("spacersfancy_proj", 9, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 4);
             projectile.hitEffects = (PickupObjectDatabase.GetById(15) as Gun).DefaultModule.projectiles[0].hitEffects;
             gun.DefaultModule.projectiles[0] = projectile;
 

@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("+VLFBEHT+");
             gun.SetLongDescription("Part of an ancient series of guns from a widespread and respected family of Gunsmiths, now lost to time."+"\n\nCrusty, rusty firearms such as this one are the only evidence of their existence...");
 
-            gun.SetupSprite(null, "ulfbehrt_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "ulfbehrt_idle_001", 8, "ulfbehrt_ammonomicon_001");
 
             gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(38) as Gun).muzzleFlashEffects;
 
@@ -69,7 +69,7 @@ namespace NevernamedsItems
             spawner.PostprocessSpawnedProjectiles = true;
             spawner.numberToSpawnOnCollison = 5;
 
-            projectile.SetProjectileSpriteRight("ulfbehrt_proj", 11, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 7);
+            projectile.SetProjectileSprite("ulfbehrt_proj", 11, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 7);
             gun.DefaultModule.projectiles[0] = projectile;
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;

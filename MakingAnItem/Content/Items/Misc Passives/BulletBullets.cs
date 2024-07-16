@@ -19,7 +19,8 @@ namespace NevernamedsItems
              "bulletbullets_icon");
             item.quality = PickupObject.ItemQuality.D;
             item.SetTag("bullet_modifier");
-        }       
+            Doug.AddToLootPool(item.PickupObjectId);
+        }
         private Projectile lastProjectile = null;
         public override void DoIntersectionEffect(Projectile playerBullet, Projectile enemyBullet)
         {

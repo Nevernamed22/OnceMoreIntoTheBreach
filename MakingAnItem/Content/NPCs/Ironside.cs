@@ -1,20 +1,30 @@
-﻿using NpcApi;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using LootTableAPI;
 using UnityEngine;
-using GungeonAPI;
+using Alexandria.DungeonAPI;
 using System.Reflection;
+using Alexandria.NPCAPI;
+using Alexandria.Misc;
+using Dungeonator;
+using Alexandria.BreakableAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
     public static class Ironside
     {
         public static GenericLootTable IronsideLootTable;
+        public static GameObject mapIcon;
+        public static void AddToLootPool(int id)
+        {
+            if (IronsideLootTable == null) { IronsideLootTable = LootUtility.CreateLootTable(); }
+            IronsideLootTable.AddItemToPool(id);
+        }
         public static void Init()
         {
+            #region Strings
             ETGMod.Databases.Strings.Core.AddComplex("#IRONSIDE_GENERIC_TALK", "The Gungeon is a tough place, it pays to have thick skin.");
             ETGMod.Databases.Strings.Core.AddComplex("#IRONSIDE_GENERIC_TALK", "My pepaw always told me to stay prepared. So that's what I do.");
             ETGMod.Databases.Strings.Core.AddComplex("#IRONSIDE_GENERIC_TALK", "The cost of being heavily armoured is never letting anyone in.");
@@ -33,8 +43,8 @@ namespace NevernamedsItems
             ETGMod.Databases.Strings.Core.AddComplex("#IRONSIDE_PURCHASE_TALK", "Pays to be prepared.");
             ETGMod.Databases.Strings.Core.AddComplex("#IRONSIDE_PURCHASE_TALK", "Armoured and ready!");
 
-            ETGMod.Databases.Strings.Core.AddComplex("#IRONSIDE_NOSALE_TALK", "You'd better get out there and find some more armour.");
-            ETGMod.Databases.Strings.Core.AddComplex("#IRONSIDE_NOSALE_TALK", "Sorry pal, no shields no sale.");
+            ETGMod.Databases.Strings.Core.AddComplex("#IRONSIDE_NOSALE_TALK", "You'd better get out there and find some more [sprite \"armor_money_icon_001\"].");
+            ETGMod.Databases.Strings.Core.AddComplex("#IRONSIDE_NOSALE_TALK", "Sorry pal, no [sprite \"armor_money_icon_001\"] no sale.");
 
             ETGMod.Databases.Strings.Core.AddComplex("#IRONSIDE_INTRO_TALK", "AVAST FIEND- Oh, no. It's just you.");
             ETGMod.Databases.Strings.Core.AddComplex("#IRONSIDE_INTRO_TALK", "Staying safe out there?");
@@ -44,6 +54,11 @@ namespace NevernamedsItems
             ETGMod.Databases.Strings.Core.AddComplex("#IRONSIDE_ATTACKED_TALK", "Hah, no way you're getting through this armour!");
             ETGMod.Databases.Strings.Core.AddComplex("#IRONSIDE_ATTACKED_TALK", "Nice try, but one of us is squishy and it ain't me.");
             ETGMod.Databases.Strings.Core.AddComplex("#IRONSIDE_ATTACKED_TALK", "You're gonna wish you hadn't done that one day.");
+
+            ETGMod.Databases.Strings.Core.AddComplex("#IRONSIDE_STEAL_TALK", "THIEF!");
+            ETGMod.Databases.Strings.Core.AddComplex("#IRONSIDE_STEAL_TALK", "TAFFER!");
+            ETGMod.Databases.Strings.Core.AddComplex("#IRONSIDE_STEAL_TALK", "ARMS UP!");
+            #endregion
 
             List<int> LootTable = new List<int>()
             {
@@ -87,70 +102,79 @@ namespace NevernamedsItems
                 RapidRiposte.RapidRiposteID,
                 Converter.ConverterID,
             };
+            foreach (int i in LootTable) { AddToLootPool(i); }
 
-            IronsideLootTable = LootTableTools.CreateLootTable();
-            foreach (int i in LootTable)
+            mapIcon = ItemBuilder.SpriteFromBundle("ironside_mapicon", Initialisation.NPCCollection.GetSpriteIdByName("ironside_mapicon"), Initialisation.NPCCollection, new GameObject("ironside_mapicon"));
+            mapIcon.MakeFakePrefab();
+
+            var ironside = ItemBuilder.SpriteFromBundle("ironside_idle_001", Initialisation.NPCCollection.GetSpriteIdByName("ironside_idle_001"), Initialisation.NPCCollection, new GameObject("Ironside"));
+            SpeculativeRigidbody rigidbody = ShopAPI.GenerateOrAddToRigidBody(ironside, CollisionLayer.LowObstacle, PixelCollider.PixelColliderGeneration.Manual, true, true, true, false, false, false, false, true, new IntVector2(11, 11), new IntVector2(9, -1));
+            rigidbody.AddCollisionLayerOverride(CollisionMask.LayerToMask(CollisionLayer.BulletBlocker));
+
+            GameObject shopObj = TempNPCTools.MakeIntoShopkeeper("Ironside", "nn", ironside, "ironside_idle", "ironside_talk", Initialisation.NPCCollection, Initialisation.npcAnimationCollection,
+                   IronsideLootTable,
+                   CustomShopItemController.ShopCurrencyType.CUSTOM,
+                   "#IRONSIDE_GENERIC_TALK",
+                   "#IRONSIDE_STOPPER_TALK",
+                   "#IRONSIDE_PURCHASE_TALK",
+                   "#IRONSIDE_NOSALE_TALK",
+                   "#IRONSIDE_INTRO_TALK",
+                   "#IRONSIDE_ATTACKED_TALK",
+                   "#IRONSIDE_STEAL_TALK",
+                   new Vector3(15f / 16f, 33f / 16f, 0), //Textbox Offset
+                   new Vector3(27f / 16f, 56f / 16f, 0), //NPC Offset
+                   itemPositions: ShopAPI.defaultItemPositions,
+                   hasMinimapIcon: true,
+                   minimapIcon: mapIcon,
+                   Carpet: "ironside_carpet",
+                   CarpetOffset: new Vector2(-1f / 16f, -1f / 16f),
+                   CustomCanBuy: Ironside.IronsideCustomCanBuy,
+                   CustomRemoveCurrency: Ironside.IronsideCustomRemoveCurrency,
+                   CustomPrice: Ironside.IronsideCustomPrice,
+                   OnPurchase: IronsideBuy,
+                   currencyIconPath: "NevernamedsItems/Resources/NPCSprites/Ironside/armourcurrency_icon.png",
+                   currencyName: "Armor",
+                   addToShopAnnex: true,
+                   shopAnnexWeight: 0.08f,
+                   voice: "golem"
+                   );
+
+            Dictionary<GameObject, float> dict = new Dictionary<GameObject, float>() { { shopObj, 1f } };
+            DungeonPlaceable placeable = BreakableAPIToolbox.GenerateDungeonPlaceable(dict);
+            placeable.isPassable = true;
+            placeable.width = 5;
+            placeable.height = 5;
+            StaticReferences.StoredDungeonPlaceables.Add("ironside", placeable);
+            Alexandria.DungeonAPI.StaticReferences.customPlaceables.Add("nn:ironside", placeable);
+
+            SharedInjectionData npcTable = GameManager.Instance.GlobalInjectionData.entries[2].injectionData;
+            npcTable.InjectionData.Add(new ProceduralFlowModifierData()
             {
-                IronsideLootTable.AddItemToPool(i);
-            }
-
-            GameObject ironsideObj = ItsDaFuckinShopApi.SetUpShop(
-                         "Ironside",
-                         "omitb",
-                         new List<string>()
-                         {
-                        "NevernamedsItems/Resources/NPCSprites/Ironside/ironside_idle_001",
-                        "NevernamedsItems/Resources/NPCSprites/Ironside/ironside_idle_002",
-                        "NevernamedsItems/Resources/NPCSprites/Ironside/ironside_idle_003",
-                        "NevernamedsItems/Resources/NPCSprites/Ironside/ironside_idle_004",
-                         },
-                         8,
-                         new List<string>()
-                         {
-                        "NevernamedsItems/Resources/NPCSprites/Ironside/ironside_talk_001",
-                        "NevernamedsItems/Resources/NPCSprites/Ironside/ironside_talk_002",
-                        "NevernamedsItems/Resources/NPCSprites/Ironside/ironside_talk_003",
-                        "NevernamedsItems/Resources/NPCSprites/Ironside/ironside_talk_004",
-                        "NevernamedsItems/Resources/NPCSprites/Ironside/ironside_talk_005",
-                        "NevernamedsItems/Resources/NPCSprites/Ironside/ironside_talk_006",
-                         },
-                         12,
-                         IronsideLootTable,
-                         CustomShopItemController.ShopCurrencyType.CUSTOM,
-                         "#IRONSIDE_GENERIC_TALK",
-                         "#IRONSIDE_STOPPER_TALK",
-                         "#IRONSIDE_PURCHASE_TALK",
-                         "#IRONSIDE_NOSALE_TALK",
-                         "#IRONSIDE_INTRO_TALK",
-                         "#IRONSIDE_ATTACKED_TALK",
-                         new Vector3(1, 2.5f, 0),
-                         ItsDaFuckinShopApi.defaultItemPositions,
-                         1f,
-                         false,
-                         null,
-                         Ironside.IronsideCustomCanBuy,
-                         Ironside.IronsideCustomRemoveCurrency,
-                         Ironside.IronsideCustomPrice,
-                         IronsideBuy,
-                         null,
-                         "NevernamedsItems/Resources/NPCSprites/Ironside/armourcurrency_icon.png",
-                         "Armor",
-                         true,
-                         true,
-                         "NevernamedsItems/Resources/NPCSprites/Ironside/ironside_carpet",
-                         true,
-                         "NevernamedsItems/Resources/NPCSprites/Ironside/ironside_mapicon",
-                         true,
-                         0.1f
-                         );
-
-            PrototypeDungeonRoom Mod_Shop_Room = RoomFactory.BuildFromResource("NevernamedsItems/Resources/EmbeddedRooms/IronsideRoom.room").room;
-            ItsDaFuckinShopApi.RegisterShopRoom(ironsideObj, Mod_Shop_Room, new UnityEngine.Vector2(7f, 9));
+                annotation = "Ironside",
+                DEBUG_FORCE_SPAWN = false,
+                OncePerRun = false,
+                placementRules = new List<ProceduralFlowModifierData.FlowModifierPlacementType>()
+                {
+                    ProceduralFlowModifierData.FlowModifierPlacementType.END_OF_CHAIN
+                },
+                roomTable = null,
+                exactRoom = RoomFactory.BuildNewRoomFromResource("NevernamedsItems/Content/NPCs/Rooms/IronsideRoom.newroom").room,
+                IsWarpWing = false,
+                RequiresMasteryToken = false,
+                chanceToLock = 0,
+                selectionWeight = 0.8f,
+                chanceToSpawn = 1,
+                RequiredValidPlaceable = null,
+                prerequisites = new DungeonPrerequisite[0],
+                CanBeForcedSecret = false,
+                RandomNodeChildMinDistanceFromEntrance = 0,
+                exactSecondaryRoom = null,
+                framedCombatNodes = 0,
+            });
         }
-        
+
         public static bool IronsideBuy(PlayerController player, PickupObject item, int idfk)
         {
-
             return false;
         }
         public static int IronsideCustomPrice(CustomShopController shop, CustomShopItemController itemCont, PickupObject item)

@@ -6,8 +6,10 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
 using SaveAPI;
+using Dungeonator;
 
 namespace NevernamedsItems
 {
@@ -23,8 +25,7 @@ namespace NevernamedsItems
             gun.gameObject.AddComponent<NNBazooka>();
             gun.SetShortDescription("Boom Boom Boom Boom");
             gun.SetLongDescription("It takes a lunatic to be a legend." + "\n\nThis powerful explosive weapon has one major drawback; it is capable of damaging it's bearer. You'd think more bombs would do that, but the Gungeon forgives.");
-
-            gun.SetupSprite(null, "bazooka_idle_001", 8);
+            gun.SetGunSprites("bazooka");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 
@@ -84,26 +85,54 @@ namespace NevernamedsItems
     }
     public class FuckingExplodeYouCunt : MonoBehaviour
     {
-        public FuckingExplodeYouCunt()
-        {
-
-        }
+        public bool spawnedBySynergy = false;
         private Projectile m_projectile;
-
-        private void Awake()
+        private void Start()
         {
             this.m_projectile = base.GetComponent<Projectile>();
             m_projectile.OnDestruction += this.Destruction;
         }
+
         private void Destruction(Projectile projectile)
         {
-            //ETGModConsole.Log("On Destroy was called");
-            Exploder.DoDefaultExplosion(projectile.specRigidbody.UnitTopCenter, new Vector2(), null, false, CoreDamageTypes.None, true);
-            //Exploder.DoDefaultExplosion(projectile.specRigidbody.UnitTopCenter, new Vector2(), null, false, CoreDamageTypes.None, true);
-        }
-        private void Update()
-        {
+            if (m_projectile.ProjectilePlayerOwner() != null && m_projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Bazooka Joe") && !spawnedBySynergy)
+            {
+                GameObject splash = SpawnManager.SpawnVFX(ChewingGun.popVFX, projectile.LastPosition, Quaternion.identity);
+                AkSoundEngine.PostEvent("Play_MouthPopSound", base.gameObject);
 
+                List<AIActor> activeEnemies = m_projectile.GetAbsoluteRoom().GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+                if (activeEnemies != null)
+                {
+                    for (int i = 0; i < activeEnemies.Count; i++)
+                    {
+                        AIActor aiactor = activeEnemies[i];
+                        if (aiactor.IsNormalEnemy)
+                        {
+                            float num = Vector2.Distance(projectile.LastPosition, aiactor.CenterPosition);
+                            if (num <= 7f)
+                            {
+                                if (aiactor.healthHaver && aiactor.healthHaver.IsAlive)
+                                {
+                                    if (aiactor.behaviorSpeculator) { aiactor.behaviorSpeculator.Stun(1f); }
+
+                                    GameObject gumpile = SpawnManager.SpawnVFX(ChewingGun.gummedVFX, true);
+                                    tk2dBaseSprite component = gumpile.GetComponent<tk2dBaseSprite>();
+
+                                    gumpile.transform.position = new Vector2(aiactor.sprite.WorldBottomCenter.x + 0.5f, aiactor.sprite.WorldBottomCenter.y);
+                                    gumpile.transform.parent = aiactor.transform;
+                                    component.HeightOffGround = 0.2f;
+                                    aiactor.sprite.AttachRenderer(component);
+
+                                    GumPile pile = gumpile.GetComponent<GumPile>();
+                                    if (pile) { pile.lifetime = 7f; pile.target = aiactor.specRigidbody; }
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            Exploder.DoDefaultExplosion(projectile.specRigidbody.UnitTopCenter, new Vector2(), null, false, CoreDamageTypes.None, true);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 
@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("");
             gun.SetLongDescription("");
 
-            gun.SetupSprite(null, "redrebondir_idle_001", 8);
+            gun.SetGunSprites("redrebondir", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(89) as Gun).gunSwitchGroup;

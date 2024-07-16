@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Here Comes The Bride");
             gun.SetLongDescription("A lonesome gun, stood up on it's wedding day and forever hoping to be reunited with it's partner.");
 
-            gun.SetupSprite(null, "thebride_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "thebride_idle_001", 8, "thebride_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 13);
             gun.SetAnimationFPS(gun.idleAnimation, 5);
@@ -53,7 +53,7 @@ namespace NevernamedsItems
                 projectile.baseData.damage = 12f;
                 projectile.hitEffects.alwaysUseMidair = true;
                 projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.WhiteCircleVFX;
-                projectile.SetProjectileSpriteRight("bride_projectile", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
+                projectile.SetProjectileSprite("bride_projectile", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
                 if (iterator == 1 || iterator == 2 || iterator == 3)
                 {
                     mod.angleFromAim = 45;

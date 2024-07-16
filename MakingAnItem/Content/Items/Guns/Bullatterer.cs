@@ -21,7 +21,8 @@ namespace NevernamedsItems
             gun.gameObject.AddComponent<Bullatterer>();
             gun.SetShortDescription("Fly, my pretties!");
             gun.SetLongDescription("Releases angry Bullats to fight for you."+"\n\nCreated by an ancient vampire in order to fight the most intimidating monster of all... his own loneliness.");
-            gun.SetupSprite(null, "bullatterer_idle_001", 8);
+
+            gun.SetGunSprites("bullatterer");
 
             gun.SetAnimationFPS(gun.shootAnimation, 13);
 

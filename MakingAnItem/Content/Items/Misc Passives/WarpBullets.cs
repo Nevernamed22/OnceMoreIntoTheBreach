@@ -21,6 +21,7 @@ namespace NevernamedsItems
             "warpbullets_icon");           
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("bullet_modifier");
+            Doug.AddToLootPool(item.PickupObjectId);
         }
 
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)

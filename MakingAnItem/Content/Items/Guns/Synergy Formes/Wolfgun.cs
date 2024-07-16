@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -16,11 +16,11 @@ namespace NevernamedsItems
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Wolfgun", "wolfgun");
             Game.Items.Rename("outdated_gun_mods:wolfgun", "nn:doggun+discord_and_rhyme");
-            gun.gameObject.AddComponent<Corgun>();
+            gun.gameObject.AddComponent<Wolfgun>();
             gun.SetShortDescription("Bork Bork BORK!");
             gun.SetLongDescription("BORKBORKBORKBORKBORKBORKBORK"+"\n\nAlso, if you're reading this, you're a BORKING haxor.");
 
-            gun.SetupSprite(null, "wolfgun_idle_001", 8);
+            gun.SetGunSprites("wolfgun", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 

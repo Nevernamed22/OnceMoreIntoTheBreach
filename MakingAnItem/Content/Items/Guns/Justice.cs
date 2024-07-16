@@ -24,7 +24,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Served");
             gun.SetLongDescription("Bello's trusty shotgun, custom made for his big, burly hands.");
 
-            gun.SetupSprite(null, "justice_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "justice_idle_001", 8, "justice_ammonomicon_001");
+
             //ItemBuilder.AddPassiveStatModifier(gun, PlayerStats.StatType.GlobalPriceMultiplier, 0.925f, StatModifier.ModifyMethod.MULTIPLICATIVE);
 
             gun.SetAnimationFPS(gun.shootAnimation, 8);
@@ -55,7 +56,7 @@ namespace NevernamedsItems
                 projectile.pierceMinorBreakables = true;
                 JusticeBurstHandler BurstPop = projectile.gameObject.AddComponent<JusticeBurstHandler>();
 
-                projectile.SetProjectileSpriteRight("justice_projectile", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
+                projectile.SetProjectileSprite("justice_projectile", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
                 if (mod != gun.DefaultModule) { mod.ammoCost = 0; }
                 projectile.transform.parent = gun.barrelOffset;
             }

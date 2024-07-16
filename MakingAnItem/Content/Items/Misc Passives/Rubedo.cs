@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Rubedo";
-            string resourceName = "NevernamedsItems/Resources/rubedo_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Rubedo>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Absolution";
-            string longDesc = "Periodically heals from the pool of stored hearts."+"\n\nOnce the Citrinitas stage of the Prime Materia matures into it's reddish hues, it has achieved completion. The Masterwork. THE Magnum Opus. Perfection.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<Rubedo>(
+            "Rubedo",
+            "Absolution",
+            "Periodically heals from the pool of stored hearts." + "\n\nOnce the Citrinitas stage of the Prime Materia matures into it's reddish hues, it has achieved completion. The Masterwork. THE Magnum Opus. Perfection.",
+            "rubedo_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.B;
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
         }

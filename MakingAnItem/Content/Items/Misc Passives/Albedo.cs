@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Albedo";
-            string resourceName = "NevernamedsItems/Resources/albedo_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Albedo>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Clarity";
-            string longDesc = "Speeds up Glass Guon Stones." + "\n\nThe second phase of the prime materia's transition into the Philosopher's Stone, where the murky darkness of the Nigredo is purified into a lunarily charged clarity.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<Albedo>(
+           "Albedo",
+           "Clarity",
+           "Speeds up Glass Guon Stones." + "\n\nThe second phase of the prime materia's transition into the Philosopher's Stone, where the murky darkness of the Nigredo is purified into a lunarily charged clarity.",
+           "albedo_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.C;
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
             AlbedoID = item.PickupObjectId;
@@ -51,35 +48,38 @@ namespace NevernamedsItems
         {
             foreach (var o in Owner.orbitals)
             {
-                var orbital = (PlayerOrbital)o;
-                if (orbital.name == "IounStone_Glass(Clone)")
+                if (o is PlayerOrbital)
                 {
-                    if (orbital.gameObject.GetComponent<BoostedByAlbedo>() == null)
+                    var orbital = (PlayerOrbital)o;
+                    if (orbital != null && orbital.name == "IounStone_Glass(Clone)")
                     {
-                        int mult = 3;
-                        if (Owner.PlayerHasActiveSynergy("White Ethesia")) mult = 4;
-                        BoostedByAlbedo boost = orbital.gameObject.AddComponent<BoostedByAlbedo>();
-                        boost.currentMultiplier = mult;
-                        boost.storedOrbitalTier = orbital.GetOrbitalTier();
-                        orbital.orbitDegreesPerSecond *= mult;
-                        orbital.SetOrbitalTier(1010);
-                        orbital.SetOrbitalTierIndex(PlayerOrbital.GetNumberOfOrbitalsInTier(Owner, 1010));
-                    }
-                    else if (orbital.gameObject.GetComponent<BoostedByAlbedo>().currentMultiplier == 3 && Owner.PlayerHasActiveSynergy("White Ethesia"))
-                    {
-                        orbital.orbitDegreesPerSecond /= 3;
-                        orbital.orbitDegreesPerSecond *= 4;
-                        orbital.gameObject.GetComponent<BoostedByAlbedo>().currentMultiplier = 4;
-                        orbital.SetOrbitalTier(1010);
-                        orbital.SetOrbitalTierIndex(PlayerOrbital.GetNumberOfOrbitalsInTier(Owner, 1010));
-                    }
-                    else if (orbital.gameObject.GetComponent<BoostedByAlbedo>().currentMultiplier == 4 && !Owner.PlayerHasActiveSynergy("White Ethesia"))
-                    {
-                        orbital.orbitDegreesPerSecond /= 4;
-                        orbital.orbitDegreesPerSecond *= 3;
-                        orbital.gameObject.GetComponent<BoostedByAlbedo>().currentMultiplier = 3;
-                        orbital.SetOrbitalTier(1010);
-                        orbital.SetOrbitalTierIndex(PlayerOrbital.GetNumberOfOrbitalsInTier(Owner, 1010));
+                        if (orbital.gameObject.GetComponent<BoostedByAlbedo>() == null)
+                        {
+                            int mult = 3;
+                            if (Owner.PlayerHasActiveSynergy("White Ethesia")) mult = 4;
+                            BoostedByAlbedo boost = orbital.gameObject.AddComponent<BoostedByAlbedo>();
+                            boost.currentMultiplier = mult;
+                            boost.storedOrbitalTier = orbital.GetOrbitalTier();
+                            orbital.orbitDegreesPerSecond *= mult;
+                            orbital.SetOrbitalTier(1010);
+                            orbital.SetOrbitalTierIndex(PlayerOrbital.GetNumberOfOrbitalsInTier(Owner, 1010));
+                        }
+                        else if (orbital.gameObject.GetComponent<BoostedByAlbedo>().currentMultiplier == 3 && Owner.PlayerHasActiveSynergy("White Ethesia"))
+                        {
+                            orbital.orbitDegreesPerSecond /= 3;
+                            orbital.orbitDegreesPerSecond *= 4;
+                            orbital.gameObject.GetComponent<BoostedByAlbedo>().currentMultiplier = 4;
+                            orbital.SetOrbitalTier(1010);
+                            orbital.SetOrbitalTierIndex(PlayerOrbital.GetNumberOfOrbitalsInTier(Owner, 1010));
+                        }
+                        else if (orbital.gameObject.GetComponent<BoostedByAlbedo>().currentMultiplier == 4 && !Owner.PlayerHasActiveSynergy("White Ethesia"))
+                        {
+                            orbital.orbitDegreesPerSecond /= 4;
+                            orbital.orbitDegreesPerSecond *= 3;
+                            orbital.gameObject.GetComponent<BoostedByAlbedo>().currentMultiplier = 3;
+                            orbital.SetOrbitalTier(1010);
+                            orbital.SetOrbitalTierIndex(PlayerOrbital.GetNumberOfOrbitalsInTier(Owner, 1010));
+                        }
                     }
                 }
             }

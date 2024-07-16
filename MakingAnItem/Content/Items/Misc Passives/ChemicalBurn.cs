@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Dungeonator;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 using Alexandria.Misc;
 
@@ -14,18 +14,14 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Chemical Burn";
-            string resourceName = "NevernamedsItems/Resources/chemicalburn_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<ChemicalBurn>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Two-Faced";
-            string longDesc = "Poison immunity. Standing on poison grants massively increased firepower." + "\n\nSweet, sweet pain.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<ChemicalBurn>(
+           "Chemical Burn",
+           "Two-Faced",
+           "Poison immunity. Standing on poison grants massively increased firepower." + "\n\nSweet, sweet pain.",
+           "chemicalburn_icon") as PassiveItem;            
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
             item.quality = PickupObject.ItemQuality.B;
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_OUB, true);
-
         }
         public void onFired(Projectile bullet, float eventchancescaler)
         {

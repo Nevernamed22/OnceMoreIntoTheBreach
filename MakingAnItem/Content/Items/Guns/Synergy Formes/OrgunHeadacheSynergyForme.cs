@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -23,8 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Activates those almonds");
             gun.SetLongDescription("Aww yeah, it's big brain time." + "\n\nAlso, if you're reading this, you're a cheaty haxxor.");
 
-            gun.SetupSprite(null, "orgun_headache_idle_001", 8);
-            //ItemBuilder.AddPassiveStatModifier(gun, PlayerStats.StatType.GlobalPriceMultiplier, 0.925f, StatModifier.ModifyMethod.MULTIPLICATIVE);
+            gun.SetGunSprites("orgun_headache", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 8);
             gun.SetAnimationFPS(gun.idleAnimation, 5);

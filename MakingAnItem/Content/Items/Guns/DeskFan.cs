@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Night Shift");
             gun.SetLongDescription("Pushes enemies away, and does slight damage." + "\n\nHides great and terrible secrets... maybe.");
 
-            gun.SetupSprite(null, "deskfan_idle_001", 8);
+            gun.SetGunSprites("deskfan");
 
             gun.SetAnimationFPS(gun.shootAnimation, 24);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(520) as Gun).gunSwitchGroup;

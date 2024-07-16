@@ -6,8 +6,9 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Alexandria.Misc;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -21,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Inexplicable");
             gun.SetLongDescription("These loosely bound motes of gun floated into existence through a tear in the curtain eons before the Great Bullet struck."+"\n\nIt's fractal bullets carve hauntingly beautiful patterns in the air, at least for those who can understand them.");
 
-            gun.SetupSprite(null, "protean_idle_001", 8);
+            gun.SetGunSprites("protean");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.idleAnimation, 12);
@@ -55,30 +56,19 @@ namespace NevernamedsItems
 
             projectile.pierceMinorBreakables = true;
 
-
-            projectile.AnimateProjectile(new List<string> {
-                "proteanproj_1",
-                "proteanproj_2",
-                "proteanproj_3",
-                "proteanproj_4",
-                "proteanproj_5",
-                "proteanproj_6",
-                "proteanproj_7",
-                "proteanproj_8",
-            }, 8, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(9, 9), //1
-                new IntVector2(9, 9), //2            
-                new IntVector2(9,9), //3
-                new IntVector2(9, 9), //4
-                new IntVector2(9, 9), //5
-                new IntVector2(9, 9), //6
-                new IntVector2(9,9), //7
-                new IntVector2(9, 9), //8
-            }, AnimateBullet.ConstructListOfSameValues(true, 8), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 8), AnimateBullet.ConstructListOfSameValues(true, 8), AnimateBullet.ConstructListOfSameValues(false, 8),
-                        AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 8), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 8), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 8), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 8), 0);
-
-            projectile.transform.parent = gun.barrelOffset;
-
+            projectile.AnimateProjectileBundle("ProteanProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "ProteanProjectile",
+                   MiscTools.DupeList(new IntVector2(9, 9), 8), //Pixel Sizes
+                   MiscTools.DupeList(true, 8), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 8), //Anchors
+                   MiscTools.DupeList(true, 8), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 8), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 8), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(null, 8), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 8), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 8)); // Override to copy from    
 
             gun.quality = PickupObject.ItemQuality.C;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

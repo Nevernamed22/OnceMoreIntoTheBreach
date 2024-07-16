@@ -46,6 +46,7 @@ namespace NevernamedsItems
                 }},
                 { "4d164ba3f62648809a4a82c90fc22cae", new Dictionary<PlayableCharacters, CustomDungeonFlags>()
                 { //Rat Mech
+                    { PlayableCharacters.Robot, CustomDungeonFlags.RAT_KILLED_ROBOT },
                     { ETGModCompatibility.ExtendEnum<PlayableCharacters>(Initialisation.GUID, "Shade"), CustomDungeonFlags.RAT_KILLED_SHADE }
                 }}
             };
@@ -73,7 +74,7 @@ namespace NevernamedsItems
             //Flags changed when any character kills a specific boss in Turbo Mode
             TurboModeSpecificBossUnlocks = new Dictionary<string, CustomDungeonFlags>()
             {
-
+                { "7c5d5f09911e49b78ae644d2b50ff3bf", CustomDungeonFlags.BEATEN_HELL_BOSS_TURBO_MODE }// Infinilich
             };
 
             //ALL JAMMED MODE

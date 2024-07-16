@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Sentry Gun");
             gun.SetLongDescription("The final bullet in the clip of this strange gun is actually an entirely self-contained sentry-robot.");
 
-            gun.SetupSprite(null, "rc360_idle_001", 8);
+            gun.SetGunSprites("rc360");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
             gun.SetAnimationFPS(gun.reloadAnimation, 30);
@@ -59,7 +59,7 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             projectile.baseData.speed *= 0.1f;
             projectile.baseData.damage = 25f;
-            projectile.SetProjectileSpriteRight("goopyproj_001", 16, 16, true, tk2dBaseSprite.Anchor.MiddleCenter, 14, 14);
+            projectile.SetProjectileSprite("goopyproj_001", 16, 16, true, tk2dBaseSprite.Anchor.MiddleCenter, 14, 14);
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.YellowLaserCircleVFX;
             projectile.gameObject.AddComponent<RC360TurretShot>();

@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("King of Crimson");
             gun.SetLongDescription("Fires pure, concentrated red."+"\n\nInvented by a mad chromatologist deep in his underground lab...");
 
-            gun.SetupSprite(null, "redblaster_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "redblaster_idle_001", 8, "redblaster_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 8);
             gun.isAudioLoop = true;

@@ -24,6 +24,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.S;
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.DRAGUN_KILLED_SHADE, true);
+            Doug.AddToLootPool(item.PickupObjectId);
         }
 
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)

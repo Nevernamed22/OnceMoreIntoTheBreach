@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Thin As A Broom");
             gun.SetLongDescription("Despite it's heart's longing, this gun missed it's wedding day. Now it roams the halls of the Gungeon, searching for it's bride.");
 
-            gun.SetupSprite(null, "thegroom_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "thegroom_idle_001", 8, "thegroom_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 13);
             gun.SetAnimationFPS(gun.idleAnimation, 5);

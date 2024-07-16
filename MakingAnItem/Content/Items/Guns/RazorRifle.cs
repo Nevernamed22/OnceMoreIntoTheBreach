@@ -9,6 +9,7 @@ using UnityEngine;
 using Alexandria.Misc;
 using Alexandria.ItemAPI;
 using SaveAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -24,7 +25,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Close Shave");
             gun.SetLongDescription("One of the last products from Cut-Abuv(TM) Kitchenware and Personal Hygiene, before the company devolved into bankruptcy and legal litigation.");
 
-            gun.SetupSprite(null, "razorrifle_idle_001", 8);
+            gun.SetGunSprites("razorrifle");
 
             gun.SetAnimationFPS(gun.shootAnimation, 17);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);
@@ -51,20 +52,20 @@ namespace NevernamedsItems
             projectile.baseData.damage = 7f;
             PierceProjModifier pierce = projectile.gameObject.AddComponent<PierceProjModifier>();
             pierce.penetration++;
-            projectile.AnimateProjectile(new List<string> {
-                "razorrifle_proj_001",
-                "razorrifle_proj_002",
-                "razorrifle_proj_003",
-                "razorrifle_proj_004",
-            }, 12, tk2dSpriteAnimationClip.WrapMode.Loop, AnimateBullet.ConstructListOfSameValues(new IntVector2(10, 12), 4),
-            AnimateBullet.ConstructListOfSameValues(true, 4),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4),
-            AnimateBullet.ConstructListOfSameValues(true, 4),
-            AnimateBullet.ConstructListOfSameValues(false, 4),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
+            projectile.AnimateProjectileBundle("RazorRifleProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "RazorRifleProjectile",
+                   MiscTools.DupeList(new IntVector2(10, 12), 4), //Pixel Sizes
+                   MiscTools.DupeList(true, 4), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                   MiscTools.DupeList(true, 4), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 4), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 4), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 4)); // Override to copy from    
+
             InherentExsanguinationEffect bleed = projectile.gameObject.AddComponent<InherentExsanguinationEffect>();
             bleed.duration = 10;
 

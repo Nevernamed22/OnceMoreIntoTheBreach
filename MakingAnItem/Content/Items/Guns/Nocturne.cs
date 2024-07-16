@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Welcome Back");
             gun.SetLongDescription("Alternates between faster purple blasts, and more damaging green blasts."+"\n\nThis gun was left in the Gungeon as one part of a great puzzle."+"\nUnfortunately, the seekers seem to have given up.");
 
-            gun.SetupSprite(null, "nocturne_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "nocturne_idle_001", 8, "nocturne_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
 

@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Kingdom Come");
             gun.SetLongDescription("The classy and classical predecessor to the modern grenade launchers, some old grenadiers still swear by their effectiveness.");
 
-            gun.SetupSprite(null, "handmortar_idle_001", 8);
+            gun.SetGunSprites("handmortar");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
@@ -56,7 +56,7 @@ namespace NevernamedsItems
 
             projectile.baseData.range *= 0.8f;
             projectile.transform.parent = gun.barrelOffset;
-            projectile.SetProjectileSpriteRight("handmortar_projectile", 8, 8, false, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
+            projectile.SetProjectileSprite("handmortar_projectile", 8, 8, false, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("HandMortar Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/handmortar_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/handmortar_clipempty");

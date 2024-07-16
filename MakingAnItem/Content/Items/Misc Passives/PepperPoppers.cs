@@ -9,6 +9,7 @@ using MonoMod.RuntimeDetour;
 using System.Reflection;
 using SaveAPI;
 using Alexandria.Misc;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -16,31 +17,37 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Pepper Poppers";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/pepperpoppers_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<PepperPoppers>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Popping Off";
-            string longDesc = "Launches young Gungeon Peppers." + "\n\nA spicy dish of stuffed Gungeon Peppers, and an important part of the Gungeon Pepper life cycle.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<PepperPoppers>(
+               "Pepper Poppers",
+               "Popping Off",
+               "Launches young Gungeon Peppers." + "\n\nA spicy dish of stuffed Gungeon Peppers, and an important part of the Gungeon Pepper life cycle.",
+               "pepperpoppers_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.B;
             genericPopper = BuildPrefab();
 
             PopperProjectile = (PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
             PopperProjectile.baseData.damage = 5f;
             PopperProjectile.baseData.speed *= 0.6f;
-            PopperProjectile.SetProjectileSpriteRight("popperproj_1", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 16, 7);
+            PopperProjectile.SetProjectileSprite("popperproj_1", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 16, 7);
             SpawnObjectBehaviour spawnpopper = PopperProjectile.gameObject.AddComponent<SpawnObjectBehaviour>();
             spawnpopper.objectToSpawn = genericPopper;
 
-            PopperProjectile.AnimateProjectile(new List<string> {
-                "popperproj_1",
-                "popperproj_2",
-                "popperproj_3",
-                "popperproj_4",
-            }, 12,  tk2dSpriteAnimationClip.WrapMode.Loop, AnimateBullet.ConstructListOfSameValues(new IntVector2(16, 7), 4), AnimateBullet.ConstructListOfSameValues(false, 4), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4), AnimateBullet.ConstructListOfSameValues(true, 4), AnimateBullet.ConstructListOfSameValues(false, 4),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);;
+            //PopperProjectile.AnimateProjectileBundle()
+
+            PopperProjectile.AnimateProjectileBundle("PepperPopperProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "PepperPopperProjectile",
+                   MiscTools.DupeList(new IntVector2(16, 7), 4), //Pixel Sizes
+                   MiscTools.DupeList(false, 4), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                   MiscTools.DupeList(true, 4), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 4), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 4), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 4)); // Override to copy from    
+
         }
         public static Projectile PopperProjectile;
         public static GameObject genericPopper;

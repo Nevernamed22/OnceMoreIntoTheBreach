@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Hiss Bang");
             gun.SetLongDescription("This starkly cylindrical sidearm hails from a dimension of permanent combat."+"\n\nContains dehydrated snakes.");
 
-            gun.SetupSprite(null, "snakepistol_idle_001", 8);
+            gun.SetGunSprites("snakepistol");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);

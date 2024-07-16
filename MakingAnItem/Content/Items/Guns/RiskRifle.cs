@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Danger Zone");
             gun.SetLongDescription("A strong rifle with one notable drawback; it harms it's owner upon emptying a clip. Be very careful to reload before then." + "\n\n");
 
-            gun.SetupSprite(null, "riskrifle_idle_001", 8);
+            gun.SetGunSprites("riskrifle");
 
             gun.SetAnimationFPS(gun.shootAnimation, 17);
 
@@ -46,7 +46,7 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
-            projectile.SetProjectileSpriteRight("riskrifle_projectile", 6, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 4);
+            projectile.SetProjectileSprite("riskrifle_projectile", 6, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 4);
 
             projectile.transform.parent = gun.barrelOffset;
 

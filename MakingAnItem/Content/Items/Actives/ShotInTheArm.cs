@@ -15,18 +15,14 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Shot In The Arm";
-            string resourceName = "NevernamedsItems/Resources/NeoActiveSprites/shotinthearm_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<ShotInTheArm>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "The Jab";
-            string longDesc = "A vial full of volatile stimulant. Briefly buffs offensive power. \n\nUsed by Primerdyne Marines to steady their trigger fingers in active combat.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<ShotInTheArm>(
+            "Shot In The Arm",
+            "The Jab",
+            "A vial full of volatile stimulant. Briefly buffs offensive power. \n\nUsed by Primerdyne Marines to steady their trigger fingers in active combat.",
+            "shotinthearm_icon") as PlayerItem;        
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed,7);       
             item.consumable = false;
-            item.quality = ItemQuality.D; //D
-
+            item.quality = ItemQuality.D; 
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.BOSSRUSH_MARINE, true);
         }

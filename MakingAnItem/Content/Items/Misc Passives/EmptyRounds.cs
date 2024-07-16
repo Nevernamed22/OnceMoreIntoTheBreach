@@ -19,6 +19,7 @@ namespace NevernamedsItems
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("bullet_modifier");
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         private void PostProcessBeam(BeamController beam)
         {

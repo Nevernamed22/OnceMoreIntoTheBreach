@@ -20,7 +20,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Mega Bore");
             gun.SetLongDescription("A magnificent example of bombard weaponry, built to slay giants!"+"\n\nNormally impossible for a single person to wield, Gunymede's reduced gravity somewhat allows this ridiculous feat.");
 
-            gun.SetupSprite(null, "pumhart_idle_001", 8);
+            gun.SetGunSprites("pumhart");
+
             gun.SetAnimationFPS(gun.chargeAnimation, 1);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
@@ -60,7 +61,7 @@ namespace NevernamedsItems
             bounce.additionalScreenShake = (PickupObjectDatabase.GetById(37) as Gun).DefaultModule.chargeProjectiles[0].Projectile.GetComponent<BounceProjModifier>().additionalScreenShake;
             projectile.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(37) as Gun).DefaultModule.chargeProjectiles[0].Projectile.hitEffects.overrideMidairDeathVFX;
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.SetProjectileSpriteRight("pumhart_proj", 48, 48, false, tk2dBaseSprite.Anchor.MiddleCenter, 30, 30);
+            projectile.SetProjectileSprite("pumhart_proj", 48, 48, false, tk2dBaseSprite.Anchor.MiddleCenter, 30, 30);
 
             ProjectileModule.ChargeProjectile chargeProj = new ProjectileModule.ChargeProjectile
             {

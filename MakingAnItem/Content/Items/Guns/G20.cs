@@ -8,6 +8,7 @@ using MonoMod;
 using UnityEngine;
 using Alexandria.ItemAPI;
 using Alexandria.Misc;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -23,7 +24,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Roll and Die");
             gun.SetLongDescription("Randomises stats upon entering combat." + "\n\nThe preferred weapon of a young disciple of Icosahedrax, stolen by his michevious nephew.");
             gun.SetupSprite(null, "g20_idle_001", 8);
-            gun.SetAnimationFPS(gun.shootAnimation, 14);
+
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "g20_idle_001", 14, "g20_ammonomicon_001");
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(38) as Gun).gunSwitchGroup;
@@ -45,23 +47,23 @@ namespace NevernamedsItems
             projectile.baseData.damage = 10f;
             projectile.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(519) as Gun).DefaultModule.projectiles[0].hitEffects.tileMapVertical.effects[0].effects[0].effect;
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.AnimateProjectile(new List<string> {
-                "g20_newproj_001",
-                "g20_newproj_002",
-                "g20_newproj_003",
-                "g20_newproj_003",
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop,
-      AnimateBullet.ConstructListOfSameValues(new IntVector2(11, 10), 4),
-      AnimateBullet.ConstructListOfSameValues(true, 4),
-      AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4),
-      AnimateBullet.ConstructListOfSameValues(true, 4),
-      AnimateBullet.ConstructListOfSameValues(false, 4),
-      AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4),
-      AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-      AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-      AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
 
-            gun.TrimGunSprites();
+            projectile.AnimateProjectileBundle("G20Projectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "G20Projectile",
+                   MiscTools.DupeList(new IntVector2(11, 10), 4), //Pixel Sizes
+                   MiscTools.DupeList(true, 4), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                   MiscTools.DupeList(true, 4), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 4), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 4), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 4)); // Override to copy from    
+
+            gun.AddShellCasing(0, 0, 5, 0, "shell_dice");
+
 
             gun.quality = PickupObject.ItemQuality.D;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

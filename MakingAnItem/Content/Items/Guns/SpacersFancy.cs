@@ -22,7 +22,9 @@ namespace NevernamedsItems
             gun.gameObject.AddComponent<SpacersFancy>();
             gun.SetShortDescription("Not the Best Choice");
             gun.SetLongDescription("A cheaply made sidearm from a far flung solar system."+"\n\nBecomes stronger each time it's slinger basks in the light of glorious commerce.");
-            gun.SetupSprite(null, "spacersfancy_idle_001", 8);
+
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "spacersfancy_idle_001", 8, "spacersfancy_ammonomicon_001");
+
             gun.SetAnimationFPS(gun.shootAnimation, 15);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);
 
@@ -43,7 +45,7 @@ namespace NevernamedsItems
             Projectile projectile = gun.DefaultModule.projectiles[0].InstantiateAndFakeprefab();
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.speed *= 1.2f;
-            projectile.SetProjectileSpriteRight("spacersfancy_proj", 9, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 4);
+            projectile.SetProjectileSprite("spacersfancy_proj", 9, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 4);
 
             
             gun.quality = PickupObject.ItemQuality.C;

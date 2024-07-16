@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Burning Bills");
             gun.SetLongDescription("Fires purple in it's rawest form." + "\n\nThis inconveniently small blaster was made for much more diminutive beings with no fingers.");
 
-            gun.SetupSprite(null, "purpler_idle_001", 8);
+            gun.SetGunSprites("purpler");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
@@ -51,7 +51,7 @@ namespace NevernamedsItems
 
             projectile.baseData.range *= 0.7f;
             projectile.transform.parent = gun.barrelOffset;
-            projectile.SetProjectileSpriteRight("purpler_projectile", 8, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
+            projectile.SetProjectileSprite("purpler_projectile", 8, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
 

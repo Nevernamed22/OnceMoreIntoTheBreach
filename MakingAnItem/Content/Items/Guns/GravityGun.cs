@@ -28,7 +28,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Not A Toy");
             gun.SetLongDescription("Picks up and throws objects, and weak enemies." + "\n\nOriginally developed for hazardous materials transport by an alien empire." + "\nUtilises negative mass and counter-resonant fluctuators to maintain a stable zero-point field.");
 
-            gun.SetupSprite(null, "gravitygun_idle_001", 8);
+            gun.SetGunSprites("gravitygun");
 
             gun.SetAnimationFPS(gun.shootAnimation, 25);
 

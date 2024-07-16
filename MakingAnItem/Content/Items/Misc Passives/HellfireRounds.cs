@@ -16,9 +16,10 @@ namespace NevernamedsItems
              "Hellfire Rounds",
              "Lead and Brimstone",
              "These bullets hit harder the closer they get to the fires of Bullet Hell." + "\n\nMany years ago, the red flames of the pit were used one single time to soften metal for the Blacksmith's anvil. That was a bad idea.",
-             "hellfirerounds_icon");
+             "hellfirerounds_new");
             item.quality = PickupObject.ItemQuality.S;
             item.SetTag("bullet_modifier");
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public float currentDamageMod = 1;
         private void OnNewFloor()

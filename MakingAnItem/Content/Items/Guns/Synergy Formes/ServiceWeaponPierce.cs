@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("");
             gun.SetLongDescription("");
 
-            gun.SetupSprite(null, "serviceweaponpierce_idle_001", 8);
+            gun.SetGunSprites("serviceweaponpierce", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 12);
@@ -61,7 +61,7 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.damage = 70;
             projectile.baseData.speed *= 4;
-                projectile.SetProjectileSpriteRight("serviceweaponpierce_proj", 24, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 20, 10);
+                projectile.SetProjectileSprite("serviceweaponpierce_proj", 24, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 20, 10);
             projectile.hitEffects = (PickupObjectDatabase.GetById(328) as Gun).DefaultModule.chargeProjectiles[0].Projectile.hitEffects;
 
             ImprovedAfterImage afterImage = projectile.gameObject.AddComponent<ImprovedAfterImage>();

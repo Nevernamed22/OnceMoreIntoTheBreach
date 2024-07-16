@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("oh dear");
             gun.SetLongDescription("a literal fucking gat");
 
-            gun.SetupSprite(null, "gatgun_idle_001", 8);
+            gun.SetGunSprites("gatgun", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 16);
 

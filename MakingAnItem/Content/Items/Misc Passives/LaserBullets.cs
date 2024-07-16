@@ -20,6 +20,7 @@ namespace NevernamedsItems
             "laserbullets_icon");            
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.B;
+            Doug.AddToLootPool(item.PickupObjectId);
             item.SetTag("bullet_modifier");
             List<string> BeamAnimPaths = new List<string>()
             {

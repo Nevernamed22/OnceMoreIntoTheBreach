@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Arctery");
             gun.SetLongDescription("Freezes enemies."+"\n\nFerried to the Gungeon from a remote island on the edge of civilisation.");
 
-            gun.SetupSprite(null, "icebow_idle_001", 8);
+            gun.SetGunSprites("icebow");
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(12) as Gun, true, false);
             gun.SetAnimationFPS(gun.chargeAnimation, 3);
@@ -57,7 +57,7 @@ namespace NevernamedsItems
             PierceProjModifier pierce = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();
             pierce.penetration++;
             pierce.penetratesBreakables = true;
-            projectile.SetProjectileSpriteRight("icebow_projectile", 15, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 14, 4);
+            projectile.SetProjectileSprite("icebow_projectile", 15, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 14, 4);
 
             ProjectileModule.ChargeProjectile chargeProj = new ProjectileModule.ChargeProjectile
             {

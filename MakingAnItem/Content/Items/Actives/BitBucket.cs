@@ -14,22 +14,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Bit Bucket";
-            string resourceName = "NevernamedsItems/Resources/bitbucket_icon";
-
-            GameObject obj = new GameObject(itemName);
-
-            var item = obj.AddComponent<BitBucket>();
-
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            string shortDesc = "Data Loss";
-            string longDesc = "Consumes lost data, regurgitating it forth when agitated."+"\n\nThe cornerstone of modern computing.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            BitBucket item = ItemSetup.NewItem<BitBucket>(
+              "Bit Bucket",
+              "Data Loss",
+              "Consumes lost data, regurgitating it forth when agitated." + "\n\nThe cornerstone of modern computing.",
+              "bitbucket_icon") as BitBucket;          
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 0.2f);
-
             item.consumable = false;
             item.quality = ItemQuality.D;
         }

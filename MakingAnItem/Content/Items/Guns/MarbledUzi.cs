@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("At First I Was Afraid");
             gun.SetLongDescription("Favoured sidearm of Meduzi, the fearsome Gorgun. Legends say she emerged from her egg already clutching it's cold steel."+"\n\nReleases a stunning wave upon reloading, and deals more damage to stunned enemies.");
 
-            gun.SetupSprite(null, "marbleduzi_idle_001", 8);
+            gun.SetGunSprites("marbleduzi");
 
             gun.SetAnimationFPS(gun.shootAnimation, 16);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(673) as Gun).gunSwitchGroup;

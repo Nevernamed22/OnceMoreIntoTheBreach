@@ -24,7 +24,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("I See It's As Big As Mine");
             gun.SetLongDescription("An old fashioned machine gun with a water-cooled barrel."+"\n\nExcercising remarkable minimalism in it's parts- it's bullets seem prone to drift.");
 
-            gun.SetupSprite(null, "schwarzlose_idle_001", 8);
+            gun.SetGunSprites("schwarzlose");
+
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(51) as Gun).gunSwitchGroup;
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);

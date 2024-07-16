@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Bag of Holding";
-            string resourceName = "NevernamedsItems/Resources/bagofholding_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BagOfHolding>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Space Gallore";
-            string longDesc = "Drastically increases active item storage." + "\n\nThe mad wizard Alben Smallbore theorised that bags such as these could be turned into violent explosive devices if they were ever punctured. Sadly, his research was never realised.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<BagOfHolding>(
+               "Bag of Holding",
+               "Space Gallore",
+               "Drastically increases active item storage." + "\n\nThe mad wizard Alben Smallbore theorised that bags such as these could be turned into violent explosive devices if they were ever punctured. Sadly, his research was never realised.",
+               "bagofholding_icon") as PassiveItem;
 
             item.AddPassiveStatModifier( PlayerStats.StatType.AdditionalItemCapacity, 10f, StatModifier.ModifyMethod.ADDITIVE);
 

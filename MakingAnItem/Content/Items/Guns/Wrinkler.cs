@@ -8,6 +8,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using Alexandria.ItemAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -26,7 +27,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Bite The Bullet");
             gun.SetLongDescription("Eats bullets on reload, resulting in a net ammo profit overall." + "\n\nAn elder-ich being whose gluttony knows no grounds. \nIt's odd fractal digestive tract seems to allow it to regurgitate more material than it ingests.");
 
-            gun.SetupSprite(null, "wrinkler_idle_001", 8);
+            gun.SetGunSprites("wrinkler");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 15);
@@ -52,24 +53,20 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             projectile.baseData.damage = 8.5f;
-            projectile.AnimateProjectile(new List<string> {
-                "wrinklerproj_001",
-                "wrinklerproj_002",
-                "wrinklerproj_003",
-                "wrinklerproj_004",
-                "wrinklerproj_005",
-            },
-            14, //FPS
-            tk2dSpriteAnimationClip.WrapMode.Loop, //Loops
-            AnimateBullet.ConstructListOfSameValues(new IntVector2(18, 10), 5), //Sprite Sizes
-            AnimateBullet.ConstructListOfSameValues(false, 5), //Lightened
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 5), //Anchors
-            AnimateBullet.ConstructListOfSameValues(true, 5), //Anchors Change Colliders
-            AnimateBullet.ConstructListOfSameValues(false, 5), //Fixes Scales
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 5),  //Manual Offsets
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(14, 8), 5), //Collider Pixel Sizes
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 5), //Override Collider Offsets
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 5), 0);
+
+            projectile.AnimateProjectileBundle("WrinklerProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "WrinklerProjectile",
+                   MiscTools.DupeList(new IntVector2(18, 10), 5), //Pixel Sizes
+                   MiscTools.DupeList(false, 5), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 5), //Anchors
+                   MiscTools.DupeList(true, 5), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 5), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 5), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(14, 8), 5), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 5), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 5)); // Override to copy from    
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Wrinkler Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/wrinkler_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/wrinkler_clipempty");

@@ -23,8 +23,9 @@ namespace NevernamedsItems
             gun.SetShortDescription("No Man's Gun");
             gun.SetLongDescription("A scientific waveform multitool designed for deep space exploration."+"\n\nInitial releases of the technology were highly flawed, but years of R&D have managed to develop the device into something resembling a useful tool.");
 
+            gun.SetGunSprites("waveformlens");
+
             //Whole Gun Stats
-            gun.SetupSprite(null, "waveformlens_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 15);
             gun.SetAnimationFPS(gun.alternateShootAnimation, 15);
             gun.SetAnimationFPS(gun.reloadAnimation, 5);
@@ -49,7 +50,7 @@ namespace NevernamedsItems
             Projectile projectile = ProjectileUtility.SetupProjectile(86);           
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.damage = 5f;
-            projectile.SetProjectileSpriteRight("waveformlens_proj", 5, 5, false, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
+            projectile.SetProjectileSprite("waveformlens_proj", 5, 5, false, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.SmoothLightBlueLaserCircleVFX;
             projectile.hitEffects.alwaysUseMidair = true;
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
@@ -79,7 +80,7 @@ namespace NevernamedsItems
             RayProjectile.hitEffects = (PickupObjectDatabase.GetById(32) as Gun).DefaultModule.projectiles[0].hitEffects;
             RayProjectile.baseData.damage = 10;
             RayProjectile.baseData.speed = 600f;
-            RayProjectile.SetProjectileSpriteRight("laserwelder_proj", 10, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 3);
+            RayProjectile.SetProjectileSprite("laserwelder_proj", 10, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 3);
             RayProjectile.hitEffects.CenterDeathVFXOnProjectile = true;
             List<string> BeamAnimPaths = new List<string>()
             {

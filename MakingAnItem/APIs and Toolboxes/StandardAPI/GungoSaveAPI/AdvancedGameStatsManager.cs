@@ -646,5 +646,10 @@ namespace SaveAPI
         public int cachedHuntIndex;
         [fsIgnore]
         public SaveManager.SaveSlot cachedSaveSlot;
+
+        [fsProperty]
+        public int BeggarRepeatTarget;
+        [fsProperty]
+        public int BeggarRepeatCurrent;
     }
 }

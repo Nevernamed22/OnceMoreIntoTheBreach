@@ -24,7 +24,7 @@ namespace NevernamedsItems
             
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(81) as Gun).gunSwitchGroup;
 
-            gun.SetupSprite(null, "heavyassaultrifle_idle_001", 8);
+            gun.SetGunSprites("heavyassaultrifle");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
@@ -47,7 +47,7 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile);
 
             projectile.baseData.damage *= 6f;
-            projectile.SetProjectileSpriteRight("heavyassaultrifle_projectile", 22, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 22, 7);
+            projectile.SetProjectileSprite("heavyassaultrifle_projectile", 22, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 22, 7);
 
             projectile.transform.parent = gun.barrelOffset;
             PierceProjModifier orAddComponent = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();

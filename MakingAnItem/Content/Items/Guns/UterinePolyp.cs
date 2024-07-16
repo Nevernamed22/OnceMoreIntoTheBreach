@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -26,7 +26,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Endometrial");
             gun.SetLongDescription("A disgusting teratoma-esque growth cut from a demon's womb."+"\n\nGenuinely unpleasant to look at, touch, and think about.");
 
-            gun.SetupSprite(null, "uterinepolyp_idle_001", 8);
+            gun.SetGunSprites("uterinepolyp");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 

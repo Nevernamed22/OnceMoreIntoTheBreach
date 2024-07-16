@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Definitely Humane");
             gun.SetLongDescription("Fires elastic rubber bullets."+"\n\nWhile rubber bullets are generally considered non-lethal, a more accurate term would be 'less-lethal'."+"\nThese bullets can still cause damage.");
 
-            gun.SetupSprite(null, "riotgun_idle_001", 8);
+            gun.SetGunSprites("riotgun");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 1);
@@ -54,7 +54,7 @@ namespace NevernamedsItems
             projectile.AppliesStun = true;
             projectile.StunApplyChance = 0.2f;
             projectile.AppliedStunDuration = 2f;
-            projectile.SetProjectileSpriteRight("riotgun_projectile", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
+            projectile.SetProjectileSprite("riotgun_projectile", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
 
 
             projectile.pierceMinorBreakables = true;

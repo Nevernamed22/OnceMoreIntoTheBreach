@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -22,8 +22,8 @@ namespace NevernamedsItems
             behav.overrideNormalReloadAudio = "Play_ENM_flame_veil_01";
             gun.SetShortDescription("Burns Eternal");
             gun.SetLongDescription("This mighty furnace was created to warm a group of hopeless souls trapped in the freezing hollow."+"\n\nThough it no longer burns with it's ancient ferocity, it has not yet run cold in a thousand years.");
-            gun.SetupSprite(null, "embercannon_idle_001", 8);
-
+           
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "embercannon_idle_001", 8, "embercannon_ammonomicon_001");
 
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).frames[0].eventAudio = "Play_WPN_seriouscannon_shot_01";
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).frames[0].triggerEvent = true;

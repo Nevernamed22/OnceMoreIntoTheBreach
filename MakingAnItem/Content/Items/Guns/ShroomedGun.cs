@@ -24,7 +24,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Looney");
             gun.SetLongDescription("The classic result of a misfired magnum." + "\n\nLooks like someone stuck their finger in the barrel.");
 
-            gun.SetupSprite(null, "shroomedgun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "shroomedgun_idle_001", 8, "shroomedgun_ammonomicon_001");
+
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(38) as Gun).gunSwitchGroup;
 
 

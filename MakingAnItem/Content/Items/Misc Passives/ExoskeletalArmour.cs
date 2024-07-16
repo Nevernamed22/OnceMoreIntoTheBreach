@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -17,7 +17,7 @@ namespace NevernamedsItems
             "Meat Shield",
             "Self Sacrifice",
             "Causes health to take damage before armour, and gives a little of both.",
-            "meatshield_icon") as PassiveItem;
+            "meatshield_improved") as PassiveItem;
             item.quality = PickupObject.ItemQuality.D;
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_MEATSHIELD, true);
             item.AddItemToDougMetaShop(15);

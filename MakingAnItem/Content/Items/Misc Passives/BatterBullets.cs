@@ -24,6 +24,7 @@ namespace NevernamedsItems
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_BATTERBULLETS, true);
             item.AddItemToDougMetaShop(45);
+            Doug.AddToLootPool(item.PickupObjectId);
         }
 
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)

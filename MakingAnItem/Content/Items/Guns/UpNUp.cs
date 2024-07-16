@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Great Potential");
             gun.SetLongDescription("Though this pistol on it's own is unremarkable, the damage of it's bullets is affected TWICE by any bullet stat modifiers you recieve.");
 
-            gun.SetupSprite(null, "upnup_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "upnup_idle_001", 8, "upnup_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 

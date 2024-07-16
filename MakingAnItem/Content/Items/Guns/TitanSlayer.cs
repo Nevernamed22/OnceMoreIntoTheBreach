@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("A High Toll Indeed");
             gun.SetLongDescription("An elegant bow crafted to kill Titans on a distant world."+"\n\nDespite it's masterful craftsmanship, it seems its true power lies with its single, magic arrow...");
 
-            gun.SetupSprite(null, "titanslayer_idle_001", 8);
+            gun.SetGunSprites("titanslayer");
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(8) as Gun).gunSwitchGroup;
@@ -53,7 +53,7 @@ namespace NevernamedsItems
 
             //BULLET STATS
             Projectile projectile = gun.DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            projectile.SetProjectileSpriteRight("titanslayer_proj", 21, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 17, 3);
+            projectile.SetProjectileSprite("titanslayer_proj", 21, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 17, 3);
             projectile.baseData.speed *= 2;
             projectile.baseData.range = float.MaxValue;
             projectile.baseData.damage = 33;

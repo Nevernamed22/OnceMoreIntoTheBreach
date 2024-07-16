@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 using Alexandria.Misc;
 
@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Past It's Prime");
             gun.SetLongDescription("This shotgun was cast aside to rust in a gutter years ago. Some of it's shots never even manage to fire!"+"\n\nPerhaps it just needs an understanding user to let it shine.");
 
-            gun.SetupSprite(null, "rustyshotgun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "rustyshotgun_idle_001", 8, "rustyshotgun_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 13);
             gun.SetAnimationFPS(gun.idleAnimation, 5);

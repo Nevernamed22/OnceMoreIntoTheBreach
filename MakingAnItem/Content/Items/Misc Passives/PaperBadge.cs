@@ -13,16 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Paper Badge";
-            string resourceName = "NevernamedsItems/Resources/paperbadge_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<PaperBadge>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "All or Nothing";
-            string longDesc = "Randomly either doubles or negates your bullet damage!"+"\n\nThis paper badge looks far too flimsy to be of any use, but you'd be surprised.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PassiveItem item = ItemSetup.NewItem<PaperBadge>(
+              "Paper Badge",
+              "All or Nothing",
+              "Randomly either doubles or negates your bullet damage!" + "\n\nThis paper badge looks far too flimsy to be of any use, but you'd be surprised.",
+              "paperbadge_icon") as PassiveItem;           
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.C;
         }

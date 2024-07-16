@@ -22,6 +22,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("bullet_modifier");
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
+            Doug.AddToLootPool(item.PickupObjectId);
         }
     }
 }

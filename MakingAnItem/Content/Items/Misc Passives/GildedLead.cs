@@ -21,6 +21,7 @@ namespace NevernamedsItems
              "gildedlead_icon");          
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public static Color gold = new Color(230f / 255f, 174f / 255f, 21f / 255f);
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)

@@ -22,7 +22,9 @@ namespace NevernamedsItems
             gun.gameObject.AddComponent<SalvatorDormusM1893>();
             gun.SetShortDescription("Type Match");
             gun.SetLongDescription("Increases it's own stats based on what other types of gun are in it's owner's possession" + "\n\nOne of the earliest models of semiautomatic pistol ever invented, it's ancestral promenance grants it more power the more of it's descendants are held.");
-            gun.SetupSprite(null, "salvatordormusm1893_idle_001", 8);
+         
+            gun.SetGunSprites("salvatordormusm1893", 8, true);
+
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);
 

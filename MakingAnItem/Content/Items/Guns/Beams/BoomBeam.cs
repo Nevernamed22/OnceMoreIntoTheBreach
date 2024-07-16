@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Explosive Transmission");
             gun.SetLongDescription("A high-tech military laser packed with so much energy that it causes violent explosions when impeded."+"\n\nThe laser went through five stages of R&D until it's beam was glowy enough.");
 
-            gun.SetupSprite(null, "boombeam_idle_001", 8);
+            gun.SetGunSprites("boombeam");
 
             gun.SetAnimationFPS(gun.shootAnimation, 20);
             gun.isAudioLoop = true;

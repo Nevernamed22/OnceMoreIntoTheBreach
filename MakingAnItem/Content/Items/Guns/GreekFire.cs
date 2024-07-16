@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -21,7 +21,9 @@ namespace NevernamedsItems
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(37) as Gun).gunSwitchGroup;
             gun.SetShortDescription("Fire of Man");
             gun.SetLongDescription("Used by ancient civilisations as a primitive flamethrower."+"\n\nThe potent chemical mixture used to create the flames makes it remarkably dangerous.");
-            gun.SetupSprite(null, "greekfire_idle_001", 8);
+
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "greekfire_idle_001", 8, "greekfire_ammonomicon_001");
+
             gun.SetAnimationFPS(gun.shootAnimation, 16);
             gun.SetAnimationFPS(gun.chargeAnimation, 3);
 

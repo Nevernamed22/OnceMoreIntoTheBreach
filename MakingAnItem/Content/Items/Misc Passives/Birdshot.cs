@@ -22,6 +22,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
             BirdshotID = item.PickupObjectId;
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public static int BirdshotID;
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)

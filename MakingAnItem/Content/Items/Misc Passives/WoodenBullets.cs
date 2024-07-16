@@ -28,6 +28,7 @@ namespace NevernamedsItems
 
             item.quality = PickupObject.ItemQuality.D;
             item.SetTag("bullet_modifier");
+            Doug.AddToLootPool(item.PickupObjectId);
         }
     }
 }

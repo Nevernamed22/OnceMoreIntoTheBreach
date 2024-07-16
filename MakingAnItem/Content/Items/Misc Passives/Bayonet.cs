@@ -15,19 +15,14 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Bayonet";
-            string resourceName = "NevernamedsItems/Resources/bayonet_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Bayonet>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "They Don't Like The Cold Steel";
-            string longDesc = "Cuts at your enemies when you reload your weapon."+"\n\nAn old fashioned blade attached to the end of rifles to add melee proficiency. Angers the Jammed.";
-
+            PassiveItem item = ItemSetup.NewItem<Bayonet>(
+            "Bayonet",
+            "They Don't Like The Cold Steel",
+            "Cuts at your enemies when you reload your weapon." + "\n\nAn old fashioned blade attached to the end of rifles to add melee proficiency. Angers the Jammed.",
+            "bayonet_icon") as PassiveItem;          
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.C;
-
         }
         private void OnReloadPressed(PlayerController player, Gun gun)
         {

@@ -13,22 +13,14 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Kalibers Prayer";
-            string resourceName = "NevernamedsItems/Resources/kalibersprayer_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<KalibersPrayer>();
-
-
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Book of Secrets";
-            string longDesc = "Though the most commonly known prayer to Kaliber is the famous Dodge Roll, this tome is filled with lesser rites to briefly grant Kaliber's protection in battle." + "\n\nIt is mandated that every adult Gun Cultist carry a copy of this holy tome, though not all can read it's strange spiralling text.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PlayerItem item = ItemSetup.NewItem<KalibersPrayer>(
+            "Kalibers Prayer",
+            "Book of Secrets",
+            "Though the most commonly known prayer to Kaliber is the famous Dodge Roll, this tome is filled with lesser rites to briefly grant Kaliber's protection in battle." + "\n\nIt is mandated that every adult Gun Cultist carry a copy of this holy tome, though not all can read it's strange spiralling text.",
+            "kalibersprayer_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 8);
-
             item.consumable = false;
             item.quality = ItemQuality.D;
-
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.GUNCULTIST_QUEST_REWARDED, true);
         }
 

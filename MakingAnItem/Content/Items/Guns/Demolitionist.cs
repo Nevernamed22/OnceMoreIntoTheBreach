@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Up in Smoke!");
             gun.SetLongDescription("Reloading on a full clip consumes some ammo and places a proximity mine." + "\n\nAn old Hegemony of Man weapon, repurposed by Minelets for blasting open ore deposits in the mines.");
 
-            gun.SetupSprite(null, "demolitionist_idle_001", 8);
+            gun.SetGunSprites("demolitionist");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 
@@ -46,7 +46,7 @@ namespace NevernamedsItems
             projectile.baseData.damage *= 1.8f;
             projectile.baseData.speed *= 1f;
             projectile.baseData.range *= 1f;
-            projectile.SetProjectileSpriteRight("demolitionist_projectile", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 15, 6);
+            projectile.SetProjectileSprite("demolitionist_projectile", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 15, 6);
 
             projectile.transform.parent = gun.barrelOffset;
 

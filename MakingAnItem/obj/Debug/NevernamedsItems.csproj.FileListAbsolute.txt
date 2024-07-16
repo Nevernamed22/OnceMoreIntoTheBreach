@@ -152,3 +152,4 @@ C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\Uni
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\UnityEngine.WebModule.xml
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\UnityEngine.WindModule.xml
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\NevernamedsItems.csproj.AssemblyReference.cache
+C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\Gunfig.dll

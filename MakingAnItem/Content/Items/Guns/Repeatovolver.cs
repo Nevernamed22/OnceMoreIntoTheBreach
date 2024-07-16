@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Rolls Off The Tongue");
             gun.SetLongDescription("A revolver modified to spew forth it's entire extended chamber with a single pull of the trigger."+"\n\nNames such as 'Repeating Revolver', 'Revolverpeater' and 'Rerererererevolver' were floated, but eventually 'Repeatovolver' won out.");
 
-            gun.SetupSprite(null, "repeatovolver_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "repeatovolver_idle_001", 8, "repeatovolver_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 

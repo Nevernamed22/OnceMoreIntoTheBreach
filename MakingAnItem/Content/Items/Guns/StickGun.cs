@@ -25,7 +25,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Scribble");
             gun.SetLongDescription("Carried by a brave stickman as he ventured through the pages of a bored child's homework." + "\n\nHe may be long erased, but his legacy lives on.");
 
-            gun.SetupSprite(null, "stickgun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "stickgun_idle_001", 8, "stickgun_ammonomicon_001");
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
 
@@ -70,7 +70,7 @@ namespace NevernamedsItems
             PierceProjModifier pierce = projectile.gameObject.AddComponent<PierceProjModifier>();
             pierce.penetration = 1;
 
-            projectile.SetProjectileSpriteRight("stickgun_projectile", 12, 2, false, tk2dBaseSprite.Anchor.MiddleCenter, 12, 2);
+            projectile.SetProjectileSprite("stickgun_projectile", 12, 2, false, tk2dBaseSprite.Anchor.MiddleCenter, 12, 2);
             gun.DefaultModule.projectiles[0] = projectile;
 
             //Projectile VFX

@@ -13,15 +13,15 @@ namespace NevernamedsItems
     
     public static void EasyAnimate(this Projectile proj, List<string> projectileNames, int frames, IntVector2 dimensions, int fps, bool light, tk2dSpriteAnimationClip.WrapMode wrapmode)
     {
-        proj.AnimateProjectile(projectileNames, fps, wrapmode, AnimateBullet.ConstructListOfSameValues(dimensions, frames),
-        AnimateBullet.ConstructListOfSameValues(light, frames),
-        AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, frames),
-        AnimateBullet.ConstructListOfSameValues(true, frames),
-        AnimateBullet.ConstructListOfSameValues(false, frames),
-        AnimateBullet.ConstructListOfSameValues<Vector3?>(null, frames),
-        AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, frames),
-        AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, frames),
-        AnimateBullet.ConstructListOfSameValues<Projectile>(null, frames), 0);
+        proj.AnimateProjectile(projectileNames, fps, wrapmode, MiscTools.DupeList(dimensions, frames),
+        MiscTools.DupeList(light, frames),
+        MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, frames),
+        MiscTools.DupeList(true, frames),
+        MiscTools.DupeList(false, frames),
+        MiscTools.DupeList<Vector3?>(null, frames),
+        MiscTools.DupeList<IntVector2?>(null, frames),
+        MiscTools.DupeList<IntVector2?>(null, frames),
+        MiscTools.DupeList<Projectile>(null, frames), 0);
     }
     public static void RenderTilePiercingForSeconds(this Projectile proj, float seconds) { proj.StartCoroutine(NoCollideTilesForSeconds(proj, seconds)); }
     private static IEnumerator NoCollideTilesForSeconds(Projectile proj, float time)

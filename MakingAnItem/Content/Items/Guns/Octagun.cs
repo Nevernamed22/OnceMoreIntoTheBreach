@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Welcome To The 2nd Dimension");
             gun.SetLongDescription("A simple shape, with a name that kinda sounds like it has 'gun' in it." + "\n\nOften confused by preschoolers for it's much more fashionable cousin, the Pentagon.");
 
-            gun.SetupSprite(null, "octagun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "octagun_idle_001", 8, "octagun_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 8);
             gun.SetAnimationFPS(gun.idleAnimation, 5);
@@ -47,7 +47,7 @@ namespace NevernamedsItems
                 UnityEngine.Object.DontDestroyOnLoad(projectile);
                 projectile.baseData.damage *= 1.6f;
                 projectile.baseData.speed *= 0.1f;
-                projectile.SetProjectileSpriteRight("octagun_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
+                projectile.SetProjectileSprite("octagun_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
                 if (mod != gun.DefaultModule) { mod.ammoCost = 0; }
                 projectile.transform.parent = gun.barrelOffset;
             }

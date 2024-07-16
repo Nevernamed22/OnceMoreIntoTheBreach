@@ -15,14 +15,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Laser Knife";
-            string resourceName = "NevernamedsItems/Resources/NeoActiveSprites/laserknife_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<LaserKnife>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "He Couldn't See The Stars";
-            string longDesc = "Vaporises the nearest enemy. \n\nA standard issue military pocket plasma blade for hand-to-hand combat.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<LaserKnife>(
+            "Laser Knife",
+            "He Couldn't See The Stars",
+            "Vaporises the nearest enemy. \n\nA standard issue military pocket plasma blade for hand-to-hand combat.",
+            "laserknife_icon") as PlayerItem;
+
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 600);
 
             laserSlashVFX = VFXToolbox.CreateVFX("LaserSlashVFX",

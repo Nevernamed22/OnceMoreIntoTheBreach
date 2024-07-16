@@ -28,7 +28,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Goodbye");
             gun.SetLongDescription("Displaces enemies through time and space to somewhere... else. "+"\nThose too weak to withstand the vortex will be lost among the border worlds of reality."+"\n\n\"We're gonna take our problems and DISPLACE them somewhere else!\"");
 
-            gun.SetupSprite(null, "displacercannon_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "displacercannon_idle_001", 8, "displacercannon_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.chargeAnimation, 11);
 
@@ -65,7 +65,7 @@ namespace NevernamedsItems
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.SmoothLightBlueLaserCircleVFX;
             DisplaceEnemies displacement = projectile.gameObject.AddComponent<DisplaceEnemies>();
 
-            projectile.SetProjectileSpriteRight("displacercannon_projectile", 17, 17, true, tk2dBaseSprite.Anchor.MiddleCenter, 15, 15);
+            projectile.SetProjectileSprite("displacercannon_projectile", 17, 17, true, tk2dBaseSprite.Anchor.MiddleCenter, 15, 15);
 
             ProjectileModule.ChargeProjectile chargeProj = new ProjectileModule.ChargeProjectile
             {

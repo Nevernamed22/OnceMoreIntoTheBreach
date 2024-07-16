@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Ranged Weapon");
             gun.SetLongDescription("Pressing reload sucks up nearby blobs, and uses them as ammo. Cannot gain ammo by any other method." + "\n\nDesigned specifically to combat Blobulonian creatures, in the case of a potential re-emergence of the empire." + "\n\nZZZZZZZ");
 
-            gun.SetupSprite(null, "vacuumgun_idle_001", 8);
+            gun.SetGunSprites("vacuumgun");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 
@@ -50,7 +50,7 @@ namespace NevernamedsItems
             projectile.baseData.damage = 30f;
             projectile.baseData.speed *= 1f;
             projectile.baseData.range *= 1f;
-            projectile.SetProjectileSpriteRight("vacuumgun_projectile", 16, 14, false, tk2dBaseSprite.Anchor.MiddleCenter, 15, 13);
+            projectile.SetProjectileSprite("vacuumgun_projectile", 16, 14, false, tk2dBaseSprite.Anchor.MiddleCenter, 15, 13);
             GoopModifier gooper = projectile.gameObject.AddComponent<GoopModifier>();
             gooper.SpawnGoopInFlight = false;
             gooper.SpawnGoopOnCollision = true;

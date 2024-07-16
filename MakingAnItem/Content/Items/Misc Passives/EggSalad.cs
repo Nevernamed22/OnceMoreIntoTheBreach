@@ -65,6 +65,8 @@ namespace NevernamedsItems
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomStat(CustomTrackedStats.TITAN_KIN_KILLED, 4, DungeonPrerequisite.PrerequisiteOperation.GREATER_THAN);
             ID = item.PickupObjectId;
+            Doug.AddToLootPool(item.PickupObjectId);
+
         }
         public static int ID;
         public override void Pickup(PlayerController player)
@@ -95,7 +97,7 @@ namespace NevernamedsItems
              "Spare Blank",
              "+1 to Blank",
              "Never hurts to have a spare.",
-             "spareblank_icon");         
+             "spareblank_new");         
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalBlanksPerFloor, 1, StatModifier.ModifyMethod.ADDITIVE);
             item.quality = PickupObject.ItemQuality.D;
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);

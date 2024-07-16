@@ -24,8 +24,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Great Wall");
             gun.SetLongDescription("A scale model of the fearsome Wallmonger, used as a mock-up during it's original construction." + "\n\nWhile the Wallmonger contains hundreds of tortured souls, this only contains two or three.");
             gun.AddPassiveStatModifier(PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
-            gun.SetupSprite(null, "minimonger_idle_001", 8);
-
+           
+            gun.SetGunSprites("minimonger");
 
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).frames[0].eventAudio = "Play_ENM_demonwall_barf_01";
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).frames[0].triggerEvent = true;
@@ -57,7 +57,7 @@ namespace NevernamedsItems
                 AutoDoShadowChainOnSpawn chain = projectile.gameObject.GetOrAddComponent<AutoDoShadowChainOnSpawn>();
                 chain.NumberInChain = 5;
                 chain.pauseLength = 0.1f;
-                projectile.SetProjectileSpriteRight("pillarocket_subprojectile", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 3, 3);
+                projectile.SetProjectileSprite("pillarocket_subprojectile", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 3, 3);
 
                 if (mod != gun.DefaultModule) { mod.ammoCost = 0; }
                 ProjectileModule.ChargeProjectile chargeProj = new ProjectileModule.ChargeProjectile

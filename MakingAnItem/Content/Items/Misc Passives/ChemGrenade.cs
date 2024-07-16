@@ -15,18 +15,14 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Chem Grenade";
-            string resourceName = "NevernamedsItems/Resources/chemgrenade_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<ChemGrenade>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Toxic Explosions";
-            string longDesc = "Explosions leave pools of poison. Gives poison immunity. " + "\n\nThis probably breaks the Guneva Conventions, but this is the Gungeon, who's gonna stop you?";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<ChemGrenade>(
+              "Chem Grenade",
+              "Toxic Explosions",
+              "Explosions leave pools of poison. Gives poison immunity. " + "\n\nThis probably breaks the Guneva Conventions, but this is the Gungeon, who's gonna stop you?",
+              "chemgrenade_icon") as PassiveItem;        
             item.quality = PickupObject.ItemQuality.C;
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
-
             ChemGrenadeID = item.PickupObjectId;
         }
         public static int ChemGrenadeID;

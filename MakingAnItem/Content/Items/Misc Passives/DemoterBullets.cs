@@ -20,6 +20,7 @@ namespace NevernamedsItems
              "demoterbullets_icon");
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("bullet_modifier");
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public void onFired(Projectile bullet, float eventchancescaler)
         {

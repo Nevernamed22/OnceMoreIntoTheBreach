@@ -23,7 +23,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Pop Goes");
             gun.SetLongDescription("A children's toy."+"\n\nFires pellets on a string to be reeled back into the barrel. Deals more damage while it's shots are being yanked back in.");
 
-            gun.SetupSprite(null, "popgun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "popgun_idle_001", 8, "popgun_ammonomicon_001");
+
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(150) as Gun).gunSwitchGroup;
 
             gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(28) as Gun).muzzleFlashEffects;
@@ -61,7 +62,7 @@ namespace NevernamedsItems
 
             projectile.pierceMinorBreakables = true;
 
-            projectile.SetProjectileSpriteRight("popgun_proj", 7, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
+            projectile.SetProjectileSprite("popgun_proj", 7, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
             gun.DefaultModule.projectiles[0] = projectile;
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;

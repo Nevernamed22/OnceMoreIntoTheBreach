@@ -32,7 +32,7 @@ namespace NevernamedsItems
                 "\nBut it jammed, hard, never to shoot again," +
                 "\nWhen the old man died.");
 
-            gun.SetupSprite(null, "grandfatherglock_idle_001", 8);
+            gun.SetGunSprites("grandfatherglock");
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(56) as Gun).gunSwitchGroup;
             gun.muzzleFlashEffects.type = VFXPoolType.None;
 
@@ -71,7 +71,7 @@ namespace NevernamedsItems
                     projectile.pierceMinorBreakables = true;
                     TimeBasedBulletAimer orAddComponent = projectile.gameObject.GetOrAddComponent<TimeBasedBulletAimer>();
                     orAddComponent.aimType = TimeBasedBulletAimer.ClockHandAimType.HOUR_HAND;
-                    projectile.SetProjectileSpriteRight("grandfatherglock_hourhand_projectile", 19, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 18, 10);
+                    projectile.SetProjectileSprite("grandfatherglock_hourhand_projectile", 19, 11, true, tk2dBaseSprite.Anchor.MiddleCenter, 18, 10);
                     i2++;
                 }
                 else if (i2 == 1) //Minute hand
@@ -94,7 +94,7 @@ namespace NevernamedsItems
                     projectile.baseData.range *= 2f;
                     TimeBasedBulletAimer orAddComponent = projectile.gameObject.GetOrAddComponent<TimeBasedBulletAimer>();
                     orAddComponent.aimType = TimeBasedBulletAimer.ClockHandAimType.MINUTE_HAND;
-                    projectile.SetProjectileSpriteRight("grandfatherglock_minutehand_projectile", 26, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 25, 8);
+                    projectile.SetProjectileSprite("grandfatherglock_minutehand_projectile", 26, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 25, 8);
                     i2++;
                 }
                 else if (i2 >= 2) //Second hand
@@ -119,7 +119,7 @@ namespace NevernamedsItems
                     
                     TimeBasedBulletAimer orAddComponent = projectile.gameObject.GetOrAddComponent<TimeBasedBulletAimer>();
                     orAddComponent.aimType = TimeBasedBulletAimer.ClockHandAimType.SECOND_HAND;
-                    projectile.SetProjectileSpriteRight("grandfatherglock_secondhand_projectile", 22, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 21, 4);
+                    projectile.SetProjectileSprite("grandfatherglock_secondhand_projectile", 22, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 21, 4);
                     i2++;
                 }
             }

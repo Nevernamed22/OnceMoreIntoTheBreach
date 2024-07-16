@@ -17,7 +17,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("<><>");
             gun.SetLongDescription("The plasma blaster of a Colorscant lieutenant whose platoon was stranded within the Gungeon in a bygone age.");
 
-            gun.SetupSprite(null, "ltbluesphaser_idle_001", 8);
+            gun.SetGunSprites("ltbluesphaser");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 

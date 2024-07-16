@@ -22,6 +22,7 @@ namespace NevernamedsItems
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_MINERSBULLETS, true);
             item.AddItemToDougMetaShop(8);
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public override void Pickup(PlayerController player)
         {

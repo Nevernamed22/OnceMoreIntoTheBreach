@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Alexandria.BreakableAPI;
 
 namespace NevernamedsItems
@@ -21,8 +21,7 @@ namespace NevernamedsItems
             var behav = gun.gameObject.AddComponent<Sweeper>();
             gun.SetShortDescription("B)");
             gun.SetLongDescription("Used for clearing minefields with it's forceful blast.\n\n"+"The numbers, what do they mean!?");
-
-            gun.SetupSprite(null, "sweeper_idle_001", 8);
+            gun.SetGunSprites("sweeper");
 
             gun.SetAnimationFPS(gun.shootAnimation, 13);
             gun.SetAnimationFPS(gun.idleAnimation, 5);

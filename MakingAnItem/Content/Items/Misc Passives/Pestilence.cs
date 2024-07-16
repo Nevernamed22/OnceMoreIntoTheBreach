@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Pestilence";
-            string resourceName = "NevernamedsItems/Resources/pestilence_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Pestilence>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Yersinia Bestis";
-            string longDesc = "Afflicts one enemy per room with a deadly plague." + "\n\nA tiny bundle of DNA molecules that directly attacks the shells that make up Gundead bodies.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<Pestilence>(
+              "Pestilence",
+              "Yersinia Bestis",
+              "Afflicts one enemy per room with a deadly plague." + "\n\nA tiny bundle of DNA molecules that directly attacks the shells that make up Gundead bodies.",
+              "pestilence_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.C;
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
         }

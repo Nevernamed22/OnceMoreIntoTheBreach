@@ -15,14 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Gunidae solvit Haatelis";
-            string resourceName = "NevernamedsItems/Resources/gunidaesolvithaatelis_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<GunidaeSolvitHaatelis>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "As It Is Written";
-            string longDesc = "An excerpt from an ancient holy text of the Order."+"\n\nReading it has enough power to bend the motion of bullets to your will.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<GunidaeSolvitHaatelis>(
+            "Gunidae solvit Haatelis",
+            "As It Is Written",
+            "An excerpt from an ancient holy text of the Order." + "\n\nReading it has enough power to bend the motion of bullets to your will.",
+            "gunidaesolvithaatelis_icon") as PlayerItem;          
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 350);
             item.AddPassiveStatModifier( PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.consumable = false;

@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -21,7 +21,8 @@ namespace NevernamedsItems
             gun.gameObject.AddComponent<Bullatterer>();
             gun.SetShortDescription("djahksdhkssdfdfssdf");
             gun.SetLongDescription("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-            gun.SetupSprite(null, "kingbullatterer_idle_001", 8);
+
+            gun.SetGunSprites("kingbullatterer", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 13);
             gun.SetAnimationFPS(gun.idleAnimation, 13);

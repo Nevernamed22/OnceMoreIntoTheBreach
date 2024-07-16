@@ -5,7 +5,7 @@ using System.Text;
 using System.Collections;
 using UnityEngine;
 using Alexandria.ItemAPI;
-using TranslationAPI;
+using Alexandria.TranslationAPI;
 
 namespace NevernamedsItems
 {

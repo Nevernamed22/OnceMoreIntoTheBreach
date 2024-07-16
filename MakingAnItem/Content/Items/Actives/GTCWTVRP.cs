@@ -3,51 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Dungeonator;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
 {
     class GTCWTVRP : PlayerItem
     {
-        //Call this method from the Start() method of your ETGModule extension class
         public static void Init()
         {
-            //The name of the item
-            string itemName = "GTCWTVRP";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it.
-            string resourceName = "NevernamedsItems/Resources/gtcwtvrp_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a ActiveItem component to the object
-            var item = obj.AddComponent<GTCWTVRP>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "'Tis but a copy";
-            string longDesc = "'Gun That Can Wound The Very Recent Past'" + "\n\nReloads the current floor. A cheap plastic knockoff of The Gun That Can Kill The Past.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //"kts" here is the item pool. In the console you'd type kts:sweating_bullets
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Set the cooldown type and duration of the cooldown
+            PlayerItem item = ItemSetup.NewItem<GTCWTVRP>(
+               "GTCWTVRP",
+               "'Tis but a copy",
+               "'Gun That Can Wound The Very Recent Past'" + "\n\nReloads the current floor. A cheap plastic knockoff of The Gun That Can Kill The Past.",
+               "gtcwtvrp_icon") as PlayerItem;
+            
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 1000);
-
-            //Adds a passive modifier, like curse, coolness, damage, etc. to the item. Works for passives and actives.
-
-            //Set some other fields
             item.consumable = true;
             item.quality = ItemQuality.A;
-
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
-
         }
         public override void DoEffect(PlayerController user)
         {

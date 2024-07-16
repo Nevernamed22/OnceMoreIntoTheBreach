@@ -24,6 +24,7 @@ namespace NevernamedsItems
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_NITROBULLETS, true);
             item.AddItemToDougMetaShop(15);
             NitroBulletsID = item.PickupObjectId;
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public static int NitroBulletsID;
         bool hasSynergy;

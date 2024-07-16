@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 
@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("sv_cheats 1");
             gun.SetLongDescription("Pressing reload with a full clip cycles firing modes."+"\n\nAn incredibly advanced piece of technology capable of manipulating reality around you. Used almost entirely for practical jokes.");
 
-            gun.SetupSprite(null, "toolgun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "toolgun_idle_001", 8, "toolgun_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(153) as Gun).gunSwitchGroup;

@@ -6,7 +6,7 @@ using Dungeonator;
 using UnityEngine;
 using Alexandria.ItemAPI;
 using System.Collections;
-using TranslationAPI;
+using Alexandria.TranslationAPI;
 using Alexandria.Misc;
 
 namespace NevernamedsItems
@@ -72,8 +72,8 @@ namespace NevernamedsItems
                         statModifier.statToBoost = PlayerStats.StatType.Damage;
                         Owner.ownerlessStatModifiers.Add(statModifier);
                         Owner.stats.RecalculateStats(Owner, false, false);
-
-                        LootEngine.SpawnCurrency(player.sprite.WorldCenter, (15 * amountOfSurplus));
+                   
+                        LootEngine.SpawnCurrency(Owner.CenterPosition, (15 * amountOfSurplus));
                     }
                     hasDoneFirstArmourResetThisRun = true;
                     player.healthHaver.Armor = 1f;

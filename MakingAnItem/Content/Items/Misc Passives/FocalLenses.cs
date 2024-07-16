@@ -15,14 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Focal Lenses";
-            string resourceName = "NevernamedsItems/Resources/focallenses_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<FocalLenses>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Better Beams";
-            string longDesc = "Doubles beam damage."+"\n\nA set of lenses capable of increasing the firepower of laserbeams... and the waterpower of the Mega Douser, somehow.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<FocalLenses>(
+              "Focal Lenses",
+              "Better Beams",
+              "Doubles beam damage." + "\n\nA set of lenses capable of increasing the firepower of laserbeams... and the waterpower of the Mega Douser, somehow.",
+              "focallenses_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.D;
             item.AddPassiveStatModifier( PlayerStats.StatType.Accuracy, 0.9f, StatModifier.ModifyMethod.MULTIPLICATIVE);
         }

@@ -22,6 +22,7 @@ namespace NevernamedsItems
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_RANDOROUNDS, true);
             item.AddItemToDougMetaShop(19);
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         bool hasPicked = false;
         public int randomNumber;

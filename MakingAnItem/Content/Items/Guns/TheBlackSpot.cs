@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Put To Death");
             gun.SetLongDescription("This flintlock pistol is haunted by the souls of an entire pirate crew, put to death for mutiny."+"\n\nWhen you hold the barrel to your ear, you can hear the sea.");
 
-            gun.SetupSprite(null, "theblackspot_idle_001", 8);
+            gun.SetGunSprites("theblackspot");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 12);
@@ -65,7 +65,7 @@ namespace NevernamedsItems
             trail.LifeTime = 1.5f;
             trail.BaseColor = Color.black;
             trail.EndColor = Color.black;
-            projectile.SetProjectileSpriteRight("theblackspot_proj", 7, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
+            projectile.SetProjectileSprite("theblackspot_proj", 7, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
             projectile.gameObject.AddComponent<PierceDeadActors>();
 
             gun.quality = PickupObject.ItemQuality.A;

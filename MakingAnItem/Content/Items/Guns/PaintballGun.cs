@@ -24,8 +24,9 @@ namespace NevernamedsItems
             gun.gameObject.AddComponent<PaintballGun>();          
             gun.SetShortDescription("The Colours, Duke!");
             gun.SetLongDescription("Small rubbery pellets loaded with lethal old-school lead paint."+"\n\nBrought to the Gungeon by an amateur artist who wished to flee his debts.");
-         
-            gun.SetupSprite(null, "paintballgun_idle_001", 8);      
+
+            gun.SetGunSprites("paintballgun");
+
             gun.SetAnimationFPS(gun.shootAnimation, 14);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);

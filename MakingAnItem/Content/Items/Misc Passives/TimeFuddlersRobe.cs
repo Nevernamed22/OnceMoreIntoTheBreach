@@ -5,7 +5,7 @@ using Gungeon;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -13,32 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Time Fuddler's Robe";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/timefuddlersrobe_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<TimeFuddlersRobe>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Timeline Twister";
-            string longDesc = "Chance to freeze time upon killing an enemy."+"\n\nThe robes of a young bullet who broke the timeline so badly that even his garments maintain an echo of the events.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
+            PassiveItem item = ItemSetup.NewItem<TimeFuddlersRobe>(
+               "Time Fuddler's Robe",
+               "Timeline Twister",
+               "Chance to freeze time upon killing an enemy." + "\n\nThe robes of a young bullet who broke the timeline so badly that even his garments maintain an echo of the events.",
+               "timefuddlersrobe_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.A;
 
             //SYNERGY WITH PIG OR BULLET TIME --> "Epsiode" 

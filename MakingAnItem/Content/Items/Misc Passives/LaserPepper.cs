@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using Dungeonator;
@@ -15,16 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Laser Pepper";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/laserpepper_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<LaserPepper>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Burns the Tongue";
-            string longDesc = "A delectable condemnation of the scientific drive to create spicier and spicier peppers. \n\nThey were so preoccupied with whether they could, they didn't stop to think if they should.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PassiveItem item = ItemSetup.NewItem<LaserPepper>(
+               "Laser Pepper",
+               "Burns the Tongue",
+               "A delectable condemnation of the scientific drive to create spicier and spicier peppers. \n\nThey were so preoccupied with whether they could, they didn't stop to think if they should.",
+               "laserpepper_icon") as PassiveItem;
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.B;
         }

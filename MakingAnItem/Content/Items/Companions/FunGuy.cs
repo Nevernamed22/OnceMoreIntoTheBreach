@@ -7,6 +7,7 @@ using Alexandria.ItemAPI;
 using SaveAPI;
 using UnityEngine;
 using Alexandria.Misc;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -25,7 +26,7 @@ namespace NevernamedsItems
 
             synergyFungusProj = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
             synergyFungusProj.gameObject.MakeFakePrefab();
-            synergyFungusProj.SetProjectileSpriteRight("yellowtriangleproj_001", 19, 17, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 9);
+            synergyFungusProj.SetProjectileSprite("yellowtriangleproj_001", 19, 17, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 9);
             FungoRandomBullets orAddComponent = synergyFungusProj.gameObject.GetOrAddComponent<FungoRandomBullets>();
             synergyFungusProj.baseData.speed *= 0.2f;
             synergyFungusProj.baseData.damage = 12.5f;
@@ -34,25 +35,21 @@ namespace NevernamedsItems
             pierce.penetratesBreakables = true;
             synergyFungusProj.gameObject.AddComponent<PierceDeadActors>();
             synergyFungusProj.pierceMinorBreakables = true;
-            synergyFungusProj.AnimateProjectile(new List<string> {
-                "yellowtriangleproj_001",
-                "yellowtriangleproj_002",
-                "yellowtriangleproj_003",
-                "yellowtriangleproj_004",
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(19, 17), 
-                new IntVector2(19, 17), 
-                new IntVector2(19, 17), 
-                new IntVector2(19, 17), 
-            }, 
-            AnimateBullet.ConstructListOfSameValues(true, 4), 
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4), 
-            AnimateBullet.ConstructListOfSameValues(true, 4), 
-            AnimateBullet.ConstructListOfSameValues(false, 4),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), 
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(9, 9),4), 
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(5, 3), 4), 
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
+
+
+            synergyFungusProj.AnimateProjectileBundle("YellowTriangleProjectile",
+                    Initialisation.ProjectileCollection,
+                    Initialisation.projectileAnimationCollection,
+                    "YellowTriangleProjectile",
+                    MiscTools.DupeList(new IntVector2(19, 17), 4), //Pixel Sizes
+                    MiscTools.DupeList(true, 4), //Lightened
+                    MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                    MiscTools.DupeList(true, 4), //Anchors Change Colliders
+                    MiscTools.DupeList(false, 4), //Fixes Scales
+                    MiscTools.DupeList<Vector3?>(null, 4), //Manual Offsets
+                    MiscTools.DupeList<IntVector2?>(new IntVector2(9, 9), 4), //Override colliders
+                    MiscTools.DupeList<IntVector2?>(new IntVector2(5, 3), 4), //Override collider offsets
+                    MiscTools.DupeList<Projectile>(null, 4)); // Override to copy from                       
         }
 
         public static Projectile synergyFungusProj;

@@ -13,16 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Blood Thinner";
-            string resourceName = "NevernamedsItems/Resources/bloodthinner_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BloodThinner>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Unnecessary Necessities";
-            string longDesc = "Turns hearts into other consumables at full HP. Does not affect shops." + "\n\nPrevents blood clots. If you experience side effects such as light headedness, vomiting, nausea, projectile dysfunction, drowsiness, decreased apetite, or death, consult your doctor immediately.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PassiveItem item = ItemSetup.NewItem<BloodThinner>(
+            "Blood Thinner",
+            "Unnecessary Necessities",
+            "Turns hearts into other consumables at full HP. Does not affect shops." + "\n\nPrevents blood clots. If you experience side effects such as light headedness, vomiting, nausea, projectile dysfunction, drowsiness, decreased apetite, or death, consult your doctor immediately.",
+            "bloodthinner_icon") as PassiveItem;
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.C;
 

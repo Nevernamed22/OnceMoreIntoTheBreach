@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("D'arvit");
             gun.SetLongDescription("Made for tiny hands. A micro-nuclear battery will keep this blaster burning longer than the lifetime of Gunymede's star!" + "\n\nReload a full clip to swap between 'stun' and 'fry' modes.");
 
-            gun.SetupSprite(null, "neutrino_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "neutrino_idle_001", 8, "neutrino_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
 
@@ -54,7 +54,7 @@ namespace NevernamedsItems
             projectile.StunApplyChance = 0.2f;
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.SmoothLightBlueLaserCircleVFX;
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.SetProjectileSpriteRight("neutrino_stun_proj", 10, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 3);
+            projectile.SetProjectileSprite("neutrino_stun_proj", 10, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 3);
 
             //FIREBULLETS
             Projectile projectile2 = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
@@ -68,7 +68,7 @@ namespace NevernamedsItems
             projectile2.FireApplyChance = 0.07f;
             projectile2.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.YellowLaserCircleVFX;
             projectile2.hitEffects.alwaysUseMidair = true;
-            projectile2.SetProjectileSpriteRight("neutrino_burn_proj", 10, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 3);
+            projectile2.SetProjectileSprite("neutrino_burn_proj", 10, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 3);
 
             burnModeProj = projectile2;
 

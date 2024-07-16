@@ -9,6 +9,7 @@ using UnityEngine;
 using Dungeonator;
 using Alexandria.ItemAPI;
 using Alexandria.Misc;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -23,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Law of Attraction");
             gun.SetLongDescription("Fires alternating monopolar electromagnetic blasts."+"\n\nUpon the discovery of the first monopole, the tech was immediately weaponised.");
 
-            gun.SetupSprite(null, "ferrobolt_idle_001", 8);
+            gun.SetGunSprites("ferrobolt");
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(150) as Gun).gunSwitchGroup;
@@ -72,27 +73,20 @@ namespace NevernamedsItems
 
             projectile.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(57) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX;
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.AnimateProjectile(new List<string> {
-                "ferrobolt_orb_001",
-                "ferrobolt_orb_002",
-                "ferrobolt_orb_003",
-                "ferrobolt_orb_004",
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                 new IntVector2(14, 14), //1
-                 new IntVector2(14, 14), //1
-                 new IntVector2(14, 14), //1
-                 new IntVector2(14, 14), //1
-            },
-            AnimateBullet.ConstructListOfSameValues(false, 4),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4),
-            AnimateBullet.ConstructListOfSameValues(true, 4),
-            AnimateBullet.ConstructListOfSameValues(false, 4),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(8, 8), 4),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
 
-            projectile.SetProjectileSpriteRight("ferrobolt_orb_001", 14, 14, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
+            projectile.AnimateProjectileBundle("FerroboltOrbProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "FerroboltOrbProjectile",
+                   MiscTools.DupeList(new IntVector2(14, 14), 4), //Pixel Sizes
+                   MiscTools.DupeList(true, 4), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                   MiscTools.DupeList(true, 4), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 4), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 4), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(8, 8), 4), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 4)); // Override to copy from    
 
             ProjectileModule.ChargeProjectile chargeProj = new ProjectileModule.ChargeProjectile
             {
@@ -116,7 +110,7 @@ namespace NevernamedsItems
             PierceProjModifier piercing = bolt.gameObject.AddComponent<PierceProjModifier>();
             piercing.penetration = 100;
             bolt.pierceMinorBreakables = true;
-            bolt.SetProjectileSpriteRight("ferrobolt_bolt_001", 19, 8, true, tk2dBaseSprite.Anchor.MiddleCenter, 16, 6);
+            bolt.SetProjectileSprite("ferrobolt_bolt_001", 19, 8, true, tk2dBaseSprite.Anchor.MiddleCenter, 16, 6);
             bolt.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(57) as Gun).DefaultModule.chargeProjectiles[0].Projectile.hitEffects.overrideMidairDeathVFX;
             bolt.hitEffects.alwaysUseMidair = true;
             bolt.gameObject.AddComponent<FerroboltBoltController>();

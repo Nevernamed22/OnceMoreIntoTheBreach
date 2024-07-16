@@ -3,7 +3,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 using System.Collections.Generic;
 
@@ -25,7 +25,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Cosmic Crunch");
             gun.SetLongDescription("Tears apart the fabric of space time and good game design, allowing for ridiculous gun effects and fourth wall breaking Ammonomicon descriptions.");
 
-            gun.SetupSprite(null, "galaxycrusher_idle_001", 8);
+            gun.SetGunSprites("galaxycrusher");
 
             gun.SetAnimationFPS(gun.chargeAnimation, 13);
 

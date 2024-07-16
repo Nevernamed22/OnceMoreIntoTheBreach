@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Death Throws");
             gun.SetLongDescription("A futuristic plasma blaster modeled after a historic flintlock." + "\n\nIt's initial bite has a deadly followup.");
 
-            gun.SetupSprite(null, "viper_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "viper_idle_001", 8, "viper_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
 
@@ -49,7 +49,7 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(secondaryProj);
             secondaryProj.baseData.damage *= 1.2f;
             secondaryProj.baseData.force *= 2f;
-            secondaryProj.SetProjectileSpriteRight("vipersecondary_projectile", 6, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
+            secondaryProj.SetProjectileSprite("vipersecondary_projectile", 6, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
 
 
             //BULLET STATS
@@ -66,7 +66,7 @@ namespace NevernamedsItems
             PierceProjModifier pierce = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();
             pierce.penetration++;
             pierce.penetratesBreakables = true;
-            projectile.SetProjectileSpriteRight("vipermain_projectile", 15, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 6);
+            projectile.SetProjectileSprite("vipermain_projectile", 15, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 6);
 
             gun.DefaultModule.projectiles[0] = projectile;
 

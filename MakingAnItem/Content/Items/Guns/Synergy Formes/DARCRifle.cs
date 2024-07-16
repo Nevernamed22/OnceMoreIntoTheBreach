@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Electrotech Assassin");
             gun.SetLongDescription("This slow firing yet powerful electric rifle was patented by the ARC Private Security Company for effective 'ranged situation management'." + "\n\nColloquial nicknames such as 'Thunderstick' are not uncommon among ARC personnel.");
 
-            gun.SetupSprite(null, "darcrifle_idle_001", 8);
+            gun.SetGunSprites("darcrifle", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 

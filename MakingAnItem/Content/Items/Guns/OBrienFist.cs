@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Bathe In the Fire");
             gun.SetLongDescription("The limb of a lumbering tortured golem who sought the Gungeon to sate his bloodlust." + "\n\nYour enemies will run, or face your rage.");
 
-            gun.SetupSprite(null, "obrienfist_idle_001", 8);
+            gun.SetGunSprites("obrienfist");
 
             gun.SetAnimationFPS(gun.shootAnimation, 16);
 

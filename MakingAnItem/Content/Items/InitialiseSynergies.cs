@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -722,7 +722,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("Rod of Iron", mandatorySynergyItemsRodOfIron, optionalSynergyItemsRodOfIron);
             //KALIBERS PRAYER + BOMBINOMICON
             List<string> mandatorySynergyItemsLiturgist = new List<string>() { "nn:kalibers_prayer" };
-            List<string> optionalSynergyItemsLiturgist = new List<string>() { "nn:bombinomicon", "nn:bookllet", "nn:lorebook" }; 
+            List<string> optionalSynergyItemsLiturgist = new List<string>() { "nn:bombinomicon", "nn:bookllet", "nn:lorebook" };
             CustomSynergies.Add("Liturgist", mandatorySynergyItemsLiturgist, optionalSynergyItemsLiturgist);
             //KALIBERS PRAYER + SAA
             List<string> mandatorySynergyItemsGunvana = new List<string>() { "saa", "nn:kalibers_prayer" };
@@ -1238,7 +1238,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("Micro Aggressions", mandatorySynergyItemsMicroAggressions, optionalSynergyItemsMicroAggressions);
             //FIRE LANCE / MAGIC
             List<string> mandatorySynergyItemsThereAreSomeWhoCallMe = new List<string>() { "nn:fire_lance" };
-            List<string> optionalSynergyItemsThereAreSomeWhoCallMe = new List<string>() { "magic_bullets", "bundle_of_wands","hexagun","witch_pistol" };
+            List<string> optionalSynergyItemsThereAreSomeWhoCallMe = new List<string>() { "magic_bullets", "bundle_of_wands", "hexagun", "witch_pistol" };
             CustomSynergies.Add("There are some who call me...", mandatorySynergyItemsThereAreSomeWhoCallMe, optionalSynergyItemsThereAreSomeWhoCallMe);
             //ALPHA BEAM / ALPHA BULLETS
             List<string> mandatorySynergyItemsDualAlpha = new List<string>() { "nn:alpha_beam", "alpha_bullets" };
@@ -1282,7 +1282,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("Leadbulonial", mandatorySynergyItemsLeadbulonial, optionalSynergyItemsLeadbulonial);
             //VACUUM GUN / POOP
             List<string> mandatorySynergyItemsPoopulonial = new List<string>() { "nn:vacuum_gun" };
-            List<string> optionalSynergyItemsPoopulonial = new List<string>() { "klobbe", "weird_egg", "nn:egg_salad","meatbun" };
+            List<string> optionalSynergyItemsPoopulonial = new List<string>() { "klobbe", "weird_egg", "nn:egg_salad", "meatbun" };
             CustomSynergies.Add("Poopulonial", mandatorySynergyItemsPoopulonial, optionalSynergyItemsPoopulonial);
             //VACUUM GUN / BLOOD
             List<string> mandatorySynergyItemsBloodbulonial = new List<string>() { "nn:vacuum_gun" };
@@ -1328,7 +1328,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("Tomorrow, or just the end of time?", mandatorySynergyItemsTomorrowOrJustTheEndOfTime, optionalSynergyItemsTomorrowOrJustTheEndOfTime);
             //MARCH GUN / SHOES
             List<string> mandatorySynergyItemsTappyToes = new List<string>() { "nn:march_gun" };
-            List<string> optionalSynergyItemsTappyToes = new List<string>() { "ballistic_boots", "heavy_boots", "nn:bullet_boots" ,"gunboots", "bug_boots", "springheel_boots", "rat_boots", "nn:cyclone_boots", "nn:legboot", "nn:blank_boots" };
+            List<string> optionalSynergyItemsTappyToes = new List<string>() { "ballistic_boots", "heavy_boots", "nn:bullet_boots", "gunboots", "bug_boots", "springheel_boots", "rat_boots", "nn:cyclone_boots", "nn:legboot", "nn:blank_boots" };
             CustomSynergies.Add("Tappy Toes", mandatorySynergyItemsTappyToes, optionalSynergyItemsTappyToes);
             //MARCH GUN / MUSIC
             List<string> mandatorySynergyItemsStepToTheBeat = new List<string>() { "nn:march_gun" };
@@ -1475,7 +1475,7 @@ namespace NevernamedsItems
             CustomSynergies.Add("Bubble Blowing, Baby!", mandatorySynergyItemsBubbleBlowingBaby, optionalSynergyItemsBubbleBlowingBaby);
             //REDHAWK / REDROBIN
             List<string> mandatorySynergyItemsRedbirds = new List<string>() { "nn:red_robin", "nn:redhawk" };
-           AdvancedSynergyEntry RedBirds = CustomSynergies.Add("Redbirds", mandatorySynergyItemsRedbirds);
+            AdvancedSynergyEntry RedBirds = CustomSynergies.Add("Redbirds", mandatorySynergyItemsRedbirds);
             RedBirds.ActiveWhenGunUnequipped = false;
             RedBirds.statModifiers.Add(new StatModifier()
             {
@@ -1495,7 +1495,7 @@ namespace NevernamedsItems
             AdvancedSynergyEntry PaintItBlack = CustomSynergies.Add("Paint It Black", mandatorySynergyItemsPaintItBlack, optionalSynergyItemsPaintItBlack);
             //LIBRAM OF THE CHAMBER / CHAMBER MASTERS
             List<string> mandatorySynergyItemsChamberMasters = new List<string>() { "nn:libram_of_the_chambers" };
-            List<string> optionalSynergyItemsChamberMasters = new List<string>() { "yellow_chamber", "sixth_chamber", "oiled_cylinder", 
+            List<string> optionalSynergyItemsChamberMasters = new List<string>() { "yellow_chamber", "sixth_chamber", "oiled_cylinder",
                 "nn:nitroglycylinder", "nn:glass_chamber", "nn:flame_chamber", "nn:springloaded_chamber", "nn:withering_chamber", "nn:heavy_chamber", "nn:cyclopean_cylinder", "nn:recyclinder", "nn:barrel_chamber" };
             CustomSynergies.Add("Chamber Masters", mandatorySynergyItemsChamberMasters, optionalSynergyItemsChamberMasters);
             #endregion
@@ -1539,8 +1539,8 @@ namespace NevernamedsItems
             List<string> optionalSynergyItemsDARCRifle = new List<string>() { "riddle_of_lead", "nn:cloak_of_darkness", "dark_marker" };
             CustomSynergies.Add("DARC Rifle", mandatorySynergyItemsDARCRifle, optionalSynergyItemsDARCRifle);
 
-            CustomSynergies.Add("DARC Shotgun", 
-                new List<string>() { "nn:arc_shotgun" }, 
+            CustomSynergies.Add("DARC Shotgun",
+                new List<string>() { "nn:arc_shotgun" },
                 new List<string>() { "riddle_of_lead", "nn:cloak_of_darkness", "dark_marker" });
 
             CustomSynergies.Add("DARC Tactical",
@@ -1607,7 +1607,7 @@ namespace NevernamedsItems
 
             CustomSynergies.Add("<pierce/penetrate/eviscerate>",
                new List<string>() { "nn:service_weapon" },
-               new List<string>() { "ghost_bullets","sniper_rifle","nn:antimateriel_rifle", "nn:tau_cannon","nn:diamond_cutter" });
+               new List<string>() { "ghost_bullets", "sniper_rifle", "nn:antimateriel_rifle", "nn:tau_cannon", "nn:diamond_cutter" });
 
             CustomSynergies.Add("<charge/decimate/kaboom>",
                new List<string>() { "nn:service_weapon" },
@@ -1619,7 +1619,7 @@ namespace NevernamedsItems
 
             CustomSynergies.Add("Recursive Recursions",
                 new List<string>() { "nn:set_of_all_sets" },
-                new List<string>() { "nn:repetitron", "nn:repeatovolver", "nn:mobius_clip"});
+                new List<string>() { "nn:repetitron", "nn:repeatovolver", "nn:mobius_clip" });
 
             CustomSynergies.Add("Added Effect - Reave",
                 new List<string>() { "nn:rounds_of_the_reaver", "alpha_bullets" });
@@ -1656,11 +1656,11 @@ namespace NevernamedsItems
 
             CustomSynergies.Add("Big Borz",
                 new List<string>() { "nn:borz" },
-                new List<string>() { "trank_gun", "saa", "patriot", "vulcan_cannon", "rc_rocket","machine_fist","ration","chaff_grenade","box","fortunes_favor", "nanomachines", "ancient_heros_bandana" });
+                new List<string>() { "trank_gun", "saa", "patriot", "vulcan_cannon", "rc_rocket", "machine_fist", "ration", "chaff_grenade", "box", "fortunes_favor", "nanomachines", "ancient_heros_bandana" });
 
             CustomSynergies.Add("Any Way The Wind Blows",
                 new List<string>() { "nn:mama" },
-                new List<string>() { "nn:desk_fan", "balloon_gun","nn:cyclone_boots","nn:gusty" });
+                new List<string>() { "nn:desk_fan", "balloon_gun", "nn:cyclone_boots", "nn:gusty" });
 
             CustomSynergies.Add("Molotovs Revenge",
                 new List<string>() { "nn:makatov", "molotov_launcher" });
@@ -1673,6 +1673,74 @@ namespace NevernamedsItems
                 new List<string>() { "gunslingers_ashes", "skull_spitter", "vertebraek47", "nn:uzi_spine_mm" });
             #endregion
 
+            #region Return of the Squid
+            CustomSynergies.Add("Addiction Breaker",
+                new List<string>() { "nn:chewing_gun", "cigarettes" });
+
+            CustomSynergies.Add("Gumzookie",
+                new List<string>() { "nn:chewing_gun", "bubble_blaster" });
+
+            CustomSynergies.Add("Bazooka Joe",
+                new List<string>() { "nn:chewing_gun", "nn:bazooka" });
+
+            CustomSynergies.Add("Binocular",
+                new List<string>() { "nn:beholster_eye", "eye_of_the_beholster" });
+
+            CustomSynergies.Add("Liber Null",
+                new List<string>() { "nn:helm_of_chaos", "nn:entropew" });
+
+            CustomSynergies.Add("Leafy Greens",
+                new List<string>() { "nn:pine_needler" },
+                new List<string>() { "mahoguny", "seven_leaf_clover" });
+
+            CustomSynergies.Add("Creatures of the Wood",
+                new List<string>() { "nn:pine_needler" },
+                new List<string>() { "nail_gun", "nn:tack_shooter" });
+
+            CustomSynergies.Add("Superspreader",
+                new List<string>() { "nn:spitballer" },
+                new List<string>() { "plague_pistol", "nn:hepatizon_ammolet", "nn:pestilence", "nn:pestiferous_lead" });
+
+            CustomSynergies.Add("Spitfire",
+                new List<string>() { "nn:spitballer" },
+                new List<string>() { "nn:flaming_shells", "bubble_blaster", "nn:sick_worm", "nn:mini_monger", "nn:wrinkler" });
+
+            CustomSynergies.Add("Five Finger Fillet",
+                new List<string>() { "nn:wooden_knife", "knife_shield" });
+
+            CustomSynergies.Add("Not Mu' Shroom Left",
+                new List<string>() { "nn:shroomed_gun", "nn:shroomed_bullets" });
+
+            CustomSynergies.Add("Dear God That Pig Can Do Algebra",
+                new List<string>() { "nn:brain_blast", "pig" });
+
+            AdvancedSynergyEntry Pluralitas = CustomSynergies.Add("Pluralitas Non Est",
+                   new List<string>() { "nn:belt_feeder", "nn:50_cal_rounds" });
+            Pluralitas.ActiveWhenGunUnequipped = true;
+            Pluralitas.statModifiers.Add(new StatModifier()
+            {
+                amount = 1.25f,
+                statToBoost = PlayerStats.StatType.RateOfFire,
+                modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+            });
+            Pluralitas.statModifiers.Add(new StatModifier()
+            {
+                amount = 1.1f,
+                statToBoost = PlayerStats.StatType.ProjectileSpeed,
+                modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+            });
+
+            CustomSynergies.Add("Belting Out",
+                new List<string>() { "nn:belt_feeder" },
+                new List<string>() { "nn:gun_grease", "patriot", "lichy_trigger_finger", "nn:sanctified_oil" });
+            #endregion
+
+            //TODO
+
+            //Yours To Keep - Crown of Guns, Vulcan Cannon, and Smileys/Shades Revolver
+            //Prim and Proper - Guneonate, Marbled Uzi, and any Beholster Gun
+            //Mine over Matter - Flayed Revolver, Serious Cannon, and Treadnaught Barrel
+            //Hollow Hearted - Head of the Order, Mini Monger, and Pillarocket
 
         }
 

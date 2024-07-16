@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
@@ -25,6 +25,7 @@ namespace NevernamedsItems
             List<string> mandatorySynergyItems = new List<string>() { "nn:lucky_coin", "seven_leaf_clover" };
             CustomSynergies.Add("Even Luckier!", mandatorySynergyItems);
 
+            item.SetTag("lucky");
             LuckyCoinID = item.PickupObjectId;
         }
         public static int LuckyCoinID;
@@ -47,7 +48,7 @@ namespace NevernamedsItems
                 if (UnityEngine.Random.value > .25f)
                 {
                     GoodEffectActive = true;
-                    AkSoundEngine.PostEvent("Play_WPN_radgun_noice_01", base.gameObject);
+                    AkSoundEngine.PostEvent("luckyvoice", base.gameObject);
                     if (user.HasPickupID(Gungeon.Game.Items["nn:lump_of_space_metal"].PickupObjectId) || user.HasPickupID(Gungeon.Game.Items["nn:loose_change"].PickupObjectId) || user.HasPickupID(214) || user.HasPickupID(272) || user.HasPickupID(614) || user.HasPickupID(397))
                     {
                         LootEngine.SpawnItem(PickupObjectDatabase.GetById(68).gameObject, user.specRigidbody.UnitCenter, Vector2.zero, 1f, false, true, false);
@@ -68,7 +69,7 @@ namespace NevernamedsItems
                 else
                 {
                     BadEffectActive = true;
-                    AkSoundEngine.PostEvent("Play_WPN_radgun_wack_01", base.gameObject);
+                    AkSoundEngine.PostEvent("unluckyvoice", base.gameObject);
                     StartBadEffect(user);
                     StartCoroutine(ItemBuilder.HandleDuration(this, duration, user, EndBadEffect));
                     //ETGModConsole.Log("Lucky Coin has given you the negative effect, and thinks you have the Seven Leaf Clover");
@@ -79,7 +80,7 @@ namespace NevernamedsItems
                 if (UnityEngine.Random.value < .5f)
                 {
                     GoodEffectActive = true;
-                    AkSoundEngine.PostEvent("Play_WPN_radgun_noice_01", base.gameObject);
+                    AkSoundEngine.PostEvent("luckyvoice", base.gameObject);
                     if (user.HasPickupID(Gungeon.Game.Items["nn:lump_of_space_metal"].PickupObjectId) || user.HasPickupID(Gungeon.Game.Items["nn:loose_change"].PickupObjectId) || user.HasPickupID(214) || user.HasPickupID(272) || user.HasPickupID(614) || user.HasPickupID(397))
                     {
                         LootEngine.SpawnItem(PickupObjectDatabase.GetById(68).gameObject, user.specRigidbody.UnitCenter, Vector2.zero, 1f, false, true, false);
@@ -100,7 +101,7 @@ namespace NevernamedsItems
                 else
                 {
                     BadEffectActive = true;
-                    AkSoundEngine.PostEvent("Play_WPN_radgun_wack_01", base.gameObject);
+                    AkSoundEngine.PostEvent("unluckyvoice", base.gameObject);
                     StartBadEffect(user);
                     StartCoroutine(ItemBuilder.HandleDuration(this, duration, user, EndBadEffect));
                     //ETGModConsole.Log("Lucky Coin has given you the negative effect.");

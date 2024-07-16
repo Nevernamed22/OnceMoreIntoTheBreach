@@ -19,6 +19,7 @@ namespace NevernamedsItems
              "crowdedclips_icon");
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("bullet_modifier");
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         private int currentItems, lastItems;
         private int currentGuns, lastGuns;

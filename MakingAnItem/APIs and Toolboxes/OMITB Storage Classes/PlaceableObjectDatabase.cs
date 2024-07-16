@@ -1,6 +1,6 @@
 ﻿using Dungeonator;
 //using GungeonAPI;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;

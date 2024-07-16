@@ -26,7 +26,8 @@ namespace NevernamedsItems
             behav.preventNormalFireAudio = true;
             behav.overrideNormalFireAudio = "Play_WPN_plasmarifle_shot_01";
 
-            gun.SetupSprite(null, "nnboltcaster_idle_001", 8);
+            gun.SetGunSprites("nnboltcaster");
+
             gun.SetAnimationFPS(gun.shootAnimation, 16);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);
 
@@ -66,7 +67,7 @@ namespace NevernamedsItems
             projectile.baseData.damage = 30f;
             projectile.baseData.speed *= 3f;
             projectile.baseData.range *= 3f;
-            projectile.SetProjectileSpriteRight("boltcaster_proj", 23, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 13, 3);
+            projectile.SetProjectileSprite("boltcaster_proj", 23, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 13, 3);
             projectile.hitEffects = (PickupObjectDatabase.GetById(543) as Gun).DefaultModule.projectiles[0].hitEffects;
             projectile.pierceMinorBreakables = true;
             projectile.baseData.force *= 4f;

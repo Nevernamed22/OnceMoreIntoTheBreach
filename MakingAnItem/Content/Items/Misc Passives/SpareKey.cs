@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -16,7 +16,7 @@ namespace NevernamedsItems
             "Spare Key",
             "Important to Have",
             "Grants an extra key every floor.\nHaving a spare key is important, what if you lose the one you have?",
-            "sparekey_icon");
+            "sparekey_new");
             item.quality = PickupObject.ItemQuality.B;
             item.AddToSubShop(ItemBuilder.ShopType.Flynt);
         }

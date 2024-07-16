@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Ready... Set...");
             gun.SetLongDescription("Designed to signal the start of races, this flimsy plastic gun is cheap to fire and at least delivers a sonic payload.");
 
-            gun.SetupSprite(null, "starterpistol_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "starterpistol_idle_001", 8, "starterpistol_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 16);
 
@@ -47,7 +47,7 @@ namespace NevernamedsItems
             projectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
-            projectile.SetProjectileSpriteRight("starterpistol_proj", 6, 17, true, tk2dBaseSprite.Anchor.MiddleCenter, 2, 13);
+            projectile.SetProjectileSprite("starterpistol_proj", 6, 17, true, tk2dBaseSprite.Anchor.MiddleCenter, 2, 13);
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.YellowLaserCircleVFX;
             projectile.baseData.damage = 5;

@@ -22,6 +22,7 @@ namespace NevernamedsItems
 
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("bullet_modifier");
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public void ModifyVolley(ProjectileVolleyData volleyToModify)
         {

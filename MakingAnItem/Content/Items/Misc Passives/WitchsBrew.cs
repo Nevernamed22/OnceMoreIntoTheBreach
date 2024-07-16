@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Witches Brew";
-            string resourceName = "NevernamedsItems/Resources/witchsbrew_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<WitchsBrew>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Fire Burn and Cauldron Bubble";
-            string longDesc = "Doubles all enemies, but makes them much weaker." + "\n\nNot suitable for vegans or vegetarians.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<WitchsBrew>(
+           "Witches Brew",
+           "Fire Burn and Cauldron Bubble",
+           "Doubles all enemies, but makes them much weaker." + "\n\nNot suitable for vegans or vegetarians.",
+           "witchsbrew_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.A;
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.CHALLENGE_TOILANDTROUBLE_BEATEN, true);
         }

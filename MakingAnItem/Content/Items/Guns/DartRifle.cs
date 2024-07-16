@@ -23,8 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Tactical Incapacitation");
             gun.SetLongDescription("Used to incapacitate large animals for transport."+"\n\nLoaded with a powerful sedative.");
 
-            gun.SetupSprite(null, "dartrifle_idle_001", 8);
-
+            gun.SetGunSprites("dartrifle");
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
@@ -51,7 +50,7 @@ namespace NevernamedsItems
             projectile.AppliesStun = true;
             projectile.AppliedStunDuration += 7f;
             projectile.StunApplyChance = 1f;
-            projectile.SetProjectileSpriteRight("dartrifle_projectile", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 14, 3);
+            projectile.SetProjectileSprite("dartrifle_projectile", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 14, 3);
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Dart Rifle Darts", "NevernamedsItems/Resources/CustomGunAmmoTypes/dartrifle_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/dartrifle_clipempty");

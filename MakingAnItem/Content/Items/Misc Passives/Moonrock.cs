@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
@@ -15,14 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Moonrock";
-            string resourceName = "NevernamedsItems/Resources/moonrock_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Moonrock>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Little Orbiters";
-            string longDesc = "Causes small chunks of space debris to orbit your shots."+ "\n\nRound and round and round and round and round and round and round and round and round and round and round and round and round and round and round and round and round and...";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<Moonrock>(
+              "Moonrock",
+              "Little Orbiters",
+              "Causes small chunks of space debris to orbit your shots." + "\n\nRound and round and round and round and round and round and round and round and round and round and round and round and round and round and round and round and round and...",
+              "moonrock_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.B;
 
             moonrockProjectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);

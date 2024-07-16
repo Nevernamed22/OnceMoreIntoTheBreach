@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Dungeonator;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Bloodshot Eye";
-            string resourceName = "NevernamedsItems/Resources/bloodshoteye_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BloodshotEye>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Ow, Oof, Ouchie";
-            string longDesc = "Slightly increases damage for every hit taken."+"\nEffect is permanent."+"\n\nLooks like you could use some eyedrops.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<BloodshotEye>(
+               "Bloodshot Eye",
+               "Ow, Oof, Ouchie",
+               "Slightly increases damage for every hit taken." + "\nEffect is permanent." + "\n\nLooks like you could use some eyedrops.",
+               "bloodshoteye_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.A;
             BloodshotEyeID = item.PickupObjectId;
         }

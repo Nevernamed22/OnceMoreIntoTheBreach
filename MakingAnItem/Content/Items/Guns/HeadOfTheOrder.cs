@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using Alexandria.ItemAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -22,7 +23,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Guns, Immortal");
             gun.SetLongDescription("Though torn from the rest of it's corporeal form, the immortal soul of the High Priest remains bound to this weapon.");
             gun.AddPassiveStatModifier(PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
-            gun.SetupSprite(null, "headoftheorder_idle_001", 8);
+
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "headoftheorder_idle_001", 8, "headoftheorder_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
 
@@ -54,19 +56,19 @@ namespace NevernamedsItems
             homing.HomingRadius = 20f;
             homing.AngularVelocity = 400;
 
-            projectile.AnimateProjectile(new List<string> {
-                "atomic_projectile_001",
-                "atomic_projectile_002",
-                "atomic_projectile_003",
-                "atomic_projectile_004",
-                "atomic_projectile_005",
-                "atomic_projectile_006",
-                "atomic_projectile_007",
-                "atomic_projectile_008",
-                "atomic_projectile_009",
-                "atomic_projectile_010",
-            }, 15, tk2dSpriteAnimationClip.WrapMode.Loop, AnimateBullet.ConstructListOfSameValues<IntVector2>(new IntVector2(24, 20), 10), AnimateBullet.ConstructListOfSameValues(true, 10), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 10), AnimateBullet.ConstructListOfSameValues(true, 10), AnimateBullet.ConstructListOfSameValues(false, 10),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 10), AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(8, 8), 10), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 10), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 10), 0);
+            projectile.AnimateProjectileBundle("HeadOfTheOrderProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "HeadOfTheOrderProjectile",
+                   MiscTools.DupeList(new IntVector2(24, 20), 10), //Pixel Sizes
+                   MiscTools.DupeList(true, 10), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 10), //Anchors
+                   MiscTools.DupeList(true, 10), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 10), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 10), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(8, 8), 10), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 10), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 10)); // Override to copy from    
 
             gun.DefaultModule.projectiles[0] = projectile;
 

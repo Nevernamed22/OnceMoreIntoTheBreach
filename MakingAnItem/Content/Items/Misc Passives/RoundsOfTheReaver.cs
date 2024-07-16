@@ -23,6 +23,7 @@ namespace NevernamedsItems
             "roundsofthereaver_icon");           
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("bullet_modifier");
+            Doug.AddToLootPool(item.PickupObjectId);
         }
 
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)

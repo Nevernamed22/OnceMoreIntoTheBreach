@@ -28,7 +28,7 @@ namespace NevernamedsItems
 
             gun.SetShortDescription("Reap");
             gun.SetLongDescription("An old fashioned scythe without a gun attached. Rends the souls from enemies."+"\n\nFavoured by reapers and wheat farmers everywhere except the gungeon.");
-            gun.SetupSprite(null, "scythe_idle_001", 8);
+            gun.SetGunSprites("scythe");
 
 
             gun.SetAnimationFPS(gun.shootAnimation, 13);

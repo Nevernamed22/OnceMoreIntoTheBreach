@@ -23,7 +23,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("15th Century");
             gun.SetLongDescription("An ancient machine designed to spew forth rocket-powered arrows. Some consider it the great grandfather of the modern minigun."+"\n\nOnce it has begun firing, it is difficult to stop it.");
 
-            gun.SetupSprite(null, "hwacha_idle_001", 8);
+            gun.SetGunSprites("hwacha");
+
             //ItemBuilder.AddPassiveStatModifier(gun, PlayerStats.StatType.GlobalPriceMultiplier, 0.925f, StatModifier.ModifyMethod.MULTIPLICATIVE);
 
             gun.SetAnimationFPS(gun.shootAnimation, 8);

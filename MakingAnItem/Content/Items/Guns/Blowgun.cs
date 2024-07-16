@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Huff and Puff");
             gun.SetLongDescription("Relies on lung strength to propel poisonous darts." + "\n\nRobots may need to hold it up to a cooling vent or something.");
 
-            gun.SetupSprite(null, "blowgun_idle_001", 8);
+            gun.SetGunSprites("blowgun");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
@@ -53,7 +53,7 @@ namespace NevernamedsItems
             ExtremelySimplePoisonBulletBehaviour poisoning = projectile.gameObject.AddComponent<ExtremelySimplePoisonBulletBehaviour>();
             poisoning.procChance = 1;
             poisoning.useSpecialTint = false;
-            projectile.SetProjectileSpriteRight("blowgun_projectile", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 15, 8);
+            projectile.SetProjectileSprite("blowgun_projectile", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 15, 8);
 
             VFXPool HorizVFXOBj = VFXToolbox.CreateVFXPool("Blowgun Tilemap VFX Horiz",
                 new List<string>()

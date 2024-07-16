@@ -15,14 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Lead Soul";
-            string resourceName = "NevernamedsItems/Resources/leadsoul_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<LeadSoul>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "No Voice To Cry Suffering";
-            string longDesc = "Grants a regenerating shield."+"\n\nSteel yourself against the tribulations ahead, for the world is dark and cold...";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<LeadSoul>(
+              "Lead Soul",
+              "No Voice To Cry Suffering",
+              "Grants a regenerating shield." + "\n\nSteel yourself against the tribulations ahead, for the world is dark and cold...",
+              "leadsoul_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.S;
             LeadSoulID = item.PickupObjectId;
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.LICH_BEATEN_SHADE, true);

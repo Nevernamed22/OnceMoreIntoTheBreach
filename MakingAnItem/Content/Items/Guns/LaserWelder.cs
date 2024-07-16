@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Cleanup in Detail");
             gun.SetLongDescription("Blasts enemies apart in a burst of gruesome viscera... someone's gonna have to clean up that mess..." + "\n\nAllows for the repair of objects.");
 
-            gun.SetupSprite(null, "laserwelder_idle_001", 8);
+            gun.SetGunSprites("laserwelder");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
@@ -57,7 +57,7 @@ namespace NevernamedsItems
             // projectile.sprite.renderer.enabled = false;
             projectile.hitEffects = (PickupObjectDatabase.GetById(32) as Gun).DefaultModule.projectiles[0].hitEffects;
 
-            projectile.SetProjectileSpriteRight("laserwelder_proj", 10, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 3);
+            projectile.SetProjectileSprite("laserwelder_proj", 10, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 3);
             projectile.hitEffects.CenterDeathVFXOnProjectile = true;
 
             List<string> BeamAnimPaths = new List<string>()

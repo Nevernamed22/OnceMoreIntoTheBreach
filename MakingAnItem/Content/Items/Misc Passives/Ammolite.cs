@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Ammolite";
-            string resourceName = "NevernamedsItems/Resources/ammolite_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Ammolite>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Gemmed Shells";
-            string longDesc = "Refilling a gun with ammo permanently increases it's damage by 5%."+"\n\nThese beautiful opal-like gemstones are found in strange abundance within Gunymede's crust.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<Ammolite>(
+              "Ammolite",
+              "Gemmed Shells",
+              "Refilling a gun with ammo permanently increases it's damage by 5%." + "\n\nThese beautiful opal-like gemstones are found in strange abundance within Gunymede's crust.",
+              "ammolite_icon") as PassiveItem;           
             item.quality = PickupObject.ItemQuality.B;
         }
         Hook ammoPickupHook = new Hook(

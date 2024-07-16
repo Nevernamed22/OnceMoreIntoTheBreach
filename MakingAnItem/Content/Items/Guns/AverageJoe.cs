@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Everyman");
             gun.SetLongDescription("Shots from this gun deal damage equal to the average damage per bullet of each gun in the owner's arsenal."+ "\n\nA boring gun for the boring everyman- flagrantly and irresponsibly having been aesthetically modified with a red sash.");
 
-            gun.SetupSprite(null, "averagejoe_idle_001", 8);
+            gun.SetGunSprites("averagejoe");
 
             gun.SetAnimationFPS(gun.shootAnimation, 17);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);
@@ -48,7 +48,7 @@ namespace NevernamedsItems
             //BULLET STATS
             Projectile projectile = gun.DefaultModule.projectiles[0].InstantiateAndFakeprefab();          
             gun.DefaultModule.projectiles[0] = projectile;
-            projectile.SetProjectileSpriteRight("boltcaster_proj", 23, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 13, 3);
+            projectile.SetProjectileSprite("boltcaster_proj", 23, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 13, 3);
             projectile.gameObject.AddComponent<DamageAverageBehaviour>();
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;

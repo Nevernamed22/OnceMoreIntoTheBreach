@@ -9,6 +9,7 @@ using UnityEngine;
 using Alexandria.ItemAPI;
 using Dungeonator;
 using SaveAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -22,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Scienced To The Max");
             gun.SetLongDescription("A slimmed down, pocket version of the tachyon projectile emmitter known as the Fat Line." + "\n\nIt's projectiles defy each other, and have volatile effects upon meeting.");
 
-            gun.SetupSprite(null, "thinline_idle_001", 8);
+            gun.SetGunSprites("thinline");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
 
@@ -54,25 +55,25 @@ namespace NevernamedsItems
                     UnityEngine.Object.DontDestroyOnLoad(projectile);
                     projectile.baseData.damage *= 2f;
                     projectile.baseData.speed *= 0.5f;
+                    projectile.specRigidbody.CollideWithTileMap = false;
+                    projectile.m_ignoreTileCollisionsTimer = 1f;
                     projectile.pierceMinorBreakables = true;
                     ThinLineCollidee collidee = projectile.gameObject.GetOrAddComponent<ThinLineCollidee>();
                     mod.ammoCost = 0;
-                    projectile.AnimateProjectile(new List<string> {
-                "thinline_pinkproj_001",
-                "thinline_pinkproj_002",
-                "thinline_pinkproj_003",
-                "thinline_pinkproj_004",
-                "thinline_pinkproj_005",
-                "thinline_pinkproj_006",
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(10, 10),
-                new IntVector2(10, 10),
-                new IntVector2(10, 10),
-                new IntVector2(10, 10),
-                new IntVector2(10, 10),
-                new IntVector2(10, 10),
-            }, AnimateBullet.ConstructListOfSameValues(true, 6), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 6), AnimateBullet.ConstructListOfSameValues(true, 6), AnimateBullet.ConstructListOfSameValues(false, 6),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 6), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 6), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 6), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 6), 0);
+
+                    projectile.AnimateProjectileBundle("ThinLinePinkProjectile",
+                    Initialisation.ProjectileCollection,
+                    Initialisation.projectileAnimationCollection,
+                    "ThinLinePinkProjectile",
+                    MiscTools.DupeList(new IntVector2(10, 10), 6), //Pixel Sizes
+                    MiscTools.DupeList(true, 6), //Lightened
+                    MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 6), //Anchors
+                    MiscTools.DupeList(true, 6), //Anchors Change Colliders
+                    MiscTools.DupeList(false, 6), //Fixes Scales
+                    MiscTools.DupeList<Vector3?>(null, 6), //Manual Offsets
+                    MiscTools.DupeList<IntVector2?>(new IntVector2(10, 10), 6), //Override colliders
+                    MiscTools.DupeList<IntVector2?>(null, 6), //Override collider offsets
+                    MiscTools.DupeList<Projectile>(null, 6)); // Override to copy from                  
                     mod.projectiles[0] = projectile;
 
                 }
@@ -84,22 +85,19 @@ namespace NevernamedsItems
                     UnityEngine.Object.DontDestroyOnLoad(projectile);
                     projectile.baseData.damage *= 2f;
                     projectile.baseData.speed *= 0.5f;
-                    projectile.AnimateProjectile(new List<string> {
-                "thinline_blueproj_001",
-                "thinline_blueproj_002",
-                "thinline_blueproj_003",
-                "thinline_blueproj_004",
-                "thinline_blueproj_005",
-                "thinline_blueproj_006",
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(10, 10),
-                new IntVector2(10, 10),
-                new IntVector2(10, 10),
-                new IntVector2(10, 10),
-                new IntVector2(10, 10),
-                new IntVector2(10, 10),
-            }, AnimateBullet.ConstructListOfSameValues(true, 6), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 6), AnimateBullet.ConstructListOfSameValues(true, 6), AnimateBullet.ConstructListOfSameValues(false, 6),
-           AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 6), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 6), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 6), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 6), 0);
+                    projectile.AnimateProjectileBundle("ThinLineBlueProjectile",
+                    Initialisation.ProjectileCollection,
+                    Initialisation.projectileAnimationCollection,
+                    "ThinLineBlueProjectile",
+                    MiscTools.DupeList(new IntVector2(10, 10), 6), //Pixel Sizes
+                    MiscTools.DupeList(true, 6), //Lightened
+                    MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 6), //Anchors
+                    MiscTools.DupeList(true, 6), //Anchors Change Colliders
+                    MiscTools.DupeList(false, 6), //Fixes Scales
+                    MiscTools.DupeList<Vector3?>(null, 6), //Manual Offsets
+                    MiscTools.DupeList<IntVector2?>(new IntVector2(10, 10), 6), //Override colliders
+                    MiscTools.DupeList<IntVector2?>(null, 6), //Override collider offsets
+                    MiscTools.DupeList<Projectile>(null, 6)); // Override to copy from                  
                     mod.ammoCost = 1;
                     ThinLineCollision collider = projectile.gameObject.GetOrAddComponent<ThinLineCollision>();
                     mod.projectiles[0] = projectile;

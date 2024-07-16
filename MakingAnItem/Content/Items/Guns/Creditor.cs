@@ -11,6 +11,7 @@ using MonoMod.RuntimeDetour;
 using System.Reflection;
 using Alexandria.Misc;
 using SaveAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -24,7 +25,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Credit To The Team");
             gun.SetLongDescription("Converts the sheer economic potential of the Hegemony Credit into a powerful blast."+"\n\nDraws from the bearer's stored funds.");
 
-            gun.SetupSprite(null, "creditor_idle_001", 8);
+            gun.SetGunSprites("creditor");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
 
@@ -56,30 +57,19 @@ namespace NevernamedsItems
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.GreenLaserCircleVFX;
 
-            projectile.AnimateProjectile(new List<string> {
-                "creditorproj_001",
-                "creditorproj_002",
-                "creditorproj_003",
-                "creditorproj_004",
-                "creditorproj_005",
-                "creditorproj_006",
-                "creditorproj_007",
-                "creditorproj_008",
-                "creditorproj_009",
-                "creditorproj_010",
-            }, 
-            10, //FPS
-            tk2dSpriteAnimationClip.WrapMode.Loop, //Loops
-            AnimateBullet.ConstructListOfSameValues<IntVector2>(new IntVector2(15, 11), 10), //Pixel Sizes
-            AnimateBullet.ConstructListOfSameValues(true, 10), //Lightened
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 10), //Anchors
-            AnimateBullet.ConstructListOfSameValues(true, 10), //Anchors Change Colliders
-            AnimateBullet.ConstructListOfSameValues(false, 10),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 10), 
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(13, 7), 10), //Override Colliders
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 10), //Override Collider Offsets
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 10), 0); //Override Proj to Copy From
-
+            projectile.AnimateProjectileBundle("CreditorProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "CreditorProjectile",
+                   AnimateBullet.ConstructListOfSameValues(new IntVector2(15, 11), 10), //Pixel Sizes
+                   AnimateBullet.ConstructListOfSameValues(true, 10), //Lightened
+                   AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 10), //Anchors
+                   AnimateBullet.ConstructListOfSameValues(true, 10), //Anchors Change Colliders
+                   AnimateBullet.ConstructListOfSameValues(false, 10), //Fixes Scales
+                   AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 10), //Manual Offsets
+                   AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(13, 7), 10), //Override colliders
+                   AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 10), //Override collider offsets
+                   AnimateBullet.ConstructListOfSameValues<Projectile>(null, 10)); // Override to copy from    
 
             gun.DefaultModule.projectiles[0] = projectile;
 

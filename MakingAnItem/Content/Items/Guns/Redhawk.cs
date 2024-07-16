@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Rugged");
             gun.SetLongDescription("An ancient masterwork, rumoured to be an unreleased Edwin classical original." + "\n\nThe Redhawk's bullets seem to rip and rend the exact right strands of sinew and muscle to cripple any foe.");
 
-            gun.SetupSprite(null, "redhawk_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "redhawk_idle_001", 8, "redhawk_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);
@@ -55,7 +55,7 @@ namespace NevernamedsItems
             projectile.baseData.speed = 45f;     
             projectile.hitEffects = (PickupObjectDatabase.GetById(32) as Gun).DefaultModule.projectiles[0].hitEffects;
 
-            projectile.SetProjectileSpriteRight("laserwelder_proj", 10, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 3);
+            projectile.SetProjectileSprite("laserwelder_proj", 10, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 3);
             projectile.hitEffects.CenterDeathVFXOnProjectile = true;
 
             ProjWeaknessModifier weakness = projectile.gameObject.AddComponent<ProjWeaknessModifier>();

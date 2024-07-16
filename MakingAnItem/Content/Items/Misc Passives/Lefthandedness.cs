@@ -11,15 +11,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Lefthandedness";
-            string resourceName = "NevernamedsItems/Resources/lefthandedness_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Lefthandedness>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Shell'tan's Sign";
-            string longDesc = "Empowers bullets when firing to the left." + "\n\nFor some unknown reason, left-handed people are statistically better at all known branches of Ammomancy.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PassiveItem item = ItemSetup.NewItem<Lefthandedness>(
+               "Lefthandedness",
+               "Shell'tan's Sign",
+               "Empowers bullets when firing to the left." + "\n\nFor some unknown reason, left-handed people are statistically better at all known branches of Ammomancy.",
+               "lefthandedness_icon") as PassiveItem;         
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.C;
         }

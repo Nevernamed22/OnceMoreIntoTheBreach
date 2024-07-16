@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Firing On All Cylinders");
             gun.SetLongDescription("A humongous firearm, created by the Gungeon's Master to fire the legendary master rounds, though he never truly finished it." + "\n\nAfter it's recent rediscovery, the Blacksmith managed to finish the spectacular weapon, and even forged Master-Sized bullet replicas for ammo." + "\n\nNothing can beat the gun's original purpose though, so getting your grubby hands on some master rounds would be good.");
 
-            gun.SetupSprite(null, "mastersgun_idle_001", 8);
+            gun.SetGunSprites("mastersgun");
 
             gun.SetAnimationFPS(gun.shootAnimation, 11);
 

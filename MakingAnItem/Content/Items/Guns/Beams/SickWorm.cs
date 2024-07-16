@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Projectile Vomit");
             gun.SetLongDescription("A rare example of Gungeon Gigantism, this worm has developed a remarkable evolutionary defence mechanism; regurgitating high-speed digestive juices at potential predators.");
 
-            gun.SetupSprite(null, "sickworm_idle_001", 8);
+            gun.SetGunSprites("sickworm");
 
             gun.SetAnimationFPS(gun.shootAnimation, 16);
             gun.isAudioLoop = true;
@@ -98,7 +98,7 @@ namespace NevernamedsItems
             spewProj.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(spewProj.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(spewProj);
-            spewProj.SetProjectileSpriteRight("sickworm_projectile", 5, 5, false, tk2dBaseSprite.Anchor.MiddleCenter, 3, 3);
+            spewProj.SetProjectileSprite("sickworm_projectile", 5, 5, false, tk2dBaseSprite.Anchor.MiddleCenter, 3, 3);
             spewProj.baseData.damage = 2;
             RandomProjectileStatsComponent randomStats = spewProj.gameObject.AddComponent<RandomProjectileStatsComponent>();
             randomStats.randomScale = true;

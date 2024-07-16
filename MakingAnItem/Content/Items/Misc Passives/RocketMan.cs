@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Rocket Man";
-            string resourceName = "NevernamedsItems/Resources/rocketman_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<RocketMan>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Gonna be a long long time";
-            string longDesc = "Chance to fire random rockets." + "\n\nThe prized relic of a reclusive group of Detoknights, though in truth it does not belong to them at all...";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PickupObject item = ItemSetup.NewItem<RocketMan>(
+            "Rocket Man",
+            "Gonna be a long long time",
+            "Chance to fire random rockets." + "\n\nThe prized relic of a reclusive group of Detoknights, though in truth it does not belong to them at all...",
+            "rocketman_icon");           
             item.quality = PickupObject.ItemQuality.B;
             RocketManID = item.PickupObjectId;
         }

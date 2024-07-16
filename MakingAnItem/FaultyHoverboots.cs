@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -12,32 +12,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Faulty Hoverboots";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/workinprogress_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<FaultyHoverboots>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Come Fly With Me";
-            string longDesc = "Grants flight, but ceases to function upon dodge rolling. Resets every floor." + "\n\nConceptualised by a Turtle, and created by a lunatic with nothing better to do.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
+            PassiveItem item = ItemSetup.NewItem<FaultyHoverboots>(
+              "Faulty Hoverboots",
+              "Come Fly With Me",
+              "Grants flight, but ceases to function upon dodge rolling. Resets every floor." + "\n\nConceptualised by a Turtle, and created by a lunatic with nothing better to do.",
+              "workinprogress_icon") as PassiveItem;
+          
             item.quality = PickupObject.ItemQuality.EXCLUDED;
         }
         public bool isFlying = false;

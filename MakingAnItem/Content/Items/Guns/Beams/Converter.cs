@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("My Bullets!");
             gun.SetLongDescription("Converts enemy bullets to your side."+"\n\nPart of a dismantled mind control device. Not strong enough to convert the Gundead themselves, but enemy shots have far weaker wills.");
 
-            gun.SetupSprite(null, "converter_idle_001", 8);
+            gun.SetGunSprites("converter");
 
             gun.SetAnimationFPS(gun.shootAnimation, 9);
             gun.isAudioLoop = true;

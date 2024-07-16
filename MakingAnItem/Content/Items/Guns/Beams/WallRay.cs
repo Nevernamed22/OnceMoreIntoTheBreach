@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("90 Degrees Are Best Degrees");
             gun.SetLongDescription("Creates two beams at ninety degree angles from the direction aimed."+"\n\nInvented and used primarily for window washing.");
 
-            gun.SetupSprite(null, "wallray_idle_001", 8);
+            gun.SetGunSprites("wallray");
 
             gun.SetAnimationFPS(gun.shootAnimation, 8);
             gun.isAudioLoop = true;

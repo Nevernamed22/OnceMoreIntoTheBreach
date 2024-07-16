@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("");
             gun.SetLongDescription("");
 
-            gun.SetupSprite(null, "bigborz_idle_001", 8);
+            gun.SetGunSprites("bigborz", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);
@@ -48,13 +48,14 @@ namespace NevernamedsItems
             Projectile projectile = gun.DefaultModule.projectiles[0].InstantiateAndFakeprefab();
             projectile.baseData.speed *= 1.5f;
             projectile.baseData.damage = 6f;
-            projectile.SetProjectileSpriteRight("12x12_yellowenemy_projectile", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 11);
+            projectile.SetProjectileSprite("12x12_yellowenemy_projectile", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 11);
             projectile.hitEffects = (PickupObjectDatabase.GetById(15) as Gun).DefaultModule.projectiles[0].hitEffects;
             gun.DefaultModule.projectiles[0] = projectile;
 
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             ID = gun.PickupObjectId;
+            gun.SetName("Borz");
         }
         public static int ID;        
     }

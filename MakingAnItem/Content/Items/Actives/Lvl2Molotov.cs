@@ -14,15 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Lvl. 2 Molotov";
-
-            string resourceName = "NevernamedsItems/Resources/ThrowableActives/lvl2molotov_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Lvl2Molotov>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "BURN IT DOWN";
-            string longDesc = "A souped up molotov, mixed together using organic, non-gmo, locally grown magical chemicals.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            SpawnObjectPlayerItem item = ItemSetup.NewItem<Lvl2Molotov>(
+               "Lvl. 2 Molotov",
+               "BURN IT DOWN",
+               "A souped up molotov, mixed together using organic, non-gmo, locally grown magical chemicals.",
+               "lvl2molotov_icon") as SpawnObjectPlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 800);
             item.consumable = false;
 

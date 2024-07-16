@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Horned Helmet";
-            string resourceName = "NevernamedsItems/Resources/hornedhelmet_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<HornedHelmet>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "19 STR 7 INT";
-            string longDesc = "You burst into a berserker rage upon the mere sight of fresh prey. What a monster!";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<HornedHelmet>(
+              "Horned Helmet",
+              "19 STR 7 INT",
+              "You burst into a berserker rage upon the mere sight of fresh prey. What a monster!",
+              "hornedhelmet_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.B;
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
             HornedHelmetID = item.PickupObjectId;

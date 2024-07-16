@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Alexandria.Misc;
 using Dungeonator;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
@@ -13,18 +13,13 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Tack Shooter";
-            string resourceName = "NevernamedsItems/Resources/NeoActiveSprites/tackshooter_generic";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<TackShooter>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Tacked On";
-            string longDesc = "Places a radial tack-spraying turret."+"\n\nLegends tell of a tiny monkey hiding inside, operating the device.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<TackShooter>(
+              "Tack Shooter",
+              "Tacked On",
+              "Places a radial tack-spraying turret." + "\n\nLegends tell of a tiny monkey hiding inside, operating the device.",
+              "tackshooter_generic") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 200);
-
             TackShooterObject = SetupTackShooter();
-
             item.consumable = false;
             item.quality = ItemQuality.D;
         }
@@ -136,6 +131,7 @@ namespace NevernamedsItems
         {
             Vector2 position = user.PositionInDistanceFromAimDir(1);
             GameObject tackShooter = UnityEngine.Object.Instantiate<GameObject>(TackShooterObject, position, Quaternion.identity);
+            tackShooter.GetComponent<AIActor>().CompanionOwner = user;
             tackShooter.GetComponent<tk2dSprite>().PlaceAtLocalPositionByAnchor(position, tk2dBaseSprite.Anchor.MiddleCenter);
             TackShooterBehaviour shooterComp = tackShooter.GetComponent<TackShooterBehaviour>();
             if (shooterComp)

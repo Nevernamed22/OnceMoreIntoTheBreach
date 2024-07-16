@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Tracked");
             gun.SetLongDescription("Advanced tech designed for private security contractors on the fringes of space."+"\n\nHolding down fire allows the operator to enter 'aim time'.");
 
-            gun.SetupSprite(null, "highvelocityrifle_idle_001", 8);
+            gun.SetGunSprites("highvelocityrifle");
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
 

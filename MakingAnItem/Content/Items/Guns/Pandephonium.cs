@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -26,7 +26,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Chaostric Melody");
             gun.SetLongDescription("The bullets from this peculiar brass shotgun seem to want revenge against their creator. Even though they can't do any real harm, this won't stop them trying.");
 
-            gun.SetupSprite(null, "pandephonium_idle_001", 8);
+            gun.SetGunSprites("pandephonium");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 

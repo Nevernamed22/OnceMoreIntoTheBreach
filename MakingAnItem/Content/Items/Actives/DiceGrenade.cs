@@ -13,15 +13,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Dice Grenade";
+            SpawnObjectPlayerItem item = ItemSetup.NewItem<DiceGrenade>(
+               "Dice Grenade",
+               "Die, Fool!",
+               "A rare collectors item, two explosions are never quite the same." + "\n\nDesigned for the assassination of tabletop roleplayers, this one was put up for resale online after a series of continually poor rolls.",
+               "dicegrenade_icon") as SpawnObjectPlayerItem;
 
-            string resourceName = "NevernamedsItems/Resources/ThrowableActives/dicegrenade_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<DiceGrenade>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Die, Fool!";
-            string longDesc = "A rare collectors item, two explosions are never quite the same." + "\n\nDesigned for the assassination of tabletop roleplayers, this one was put up for resale online after a series of continually poor rolls.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 190);
             item.consumable = false;
 

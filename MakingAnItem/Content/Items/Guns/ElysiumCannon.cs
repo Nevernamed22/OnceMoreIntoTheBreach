@@ -6,7 +6,8 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -23,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("The Sky Will Crack");
             gun.SetLongDescription("Cracks reality and unleashes a torrent of holey light."+"\n\nInitially created by the Order of the True Gun for righteous inquisitions, this unimaginable flood of radiant power has been the subject of countless wars.");
 
-            gun.SetupSprite(null, "elysiumcannon_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "elysiumcannon_idle_001", 8, "elysiumcannon_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation,16);
             gun.SetAnimationFPS(gun.idleAnimation, 16);
@@ -62,7 +63,9 @@ namespace NevernamedsItems
                 pierce.penetration = 100;
                 pierce.penetratesBreakables = true;
                 projectile.pierceMinorBreakables = true;
-                projectile.SetProjectileSpriteRight("elysiumcannon_proj", 56, 56, true, tk2dBaseSprite.Anchor.MiddleCenter, 50, 50);
+
+
+                projectile.SetProjectileSprite("elysiumcannon_proj", 56, 56, true, tk2dBaseSprite.Anchor.MiddleCenter, 50, 50);
 
                 BounceProjModifier Bouncing = projectile.gameObject.GetOrAddComponent<BounceProjModifier>();
                     Bouncing.numberOfBounces = 1;

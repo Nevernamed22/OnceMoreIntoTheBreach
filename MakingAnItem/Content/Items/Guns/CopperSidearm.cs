@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Conductive");
             gun.SetLongDescription("A prime conductor of electricity, the bullets from this gun connect back to the wielder by an electric arc."+"\n\nSmells faintly of wax.");
 
-            gun.SetupSprite(null, "coppersidearm_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "coppersidearm_idle_001", 8, "coppersidearm_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 16);
             gun.SetAnimationFPS(gun.reloadAnimation, 1);
@@ -51,7 +51,7 @@ namespace NevernamedsItems
             projectile.baseData.damage = 6f;
             projectile.baseData.speed *= 0.5f;
             projectile.baseData.range *= 10f;
-            projectile.SetProjectileSpriteRight("coppersidearm_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
+            projectile.SetProjectileSprite("coppersidearm_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
 
             GameObject LinkVFXPrefab = FakePrefab.Clone(Game.Items["shock_rounds"].GetComponent<ComplexProjectileModifier>().ChainLightningVFX);
             FakePrefab.MarkAsFakePrefab(LinkVFXPrefab);

@@ -46,8 +46,7 @@ namespace NevernamedsItems
                 {
                     float finalAngle = startAngle - (ProjectileInterval * iteration);
 
-                    GameObject newBulletOBJ = FakePrefab.Clone(parentProjectile.gameObject);
-                    GameObject spawnedBulletOBJ = SpawnManager.SpawnProjectile(newBulletOBJ, parentProjectile.sprite.WorldCenter, Quaternion.Euler(0f, 0f, finalAngle), true);
+                    GameObject spawnedBulletOBJ = SpawnManager.SpawnProjectile(parentProjectile.gameObject, parentProjectile.SafeCenter, Quaternion.Euler(0f, 0f, finalAngle), true);
                     Projectile component = spawnedBulletOBJ.GetComponent<Projectile>();
                     if (component != null)
                     {

@@ -21,7 +21,9 @@ namespace NevernamedsItems
             gun.gameObject.AddComponent<LovePistol>();
             gun.SetShortDescription(";)");
             gun.SetLongDescription("A low powered pistol, formerly kept in the back pocket of Hespera, the Pride of Venus, for times of need.");
-            gun.SetupSprite(null, "lovepistol_idle_001", 8);
+
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "lovepistol_idle_001", 8, "lovepistol_ammonomicon_001");
+
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
@@ -45,11 +47,9 @@ namespace NevernamedsItems
             projectile.baseData.speed *= 0.9f;
             projectile.baseData.damage *= 0.8f;
             LovePistolCharmBehaviour charmBehaviour = projectile.gameObject.AddComponent<LovePistolCharmBehaviour>();
-            projectile.SetProjectileSpriteRight("lovepistol_projectile", 7, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 6);
+            projectile.SetProjectileSprite("lovepistol_projectile", 7, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 6);
 
-            projectile.transform.parent = gun.barrelOffset;
-            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
-            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Love Pistol Hearts", "NevernamedsItems/Resources/CustomGunAmmoTypes/lovepistol_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/lovepistol_clipempty");
+            
             gun.quality = PickupObject.ItemQuality.B;
             gun.encounterTrackable.EncounterGuid = "this is the Love Pistol";
             ETGMod.Databases.Items.Add(gun, null, "ANY");

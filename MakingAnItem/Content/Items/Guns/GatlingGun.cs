@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Grandaddy");
             gun.SetLongDescription("An old rapid-fire weapon made obsolete by the more modern minigun.");
 
-            gun.SetupSprite(null, "gatlinggun_idle_001", 8);
+            gun.SetGunSprites("gatlinggun");
 
             gun.SetAnimationFPS(gun.shootAnimation, 16);
 

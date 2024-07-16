@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Try Catch This!");
             gun.SetLongDescription("This gun can't seem to decide what gun it wants to be!" + "\n\nFished from the deepest waters of the Gungeon's coast.");
 
-            gun.SetupSprite(null, "missinguno_idle_001", 8);
+            gun.SetGunSprites("missinguno");
 
             gun.SetAnimationFPS(gun.shootAnimation, 14);
 

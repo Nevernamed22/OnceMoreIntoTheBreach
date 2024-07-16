@@ -24,7 +24,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Bad Choices");
             gun.SetLongDescription("Fires sharp, bouncing discs." + "\n\nCapable of hurting it's bearer, because someone thought that would be funny.");
 
-            gun.SetupSprite(null, "discgun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "discgun_idle_001", 8, "discgun_ammonomicon_001");
+
             gun.SetAnimationFPS(gun.shootAnimation, 14);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
@@ -48,7 +49,7 @@ namespace NevernamedsItems
             projectile.baseData.damage *= 4f;
             projectile.baseData.range *= 20f;
             projectile.baseData.speed *= 0.4f;
-            projectile.SetProjectileSpriteRight("discgun_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 9);
+            projectile.SetProjectileSprite("discgun_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 9);
             SelfHarmBulletBehaviour SuicidalTendancies = projectile.gameObject.AddComponent<SelfHarmBulletBehaviour>();
 
             PierceProjModifier Piercing = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();

@@ -6,8 +6,9 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -25,7 +26,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Bork Bork");
             gun.SetLongDescription("Lovingly carved in the image of Junior II, this gun has some fighting spirit, despite it's cuddly appearance."+"\n\n'Bork Bork' - Junior II");
 
-            gun.SetupSprite(null, "corgun_idle_001", 8);
+            gun.SetGunSprites("corgun");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(519) as Gun).gunSwitchGroup;
@@ -65,7 +66,8 @@ namespace NevernamedsItems
             homing.AngularVelocity = 70f;
             homing.HomingRadius = 100f;
 
-            projectile.SetProjectileSpriteRight("doggun_projectile", 16, 11, false, tk2dBaseSprite.Anchor.MiddleCenter, 15, 10);
+
+            projectile.SetProjectileSprite("doggun_projectile", 16, 11, false, tk2dBaseSprite.Anchor.MiddleCenter, 15, 10);
 
             projectile.transform.parent = gun.barrelOffset;
 

@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -44,7 +44,8 @@ namespace NevernamedsItems
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
             projectile.hitEffects.alwaysUseMidair = true;
 
-            projectile.SetProjectileSpriteRight("eldermagnum_projectile", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
+
+            //projectile.SetProjectileSpriteRight("eldermagnum_projectile", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
             gun.DefaultModule.projectiles[0] = projectile;
 
             gun.quality = PickupObject.ItemQuality.EXCLUDED;

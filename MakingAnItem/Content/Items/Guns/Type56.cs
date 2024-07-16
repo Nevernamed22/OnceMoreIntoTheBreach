@@ -17,7 +17,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("State Standard");
             gun.SetLongDescription("Cheap imperial hardware from the fringes of Hegemony space. Its brittle ammunition is prone to fragmentation.");
 
-            gun.SetupSprite(null, "type56_idle_001", 8);
+            gun.SetGunSprites("type56");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);

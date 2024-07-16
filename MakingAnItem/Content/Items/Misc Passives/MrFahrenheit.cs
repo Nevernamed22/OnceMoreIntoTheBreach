@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Gungeon;
 
 namespace NevernamedsItems
@@ -13,33 +13,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Mr. Fahrenheit";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/mrfahrenheit_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<MrFahrenheit>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "200 Degrees";
-            string longDesc = "Sprint around, leaving a firey trail!" + "\n\nThere's no stopping you!";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item            
-            //Set the rarity of the item
+            PassiveItem item = ItemSetup.NewItem<MrFahrenheit>(
+              "Mr. Fahrenheit",
+              "200 Degrees",
+              "Sprint around, leaving a firey trail!" + "\n\nThere's no stopping you!",
+              "mrfahrenheit_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.B;
-
             AssetBundle assetBundle = ResourceManager.LoadAssetBundle("shared_auto_001");
             MrFahrenheit.goopDefs = new List<GoopDefinition>();
             foreach (string text in MrFahrenheit.goops)

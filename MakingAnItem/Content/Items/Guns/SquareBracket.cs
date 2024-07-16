@@ -17,7 +17,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Brace For Impact");
             gun.SetLongDescription("Fires square wave energy beams."+"\n\nA remnant of an ancient cult of technomages, versed in the dark arts of vector rotation.");
 
-            gun.SetupSprite(null, "squarebracket_idle_001", 8);
+            gun.SetGunSprites("squarebracket");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 

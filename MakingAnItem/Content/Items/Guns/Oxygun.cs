@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Bullets Not Included");
             gun.SetLongDescription("This standard-issue colony multi-tool seems to be stuck on the 'offensive' setting." + "\n\nUpon finding it, there seemed to be no shots left inside.");
 
-            gun.SetupSprite(null, "oxygun_idle_001", 8);
+            gun.SetGunSprites("oxygun");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 

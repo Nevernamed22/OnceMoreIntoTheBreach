@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -24,8 +24,8 @@ namespace NevernamedsItems
             gun.gameObject.AddComponent<TheLodger>();
             gun.SetShortDescription("Cherish What You Have");
             gun.SetLongDescription("Many Gungeoneers have a bad habit of turning their noses up at items they deem to be of poor quality, but the Lodger seeks to teach them a lesson in humility.");
-        
-            gun.SetupSprite(null, "lodger_idle_001", 8);
+
+            gun.SetGunSprites("lodger");
  
             gun.SetAnimationFPS(gun.shootAnimation, 10);
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);

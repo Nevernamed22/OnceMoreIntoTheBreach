@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("");
             gun.SetLongDescription("");
 
-            gun.SetupSprite(null, "carrionformthree_idle_001", 8);
+            gun.SetGunSprites("carrionformthree", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 13);
             gun.SetAnimationFPS(gun.idleAnimation, 13);

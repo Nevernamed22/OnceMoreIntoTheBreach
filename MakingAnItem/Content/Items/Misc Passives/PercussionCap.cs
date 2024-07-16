@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Percussion Cap";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/bluecap_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<PercussionCap>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Blanks Enspore";
-            string longDesc = "This mushroom cap responds to the resonant frequency of blanks, letting it know that it's time to release it's spores.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            BlankModificationItem item = ItemSetup.NewItem<PercussionCap>(
+               "Percussion Cap",
+               "Blanks Enspore",
+               "This mushroom cap responds to the resonant frequency of blanks, letting it know that it's time to release it's spores.",
+               "bluecap_icon") as BlankModificationItem;
             item.quality = PickupObject.ItemQuality.C;
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);
             ID = item.PickupObjectId;

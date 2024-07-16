@@ -26,7 +26,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Beep");
             gun.SetLongDescription("Often used in more technologically adept shops to scan items for purchase, but Bello has no idea how to use a computer.");
 
-            gun.SetupSprite(null, "barcodescanner_idle_001", 8);
+            gun.SetGunSprites("barcodescanner");
 
             gun.SetAnimationFPS(gun.shootAnimation, 5);
 
@@ -51,7 +51,7 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile);
 
             projectile.baseData.damage = 6f;
-            projectile.SetProjectileSpriteRight("barcodescanner_projectile", 4, 14, false, tk2dBaseSprite.Anchor.MiddleCenter, 2, 12);
+            projectile.SetProjectileSprite("barcodescanner_projectile", 4, 14, false, tk2dBaseSprite.Anchor.MiddleCenter, 2, 12);
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
             projectile.transform.parent = gun.barrelOffset;

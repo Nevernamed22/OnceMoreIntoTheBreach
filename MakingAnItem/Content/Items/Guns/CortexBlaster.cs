@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Crash Bang-De-Shoot");
             gun.SetLongDescription("The signature weapon of a mad, sad scientist. It's inner workings are complete nonsense to everyone save it's creator."+"\n\nCharges up to fire swirling charges of plasma.");
 
-            gun.SetupSprite(null, "cortexblaster_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "cortexblaster_idle_001", 8, "cortexblaster_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
             gun.SetAnimationFPS(gun.chargeAnimation, 10);
@@ -55,7 +55,7 @@ namespace NevernamedsItems
 
             //BULLET STATS
             Projectile projectile = gun.DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            projectile.SetProjectileSpriteRight("cortexblaster_proj", 17, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 11, 3);
+            projectile.SetProjectileSprite("cortexblaster_proj", 17, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 11, 3);
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.baseData.damage = 10;
             projectile.baseData.force *= 1.2f;
@@ -73,7 +73,7 @@ namespace NevernamedsItems
             ImprovedHelixProjectile leftWiggle = DataCloners.CopyFields<ImprovedHelixProjectile>(Instantiate((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]));
             leftWiggle.SpawnShadowBulletsOnSpawn = false;
             leftWiggle.gameObject.MakeFakePrefab();
-            leftWiggle.SetProjectileSpriteRight("cortexblaster_proj", 17, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 11, 3);
+            leftWiggle.SetProjectileSprite("cortexblaster_proj", 17, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 11, 3);
             leftWiggle.hitEffects.alwaysUseMidair = true;
             leftWiggle.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.PurpleLaserCircleVFX;
             leftWiggle.baseData.damage = 11;
@@ -101,7 +101,7 @@ namespace NevernamedsItems
             ImprovedHelixProjectile rightWiggle = DataCloners.CopyFields<ImprovedHelixProjectile>(Instantiate((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]));
             rightWiggle.SpawnShadowBulletsOnSpawn = false;
             rightWiggle.gameObject.MakeFakePrefab();
-            rightWiggle.SetProjectileSpriteRight("cortexblaster_proj", 17, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 11, 3);
+            rightWiggle.SetProjectileSprite("cortexblaster_proj", 17, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 11, 3);
             rightWiggle.hitEffects.alwaysUseMidair = true;
             rightWiggle.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.PurpleLaserCircleVFX;
             rightWiggle.startInverted = true;
@@ -129,7 +129,7 @@ namespace NevernamedsItems
 
             //CHARGE BULLET STATS
             Projectile chargeprojectile = (PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            chargeprojectile.SetProjectileSpriteRight("cortexblaster_proj", 17, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 11, 3);
+            chargeprojectile.SetProjectileSprite("cortexblaster_proj", 17, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 11, 3);
             chargeprojectile.hitEffects.alwaysUseMidair = true;
             chargeprojectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.PurpleLaserCircleVFX;
             chargeprojectile.baseData.damage = 11;

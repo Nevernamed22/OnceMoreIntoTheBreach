@@ -4,13 +4,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using Alexandria.ItemAPI;
+using Alexandria.Misc;
+using Dungeonator;
 
 namespace NevernamedsItems
 {
     public class LobbedProjectile : Projectile
     {
+        private RoomHandler m_room;
         public override void Start()
         {
+            AIActor nearestEnemy = ((Vector2)base.LastPosition).GetNearestEnemyToPosition(true, Dungeonator.RoomHandler.ActiveEnemyType.All, null, null);
+            if (nearestEnemy != null) { SetDestination(nearestEnemy.Position); }
+
             m_canCollide = false;
             PierceProjModifier pierce = this.gameObject.GetOrAddComponent<PierceProjModifier>();
             pierce.penetratesBreakables = true;
@@ -22,7 +29,94 @@ namespace NevernamedsItems
             transform.rotation = Quaternion.identity;
             m_originalHeightOffGround = sprite.HeightOffGround;
             specRigidbody.OnPreMovement += HandleHeight;
-        }
+
+            
+
+                /*    if (this.ProjectilePlayerOwner() && this.ProjectilePlayerOwner().CurrentGun && !BraveInput.GetInstanceForPlayer(this.ProjectilePlayerOwner().PlayerIDX).IsKeyboardAndMouse(false))
+                    {
+                        Vector2 start = this.ProjectilePlayerOwner().CurrentGun.barrelOffset.position;
+
+                        Dungeon dungeon = GameManager.Instance.Dungeon;
+                        Vector2 vector = start + this.ProjectilePlayerOwner().CurrentGun.CurrentAngle.DegreeToVector2().normalized * 20;
+                        this.m_room = start.GetAbsoluteRoom();
+                        bool flag = false;
+                        Vector2 vector2 = start;
+                        IntVector2 intVector = vector2.ToIntVector2(VectorConversions.Floor);
+                        if (dungeon.data.CheckInBoundsAndValid(intVector))
+                        {
+                            flag = dungeon.data[intVector].isExitCell;
+                        }
+                        float num = vector.x - start.x;
+                        float num2 = vector.y - start.y;
+                        float num3 = Mathf.Sign(vector.x - start.x);
+                        float num4 = Mathf.Sign(vector.y - start.y);
+                        bool flag2 = num3 > 0f;
+                        bool flag3 = num4 > 0f;
+                        int num5 = 0;
+                        while (Vector2.Distance(vector2, vector) > 0.1f && num5 < 10000)
+                        {
+                            num5++;
+                            float num6 = Mathf.Abs((((!flag2) ? Mathf.Floor(vector2.x) : Mathf.Ceil(vector2.x)) - vector2.x) / num);
+                            float num7 = Mathf.Abs((((!flag3) ? Mathf.Floor(vector2.y) : Mathf.Ceil(vector2.y)) - vector2.y) / num2);
+                            int num8 = Mathf.FloorToInt(vector2.x);
+                            int num9 = Mathf.FloorToInt(vector2.y);
+                            IntVector2 intVector2 = new IntVector2(num8, num9);
+                            bool flag4 = false;
+                            if (!dungeon.data.CheckInBoundsAndValid(intVector2))
+                            {
+                                break;
+                            }
+                            CellData cellData = dungeon.data[intVector2];
+                            if (cellData.nearestRoom != this.m_room || cellData.isExitCell != flag)
+                            {
+                                break;
+                            }
+                            if (cellData.type != CellType.WALL)
+                            {
+                                flag4 = true;
+                            }
+                            if (flag4)
+                            {
+                                intVector = intVector2;
+                            }
+                            if (num6 < num7)
+                            {
+                                num8++;
+                                vector2.x += num6 * num + 0.1f * Mathf.Sign(num);
+                                vector2.y += num6 * num2 + 0.1f * Mathf.Sign(num2);
+                            }
+                            else
+                            {
+                                num9++;
+                                vector2.x += num7 * num + 0.1f * Mathf.Sign(num);
+                                vector2.y += num7 * num2 + 0.1f * Mathf.Sign(num2);
+                            }
+                        }
+                        Vector2 end = intVector.ToCenterVector2();
+                        Vector2 found = Vector2.zero;
+                        List<AIActor> activeEnemies = start.GetAbsoluteRoom().GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+                        if (activeEnemies != null)
+                        {
+                            for (int i = 0; i < activeEnemies.Count; i++)
+                            {
+                                if (found == Vector2.zero)
+                                {
+                                    AIActor aiactor = activeEnemies[i];
+                                    if (aiactor && aiactor.healthHaver && !aiactor.healthHaver.IsDead)
+                                    {
+                                        Vector2 zero = Vector2.zero;
+                                        if (BraveUtility.LineIntersectsAABB(start, end, aiactor.specRigidbody.HitboxPixelCollider.UnitBottomLeft, aiactor.specRigidbody.HitboxPixelCollider.UnitDimensions, out zero))
+                                        {
+                                            found = aiactor.specRigidbody.UnitCenter;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        SetDestination(found);
+                    }*/
+            }
 
         public virtual void HandleHeight(SpeculativeRigidbody body)
         {

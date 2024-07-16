@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Diggy Diggy");
             gun.SetLongDescription("Advanced powder-powered mining tech only recently developed for use in the Black Powder Mine.");
 
-            gun.SetupSprite(null, "gaxe_idle_001", 8);
+            gun.SetGunSprites("gaxe");
 
             gun.SetAnimationFPS(gun.shootAnimation, 16);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(335) as Gun).gunSwitchGroup;

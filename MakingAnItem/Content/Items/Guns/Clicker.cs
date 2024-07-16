@@ -27,7 +27,8 @@ namespace NevernamedsItems
             behav.overrideNormalFireAudio = "Play_MouseClickNoise";
             gun.SetShortDescription("Clacker");
             gun.SetLongDescription("A remarkably strange invention, this arrow requires no bow to fire." + "\n\nCan shred enemies apart as fast as you can click on them!");
-            gun.SetupSprite(null, "clicker_idle_001", 13);
+
+            gun.SetGunSprites("clicker", 13);
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 
@@ -58,7 +59,7 @@ namespace NevernamedsItems
             projectile.baseData.speed = 0.1f;
             projectile.baseData.force = 0f;
             projectile.baseData.range *= 1f;
-            projectile.SetProjectileSpriteRight("16x16_white_circle", 16, 16, false, tk2dBaseSprite.Anchor.MiddleCenter, 16, 16);
+            projectile.SetProjectileSprite("16x16_white_circle", 16, 16, false, tk2dBaseSprite.Anchor.MiddleCenter, 16, 16);
 
             //projectile.hitEffects.suppressMidairDeathVfx = true;
             // projectile.hitEffectHandler.SuppressAllHitEffects = true;
@@ -77,6 +78,12 @@ namespace NevernamedsItems
             clickerCollection = SpriteBuilder.ConstructCollection(gun.gameObject, "Clicker_Collection");
             crosshairSpriteID = SpriteBuilder.AddSpriteToCollection("NevernamedsItems/Resources/MiscVFX/clicker_crosshair", clickerCollection);
 
+        }
+        public static bool isHeld(PlayerController player)
+        {
+            if (player.CurrentGun != null && player.CurrentGun.PickupObjectId == Clicker.ID) return true;
+            if (player.CurrentSecondaryGun != null && player.CurrentSecondaryGun.PickupObjectId == Clicker.ID) return true;
+            return false;
         }
         public static tk2dSpriteCollectionData clickerCollection;
         public static int crosshairSpriteID;
@@ -98,6 +105,8 @@ namespace NevernamedsItems
         {
             if (this.m_extantReticleQuad)
             {
+                m_currentAngle = 0;
+                m_currentDistance = 0;
                 UnityEngine.Object.Destroy(m_extantReticleQuad);
             }
             else
@@ -128,51 +137,41 @@ namespace NevernamedsItems
             }
             m_extantReticleQuad = m_ItemSprite;
         }
-
-        protected override void Update()
+        protected override void NonCurrentGunUpdate()
         {
             if (gun && gun.GunPlayerOwner())
             {
-                if (!this.m_extantReticleQuad)
+                if (!this.m_extantReticleQuad) //If there is no reticle
                 {
+                    //Do nothing if the player is on Keyboard because they dont need a reticle
                     if (BraveInput.GetInstanceForPlayer(gun.GunPlayerOwner().PlayerIDX).IsKeyboardAndMouse(false)) { return; }
                     else
                     {
-                        if (gun.GunPlayerOwner().CurrentGun != null)
-                        {
-                            if ((gun.GunPlayerOwner().CurrentGun.PickupObjectId == gun.PickupObjectId) || (gun.GunPlayerOwner().CurrentSecondaryGun.PickupObjectId == gun.PickupObjectId))
-                            {
-                                createManualCrosshairForController(gun.GunPlayerOwner());
-                            }
-
-                        }
+                        //if the current gun or secondary gun is the Clicker, instantiate a new crosshair
+                        if (isHeld(gun.GunPlayerOwner())) { createManualCrosshairForController(gun.GunPlayerOwner()); }
                     }
                 }
-                if (this.m_extantReticleQuad)
+                if (this.m_extantReticleQuad) //If there is a reticle
                 {
-                    if (BraveInput.GetInstanceForPlayer(gun.GunPlayerOwner().PlayerIDX).IsKeyboardAndMouse(false))
-                    {
-                        removeManualCrosshair();
-                    }
+                    //If the player is on keyboard and mouse, remove the reticle because they dont need it
+                    if (BraveInput.GetInstanceForPlayer(gun.GunPlayerOwner().PlayerIDX).IsKeyboardAndMouse(false)) { removeManualCrosshair(); }
                     else
                     {
-                        if (gun.GunPlayerOwner().CurrentGun != null)
+                        //If the Current Gun isn't Null, and the current gun 
+                        if (isHeld(gun.GunPlayerOwner()))
                         {
-                            if ((gun.GunPlayerOwner().CurrentGun.PickupObjectId == gun.PickupObjectId) || (gun.GunPlayerOwner().CurrentSecondaryGun.PickupObjectId == gun.PickupObjectId))
+                            //Room change positional update
+                            if (gun.GunPlayerOwner().CurrentRoom != lastRoom)
                             {
-
-                                //Room change positional update
-                                if (gun.GunPlayerOwner().CurrentRoom != lastRoom)
-                                {
-                                    regenerateExtantCrosshair(gun.GunPlayerOwner());
-                                    lastRoom = gun.GunPlayerOwner().CurrentRoom;
-                                }
-                                else
-                                {
-                                    this.UpdateReticlePosition();
-                                }
+                                regenerateExtantCrosshair(gun.GunPlayerOwner());
+                                lastRoom = gun.GunPlayerOwner().CurrentRoom;
+                                m_currentAngle = 0;
+                                m_currentDistance = 0;
                             }
-                            else { removeManualCrosshair(); }
+                            else
+                            {
+                                this.UpdateReticlePosition();
+                            }
                         }
                         else { removeManualCrosshair(); }
                     }
@@ -197,14 +196,27 @@ namespace NevernamedsItems
                 else
                 {
                     BraveInput instanceForPlayer = BraveInput.GetInstanceForPlayer(user.PlayerIDX);
-                    Vector2 vector3 = user.CenterPosition + (Quaternion.Euler(0f, 0f, this.m_currentAngle) * Vector2.right).XY() * this.m_currentDistance;
-                    vector3 += instanceForPlayer.ActiveActions.Aim.Vector * 12f * BraveTime.DeltaTime;
-                    this.m_currentAngle = BraveMathCollege.Atan2Degrees(vector3 - user.CenterPosition);
-                    this.m_currentDistance = Vector2.Distance(vector3, user.CenterPosition);
-                    this.m_currentDistance = Mathf.Min(this.m_currentDistance, 100);
-                    vector3 = user.CenterPosition + (Quaternion.Euler(0f, 0f, this.m_currentAngle) * Vector2.right).XY() * this.m_currentDistance;
-                    Vector2 vector4 = vector3 - this.m_extantReticleQuad.GetBounds().extents.XY();
-                    this.m_extantReticleQuad.transform.position = vector4;
+
+                    AIActor nearestEnemy = ((Vector2)this.m_extantReticleQuad.transform.position).GetNearestEnemyToPosition(true, Dungeonator.RoomHandler.ActiveEnemyType.All, null, null);
+                    if (nearestEnemy && instanceForPlayer.ActiveActions.Aim.Vector.x == 0 && instanceForPlayer.ActiveActions.Aim.Vector.y == 0 &&Vector2.Distance(nearestEnemy.Position, user.CenterPosition) <= 15 && Vector2.Distance(nearestEnemy.Position, this.m_extantReticleQuad.transform.position) <= 1) 
+                    {
+                        m_currentDistance = Vector2.Distance(nearestEnemy.Position, user.CenterPosition);
+                        m_currentAngle = user.CenterPosition.CalculateVectorBetween(nearestEnemy.Position).ToAngle();
+                        Vector2 vector3 = user.CenterPosition + (Quaternion.Euler(0f, 0f, this.m_currentAngle) * Vector2.right).XY() * this.m_currentDistance;
+                        Vector2 vector4 = vector3 - this.m_extantReticleQuad.GetBounds().extents.XY();
+                        this.m_extantReticleQuad.transform.position = vector4;
+                    }
+                    else
+                    {
+                        Vector2 vector3 = user.CenterPosition + (Quaternion.Euler(0f, 0f, this.m_currentAngle) * Vector2.right).XY() * this.m_currentDistance;
+                        vector3 += instanceForPlayer.ActiveActions.Aim.Vector * 12f * BraveTime.DeltaTime;
+                        this.m_currentAngle = BraveMathCollege.Atan2Degrees(vector3 - user.CenterPosition);
+                        this.m_currentDistance = Vector2.Distance(vector3, user.CenterPosition);
+                        this.m_currentDistance = Mathf.Min(this.m_currentDistance, 15);
+                        vector3 = user.CenterPosition + (Quaternion.Euler(0f, 0f, this.m_currentAngle) * Vector2.right).XY() * this.m_currentDistance;
+                        Vector2 vector4 = vector3 - this.m_extantReticleQuad.GetBounds().extents.XY();
+                        this.m_extantReticleQuad.transform.position = vector4;
+                    }
                 }
             }
         }

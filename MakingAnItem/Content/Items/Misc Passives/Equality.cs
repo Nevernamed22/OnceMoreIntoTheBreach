@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using Dungeonator;
@@ -14,16 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Equality";
-            string resourceName = "NevernamedsItems/Resources/equality_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<EqualityItem>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Blanks And Keys Are Equal";
-            string longDesc = "Constantly equalises the bearer's stocks of blanks and keys."+"\n\nOf debatable usefulness.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PassiveItem item = ItemSetup.NewItem<EqualityItem>(
+              "Equality",
+              "Blanks And Keys Are Equal",
+              "Constantly equalises the bearer's stocks of blanks and keys." + "\n\nOf debatable usefulness.",
+              "equality_icon") as PassiveItem;
             item.CanBeDropped = false;
             item.quality = PickupObject.ItemQuality.B;
 

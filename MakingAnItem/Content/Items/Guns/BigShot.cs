@@ -10,6 +10,7 @@ using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using Alexandria.Misc;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -26,7 +27,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Now's Your Chance!");
             gun.SetLongDescription("The sign4ture weap0n of a [ONCE IN A LIFETIME OPPORTUNITY] that came to the Gungeon [ON AN ALL EXPENSES PAID HOLIDAY] seeking $$fr33$$! KROMER." + "\n\nYou're fill3d with [Hyperlink Blocked.].");
 
-            gun.SetupSprite(null, "bigshot_idle_001", 8);
+            gun.SetGunSprites("bigshot");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(519) as Gun).gunSwitchGroup;
@@ -55,26 +56,23 @@ namespace NevernamedsItems
             projectile.baseData.speed *= 0.7f;
             projectile.baseData.range *= 2f;
             //ANIMATE BULLET
-            projectile.AnimateProjectile(new List<string> {
-                "bigshot_orangeproj_001",
-                "bigshot_orangeproj_002",
-                "bigshot_orangeproj_003",
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                 new IntVector2(17, 16), //1
-                  new IntVector2(17, 16), //2
-                   new IntVector2(17, 16), //3
-            },
-            AnimateBullet.ConstructListOfSameValues(true, 3),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 3),
-            AnimateBullet.ConstructListOfSameValues(true, 3),
-            AnimateBullet.ConstructListOfSameValues(false, 3),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 3),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 3),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 3),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 3), 0);
+
+            projectile.AnimateProjectileBundle("BigShotOrangeProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "BigShotOrangeProjectile",
+                   MiscTools.DupeList(new IntVector2(17, 16), 3), //Pixel Sizes
+                   MiscTools.DupeList(true, 3), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 3), //Anchors
+                   MiscTools.DupeList(true, 3), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 3), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 3), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(null, 3), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 3), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 3)); // Override to copy from        
+
             projectile.gameObject.AddComponent<BigShotProjectileComp>();
             projectile.DestroyMode = Projectile.ProjectileDestroyMode.BecomeDebris;
-            projectile.SetProjectileSpriteRight("bigshot_orangeproj_001", 17, 16, true, tk2dBaseSprite.Anchor.MiddleCenter, 17, 16);
 
             Projectile projectile2 = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
             projectile2.gameObject.SetActive(false);
@@ -85,23 +83,20 @@ namespace NevernamedsItems
             projectile2.baseData.range *= 2f;
 
             //ANIMATE BULLET
-            projectile2.AnimateProjectile(new List<string> {
-                "bigshot_pinkproj_001",
-                "bigshot_pinkproj_002",
-                "bigshot_pinkproj_003",
-            }, 16, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(17, 15), //1
-                new IntVector2(17, 15), //2
-                new IntVector2(17, 15), //3
-            }, AnimateBullet.ConstructListOfSameValues(true, 3),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 3),
-            AnimateBullet.ConstructListOfSameValues(true, 3),
-            AnimateBullet.ConstructListOfSameValues(false, 3),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 3),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 3),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 3),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 3), 0);
-            projectile2.SetProjectileSpriteRight("bigshot_pinkproj_001", 17, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 17, 15);
+            projectile2.AnimateProjectileBundle("BigShotPinkProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "BigShotPinkProjectile",
+                   MiscTools.DupeList(new IntVector2(17, 15), 3), //Pixel Sizes
+                   MiscTools.DupeList(true, 3), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 3), //Anchors
+                   MiscTools.DupeList(true, 3), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 3), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 3), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(null, 3), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 3), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 3)); // Override to copy from    
+
             projectile2.DestroyMode = Projectile.ProjectileDestroyMode.BecomeDebris;
             projectile2.gameObject.AddComponent<BigShotProjectileComp>();
             gun.DefaultModule.projectiles.Add(projectile2);
@@ -127,21 +122,23 @@ namespace NevernamedsItems
             spamtonHead.baseData.speed *= 1.2f;
             spamtonHead.hitEffects.alwaysUseMidair = true;
             spamtonHead.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.WhiteCircleVFX;
-            spamtonHead.AnimateProjectile(new List<string> {
-                "spamtonhead_001",
-                "spamtonhead_002",
-            }, 4, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(10, 13), //1
-                new IntVector2(10, 11), //2
-            }, AnimateBullet.ConstructListOfSameValues(true, 2),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 2),
-            AnimateBullet.ConstructListOfSameValues(true, 2),
-            AnimateBullet.ConstructListOfSameValues(false, 2),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 2),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(5, 5), 2),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 2),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 2), 0);
-            spamtonHead.SetProjectileSpriteRight("spamtonhead_001", 10, 13, true, tk2dBaseSprite.Anchor.MiddleCenter, 5, 5);
+
+            projectile.AnimateProjectileBundle("BigShotSpamtonHeadProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "BigShotSpamtonHeadProjectile",
+                   new List<IntVector2> {
+                        new IntVector2(10, 13), //1
+                        new IntVector2(10, 11), //2
+                   }, //Pixel Sizes
+                   MiscTools.DupeList(true, 2), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 2), //Anchors
+                   MiscTools.DupeList(true, 2), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 2), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 2), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(5, 5), 2), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 2), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 2)); // Override to copy from 
 
             //PIPIS
             Projectile pipisProj = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
@@ -151,25 +148,21 @@ namespace NevernamedsItems
             pipisProj.baseData.damage = 29.99f;
             pipisProj.baseData.speed *= 0.7f;
             pipisProj.baseData.range *= 0.7f;
-            pipisProj.AnimateProjectile(new List<string> {
-                "pipis_001",
-                "pipis_002",
-                "pipis_003",
-                "pipis_004",
-            }, 8, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(12, 12), //1
-                new IntVector2(12, 12), //2
-                new IntVector2(12, 12), //3
-                new IntVector2(12, 12), //3
-            }, AnimateBullet.ConstructListOfSameValues(true, 4),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4),
-            AnimateBullet.ConstructListOfSameValues(true, 4),
-            AnimateBullet.ConstructListOfSameValues(false, 4),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(5, 5), 4),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
-            pipisProj.SetProjectileSpriteRight("pipis_001", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 5, 5);
+
+            projectile.AnimateProjectileBundle("BigShotPipisProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "BigShotPipisProjectile",
+                   MiscTools.DupeList(new IntVector2(12, 12), 4), //Pixel Sizes
+                   MiscTools.DupeList(true, 4), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                   MiscTools.DupeList(true, 4), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 4), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 4), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(9, 9), 4), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 4)); // Override to copy from    
+
             pipisProj.DestroyMode = Projectile.ProjectileDestroyMode.BecomeDebris;
             pipisProj.gameObject.AddComponent<BigShotProjectileComp>();
             SpawnProjModifier projMod = pipisProj.gameObject.AddComponent<SpawnProjModifier>();

@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +11,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Infantry Grenade";
+            SpawnObjectPlayerItem item = ItemSetup.NewItem<InfantryGrenade>(
+               "Infantry Grenade",
+               "Cheap, but Efficient",
+               "A paltry explosive device carried by infantry soldiers from a far off land." + "\n\nHas a weak blast, but can be slung multiple times in quick succession.",
+               "infantrygrenade_icon") as SpawnObjectPlayerItem;
 
-            string resourceName = "NevernamedsItems/Resources/ThrowableActives/infantrygrenade_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<InfantryGrenade>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Cheap, but Efficient";
-            string longDesc = "A paltry explosive device carried by infantry soldiers from a far off land."+"\n\nHas a weak blast, but can be slung multiple times in quick succession.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 50);
             item.consumable = false;
 

@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Can Run Quake");
             gun.SetLongDescription("This gun is oddly good at predicting the seismic shaking of Gunymede's crust- it seems to always be fired moments before noticeable earthquakes.");
 
-            gun.SetupSprite(null, "seismograph_idle_001", 8);
+            gun.SetGunSprites("seismograph");
 
             gun.SetAnimationFPS(gun.shootAnimation, 16);
             gun.SetAnimationFPS(gun.idleAnimation, 16);

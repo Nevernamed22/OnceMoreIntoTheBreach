@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Quiet, Quiet");
             gun.SetLongDescription("Designed for stealth assasination missions behind enemy lines, the Welrod is quiet and efficient.");
 
-            gun.SetupSprite(null, "welrod_idle_001", 8);
+            gun.SetGunSprites("welrod");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 

@@ -15,39 +15,15 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Kaliber's Eye";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/kaliberseye_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<KalibersEye>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "They are mine.";
-            string longDesc = "Makes the Gundead your own." + "\n\nDestroy them, but do not waste them.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
+            PassiveItem item = ItemSetup.NewItem<KalibersEye>(
+               "Kaliber's Eye",
+               "They are mine.",
+               "Makes the Gundead your own." + "\n\nDestroy them, but do not waste them.",
+               "kaliberseye_icon") as PassiveItem;
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.S;
-
-            //NPC Pools
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
             KalibersEyeID = item.PickupObjectId;
-
             item.SetupUnlockOnCustomStat(CustomTrackedStats.CHARMED_ENEMIES_KILLED, 99, DungeonPrerequisite.PrerequisiteOperation.GREATER_THAN);
             Game.Items.Rename("nn:kaliber's_eye", "nn:kalibers_eye");
 

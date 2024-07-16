@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetLongDescription("Rapid-fires boomeraning bullets." + "\n\nFound among the remnants of an old abandoned circus in the Gungeon's third chamber. Where the performers went is a mystery.");
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(15) as Gun).gunSwitchGroup;
 
-            gun.SetupSprite(null, "kalashnirang_idle_001", 8);
+            gun.SetGunSprites("kalashnirang");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 

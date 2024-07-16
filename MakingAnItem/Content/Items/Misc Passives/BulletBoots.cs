@@ -28,7 +28,7 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile2);
             projectile2.baseData.speed *= 1.2f;
             projectile2.baseData.range *= 0.5f;
-            projectile2.SetProjectileSpriteRight("bulletboots_projectile", 19, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 17, 7);
+            projectile2.SetProjectileSprite("bulletboots_projectile", 19, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 17, 7);
             BulletBootsProjectile = projectile2;
 
             BulletBootsID = item.PickupObjectId;

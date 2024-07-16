@@ -18,9 +18,9 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:punishment_ray", "nn:punishment_ray");
             gun.gameObject.AddComponent<PunishmentRay>();
             gun.SetShortDescription("STREAK");
-            gun.SetLongDescription("Repeatedly landing shots builds up a damage increasing streak, but losing a high enough streak hurts." + "\n\nHave you been a bad Gungeoneer?");
+            gun.SetLongDescription("Repeatedly landing shots builds up a damage increasing streak, but missing shots will be PUNISHED." + "\n\nHave you been a bad Gungeoneer?");
 
-            gun.SetupSprite(null, "punishmentray_idle_001", 8);
+            gun.SetGunSprites("punishmentray");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
 
@@ -52,7 +52,7 @@ namespace NevernamedsItems
             projectile.baseData.range *= 1f;
             projectile.baseData.force *= 1f;
 
-            projectile.SetProjectileSpriteRight("punishmentray_projectile", 20, 3, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 3);
+            projectile.SetProjectileSprite("punishmentray_projectile", 20, 3, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 3);
 
             projectile.transform.parent = gun.barrelOffset;
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
@@ -125,13 +125,13 @@ namespace NevernamedsItems
             {
                 if (HitStreak > 0)
                 {
-                    VFXToolbox.DoStringSquirt("STREAK LOST", this.gun.CurrentOwner.transform.position, Color.red);
+                    VFXToolbox.DoRisingStringFade("STREAK LOST", this.gun.CurrentOwner.transform.position, Color.red);
                 }
-                int damageThreshold = 10;
-                if ((this.gun.CurrentOwner as PlayerController).PlayerHasActiveSynergy("Spare The Rod")) damageThreshold = 20;
+                int damageThreshold = 15;
+                if ((this.gun.CurrentOwner as PlayerController).PlayerHasActiveSynergy("Spare The Rod")) damageThreshold = 7;
                 if (HitStreak >= damageThreshold)
                 {
-                    this.gun.CurrentOwner.healthHaver.ApplyDamage(0.5f, Vector2.zero, "STREAK LOST", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
+                    this.gun.GunPlayerOwner().GetComponent<PlayerToolbox>().DoFakeDamage();
                 }
             }
             HitStreak = 0;

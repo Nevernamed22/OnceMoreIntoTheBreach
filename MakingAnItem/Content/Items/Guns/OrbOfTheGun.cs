@@ -26,7 +26,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Hypershot");
             gun.SetLongDescription("This gun is from a strange non-euclidian plane of reality, where it used to be able to only point in one direction." + "\n\nReloading when the clip is more than 50% empty sends bullets close to you to another dimension.");
 
-            gun.SetupSprite(null, "orbofthegun_idle_001", 8);
+            gun.SetGunSprites("orbofthegun");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
@@ -55,7 +55,7 @@ namespace NevernamedsItems
             projectile.baseData.speed *= 2f;
             projectile.pierceMinorBreakables = true;
 
-            projectile.SetProjectileSpriteRight("orbofthegun_projectile", 20, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 20, 12);
+            projectile.SetProjectileSprite("orbofthegun_projectile", 20, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 20, 12);
 
             gun.quality = PickupObject.ItemQuality.A;
             ETGMod.Databases.Items.Add(gun, false, "ANY");

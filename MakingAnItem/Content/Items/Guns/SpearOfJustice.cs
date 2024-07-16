@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("NGAH!");
             gun.SetLongDescription("Weapon of an ancient gundead warrior, who believed she could escape the Gungeon by harnessing the power of Gungeoneer souls." + "\n\nShe never achieved her goal.");
 
-            gun.SetupSprite(null, "spearofjustice_idle_001", 8);
+            gun.SetGunSprites("spearofjustice");
 
             gun.SetAnimationFPS(gun.shootAnimation, 30);
 
@@ -49,7 +49,7 @@ namespace NevernamedsItems
             PierceProjModifier Piercing = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();
             Piercing.penetratesBreakables = true;
             Piercing.penetration += 10;
-            projectile.SetProjectileSpriteRight("spearofjustice_projectile", 52, 14, false, tk2dBaseSprite.Anchor.MiddleCenter, 39, 8);
+            projectile.SetProjectileSprite("spearofjustice_projectile", 52, 14, false, tk2dBaseSprite.Anchor.MiddleCenter, 39, 8);
 
             projectile.transform.parent = gun.barrelOffset;
 

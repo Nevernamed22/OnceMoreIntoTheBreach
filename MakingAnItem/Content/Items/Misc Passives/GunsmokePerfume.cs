@@ -14,20 +14,14 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Gunsmoke Perfume";
-            string resourceName = "NevernamedsItems/Resources/gunsmokeperfume_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<GunsmokePerfume>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Ode To Glock 42";
-            string longDesc = "Charms enemies who get too close." + "\n\nThe enticing aroma of a battle hardened gunslinger!";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            AffectEnemiesInProximityTickItem item = ItemSetup.NewItem<GunsmokePerfume>(
+              "Gunsmoke Perfume",
+              "Ode To Glock 42",
+              "Charms enemies who get too close." + "\n\nThe enticing aroma of a battle hardened gunslinger!",
+              "gunsmokeperfume_icon") as AffectEnemiesInProximityTickItem;
             item.range = 2;
             item.rangeMultSynergy = "Practically Pungent";
             item.synergyRangeMult = 2;
-
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.B;
         }

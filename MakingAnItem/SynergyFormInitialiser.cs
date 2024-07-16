@@ -51,6 +51,7 @@ namespace NevernamedsItems
             AddSynergyForm(LaundromaterielRifle.ID, Bloodwash.ID, "Bloodwash");
             AddSynergyForm(SalvatorDormus.ID, SalvatorDormusM1893.ID, "M1893");
             AddSynergyForm(Borz.ID, BigBorz.ID, "Big Borz");
+            AddSynergyForm(Spitballer.ID, Spitfire.ID, "Spitfire");
 
             AddSwappableSynergyForm(ServiceWeapon.ID, ServiceWeaponShatter.ID, "<shatter/break/unmake>");
             AddSwappableSynergyForm(ServiceWeapon.ID, ServiceWeaponSpin.ID, "<spin/rotate/shred>");

@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Where it all started");
             gun.SetLongDescription("Long explosive lances such as these are recorded to be some of the first gunpowder-based weapons in human history, beaten out only by crude bombs."+"\n\nWithout this, none of this would be possible.");
 
-            gun.SetupSprite(null, "firelance_idle_001", 8);
+            gun.SetGunSprites("firelance");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 

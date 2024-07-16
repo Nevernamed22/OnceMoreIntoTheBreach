@@ -21,7 +21,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Begins Anew");
             gun.SetLongDescription("Becomes more powerful the cooler it's owner is." + "\n\nSnapped off of the ceiling of the Hollow's deepest catacomb, and somehow hasn't thawed ever since.");
 
-            gun.SetupSprite(null, "icicle_idle_001", 8);
+            gun.SetGunSprites("icicle");
+
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(199) as Gun).gunSwitchGroup;
 
             gun.SetAnimationFPS(gun.shootAnimation, 14);
@@ -66,7 +67,7 @@ namespace NevernamedsItems
             watering.SpawnGoopInFlight = false;
             watering.goopDefinition = EasyGoopDefinitions.WaterGoop;
 
-            projectile.SetProjectileSpriteRight("icicle_projectile", 13, 5, false, tk2dBaseSprite.Anchor.MiddleCenter, 13, 5);
+            projectile.SetProjectileSprite("icicle_projectile", 13, 5, false, tk2dBaseSprite.Anchor.MiddleCenter, 13, 5);
             gun.DefaultModule.projectiles[0] = projectile;
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;

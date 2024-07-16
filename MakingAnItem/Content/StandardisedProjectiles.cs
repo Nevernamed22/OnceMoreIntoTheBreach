@@ -1,4 +1,5 @@
-﻿using Alexandria.ItemAPI;
+﻿using Alexandria.Assetbundle;
+using Alexandria.ItemAPI;
 using Alexandria.Misc;
 using System;
 using System.Collections.Generic;
@@ -13,28 +14,19 @@ namespace NevernamedsItems
         public static void Init()
         {
             Projectile projectile = (PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            projectile.AnimateProjectile(new List<string> {
-                "smokeproj_001",
-                "smokeproj_002",
-                "smokeproj_003",
-                "smokeproj_004",
-                "smokeproj_005",
-                "smokeproj_006",
-                "smokeproj_007",
-                "smokeproj_008",
-                "smokeproj_009",
-                "smokeproj_010",
-                "smokeproj_011",
-                "smokeproj_012",
-            }, 12, tk2dSpriteAnimationClip.WrapMode.Loop, AnimateBullet.ConstructListOfSameValues(new IntVector2(48, 48), 12),
-            AnimateBullet.ConstructListOfSameValues(false, 12),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 12),
-            AnimateBullet.ConstructListOfSameValues(true, 12),
-            AnimateBullet.ConstructListOfSameValues(false, 12),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 12),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(26, 26), 12),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 12),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 12), 0);
+            projectile.AnimateProjectileBundle("SmokeProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "SmokeProjectile",
+                   MiscTools.DupeList(new IntVector2(48, 48), 12), //Pixel Sizes
+                   MiscTools.DupeList(false, 12), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 12), //Anchors
+                   MiscTools.DupeList(true, 12), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 12), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null,12), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(26, 26), 12), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 12), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 12)); // Override to copy from               
             projectile.sprite.renderer.material.shader = ShaderCache.Acquire("Brave/LitBlendUber");
             projectile.sprite.renderer.material.SetFloat("_VertexColor", 1f);
             projectile.sprite.color = projectile.sprite.color.WithAlpha(0.65f);
@@ -107,30 +99,19 @@ namespace NevernamedsItems
             smoke = projectile;
 
             Projectile flamethrowerBase = (PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            flamethrowerBase.AnimateProjectile(new List<string> {
-                "flamethrower_proj1",
-                "flamethrower_proj2",
-                "flamethrower_proj3",
-                "flamethrower_proj4",
-                "flamethrower_proj5",
-                "flamethrower_proj6",
-                "flamethrower_proj7",
-                "flamethrower_proj8",
-                "flamethrower_proj9",
-                "flamethrower_proj10",
-                "flamethrower_proj11",
-                "flamethrower_proj12",
-                "flamethrower_proj13",
-            }, 13, tk2dSpriteAnimationClip.WrapMode.LoopSection, AnimateBullet.ConstructListOfSameValues(new IntVector2(32, 31), 13),
-            AnimateBullet.ConstructListOfSameValues(false, 13),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 13),
-            AnimateBullet.ConstructListOfSameValues(true, 13),
-            AnimateBullet.ConstructListOfSameValues(false, 13),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 13),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(18, 18), 13),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 13),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 13), 9);
-
+            flamethrowerBase.AnimateProjectileBundle("FlamethrowerProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "FlamethrowerProjectile",
+                   MiscTools.DupeList(new IntVector2(32, 31), 13), //Pixel Sizes
+                   MiscTools.DupeList(false, 13), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 13), //Anchors
+                   MiscTools.DupeList(true, 13), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 13), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 13), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(18, 18), 13), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 13), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 13)); // Override to copy from    
             flamethrowerBase.baseData.speed *= 0.65f;
             flamethrowerBase.baseData.force = 0;
             flamethrowerBase.baseData.damage = 2;
@@ -158,21 +139,19 @@ namespace NevernamedsItems
 
 
             ghost = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            ghost.AnimateProjectile(new List<string> {
-                "ghostproj_001",
-                "ghostproj_002",
-                "ghostproj_003",
-                "ghostproj_004",
-                "ghostproj_005"
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, AnimateBullet.ConstructListOfSameValues(new IntVector2(14, 27), 5),
-            AnimateBullet.ConstructListOfSameValues(false, 5),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 5),
-            AnimateBullet.ConstructListOfSameValues(true, 5),
-            AnimateBullet.ConstructListOfSameValues(false, 5),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 5),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(8, 8), 5),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 5),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 5), 0);
+            ghost.AnimateProjectileBundle("GhostProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "GhostProjectile",
+                   MiscTools.DupeList(new IntVector2(14, 27), 5), //Pixel Sizes
+                   MiscTools.DupeList(false, 5), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 5), //Anchors
+                   MiscTools.DupeList(true, 5), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 5), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 5), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(8, 8), 5), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 5), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 5)); // Override to copy from              
             ghost.sprite.renderer.material.shader = ShaderCache.Acquire("Brave/LitBlendUber");
             ghost.sprite.renderer.material.SetFloat("_VertexColor", 1f);
             ghost.sprite.color = ghost.sprite.color.WithAlpha(0.8f);
@@ -217,7 +196,7 @@ namespace NevernamedsItems
             snakePierce.penetration = 2;
             initsnake.pierceMinorBreakables = true;
             initsnake.gameObject.AddComponent<ConvertToHelixOnSpawn>();
-            initsnake.SetProjectileSpriteRight("snake_proj", 12, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 7);
+            initsnake.SetProjectileSprite("snake_proj", 12, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 7);
 
             VFXPool bite = VFXToolbox.CreateVFXPool($"Bite Impact",
                new List<string>()
@@ -239,7 +218,7 @@ namespace NevernamedsItems
             initsnake.hitEffects.enemy = bite;
 
             EasyTrailBullet snakeTrail = initsnake.gameObject.AddComponent<EasyTrailBullet>();
-            snakeTrail.TrailPos = projectile.transform.position;
+            snakeTrail.TrailPos = initsnake.transform.position;
             snakeTrail.StartWidth = 0.25f;
             snakeTrail.EndWidth = 0f;
             snakeTrail.LifeTime = 0.4f;

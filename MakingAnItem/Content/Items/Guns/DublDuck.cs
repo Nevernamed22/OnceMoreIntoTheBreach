@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Quackpot");
             gun.SetLongDescription("An existing bolt action pistol model with a customised grip, shamelessly shipped to the Gungeon by it's own creator in an attempt to raise his own notoriety.");
 
-            gun.SetupSprite(null, "dublduck_idle_001", 8);
+            gun.SetGunSprites("dublduck");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 

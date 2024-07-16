@@ -21,6 +21,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("bullet_modifier");
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
+            Doug.AddToLootPool(item.PickupObjectId);
         }
 
         private void OnEnemyDamaged(float damage, bool fatal, HealthHaver enemy)

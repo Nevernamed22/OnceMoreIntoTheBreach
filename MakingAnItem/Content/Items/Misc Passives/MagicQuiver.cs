@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Magic Quiver";
-            string resourceName = "NevernamedsItems/Resources/magicquiver_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<MagicQuiver>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Stranger Ranger";
-            string longDesc = "Increases the damage of arrow-based weapons." + "\n\nAlben Smallbore was commissioned to create this artefact by a disappointed Bowman, disatisfied with the Gungeon's nigh dismissal of his craft.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<MagicQuiver>(
+              "Magic Quiver",
+              "Stranger Ranger",
+              "Increases the damage of arrow-based weapons." + "\n\nAlben Smallbore was commissioned to create this artefact by a disappointed Bowman, disatisfied with the Gungeon's nigh dismissal of his craft.",
+              "magicquiver_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.C;
         }
         private Gun currentHeldGun, lastHeldGun;

@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Let Me In!");
             gun.SetLongDescription("This equine effigy was engineered by an ancient gunslinger as a misleading gift to gain the trust of the Gundead."+"\n\nTo this day, Gundead are still fooled!");
 
-            gun.SetupSprite(null, "woodenhorse_idle_001", 8);
+            gun.SetGunSprites("woodenhorse");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 
@@ -49,7 +49,7 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.damage = 7.7f;
-            projectile.SetProjectileSpriteRight("woodenhorse_projectile", 8,8, false, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            projectile.SetProjectileSprite("woodenhorse_projectile", 8,8, false, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
 
             projectile.transform.parent = gun.barrelOffset;
 

@@ -376,7 +376,7 @@ namespace NevernamedsItems
         public static void DoRisingStringFade(string text, Vector2 point, Color colour, float heightOffGround = 3f, float opacity = 1f)
         {
 
-             GameObject gameObject = (GameObject)UnityEngine.Object.Instantiate(BraveResources.Load("DamagePopupLabel", ".prefab"), GameUIRoot.Instance.transform);
+            GameObject gameObject = (GameObject)UnityEngine.Object.Instantiate(BraveResources.Load("DamagePopupLabel", ".prefab"), GameUIRoot.Instance.transform);
 
             dfLabel label = gameObject.GetComponent<dfLabel>();
             label.gameObject.SetActive(true);
@@ -515,6 +515,127 @@ namespace NevernamedsItems
             plagueanimator.DefaultClipId = plagueanimator.GetClipIdByName("NewOverheadVFX");
             return overheadderVFX;
         }
+
+        public static GameObject CreateVFXBundle(string name, IntVector2 Dimensions, tk2dBaseSprite.Anchor anchor, bool usesZHeight, float zHeightOffset, float emissivePower = -1, Color? emissiveColour = null, bool persist = false)
+        {
+            GameObject Obj = new GameObject(name);
+            VFXObject vfObj = new VFXObject();
+            Obj.SetActive(false);
+            FakePrefab.MarkAsFakePrefab(Obj);
+            UnityEngine.Object.DontDestroyOnLoad(Obj);
+
+            tk2dSpriteCollectionData VFXSpriteCollection = Initialisation.VFXCollection;
+            tk2dSprite sprite = Obj.GetOrAddComponent<tk2dSprite>();
+            tk2dSpriteAnimator animator = Obj.GetOrAddComponent<tk2dSpriteAnimator>();
+            tk2dSpriteAnimation animation = Initialisation.vfxAnimationCollection;
+            animator.Library = animation;
+            sprite.collection = VFXSpriteCollection;
+
+            Vector3[] colliderVertices = new Vector3[]{
+                      new Vector3(0f, 0f, 0f),
+                      new Vector3((Dimensions.x / 16), (Dimensions.y / 16), 0f)
+                  };
+            tk2dSpriteAnimationClip clip = animator.GetClipByName(name);
+
+            List<tk2dSpriteDefinition> frames = new List<tk2dSpriteDefinition>();
+            foreach (tk2dSpriteAnimationFrame frame in clip.frames) {  frames.Add(VFXSpriteCollection.spriteDefinitions[frame.spriteId]); }
+
+            foreach (tk2dSpriteDefinition frameDef in frames)
+            {
+                frameDef.ConstructOffsetsFromAnchor(anchor);
+                frameDef.colliderVertices = colliderVertices;
+                if (emissivePower > 0) frameDef.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
+                if (emissivePower > 0) frameDef.material.SetFloat("_EmissiveColorPower", emissivePower);
+                if (emissiveColour != null) frameDef.material.SetColor("_EmissiveColor", (Color)emissiveColour);
+                if (emissivePower > 0) frameDef.materialInst.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
+                if (emissivePower > 0) frameDef.materialInst.SetFloat("_EmissiveColorPower", emissivePower);
+                if (emissiveColour != null) frameDef.materialInst.SetColor("_EmissiveColor", (Color)emissiveColour);
+            }
+
+            if (emissivePower > 0) sprite.renderer.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
+            if (emissivePower > 0) sprite.renderer.material.SetFloat("_EmissiveColorPower", emissivePower);
+            if (emissiveColour != null) sprite.renderer.material.SetColor("_EmissiveColor", (Color)emissiveColour);
+            if (!persist)
+            {
+                SpriteAnimatorKiller kill = animator.gameObject.AddComponent<SpriteAnimatorKiller>();
+                kill.fadeTime = -1f;
+                kill.animator = animator;
+                kill.delayDestructionTime = -1f;
+            }
+            animator.playAutomatically = true;
+            animator.DefaultClipId = animator.GetClipIdByName(name);
+            vfObj.attached = true;
+            vfObj.persistsOnDeath = false;
+            vfObj.usesZHeight = usesZHeight;
+            vfObj.zHeight = zHeightOffset;
+            vfObj.alignment = VFXAlignment.NormalAligned;
+            vfObj.destructible = false;
+            vfObj.effect = Obj;
+            return Obj;
+        }
+
+        public static VFXPool CreateVFXPoolBundle(string name, IntVector2 Dimensions, tk2dBaseSprite.Anchor anchor, bool usesZHeight, float zHeightOffset, VFXAlignment alignment = VFXAlignment.NormalAligned, float emissivePower = -1, Color? emissiveColour = null, bool persist = false)
+        {
+            GameObject Obj = new GameObject(name);
+            VFXPool pool = new VFXPool();
+            pool.type = VFXPoolType.All;
+            VFXComplex complex = new VFXComplex();
+            VFXObject vfObj = new VFXObject();
+            Obj.SetActive(false);
+            FakePrefab.MarkAsFakePrefab(Obj);
+            UnityEngine.Object.DontDestroyOnLoad(Obj);
+
+            tk2dSpriteCollectionData VFXSpriteCollection = Initialisation.VFXCollection;
+            tk2dSprite sprite = Obj.GetOrAddComponent<tk2dSprite>();
+            tk2dSpriteAnimator animator = Obj.GetOrAddComponent<tk2dSpriteAnimator>();
+            tk2dSpriteAnimation animation = Initialisation.vfxAnimationCollection;
+            animator.Library = animation;
+
+            Vector3[] colliderVertices = new Vector3[]{
+                      new Vector3(0f, 0f, 0f),
+                      new Vector3((Dimensions.x / 16), (Dimensions.y / 16), 0f)
+                  };
+            tk2dSpriteAnimationClip clip = animator.GetClipByName(name);
+
+            List<tk2dSpriteDefinition> frames = new List<tk2dSpriteDefinition>();
+            foreach (tk2dSpriteAnimationFrame frame in clip.frames) { frames.Add(VFXSpriteCollection.spriteDefinitions[frame.spriteId]); }
+
+            foreach (tk2dSpriteDefinition frameDef in frames)
+            {
+                frameDef.ConstructOffsetsFromAnchor(anchor);
+                frameDef.colliderVertices = colliderVertices;
+                if (emissivePower > 0) frameDef.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
+                if (emissivePower > 0) frameDef.material.SetFloat("_EmissiveColorPower", emissivePower);
+                if (emissiveColour != null) frameDef.material.SetColor("_EmissiveColor", (Color)emissiveColour);
+                if (emissivePower > 0) frameDef.materialInst.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
+                if (emissivePower > 0) frameDef.materialInst.SetFloat("_EmissiveColorPower", emissivePower);
+                if (emissiveColour != null) frameDef.materialInst.SetColor("_EmissiveColor", (Color)emissiveColour);
+            }
+
+            if (emissivePower > 0) sprite.renderer.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
+            if (emissivePower > 0) sprite.renderer.material.SetFloat("_EmissiveColorPower", emissivePower);
+            if (emissiveColour != null) sprite.renderer.material.SetColor("_EmissiveColor", (Color)emissiveColour);
+            if (!persist)
+            {
+                SpriteAnimatorKiller kill = animator.gameObject.AddComponent<SpriteAnimatorKiller>();
+                kill.fadeTime = -1f;
+                kill.animator = animator;
+                kill.delayDestructionTime = -1f;
+            }
+            animator.playAutomatically = true;
+            animator.DefaultClipId = animator.GetClipIdByName(name);
+            vfObj.attached = true;
+            vfObj.persistsOnDeath = persist;
+            vfObj.usesZHeight = usesZHeight;
+            vfObj.zHeight = zHeightOffset;
+            vfObj.alignment = alignment;
+            vfObj.destructible = false;
+            vfObj.effect = Obj;
+            complex.effects = new VFXObject[] { vfObj };
+            pool.effects = new VFXComplex[] { complex };
+            return pool;
+        }
+
         public static GameObject CreateVFX(string name, List<string> spritePaths, int fps, IntVector2 Dimensions, tk2dBaseSprite.Anchor anchor, bool usesZHeight, float zHeightOffset, float emissivePower = -1, Color? emissiveColour = null, tk2dSpriteAnimationClip.WrapMode wrap = tk2dSpriteAnimationClip.WrapMode.Once, bool persist = false, int loopStart = 0)
         {
             GameObject Obj = new GameObject(name);
@@ -658,7 +779,7 @@ namespace NevernamedsItems
         {
             return new VFXPool { type = VFXPoolType.None, effects = new VFXComplex[] { new VFXComplex() { effects = new VFXObject[] { new VFXObject() { effect = effect } } } } };
         }
-        public static VFXPool CreateVFXPool(string name, List<string> spritePaths, int fps, IntVector2 Dimensions, tk2dBaseSprite.Anchor anchor, bool usesZHeight, float zHeightOffset, bool persist = false, VFXAlignment alignment = VFXAlignment.NormalAligned, float emissivePower = -1, Color? emissiveColour = null, tk2dSpriteAnimationClip.WrapMode wrapmode = tk2dSpriteAnimationClip.WrapMode.Once, int loopStart =0)
+        public static VFXPool CreateVFXPool(string name, List<string> spritePaths, int fps, IntVector2 Dimensions, tk2dBaseSprite.Anchor anchor, bool usesZHeight, float zHeightOffset, bool persist = false, VFXAlignment alignment = VFXAlignment.NormalAligned, float emissivePower = -1, Color? emissiveColour = null, tk2dSpriteAnimationClip.WrapMode wrapmode = tk2dSpriteAnimationClip.WrapMode.Once, int loopStart = 0)
         {
             GameObject Obj = new GameObject(name);
             VFXPool pool = new VFXPool();
@@ -728,7 +849,7 @@ namespace NevernamedsItems
             pool.effects = new VFXComplex[] { complex };
             return pool;
         }
-       
+
         public static GameObject CreateCustomClip(string spriteName, int pixelWidth, int pixelHeight)
         {
             GameObject clip = UnityEngine.Object.Instantiate((PickupObjectDatabase.GetById(95) as Gun).clipObject);

@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Bullet Hole In 1");
             gun.SetLongDescription("Golf is a popular game among the Gundead of the Keep, though it's rules are very peculiar to outsiders." + "\n\nThere's a lot more violence involved.");
 
-            gun.SetupSprite(null, "golfrifle_idle_001", 8);
+            gun.SetGunSprites("golfrifle");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
@@ -52,7 +52,7 @@ namespace NevernamedsItems
             Bouncing.numberOfBounces = 30;
             projectile.baseData.range *= 60f;
             projectile.transform.parent = gun.barrelOffset;
-            projectile.SetProjectileSpriteRight("golfrifle_projectile", 7, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
+            projectile.SetProjectileSprite("golfrifle_projectile", 7, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
 
             gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "this is the Golf Rifle";

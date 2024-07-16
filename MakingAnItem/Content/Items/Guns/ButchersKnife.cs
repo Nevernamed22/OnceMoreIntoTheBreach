@@ -26,7 +26,9 @@ namespace NevernamedsItems
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(417) as Gun).gunSwitchGroup;
             gun.SetShortDescription("Word of Kaliber");
             gun.SetLongDescription("Cuts enemies to bits."+"\n\nForged and sharpened by a Gun Cultist who believed she heard the voice of Kaliber speaking to her... asking her for a sacrifice... her son.");
-            gun.SetupSprite(null, "butchersknife_idle_001", 8);
+            
+            gun.SetGunSprites("butchersknife");
+
             gun.SetAnimationFPS(gun.shootAnimation, 16);
             gun.SetAnimationFPS(gun.chargeAnimation, 8);
             gun.SetAnimationFPS(gun.reloadAnimation, 1);
@@ -50,7 +52,7 @@ namespace NevernamedsItems
             projectile.pierceMinorBreakables = true;
             projectile.AdditionalScaleMultiplier *= 1f;
             projectile.baseData.range *= 1000f;
-            projectile.SetProjectileSpriteRight("butchersknife_projectile", 29, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 35, 14);
+            projectile.SetProjectileSprite("butchersknife_projectile", 29, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 35, 14);
             projectile.specRigidbody.CollideWithTileMap = false;
 
             NoCollideBehaviour nocollide = projectile.gameObject.GetOrAddComponent<NoCollideBehaviour>();

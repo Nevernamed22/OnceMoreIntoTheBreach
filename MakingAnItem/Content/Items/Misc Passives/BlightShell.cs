@@ -14,14 +14,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Blight Shell";
-            string resourceName = "NevernamedsItems/Resources/blightshell_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<BlightShell>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Apocryphal Armoury";
-            string longDesc = "Grants a free shotgun every floor, as well as a free curse." + "\n\nShotgun Gundead are often neglected in death, despite their noble status. This artefact collects their souls, because nobody else will.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<BlightShell>(
+               "Blight Shell",
+               "Apocryphal Armoury",
+               "Grants a free shotgun every floor, as well as a free curse." + "\n\nShotgun Gundead are often neglected in death, despite their noble status. This artefact collects their souls, because nobody else will.",
+               "blightshell_icon") as PassiveItem;
+
             item.quality = PickupObject.ItemQuality.B;
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
 

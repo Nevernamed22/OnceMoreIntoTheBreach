@@ -61,8 +61,30 @@ namespace NevernamedsItems
             return true;
         }
         //float duration = 20f;
+        public static string audioString = "bower";
+        public static string textToShow = null;
+        public IEnumerator voicetest(PlayerController user)
+        {
+            TextBoxManager.ShowTextBox(user.sprite.WorldCenter + new Vector2(0f, 1f), user.transform, -1f,
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                audioString, instant: false);
+            yield return new WaitForSeconds(5f);
+            TextBoxManager.ShowTextBox(user.sprite.WorldCenter + new Vector2(0f, 1f), user.transform, -1f,
+                 "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                 audioString, instant: false);
+            yield break;
+        }
         public override void DoEffect(PlayerController user)
         {
+            //user.StartCoroutine(voicetest(user));
+            if (textToShow == null) { textToShow = $"[sprite \"accuracy_ui\"]"; }
+
+            TextBoxManager.ShowTextBox(user.sprite.WorldCenter + new Vector2(0f, 1f), user.transform, -1f,
+                textToShow,
+                audioString, instant: false);
+
+            //ETGModConsole.Log(user.stats.GetStatValue(PlayerStats.StatType.AdditionalItemCapacity) + " and  " + user.stats.GetStatValue(PlayerStats.StatType.AdditionalGunCapacity));
+
             //IntVector2 bestRewardLocation = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
             //ChestToolbox.ChestTier tier = RandomEnum<ChestToolbox.ChestTier>.Get();
             //ChestToolbox.SpawnChestEasy(bestRewardLocation, tier, true, Chest.GeneralChestType.UNSPECIFIED);
@@ -117,9 +139,9 @@ namespace NevernamedsItems
 
 
 
-            Vector3 place = user.GetCursorPosition(4);
-            GameObject carto = UnityEngine.Object.Instantiate<GameObject>(Initialisation.toSpawn, place, Quaternion.identity);
-            if (carto.GetComponent<DungeonPlaceable>()) DungeonPlaceableUtility.InstantiateDungeonPlaceable(carto, user.CurrentRoom, ((Vector2)carto.transform.position).ToIntVector2(), false);
+            //Vector3 place = user.GetCursorPosition(4);
+            //GameObject carto = UnityEngine.Object.Instantiate<GameObject>(Initialisation.toSpawn, place, Quaternion.identity);
+            // if (carto.GetComponent<DungeonPlaceable>()) DungeonPlaceableUtility.InstantiateDungeonPlaceable(carto, user.CurrentRoom, ((Vector2)carto.transform.position).ToIntVector2(), false);
             //SaveAPIManager.SetFlag(CustomDungeonFlags.CHEATED_DEATH_SHADE, true);
             // CurseManager.AddCurse("Curse of Butterfingers");
             /*  ChamberGunProcessor processor = user.CurrentGun.GetComponentInChildren<ChamberGunProcessor>();
@@ -309,7 +331,7 @@ namespace NevernamedsItems
 
         private void Update()
         {
-            if (enabled && !GameManager.Instance.IsLoadingLevel && GameManager.Instance.Dungeon != null)
+            if (circleEnabled && !GameManager.Instance.IsLoadingLevel && GameManager.Instance.Dungeon != null)
             {
                 for (int i = StaticReferenceManager.AllEnemies.Count - 1; i >= 0; i--)
                 {
@@ -337,7 +359,7 @@ namespace NevernamedsItems
                 }
             }
         }
-        private bool enabled;
+        private bool circleEnabled;
         private List<AIActor> actorsInCircle = new List<AIActor>();
         private HeatIndicatorController m_radialIndicator;
 

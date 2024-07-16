@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using System.Collections.Generic;
@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Cartographers Eye";
-            string resourceName = "NevernamedsItems/Resources/cartographerseye_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<CartographersEye>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Shows the Way";
-            string longDesc = "Grants vision of important rooms." + "\nGrants access to a randomly selected special room." + "\n\nCreated by legendary cartographer Woban to guide him in his old age as his vision failed.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<CartographersEye>(
+               "Cartographers Eye",
+               "Shows the Way",
+               "Grants vision of important rooms." + "\nGrants access to a randomly selected special room." + "\n\nCreated by legendary cartographer Woban to guide him in his old age as his vision failed.",
+               "cartographerseye_icon") as PassiveItem;
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.B;
             CartographersEyeID = item.PickupObjectId;

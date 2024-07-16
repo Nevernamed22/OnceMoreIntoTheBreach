@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Bro!");
             gun.SetLongDescription("Delivers a potent electric shock to it's target."+"\n\nPopular amongst law enforcement, and as a personal protection sidearm.");
 
-            gun.SetupSprite(null, "stungun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "stungun_idle_001", 8, "stungun_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 

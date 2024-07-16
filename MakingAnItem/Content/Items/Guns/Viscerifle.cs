@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Bloody Stream");
             gun.SetLongDescription("Fires hearts and armour as ammunition." + "\n\nThis, by definition, is not a rifle. The name is purely marketing." + "\n\nFires nothing if fired while invincible.");
 
-            gun.SetupSprite(null, "viscerifle_idle_001", 8);
+            gun.SetGunSprites("viscerifle");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 
@@ -53,7 +53,7 @@ namespace NevernamedsItems
             projectile.baseData.speed *= 1f;
             projectile.ignoreDamageCaps = true;
             projectile.baseData.range *= 10f;
-            projectile.SetProjectileSpriteRight("viscerifle_heart_projectile", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 16, 7);
+            projectile.SetProjectileSprite("viscerifle_heart_projectile", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 16, 7);
             GoopModifier blood = projectile.gameObject.AddComponent<GoopModifier>();
             blood.goopDefinition = EasyGoopDefinitions.BlobulonGoopDef;
             blood.SpawnGoopInFlight = true;
@@ -64,7 +64,7 @@ namespace NevernamedsItems
 
             //SHADE BULLETS
             shadeProjectile = ProjectileSetupUtility.MakeProjectile(56, 20, 35, 23);
-            shadeProjectile.SetProjectileSpriteRight("shadeviscerifle_proj", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 16, 7);
+            shadeProjectile.SetProjectileSprite("shadeviscerifle_proj", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 16, 7);
 
             //ARMOUR
             armourProjectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -76,7 +76,7 @@ namespace NevernamedsItems
             armourProjectile.baseData.speed *= 1f;
             armourProjectile.baseData.range *= 10;
             armourProjectile.pierceMinorBreakables = true;
-            armourProjectile.SetProjectileSpriteRight("viscerifle_armour_projectile", 12, 8, false, tk2dBaseSprite.Anchor.MiddleCenter, 12, 8);
+            armourProjectile.SetProjectileSprite("viscerifle_armour_projectile", 12, 8, false, tk2dBaseSprite.Anchor.MiddleCenter, 12, 8);
             armourProjectile.transform.parent = gun.barrelOffset;
             BlankProjModifier blankingArmor = armourProjectile.gameObject.GetOrAddComponent<BlankProjModifier>();
             blankingArmor.blankType = Alexandria.Misc.EasyBlankType.FULL;
@@ -92,7 +92,7 @@ namespace NevernamedsItems
             crestProjectile.baseData.speed *= 1f;
             crestProjectile.baseData.range *= 10;
             crestProjectile.pierceMinorBreakables = true;
-            crestProjectile.SetProjectileSpriteRight("viscerifle_crest_projectile", 12, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 12, 9);
+            crestProjectile.SetProjectileSprite("viscerifle_crest_projectile", 12, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 12, 9);
             crestProjectile.transform.parent = gun.barrelOffset;
             BlankProjModifier blankingCrest = crestProjectile.gameObject.GetOrAddComponent<BlankProjModifier>();
             blankingCrest.blankType = Alexandria.Misc.EasyBlankType.FULL;

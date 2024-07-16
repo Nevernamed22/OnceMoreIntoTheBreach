@@ -14,19 +14,13 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Graceful Goop";
-            string resourceName = "NevernamedsItems/Resources/gracefulgoop_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<GracefulGoop>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "They Have Died... Inside";
-            string longDesc = "Bullets trail poison." + "\n\nBrewed (and probably drunk) by a tragic comedian on the brink.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<GracefulGoop>(
+              "Graceful Goop",
+              "They Have Died... Inside",
+              "Bullets trail poison." + "\n\nBrewed (and probably drunk) by a tragic comedian on the brink.",
+              "gracefulgoop_icon") as PassiveItem;       
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
-
             item.quality = PickupObject.ItemQuality.B;
-
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_GRACEFULGOOP, true);
             item.AddItemToGooptonMetaShop(25);
             ID = item.PickupObjectId;

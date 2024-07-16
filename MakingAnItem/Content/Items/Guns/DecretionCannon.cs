@@ -7,7 +7,8 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -22,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Shrinky Shrinky");
             gun.SetLongDescription("The bullets of this rapid firing bronze marvel were originally indended to grow in size and damage as they travelled. Unfortunately, the blueprint was read upside down, and the effect was reversed.");
 
-            gun.SetupSprite(null, "decretioncarbine_idle_001", 8);
+            gun.SetGunSprites("decretioncarbine");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);
@@ -50,7 +51,8 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
-            projectile.SetProjectileSpriteRight("decretioncarbine_proj", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 15, 15);
+
+           projectile.SetProjectileSprite("decretioncarbine_proj", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 15, 15);
             projectile.baseData.damage = 10f;
             ScaleChangeOverTimeModifier scaler = projectile.gameObject.GetOrAddComponent<ScaleChangeOverTimeModifier>();
             scaler.destroyAfterChange = true;

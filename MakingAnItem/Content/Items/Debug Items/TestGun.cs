@@ -28,7 +28,7 @@ namespace NevernamedsItems
             behav.overrideNormalFireAudio = "Play_GoldenEye_BulletFire";
             gun.SetLongDescription("Made for fun. Probably broken.");
 
-            gun.SetupSprite(null, "wailingmagnum_idle_001", 8);
+            gun.SetGunSprites("wailingmagnum");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
 
@@ -39,41 +39,44 @@ namespace NevernamedsItems
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Ordered;
             gun.reloadTime = 1.1f;
             gun.DefaultModule.cooldownTime = 0.1f;
-            gun.DefaultModule.numberOfShotsInClip = 500;
-            gun.SetBaseMaxAmmo(500);
+            gun.DefaultModule.numberOfShotsInClip = 7;
+            gun.SetBaseMaxAmmo(700);
 
+            Projectile proj = (PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
+            gun.DefaultModule.projectiles[0] = proj;
 
 
             //   gun.DefaultModule.projectiles[0] = GameOfLifeHandler.GOLProjPrefab;
-            /*LobbedProjectile proj = DataCloners.CopyFields<LobbedProjectile>(Instantiate((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]));
-            proj.gameObject.MakeFakePrefab();
 
-            proj.initialSpeed = 23f;
-            proj.speedCurve = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(1f, -10f));
-            proj.flySpeedMultiplier = 1f;
-            proj.destinationOffset = new Vector2(0f, 0.6875f);
-            proj.angularVelocity = 360f;*/
-            /*
-            Projectile proj = (PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
+            /*   LobbedProjectile proj = DataCloners.CopyFields<LobbedProjectile>(Instantiate((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]));
+               proj.gameObject.MakeFakePrefab();
 
-            proj.hitEffects.enemy = VFXToolbox.CreateVFXPool("hjsdfgd Muzzleflash",
-               new List<string>()
-               {
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectilehitvfx_blue_001",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectilehitvfx_blue_002",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectilehitvfx_blue_003",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectilehitvfx_blue_004",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectilehitvfx_blue_005",
-               },
-               13, //FPS
-               new IntVector2(42, 36), //Dimensions
-               tk2dBaseSprite.Anchor.MiddleLeft, //Anchor
-               false, //Uses a Z height off the ground
-               0, //The Z height, if used
-               false,
-              VFXAlignment.VelocityAligned
-                 );
-            */
+               proj.initialSpeed = 23f;
+               proj.speedCurve = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(1f, -10f));
+               proj.flySpeedMultiplier = 1f;
+               proj.destinationOffset = new Vector2(0f, 0.6875f);
+               proj.angularVelocity = 360f;
+
+
+
+               proj.hitEffects.enemy = VFXToolbox.CreateVFXPool("hjsdfgd Muzzleflash",
+                  new List<string>()
+                  {
+                       "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectilehitvfx_blue_001",
+                       "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectilehitvfx_blue_002",
+                       "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectilehitvfx_blue_003",
+                       "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectilehitvfx_blue_004",
+                       "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectilehitvfx_blue_005",
+                  },
+                  13, //FPS
+                  new IntVector2(42, 36), //Dimensions
+                  tk2dBaseSprite.Anchor.MiddleLeft, //Anchor
+                  false, //Uses a Z height off the ground
+                  0, //The Z height, if used
+                  false,
+                 VFXAlignment.VelocityAligned
+                    );
+               */
             //gun.DefaultModule.projectiles[0] = EnemyDatabase.GetOrLoadByGuid("465da2bb086a4a88a803f79fe3a27677").bulletBank.GetBullet("rocket").BulletObject.GetComponent<Projectile>();
 
             //gun.DefaultModule.projectiles[0] = StandardisedProjectiles.flamethrower ;
@@ -95,7 +98,8 @@ namespace NevernamedsItems
 
 
     }
-    public class GameOfLifeHandler : MonoBehaviour
+
+        public class GameOfLifeHandler : MonoBehaviour
     {
         public static Projectile GOLProjPrefab;
         public GameOfLifeHandler()
@@ -106,7 +110,7 @@ namespace NevernamedsItems
             GOLProjPrefab = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].gameObject.InstantiateAndFakeprefab().GetComponent<Projectile>();
             GOLProjPrefab.baseData.speed = 0f;
             GOLProjPrefab.shouldRotate = false;
-            GOLProjPrefab.SetProjectileSpriteRight("gameoflife_projectile", 16, 16, true, tk2dBaseSprite.Anchor.MiddleCenter, 16, 16);
+            GOLProjPrefab.SetProjectileSprite("gameoflife_projectile", 16, 16, true, tk2dBaseSprite.Anchor.MiddleCenter, 16, 16);
             GOLProjPrefab.gameObject.AddComponent<GameOfLifeProjectile>();
             GOLProjPrefab.specRigidbody.CollideWithTileMap = false;
         }

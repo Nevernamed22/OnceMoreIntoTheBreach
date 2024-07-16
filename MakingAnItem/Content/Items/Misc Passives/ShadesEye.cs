@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Dungeonator;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 using UnityEngine;
 
@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Shade's Eye";
-            string resourceName = "NevernamedsItems/Resources/shadeseye_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<ShadesEye>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Everything For A Price";
-            string longDesc = "Doubles boss loot, but taking damage in a bossfight causes instant death." + "\nDestroyed upon being discarded." + "\n\nThe wandering eye of a vengeful shade.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<ShadesEye>(
+               "Shade's Eye",
+               "Everything For A Price",
+               "Doubles boss loot, but taking damage in a bossfight causes instant death." + "\nDestroyed upon being discarded." + "\n\nThe wandering eye of a vengeful shade.",
+               "shadeseye_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.C;
             Game.Items.Rename("nn:shade's_eye", "nn:shades_eye");
             ShadesEyeID = item.PickupObjectId;

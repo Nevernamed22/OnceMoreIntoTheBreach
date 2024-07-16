@@ -24,7 +24,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("My Heart Will Go On");
             gun.SetLongDescription("Hespera, the Pride of Venus, always wished that her fighting spirit, her courage... her heart, if you will, would go on to inspire and aid others." + "\n\nShe never realised how literal that would be.");
 
-            gun.SetupSprite(null, "orgun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "orgun_idle_001", 8, "orgun_ammonomicon_001");
+
             //ItemBuilder.AddPassiveStatModifier(gun, PlayerStats.StatType.GlobalPriceMultiplier, 0.925f, StatModifier.ModifyMethod.MULTIPLICATIVE);
 
             gun.SetAnimationFPS(gun.shootAnimation, 8);
@@ -63,7 +64,7 @@ namespace NevernamedsItems
                 blood.InFlightSpawnRadius = 1f;
                 blood.SpawnGoopOnCollision = true;
                 blood.CollisionSpawnRadius = 2f;
-                projectile.SetProjectileSpriteRight("orgun_projectile", 12, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+                projectile.SetProjectileSprite("orgun_projectile", 12, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
                 if (mod != gun.DefaultModule) { mod.ammoCost = 0; }
                 projectile.transform.parent = gun.barrelOffset;
             }

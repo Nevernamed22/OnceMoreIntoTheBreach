@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Don't Get Used To Yourself");
             gun.SetLongDescription("A highly advanced piece of alien technology developed by a race of cephalopodal beings native to a far off world."+"\n\nDeconstructs organisms on a cellular level, and rearranges them into something else."+"\nThis process is incredibly painful.");
 
-            gun.SetupSprite(null, "biotranstater2100_idle_001", 8);
+            gun.SetGunSprites("biotranstater2100");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
 

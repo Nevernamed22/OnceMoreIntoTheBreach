@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Stonefaced");
             gun.SetLongDescription("An invisible laser which tears chunks from intersecting walls in the form of superheated shrapnel."+"\n\nFavoured by Gargoyle Hunters.");
 
-            gun.SetupSprite(null, "particlebeam_idle_001", 8);
+            gun.SetGunSprites("particlebeam");
 
             gun.isAudioLoop = true;
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);

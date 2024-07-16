@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
@@ -12,33 +12,14 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Coupon";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/NeoActiveSprites/coupon_improved";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<ItemCoupon>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "100th Lucky Gungeoneer";
-            string longDesc = "Entitles you to one free item at most Gungeon based merchanteering establishments. Simply use the coupon, and select your item in the alloted time.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<ItemCoupon>(
+               "Coupon",
+               "100th Lucky Gungeoneer",
+               "Entitles you to one free item at most Gungeon based merchanteering establishments. Simply use the coupon, and select your item in the alloted time.",
+               "coupon_improved") as PlayerItem;
 
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 500);
 
-
-            //Set the rarity of the item
             item.quality = PickupObject.ItemQuality.B;
 
             List<string> mandatorySynergyItems = new List<string>() { "nn:coupon", "ring_of_miserly_protection" };

@@ -37,6 +37,7 @@ namespace NevernamedsItems
                 PrintUnlock(CustomTrackedStats.RUSTY_ITEMS_PURCHASED, "Rusty Casing", "Purchase 3 items from Rusty;", 3);
                 PrintUnlock(CustomTrackedStats.RUSTY_ITEMS_STOLEN, "Rusty Shotgun", "Steal an item from Rusty.", 1, false);
                 PrintUnlock(CustomDungeonFlags.CHEATED_DEATH_SHADE, "Shade's Eye", "Take damage as the Shade... and live!");
+                PrintUnlock(CustomTrackedStats.DOUG_ITEMS_PURCHASED, "Belt Feeder", "Purchase 3 items from Doug in the Gungeon;", 3);
 
                 //----------------------------------------------------------Specific Boss Kills
                 ETGModConsole.Log("<color=#00d6e6>Boss Kill Tally Unlocks:</color>");//------------------------------------------------------------
@@ -84,6 +85,7 @@ namespace NevernamedsItems
                 PrintUnlock(CustomDungeonFlags.BEATEN_KEEP_TURBO_MODE, "Chaos Ruby", "Beat the Keep of the Lead Lord on Turbo Mode.");
                 PrintUnlock(CustomDungeonFlags.BEATEN_MINES_BOSS_TURBO_MODE, "Ringer", "Beat the Black Powder Mine on Turbo Mode.");
                 PrintUnlock(CustomDungeonFlags.BEATEN_HOLLOW_BOSS_TURBO_MODE, "Supersonic Shots", "Beat the Hollow on Turbo Mode.");
+                PrintUnlock(CustomDungeonFlags.BEATEN_HELL_BOSS_TURBO_MODE, "Helm of Chaos", "Beat Bullet Hell on Turbo Mode.");
 
                 //----------------------------------------------------------ADVANCED DRAGUN
                 ETGModConsole.Log("<color=#00d6e6>Advanced Dragun Unlocks:</color>"); //------------------------------------------------------------
@@ -128,6 +130,21 @@ namespace NevernamedsItems
                 PrintUnlock(CustomDungeonFlags.JAMMEDLEADMAIDEN_QUEST_REWARDED, "Maiden-Shaped Box", null);
                 PrintUnlock(CustomDungeonFlags.JAMMEDBULLETSHARK_QUEST_REWARDED, "Gunshark", null);
                 PrintUnlock(CustomDungeonFlags.JAMMEDGUNNUT_QUEST_REWARDED, "Bullet Blade", null);
+
+                //----------------------------------------------------------Beggar Unlocks
+                ETGModConsole.Log("<color=#00d6e6>Beggar Unlocks:</color>"); //------------------------------------------------------------
+                ETGModConsole.Log("Unlocked by making donations to the Beggar.");
+
+                PrintUnlock(CustomTrackedStats.BEGGAR_TOTAL_DONATIONS, "Spitballer", "Total Donated:", 5);
+                PrintUnlock(CustomTrackedStats.BEGGAR_TOTAL_DONATIONS, "Scrap Strap", "Total Donated:", 15);
+                PrintUnlock(CustomTrackedStats.BEGGAR_TOTAL_DONATIONS, "Flaming Shells", "Total Donated:", 35);
+                PrintUnlock(CustomTrackedStats.BEGGAR_TOTAL_DONATIONS, "Shell Necklace", "Total Donated:", 74);
+                PrintUnlock(CustomTrackedStats.BEGGAR_TOTAL_DONATIONS, "Underbarrel Shotgun", "Total Donated:", 155);
+                PrintUnlock(CustomTrackedStats.BEGGAR_TOTAL_DONATIONS, "Wooden Knife", "Total Donated:", 315);
+                PrintUnlock(CustomTrackedStats.BEGGAR_TOTAL_DONATIONS, "Gungineer", "Total Donated:", 635);
+                PrintUnlock(CustomTrackedStats.BEGGAR_TOTAL_DONATIONS, "Shroomed Bullets", "Total Donated:", 1275);
+                PrintUnlock(CustomTrackedStats.BEGGAR_TOTAL_DONATIONS, "Ring of Fortune", "Total Donated:", 2555);
+                PrintUnlock(CustomTrackedStats.BEGGAR_TOTAL_DONATIONS, "Beggars Belief", "Total Donated:", 5115);
 
             });
         }

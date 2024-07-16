@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Knock Knock Knockin");
             gun.SetLongDescription("Converts chemical potential energy into potent kinetic energy."+"\n\nOlder than most guns in the Gungeon. In it's hayday, it was even powerful enough to grant flight!");
 
-            gun.SetupSprite(null, "kineticblaster_idle_001", 8);
+            gun.SetGunSprites("kineticblaster");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 
@@ -49,7 +49,7 @@ namespace NevernamedsItems
             projectile.baseData.damage = 7f;
             projectile.baseData.force *= 6f;
 
-            projectile.SetProjectileSpriteRight("kineticblaster_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
+            projectile.SetProjectileSprite("kineticblaster_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.BlueFrostBlastVFX;
 

@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Healthy Option");
             gun.SetLongDescription("Deals bonus damage at full health." + "\n\nThe signature weapon of Gungeoneer 'Hearts Ferros', famous for never being shot in a gunfight... until he was.");
 
-            gun.SetupSprite(null, "redrobin_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "redrobin_idle_001", 8, "redrobin_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 13);
 
@@ -61,7 +61,7 @@ namespace NevernamedsItems
             Projectile projectile = gun.DefaultModule.projectiles[0].gameObject.InstantiateAndFakeprefab().GetComponent<Projectile>();
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.damage = 5f;
-            projectile.SetProjectileSpriteRight("redrobin_projectile", 12, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 12, 6);
+            projectile.SetProjectileSprite("redrobin_projectile", 12, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 12, 6);
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
             projectile.hitEffects.alwaysUseMidair = true;
 

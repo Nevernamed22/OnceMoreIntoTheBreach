@@ -24,7 +24,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Face It!");
             gun.SetLongDescription("Fires piercing gemstones."+"\n\nLeft in a chest by a powerful warrior of shimmering crystal... who didn't show up to work today.");
 
-            gun.SetupSprite(null, "diamondcutter_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "diamondcutter_idle_001", 8, "diamondcutter_ammonomicon_001");
+
             gun.SetAnimationFPS(gun.reloadAnimation, 1);
 
             gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(97) as Gun).muzzleFlashEffects;
@@ -61,7 +62,7 @@ namespace NevernamedsItems
             maintain.damageMultOnPierce = 2f;
             projectile.pierceMinorBreakables = true;
 
-            projectile.SetProjectileSpriteRight("diamondcutter_proj", 23, 13, false, tk2dBaseSprite.Anchor.MiddleCenter, 17, 5);
+            projectile.SetProjectileSprite("diamondcutter_proj", 23, 13, false, tk2dBaseSprite.Anchor.MiddleCenter, 17, 5);
             projectile.DestroyMode = Projectile.ProjectileDestroyMode.BecomeDebris;
             gun.DefaultModule.projectiles[0] = projectile;
 
@@ -70,7 +71,6 @@ namespace NevernamedsItems
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("DiamondCutter Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/diamondcutter_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/diamondcutter_clipempty");
 
             gun.quality = PickupObject.ItemQuality.B;
-            gun.TrimGunSprites();
             ETGMod.Databases.Items.Add(gun, false, "ANY");
             ID = gun.PickupObjectId;
 

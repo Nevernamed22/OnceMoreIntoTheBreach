@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Weird Champion");
             gun.SetLongDescription("This wiggly weapon proves that we are all made of... star... squooge.");
 
-            gun.SetupSprite(null, "w3irdstar_idle_001", 8);
+            gun.SetGunSprites("w3irdstar");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
             gun.SetAnimationFPS(gun.idleAnimation, 10);
@@ -79,7 +79,7 @@ namespace NevernamedsItems
             
             projectile.hitEffects.overrideMidairDeathVFX = bulletDeath;
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.SetProjectileSpriteRight("w3irdstar_largeproj", 20, 20, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
+            projectile.SetProjectileSprite("w3irdstar_largeproj", 20, 20, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
             EvenRadialBurstHandler burst = projectile.gameObject.AddComponent<EvenRadialBurstHandler>();
             burst.numberToSpawn = 40;
             burst.PostProcess = false;
@@ -97,7 +97,7 @@ namespace NevernamedsItems
             projectile2.baseData.range = 20f;
             projectile2.hitEffects.overrideMidairDeathVFX = bulletDeath;
             projectile2.hitEffects.alwaysUseMidair = true;
-            projectile2.SetProjectileSpriteRight("w3irdstar_smallproj", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
+            projectile2.SetProjectileSprite("w3irdstar_smallproj", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
 
             burst.projectileToSpawn = projectile2;
 

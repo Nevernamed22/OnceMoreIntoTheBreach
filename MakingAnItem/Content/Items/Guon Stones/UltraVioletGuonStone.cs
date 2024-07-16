@@ -7,6 +7,7 @@ using System.Collections;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
 using Alexandria.ItemAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -39,22 +40,20 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(xenochromePrefab);
             xenochromePrefab.baseData.damage = 20f;
             xenochromePrefab.baseData.speed = 0f;
-            xenochromePrefab.AnimateProjectile(new List<string> {
-                "thinline_pinkproj_001",
-                "thinline_pinkproj_002",
-                "thinline_pinkproj_003",
-                "thinline_pinkproj_004",
-                "thinline_pinkproj_005",
-                "thinline_pinkproj_006",
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(10, 10),
-                new IntVector2(10, 10),
-                new IntVector2(10, 10),
-                new IntVector2(10, 10),
-                new IntVector2(10, 10),
-                new IntVector2(10, 10),
-            }, AnimateBullet.ConstructListOfSameValues(true, 6), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 6), AnimateBullet.ConstructListOfSameValues(true, 6), AnimateBullet.ConstructListOfSameValues(false, 6),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 6), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 6), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 6), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 6), 0);
+
+            xenochromePrefab.AnimateProjectileBundle("ThinLinePinkProjectile",
+                    Initialisation.ProjectileCollection,
+                    Initialisation.projectileAnimationCollection,
+                    "ThinLinePinkProjectile",
+                    MiscTools.DupeList(new IntVector2(10, 10), 6), //Pixel Sizes
+                    MiscTools.DupeList(true, 6), //Lightened
+                    MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 6), //Anchors
+                    MiscTools.DupeList(true, 6), //Anchors Change Colliders
+                    MiscTools.DupeList(false, 6), //Fixes Scales
+                    MiscTools.DupeList<Vector3?>(null, 6), //Manual Offsets
+                    MiscTools.DupeList<IntVector2?>(new IntVector2(10, 10), 6), //Override colliders
+                    MiscTools.DupeList<IntVector2?>(null, 6), //Override collider offsets
+                    MiscTools.DupeList<Projectile>(null, 6)); // Override to copy from          
             BulletLifeTimer timer = xenochromePrefab.gameObject.AddComponent<BulletLifeTimer>();
             timer.secondsTillDeath = 2;
             ExplosiveModifier splode = xenochromePrefab.gameObject.AddComponent<ExplosiveModifier>();

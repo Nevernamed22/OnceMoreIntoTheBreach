@@ -24,7 +24,8 @@ namespace NevernamedsItems
             gun.SetLongDescription("Stacks different coloured jewels on enemies. When three gems of the same colour exist in a room, they will be... erased."+
                 "\n\nVolatile crystals like this are a rare but lucrative opportunity for wandering Minelets deep within the Gungeon.");
 
-            gun.SetupSprite(null, "bejeweler_idle_001", 8);
+            gun.SetGunSprites("bejeweler");
+
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(199) as Gun).gunSwitchGroup;
 
             gun.SetAnimationFPS(gun.shootAnimation, 14);
@@ -78,43 +79,43 @@ namespace NevernamedsItems
 
             //BULLET STATS
             Projectile bluegem = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            bluegem.SetProjectileSpriteRight("bejeweler_projectile_blue", 11, 11, false, tk2dBaseSprite.Anchor.MiddleCenter, 11, 11);
+            bluegem.SetProjectileSprite("bejeweler_projectile_blue", 11, 11, false, tk2dBaseSprite.Anchor.MiddleCenter, 11, 11);
             bluegem.hitEffects.deathAny = hitEffectBlue;
             bluegem.hitEffects.HasProjectileDeathVFX = true;
             bluegem.gameObject.AddComponent<BejewelerStuckJewels>().colour = GemColour.BLUE;
 
             Projectile greengem = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            greengem.SetProjectileSpriteRight("bejeweler_projectile_green", 10, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
+            greengem.SetProjectileSprite("bejeweler_projectile_green", 10, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 9);
             greengem.hitEffects.deathAny = hitEffectGreen;
             greengem.hitEffects.HasProjectileDeathVFX = true;
             greengem.gameObject.AddComponent<BejewelerStuckJewels>().colour = GemColour.GREEN;
 
             Projectile orangegem = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            orangegem.SetProjectileSpriteRight("bejeweler_projectile_orange", 8, 8, false, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
+            orangegem.SetProjectileSprite("bejeweler_projectile_orange", 8, 8, false, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
             orangegem.hitEffects.deathAny = hitEffectOrange;
             orangegem.hitEffects.HasProjectileDeathVFX = true;
             orangegem.gameObject.AddComponent<BejewelerStuckJewels>().colour = GemColour.ORANGE;
 
             Projectile pinkgem = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            pinkgem.SetProjectileSpriteRight("bejeweler_projectile_pink", 9, 10, false, tk2dBaseSprite.Anchor.MiddleCenter, 9, 10);
+            pinkgem.SetProjectileSprite("bejeweler_projectile_pink", 9, 10, false, tk2dBaseSprite.Anchor.MiddleCenter, 9, 10);
             pinkgem.hitEffects.deathAny = hitEffectPink;
             pinkgem.hitEffects.HasProjectileDeathVFX = true;
             pinkgem.gameObject.AddComponent<BejewelerStuckJewels>().colour = GemColour.PINK;
 
             Projectile redgem = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            redgem.SetProjectileSpriteRight("bejeweler_projectile_red", 9, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 9, 9);
+            redgem.SetProjectileSprite("bejeweler_projectile_red", 9, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 9, 9);
             redgem.hitEffects.deathAny = hitEffectRed;
             redgem.hitEffects.HasProjectileDeathVFX = true;
             redgem.gameObject.AddComponent<BejewelerStuckJewels>().colour = GemColour.RED;
 
             Projectile whitegem = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            whitegem.SetProjectileSpriteRight("bejeweler_projectile_white", 10, 10, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
+            whitegem.SetProjectileSprite("bejeweler_projectile_white", 10, 10, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
             whitegem.hitEffects.deathAny = hitEffectWhite;
             whitegem.hitEffects.HasProjectileDeathVFX = true;
             whitegem.gameObject.AddComponent<BejewelerStuckJewels>().colour = GemColour.WHITE;
 
             Projectile yellowgem = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            yellowgem.SetProjectileSpriteRight("bejeweler_projectile_yellow", 10, 10, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
+            yellowgem.SetProjectileSprite("bejeweler_projectile_yellow", 10, 10, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
             yellowgem.hitEffects.deathAny = hitEffectYellow;
             yellowgem.hitEffects.HasProjectileDeathVFX = true;
             yellowgem.gameObject.AddComponent<BejewelerStuckJewels>().colour = GemColour.YELLOW;

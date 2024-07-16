@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("");
             gun.SetLongDescription("");
 
-            gun.SetupSprite(null, "qbeam_idle_001", 8);
+            gun.SetGunSprites("qbeam");
 
             gun.SetAnimationFPS(gun.shootAnimation, 9);
             gun.isAudioLoop = true;

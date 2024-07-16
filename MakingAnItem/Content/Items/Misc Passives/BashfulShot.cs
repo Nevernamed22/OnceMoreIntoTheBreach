@@ -20,6 +20,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.S;
             item.SetTag("bullet_modifier");
             BashfulShotID = item.PickupObjectId;
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public static int BashfulShotID;
         private int currentItems, lastItems;

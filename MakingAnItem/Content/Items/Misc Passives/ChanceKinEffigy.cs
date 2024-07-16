@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Chance Effigy";
-            string resourceName = "NevernamedsItems/Resources/chanceeffigy_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<ChanceKinEffigy>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Guns Upon A Time";
-            string longDesc = "Chance Kin drop bonus supplies." + "\n\nHailing from the same ludicrous sect who forged the Keybullet Effigy. Their religious rites, while inclusive of Chance Kin, rarely focus on them as they are perceived as lesser spirits.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<ChanceKinEffigy>(
+              "Chance Effigy",
+              "Guns Upon A Time",
+              "Chance Kin drop bonus supplies." + "\n\nHailing from the same ludicrous sect who forged the Keybullet Effigy. Their religious rites, while inclusive of Chance Kin, rarely focus on them as they are perceived as lesser spirits.",
+              "chanceeffigy_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.D;
             ChanceEffigyID = item.PickupObjectId;
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.KILLEDJAMMEDCHANCEKIN, true);

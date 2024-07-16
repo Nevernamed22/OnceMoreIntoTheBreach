@@ -25,7 +25,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Come Join Me...");
             gun.SetLongDescription("Forever. Inescapable. Beautiful."+"\n\nAll will become a part of the Spiral.");
 
-            gun.SetupSprite(null, "spiral_idle_001", 16);
+            gun.SetGunSprites("spiral", 16);
 
             gun.SetAnimationFPS(gun.shootAnimation, 30);
 
@@ -59,7 +59,7 @@ namespace NevernamedsItems
             projectile.pierceMinorBreakables = true;
             SpiralHandler spiralBehaviour = projectile.gameObject.AddComponent<SpiralHandler>();
             spiralBehaviour.projectileToSpawn = swirlyProj;
-            projectile.SetProjectileSpriteRight("spiral_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 14, 14);
+            projectile.SetProjectileSprite("spiral_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 14, 14);
 
             projectile.transform.parent = gun.barrelOffset;
 

@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Follow The Leader");
             gun.SetLongDescription("Mimics the projectiles of other guns."+"\n\nThis industrial mimigoo weapon has attained a low level of sentience, and now communicates solely in meowing and scratching.");
 
-            gun.SetupSprite(null, "copygat_idle_001", 8);
+            gun.SetGunSprites("copygat");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 
@@ -49,7 +49,7 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile);
 
             projectile.baseData.damage = 20f;
-            projectile.SetProjectileSpriteRight("wrench_null_projectile", 13, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 12, 7);
+            projectile.SetProjectileSprite("wrench_null_projectile", 13, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 12, 7);
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
             projectile.transform.parent = gun.barrelOffset;

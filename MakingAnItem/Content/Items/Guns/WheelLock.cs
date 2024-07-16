@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -20,7 +20,9 @@ namespace NevernamedsItems
             gun.gameObject.AddComponent<WheelLock>();
             gun.SetShortDescription("Wheeler Dealer");
             gun.SetLongDescription("A classical precursor to the flintlock."+"\n\nUses a spring-powered spinning wheel to ignite the powder within.");
-            gun.SetupSprite(null, "wheellock_idle_001", 8);
+           
+            gun.SetGunSprites("wheellock");
+
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(9) as Gun, true, false);

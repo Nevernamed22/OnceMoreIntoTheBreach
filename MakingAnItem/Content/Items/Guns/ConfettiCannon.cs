@@ -10,6 +10,7 @@ using Alexandria.ItemAPI;
 using SaveAPI;
 using Alexandria.Misc;
 using Alexandria.BreakableAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -26,7 +27,10 @@ namespace NevernamedsItems
             gun.SetShortDescription("Congratulations!");
             gun.SetLongDescription("A tube containing a small gunpowder charge and a collection of paper confetti."+"\n\nOften used to celebrate gundead birthdays, and by nature of the weapon, gundead funerals.");
 
-            gun.SetupSprite(null, "confetticannon_idle_001", 8);
+            gun.SetGunSprites("confetticannon");
+
+            gun.TrimGunSprites();
+
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);

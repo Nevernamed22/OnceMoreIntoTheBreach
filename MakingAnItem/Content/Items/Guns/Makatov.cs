@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("A drink with the meal");
             gun.SetLongDescription("A gun grip hastily glued to the bottom of a molotov."+"\n\nSpits puffs of flame.");
 
-            gun.SetupSprite(null, "makatov_idle_001", 8);
+            gun.SetGunSprites("makatov");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 

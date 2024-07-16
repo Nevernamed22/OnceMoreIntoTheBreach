@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Kechler and Hock");
             gun.SetLongDescription("Revolutionary recoil mitigation mechanisms cause the first two shots in each magazine of this clockwork marvel to fire with increased power."+"\n\nAn old Hegemony prototype. Somehow, never caught on.");
 
-            gun.SetupSprite(null, "g11_idle_001", 8);
+            gun.SetGunSprites("g11");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);

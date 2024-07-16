@@ -14,21 +14,15 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Combat Knife";
-            string resourceName = "NevernamedsItems/Resources/combatknife_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<CombatKnife>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Quiet and Always Available";
-            string longDesc = "In the galaxy at large, knife kills are considered demonstrations of extreme skill, and many bounty hunters, soldiers, and general vagabonds often forego more effective weaponry in hopes of gaining that prestige.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<CombatKnife>(
+            "Combat Knife",
+            "Quiet and Always Available",
+            "In the galaxy at large, knife kills are considered demonstrations of extreme skill, and many bounty hunters, soldiers, and general vagabonds often forego more effective weaponry in hopes of gaining that prestige.",
+            "combatknife_icon") as PlayerItem;         
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 3);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
-
             item.consumable = false;
-            item.quality = ItemQuality.D; //D
-
-
+            item.quality = ItemQuality.D; 
         }
         public override void DoEffect(PlayerController user)
         {

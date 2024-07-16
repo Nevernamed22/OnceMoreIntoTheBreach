@@ -22,8 +22,7 @@ namespace NevernamedsItems
             behav.preventNormalFireAudio = true;
             gun.SetShortDescription("Set to Defrost");
             gun.SetLongDescription("An old weaponised heating coil, will burn enemies it's focused on for long enough.");
-
-            gun.SetupSprite(null, "heatray_idle_001", 8);
+            gun.SetGunSprites("heatray");
 
             gun.SetAnimationFPS(gun.shootAnimation, 8);
             gun.isAudioLoop = true;

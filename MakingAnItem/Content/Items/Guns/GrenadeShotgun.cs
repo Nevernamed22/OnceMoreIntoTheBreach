@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Sit Down");
             gun.SetLongDescription("The product of combining two of the most entertaining classes of weaponry- Shotguns, and the ones that explode.");
 
-            gun.SetupSprite(null, "grenadeshotgun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "grenadeshotgun_idle_001", 8, "grenadeshotgun_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 13);
 

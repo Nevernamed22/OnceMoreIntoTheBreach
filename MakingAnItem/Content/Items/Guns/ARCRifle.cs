@@ -21,8 +21,8 @@ namespace NevernamedsItems
             gun.gameObject.AddComponent<ARCRifle>();
             gun.SetShortDescription("Electrotech Assassin");
             gun.SetLongDescription("This slow firing yet powerful electric rifle was patented by the ARC Private Security Company for effective 'ranged situation management'."+"\n\nColloquial nicknames such as 'Thunderstick' are not uncommon among ARC personnel.");
-
-            gun.SetupSprite(null, "arcrifle_idle_001", 8);
+            
+            gun.SetGunSprites("arcrifle");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 

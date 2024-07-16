@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Discrete Sidearm");
             gun.SetLongDescription("A simple firearm designed for easy concealment.");
 
-            gun.SetupSprite(null, "glock42_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "glock42_idle_001", 8, "glock42_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
 

@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Cosmic Ray Spallation");
             gun.SetLongDescription("The lack of any radiation filtering on this homemade energy blaster causes it's playload to ricochet uncontrollably off of surfaces!");
 
-            gun.SetupSprite(null, "rico_idle_001", 8);
+            gun.SetGunSprites("rico");
 
             gun.SetAnimationFPS(gun.shootAnimation, 9);
             gun.isAudioLoop = true;

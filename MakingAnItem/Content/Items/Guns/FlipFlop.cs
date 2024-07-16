@@ -6,10 +6,11 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using SaveAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -57,7 +58,7 @@ namespace NevernamedsItems
 
             PierceDeadActors piercedead = projectile.gameObject.AddComponent<PierceDeadActors>();
 
-            projectile.SetProjectileSpriteRight("burstrifle_proj", 7, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 4);
+            projectile.SetProjectileSprite("burstrifle_proj", 7, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 4);
             EasyTrailBullet trail4 = projectile.gameObject.AddComponent<EasyTrailBullet>();
             trail4.TrailPos = projectile.transform.position;
             trail4.StartWidth = 0.25f;

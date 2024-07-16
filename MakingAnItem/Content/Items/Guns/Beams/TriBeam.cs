@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Revolutionary Tech");
             gun.SetLongDescription("This seemingly unremarkable tri-core energy weapon actually marks an astounding leap in the furthering of gunsmithing technology.");
 
-            gun.SetupSprite(null, "tribeam_idle_001", 8);
+            gun.SetGunSprites("tribeam");
 
             gun.SetAnimationFPS(gun.shootAnimation, 8);
             gun.isAudioLoop = true;

@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using Alexandria.ItemAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -20,7 +21,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Ow!.. Heat was Hot!");
             gun.SetLongDescription("Glues your foes in place, and has a chance to set them ablaze."+"\n\nPioneered by amateur guncrafters, and generally considered one of the most painful methods of adhesive application.");
 
-            gun.SetupSprite(null, "hotgluegun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "hotgluegun_idle_001", 8, "hotgluegun_ammonomicon_001");
+
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(199) as Gun).gunSwitchGroup;
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
@@ -61,18 +63,25 @@ namespace NevernamedsItems
             burning.usesFireEffect = true;
             burning.fireEffect = StaticStatusEffects.hotLeadEffect;
 
-            projectile.AnimateProjectile(new List<string> {
-                "gluegunproj_1",
-                "gluegunproj_2",
-                "gluegunproj_1",
-                "gluegunproj_3",
-            }, 8, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(5, 5), //1
-                new IntVector2(4, 6), //2            
-                new IntVector2(5, 5), //3
-                new IntVector2(6, 4), //4
-            }, AnimateBullet.ConstructListOfSameValues(false, 4), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4), AnimateBullet.ConstructListOfSameValues(true, 4), AnimateBullet.ConstructListOfSameValues(false, 4),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
+            projectile.AnimateProjectileBundle("GlueGunProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "GlueGunProjectile",
+                   new List<IntVector2> {
+                        new IntVector2(5, 5), //1
+                        new IntVector2(4, 6), //2            
+                        new IntVector2(5, 5), //3
+                        new IntVector2(6, 4), //4
+                   }, //Pixel Sizes
+                   MiscTools.DupeList(false, 4), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                   MiscTools.DupeList(true, 4), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 4), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 4), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 4)); // Override to copy from    
+        
             gun.DefaultModule.projectiles[0] = projectile;
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("HotGlueGun Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/hotgluegun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/hotgluegun_clipempty");

@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Civil");
             gun.SetLongDescription("An antique musket rifle. Thoroughly inefficient, but charged with a sense of bloodthirsty ancient optimism about it's potential.");
 
-            gun.SetupSprite(null, "musketrifle_idle_001", 8);
+            gun.SetGunSprites("musketrifle");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
             gun.SetAnimationFPS(gun.reloadAnimation, 6);

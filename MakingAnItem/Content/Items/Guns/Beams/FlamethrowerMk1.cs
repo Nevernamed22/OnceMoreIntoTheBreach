@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Bearing Down On Me");
             gun.SetLongDescription("A crudely modified Mega-Douser filled with gasoline."+"\n\nThe very first experiment of flamesmith Lucinda \"Third Degree\" Burns.");
 
-            gun.SetupSprite(null, "flamethrowermk1_idle_001", 8);
+            gun.SetGunSprites("flamethrowermk1");
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(10) as Gun).gunSwitchGroup;

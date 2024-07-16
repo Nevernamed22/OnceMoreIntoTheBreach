@@ -12,18 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Identity Crisis";
-            string resourceName = "NevernamedsItems/Resources/identitycrisis_icon";
-
-            GameObject obj = new GameObject(itemName);
-
-            var item = obj.AddComponent<IdentityCrisis>();
-
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            string shortDesc = "WHO AM I?";
-            string longDesc = "Makes you completely forget who you are.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<IdentityCrisis>(
+               "Identity Crisis",
+               "WHO AM I?",
+               "Makes you completely forget who you are.",
+               "identitycrisis_icon") as PlayerItem;           
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 1000);
             item.consumable = true;
             item.quality = ItemQuality.B;

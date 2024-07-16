@@ -30,6 +30,7 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(linkVFX);
             UnityEngine.Object.DontDestroyOnLoad(linkVFX);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ADVDRAGUN_KILLED_ROBOT, true);
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public static GameObject linkVFX;
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)

@@ -24,6 +24,7 @@ namespace NevernamedsItems
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_UNENGRAVEDBULLETS, true);
             item.AddItemToTrorcMetaShop(15);
+            Doug.AddToLootPool(item.PickupObjectId);
         }
 
         float duration = 4;

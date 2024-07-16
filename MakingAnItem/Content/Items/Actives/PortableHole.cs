@@ -2,27 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Alexandria.Assetbundle;
 using Dungeonator;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
 {
     class PortableHole : PlayerItem
     {
-        //Call this method from the Start() method of your ETGModule extension class
         public static void Init()
         {
-            string itemName = "Portable Hole";
-            string resourceName = "NevernamedsItems/Resources/portablehole_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<PortableHole>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "The Hole Nine Yards";
-            string longDesc = "Not only is this hole portable, it's almost bottomless. And depressed. I mean, you would be too if you didn't have a bottom.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<PortableHole>(
+              "Portable Hole",
+              "The Hole Nine Yards",
+              "Not only is this hole portable, it's also bottomless. And depressed. I mean, you would be too if you didn't have a bottom.",
+              "portablehole_icon") as PlayerItem;         
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 600);
-
             item.consumable = false;
             item.quality = ItemQuality.B;
 
@@ -43,7 +39,7 @@ namespace NevernamedsItems
             BounceProjModifier Bouncing = HoleProjectile.gameObject.GetOrAddComponent<BounceProjModifier>();
             Bouncing.numberOfBounces += 100;
 
-            HoleProjectile.SetProjectileSpriteRight("portablehole_projectile", 17, 17, false, tk2dBaseSprite.Anchor.MiddleCenter, 17, 17);
+            HoleProjectile.SetProjectileCollisionRight("portablehole_projectile", Initialisation.ProjectileCollection, 17, 17, false, tk2dBaseSprite.Anchor.MiddleCenter, 17, 17);
         }
         private static Projectile HoleProjectile;
         public override void DoEffect(PlayerController user)

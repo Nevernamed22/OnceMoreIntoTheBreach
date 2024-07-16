@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -17,7 +17,7 @@ namespace NevernamedsItems
             "Overpriced Headband",
             "Ultimate",
             "Apparently being rich = being cool these days." + "\n\nMaybe you should write a song about how rich you are.",
-            "overpricedheadband_icon");
+            "overpricedheadband_improved");
             item.quality = PickupObject.ItemQuality.C;
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_OVERPRICEDHEADBAND, true);
             OverpricedHeadbandID = item.PickupObjectId;

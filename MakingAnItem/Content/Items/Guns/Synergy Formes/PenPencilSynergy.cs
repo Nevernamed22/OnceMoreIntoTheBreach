@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("draw me like one of your french girls");
             gun.SetLongDescription("massive fuck'n pen");
 
-            gun.SetupSprite(null, "pen_idle_001", 8);
+            gun.SetGunSprites("pen", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 17);
 

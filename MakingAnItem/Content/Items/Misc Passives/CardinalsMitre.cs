@@ -6,6 +6,7 @@ using System.Text;
 
 using UnityEngine;
 using Alexandria.ItemAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -13,31 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Cardinals Mitre";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/cardinalsmitre_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<CardinalsMitre>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Ex Cathedra";
-            string longDesc = "Fires a homing bullet upon reloading." + "\n\nImbued with power by a Bishop of the True Gun, hats like these are worn by Kaliber-devout Cardinals.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-
-            //Set the rarity of the item
+            PassiveItem item = ItemSetup.NewItem<CardinalsMitre>(
+              "Cardinals Mitre",
+              "Ex Cathedra",
+              "Fires a homing bullet upon reloading." + "\n\nImbued with power by a Bishop of the True Gun, hats like these are worn by Kaliber-devout Cardinals.",
+              "cardinalsmitre_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.C;
 
             //MITRE PROJECTILES
@@ -47,22 +28,29 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(MitreProjectile);
             MitreProjectile.baseData.damage *= 5f;
             MitreProjectile.baseData.speed *= 0.4f;
-            MitreProjectile.SetProjectileSpriteRight("mitreproj_1", 22, 22, true, tk2dBaseSprite.Anchor.MiddleCenter, 22, 22);
+            MitreProjectile.SetProjectileSprite("mitreproj_1", 22, 22, true, tk2dBaseSprite.Anchor.MiddleCenter, 22, 22);
 
             HomingModifier homing = MitreProjectile.gameObject.AddComponent<HomingModifier>();
             homing.AngularVelocity = 80f;
             homing.HomingRadius = 1000f;
 
-            MitreProjectile.AnimateProjectile(new List<string> {
-                "mitreproj_1",
-                "mitreproj_2",
-                "mitreproj_3",
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(22, 22), //1
-                new IntVector2(20, 20), //2            
-                new IntVector2(20, 20), //3
-            }, AnimateBullet.ConstructListOfSameValues(true, 3), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 3), AnimateBullet.ConstructListOfSameValues(true, 3), AnimateBullet.ConstructListOfSameValues(false, 3),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 3), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 3), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 3), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 3), 0);
+            MitreProjectile.AnimateProjectileBundle("CardinalsMitreProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "CardinalsMitreProjectile",
+                   new List<IntVector2> {
+                        new IntVector2(22, 22), //1
+                        new IntVector2(20, 20), //2            
+                        new IntVector2(20, 20), //3
+                    }, //Pixel Sizes
+                   MiscTools.DupeList(true, 3), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 3), //Anchors
+                   MiscTools.DupeList(true, 3), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 3), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 3), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(null, 3), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 3), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 3)); // Override to copy from              
         }
         public static Projectile MitreProjectile;
         bool canFire = true;

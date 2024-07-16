@@ -25,6 +25,7 @@ namespace NevernamedsItems
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_HEMATICROUNDS, true);
             item.AddItemToDougMetaShop(50);
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public override void Pickup(PlayerController player)
         {
@@ -42,13 +43,13 @@ namespace NevernamedsItems
         private RoomHandler lastCheckedRoom;
         private void PostProj(Projectile proj, float i)
         {
-            proj.baseData.damage *= (1 + (0.1f * timesHit));
+            proj.baseData.damage *= (1 + (0.5f * timesHit));
         }
         private void PostBeam(BeamController b)
         {
             if (b.projectile)
             {
-                b.projectile.baseData.damage *= (1 + (0.1f * timesHit));
+                b.projectile.baseData.damage *= (1 + (0.5f * timesHit));
             }
         }
         public override void Update()

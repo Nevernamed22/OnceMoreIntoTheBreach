@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using static GungeonAPI.OldShrineFactory;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
@@ -14,107 +13,92 @@ using System.Collections;
 
 namespace NevernamedsItems
 {
-    public static class TurtleShrine
+    public class TurtleShrine : GenericShrine
     {
-
-        public static void Add()
+        public static GameObject Setup(GameObject pedestal)
         {
-            OldShrineFactory aa = new OldShrineFactory
-            {
-
-                name = "TurtleShrine",
-                modID = "omitb",
-                text = "A shrine to a bizarre Gungeoneer, whose psychopathy was rewarded by a bloodthirsty reptilian horde.",
-                spritePath = "NevernamedsItems/Resources/Shrines/turtle_shrine.png",
-                room = RoomFactory.BuildFromResource("NevernamedsItems/Resources/EmbeddedRooms/TurtleShrineRoom.room").room,
-                RoomWeight = 1f,
-                acceptText = "Beat your head against the statue <Lose Half a Heart>",
-                declineText = "Leave",
-                OnAccept = Accept,
-                OnDecline = null,
-                CanUse = CanUse,
-                offset = new Vector3(-1, -1, 0),
-                talkPointOffset = new Vector3(0, 3, 0),
-                isToggle = false,
-                isBreachShrine = false,
-
-
-            };
-            aa.Build();
-            spriteId = SpriteBuilder.AddSpriteToCollection(spriteDefinition, ShrineFactory.ShrineIconCollection);
+            var shrineobj = ItemBuilder.SpriteFromBundle("shrine_turtle", Initialisation.NPCCollection.GetSpriteIdByName("shrine_turtle"), Initialisation.NPCCollection, new GameObject("Shrine Turtle Statue"));
+            shrineobj.GetComponent<tk2dSprite>().HeightOffGround = 1.25f;
+            shrineobj.GetComponent<tk2dSprite>().renderer.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTiltedCutout");
+            shrineobj.GetComponent<tk2dSprite>().usesOverrideMaterial = true;
+            pedestal.AddComponent<TurtleShrine>();
+            GameObject talkpoint = new GameObject("talkpoint");
+            talkpoint.transform.SetParent(pedestal.transform);
+            talkpoint.transform.localPosition = new Vector3(1f, 36f / 16f, 0f);
+            return shrineobj;
         }
-        public static string spriteDefinition = "NevernamedsItems/Resources/Shrines/turtle_icon";
-        public static bool CanUse(PlayerController player, GameObject shrine)
+        public override bool CanAccept(PlayerController interactor)
         {
-            if (!player.ForceZeroHealthState && player.healthHaver.GetCurrentHealth() > 0.5f)
+            if (interactor.characterIdentity == OMITBChars.Shade)
             {
-                return true;
+                if (interactor.carriedConsumables.Currency >= 20) return true;
+                else return false;
             }
-            else if (player.ForceZeroHealthState && player.healthHaver.Armor > 1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            if (interactor.ForceZeroHealthState && interactor.healthHaver.Armor > 1) { return true; }
+            else if (interactor.healthHaver.GetCurrentHealth() > 0.5f) { return true; }
+            return false;
         }
-        private static IEnumerator DoShrineEffect(PlayerController player)
+        public override void OnAccept(PlayerController Interactor)
         {
-            float SST = UnityEngine.Random.value;
-            TurtleShrineEffectHandler eff = player.gameObject.GetOrAddComponent<TurtleShrineEffectHandler>();
-            yield return null;
-            if (player.characterIdentity == PlayableCharacters.Robot)
-            {
-                player.healthHaver.Armor -= 1;
-                if (SST <= 0.01f)
-                {
-                    PickupObject byId = PickupObjectDatabase.GetById(301);
-                    player.AcquirePassiveItemPrefabDirectly(byId as PassiveItem);
-                }
-                else
-                {
-                    eff.SpawnNewTurtle();
-                    eff.SpawnNewTurtle();
-                    eff.SpawnNewTurtle();
-                    eff.SpawnNewTurtle();
-                }
-            }
-            else
-            {
-                player.healthHaver.ApplyHealing(-0.5f);
-                if (SST <= 0.005f)
-                {
-                    PickupObject byId = PickupObjectDatabase.GetById(301);
-                    player.AcquirePassiveItemPrefabDirectly(byId as PassiveItem);
-                }
-                else
-                {
-                    eff.SpawnNewTurtle();
-                    eff.SpawnNewTurtle();
-                }
-            }
-            yield break;
-        }
-        public static void Accept(PlayerController player, GameObject shrine)
-        {
-            shrine.GetComponent<CustomShrineController>().numUses++;
-
             GameUIRoot.Instance.notificationController.DoCustomNotification(
-                   "Turtle Power",
+                    "Turtle Power",
                     "A new friend?",
-                    ShrineFactory.ShrineIconCollection,
-                spriteId,
+                    Initialisation.NPCCollection,
+                    Initialisation.NPCCollection.GetSpriteIdByName("turtle_icon"),
                     UINotificationController.NotificationColor.SILVER,
                     true,
                     false
                     );
 
-            player.StartCoroutine(DoShrineEffect(player));
-            
-            AkSoundEngine.PostEvent("Play_OBJ_shrine_accept_01", shrine);
+            float SST = UnityEngine.Random.value;
+            TurtleShrineEffectHandler eff = Interactor.gameObject.GetOrAddComponent<TurtleShrineEffectHandler>();
+
+            if (Interactor.characterIdentity == PlayableCharacters.Robot)
+            {
+                Interactor.healthHaver.Armor -= 1;
+                if (SST <= 0.01f)
+                {
+                    PickupObject byId = PickupObjectDatabase.GetById(301);
+                    Interactor.AcquirePassiveItemPrefabDirectly(byId as PassiveItem);
+                }
+                else
+                {
+                    eff.SpawnNewTurtle();
+                    eff.SpawnNewTurtle();
+                    eff.SpawnNewTurtle();
+                    eff.SpawnNewTurtle();
+                }
+            }
+            else
+            {
+                Interactor.healthHaver.ApplyHealing(-0.5f);
+                if (SST <= 0.005f)
+                {
+                    PickupObject byId = PickupObjectDatabase.GetById(301);
+                    Interactor.AcquirePassiveItemPrefabDirectly(byId as PassiveItem);
+                }
+                else
+                {
+                    eff.SpawnNewTurtle();
+                    eff.SpawnNewTurtle();
+                }
+            }
+            AkSoundEngine.PostEvent("Play_OBJ_shrine_accept_01", base.gameObject);
         }
-        public static int spriteId;
+        public override string AcceptText(PlayerController interactor)
+        {
+            if (interactor.characterIdentity == OMITBChars.Shade) { return "Beat your wallet against the statue <Lose 20[sprite \"ui_coin\"]>"; }
+            if (interactor.ForceZeroHealthState) { return $"Beat your head against the statue <Lose 1 [sprite \"armor_money_icon_001\"]>"; }
+            return $"Beat your head against the statue <Lose half a heart>";
+        }
+        public override string DeclineText(PlayerController Interactor)
+        {
+            return "Leave";
+        }
+        public override string PanelText(PlayerController Interactor)
+        {
+            return "A shrine to a bizarre Gungeoneer, whose psychopathy was rewarded by a bloodthirsty reptilian horde.";
+        }
     }
     public class TurtleShrineEffectHandler : MonoBehaviour
     {
@@ -160,6 +144,7 @@ namespace NevernamedsItems
             Vector3 vector = player.transform.position;
             GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(orLoadByGuid.gameObject, vector, Quaternion.identity);
             CompanionController orAddComponent = gameObject.GetOrAddComponent<CompanionController>();
+            if (activeTurtles == null) { activeTurtles = new List<GameObject>(); }
             this.activeTurtles.Add(gameObject);
             orAddComponent.Initialize(player);
             if (orAddComponent.specRigidbody)
@@ -167,7 +152,7 @@ namespace NevernamedsItems
                 PhysicsEngine.Instance.RegisterOverlappingGhostCollisionExceptions(orAddComponent.specRigidbody, null, false);
             }
             HealthHaver helf = gameObject.GetComponent<HealthHaver>();
-            if  (helf != null)
+            if (helf != null)
             {
                 float helfNew = helf.GetMaxHealth() * 3f;
                 helf.SetHealthMaximum(helfNew);

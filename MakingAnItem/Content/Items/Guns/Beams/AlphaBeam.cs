@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Ancient Tech");
             gun.SetLongDescription("A powerful ion-beam that stings like hell."+"\n\nEvidence suggests this may be the first energy beam to ever find it's way to the Gungeon.");
 
-            gun.SetupSprite(null, "alphabeam_idle_001", 8);
+            gun.SetGunSprites("alphabeam");
 
             gun.SetAnimationFPS(gun.shootAnimation, 20);
             gun.isAudioLoop = true;

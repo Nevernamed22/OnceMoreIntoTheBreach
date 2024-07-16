@@ -1,6 +1,6 @@
 ﻿using Brave.BulletScript;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -193,7 +193,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Do you believe in magic?");
             gun.SetLongDescription("The lost wand of an Apprentice Gunjurer, cruelly slain by a Gungeoneer while out of his mentor's sight for but a moment...");
 
-            gun.SetupSprite(null, "gunjurerswand_idle_001", 8);
+            gun.SetGunSprites("gunjurerswand");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
             gun.SetAnimationFPS(gun.chargeAnimation, 4);

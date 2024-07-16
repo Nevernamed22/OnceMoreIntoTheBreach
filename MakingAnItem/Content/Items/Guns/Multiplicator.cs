@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Times Gone By");
             gun.SetLongDescription("This gun is capable of merging multiple bullets together to multiply their damage. Reload on a full clip to select multiplication intensity."+"\n\nBrought to the Gungeon by a great mathematician who stole everything he ever published.");
 
-            gun.SetupSprite(null, "multiplicator_idle_001", 8);
+            gun.SetGunSprites("multiplicator");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 
@@ -45,7 +45,7 @@ namespace NevernamedsItems
             projectile.baseData.damage *= 1f;
             projectile.baseData.speed *= 1f;
             projectile.baseData.range *= 1f;
-            projectile.SetProjectileSpriteRight("multiplicator_projectile", 14, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 14, 7);
+            projectile.SetProjectileSprite("multiplicator_projectile", 14, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 14, 7);
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Multiplicator Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/multiplicator_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/multiplicator_clipempty");

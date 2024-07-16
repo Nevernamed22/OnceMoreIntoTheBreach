@@ -22,7 +22,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Better Than One");
             gun.SetLongDescription("The result of a one night stand between a shotgun and a revolver. Fires two shots at once.");
 
-            gun.SetupSprite(null, "doublegun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "doublegun_idle_001", 8, "doublegun_ammonomicon_001");
+
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(51) as Gun).gunSwitchGroup;
             gun.SetAnimationFPS(gun.shootAnimation, 15);
             gun.SetAnimationFPS(gun.reloadAnimation, 13);

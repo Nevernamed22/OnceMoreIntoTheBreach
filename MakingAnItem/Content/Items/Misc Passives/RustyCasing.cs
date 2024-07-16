@@ -16,16 +16,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Rusty Casing";
-            string resourceName = "NevernamedsItems/Resources/rustycasing_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<RustyCasing>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Heheheheheheh";
-            string longDesc = "Yesyesyoulikestufffyouneeedmoney." + "\nThisgiveyoumoneyyesyesyes." + "\n\nHeheheheheheh";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<RustyCasing>(
+               "Rusty Casing",
+               "Heheheheheheh",
+               "Yesyesyoulikestufffyouneeedmoney." + "\nThisgiveyoumoneyyesyesyes." + "\n\nHeheheheheheh",
+               "rustycasing_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.D;
-
             RustyCasingID = item.PickupObjectId;
             item.SetupUnlockOnCustomStat(CustomTrackedStats.RUSTY_ITEMS_PURCHASED, 2, DungeonPrerequisite.PrerequisiteOperation.GREATER_THAN);
         }

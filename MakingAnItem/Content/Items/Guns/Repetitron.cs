@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("We've Done This Before");
             gun.SetLongDescription("Fires bullets... again... and again... and again."+"\n\nThis gun is powered by a miniature recursive sub-space anomaly. Do not look at the operational end.");
 
-            gun.SetupSprite(null, "repetiton_idle_001", 8);
+            gun.SetGunSprites("repetiton");
 
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(89) as Gun).gunSwitchGroup;
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);

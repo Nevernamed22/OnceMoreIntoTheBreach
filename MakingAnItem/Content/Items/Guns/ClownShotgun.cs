@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Honk Honk");
             gun.SetLongDescription("Filled to an excessive degree with bouncing shells. Once belonged to a real, genuine, pure-bred clown." + "\n\nAn essential tool in any clown's arsenal, along with a cute little car, a hula hoop, and space lubricant.");
 
-            gun.SetupSprite(null, "clownshotgun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "clownshotgun_idle_001", 8, "clownshotgun_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 13);
             gun.SetAnimationFPS(gun.idleAnimation, 5);

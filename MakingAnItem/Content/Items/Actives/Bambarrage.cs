@@ -8,6 +8,7 @@ using Dungeonator;
 using Alexandria.ItemAPI;
 using Alexandria.Misc;
 using UnityEngine;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -15,18 +16,15 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Bambarrage";
-            string resourceName = "NevernamedsItems/Resources/NeoActiveSprites/bambarrage_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Bambarrage>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Xiao Zhu Tong Jian";
-            string longDesc = "An ancient bamboo tube, hung at the hip- and capable of launching a devastating barrage of poisoned rocket arrows!";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 600);
+            PlayerItem item = ItemSetup.NewItem<Bambarrage>(
+              "Bambarrage",
+              "Xiao Zhu Tong Jian",
+              "An ancient bamboo tube, hung at the hip- and capable of launching a devastating barrage of poisoned rocket arrows!",
+              "bambarrage_icon") as PlayerItem;
+            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 200);
 
             projPrefab = ((Gun)PickupObjectDatabase.GetById(56)).DefaultModule.projectiles[0].gameObject.InstantiateAndFakeprefab().GetComponent<Projectile>();
-            projPrefab.SetProjectileSpriteRight("bambarrage_proj", 17, 3, false, tk2dBaseSprite.Anchor.MiddleCenter, 17, 3);
+            projPrefab.SetProjectileSprite("bambarrage_proj", 17, 3, false, tk2dBaseSprite.Anchor.MiddleCenter, 17, 3);
             projPrefab.baseData.damage = 7f;
             projPrefab.baseData.AccelerationCurve = ((Gun)PickupObjectDatabase.GetById(39)).DefaultModule.projectiles[0].baseData.AccelerationCurve;
             projPrefab.AppliesPoison = true;

@@ -23,6 +23,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.D;
             item.SetTag("bullet_modifier");
             BashingBulletsID = item.PickupObjectId;
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public static int BashingBulletsID;
         public override void Pickup(PlayerController player)

@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Kaboing");
             gun.SetLongDescription("The payload of this standard rocket propelled grenade has been coated in rubber, allowing it to ricochet once before detonating.");
 
-            gun.SetupSprite(null, "bouncerrpg_idle_001", 8);
+            gun.SetGunSprites("bouncerrpg");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 
@@ -65,7 +65,7 @@ namespace NevernamedsItems
 
             
 
-            proj.SetProjectileSpriteRight("bouncerrpg_proj", 10, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 9, 8);
+            proj.SetProjectileSprite("bouncerrpg_proj", 10, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 9, 8);
             gun.DefaultModule.projectiles[0] = proj;
 
 

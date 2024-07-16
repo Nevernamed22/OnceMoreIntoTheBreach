@@ -10,6 +10,7 @@ using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using SaveAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -23,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Evisceration");
             gun.SetLongDescription("This sidearm was once carried by an accursed sorcerer who put countless innocents to death in order to secure his grab at penultimate power.");
 
-            gun.SetupSprite(null, "gunofathousandsins_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "gunofathousandsins_idle_001", 8, "gunofathousandsins_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(198) as Gun).gunSwitchGroup;
@@ -60,26 +61,21 @@ namespace NevernamedsItems
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.BloodiedScarfPoofVFX;
 
             //ANIMATE BULLET
-            projectile.AnimateProjectile(new List<string> {
-                "gunofathousandsins_projectile_001",
-                "gunofathousandsins_projectile_002",
-                "gunofathousandsins_projectile_003",
-                "gunofathousandsins_projectile_004",
-            }, 12, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(23, 22), //1
-                new IntVector2(23, 22), //2            
-                new IntVector2(23, 22), //3
-               new IntVector2(23, 22),//4
-            }, AnimateBullet.ConstructListOfSameValues(true, 4), //Lightened
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
-            AnimateBullet.ConstructListOfSameValues(true, 4), //Anchors Change Colliders
-            AnimateBullet.ConstructListOfSameValues(false, 4), //Fixes Scales
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), //Offsets
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(20, 11), 4), //Override Collider Sizes
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(2, 5), 4), //Override Collider Offsets
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
+            projectile.AnimateProjectileBundle("GunOfAThousandSinsProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "GunOfAThousandSinsProjectile",
+                   MiscTools.DupeList(new IntVector2(23, 22), 4), //Pixel Sizes
+                   MiscTools.DupeList(true, 4), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                   MiscTools.DupeList(true, 4), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 4), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 4), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(20, 11), 4), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(2, 5), 4), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 4)); // Override to copy from              
 
-            projectile.SetProjectileSpriteRight("gunofathousandsins_projectile_001", 23, 22, true, tk2dBaseSprite.Anchor.MiddleCenter, 20, 11);
+            projectile.SetProjectileSprite("gunofathousandsins_projectile_001", 23, 22, true, tk2dBaseSprite.Anchor.MiddleCenter, 20, 11);
 
             projectile.transform.parent = gun.barrelOffset;
 

@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Forget Me Not");
             gun.SetLongDescription("Has 100 shots. Cannot gain ammo." + "\n\nThe sidearm of a glistening sentinel, who came to the Gungeon not to flee his inevitable death, but to embrace it.");
 
-            gun.SetupSprite(null, "unuscentum_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "unuscentum_idle_001", 8, "unuscentum_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 

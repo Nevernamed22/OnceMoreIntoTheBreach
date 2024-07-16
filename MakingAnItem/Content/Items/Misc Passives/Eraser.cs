@@ -15,14 +15,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Eraser";
-            string resourceName = "NevernamedsItems/Resources/eraser_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Eraser>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Now I Only Want You Gone";
-            string longDesc = "Chance to erase enemy bullets." + "\n\nDesigned to remove mistakes, including that mistake of walking into that bullet that you were just about to make!";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<Eraser>(
+              "Eraser",
+              "Now I Only Want You Gone",
+              "Chance to erase enemy bullets." + "\n\nDesigned to remove mistakes, including that mistake of walking into that bullet that you were just about to make!",
+              "eraser_icon") as PassiveItem;          
             item.quality = PickupObject.ItemQuality.B;
         }
 

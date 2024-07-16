@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -131,14 +131,26 @@ namespace NevernamedsItems
         }
         private void EnableVFX(PlayerController user)
         {
-            Material outlineMaterial = SpriteOutlineManager.GetOutlineMaterial(user.sprite);
-            outlineMaterial.SetColor("_OverrideColor", new Color(255f / 255f, 207f / 255f, 13f / 255f));
+            if (user && user.sprite)
+            {
+                Material outlineMaterial = SpriteOutlineManager.GetOutlineMaterial(user.sprite);
+                if (outlineMaterial != null)
+                {
+                    outlineMaterial.SetColor("_OverrideColor", new Color(255f / 255f, 207f / 255f, 13f / 255f));
+                }
+            }
         }
 
         private void DisableVFX(PlayerController user)
         {
-            Material outlineMaterial = SpriteOutlineManager.GetOutlineMaterial(user.sprite);
-            outlineMaterial.SetColor("_OverrideColor", new Color(0f, 0f, 0f));
+            if (user && user.sprite)
+            {
+                Material outlineMaterial = SpriteOutlineManager.GetOutlineMaterial(user.sprite);
+                if (outlineMaterial != null)
+                {
+                    outlineMaterial.SetColor("_OverrideColor", new Color(0f, 0f, 0f));
+                }
+            }
         }
         private void PlayerTookDamage(float resultValue, float maxValue, CoreDamageTypes damageTypes, DamageCategory damageCategory, Vector2 damageDirection)
         {

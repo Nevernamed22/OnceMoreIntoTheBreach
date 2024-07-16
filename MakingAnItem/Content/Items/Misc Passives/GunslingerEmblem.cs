@@ -15,7 +15,7 @@ namespace NevernamedsItems
             "Gunslinger Emblem",
             "Class Divide",
             "Serves as a helpful buff for Gunslinger Class warriors. Fortunately, that's pretty much everyone here.",
-            "gunslingeremblem_icon");
+            "gunslingeremblem_improved");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.RangeMultiplier, 1.1f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ReloadSpeed, 0.9f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.RateOfFire, 1.1f, StatModifier.ModifyMethod.MULTIPLICATIVE);

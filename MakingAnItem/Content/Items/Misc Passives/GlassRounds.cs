@@ -18,6 +18,7 @@ namespace NevernamedsItems
              "glassrounds_icon");
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("bullet_modifier");
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         private int currentItems, lastItems;
         public override void Update()

@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Hold Position");
             gun.SetLongDescription("Fires dangerous particle bolts that freeze time in a small radius around the impact site."+"\n\nWorks underwater.");
 
-            gun.SetupSprite(null, "stasisrifle_idle_001", 8);
+            gun.SetGunSprites("stasisrifle");
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
 

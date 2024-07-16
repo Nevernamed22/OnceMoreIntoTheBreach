@@ -24,7 +24,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Rub It In");
             gun.SetLongDescription("A way over-the-top method of pest control, used in the Gungeon to avoid Kaliber's disdain for flyswatters.");
 
-            gun.SetupSprite(null, "saltgun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "saltgun_idle_001", 8, "saltgun_ammonomicon_001");
+
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(150) as Gun).gunSwitchGroup;
             gun.SetAnimationFPS(gun.shootAnimation, 13);
             gun.SetAnimationFPS(gun.idleAnimation, 5);
@@ -49,7 +50,7 @@ namespace NevernamedsItems
                 projectile.gameObject.SetActive(false);
                 FakePrefab.MarkAsFakePrefab(projectile.gameObject);
                 UnityEngine.Object.DontDestroyOnLoad(projectile);
-                projectile.SetProjectileSpriteRight("salt_projectile", 2, 2, false, tk2dBaseSprite.Anchor.MiddleCenter, 2, 2);
+                projectile.SetProjectileSprite("salt_projectile", 2, 2, false, tk2dBaseSprite.Anchor.MiddleCenter, 2, 2);
                 projectile.baseData.range = 6;
                 projectile.baseData.damage = 2;
                 projectile.baseData.force *= 0.3f;

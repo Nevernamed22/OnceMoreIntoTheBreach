@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Scribble");
             gun.SetLongDescription("Carried by a brave stickman as he ventured through the pages of a bored child's homework." + "\n\nHe may be long erased, but his legacy lives on.");
 
-            gun.SetupSprite(null, "fullautostickgun_idle_001", 8);
+            gun.SetGunSprites("fullautostickgun", 8, true);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(StickGun.ID) as Gun, true, false);
 

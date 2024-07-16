@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using static GungeonAPI.OldShrineFactory;
+
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
@@ -16,95 +16,73 @@ using MonoMod.RuntimeDetour;
 
 namespace NevernamedsItems
 {
-    public static class ExecutionerShrine
+    public class ExecutionerShrine : GenericShrine
     {
-
-        public static void Add()
+        public static GameObject Setup(GameObject pedestal)
         {
-            OldShrineFactory aa = new OldShrineFactory
-            {
-
-                name = "ExecutionerShrine",
-                modID = "omitb",
-                text = "A shrine to an over-zealous Executioner, fond of gambling and wagers. Those who conjure his spirit are either saved or damned depending on a roll of the dice.",
-                spritePath = "NevernamedsItems/Resources/Shrines/executioner_shrine.png",
-                room = RoomFactory.BuildFromResource("NevernamedsItems/Resources/EmbeddedRooms/ExecutionerShrine.room").room,
-                RoomWeight = 1f,
-                acceptText = "Conjure The Spirit of Execution",
-                declineText = "Leave",
-                OnAccept = Accept,
-                OnDecline = null,
-                CanUse = CanUse,
-                offset = new Vector3(-1, -1, 0),
-                talkPointOffset = new Vector3(0, 3, 0),
-                isToggle = false,
-                isBreachShrine = false,
-
-
-            };
-            aa.Build();
-            spriteId = SpriteBuilder.AddSpriteToCollection(spriteDefinition, ShrineFactory.ShrineIconCollection);
+            var shrineobj = ItemBuilder.SpriteFromBundle("shrine_execution", Initialisation.NPCCollection.GetSpriteIdByName("shrine_execution"), Initialisation.NPCCollection, new GameObject("Shrine Execution Statue"));
+            shrineobj.GetComponent<tk2dSprite>().HeightOffGround = 1.25f;
+            shrineobj.GetComponent<tk2dSprite>().renderer.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTiltedCutout");
+            shrineobj.GetComponent<tk2dSprite>().usesOverrideMaterial = true;
+            pedestal.AddComponent<ExecutionerShrine>();
+            GameObject talkpoint = new GameObject("talkpoint");
+            talkpoint.transform.SetParent(pedestal.transform);
+            talkpoint.transform.localPosition = new Vector3(1f, 36f / 16f, 0f);
+            return shrineobj;
         }
-        public static string spriteDefinition = "NevernamedsItems/Resources/Shrines/executioner_icon";
-        public static bool CanUse(PlayerController player, GameObject shrine)
+        public override bool CanAccept(PlayerController interactor) { return !hasFailed; }
+        public override void OnAccept(PlayerController Interactor)
         {
-            if (shrine.GetComponent<CustomShrineController>().numUses == 0 || player.HasPickupID(PassiveTestingItem.DebugPassiveID))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+            float chance = 0.5f;
+            if (Interactor.HasPickupID(LuckyCoin.LuckyCoinID)) { chance = 0.75f; }
+            if (Interactor.HasPickupID(289)) { chance = 0.9f; }
 
-        public static void Accept(PlayerController player, GameObject shrine)
-        {
-            shrine.GetComponent<CustomShrineController>().numUses++;
-            if (UnityEngine.Random.value <= 0.5f)
+            if (UnityEngine.Random.value <= chance)
             {
-                if (player.ForceZeroHealthState)
-                {
-                    player.healthHaver.Armor += 4;
-                }
-                else
-                {
-                    player.healthHaver.ApplyHealing(1000);
-                }
+                if (Interactor.ForceZeroHealthState) { Interactor.healthHaver.Armor += 4; }
+                else { Interactor.healthHaver.ApplyHealing(1000); }
+
                 GameUIRoot.Instance.notificationController.DoCustomNotification(
                        "Salvation",
                         "Executioner's Wager",
-                        ShrineFactory.ShrineIconCollection,
-                    spriteId,
+                        Initialisation.NPCCollection,
+                        Initialisation.NPCCollection.GetSpriteIdByName("executioner_icon"),
                         UINotificationController.NotificationColor.SILVER,
                         true,
                         false
                         );
-                AkSoundEngine.PostEvent("Play_OBJ_shrine_accept_01", shrine);
+                AkSoundEngine.PostEvent("Play_OBJ_shrine_accept_01", base.gameObject);
             }
             else
             {
-                if (player.ForceZeroHealthState)
-                {
-                    player.healthHaver.Armor = 1;
-                }
-                else
-                {
-                    player.healthHaver.ForceSetCurrentHealth(0.5f);
-                }
-                AkSoundEngine.PostEvent("Play_VO_lichA_cackle_01", shrine);
+                hasFailed = true;
+                if (Interactor.ForceZeroHealthState) { Interactor.healthHaver.Armor = 1; }
+                else { Interactor.healthHaver.ForceSetCurrentHealth(0.5f); }
+
                 GameUIRoot.Instance.notificationController.DoCustomNotification(
-                       "Damnation",
+                        "Damnation",
                         "Executioner's Wager",
-                        ShrineFactory.ShrineIconCollection,
-                    spriteId,
+                        Initialisation.NPCCollection,
+                        Initialisation.NPCCollection.GetSpriteIdByName("executioner_icon"),
                         UINotificationController.NotificationColor.SILVER,
                         true,
                         false
                         );
-
+                AkSoundEngine.PostEvent("Play_VO_lichA_cackle_01", base.gameObject);
             }
         }
-        public static int spriteId;
+        public override string AcceptText(PlayerController interactor)
+        {
+            return "Conjure The Spirit of Execution";
+        }
+        public override string DeclineText(PlayerController Interactor)
+        {
+            return "Leave";
+        }
+        public override string PanelText(PlayerController Interactor)
+        {
+            return hasFailed ? "No second chances..." : "A shrine to an over-zealous Executioner, fond of gambling and wagers. Those who conjure his spirit are either saved or damned depending on a roll of the dice.";
+        }
+        public bool hasFailed = false;
     }
 }

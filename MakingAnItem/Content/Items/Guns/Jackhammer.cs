@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -21,7 +21,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("A Better Way");
             gun.SetLongDescription("A fully automatic shotgun designed by a dissilusioned Gungeoneer."+"\n\nPump action is soooo last decade.");
 
-            gun.SetupSprite(null, "jackhammer_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "jackhammer_idle_001", 8, "jackhammer_ammonomicon_001");
+
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(98) as Gun).gunSwitchGroup;
             gun.SetAnimationFPS(gun.shootAnimation, 13);
             gun.SetAnimationFPS(gun.idleAnimation, 5);

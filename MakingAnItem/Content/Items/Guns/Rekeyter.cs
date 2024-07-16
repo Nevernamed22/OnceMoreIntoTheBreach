@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Click");
             gun.SetLongDescription("A key clumsily fused to a grip and trigger. Low chance to open chests." + "\n\nHidden sidearm of the infamous criminal Locke Smith.");
 
-            gun.SetupSprite(null, "rekeyter_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "rekeyter_idle_001", 8, "rekeyter_ammonomicon_001");
 
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(95) as Gun).gunSwitchGroup;
 
@@ -61,7 +61,7 @@ namespace NevernamedsItems
             keyDamage.projstat = ScaleProjectileStatOffConsumableCount.ProjectileStatType.DAMAGE;
             keyDamage.consumableType = ScaleProjectileStatOffConsumableCount.ConsumableType.KEYS;
 
-            projectile.SetProjectileSpriteRight("rekeyter_projectile", 17, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 17, 6);
+            projectile.SetProjectileSprite("rekeyter_projectile", 17, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 17, 6);
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Rekeyter Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/rekeyter_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/rekeyter_clipempty");
             gun.quality = PickupObject.ItemQuality.B;

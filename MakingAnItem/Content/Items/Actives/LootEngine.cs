@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -12,19 +12,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Loot Engine";
-            string resourceName = "NevernamedsItems/Resources/lootengine_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<LootEngineItem>();
-
-
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Lengine, if you will";
-            string longDesc = "Rerolls all consumables in the room into other consumables. Also works on Glass Guon Stones, and Junk." + "\n\nRumour has it that a much larger version of this machine is responsible for handling the Gungeon's notoriously stingy loot system.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PlayerItem item = ItemSetup.NewItem<LootEngineItem>(
+              "Loot Engine",
+              "Lengine, if you will",
+              "Rerolls all consumables in the room into other consumables. Also works on Glass Guon Stones, and Junk." + "\n\nRumour has it that a much larger version of this machine is responsible for handling the Gungeon's notoriously stingy loot system.",
+              "lootengine_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 500);
-
             item.consumable = false;
             item.quality = ItemQuality.C;
         }

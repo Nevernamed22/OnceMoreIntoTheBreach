@@ -33,8 +33,7 @@ namespace NevernamedsItems
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).frames[3].eventAudio = "Play_WPN_minigun_shot_01";
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.shootAnimation).frames[3].triggerEvent = true;
 
-
-            gun.SetupSprite(null, "fractalgun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "fractalgun_idle_001", 8, "fractalgun_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 

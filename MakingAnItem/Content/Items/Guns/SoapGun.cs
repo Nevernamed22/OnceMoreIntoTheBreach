@@ -21,7 +21,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Rub a dub dub");
             gun.SetLongDescription("Launches a spray of light, airy, and delicate soap bubbles." + "\n\nUsed for class five cleaning emergencies, when approach is not an option.");
 
-            gun.SetupSprite(null, "soapgun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "soapgun_idle_001", 8, "soapgun_ammonomicon_001");
+
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(404) as Gun).gunSwitchGroup;
             gun.SetAnimationFPS(gun.shootAnimation, 15);
             gun.SetAnimationFPS(gun.reloadAnimation, 13);

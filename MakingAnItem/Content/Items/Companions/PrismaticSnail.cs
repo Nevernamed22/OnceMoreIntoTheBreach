@@ -186,7 +186,7 @@ namespace NevernamedsItems
                 timerRemaining = 7f;
                 attacking = false;
             }
-            private void Update()
+            public override void Update()
             {
                 if (Owner && Owner.IsInCombat && (base.aiActor.Position.GetAbsoluteRoom() != null && Owner.CurrentRoom != null && base.aiActor.Position.GetAbsoluteRoom() == Owner.CurrentRoom))
                 {
@@ -199,6 +199,7 @@ namespace NevernamedsItems
                         base.StartCoroutine(Attack());
                     }
                 }
+                base.Update();
             }
             private bool attacking;
             private IEnumerator Attack()

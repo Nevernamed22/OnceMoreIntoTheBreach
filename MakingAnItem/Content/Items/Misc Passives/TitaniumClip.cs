@@ -13,16 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Titanium Clip";
-            string resourceName = "NevernamedsItems/Resources/titaniumclip_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<TitaniumClip>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Damage Output";
-            string longDesc = "Doubles damage of non-infinite ammo guns, but also doubles their ammo consumption." + "\n\nCreated to aid the greedy and shortsighted."+"\n\nTechnically, this is a magazine and not a clip, but I really don't care.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PassiveItem item = ItemSetup.NewItem<TitaniumClip>(
+              "Titanium Clip",
+              "Damage Output",
+              "Doubles damage of non-infinite ammo guns, but also doubles their ammo consumption." + "\n\nCreated to aid the greedy and shortsighted." + "\n\nTechnically, this is a magazine and not a clip, but I really don't care.",
+              "titaniumclip_icon") as PassiveItem;        
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.B;
             TitaniumClipID = item.PickupObjectId;

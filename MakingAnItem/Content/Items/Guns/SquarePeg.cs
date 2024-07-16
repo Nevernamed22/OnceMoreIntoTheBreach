@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("In A Round Chamber");
             gun.SetLongDescription("[] A perfect example of the art of cubism.");
 
-            gun.SetupSprite(null, "squarepeg_idle_001", 8);
+            gun.SetGunSprites("squarepeg");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 

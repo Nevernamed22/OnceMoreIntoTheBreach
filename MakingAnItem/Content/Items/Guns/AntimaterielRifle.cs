@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Shreddin' Vapours");
             gun.SetLongDescription("Used in rebel attacks on remote Hegemony of Man outposts, this high-tech tool of destruction is geared to take out heavy targets."+"\n\nIgnores boss DPS cap.");
 
-            gun.SetupSprite(null, "antimaterielrifle_idle_001", 8);
+            gun.SetGunSprites("antimaterielrifle");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
@@ -55,7 +55,7 @@ namespace NevernamedsItems
             PierceProjModifier orAddComponent = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();
             orAddComponent.penetratesBreakables = true;
             orAddComponent.penetration++;
-            projectile.SetProjectileSpriteRight("antimaterielrifle_projectile", 15, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 15, 7);
+            projectile.SetProjectileSprite("antimaterielrifle_projectile", 15, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 15, 7);
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = "Thinline Bullets";

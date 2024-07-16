@@ -24,6 +24,7 @@ namespace NevernamedsItems
             item.SetTag("bullet_modifier");
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.BEATEN_HOLLOW_BOSS_TURBO_MODE, true);
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {

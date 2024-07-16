@@ -15,33 +15,23 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Jarate";
-
-            string resourceName = "NevernamedsItems/Resources/ThrowableActives/Jarate/jarate_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Jarate>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Good Job";
-            string longDesc = "Throws a jar of miracle fluids which weakens the Gundead. \n\nGungeoneering can be a long and tedious process. The ancient art of Jarate was derived as an ingenious solution to both combat and excrement reprocessing.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            Jarate item = ItemSetup.NewItem<Jarate>(
+           "Jarate",
+           "Good Job",
+           "Throws a jar of miracle fluids which weakens the Gundead. \n\nGungeoneering can be a long and tedious process. The ancient art of Jarate was derived as an ingenious solution to both combat and excrement reprocessing.",
+           "jarate_icon") as Jarate;
+          
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 800);
             item.consumable = false;
-
             item.objectToSpawn = BuildPrefab();
-
-
             item.tossForce = 12;
             item.canBounce = false;
-
             item.IsCigarettes = false;
             item.RequireEnemiesInRoom = false;
-
             item.SpawnRadialCopies = false;
             item.RadialCopiesToSpawn = 0;
-
             item.AudioEvent = null;
             item.IsKageBunshinItem = false;
-
             item.quality = PickupObject.ItemQuality.C;
         }
 

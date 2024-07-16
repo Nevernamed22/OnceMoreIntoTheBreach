@@ -14,6 +14,8 @@ namespace SaveAPI
         ALLJAMMEDMODE_ENABLED_GENUINE,
         ALLJAMMEDMODE_ENABLED_CONSOLE,
         CURSES_DISABLED,
+        BOWLERSHOP_METONCE,
+        CHANCELOT_METONCE,
         //---------------------------------------------Task Based Unlocks
         PLAYERHELDMORETHANFIVEARMOUR,
         KILLEDJAMMEDKEYBULLETKIN,
@@ -35,6 +37,7 @@ namespace SaveAPI
         BEATEN_KEEP_TURBO_MODE,
         BEATEN_MINES_BOSS_TURBO_MODE,
         BEATEN_HOLLOW_BOSS_TURBO_MODE,
+        BEATEN_HELL_BOSS_TURBO_MODE,
         //Rainbow
         RAINBOW_KILLED_LICH,
         //All-Jammed
@@ -60,6 +63,7 @@ namespace SaveAPI
         BOSSRUSH_BULLET,
         //Rat Unlocks
         RAT_KILLED_SHADE,
+        RAT_KILLED_ROBOT,
         //Dragun Unlocks
         DRAGUN_KILLED_HUNTER,
         DRAGUN_KILLED_SHADE,
@@ -75,6 +79,17 @@ namespace SaveAPI
         //Shade  Unlocks
         LICH_BEATEN_SHADE,
         CHEATED_DEATH_SHADE,
+        //---------------------------------------------Beggar
+        GIVEN_SPITBALLER,
+        GIVEN_SCRAPSTRAP,
+        GIVEN_FLAMINGSHELLS,
+        GIVEN_SHELLNECKLACE,
+        GIVEN_UNDERBARRELSHOTGUN,
+        GIVEN_WOODENKNIFE,
+        GIVEN_GUNGINEER,
+        GIVEN_SHROOMEDBULLETS,
+        GIVEN_RINGOFFORTUNE,
+        GIVEN_BEGGARSBELIEF,
         //---------------------------------------------Hunting Quests
         //Quest Completion
         MISFIREBEAST_QUEST_COMPLETE,
@@ -130,6 +145,7 @@ namespace SaveAPI
         PURCHASED_LOUDENBOOMER,
         PURCHASED_BORZ,
         PURCHASED_BORCHARDT,
+        PURCHASED_RHEINMETOLE,
         //GOOPTON
         PURCHASED_GRACEFULGOOP,
         PURCHASED_GOOMPERORSCROWN,

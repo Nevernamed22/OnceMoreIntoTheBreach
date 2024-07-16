@@ -14,16 +14,14 @@ namespace NevernamedsItems
 
     public class NNMinigun : GunBehaviour
     {
-
-
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Mini Gun", "mini_gun");
             Game.Items.Rename("outdated_gun_mods:mini_gun", "nn:mini_gun");
             gun.gameObject.AddComponent<NNMinigun>();
             gun.SetShortDescription("Misleading Name");
-            gun.SetLongDescription("A tiny toy gun, probably pulled from the grip of a tiny toy soldier.");            
-            gun.SetupSprite(null, "mini_gun_idle_001", 8);
+            gun.SetLongDescription("A tiny toy gun, probably pulled from the grip of a tiny toy soldier.");
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "mini_gun_idle_001", 8, "mini_gun_ammonomicon_001");
             gun.SetAnimationFPS(gun.shootAnimation, 20);
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
             gun.DefaultModule.ammoCost = 1;

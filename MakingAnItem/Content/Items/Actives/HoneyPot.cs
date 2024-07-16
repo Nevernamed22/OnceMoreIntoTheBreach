@@ -5,6 +5,7 @@ using System.Text;
 using Dungeonator;
 using Alexandria.ItemAPI;
 using UnityEngine;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -12,16 +13,13 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Honey Pot";
-            string resourceName = "NevernamedsItems/Resources/honeypot_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<HoneyPot>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "A Little Something";
-            string longDesc = "A handy, throwable pot of sticky honey." + "\n\nSome Gundead tell whispers of buzzing coming from the Oubliette...";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 250);
+            PlayerItem item = ItemSetup.NewItem<HoneyPot>(
+           "Honey Pot",
+           "A Little Something",
+           "A handy, throwable pot of sticky honey." + "\n\nSome Gundead tell whispers of buzzing coming from the Oubliette...",
+           "honeypot_icon") as PlayerItem;
 
+            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 250);
             item.consumable = false;
             item.quality = ItemQuality.D;
 
@@ -42,28 +40,19 @@ namespace NevernamedsItems
             BounceProjModifier Bouncing = PotProjectile.gameObject.GetOrAddComponent<BounceProjModifier>();
             Bouncing.numberOfBounces += 100;
 
-            PotProjectile.AnimateProjectile(new List<string> {
-                "honeypotproj_1",
-                "honeypotproj_2",
-                "honeypotproj_3",
-                "honeypotproj_4",
-            }, 8, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(19, 16), //1
-                new IntVector2(16, 19), //2            
-                new IntVector2(19, 16), //3
-                new IntVector2(16, 19), //4
-            }, AnimateBullet.ConstructListOfSameValues(false, 4), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4),
-            AnimateBullet.ConstructListOfSameValues(true, 4),
-            AnimateBullet.ConstructListOfSameValues(false, 4),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4),
-            new List<IntVector2?> {
-                new IntVector2(14, 14), //1
-                new IntVector2(14, 14), //2            
-                new IntVector2(14, 14), //3
-                new IntVector2(14, 14), //3
-            },
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
+            PotProjectile.AnimateProjectileBundle("HoneyPotProjectile",
+                    Initialisation.ProjectileCollection,
+                    Initialisation.projectileAnimationCollection,
+                    "HoneyPotProjectile",
+                    new List<IntVector2> { new IntVector2(19, 16), new IntVector2(16, 19), new IntVector2(19, 16), new IntVector2(16, 19) }, //Pixel Sizes
+                    MiscTools.DupeList(false, 4), //Lightened
+                    MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                    MiscTools.DupeList(true, 4), //Anchors Change Colliders
+                    MiscTools.DupeList(false, 4), //Fixes Scales
+                    MiscTools.DupeList<Vector3?>(null, 4), //Manual Offsets
+                    MiscTools.DupeList<IntVector2?>(new IntVector2(14, 14), 4), //Override colliders
+                    MiscTools.DupeList<IntVector2?>(null, 4), //Override collider offsets
+                    MiscTools.DupeList<Projectile>(null, 4)); // Override to copy from             
         }
         private static Projectile PotProjectile;
         public override void DoEffect(PlayerController user)

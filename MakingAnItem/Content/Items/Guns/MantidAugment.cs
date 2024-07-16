@@ -22,7 +22,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Flashy and Lethal");
             gun.SetLongDescription("A cybernetic augment concealed in the forearm, this cruel blade extends to slash at your enemies with inhuman speed.");
 
-            gun.SetupSprite(null, "mantidaugment_idle_001", 8);
+            gun.SetGunSprites("mantidaugment");
+
             gun.AddPassiveStatModifier(PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             gun.AddCurrentGunStatModifier(PlayerStats.StatType.MovementSpeed, 1f, StatModifier.ModifyMethod.ADDITIVE);
             gun.SetAnimationFPS(gun.shootAnimation, 20);

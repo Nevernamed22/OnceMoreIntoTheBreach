@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("All Lightning");
             gun.SetLongDescription("The ARC Cannon was commissioned from the ARC Private Security Company by the Sultan of a distant planet, who now spends his free time striking ships from the sky and declaring himself a god.");
 
-            gun.SetupSprite(null, "arccannon_idle_001", 8);
+            gun.SetGunSprites("arccannon");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);

@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Beegone");
             gun.SetLongDescription("A classic bee-smoker, used to pacify hives."+"\n\nIt seems to have been manufactured with extreme range and output in mind- suggesting particularly hostile targets.");
 
-            gun.SetupSprite(null, "smoker_idle_001", 8);
+            gun.SetGunSprites("smoker");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 12);

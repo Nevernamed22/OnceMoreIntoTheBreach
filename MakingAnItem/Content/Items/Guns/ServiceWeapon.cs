@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Last Line of Defence");
             gun.SetLongDescription("This weapon is officially categorised as a F.O.P, or 'Firearm of Power', a highly anomalous, highly powerful weapon."+"\n\nDespite not belonging within the Gungeon, something about the shifting nature of the Gungeon's depths seems to soothe it.");
 
-            gun.SetupSprite(null, "serviceweapon_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "serviceweapon_idle_001", 8, "serviceweapon_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 12);
@@ -72,7 +72,7 @@ namespace NevernamedsItems
             projectile.baseData.damage = 20;
             projectile.baseData.speed *= 2;
             projectile.baseData.force *= 2;
-            projectile.SetProjectileSpriteRight("serviceweapon_proj", 11, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 5);
+            projectile.SetProjectileSprite("serviceweapon_proj", 11, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 5);
             projectile.hitEffects = (PickupObjectDatabase.GetById(15) as Gun).DefaultModule.projectiles[0].hitEffects;
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;

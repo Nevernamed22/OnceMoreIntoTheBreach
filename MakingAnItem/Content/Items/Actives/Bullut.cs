@@ -3,49 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Dungeonator;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
 {
     class Bullut : PlayerItem
     {
-        //Call this method from the Start() method of your ETGModule extension class
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Bullut";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it.
-            string resourceName = "NevernamedsItems/Resources/bullut_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a ActiveItem component to the object
-            var item = obj.AddComponent<Bullut>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Supposed Delicacy";
-            string longDesc = "Bullet Embryos, boiled inside their shells. Apparently this is supposed to be food." + "\n\nEating this makes the Gundead, Kaliber, and pretty much everyone else mad at you, though the Gunsling King describes it as a... rewarding experience.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //"kts" here is the item pool. In the console you'd type kts:sweating_bullets
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Set the cooldown type and duration of the cooldown
+            PlayerItem item = ItemSetup.NewItem<Bullut>(
+              "Bullut",
+              "Supposed Delicacy",
+              "Bullet Embryos, boiled inside their shells. Apparently this is supposed to be food." + "\n\nEating this makes the Gundead, Kaliber, and pretty much everyone else mad at you, though the Gunsling King describes it as a... rewarding experience.",
+              "bullut_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 1000);
-
-            //Adds a passive modifier, like curse, coolness, damage, etc. to the item. Works for passives and actives.
-
-            //Set some other fields
             item.consumable = true;
             item.quality = ItemQuality.D;
-
-
         }
         public override void DoEffect(PlayerController user)
         {

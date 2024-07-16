@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Preluger");
             gun.SetLongDescription("Landing a shot on an enemy has a chance to force a shotgun blast from the meagre barrel of this weapon. Exactly why this works isn't entirely known, but most people don't care too much.");
 
-            gun.SetupSprite(null, "borchardt_idle_001", 8);
+            gun.SetGunSprites("borchardt");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);

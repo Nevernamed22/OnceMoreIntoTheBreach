@@ -67,7 +67,11 @@ namespace NevernamedsItems
             {
                 PlayerController player = GameManager.Instance.PrimaryPlayer;
                 var roomName = player.CurrentRoom.GetRoomName();
+
+                
                 ETGModConsole.Log("<color=#ff0000ff>Room Name: </color>" + roomName);
+                ETGModConsole.Log("<color=#ff0000ff>Category: </color>" + player.CurrentRoom.area.PrototypeRoomCategory);
+                ETGModConsole.Log("<color=#ff0000ff>Subcategory: </color>" + player.CurrentRoom.area.PrototypeRoomNormalSubcategory);
             });
             ETGModConsole.Commands.GetGroup("nn").AddUnit("togglerarityboost", delegate (string[] args)
             {

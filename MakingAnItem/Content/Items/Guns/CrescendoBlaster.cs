@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Rise and Fall");
             gun.SetLongDescription("Raises and lowers in damage as it fires." + "\n\nPowered by exotic morphous crystals from a distance moon.");
 
-            gun.SetupSprite(null, "crescendoblaster_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "crescendoblaster_idle_001", 8, "crescendoblaster_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
 
@@ -46,7 +46,7 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(threedamageproj.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(threedamageproj);
             threedamageproj.baseData.damage *= 0.6f;
-            threedamageproj.SetProjectileSpriteRight("crescendoblaster_projectile", 25, 25, true, tk2dBaseSprite.Anchor.MiddleCenter, 20, 20);
+            threedamageproj.SetProjectileSprite("crescendoblaster_projectile", 25, 25, true, tk2dBaseSprite.Anchor.MiddleCenter, 20, 20);
             threedamageproj.AdditionalScaleMultiplier *= 0.16f;
             projOneSMALLEST = threedamageproj;
 
@@ -55,7 +55,7 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(sixdamageproj.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(sixdamageproj);
             sixdamageproj.baseData.damage *= 1.2f;
-            sixdamageproj.SetProjectileSpriteRight("crescendoblaster_projectile", 25, 25, true, tk2dBaseSprite.Anchor.MiddleCenter, 20, 20);
+            sixdamageproj.SetProjectileSprite("crescendoblaster_projectile", 25, 25, true, tk2dBaseSprite.Anchor.MiddleCenter, 20, 20);
             sixdamageproj.AdditionalScaleMultiplier *= 0.32f;
             projTwo = sixdamageproj;
 
@@ -64,7 +64,7 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(ninedamageproj.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(ninedamageproj);
             ninedamageproj.baseData.damage *= 1.8f;
-            ninedamageproj.SetProjectileSpriteRight("crescendoblaster_projectile", 25, 25, true, tk2dBaseSprite.Anchor.MiddleCenter, 20, 20);
+            ninedamageproj.SetProjectileSprite("crescendoblaster_projectile", 25, 25, true, tk2dBaseSprite.Anchor.MiddleCenter, 20, 20);
             ninedamageproj.AdditionalScaleMultiplier *= 0.48f;
             projThree = ninedamageproj;
 
@@ -73,7 +73,7 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(twelvedamageproj.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(twelvedamageproj);
             twelvedamageproj.baseData.damage *= 2.4f;
-            twelvedamageproj.SetProjectileSpriteRight("crescendoblaster_projectile", 25, 25, true, tk2dBaseSprite.Anchor.MiddleCenter, 20, 20);
+            twelvedamageproj.SetProjectileSprite("crescendoblaster_projectile", 25, 25, true, tk2dBaseSprite.Anchor.MiddleCenter, 20, 20);
             twelvedamageproj.AdditionalScaleMultiplier *= 0.64f;
             projFour = twelvedamageproj;
 
@@ -82,7 +82,7 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(sixteendamageproj.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(sixteendamageproj);
             sixteendamageproj.baseData.damage *= 3.2f;
-            sixteendamageproj.SetProjectileSpriteRight("crescendoblaster_projectile", 25, 25, true, tk2dBaseSprite.Anchor.MiddleCenter, 20, 20);
+            sixteendamageproj.SetProjectileSprite("crescendoblaster_projectile", 25, 25, true, tk2dBaseSprite.Anchor.MiddleCenter, 20, 20);
             sixteendamageproj.AdditionalScaleMultiplier *= 0.8f;
             projFive = sixteendamageproj;
 
@@ -91,7 +91,7 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(twentydamageprojectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(twentydamageprojectile);
             twentydamageprojectile.baseData.damage *= 4f;
-            twentydamageprojectile.SetProjectileSpriteRight("crescendoblaster_projectile", 25, 25, true, tk2dBaseSprite.Anchor.MiddleCenter, 20, 20);
+            twentydamageprojectile.SetProjectileSprite("crescendoblaster_projectile", 25, 25, true, tk2dBaseSprite.Anchor.MiddleCenter, 20, 20);
             twentydamageprojectile.AdditionalScaleMultiplier *= 1f;
             BigCrescendoBullet bigbullet = twentydamageprojectile.gameObject.AddComponent<BigCrescendoBullet>();
             projSixBIGGEST = twentydamageprojectile;
@@ -143,6 +143,11 @@ namespace NevernamedsItems
                 ETGModConsole.Log(e.Message);
                 ETGModConsole.Log(e.StackTrace);
             }
+        }
+        public override void PostProcessProjectile(Projectile projectile)
+        {
+            projectile.gameObject.SetLayerRecursively(LayerMask.NameToLayer("Default"));
+            base.PostProcessProjectile(projectile);
         }
         private void GiveExtraSynergyBullets()
         {

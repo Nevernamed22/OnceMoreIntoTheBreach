@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("You Just Got Witch'd");
             gun.SetLongDescription("Adopts one of four random spell types each time it is encountered."+"\n\nCrafted (poorly) by an Apprentice Gunjurer.");
 
-            gun.SetupSprite(null, "initiatewand_idle_001", 8);
+            gun.SetGunSprites("initiatewand");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 

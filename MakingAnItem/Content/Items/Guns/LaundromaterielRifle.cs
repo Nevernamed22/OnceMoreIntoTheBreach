@@ -12,6 +12,7 @@ using MonoMod.RuntimeDetour;
 using System.Reflection;
 using Alexandria.BreakableAPI;
 using Dungeonator;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -25,7 +26,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Washed Up");
             gun.SetLongDescription("This washing machine was stolen from the long lost communal washroom in the Breach- for use as a weapon within the Gungeon." + "\n\n Contains several prized artefacts, such as Winchesters lucky shorts.");
 
-            gun.SetupSprite(null, "laundromaterielrifle_idle_001", 8);
+            gun.SetGunSprites("laundromaterielrifle");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(404) as Gun).gunSwitchGroup;
@@ -72,15 +73,15 @@ namespace NevernamedsItems
                 mod.numberOfShotsInClip = 6;
 
                 //BULLET STATS
-                mod.projectiles[0] = MakeProj("yellowshirt", "yellowshirt");
-                mod.projectiles.Add(MakeProj("yellowshirt", "kinshirt"));
-                mod.projectiles.Add(MakeProj("pinkshirt", "pinkshirt"));
-                mod.projectiles.Add(MakeProj("redshirt", "redshirt"));
-                mod.projectiles.Add(MakeProj("greenshirt", "greenshirt"));
-                mod.projectiles.Add(MakeProj("bluepants", "bluepants"));
-                mod.projectiles.Add(MakeProj("greypants", "greypants"));
-                mod.projectiles.Add(MakeProj("whitepants", "whitepants"));
-                mod.projectiles.Add(MakeProj("pinkshirt", "pinkpants"));
+                mod.projectiles[0] = MakeProj("yellowshirt", "yellowshirt", "LaundromaterielYellowShirt");
+                mod.projectiles.Add(MakeProj("yellowshirt", "kinshirt", "LaundromaterielYellowShirt"));
+                mod.projectiles.Add(MakeProj("pinkshirt", "pinkshirt", "LaundromaterielPinkShirt"));
+                mod.projectiles.Add(MakeProj("redshirt", "redshirt", "LaundromaterielRedShirt"));
+                mod.projectiles.Add(MakeProj("greenshirt", "greenshirt", "LaundromaterielGreenShirt"));
+                mod.projectiles.Add(MakeProj("bluepants", "bluepants", "LaundromaterielBluePants"));
+                mod.projectiles.Add(MakeProj("greypants", "greypants", "LaundromaterielGreyPants"));
+                mod.projectiles.Add(MakeProj("whitepants", "whitepants", "LaundromaterielWhitePants"));
+                mod.projectiles.Add(MakeProj("pinkshirt", "pinkpants", "LaundromaterielPinkShirt"));
             }
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = "Laundromateriel Bullets";
@@ -108,13 +109,13 @@ namespace NevernamedsItems
             }
             base.OnPostFired(player, gun);
         }
-        private static Projectile MakeProj(string projName, string debrisname)
+        private static Projectile MakeProj(string projName, string debrisname, string animationName)
         {
             Projectile projectile = ((Gun)PickupObjectDatabase.GetById(86)).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
             projectile.name = projName;
             projectile.baseData.speed *= 0.7f;
             projectile.baseData.range *= 2f;
-            AnimateIndiv(projectile, projName);
+            AnimateIndiv(projectile, animationName);
 
             GameObject shirt = BreakableAPIToolbox.GenerateDebrisObject($"NevernamedsItems/Resources/Debris/{debrisname}_debris.png", true, 1, 1, 45, 20).gameObject;
             shirt.name = debrisname;
@@ -256,28 +257,21 @@ namespace NevernamedsItems
             };
             return projectile;
         }
-        private static void AnimateIndiv(Projectile projectile, string projName)
+        private static void AnimateIndiv(Projectile projectile, string animName)
         {
-            projectile.SetProjectileSpriteRight($"{projName}_proj_001", 12, 12, false, tk2dBaseSprite.Anchor.MiddleCenter, 12, 12);
-            projectile.AnimateProjectile(new List<string> {
-                $"{projName}_proj_001",
-                $"{projName}_proj_002",
-                $"{projName}_proj_003",
-                $"{projName}_proj_004",
-                $"{projName}_proj_005",
-                $"{projName}_proj_006",
-                $"{projName}_proj_007",
-                $"{projName}_proj_008",
-            }, 12, tk2dSpriteAnimationClip.WrapMode.Loop,
-            AnimateBullet.ConstructListOfSameValues(new IntVector2(12, 12), 8),
-            AnimateBullet.ConstructListOfSameValues(false, 8),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 8),
-            AnimateBullet.ConstructListOfSameValues(true, 8),
-            AnimateBullet.ConstructListOfSameValues(false, 8),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 8),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 8),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 8),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 8), 0);
+            projectile.AnimateProjectileBundle(animName,
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   animName,
+                   MiscTools.DupeList(new IntVector2(12, 12), 8), //Pixel Sizes
+                   MiscTools.DupeList(false, 8), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 8), //Anchors
+                   MiscTools.DupeList(true, 8), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 8), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 8), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(null, 8), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 8), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 8)); // Override to copy from    
         }
         public static int ID;
     }

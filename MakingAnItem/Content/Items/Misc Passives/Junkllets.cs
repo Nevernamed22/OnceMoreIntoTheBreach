@@ -21,6 +21,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ROBOT_HELD_FIVE_JUNK, true);
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         private int currentItems, lastItems;
         public override void Update()

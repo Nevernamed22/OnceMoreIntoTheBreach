@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("I Fear No Man");
             gun.SetLongDescription("Spews an ignited gasoline vapor."+"\n\nThe favoured weapon of Lucinda Burns as part of her 'char-grill' fighting technique.");
 
-            gun.SetupSprite(null, "flamethrowermk2_idle_001", 8);
+            gun.SetGunSprites("flamethrowermk2");
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(153) as Gun).gunSwitchGroup;

@@ -48,7 +48,7 @@ namespace NevernamedsItems
              }*/
             // if (bullet.sprite) bullet.sprite.renderer.enabled = false;
             //bullet.baseData.range = 5;
-            bullet.specRigidbody.OnPreTileCollision += OnPreTileCollision;
+            //bullet.specRigidbody.OnPreTileCollision += OnPreTileCollision;
         }
         public void OnPreTileCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, PhysicsEngine.Tile tile, PixelCollider tilePixelCollider)
         {
@@ -91,7 +91,7 @@ namespace NevernamedsItems
         public override void Pickup(PlayerController player)
         {
             //player.SetIsStealthed(true, "blehp");
-            player.PostProcessProjectile += this.onFired;
+            //player.PostProcessProjectile += this.onFired;
             //player.PostProcessThrownGun += PostProcessGun;
             // player.OnRollStarted += OnRoll;
             // player.PostProcessBeam += this.PostProcessBeam;
@@ -100,16 +100,28 @@ namespace NevernamedsItems
         private void PostProcessGun(Projectile fucker)
         {
         }
+        public float num = 0;
         public override void Update()
         {
-            if (Owner && Owner.SuperAutoAimTarget != null)
+            if (num < 0.25f) { num += BraveTime.DeltaTime; }
+            else
+            {
+                if (Owner && Owner.CurrentGun)
+                {
+                    Gun g = Owner.CurrentGun;
+                    float dps = (g.DefaultModule.numberOfShotsInClip * (g.DefaultModule.projectiles[0].baseData.damage * g.Volley.projectiles.Count())) / ((g.DefaultModule.numberOfShotsInClip - 1) * g.DefaultModule.cooldownTime + g.reloadTime);
+                    VFXToolbox.DoRisingStringFade(dps.ToString(), Owner.CurrentGun.barrelOffset.position, Color.red);
+                }
+                num = 0;
+            }
+            /*if (Owner && Owner.SuperAutoAimTarget != null)
             {
                 Instantiate(EasyVFXDatabase.GreenLaserCircleVFX, Owner.SuperAutoAimTarget.AimCenter, Quaternion.identity);
             }
             if (Owner && Owner.SuperDuperAimTarget != null)
             {
                 Instantiate(EasyVFXDatabase.BlueLaserCircleVFX, Owner.SuperAutoAimTarget.AimCenter, Quaternion.identity);
-            }
+            }*/
             base.Update();
         }
         public override DebrisObject Drop(PlayerController player)

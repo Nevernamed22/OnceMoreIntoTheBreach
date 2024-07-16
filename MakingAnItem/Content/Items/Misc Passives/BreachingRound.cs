@@ -23,6 +23,7 @@ namespace NevernamedsItems
             item.SetTag("bullet_modifier");
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
             ID = item.PickupObjectId;
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public static int ID;
         public override void Pickup(PlayerController player)

@@ -24,7 +24,7 @@ namespace NevernamedsItems
             behav.preventNormalReloadAudio = true;
             gun.SetShortDescription("PLOOMPH");
             gun.SetLongDescription("A mutated fungun from the Oubliette." + "\n\nThough horrific genetic anomalies have stripped it of it's face and legs, it still retains it's deadly spores.");
-            gun.SetupSprite(null, "fungocannon_idle_001", 8);
+            gun.SetGunSprites("fungocannon");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.chargeAnimation, 6);
@@ -48,7 +48,7 @@ namespace NevernamedsItems
                 projectile.gameObject.SetActive(false);
                 FakePrefab.MarkAsFakePrefab(projectile.gameObject);
                 UnityEngine.Object.DontDestroyOnLoad(projectile);
-                projectile.SetProjectileSpriteRight("enemystylespore_projectile", 14, 14, true, tk2dBaseSprite.Anchor.MiddleCenter, 14, 14);
+                projectile.SetProjectileSprite("enemystylespore_projectile", 14, 14, true, tk2dBaseSprite.Anchor.MiddleCenter, 14, 14);
                 FungoRandomBullets orAddComponent = projectile.gameObject.GetOrAddComponent<FungoRandomBullets>();
                 projectile.baseData.speed *= 0.2f;
                 projectile.baseData.damage *= 2f;

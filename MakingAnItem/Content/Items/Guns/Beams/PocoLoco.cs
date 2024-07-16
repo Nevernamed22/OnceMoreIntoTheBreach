@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Crazy");
             gun.SetLongDescription("This energy beam emitter has been heavily modified. At a cursory glance, it's there's no way it could possibly be functional- but what's the harm in trying?");
 
-            gun.SetupSprite(null, "pocoloco_idle_001", 8);
+            gun.SetGunSprites("pocoloco");
 
             gun.SetAnimationFPS(gun.shootAnimation, 20);
             gun.isAudioLoop = true;

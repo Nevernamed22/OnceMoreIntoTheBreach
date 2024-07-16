@@ -23,6 +23,7 @@ namespace NevernamedsItems
             item.SetTag("bullet_modifier");
             item.CanBeDropped = true;
             KnightlyBulletsID = item.PickupObjectId;
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public static int KnightlyBulletsID;
         private RoomHandler lastCheckedRoom;

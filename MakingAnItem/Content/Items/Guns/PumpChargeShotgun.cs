@@ -21,8 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("HELL IS FULL");
             gun.SetLongDescription("Continuing to reload this shotgun when it's already full will charge it up. Be careful not to overcharge it!"+"\n\nForged by a bloodthirsty adventurer who sought to cleanse Bullet Hell.");
 
-            gun.SetupSprite(null, "pumpchargeshotgun_idle_001", 8);
-            //gun.SetAnimationFPS(gun.shootAnimation, 10);
+            gun.SetGunSprites("pumpchargeshotgun");
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(55) as Gun).gunSwitchGroup;
@@ -57,7 +56,7 @@ namespace NevernamedsItems
                 projectile.baseData.damage *= 1f;
                 projectile.hitEffects.alwaysUseMidair = true;
                 projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.GreenLaserCircleVFX;
-                projectile.SetProjectileSpriteRight("pumpcharge_green_projectile", 8, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 5);
+                projectile.SetProjectileSprite("pumpcharge_green_projectile", 8, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 5);
                 projectile.gameObject.AddComponent<BloodBurstOnKill>();
                 if (mod != gun.DefaultModule) { mod.ammoCost = 0; }
             }
@@ -79,7 +78,7 @@ namespace NevernamedsItems
             projectile2.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.YellowLaserCircleVFX;
             projectile2.gameObject.AddComponent<BloodBurstOnKill>();
 
-            projectile2.SetProjectileSpriteRight("pumpcharge_yellow_projectile", 10, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 5);
+            projectile2.SetProjectileSprite("pumpcharge_yellow_projectile", 10, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 5);
             Level2Projectile = projectile2;
 
             //Level 3 Proj
@@ -93,7 +92,7 @@ namespace NevernamedsItems
             projectile3.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.YellowLaserCircleVFX;
             projectile3.gameObject.AddComponent<BloodBurstOnKill>();
             projectile3.baseData.damage *= 1.8f;
-            projectile3.SetProjectileSpriteRight("pumpcharge_orange_projectile", 12, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 5);
+            projectile3.SetProjectileSprite("pumpcharge_orange_projectile", 12, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 5);
             Level3Projectile = projectile3;
 
             //Level 4 Proj
@@ -107,7 +106,7 @@ namespace NevernamedsItems
             projectile4.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
 
             projectile4.baseData.damage *= 2.2f;
-            projectile4.SetProjectileSpriteRight("pumpcharge_red_projectile", 17, 8, true, tk2dBaseSprite.Anchor.MiddleCenter, 16, 7);
+            projectile4.SetProjectileSprite("pumpcharge_red_projectile", 17, 8, true, tk2dBaseSprite.Anchor.MiddleCenter, 16, 7);
             Level4Projectile = projectile4;
 
             SetupCollection();

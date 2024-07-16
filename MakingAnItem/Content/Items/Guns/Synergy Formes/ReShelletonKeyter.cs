@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Click");
             gun.SetLongDescription("Skull lookin ass");
 
-            gun.SetupSprite(null, "rekeytershelletonforme_idle_001", 8);
+            gun.SetGunSprites("rekeytershelletonforme", 8, true);
 
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(95) as Gun).gunSwitchGroup;
 

@@ -28,8 +28,6 @@ namespace NevernamedsItems
             item.AddItemToGooptonMetaShop(10);
         }
 
-        //Add the item's functionality down here! I stole most of this from the Stuffed Star active item code!
-
         public override void DoEffect(PlayerController user)
         {
             float length = 13;

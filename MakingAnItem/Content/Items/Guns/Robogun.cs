@@ -23,7 +23,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Aim Electrique");
             gun.SetLongDescription("This laser blaster carries an on-board targeting computer so sophisticated that no aiming is required whatsoever- which is good, because the weight of the computer renders the weapon impossible to aim anyways.");
 
-            gun.SetupSprite(null, "robogun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "robogun_idle_001", 8, "robogun_ammonomicon_001");
+
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(58) as Gun).gunSwitchGroup;
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
@@ -58,7 +59,7 @@ namespace NevernamedsItems
             orAddComponent.penetratesBreakables = true;
             orAddComponent.penetration = 1;
 
-            projectile.SetProjectileSpriteRight("robogun_proj", 17, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 17, 7);
+            projectile.SetProjectileSprite("robogun_proj", 17, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 17, 7);
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
 

@@ -22,6 +22,7 @@ namespace NevernamedsItems
             item.SetTag("bullet_modifier");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 3, StatModifier.ModifyMethod.ADDITIVE);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_HOLLOW, true);
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public void onFired(Projectile bullet, float eventchancescaler)
         {

@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Yoink");
             gun.SetLongDescription("This gun has been specially manufactured to be compatible with the same shells used by the Gundead."+"\n\nAllows for the stealing of ammo from fallen foes.");
 
-            gun.SetupSprite(null, "welgun_idle_001", 8);
+            gun.SetGunSprites("welgun");
 
             gun.SetAnimationFPS(gun.shootAnimation, 17);
 
@@ -49,7 +49,7 @@ namespace NevernamedsItems
             projectile.baseData.range *= 10f;
 
 
-            projectile.SetProjectileSpriteRight("welgun_projectile", 4, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
+            projectile.SetProjectileSprite("welgun_projectile", 4, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
 
             projectile.transform.parent = gun.barrelOffset;
 

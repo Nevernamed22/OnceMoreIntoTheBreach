@@ -18,7 +18,7 @@ namespace NevernamedsItems
             "Cursed Tumbler",
             "What's In The Box?",
             "Gives chests a chance to be Jammed." + "\n\nAn 4th dimensional set of mechanisms designed to lock away all evil in this world.",
-            "cursedtumbler_icon");
+            "cursedtumbler_improved");
             item.AddPassiveStatModifier( PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.B;

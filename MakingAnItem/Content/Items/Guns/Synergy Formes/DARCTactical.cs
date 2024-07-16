@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Stormed Troopers");
             gun.SetLongDescription("This rapid firing weapon was designed by the ARC Private Security Company for dangerous field combat situations." + "\n\nIt has since become popular in completely different environments, namely the collections of tough guys who like having bigger guns than they need.");
 
-            gun.SetupSprite(null, "darctactical_idle_001", 8);
+            gun.SetGunSprites("darctactical", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 30);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);

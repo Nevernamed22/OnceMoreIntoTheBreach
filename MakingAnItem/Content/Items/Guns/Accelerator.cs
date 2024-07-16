@@ -8,6 +8,7 @@ using MonoMod;
 using UnityEngine;
 using Alexandria.ItemAPI;
 using SaveAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -22,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Sapper");
             gun.SetLongDescription("The projectiles of this remarkable weapon suck the speed right out of enemy bullets!"+"\n\nReverse engineered from vampires.");
 
-            gun.SetupSprite(null, "accelerator_idle_001", 8);
+            gun.SetGunSprites("accelerator");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 
@@ -57,9 +58,7 @@ namespace NevernamedsItems
             orAddComponent.penetratesBreakables = true;
             orAddComponent.penetration = 1;
 
-
-
-            projectile.SetProjectileSpriteRight("accelerator_projectile", 11, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 8);
+            projectile.SetProjectileCollisionRight("accelerator_projectile", Initialisation.ProjectileCollection, 11, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 8);
             
             projectile.transform.parent = gun.barrelOffset;
 

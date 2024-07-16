@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("");
             gun.SetLongDescription("");
 
-            gun.SetupSprite(null, "stormrod_idle_001", 8);
+            gun.SetGunSprites("stormrod", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 8);
             gun.isAudioLoop = true;

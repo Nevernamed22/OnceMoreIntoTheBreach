@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 
 namespace NevernamedsItems
@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Citrinitas";
-            string resourceName = "NevernamedsItems/Resources/citrinitas_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Citrinitas>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Wisdom";
-            string longDesc = "Entering secret rooms grants fortune, and permanent upgrades."+"\n\nThe third phase of the Philosopher's Stone formation process, in which Solar Wisdom drives away the Lunar Energy of the Albedo.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<Citrinitas>(
+           "Citrinitas",
+           "Wisdom",
+           "Entering secret rooms grants fortune, and permanent upgrades." + "\n\nThe third phase of the Philosopher's Stone formation process, in which Solar Wisdom drives away the Lunar Energy of the Albedo.",
+           "citrinitas_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.C;
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
         }

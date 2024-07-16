@@ -14,16 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Glass Shard";
-            string resourceName = "NevernamedsItems/Resources/glassshard_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<GlassShard>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Walking on Broken Glass";
-            string longDesc = "Makes Glass Guon Stones fire at enemies."+"\n\nCarries the soul of a vengeful gungeoneer."+"\nSome say if you gaze into the depths of the shard, you can see him gazing back out at you.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PassiveItem item = ItemSetup.NewItem<GlassShard>(
+              "Glass Shard",
+              "Walking on Broken Glass",
+              "Makes Glass Guon Stones fire at enemies." + "\n\nCarries the soul of a vengeful gungeoneer." + "\nSome say if you gaze into the depths of the shard, you can see him gazing back out at you.",
+              "glassshard_icon") as PassiveItem;          
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.A;
 
@@ -33,7 +28,7 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile2);
             projectile2.baseData.speed *= 1.2f;
             projectile2.baseData.range *= 1f;
-            projectile2.SetProjectileSpriteRight("glasster_projectile", 4, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
+            projectile2.SetProjectileSprite("glasster_projectile", 4, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
             GlassShardProjectile = projectile2;
 
             GlassShardID = item.PickupObjectId;

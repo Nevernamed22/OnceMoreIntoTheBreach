@@ -10,11 +10,12 @@ using UnityEngine;
 using Alexandria.ItemAPI;
 using SaveAPI;
 using Alexandria.Misc;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
 
-    public class DoomBoom : AdvancedGunBehavior
+    public class DoomBoom : GunBehaviour
     {
         public static void Add()
         {
@@ -28,8 +29,8 @@ namespace NevernamedsItems
 
             gun.SetShortDescription("Momentum Mori");
             gun.SetLongDescription("Packs an explosive punch so powerful that it knocks enemies souls out of their bodies." + "\n\nIn Gundead culture, it is considered a high honour to be buried beneath funerary-grade heavy munitions such as this.");
-            gun.SetupSprite(null, "doomboom_idle_001", 8);
-
+          
+            gun.SetGunSprites("doomboom");
 
             gun.SetAnimationFPS(gun.shootAnimation, 13);
             gun.SetAnimationFPS(gun.reloadAnimation, 10);
@@ -41,23 +42,9 @@ namespace NevernamedsItems
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
             gun.reloadTime = 1.2f;
             gun.DefaultModule.cooldownTime = 0.75f;
-            gun.muzzleFlashEffects = VFXToolbox.CreateVFXPool("DoomBoom Muzzleflash",
-               new List<string>()
-               {
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/doomboom_muzzle_001",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/doomboom_muzzle_002",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/doomboom_muzzle_003",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/doomboom_muzzle_004",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/doomboom_muzzle_005",
-               },
-               13, //FPS
-               new IntVector2(36, 41), //Dimensions
-               tk2dBaseSprite.Anchor.MiddleLeft, //Anchor
-               false, //Uses a Z height off the ground
-               0, //The Z height, if used
-               false,
-              VFXAlignment.Fixed
-                 );
+
+            gun.muzzleFlashEffects = VFXToolbox.CreateVFXPoolBundle("DoomBoomMuzzle", new IntVector2(36, 41), tk2dBaseSprite.Anchor.MiddleLeft, false, 0, VFXAlignment.Fixed);
+          
             gun.DefaultModule.numberOfShotsInClip = 2;
             gun.barrelOffset.transform.localPosition = new Vector3(34f / 16f, 19f / 16f, 0f);
             gun.SetBaseMaxAmmo(50);
@@ -73,42 +60,21 @@ namespace NevernamedsItems
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.gameObject.AddComponent<DoomExplosion>();
 
-            vfx = VFXToolbox.CreateVFX("DoomBoom Explosion",
-                 new List<string>()
-                 {
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/doomboom_explosionvfx_001",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/doomboom_explosionvfx_002",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/doomboom_explosionvfx_003",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/doomboom_explosionvfx_004",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/doomboom_explosionvfx_005",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/doomboom_explosionvfx_006",
-                 },
-                13, //FPS
-                 new IntVector2(88, 82), //Dimensions
-                 tk2dBaseSprite.Anchor.MiddleCenter, //Anchor
-                 true, //Uses a Z height off the ground
-                 0.4f //The Z height, if used
-                   );
+            vfx = VFXToolbox.CreateVFXBundle("DoomBoomExplosion", new IntVector2(88, 82), tk2dBaseSprite.Anchor.MiddleCenter, true, 0.4f);
 
-            projectile.AnimateProjectile(new List<string> {
-                "doomboom_projectile_001",
-                "doomboom_projectile_002",
-                "doomboom_projectile_003",
-                "doomboom_projectile_004",
-                "doomboom_projectile_005",
-                "doomboom_projectile_006",
-                "doomboom_projectile_007",
-                "doomboom_projectile_008",
-            }, 8, tk2dSpriteAnimationClip.WrapMode.Loop,
-            AnimateBullet.ConstructListOfSameValues(new IntVector2(16, 17), 8),
-            AnimateBullet.ConstructListOfSameValues(false, 8),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 8),
-            AnimateBullet.ConstructListOfSameValues(true, 8),
-            AnimateBullet.ConstructListOfSameValues(false, 8),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 8),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(13, 13), 8),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 8),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 8), 0);
+            projectile.AnimateProjectileBundle("DoomBoomProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "DoomBoomProjectile",
+                   MiscTools.DupeList(new IntVector2(16, 17), 8), //Pixel Sizes
+                   MiscTools.DupeList(false, 8), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 8), //Anchors
+                   MiscTools.DupeList(true, 8), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 8), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 8), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(13, 13), 8), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 8), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 8)); // Override to copy from    
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = "white";

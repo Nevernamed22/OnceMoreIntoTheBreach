@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Old School Cool");
             gun.SetLongDescription("This well oiled rifle was brought to the Gungeon by a student of the Gungeon Master, and is older than the Gungeon itself!"+"\n\nPassed down through the generations, Ol' Reliable has been a favourite of Gungeoneers from all walks of life.");
 
-            gun.SetupSprite(null, "olreliable_idle_001", 8);
+            gun.SetGunSprites("olreliable");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);

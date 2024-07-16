@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -23,7 +23,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Raising the Bar");
             gun.SetLongDescription("An incredibly satisfying piece of industrial machinery, designed specifically for killing adorable wildlife.");
 
-            gun.SetupSprite(null, "rebargun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "rebargun_idle_001", 8, "rebargun_ammonomicon_001");
+
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(806) as Gun).gunSwitchGroup;
 
             gun.SetAnimationFPS(gun.shootAnimation, 16);

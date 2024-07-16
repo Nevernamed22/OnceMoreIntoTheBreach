@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -20,7 +20,9 @@ namespace NevernamedsItems
             gun.gameObject.AddComponent<MinigunMiniShotgunSynergyForme>();
             gun.SetShortDescription("Tiny Toys");
             gun.SetLongDescription("This shotgun is the size of my self confidence." + "\n\nIf you're reading this, you're a cheatsy haxor.");
-            gun.SetupSprite(null, "minishotgun_idle_001", 8);
+          
+            gun.SetGunSprites("minishotgun", 8, true);
+
             gun.SetAnimationFPS(gun.shootAnimation, 16);
             for (int i = 0; i < 3; i++)
             {

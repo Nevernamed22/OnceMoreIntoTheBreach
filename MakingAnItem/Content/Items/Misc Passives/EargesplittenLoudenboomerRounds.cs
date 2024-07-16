@@ -26,6 +26,7 @@ namespace NevernamedsItems
             EargesplittenLoudenboomerRoundsID = item.PickupObjectId;
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_LOUDENBOOMER, true);
             item.AddItemToTrorcMetaShop(50);
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public static int EargesplittenLoudenboomerRoundsID;
         private void PostProcessProj(Projectile proj, float flot)

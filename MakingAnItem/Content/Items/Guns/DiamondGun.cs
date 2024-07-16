@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Diamonds Toniiiight");
             gun.SetLongDescription("Made out of shimmering crystal, this sidearm was mined in one piece from the rock of the Black Powder Mines.");
 
-            gun.SetupSprite(null, "diamondgun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "diamondgun_idle_001", 8, "diamondgun_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
@@ -49,15 +49,22 @@ namespace NevernamedsItems
             projectile.baseData.damage *= 3f;
             projectile.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(506) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX;
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.SetProjectileSpriteRight("diamond_projectile", 11, 11, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
+
+            ParticleShitter particles = projectile.gameObject.GetOrAddComponent<ParticleShitter>();
+            particles.particleType = GlobalSparksDoer.SparksType.SOLID_SPARKLES;
+            particles.particlesPerSecond = 20;
+
+            projectile.SetProjectileSprite("diamond_projectile", 11, 11, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Diamond Gun Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/diamondgun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/diamondgun_clipempty");
             gun.quality = PickupObject.ItemQuality.A;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             DiamondGunID = gun.PickupObjectId;
+            sparkle = VFXToolbox.CreateVFXBundle("DiamondSparkle", new IntVector2(7, 7), tk2dBaseSprite.Anchor.MiddleCenter, true, 0.4f);
         }
         public static int DiamondGunID;
+        public static GameObject sparkle;
         public override void PostProcessProjectile(Projectile projectile)
         {
             try
@@ -95,8 +102,25 @@ namespace NevernamedsItems
             PlayerController player = gun.CurrentOwner as PlayerController;
             player.GunChanged -= this.OnChangedGun;
         }
+        private float sparkleAccum;
         protected override void Update()
         {
+            if (gun && gun.sprite)
+            {
+                sparkleAccum += BraveTime.DeltaTime * 3;
+                if (sparkleAccum > 1f)
+                {
+                    int num = Mathf.FloorToInt(sparkleAccum);
+                    sparkleAccum %= 1f;
+                    Vector2 minpos = gun.sprite.sprite.WorldBottomLeft;
+                    Vector2 maxpos = gun.sprite.sprite.WorldTopRight;
+                    for (int i = 0; i < num; i++)
+                    {
+                        GameObject sparkleinst = UnityEngine.Object.Instantiate(sparkle, new Vector2(UnityEngine.Random.Range(minpos.x, maxpos.x), UnityEngine.Random.Range(minpos.y, maxpos.y)), Quaternion.identity);
+                        sparkleinst.GetComponent<tk2dBaseSprite>().HeightOffGround = 0.2f;
+                    }
+                }
+            }
             base.Update();
         }
 

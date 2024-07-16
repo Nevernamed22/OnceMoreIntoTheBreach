@@ -5,7 +5,7 @@ using System.Text;
 using System.Collections;
 using Gungeon;
 using MonoMod;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using System.Reflection;
 
@@ -24,7 +24,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Badder Choices");
             gun.SetLongDescription("Fires a shit-ton of discs. If you're reading this, you're a hacker.");
 
-            gun.SetupSprite(null, "discgun_superdiscsynergyforme_idle_001", 8);
+            gun.SetGunSprites("discgun_superdiscsynergyforme", 8, true);
+
             gun.SetAnimationFPS(gun.shootAnimation, 14);
 
             for (int i = 0; i < 5; i++)

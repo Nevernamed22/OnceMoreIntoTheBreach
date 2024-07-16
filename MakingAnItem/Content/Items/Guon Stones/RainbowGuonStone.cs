@@ -42,7 +42,7 @@ namespace NevernamedsItems
             projectile2.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile2.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile2);
-            projectile2.SetProjectileSpriteRight("mockorangeguon_proj", 4, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
+            projectile2.SetProjectileSprite("mockorangeguon_proj", 4, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
             mockOrangeGuonProj = projectile2;
 
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.RAINBOW_KILLED_LICH, true);

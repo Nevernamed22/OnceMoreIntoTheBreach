@@ -32,7 +32,7 @@ namespace NevernamedsItems
             {
                 if (sourceProjectile.GetComponent<HasBeenBulletShuffled>() == null)
                 {
-                    int num = UnityEngine.Random.Range(1, 55);
+                    int num = UnityEngine.Random.Range(1, 62);
                     //VFXToolbox.DoStringSquirt(num.ToString(), sourceProjectile.ProjectilePlayerOwner().specRigidbody.UnitCenter, Color.red);
                     switch (num)
                     {
@@ -284,7 +284,7 @@ namespace NevernamedsItems
                             sourceProjectile.ApplyClonedShaderProjModifier((PickupObjectDatabase.GetById(28) as Gun).modifiedFinalVolley.projectiles[0].projectiles[1].GetComponent<ShaderProjModifier>());
                             break;
                         case 51: //Finished Effect
-                            sourceProjectile.gameObject.AddComponent<BlackRevolverModifier>(); 
+                            sourceProjectile.gameObject.AddComponent<BlackRevolverModifier>();
                             break;
                         case 52: //Mimic Gun Effect
                             sourceProjectile.gameObject.AddComponent<EnemyBulletsBecomeJammedModifier>();
@@ -295,6 +295,47 @@ namespace NevernamedsItems
                             break;
                         case 54: //Encircler
                             sourceProjectile.ApplyClonedShaderProjModifier((PickupObjectDatabase.GetById(648) as Gun).DefaultModule.projectiles[0].GetComponent<ShaderProjModifier>());
+                            break;
+
+                        //WORKING 
+
+                        case 55: //50. Cal
+                            sourceProjectile.baseData.damage *= 1.16f;
+                            sourceProjectile.baseData.speed *= 1.25f;
+                            sourceProjectile.UpdateSpeed();
+                            break;
+                        case 56: //Alkali Bullets
+                            ProjectileInstakillBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
+                            instakill.tagsToKill.Add("blobulon");
+                            instakill.protectBosses = false;
+                            instakill.enemyGUIDSToEraseFromExistence.Add(EnemyGuidDatabase.Entries["bloodbulon"]);
+                            break;
+                        case 57: //Antimagic Rounds
+                            ProjectileInstakillBehaviour instakill2 = sourceProjectile.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
+                            instakill2.tagsToKill.AddRange(new List<string> { "gunjurer", "gunsinger", "bookllet" });
+                            instakill2.enemyGUIDsToKill.AddRange(new List<string> { EnemyGuidDatabase.Entries["wizbang"], EnemyGuidDatabase.Entries["pot_fairy"] });
+                            break;
+                        case 58: //Antimatter Bullets
+                            ExplodeOnBulletIntersection mod = sourceProjectile.gameObject.GetOrAddComponent<ExplodeOnBulletIntersection>();
+                            mod.explosionData = AntimatterBullets.smallPlayerSafeExplosion;
+                            break;
+                        case 59: //Bashing Bullets
+                            sourceProjectile.baseData.force *= 10f;
+                            sourceProjectile.gameObject.AddComponent<BreakableBashingBehaviour>();
+                            break;
+                        case 60: //Bloodthirsty Bullets
+                            sourceProjectile.gameObject.GetOrAddComponent<BloodthirstyBulletsComp>();
+                            break;
+                        case 61: //Bombardier Shells
+                            sourceProjectile.ProjectilePlayerOwner().knockbackDoer.ApplyKnockback((sourceProjectile.ProjectilePlayerOwner().CenterPosition - sourceProjectile.ProjectilePlayerOwner().unadjustedAimPoint.XY()).normalized, Mathf.Min(100, 40 * (sourceProjectile.baseData.damage / 10)));
+                            sourceProjectile.RuntimeUpdateScale(1.3f);
+                            sourceProjectile.baseData.damage *= 2f;
+                            if (UnityEngine.Random.value <= 0.07f)
+                            {
+                                ExplosiveModifier exploding = sourceProjectile.gameObject.GetOrAddComponent<ExplosiveModifier>();
+                                exploding.doExplosion = true;
+                                exploding.explosionData = StaticExplosionDatas.explosiveRoundsExplosion;
+                            }
                             break;
                     }
                     sourceProjectile.gameObject.AddComponent<HasBeenBulletShuffled>();
@@ -331,7 +372,7 @@ namespace NevernamedsItems
                 Projectile toSpawn = source.PossibleSourceGun.DefaultModule.GetCurrentProjectile();
                 if (toSpawn != null)
                 {
-                   StartCoroutine( SpawnAdditionalProjectile(source.ProjectilePlayerOwner(), source.specRigidbody.UnitCenter, source.Direction.ToAngle(), toSpawn, AngleVariance, angleFromAim, helix));
+                    StartCoroutine(SpawnAdditionalProjectile(source.ProjectilePlayerOwner(), source.specRigidbody.UnitCenter, source.Direction.ToAngle(), toSpawn, AngleVariance, angleFromAim, helix));
                 }
                 //else ETGModConsole.Log("Tospawn nulled");
             }

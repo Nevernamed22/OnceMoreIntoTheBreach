@@ -21,6 +21,7 @@ namespace NevernamedsItems
             item.SetTag("bullet_modifier");
             AntimatterBulletsID = item.PickupObjectId;
 
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public static int AntimatterBulletsID;
 

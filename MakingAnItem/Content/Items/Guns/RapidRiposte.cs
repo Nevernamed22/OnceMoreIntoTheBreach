@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Top Tier Gunsmanship");
             gun.SetLongDescription("Fires with the utmost precision, parrying projectiles back at their owners." + "\n\nAn old rapier, modified for gunslinging.");
 
-            gun.SetupSprite(null, "rapidriposte_idle_001", 8);
+            gun.SetGunSprites("rapidriposte");
 
             gun.SetAnimationFPS(gun.shootAnimation, 16);
 
@@ -54,7 +54,7 @@ namespace NevernamedsItems
             mirror.postProcessReflectedBullets = true;
             mirror.tintsBullets = false;
 
-            projectile.SetProjectileSpriteRight("rapidriposte_projectile", 26, 8, true, tk2dBaseSprite.Anchor.MiddleCenter, 13, 4);
+            projectile.SetProjectileSprite("rapidriposte_projectile", 26, 8, true, tk2dBaseSprite.Anchor.MiddleCenter, 13, 4);
 
 
             gun.DefaultModule.projectiles[0] = projectile;

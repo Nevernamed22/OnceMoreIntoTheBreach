@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -23,7 +23,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Platoon Onboard");
             gun.SetLongDescription("Standard issue blasma blaster from the far reaches of space, outfitted with a special ruby from deep within the Black Powder Mines to maximise it's power.");
 
-            gun.SetupSprite(null, "blasmaster_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "blasmaster_idle_001", 8, "blasmaster_ammonomicon_001");
+
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(599) as Gun).gunSwitchGroup;
 
             gun.SetAnimationFPS(gun.shootAnimation, 14);

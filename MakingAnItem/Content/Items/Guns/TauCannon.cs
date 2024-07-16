@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using ChestType = Chest.GeneralChestType;
 using Dungeonator;
 
@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Questionable Ethics");
             gun.SetLongDescription("An ingenious way devised by scientists in the field of materials handling to dispose of spent uranium."+"\n\nWill violently overcharge if powered up for too long.");
 
-            gun.SetupSprite(null, "taucannon_idle_001", 8);
+            gun.SetGunSprites("taucannon");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
             gun.SetAnimationFPS(gun.chargeAnimation, 6);

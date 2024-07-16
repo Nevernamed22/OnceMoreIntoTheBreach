@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -57,7 +57,7 @@ namespace NevernamedsItems
 
 
             //ANIMATE BULLETS
-            projectile.AnimateProjectile(new List<string> {
+          /*  projectile.AnimateProjectile(new List<string> {
                 "globbitlargeproj_1",
                 "globbitlargeproj_2",
                 "globbitlargeproj_1",
@@ -69,7 +69,7 @@ namespace NevernamedsItems
                 new IntVector2(17, 13), //4
             }, AnimateBullet.ConstructListOfSameValues(false, 4), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4), AnimateBullet.ConstructListOfSameValues(true, 4), AnimateBullet.ConstructListOfSameValues(false, 4),
             AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
-
+          */
 
             projectile.transform.parent = gun.barrelOffset;
 

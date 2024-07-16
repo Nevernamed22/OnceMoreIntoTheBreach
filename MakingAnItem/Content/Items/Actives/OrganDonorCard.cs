@@ -28,7 +28,7 @@ namespace NevernamedsItems
             heartCompanionBullet.baseData.damage = 20f;
             heartCompanionBullet.pierceMinorBreakables = true;
             heartCompanionBullet.baseData.range *= 10f;
-            heartCompanionBullet.SetProjectileSpriteRight("viscerifle_heart_projectile", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 16, 7);
+            heartCompanionBullet.SetProjectileSprite("viscerifle_heart_projectile", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 16, 7);
             GoopModifier blood = heartCompanionBullet.gameObject.AddComponent<GoopModifier>();
             blood.goopDefinition = EasyGoopDefinitions.BlobulonGoopDef;
             blood.SpawnGoopInFlight = true;

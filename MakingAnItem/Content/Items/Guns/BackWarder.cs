@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Backup");
             gun.SetLongDescription("Fires backwards."+ "\n\nThe condition of shooting backwards (known medically as disgyrismata) affects as many as one in five Gungeoneers.");
 
-            gun.SetupSprite(null, "backwarder_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "backwarder_idle_001", 8, "backwarder_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 14);
 

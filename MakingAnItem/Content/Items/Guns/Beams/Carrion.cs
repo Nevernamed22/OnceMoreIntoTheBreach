@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Fresh Meat");
             gun.SetLongDescription("A wormlike colony of bizarre organisms. Unknown origin." + "\n\nIt has three base desires. \nTo grow. \nTo Spread. \nTo Feed.");
 
-            gun.SetupSprite(null, "carrion2_idle_001", 8);
+            gun.SetGunSprites("carrion2");
 
             gun.SetAnimationFPS(gun.shootAnimation, 13);
             gun.SetAnimationFPS(gun.idleAnimation, 13);
@@ -173,7 +173,7 @@ namespace NevernamedsItems
             PierceProjModifier piercing = wiggler.gameObject.GetOrAddComponent<PierceProjModifier>();
             piercing.penetratesBreakables = true;
             piercing.penetration++;
-            wiggler.SetProjectileSpriteRight("carrion_wiggler", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 5, 5);
+            wiggler.SetProjectileSprite("carrion_wiggler", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 5, 5);
             EasyTrailBullet trail = wiggler.gameObject.AddComponent<EasyTrailBullet>();
             trail.TrailPos = projectile.transform.position;
             trail.StartWidth = 0.31f;

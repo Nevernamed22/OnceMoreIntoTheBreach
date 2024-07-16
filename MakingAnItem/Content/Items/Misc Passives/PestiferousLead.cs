@@ -25,6 +25,7 @@ namespace NevernamedsItems
             //Unlock
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_PESTIFEROUSLEAD, true);
             item.AddItemToDougMetaShop(30);
+            Doug.AddToLootPool(item.PickupObjectId);
 
         }
 

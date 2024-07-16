@@ -10,28 +10,18 @@ namespace NevernamedsItems
 {
     class AppleActive : PlayerItem
     {
-        private static int[] spriteIDs;
-        private static readonly string[] spritePaths = new string[]
-        {
-            "NevernamedsItems/Resources/apple_icon",
-            "NevernamedsItems/Resources/goldenapple_icon",
-        };
+        private static int NormalSpriteID;
+        private static int GoldenSpriteID;
         public static void Init()
         {
-            string itemName = "Apple";
-            string resourceName = AppleActive.spritePaths[0];
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<AppleActive>();
+            PlayerItem item = ItemSetup.NewItem<AppleActive>(
+               "Apple",
+               "Doesn't Fall Far",
+               "Heals a small amount. Can only be eaten once." + "\n\nAn apple from Kaliber's garden.",
+               "apple_icon") as PlayerItem;
 
-            AppleActive.spriteIDs = new int[AppleActive.spritePaths.Length];
-
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Doesn't Fall Far";
-            string longDesc = "Heals a small amount. Can only be eaten once." + "\n\nAn apple from Kaliber's garden.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            AppleActive.spriteIDs[0] = item.sprite.spriteId; //Norm
-            AppleActive.spriteIDs[1] = SpriteBuilder.AddSpriteToCollection(AppleActive.spritePaths[1], item.sprite.Collection); //Gold
+            NormalSpriteID = item.sprite.spriteId; //Norm
+            GoldenSpriteID = Initialisation.itemCollection.GetSpriteIdByName("goldenapple_icon");
 
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 0);
             item.CustomCost = 10;
@@ -48,12 +38,12 @@ namespace NevernamedsItems
             {
                 if (LastOwner.PlayerHasActiveSynergy("Golden Apple") && !WasGoldenLastChecked)
                 {
-                    base.sprite.SetSprite(AppleActive.spriteIDs[1]);
+                    base.sprite.SetSprite(AppleActive.GoldenSpriteID);
                     WasGoldenLastChecked = true;
                 }
                 else if (!LastOwner.PlayerHasActiveSynergy("Golden Apple") && WasGoldenLastChecked)
                 {
-                    base.sprite.SetSprite(AppleActive.spriteIDs[0]);
+                    base.sprite.SetSprite(AppleActive.NormalSpriteID);
                     WasGoldenLastChecked = false;
                 }
             }
@@ -79,7 +69,7 @@ namespace NevernamedsItems
                 if (user.PlayerHasActiveSynergy("Golden Apple")) user.healthHaver.ApplyHealing(100000000000000f);
                 else if (user.PlayerHasActiveSynergy("Apple A Day")) user.healthHaver.ApplyHealing(3f);
                 else user.healthHaver.ApplyHealing(1.5f);
-                
+
             }
             if (user.PlayerHasActiveSynergy("Golden Apple"))
             {
@@ -164,7 +154,8 @@ namespace NevernamedsItems
                 if (GameManager.Options.ShaderQuality != GameOptions.GenericHighMedLowOption.LOW && GameManager.Options.ShaderQuality != GameOptions.GenericHighMedLowOption.VERY_LOW && target && target.IsVisible && !target.IsFalling)
                 {
                     GlobalSparksDoer.DoRandomParticleBurst(3, target.sprite.WorldBottomLeft.ToVector3ZisY(0f), target.sprite.WorldTopRight.ToVector3ZisY(0f), Vector3.up, 90f, 0.5f, null, null, null, GlobalSparksDoer.SparksType.RED_MATTER);
-                }  ParticleTimer = 0.1f;
+                }
+                ParticleTimer = 0.1f;
             }
         }
         public void GoldenEffectStart(PlayerController player)
@@ -187,21 +178,19 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Apple Core";
-            string resourceName = "NevernamedsItems/Resources/applecore_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<AppleCore>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Trash";
-            string longDesc = "A worthless apple core.";
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<AppleCore>(
+               "Apple Core",
+               "Trash",
+               "A worthless apple core.",
+               "applecore_icon") as PassiveItem;
+         
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ProjectileSpeed, 1.05f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.PlayerBulletScale, 1.05f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-
             item.CanBeDropped = true;
             item.quality = PickupObject.ItemQuality.EXCLUDED;
             AppleCoreID = item.PickupObjectId;
+            item.CustomCost = 3;
+            item.UsesCustomCost = true;
         }
         public static int AppleCoreID;
         public bool givesFlight = false;
@@ -244,15 +233,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Golden Apple Core";
-            string resourceName = "NevernamedsItems/Resources/goldenapplecore_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<GoldenAppleCore>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Trash?";
-            string longDesc = "An apple core." + "\n\nMaybe this one isn't so worthless.";
+            PassiveItem item = ItemSetup.NewItem<GoldenAppleCore>(
+               "Golden Apple Core",
+               "Trash?",
+               "An apple core." + "\n\nMaybe this one isn't so worthless.",
+               "goldenapplecore_icon") as PassiveItem;
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ProjectileSpeed, 1.05f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.PlayerBulletScale, 1.05f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.CustomCost = 100;

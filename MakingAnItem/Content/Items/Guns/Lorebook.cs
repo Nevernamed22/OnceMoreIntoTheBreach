@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using Alexandria.ItemAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -29,7 +30,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Party Cohesion");
             gun.SetLongDescription("Summons brave and noble bullet warriors of several different classes to destroy everything in sight and wreak havoc."+"\n(Like real heroes!)"+"\n\nThis magical tome of stories and scenarios was stolen from one of the most evil creatures in the Gungeon; a Lore Gunjurer.");
 
-            gun.SetupSprite(null, "lorebook_idle_001", 8);
+            gun.SetGunSprites("lorebook");
 
             gun.SetAnimationFPS(gun.shootAnimation, 18);
 
@@ -54,7 +55,7 @@ namespace NevernamedsItems
             wizardSpellProjectile.baseData.damage *= 1f;
             wizardSpellProjectile.baseData.speed *= 0.7f;
             wizardSpellProjectile.baseData.range *= 5f;
-            wizardSpellProjectile.SetProjectileSpriteRight("smallspark_projectile", 7, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
+            wizardSpellProjectile.SetProjectileSprite("smallspark_projectile", 7, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
 
             Projectile wizardProjectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
             wizardProjectile.gameObject.SetActive(false);
@@ -83,29 +84,19 @@ namespace NevernamedsItems
             wizardHoming.HomingRadius = 1000f;
             BounceProjModifier wizardBouncing = wizardProjectile.gameObject.GetOrAddComponent<BounceProjModifier>();
             wizardBouncing.numberOfBounces = 10;
-            wizardProjectile.AnimateProjectile(new List<string> {
-                "playerwizardprojectile_001",
-                "playerwizardprojectile_002",
-                "playerwizardprojectile_003",
-                "playerwizardprojectile_004",
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(17, 22), //1
-                new IntVector2(17, 22), //2            
-                new IntVector2(17, 22), //3
-                new IntVector2(17, 22), //3
-            }, AnimateBullet.ConstructListOfSameValues(true, 4),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4),
-            AnimateBullet.ConstructListOfSameValues(true, 4),
-            AnimateBullet.ConstructListOfSameValues(false, 4),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4),
-            new List<IntVector2?> {
-                new IntVector2(11, 16), //1
-                new IntVector2(11, 16), //2            
-                new IntVector2(11, 16), //3
-                new IntVector2(11, 16), //3
-            },
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
+            wizardProjectile.AnimateProjectileBundle("LorebookWizardProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "LorebookWizardProjectile",
+                   MiscTools.DupeList(new IntVector2(17, 22), 4), //Pixel Sizes
+                   MiscTools.DupeList(true, 4), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                   MiscTools.DupeList(true, 4), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 4), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 4), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(11, 16), 4), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 4)); // Override to copy from                
             wizardProjectile.shouldFlipHorizontally = true;
 
             Projectile bardProjectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
@@ -126,29 +117,19 @@ namespace NevernamedsItems
             bardCharming.charmEffect = StaticStatusEffects.charmingRoundsEffect;
             BounceProjModifier bardBouncing = bardProjectile.gameObject.GetOrAddComponent<BounceProjModifier>();
             bardBouncing.numberOfBounces = 10;
-            bardProjectile.AnimateProjectile(new List<string> {
-                "playerbardbullet_001",
-                "playerbardbullet_002",
-                "playerbardbullet_003",
-                "playerbardbullet_004",
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(16, 15), //1
-                new IntVector2(16, 15), //2            
-                new IntVector2(16, 15), //3
-                new IntVector2(16, 15), //3
-            }, AnimateBullet.ConstructListOfSameValues(true, 4),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4),
-            AnimateBullet.ConstructListOfSameValues(true, 4),
-            AnimateBullet.ConstructListOfSameValues(false, 4),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4),
-            new List<IntVector2?> {
-                new IntVector2(10, 9), //1
-                new IntVector2(10, 9), //2            
-                new IntVector2(10, 9), //3
-                new IntVector2(10, 9), //3
-            },
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
+            bardProjectile.AnimateProjectileBundle("LorebookBardProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "LorebookBardProjectile",
+                   MiscTools.DupeList(new IntVector2(16, 15), 4), //Pixel Sizes
+                   MiscTools.DupeList(true, 4), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                   MiscTools.DupeList(true, 4), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 4), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 4), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(10, 9), 4), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 4)); // Override to copy from               
             bardProjectile.shouldFlipHorizontally = true;
 
 
@@ -191,29 +172,19 @@ namespace NevernamedsItems
                 else { ETGModConsole.Log("Base Eney TeleportProjModifier was null???"); }
             }
             else { ETGModConsole.Log("Base Enemy Rogue Bullet had no projectile component???"); }
-            rogueProjectile.AnimateProjectile(new List<string> {
-                "playerroguebullet_001",
-                "playerroguebullet_002",
-                "playerroguebullet_003",
-                "playerroguebullet_004",
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(16, 15), //1
-                new IntVector2(16, 15), //2            
-                new IntVector2(16, 15), //3
-                new IntVector2(16, 15), //3
-            }, AnimateBullet.ConstructListOfSameValues(true, 4),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4),
-            AnimateBullet.ConstructListOfSameValues(true, 4),
-            AnimateBullet.ConstructListOfSameValues(false, 4),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4),
-            new List<IntVector2?> {
-                new IntVector2(10, 9), //1
-                new IntVector2(10, 9), //2            
-                new IntVector2(10, 9), //3
-                new IntVector2(10, 9), //3
-            },
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
+            rogueProjectile.AnimateProjectileBundle("LorebookRogueProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "LorebookRogueProjectile",
+                   MiscTools.DupeList(new IntVector2(16, 15), 4), //Pixel Sizes
+                   MiscTools.DupeList(true, 4), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                   MiscTools.DupeList(true, 4), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 4), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 4), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(10, 9), 4), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 4)); // Override to copy from   
 
             //BULLET STATS
             Projectile knightProjectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
@@ -231,41 +202,26 @@ namespace NevernamedsItems
             knightHoming.HomingRadius = 1000f;
             BounceProjModifier knightBouncing = knightProjectile.gameObject.GetOrAddComponent<BounceProjModifier>();
             knightBouncing.numberOfBounces = 10;
-            knightProjectile.AnimateProjectile(new List<string> {
-                "playerknightbullet_001",
-                "playerknightbullet_002",
-                "playerknightbullet_003",
-                "playerknightbullet_004",
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(19, 15), //1
-                new IntVector2(19, 15), //2            
-                new IntVector2(19, 15), //3
-                new IntVector2(19, 15), //3
-            }, AnimateBullet.ConstructListOfSameValues(true, 4),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4),
-            AnimateBullet.ConstructListOfSameValues(true, 4),
-            AnimateBullet.ConstructListOfSameValues(false, 4),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4),
-            new List<IntVector2?> {
-                new IntVector2(13, 9), //1
-                new IntVector2(13, 9), //2            
-                new IntVector2(13, 9), //3
-                new IntVector2(13, 9), //3
-            },
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
+            knightProjectile.AnimateProjectileBundle("LorebookKnightProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "LorebookKnightProjectile",
+                   MiscTools.DupeList(new IntVector2(19, 15), 4), //Pixel Sizes
+                   MiscTools.DupeList(true, 4), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                   MiscTools.DupeList(true, 4), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 4), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 4), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(13, 9), 4), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 4)); // Override to copy from   
+           
             knightProjectile.shouldFlipHorizontally = true;
-
 
             gun.DefaultModule.projectiles[0] = knightProjectile;
             gun.DefaultModule.projectiles.Add(wizardProjectile);
             gun.DefaultModule.projectiles.Add(bardProjectile);
             gun.DefaultModule.projectiles.Add(rogueProjectile);
-
-
-
-
-
 
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

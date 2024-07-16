@@ -1,4 +1,4 @@
-﻿using Dungeonator;
+﻿/*using Dungeonator;
 using MonoMod.RuntimeDetour;
 using System;
 using System.Collections;
@@ -722,4 +722,4 @@ namespace ItemAPI
 
     }
 
-}
+}*/

@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Time Twister");
             gun.SetLongDescription("Summons bullets from an alternate timeline."+"\n\nThis was pulled through a tear in the curtain along with the Killithid incursion- though it is not of their craftmanship.");
 
-            gun.SetupSprite(null, "rewarp_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "rewarp_idle_001", 8, "rewarp_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 

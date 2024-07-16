@@ -23,7 +23,9 @@ namespace NevernamedsItems
             gun.gameObject.AddComponent<FlayedRevolver>();
             gun.SetShortDescription("Sinister Bells");
             gun.SetLongDescription("The favoured weapon of the cruel Mine Flayer, Planar lord of rings.\n\n" + "Reloading a full clip allows the bearer to slip beyond the curtain, if only briefly.");
-            gun.SetupSprite(null, "flayedrevolver_idle_001", 13);
+            
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "flayedrevolver_idle_001", 13, "flayedrevolver_ammonomicon_001");
+
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(35) as Gun).gunSwitchGroup;
 
             gun.SetAnimationFPS(gun.shootAnimation, 24);

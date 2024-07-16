@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Completely Awesomer");
             gun.SetLongDescription("Big shark gun go brr."+"\n\nIf you're reading this, you're a cheatsy haxor.");
 
-            gun.SetupSprite(null, "gunshark_megasharkforme_idle_001", 8);
+            gun.SetGunSprites("gunshark_megasharkforme", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 17);
 

@@ -10,6 +10,7 @@ using UnityEngine;
 using Alexandria.ItemAPI;
 using Dungeonator;
 using Alexandria.Misc;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -23,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Postmortal");
             gun.SetLongDescription("An ancient relic of a lost religion, holding this totem-shaped gun as one breathes their last breath allows them to return to the firefight, fit and ready for action.");
 
-            gun.SetupSprite(null, "totemofgundying_idle_001", 8);
+            gun.SetGunSprites("totemofgundying");
 
             gun.SetAnimationFPS(gun.shootAnimation, 9);
             gun.SetAnimationFPS(gun.reloadAnimation, 9);
@@ -60,20 +61,19 @@ namespace NevernamedsItems
             projectile.gameObject.AddComponent<PierceProjModifier>().penetration = 1;
             projectile.gameObject.AddComponent<BounceProjModifier>().numberOfBounces = 1;
 
-            projectile.SetProjectileSpriteRight($"totemofgundying_proj_001", 9, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
-            projectile.AnimateProjectile(new List<string> {
-                $"totemofgundying_proj_001",
-                $"totemofgundying_proj_002",
-            }, 12, tk2dSpriteAnimationClip.WrapMode.Loop,
-            AnimateBullet.ConstructListOfSameValues(new IntVector2(9, 9), 2),
-            AnimateBullet.ConstructListOfSameValues(true, 2),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 2),
-            AnimateBullet.ConstructListOfSameValues(true, 2),
-            AnimateBullet.ConstructListOfSameValues(false, 2),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 2),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 2),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 2),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 2), 0);
+            projectile.AnimateProjectileBundle("TotemOfGundyingProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "TotemOfGundyingProjectile",
+                   MiscTools.DupeList(new IntVector2(9, 9), 2), //Pixel Sizes
+                   MiscTools.DupeList(true, 2), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 2), //Anchors
+                   MiscTools.DupeList(true, 2), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 2), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 2), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(null, 2), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 2), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 2)); // Override to copy from               
 
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             ETGMod.Databases.Items.Add(gun, false, "ANY");

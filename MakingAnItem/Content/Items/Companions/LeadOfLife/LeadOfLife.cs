@@ -1,5 +1,5 @@
 ﻿using Dungeonator;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System;
 using System.Collections;
@@ -159,18 +159,12 @@ namespace NevernamedsItems
             BloodthirstyBulletsCompanion = new LeadOfLifeCompanionStats() { guid = "leadoflife_bloodthirstybullets" };
             TitanBulletsCompanion = new LeadOfLifeCompanionStats() { guid = "leadoflife_titanbullets" };
 
-
-
-            string name = "Lead of Life";
-            string resourcePath = "NevernamedsItems/Resources/Companions/LeadOfLife/leadoflife_icon";
-            GameObject gameObject = new GameObject(name);
-            var item = gameObject.AddComponent<LeadOfLife>();
-            ItemBuilder.AddSpriteToObject(name, resourcePath, gameObject);
-            string shortDesc = "Forged Friends";
-            string longDesc = "Brings bullet upgrades to life!" + "\n\nA tiny fragment of lead left over from the creation of the very first Bullet Kin." + "\n\nIt still glows with lifegiving power...";
+            PassiveItem item = ItemSetup.NewItem<LeadOfLife>(
+              "Lead of Life",
+              "Forged Friends",
+              "Brings bullet upgrades to life!" + "\n\nA tiny fragment of lead left over from the creation of the very first Bullet Kin." + "\n\nIt still glows with lifegiving power...",
+              "leadoflife_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.S;
-            item.SetupItem(shortDesc, longDesc, "nn");
-
             LeadOfLifeID = item.PickupObjectId;
 
             activeItemDropHook = new Hook(
@@ -178,7 +172,7 @@ namespace NevernamedsItems
                 typeof(LeadOfLife).GetMethod("DropActiveHook")
             );
 
-            CompanionItemDictionary = new Dictionary<int, List<string>>();           
+            CompanionItemDictionary = new Dictionary<int, List<string>>();
         }
         public static int LeadOfLifeID;
         public static Hook activeItemDropHook;
@@ -193,8 +187,8 @@ namespace NevernamedsItems
                     foreach (PassiveItem potentialLOL in self.passiveItems)
                     {
                         if (potentialLOL.GetComponent<LeadOfLife>() != null) potentialLOL.GetComponent<LeadOfLife>().RecalculateCompanions(true);
-                    } 
-                }                    
+                    }
+                }
                 return orig(self, item, force, deathdrop);
             }
             catch (Exception e)
@@ -204,7 +198,7 @@ namespace NevernamedsItems
                 return null;
             }
         }
-      
+
         //Methods which change the number of companions, by spawning new ones and deleting old ones
         public void RecalculateCompanions(bool late = false)
         {
@@ -278,7 +272,7 @@ namespace NevernamedsItems
         public override void DisableEffect(PlayerController player)
         {
             DestroyAllCompanions();
-            player.OnNewFloorLoaded -= this.OnNewFloor;
+            if (player) player.OnNewFloorLoaded -= this.OnNewFloor;
             base.DisableEffect(player);
         }
 

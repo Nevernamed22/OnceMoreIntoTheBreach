@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Hungry Gun");
             gun.SetLongDescription("Reloading this strange creature near guns on the ground will cause them to be... consumed?" + "\n\nThese creatures are worshipped as gods in some cultures, though they know it not.");
 
-            gun.SetupSprite(null, "gunger_idle_001", 8);
+            gun.SetGunSprites("gunger");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.idleAnimation, 9);
@@ -53,7 +53,7 @@ namespace NevernamedsItems
             projectile.baseData.force *= 1.2f;
             GungerBaseProjectile gungerbase = projectile.gameObject.AddComponent<GungerBaseProjectile>();
 
-            projectile.SetProjectileSpriteRight("gunger_projectile", 17, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 16, 8);
+            projectile.SetProjectileSprite("gunger_projectile", 17, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 16, 8);
 
             projectile.transform.parent = gun.barrelOffset;
 

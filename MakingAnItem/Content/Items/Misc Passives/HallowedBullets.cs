@@ -22,6 +22,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.D;
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_KEEP, true);
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public void onFiredGun(Projectile bullet, float eventchancescaler)
         {           
@@ -32,17 +33,12 @@ namespace NevernamedsItems
             player.PostProcessProjectile += this.onFiredGun;
             base.Pickup(player);
         }
-        public override DebrisObject Drop(PlayerController player)
+        public override void DisableEffect(PlayerController player)
         {
-            DebrisObject result = base.Drop(player);
-            player.PostProcessProjectile -= this.onFiredGun;
-            return result;
+            if (player) player.PostProcessProjectile -= this.onFiredGun;
+            base.DisableEffect(player);
         }
-        public override void OnDestroy()
-        {
-            Owner.PostProcessProjectile -= this.onFiredGun;
-            base.OnDestroy();
-        }
+
         public override void DoIntersectionEffect(Projectile playerBullet, Projectile enemyBullet)
         {
             if (enemyBullet.IsBlackBullet)

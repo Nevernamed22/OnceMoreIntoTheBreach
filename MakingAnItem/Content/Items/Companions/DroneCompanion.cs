@@ -32,7 +32,7 @@ namespace NevernamedsItems
             projectile2.baseData.range *= 1f;
             projectile2.baseData.damage *= 0.8f;
             projectile2.gameObject.AddComponent<DroneBulletComponent>();
-            projectile2.SetProjectileSpriteRight("drone_projectile", 14, 8, true, tk2dBaseSprite.Anchor.MiddleCenter, 12, 6);
+            projectile2.SetProjectileSprite("drone_projectile", 14, 8, true, tk2dBaseSprite.Anchor.MiddleCenter, 12, 6);
             DroneCompanionProjectile = projectile2;
             DroneID = companionItem.PickupObjectId;
             companionItem.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_DRONE, true);

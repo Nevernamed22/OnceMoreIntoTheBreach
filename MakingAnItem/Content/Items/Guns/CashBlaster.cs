@@ -25,7 +25,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Money Guney");
             gun.SetLongDescription("A tacky device designed to fire paper currency."+"\n\nUnfortunately, paper currency is not legal tender in the Gungeon.");
 
-            gun.SetupSprite(null, "cashblaster_idle_001", 8);
+            gun.SetGunSprites("cashblaster");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -12,34 +12,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Book of Mimic Anatomy";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/bookofmimicanatomy_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<BookOfMimicAnatomy>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Look closer...";
-            string longDesc = "This book, while bound and covered identically to the Book of Chest Anatomy, is in fact a much more interesting tome on the anatomy of the creature known as the Mimic." + "\n\nIt appears to be a sequel to the Book of Chest Anatomy from the same author, which is good ‘cause that one left off on a cliffhanger.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
+            PassiveItem item = ItemSetup.NewItem<BookOfMimicAnatomy>(
+            "Book of Mimic Anatomy",
+            "Look closer...",
+            "This book, while bound and covered identically to the Book of Chest Anatomy, is in fact a much more interesting tome on the anatomy of the creature known as the Mimic." + "\n\nIt appears to be a sequel to the Book of Chest Anatomy from the same author, which is good ‘cause that one left off on a cliffhanger.",
+            "bookofmimicanatomy_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.A;
-
             item.AddToSubShop(ItemBuilder.ShopType.Flynt);
         }
         private List<string> mimicGuids = new List<string>
@@ -129,16 +107,10 @@ namespace NevernamedsItems
             base.Pickup(player);
             player.OnAnyEnemyReceivedDamage += this.OnEnemyDamaged;
         }
-        public override DebrisObject Drop(PlayerController player)
+        public override void DisableEffect(PlayerController player)
         {
-            DebrisObject debrisObject = base.Drop(player);
-            player.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
-            return debrisObject;
-        }
-        public override void OnDestroy()
-        {
-            if (Owner) Owner.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
-            base.OnDestroy();
+            if (player) player.OnAnyEnemyReceivedDamage -= this.OnEnemyDamaged;
+            base.DisableEffect(player);
         }
     }
 }

@@ -213,4 +213,103 @@ namespace NevernamedsItems
 
         }
     }
+
+    public class AdvancedDungeonPrerequisite : CustomDungeonPrerequisite
+    {
+        public override bool CheckConditionsFulfilled()
+        {
+
+
+            if (advancedAdvancedPrerequisiteType != AdvancedAdvancedPrerequisiteType.NONE)
+            {
+                if (advancedAdvancedPrerequisiteType == AdvancedAdvancedPrerequisiteType.MULTIPLE_FLOORS)
+                {
+                    var h = GlobalDungeonData.ValidTilesets.GUNGEON;
+                    if (GameManager.Instance.BestGenerationDungeonPrefab != null)
+                    {
+                        h = GameManager.Instance.BestGenerationDungeonPrefab.tileIndices.tilesetId;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    return validTilesets.Contains(h);
+                }
+                if (advancedAdvancedPrerequisiteType == AdvancedAdvancedPrerequisiteType.PASSIVE_ITEM_FLAG)
+                {
+                    if (PassiveItem.IsFlagSetAtAll(requiredPassiveFlag) == true)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                if (advancedAdvancedPrerequisiteType == AdvancedAdvancedPrerequisiteType.SPEEDRUN_TIMER_BEFORE)
+                {
+                    if (GameStatsManager.Instance.GetSessionStatValue(TrackedStats.TIME_PLAYED) <= BeforeTimeInSeconds)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                if (advancedAdvancedPrerequisiteType == AdvancedAdvancedPrerequisiteType.UNLOCK)
+                {
+                    if (SaveAPIManager.GetFlag(UnlockFlag) == UnlockRequirement)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                if (advancedAdvancedPrerequisiteType == AdvancedAdvancedPrerequisiteType.SPEEDRUN_TIMER_AFTER)
+                {
+                    if (GameStatsManager.Instance.GetSessionStatValue(TrackedStats.TIME_PLAYED) >= AfterTimeInSeconds)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+
+                }
+            }
+
+            else
+            {
+                return base.CheckConditionsFulfilled();
+            }
+            return false;
+        }
+
+        public float BeforeTimeInSeconds;
+        public float AfterTimeInSeconds;
+        public bool UnlockRequirement;
+        public CustomDungeonFlags UnlockFlag;
+
+        public AdvancedAdvancedPrerequisiteType advancedAdvancedPrerequisiteType;
+
+
+        public List<GlobalDungeonData.ValidTilesets> validTilesets = new List<GlobalDungeonData.ValidTilesets>();
+
+
+        public enum AdvancedAdvancedPrerequisiteType
+        {
+            NONE,
+            PASSIVE_ITEM_FLAG,
+            SPEEDRUN_TIMER_BEFORE,
+            SPEEDRUN_TIMER_AFTER,
+            UNLOCK,
+            MULTIPLE_FLOORS
+        }
+    }
+
 }

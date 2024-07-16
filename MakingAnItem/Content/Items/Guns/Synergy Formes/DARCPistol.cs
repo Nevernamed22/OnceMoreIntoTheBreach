@@ -16,7 +16,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Shocked And Loaded");
             gun.SetLongDescription("Developed by the ARC Private Security company for easy manufacture and deployment, this electrotech blaster is the epittome of the ARC brand.");
 
-            gun.SetupSprite(null, "darcpistol_idle_001", 8);
+            gun.SetGunSprites("darcpistol", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
@@ -43,7 +43,7 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.speed *= 5f;
             projectile.baseData.damage = 7.2f;
-            projectile.SetProjectileSpriteRight("darc_proj", 8, 2, false, tk2dBaseSprite.Anchor.MiddleCenter, 8, 2);
+            projectile.SetProjectileSprite("darc_proj", 8, 2, false, tk2dBaseSprite.Anchor.MiddleCenter, 8, 2);
             LightningProjectileComp lightning = projectile.gameObject.GetOrAddComponent<LightningProjectileComp>();
             lightning.targetEnemies = true;
             lightning.arcBetweenEnemiesRange = 6;

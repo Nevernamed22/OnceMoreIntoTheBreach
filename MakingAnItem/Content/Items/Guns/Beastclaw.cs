@@ -6,8 +6,9 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -21,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Out of Place");
             gun.SetLongDescription("The weaponised claw of a mighty Misfire Beast." + "\n\nRumour has it that infamous big game hunter Emmitt Calx had one of the beasts as a tame pet and lap cat.");
 
-            gun.SetupSprite(null, "beastclaw_idle_001", 8);
+            gun.SetGunSprites("beastclaw");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 1);
@@ -53,7 +54,8 @@ namespace NevernamedsItems
             projectile.baseData.damage *= 0.8f;
             projectile.baseData.speed *= 1f;
             projectile.baseData.range *= 1f;
-            projectile.SetProjectileSpriteRight("enemystyle_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
+
+           projectile.SetProjectileSprite("enemystyle_projectile",  10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
             InstantTeleportToPlayerCursorBehav tp = projectile.gameObject.GetOrAddComponent<InstantTeleportToPlayerCursorBehav>();
 
 

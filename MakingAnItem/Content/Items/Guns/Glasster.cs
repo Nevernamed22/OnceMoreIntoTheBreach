@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Glass Blower");
             gun.SetLongDescription("Increases in damage the more Glass Guon Stones are held." + "\n\nGifted unto a spacefaring rogue by the Lady of Pane, it's original bearer died from infection after cutting himself on a shard of glass.");
 
-            gun.SetupSprite(null, "glasster_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "glasster_idle_001", 8, "glasster_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 14);
 
@@ -46,7 +46,7 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             projectile.baseData.damage *= 1f;
-            projectile.SetProjectileSpriteRight("glasster_projectile", 4, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
+            projectile.SetProjectileSprite("glasster_projectile", 4, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
             gun.DefaultModule.projectiles[0] = projectile;
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;

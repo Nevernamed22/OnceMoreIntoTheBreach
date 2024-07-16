@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Liquid-Metal Body";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/liquidmetalbody_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<LiquidMetalBody>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "1000";
-            string longDesc = "Grants a liquid-metal state for a brief time upon taking damage."+"\n\nBlobulonian science, once used to formulate the terrifying Leadbulon, now modified by Professor Goopton to affect other lifeforms.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<LiquidMetalBody>(
+               "Liquid-Metal Body",
+               "1000",
+               "Grants a liquid-metal state for a brief time upon taking damage." + "\n\nBlobulonian science, once used to formulate the terrifying Leadbulon, now modified by Professor Goopton to affect other lifeforms.",
+               "liquidmetalbody_icon") as PassiveItem;         
             item.quality = PickupObject.ItemQuality.B;
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_LIQUIDMETALBODY, true);

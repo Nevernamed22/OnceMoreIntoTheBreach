@@ -24,6 +24,7 @@ namespace NevernamedsItems
             item.SetTag("bullet_modifier");
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.ALLJAMMED_BEATEN_MINES, true);
             BloodthirstyBulletsID = item.PickupObjectId;
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public static int BloodthirstyBulletsID;
         public override void Pickup(PlayerController player)

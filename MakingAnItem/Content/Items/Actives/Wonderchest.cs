@@ -5,7 +5,7 @@ using System.Text;
 using Alexandria.ChestAPI;
 using Alexandria.Misc;
 using Dungeonator;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace NevernamedsItems

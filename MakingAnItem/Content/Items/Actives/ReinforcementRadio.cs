@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Reinforcement Radio";
-            string resourceName = "NevernamedsItems/Resources/reinforcementradio_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<ReinforcementRadio>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "I Need Backup!";
-            string longDesc = "Taps into secret Gundead radio frequencies to confuse their reinforcement divisions, and get them to send aid to the wrong side." + "\n\nGundead are not the brightest of creatures.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<ReinforcementRadio>(
+            "Reinforcement Radio",
+            "I Need Backup!",
+            "Taps into secret Gundead radio frequencies to confuse their reinforcement divisions, and get them to send aid to the wrong side." + "\n\nGundead are not the brightest of creatures.",
+            "reinforcementradio_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 600);
             item.consumable = false;
             item.quality = ItemQuality.B;

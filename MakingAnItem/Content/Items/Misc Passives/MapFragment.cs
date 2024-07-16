@@ -12,14 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Map Fragment";
-            string resourceName = "NevernamedsItems/Resources/mapfragment_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<MapFragment>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Selective Information";
-            string longDesc = "Reveals nearby rooms." + "\n\nSeemingly torn from a larger map.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<MapFragment>(
+            "Map Fragment",
+            "Selective Information",
+            "Reveals nearby rooms." + "\n\nSeemingly torn from a larger map.",
+            "mapfragment_icon") as PassiveItem;
             item.CanBeDropped = true;
             item.CustomCost = 20;
             item.UsesCustomCost = true;

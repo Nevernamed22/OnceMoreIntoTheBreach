@@ -25,7 +25,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Completely Awesome");
             gun.SetLongDescription("A bullet shark that is also a gun, what more could you ask for?");
 
-            gun.SetupSprite(null, "gunshark_idle_001", 8);
+            gun.SetGunSprites("gunshark");
 
             gun.SetAnimationFPS(gun.shootAnimation, 17);
 
@@ -53,7 +53,7 @@ namespace NevernamedsItems
             projectile.baseData.speed *= 2f;
             projectile.pierceMinorBreakables = true;
             //projectile.shouldRotate = true;
-            projectile.SetProjectileSpriteRight("gunshark_projectile", 17, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 17, 4);
+            projectile.SetProjectileSprite("gunshark_projectile", 17, 4, true, tk2dBaseSprite.Anchor.MiddleCenter, 17, 4);
 
             projectile.transform.parent = gun.barrelOffset;
 

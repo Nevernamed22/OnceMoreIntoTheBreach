@@ -8,6 +8,7 @@ using MonoMod;
 using UnityEngine;
 using Alexandria.ItemAPI;
 using SaveAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -21,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Dynamight makes Dynaright");
             gun.SetLongDescription("Fires a potent stick of nitroglycerin."+"\n\nCreated by mad Nitra Gunsmith, before he realised that he didn't have hands.");
 
-            gun.SetupSprite(null, "dynamitelauncher_idle_001", 8);
+            gun.SetGunSprites("dynamitelauncher");
 
             gun.outOfAmmoAnimation = "empty";
 
@@ -58,20 +59,25 @@ namespace NevernamedsItems
 
             projectile.pierceMinorBreakables = true;
 
-
-            projectile.AnimateProjectile(new List<string> {
-                "dynamiteproj_1",
-                "dynamiteproj_2",
-                "dynamiteproj_3",
-                "dynamiteproj_4",
-            }, 8, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(14, 15), //1
-                new IntVector2(15, 14), //2            
-                new IntVector2(14,15), //3
-                new IntVector2(15, 14), //4
-            }, AnimateBullet.ConstructListOfSameValues(false, 4), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4), AnimateBullet.ConstructListOfSameValues(true, 4), AnimateBullet.ConstructListOfSameValues(false, 4),
-                        AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
-
+            projectile.AnimateProjectileBundle("DynamiteLauncherProj",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "DynamiteLauncherProj",
+                   new List<IntVector2> {
+                        new IntVector2(14, 15), //1
+                        new IntVector2(15, 14), //2            
+                        new IntVector2(14, 15), //3
+                        new IntVector2(15, 14), //4
+                    }, //Pixel Sizes
+                   AnimateBullet.ConstructListOfSameValues(false, 4), //Lightened
+                   AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                   AnimateBullet.ConstructListOfSameValues(true, 4), //Anchors Change Colliders
+                   AnimateBullet.ConstructListOfSameValues(false, 4), //Fixes Scales
+                   AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), //Manual Offsets
+                   AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), //Override colliders
+                   AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), //Override collider offsets
+                   AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4)); // Override to copy from    
+         
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Dynamite Launcher Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/dynamitelauncher_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/dynamitelauncher_clipempty");
 
@@ -98,6 +104,7 @@ namespace NevernamedsItems
                 nitraSpawning.companioniseEnemy = true;
                 nitraSpawning.deleteProjAfterSpawn = false;
                 nitraSpawning.enemyBulletDamage = 30f;
+                nitraSpawning.knockbackAmountAwayFromOwner = 40;
                 nitraSpawning.guidToSpawn = EnemyGuidDatabase.Entries["dynamite_kin"];
                 nitraSpawning.ignoreSpawnedEnemyForGoodMimic = true;
                 nitraSpawning.killSpawnedEnemyOnRoomClear = true;

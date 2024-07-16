@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -20,7 +20,9 @@ namespace NevernamedsItems
             gun.gameObject.AddComponent<GonneElder>();
             gun.SetShortDescription("It Whispers To Me");
             gun.SetLongDescription("This peculiar old-fashioned firearm whispers offers of power and domination to it's bearer." + "\n\nFor the rest of the Galaxy's safety, it was cast away to the depths of the Gungeon.");
-            gun.SetupSprite(null, "eldergonne_idle_001", 8);
+           
+            gun.SetGunSprites("eldergonne", 8, true);
+
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(519) as Gun, true, false);

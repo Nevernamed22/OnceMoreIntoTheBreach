@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using SaveAPI;
@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Mort Indirecte");
             gun.SetLongDescription("Fires bouncy bolts of energy that only get stronger with each ricochet."+"\n\nUsed by Hegemony of Man soldiers to clear hostile structures without setting foot inside.");
 
-            gun.SetupSprite(null, "rebondir_idle_001", 8);
+            gun.SetGunSprites("rebondir");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(89) as Gun).gunSwitchGroup;

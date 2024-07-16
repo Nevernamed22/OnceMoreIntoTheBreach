@@ -4,7 +4,7 @@ using System.Linq;
 using Dungeonator;
 using System.Text;
 
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
@@ -14,14 +14,11 @@ namespace NevernamedsItems
         public static int RouletteID;
         public static void Init()
         {
-            string itemName = "Roulette";
-            string resourceName = "NevernamedsItems/Resources/workinprogress_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Roulette>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Spin To Win";
-            string longDesc = "";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<Roulette>(
+              "Roulette",
+              "Spin To Win",
+              "",
+              "workinprogress_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 0);
             item.consumable = false;
             item.quality = ItemQuality.EXCLUDED; //A

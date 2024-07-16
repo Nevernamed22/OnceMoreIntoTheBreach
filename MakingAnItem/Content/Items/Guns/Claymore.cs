@@ -28,7 +28,7 @@ namespace NevernamedsItems
 
             gun.SetShortDescription("Bladeborn");
             gun.SetLongDescription("Slices and detonates foes"+"\n\nFrom the extensive and ostentatious sword collection of King Charthur of the knights of the octagonal table.");
-            gun.SetupSprite(null, "claymore_idle_001", 8);
+            gun.SetGunSprites("claymore");
 
 
             gun.SetAnimationFPS(gun.shootAnimation, 13);

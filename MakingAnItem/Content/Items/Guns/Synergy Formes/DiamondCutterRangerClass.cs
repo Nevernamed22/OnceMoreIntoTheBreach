@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -24,7 +24,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Face It!");
             gun.SetLongDescription("Fires piercing gemstones." + "\n\nLeft in a chest by a powerful warrior of shimmering crystal... who didn't show up to work today.");
 
-            gun.SetupSprite(null, "reddiamondcutter_idle_001", 8);
+            gun.SetGunSprites("reddiamondcutter", 8, true);
+
             gun.SetAnimationFPS(gun.reloadAnimation, 1);
 
             gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(97) as Gun).muzzleFlashEffects;

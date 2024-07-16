@@ -28,7 +28,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Arachnikov");
             gun.SetLongDescription("The hatchling spawn of a Phaser Spider."+"\n\nOne of the first organs to fully develop are the spinnerets.");
 
-            gun.SetupSprite(null, "phaserspiderling_idle_001", 8);
+            gun.SetGunSprites("phaserspiderling");
+
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(86) as Gun).gunSwitchGroup;
             gun.muzzleFlashEffects.type = VFXPoolType.None;
 
@@ -68,7 +69,7 @@ namespace NevernamedsItems
                 webbing.SpawnGoopOnCollision = true;
                 webbing.CollisionSpawnRadius = 2f;
 
-                projectile.SetProjectileSpriteRight("yellow_enemystyle_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
+                projectile.SetProjectileSprite("yellow_enemystyle_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
 
                 if (i2 <= 0) //First Common Proj (-30)
                 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Dungeonator;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace NevernamedsItems
@@ -12,19 +12,14 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Telekinesis";
-            string resourceName = "NevernamedsItems/Resources/telekinesis_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<Telekinesis>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Power Of The Mind";
-            string longDesc = "Pushes all enemies in the direction aimed."+"\n\nOne hell of a headache.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<Telekinesis>(
+              "Telekinesis",
+              "Power Of The Mind",
+              "Pushes all enemies in the direction aimed." + "\n\nOne hell of a headache.",
+              "telekinesis_icon") as PlayerItem;          
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 2f);
             item.quality = ItemQuality.D;
-
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
-
         }
         public override void DoEffect(PlayerController user)
         {

@@ -20,7 +20,9 @@ namespace NevernamedsItems
             gun.gameObject.AddComponent<FingerGuns>();
             gun.SetShortDescription("Ayyyyy");
             gun.SetLongDescription("A universal gesture, laden with rogueish charm." + "\n\nEven this simple hand movement is enough for use in combat in the gungeon.");
-            gun.SetupSprite(null, "fingerguns_idle_001", 8);
+           
+            gun.SetGunSprites("fingerguns");
+                
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
@@ -44,7 +46,7 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.speed *= 0.9f;
             projectile.baseData.damage *= 1.4f;
-            projectile.SetProjectileSpriteRight("fingerguns_projectile", 8, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 2);
+            projectile.SetProjectileSprite("fingerguns_projectile", 8, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 2);
             projectile.sprite.renderer.enabled = false;
 
 

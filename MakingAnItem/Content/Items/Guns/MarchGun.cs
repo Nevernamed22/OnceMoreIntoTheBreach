@@ -22,7 +22,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Direct To The Point");
             gun.SetLongDescription("Deals bonus damage when fired in the same direction the user is moving."+"\n\nBrought to the Gungeon by notorious tapdancer Tom Toe Tucker.");
 
-            gun.SetupSprite(null, "marchgun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "marchgun_idle_001", 8, "marchgun_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(732) as Gun).gunSwitchGroup;
@@ -53,7 +53,7 @@ namespace NevernamedsItems
             projectile.baseData.range *= 1f;
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.SmoothLightBlueLaserCircleVFX;
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.SetProjectileSpriteRight("march_none_projectile", 9, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
+            projectile.SetProjectileSprite("march_none_projectile", 9, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
 
             GunTools.SetupDefinitionForProjectileSprite("march_left_projectile", ETGMod.Databases.Items.ProjectileCollection.inst.GetSpriteIdByName("march_left_projectile"), 17, 11, false, 15, 9, 0, 0, null);
             GunTools.SetupDefinitionForProjectileSprite("march_right_projectile", ETGMod.Databases.Items.ProjectileCollection.inst.GetSpriteIdByName("march_right_projectile"), 17, 11, false, 15, 9, 0, 0, null);

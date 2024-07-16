@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Been Through It");
             gun.SetLongDescription("Blasts you forwards with each shot, and has a chance to negate damage while held." + "\n\nWhoever made this must really have liked to go fast.");
 
-            gun.SetupSprite(null, "ringer_idle_001", 8);
+            gun.SetGunSprites("ringer");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
 

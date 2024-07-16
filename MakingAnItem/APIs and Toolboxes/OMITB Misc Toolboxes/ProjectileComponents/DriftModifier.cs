@@ -31,6 +31,7 @@ namespace NevernamedsItems
         private int timesReAimed;
         public bool startInactive;
         private bool active;
+        public float degreesOfVariance = -1;
         public void Activate() { active = true;}
         private void Update()
         {
@@ -41,7 +42,11 @@ namespace NevernamedsItems
                 {
                     if (timesReAimed < maxDriftReaims)
                     {
-                        m_projectile.SendInRandomDirection();
+                        if (degreesOfVariance != -1)
+                        {
+                            m_projectile.SendInDirection((m_projectile.Direction.ToAngle() + UnityEngine.Random.Range(-degreesOfVariance, degreesOfVariance)).DegreeToVector2(), false, false);
+                        }
+                        else { m_projectile.SendInRandomDirection(); }
                         timesReAimed++;
                     }
                     else if (diesAfterMaxDrifts) { m_projectile.DieInAir(); }

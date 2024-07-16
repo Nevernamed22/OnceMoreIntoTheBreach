@@ -23,6 +23,7 @@ namespace NevernamedsItems
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.PlayerBulletScale, 1.3f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("bullet_modifier");
+            Doug.AddToLootPool(item.PickupObjectId);
 
             gunFiredHook = new Hook(
                     typeof(Gun).GetMethod("ShootSingleProjectile", BindingFlags.NonPublic | BindingFlags.Instance),

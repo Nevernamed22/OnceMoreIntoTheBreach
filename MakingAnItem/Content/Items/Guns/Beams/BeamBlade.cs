@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Elegant");
             gun.SetLongDescription("An artful weapon with a blade made of pure beam."+"\n\nRelic of an ancient order of Gun Knights, whose arcane religions have since fallen into obscurity.");
 
-            gun.SetupSprite(null, "beamblade_idle_001", 8);
+            gun.SetGunSprites("beamblade");
 
             gun.SetAnimationFPS(gun.shootAnimation, 8);
             gun.isAudioLoop = true;

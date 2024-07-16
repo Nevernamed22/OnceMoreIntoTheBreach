@@ -21,6 +21,7 @@ namespace NevernamedsItems
              "epimethianbullets_icon");
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
+            Doug.AddToLootPool(item.PickupObjectId);
         }
 
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)

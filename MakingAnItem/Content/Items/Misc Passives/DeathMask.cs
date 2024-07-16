@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Dungeonator;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Alexandria.Misc;
 using SaveAPI;
 
@@ -14,14 +14,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Death Mask";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/deathmask_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<DeathMask>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Face Off";
-            string longDesc = "Chance to clear the room when damage is taken or a blank is used. \n\nA cracked burial mask worn by a high class noble at their first funeral.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<DeathMask>(
+              "Death Mask",
+              "Face Off",
+              "Chance to clear the room when damage is taken or a blank is used. \n\nA cracked burial mask worn by a high class noble at their first funeral.",
+              "deathmask_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.B;
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.RAT_KILLED_SHADE, true);
         }

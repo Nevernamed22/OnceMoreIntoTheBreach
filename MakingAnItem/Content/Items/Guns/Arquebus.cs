@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Line and Sinker");
             gun.SetLongDescription("A classic muzzleloader, overstuffed with black powder from the depths of the Gungeon's labyrinthine mines."+"\n\nKicks up plenty of shrapnel on impact.");
 
-            gun.SetupSprite(null, "arquebus_idle_001", 8);
+            gun.SetGunSprites("arquebus");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
             gun.SetAnimationFPS(gun.reloadAnimation, 6);
@@ -64,7 +64,7 @@ namespace NevernamedsItems
 
             Projectile tospn = (PickupObjectDatabase.GetById(531) as ComplexProjectileModifier).CollisionSpawnProjectile.InstantiateAndFakeprefab();
             tospn.baseData.damage = 10f;
-            tospn.SetProjectileSpriteRight("arquebusflak", 4, 4, false, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
+            tospn.SetProjectileSprite("arquebusflak", 4, 4, false, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
 
             spawnProjModifier.projectileToSpawnOnCollision = tospn;
             spawnProjModifier.collisionSpawnStyle = SpawnProjModifier.CollisionSpawnStyle.FLAK_BURST;

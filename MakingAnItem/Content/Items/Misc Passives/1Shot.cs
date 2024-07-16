@@ -43,6 +43,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.S;
             item.SetTag("bullet_modifier");
             OneShotID = item.PickupObjectId;
+            Doug.AddToLootPool(item.PickupObjectId, 0.1f);
         }
         public static int OneShotID;
     }

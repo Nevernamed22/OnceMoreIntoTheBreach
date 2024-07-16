@@ -6,7 +6,8 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -24,7 +25,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Wiggle Wiggle");
             gun.SetLongDescription("A tadpole of the Killithid species, capable of opening up portals to it's home dimension."+"\n\nWhile currently dormant, one day it will become active and burrow into the head of a sapient humanoid, eat their brain, and turn them into another Killithid.");
 
-            gun.SetupSprite(null, "killithidtendril_idle_001", 8);
+            gun.SetGunSprites("killithidtendril");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
 
@@ -79,18 +80,24 @@ namespace NevernamedsItems
             projectile.baseData.force *= 1.2f;
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.YellowLaserCircleVFX;
-            projectile.AnimateProjectile(new List<string> {
-                "goopyproj_001",
-                "goopyproj_002",
-                "goopyproj_003",
-                "goopyproj_004",
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> { 
-                new IntVector2(16, 16),
-                new IntVector2(20, 20),
-                new IntVector2(24, 24),
-                new IntVector2(20, 20),
-            }, AnimateBullet.ConstructListOfSameValues(true, 4), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4), AnimateBullet.ConstructListOfSameValues(true, 4), AnimateBullet.ConstructListOfSameValues(false, 4),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(16, 16), 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
+            projectile.AnimateProjectileBundle("KillithidTendrilProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "KillithidTendrilProjectile",
+                   new List<IntVector2> {
+                        new IntVector2(16, 16),
+                        new IntVector2(20, 20),
+                        new IntVector2(24, 24),
+                        new IntVector2(20, 20),
+                   }, //Pixel Sizes
+                   MiscTools.DupeList(true, 4), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                   MiscTools.DupeList(true, 4), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 4), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 4), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(16, 16), 4), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 4)); // Override to copy from    
 
             gun.DefaultModule.projectiles[0] = projectile;
 

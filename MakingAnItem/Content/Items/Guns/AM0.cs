@@ -10,6 +10,7 @@ using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using Alexandria.Misc;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -23,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Fires Ammunition");
             gun.SetLongDescription("Becomes more powerful the more times it's ammo is refilled." + "\n\nThis gun is comically stuffed with whole ammo boxes.");
 
-            gun.SetupSprite(null, "am0_idle_001", 8);
+            gun.SetGunSprites("am0");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(519) as Gun).gunSwitchGroup;
@@ -52,24 +53,11 @@ namespace NevernamedsItems
             projectile.baseData.range *= 2f;
 
             //ANIMATE BULLET
-            projectile.AnimateProjectile(new List<string> {
-                "ammoproj_1",
-                "ammoproj_2",
-                "ammoproj_3",
-                "ammoproj_4",
-                "ammoproj_5",
-                "ammoproj_6",
-                "ammoproj_7",
-                "ammoproj_8",
-                "ammoproj_9",
-                "ammoproj_10",
-                "ammoproj_11",
-                "ammoproj_12",
-                "ammoproj_13",
-                "ammoproj_14",
-                "ammoproj_15",
-                "ammoproj_16"
-            }, 16, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
+            projectile.AnimateProjectileBundle("AM0Projectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "AM0Projectile",
+                    new List<IntVector2> {
                 new IntVector2(11, 14), //1
                 new IntVector2(13, 16), //2            All frames are 13x16 except select ones that are 11-14
                 new IntVector2(13, 16), //3
@@ -86,16 +74,19 @@ namespace NevernamedsItems
                 new IntVector2(13, 16),//14
                 new IntVector2(13, 16),//15
                 new IntVector2(13, 16),//16
-            }, AnimateBullet.ConstructListOfSameValues(false, 16), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 16), AnimateBullet.ConstructListOfSameValues(true, 16), AnimateBullet.ConstructListOfSameValues(false, 16),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 16), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 16), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 16), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 16), 0);
-
-            projectile.SetProjectileSpriteRight("ammoproj_1", 11, 14, false, tk2dBaseSprite.Anchor.MiddleCenter, 11, 14);
-
-            projectile.transform.parent = gun.barrelOffset;
+            }, //Pixel Sizes
+                   MiscTools.DupeList(false, 16), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 16), //Anchors
+                   MiscTools.DupeList(true, 16), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 16), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 16), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(null, 16), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 16), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 16)); // Override to copy from        
+            
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("AM0 Ammo Boxes", "NevernamedsItems/Resources/CustomGunAmmoTypes/am0_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/am0_clipempty");
             gun.quality = PickupObject.ItemQuality.B;
-            gun.encounterTrackable.EncounterGuid = "this is the AM-0";
             ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc);

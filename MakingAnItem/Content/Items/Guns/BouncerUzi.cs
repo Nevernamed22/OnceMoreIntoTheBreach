@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Let's Bounce");
             gun.SetLongDescription("A standard machine pistol the bullets of which have been wrapped in rubber- though that doesnt make them less deadly."+"\n\nLegends tell of a mythical troupe of Gundead who used these whimsical barkers, but nobody has seen hide nor hair of them in many years.");
 
-            gun.SetupSprite(null, "bounceruzi_idle_001", 8);
+            gun.SetGunSprites("bounceruzi");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);
@@ -46,7 +46,7 @@ namespace NevernamedsItems
             //BULLET STATS
             Projectile projectile = gun.DefaultModule.projectiles[0].InstantiateAndFakeprefab();
             projectile.baseData.damage = 4f;
-            projectile.SetProjectileSpriteRight("bounceruzi_proj", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
+            projectile.SetProjectileSprite("bounceruzi_proj", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
 
             BounceProjModifier ricochet = projectile.gameObject.AddComponent<BounceProjModifier>();
             ricochet.numberOfBounces = 1;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Dungeonator;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Alexandria.Misc;
 
 namespace NevernamedsItems
@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Amber Die";
-            string resourceName = "NevernamedsItems/Resources/NeoItemSprites/amberdie_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<AmberDie>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Tastes Lucky";
-            string longDesc = "Chance for enemy projectiles to be friendly instead!\n\nThe remains of a leprechaun are immaculately preserved in it's center.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PassiveItem item = ItemSetup.NewItem<AmberDie>(
+              "Amber Die",
+              "Tastes Lucky",
+              "Chance for enemy projectiles to be friendly instead!\n\nThe remains of a leprechaun are immaculately preserved in it's center.",
+              "amberdie_icon") as PassiveItem;
             item.quality = PickupObject.ItemQuality.C;
         }
         private void NewBulletAppeared(Projectile proj)

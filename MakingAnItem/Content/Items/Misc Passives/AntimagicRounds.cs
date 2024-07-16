@@ -22,6 +22,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
+            Doug.AddToLootPool(item.PickupObjectId);
 
             AntimagicRoundsID = item.PickupObjectId;        
         }

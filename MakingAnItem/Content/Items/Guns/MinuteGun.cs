@@ -20,7 +20,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("You Have 60 Seconds");
             gun.SetLongDescription("Usable for only 60 seconds each floor." + "\n\nA tiny adventurer managed to bring this all the way from his home in the swamps to the Gungeon's Entrance before his time was up.");
 
-            gun.SetupSprite(null, "minutegun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "minutegun_idle_001", 8, "minutegun_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 16);
 
@@ -45,7 +45,7 @@ namespace NevernamedsItems
             projectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
-            projectile.SetProjectileSpriteRight("minutegun_projectile", 16, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 15, 8);
+            projectile.SetProjectileSprite("minutegun_projectile", 16, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 15, 8);
             projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.WhiteCircleVFX;
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.baseData.damage = 20;

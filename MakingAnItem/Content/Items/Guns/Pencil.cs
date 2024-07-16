@@ -25,7 +25,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Me Hoy Minoy");
             gun.SetLongDescription("Sketches out stationary bullets in the air. Reload to send your drawings flying!" + "\n\nAbandoned in the Gungeon by a grieving artist with really big hands.");
 
-            gun.SetupSprite(null, "pencil_idle_001", 8);
+            gun.SetGunSprites("pencil");
 
             gun.SetAnimationFPS(gun.shootAnimation, 17);
             gun.doesScreenShake = false;
@@ -57,7 +57,7 @@ namespace NevernamedsItems
             projectile.additionalStartEventName = null;
             projectile.baseData.force *= 0.1f;
             projectile.baseData.speed *= 0.0001f;
-            projectile.SetProjectileSpriteRight("pencil_projectile", 4, 4, false, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
+            projectile.SetProjectileSprite("pencil_projectile", 4, 4, false, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);
             projectile.hitEffects.enemy = null;
             projectile.hitEffects.tileMapHorizontal = null;
             projectile.hitEffects.tileMapVertical = null;

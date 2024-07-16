@@ -6,10 +6,11 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
 using SaveAPI;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -25,7 +26,8 @@ namespace NevernamedsItems
             gun.SetLongDescription("Fires weak energy bolts programmed to seek and destroy."+"\n\nBrought to the Gungeon by an incompetent spacefarer who couldn't hit the broad side of a barn... from inside the barn.");
 
             gun.doesScreenShake = false;
-            gun.SetupSprite(null, "autogun_idle_001", 8);
+
+            gun.SetGunSprites("autogun");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(89) as Gun).gunSwitchGroup;
@@ -59,7 +61,8 @@ namespace NevernamedsItems
             BounceProjModifier bounce = projectile.gameObject.GetOrAddComponent<BounceProjModifier>();
             bounce.numberOfBounces = 1;
 
-            projectile.SetProjectileSpriteRight("autogun_proj", 2, 2, true, tk2dBaseSprite.Anchor.MiddleCenter, 2, 2);
+
+            projectile.SetProjectileSprite("autogun_proj", 2, 2, true, tk2dBaseSprite.Anchor.MiddleCenter, 2, 2);
             EasyTrailBullet trail4 = projectile.gameObject.AddComponent<EasyTrailBullet>();
             trail4.TrailPos = projectile.transform.position;
             trail4.StartWidth = 0.2f;

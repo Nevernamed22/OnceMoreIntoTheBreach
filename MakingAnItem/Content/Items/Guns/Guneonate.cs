@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Babyconda");
             gun.SetLongDescription("A hatchling ammoconda, formed from fresh discarded bullet casings." + "\n\nIt seems to have self esteem issues.");
 
-            gun.SetupSprite(null, "guneonate_idle_001", 8);
+            gun.SetGunSprites("guneonate");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
             gun.SetAnimationFPS(gun.idleAnimation, 10);
@@ -62,7 +62,7 @@ namespace NevernamedsItems
 
             projectile.NumberInChain = 5;
             projectile.pauseLength = 0.05f;
-            projectile.SetProjectileSpriteRight("12x12_yellowenemy_projectile", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
+            projectile.SetProjectileSprite("12x12_yellowenemy_projectile", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
 
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;

@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -23,7 +23,8 @@ namespace NevernamedsItems
             gun.SetShortDescription("Shooting Range");
             gun.SetLongDescription("Fires an even range of bullets, starting high in damage at one end of the spread and incrementally decreasing towards the other.");
 
-            gun.SetupSprite(null, "ranger_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "ranger_idle_001", 8, "ranger_ammonomicon_001");
+
             //gun.gunSwitchGroup = (PickupObjectDatabase.GetById(86) as Gun).gunSwitchGroup;
             //gun.muzzleFlashEffects.type = VFXPoolType.None;
 

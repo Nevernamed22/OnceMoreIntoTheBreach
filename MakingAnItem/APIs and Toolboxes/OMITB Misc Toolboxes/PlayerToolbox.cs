@@ -23,7 +23,6 @@ namespace NevernamedsItems
         public static void DoSetup(Action<PlayerController> action, PlayerController player)
         {
             action(player);
-            if (player.GetComponent<HatController>() == null) player.gameObject.AddComponent<HatController>();
             if (player.GetComponent<PlayerToolbox>() == null) player.gameObject.AddComponent<PlayerToolbox>();
         }
         public static Hook playerStartHook;
@@ -84,6 +83,7 @@ namespace NevernamedsItems
                             goop.TimedAddGoopCircle(pos.ToVector2(), UnityEngine.Random.Range(2.5f, 4f), 0.75f, true);
                         }
                     }
+                    DeadlyDeadlyGoopManager.DelayedClearGoopsInRadius(m_attachedPlayer.CenterPosition, 5f);
                 }
             }
         }
@@ -140,7 +140,7 @@ namespace NevernamedsItems
             yield break;
         }
         private void ButterfingersBabyMode(DebrisObject obj) { obj.PreventFallingInPits = true; }
-        
+
         private IEnumerator ButterfingersLateReTeleport(Projectile proj)
         {
             proj.OnBecameDebris += ButterfingersBabyMode;
@@ -151,7 +151,7 @@ namespace NevernamedsItems
                 try
                 {
                     proj.specRigidbody.Position = new Position(m_attachedPlayer.specRigidbody.UnitCenter);
-                    UnityEngine.Object.Destroy(proj.gameObject.GetComponent<ButterfingersedGun>());                 
+                    UnityEngine.Object.Destroy(proj.gameObject.GetComponent<ButterfingersedGun>());
                     hasTeleportedOnce = true;
                 }
                 catch (Exception e)
@@ -232,7 +232,7 @@ namespace NevernamedsItems
         {
             if (m_attachedPlayer != null && !Dungeon.IsGenerating)
             {
-                if (m_attachedPlayer.healthHaver.Armor != armourLastChecked)
+                if (m_attachedPlayer.healthHaver != null && m_attachedPlayer.healthHaver.Armor != armourLastChecked)
                 {
                     if (!SaveAPIManager.GetFlag(CustomDungeonFlags.PLAYERHELDMORETHANFIVEARMOUR))
                     {
@@ -242,12 +242,12 @@ namespace NevernamedsItems
                     }
                     armourLastChecked = (int)m_attachedPlayer.healthHaver.Armor;
                 }
-                if (m_attachedPlayer.stats.GetStatValue(PlayerStats.StatType.Health) != hpStatLastChecked)
+                if (m_attachedPlayer.stats != null && m_attachedPlayer.stats.GetStatValue(PlayerStats.StatType.Health) != hpStatLastChecked)
                 {
                     SaveAPIManager.UpdateMaximum(CustomTrackedMaximums.MAX_HEART_CONTAINERS_EVER, m_attachedPlayer.stats.GetStatValue(PlayerStats.StatType.Health));
                     hpStatLastChecked = (int)m_attachedPlayer.stats.GetStatValue(PlayerStats.StatType.Health);
                 }
-                if (m_attachedPlayer.passiveItems.Count != itemCountLastChecked)
+                if (m_attachedPlayer.passiveItems != null && m_attachedPlayer.passiveItems.Count != itemCountLastChecked)
                 {
                     OnInventoryItemsChanged();
                     itemCountLastChecked = m_attachedPlayer.passiveItems.Count;
@@ -273,7 +273,7 @@ namespace NevernamedsItems
                     m_attachedPlayer.DoDustUps = true;
                     m_attachedPlayer.IsVisible = true;
                 }
-                if (playerIsInvisibleForChallenge && m_attachedPlayer.gameActor.ShadowObject.GetComponent<Renderer>().enabled == true && !playerShadowInvisible)
+                if (playerIsInvisibleForChallenge && m_attachedPlayer.gameActor.ShadowObject != null &&  m_attachedPlayer.gameActor.ShadowObject.GetComponent<Renderer>().enabled == true && !playerShadowInvisible)
                 {
                     m_attachedPlayer.gameActor.ShadowObject.GetComponent<Renderer>().enabled = false;
                     playerShadowInvisible = true;
@@ -285,8 +285,8 @@ namespace NevernamedsItems
                 }
                 if (Challenges.CurrentChallenge == ChallengeType.INVISIBLEO && m_attachedPlayer.CurrentGun && m_attachedPlayer.CurrentGun.GetComponent<InvisibleGun>() == null) m_attachedPlayer.CurrentGun.gameObject.AddComponent<InvisibleGun>();
                 if (Challenges.CurrentChallenge == ChallengeType.INVISIBLEO && m_attachedPlayer.CurrentSecondaryGun && m_attachedPlayer.CurrentSecondaryGun.GetComponent<InvisibleGun>() == null) m_attachedPlayer.CurrentSecondaryGun.gameObject.AddComponent<InvisibleGun>();
-                if (playerIsInvisibleForChallenge && m_attachedPlayer.primaryHand.ForceRenderersOff == false) m_attachedPlayer.primaryHand.ForceRenderersOff = true;
-                if (playerIsInvisibleForChallenge && m_attachedPlayer.secondaryHand.ForceRenderersOff == false) m_attachedPlayer.secondaryHand.ForceRenderersOff = true;
+                if (playerIsInvisibleForChallenge && m_attachedPlayer.primaryHand != null && m_attachedPlayer.primaryHand.ForceRenderersOff == false) m_attachedPlayer.primaryHand.ForceRenderersOff = true;
+                if (playerIsInvisibleForChallenge && m_attachedPlayer.secondaryHand != null &&  m_attachedPlayer.secondaryHand.ForceRenderersOff == false) m_attachedPlayer.secondaryHand.ForceRenderersOff = true;
                 if (Challenges.CurrentChallenge == ChallengeType.INVISIBLEO && GameUIRoot.Instance.GetReloadBarForPlayer(m_attachedPlayer))
                 {
                     int i = m_attachedPlayer.PlayerIDX;
@@ -344,6 +344,53 @@ namespace NevernamedsItems
                 }
             }
         }
+
+        public void DoFakeDamage()
+        {
+            HealthHaver playerHealthHaver = m_attachedPlayer.healthHaver;
+            float currenthealth = playerHealthHaver.GetCurrentHealth();
+            float currentArmor = playerHealthHaver.Armor;
+            bool recoverFlawless = m_attachedPlayer.CurrentRoom != null && !m_attachedPlayer.CurrentRoom.PlayerHasTakenDamageInThisRoom;
+            bool nextShot = false;
+            if (playerHealthHaver.NextShotKills) { playerHealthHaver.NextShotKills = false; nextShot = true; }
+            bool hasCrest = playerHealthHaver.HasCrest;
+
+            if (currentArmor > 0f && (m_attachedPlayer.ForceZeroHealthState || !playerHealthHaver.NextDamageIgnoresArmor))
+            {
+                playerHealthHaver.Armor += 1f;
+                playerHealthHaver.healthHaver.ApplyDamage(0.5f, Vector2.zero, "FAKE DAMAGE - REPORT THIS BUG", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
+            }
+            else
+            {
+                if (currenthealth == 0.5f)
+                {
+                    playerHealthHaver.healthHaver.ForceSetCurrentHealth(currenthealth + 0.5f);
+                    playerHealthHaver.healthHaver.ApplyDamage(0.5f, Vector2.zero, "FAKE DAMAGE - REPORT THIS BUG", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
+                }
+                else
+                {
+                    playerHealthHaver.ApplyDamage(0.5f, Vector2.zero, "FAKE DAMAGE - REPORT THIS BUG", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
+                }
+            }
+
+            if (nextShot) { playerHealthHaver.NextShotKills = true; }
+            if (playerHealthHaver.Armor != currentArmor) { playerHealthHaver.Armor = currentArmor; }
+            if (playerHealthHaver.GetCurrentHealth() != currenthealth) { playerHealthHaver.healthHaver.ForceSetCurrentHealth(currenthealth); }
+            GameManager.Instance.StartCoroutine(Delay(m_attachedPlayer.CurrentRoom, playerHealthHaver, recoverFlawless, hasCrest)); 
+        }
+        private IEnumerator Delay(RoomHandler room, HealthHaver health, bool flawless, bool crest)
+        {
+            yield return new WaitForSeconds(0.1f);
+            if (crest)
+            {
+                health.Armor--;
+                LootEngine.TryGivePrefabToPlayer(PickupObjectDatabase.GetById(305).gameObject, m_attachedPlayer, false);
+                health.HasCrest = true;
+            }
+            if  (flawless) room.PlayerHasTakenDamageInThisRoom = false;
+            yield break;
+        }
+
 
         #region HandleShadeCheatedDeathUnlock
         private IEnumerator PostDamageCheck(PlayerController player)

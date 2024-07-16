@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 using SaveAPI;
 
@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Corrupts Absolutely");
             gun.SetLongDescription("The Rusty Sidearm was brou-to the Gungeon by an infamous fug-a low-ranking Primerdyne soldier-It's never let him down." + "\n\nJust because children are young, doesn't mea-ssault robot that fled to the Gunge-legendary gunplay expert." + "\n\nBetrayer!");
 
-            gun.SetupSprite(null, "paraglocks_idle_001", 8);
+            gun.SetGunSprites("paraglocks");
 
             gun.SetAnimationFPS(gun.shootAnimation, 14);
 

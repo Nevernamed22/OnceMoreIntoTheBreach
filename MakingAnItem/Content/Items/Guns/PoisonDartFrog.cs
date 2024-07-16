@@ -20,8 +20,8 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:poison_dart_frog", "nn:poison_dart_frog");
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(599) as Gun).gunSwitchGroup;
             gun.SetShortDescription("Oh yeah, it's Frog Time");
-            gun.SetLongDescription("An endangered frog species from inside the Gungeon. Spits poison darts to protect itself."+"\n\nHow do you 'fire' a frog? How do you RELOAD a frog??");
-            gun.SetupSprite(null, "poisondartfrog_idle_001", 8);
+            gun.SetLongDescription("An endangered frog species from inside the Gungeon. Spits poison darts to protect itself."+"\n\nHow do you 'fire' a frog? How do you RELOAD a frog??");      
+            gun.SetGunSprites("poisondartfrog");
             gun.SetAnimationFPS(gun.shootAnimation, 16);
             for (int i = 0; i < 3; i++)
             {
@@ -49,7 +49,7 @@ namespace NevernamedsItems
                 ExtremelySimplePoisonBulletBehaviour poisoning = projectile.gameObject.AddComponent<ExtremelySimplePoisonBulletBehaviour>();
                 poisoning.procChance = 1;
                 poisoning.useSpecialTint = false;
-                projectile.SetProjectileSpriteRight("blowgun_projectile", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 15, 8);
+                projectile.SetProjectileSprite("blowgun_projectile", 16, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 15, 8);
             }
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;

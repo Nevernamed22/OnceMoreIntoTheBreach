@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Ain't He Cute?");
             gun.SetLongDescription("An infant alien from another dimension. Capable of storing potent spores in it's digestive tract in order to regurgitate them for self defense." + "\n\nEnjoys headpats, belly rubs, and those little fish-shaped cracker things.");
 
-            gun.SetupSprite(null, "sporelauncher_idle_001", 8);
+            gun.SetGunSprites("sporelauncher");
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(599) as Gun).gunSwitchGroup;
 
             gun.SetAnimationFPS(gun.shootAnimation, 14);
@@ -61,7 +61,7 @@ namespace NevernamedsItems
             homing.AngularVelocity = 70f;
             homing.HomingRadius = 100f;
 
-            projectile.SetProjectileSpriteRight("sporelauncher_projectile", 10, 10, false, tk2dBaseSprite.Anchor.MiddleCenter, 9, 9);
+            projectile.SetProjectileSprite("sporelauncher_projectile", 10, 10, false, tk2dBaseSprite.Anchor.MiddleCenter, 9, 9);
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("SporeLauncher Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/sporelauncher_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/sporelauncher_clipempty");

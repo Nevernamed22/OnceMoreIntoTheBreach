@@ -9,6 +9,7 @@ using UnityEngine;
 using Alexandria.ItemAPI;
 using ChestType = Chest.GeneralChestType;
 using Dungeonator;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -22,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Wumderful");
             gun.SetLongDescription("Fires globs of gum at your foes." + "\nHolding down fire causes it to enter 'Gumzooka' mode." + "\n\nThis tiny handcannon was designed for use by small creatures with no hands." + "\nCan you still call it a handcannon then?");
 
-            gun.SetupSprite(null, "gumgun_idle_001", 8);
+            gun.SetGunSprites("gumgun");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
             gun.SetAnimationFPS(gun.chargeAnimation, 3);
@@ -53,19 +54,24 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             RandomiseProjectileColourComponent colour = projectile.gameObject.GetOrAddComponent<RandomiseProjectileColourComponent>();
             projectile.baseData.damage *= 1.4f;
-            projectile.AnimateProjectile(new List<string> {
-                "gumgun_smallproj_001",
-                "gumgun_smallproj_002",
-                "gumgun_smallproj_001",
-                "gumgun_smallproj_003",
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(13, 10),
-                new IntVector2(15, 8),
-                new IntVector2(13, 10),
-                new IntVector2(11, 12),
-            }, AnimateBullet.ConstructListOfSameValues(false, 4), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4), AnimateBullet.ConstructListOfSameValues(true, 4), AnimateBullet.ConstructListOfSameValues(false, 4),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(12, 9), 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
-
+            projectile.AnimateProjectileBundle("GumGunProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "GumGunProjectile",
+                   new List<IntVector2> {
+                        new IntVector2(13, 10),
+                        new IntVector2(15, 8),
+                        new IntVector2(13, 10),
+                        new IntVector2(11, 12),
+                   }, //Pixel Sizes
+                   MiscTools.DupeList(false, 4), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                   MiscTools.DupeList(true, 4), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 4), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 4), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 4)); // Override to copy from    
 
             //CHARGE BULLET STATS
             Projectile chargeprojectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]);
@@ -74,18 +80,24 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(chargeprojectile);
             RandomiseProjectileColourComponent colour2 = chargeprojectile.gameObject.GetOrAddComponent<RandomiseProjectileColourComponent>();
             chargeprojectile.baseData.damage *= 4;
-            chargeprojectile.AnimateProjectile(new List<string> {
-                "gumgun_bigproj_001",
-                "gumgun_bigproj_002",
-                "gumgun_bigproj_001",
-                "gumgun_bigproj_003",
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                new IntVector2(21, 14),
-                new IntVector2(23, 12),
-                new IntVector2(21, 14),
-                new IntVector2(19, 16),
-            }, AnimateBullet.ConstructListOfSameValues(false, 4), AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 4), AnimateBullet.ConstructListOfSameValues(true, 4), AnimateBullet.ConstructListOfSameValues(false, 4),
-           AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(14, 8), 4), AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 4), AnimateBullet.ConstructListOfSameValues<Projectile>(null, 4), 0);
+            projectile.AnimateProjectileBundle("GumGunBigProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "GumGunBigProjectile",
+                   new List<IntVector2> {
+                        new IntVector2(21, 14),
+                        new IntVector2(23, 12),
+                        new IntVector2(21, 14),
+                        new IntVector2(19, 16),
+                   }, //Pixel Sizes
+                   MiscTools.DupeList(false, 4), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 4), //Anchors
+                   MiscTools.DupeList(true, 4), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 4), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 4), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 4), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 4)); // Override to copy from    
 
             ProjectileModule.ChargeProjectile chargeProj1 = new ProjectileModule.ChargeProjectile
             {

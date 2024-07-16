@@ -20,6 +20,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("bullet_modifier");
             CrossBulletsID = item.PickupObjectId;
+            Doug.AddToLootPool(item.PickupObjectId);
         }
         public static int CrossBulletsID;
        public bool isActive;

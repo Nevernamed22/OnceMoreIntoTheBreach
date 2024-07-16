@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Lady Death");
             gun.SetLongDescription("Reverse engineered Lead Maiden technology." + "\n\nOriginally, the projectiles would rotate when in walls, but this was removed for efficiency, and definitely not because quaternions and vectors are more painful than tapdancing on an echidna.");
 
-            gun.SetupSprite(null, "maidenrifle_idle_001", 8);
+            gun.SetGunSprites("maidenrifle");
 
             gun.SetAnimationFPS(gun.shootAnimation, 17);
 
@@ -48,7 +48,7 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.damage *= 1.6f;
             projectile.pierceMinorBreakables = true;
-            projectile.SetProjectileSpriteRight("friendlymaiden_projectile", 25, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 8);
+            projectile.SetProjectileSprite("friendlymaiden_projectile", 25, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 8);
             LeadMaidenProjectileReAiming orAddComponent = projectile.gameObject.GetOrAddComponent<LeadMaidenProjectileReAiming>();
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;

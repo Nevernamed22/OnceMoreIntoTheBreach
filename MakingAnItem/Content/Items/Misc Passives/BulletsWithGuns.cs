@@ -20,6 +20,7 @@ namespace NevernamedsItems
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 0.85f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
+            Doug.AddToLootPool(item.PickupObjectId);
 
             Projectile projectile = UnityEngine.Object.Instantiate(((Gun)ETGMod.Databases.Items[86]).DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);

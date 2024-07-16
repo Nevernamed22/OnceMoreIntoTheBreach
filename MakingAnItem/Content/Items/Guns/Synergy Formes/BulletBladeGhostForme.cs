@@ -7,7 +7,7 @@ using System.Reflection;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace NevernamedsItems
 {
@@ -25,7 +25,9 @@ namespace NevernamedsItems
 
             gun.SetShortDescription("Forged of Pure Bullet");
             gun.SetLongDescription("The hefty blade of the fearsome armoured sentinels that tread the Gungeon's Halls." + "\n\nHas claimed the life of many a careless gungeoneer with it's wide spread.");
-            gun.SetupSprite(null, "ghostblade_idle_001", 8);
+           
+            gun.SetGunSprites("ghostblade", 8, true);
+
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.chargeAnimation, 6);
 
@@ -122,6 +124,7 @@ namespace NevernamedsItems
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             gun.barrelOffset.transform.localPosition = new Vector3(3.18f, 2.0f, 0f);
             GhostBladeID = gun.PickupObjectId;
+            gun.SetName("Bullet Blade");
         }
         public static int GhostBladeID;
         public static Projectile BurstShot;

@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -24,7 +24,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("weo8onerco;ma8437465");
             gun.SetLongDescription("This shotgun has seen the void, andddddddddddddddddddddfdfd 9d8dy73287675246c53xydf56ui87no8mp9,ufdauhjkds8888888888888");
 
-            gun.SetupSprite(null, "irregularshotgun_idle_001", 8);
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "irregularshotgun_idle_001", 8, "irregularshotgun_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 13);
             gun.SetAnimationFPS(gun.reloadAnimation, 7);

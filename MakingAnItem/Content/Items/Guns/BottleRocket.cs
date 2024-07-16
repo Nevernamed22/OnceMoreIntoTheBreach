@@ -8,6 +8,7 @@ using MonoMod;
 using UnityEngine;
 using Alexandria.ItemAPI;
 using Alexandria.Misc;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
@@ -22,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Waterarms Afficionado");
             gun.SetLongDescription("A pressurised bottle of fluid. Pumping it any fuller will send it flying off in erratic directions."+"\n\nProne to exploding.");
 
-            gun.SetupSprite(null, "bottlerocket_idle_001", 8);
+            gun.SetGunSprites("bottlerocket");
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(150) as Gun).gunSwitchGroup;
@@ -85,22 +86,21 @@ namespace NevernamedsItems
             projectile.baseData.range *= 2f;
             projectile.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(33) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX;
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.AnimateProjectile(new List<string> {
-                "bottlerocketproj_001",
-                "bottlerocketproj_002",
-            }, 10, tk2dSpriteAnimationClip.WrapMode.Loop, new List<IntVector2> {
-                 new IntVector2(24, 16), //1
-                  new IntVector2(24, 16), //2
-            },
-            AnimateBullet.ConstructListOfSameValues(false, 2),
-            AnimateBullet.ConstructListOfSameValues(tk2dBaseSprite.Anchor.MiddleCenter, 2),
-            AnimateBullet.ConstructListOfSameValues(true, 2),
-            AnimateBullet.ConstructListOfSameValues(false, 2),
-            AnimateBullet.ConstructListOfSameValues<Vector3?>(null, 2),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(new IntVector2(15, 8), 2),
-            AnimateBullet.ConstructListOfSameValues<IntVector2?>(null, 2),
-            AnimateBullet.ConstructListOfSameValues<Projectile>(null, 2), 0);
-            projectile.SetProjectileSpriteRight("bottlerocketproj_001", 24, 16, true, tk2dBaseSprite.Anchor.MiddleCenter, 15, 8);
+
+            projectile.AnimateProjectileBundle("BottleRocketProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "BottleRocketProjectile",
+                   MiscTools.DupeList(new IntVector2(24, 16), 2), //Pixel Sizes
+                   MiscTools.DupeList(false, 2), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 2), //Anchors
+                   MiscTools.DupeList(true, 2), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 2), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 2), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(15, 8), 2), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 2), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 2)); // Override to copy from    
+           
             projectile.gameObject.AddComponent<ProjectileMotionDrift>();
             projectile.gameObject.AddComponent<BounceProjModifier>();
             GoopModifier gooper = projectile.gameObject.AddComponent<GoopModifier>();

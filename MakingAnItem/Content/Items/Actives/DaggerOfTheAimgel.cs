@@ -13,14 +13,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Dagger of The Aimgels";
-            string resourceName = "NevernamedsItems/Resources/daggeroftheaimgel_icon";
-            GameObject obj = new GameObject(itemName);
-            var item = obj.AddComponent<DaggerOfTheAimgel>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-            string shortDesc = "Sacrifices Must Be Made";
-            string longDesc = "Plunging this dagger into your flesh has irreversible side effects, but it also imbues within you with the rage of a thousand corrupted Aimgels, fallen from Bullet Heaven.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
+            PlayerItem item = ItemSetup.NewItem<DaggerOfTheAimgel>(
+            "Dagger of The Aimgels",
+            "Sacrifices Must Be Made",
+            "Plunging this dagger into your flesh has irreversible side effects, but it also imbues within you with the rage of a thousand corrupted Aimgels, fallen from Bullet Heaven.",
+            "daggeroftheaimgel_icon") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 5);
             item.AddPassiveStatModifier(PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
 

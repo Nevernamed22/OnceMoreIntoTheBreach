@@ -29,7 +29,7 @@ namespace NevernamedsItems
                     for (int i = 0; i < activeEnemies.Count; i++)
                     {
                         AIActor aiactor = activeEnemies[i];
-                        if (aiactor.IsNormalEnemy)
+                        if (aiactor != null && aiactor.IsNormalEnemy && aiactor.transform)
                         {
                             float instRange = range;
                             if (!string.IsNullOrEmpty(rangeMultSynergy) && Owner.PlayerHasActiveSynergy(rangeMultSynergy)) instRange *= synergyRangeMult;

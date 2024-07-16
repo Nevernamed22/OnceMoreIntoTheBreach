@@ -28,8 +28,8 @@ namespace NevernamedsItems
 
             gun.SetShortDescription("Prosper");
             gun.SetLongDescription("This ancient magical dagger was stolen from the ruins of Castle Blamalot." + "\n\nWhile both it's range and power are lacking, you sense a strange, bountiful energy in the blade.");
-            gun.SetupSprite(null, "carnwennan_idle_001", 8);
-
+           
+            gun.SetGunSprites("carnwennan");
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
 

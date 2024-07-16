@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 
 namespace NevernamedsItems
@@ -21,7 +21,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("Pre-emptive Strike");
             gun.SetLongDescription("First shot in every room is significantly more powerful." + "\n\nIssued to only the highest ranking Primerdyne Marines.");
 
-            gun.SetupSprite(null, "primos1_idle_001", 8);
+            gun.SetGunSprites("primos1");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
 

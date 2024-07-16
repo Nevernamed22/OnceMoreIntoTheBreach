@@ -6,7 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 using System.Reflection;
 using System.Collections.ObjectModel;
@@ -23,7 +23,7 @@ namespace NevernamedsItems
             gun.SetShortDescription("ding ding");
             gun.SetLongDescription("");
 
-            gun.SetupSprite(null, "gravitygunnegativematter_idle_001", 8);
+            gun.SetGunSprites("gravitygunnegativematter", 8, true);
 
             gun.SetAnimationFPS(gun.shootAnimation, 25);
 
