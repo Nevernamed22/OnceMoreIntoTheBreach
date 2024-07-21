@@ -30,6 +30,7 @@ namespace NevernamedsItems
         public float timeTillKillAfterCompleteStop;
         public bool activateDriftAfterstop;
         public float targetSpeed;
+        public Action<Projectile> OnCompleteStop;
         private void Start()
         {
             this.self = base.GetComponent<Projectile>();
@@ -57,6 +58,7 @@ namespace NevernamedsItems
                 if (!self) break;
                 yield return null;
             }
+            if (OnCompleteStop != null) { OnCompleteStop(self); }
             if (activateDriftAfterstop && self.GetComponent<DriftModifier>()) self.GetComponent<DriftModifier>().Activate();
             if (killAfterCompleteStop)
             {

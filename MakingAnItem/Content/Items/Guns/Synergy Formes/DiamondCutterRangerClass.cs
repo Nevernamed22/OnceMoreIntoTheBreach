@@ -80,6 +80,7 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             ETGMod.Databases.Items.Add(gun, false, "ANY");
             ID = gun.PickupObjectId;
+            gun.SetName("Diamond Cutter");
 
         }
         public static int ID;

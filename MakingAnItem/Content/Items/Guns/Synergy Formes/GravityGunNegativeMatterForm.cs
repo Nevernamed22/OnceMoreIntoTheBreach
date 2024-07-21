@@ -57,6 +57,7 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             GravityGunNegativeMatterID = gun.PickupObjectId;
+            gun.SetName("Gravity Gun");
         }
         public static int GravityGunNegativeMatterID;
         public GravityGunNegativeMatterForm()

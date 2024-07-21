@@ -16,13 +16,21 @@ namespace NevernamedsItems
     {
         public static void Add()
         {
-            Gun gun = ETGMod.Databases.Items.NewGun("Mini Gun", "mini_gun");
+            Gun gun = ETGMod.Databases.Items.NewGun("Mini Gun", "nnminigun2");
             Game.Items.Rename("outdated_gun_mods:mini_gun", "nn:mini_gun");
             gun.gameObject.AddComponent<NNMinigun>();
             gun.SetShortDescription("Misleading Name");
             gun.SetLongDescription("A tiny toy gun, probably pulled from the grip of a tiny toy soldier.");
-            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "mini_gun_idle_001", 8, "mini_gun_ammonomicon_001");
-            gun.SetAnimationFPS(gun.shootAnimation, 20);
+
+            gun.SetGunSprites("nnminigun2", 8, false, 2);
+
+            gun.SetAnimationFPS(gun.shootAnimation, 16);
+            gun.SetAnimationFPS(gun.reloadAnimation, 16);
+            gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.reloadAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop;
+            gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(79) as Gun).muzzleFlashEffects;
+
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(43) as Gun).gunSwitchGroup;
+
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
@@ -31,12 +39,11 @@ namespace NevernamedsItems
             gun.gunClass = GunClass.PISTOL;
             gun.DefaultModule.cooldownTime = 0.1f;
             gun.DefaultModule.numberOfShotsInClip = 4;
-            gun.SetBaseMaxAmmo(100);
+            gun.SetBaseMaxAmmo(60);
             gun.quality = PickupObject.ItemQuality.D;
-            gun.encounterTrackable.EncounterGuid = "this is the Mini Gun";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
-            gun.barrelOffset.transform.localPosition = new Vector3(0.37f, 0.18f, 0f);
+            gun.SetBarrel(9, 5);
 
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);
@@ -44,7 +51,11 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.AdditionalScaleMultiplier *= 0.5f;
-            projectile.baseData.damage = 7f;
+            projectile.baseData.damage = 6f;
+
+            gun.AddShellCasing(0, 0, 4, 1, "shell_tiny");
+
+            gun.AddClipSprites("minigun");
 
             MiniGunID = gun.PickupObjectId;
         }
@@ -63,15 +74,6 @@ namespace NevernamedsItems
                 }
             }
             base.PostProcessProjectile(projectile);
-        }
-        public override void OnPostFired(PlayerController player, Gun gun)
-        {
-            gun.PreventNormalFireAudio = true;
-            AkSoundEngine.PostEvent("Play_WPN_smileyrevolver_shot_01", gameObject);
-        }
-        public NNMinigun()
-        {
-
         }
     }
 }

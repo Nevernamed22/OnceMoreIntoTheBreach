@@ -66,6 +66,7 @@ namespace NevernamedsItems
             gun.encounterTrackable.EncounterGuid = "this is the Gunshark Megashark Synergy Form";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
             GunsharkMegasharkSynergyFormeID = gun.PickupObjectId;
+            gun.SetName("Gunshark");
 
         }
         public override void PostProcessProjectile(Projectile projectile)

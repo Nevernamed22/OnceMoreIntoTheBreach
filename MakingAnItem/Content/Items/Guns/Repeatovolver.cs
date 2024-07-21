@@ -8,6 +8,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using Alexandria.ItemAPI;
+using Alexandria.Misc;
 using SaveAPI;
 
 namespace NevernamedsItems
@@ -21,7 +22,7 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:repeatovolver", "nn:repeatovolver");
             gun.gameObject.AddComponent<Repeatovolver>();
             gun.SetShortDescription("Rolls Off The Tongue");
-            gun.SetLongDescription("A revolver modified to spew forth it's entire extended chamber with a single pull of the trigger."+"\n\nNames such as 'Repeating Revolver', 'Revolverpeater' and 'Rerererererevolver' were floated, but eventually 'Repeatovolver' won out.");
+            gun.SetLongDescription("A revolver modified to spew forth it's entire extended cylinder with a single pull of the trigger." + "\n\nNames such as 'Repeating Revolver', 'Revolverpeater' and 'Rerererererevolver' were floated, but eventually 'Repeatovolver' won out.");
 
             Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "repeatovolver_idle_001", 8, "repeatovolver_ammonomicon_001");
 
@@ -33,7 +34,7 @@ namespace NevernamedsItems
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Burst;
             gun.DefaultModule.burstShotCount = 10;
-            gun.DefaultModule.burstCooldownTime = 0.04f; 
+            gun.DefaultModule.burstCooldownTime = 0.04f;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
             gun.reloadTime = 1f;
             gun.DefaultModule.cooldownTime = 1f;
@@ -48,17 +49,69 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
 
+            gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(62) as Gun).muzzleFlashEffects;
+            gun.gunHandedness = GunHandedness.OneHanded;
             projectile.baseData.range *= 2f;
             projectile.transform.parent = gun.barrelOffset;
             projectile.SetProjectileSpriteRight("repeating_projectile", 9, 6, false, tk2dBaseSprite.Anchor.MiddleCenter, 9, 6);
 
+            gun.AddShellCasing(1, 0, 0, 0);
+
             gun.quality = PickupObject.ItemQuality.B;
-            gun.encounterTrackable.EncounterGuid = "this is the Repeatovolver";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+            gun.SetName("Repeatovolver");
+
             RepeatovolverID = gun.PickupObjectId;
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.PURCHASED_REPEATOVOLVER, true);
         }
         public static int RepeatovolverID;
+        public override void Update()
+        {
+            if (gun && gun.GunPlayerOwner())
+            {
+                PlayerController player = gun.GunPlayerOwner();
+                if (player.PlayerHasActiveSynergy("Ad Infinitum") && !gun.InfiniteAmmo)
+                {
+                    gun.InfiniteAmmo = true;
+                }
+                else if (!player.PlayerHasActiveSynergy("Ad Infinitum") && gun.InfiniteAmmo)
+                {
+                    gun.InfiniteAmmo = false;
+                }
+            }
+        }
+        public override void PostProcessProjectile(Projectile projectile)
+        {
+            if (projectile && projectile.ProjectilePlayerOwner() && base.gun && gun.CurrentOwner && gun.IsCurrentGun())
+            {
+                if (projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Repeating Yourself"))
+                {
+                    projectile.OnHitEnemy += OnHit;
+                }
+
+                bool isFirstShot = (gun.LastShotIndex == 0);
+                bool isLastShot = (gun.LastShotIndex == gun.ClipCapacity - 1);
+                if (isFirstShot && projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Ad Nauseum"))
+                {
+                    projectile.AdjustPlayerProjectileTint(ExtendedColours.plaguePurple, 2);
+                    projectile.statusEffectsToApply.Add(StaticStatusEffects.StandardPlagueEffect);
+                }
+                if (isLastShot && projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Ad Nauseum"))
+                {
+                    projectile.AdjustPlayerProjectileTint(ExtendedColours.poisonGreen, 2);
+                    projectile.statusEffectsToApply.Add(StaticStatusEffects.irradiatedLeadEffect);
+                }
+            }
+            base.PostProcessProjectile(projectile);
+        }
+        public void OnHit(Projectile proj, SpeculativeRigidbody bod, bool fatal)
+        {
+            if (fatal)
+            {
+                int missingShots = gun.ClipCapacity - gun.ClipShotsRemaining;
+                if (missingShots > 0) gun.MoveBulletsIntoClip(missingShots);
+            }
+        }
         public Repeatovolver()
         {
 

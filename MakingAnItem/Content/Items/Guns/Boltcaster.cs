@@ -6,6 +6,7 @@ using System.Collections;
 using Gungeon;
 using MonoMod;
 using Alexandria.ItemAPI;
+using Alexandria.VisualAPI;
 using UnityEngine;
 using SaveAPI;
 namespace NevernamedsItems
@@ -31,9 +32,9 @@ namespace NevernamedsItems
             gun.SetAnimationFPS(gun.shootAnimation, 16);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);
 
-            gun.muzzleFlashEffects = VFXToolbox.CreateVFXPool("Boltcaster Muzzleflash",
+            gun.muzzleFlashEffects = VFXBuilder.CreateVFXPool("Boltcaster Muzzleflash", //Name of the muzzleflash
                 new List<string>()
-                {
+                { //Sprite paths
                     "NevernamedsItems/Resources/MiscVFX/GunVFX/Boltcaster/boltcaster_muzzleflash_001",
                     "NevernamedsItems/Resources/MiscVFX/GunVFX/Boltcaster/boltcaster_muzzleflash_002",
                     "NevernamedsItems/Resources/MiscVFX/GunVFX/Boltcaster/boltcaster_muzzleflash_003",
@@ -43,7 +44,7 @@ namespace NevernamedsItems
                 tk2dBaseSprite.Anchor.MiddleLeft, //Anchor
                 false, //Uses a Z height off the ground
                 0, //The Z height, if used
-                false,
+                false, 
                VFXAlignment.Fixed
                   );
 

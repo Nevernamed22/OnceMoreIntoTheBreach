@@ -37,9 +37,16 @@ namespace NevernamedsItems
             }
         }
 
-        public static void SetGunSprites(this Gun gun, string identity, int framerate = 8, bool noAmmonomicon = false)
+        public static void SetGunSprites(this Gun gun, string identity, int framerate = 8, bool noAmmonomicon = false, int collection = 1)
         {
-            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, $"{identity}_idle_001", framerate, noAmmonomicon ? null : $"{identity}_ammonomicon_001");
+            Dictionary<int, tk2dSpriteCollectionData> collections = new Dictionary<int, tk2dSpriteCollectionData>()
+            {
+                {1, Initialisation.gunCollection },
+                {2, Initialisation.gunCollection2 },
+            };
+
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, collections[collection], $"{identity}_idle_001", framerate, noAmmonomicon ? null : $"{identity}_ammonomicon_001");
         }
+
     }
 }

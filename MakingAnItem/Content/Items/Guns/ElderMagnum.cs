@@ -54,6 +54,8 @@ namespace NevernamedsItems
             gun.AddShellCasing(1, 0, 0, 0, "shell_red");
             gun.shellCasing.gameObject.AddComponent<ClipBurner>();
 
+            gun.AddClipSprites("riskrifle");
+
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             ETGMod.Databases.Items.Add(gun, false, "ANY");
 

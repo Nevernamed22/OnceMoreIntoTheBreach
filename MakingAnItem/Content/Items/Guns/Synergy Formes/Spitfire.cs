@@ -73,6 +73,7 @@ namespace NevernamedsItems
             gun.DefaultModule.customAmmoType = "white";
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             ETGMod.Databases.Items.Add(gun, false, "ANY");
+            gun.SetName("Spitballer");
 
             ID = gun.PickupObjectId;
         }

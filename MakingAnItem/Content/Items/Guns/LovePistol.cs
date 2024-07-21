@@ -8,6 +8,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -27,6 +28,7 @@ namespace NevernamedsItems
             gun.SetAnimationFPS(gun.shootAnimation, 15);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(199) as Gun).gunSwitchGroup;
 
             //GUN STATS
             gun.DefaultModule.ammoCost = 1;
@@ -35,23 +37,28 @@ namespace NevernamedsItems
             gun.reloadTime = 0.8f;
             gun.DefaultModule.cooldownTime = 0.2f;
             gun.DefaultModule.numberOfShotsInClip = 9;
-            gun.barrelOffset.transform.localPosition = new Vector3(1.12f, 0.62f, 0f);
+            gun.SetBarrel(22, 12);
             gun.SetBaseMaxAmmo(400);
             gun.gunClass = GunClass.CHARM;
+
             //BULLET STATS
-            Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
-            projectile.gameObject.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(projectile);
+            Projectile projectile = ProjectileSetupUtility.MakeProjectile(86, 4f);
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.speed *= 0.9f;
-            projectile.baseData.damage *= 0.8f;
-            LovePistolCharmBehaviour charmBehaviour = projectile.gameObject.AddComponent<LovePistolCharmBehaviour>();
+            projectile.AppliesCharm = true;
+            projectile.CharmApplyChance = 1f;
+            projectile.charmEffect = StaticStatusEffects.charmingRoundsEffect;
             projectile.SetProjectileSprite("lovepistol_projectile", 7, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 6);
 
-            
+            gun.AddShellCasing(1, 0, 0, 0, "shell_pink");
+            gun.AddClipSprites("lovepistol");
+
+            gun.muzzleFlashEffects = VFXToolbox.CreateVFXPoolBundle("LovePistolMuzzle", new IntVector2(11,15), tk2dBaseSprite.Anchor.MiddleLeft, false, 0, VFXAlignment.Fixed, 10, new Color32(250, 0, 0, 255));
+          
+            projectile.hitEffects.overrideMidairDeathVFX = VFXToolbox.CreateVFXBundle("LovePistolImpact", new IntVector2(15, 17), tk2dBaseSprite.Anchor.MiddleCenter, true, 5f);
+            projectile.hitEffects.alwaysUseMidair = true;
+          
             gun.quality = PickupObject.ItemQuality.B;
-            gun.encounterTrackable.EncounterGuid = "this is the Love Pistol";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             gun.AddToSubShop(ItemBuilder.ShopType.Cursula);
@@ -60,47 +67,15 @@ namespace NevernamedsItems
         public static int LovePistolID;
         public override void PostProcessProjectile(Projectile projectile)
         {
-            PlayerController playerController = projectile.Owner as PlayerController;
-            if (playerController.PlayerHasActiveSynergy("Toxic Love")) projectile.baseData.damage *= 2;
-            base.PostProcessProjectile(projectile);
-        }
-        public LovePistol()
-        {
-
-        }
-    }
-    public class LovePistolCharmBehaviour : MonoBehaviour
-    {
-        public LovePistolCharmBehaviour()
-        {
-
-        }
-        private void Awake()
-        {
-            this.m_projectile = base.GetComponent<Projectile>();
-            m_projectile.OnHitEnemy += this.OnHitEnemy;
-        }
-        GameActorCharmEffect charmEffect = Gungeon.Game.Items["charming_rounds"].GetComponent<BulletStatusEffectItem>().CharmModifierEffect;
-
-        private void OnHitEnemy(Projectile bullet, SpeculativeRigidbody enemy, bool fatal)
-        {
-            if (enemy && enemy.aiActor && enemy.gameActor)
+            if (projectile && projectile.ProjectilePlayerOwner())
             {
-                PlayerController playerController = this.m_projectile.Owner as PlayerController;
-                if (playerController)
+                if (projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Toxic Love")) { projectile.baseData.damage *= 2; }
+                if (projectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("Everlasting Love"))
                 {
-                    if (playerController.PlayerHasActiveSynergy("Everlasting Love"))
-                    {
-                        enemy.aiActor.ApplyEffect(GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultPermanentCharmEffect, 1f, null);
-                    }
-                    else
-                    {
-                        enemy.gameActor.ApplyEffect(this.charmEffect, 1f, null);
-                    }
+                    projectile.charmEffect = GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultPermanentCharmEffect;
                 }
             }
-
+            base.PostProcessProjectile(projectile);
         }
-        private Projectile m_projectile;
     }
 }

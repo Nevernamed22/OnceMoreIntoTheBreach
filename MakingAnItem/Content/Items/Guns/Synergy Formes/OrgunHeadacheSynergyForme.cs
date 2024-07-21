@@ -64,6 +64,7 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             gun.encounterTrackable.EncounterGuid = "this is the Orgun Headache Synergy Forme";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+            gun.SetName("Orgun");
 
             OrgunHeadacheSynergyFormeID = gun.PickupObjectId;
         }

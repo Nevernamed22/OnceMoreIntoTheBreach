@@ -52,6 +52,7 @@ namespace NevernamedsItems
 
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+            gun.SetName("Gonne");
             ElderGonneId = gun.PickupObjectId;
         }
         public static int ElderGonneId;

@@ -8,25 +8,31 @@ using MonoMod;
 using Alexandria.ItemAPI;
 using UnityEngine;
 using System.Reflection;
+using Alexandria.Assetbundle;
 
 namespace NevernamedsItems
 {
 
-    public class DiscGun : GunBehaviour
+    public class DiscGun : AdvancedGunBehavior
     {
         public static int DiscGunID;
 
         public static void Add()
         {
-            Gun gun = ETGMod.Databases.Items.NewGun("Disc Gun", "discgun");
+            Gun gun = ETGMod.Databases.Items.NewGun("Disc Gun", "discgun2");
             Game.Items.Rename("outdated_gun_mods:disc_gun", "nn:disc_gun");
-            gun.gameObject.AddComponent<DiscGun>();
+            var behav = gun.gameObject.AddComponent<DiscGun>();
             gun.SetShortDescription("Bad Choices");
             gun.SetLongDescription("Fires sharp, bouncing discs." + "\n\nCapable of hurting it's bearer, because someone thought that would be funny.");
 
-            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "discgun_idle_001", 8, "discgun_ammonomicon_001");
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "discgun2_idle_001", 8, "discgun2_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 14);
+            gun.SetAnimationFPS(gun.reloadAnimation, 14);
+
+            gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(26) as Gun).muzzleFlashEffects;
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(12) as Gun).gunSwitchGroup;
+
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
             gun.DefaultModule.ammoCost = 1;
@@ -36,20 +42,65 @@ namespace NevernamedsItems
             gun.DefaultModule.cooldownTime = 0.25f;
             gun.DefaultModule.numberOfShotsInClip = 10;
             gun.SetBaseMaxAmmo(300);
-            //gun.DefaultModule.positionOffset = new Vector3(1f, 0f, 0f);
-            gun.barrelOffset.transform.localPosition = new Vector3(1.37f, 0.68f, 0f);
+            gun.SetBarrel(19, 11);
             gun.gunClass = GunClass.PISTOL;
 
             //BULLET STATS
-            Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
-            projectile.gameObject.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(projectile);
+            Projectile projectile = ProjectileSetupUtility.MakeProjectile(86, 20f);
             gun.DefaultModule.projectiles[0] = projectile;
-            projectile.baseData.damage *= 4f;
             projectile.baseData.range *= 20f;
+            projectile.objectImpactEventName = "saw";
             projectile.baseData.speed *= 0.4f;
-            projectile.SetProjectileSprite("discgun_projectile", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 9);
+
+            CustomVFXTrail trail = projectile.gameObject.AddComponent<CustomVFXTrail>();
+            trail.timeBetweenSpawns = 0.15f;
+            trail.anchor = CustomVFXTrail.Anchor.Center;
+            trail.VFX = VFXToolbox.CreateBlankVFXPool(VFXToolbox.CreateVFXBundle("DiscTrail", false, 0), true);
+            trail.heightOffset = -1f;
+
+            GameObject blood = (PickupObjectDatabase.GetById(97) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX;
+            GameObject discDebris = Breakables.GenerateDebrisObject(Initialisation.GunDressingCollection, "disc_debris", true, 1, 1, 45, 20, null, 1, null, null, 1).gameObject;
+
+            VFXPool plinkPool = (PickupObjectDatabase.GetById(97) as Gun).DefaultModule.projectiles[0].hitEffects.tileMapVertical;
+            VFXPool debrisPool = VFXToolbox.CreateBlankVFXPool(discDebris, true);
+            VFXPool bloodPool = VFXToolbox.CreateBlankVFXPool(blood);
+
+            projectile.hitEffects.enemy = bloodPool;
+
+            projectile.hitEffects.deathTileMapVertical = debrisPool;
+            projectile.hitEffects.deathTileMapHorizontal = debrisPool;
+            projectile.hitEffects.deathEnemy = debrisPool;
+            projectile.hitEffects.deathAny = plinkPool;
+            projectile.hitEffects.overrideMidairDeathVFX = discDebris;
+
+            projectile.hitEffects.suppressHitEffectsIfOffscreen = false;
+            projectile.hitEffects.suppressMidairDeathVfx = false;
+            projectile.hitEffects.overrideMidairZHeight = -1;
+            projectile.hitEffects.overrideEarlyDeathVfx = null;
+            projectile.hitEffects.overrideMidairDeathVFX = discDebris;
+            projectile.hitEffects.midairInheritsVelocity = false;
+            projectile.hitEffects.midairInheritsFlip = false;
+            projectile.hitEffects.midairInheritsRotation = false;
+            projectile.hitEffects.alwaysUseMidair = false;
+            projectile.hitEffects.CenterDeathVFXOnProjectile = false;
+            projectile.hitEffects.HasProjectileDeathVFX = true;
+            projectile.hitEffects.tileMapHorizontal = ((Gun)PickupObjectDatabase.GetById(97)).DefaultModule.projectiles[0].hitEffects.tileMapHorizontal;
+            projectile.hitEffects.tileMapVertical = ((Gun)PickupObjectDatabase.GetById(97)).DefaultModule.projectiles[0].hitEffects.tileMapVertical;
+
+            projectile.AnimateProjectileBundle("DiscProjectile",
+                   Initialisation.ProjectileCollection,
+                   Initialisation.projectileAnimationCollection,
+                   "DiscProjectile",
+                   MiscTools.DupeList(new IntVector2(15, 15), 8), //Pixel Sizes
+                   MiscTools.DupeList(false, 8), //Lightened
+                   MiscTools.DupeList(tk2dBaseSprite.Anchor.MiddleCenter, 8), //Anchors
+                   MiscTools.DupeList(true, 8), //Anchors Change Colliders
+                   MiscTools.DupeList(false, 8), //Fixes Scales
+                   MiscTools.DupeList<Vector3?>(null, 8), //Manual Offsets
+                   MiscTools.DupeList<IntVector2?>(new IntVector2(9, 9), 8), //Override colliders
+                   MiscTools.DupeList<IntVector2?>(null, 8), //Override collider offsets
+                   MiscTools.DupeList<Projectile>(null, 8)); // Override to copy from    
+
             SelfHarmBulletBehaviour SuicidalTendancies = projectile.gameObject.AddComponent<SelfHarmBulletBehaviour>();
 
             PierceProjModifier Piercing = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();
@@ -58,8 +109,8 @@ namespace NevernamedsItems
             BounceProjModifier Bouncing = projectile.gameObject.GetOrAddComponent<BounceProjModifier>();
             Bouncing.numberOfBounces = 10;
 
-            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
-            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Disc Gun Discs", "NevernamedsItems/Resources/CustomGunAmmoTypes/discgun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/discgun_clipempty");
+
+            gun.AddClipSprites("discgun");
             gun.quality = PickupObject.ItemQuality.D;
 
             ETGMod.Databases.Items.Add(gun, null, "ANY");
@@ -79,15 +130,6 @@ namespace NevernamedsItems
                 homing.AngularVelocity = 50f;
                 homing.HomingRadius = 50f;
             }
-        }
-        public override void OnPostFired(PlayerController player, Gun gun)
-        {
-            gun.PreventNormalFireAudio = true;
-            AkSoundEngine.PostEvent("Play_WPN_saw_impact_01", gameObject);
-        }
-        public DiscGun()
-        {
-
         }
     }
     public class SelfHarmBulletBehaviour : MonoBehaviour
@@ -137,14 +179,14 @@ namespace NevernamedsItems
                 if (playerController.PlayerHasActiveSynergy("Discworld"))
                 {
                     PlayableCharacters characterIdentity = playerController.characterIdentity;
-                    if(playerController.ForceZeroHealthState)
+                    if (playerController.ForceZeroHealthState)
                     {
                         if (playerController.healthHaver.Armor <= 1)
                         {
                             isProtectedByDiscworld = true;
                         }
                     }
-                    else 
+                    else
                     {
                         if (playerController.healthHaver.Armor == 0 || playerController.healthHaver.NextDamageIgnoresArmor)
                         {
@@ -162,7 +204,7 @@ namespace NevernamedsItems
                         {
                             isProtectedByDiscworld = true;
                         }
-                    }                    
+                    }
                 }
                 PlayerController component = otherRigidbody.GetComponent<PlayerController>();
                 if (component && !component.IsGhost)

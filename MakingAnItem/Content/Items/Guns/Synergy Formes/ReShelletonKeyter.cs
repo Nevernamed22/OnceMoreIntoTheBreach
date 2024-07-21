@@ -68,7 +68,7 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             gun.encounterTrackable.EncounterGuid = "this is the ReShelletonKeyter";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
-
+            gun.SetName("Rekeyter");
             ReShelletonKeyterID = gun.PickupObjectId;
         }
         public static int ReShelletonKeyterID;

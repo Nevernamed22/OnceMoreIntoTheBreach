@@ -69,6 +69,7 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             gun.encounterTrackable.EncounterGuid = "this is the Wolfgun synergy";
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+            gun.SetName("Doggun");
             WolfgunID = gun.PickupObjectId;
         }
         public static int WolfgunID;

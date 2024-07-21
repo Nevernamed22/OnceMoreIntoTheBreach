@@ -83,7 +83,7 @@ namespace NevernamedsItems
 
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.SMALL_BULLET;
-            gun.AddShellCasing(18, 9);
+            gun.AddShellCasing(1, 0);
 
 
             gun.quality = PickupObject.ItemQuality.C;

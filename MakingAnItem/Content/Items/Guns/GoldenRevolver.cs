@@ -23,6 +23,8 @@ namespace NevernamedsItems
             Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "goldenrevolver_idle_001", 8, "goldenrevolver_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
+            gun.SetAnimationFPS(gun.reloadAnimation, 15);
+            gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.reloadAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop;
 
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(38) as Gun).gunSwitchGroup;
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(38) as Gun, true, false);
@@ -52,6 +54,8 @@ namespace NevernamedsItems
             chain.pauseLength = 0.05f;
 
             gun.DefaultModule.projectiles[0] = projectile;
+
+            gun.AddShellCasing(0, 0, 6, 0);
 
             gun.quality = PickupObject.ItemQuality.S;
             ETGMod.Databases.Items.Add(gun, false, "ANY");

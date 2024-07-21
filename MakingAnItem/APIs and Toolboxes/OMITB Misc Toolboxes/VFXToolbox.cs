@@ -538,12 +538,64 @@ namespace NevernamedsItems
             tk2dSpriteAnimationClip clip = animator.GetClipByName(name);
 
             List<tk2dSpriteDefinition> frames = new List<tk2dSpriteDefinition>();
-            foreach (tk2dSpriteAnimationFrame frame in clip.frames) {  frames.Add(VFXSpriteCollection.spriteDefinitions[frame.spriteId]); }
+            foreach (tk2dSpriteAnimationFrame frame in clip.frames) { frames.Add(VFXSpriteCollection.spriteDefinitions[frame.spriteId]); }
 
             foreach (tk2dSpriteDefinition frameDef in frames)
             {
                 frameDef.ConstructOffsetsFromAnchor(anchor);
                 frameDef.colliderVertices = colliderVertices;
+                if (emissivePower > 0) frameDef.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
+                if (emissivePower > 0) frameDef.material.SetFloat("_EmissiveColorPower", emissivePower);
+                if (emissiveColour != null) frameDef.material.SetColor("_EmissiveColor", (Color)emissiveColour);
+                if (emissivePower > 0) frameDef.materialInst.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
+                if (emissivePower > 0) frameDef.materialInst.SetFloat("_EmissiveColorPower", emissivePower);
+                if (emissiveColour != null) frameDef.materialInst.SetColor("_EmissiveColor", (Color)emissiveColour);
+            }
+
+            if (emissivePower > 0) sprite.renderer.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
+            if (emissivePower > 0) sprite.renderer.material.SetFloat("_EmissiveColorPower", emissivePower);
+            if (emissiveColour != null) sprite.renderer.material.SetColor("_EmissiveColor", (Color)emissiveColour);
+            if (!persist)
+            {
+                SpriteAnimatorKiller kill = animator.gameObject.AddComponent<SpriteAnimatorKiller>();
+                kill.fadeTime = -1f;
+                kill.animator = animator;
+                kill.delayDestructionTime = -1f;
+            }
+            animator.playAutomatically = true;
+            animator.DefaultClipId = animator.GetClipIdByName(name);
+            vfObj.attached = true;
+            vfObj.persistsOnDeath = false;
+            vfObj.usesZHeight = usesZHeight;
+            vfObj.zHeight = zHeightOffset;
+            vfObj.alignment = VFXAlignment.NormalAligned;
+            vfObj.destructible = false;
+            vfObj.effect = Obj;
+            return Obj;
+        }
+
+        public static GameObject CreateVFXBundle(string name, bool usesZHeight, float zHeightOffset, float emissivePower = -1, Color? emissiveColour = null, bool persist = false)
+        {
+            GameObject Obj = new GameObject(name);
+            VFXObject vfObj = new VFXObject();
+            Obj.SetActive(false);
+            FakePrefab.MarkAsFakePrefab(Obj);
+            UnityEngine.Object.DontDestroyOnLoad(Obj);
+
+            tk2dSpriteCollectionData VFXSpriteCollection = Initialisation.VFXCollection;
+            tk2dSprite sprite = Obj.GetOrAddComponent<tk2dSprite>();
+            tk2dSpriteAnimator animator = Obj.GetOrAddComponent<tk2dSpriteAnimator>();
+            tk2dSpriteAnimation animation = Initialisation.vfxAnimationCollection;
+            animator.Library = animation;
+            sprite.collection = VFXSpriteCollection;
+
+            tk2dSpriteAnimationClip clip = animator.GetClipByName(name);
+
+            List<tk2dSpriteDefinition> frames = new List<tk2dSpriteDefinition>();
+            foreach (tk2dSpriteAnimationFrame frame in clip.frames) { frames.Add(VFXSpriteCollection.spriteDefinitions[frame.spriteId]); }
+
+            foreach (tk2dSpriteDefinition frameDef in frames)
+            {
                 if (emissivePower > 0) frameDef.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
                 if (emissivePower > 0) frameDef.material.SetFloat("_EmissiveColorPower", emissivePower);
                 if (emissiveColour != null) frameDef.material.SetColor("_EmissiveColor", (Color)emissiveColour);
@@ -604,17 +656,19 @@ namespace NevernamedsItems
             {
                 frameDef.ConstructOffsetsFromAnchor(anchor);
                 frameDef.colliderVertices = colliderVertices;
-                if (emissivePower > 0) frameDef.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
-                if (emissivePower > 0) frameDef.material.SetFloat("_EmissiveColorPower", emissivePower);
-                if (emissiveColour != null) frameDef.material.SetColor("_EmissiveColor", (Color)emissiveColour);
-                if (emissivePower > 0) frameDef.materialInst.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
-                if (emissivePower > 0) frameDef.materialInst.SetFloat("_EmissiveColorPower", emissivePower);
-                if (emissiveColour != null) frameDef.materialInst.SetColor("_EmissiveColor", (Color)emissiveColour);
             }
 
-            if (emissivePower > 0) sprite.renderer.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
-            if (emissivePower > 0) sprite.renderer.material.SetFloat("_EmissiveColorPower", emissivePower);
-            if (emissiveColour != null) sprite.renderer.material.SetColor("_EmissiveColor", (Color)emissiveColour);
+            if (emissivePower > 0)
+            {
+                sprite.usesOverrideMaterial = true;
+
+                Material mat = new Material(EnemyDatabase.GetOrLoadByName("GunNut").sprite.renderer.material);
+                mat.mainTexture = sprite.renderer.material.mainTexture;
+                mat.SetColor("_EmissiveColor", (Color)emissiveColour); //RGB value of the color you want glowing
+                mat.SetFloat("_EmissiveColorPower", emissivePower); // no idea tbh
+                mat.SetFloat("_EmissivePower", emissivePower); //brightness
+                sprite.renderer.material = mat;
+            }
             if (!persist)
             {
                 SpriteAnimatorKiller kill = animator.gameObject.AddComponent<SpriteAnimatorKiller>();
@@ -775,9 +829,28 @@ namespace NevernamedsItems
         {
             return new VFXPool { type = VFXPoolType.None, effects = new VFXComplex[] { new VFXComplex() { effects = new VFXObject[] { new VFXObject() { } } } } };
         }
-        public static VFXPool CreateBlankVFXPool(GameObject effect)
+        public static VFXPool CreateBlankVFXPool(GameObject effect, bool isDebris = false)
         {
-            return new VFXPool { type = VFXPoolType.None, effects = new VFXComplex[] { new VFXComplex() { effects = new VFXObject[] { new VFXObject() { effect = effect } } } } };
+
+            if (isDebris)
+            {
+                return new VFXPool
+                {
+                    type = VFXPoolType.Single,
+                    effects = new VFXComplex[] { new VFXComplex() { effects = new VFXObject[] {
+                    new VFXObject() {
+                    effect = effect,
+                    alignment = VFXAlignment.Fixed,
+                     attached = false,
+                     destructible = false,
+                     orphaned = true,
+                     persistsOnDeath = false,
+                    usesZHeight = false,
+                    zHeight = 0,
+            } } } }
+                };
+            }
+            return new VFXPool { type = VFXPoolType.Single, effects = new VFXComplex[] { new VFXComplex() { effects = new VFXObject[] { new VFXObject() { effect = effect } } } } };
         }
         public static VFXPool CreateVFXPool(string name, List<string> spritePaths, int fps, IntVector2 Dimensions, tk2dBaseSprite.Anchor anchor, bool usesZHeight, float zHeightOffset, bool persist = false, VFXAlignment alignment = VFXAlignment.NormalAligned, float emissivePower = -1, Color? emissiveColour = null, tk2dSpriteAnimationClip.WrapMode wrapmode = tk2dSpriteAnimationClip.WrapMode.Once, int loopStart = 0)
         {

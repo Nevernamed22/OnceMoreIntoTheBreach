@@ -36,13 +36,9 @@ namespace NevernamedsItems
             gun.gunClass = GunClass.PISTOL;
 
             //BULLET STATS
-            Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
-            projectile.gameObject.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(projectile);
+            Projectile projectile = ProjectileSetupUtility.MakeProjectile(56, 6);
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.speed *= 5f;
-            projectile.baseData.damage = 6f;
             projectile.SetProjectileSprite("arc_proj", 8, 2, false, tk2dBaseSprite.Anchor.MiddleCenter, 8, 2);
             LightningProjectileComp lightning = projectile.gameObject.GetOrAddComponent<LightningProjectileComp>();
             lightning.targetEnemies = true;

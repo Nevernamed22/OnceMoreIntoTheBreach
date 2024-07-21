@@ -47,7 +47,7 @@ namespace NevernamedsItems
                  bullet.gameObject.AddComponent<HasBeenDoubleProcessed>();
              }*/
             // if (bullet.sprite) bullet.sprite.renderer.enabled = false;
-            //bullet.baseData.range = 5;
+            bullet.baseData.range = 10;
             //bullet.specRigidbody.OnPreTileCollision += OnPreTileCollision;
         }
         public void OnPreTileCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, PhysicsEngine.Tile tile, PixelCollider tilePixelCollider)
@@ -91,7 +91,7 @@ namespace NevernamedsItems
         public override void Pickup(PlayerController player)
         {
             //player.SetIsStealthed(true, "blehp");
-            //player.PostProcessProjectile += this.onFired;
+            player.PostProcessProjectile += this.onFired;
             //player.PostProcessThrownGun += PostProcessGun;
             // player.OnRollStarted += OnRoll;
             // player.PostProcessBeam += this.PostProcessBeam;
@@ -110,7 +110,7 @@ namespace NevernamedsItems
                 {
                     Gun g = Owner.CurrentGun;
                     float dps = (g.DefaultModule.numberOfShotsInClip * (g.DefaultModule.projectiles[0].baseData.damage * g.Volley.projectiles.Count())) / ((g.DefaultModule.numberOfShotsInClip - 1) * g.DefaultModule.cooldownTime + g.reloadTime);
-                    VFXToolbox.DoRisingStringFade(dps.ToString(), Owner.CurrentGun.barrelOffset.position, Color.red);
+                   // VFXToolbox.DoRisingStringFade(dps.ToString(), Owner.CurrentGun.barrelOffset.position, Color.red);
                 }
                 num = 0;
             }

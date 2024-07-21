@@ -69,7 +69,7 @@ namespace NevernamedsItems
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.SMALL_BLASTER;
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             ETGMod.Databases.Items.Add(gun, false, "ANY");
-
+            gun.SetName("Rebondir");
             ID = gun.PickupObjectId;
         }
         public static int ID;

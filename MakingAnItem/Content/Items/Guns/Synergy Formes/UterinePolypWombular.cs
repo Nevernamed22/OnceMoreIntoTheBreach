@@ -61,6 +61,7 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
+            gun.SetName("Uterine Polyp");
             WombularPolypID = gun.PickupObjectId;
         }
         public static int WombularPolypID;

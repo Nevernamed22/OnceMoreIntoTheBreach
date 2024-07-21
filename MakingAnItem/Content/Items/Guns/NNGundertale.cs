@@ -51,6 +51,7 @@ namespace NevernamedsItems
             projectile.baseData.speed *= 0f;
             projectile.sprite.renderer.enabled = false;
 
+            gun.AddClipSprites("gundertale");
 
             gun.quality = PickupObject.ItemQuality.A;
             ETGMod.Databases.Items.Add(gun, false, "ANY");
@@ -91,8 +92,8 @@ namespace NevernamedsItems
         }
         private void onDodgeRolledOverBullet(Projectile bullet)
         {
-            if (this.gun.CurrentOwner.CurrentGun == this.gun && bullet.Owner && bullet.Owner is AIActor)
-            {
+            if (gun && gun.GunPlayerOwner() && gun.IsCurrentGun() && !gun.IsReloading && bullet.Owner && bullet.Owner is AIActor)
+            { 
 
                 bool canNPCify = DetermineCanMakeNPC(bullet.Owner as AIActor);
                 if (canNPCify) { MakeEnemyNPC(bullet.Owner.aiActor); }
@@ -119,6 +120,7 @@ namespace NevernamedsItems
         }
         private void MakeEnemyNPC(AIActor enemy)
         {
+            AkSoundEngine.PostEvent("Play_OBJ_enemy_charmed_01", gun.gameObject);
             HandleSpawnLoot(enemy);
             var CurrentRoom = enemy.transform.position.GetAbsoluteRoom();
             UnityEngine.Object.Instantiate<GameObject>(EasyVFXDatabase.GundetaleSpareVFX, (enemy.sprite.WorldTopCenter + new Vector2(0, 0.25f)), Quaternion.identity);

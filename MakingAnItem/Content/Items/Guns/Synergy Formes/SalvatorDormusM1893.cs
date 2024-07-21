@@ -49,6 +49,7 @@ namespace NevernamedsItems
 
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             ETGMod.Databases.Items.Add(gun, false, "ANY");
+            gun.SetName("Salvator Dormus");
 
             ID = gun.PickupObjectId;
         }

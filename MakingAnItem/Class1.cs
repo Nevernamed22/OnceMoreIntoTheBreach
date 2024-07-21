@@ -43,6 +43,7 @@ namespace NevernamedsItems
         public static AssetBundle assetBundle;
         public static tk2dSpriteCollectionData itemCollection;
         public static tk2dSpriteCollectionData gunCollection;
+        public static tk2dSpriteCollectionData gunCollection2;
         public static tk2dSpriteCollectionData companionCollection;
         public static tk2dSpriteCollectionData VFXCollection;
         public static tk2dSpriteCollectionData NPCCollection;
@@ -86,6 +87,7 @@ namespace NevernamedsItems
                 assetBundle = AssetBundleLoader.LoadAssetBundleFromLiterallyAnywhere("omitbbundle", true);
                 itemCollection = AssetBundleLoader.FastLoadSpriteCollection(assetBundle, "ItemCollection", "ItemCollectionMaterial.mat");
                 gunCollection = AssetBundleLoader.FastLoadSpriteCollection(assetBundle, "GunCollection", "GunCollectionMaterial.mat");
+                gunCollection2 = AssetBundleLoader.FastLoadSpriteCollection(assetBundle, "GunCollection2", "GunCollection2Material.mat");
                 ProjectileCollection = AssetBundleLoader.FastLoadSpriteCollection(assetBundle, "ProjectileCollection", "ProjectileCollectionMaterial.mat");
                 VFXCollection = AssetBundleLoader.FastLoadSpriteCollection(assetBundle, "VFXCollection", "VFXCollectionMaterial.mat");
                 NPCCollection = AssetBundleLoader.FastLoadSpriteCollection(assetBundle, "NPCCollection", "NPCCollectionMaterial.mat");
@@ -105,6 +107,7 @@ namespace NevernamedsItems
                 environmentAnimationCollection = assetBundle.LoadAsset<GameObject>("EnvironmentAnimationCollection").GetComponent<tk2dSpriteAnimation>();
 
                 JsonEmbedder.EmbedJsonDataFromAssembly(Assembly.GetExecutingAssembly(), gunCollection, "NevernamedsItems/Resources/GunJsons");
+                JsonEmbedder.EmbedJsonDataFromAssembly(Assembly.GetExecutingAssembly(), gunCollection2, "NevernamedsItems/Resources/GunJsons");
 
                 //Tools and Toolboxes
                 StaticReferences.Init();
@@ -343,6 +346,7 @@ namespace NevernamedsItems
                     HeavyChamber.Init();
                     CyclopeanChamber.Init();
                     ElectricCylinder.Init();
+                    Dreamcatcher.Init();
                     //Table Techs
                     TableTechTable.Init();
                     TableTechSpeed.Init();
@@ -903,6 +907,7 @@ namespace NevernamedsItems
                     ServiceWeaponCharge.Add();
                     BigBorz.Add();
                     Spitfire.Add();
+                    RepeatovolverInfinite.Add();
                     #endregion
 
 

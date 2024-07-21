@@ -47,7 +47,20 @@ namespace NevernamedsItems
                 if (m_projectile)
                 {
                     Vector2 dirVec = m_projectile.GetVectorToNearestEnemy();
-                   if (dirVec != Vector2.zero) m_projectile.SendInDirection(dirVec, false, true);
+                    if (dirVec != Vector2.zero)
+                    {
+                        if (sounds != null && sounds.Count > 0)
+                        {
+                            foreach (string son in sounds)
+                            {
+                                AkSoundEngine.PostEvent(son, base.gameObject);
+                            }
+                        }
+                        if (VFX != null) { SpawnManager.SpawnVFX(VFX, m_projectile.specRigidbody.UnitCenter, Quaternion.identity); }
+                        
+                        m_projectile.SendInDirection(dirVec, false, true);
+                        if (OnReAim != null) { OnReAim(m_projectile); }
+                    }
                 }
             }
             yield break;
@@ -59,11 +72,14 @@ namespace NevernamedsItems
             IMMEDIATE
         }
         public ReAimTrigger trigger;
-       // public float angleVariance;
-       // public bool scaleAccuracyOffOwner;
+        // public float angleVariance;
+        // public bool scaleAccuracyOffOwner;
         public float reAimDelay;
         public float reAimAmount;
         public float maxReloadReAims;
+        public GameObject VFX;
+        public List<string> sounds = null;
+        public Action<Projectile> OnReAim;
 
         private float storedReloadReaims;
         private Projectile m_projectile;

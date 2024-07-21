@@ -212,10 +212,12 @@ namespace NevernamedsItems
                         overlappingRigidbodies[i].healthHaver.ApplyDamage((overlappingRigidbodies[i].gameActor is PlayerController) ? 0.5f : 50f, direction, StringTableManager.GetEnemiesString("#TRAP", -1), CoreDamageTypes.None, DamageCategory.Normal, false, null, false);
                     }
                     if (overlappingRigidbodies[i].knockbackDoer) { overlappingRigidbodies[i].knockbackDoer.ApplyKnockback(direction, 20f, false); }
+                    base.specRigidbody.RegisterTemporaryCollisionException(overlappingRigidbodies[i]);
+                    overlappingRigidbodies[i].RegisterTemporaryCollisionException(base.specRigidbody);
                 }
             }
             base.specRigidbody.PixelColliders[4].Enabled = true;
-            PhysicsEngine.Instance.RegisterOverlappingGhostCollisionExceptions(base.specRigidbody, null, false);
+
             this.m_allOccupiedCells = new List<OccupiedCells>(1);
             this.m_allOccupiedCells.Add(new OccupiedCells(base.specRigidbody, base.specRigidbody.PixelColliders[4], currentRoom));
 

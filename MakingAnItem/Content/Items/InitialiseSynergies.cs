@@ -1733,6 +1733,32 @@ namespace NevernamedsItems
             CustomSynergies.Add("Belting Out",
                 new List<string>() { "nn:belt_feeder" },
                 new List<string>() { "nn:gun_grease", "patriot", "lichy_trigger_finger", "nn:sanctified_oil" });
+
+            CustomSynergies.Add("Lord of Rings",
+                new List<string>() { "nn:flayed_revolver" },
+                new List<string>() { "ring_of_the_resourceful_rat", "cartographers_ring", "ring_of_fire_resistance", "ring_of_miserly_protection", "unity", "ring_of_chest_vampirism", "cloranthy_ring", "ring_of_chest_friendship", "ring_of_mimic_friendship", "ring_of_triggers", "ring_of_ethereal_form",
+                "nn:ringer", "nn:ring_of_oddly_specific_benefits", "nn:fowl_ring", "nn:ring_of_ammo_redemption", "nn:risky_ring", "nn:widows_ring", "nn:shadow_ring", "nn:ring_of_fortune", "nn:ring_of_invisibility"});
+
+            CustomSynergies.Add("Spellcatcher",
+                new List<string>() { "nn:dreamcatcher" },
+                new List<string>() { "witch_pistol", "hexagun" });
+
+            CustomSynergies.Add("Six Bullets",
+                new List<string>() { "nn:pista" },
+                new List<string>() { "sixth_chamber" });
+
+            CustomSynergies.Add("Ad Infinitum",
+                new List<string>() { "nn:repeatovolver" },
+                new List<string>() { "nn:mobius_clip", "nn:endless_bullets", "nn:big_shot" });
+
+            CustomSynergies.Add("Ad Nauseum",
+                new List<string>() { "nn:repeatovolver" },
+                new List<string>() { "nn:sick_worm", "nn:pestiferous_lead" });
+
+            CustomSynergies.Add("Repeating Yourself",
+                new List<string>() { "nn:repeatovolver" },
+                new List<string>() { "nn:shadow_ring", "nn:bullet_bullets", "shadow_clone" });
+
             #endregion
 
             //TODO

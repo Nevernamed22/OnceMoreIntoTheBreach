@@ -68,6 +68,7 @@ namespace NevernamedsItems
 
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
+            gun.SetName("Glue Gunner");
             GlueGunnerID = gun.PickupObjectId;
 
         }

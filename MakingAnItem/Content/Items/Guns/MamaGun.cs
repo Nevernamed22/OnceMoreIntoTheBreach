@@ -27,7 +27,8 @@ namespace NevernamedsItems
             Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "mama2_idle_001", 8, "mama2_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
-            gun.SetAnimationFPS(gun.reloadAnimation, 0);
+            gun.SetAnimationFPS(gun.reloadAnimation, 15);
+            gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.reloadAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop;
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(38) as Gun).gunSwitchGroup;
@@ -39,7 +40,7 @@ namespace NevernamedsItems
             gun.reloadTime = 1f;
             gun.DefaultModule.cooldownTime = 0.1f;
             gun.DefaultModule.numberOfShotsInClip = 15;
-            gun.barrelOffset.transform.localPosition = new Vector3(22f / 16f, 13f / 16f, 0f);
+            gun.SetBarrel(22, 13);
             gun.SetBaseMaxAmmo(200);
             gun.gunClass = GunClass.PISTOL;
             gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(80) as Gun).muzzleFlashEffects;
@@ -57,11 +58,10 @@ namespace NevernamedsItems
 
             gun.AddShellCasing(1, 1, 0, 0, "shell_bigbeige");
             gun.AddClipDebris( 0, 1, "clipdebris_mama");
-
+            gun.AddClipSprites("mama");
 
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
-
         }
     }
     public class PutAGunAgainstHisHeadPulledMyTriggerNowHesDeadBehaviour : MonoBehaviour

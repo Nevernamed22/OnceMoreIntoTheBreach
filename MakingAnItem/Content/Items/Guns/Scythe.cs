@@ -47,6 +47,10 @@ namespace NevernamedsItems
             gun.DefaultModule.cooldownTime = 0.75f;
             gun.muzzleFlashEffects.type = VFXPoolType.None;
             gun.DefaultModule.numberOfShotsInClip = 6;
+
+            gun.SetBarrel(47, 57);
+
+
             gun.barrelOffset.transform.localPosition = new Vector3(49f / 16f, 58f / 16f, 0f);
             gun.SetBaseMaxAmmo(100);
             gun.quality = PickupObject.ItemQuality.B;
@@ -67,7 +71,7 @@ namespace NevernamedsItems
             slash.SlashDamageUsesBaseProjectileDamage = true;
             slash.slashParameters.doVFX = false;
             slash.slashParameters.doHitVFX = true;
-            slash.slashParameters.slashRange = 4f;
+            slash.slashParameters.slashRange = 4.5f;
             slash.slashParameters.slashDegrees = 45f;
             slash.slashParameters.playerKnockbackForce = 40f;
 
@@ -76,7 +80,6 @@ namespace NevernamedsItems
 
             ETGMod.Databases.Items.Add(gun, false, "ANY");
             ID = gun.PickupObjectId;
-            gun.TrimGunSprites();
         }
         public static int ID;
         public class SoulRendSlashModifier : ProjectileSlashingBehaviour

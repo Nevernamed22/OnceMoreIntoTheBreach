@@ -78,9 +78,9 @@ namespace NevernamedsItems
         }
         public override void Update()
         {
-            if (gun.CurrentOwner is PlayerController)
+            if (gun && gun.GunPlayerOwner())
             {
-            PlayerController player = gun.CurrentOwner as PlayerController;
+            PlayerController player = gun.GunPlayerOwner();
                 if (player.PlayerHasActiveSynergy("ReShelletonKeyter") && !gun.InfiniteAmmo)
                 {
                     gun.InfiniteAmmo = true;

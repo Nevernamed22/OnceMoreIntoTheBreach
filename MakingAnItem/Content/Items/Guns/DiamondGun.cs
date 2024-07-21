@@ -16,18 +16,20 @@ namespace NevernamedsItems
     {
         public static void Add()
         {
-            Gun gun = ETGMod.Databases.Items.NewGun("Diamond Gun", "diamondgun");
+            Gun gun = ETGMod.Databases.Items.NewGun("Diamond Gun", "diamondgun2");
             Game.Items.Rename("outdated_gun_mods:diamond_gun", "nn:diamond_gun");
             gun.gameObject.AddComponent<DiamondGun>();
             gun.SetShortDescription("Diamonds Toniiiight");
             gun.SetLongDescription("Made out of shimmering crystal, this sidearm was mined in one piece from the rock of the Black Powder Mines.");
 
-            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "diamondgun_idle_001", 8, "diamondgun_ammonomicon_001");
+            Alexandria.Assetbundle.GunInt.SetupSprite(gun, Initialisation.gunCollection, "diamondgun2_idle_001", 8, "diamondgun2_ammonomicon_001");
 
             gun.SetAnimationFPS(gun.shootAnimation, 15);
+            gun.SetAnimationFPS(gun.reloadAnimation, 15);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
             gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(53) as Gun).muzzleFlashEffects;
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(53) as Gun).gunSwitchGroup;
 
             //GUN STATS
             gun.DefaultModule.ammoCost = 1;
@@ -36,7 +38,8 @@ namespace NevernamedsItems
             gun.reloadTime = 1f;
             gun.DefaultModule.cooldownTime = 0.2f;
             gun.DefaultModule.numberOfShotsInClip = 6;
-            gun.barrelOffset.transform.localPosition = new Vector3(1.5f, 0.87f, 0f);
+            gun.SetBarrel(27, 17);
+
             gun.SetBaseMaxAmmo(200);
             gun.gunClass = GunClass.PISTOL;
             //BULLET STATS
@@ -50,9 +53,12 @@ namespace NevernamedsItems
             projectile.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(506) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX;
             projectile.hitEffects.alwaysUseMidair = true;
 
-            ParticleShitter particles = projectile.gameObject.GetOrAddComponent<ParticleShitter>();
-            particles.particleType = GlobalSparksDoer.SparksType.SOLID_SPARKLES;
-            particles.particlesPerSecond = 20;
+            sparkle = VFXToolbox.CreateVFXBundle("DiamondSparkle", new IntVector2(7, 7), tk2dBaseSprite.Anchor.MiddleCenter, true, 0.4f);
+
+            SpriteSparkler particles = projectile.gameObject.GetOrAddComponent<SpriteSparkler>();
+            particles.doVFX = true;
+            particles.VFX = sparkle;
+            particles.particlesPerSecond = 20f;
 
             projectile.SetProjectileSprite("diamond_projectile", 11, 11, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
@@ -60,8 +66,15 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.A;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
+            gun.AddShellCasing(0, 0, 6, 0, "shell_diamond");
+
             DiamondGunID = gun.PickupObjectId;
-            sparkle = VFXToolbox.CreateVFXBundle("DiamondSparkle", new IntVector2(7, 7), tk2dBaseSprite.Anchor.MiddleCenter, true, 0.4f);
+
+            SpriteSparkler sparkler = gun.shellCasing.AddComponent<SpriteSparkler>();
+            sparkler.doVFX = true;
+            sparkler.VFX = sparkle;
+            sparkler.particlesPerSecond = 0.5f;
+            sparkler.randomise = true;
         }
         public static int DiamondGunID;
         public static GameObject sparkle;
@@ -127,7 +140,7 @@ namespace NevernamedsItems
         GameActorFireEffect fireEffect = Gungeon.Game.Items["hot_lead"].GetComponent<BulletStatusEffectItem>().FireModifierEffect;
         private void applyFire(Projectile bullet, SpeculativeRigidbody enemy, bool fatal)
         {
-          if (enemy && enemy.gameActor)  enemy.gameActor.ApplyEffect(this.fireEffect, 1f, null);
+            if (enemy && enemy.gameActor) enemy.gameActor.ApplyEffect(this.fireEffect, 1f, null);
         }
         private void killArthropods(Projectile bullet, SpeculativeRigidbody enemy, bool fatal)
         {
@@ -143,10 +156,10 @@ namespace NevernamedsItems
         {
             if (enemy && enemy.aiActor && !string.IsNullOrEmpty(enemy.aiActor.EnemyGuid))
             {
-            if (undead.Contains(enemy.aiActor.EnemyGuid))
-            {
-                enemy.aiActor.healthHaver.ApplyDamage(1E+07f, Vector2.zero, "Smite", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
-            }
+                if (undead.Contains(enemy.aiActor.EnemyGuid))
+                {
+                    enemy.aiActor.healthHaver.ApplyDamage(1E+07f, Vector2.zero, "Smite", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
+                }
 
             }
         }
