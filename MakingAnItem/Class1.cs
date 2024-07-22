@@ -25,7 +25,7 @@ using HarmonyLib;
 
 namespace NevernamedsItems
 {
-    [BepInPlugin(GUID, "Once More Into The Breach", "1.30.0")]
+    [BepInPlugin(GUID, "Once More Into The Breach", "1.32.0")]
     [BepInDependency(ETGModMainBehaviour.GUID)]
     [BepInDependency("etgmodding.etg.mtgapi")]
     [BepInDependency("kyle.etg.gapi")]

@@ -39,7 +39,7 @@ namespace NevernamedsItems
             gun.gunClass = GunClass.PISTOL;
             gun.DefaultModule.cooldownTime = 0.1f;
             gun.DefaultModule.numberOfShotsInClip = 4;
-            gun.SetBaseMaxAmmo(60);
+            gun.SetBaseMaxAmmo(100);
             gun.quality = PickupObject.ItemQuality.D;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
@@ -53,7 +53,7 @@ namespace NevernamedsItems
             projectile.AdditionalScaleMultiplier *= 0.5f;
             projectile.baseData.damage = 6f;
 
-            gun.AddShellCasing(0, 0, 4, 1, "shell_tiny");
+            gun.AddShellCasing(0, 0, 4, 0, "shell_tiny");
 
             gun.AddClipSprites("minigun");
 

@@ -31,15 +31,15 @@ namespace NevernamedsItems
             item.SetTag("ammolet");
         }
 
-        private static int ID;    
-         public override void Pickup(PlayerController player)
+        private static int ID;
+        public override void Pickup(PlayerController player)
         {
             player.GetExtComp().OnBlankModificationItemProcessed += OnBlankModTriggered;
             base.Pickup(player);
         }
         public override void DisableEffect(PlayerController player)
         {
-            player.GetExtComp().OnBlankModificationItemProcessed -= OnBlankModTriggered;
+            if (player != null && player.GetExtComp()) player.GetExtComp().OnBlankModificationItemProcessed -= OnBlankModTriggered;
             base.DisableEffect(player);
         }
         private void OnBlankModTriggered(PlayerController user, SilencerInstance blank, Vector2 pos, BlankModificationItem item)

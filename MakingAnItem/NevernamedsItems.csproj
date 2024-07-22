@@ -7319,11 +7319,6 @@
     <EmbeddedResource Include="Resources\GunJsons\serviceweapon_reload_001.jtk2d" />
     <EmbeddedResource Include="Resources\GunJsons\serviceweapon_reload_002.jtk2d" />
     <EmbeddedResource Include="Resources\GunJsons\serviceweapon_reload_003.jtk2d" />
-    <EmbeddedResource Include="Resources\GunJsons\shroomedgun_fire_001.jtk2d" />
-    <EmbeddedResource Include="Resources\GunJsons\shroomedgun_fire_002.jtk2d" />
-    <EmbeddedResource Include="Resources\GunJsons\shroomedgun_fire_003.jtk2d" />
-    <EmbeddedResource Include="Resources\GunJsons\shroomedgun_fire_004.jtk2d" />
-    <EmbeddedResource Include="Resources\GunJsons\shroomedgun_idle_001.jtk2d" />
     <EmbeddedResource Include="Resources\GunJsons\sickworm_fire_001.jtk2d" />
     <EmbeddedResource Include="Resources\GunJsons\sickworm_fire_002.jtk2d" />
     <EmbeddedResource Include="Resources\GunJsons\sickworm_fire_003.jtk2d" />
@@ -7997,6 +7992,11 @@
     <EmbeddedResource Include="Resources\GunJsons\nnminigun2_fire_004.json" />
     <EmbeddedResource Include="Resources\GunJsons\nnminigun2_idle_001.json" />
     <EmbeddedResource Include="Resources\GunJsons\nnminigun2_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons\shroomedgun_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons\shroomedgun_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons\shroomedgun_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons\shroomedgun_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons\shroomedgun_idle_001.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\NeoItemSprites\flamechamber_icon.png" />

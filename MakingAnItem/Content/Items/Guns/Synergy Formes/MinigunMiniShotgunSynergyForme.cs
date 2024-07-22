@@ -54,7 +54,7 @@ namespace NevernamedsItems
                 if (mod != gun.DefaultModule) { mod.ammoCost = 0; }
             }
             gun.reloadTime = 1.1f;
-            gun.SetBaseMaxAmmo(120);
+            gun.SetBaseMaxAmmo(200);
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 

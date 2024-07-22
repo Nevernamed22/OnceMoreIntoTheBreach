@@ -38,37 +38,57 @@ namespace NevernamedsItems
         public static AssetBundle LoadAssetBundleFromLiterallyAnywhere(string name, bool logs = false)
         {
             AssetBundle result = null;
+
+            string platformFolder;
+
+            switch (Application.platform)
             {
-                if (File.Exists(Initialisation.FilePathFolder + "/" + name))
+                case RuntimePlatform.LinuxPlayer:
+                case RuntimePlatform.LinuxEditor:
+                    platformFolder = "Linux";
+                    break;
+
+                case RuntimePlatform.OSXPlayer:
+                case RuntimePlatform.OSXEditor:
+                    platformFolder = "MacOS";
+                    break;
+
+                default:
+                    platformFolder = "Windows";
+                    break;
+            }
+
+            if (File.Exists(Path.Combine(Path.Combine(Initialisation.FilePathFolder, platformFolder), name)))
+            {
+                try
                 {
-                    try
+                    result = AssetBundle.LoadFromFile(Path.Combine(Initialisation.FilePathFolder, name));
+                    if (logs == true)
                     {
-                        result = AssetBundle.LoadFromFile(Path.Combine(Initialisation.FilePathFolder, name));
-                        if (logs == true)
-                        {
-                            global::ETGModConsole.Log("Successfully loaded assetbundle!", false);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        global::ETGModConsole.Log("Failed loading asset bundle from file.", false);
-                        global::ETGModConsole.Log(ex.ToString(), false);
+                        global::ETGModConsole.Log("Successfully loaded assetbundle!", false);
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    global::ETGModConsole.Log("AssetBundle NOT FOUND!", false);
+                    global::ETGModConsole.Log("Failed loading asset bundle from file.", false);
+                    global::ETGModConsole.Log(ex.ToString(), false);
                 }
             }
+            else
+            {
+                global::ETGModConsole.Log("AssetBundle NOT FOUND!", false);
+            }
+
             if (result != null)
             {
                 var colls = result.LoadAllAssets<GameObject>().SelectMany(x => x.GetComponents<tk2dSpriteCollectionData>());
 
                 var shaderDict = new Dictionary<string, string>()
-            {
-                { "GunCollection", "tk2d/CutoutVertexColorTilted" }
-                // if you have multiple gun collections, copy this line for all of them
-            };
+                {
+                    { "GunCollection", "tk2d/CutoutVertexColorTilted" },
+                    { "GunCollection2", "tk2d/CutoutVertexColorTilted" }
+                    // if you have multiple gun collections, copy this line for all of them
+                };
 
                 foreach (var coll in colls)
                 {
@@ -86,8 +106,7 @@ namespace NevernamedsItems
                     }
                 }
             }
+
             return result;
         }
-
-    }
-}
+    } }

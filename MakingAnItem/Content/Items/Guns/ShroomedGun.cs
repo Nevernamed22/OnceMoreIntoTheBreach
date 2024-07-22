@@ -84,6 +84,11 @@ namespace NevernamedsItems
             ETGMod.Databases.Items.Add(gun, false, "ANY");
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.HURT_BY_SHROOMER, true);
 
+            //Temporary
+            gun.reloadAnimation = gun.shootAnimation;
+
+            gun.AddShellCasing(0, 0, 6, 0);
+
             gun.AddToGunslingKingTable();
 
             ShroomedGunID = gun.PickupObjectId;
