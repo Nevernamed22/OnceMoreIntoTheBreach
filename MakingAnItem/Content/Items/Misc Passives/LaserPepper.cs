@@ -34,7 +34,7 @@ namespace NevernamedsItems
                     if (Owner.CenterPosition.GetNearestEnemyToPosition() != null && (Vector2.Distance(Owner.CenterPosition.GetNearestEnemyToPosition().Position, Owner.CenterPosition) <= 5))
                     {
                         AIActor enemy = Owner.CenterPosition.GetNearestEnemyToPosition();
-                        UnityEngine.Object.Instantiate<GameObject>(LaserKnife.laserSlashVFX, enemy.sprite.WorldCenter, Quaternion.identity);
+                        UnityEngine.Object.Instantiate<GameObject>(SharedVFX.LaserSlashUndertale, enemy.sprite.WorldCenter, Quaternion.identity);
                         if (enemy && (!enemy.healthHaver || !enemy.healthHaver.IsBoss))
                         {
                             GameManager.Instance.Dungeon.StartCoroutine(LaserKnife.HandleEnemyDeath(enemy, Owner.CenterPosition.GetVectorToNearestEnemy()));

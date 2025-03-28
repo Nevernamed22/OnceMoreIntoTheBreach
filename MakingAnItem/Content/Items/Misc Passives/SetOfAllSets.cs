@@ -202,7 +202,7 @@ namespace NevernamedsItems
                     if (component.characterIdentity == PlayableCharacters.Robot) component.healthHaver.Armor += 1;
                     else component.healthHaver.ApplyHealing(0.5f);
                     AkSoundEngine.PostEvent("Play_OBJ_heart_heal_01", base.gameObject);
-                    component.PlayEffectOnActor(EasyVFXDatabase.HealingSparkles, Vector3.zero, true, false, false);
+                    component.PlayEffectOnActor(SharedVFX.HealingSparkles, Vector3.zero, true, false, false);
                 }
             }
         }

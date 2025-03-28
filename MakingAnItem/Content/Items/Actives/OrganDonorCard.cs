@@ -118,7 +118,7 @@ namespace NevernamedsItems
 
             LootEngine.SpawnCurrency(user.specRigidbody.UnitCenter, cashToGive);
 
-            SpawnManager.SpawnVFX(EasyVFXDatabase.BloodExplosion, user.specRigidbody.UnitCenter, Quaternion.identity);
+            SpawnManager.SpawnVFX(SharedVFX.BloodExplosion, user.specRigidbody.UnitCenter, Quaternion.identity);
 
             PlayableCharacters characterIdentity = user.characterIdentity;
 

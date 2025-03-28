@@ -48,7 +48,7 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(portalSubProj);
             portalSubProj.baseData.damage = 5f;
             portalSubProj.baseData.speed *= 1f;
-            portalSubProj.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.GreenLaserCircleVFX;
+            portalSubProj.hitEffects.overrideMidairDeathVFX = SharedVFX.GreenLaserCircleVFX;
             portalSubProj.hitEffects.alwaysUseMidair = true;
             portalSubProj.SetProjectileSprite("dimensionaliser_projectile", 12, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 5);
 
@@ -65,7 +65,7 @@ namespace NevernamedsItems
             NoCollideBehaviour noCollide = portal.gameObject.GetOrAddComponent<NoCollideBehaviour>();
             noCollide.worksOnEnemies = true;
             noCollide.worksOnProjectiles = true;
-            portal.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.GreenLaserCircleVFX;
+            portal.hitEffects.overrideMidairDeathVFX = SharedVFX.GreenLaserCircleVFX;
             portal.hitEffects.alwaysUseMidair = true;
 
             portal.AnimateProjectileBundle("DimensionaliserPortalIdle", 
@@ -91,7 +91,7 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             projectile.baseData.damage = 1f;
             projectile.baseData.speed *= 3f;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.GreenLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.GreenLaserCircleVFX;
             projectile.hitEffects.alwaysUseMidair = true;
             DimensionaliserProjectile dimensionaliserProj = projectile.gameObject.GetOrAddComponent<DimensionaliserProjectile>();
             dimensionaliserProj.portalPrefab = portal.gameObject;

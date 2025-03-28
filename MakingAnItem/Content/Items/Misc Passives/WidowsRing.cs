@@ -20,7 +20,7 @@ namespace NevernamedsItems
             "Widow's Ring",
             "Deadly Charms",
             "Charmed enemies can be instantly slain." + "\n\nThe previous owner of this ring was banished to the Gungeon for murdering five of his ex-husbands." + "\nThere's even a small compartment inside containing poison.",
-            "widowsring_icon");
+            "widowsring_improved");
             item.quality = PickupObject.ItemQuality.C;
             Game.Items.Rename("nn:widow's_ring", "nn:widows_ring");
         }

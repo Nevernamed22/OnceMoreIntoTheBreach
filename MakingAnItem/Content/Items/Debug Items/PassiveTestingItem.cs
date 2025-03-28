@@ -16,40 +16,33 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "PassiveTestingItem";
-            string resourceName = "NevernamedsItems/Resources/workinprogress_icon";
-            GameObject obj = new GameObject();
-            var item = obj.AddComponent<PassiveTestingItem>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-
-            string shortDesc = "wip";
-            string longDesc = "Did you seriously give yourself a testing item just to read the flavour text?";
-
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            PassiveTestingItem item = ItemSetup.NewItem<PassiveTestingItem>(
+              "PassiveTestingItem",
+              "Work In Progress",
+              "Did you seriously give yourself a testing item just to read the flavour text?",
+              "workinprogress_icon") as PassiveTestingItem;
             item.quality = PickupObject.ItemQuality.EXCLUDED;
             item.sprite.IsPerpendicular = true;
             item.CanBeDropped = true;
             item.CanBeSold = true;
-            DebugPassiveID = item.PickupObjectId;
-
-           
+            DebugPassiveID = item.PickupObjectId;        
         }
         
         public static int DebugPassiveID;
         public void onFired(Projectile bullet, float eventchancescaler)
         {
-            /* if (!bullet.GetComponent<HasBeenDoubleProcessed>())
-             {
-                 StartCoroutine(doLateFrameProcessing(bullet));
-                 bullet.gameObject.AddComponent<HasBeenDoubleProcessed>();
-             }*/
-            // if (bullet.sprite) bullet.sprite.renderer.enabled = false;
-            bullet.baseData.range = 10;
-            //bullet.specRigidbody.OnPreTileCollision += OnPreTileCollision;
+            numfired++;
+            ETGModConsole.Log("Fired bullet; " + numfired);
+         /*  bullet.statusEffectsToApply.Add(new GameActorGildedEffect()
+            {
+                duration = 10,
+                stackMode = GameActorEffect.EffectStackingMode.Refresh,
+            });
+
+            //Assigns to the tile destroyer
+            //bullet.specRigidbody.OnPreTileCollision += OnPreTileCollision;*/
         }
+        //Break tiles
         public void OnPreTileCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, PhysicsEngine.Tile tile, PixelCollider tilePixelCollider)
         {
             RoomHandler baseRoom = myRigidbody.projectile.GetAbsoluteRoom();
@@ -70,85 +63,24 @@ namespace NevernamedsItems
                 if (tilemap) { GameManager.Instance.Dungeon.RebuildTilemap(tilemap); }
             }
         }
-        private IEnumerator doLateFrameProcessing(Projectile projectile)
-        {
-            yield return null;
-            //if (projectile.ProjectilePlayerOwner()) projectile.ProjectilePlayerOwner().DoPostProcessProjectile(projectile);
-            yield break;
-        }
-        private void PostProcessBeam(BeamController beam)
-        {
-            if (beam.GetComponent<BeamSplittingModifier>())
-            {
-                ETGModConsole.Log("Split found");
-                beam.GetComponent<BeamSplittingModifier>().amtToSplitTo++;
-            }
-        }
-        private void OnRoll(PlayerController player, Vector2 vec)
-        {
-            ETGModConsole.Log(player.specRigidbody.UnitCenter.ToString());
-        }
         public override void Pickup(PlayerController player)
         {
-            //player.SetIsStealthed(true, "blehp");
+            ETGModConsole.Log("-------------------------------");
+            numfired = 0;
             player.PostProcessProjectile += this.onFired;
-            //player.PostProcessThrownGun += PostProcessGun;
-            // player.OnRollStarted += OnRoll;
-            // player.PostProcessBeam += this.PostProcessBeam;
             base.Pickup(player);
         }
-        private void PostProcessGun(Projectile fucker)
-        {
-        }
-        public float num = 0;
+        int numfired = 0;
         public override void Update()
         {
-            if (num < 0.25f) { num += BraveTime.DeltaTime; }
-            else
-            {
-                if (Owner && Owner.CurrentGun)
-                {
-                    Gun g = Owner.CurrentGun;
-                    float dps = (g.DefaultModule.numberOfShotsInClip * (g.DefaultModule.projectiles[0].baseData.damage * g.Volley.projectiles.Count())) / ((g.DefaultModule.numberOfShotsInClip - 1) * g.DefaultModule.cooldownTime + g.reloadTime);
-                   // VFXToolbox.DoRisingStringFade(dps.ToString(), Owner.CurrentGun.barrelOffset.position, Color.red);
-                }
-                num = 0;
-            }
-            /*if (Owner && Owner.SuperAutoAimTarget != null)
-            {
-                Instantiate(EasyVFXDatabase.GreenLaserCircleVFX, Owner.SuperAutoAimTarget.AimCenter, Quaternion.identity);
-            }
-            if (Owner && Owner.SuperDuperAimTarget != null)
-            {
-                Instantiate(EasyVFXDatabase.BlueLaserCircleVFX, Owner.SuperAutoAimTarget.AimCenter, Quaternion.identity);
-            }*/
             base.Update();
         }
         public override DebrisObject Drop(PlayerController player)
         {
-           // player.PostProcessThrownGun -= PostProcessGun;
-           // player.PostProcessProjectile -= this.onFired;
-            // player.PostProcessBeam -= this.PostProcessBeam;
-
-            DebrisObject result = base.Drop(player);
+           player.PostProcessProjectile -= this.onFired;
+           DebrisObject result = base.Drop(player);
             return result;
         }
-        public class HasBeenDoubleProcessed : MonoBehaviour { }
 
-    }
-    public class JamPlayerBulletModifier : MonoBehaviour
-    {
-        private void Awake()
-        {
-            this.m_projectile = base.GetComponent<Projectile>();
-        }
-        private void Update()
-        {
-            if (!m_projectile.IsBlackBullet)
-            {
-                m_projectile.BecomeBlackBullet();
-            }
-        }
-        private Projectile m_projectile;
     }
 }

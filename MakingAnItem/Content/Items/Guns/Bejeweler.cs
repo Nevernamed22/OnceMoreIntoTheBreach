@@ -147,60 +147,8 @@ namespace NevernamedsItems
                 buffanimator.animationStyle = BuffVFXAnimator.BuffAnimationStyle.TETRIS;
                 buffanimator.AdditionalPierceDepth = 0;
             }
-
-            cubeVFX = VFXToolbox.CreateVFX("BejewelerCube",
-                new List<string>()
-                {
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_001",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_002",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_003",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_004",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_005",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_006",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_007",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_008",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_009",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_010",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_011",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_012",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_013",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_014",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_015",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_016",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_017",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_018",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_019",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_020",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_021",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_022",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/Bejeweler/bejeweler_projectile_cube_023",
-                },
-                12, new IntVector2(13, 26),
-                tk2dBaseSprite.Anchor.LowerCenter,
-                true, 1, -1, null,
-                tk2dSpriteAnimationClip.WrapMode.LoopSection, true, 6);
-
-            TenPoints = VFXToolbox.CreateVFX("Ten Points VFX",
-                new List<string>() {
-                    "NevernamedsItems/Resources/MiscVFX/tenpoints_001",
-                    "NevernamedsItems/Resources/MiscVFX/tenpoints_002",
-                    "NevernamedsItems/Resources/MiscVFX/tenpoints_003",
-                    "NevernamedsItems/Resources/MiscVFX/tenpoints_004",
-                    "NevernamedsItems/Resources/MiscVFX/tenpoints_005",
-                    "NevernamedsItems/Resources/MiscVFX/tenpoints_006",
-                    "NevernamedsItems/Resources/MiscVFX/tenpoints_007",
-                    "NevernamedsItems/Resources/MiscVFX/tenpoints_008",
-                    "NevernamedsItems/Resources/MiscVFX/tenpoints_009",
-                    "NevernamedsItems/Resources/MiscVFX/tenpoints_010",
-                    "NevernamedsItems/Resources/MiscVFX/tenpoints_011",
-                    "NevernamedsItems/Resources/MiscVFX/tenpoints_012",
-                    "NevernamedsItems/Resources/MiscVFX/tenpoints_013",
-                },
-                12, new IntVector2(35, 20),
-                tk2dBaseSprite.Anchor.LowerCenter,
-                true, 1, -1, null,
-                tk2dSpriteAnimationClip.WrapMode.Once, false, 0);
-
+            cubeVFX = VFXToolbox.CreateVFXBundle("BejewelerCube", true, 1f, -1f, -1f, null, true);
+           
             railgun = (PickupObjectDatabase.GetById(370) as Gun).DefaultModule.chargeProjectiles[1].Projectile.InstantiateAndFakeprefab();
             railgun.PenetratesInternalWalls = true;
             railgun.baseData.damage = 70f;
@@ -224,7 +172,6 @@ namespace NevernamedsItems
         public static VFXPool hitEffectYellow;
 
         public static GameObject cubeVFX;
-        public static GameObject TenPoints;
         public enum GemColour
         {
             BLUE,
@@ -317,7 +264,7 @@ namespace NevernamedsItems
             //shoot
 
             UnityEngine.Object.Destroy(cube);
-            SpawnManager.SpawnVFX(EasyVFXDatabase.ShittyElectricExplosion, positionForCube, Quaternion.identity);
+            SpawnManager.SpawnVFX(SharedVFX.ArcExplosion, positionForCube, Quaternion.identity);
 
 
             yield break;
@@ -423,7 +370,7 @@ namespace NevernamedsItems
                 GameObject gem = both.Second;
 
 
-                SpawnManager.SpawnVFX(Bejeweler.TenPoints, gem.GetComponent<tk2dSprite>().WorldCenter, Quaternion.identity);
+                SpawnManager.SpawnVFX(SharedVFX.TenPointsPopup, gem.GetComponent<tk2dSprite>().WorldCenter, Quaternion.identity);
                 SpawnManager.SpawnVFX(colourToShatter[colour], gem.GetComponent<tk2dSprite>().WorldCenter, Quaternion.identity);
 
                 UnityEngine.Object.Destroy(gem);
@@ -437,7 +384,7 @@ namespace NevernamedsItems
             if (instantiatedGemVFX.Exists(x => x.Second == gem))
             {
                 Tuple<Bejeweler.GemColour, GameObject> both = instantiatedGemVFX.Find(x => x.Second == gem);
-                SpawnManager.SpawnVFX(Bejeweler.TenPoints, gem.GetComponent<tk2dSprite>().WorldCenter, Quaternion.identity);
+                SpawnManager.SpawnVFX(SharedVFX.TenPointsPopup, gem.GetComponent<tk2dSprite>().WorldCenter, Quaternion.identity);
                 SpawnManager.SpawnVFX(colourToShatter[both.First], gem.GetComponent<tk2dSprite>().WorldCenter, Quaternion.identity);
                 UnityEngine.Object.Destroy(gem);
                 instantiatedGemVFX.Remove(both);

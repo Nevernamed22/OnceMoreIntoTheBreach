@@ -16,7 +16,7 @@ namespace NevernamedsItems
               "Accelerant",
               "Burning Sensation",
               "Triples the damage dealt to enemies by fire." + "\n\nWatching their skin melt off is actually rather horrifying. Avert your eyes.",
-              "accelerant_icon") as PassiveItem;          
+              "accelerant_improved") as PassiveItem;          
             item.quality = PickupObject.ItemQuality.D;
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
         }

@@ -172,13 +172,14 @@ namespace NevernamedsItems
                 }
             }
         }
+        public float HunterSporeChance = 0.1f;
         private IEnumerator FloatHandler()
         {
-            float HunterChance = 0.9f;
+            float HunterChance = HunterSporeChance;
             if (HasSynergyHunterSpores) HunterChance = 0.5f;
             if (m_projectile && m_projectile.ProjectilePlayerOwner())
             {
-                if (UnityEngine.Random.value <= HunterChance || !m_projectile.ProjectilePlayerOwner().IsInCombat)
+                if (UnityEngine.Random.value > HunterChance || !m_projectile.ProjectilePlayerOwner().IsInCombat)
                 {
                     m_projectile.baseData.speed = 0.1f;
                     m_projectile.UpdateSpeed();

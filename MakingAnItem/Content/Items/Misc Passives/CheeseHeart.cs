@@ -30,7 +30,7 @@ namespace NevernamedsItems
         }
         public override void DisableEffect(PlayerController player)
         {
-            player.OnReceivedDamage -= OnHitEffect;
+            if (player) { player.OnReceivedDamage -= OnHitEffect; }
             base.DisableEffect(player);
         }       
         private void OnHitEffect(PlayerController user)

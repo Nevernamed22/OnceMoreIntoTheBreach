@@ -49,7 +49,7 @@ namespace NevernamedsItems
             PierceProjModifier pierce = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();
             pierce.penetration++;
             pierce.penetratesBreakables = true;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.SmoothLightBlueLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.SmoothLightBlueLaserCircleVFX;
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.SetProjectileSpriteRight("highvelocityrifle_projectile", 13, 5, true, tk2dBaseSprite.Anchor.MiddleCenter,11, 4);
 

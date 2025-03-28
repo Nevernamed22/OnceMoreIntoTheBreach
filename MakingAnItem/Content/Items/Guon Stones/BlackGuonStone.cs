@@ -13,9 +13,6 @@ namespace NevernamedsItems
 {
     class BlackGuonStone : AdvancedPlayerOrbitalItem
     {
-
-        public static PlayerOrbital orbitalPrefab;
-        public static PlayerOrbital upgradeOrbitalPrefab;
         public static void Init()
         {
             AdvancedPlayerOrbitalItem item = ItemSetup.NewItem<BlackGuonStone>(
@@ -25,52 +22,13 @@ namespace NevernamedsItems
             "blackguonstone_icon") as AdvancedPlayerOrbitalItem;
             item.quality = PickupObject.ItemQuality.B;
 
-            item.OrbitalPrefab = BuildPrefab();
+            item.OrbitalPrefab = ItemSetup.CreateOrbitalObject("Black Guon Stone", "blackguonstone_orbital", new IntVector2(8,8), new IntVector2(-4, -4)).GetComponent<PlayerOrbital>();
 
             item.SetTag("guon_stone");
 
             item.HasAdvancedUpgradeSynergy = true;
             item.AdvancedUpgradeSynergy = "Blacker Guon Stone";
-            item.AdvancedUpgradeOrbitalPrefab = BuildSynergyPrefab().gameObject;
-        }
-        public static PlayerOrbital BuildPrefab()
-        {
-            
-            GameObject prefab = ItemBuilder.SpriteFromBundle("BlackGuonOrbital", Initialisation.itemCollection.GetSpriteIdByName("blackguonstone_orbital"), Initialisation.itemCollection);
-            prefab.name = "Black Guon Orbital";
-            var body = prefab.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(6, 9));
-            body.CollideWithTileMap = false;
-            body.CollideWithOthers = true;
-            body.PrimaryPixelCollider.CollisionLayer = CollisionLayer.EnemyBulletBlocker;
-
-            orbitalPrefab = prefab.AddComponent<PlayerOrbital>();
-            orbitalPrefab.motionStyle = PlayerOrbital.OrbitalMotionStyle.ORBIT_PLAYER_ALWAYS;
-            orbitalPrefab.shouldRotate = false;
-            orbitalPrefab.orbitRadius = 2.5f;
-            orbitalPrefab.orbitDegreesPerSecond = 120f;
-            orbitalPrefab.SetOrbitalTier(0);
-
-            prefab.MakeFakePrefab();
-            return orbitalPrefab;
-        }
-        public static PlayerOrbital BuildSynergyPrefab()
-        {
-            
-            GameObject gameObject = ItemBuilder.SpriteFromBundle("BlackGuonOrbitalSynergy", Initialisation.itemCollection.GetSpriteIdByName("blackguonstone_synergy"), Initialisation.itemCollection);
-            gameObject.name = "Black Guon Orbital Synergy Form";
-            SpeculativeRigidbody speculativeRigidbody = gameObject.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(9, 13));
-            upgradeOrbitalPrefab = gameObject.AddComponent<PlayerOrbital>();
-            speculativeRigidbody.CollideWithTileMap = false;
-            speculativeRigidbody.CollideWithOthers = true;
-            speculativeRigidbody.PrimaryPixelCollider.CollisionLayer = CollisionLayer.EnemyBulletBlocker;
-            upgradeOrbitalPrefab.shouldRotate = false;
-            upgradeOrbitalPrefab.orbitRadius = 2.5f;
-            upgradeOrbitalPrefab.orbitDegreesPerSecond = 120f;
-            upgradeOrbitalPrefab.perfectOrbitalFactor = 10f;
-            upgradeOrbitalPrefab.SetOrbitalTier(0);
-
-            gameObject.MakeFakePrefab();
-            return upgradeOrbitalPrefab;
+            item.AdvancedUpgradeOrbitalPrefab = ItemSetup.CreateOrbitalObject("Blacker Guon Stone", "blackguonstone_synergy", new IntVector2(12, 12), new IntVector2(-6, -6), perfectOrbitalFactor: 10);
         }
         public override void OnOrbitalCreated(GameObject orbital)
         {

@@ -17,7 +17,7 @@ namespace NevernamedsItems
             "Nitroglycylinder",
             "Reloader 'sploder",
             "Explodes safely (for you at least) upon reloading." + "\n\nThis attatchment was favoured by a masochistic gungeoneer who liked the smell of burnt hair just a little too much. After his inevitable death, it was modified to not actually hurt it's bearer.",
-            "nitroglycylinder_icon");
+            "nitroglycylinder_improved");
             item.quality = PickupObject.ItemQuality.D;
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
 

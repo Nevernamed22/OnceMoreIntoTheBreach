@@ -48,7 +48,7 @@ namespace NevernamedsItems
             projectile.baseData.damage = 5.5f;
             projectile.baseData.speed = 11f;
             projectile.SetProjectileSprite("16x16_white_circle", 6, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.WhiteCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.WhiteCircleVFX;
             projectile.hitEffects.alwaysUseMidair = true;
 
             BounceProjModifier ricochet = projectile.gameObject.AddComponent<BounceProjModifier>();

@@ -50,9 +50,11 @@ namespace NevernamedsItems
                 projectile.AdditionalScaleMultiplier *= 2f;
                 projectile.baseData.range *= 0.5f;
                 if (mod != gun.DefaultModule) { mod.ammoCost = 0; }
-                projectile.transform.parent = gun.barrelOffset;
-                PrefabStatusEffectsToApply statusE =  projectile.gameObject.AddComponent<PrefabStatusEffectsToApply>();
-                statusE.effects = new List<GameActorEffect>() { StaticStatusEffects.greenFireEffect };
+
+                projectile.AppliesFire = true;
+                projectile.FireApplyChance = 1;
+                projectile.fireEffect = StaticStatusEffects.greenFireEffect;
+
                 if (projectile.gameObject.GetComponent<GoopModifier>())
                 {
                     Destroy(projectile.gameObject.GetComponent<GoopModifier>());

@@ -19,34 +19,16 @@ namespace NevernamedsItems
             "Laser Knife",
             "He Couldn't See The Stars",
             "Vaporises the nearest enemy. \n\nA standard issue military pocket plasma blade for hand-to-hand combat.",
-            "laserknife_icon") as PlayerItem;
+            "laserknife_improved") as PlayerItem;
 
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 600);
 
-            laserSlashVFX = VFXToolbox.CreateVFX("LaserSlashVFX",
-                  new List<string>()
-                  {
-                    "NevernamedsItems/Resources/MiscVFX/laserslashundertale_vfx_001",
-                    "NevernamedsItems/Resources/MiscVFX/laserslashundertale_vfx_002",
-                    "NevernamedsItems/Resources/MiscVFX/laserslashundertale_vfx_003",
-                    "NevernamedsItems/Resources/MiscVFX/laserslashundertale_vfx_004",
-                    "NevernamedsItems/Resources/MiscVFX/laserslashundertale_vfx_005",
-                    "NevernamedsItems/Resources/MiscVFX/laserslashundertale_vfx_006",
-                  },
-                 14, //FPS
-                  new IntVector2(74, 13), //Dimensions
-                  tk2dBaseSprite.Anchor.MiddleCenter, //Anchor
-                  false, //Uses a Z height off the ground
-                  0 //The Z height, if used
-                    );
-
             item.quality = ItemQuality.C;
         }
-        public static GameObject laserSlashVFX;
         public override void DoEffect(PlayerController user)
         {
             AIActor enemy = user.CenterPosition.GetNearestEnemyToPosition();
-            UnityEngine.Object.Instantiate<GameObject>(laserSlashVFX, enemy.sprite.WorldCenter, Quaternion.identity);
+            UnityEngine.Object.Instantiate<GameObject>(SharedVFX.LaserSlashUndertale, enemy.sprite.WorldCenter, Quaternion.identity);
             if (enemy && (!enemy.healthHaver || !enemy.healthHaver.IsBoss))
             {
                 GameManager.Instance.Dungeon.StartCoroutine(HandleEnemyDeath(enemy, user.CenterPosition.GetVectorToNearestEnemy()));

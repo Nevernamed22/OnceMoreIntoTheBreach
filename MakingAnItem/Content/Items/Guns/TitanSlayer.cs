@@ -155,7 +155,7 @@ namespace NevernamedsItems
                 if (Vector2.Distance(self.LastPosition, self.ProjectilePlayerOwner().specRigidbody.UnitCenter) < 2)
                 {
                     isDestroying = true;
-                    SpawnManager.SpawnVFX(EasyVFXDatabase.WhiteCircleVFX, self.LastPosition, Quaternion.identity);
+                    SpawnManager.SpawnVFX(SharedVFX.WhiteCircleVFX, self.LastPosition, Quaternion.identity);
                     if (self.ProjectilePlayerOwner().CurrentGun && self.ProjectilePlayerOwner().CurrentGun.GetComponent<TitanSlayer>() && self.ProjectilePlayerOwner().CurrentGun.IsReloading)
                     {
                         Gun gu = self.ProjectilePlayerOwner().CurrentGun;

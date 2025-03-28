@@ -12,34 +12,12 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            //The name of the item
-            string itemName = "Tier Bullets";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it
-            string resourceName = "NevernamedsItems/Resources/tierbullets_default_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a PassiveItem component to the object
-            var item = obj.AddComponent<TierBullets>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Typecast";
-            string longDesc = "Picks an item tier at random when first collected. Gives a damage bonus for every item of that tier held." + "\n\nThese bullets were made eagerly, as a proof of concept for something much, much cooler...";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //Do this after ItemBuilder.AddSpriteToObject!
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Adds the actual passive effect to the item
-
-            //Set the rarity of the item
+            PickupObject item = ItemSetup.NewItem<TierBullets>(
+             "Tier Bullets",
+             "Typecast",
+             "Picks an item tier at random when first collected. Gives a damage bonus for every item of that tier held." + "\n\nThese bullets were made eagerly, as a proof of concept for something much, much cooler...",
+             "tierbullets_default_icon");
             item.quality = PickupObject.ItemQuality.EXCLUDED;
-
 
             TierBullets.spriteIDs = new int[TierBullets.spritePaths.Length];
             TierBullets.spriteIDs[0] = SpriteBuilder.AddSpriteToCollection(TierBullets.spritePaths[0], item.sprite.Collection);

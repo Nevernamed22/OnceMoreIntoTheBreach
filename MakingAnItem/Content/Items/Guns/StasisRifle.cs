@@ -55,7 +55,7 @@ namespace NevernamedsItems
             projectile.baseData.force *= 0.5f;
             projectile.baseData.speed *= 2f;
             projectile.baseData.range *= 2f;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.SmoothLightBlueLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.SmoothLightBlueLaserCircleVFX;
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.SetProjectileSpriteRight("highvelocityrifle_projectile", 13, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 4);
             FreezeTimeOnHitModifier freezy = projectile.gameObject.GetOrAddComponent<FreezeTimeOnHitModifier>();

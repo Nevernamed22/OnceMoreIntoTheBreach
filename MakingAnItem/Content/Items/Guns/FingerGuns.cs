@@ -7,6 +7,7 @@ using Gungeon;
 using MonoMod;
 using UnityEngine;
 using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -49,6 +50,12 @@ namespace NevernamedsItems
             projectile.SetProjectileSprite("fingerguns_projectile", 8, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 2);
             projectile.sprite.renderer.enabled = false;
 
+            AdvancedVolleyModificationSynergyProcessor advVolley = gun.gameObject.AddComponent<AdvancedVolleyModificationSynergyProcessor>();
+            AdvancedVolleyModificationSynergyData data = ScriptableObject.CreateInstance<AdvancedVolleyModificationSynergyData>();
+            data.AddsDuplicatesOfBaseModule = true;
+            data.DuplicatesOfBaseModule = 4;
+            data.RequiredSynergy = "Five Finger Guns";
+            advVolley.synergies.Add(data);
 
             gun.quality = PickupObject.ItemQuality.D;
             ETGMod.Databases.Items.Add(gun, false, "ANY");
@@ -78,9 +85,13 @@ namespace NevernamedsItems
         }
         public override void PostProcessProjectile(Projectile projectile)
         {
+            if (projectile && projectile.ProjectilePlayerOwner())
+            {
+                PlayerController player = projectile.ProjectilePlayerOwner();
+                if (player.PlayerHasActiveSynergy("Polydactyly")) projectile.baseData.damage *= 1.142857f;
+                if (player.PlayerHasActiveSynergy("Five Finger Guns")) projectile.sprite.renderer.enabled = true;
+            }
             base.PostProcessProjectile(projectile);
-            PlayerController player = gun.CurrentOwner as PlayerController;
-            if (player.PlayerHasActiveSynergy("Polydactyly")) projectile.baseData.damage *= 1.142857f;
         }
         private bool hasPolydactylySynergyAlready = false;
         public FingerGuns()

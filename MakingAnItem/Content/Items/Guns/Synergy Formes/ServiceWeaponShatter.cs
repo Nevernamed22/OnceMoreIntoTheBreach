@@ -65,7 +65,7 @@ namespace NevernamedsItems
             }
             gun.Volley.UsesShotgunStyleVelocityRandomizer = true;
             gun.DefaultModule.ammoCost = 1;
-            gun.TrimGunSprites();
+
 
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

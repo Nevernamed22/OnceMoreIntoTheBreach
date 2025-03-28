@@ -281,7 +281,7 @@ namespace NevernamedsItems
         }
         private IEnumerator HandleClickDeath()
         {
-            UnityEngine.Object.Instantiate<GameObject>(EasyVFXDatabase.WhiteCircleVFX, m_projectile.specRigidbody.UnitCenter, Quaternion.identity);
+            UnityEngine.Object.Instantiate<GameObject>(SharedVFX.WhiteCircleVFX, m_projectile.specRigidbody.UnitCenter, Quaternion.identity);
             for (int i = 0; i < 10; i++)
             {
                 HandleForceToPosition();

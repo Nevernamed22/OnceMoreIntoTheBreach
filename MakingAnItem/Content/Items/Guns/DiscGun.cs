@@ -58,14 +58,12 @@ namespace NevernamedsItems
             trail.VFX = VFXToolbox.CreateBlankVFXPool(VFXToolbox.CreateVFXBundle("DiscTrail", false, 0), true);
             trail.heightOffset = -1f;
 
-            GameObject blood = (PickupObjectDatabase.GetById(97) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX;
             GameObject discDebris = Breakables.GenerateDebrisObject(Initialisation.GunDressingCollection, "disc_debris", true, 1, 1, 45, 20, null, 1, null, null, 1).gameObject;
 
             VFXPool plinkPool = (PickupObjectDatabase.GetById(97) as Gun).DefaultModule.projectiles[0].hitEffects.tileMapVertical;
             VFXPool debrisPool = VFXToolbox.CreateBlankVFXPool(discDebris, true);
-            VFXPool bloodPool = VFXToolbox.CreateBlankVFXPool(blood);
 
-            projectile.hitEffects.enemy = bloodPool;
+            projectile.hitEffects.enemy = projectile.hitEffects.enemy = (PickupObjectDatabase.GetById(369) as Gun).DefaultModule.chargeProjectiles[0].Projectile.hitEffects.tileMapVertical;
 
             projectile.hitEffects.deathTileMapVertical = debrisPool;
             projectile.hitEffects.deathTileMapHorizontal = debrisPool;

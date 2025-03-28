@@ -105,6 +105,7 @@ namespace NevernamedsItems
         {
             base.minorBreakable.OnBreak += OnBreak;
             room = base.transform.position.GetAbsoluteRoom();
+            SpriteOutlineManager.AddOutlineToSprite(base.sprite, Color.red);
         }
         public GameObject trapShot;
         private RoomHandler room;

@@ -65,6 +65,9 @@ namespace NevernamedsItems
             gun.quality = PickupObject.ItemQuality.C;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
+
+            gun.AddClipSprites("bubblefist");
+
             gun.Volley.UsesShotgunStyleVelocityRandomizer = true;
 
             ID = gun.PickupObjectId;

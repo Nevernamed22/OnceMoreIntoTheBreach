@@ -16,7 +16,7 @@ namespace NevernamedsItems
         public static void Init()
         {
             var item = ItemSetup.NewItem<TableTechAstronomy>(
-                "Table Tech Astronomy",
+               "Table Tech Astronomy",
                "The Flip Beyond",
                "Flipped tables conjure a simulacrum of the heavens" + "\n\n Among secretive flipping circles, there is a cryptic proverb; A table flipped properly will never come back down.",
                "tabletechastronomy_icon");

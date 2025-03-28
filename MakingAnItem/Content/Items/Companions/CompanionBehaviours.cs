@@ -473,7 +473,7 @@ namespace NevernamedsItems
                                 }
                                 else
                                 {
-                                    ETGModConsole.Log("Peanut attempted to attack in an unrecognised direction, and gave up." + "\nDirection: " + z + "\nIf you see this error, report it to the mod creator with a Screenshot of this message, please.");
+                                    Debug.LogError("Peanut attempted to attack in an unrecognised direction, and gave up." + "\nDirection: " + z);
                                     yield break;
                                 }
 
@@ -594,14 +594,14 @@ namespace NevernamedsItems
                 BehaviorResult result;
                 if ((overrideTarget == null) && (Stealthed == false))
                 {
-                    this.m_aiActor.PlayEffectOnActor(EasyVFXDatabase.BloodiedScarfPoofVFX, Vector3.zero, false, true, false);
+                    this.m_aiActor.PlayEffectOnActor(SharedVFX.BloodiedScarfPoofVFX, Vector3.zero, false, true, false);
                     this.m_aiActor.ToggleRenderers(false);
                     this.m_aiActor.ToggleShadowVisiblity(false);
                     Stealthed = true;
                 }
                 else if ((overrideTarget != null) && (Stealthed == true))
                 {
-                    this.m_aiActor.PlayEffectOnActor(EasyVFXDatabase.BloodiedScarfPoofVFX, Vector3.zero, false, true, false);
+                    this.m_aiActor.PlayEffectOnActor(SharedVFX.BloodiedScarfPoofVFX, Vector3.zero, false, true, false);
                     this.m_aiActor.sprite.renderer.enabled = true;
                     this.m_aiActor.ToggleRenderers(true);
                     this.m_aiActor.ToggleShadowVisiblity(true);

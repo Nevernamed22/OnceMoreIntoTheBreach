@@ -16,7 +16,7 @@ namespace NevernamedsItems
             "Aimbot",
             "Virtual Assistant",
             "This highly advanced contact lens contains a Hegemony Issue Virtual Aim Assistant Micro-AI, or Aimbot for short. It projects mathematic predictions, bullet aerodynamics simulations, and a targeting reticule onto your vision, making your accuracy second to none.",
-            "microaicontact_icon");
+            "aimbot_improved");
             item.AddPassiveStatModifier( PlayerStats.StatType.Accuracy, 0.01f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = PickupObject.ItemQuality.A;
         }

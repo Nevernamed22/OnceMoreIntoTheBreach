@@ -50,19 +50,7 @@ namespace NevernamedsItems
             projectile.gameObject.AddComponent<PierceDeadActors>();
             projectile.gameObject.AddComponent<MaintainDamageOnPierce>();
 
-            projectile.hitEffects.overrideMidairDeathVFX = VFXToolbox.CreateVFX("DARC Impact",
-                 new List<string>()
-                 {
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/red_electricimpact_001",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/red_electricimpact_002",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/red_electricimpact_003",
-                 },
-                10, //FPS
-                 new IntVector2(44, 43), //Dimensions
-                 tk2dBaseSprite.Anchor.MiddleCenter, //Anchor
-                 false, //Uses a Z height off the ground
-                 0 //The Z height, if used
-                   );
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.ArcImpactRed;
             projectile.hitEffects.alwaysUseMidair = true;
 
             List<string> BeamAnimPaths = new List<string>()

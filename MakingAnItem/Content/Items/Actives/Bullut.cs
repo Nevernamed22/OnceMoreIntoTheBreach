@@ -5,6 +5,7 @@ using System.Text;
 using Dungeonator;
 using Alexandria.ItemAPI;
 using UnityEngine;
+using Alexandria.ChestAPI;
 
 namespace NevernamedsItems
 {
@@ -31,24 +32,28 @@ namespace NevernamedsItems
                 Chest spawnedChest = GameManager.Instance.RewardManager.SpawnRewardChestAt(locationToSpawn);
                 spawnedChest.RegisterChestOnMinimap(spawnedChest.GetAbsoluteParentRoom());
             }
+
             //SYNERGY CHEST
-            Chest Synergy_Chest = GameManager.Instance.RewardManager.Synergy_Chest;
-            Synergy_Chest.IsLocked = true;           
-            Chest SpawnedSynergy = Chest.Spawn(Synergy_Chest, user.CurrentRoom.GetRandomVisibleClearSpot(2, 2));
-            SpawnedSynergy.RegisterChestOnMinimap(SpawnedSynergy.GetAbsoluteParentRoom());
+            ChestUtility.SpawnChestEasy(user.CurrentRoom.GetRandomVisibleClearSpot(2, 2), 
+                ChestUtility.ChestTier.SYNERGY, 
+                true, //Locked
+                Chest.GeneralChestType.UNSPECIFIED
+             );
+
             //RED CHEST
-            Chest Red_Chest = GameManager.Instance.RewardManager.A_Chest;
-            Red_Chest.IsLocked = true;
-            Red_Chest.ChestType = Chest.GeneralChestType.UNSPECIFIED;
-            Chest SpawnedRed = Chest.Spawn(Red_Chest, user.CurrentRoom.GetRandomVisibleClearSpot(2, 2));
-            SpawnedRed.lootTable.lootTable = (UnityEngine.Random.value <= 0.5f ? GameManager.Instance.RewardManager.GunsLootTable : GameManager.Instance.RewardManager.ItemsLootTable);
-            SpawnedRed.RegisterChestOnMinimap(SpawnedRed.GetAbsoluteParentRoom());
+            ChestUtility.SpawnChestEasy(user.CurrentRoom.GetRandomVisibleClearSpot(2, 2),
+                ChestUtility.ChestTier.RED,
+                true, //Locked
+                Chest.GeneralChestType.UNSPECIFIED
+             );
+
             //BLACK CHEST
-            Chest Black_Chest = GameManager.Instance.RewardManager.S_Chest;
-            Black_Chest.IsLocked = true;
-            Chest SpawnedBlack = Chest.Spawn(Black_Chest, user.CurrentRoom.GetRandomVisibleClearSpot(2, 2));
-            SpawnedBlack.lootTable.lootTable = (UnityEngine.Random.value <= 0.5f ? GameManager.Instance.RewardManager.GunsLootTable : GameManager.Instance.RewardManager.ItemsLootTable);
-            SpawnedBlack.RegisterChestOnMinimap(SpawnedBlack.GetAbsoluteParentRoom());
+            ChestUtility.SpawnChestEasy(user.CurrentRoom.GetRandomVisibleClearSpot(2, 2),
+                ChestUtility.ChestTier.BLACK,
+                true, //Locked
+                Chest.GeneralChestType.UNSPECIFIED
+             );
+
             //GIVE KEYS
             for (int i = 0; i < 10; i++) LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(67).gameObject, user);
         }

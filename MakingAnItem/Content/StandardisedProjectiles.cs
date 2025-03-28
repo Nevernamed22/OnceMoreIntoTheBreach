@@ -135,6 +135,9 @@ namespace NevernamedsItems
             flamethrowerBase.hitEffects.overrideMidairDeathVFX = smoke.hitEffects.overrideMidairDeathVFX;
             flamethrowerBase.hitEffects.enemy = fireImp;
 
+            flamethrowerBase.enemyImpactEventName = "flame";
+            flamethrowerBase.objectImpactEventName = "flame";
+
             flamethrower = flamethrowerBase;
 
 
@@ -173,7 +176,7 @@ namespace NevernamedsItems
             ghost.baseData.CustomAccelerationCurveDuration = (PickupObjectDatabase.GetById(760) as Gun).DefaultModule.projectiles[0].baseData.CustomAccelerationCurveDuration;
             ghost.baseData.IgnoreAccelCurveTime = (PickupObjectDatabase.GetById(760) as Gun).DefaultModule.projectiles[0].baseData.IgnoreAccelCurveTime;
 
-            ghost.hitEffects.overrideMidairDeathVFX = RainbowGuonStone.WhiteGuonTransitionVFX;
+            ghost.hitEffects.overrideMidairDeathVFX = SharedVFX.ColouredPoofWhite;
             ghost.hitEffects.alwaysUseMidair = true;
 
 
@@ -249,7 +252,9 @@ namespace NevernamedsItems
               true,
              VFXAlignment.Fixed
                 );
-            //snakedeath.effects[0].effects[0].effect.gameObject.layer = LayerMask.NameToLayer("BG_Critical");
+
+            snakedeath.effects[0].effects[0].effect.gameObject.AddComponent<IsCorpseWithSynergy>();
+            // = LayerMask.NameToLayer("BG_Critical");
             initsnake.hitEffects.deathAny = snakedeath;
             initsnake.hitEffects.HasProjectileDeathVFX = true;
 
@@ -260,5 +265,13 @@ namespace NevernamedsItems
         public static Projectile smoke;
         public static Projectile ghost;
         public static Projectile flamethrower;
+        private class IsCorpseWithSynergy : MonoBehaviour
+        {
+            public void Start()
+            {
+                if (GameManager.Instance.AnyPlayerHasActiveSynergy("Rock Python")) { StaticReferenceManager.AllCorpses.Add(base.gameObject); }
+            }
+        }
     }
+    
 }

@@ -71,7 +71,8 @@ namespace NevernamedsItems
             }
             else
             {
-                Interactor.healthHaver.ApplyHealing(-0.5f);
+                if (Interactor.characterIdentity == OMITBChars.Shade) { Interactor.carriedConsumables.Currency -= 20; }
+                else { Interactor.healthHaver.ApplyHealing(-0.5f); }
                 if (SST <= 0.005f)
                 {
                     PickupObject byId = PickupObjectDatabase.GetById(301);

@@ -25,15 +25,15 @@ namespace NevernamedsItems
             "limeguonstone_icon") as AdvancedPlayerOrbitalItem;
             item.quality = PickupObject.ItemQuality.C;
 
-            BuildPrefab();
-            item.OrbitalPrefab = orbitalPrefab;
-            BuildSynergyPrefab();
+            item.OrbitalPrefab = ItemSetup.CreateOrbitalObject("Lime Guon Stone", "limeguonstone_ingame", new IntVector2(8, 8), new IntVector2(-4, -4)).GetComponent<PlayerOrbital>();
+            item.OrbitalPrefab.gameObject.AddComponent<LimeGuonStoneController>();
 
             item.SetTag("guon_stone");
 
             item.HasAdvancedUpgradeSynergy = true;
             item.AdvancedUpgradeSynergy = "Limer Guon Stone";
-            item.AdvancedUpgradeOrbitalPrefab = upgradeOrbitalPrefab.gameObject;
+            item.AdvancedUpgradeOrbitalPrefab = ItemSetup.CreateOrbitalObject("Limer Guon Stone", "limeguonstone_synergy", new IntVector2(12, 12), new IntVector2(-6, -6), perfectOrbitalFactor: 10);
+            item.AdvancedUpgradeOrbitalPrefab.AddComponent<LimeGuonStoneController>();
 
             orbitalShot = ((Gun)PickupObjectDatabase.GetById(86)).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
             orbitalShot.SetProjectileSprite("limebullet", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 3, 3);
@@ -41,55 +41,7 @@ namespace NevernamedsItems
             orbitalShot.gameObject.AddComponent<PierceProjModifier>();
             orbitalShot.gameObject.AddComponent<PierceDeadActors>();
         }
-        public static PlayerOrbital orbitalPrefab;
-        public static PlayerOrbital upgradeOrbitalPrefab;
         public static Projectile orbitalShot;
-        public static void BuildPrefab()
-        {
-            if (orbitalPrefab != null) return;
-            GameObject prefab = ItemBuilder.SpriteFromBundle("LimeGuonOrbital", Initialisation.itemCollection.GetSpriteIdByName("limeguonstone_ingame"), Initialisation.itemCollection);
-            prefab.name = "Lime Guon Orbital";
-            var body = prefab.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(8, 8));
-
-            body.CollideWithTileMap = false;
-            body.CollideWithOthers = true;
-            body.PrimaryPixelCollider.CollisionLayer = CollisionLayer.EnemyBulletBlocker;
-            prefab.AddComponent<LimeGuonStoneController>();
-
-            orbitalPrefab = prefab.AddComponent<PlayerOrbital>();
-            orbitalPrefab.motionStyle = PlayerOrbital.OrbitalMotionStyle.ORBIT_PLAYER_ALWAYS;
-            orbitalPrefab.perfectOrbitalFactor = 0f;
-            orbitalPrefab.shouldRotate = false;
-            orbitalPrefab.orbitRadius = 2.5f;
-            orbitalPrefab.orbitDegreesPerSecond = 120f;
-            orbitalPrefab.SetOrbitalTier(0);
-
-
-            prefab.MakeFakePrefab();
-        }       
-        public static void BuildSynergyPrefab()
-        {
-            if (upgradeOrbitalPrefab != null) return;
-            GameObject gameObject = ItemBuilder.SpriteFromBundle("LimeGuonOrbitalSynergy", Initialisation.itemCollection.GetSpriteIdByName("limeguonstone_synergy"), Initialisation.itemCollection);
-            gameObject.name = "Lime Guon Orbital Synergy Form";
-            SpeculativeRigidbody speculativeRigidbody = gameObject.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(12, 12));
-            gameObject.AddComponent<LimeGuonStoneController>();
-
-            upgradeOrbitalPrefab = gameObject.AddComponent<PlayerOrbital>();
-            speculativeRigidbody.CollideWithTileMap = false;
-            speculativeRigidbody.CollideWithOthers = true;
-            speculativeRigidbody.PrimaryPixelCollider.CollisionLayer = CollisionLayer.EnemyBulletBlocker;
-            upgradeOrbitalPrefab.shouldRotate = false;
-            upgradeOrbitalPrefab.orbitRadius = 2.5f;
-            upgradeOrbitalPrefab.perfectOrbitalFactor = 10f;
-            upgradeOrbitalPrefab.orbitDegreesPerSecond = 120f;
-            upgradeOrbitalPrefab.SetOrbitalTier(0);
-
-
-            gameObject.MakeFakePrefab();
-
-
-        }
     }
     public class LimeGuonStoneController : MonoBehaviour
     {

@@ -52,7 +52,7 @@ namespace NevernamedsItems
                 projectile.baseData.range = 15;
                 projectile.baseData.damage = 12f;
                 projectile.hitEffects.alwaysUseMidair = true;
-                projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.WhiteCircleVFX;
+                projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.WhiteCircleVFX;
                 projectile.SetProjectileSprite("bride_projectile", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
                 if (iterator == 1 || iterator == 2 || iterator == 3)
                 {

@@ -304,7 +304,7 @@ namespace NevernamedsItems
                     GameLevelDefinition lastLoadedLevelDefinition = GameManager.Instance.GetLastLoadedLevelDefinition();
                     multiplier *= (lastLoadedLevelDefinition == null) ? 1f : lastLoadedLevelDefinition.priceMultiplier;
 
-                    return Mathf.FloorToInt(90 * multiplier);
+                    return Mathf.FloorToInt((90 * multiplier) * 0.8f);
                 }
             }
 

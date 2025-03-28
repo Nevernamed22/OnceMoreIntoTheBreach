@@ -25,4 +25,15 @@ namespace NevernamedsItems
     {
         public Action<Projectile> OnShot;
     }
+
+    [HarmonyPatch(typeof(CompanionItem))]
+    [HarmonyPatch("CreateCompanion", MethodType.Normal)]
+    public class CreatePost
+    {
+        [HarmonyPostfix]
+        public static void HarmonyPostfix(CompanionItem __instance, PlayerController owner)
+        {
+            if (__instance && __instance is ExtendedCompanionItem) { (__instance as ExtendedCompanionItem).OnCompanionCreation(owner); }
+        }
+    }
 }

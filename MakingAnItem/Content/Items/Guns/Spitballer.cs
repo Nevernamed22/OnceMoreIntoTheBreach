@@ -85,7 +85,6 @@ namespace NevernamedsItems
 
             ETGMod.Databases.Items.Add(gun, false, "ANY");
             ID = gun.PickupObjectId;
-            gun.TrimGunSprites();
 
             gun.SetupUnlockOnCustomStat(CustomTrackedStats.BEGGAR_TOTAL_DONATIONS, 4, DungeonPrerequisite.PrerequisiteOperation.GREATER_THAN);
 

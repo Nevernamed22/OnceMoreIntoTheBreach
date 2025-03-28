@@ -56,35 +56,35 @@ namespace NevernamedsItems
                         {
                             case 1:
                                 projectile.SetProjectileSpriteRight("sweeper_1", 6, 10, false, tk2dBaseSprite.Anchor.MiddleCenter, 4, 8);
-                                projectile.hitEffects.overrideMidairDeathVFX = RainbowGuonStone.BlueGuonTransitionVFX;
+                                projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.ColouredPoofBlue;
                                 break;
                             case 2:
                                 projectile.SetProjectileSpriteRight("sweeper_2", 7, 10, false, tk2dBaseSprite.Anchor.MiddleCenter, 5, 8);
-                                projectile.hitEffects.overrideMidairDeathVFX = RainbowGuonStone.GreenGuonTransitionVFX;
+                                projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.ColouredPoofGreen;
                                 break;
                             case 3:
                                 projectile.SetProjectileSpriteRight("sweeper_3", 7, 10, false, tk2dBaseSprite.Anchor.MiddleCenter, 5, 8);
-                                projectile.hitEffects.overrideMidairDeathVFX = RainbowGuonStone.RedGuonTransitionVFX;
+                                projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.ColouredPoofRed;
                                 break;
                             case 4:
                                 projectile.SetProjectileSpriteRight("sweeper_4", 7, 10, false, tk2dBaseSprite.Anchor.MiddleCenter, 5, 8);
-                                projectile.hitEffects.overrideMidairDeathVFX = RainbowGuonStone.BlueGuonTransitionVFX;
+                                projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.ColouredPoofBlue;
                                 break;
                             case 5:
                                 projectile.SetProjectileSpriteRight("sweeper_5", 7, 10, false, tk2dBaseSprite.Anchor.MiddleCenter, 5, 8);
-                                projectile.hitEffects.overrideMidairDeathVFX = RainbowGuonStone.RedGuonTransitionVFX;
+                                projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.ColouredPoofRed;
                                 break;
                             case 6:
                                 projectile.SetProjectileSpriteRight("sweeper_6", 7, 10, false, tk2dBaseSprite.Anchor.MiddleCenter, 5, 8);
-                                projectile.hitEffects.overrideMidairDeathVFX = RainbowGuonStone.CyanGuonTransitionVFX;
+                                projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.ColouredPoofCyan;
                                 break;
                             case 7:
                                 projectile.SetProjectileSpriteRight("sweeper_7", 7, 10, false, tk2dBaseSprite.Anchor.MiddleCenter, 5, 8);
-                                projectile.hitEffects.overrideMidairDeathVFX = RainbowGuonStone.GreyGuonTransitionVFX;
+                                projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.ColouredPoofGrey;
                                 break;
                             case 8:
                                 projectile.SetProjectileSpriteRight("sweeper_8", 7, 10, false, tk2dBaseSprite.Anchor.MiddleCenter, 5, 8);
-                                projectile.hitEffects.overrideMidairDeathVFX = RainbowGuonStone.GreyGuonTransitionVFX;
+                                projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.ColouredPoofGrey;
                                 break;
                         }
                         mod.projectiles.Add(projectile);

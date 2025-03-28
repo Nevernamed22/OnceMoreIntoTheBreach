@@ -76,7 +76,7 @@ namespace NevernamedsItems
             HoneyGoop.damagesEnemies = false;
             HoneyGoop.damagesPlayers = false;
             HoneyGoop.baseColor32 = ExtendedColours.honeyYellow;
-            HoneyGoop.goopTexture = ResourceExtractor.GetTextureFromResource("NevernamedsItems/Resources/honey_standard_base_001.png");
+            HoneyGoop.goopTexture = Initialisation.assetBundle.LoadAsset<Texture2D>("honey_standard_base_001");
             HoneyGoop.usesLifespan = false;
             HoneyGoop.playerStepsChangeLifetime = true;
             HoneyGoop.playerStepsLifetime = 2.5f;

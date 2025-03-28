@@ -79,7 +79,7 @@ namespace NevernamedsItems
             firing.inFlightSpawnCooldown = 1;
             projectile.baseData.force *= 1.2f;
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.YellowLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.YellowLaserCircleVFX;
             projectile.AnimateProjectileBundle("KillithidTendrilProjectile",
                    Initialisation.ProjectileCollection,
                    Initialisation.projectileAnimationCollection,

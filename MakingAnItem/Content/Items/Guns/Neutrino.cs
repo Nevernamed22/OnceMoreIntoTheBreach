@@ -52,7 +52,7 @@ namespace NevernamedsItems
             projectile.AppliesStun = true;
             projectile.AppliedStunDuration = 4f;
             projectile.StunApplyChance = 0.2f;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.SmoothLightBlueLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.SmoothLightBlueLaserCircleVFX;
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.SetProjectileSprite("neutrino_stun_proj", 10, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 3);
 
@@ -66,7 +66,7 @@ namespace NevernamedsItems
             projectile2.AppliesFire = true;
             projectile2.fireEffect = StaticStatusEffects.hotLeadEffect;
             projectile2.FireApplyChance = 0.07f;
-            projectile2.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.YellowLaserCircleVFX;
+            projectile2.hitEffects.overrideMidairDeathVFX = SharedVFX.YellowLaserCircleVFX;
             projectile2.hitEffects.alwaysUseMidair = true;
             projectile2.SetProjectileSprite("neutrino_burn_proj", 10, 3, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 3);
 

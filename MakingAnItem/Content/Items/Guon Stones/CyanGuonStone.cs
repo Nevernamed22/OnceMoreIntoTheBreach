@@ -13,9 +13,6 @@ namespace NevernamedsItems
 {
     class CyanGuonStone : AdvancedPlayerOrbitalItem
     {
-
-        public static PlayerOrbital orbitalPrefab;
-        public static PlayerOrbital upgradeOrbitalPrefab;
         public static void Init()
         {
             AdvancedPlayerOrbitalItem item = ItemSetup.NewItem<CyanGuonStone>(
@@ -26,72 +23,19 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.A;
             item.SetTag("guon_stone");
 
-            BuildPrefab();
-            item.OrbitalPrefab = orbitalPrefab;
-            BuildSynergyPrefab();
+
+            item.OrbitalPrefab = ItemSetup.CreateOrbitalObject("Cyan Guon Stone", "cyanguon_ingame", new IntVector2(8, 8), new IntVector2(-4, -4)).GetComponent<PlayerOrbital>();
 
             item.HasAdvancedUpgradeSynergy = true;
             item.AdvancedUpgradeSynergy = "Cyaner Guon Stone";
-            item.AdvancedUpgradeOrbitalPrefab = CyanGuonStone.upgradeOrbitalPrefab.gameObject;
+            item.AdvancedUpgradeOrbitalPrefab = ItemSetup.CreateOrbitalObject("Cyaner Guon Stone", "cyanguon_synergy", new IntVector2(12, 12), new IntVector2(-6, -6), perfectOrbitalFactor: 10);
 
-            Projectile projectile2 = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
-            projectile2.gameObject.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(projectile2.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(projectile2);
-            projectile2.baseData.speed *= 2f;
-            projectile2.baseData.damage = 2;
-            projectile2.baseData.range *= 2f;
-            projectile2.SetProjectileSprite("cyanguon_proj", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 5, 5);
-            cyanGuonProj = projectile2;
+            Projectile proj = ProjectileSetupUtility.MakeProjectile(86, 2, 1000, 50);
+            proj.SetProjectileSprite("cyanguon_proj", 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 5, 5);
+            cyanGuonProj = proj;
         }
         public static Projectile cyanGuonProj;
-        public static void BuildPrefab()
-        {
 
-
-            if (CyanGuonStone.orbitalPrefab != null) return;
-            GameObject prefab = ItemBuilder.SpriteFromBundle("CyanGuonOrbital", Initialisation.itemCollection.GetSpriteIdByName("cyanguon_ingame"), Initialisation.itemCollection);
-            prefab.name = "Cyan Guon Orbital";
-            var body = prefab.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(5, 9));
-            //prefab.GetComponent<tk2dSprite>().GetCurrentSpriteDef().ConstructOffsetsFromAnchor(tk2dBaseSprite.Anchor.MiddleCenter, body.GetComponent<tk2dSprite>().GetCurrentSpriteDef().position3);
-            body.CollideWithTileMap = false;
-            body.CollideWithOthers = true;
-            body.PrimaryPixelCollider.CollisionLayer = CollisionLayer.EnemyBulletBlocker;
-
-            orbitalPrefab = prefab.AddComponent<PlayerOrbital>();
-            orbitalPrefab.motionStyle = PlayerOrbital.OrbitalMotionStyle.ORBIT_PLAYER_ALWAYS;
-            orbitalPrefab.shouldRotate = false;
-            orbitalPrefab.orbitRadius = 2.5f;
-            orbitalPrefab.orbitDegreesPerSecond = 120f;
-            orbitalPrefab.SetOrbitalTier(0);
-
-            GameObject.DontDestroyOnLoad(prefab);
-            FakePrefab.MarkAsFakePrefab(prefab);
-            prefab.SetActive(false);
-        }
-        public static void BuildSynergyPrefab()
-        {
-            bool flag = CyanGuonStone.upgradeOrbitalPrefab == null;
-            if (flag)
-            {
-                GameObject gameObject = ItemBuilder.SpriteFromBundle("CyanGuonOrbitalSynergy", Initialisation.itemCollection.GetSpriteIdByName("cyanguon_synergy"), Initialisation.itemCollection);
-                gameObject.name = "Cyan Guon Orbital Synergy Form";
-                SpeculativeRigidbody speculativeRigidbody = gameObject.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(9, 13));
-                //gameObject.GetComponent<tk2dSprite>().GetCurrentSpriteDef().ConstructOffsetsFromAnchor(tk2dBaseSprite.Anchor.MiddleCenter, gameObject.GetComponent<tk2dSprite>().GetCurrentSpriteDef().position3);
-                CyanGuonStone.upgradeOrbitalPrefab = gameObject.AddComponent<PlayerOrbital>();
-                speculativeRigidbody.CollideWithTileMap = false;
-                speculativeRigidbody.CollideWithOthers = true;
-                speculativeRigidbody.PrimaryPixelCollider.CollisionLayer = CollisionLayer.EnemyBulletBlocker;
-                CyanGuonStone.upgradeOrbitalPrefab.shouldRotate = false;
-                CyanGuonStone.upgradeOrbitalPrefab.orbitRadius = 2.5f;
-                CyanGuonStone.upgradeOrbitalPrefab.orbitDegreesPerSecond = 120f;
-                CyanGuonStone.upgradeOrbitalPrefab.perfectOrbitalFactor = 10f;
-                CyanGuonStone.upgradeOrbitalPrefab.SetOrbitalTier(0);
-                UnityEngine.Object.DontDestroyOnLoad(gameObject);
-                FakePrefab.MarkAsFakePrefab(gameObject);
-                gameObject.SetActive(false);
-            }
-        }
         bool canFire = true;
         public override void Update()
         {

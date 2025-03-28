@@ -32,16 +32,16 @@ namespace NevernamedsItems
                  0, //Perfect orbital factor (synergy guons have it set around 10, other guons are 0)
                  new List<string>()
                  {
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_yellow_001",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_yellow_002",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_yellow_003",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_yellow_004",
+                     "libramorbtial_yellow_001",
+                     "libramorbtial_yellow_002",
+                     "libramorbtial_yellow_003",
+                     "libramorbtial_yellow_004",
                  },
                  6, //FPS
                  new Vector2(9, 9), //Collider Dimensions
                  new Vector2(1, 2), //Collider Offsets
                  tk2dBaseSprite.Anchor.LowerLeft, //Sprite Anchor
-                 tk2dSpriteAnimationClip.WrapMode.Loop);
+                 tk2dSpriteAnimationClip.WrapMode.Loop, true);
             LibramOrbitalController YellowController = YellowChamberOrbital.AddComponent<LibramOrbitalController>();
             YellowController.shoots = true;
             YellowController.gunIDToShoot = LovePistol.LovePistolID;
@@ -54,16 +54,16 @@ namespace NevernamedsItems
                 0, //Perfect orbital factor (synergy guons have it set around 10, other guons are 0)
                 new List<string>()
                 {
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_sixth_001",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_sixth_002",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_sixth_003",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_sixth_004",
+                     "libramorbtial_sixth_001",
+                     "libramorbtial_sixth_002",
+                     "libramorbtial_sixth_003",
+                     "libramorbtial_sixth_004",
                 },
                 6, //FPS
                 new Vector2(9, 9), //Collider Dimensions
                 new Vector2(1, 2), //Collider Offsets
                 tk2dBaseSprite.Anchor.LowerLeft, //Sprite Anchor
-                tk2dSpriteAnimationClip.WrapMode.Loop);
+                tk2dSpriteAnimationClip.WrapMode.Loop,true);
             LibramOrbitalController SixthController = SixthChamberOrbital.AddComponent<LibramOrbitalController>();
             SixthController.shoots = true;
             SixthController.shootDelay = 5;
@@ -78,16 +78,16 @@ namespace NevernamedsItems
                 0, //Perfect orbital factor (synergy guons have it set around 10, other guons are 0)
                 new List<string>()
                 {
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_oiled_001",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_oiled_002",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_oiled_003",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_oiled_004",
+                     "libramorbtial_oiled_001",
+                     "libramorbtial_oiled_002",
+                     "libramorbtial_oiled_003",
+                     "libramorbtial_oiled_004",
                 },
                 6, //FPS
                 new Vector2(9, 9), //Collider Dimensions
                 new Vector2(1, 2), //Collider Offsets
                 tk2dBaseSprite.Anchor.LowerLeft, //Sprite Anchor
-                tk2dSpriteAnimationClip.WrapMode.Loop);
+                tk2dSpriteAnimationClip.WrapMode.Loop, true);
 
             GameObject NitroglycylinderOrbital = GuonToolbox.MakeAnimatedOrbital("Nitroglycylinder LibramOrbital",
                 3f, //Orbital radius
@@ -97,16 +97,16 @@ namespace NevernamedsItems
                 0, //Perfect orbital factor (synergy guons have it set around 10, other guons are 0)
                 new List<string>()
                 {
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_nitro_001",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_nitro_002",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_nitro_003",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_nitro_004",
+                     "libramorbtial_nitro_001",
+                     "libramorbtial_nitro_002",
+                     "libramorbtial_nitro_003",
+                     "libramorbtial_nitro_004",
                 },
                 6, //FPS
                 new Vector2(9, 9), //Collider Dimensions
                 new Vector2(1, 2), //Collider Offsets
                 tk2dBaseSprite.Anchor.LowerLeft, //Sprite Anchor
-                tk2dSpriteAnimationClip.WrapMode.Loop);
+                tk2dSpriteAnimationClip.WrapMode.Loop, true);
             LibramOrbitalController NitroController = NitroglycylinderOrbital.AddComponent<LibramOrbitalController>();
             NitroController.shoots = true;
             NitroController.gunIDToShoot = 81;
@@ -120,16 +120,16 @@ namespace NevernamedsItems
                 0, //Perfect orbital factor (synergy guons have it set around 10, other guons are 0)
                 new List<string>()
                 {
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_glass_001",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_glass_002",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_glass_003",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_glass_004",
+                     "libramorbtial_glass_001",
+                     "libramorbtial_glass_002",
+                     "libramorbtial_glass_003",
+                     "libramorbtial_glass_004",
                 },
                 6, //FPS
                 new Vector2(9, 9), //Collider Dimensions
                 new Vector2(1, 2), //Collider Offsets
                 tk2dBaseSprite.Anchor.LowerLeft, //Sprite Anchor
-                tk2dSpriteAnimationClip.WrapMode.Loop);
+                tk2dSpriteAnimationClip.WrapMode.Loop, true);
             LibramOrbitalController GlassController = GlassChamberOrbital.AddComponent<LibramOrbitalController>();
             GlassController.shoots = true;
             GlassController.gunIDToShoot = Glasster.GlassterID;
@@ -143,16 +143,16 @@ namespace NevernamedsItems
                 0, //Perfect orbital factor (synergy guons have it set around 10, other guons are 0)
                 new List<string>()
                 {
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_flame_001",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_flame_002",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_flame_003",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_flame_004",
+                     "libramorbtial_flame_001",
+                     "libramorbtial_flame_002",
+                     "libramorbtial_flame_003",
+                     "libramorbtial_flame_004",
                 },
                 6, //FPS
                 new Vector2(9, 9), //Collider Dimensions
                 new Vector2(1, 2), //Collider Offsets
                 tk2dBaseSprite.Anchor.LowerLeft, //Sprite Anchor
-                tk2dSpriteAnimationClip.WrapMode.Loop);
+                tk2dSpriteAnimationClip.WrapMode.Loop, true);
             LibramOrbitalController FlameController = FlamechamberOrbital.AddComponent<LibramOrbitalController>();
             FlameController.shoots = true;
             FlameController.gunIDToShoot = 336;
@@ -165,16 +165,16 @@ namespace NevernamedsItems
                 0, //Perfect orbital factor (synergy guons have it set around 10, other guons are 0)
                 new List<string>()
                 {
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_spring_001",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_spring_002",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_spring_003",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_spring_004",
+                     "libramorbtial_spring_001",
+                     "libramorbtial_spring_002",
+                     "libramorbtial_spring_003",
+                     "libramorbtial_spring_004",
                 },
                 6, //FPS
                 new Vector2(9, 9), //Collider Dimensions
                 new Vector2(1, 2), //Collider Offsets
                 tk2dBaseSprite.Anchor.LowerLeft, //Sprite Anchor
-                tk2dSpriteAnimationClip.WrapMode.Loop);
+                tk2dSpriteAnimationClip.WrapMode.Loop, true);
             LibramOrbitalController SpringloadedController = SpringloadedChamberOrbital.AddComponent<LibramOrbitalController>();
             SpringloadedController.shoots = true;
             SpringloadedController.shootDelay = 1f;
@@ -188,16 +188,16 @@ namespace NevernamedsItems
                 0, //Perfect orbital factor (synergy guons have it set around 10, other guons are 0)
                 new List<string>()
                 {
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_withered_001",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_withered_002",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_withered_003",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_withered_004",
+                     "libramorbtial_withered_001",
+                     "libramorbtial_withered_002",
+                     "libramorbtial_withered_003",
+                     "libramorbtial_withered_004",
                 },
                 6, //FPS
                 new Vector2(9, 9), //Collider Dimensions
                 new Vector2(1, 2), //Collider Offsets
                 tk2dBaseSprite.Anchor.LowerLeft, //Sprite Anchor
-                tk2dSpriteAnimationClip.WrapMode.Loop);
+                tk2dSpriteAnimationClip.WrapMode.Loop, true);
             LibramOrbitalController WitheringController = WitheringChamberOrbital.AddComponent<LibramOrbitalController>();
             WitheringController.shoots = true;
             WitheringController.gunIDToShoot = Redhawk.ID;
@@ -210,16 +210,16 @@ namespace NevernamedsItems
                 5, //Perfect orbital factor (synergy guons have it set around 10, other guons are 0)
                 new List<string>()
                 {
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_heavy_001",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_heavy_002",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_heavy_003",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_heavy_004",
+                     "libramorbtial_heavy_001",
+                     "libramorbtial_heavy_002",
+                     "libramorbtial_heavy_003",
+                     "libramorbtial_heavy_004",
                 },
                 6, //FPS
                 new Vector2(9, 9), //Collider Dimensions
                 new Vector2(1, 2), //Collider Offsets
                 tk2dBaseSprite.Anchor.LowerLeft, //Sprite Anchor
-                tk2dSpriteAnimationClip.WrapMode.Loop);
+                tk2dSpriteAnimationClip.WrapMode.Loop, true);
 
             GameObject CyclopeanChamberOrbital = GuonToolbox.MakeAnimatedOrbital("Cyclopean Chamber LibramOrbital",
                 3f, //Orbital radius
@@ -229,16 +229,16 @@ namespace NevernamedsItems
                 0, //Perfect orbital factor (synergy guons have it set around 10, other guons are 0)
                 new List<string>()
                 {
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_cyclop_001",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_cyclop_002",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_cyclop_003",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_cyclop_004",
+                     "libramorbtial_cyclop_001",
+                     "libramorbtial_cyclop_002",
+                     "libramorbtial_cyclop_003",
+                     "libramorbtial_cyclop_004",
                 },
                 6, //FPS
                 new Vector2(9, 9), //Collider Dimensions
                 new Vector2(1, 2), //Collider Offsets
                 tk2dBaseSprite.Anchor.LowerLeft, //Sprite Anchor
-                tk2dSpriteAnimationClip.WrapMode.Loop);
+                tk2dSpriteAnimationClip.WrapMode.Loop, true);
             LibramOrbitalController CyclopeanController = CyclopeanChamberOrbital.AddComponent<LibramOrbitalController>();
             CyclopeanController.shoots = true;
             CyclopeanController.shootDelay = 6;
@@ -253,16 +253,16 @@ namespace NevernamedsItems
                 0, //Perfect orbital factor (synergy guons have it set around 10, other guons are 0)
                 new List<string>()
                 {
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_recycle_001",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_recycle_002",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_recycle_003",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_recycle_004",
+                     "libramorbtial_recycle_001",
+                     "libramorbtial_recycle_002",
+                     "libramorbtial_recycle_003",
+                     "libramorbtial_recycle_004",
                 },
                 6, //FPS
                 new Vector2(9, 9), //Collider Dimensions
                 new Vector2(1, 2), //Collider Offsets
                 tk2dBaseSprite.Anchor.LowerLeft, //Sprite Anchor
-                tk2dSpriteAnimationClip.WrapMode.Loop);
+                tk2dSpriteAnimationClip.WrapMode.Loop, true);
             LibramOrbitalController RecycleController = RecyclinderOrbital.AddComponent<LibramOrbitalController>();
             RecycleController.shoots = false;
             RecycleController.respondsToHit = true;
@@ -276,16 +276,16 @@ namespace NevernamedsItems
                 0, //Perfect orbital factor (synergy guons have it set around 10, other guons are 0)
                 new List<string>()
                 {
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_barrel_001",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_barrel_002",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_barrel_003",
-                     "NevernamedsItems/Resources/GuonStones/LibramOrbitals/libramorbtial_barrel_004",
+                     "libramorbtial_barrel_001",
+                     "libramorbtial_barrel_002",
+                     "libramorbtial_barrel_003",
+                     "libramorbtial_barrel_004",
                 },
                 6, //FPS
                 new Vector2(9, 9), //Collider Dimensions
                 new Vector2(1, 2), //Collider Offsets
                 tk2dBaseSprite.Anchor.LowerLeft, //Sprite Anchor
-                tk2dSpriteAnimationClip.WrapMode.Loop);
+                tk2dSpriteAnimationClip.WrapMode.Loop, true);
             LibramOrbitalController BarrelController = BarrelChamberOrbital.AddComponent<LibramOrbitalController>();
             BarrelController.shoots = false;
             BarrelController.shootDelay = 1;

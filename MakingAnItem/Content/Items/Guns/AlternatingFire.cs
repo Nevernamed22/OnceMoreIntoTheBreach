@@ -48,7 +48,7 @@ namespace NevernamedsItems
             projectile.gameObject.name = "alternatingfire_proj";
             projectile.SetProjectileSprite("alternatingfire_proj", 7, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.WhiteCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.WhiteCircleVFX;
             projectile.baseData.damage = 6;
 
             gun.DefaultModule.projectiles[0] = projectile;
@@ -57,7 +57,7 @@ namespace NevernamedsItems
             alternateProj = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
             alternateProj.SetProjectileSprite("alternatingfire_proj2", 7, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
             alternateProj.hitEffects.alwaysUseMidair = true;
-            alternateProj.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.WhiteCircleVFX;
+            alternateProj.hitEffects.overrideMidairDeathVFX = SharedVFX.WhiteCircleVFX;
             alternateProj.baseData.damage = 3;
             alternateProj.baseData.speed *= 2;
             alternateProj.baseData.force *= 2;

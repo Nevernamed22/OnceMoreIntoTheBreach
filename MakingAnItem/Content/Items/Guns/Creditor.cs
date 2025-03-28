@@ -55,7 +55,7 @@ namespace NevernamedsItems
             projectile.baseData.speed *= 1f;
             projectile.pierceMinorBreakables = true;
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.GreenLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.GreenLaserCircleVFX;
 
             projectile.AnimateProjectileBundle("CreditorProjectile",
                    Initialisation.ProjectileCollection,

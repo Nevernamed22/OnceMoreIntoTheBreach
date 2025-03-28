@@ -129,7 +129,7 @@ namespace NevernamedsItems
             ImplosionBehaviour implosion3 = projectile3.gameObject.AddComponent<ImplosionBehaviour>();
             implosion3.waitTime = 1f;
             implosion3.Suck = true;
-            implosion3.vfx = EasyVFXDatabase.HighPriestImplosionRing;
+            implosion3.vfx = SharedVFX.HighPriestImplosionRing;
             implosion3.explosionData = new ExplosionData()
             {
                 effect = StaticExplosionDatas.genericLargeExplosion.effect,
@@ -171,7 +171,7 @@ namespace NevernamedsItems
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = "Service Weapon Bullets";
 
-            gun.TrimGunSprites();
+
 
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

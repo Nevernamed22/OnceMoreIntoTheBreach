@@ -44,19 +44,7 @@ namespace NevernamedsItems
             lightning.targetEnemies = true;
             projectile.gameObject.AddComponent<PierceDeadActors>();
 
-            projectile.hitEffects.overrideMidairDeathVFX = VFXToolbox.CreateVFX("ARC Impact",
-                 new List<string>()
-                 {
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/electricImpact1",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/electricImpact2",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/electricImpact3",
-                 },
-                10, //FPS
-                 new IntVector2(44, 43), //Dimensions
-                 tk2dBaseSprite.Anchor.MiddleCenter, //Anchor
-                 false, //Uses a Z height off the ground
-                 0 //The Z height, if used
-                   );
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.ArcImpact;
             projectile.hitEffects.alwaysUseMidair = true;
 
             List<string> trailAnimpaths = new List<string>()

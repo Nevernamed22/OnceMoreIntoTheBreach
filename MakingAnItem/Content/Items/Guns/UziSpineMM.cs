@@ -50,7 +50,7 @@ namespace NevernamedsItems
             projectile.baseData.damage = 3f;
             projectile.baseData.range = 15f;
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.SmoothLightBlueLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.SmoothLightBlueLaserCircleVFX;
 
             HomingModifier homing = projectile.gameObject.AddComponent<HomingModifier>();
             homing.AngularVelocity = 40f;

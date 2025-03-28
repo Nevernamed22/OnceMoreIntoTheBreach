@@ -18,326 +18,9 @@ namespace NevernamedsItems
     }
     class VFXToolbox
     {
-
-        private static GameObject VFXScapeGoat;
-        private static tk2dSpriteCollectionData PrivateVFXCollection;
-        public static tk2dSpriteCollectionData VFXCollection
-        {
-            get
-            {
-                return PrivateVFXCollection;
-            }
-        }
-        public static void InitVFX()
-        {
-            VFXScapeGoat = new GameObject();
-            UnityEngine.Object.DontDestroyOnLoad(VFXScapeGoat);
-            PrivateVFXCollection = SpriteBuilder.ConstructCollection(VFXScapeGoat, "OMITBVFXCollection");
-
-            GameObject errorshellsvfx = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/MiscVFX/errorshellsoverhead_vfx", new GameObject("ErrorShellsIcon"));
-            errorshellsvfx.SetActive(false);
-            tk2dBaseSprite vfxSprite = errorshellsvfx.GetComponent<tk2dBaseSprite>();
-            vfxSprite.GetCurrentSpriteDef().ConstructOffsetsFromAnchor(tk2dBaseSprite.Anchor.LowerCenter, vfxSprite.GetCurrentSpriteDef().position3);
-            FakePrefab.MarkAsFakePrefab(errorshellsvfx);
-            UnityEngine.Object.DontDestroyOnLoad(errorshellsvfx);
-            EasyVFXDatabase.ERRORShellsOverheadVFX = errorshellsvfx;
-
-            List<string> SpareVFXPaths = new List<string>()
-            {
-                "NevernamedsItems/Resources/MiscVFX/spared_vfx_001",
-                "NevernamedsItems/Resources/MiscVFX/spared_vfx_002",
-                "NevernamedsItems/Resources/MiscVFX/spared_vfx_003",
-                "NevernamedsItems/Resources/MiscVFX/spared_vfx_004",
-                "NevernamedsItems/Resources/MiscVFX/spared_vfx_005",
-                "NevernamedsItems/Resources/MiscVFX/spared_vfx_006",
-                "NevernamedsItems/Resources/MiscVFX/spared_vfx_007",
-                "NevernamedsItems/Resources/MiscVFX/spared_vfx_008",
-                "NevernamedsItems/Resources/MiscVFX/spared_vfx_009",
-                "NevernamedsItems/Resources/MiscVFX/spared_vfx_010",
-                "NevernamedsItems/Resources/MiscVFX/spared_vfx_011",
-            };
-            GameObject spareVFX = CreateVFX("GundertaleSpare", SpareVFXPaths, 16, new IntVector2(34, 14), tk2dBaseSprite.Anchor.LowerCenter, true, 0.18f, 100, Color.yellow);
-            EasyVFXDatabase.GundetaleSpareVFX = spareVFX;
-
-            List<string> SpeedUpVFX = new List<string>()
-            {
-                "NevernamedsItems/Resources/StatVFX/speedup_vfx_001",
-                "NevernamedsItems/Resources/StatVFX/speedup_vfx_002",
-                "NevernamedsItems/Resources/StatVFX/speedup_vfx_003",
-                "NevernamedsItems/Resources/StatVFX/speedup_vfx_004",
-                "NevernamedsItems/Resources/StatVFX/speedup_vfx_005",
-                "NevernamedsItems/Resources/StatVFX/speedup_vfx_006",
-                "NevernamedsItems/Resources/StatVFX/speedup_vfx_007",
-            };
-            GameObject SpeedUpVFXObj = CreateVFX("Speed Up VFX", SpeedUpVFX, 16, new IntVector2(27, 17), tk2dBaseSprite.Anchor.LowerCenter, true, 0.18f, 100, Color.yellow);
-            EasyVFXDatabase.SpeedUpVFX = SpeedUpVFXObj;
-
-            EasyVFXDatabase.BigWhitePoofVFX = CreateVFX("Big White Poof",
-                  new List<string>()
-                  {
-                    "NevernamedsItems/Resources/MiscVFX/bigwhitepoof_001",
-                    "NevernamedsItems/Resources/MiscVFX/bigwhitepoof_002",
-                    "NevernamedsItems/Resources/MiscVFX/bigwhitepoof_003",
-                    "NevernamedsItems/Resources/MiscVFX/bigwhitepoof_004",
-                  },
-                 10, //FPS
-                  new IntVector2(36, 36), //Dimensions
-                  tk2dBaseSprite.Anchor.MiddleCenter, //Anchor
-                  false, //Uses a Z height off the ground
-                  0 //The Z height, if used
-                    );
-
-            EasyVFXDatabase.PurpleLaserCircleVFX = CreateVFX("Purple Laser Impact",
-                  new List<string>()
-                  {
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/purple_lasercircle_001",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/purple_lasercircle_002",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/purple_lasercircle_003",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/purple_lasercircle_004",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/purple_lasercircle_005",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/purple_lasercircle_006",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/purple_lasercircle_007",
-                  },
-                 12, //FPS
-                  new IntVector2(15, 14), //Dimensions
-                  tk2dBaseSprite.Anchor.MiddleCenter, //Anchor
-                  false, //Uses a Z height off the ground
-                  0 //The Z height, if used
-                    );
-
-            EasyVFXDatabase.BloodExplosion = CreateVFX("Blood Explosion VFX",
-                  new List<string>()
-                  {
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_001",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_002",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_003",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_004",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_005",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_006",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_007",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_008",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_009",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/bloodexplosion_010",
-                  },
-                 10, //FPS
-                  new IntVector2(71, 71), //Dimensions
-                  tk2dBaseSprite.Anchor.MiddleCenter, //Anchor
-                  false, //Uses a Z height off the ground
-                  0 //The Z height, if used
-                    );
-            GameObject debrislauncher = new GameObject();
-            debrislauncher.MakeFakePrefab();
-            debrislauncher.transform.parent = EasyVFXDatabase.BloodExplosion.transform;
-            debrislauncher.AddComponent<ExplosionDebrisLauncher>();
-
-            #region ArcExplosion
-            GameObject indevArcExplosion = CreateVFX("ARC Explosion",
-                 new List<string>()
-                 {
-                    "NevernamedsItems/Resources/MiscVFX/shittyarcsplosion_001",
-                    "NevernamedsItems/Resources/MiscVFX/shittyarcsplosion_002",
-                    "NevernamedsItems/Resources/MiscVFX/shittyarcsplosion_003",
-                    "NevernamedsItems/Resources/MiscVFX/shittyarcsplosion_004",
-                    "NevernamedsItems/Resources/MiscVFX/shittyarcsplosion_005",
-                    "NevernamedsItems/Resources/MiscVFX/shittyarcsplosion_006",
-                 },
-                10, //FPS
-                 new IntVector2(66, 64), //Dimensions
-                 tk2dBaseSprite.Anchor.MiddleCenter, //Anchor
-                 false, //Uses a Z height off the ground
-                 0 //The Z height, if used
-                   );
-
-            indevArcExplosion.GetComponent<tk2dBaseSprite>().sprite.usesOverrideMaterial = true;
-            Material mat = new Material(EnemyDatabase.GetOrLoadByName("GunNut").sprite.renderer.material);
-            mat.mainTexture = indevArcExplosion.GetComponent<tk2dBaseSprite>().sprite.renderer.material.mainTexture;
-            mat.SetColor("_EmissiveColor", ExtendedColours.skyblue);
-            mat.SetFloat("_EmissiveColorPower", 1.55f);
-            mat.SetFloat("_EmissivePower", 100);
-            indevArcExplosion.GetComponent<tk2dBaseSprite>().sprite.renderer.material = mat;
-
-            EasyVFXDatabase.ShittyElectricExplosion = indevArcExplosion;
-
-            GameObject indevDArcExplosion = CreateVFX("DARC Explosion",
-                 new List<string>()
-                 {
-                    "NevernamedsItems/Resources/MiscVFX/shittyarcsplosionred_001",
-                    "NevernamedsItems/Resources/MiscVFX/shittyarcsplosionred_002",
-                    "NevernamedsItems/Resources/MiscVFX/shittyarcsplosionred_003",
-                    "NevernamedsItems/Resources/MiscVFX/shittyarcsplosionred_004",
-                    "NevernamedsItems/Resources/MiscVFX/shittyarcsplosionred_005",
-                    "NevernamedsItems/Resources/MiscVFX/shittyarcsplosionred_006",
-                 },
-                10, //FPS
-                 new IntVector2(66, 64), //Dimensions
-                 tk2dBaseSprite.Anchor.MiddleCenter, //Anchor
-                 false, //Uses a Z height off the groundFinde
-                 0 //The Z height, if used
-                   );
-
-            indevDArcExplosion.GetComponent<tk2dBaseSprite>().sprite.usesOverrideMaterial = true;
-            Material mat2 = new Material(EnemyDatabase.GetOrLoadByName("GunNut").sprite.renderer.material);
-            mat2.mainTexture = indevDArcExplosion.GetComponent<tk2dBaseSprite>().sprite.renderer.material.mainTexture;
-            mat2.SetColor("_EmissiveColor", Color.red);
-            mat2.SetFloat("_EmissiveColorPower", 1.55f);
-            mat2.SetFloat("_EmissivePower", 100);
-            indevDArcExplosion.GetComponent<tk2dBaseSprite>().sprite.renderer.material = mat2;
-
-            EasyVFXDatabase.ShittyElectricExplosionRed = indevDArcExplosion;
-
-            EasyVFXDatabase.JarateExplosion = CreateVFX("Jarate Explosion VFX",
-                  new List<string>()
-                  {
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/jarate_explosion_001",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/jarate_explosion_002",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/jarate_explosion_003",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/jarate_explosion_004",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/jarate_explosion_005",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/jarate_explosion_006",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/jarate_explosion_007",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/jarate_explosion_008",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/jarate_explosion_009",
-                    "NevernamedsItems/Resources/MiscVFX/Explosions/jarate_explosion_010",
-                  },
-                 10, //FPS
-                  new IntVector2(71, 71), //Dimensions
-                  tk2dBaseSprite.Anchor.MiddleCenter, //Anchor
-                  false, //Uses a Z height off the ground
-                  0 //The Z height, if used
-                    );
-
-            #endregion
-
-
-            EasyVFXDatabase.JarateDrip = CreateVFX("JarateDrip", new List<string>()
-            {
-                "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/jarate_drip_001",
-                "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/jarate_drip_002",
-                "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/jarate_drip_003",
-                "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/jarate_drip_004",
-                "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/jarate_drip_005",
-            }, 10, new IntVector2(3, 8), tk2dBaseSprite.Anchor.UpperCenter, false, 0);
-
-
-            #region RainbowGuonPoofs
-            //RED
-            List<string> RedPoofPaths = new List<string>()
-            {
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/redpoof_001",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/redpoof_002",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/redpoof_003",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/redpoof_004",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/redpoof_005",
-            };
-            RainbowGuonStone.RedGuonTransitionVFX = CreateVFX("RedGuonPoof", RedPoofPaths, 14, new IntVector2(21, 22), tk2dBaseSprite.Anchor.MiddleCenter, false, 0);
-            //ORANGE
-            List<string> OrangePoofPaths = new List<string>()
-            {
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/orangepoof_001",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/orangepoof_002",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/orangepoof_003",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/orangepoof_004",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/orangepoof_005",
-            };
-            RainbowGuonStone.OrangeGuonTransitionVFX = CreateVFX("OrangeGuonPoof", OrangePoofPaths, 14, new IntVector2(21, 22), tk2dBaseSprite.Anchor.MiddleCenter, false, 0);
-            //YELLOW
-            List<string> YellowPoofPaths = new List<string>()
-            {
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/yellowpoof_001",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/yellowpoof_002",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/yellowpoof_003",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/yellowpoof_004",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/yellowpoof_005",
-            };
-            RainbowGuonStone.YellowGuonTransitionVFX = CreateVFX("YellowGuonPoof", YellowPoofPaths, 14, new IntVector2(21, 22), tk2dBaseSprite.Anchor.MiddleCenter, false, 0);
-            //GREEN
-            List<string> GreenPoofPaths = new List<string>()
-            {
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/greenpoof_001",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/greenpoof_002",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/greenpoof_003",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/greenpoof_004",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/greenpoof_005",
-            };
-            RainbowGuonStone.GreenGuonTransitionVFX = CreateVFX("GreenGuonPoof", GreenPoofPaths, 14, new IntVector2(21, 22), tk2dBaseSprite.Anchor.MiddleCenter, false, 0);
-            //BLUE
-            List<string> BluePoofPaths = new List<string>()
-            {
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/bluepoof_001",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/bluepoof_002",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/bluepoof_003",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/bluepoof_004",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/bluepoof_005",
-            };
-            RainbowGuonStone.BlueGuonTransitionVFX = CreateVFX("BlueGuonPoof", BluePoofPaths, 14, new IntVector2(21, 22), tk2dBaseSprite.Anchor.MiddleCenter, false, 0);
-            //WHITE
-            List<string> WhitePoofPaths = new List<string>()
-            {
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/whitepoof_001",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/whitepoof_002",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/whitepoof_003",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/whitepoof_004",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/whitepoof_005",
-            };
-            RainbowGuonStone.WhiteGuonTransitionVFX = CreateVFX("WhiteGuonPoof", WhitePoofPaths, 14, new IntVector2(21, 22), tk2dBaseSprite.Anchor.MiddleCenter, false, 0);
-            //CYAN
-            List<string> CyanPoofPaths = new List<string>()
-            {
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/cyanpoof_001",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/cyanpoof_002",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/cyanpoof_003",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/cyanpoof_004",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/cyanpoof_005",
-            };
-            RainbowGuonStone.CyanGuonTransitionVFX = CreateVFX("CyanGuonPoof", CyanPoofPaths, 14, new IntVector2(21, 22), tk2dBaseSprite.Anchor.MiddleCenter, false, 0);
-            //GOLD
-            List<string> GoldPoofPaths = new List<string>()
-            {
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/goldpoof_001",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/goldpoof_002",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/goldpoof_003",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/goldpoof_004",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/goldpoof_005",
-            };
-            RainbowGuonStone.GoldGuonTransitionVFX = CreateVFX("GoldGuonPoof", GoldPoofPaths, 14, new IntVector2(21, 22), tk2dBaseSprite.Anchor.MiddleCenter, false, 0);
-            //GREY
-            List<string> GreyPoofPaths = new List<string>()
-            {
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/greypoof_001",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/greypoof_002",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/greypoof_003",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/greypoof_004",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/greypoof_005",
-            };
-            RainbowGuonStone.GreyGuonTransitionVFX = CreateVFX("GreyGuonPoof", GreyPoofPaths, 14, new IntVector2(21, 22), tk2dBaseSprite.Anchor.MiddleCenter, false, 0);
-            //BROWN
-            List<string> BrownPoofPaths = new List<string>()
-            {
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/brownpoof_001",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/brownpoof_002",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/brownpoof_003",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/brownpoof_004",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/brownpoof_005",
-            };
-            RainbowGuonStone.BrownGuonTransitionVFX = CreateVFX("BrownGuonPoof", BrownPoofPaths, 14, new IntVector2(21, 22), tk2dBaseSprite.Anchor.MiddleCenter, false, 0);
-            //INDIGO
-            List<string> IndigoPoofPaths = new List<string>()
-            {
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/indigopoof_001",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/indigopoof_002",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/indigopoof_003",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/indigopoof_004",
-                "NevernamedsItems/Resources/MiscVFX/RainbowGuonPoofs/indigopoof_005",
-            };
-            RainbowGuonStone.IndigoGuonTransitionVFX = CreateVFX("IndigoGuonPoof", IndigoPoofPaths, 14, new IntVector2(21, 22), tk2dBaseSprite.Anchor.MiddleCenter, false, 0);
-            #endregion
-
-            laserSightPrefab = LoadHelper.LoadAssetFromAnywhere("assets/resourcesbundle/global vfx/vfx_lasersight.prefab") as GameObject;
-        }
-        public static GameObject laserSightPrefab;
         public static GameObject RenderLaserSight(Vector2 position, float length, float width, float angle, bool alterColour = false, Color? colour = null)
         {
-            GameObject gameObject = SpawnManager.SpawnVFX(laserSightPrefab, position, Quaternion.Euler(0, 0, angle));
+            GameObject gameObject = SpawnManager.SpawnVFX(SharedVFX.LaserSight, position, Quaternion.Euler(0, 0, angle));
 
             tk2dTiledSprite component2 = gameObject.GetComponent<tk2dTiledSprite>();
             float newWidth = 1f;
@@ -366,13 +49,6 @@ namespace NevernamedsItems
             Pixelator.Instance.DeregisterAdditionalRenderPass(glitchPass);
             yield break;
         }
-
-
-
-
-
-
-
         public static void DoRisingStringFade(string text, Vector2 point, Color colour, float heightOffGround = 3f, float opacity = 1f)
         {
 
@@ -485,36 +161,6 @@ namespace NevernamedsItems
             UnityEngine.Object.Destroy(damageLabel.gameObject, 1);
             yield break;
         }
-        public static GameObject CreateOverheadVFX(List<string> filepaths, string name, int fps)
-        {
-            //Setting up the Overhead Plague VFX
-            GameObject overheadderVFX = SpriteBuilder.SpriteFromResource(filepaths[0], new GameObject(name));
-            overheadderVFX.SetActive(false);
-            tk2dBaseSprite plaguevfxSprite = overheadderVFX.GetComponent<tk2dBaseSprite>();
-            plaguevfxSprite.GetCurrentSpriteDef().ConstructOffsetsFromAnchor(tk2dBaseSprite.Anchor.LowerCenter, plaguevfxSprite.GetCurrentSpriteDef().position3);
-            FakePrefab.MarkAsFakePrefab(overheadderVFX);
-            UnityEngine.Object.DontDestroyOnLoad(overheadderVFX);
-
-            //Animating the overhead
-            tk2dSpriteAnimator plagueanimator = overheadderVFX.AddComponent<tk2dSpriteAnimator>();
-            plagueanimator.Library = overheadderVFX.AddComponent<tk2dSpriteAnimation>();
-            plagueanimator.Library.clips = new tk2dSpriteAnimationClip[0];
-
-            tk2dSpriteAnimationClip clip = new tk2dSpriteAnimationClip { name = "NewOverheadVFX", fps = fps, frames = new tk2dSpriteAnimationFrame[0] };
-            foreach (string path in filepaths)
-            {
-                int spriteId = SpriteBuilder.AddSpriteToCollection(path, overheadderVFX.GetComponent<tk2dBaseSprite>().Collection);
-
-                overheadderVFX.GetComponent<tk2dBaseSprite>().Collection.spriteDefinitions[spriteId].ConstructOffsetsFromAnchor(tk2dBaseSprite.Anchor.LowerCenter);
-
-                tk2dSpriteAnimationFrame frame = new tk2dSpriteAnimationFrame { spriteId = spriteId, spriteCollection = overheadderVFX.GetComponent<tk2dBaseSprite>().Collection };
-                clip.frames = clip.frames.Concat(new tk2dSpriteAnimationFrame[] { frame }).ToArray();
-            }
-            plagueanimator.Library.clips = plagueanimator.Library.clips.Concat(new tk2dSpriteAnimationClip[] { clip }).ToArray();
-            plagueanimator.playAutomatically = true;
-            plagueanimator.DefaultClipId = plagueanimator.GetClipIdByName("NewOverheadVFX");
-            return overheadderVFX;
-        }
 
         public static GameObject CreateVFXBundle(string name, IntVector2 Dimensions, tk2dBaseSprite.Anchor anchor, bool usesZHeight, float zHeightOffset, float emissivePower = -1, Color? emissiveColour = null, bool persist = false)
         {
@@ -574,7 +220,7 @@ namespace NevernamedsItems
             return Obj;
         }
 
-        public static GameObject CreateVFXBundle(string name, bool usesZHeight, float zHeightOffset, float emissivePower = -1, Color? emissiveColour = null, bool persist = false)
+        public static GameObject CreateVFXBundle(string name, bool usesZHeight, float zHeightOffset, float emissivePower = -1, float emissiveColourPower = -1, Color? emissiveColour = null, bool persist = false, tk2dSpriteCollectionData overrideCollection = null)
         {
             GameObject Obj = new GameObject(name);
             VFXObject vfObj = new VFXObject();
@@ -582,7 +228,7 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(Obj);
             UnityEngine.Object.DontDestroyOnLoad(Obj);
 
-            tk2dSpriteCollectionData VFXSpriteCollection = Initialisation.VFXCollection;
+            tk2dSpriteCollectionData VFXSpriteCollection = overrideCollection != null ? overrideCollection : Initialisation.VFXCollection;
             tk2dSprite sprite = Obj.GetOrAddComponent<tk2dSprite>();
             tk2dSpriteAnimator animator = Obj.GetOrAddComponent<tk2dSpriteAnimator>();
             tk2dSpriteAnimation animation = Initialisation.vfxAnimationCollection;
@@ -594,19 +240,20 @@ namespace NevernamedsItems
             List<tk2dSpriteDefinition> frames = new List<tk2dSpriteDefinition>();
             foreach (tk2dSpriteAnimationFrame frame in clip.frames) { frames.Add(VFXSpriteCollection.spriteDefinitions[frame.spriteId]); }
 
-            foreach (tk2dSpriteDefinition frameDef in frames)
+                sprite.usesOverrideMaterial = true;
+            sprite.renderer.material.shader = ShaderCache.Acquire("tk2d/CutoutVertexColorTintableTilted");
+
+            if (emissivePower > 0)
             {
-                if (emissivePower > 0) frameDef.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
-                if (emissivePower > 0) frameDef.material.SetFloat("_EmissiveColorPower", emissivePower);
-                if (emissiveColour != null) frameDef.material.SetColor("_EmissiveColor", (Color)emissiveColour);
-                if (emissivePower > 0) frameDef.materialInst.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
-                if (emissivePower > 0) frameDef.materialInst.SetFloat("_EmissiveColorPower", emissivePower);
-                if (emissiveColour != null) frameDef.materialInst.SetColor("_EmissiveColor", (Color)emissiveColour);
+
+                Material mat = new Material(EnemyDatabase.GetOrLoadByName("GunNut").sprite.renderer.material);
+                mat.mainTexture = sprite.renderer.material.mainTexture;
+                mat.SetColor("_EmissiveColor", (Color)emissiveColour); //RGB value of the color you want glowing
+                mat.SetFloat("_EmissiveColorPower", emissiveColourPower); // no idea tbh
+                mat.SetFloat("_EmissivePower", emissivePower); //brightness
+                sprite.renderer.material = mat;
             }
 
-            if (emissivePower > 0) sprite.renderer.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
-            if (emissivePower > 0) sprite.renderer.material.SetFloat("_EmissiveColorPower", emissivePower);
-            if (emissiveColour != null) sprite.renderer.material.SetColor("_EmissiveColor", (Color)emissiveColour);
             if (!persist)
             {
                 SpriteAnimatorKiller kill = animator.gameObject.AddComponent<SpriteAnimatorKiller>();
@@ -616,17 +263,18 @@ namespace NevernamedsItems
             }
             animator.playAutomatically = true;
             animator.DefaultClipId = animator.GetClipIdByName(name);
-            vfObj.attached = true;
+            vfObj.attached = false;
             vfObj.persistsOnDeath = false;
             vfObj.usesZHeight = usesZHeight;
             vfObj.zHeight = zHeightOffset;
             vfObj.alignment = VFXAlignment.NormalAligned;
             vfObj.destructible = false;
             vfObj.effect = Obj;
+            vfObj.orphaned = true;
             return Obj;
         }
 
-        public static VFXPool CreateVFXPoolBundle(string name, IntVector2 Dimensions, tk2dBaseSprite.Anchor anchor, bool usesZHeight, float zHeightOffset, VFXAlignment alignment = VFXAlignment.NormalAligned, float emissivePower = -1, Color? emissiveColour = null, bool persist = false)
+        public static VFXPool CreateVFXPoolBundle(string name, bool usesZHeight, float zHeightOffset, VFXAlignment alignment = VFXAlignment.NormalAligned, float emissivePower = -1, Color? emissiveColour = null, bool persist = false)
         {
             GameObject Obj = new GameObject(name);
             VFXPool pool = new VFXPool();
@@ -642,21 +290,6 @@ namespace NevernamedsItems
             tk2dSpriteAnimator animator = Obj.GetOrAddComponent<tk2dSpriteAnimator>();
             tk2dSpriteAnimation animation = Initialisation.vfxAnimationCollection;
             animator.Library = animation;
-
-            Vector3[] colliderVertices = new Vector3[]{
-                      new Vector3(0f, 0f, 0f),
-                      new Vector3((Dimensions.x / 16), (Dimensions.y / 16), 0f)
-                  };
-            tk2dSpriteAnimationClip clip = animator.GetClipByName(name);
-
-            List<tk2dSpriteDefinition> frames = new List<tk2dSpriteDefinition>();
-            foreach (tk2dSpriteAnimationFrame frame in clip.frames) { frames.Add(VFXSpriteCollection.spriteDefinitions[frame.spriteId]); }
-
-            foreach (tk2dSpriteDefinition frameDef in frames)
-            {
-                frameDef.ConstructOffsetsFromAnchor(anchor);
-                frameDef.colliderVertices = colliderVertices;
-            }
 
             if (emissivePower > 0)
             {
@@ -829,7 +462,7 @@ namespace NevernamedsItems
         {
             return new VFXPool { type = VFXPoolType.None, effects = new VFXComplex[] { new VFXComplex() { effects = new VFXObject[] { new VFXObject() { } } } } };
         }
-        public static VFXPool CreateBlankVFXPool(GameObject effect, bool isDebris = false)
+        public static VFXPool CreateBlankVFXPool(GameObject effect, bool isDebris = false, bool attached = true)
         {
 
             if (isDebris)
@@ -850,7 +483,7 @@ namespace NevernamedsItems
             } } } }
                 };
             }
-            return new VFXPool { type = VFXPoolType.Single, effects = new VFXComplex[] { new VFXComplex() { effects = new VFXObject[] { new VFXObject() { effect = effect } } } } };
+            return new VFXPool { type = VFXPoolType.Single, effects = new VFXComplex[] { new VFXComplex() { effects = new VFXObject[] { new VFXObject() { effect = effect, attached = attached } } } } };
         }
         public static VFXPool CreateVFXPool(string name, List<string> spritePaths, int fps, IntVector2 Dimensions, tk2dBaseSprite.Anchor anchor, bool usesZHeight, float zHeightOffset, bool persist = false, VFXAlignment alignment = VFXAlignment.NormalAligned, float emissivePower = -1, Color? emissiveColour = null, tk2dSpriteAnimationClip.WrapMode wrapmode = tk2dSpriteAnimationClip.WrapMode.Once, int loopStart = 0)
         {
@@ -921,64 +554,6 @@ namespace NevernamedsItems
             complex.effects = new VFXObject[] { vfObj };
             pool.effects = new VFXComplex[] { complex };
             return pool;
-        }
-
-        public static GameObject CreateCustomClip(string spriteName, int pixelWidth, int pixelHeight)
-        {
-            GameObject clip = UnityEngine.Object.Instantiate((PickupObjectDatabase.GetById(95) as Gun).clipObject);
-            clip.gameObject.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(clip.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(clip);
-            clip.GetComponent<tk2dBaseSprite>().spriteId = VFXCollection.inst.GetSpriteIdByName(spriteName);
-            VFXToolbox.SetupDefinitionForClipSprite(spriteName, clip.GetComponent<tk2dBaseSprite>().spriteId, pixelWidth, pixelHeight);
-            return clip;
-        }
-        public static void SetupDefinitionForClipSprite(string name, int id, int pixelWidth, int pixelHeight)
-        {
-            float thing = 14;
-            float trueWidth = (float)pixelWidth / thing;
-            float trueHeight = (float)pixelHeight / thing;
-            tk2dSpriteDefinition def = VFXCollection.inst.spriteDefinitions[(PickupObjectDatabase.GetById(47) as Gun).clipObject.GetComponent<tk2dBaseSprite>().spriteId].CopyDefinitionFrom();
-            def.boundsDataCenter = new Vector3(trueWidth / 2f, trueHeight / 2f, 0f);
-            def.boundsDataExtents = new Vector3(trueWidth, trueHeight, 0f);
-            def.untrimmedBoundsDataCenter = new Vector3(trueWidth / 2f, trueHeight / 2f, 0f);
-            def.untrimmedBoundsDataExtents = new Vector3(trueWidth, trueHeight, 0f);
-            def.position0 = new Vector3(0f, 0f, 0f);
-            def.position1 = new Vector3(0f + trueWidth, 0f, 0f);
-            def.position2 = new Vector3(0f, 0f + trueHeight, 0f);
-            def.position3 = new Vector3(0f + trueWidth, 0f + trueHeight, 0f);
-            def.colliderVertices[1].x = trueWidth;
-            def.colliderVertices[1].y = trueHeight;
-            def.name = name;
-            VFXCollection.spriteDefinitions[id] = def;
-        }
-        public static GameObject CreateCustomShellCasing(string spriteName, int pixelWidth, int pixelHeight)
-        {
-            GameObject casing = UnityEngine.Object.Instantiate((PickupObjectDatabase.GetById(202) as Gun).shellCasing);
-            casing.gameObject.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(casing.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(casing);
-            casing.GetComponent<tk2dBaseSprite>().spriteId = VFXCollection.inst.GetSpriteIdByName(spriteName);
-            VFXToolbox.SetupDefinitionForShellSprite(spriteName, casing.GetComponent<tk2dBaseSprite>().spriteId, pixelWidth, pixelHeight);
-            return casing;
-        }
-        public static tk2dSpriteDefinition SetupDefinitionForShellSprite(string name, int id, int pixelWidth, int pixelHeight, tk2dSpriteDefinition overrideToCopyFrom = null)
-        {
-            float thing = 14;
-            float trueWidth = (float)pixelWidth / thing;
-            float trueHeight = (float)pixelHeight / thing;
-            tk2dSpriteDefinition def = overrideToCopyFrom ?? VFXCollection.inst.spriteDefinitions[(PickupObjectDatabase.GetById(202) as Gun).shellCasing.GetComponent<tk2dBaseSprite>().spriteId].CopyDefinitionFrom();
-            def.boundsDataCenter = new Vector3(trueWidth / 2f, trueHeight / 2f, 0f);
-            def.boundsDataExtents = new Vector3(trueWidth, trueHeight, 0f);
-            def.untrimmedBoundsDataCenter = new Vector3(trueWidth / 2f, trueHeight / 2f, 0f);
-            def.untrimmedBoundsDataExtents = new Vector3(trueWidth, trueHeight, 0f);
-            def.position0 = new Vector3(0f, 0f, 0f);
-            def.position1 = new Vector3(0f + trueWidth, 0f, 0f);
-            def.position2 = new Vector3(0f, 0f + trueHeight, 0f);
-            def.position3 = new Vector3(0f + trueWidth, 0f + trueHeight, 0f);
-            def.name = name;
-            VFXCollection.spriteDefinitions[id] = def;
-            return def;
         }
     }
     public class TiledSpriteConnector : MonoBehaviour

@@ -41,7 +41,7 @@ namespace NevernamedsItems
         }
         private void OnReload(PlayerController player, Gun gun)
         {
-            AkSoundEngine.PostEvent("electricdrillbuzz", base.gameObject);
+            AkSoundEngine.PostEvent("electricdrillbuzz", base.gameObject); 
         }
     } 
 }

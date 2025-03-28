@@ -46,6 +46,7 @@ namespace NevernamedsItems
 
         //Plague Effects
         public static GameActorPlagueEffect StandardPlagueEffect;
+
         public static void InitCustomEffects()
         {
             FriendlyWebGoopSpeedMod = new GameActorSpeedEffect

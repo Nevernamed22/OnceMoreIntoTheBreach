@@ -34,15 +34,19 @@ namespace NevernamedsItems
             {
                 if (otherRigidbody)
                 {
-                    if (otherRigidbody.aiActor != null && otherRigidbody.healthHaver != null)
+                    if (minorBreakablesOnly) { if (otherRigidbody.minorBreakable) { PhysicsEngine.SkipCollision = true; } }
+                    else
                     {
-                        if (worksOnEnemies) PhysicsEngine.SkipCollision = true;
+                        if (otherRigidbody.aiActor != null && otherRigidbody.healthHaver != null)
+                        {
+                            if (worksOnEnemies) PhysicsEngine.SkipCollision = true;
+                        }
+                        else if (otherRigidbody.projectile != null && otherRigidbody.projectile.collidesWithProjectiles)
+                        {
+                            if (worksOnProjectiles) PhysicsEngine.SkipCollision = true;
+                        }
+                        else { PhysicsEngine.SkipCollision = true; }
                     }
-                    else if (otherRigidbody.projectile != null && otherRigidbody.projectile.collidesWithProjectiles)
-                    {
-                        if (worksOnProjectiles) PhysicsEngine.SkipCollision = true;
-                    }
-                    else { PhysicsEngine.SkipCollision = true; }
                 }
             }
             catch (Exception e)
@@ -55,5 +59,6 @@ namespace NevernamedsItems
 
         public bool worksOnEnemies = false;
         public bool worksOnProjectiles = false;
+        public bool minorBreakablesOnly = false;
     }
 }

@@ -64,7 +64,6 @@ namespace NevernamedsItems
             projectile.hitEffects.deathTileMapVertical = null;
             projectile.hitEffects.deathTileMapHorizontal = null;
             projectile.hitEffects.overrideMidairDeathVFX = null;
-            projectile.transform.parent = gun.barrelOffset;
 
             // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.
             gun.quality = PickupObject.ItemQuality.B;

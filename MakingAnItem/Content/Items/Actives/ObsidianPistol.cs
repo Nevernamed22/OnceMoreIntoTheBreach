@@ -78,7 +78,7 @@ namespace NevernamedsItems
                 if (itemness != null)
                 {
                     AkSoundEngine.PostEvent("Play_WPN_smileyrevolver_shot_01", gameObject);
-                    Instantiate<GameObject>(EasyVFXDatabase.TeleporterPrototypeTelefragVFX, itemness.sprite.WorldCenter, Quaternion.identity);
+                    Instantiate<GameObject>(SharedVFX.TeleporterPrototypeTelefragVFX, itemness.sprite.WorldCenter, Quaternion.identity);
                     GameManager.Instance.StartCoroutine(DoReward(user, itemness.sprite.WorldCenter, itemness.PickupObjectId));
                     Destroy(companion.gameObject);
                 }
@@ -98,7 +98,7 @@ namespace NevernamedsItems
             if (debrisObject != null)
             {
                 AkSoundEngine.PostEvent("Play_WPN_smileyrevolver_shot_01", gameObject);
-                Instantiate<GameObject>(EasyVFXDatabase.TeleporterPrototypeTelefragVFX, debrisObject.sprite.WorldCenter, Quaternion.identity);
+                Instantiate<GameObject>(SharedVFX.TeleporterPrototypeTelefragVFX, debrisObject.sprite.WorldCenter, Quaternion.identity);
                 GameManager.Instance.StartCoroutine(DoReward(user, debrisObject.sprite.WorldCenter, item.PickupObjectId));
                 UnityEngine.Object.Destroy(debrisObject.gameObject);
             }

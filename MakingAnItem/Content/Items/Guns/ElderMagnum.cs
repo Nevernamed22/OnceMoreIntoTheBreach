@@ -45,7 +45,7 @@ namespace NevernamedsItems
             projectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.RedLaserCircleVFX;
             projectile.hitEffects.alwaysUseMidair = true;
 
             projectile.SetProjectileCollisionRight("eldermagnum_projectile", Initialisation.ProjectileCollection, 5, 5, true, tk2dBaseSprite.Anchor.MiddleCenter, 4, 4);

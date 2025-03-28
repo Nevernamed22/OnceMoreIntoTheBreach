@@ -121,9 +121,9 @@ namespace NevernamedsItems
             spamtonHead.baseData.damage = 7f;
             spamtonHead.baseData.speed *= 1.2f;
             spamtonHead.hitEffects.alwaysUseMidair = true;
-            spamtonHead.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.WhiteCircleVFX;
+            spamtonHead.hitEffects.overrideMidairDeathVFX = SharedVFX.WhiteCircleVFX;
 
-            projectile.AnimateProjectileBundle("BigShotSpamtonHeadProjectile",
+            spamtonHead.AnimateProjectileBundle("BigShotSpamtonHeadProjectile",
                    Initialisation.ProjectileCollection,
                    Initialisation.projectileAnimationCollection,
                    "BigShotSpamtonHeadProjectile",
@@ -149,7 +149,7 @@ namespace NevernamedsItems
             pipisProj.baseData.speed *= 0.7f;
             pipisProj.baseData.range *= 0.7f;
 
-            projectile.AnimateProjectileBundle("BigShotPipisProjectile",
+            pipisProj.AnimateProjectileBundle("BigShotPipisProjectile",
                    Initialisation.ProjectileCollection,
                    Initialisation.projectileAnimationCollection,
                    "BigShotPipisProjectile",

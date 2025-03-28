@@ -11,6 +11,17 @@ namespace NevernamedsItems
     {
         public static tk2dSpriteCollectionData FastLoadSpriteCollection(AssetBundle bundle, string CollectionName, string MaterialName)
         {
+            //ETGModConsole.Log($"Loading Collection '{CollectionName}' with material '{MaterialName}'");
+            if (bundle == null)
+            {
+                ETGModConsole.Log("ASSET BUNDLE WAS NULL.");
+                return null;
+            }
+            if (bundle.LoadAsset<GameObject>(CollectionName) == null)
+            {
+                ETGModConsole.Log($"COLLECTION '{CollectionName}' WAS NULL");
+                return null;
+            }
             tk2dSpriteCollectionData Colection = bundle.LoadAsset<GameObject>(CollectionName).GetComponent<tk2dSpriteCollectionData>();
             Material material = bundle.LoadAsset<Material>(MaterialName);
             Texture texture = material.GetTexture("_MainTex");
@@ -58,11 +69,13 @@ namespace NevernamedsItems
                     break;
             }
 
-            if (File.Exists(Path.Combine(Path.Combine(Initialisation.FilePathFolder, platformFolder), name)))
+            var path = Path.Combine(Path.Combine(Initialisation.FilePathFolder, platformFolder), name);
+
+            if (File.Exists(path))
             {
                 try
                 {
-                    result = AssetBundle.LoadFromFile(Path.Combine(Initialisation.FilePathFolder, name));
+                    result = AssetBundle.LoadFromFile(path);
                     if (logs == true)
                     {
                         global::ETGModConsole.Log("Successfully loaded assetbundle!", false);

@@ -55,6 +55,7 @@ namespace NevernamedsItems
 
         public static tk2dSpriteAnimation projectileAnimationCollection;
         public static tk2dSpriteAnimation gunAnimationCollection;
+        public static tk2dSpriteAnimation itemAnimationCollection;
         public static tk2dSpriteAnimation vfxAnimationCollection;
         public static tk2dSpriteAnimation npcAnimationCollection;
         public static tk2dSpriteAnimation companionAnimationCollection;
@@ -84,7 +85,7 @@ namespace NevernamedsItems
                 FilePathFolder = this.FolderPath();
 
                 //Assets
-                assetBundle = AssetBundleLoader.LoadAssetBundleFromLiterallyAnywhere("omitbbundle", true);
+                assetBundle = AssetBundleLoader.LoadAssetBundleFromLiterallyAnywhere("omitbbundle", false);
                 itemCollection = AssetBundleLoader.FastLoadSpriteCollection(assetBundle, "ItemCollection", "ItemCollectionMaterial.mat");
                 gunCollection = AssetBundleLoader.FastLoadSpriteCollection(assetBundle, "GunCollection", "GunCollectionMaterial.mat");
                 gunCollection2 = AssetBundleLoader.FastLoadSpriteCollection(assetBundle, "GunCollection2", "GunCollection2Material.mat");
@@ -99,6 +100,7 @@ namespace NevernamedsItems
 
                 projectileAnimationCollection = assetBundle.LoadAsset<GameObject>("ProjectileAnimationCollection").GetComponent<tk2dSpriteAnimation>();
                 gunAnimationCollection = assetBundle.LoadAsset<GameObject>("GunAnimationCollection").GetComponent<tk2dSpriteAnimation>();
+                itemAnimationCollection = assetBundle.LoadAsset<GameObject>("ItemAnimationCollection").GetComponent<tk2dSpriteAnimation>();
                 vfxAnimationCollection = assetBundle.LoadAsset<GameObject>("VFXAnimationCollection").GetComponent<tk2dSpriteAnimation>();
                 npcAnimationCollection = assetBundle.LoadAsset<GameObject>("NPCAnimationCollection").GetComponent<tk2dSpriteAnimation>();
                 companionAnimationCollection = assetBundle.LoadAsset<GameObject>("CompanionAnimationCollection").GetComponent<tk2dSpriteAnimation>();
@@ -107,7 +109,7 @@ namespace NevernamedsItems
                 environmentAnimationCollection = assetBundle.LoadAsset<GameObject>("EnvironmentAnimationCollection").GetComponent<tk2dSpriteAnimation>();
 
                 JsonEmbedder.EmbedJsonDataFromAssembly(Assembly.GetExecutingAssembly(), gunCollection, "NevernamedsItems/Resources/GunJsons");
-                JsonEmbedder.EmbedJsonDataFromAssembly(Assembly.GetExecutingAssembly(), gunCollection2, "NevernamedsItems/Resources/GunJsons");
+                JsonEmbedder.EmbedJsonDataFromAssembly(Assembly.GetExecutingAssembly(), gunCollection2, "NevernamedsItems/Resources/GunJsons2");
 
                 //Tools and Toolboxes
                 StaticReferences.Init();
@@ -134,9 +136,7 @@ namespace NevernamedsItems
                 FloorAndGenerationToolbox.Init();
                 ComplexProjModBeamCompatibility.Init();
 
-                //VFX Setup
-                VFXToolbox.InitVFX();
-                EasyVFXDatabase.Init(); //Needs to occur before goop definition
+                SharedVFX.Init();
                 ShadeFlightHookFix.Init();
 
                 //Status Effect Setup
@@ -158,9 +158,6 @@ namespace NevernamedsItems
                 JammedChests.Init();
 
                 //Exotic Object Shit
-
-                //VFX
-                LockdownStatusEffect.Initialise();
 
                 //Tweaks and Changes
                 EnemyHealthModifiers.Init();
@@ -215,8 +212,9 @@ namespace NevernamedsItems
                     BulletBullets.Init();
                     AntimatterBullets.Init();
                     SpectreBullets.Init();
+                    ExpandingBullets.Init();
                     Tabullets.Init();
-                    TierBullets.Init(); //Unfinished
+                    //TierBullets.Init(); //Unfinished
                     BombardierShells.Init();
                     GildedLead.Init();
                     DemoterBullets.Init();
@@ -240,14 +238,17 @@ namespace NevernamedsItems
                     ElectrumRounds.Init();
                     BreachingRounds.Init();
                     MagnetItem.Init();
+                    BlueShell.Init();
                     EargesplittenLoudenboomerRounds.Init();
                     RoundsOfTheReaver.Init();
                     TheShell.Init();
+                    JammedBullets.Init();
                     //Status Effect Bullet Mods
                     SnailBullets.Init();
                     LockdownBullets.Init();
                     PestiferousLead.Init();
                     Shrinkshot.Init();
+                    RazorBullets.Init();
                     //Volley Modifying Bullet Mods
                     FlamingShells.Init();
                     ShroomedBullets.Init();
@@ -288,6 +289,7 @@ namespace NevernamedsItems
                     ExoskeletalArmour.Init();
                     PowerArmour.Init();
                     ArmouredArmour.Init();
+                    HEVSuit.Init();
                     //Consumable Givers
                     LooseChange.Init();
                     SpaceMetal.Init();
@@ -335,6 +337,8 @@ namespace NevernamedsItems
                     ExaltedHeart.Init();
                     CheeseHeart.Init();
                     TinHeart.Init();
+                    HeartContainer.Init();
+                    HeartBox.Init();
                     //Chambers
                     BarrelChamber.Init();
                     GlassChamber.Init();
@@ -346,17 +350,20 @@ namespace NevernamedsItems
                     HeavyChamber.Init();
                     CyclopeanChamber.Init();
                     ElectricCylinder.Init();
+                    SonicCylinder.Init();
+                    Chamembert.Init();
                     Dreamcatcher.Init();
+                    FiringMechanism.Init();
                     //Table Techs
                     TableTechTable.Init();
                     TableTechSpeed.Init();
                     TableTechInvulnerability.Init();
                     TableTechAmmo.Init();
                     TableTechGuon.Init();
-                    TableTechNology.Init();
                     TableTechSpectre.Init();
                     TableTechAstronomy.Init();
                     TableTechVitality.Init();
+                    TableTechNology.Init();
                     UnsTableTech.Init();
                     RectangularMirror.Init();
                     //Guon Stones
@@ -408,6 +415,8 @@ namespace NevernamedsItems
                     AmuletOfShelltan.Init();
                     CrosshairNecklace.Init();
                     HauntedAmulet.Init();
+                    Gracelets.Init();
+                    SubstitutiaryLocomotion.Init();
                     //Rings
                     RingOfOddlySpecificBenefits.Init();
                     FowlRing.Init();
@@ -444,6 +453,9 @@ namespace NevernamedsItems
                     Cubud.Init();
                     Hapulon.Init();
                     PrismaticSnail.Init();
+                    RandomisedBuddyController.Init();
+                    ManOfMystery.Init();
+                    Goobleck.Init();
                     //Potions / Jars 
                     SpeedPotion.Init();
                     LovePotion.Init();
@@ -456,6 +468,8 @@ namespace NevernamedsItems
                     Rubedo.Init();
                     HoleyWater.Init();
                     Jarate.Init();
+                    BlueSyrup.Init();
+                    ColdOne.Init();
                     //Remotes
                     ReinforcementRadio.Init();
                     //Medicine
@@ -488,6 +502,7 @@ namespace NevernamedsItems
                     //Hands
                     Lefthandedness.Init();
                     NecromancersRightHand.Init();
+                    FiveFingerDiscount.Init();
                     //Bombs
                     InfantryGrenade.Init();
                     DiceGrenade.Init();
@@ -529,6 +544,7 @@ namespace NevernamedsItems
                     Accelerant.Init();
                     HornedHelmet.Init();
                     HelmOfChaos.Init();
+                    TruthKnowersTrance.Init();
                     RocketMan.Init();
                     Roulette.Init(); //Unfinished
                     FinishedBullet.Init();
@@ -570,6 +586,11 @@ namespace NevernamedsItems
                     TabletOfOrder.Init();
                     Bambarrage.Init();
                     AmmoGland.Init();
+                    RabbitsFoot.Init();
+                    GlobeSight.Init();
+                    Payback.Init();
+                    MasterPin.Init();
+                    GuruMeditation.Init();
                     BeggarsBelief.Init();
                     LeadSoul.Init();
                     LeadOfLife.Init();
@@ -623,6 +644,7 @@ namespace NevernamedsItems
                     HotGlueGun.Add();
                     UpNUp.Add();
                     RedRobin.Add();
+                    DarkLady.Add();
                     VariableGun.Add();
                     CrescendoBlaster.Add();
                     Glasster.Add();
@@ -636,6 +658,7 @@ namespace NevernamedsItems
                     SpacersFancy.Add();
                     FractalGun.Add();
                     SalvatorDormus.Add();
+                    MoltenHeat.Add();
                     ServiceWeapon.Add();
                     HeadOfTheOrder.Add();
                     GunOfAThousandSins.Add();
@@ -661,8 +684,10 @@ namespace NevernamedsItems
                     Lantaka.Add();
                     GreekFire.Add();
                     EmberCannon.Add();
+                    Dulcannon.Add();
                     ElysiumCannon.Add();
                     DisplacerCannon.Add();
+                    BusterGun.Add();
                     //SCI-FI GUNS
                     Rewarp.Add();
                     Blasmaster.Add();
@@ -680,6 +705,7 @@ namespace NevernamedsItems
                     Purpler.Add();
                     VacuumGun.Add();
                     Oxygun.Add();
+                    XRay.Add();
                     LtBluesPhaser.Add();
                     TriBeam.Add();
                     WaveformLens.Add();
@@ -713,8 +739,10 @@ namespace NevernamedsItems
                     //BOWS AND CROSSBOWS
                     IceBow.Add();
                     TitanSlayer.Add();
+                    PencilPusher.Add();
                     Boltcaster.Add();
                     VulcanRepeater.Add();
+                    Pinaka.Add();
                     Clicker.Add();
                     //ANTIQUES
                     WheelLock.Add();
@@ -736,12 +764,17 @@ namespace NevernamedsItems
                     Arquebus.Add();
                     TheBlackSpot.Add();
                     //KNIVES AND BLADES
+                    Javelin.Add();
                     Carnwennan.Add();
                     MantidAugment.Add();
+                    HookGun.Add();
+                    RiteOfPassage.Add();
+                    KillDevil.Add();
                     Claymore.Add();
                     Scythe.Add();
                     //REALISTIC GUNS
                     HeatRay.Add();
+                    Welder.Add();
                     BlueGun.Add();
                     BarcodeScanner.Add();
                     AntimaterielRifle.Add();
@@ -766,6 +799,7 @@ namespace NevernamedsItems
                     BurstRifle.Add();
                     DublDuck.Add();
                     Type56.Add();
+                    M70.Add();
                     G11.Add();
                     C7A2.Add();
                     Rheinmetole.Add();
@@ -773,14 +807,20 @@ namespace NevernamedsItems
                     //FLAMETHROWERS
                     FlamethrowerMk1.Add();
                     FlamethrowerMk2.Add();
+                    Wex.Add();
                     //MISSILE LAUNCHERS
                     BouncerRPG.Add();
+                    Clamshell.Add();
                     BottleRocket.Add();
+                    Betsy.Add();
                     NNBazooka.Add();
                     BoomBeam.Add();
                     Pillarocket.Add();
                     DoomBoom.Add();
+                    Pallbearer.Add();
                     //ANIMAL / ORGANIC GUNS
+                    Gunion.Add();
+                    Cornnon.Add();
                     SporeLauncher.Add();
                     PoisonDartFrog.Add();
                     Corgun.Add();
@@ -790,6 +830,7 @@ namespace NevernamedsItems
                     KillithidTendril.Add();
                     Gunger.Add();
                     SickWorm.Add();
+                    DomeLord.Add();
                     MiniMonger.Add();
                     CarrionFormeTwo.Add();
                     CarrionFormeThree.Add();
@@ -797,8 +838,10 @@ namespace NevernamedsItems
                     UterinePolyp.Add();
                     Wrinkler.Add();
                     BrainBlast.Add();
+                    HornetsNest.Add();
                     //SNAKE GUNS
                     SnakePistol.Add();
+                    SnakeMinigun.Add();
                     //BLADES
                     ButchersKnife.Add();
                     RapidRiposte.Add();
@@ -806,6 +849,7 @@ namespace NevernamedsItems
                     Spitballer.Add();
                     ConfettiCannon.Add();
                     Gumgun.Add();
+                    BubbleFist.Add();
                     Glooper.Add();
                     ChewingGun.Add();
                     Makatov.Add();
@@ -841,6 +885,7 @@ namespace NevernamedsItems
                     Seismograph.Add();
                     CashBlaster.Add();
                     PocoLoco.Add();
+                    Monsoon.Add();
                     BioTranstater2100.Add();
                     //MAGICAL GUNS
                     Bejeweler.Add();
@@ -860,7 +905,10 @@ namespace NevernamedsItems
                     Entropew.Add();
                     Missinguno.Add();
                     Paraglocks.Add();
+                    BlueMoon.Add();
+                    MagicPaintbrush.Add();
                     TheGreyStaff.Add();
+                    Solstice.Add();
                     //CONSUMABLE FIRING GUNS
                     Creditor.Add();
                     Blankannon.Add();
@@ -922,6 +970,7 @@ namespace NevernamedsItems
                     GuillotineTrap.Init();
                     LowWalls.Init();
                     GoldButton.Init();
+                    BloodCandle.Init();
                     Breakables.Init();
 
                     //-----------------------------------------------------NPCS GET INITIALISED

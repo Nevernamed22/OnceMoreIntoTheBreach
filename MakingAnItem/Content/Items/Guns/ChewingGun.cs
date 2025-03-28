@@ -24,13 +24,14 @@ namespace NevernamedsItems
             var behav = gun.gameObject.AddComponent<ChewingGun>();
             gun.SetShortDescription("How does it feel?");
             gun.SetLongDescription("Chewing gum is a common method of stress relief among experienced Gungeoneers."+"\n\nThis great wad has seen many mouths.");
-
+            
             gun.SetGunSprites("chewinggun", 8);
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 12);
 
-            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(478) as Gun).gunSwitchGroup;
+            gun.AddCustomSwitchGroup("NN_WPN_ChewingGun", "", "Play_ENM_blobulord_bubble_01");
+
             gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(599) as Gun).muzzleFlashEffects;
 
 
@@ -78,8 +79,6 @@ namespace NevernamedsItems
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Chewing Gun Ammo", "NevernamedsItems/Resources/CustomGunAmmoTypes/chewinggun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/smoker_clipempty");
-
-            gun.TrimGunSprites();
 
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
@@ -220,6 +219,7 @@ namespace NevernamedsItems
                 origSpeed = self.baseData.speed;
                 self.baseData.speed = 0.001f;
                 self.UpdateSpeed();
+                AkSoundEngine.PostEvent("Play_WPN_superdowser_shot_01", self.gameObject);
                 currentBlowingBubble = this;
             }
         }
@@ -257,9 +257,14 @@ namespace NevernamedsItems
             {
                 Pop(false);
             }
+            else
+            {
+                AkSoundEngine.PostEvent("Stop_WPN_superdowser_loop_01", self.gameObject);
+            }
         }
         private void Release()
         {
+            AkSoundEngine.PostEvent("Stop_WPN_superdowser_loop_01", self.gameObject);
             currentBlowingBubble = null;
             released = true;
             inflating = false;

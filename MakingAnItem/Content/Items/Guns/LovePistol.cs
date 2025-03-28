@@ -53,9 +53,9 @@ namespace NevernamedsItems
             gun.AddShellCasing(1, 0, 0, 0, "shell_pink");
             gun.AddClipSprites("lovepistol");
 
-            gun.muzzleFlashEffects = VFXToolbox.CreateVFXPoolBundle("LovePistolMuzzle", new IntVector2(11,15), tk2dBaseSprite.Anchor.MiddleLeft, false, 0, VFXAlignment.Fixed, 10, new Color32(250, 0, 0, 255));
-          
-            projectile.hitEffects.overrideMidairDeathVFX = VFXToolbox.CreateVFXBundle("LovePistolImpact", new IntVector2(15, 17), tk2dBaseSprite.Anchor.MiddleCenter, true, 5f);
+            gun.muzzleFlashEffects = VFXToolbox.CreateVFXPoolBundle("LovePistolMuzzle", false, 0, VFXAlignment.Fixed, 10, new Color32(250, 0, 0, 255));
+
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.SmallHeartImpact;
             projectile.hitEffects.alwaysUseMidair = true;
           
             gun.quality = PickupObject.ItemQuality.B;

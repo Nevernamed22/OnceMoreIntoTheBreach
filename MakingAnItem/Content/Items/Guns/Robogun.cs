@@ -61,7 +61,7 @@ namespace NevernamedsItems
 
             projectile.SetProjectileSprite("robogun_proj", 17, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 17, 7);
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.RedLaserCircleVFX;
 
             gun.quality = PickupObject.ItemQuality.B;
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.MEDIUM_BLASTER;

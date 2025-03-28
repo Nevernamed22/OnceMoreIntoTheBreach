@@ -209,6 +209,7 @@ namespace NevernamedsItems
                         sproot.renderer.material.EnableKeyword("BRIGHTNESS_CLAMP_ON");
                         sproot.renderer.material.SetFloat("_EmissivePower", EmissivePower);
                         sproot.renderer.material.SetFloat("_EmissiveColorPower", EmissiveColorPower);
+                        if (EmissiveColor != null) sproot.renderer.material.SetColor("_EmissiveColor", (Color)EmissiveColor);
                     }
                 }
             }
@@ -224,6 +225,7 @@ namespace NevernamedsItems
                 component.sprite.renderer.material.EnableKeyword("BRIGHTNESS_CLAMP_ON");
                 component.sprite.renderer.material.SetFloat("_EmissivePower", EmissivePower);
                 component.sprite.renderer.material.SetFloat("_EmissiveColorPower", EmissiveColorPower);
+                if (EmissiveColor != null) component.sprite.renderer.material.SetColor("_EmissiveColor", (Color)EmissiveColor);
             }
         }
 
@@ -250,6 +252,7 @@ namespace NevernamedsItems
                     sproot.renderer.material.EnableKeyword("BRIGHTNESS_CLAMP_ON");
                     sproot.renderer.material.SetFloat("_EmissivePower", EmissivePower);
                     sproot.renderer.material.SetFloat("_EmissiveColorPower", EmissiveColorPower);
+                    if (EmissiveColor != null) sproot.renderer.material.SetColor("_EmissiveColor", (Color)EmissiveColor);
                 }
             }
 
@@ -258,6 +261,7 @@ namespace NevernamedsItems
         private BasicBeamController beamcont;
         public float EmissivePower;
         public float EmissiveColorPower;
+        public Color EmissiveColor;
     } //Allows the beam to glow
     public class BeamSplittingModifier : MonoBehaviour
     {
@@ -399,79 +403,7 @@ namespace NevernamedsItems
         private BeamController beamController;
         private PlayerController owner;
     } //Makes the beam split into multiple weaker beams after travelling a certain distance
-    public class BeamProjSpewModifier : MonoBehaviour
-    {
-        public BeamProjSpewModifier()
-        {
-            chancePerTick = 1;
-            tickDelay = 0.01f;
-            angleFromAim = 0;
-            accuracyVariance = 7;
-            bulletToSpew = (PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0];
-        }
-        private void Start()
-        {
-            timer = tickDelay;
-            this.projectile = base.GetComponent<Projectile>();
-            this.beamController = base.GetComponent<BeamController>();
-            this.basicBeamController = base.GetComponent<BasicBeamController>();
-            if (this.projectile.Owner is PlayerController) this.owner = this.projectile.Owner as PlayerController;
-
-
-        }
-        private void Update()
-        {
-            if (timer > 0)
-            {
-                timer -= BraveTime.DeltaTime;
-            }
-            if (timer <= 0)
-            {
-                DoTick();
-                timer = tickDelay;
-            }
-        }
-        private void DoTick()
-        {
-            //ETGModConsole.Log("Tick Triggered");
-            if (UnityEngine.Random.value < chancePerTick)
-            {
-                LinkedList<BasicBeamController.BeamBone> bones;
-                bones = basicBeamController.m_bones;
-                LinkedListNode<BasicBeamController.BeamBone> linkedListNode = bones.Last;
-                Vector2 bonePosition = basicBeamController.GetBonePosition(linkedListNode.Value);
-
-                Explode(bonePosition, basicBeamController.GetFinalBoneDirection());
-
-            }
-        }
-        private void Explode(Vector2 pos, float angle)
-        {
-            float variance = UnityEngine.Random.Range(0, accuracyVariance);
-            if (UnityEngine.Random.value <= 0.5) variance *= -1;
-            float angleVaried = (angle + angleFromAim) + variance;
-            GameObject spawnedBulletOBJ = SpawnManager.SpawnProjectile(bulletToSpew.gameObject, pos, Quaternion.Euler(0f, 0f, angleVaried), true);
-            spawnedBulletOBJ.AddComponent<BulletIsFromBeam>();
-            Projectile component = spawnedBulletOBJ.GetComponent<Projectile>();
-            if (component != null)
-            {
-                component.Owner = projectile.ProjectilePlayerOwner();
-                component.Shooter = projectile.ProjectilePlayerOwner().specRigidbody;
-                owner.DoPostProcessProjectile(component);
-            }
-        }
-        public float chancePerTick;
-        public float tickDelay;
-        public Projectile bulletToSpew;
-        public float accuracyVariance;
-        public float angleFromAim;
-
-        private float timer;
-        private Projectile projectile;
-        private BasicBeamController basicBeamController;
-        private BeamController beamController;
-        private PlayerController owner;
-    } //Makes the beam fire projectiles from the end
+   
     public class AlwaysPointAwayFromPlayerBeam : MonoBehaviour
     {
         public AlwaysPointAwayFromPlayerBeam()

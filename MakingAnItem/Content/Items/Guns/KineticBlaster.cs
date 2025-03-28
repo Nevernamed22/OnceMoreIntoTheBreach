@@ -51,7 +51,7 @@ namespace NevernamedsItems
 
             projectile.SetProjectileSprite("kineticblaster_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.BlueFrostBlastVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.BlueFrostBlastVFX;
 
             projectile.transform.parent = gun.barrelOffset;
 

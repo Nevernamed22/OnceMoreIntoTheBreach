@@ -46,7 +46,7 @@ namespace NevernamedsItems
             projectile.baseData.damage *= 1.6f;
             projectile.baseData.force *= 1.2f;
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.WhiteCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.WhiteCircleVFX;
             projectile.SetProjectileSprite("variable1_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter,8, 8);
 
             Projectile projectile2 = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
@@ -56,7 +56,7 @@ namespace NevernamedsItems
             projectile2.baseData.damage *= 1.6f;
             projectile2.baseData.force *= 1.2f;
             projectile2.hitEffects.alwaysUseMidair = true;
-            projectile2.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.WhiteCircleVFX;
+            projectile2.hitEffects.overrideMidairDeathVFX = SharedVFX.WhiteCircleVFX;
             projectile2.SetProjectileSprite("variable2_projectile", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);
 
             gun.DefaultModule.projectiles[0] = projectile;

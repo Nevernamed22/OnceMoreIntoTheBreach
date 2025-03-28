@@ -24,7 +24,7 @@ namespace NevernamedsItems
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
             Doug.AddToLootPool(item.PickupObjectId);
 
-            AntimagicRoundsID = item.PickupObjectId;        
+            AntimagicRoundsID = item.PickupObjectId;
         }
         public static int AntimagicRoundsID;
         public override void Pickup(PlayerController player)
@@ -36,7 +36,7 @@ namespace NevernamedsItems
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
             ProjectileInstakillBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
-            instakill.tagsToKill.AddRange(new List<string>{ "gunjurer", "gunsinger", "bookllet"});
+            instakill.tagsToKill.AddRange(new List<string> { "gunjurer", "gunsinger", "bookllet" });
             instakill.enemyGUIDsToKill.AddRange(new List<string> { EnemyGuidDatabase.Entries["wizbang"], EnemyGuidDatabase.Entries["pot_fairy"] });
         }
         private void PostProcessBeam(BeamController sourceBeam)
@@ -45,8 +45,11 @@ namespace NevernamedsItems
         }
         public override void DisableEffect(PlayerController player)
         {
-            player.PostProcessProjectile -= this.PostProcessProjectile;
-            player.PostProcessBeam -= this.PostProcessBeam;
+            if (player)
+            {
+                player.PostProcessProjectile -= this.PostProcessProjectile;
+                player.PostProcessBeam -= this.PostProcessBeam;
+            }
             base.DisableEffect(player);
         }
     }

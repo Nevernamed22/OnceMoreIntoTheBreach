@@ -9,6 +9,7 @@ using MonoMod;
 using UnityEngine;
 using Alexandria.ItemAPI;
 using Alexandria.Misc ;
+using Alexandria.SoundAPI;
 
 namespace NevernamedsItems
 {
@@ -26,7 +27,7 @@ namespace NevernamedsItems
             gun.SetGunSprites("flamethrowermk2");
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
-            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(153) as Gun).gunSwitchGroup;
+            gun.AddCustomSwitchGroup("NN_WPN_Flamethrower", "Play_ENM_flame_veil_01", "Play_BOSS_FuseBomb_Attack_Flame_01");
             gun.doesScreenShake = false;
             //GUN STATS
             gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(83) as Gun).muzzleFlashEffects;

@@ -140,14 +140,14 @@ namespace NevernamedsItems
                 newSprite.transform.parent = Owner.transform;
                 newSprite.transform.position = (Owner.transform.position + new Vector3(0.7f, 2f));
                 extantOverhead = newSprite;
-                UnityEngine.Object.Instantiate<GameObject>(RainbowGuonStone.WhiteGuonTransitionVFX, extantOverhead.GetComponent<tk2dBaseSprite>().WorldCenter, Quaternion.identity);
+                UnityEngine.Object.Instantiate<GameObject>(SharedVFX.ColouredPoofWhite, extantOverhead.GetComponent<tk2dBaseSprite>().WorldCenter, Quaternion.identity);
             }
         }
         private void ClearOverhead()
         {
             if (extantOverhead)
             {
-                UnityEngine.Object.Instantiate<GameObject>(RainbowGuonStone.WhiteGuonTransitionVFX, extantOverhead.GetComponent<tk2dBaseSprite>().WorldCenter, Quaternion.identity);
+                UnityEngine.Object.Instantiate<GameObject>(SharedVFX.ColouredPoofWhite, extantOverhead.GetComponent<tk2dBaseSprite>().WorldCenter, Quaternion.identity);
                 Destroy(extantOverhead);
                 extantOverhead = null;
             }

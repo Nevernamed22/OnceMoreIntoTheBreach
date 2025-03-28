@@ -39,7 +39,10 @@ namespace NevernamedsItems
         }
         public override void DisableEffect(PlayerController player)
         {
-            player.GetExtComp().OnBlankModificationItemProcessed -= OnBlankModTriggered;
+            if (player)
+            {
+                player.GetExtComp().OnBlankModificationItemProcessed -= OnBlankModTriggered;
+            }
             base.DisableEffect(player);
         }
         private void OnBlankModTriggered(PlayerController user, SilencerInstance blank, Vector2 pos, BlankModificationItem item)

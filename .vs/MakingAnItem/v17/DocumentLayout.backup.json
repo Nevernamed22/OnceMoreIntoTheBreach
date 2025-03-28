@@ -1,0 +1,106 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\guns\\gravitygun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\gravitygun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|c:\\users\\travi\\documents\\github\\oncemoreintothebreach\\makinganitem\\content\\items\\guns\\magicpaintbrush.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\magicpaintbrush.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\apis and toolboxes\\omitb misc toolboxes\\playertoolbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\apis and toolboxes\\omitb misc toolboxes\\playertoolbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|c:\\users\\travi\\documents\\github\\oncemoreintothebreach\\makinganitem\\content\\items\\misc passives\\jammedbullets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\jammedbullets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Class1.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Class1.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Class1.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Class1.cs",
+              "RelativeToolTip": "MakingAnItem\\Class1.cs",
+              "ViewState": "AgIAAF4CAAAAAAAAAAAjwNYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-28T08:13:53.18Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MagicPaintbrush.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\MagicPaintbrush.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\MagicPaintbrush.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\MagicPaintbrush.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Guns\\MagicPaintbrush.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAgwBkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-28T21:00:18.925Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "JammedBullets.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\JammedBullets.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\JammedBullets.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\JammedBullets.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\JammedBullets.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACkAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T13:05:55.838Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PlayerToolbox.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\PlayerToolbox.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\PlayerToolbox.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\PlayerToolbox.cs",
+              "RelativeToolTip": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\PlayerToolbox.cs",
+              "ViewState": "AgIAAOcAAAAAAAAAAAAywPoAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-22T19:27:29.533Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GravityGun.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\GravityGun.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\GravityGun.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\GravityGun.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Guns\\GravityGun.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAgwDkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-20T09:57:13.604Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

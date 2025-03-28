@@ -27,7 +27,7 @@ namespace NevernamedsItems
             ERRORShellsDummyEffect = new GameActorDecorationEffect()
             {
                 AffectsEnemies = true,
-                OverheadVFX = EasyVFXDatabase.ERRORShellsOverheadVFX,
+                OverheadVFX = SharedVFX.ERRORShellsOverhead,
                 AffectsPlayers = false,
                 AppliesTint = false,
                 AppliesDeathTint = false,

@@ -78,7 +78,7 @@ namespace NevernamedsItems
             {
                 breakSecretWalls = false,
                 //effect = (PickupObjectDatabase.GetById(36) as Gun).DefaultModule.chargeProjectiles[1].Projectile.projectile.hitEffects.overrideEarlyDeathVfx,
-                effect = EasyVFXDatabase.ShittyElectricExplosion,
+                effect = SharedVFX.ArcExplosion,
                 doDamage = true,
                 damageRadius = 3,
                 damageToPlayer = 0,

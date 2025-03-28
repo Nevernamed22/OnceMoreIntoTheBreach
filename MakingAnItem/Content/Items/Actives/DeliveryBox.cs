@@ -90,7 +90,7 @@ namespace NevernamedsItems
         private string currentLabel;
         public override void Update()
         {
-            if (int.Parse(this.currentLabel) != CalculatePrice(CurrentConsumable))
+            if (!string.IsNullOrEmpty(this.currentLabel) && (int.Parse(this.currentLabel) != CalculatePrice(CurrentConsumable)))
             {
                 this.currentLabel = CalculatePrice(CurrentConsumable).ToString();
             }

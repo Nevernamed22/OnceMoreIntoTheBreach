@@ -12,19 +12,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Bullet Component Lister";
-            string resourceName = "NevernamedsItems/Resources/workinprogress_icon";
-            GameObject obj = new GameObject();
-            var item = obj.AddComponent<BulletComponentLister>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-
-            string shortDesc = "wip";
-            string longDesc = "Lists the components present in fired projectiles.";
-
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            BulletComponentLister item = ItemSetup.NewItem<BulletComponentLister>(
+              "Bullet Component Lister",
+              "Work In Progress",
+              "Lists the components present in fired projectiles.",
+              "workinprogress_icon") as BulletComponentLister;
             item.quality = PickupObject.ItemQuality.EXCLUDED;
             item.CanBeDropped = true;
             item.CanBeSold = true;
@@ -110,19 +102,11 @@ namespace NevernamedsItems
     {
         public static void Init()
         {
-            string itemName = "Object Component Lister";
-            string resourceName = "NevernamedsItems/Resources/workinprogress_icon";
-            GameObject obj = new GameObject();
-            var item = obj.AddComponent<ObjectComponentLister>();
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-
-            string shortDesc = "wip";
-            string longDesc = "Lists the components present in objects that you shoot.";
-
-
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
+            ObjectComponentLister item = ItemSetup.NewItem<ObjectComponentLister>(
+              "Object Component Lister",
+              "Work In Progress",
+              "Lists the components present in objects that you shoot.",
+              "workinprogress_icon") as ObjectComponentLister;
             item.quality = PickupObject.ItemQuality.EXCLUDED;
             item.CanBeDropped = true;
             item.CanBeSold = true;

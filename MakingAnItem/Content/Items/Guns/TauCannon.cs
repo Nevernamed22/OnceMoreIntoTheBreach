@@ -55,7 +55,7 @@ namespace NevernamedsItems
             projectile.baseData.damage = 15;
             projectile.baseData.speed = 50;
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.YellowLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.YellowLaserCircleVFX;
             projectile.SetProjectileSpriteRight("tau_projectile1", 4, 2, false, tk2dBaseSprite.Anchor.MiddleCenter, 4, 2);
             EasyTrailBullet trail1 = projectile.gameObject.AddComponent<EasyTrailBullet>();
             trail1.TrailPos = projectile.transform.position;
@@ -74,7 +74,7 @@ namespace NevernamedsItems
             chargeprojectile.baseData.damage = 25;
             chargeprojectile.baseData.force *= 2;
             chargeprojectile.hitEffects.alwaysUseMidair = true;
-            chargeprojectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.YellowLaserCircleVFX;
+            chargeprojectile.hitEffects.overrideMidairDeathVFX = SharedVFX.YellowLaserCircleVFX;
             chargeprojectile.SetProjectileSpriteRight("tau_projectile2", 4, 2, false, tk2dBaseSprite.Anchor.MiddleCenter, 4, 2);
             EasyTrailBullet trail2 = chargeprojectile.gameObject.AddComponent<EasyTrailBullet>();
             trail2.TrailPos = chargeprojectile.transform.position;
@@ -93,7 +93,7 @@ namespace NevernamedsItems
             chargeprojectile2.baseData.force *= 10;
             chargeprojectile2.baseData.damage = 50;
             chargeprojectile2.hitEffects.alwaysUseMidair = true;
-            chargeprojectile2.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.YellowLaserCircleVFX;
+            chargeprojectile2.hitEffects.overrideMidairDeathVFX = SharedVFX.YellowLaserCircleVFX;
             chargeprojectile2.SetProjectileSpriteRight("tau_projectile3", 4, 2, false, tk2dBaseSprite.Anchor.MiddleCenter, 4, 2);
             EasyTrailBullet trail3 = chargeprojectile2.gameObject.AddComponent<EasyTrailBullet>();
             trail3.TrailPos = chargeprojectile2.transform.position;

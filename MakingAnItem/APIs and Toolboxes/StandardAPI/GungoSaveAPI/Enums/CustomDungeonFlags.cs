@@ -36,6 +36,7 @@ namespace SaveAPI
         //Turbo
         BEATEN_KEEP_TURBO_MODE,
         BEATEN_MINES_BOSS_TURBO_MODE,
+        BEATEN_RAT_BOSS_TURBO_MODE,
         BEATEN_HOLLOW_BOSS_TURBO_MODE,
         BEATEN_HELL_BOSS_TURBO_MODE,
         //Rainbow
@@ -51,6 +52,7 @@ namespace SaveAPI
         ALLJAMMED_BEATEN_OFFICE,
         ALLJAMMED_BEATEN_FORGE,
         ALLJAMMED_BEATEN_HELL,
+        ALLJAMMED_BEATEN_ADVANCEDDRAGUN,
         //Bossrush Unlocks
         BOSSRUSH_SHADE,
         BOSSRUSH_PARADOX,
@@ -62,8 +64,10 @@ namespace SaveAPI
         BOSSRUSH_ROBOT,
         BOSSRUSH_BULLET,
         //Rat Unlocks
+        RAT_KILLED_PILOT,
         RAT_KILLED_SHADE,
         RAT_KILLED_ROBOT,
+        RAT_KILLED_BULLET,
         //Dragun Unlocks
         DRAGUN_KILLED_HUNTER,
         DRAGUN_KILLED_SHADE,

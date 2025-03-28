@@ -51,7 +51,7 @@ namespace NevernamedsItems
             projectile.baseData.damage = 20f;
             projectile.SetProjectileSprite("wrench_null_projectile", 13, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 12, 7);
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.RedLaserCircleVFX;
             projectile.transform.parent = gun.barrelOffset;
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;

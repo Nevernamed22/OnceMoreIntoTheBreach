@@ -56,7 +56,7 @@ namespace NevernamedsItems
                 Vector2 realPos = surroundObject.UnitCenter + (betweenPlayerAndObject.normalized) * 5;
                 transform.position = realPos;
                 baseBody.Reinitialize();
-                UnityEngine.Object.Instantiate<GameObject>(EasyVFXDatabase.YellowLaserCircleVFX, baseBody.UnitCenter, Quaternion.identity);
+                UnityEngine.Object.Instantiate<GameObject>(SharedVFX.YellowLaserCircleVFX, baseBody.UnitCenter, Quaternion.identity);
             }
             if (baseBody && surroundObject && surroundObject.aiActor != null)
             {

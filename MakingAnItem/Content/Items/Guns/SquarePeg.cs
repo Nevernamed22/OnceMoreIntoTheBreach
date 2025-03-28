@@ -40,23 +40,7 @@ namespace NevernamedsItems
             gun.barrelOffset.transform.localPosition = new Vector3((26f / 16f), (14f / 16f), 0f);
             gun.SetBaseMaxAmmo(150);
             gun.gunClass = GunClass.PISTOL;
-            gun.muzzleFlashEffects = VFXToolbox.CreateVFXPool("SquarePeg Muzzleflash",
-                new List<string>()
-                {
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/SquarePeg/squarepeg_muzzleflash_001",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/SquarePeg/squarepeg_muzzleflash_002",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/SquarePeg/squarepeg_muzzleflash_003",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/SquarePeg/squarepeg_muzzleflash_004",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/SquarePeg/squarepeg_muzzleflash_005",
-                },
-                12, //FPS
-                new IntVector2(23, 14), //Dimensions
-                tk2dBaseSprite.Anchor.MiddleLeft, //Anchor
-                false, //Uses a Z height off the ground
-                0, //The Z height, if used
-                false,
-               VFXAlignment.Fixed
-                  );
+            gun.muzzleFlashEffects = VFXToolbox.CreateVFXPoolBundle("SquarePegMuzzle", false, 0, VFXAlignment.Fixed);
 
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
@@ -66,20 +50,7 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.transform.parent = gun.barrelOffset;
             projectile.baseData.damage = 8f;
-            projectile.hitEffects.overrideMidairDeathVFX = VFXToolbox.CreateVFX("SquarePeg MidairDeath",
-                  new List<string>()
-                  {
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/SquarePeg/squarepeg_impact_001",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/SquarePeg/squarepeg_impact_002",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/SquarePeg/squarepeg_impact_003",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/SquarePeg/squarepeg_impact_004",
-                  },
-                 12, //FPS
-                  new IntVector2(14, 14), //Dimensions
-                  tk2dBaseSprite.Anchor.MiddleCenter, //Anchor
-                  false, //Uses a Z height off the ground
-                  0 //The Z height, if used
-                    );
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.SquarePegImpact;
             projectile.hitEffects.alwaysUseMidair = true;
 
             projectile.SetProjectileSpriteRight("squarepeg_proj", 8, 8, false, tk2dBaseSprite.Anchor.MiddleCenter, 8, 8);

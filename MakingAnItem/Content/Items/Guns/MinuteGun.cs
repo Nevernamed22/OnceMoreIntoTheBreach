@@ -46,7 +46,7 @@ namespace NevernamedsItems
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             projectile.SetProjectileSprite("minutegun_projectile", 16, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 15, 8);
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.WhiteCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.WhiteCircleVFX;
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.baseData.damage = 20;
             gun.DefaultModule.projectiles[0] = projectile;

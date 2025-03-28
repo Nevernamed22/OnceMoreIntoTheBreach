@@ -9,6 +9,8 @@ using MonoMod.RuntimeDetour;
 using Dungeonator;
 using Alexandria.Misc;
 using Alexandria.ItemAPI;
+using Alexandria.Assetbundle;
+using Gungeon;
 
 namespace NevernamedsItems
 {
@@ -18,109 +20,142 @@ namespace NevernamedsItems
         {
             PickupObject item = ItemSetup.NewItem<TableTechNology>(
               "Table Tech-Nology",
-              "lorem ipsum",
-              "lorem ipsum",
-              "tabletechguon_icon") as PickupObject;
+              "T-Tech",
+              "Laser-powered scroll-readers like this one are employed by elderly followers of the way of the flip- in lieu of glasses, which tend to wind up broken.",
+              "tabletechnology_icon") as PickupObject;
 
-            item.quality = PickupObject.ItemQuality.EXCLUDED;
+            item.quality = PickupObject.ItemQuality.C;
 
-            List<string> BeamAnimPaths = new List<string>()
-            {
-                "NevernamedsItems/Resources/BeamSprites/redbeam_seg_001",
-                "NevernamedsItems/Resources/BeamSprites/redbeam_seg_002",
-                "NevernamedsItems/Resources/BeamSprites/redbeam_seg_003",
-                "NevernamedsItems/Resources/BeamSprites/redbeam_seg_004"
-            };
-            List<string> ImpactAnimPaths = new List<string>()
-            {
-                "NevernamedsItems/Resources/BeamSprites/redbeam_impact_001",
-                "NevernamedsItems/Resources/BeamSprites/redbeam_impact_002",
-                "NevernamedsItems/Resources/BeamSprites/redbeam_impact_003",
-                "NevernamedsItems/Resources/BeamSprites/redbeam_impact_004",
-            };
 
             Projectile projectile = ProjectileUtility.SetupProjectile(86);
-            BasicBeamController beamComp = projectile.GenerateBeamPrefab(
-                "NevernamedsItems/Resources/BeamSprites/redbeam_seg_001", new Vector2(18, 2), new Vector2(0, 8), BeamAnimPaths, 8,
-                ImpactAnimPaths, 13, new Vector2(4, 4), new Vector2(7, 7));
+            BasicBeamController beamComp = projectile.GenerateAnchoredBeamPrefabBundle(
+                    "vortexbeam_mid_001",
+                    Initialisation.ProjectileCollection,
+                    Initialisation.projectileAnimationCollection,
+                    "VortexBeam",
+                    new Vector2(17, 11),
+                    new Vector2(0, -3),
+                    impactVFXAnimationName: "CrimsonVortex",
+                    impactVFXColliderDimensions: new Vector2(3, 3),
+                    impactVFXColliderOffsets: new Vector2(-1, -1)
+                    );
+            projectile.gameObject.name = "Vortex Beam";
+            EmmisiveBeams emission = projectile.gameObject.GetOrAddComponent<EmmisiveBeams>();
+            emission.EmissivePower = 50;
+            emission.EmissiveColorPower = 50;
+            emission.EmissiveColor = new Color(254f / 255f, 144f / 255f, 128f / 255f);
 
-            projectile.baseData.damage = 20;
-            projectile.baseData.range *= 2;
-            projectile.baseData.speed *= 4;
-            projectile.gameObject.AddComponent<NoCollideBehaviour>();
-            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(projectile);
+            projectile.baseData.damage = 20f;
+            projectile.baseData.force *= 1f;
+            projectile.baseData.range *= 5;
+            projectile.baseData.speed *= 10f;
             beamComp.boneType = BasicBeamController.BeamBoneType.Straight;
-            beamComp.interpolateStretchedBones = false;
-            beamComp.penetration++;
-            beamComp.PenetratesCover = true;
-            lasa = projectile;
+
+            beamComp.endAudioEvent = "Stop_WPN_All";
+            beamComp.startAudioEvent = "Play_WPN_moonscraperLaser_shot_01";
+
+            laser = projectile;
+
+            var vortex = ItemBuilder.SpriteFromBundle("crimsonvortex_001", Initialisation.ProjectileCollection.GetSpriteIdByName("crimsonvortex_001"), Initialisation.ProjectileCollection, new GameObject("Vortex"));
+            vortex.SetActive(false);
+            FakePrefab.MarkAsFakePrefab(vortex);
+
+            tk2dSpriteAnimator vortexAnimator = vortex.GetOrAddComponent<tk2dSpriteAnimator>();
+            vortexAnimator.Library = Initialisation.projectileAnimationCollection;
+            vortexAnimator.defaultClipId = Initialisation.projectileAnimationCollection.GetClipIdByName("CrimsonVortex");
+            vortexAnimator.DefaultClipId = Initialisation.projectileAnimationCollection.GetClipIdByName("CrimsonVortex");
+            vortexAnimator.playAutomatically = true;
+
+            tk2dBaseSprite sp = vortex.GetComponent<tk2dBaseSprite>();
+            sp.HeightOffGround = 3;
+
+            sp.usesOverrideMaterial = true;
+            sp.renderer.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTiltedCutoutEmissive");
+            sp.renderer.material.EnableKeyword("BRIGHTNESS_CLAMP_ON");
+            sp.renderer.material.SetFloat("_EmissivePower", 50);
+            sp.renderer.material.SetFloat("_EmissiveColorPower", 50);
+            sp.renderer.material.SetColor("_EmissiveColor", new Color(254f / 255f, 144f / 255f, 128f / 255f));
+
+            vortex.gameObject.AddComponent<TableVortex>();
+
+            var vortexBody = vortex.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(new IntVector2(-1, -2), new IntVector2(3, 3));
+            vortexBody.CollideWithTileMap = false;
+            vortexBody.CollideWithOthers = false;
+
+            CrimsonVortex = vortex;
             item.SetTag("table_tech");
+            //Game.Items.Rename("nn:table_tech-nology", "nn:mr_fahrenheit");
         }
-        public static Projectile lasa;
+        public static Projectile laser;
+        public static GameObject CrimsonVortex;
+        public class TableVortex : BraveBehaviour
+        {
+            private void Start()
+            {
+                LootEngine.DoDefaultPurplePoof(base.transform.position);
+            }
+            public MajorBreakable table;
+            public PlayerController owner;
+            public Vector2 direction;
+            public FlippableCover flipper;
+            private float timeActive;
+
+            bool started = false;
+            private void Update()
+            {
+                if (specRigidbody) { specRigidbody.Reinitialize(); }
+                if (!started && table != null && !table.m_isBroken)
+                {
+                    //ETGModConsole.Log("Test: " + (gameObject.GetComponent<SpeculativeRigidbody>() is SpeculativeRigidbody body1));
+                    Projectile toSpawn = laser;
+                    if (owner.PlayerHasActiveSynergy("Flippity Beoooow!") && UnityEngine.Random.value <= 0.2f) { toSpawn = (PickupObjectDatabase.GetById(107) as Gun).DefaultModule.projectiles[0]; }
+                    if (owner.PlayerHasActiveSynergy("The Two Tables"))
+                    {
+                        BeamController b1 = BeamAPI.FreeFireBeamFromAnywhere(toSpawn, owner, gameObject, Vector2.zero, direction.ToAngle() + 35f, 20, true);
+                        if (b1 is BasicBeamController) { (b1 as BasicBeamController).reflections++; }
+                        BeamController b2 = BeamAPI.FreeFireBeamFromAnywhere(toSpawn, owner, gameObject, Vector2.zero, direction.ToAngle() - 35f, 20, true);
+                        if (b2 is BasicBeamController) { (b2 as BasicBeamController).reflections++; }
+                    }
+                    else
+                    {
+                        BeamAPI.FreeFireBeamFromAnywhere(toSpawn, owner, gameObject, Vector2.zero, direction.ToAngle(), 20, true);
+                    }
+                    started = true;
+                }
+                timeActive += BraveTime.DeltaTime;
+                if (!table || table.m_isBroken || timeActive > 20.5f)
+                {
+                    EndBeam();
+                }
+            }
+            private void EndBeam()
+            {
+                LootEngine.DoDefaultPurplePoof(base.transform.position);
+                UnityEngine.Object.Destroy(base.gameObject);
+            }
+        }
         public override void Pickup(PlayerController player)
         {
             base.Pickup(player);
             player.OnTableFlipCompleted += this.DoLaser;
         }
-        public override DebrisObject Drop(PlayerController player)
+        public override void DisableEffect(PlayerController player)
         {
-            DebrisObject result = base.Drop(player);
-            player.OnTableFlipCompleted -= this.DoLaser;
-            return result;
-        }
-        public override void OnDestroy()
-        {
-            if (Owner) Owner.OnTableFlipCompleted -= this.DoLaser;
-            base.OnDestroy();
+            if (player) player.OnTableFlipCompleted -= this.DoLaser;
+            base.DisableEffect(player);
         }
         private void DoLaser(FlippableCover obj)
         {
-            SpeculativeRigidbody rigidBody = obj.GetComponentInChildren<SpeculativeRigidbody>();
-            
-            PlayerController owner = base.Owner;
             Vector2 vector = DungeonData.GetIntVector2FromDirection(obj.DirectionFlipped).ToVector2();
-            BeamController cont = BeamAPI.FreeFireBeamFromAnywhere(lasa, owner, obj.gameObject, rigidBody.UnitCenter,  vector.ToAngle(), 20, true);
 
-
-            GameObject gameObject = SpawnManager.SpawnProjectile(lasa.gameObject, rigidBody.UnitCenter, Quaternion.identity, true);
-            Projectile component = gameObject.GetComponent<Projectile>();
-            component.Owner = owner;
-            BeamController component2 = gameObject.GetComponent<BeamController>();
-
-            component2.chargeDelay = 0f;
-            component2.usesChargeDelay = false;
-            component2.Owner = owner;
-            component2.HitsPlayers = false;
-            component2.HitsEnemies = true;
-            component2.Direction = vector;
-            component2.Origin = rigidBody.UnitCenter;
-            GameManager.Instance.Dungeon.StartCoroutine(HandleFreeFiringBeam(component2, rigidBody, 20));
-            
+            GameObject instVortex = UnityEngine.Object.Instantiate(CrimsonVortex, obj.sprite.WorldCenter + vector, Quaternion.identity);
+            TableVortex comp = instVortex.GetComponent<TableVortex>();
+            comp.owner = base.Owner;
+            comp.table = obj.GetComponentInChildren<MajorBreakable>();
+            comp.direction = vector;
+            comp.flipper = obj;
+            instVortex.transform.SetParent(obj.transform.GetChild(0));
         }
-        private IEnumerator HandleFreeFiringBeam(BeamController beam, SpeculativeRigidbody otherShooter, float duration)
-        {
-            float elapsed = 0f;
-            yield return null;
-            while (elapsed < duration)
-            {
-                Vector2 sourcePos;
-                if (otherShooter == null) { break; }
-                if (!otherShooter.GetComponentInParent<FlippableCover>()) break;
-                if (otherShooter.GetComponentInParent<FlippableCover>().IsBroken) break;
-                else sourcePos = otherShooter.UnitCenter;
 
-                elapsed += BraveTime.DeltaTime;
-                if (sourcePos != null)
-                {
-                    beam.Origin = sourcePos;
-                    beam.LateUpdatePosition(sourcePos);
-                }
-                else { ETGModConsole.Log("SOURCEPOS WAS NULL IN BEAM FIRING HANDLER"); }
-                yield return null;
-            }
-            beam.CeaseAttack();
-            yield break;
-        }
     }
 }

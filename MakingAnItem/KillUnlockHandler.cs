@@ -20,6 +20,7 @@ namespace NevernamedsItems
             {
                 {"4b992de5b4274168a8878ef9bf7ea36b" ,CustomTrackedStats.BEHOLSTER_KILLS},
                 {"8b0dd96e2fe74ec7bebc1bc689c0008a" ,CustomTrackedStats.MINEFLAYER_KILLS},
+                {"9189f46c47564ed588b9108965f975c9" ,CustomTrackedStats.DOOR_LORD_KILLS},
             };
             //Flags changed when a specific character kills any boss on a specific floor
             CharacterSpecificFloorSpecificUnlocks = new Dictionary<GlobalDungeonData.ValidTilesets, Dictionary<PlayableCharacters, CustomDungeonFlags>>()
@@ -46,7 +47,9 @@ namespace NevernamedsItems
                 }},
                 { "4d164ba3f62648809a4a82c90fc22cae", new Dictionary<PlayableCharacters, CustomDungeonFlags>()
                 { //Rat Mech
+                    { PlayableCharacters.Pilot, CustomDungeonFlags.RAT_KILLED_PILOT },
                     { PlayableCharacters.Robot, CustomDungeonFlags.RAT_KILLED_ROBOT },
+                    { PlayableCharacters.Bullet, CustomDungeonFlags.RAT_KILLED_BULLET },
                     { ETGModCompatibility.ExtendEnum<PlayableCharacters>(Initialisation.GUID, "Shade"), CustomDungeonFlags.RAT_KILLED_SHADE }
                 }}
             };
@@ -74,7 +77,8 @@ namespace NevernamedsItems
             //Flags changed when any character kills a specific boss in Turbo Mode
             TurboModeSpecificBossUnlocks = new Dictionary<string, CustomDungeonFlags>()
             {
-                { "7c5d5f09911e49b78ae644d2b50ff3bf", CustomDungeonFlags.BEATEN_HELL_BOSS_TURBO_MODE }// Infinilich
+                { "7c5d5f09911e49b78ae644d2b50ff3bf", CustomDungeonFlags.BEATEN_HELL_BOSS_TURBO_MODE },// Infinilich
+                { "4d164ba3f62648809a4a82c90fc22cae", CustomDungeonFlags.BEATEN_RAT_BOSS_TURBO_MODE }// Rat Mech
             };
 
             //ALL JAMMED MODE
@@ -95,6 +99,7 @@ namespace NevernamedsItems
             {
                 {"7c5d5f09911e49b78ae644d2b50ff3bf", CustomDungeonFlags.ALLJAMMED_BEATEN_HELL }, //Infinilich
                 {"4d164ba3f62648809a4a82c90fc22cae", CustomDungeonFlags.ALLJAMMED_BEATEN_RAT }, //Rat Mech
+                {"05b8afe0b6cc4fffa9dc6036fa24c8ec", CustomDungeonFlags.ALLJAMMED_BEATEN_ADVANCEDDRAGUN }, //Advanced Dragun
             };
 
             //RAINBOW MODE

@@ -48,6 +48,8 @@ namespace NevernamedsItems
                 //----------------------------------------------------------Rat Unlocks
                 ETGModConsole.Log("<color=#00d6e6>Resourceful Rat Unlocks:</color>");//------------------------------------------------------------
 
+                PrintUnlock(CustomDungeonFlags.RAT_KILLED_ROBOT, "Electric Cylinder", "Kill the Resourceful Rat as the Robot.");
+                PrintUnlock(CustomDungeonFlags.RAT_KILLED_BULLET, "Rabbits Foot", "Kill the Resourceful Rat as the Bullet.");
                 PrintUnlock(CustomDungeonFlags.RAT_KILLED_SHADE, "Death Mask", "Kill the Resourceful Rat as the Shade.");
 
                 //----------------------------------------------------------Dragun Unlocks
@@ -84,6 +86,7 @@ namespace NevernamedsItems
 
                 PrintUnlock(CustomDungeonFlags.BEATEN_KEEP_TURBO_MODE, "Chaos Ruby", "Beat the Keep of the Lead Lord on Turbo Mode.");
                 PrintUnlock(CustomDungeonFlags.BEATEN_MINES_BOSS_TURBO_MODE, "Ringer", "Beat the Black Powder Mine on Turbo Mode.");
+                PrintUnlock(CustomDungeonFlags.BEATEN_RAT_BOSS_TURBO_MODE, "Chamembert", "Beat the Resourceful Rat's Lair on Turbo Mode.");
                 PrintUnlock(CustomDungeonFlags.BEATEN_HOLLOW_BOSS_TURBO_MODE, "Supersonic Shots", "Beat the Hollow on Turbo Mode.");
                 PrintUnlock(CustomDungeonFlags.BEATEN_HELL_BOSS_TURBO_MODE, "Helm of Chaos", "Beat Bullet Hell on Turbo Mode.");
 
@@ -107,6 +110,7 @@ namespace NevernamedsItems
                 PrintUnlock(CustomDungeonFlags.ALLJAMMED_BEATEN_OFFICE, "Scroll of Exact Knowledge", "Beat the R&G Dept on All-Jammed Mode.");
                 PrintUnlock(CustomDungeonFlags.ALLJAMMED_BEATEN_FORGE, "Cloak of Darkness", "Beat the Forge on All-Jammed Mode.");
                 PrintUnlock(CustomDungeonFlags.ALLJAMMED_BEATEN_HELL, "Gun of a Thousand Sins", "Beat Bullet Hell on All-Jammed Mode.");
+                PrintUnlock(CustomDungeonFlags.ALLJAMMED_BEATEN_ADVANCEDDRAGUN, "Jammed Bullets", "Defeat the Advanced Dragun on All-Jammed Mode.");
 
                 //----------------------------------------------------------CHALLENGE MODES
                 ETGModConsole.Log("<color=#00d6e6>Challenge Run Unlocks:</color>"); //------------------------------------------------------------

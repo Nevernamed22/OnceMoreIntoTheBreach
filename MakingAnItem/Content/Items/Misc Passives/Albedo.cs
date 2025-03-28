@@ -91,13 +91,16 @@ namespace NevernamedsItems
             {
                 foreach (var o in Owner.orbitals)
                 {
-                    var orbital = (PlayerOrbital)o;
-                    if (orbital.gameObject.GetComponent<BoostedByAlbedo>() != null)
+                    if (o is PlayerOrbital)
                     {
-                        orbital.orbitDegreesPerSecond /= orbital.gameObject.GetComponent<BoostedByAlbedo>().currentMultiplier;
-                        orbital.SetOrbitalTier(PlayerOrbital.CalculateTargetTier(player, o));
-                        orbital.SetOrbitalTierIndex(PlayerOrbital.GetNumberOfOrbitalsInTier(player, orbital.gameObject.GetComponent<BoostedByAlbedo>().storedOrbitalTier));
-                        UnityEngine.Object.Destroy(orbital.gameObject.GetComponent<BoostedByAlbedo>());
+                        var orbital = (PlayerOrbital)o;
+                        if (orbital.gameObject.GetComponent<BoostedByAlbedo>() != null)
+                        {
+                            orbital.orbitDegreesPerSecond /= orbital.gameObject.GetComponent<BoostedByAlbedo>().currentMultiplier;
+                            orbital.SetOrbitalTier(PlayerOrbital.CalculateTargetTier(player, o));
+                            orbital.SetOrbitalTierIndex(PlayerOrbital.GetNumberOfOrbitalsInTier(player, orbital.gameObject.GetComponent<BoostedByAlbedo>().storedOrbitalTier));
+                            UnityEngine.Object.Destroy(orbital.gameObject.GetComponent<BoostedByAlbedo>());
+                        }
                     }
                 }
                 RecalcOrbIndex();

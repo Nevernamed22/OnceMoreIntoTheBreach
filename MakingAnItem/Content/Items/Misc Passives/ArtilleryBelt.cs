@@ -39,17 +39,20 @@ namespace NevernamedsItems
         }
         private void Fire()
         {
-            AkSoundEngine.PostEvent("Play_WPN_smileyrevolver_shot_01", gameObject);
-            GameObject spawnedProj = ProjSpawnHelper.SpawnProjectileTowardsPoint((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].gameObject, Owner.specRigidbody.UnitCenter, Owner.specRigidbody.UnitCenter.GetNearestEnemyToPosition().Position, 0, 20, Owner);
-            Projectile spawnedProjectileComp = spawnedProj.GetComponent<Projectile>();
-            spawnedProjectileComp.Owner = Owner;
-            spawnedProjectileComp.Shooter = Owner.specRigidbody;
-            spawnedProjectileComp.baseData.damage *= Owner.stats.GetStatValue(PlayerStats.StatType.Damage);
-            spawnedProjectileComp.baseData.speed *= Owner.stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed);
-            spawnedProjectileComp.baseData.range *= Owner.stats.GetStatValue(PlayerStats.StatType.RangeMultiplier);
-            spawnedProjectileComp.baseData.force *= Owner.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
-            Owner.DoPostProcessProjectile(spawnedProjectileComp);
-            spawnedProjectileComp.ApplyCompanionModifierToBullet(Owner);
+            if (Owner.specRigidbody != null && Owner.specRigidbody.UnitCenter.GetNearestEnemyToPosition() != null)
+            {
+                AkSoundEngine.PostEvent("Play_WPN_smileyrevolver_shot_01", gameObject);
+                GameObject spawnedProj = ProjSpawnHelper.SpawnProjectileTowardsPoint((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].gameObject, Owner.specRigidbody.UnitCenter, Owner.specRigidbody.UnitCenter.GetNearestEnemyToPosition().Position, 0, 20, Owner);
+                Projectile spawnedProjectileComp = spawnedProj.GetComponent<Projectile>();
+                spawnedProjectileComp.Owner = Owner;
+                spawnedProjectileComp.Shooter = Owner.specRigidbody;
+                spawnedProjectileComp.baseData.damage *= Owner.stats.GetStatValue(PlayerStats.StatType.Damage);
+                spawnedProjectileComp.baseData.speed *= Owner.stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed);
+                spawnedProjectileComp.baseData.range *= Owner.stats.GetStatValue(PlayerStats.StatType.RangeMultiplier);
+                spawnedProjectileComp.baseData.force *= Owner.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
+                Owner.DoPostProcessProjectile(spawnedProjectileComp);
+                spawnedProjectileComp.ApplyCompanionModifierToBullet(Owner);
+            }
         }
         public override void Pickup(PlayerController player)
         {

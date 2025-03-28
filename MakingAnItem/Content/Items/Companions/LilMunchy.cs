@@ -286,7 +286,7 @@ namespace NevernamedsItems
                 base.aiAnimator.PlayUntilFinished("disgust");
                 base.aiActor.MovementSpeed = 0;
                 Vector2 vector = (!base.aiActor.sprite) ? Vector2.up : (Vector2.up * (base.aiActor.sprite.WorldTopCenter.y - base.aiActor.sprite.WorldBottomCenter.y));
-                GameObject crossX = base.aiActor.PlayEffectOnActor(EasyVFXDatabase.LastBulletStandingX, vector, true, false, false);
+                GameObject crossX = base.aiActor.PlayEffectOnActor(SharedVFX.LastBulletStandingX, vector, true, false, false);
                 yield return new WaitForSeconds(0.5556f);
                 AkSoundEngine.PostEvent("Play_ENM_lizard_bubble_01", base.gameObject);
                 base.aiActor.MovementSpeed = base.aiActor.BaseMovementSpeed;

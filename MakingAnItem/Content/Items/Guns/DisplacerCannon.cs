@@ -62,7 +62,7 @@ namespace NevernamedsItems
             projectile.baseData.damage *= 6f;
             projectile.baseData.speed *= 0.5f;
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.SmoothLightBlueLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.SmoothLightBlueLaserCircleVFX;
             DisplaceEnemies displacement = projectile.gameObject.AddComponent<DisplaceEnemies>();
 
             projectile.SetProjectileSprite("displacercannon_projectile", 17, 17, true, tk2dBaseSprite.Anchor.MiddleCenter, 15, 15);

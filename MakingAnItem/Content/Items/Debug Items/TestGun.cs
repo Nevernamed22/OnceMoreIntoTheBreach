@@ -9,6 +9,7 @@ using UnityEngine;
 using Dungeonator;
 using Alexandria.ItemAPI;
 using Alexandria.Misc;
+using Pathfinding;
 
 namespace NevernamedsItems
 {
@@ -42,20 +43,34 @@ namespace NevernamedsItems
             gun.DefaultModule.numberOfShotsInClip = 7;
             gun.SetBaseMaxAmmo(700);
 
-            Projectile proj = (PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
-            gun.DefaultModule.projectiles[0] = proj;
+            //Projectile proj = (PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
 
+            LobbedProjectile proj = DataCloners.CopyFields<LobbedProjectile>(Instantiate((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]));
+            proj.gameObject.MakeFakePrefab();
+            proj.gameObject.AddComponent<BounceProjModifier>().numberOfBounces = 5;
+            proj.visualHeight = 2f;
+            proj.spawnCollisionProjectilesOnFloorBounce = true;
+
+            SpawnProjModifier flak = proj.gameObject.AddComponent<SpawnProjModifier>();
+            flak.spawnProjectilesOnCollision = true;
+            flak.spawnCollisionProjectilesOnBounce = true;
+            flak.randomRadialStartAngle = true;
+            flak.numberToSpawnOnCollison = 5;
+            flak.collisionSpawnStyle = SpawnProjModifier.CollisionSpawnStyle.RADIAL;
+
+            LobbedProjectile subproj = DataCloners.CopyFields<LobbedProjectile>(Instantiate((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]));
+            subproj.gameObject.MakeFakePrefab();
+            subproj.gameObject.AddComponent<BounceProjModifier>().numberOfBounces = 1;
+            subproj.AdditionalScaleMultiplier = 0.5f;
+            subproj.visualHeight = 1f;
+            subproj.forcedDistance = 2;
+            flak.projectileToSpawnOnCollision = subproj;
+
+            gun.DefaultModule.projectiles[0] = proj;
 
             //   gun.DefaultModule.projectiles[0] = GameOfLifeHandler.GOLProjPrefab;
 
-            /*   LobbedProjectile proj = DataCloners.CopyFields<LobbedProjectile>(Instantiate((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]));
-               proj.gameObject.MakeFakePrefab();
-
-               proj.initialSpeed = 23f;
-               proj.speedCurve = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(1f, -10f));
-               proj.flySpeedMultiplier = 1f;
-               proj.destinationOffset = new Vector2(0f, 0.6875f);
-               proj.angularVelocity = 360f;
+            /*   
 
 
 
@@ -98,8 +113,41 @@ namespace NevernamedsItems
 
 
     }
+    public class TryKillAllProjectile : Projectile
+    {
+        public override void Move()
+        {
+            this.m_timeElapsed += this.LocalDeltaTime;
+            if (this.angularVelocity != 0f)
+            {
+                this.m_transform.RotateAround(this.m_transform.position.XY(), Vector3.forward, this.angularVelocity * this.LocalDeltaTime);
+            }
+            if (this.baseData.UsesCustomAccelerationCurve)
+            {
+                float num = Mathf.Clamp01((this.m_timeElapsed - this.baseData.IgnoreAccelCurveTime) / this.baseData.CustomAccelerationCurveDuration);
+                this.m_currentSpeed = this.baseData.AccelerationCurve.Evaluate(num) * this.baseData.speed;
+            }
 
-        public class GameOfLifeHandler : MonoBehaviour
+            base.specRigidbody.Velocity = this.m_currentDirection * this.m_currentSpeed;
+
+            if (this.GetAbsoluteRoom() != null && this.GetAbsoluteRoom().GetActiveEnemiesCount( RoomHandler.ActiveEnemyType.All) > 0)
+            {
+                List<AIActor> allEn = this.GetAbsoluteRoom().GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+                foreach (AIActor ac in allEn)
+                {
+                    Vector2 angle = SafeCenter.CalculateVectorBetween(ac.CenterPosition);
+                    base.specRigidbody.Velocity += angle.normalized * (this.m_currentSpeed * 0.25f);
+                }
+            }
+
+            this.m_currentDirection = base.specRigidbody.Velocity.normalized;
+            //this.m_transform.eulerAngles = new Vector3(0f, 0f, m_currentDirection.ToAngle());
+            this.m_currentSpeed *= 1f - this.baseData.damping * this.LocalDeltaTime;
+            this.LastVelocity = base.specRigidbody.Velocity;
+        }
+    }
+    
+    public class GameOfLifeHandler : MonoBehaviour
     {
         public static Projectile GOLProjPrefab;
         public GameOfLifeHandler()

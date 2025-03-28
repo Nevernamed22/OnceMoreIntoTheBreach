@@ -66,7 +66,7 @@ namespace NevernamedsItems
                 ObjectSpecRigidBody.Initialize();
                 PhysicsEngine.Instance.RegisterOverlappingGhostCollisionExceptions(ObjectSpecRigidBody, null, false);
 
-                ETGModConsole.Log("log1");
+                //ETGModConsole.Log("log1");
                 UnityEngine.Object.Instantiate<GameObject>((PickupObjectDatabase.GetById(328) as Gun).DefaultModule.chargeProjectiles[0].Projectile.hitEffects.overrideMidairDeathVFX, position.ToVector2() + new Vector2(0.5f, 0.5f), Quaternion.identity);
                 
 

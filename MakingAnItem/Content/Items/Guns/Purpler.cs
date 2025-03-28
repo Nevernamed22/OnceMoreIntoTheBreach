@@ -53,7 +53,7 @@ namespace NevernamedsItems
             projectile.transform.parent = gun.barrelOffset;
             projectile.SetProjectileSprite("purpler_projectile", 8, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.RedLaserCircleVFX;
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = "Thinline Bullets";

@@ -41,6 +41,26 @@ namespace NevernamedsItems
                     }
                 }
             }
+            if (user.PlayerHasActiveSynergy("Wealth Untold") && user.CurrentRoom != null)
+            {
+                List<AIActor> activeEnemies = user.CurrentRoom.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+
+                if (activeEnemies != null)
+                {
+                    for (int i = 0; i < activeEnemies.Count; i++)
+                    {
+                        AIActor aiactor = activeEnemies[i];
+                        if (aiactor.IsNormalEnemy)
+                        {
+                            aiactor.gameActor.ApplyEffect(new GameActorGildedEffect()
+                            {
+                                duration = 50,
+                                stackMode = GameActorEffect.EffectStackingMode.Refresh,
+                            }, 1f, null);
+                        }
+                    }
+                }
+            }
             user.ForceBlank();
         }       
     }

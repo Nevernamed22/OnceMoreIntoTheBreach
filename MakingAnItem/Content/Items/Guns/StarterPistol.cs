@@ -49,7 +49,7 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             projectile.SetProjectileSprite("starterpistol_proj", 6, 17, true, tk2dBaseSprite.Anchor.MiddleCenter, 2, 13);
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.YellowLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.YellowLaserCircleVFX;
             projectile.baseData.damage = 5;
             projectile.baseData.force = 100;
             projectile.baseData.range = 100;

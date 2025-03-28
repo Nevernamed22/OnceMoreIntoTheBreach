@@ -32,21 +32,6 @@ namespace NevernamedsItems
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(56) as Gun, true, false);
 
-            GameObject bulletDeath = VFXToolbox.CreateVFX("W3irdstar MidairDeath",
-                  new List<string>()
-                  {
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/W3irdstar/w3irdstar_impact_001",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/W3irdstar/w3irdstar_impact_002",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/W3irdstar/w3irdstar_impact_003",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/W3irdstar/w3irdstar_impact_004",
-                  },
-                 15, //FPS
-                  new IntVector2(20, 20), //Dimensions
-                  tk2dBaseSprite.Anchor.MiddleCenter, //Anchor
-                  false, //Uses a Z height off the ground
-                  0 //The Z height, if used
-                    );
-
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).wrapMode = tk2dSpriteAnimationClip.WrapMode.LoopSection;
             gun.GetComponent<tk2dSpriteAnimator>().GetClipByName(gun.chargeAnimation).loopStart = 2;
 
@@ -77,7 +62,7 @@ namespace NevernamedsItems
             projectile.baseData.speed *= 0.5f;
             projectile.baseData.range = 12f;
             
-            projectile.hitEffects.overrideMidairDeathVFX = bulletDeath;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.W3irdstarImpact;
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.SetProjectileSprite("w3irdstar_largeproj", 20, 20, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
             EvenRadialBurstHandler burst = projectile.gameObject.AddComponent<EvenRadialBurstHandler>();
@@ -95,7 +80,7 @@ namespace NevernamedsItems
             UnityEngine.Object.DontDestroyOnLoad(projectile2);
             projectile2.baseData.damage = 5f;
             projectile2.baseData.range = 20f;
-            projectile2.hitEffects.overrideMidairDeathVFX = bulletDeath;
+            projectile2.hitEffects.overrideMidairDeathVFX = SharedVFX.W3irdstarImpact;
             projectile2.hitEffects.alwaysUseMidair = true;
             projectile2.SetProjectileSprite("w3irdstar_smallproj", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
 

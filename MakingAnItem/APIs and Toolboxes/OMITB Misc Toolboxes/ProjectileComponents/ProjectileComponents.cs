@@ -1109,19 +1109,6 @@ namespace NevernamedsItems
         public string ImpactSFX;
         private Projectile m_projectile;
     }
-    public class PrefabStatusEffectsToApply : MonoBehaviour
-    {
-        public PrefabStatusEffectsToApply()
-        {
-        }
-        private void Start()
-        {
-            this.m_projectile = base.GetComponent<Projectile>();
-           if (this.m_projectile != null && this.m_projectile.statusEffectsToApply != null && effects != null && effects.Count > 0) this.m_projectile.statusEffectsToApply.AddRange(effects);
-        }
-        public List<GameActorEffect> effects;
-        private Projectile m_projectile;
-    }
     public class ScaleChangeOverTimeModifier : MonoBehaviour
     {
         public ScaleChangeOverTimeModifier()

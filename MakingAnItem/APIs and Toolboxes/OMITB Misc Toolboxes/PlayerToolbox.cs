@@ -1,4 +1,5 @@
-﻿using Alexandria.Misc;
+﻿using Alexandria.ChestAPI;
+using Alexandria.Misc;
 using Dungeonator;
 using MonoMod.RuntimeDetour;
 using SaveAPI;
@@ -307,17 +308,17 @@ namespace NevernamedsItems
                     if (m_attachedPlayer.HasPickupID(256))
                     {
                         m_attachedPlayer.RemovePassiveItem(256);
-                        IntVector2 bestRewardLocation2 = m_attachedPlayer.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
-                        Chest red_Chest = GameManager.Instance.RewardManager.A_Chest;
-                        red_Chest.IsLocked = false;
-                        red_Chest.ChestType = (UnityEngine.Random.value <= 0.5f ? Chest.GeneralChestType.ITEM : Chest.GeneralChestType.WEAPON);
-                        Chest spawnedRed = Chest.Spawn(red_Chest, bestRewardLocation2);
-                        spawnedRed.lootTable.lootTable = (UnityEngine.Random.value <= 0.5f ? GameManager.Instance.RewardManager.GunsLootTable : GameManager.Instance.RewardManager.ItemsLootTable);
-                        spawnedRed.RegisterChestOnMinimap(spawnedRed.GetAbsoluteParentRoom());
+
+                        ChestUtility.SpawnChestEasy(m_attachedPlayer.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true),
+                            ChestUtility.ChestTier.RED,
+                            false, //Locked
+                            Chest.GeneralChestType.UNSPECIFIED
+                        );
+
                         TextBubble.DoAmbientTalk(m_attachedPlayer.transform, new Vector3(1, 2, 0), "Nice Try", 4f);
                     }
                 }
-                else if (m_attachedPlayer.ownerlessStatModifiers.Contains(keepItCoolSpeedBuff))
+                else if (m_attachedPlayer.ownerlessStatModifiers != null && m_attachedPlayer.ownerlessStatModifiers.Contains(keepItCoolSpeedBuff))
                 {
                     m_attachedPlayer.ownerlessStatModifiers.Remove(keepItCoolSpeedBuff);
                     m_attachedPlayer.stats.RecalculateStats(m_attachedPlayer);

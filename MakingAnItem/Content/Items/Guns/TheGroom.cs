@@ -51,7 +51,7 @@ namespace NevernamedsItems
                 projectile.baseData.range = 25;
                 projectile.baseData.damage = 8f;
                 projectile.hitEffects.alwaysUseMidair = true;
-                projectile.hitEffects.overrideMidairDeathVFX = RainbowGuonStone.GreyGuonTransitionVFX;
+                projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.ColouredPoofGrey;
                 projectile.SetProjectileSpriteRight("groom_projectile", 12, 12, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
                 if (iterator == 0 || iterator == 1 || iterator == 2)
                 {

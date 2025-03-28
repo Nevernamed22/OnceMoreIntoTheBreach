@@ -43,22 +43,8 @@ namespace NevernamedsItems
             gun.gunHandedness = GunHandedness.OneHanded;
 
             //VFX
-            gun.muzzleFlashEffects = VFXToolbox.CreateVFXPool("Stick Gun Muzzleflash",
-                new List<string>()
-                {
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/StickGun/stickgun_muzzleflash_001",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/StickGun/stickgun_muzzleflash_002",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/StickGun/stickgun_muzzleflash_003",
-                },
-                6, //FPS
-                new IntVector2(12, 13), //Dimensions
-                tk2dBaseSprite.Anchor.MiddleLeft, //Anchor
-                false, //Uses a Z height off the ground
-                0, //The Z height, if used
-                false,
-               VFXAlignment.Fixed
-                  );
-
+            gun.muzzleFlashEffects = VFXToolbox.CreateVFXPoolBundle("StickGunMuzzle", false, 0, VFXAlignment.Fixed);
+             
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);
@@ -74,66 +60,10 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles[0] = projectile;
 
             //Projectile VFX
-
-            projectile.hitEffects.overrideMidairDeathVFX = VFXToolbox.CreateVFX("Stick Gun MidairDeath",
-                  new List<string>()
-                  {
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/StickGun/stickgun_impact_001",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/StickGun/stickgun_impact_002",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/StickGun/stickgun_impact_003",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/StickGun/stickgun_impact_004",
-                  },
-                  6, //FPS
-                  new IntVector2(16, 15), //Dimensions
-                  tk2dBaseSprite.Anchor.MiddleCenter, //Anchor
-                  false, //Uses a Z height off the ground
-                  0 //The Z height, if used
-                    );
-
-            projectile.hitEffects.tileMapHorizontal = VFXToolbox.CreateVFXPool("Stick Gun TileMapHoriz",
-                new List<string>()
-                {
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/StickGun/stickgun_tilemaphoriz_001",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/StickGun/stickgun_tilemaphoriz_002",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/StickGun/stickgun_tilemaphoriz_003"
-                },
-                6, //FPS
-                new IntVector2(12, 21), //Dimensions
-                tk2dBaseSprite.Anchor.MiddleLeft, //Anchor
-                false, //Uses a Z height off the ground
-                0 //The Z height, if used
-                  );
-
-            projectile.hitEffects.tileMapVertical = VFXToolbox.CreateVFXPool("Stick Gun TileMapVert",
-                new List<string>()
-                {
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/StickGun/stickgun_tilemapvert_001",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/StickGun/stickgun_tilemapvert_002",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/StickGun/stickgun_tilemapvert_003"
-                },
-                6, //FPS
-                new IntVector2(18, 21), //Dimensions
-                tk2dBaseSprite.Anchor.MiddleLeft, //Anchor
-                false, //Uses a Z height off the ground
-                0 //The Z height, if used
-                  );
-
-            projectile.hitEffects.enemy = VFXToolbox.CreateVFXPool("Stick Gun EnemyImpact",
-                new List<string>()
-                {
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/StickGun/stickgun_enemyimpact_001",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/StickGun/stickgun_enemyimpact_002",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/StickGun/stickgun_enemyimpact_003",
-                    "NevernamedsItems/Resources/MiscVFX/GunVFX/StickGun/stickgun_enemyimpact_004"
-                },
-                6, //FPS
-                new IntVector2(15, 16), //Dimensions
-                tk2dBaseSprite.Anchor.MiddleCenter, //Anchor
-                false, //Uses a Z height off the ground
-                0, //The Z height, if used
-                false,
-                VFXAlignment.Fixed
-                  );
+            projectile.hitEffects.overrideMidairDeathVFX = VFXToolbox.CreateVFXBundle("StickGunMidair", false, 0f); ;
+            projectile.hitEffects.tileMapHorizontal = VFXToolbox.CreateVFXPoolBundle("StickGunTilemapHoriz", false, 0);
+            projectile.hitEffects.tileMapVertical = VFXToolbox.CreateVFXPoolBundle("StickGunTilemapVert", false, 0);
+            projectile.hitEffects.enemy = VFXToolbox.CreateVFXPoolBundle("StickGunEnemyImpact", false, 0, VFXAlignment.Fixed);
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("StickGun Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/stickgun_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/stickgun_clipempty");

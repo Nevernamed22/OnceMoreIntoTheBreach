@@ -48,7 +48,7 @@ namespace NevernamedsItems
             projectile.baseData.force *= 1f;
             projectile.baseData.speed *= 1f;
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.GreenLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.GreenLaserCircleVFX;
             projectile.baseData.range *= 0.5f;
             projectile.SetProjectileSpriteRight("repetiton_projectile", 10, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 6);
 
@@ -95,7 +95,7 @@ namespace NevernamedsItems
         }
         private void SpawnProjectile(ProjAndPositionData data)
         {
-            UnityEngine.Object.Instantiate<GameObject>(EasyVFXDatabase.GreenLaserCircleVFX, new Vector3(data.position.x, data.position.y), Quaternion.identity);
+            UnityEngine.Object.Instantiate<GameObject>(SharedVFX.GreenLaserCircleVFX, new Vector3(data.position.x, data.position.y), Quaternion.identity);
             GameObject obj = SpawnManager.SpawnProjectile(data.projectile, new Vector3(data.position.x, data.position.y, 0), Quaternion.Euler(0, 0, data.angle));
             Projectile component = obj.GetComponent<Projectile>();
             if (component != null)

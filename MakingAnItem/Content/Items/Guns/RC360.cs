@@ -61,7 +61,7 @@ namespace NevernamedsItems
             projectile.baseData.damage = 25f;
             projectile.SetProjectileSprite("goopyproj_001", 16, 16, true, tk2dBaseSprite.Anchor.MiddleCenter, 14, 14);
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.YellowLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.YellowLaserCircleVFX;
             projectile.gameObject.AddComponent<RC360TurretShot>();
             projectile.pierceMinorBreakables = true;
             gun.DefaultModule.finalProjectile = projectile;

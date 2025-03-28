@@ -58,7 +58,7 @@ namespace NevernamedsItems
             PierceProjModifier piercing = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();
             ThousandSinsProjectileModifier sins = projectile.gameObject.GetOrAddComponent<ThousandSinsProjectileModifier>();
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.BloodiedScarfPoofVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.BloodiedScarfPoofVFX;
 
             //ANIMATE BULLET
             projectile.AnimateProjectileBundle("GunOfAThousandSinsProjectile",

@@ -37,7 +37,7 @@ namespace NevernamedsItems
                 {
                     var enemyToSpawn = EnemyDatabase.GetOrLoadByGuid(guidToSpawn);
                     var position = this.m_projectile.specRigidbody.UnitCenter;
-                    Instantiate<GameObject>(EasyVFXDatabase.SpiratTeleportVFX, position, Quaternion.identity);
+                    Instantiate<GameObject>(SharedVFX.SpiratTeleportVFX, position, Quaternion.identity);
 
                     AIActor TargetActor = AIActor.Spawn(enemyToSpawn, position, GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(position.ToIntVector2()), true, AIActor.AwakenAnimationType.Default, true);
 

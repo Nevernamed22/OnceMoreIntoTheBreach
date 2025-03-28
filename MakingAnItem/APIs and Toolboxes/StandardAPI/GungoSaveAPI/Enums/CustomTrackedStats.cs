@@ -14,6 +14,7 @@ namespace SaveAPI
         TITAN_KIN_KILLED,
         BEHOLSTER_KILLS,
         MINEFLAYER_KILLS,
+        DOOR_LORD_KILLS,
         CHARMED_ENEMIES_KILLED,
         JAMMED_CHESTS_OPENED,
         //NPC Stats

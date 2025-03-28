@@ -89,7 +89,7 @@ namespace NevernamedsItems
             public override void OnEffect(GameObject obj)
             {
                 tk2dBaseSprite sprite = obj.GetComponent<tk2dBaseSprite>();
-                GameObject splash = SpawnManager.SpawnVFX(EasyVFXDatabase.JarateExplosion, sprite.WorldCenter, Quaternion.identity);
+                GameObject splash = SpawnManager.SpawnVFX(SharedVFX.JarateExplosion, sprite.WorldCenter, Quaternion.identity);
                 if (GameManager.Instance.PrimaryPlayer && Vector2.Distance(GameManager.Instance.PrimaryPlayer.CenterPosition, sprite.WorldCenter) < 4)
                 {
                     GameManager.Instance.PrimaryPlayer.CurrentFireMeterValue = 0;

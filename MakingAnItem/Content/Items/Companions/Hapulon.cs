@@ -33,7 +33,6 @@ namespace NevernamedsItems
                 "NevernamedsItems/Resources/MiscVFX/CompanionVFX/loveburstaoe_vfx_004",
                 "NevernamedsItems/Resources/MiscVFX/CompanionVFX/loveburstaoe_vfx_005",
             };
-            EasyVFXDatabase.LoveBurstAOE = VFXToolbox.CreateVFX("GundertaleSpare", vfxPaths, 16, new IntVector2(33, 16), tk2dBaseSprite.Anchor.MiddleCenter, true, 0.18f, 100, Color.yellow); ;
         }
 
         public static void BuildPrefab()
@@ -141,7 +140,7 @@ namespace NevernamedsItems
             }
             private void OnLanded(AIActor self, Vector2 position)
             {
-                if (Owner.IsInCombat) UnityEngine.Object.Instantiate<GameObject>(EasyVFXDatabase.LoveBurstAOE, base.sprite.WorldCenter + new Vector2(0, -0.5f), Quaternion.identity);
+                if (Owner.IsInCombat) UnityEngine.Object.Instantiate<GameObject>(SharedVFX.LoveBurstAOE, base.sprite.WorldCenter + new Vector2(0, -0.5f), Quaternion.identity);
                 List<AIActor> activeEnemies = base.specRigidbody.UnitCenter.GetAbsoluteRoom().GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
                 if (activeEnemies != null)
                 {

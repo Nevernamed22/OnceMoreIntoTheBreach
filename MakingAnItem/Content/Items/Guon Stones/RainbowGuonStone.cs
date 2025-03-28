@@ -348,29 +348,18 @@ namespace NevernamedsItems
         }
         public Dictionary<GuonState, GameObject> GuonTransitionVFX = new Dictionary<GuonState, GameObject>()
         {
-            {GuonState.RED, RedGuonTransitionVFX},
-            {GuonState.ORANGE, OrangeGuonTransitionVFX},
-            {GuonState.YELLOW, YellowGuonTransitionVFX},
-            {GuonState.GREEN, GreenGuonTransitionVFX},
-            {GuonState.BLUE, BlueGuonTransitionVFX},
-            {GuonState.WHITE, WhiteGuonTransitionVFX},
-            {GuonState.CYAN, CyanGuonTransitionVFX},
-            {GuonState.GOLD, GoldGuonTransitionVFX},
-            {GuonState.GREY, GreyGuonTransitionVFX},
-            {GuonState.INDIGO, IndigoGuonTransitionVFX},
-            {GuonState.BROWN, BrownGuonTransitionVFX},
+            {GuonState.RED, SharedVFX.ColouredPoofRed},
+            {GuonState.ORANGE, SharedVFX.ColouredPoofOrange},
+            {GuonState.YELLOW, SharedVFX.ColouredPoofYellow},
+            {GuonState.GREEN, SharedVFX.ColouredPoofGreen},
+            {GuonState.BLUE, SharedVFX.ColouredPoofBlue},
+            {GuonState.WHITE, SharedVFX.ColouredPoofWhite},
+            {GuonState.CYAN, SharedVFX.ColouredPoofCyan},
+            {GuonState.GOLD, SharedVFX.ColouredPoofGold},
+            {GuonState.GREY, SharedVFX.ColouredPoofGrey},
+            {GuonState.INDIGO, SharedVFX.ColouredPoofIndigo},
+            {GuonState.BROWN, SharedVFX.ColouredPoofBrown},
         };
-        public static GameObject RedGuonTransitionVFX;
-        public static GameObject OrangeGuonTransitionVFX;
-        public static GameObject YellowGuonTransitionVFX;
-        public static GameObject GreenGuonTransitionVFX;
-        public static GameObject BlueGuonTransitionVFX;
-        public static GameObject WhiteGuonTransitionVFX;
-        public static GameObject CyanGuonTransitionVFX;
-        public static GameObject GoldGuonTransitionVFX;
-        public static GameObject GreyGuonTransitionVFX;
-        public static GameObject BrownGuonTransitionVFX;
-        public static GameObject IndigoGuonTransitionVFX;
         private void resetCyanFireCooldown() { canFireCyanProjectile = true; }
         private void resetBlueRoomDMG() { canDoBlueSynergyRoomDMG = true; }
         private void resetOrangeFireCooldown() { canFireOrangeProjectile = true; }
@@ -487,14 +476,14 @@ namespace NevernamedsItems
                     if (!this.m_hasUsedShot)
                     {
                         this.m_hasUsedShot = true;
-                        if (base.Owner && EasyVFXDatabase.MachoBraceDustUpVFX)
+                        if (base.Owner && SharedVFX.MachoBraceDustUpVFX)
                         {
-                            base.Owner.PlayEffectOnActor(EasyVFXDatabase.MachoBraceDustUpVFX, new Vector3(0f, -0.625f, 0f), false, false, false);
+                            base.Owner.PlayEffectOnActor(SharedVFX.MachoBraceDustUpVFX, new Vector3(0f, -0.625f, 0f), false, false, false);
                             AkSoundEngine.PostEvent("Play_ITM_Macho_Brace_Trigger_01", base.gameObject);
                         }
-                        if (base.Owner && EasyVFXDatabase.MachoBraceBurstVFX)
+                        if (base.Owner && SharedVFX.MachoBraceBurstVFX)
                         {
-                            base.Owner.PlayEffectOnActor(EasyVFXDatabase.MachoBraceBurstVFX, new Vector3(0f, 0.375f, 0f), false, false, false);
+                            base.Owner.PlayEffectOnActor(SharedVFX.MachoBraceBurstVFX, new Vector3(0f, 0.375f, 0f), false, false, false);
                         }
                     }
                 }
@@ -746,9 +735,9 @@ namespace NevernamedsItems
                 {
                     outlineMaterial.SetColor("_OverrideColor", new Color(99f, 99f, 0f));
                 }
-                if (EasyVFXDatabase.MachoBraceOverheadVFX && !this.m_instanceVFX)
+                if (SharedVFX.MachoBraceOverheadVFX && !this.m_instanceVFX)
                 {
-                    this.m_instanceVFX = target.PlayEffectOnActor(EasyVFXDatabase.MachoBraceOverheadVFX, new Vector3(0f, 1.375f, 0f), true, true, false);
+                    this.m_instanceVFX = target.PlayEffectOnActor(SharedVFX.MachoBraceOverheadVFX, new Vector3(0f, 1.375f, 0f), true, true, false);
                 }
             }
         }

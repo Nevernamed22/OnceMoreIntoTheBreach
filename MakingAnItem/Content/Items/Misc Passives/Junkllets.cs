@@ -75,6 +75,7 @@ namespace NevernamedsItems
                 modifyType = method
             };
 
+            
             if (this.passiveStatModifiers == null)
                 this.passiveStatModifiers = new StatModifier[] { modifier };
             else

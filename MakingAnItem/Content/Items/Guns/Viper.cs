@@ -129,7 +129,7 @@ namespace NevernamedsItems
                 float rotation = vector.z;
                 if (isLeft) { rotation -= 90; isLeft = false; }
                 else { rotation += 90; isLeft = true; }
-                UnityEngine.Object.Instantiate<GameObject>(EasyVFXDatabase.RedLaserCircleVFX, new Vector3(vector.x, vector.y), Quaternion.identity);
+                UnityEngine.Object.Instantiate<GameObject>(SharedVFX.RedLaserCircleVFX, new Vector3(vector.x, vector.y), Quaternion.identity);
                 GameObject obj = SpawnManager.SpawnProjectile(projToSpawn.gameObject, new Vector3(vector.x, vector.y, 0), Quaternion.Euler(0, 0, rotation));
                 Projectile component = obj.GetComponent<Projectile>();
                 if (component != null)

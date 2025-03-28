@@ -129,7 +129,7 @@ namespace NevernamedsItems
             BounceProjModifier pinkshittybonce = pinkshitty.gameObject.GetOrAddComponent<BounceProjModifier>();
             pinkshittybonce.numberOfBounces = 1;
             pinkshittybonce.damageMultiplierOnBounce = 1;
-            pinkshitty.hitEffects.overrideMidairDeathVFX = RainbowGuonStone.RedGuonTransitionVFX;
+            pinkshitty.hitEffects.overrideMidairDeathVFX = SharedVFX.ColouredPoofPink;
             pinkshitty.SetProjectileSpriteRight("initiatewand_pinkshitty", 8, 8, true, tk2dBaseSprite.Anchor.MiddleCenter, 6, 6);
             SpecialProjectileIdentifier ID4 = pinkshitty.gameObject.AddComponent<SpecialProjectileIdentifier>();
             ID4.SpecialIdentifier = "INITIATE_WAND";

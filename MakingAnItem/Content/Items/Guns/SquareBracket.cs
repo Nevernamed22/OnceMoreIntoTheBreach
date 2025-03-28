@@ -44,7 +44,7 @@ namespace NevernamedsItems
             projectile.sprite.renderer.enabled = false;
             projectile.gameObject.AddComponent<SquareMotionHandler>();
 
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.GreenLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.GreenLaserCircleVFX;
             projectile.hitEffects.alwaysUseMidair = true;
 
             List<string> BeamAnimPaths = new List<string>()

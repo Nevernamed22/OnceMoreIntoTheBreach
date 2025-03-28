@@ -35,7 +35,6 @@ C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\Uni
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\UnityEngine.ImageConversionModule.dll
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\UnityEngine.JSONSerializeModule.dll
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\NevernamedsItems.csproj.CoreCompileInputs.cache
-C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\NevernamedsItems.csproj.CopyComplete
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\MakingAnItem.dll
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\MakingAnItem.pdb
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\UnityEngine.TextRenderingModule.dll
@@ -153,3 +152,4 @@ C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\Uni
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\UnityEngine.WindModule.xml
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\NevernamedsItems.csproj.AssemblyReference.cache
 C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\bin\Debug\Gunfig.dll
+C:\Users\travi\Documents\GitHub\OnceMoreIntoTheBreach\MakingAnItem\obj\Debug\Nevernam.1AC537A4.Up2Date

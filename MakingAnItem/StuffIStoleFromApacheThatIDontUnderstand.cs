@@ -364,7 +364,7 @@ namespace NevernamedsItems
 
             //targetPoint = (targetPoint - new Vector2(0.30f, 0.125f));
 
-            Owner.PlayEffectOnActor(EasyVFXDatabase.BloodiedScarfPoofVFX, Vector3.zero, false, true, false);
+            Owner.PlayEffectOnActor(SharedVFX.BloodiedScarfPoofVFX, Vector3.zero, false, true, false);
 
             AkSoundEngine.PostEvent("Play_ENM_wizardred_vanish_01", Owner.gameObject);
             List<AIActor> m_rollDamagedEnemies = Owner.m_rollDamagedEnemies;
@@ -405,7 +405,7 @@ namespace NevernamedsItems
             GameManager.Instance.MainCameraController.IsLerping = IsLerping;
             Owner.IsEthereal = false;
             Owner.IsVisible = true;
-            Owner.PlayEffectOnActor(EasyVFXDatabase.BloodiedScarfPoofVFX, Vector3.zero, false, true, false);
+            Owner.PlayEffectOnActor(SharedVFX.BloodiedScarfPoofVFX, Vector3.zero, false, true, false);
             //m_CurrentlyBlinking = false;
             if (Owner.CurrentFireMeterValue <= 0f) { yield break; }
             Owner.CurrentFireMeterValue = Mathf.Max(0f, Owner.CurrentFireMeterValue -= 0.5f);

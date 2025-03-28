@@ -51,7 +51,7 @@ namespace NevernamedsItems
             projectile.baseData.damage = 7.5f;
             projectile.baseData.speed *= 1f;
             projectile.baseData.range *= 1f;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.SmoothLightBlueLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.SmoothLightBlueLaserCircleVFX;
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.SetProjectileSprite("march_none_projectile", 9, 9, false, tk2dBaseSprite.Anchor.MiddleCenter, 7, 7);
 

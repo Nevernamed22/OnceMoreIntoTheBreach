@@ -62,7 +62,7 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.damage = 5f;
             projectile.SetProjectileSprite("redrobin_projectile", 12, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 12, 6);
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.RedLaserCircleVFX;
             projectile.hitEffects.alwaysUseMidair = true;
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.SMALL_BLASTER;

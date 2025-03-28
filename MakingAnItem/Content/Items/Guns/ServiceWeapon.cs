@@ -80,21 +80,14 @@ namespace NevernamedsItems
 
             CustomClipAmmoTypeToolbox.AddCustomAmmoType("Service Weapon Bullets Critical", "NevernamedsItems/Resources/CustomGunAmmoTypes/serviceweapon_critical_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/serviceweapon_critical_clipempty");
 
-            gun.TrimGunSprites();
+ 
 
             gun.quality = PickupObject.ItemQuality.S;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             ID = gun.PickupObjectId;
 
-            board = VFXToolbox.CreateVFX("TheBoard", new List<string>()
-            {
-                 "NevernamedsItems/Resources/MiscVFX/GunVFX/ServiceWeapon/theboard_vfx1",
-                 "NevernamedsItems/Resources/MiscVFX/GunVFX/ServiceWeapon/theboard_vfx2",
-                 "NevernamedsItems/Resources/MiscVFX/GunVFX/ServiceWeapon/theboard_vfx3",
-                 "NevernamedsItems/Resources/MiscVFX/GunVFX/ServiceWeapon/theboard_vfx4",
-            },
-            1, new IntVector2(30, 26), tk2dBaseSprite.Anchor.LowerCenter, false, 0, -1, null, tk2dSpriteAnimationClip.WrapMode.Loop, true);
+            board = VFXToolbox.CreateVFXBundle("TheBoard", false, 0f);
         }
         public static int ID;
      /*   public override void Start()

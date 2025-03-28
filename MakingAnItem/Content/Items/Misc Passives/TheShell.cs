@@ -18,7 +18,7 @@ namespace NevernamedsItems
             "The Shell",
             "The First",
             "This is the first shotgun shell ever to be created, by the great Gunsmith Geddian" + "\n\nHas an affinity with all shotguns.",
-            "theshell_icon");
+            "theshell_improved");
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
             Doug.AddToLootPool(item.PickupObjectId);

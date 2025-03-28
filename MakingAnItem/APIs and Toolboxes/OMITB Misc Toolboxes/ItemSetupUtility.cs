@@ -47,6 +47,36 @@ namespace NevernamedsItems
 
             Alexandria.Assetbundle.GunInt.SetupSprite(gun, collections[collection], $"{identity}_idle_001", framerate, noAmmonomicon ? null : $"{identity}_ammonomicon_001");
         }
+      
+        public static GameObject CreateOrbitalObject(string name, string defaultSprite, IntVector2 colliders, IntVector2 colliderOffsets, string animationClip = null, float orbitRadius = 2.5f, float rotationDegreesPerSecond = 120f, int orbitalTier = 0, PlayerOrbital.OrbitalMotionStyle orbitmotionStyle = PlayerOrbital.OrbitalMotionStyle.ORBIT_PLAYER_ALWAYS, float perfectOrbitalFactor = 0f)
+        {
+            GameObject prefab = ItemBuilder.SpriteFromBundle(defaultSprite, Initialisation.itemCollection.GetSpriteIdByName(defaultSprite), Initialisation.itemCollection, new GameObject(name));
+            
+            var body = prefab.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(colliderOffsets, colliders);
+            body.CollideWithTileMap = false;
+            body.CollideWithOthers = true;
+            body.PrimaryPixelCollider.CollisionLayer = CollisionLayer.EnemyBulletBlocker;
+
+            PlayerOrbital orbitalPrefab = prefab.AddComponent<PlayerOrbital>();
+            orbitalPrefab.motionStyle = orbitmotionStyle;
+            orbitalPrefab.shouldRotate = false;
+            orbitalPrefab.orbitRadius = orbitRadius;
+            orbitalPrefab.orbitDegreesPerSecond = rotationDegreesPerSecond;
+            orbitalPrefab.perfectOrbitalFactor = perfectOrbitalFactor;
+            orbitalPrefab.SetOrbitalTier(orbitalTier);
+
+            if (animationClip != null)
+            {
+                tk2dSpriteAnimator animator = prefab.GetOrAddComponent<tk2dSpriteAnimator>();
+                animator.Library = Initialisation.itemAnimationCollection;
+                animator.DefaultClipId = Initialisation.itemAnimationCollection.GetClipIdByName(animationClip);
+                animator.playAutomatically = true;
+            }
+
+            prefab.MakeFakePrefab();
+
+            return prefab;
+        }
 
     }
 }

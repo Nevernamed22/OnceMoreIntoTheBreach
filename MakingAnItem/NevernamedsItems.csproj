@@ -35,7 +35,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="APIs and Toolboxes\AssetBundleLoader.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Extensions and Hooks\MiscPatches.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Extensions and Hooks\NPCPatches.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Extensions and Hooks\OMITBActions.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\GeneralComponents\SpriteSparkler.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\GeneralComponents\RelativeLabelAttacher.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\GunComponents\AdvancedHoveringGunSynergyController.cs" />
@@ -43,17 +45,25 @@
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ItemSetupUtility.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\MiscTools.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\BeamAngleMovementBehaviour.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\BeamAttachVFXToEnd.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\BeamAutoAddMotionModule.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\BeamProjSpewModifier.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\BulletSharkProjectileDoer.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\ConvertToHelixOnSpawn.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\CustomVFXTrail.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\DamageAverageBehaviour.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\DestroyInternalWallsBehav.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\DistortionWaveDamager.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\DrainClipBehav.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\DriftModifier.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\ExplodeOnBulletIntersection.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\FixedFlakBehaviour.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\GainAmmoOnHitEnemyModifier.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\ImplosionBehaviour.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\InherentExsanguinationEffect.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\ModdedStatusEffectApplier.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\NoCollideBehaviour.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\OscillatingProjectileModifier.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\ParticleShitter.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\ProjectileShootbackMod.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\ProjectileSpinner.cs" />
@@ -62,61 +72,97 @@
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\ProjectileTilemapGracePeriod.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\RandomRoomPosBehaviour.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\SimpleProjectileTrail.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\SimpleStickInEnemyHandler.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\SneakyShotgunComponent.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\SpawnEnemyOnBulletSpawn.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\SquareMotionHandler.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\StatModifyOnBounce.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\StatusEffectBulletSynergy.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileTypes\LobbedProjectile.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileTypes\PathfindingProjectile.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\SlashComponents\ExplosiveSlashBehaviour.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\SlashComponents\ModdedStatusEffectSlashBehaviour.cs" />
     <Compile Include="Characters\OMITBChars.cs" />
     <Compile Include="Content\Entities\EntityTools.cs" />
     <Compile Include="Content\Goops\Hole.cs" />
     <Compile Include="Content\Goops\JarateGoop.cs" />
     <Compile Include="Content\Items\Actives\BeholsterEye.cs" />
+    <Compile Include="Content\Items\Actives\FiringMechanism.cs" />
     <Compile Include="Content\Items\Actives\FriendshipBracelet.cs" />
     <Compile Include="Content\Items\Actives\HelmOfChaos.cs" />
     <Compile Include="Content\Items\Actives\LaserKnife.cs" />
     <Compile Include="Content\Items\Actives\ShellNecklace.cs" />
+    <Compile Include="Content\Items\Actives\SubstitutiaryLocomotion.cs" />
     <Compile Include="Content\Items\Companions\Cubud.cs" />
+    <Compile Include="Content\Items\Companions\ExtendedCompanionItem.cs" />
+    <Compile Include="Content\Items\Companions\Goobleck.cs" />
     <Compile Include="Content\Items\Companions\Gungineer.cs" />
+    <Compile Include="Content\Items\Companions\ManOfMystery.cs" />
     <Compile Include="Content\Items\Companions\PrismaticSnail.cs" />
+    <Compile Include="Content\Items\Companions\RandomisedBuddy.cs" />
     <Compile Include="Content\Items\Guns\AlternatingFire.cs" />
     <Compile Include="Content\Items\Guns\Amalgun.cs" />
     <Compile Include="Content\Items\Guns\Arquebus.cs" />
     <Compile Include="Content\Items\Guns\AverageJoe.cs" />
+    <Compile Include="Content\Items\Guns\Beams\DomeLord.cs" />
     <Compile Include="Content\Items\Guns\Beams\FlamethrowerMk1.cs" />
+    <Compile Include="Content\Items\Guns\Beams\MoltenHeat.cs" />
     <Compile Include="Content\Items\Guns\Beams\ParticleBeam.cs" />
+    <Compile Include="Content\Items\Guns\Beams\Solstice.cs" />
+    <Compile Include="Content\Items\Guns\Beams\Welder.cs" />
+    <Compile Include="Content\Items\Guns\Beams\XRay.cs" />
     <Compile Include="Content\Items\Guns\Bejeweler.cs" />
+    <Compile Include="Content\Items\Guns\Betsy.cs" />
     <Compile Include="Content\Items\Guns\BlueGun.cs" />
+    <Compile Include="Content\Items\Guns\BlueMoon.cs" />
     <Compile Include="Content\Items\Guns\Borchardt.cs" />
     <Compile Include="Content\Items\Guns\Borz.cs" />
     <Compile Include="Content\Items\Guns\BouncerRPG.cs" />
     <Compile Include="Content\Items\Guns\BouncerUzi.cs" />
     <Compile Include="Content\Items\Guns\BrainBlast.cs" />
+    <Compile Include="Content\Items\Guns\BubbleFist.cs" />
+    <Compile Include="Content\Items\Guns\BusterGun.cs" />
     <Compile Include="Content\Items\Guns\C7A2.cs" />
     <Compile Include="Content\Items\Guns\CashBlaster.cs" />
     <Compile Include="Content\Items\Guns\ChewingGun.cs" />
+    <Compile Include="Content\Items\Guns\Clamshell.cs" />
     <Compile Include="Content\Items\Guns\Claymore.cs" />
     <Compile Include="Content\Items\Guns\ConfettiCannon.cs" />
+    <Compile Include="Content\Items\Guns\Cornnon.cs" />
     <Compile Include="Content\Items\Guns\CortexBlaster.cs" />
+    <Compile Include="Content\Items\Guns\DarkLady.cs" />
     <Compile Include="Content\Items\Guns\DoomBoom.cs" />
     <Compile Include="Content\Items\Guns\DublDuck.cs" />
+    <Compile Include="Content\Items\Guns\Dulcannon.cs" />
     <Compile Include="Content\Items\Guns\FlamethrowerMk2.cs" />
     <Compile Include="Content\Items\Guns\FractalGun.cs" />
     <Compile Include="Content\Items\Guns\G11.cs" />
+    <Compile Include="Content\Items\Guns\Gunion.cs" />
+    <Compile Include="Content\Items\Guns\HookGun.cs" />
+    <Compile Include="Content\Items\Guns\HornetsNest.cs" />
+    <Compile Include="Content\Items\Guns\Javelin.cs" />
+    <Compile Include="Content\Items\Guns\KillDevil.cs" />
     <Compile Include="Content\Items\Guns\LaundromaterielRifle.cs" />
     <Compile Include="Content\Items\Guns\LtBluesPhaser.cs" />
+    <Compile Include="Content\Items\Guns\M70.cs" />
+    <Compile Include="Content\Items\Guns\MagicPaintbrush.cs" />
     <Compile Include="Content\Items\Guns\Makatov.cs" />
+    <Compile Include="Content\Items\Guns\Monsoon.cs" />
     <Compile Include="Content\Items\Guns\Musket.cs" />
+    <Compile Include="Content\Items\Guns\Pallbearer.cs" />
+    <Compile Include="Content\Items\Guns\PencilPusher.cs" />
+    <Compile Include="Content\Items\Guns\Pinaka.cs" />
     <Compile Include="Content\Items\Guns\PineNeedler.cs" />
     <Compile Include="Content\Items\Guns\RazorRifle.cs" />
     <Compile Include="Content\Items\Guns\Rewarp.cs" />
     <Compile Include="Content\Items\Guns\Rheinmetole.cs" />
+    <Compile Include="Content\Items\Guns\RiteOfPassage.cs" />
     <Compile Include="Content\Items\Guns\SalvatorDormus.cs" />
     <Compile Include="Content\Items\Guns\ScrapStrap.cs" />
     <Compile Include="Content\Items\Guns\Scythe.cs" />
     <Compile Include="Content\Items\Guns\ServiceWeapon.cs" />
     <Compile Include="Content\Items\Guns\Smoker.cs" />
+    <Compile Include="Content\Items\Guns\SnakeMinigun.cs" />
     <Compile Include="Content\Items\Guns\SnakePistol.cs" />
     <Compile Include="Content\Items\Guns\SpacersFancy.cs" />
     <Compile Include="Content\Items\Guns\Spitballer.cs" />
@@ -137,6 +183,7 @@
     <Compile Include="Content\Items\Guns\TotemOfGundying.cs" />
     <Compile Include="Content\Items\Guns\Type56.cs" />
     <Compile Include="Content\Items\Guns\VulcanRepeater.cs" />
+    <Compile Include="Content\Items\Guns\Wex.cs" />
     <Compile Include="Content\Items\Guon Stones\LimeGuonStone.cs" />
     <Compile Include="Content\Items\Misc Passives\AmethystBracelet.cs" />
     <Compile Include="Content\Items\Misc Passives\AmmoGland.cs" />
@@ -145,21 +192,40 @@
     <Compile Include="Content\Items\Misc Passives\BeltFeeder.cs" />
     <Compile Include="Content\Items\Misc Passives\BlankDie.cs" />
     <Compile Include="Content\Items\Misc Passives\Blanket.cs" />
+    <Compile Include="Content\Items\Misc Passives\BlueShell.cs" />
     <Compile Include="Content\Items\Misc Passives\BlueSteel.cs" />
+    <Compile Include="Content\Items\Misc Passives\BlueSyrup.cs" />
+    <Compile Include="Content\Items\Misc Passives\Chamembert.cs" />
     <Compile Include="Content\Items\Misc Passives\ChanceCard.cs" />
+    <Compile Include="Content\Items\Misc Passives\ColdOne.cs" />
     <Compile Include="Content\Items\Misc Passives\CrosshairNecklace.cs" />
     <Compile Include="Content\Items\Misc Passives\DeathMask.cs" />
     <Compile Include="Content\Items\Misc Passives\Dreamcatcher.cs" />
     <Compile Include="Content\Items\Misc Passives\ElectricCylinder.cs" />
+    <Compile Include="Content\Items\Misc Passives\ExpandingBullets.cs" />
+    <Compile Include="Content\Items\Misc Passives\FiveFingerDiscount.cs" />
     <Compile Include="Content\Items\Misc Passives\FlamingShells.cs" />
+    <Compile Include="Content\Items\Misc Passives\GlobeSight.cs" />
+    <Compile Include="Content\Items\Misc Passives\Gracelets.cs" />
     <Compile Include="Content\Items\Misc Passives\GunpowderGreen.cs" />
+    <Compile Include="Content\Items\Misc Passives\GuruMeditation.cs" />
     <Compile Include="Content\Items\Misc Passives\HauntedAmulet.cs" />
+    <Compile Include="Content\Items\Misc Passives\HeartBox.cs" />
+    <Compile Include="Content\Items\Misc Passives\HeartContainer.cs" />
+    <Compile Include="Content\Items\Misc Passives\HEVSuit.cs" />
+    <Compile Include="Content\Items\Misc Passives\JammedBullets.cs" />
     <Compile Include="Content\Items\Misc Passives\LaserPepper.cs" />
+    <Compile Include="Content\Items\Misc Passives\MasterPin.cs" />
+    <Compile Include="Content\Items\Misc Passives\Payback.cs" />
     <Compile Include="Content\Items\Misc Passives\Pyromania.cs" />
+    <Compile Include="Content\Items\Misc Passives\RabbitsFoot.cs" />
+    <Compile Include="Content\Items\Misc Passives\RazorBullets.cs" />
     <Compile Include="Content\Items\Misc Passives\RingOfFortune.cs" />
     <Compile Include="Content\Items\Misc Passives\RoundsOfTheReaver.cs" />
     <Compile Include="Content\Items\Misc Passives\SetOfAllSets.cs" />
     <Compile Include="Content\Items\Misc Passives\ShroomedBullets.cs" />
+    <Compile Include="Content\Items\Misc Passives\SonicCylinder.cs" />
+    <Compile Include="Content\Items\Misc Passives\TruthKnowersTrance.cs" />
     <Compile Include="Content\Items\Misc Passives\UnderbarrelShotgun.cs" />
     <Compile Include="Content\Items\Misc Passives\WoodenKnife.cs" />
     <Compile Include="Content\Items\Table Techs\TableTechAstronomy.cs" />
@@ -169,6 +235,7 @@
     <Compile Include="Content\NPCs\BowlerShop.cs" />
     <Compile Include="Content\NPCs\BreachModifiers.cs" />
     <Compile Include="Content\NPCs\Chancellot.cs" />
+    <Compile Include="Content\NPCs\Colorscant Squad.cs" />
     <Compile Include="Content\NPCs\Dispenser.cs" />
     <Compile Include="Content\NPCs\Doug.cs" />
     <Compile Include="Content\NPCs\GenericCultist.cs" />
@@ -237,13 +304,16 @@
     <Compile Include="Content\Placeables\GenericPlaceables.cs" />
     <Compile Include="Content\Placeables\GoldButton.cs" />
     <Compile Include="Content\Placeables\LowWalls.cs" />
+    <Compile Include="Content\Placeables\Traps\BloodCandle.cs" />
     <Compile Include="Content\Placeables\Traps\Guillotine.cs" />
     <Compile Include="Content\Placeables\Traps\StatueTraps.cs" />
     <Compile Include="Content\Shrines\GenericShrine.cs" />
     <Compile Include="Content\Shrines\ShrineSetup.cs" />
     <Compile Include="Content\Shrines\VulcairnShrine.cs" />
     <Compile Include="Content\StandardisedProjectiles.cs" />
+    <Compile Include="Content\Status Effects\Crying.cs" />
     <Compile Include="Content\Status Effects\Exsanguination.cs" />
+    <Compile Include="Content\Status Effects\Gilded.cs" />
     <Compile Include="Content\Status Effects\Jarated.cs" />
     <Compile Include="Content\Tweaks\EnemyHealthModifiers.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Extensions and Hooks\ShadeFlightHookFix.cs" />
@@ -666,7 +736,7 @@
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\DataCloners.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjSpawnHelper.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\ProjectileComponents.cs" />
-    <Compile Include="APIs and Toolboxes\OMITB Storage Classes\EasyVFXDatabase.cs" />
+    <Compile Include="Content\SharedVFX.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Storage Classes\ExtendedColours.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Storage Classes\StaticExplosionDatas.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Storage Classes\StaticStatusEffects.cs" />
@@ -900,393 +970,7 @@
     <Compile Include="Content\Items\Guon Stones\YellowGuonStone.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\egg_salad_001.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\primabean_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\BulletModifiers\bashingbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\titanbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\spareblank_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\powerarmour_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\snailbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\mistakebullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\woodenbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\speedpotion.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\lewis_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\backwardsbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\antimagicrounds_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\shutdownshells_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\alkalibullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\errorshells_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\50calrounds_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\mysticoil_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\venusianbars_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\1shot_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\daggeroftheaimgel_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\trueblank_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\luckycoin_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\libation_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ironsights_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\microaicontact_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\unengravedbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\engravedbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\osteoporosisbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\hardreloadbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\workinprogress_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\awholebulletkin_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bloodybox_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\maidenshapedbox_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\sharpkey_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\blankpersonality_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\sparekey_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\caseymimic_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\shopcoupon_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\recyclinder_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\keychain_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\falseblank_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\nitrobullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\heartpadlock_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\comicallygiganticbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\spacemetal_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\keybulleteffigy_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\tabletechtable_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\minersbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\glasschamber_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\glassrounds_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bagofholding_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\keybulwark_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\loosechange_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\flamechamber_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\tabletechspeed_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\timefuddlersrobe_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\mutagen_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\theshellactery_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\identitycrisis_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\supersonicshot_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\yellowguon_icon.png" />
-    <EmbeddedResource Include="Resources\yellowguon_ingame.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\greyguon_icon.png" />
-    <EmbeddedResource Include="Resources\greyguon_ingame.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\tabletechinvulnerability_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\nitroglycylinder_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\blackholster_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\tabletechammo_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\junkllets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\knightlybullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\numberonebossmug_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bookofmimicanatomy_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\kaliberseye_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\gungrease_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\libramofthechambers_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bomberjacket_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\dragunscale_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\wonderchest_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\guonboulder_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\reinforcementradio_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\blightshell_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\gtcwtvrp_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\glassammolet_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\kevin_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\goldguonstone_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\goldguonstone_ingame.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\woodguon_icon.png" />
-    <EmbeddedResource Include="Resources\woodguon_ingame.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\tabletechguon_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\purpleprose_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\cycloneboots_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\rustycasing_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\hikingpack_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\gooeyheart_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\organdonorcard_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bloodthirstybullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\elevatorbutton_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\cleansingrounds_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bullut_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\gunpowderpheromones_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\gswitch_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\glassgod_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\exaltedheart_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\acidaura_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\accelerant_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\rando1_icon.png" />
-    <EmbeddedResource Include="Resources\rando2_icon.png" />
-    <EmbeddedResource Include="Resources\rando3_icon.png" />
-    <EmbeddedResource Include="Resources\rando4_icon.png" />
-    <EmbeddedResource Include="Resources\rando5_icon.png" />
-    <EmbeddedResource Include="Resources\rando6_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\legboot_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\fullarmourjacket_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\goldenarmour_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\crowdedclips_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bashfulshot_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\mirrorbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\theshell_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\chaosruby_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\diamondbracelet_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\pearlbracelet_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\blankkey_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bulletbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\antimatterbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\thebeholster_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\spectrebullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\hiveholster_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\hallowedrounds_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\wickerammolet_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\blankboots_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bulletkinplushie_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\promethianbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\epimethianbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\armouredarmour_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\JammomasterSprites\alljammedmode_icon.png" />
@@ -1305,51 +989,6 @@
     <EmbeddedResource Include="Resources\JammomasterSprites\jammomaster_talk_001.png" />
     <EmbeddedResource Include="Resources\JammomasterSprites\jammomaster_talk_002.png" />
     <EmbeddedResource Include="Resources\JammomasterSprites\jammomaster_talk_003.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\furiousammolet_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\hornedhelmet_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\brownguonstone_icon.png" />
-    <EmbeddedResource Include="Resources\brownguonstone_ingame.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\rocketman_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\tierbullets_a_icon.png" />
-    <EmbeddedResource Include="Resources\tierbullets_b_icon.png" />
-    <EmbeddedResource Include="Resources\tierbullets_c_icon.png" />
-    <EmbeddedResource Include="Resources\tierbullets_default_icon.png" />
-    <EmbeddedResource Include="Resources\tierbullets_d_icon.png" />
-    <EmbeddedResource Include="Resources\tierbullets_s_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ringofoddlyspecificbenefits_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\tabullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bloodglassguonstone_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\blobulonrage_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\overpricedheadband_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\heartofgold_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\finishedbullet_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\chanceeffigy_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\BabyGoodChanceKinSprites\babygoodchancekin_idleleft_001.png" />
@@ -1374,200 +1013,11 @@
     <EmbeddedResource Include="Resources\BabyGoodChanceKinSprites\babygoodchancekin_moveright_006.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\babygoodchancekin_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\gildedlead_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\magickecauldron_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\demoterbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\voodoollets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\shadeheart_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\shadehand_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\claysculpture_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bombinomicon_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\springloadedchamber_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\tracerrounds_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\gracefulgoop_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\frostkey_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\greyguon_synergy.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\mrfahrenheit_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\endlessbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\gunslingeremblem_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\mobiusclip_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\magicquiver_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\silverammolet_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\cheeseheart_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bloodybox_icon2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\magicmissile_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\goomperorscrown_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\permafrost_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\hellfirerounds_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\lockdown_effect_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\meatshield_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\lovepotion_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\speedpotion2_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\goop_standard_base_001.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\honey_standard_base_001.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bloodyammo_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\mengerammobox_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\showdown_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ammolite_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\cardinalsmitre_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\gunjurersbelt_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\birdshot_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\blombk_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\chemgrenade_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\toolbox_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\unpredictabullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\obsidianpistol_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\lockdownbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ringofammoredemption_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bombardiershells_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\riskyring_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\warpbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\pitgooptex.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\portablehole_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\keymmolet_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\honeypot_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\StatusEffectVFX\plaguevfxframe_001.png" />
     <EmbeddedResource Include="Resources\StatusEffectVFX\plaguevfxframe_002.png" />
     <EmbeddedResource Include="Resources\StatusEffectVFX\plaguevfxframe_003.png" />
     <EmbeddedResource Include="Resources\StatusEffectVFX\plaguevfxframe_004.png" />
     <EmbeddedResource Include="Resources\StatusEffectVFX\plaguevfxframe_005.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\pestilence_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\heavychamber_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\autollet_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bulletswithguns_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\applecore_icon.png" />
-    <EmbeddedResource Include="Resources\apple_icon.png" />
-    <EmbeddedResource Include="Resources\goldenapplecore_icon.png" />
-    <EmbeddedResource Include="Resources\goldenapple_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bloodthinner_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bulletboots_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\crossbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\titaniumclip_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Companions\Diode\diode_idle_001.png" />
@@ -1588,27 +1038,9 @@
     <EmbeddedResource Include="Resources\Companions\Diode\diode_moveright_006.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\cursedtumbler_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\GuonStones\cyanguon_icon.png" />
     <EmbeddedResource Include="Resources\GuonStones\cyanguon_ingame.png" />
     <EmbeddedResource Include="Resources\GuonStones\cyanguon_synergy.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\emptyrounds_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\equality_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bayonet_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\combatknife_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\glassshard_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Companions\PeanutCompanion\peanut_attackeast_001.png" />
@@ -2149,9 +1581,6 @@
     <EmbeddedResource Include="Resources\Companions\Diode\diode_icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\gunknightamulet_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\Companions\DroneCompanion\drone_icon.png" />
     <EmbeddedResource Include="Resources\Companions\DroneCompanion\drone_idle_001.png" />
     <EmbeddedResource Include="Resources\Companions\DroneCompanion\drone_idle_002.png" />
@@ -2210,9 +1639,6 @@
     <EmbeddedResource Include="Resources\Companions\Denksnavel\denksnavel_idle_right_007.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\gunsmokeperfume_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\Hats\numberoneplaceholder_south_001.png" />
     <EmbeddedResource Include="Resources\Hats\theberserker_east_001.png" />
     <EmbeddedResource Include="Resources\Hats\theberserker_north_001.png" />
@@ -2235,15 +1661,6 @@
     <EmbeddedResource Include="Resources\BeamSprites\heatray_seg_008.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\kalibersprayer_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\kinammolet_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\laserbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\BeamSprites\redbeam_impact_001.png" />
     <EmbeddedResource Include="Resources\BeamSprites\redbeam_impact_002.png" />
     <EmbeddedResource Include="Resources\BeamSprites\redbeam_impact_003.png" />
@@ -2254,30 +1671,9 @@
     <EmbeddedResource Include="Resources\BeamSprites\redbeam_seg_004.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\lefthandedness_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\longswordshot_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\lootengine_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\GuonStones\maroonguon_icon.png" />
     <EmbeddedResource Include="Resources\GuonStones\maroonguon_ingame.png" />
     <EmbeddedResource Include="Resources\GuonStones\maroonguon_synergy.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\paperbadge_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\pocketchest_black_icon.png" />
-    <EmbeddedResource Include="Resources\pocketchest_blue_icon.png" />
-    <EmbeddedResource Include="Resources\pocketchest_brown_icon.png" />
-    <EmbeddedResource Include="Resources\pocketchest_green_icon.png" />
-    <EmbeddedResource Include="Resources\pocketchest_rainbow_icon.png" />
-    <EmbeddedResource Include="Resources\pocketchest_red_icon.png" />
-    <EmbeddedResource Include="Resources\pocketchest_synergy_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\MiscVFX\PumpChargeMeter1.png" />
@@ -2285,9 +1681,6 @@
     <EmbeddedResource Include="Resources\MiscVFX\PumpChargeMeter3.png" />
     <EmbeddedResource Include="Resources\MiscVFX\PumpChargeMeter4.png" />
     <EmbeddedResource Include="Resources\MiscVFX\PumpChargeMeter5.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\blankh_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\MiscVFX\spared_vfx_001.png" />
@@ -2370,18 +1763,6 @@
     <EmbeddedResource Include="Resources\MiscVFX\RainbowGuonPoofs\yellowpoof_005.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\tinheart_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\unstabletech_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\eraser_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\amuletofshelltan_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\Companions\Gusty\gusty_icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -2394,33 +1775,6 @@
     <EmbeddedResource Include="Resources\Companions\Gusty\gusty_idle_002.png" />
     <EmbeddedResource Include="Resources\Companions\Gusty\gusty_idle_003.png" />
     <EmbeddedResource Include="Resources\Companions\Gusty\gusty_idle_004.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\drillbullets_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\shatterblank_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\foamdarts_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\tabletoforder_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ringofinvisibility_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\witchsbrew_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\chemicalburn_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\gunidaesolvithaatelis_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ammotrap_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Companions\ScrollOfExactKnowledge\scrollofexactknowledge_icon.png" />
@@ -2436,25 +1790,7 @@
     <EmbeddedResource Include="Resources\Companions\ScrollOfExactKnowledge\scrollofexactknowledge_idleright_004.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\mapfragment_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\tatteredmap_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\cloakofdarkness_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\boostershot_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\MiscVFX\errorshellsoverhead_vfx.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bloodshoteye_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\widowsring_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompaniona_idle_001.png" />
@@ -2479,12 +1815,6 @@
     <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompanionb_run_004.png" />
     <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompanionb_run_005.png" />
     <EmbeddedResource Include="Resources\Companions\LeadOfLife\lichseyebulletscompanionb_run_006.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\cartographerseye_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\opulentblank_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Companions\LeadOfLife\bullettimecompanion_idle_001.png" />
@@ -2613,9 +1943,6 @@
     <EmbeddedResource Include="Resources\StatVFX\speedup_vfx_007.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\grimblanks_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\Companions\LeadOfLife\BTCKTPcompanion_idle_001.png" />
     <EmbeddedResource Include="Resources\Companions\LeadOfLife\BTCKTPcompanion_idle_002.png" />
     <EmbeddedResource Include="Resources\Companions\LeadOfLife\BTCKTPcompanion_idle_003.png" />
@@ -2676,18 +2003,6 @@
     <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\antimagicroundscompanion_run_006.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\moonrock_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ivoryammolet_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\cliponammopouch_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\telekinesis_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\birdshotcompanion_idle_001.png" />
     <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\birdshotcompanion_idle_002.png" />
     <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\birdshotcompanion_idle_003.png" />
@@ -2722,15 +2037,6 @@
     <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bloodthirstybulletscompanion_run_004.png" />
     <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bloodthirstybulletscompanion_run_005.png" />
     <EmbeddedResource Include="Resources\Companions\LeadOfLifeModded\bloodthirstybulletscompanion_run_006.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\splattershot_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\ammolock_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\pestiferouslead_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\BeamSprites\heatray_impact_001.png" />
@@ -2794,9 +2100,6 @@
     <EmbeddedResource Include="Resources\Hats\thestovepipe_south_001.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\shadeshot_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\BeamSprites\sickworm_end_001.png" />
     <EmbeddedResource Include="Resources\BeamSprites\sickworm_mid_001.png" />
   </ItemGroup>
@@ -2817,12 +2120,6 @@
     <EmbeddedResource Include="Resources\BeamSprites\ybeam_impact_002.png" />
     <EmbeddedResource Include="Resources\BeamSprites\ybeam_impact_003.png" />
     <EmbeddedResource Include="Resources\BeamSprites\ybeam_impact_004.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\artillerybelt_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\shoulderholster_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\BeamSprites\carrion2_end_001.png" />
@@ -2866,9 +2163,6 @@
     <EmbeddedResource Include="Resources\BeamSprites\carrionformthree_mid_005.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\necromancersrighthand_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\AnimatedItemSprites\witheringchamber_icon_001.png" />
     <EmbeddedResource Include="Resources\AnimatedItemSprites\witheringchamber_icon_002.png" />
     <EmbeddedResource Include="Resources\AnimatedItemSprites\witheringchamber_icon_003.png" />
@@ -2894,21 +2188,6 @@
     <EmbeddedResource Include="Resources\BeamSprites\thickredbeam_start_005.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\bitbucket_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\nigredo_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\albedo_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\citrinitas_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\rubedo_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\GuonStones\ultravioletguonstone_icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -2922,9 +2201,6 @@
     <EmbeddedResource Include="Resources\Companions\ChromaGunDroids\chromadroid_red_idle_004.png" />
     <EmbeddedResource Include="Resources\Companions\ChromaGunDroids\chromadroid_red_idle_005.png" />
     <EmbeddedResource Include="Resources\Companions\ChromaGunDroids\chromadroid_red_idle_006.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\shadeseye_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\MiscVFX\LeadSoulVFX\leadsouloverhead_001.png" />
@@ -2946,9 +2222,6 @@
     <EmbeddedResource Include="Resources\MiscVFX\LeadSoulVFX\leadsouloverhead_017.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\leadsoul_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\GuonStones\infraredguonstone_icon.png" />
     <EmbeddedResource Include="Resources\GuonStones\infraredguonstone_ingame.png" />
     <EmbeddedResource Include="Resources\GuonStones\infraredguonstone_synergy.png" />
@@ -2962,9 +2235,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\CurseIcons\butterfingers_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\jawsofdefeat_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Shrines\investment.png" />
@@ -3024,21 +2294,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\CurseIcons\darkness_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\armourbandage_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\shrinkshot_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\focallenses_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\hepatizonammolet_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\bronzeammolet_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\BeamSprites\alphabeam_mid_001.png" />
@@ -5562,7 +4817,7 @@
       <HintPath>..\packages\HarmonyX.2.7.0\lib\net35\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Alexandria, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EtG.Alexandria.0.4.5\lib\net35\Alexandria.dll</HintPath>
+      <HintPath>..\packages\EtG.Alexandria.0.4.17\lib\net35\Alexandria.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EtG.GameLibs.2.1.9.1\lib\net35\Assembly-CSharp.dll</HintPath>
@@ -5580,7 +4835,7 @@
       <HintPath>..\packages\Ionic.Zip.1.9.1.8\lib\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="ModTheGungeonAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EtG.ModTheGungeonAPI.1.7.7\lib\net35\ModTheGungeonAPI.dll</HintPath>
+      <HintPath>..\packages\EtG.ModTheGungeonAPI.1.9.0\lib\net35\ModTheGungeonAPI.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.10.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
       <HintPath>..\packages\Mono.Cecil.0.10.4\lib\net35\Mono.Cecil.dll</HintPath>
@@ -7825,7 +7080,6 @@
     <EmbeddedResource Include="Resources\GunJsons\rheinmetole_fire_002.jtk2d" />
     <EmbeddedResource Include="Resources\GunJsons\rheinmetole_idle_001.jtk2d" />
     <EmbeddedResource Include="Resources\GunJsons\rheinmetole_reload_001.jtk2d" />
-    <EmbeddedResource Include="Resources\Sounds\NeoBank.bnk" />
     <EmbeddedResource Include="Resources\GunJsons\thegreystaff_fire_001.jtk2d" />
     <EmbeddedResource Include="Resources\GunJsons\thegreystaff_fire_002.jtk2d" />
     <EmbeddedResource Include="Resources\GunJsons\thegreystaff_idle_001.jtk2d" />
@@ -7974,29 +7228,327 @@
     <EmbeddedResource Include="Resources\GunJsons\pista_reload_010.json" />
     <EmbeddedResource Include="Resources\GunJsons\pista_reload_011.json" />
     <EmbeddedResource Include="Resources\GunJsons\pista_reload_012.json" />
-    <EmbeddedResource Include="Resources\GunJsons\repeatovolverinf_fire_001.json" />
-    <EmbeddedResource Include="Resources\GunJsons\repeatovolverinf_idle_001.json" />
-    <EmbeddedResource Include="Resources\GunJsons\minishotgun2_discharge_001.json" />
-    <EmbeddedResource Include="Resources\GunJsons\minishotgun2_discharge_002.json" />
-    <EmbeddedResource Include="Resources\GunJsons\minishotgun2_discharge_003.json" />
-    <EmbeddedResource Include="Resources\GunJsons\minishotgun2_discharge_004.json" />
-    <EmbeddedResource Include="Resources\GunJsons\minishotgun2_fire_001.json" />
-    <EmbeddedResource Include="Resources\GunJsons\minishotgun2_fire_002.json" />
-    <EmbeddedResource Include="Resources\GunJsons\minishotgun2_fire_003.json" />
-    <EmbeddedResource Include="Resources\GunJsons\minishotgun2_fire_004.json" />
-    <EmbeddedResource Include="Resources\GunJsons\minishotgun2_idle_001.json" />
-    <EmbeddedResource Include="Resources\GunJsons\minishotgun2_reload_001.json" />
-    <EmbeddedResource Include="Resources\GunJsons\nnminigun2_fire_001.json" />
-    <EmbeddedResource Include="Resources\GunJsons\nnminigun2_fire_002.json" />
-    <EmbeddedResource Include="Resources\GunJsons\nnminigun2_fire_003.json" />
-    <EmbeddedResource Include="Resources\GunJsons\nnminigun2_fire_004.json" />
-    <EmbeddedResource Include="Resources\GunJsons\nnminigun2_idle_001.json" />
-    <EmbeddedResource Include="Resources\GunJsons\nnminigun2_reload_001.json" />
     <EmbeddedResource Include="Resources\GunJsons\shroomedgun_fire_001.json" />
     <EmbeddedResource Include="Resources\GunJsons\shroomedgun_fire_002.json" />
     <EmbeddedResource Include="Resources\GunJsons\shroomedgun_fire_003.json" />
     <EmbeddedResource Include="Resources\GunJsons\shroomedgun_fire_004.json" />
     <EmbeddedResource Include="Resources\GunJsons\shroomedgun_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bustergun_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bustergun_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bustergun_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bustergun_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bustergun_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bustergun_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\m70_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\m70_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\m70_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\m70_reload_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\m70_reload_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\m70_reload_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\m70_reload_005.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\m70_reload_006.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\m70_reload_007.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\m70_reload_008.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\m70_reload_009.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\m70_reload_010.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\minishotgun2_discharge_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\minishotgun2_discharge_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\minishotgun2_discharge_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\minishotgun2_discharge_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\minishotgun2_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\minishotgun2_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\minishotgun2_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\minishotgun2_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\minishotgun2_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\minishotgun2_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\nnminigun2_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\nnminigun2_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\nnminigun2_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\nnminigun2_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\nnminigun2_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\nnminigun2_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\repeatovolverinf_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\repeatovolverinf_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_idle_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_idle_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_idle_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_idle_005.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_idle_006.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_idle_007.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_stab_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_stab_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_stab_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_stab_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_stab_005.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_stab_006.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_stab_007.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\riteofpassage_stab_008.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pencilpusher_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pencilpusher_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pencilpusher_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pencilpusher_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pencilpusher_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pencilpusher_out_of_ammo_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pencilpusher_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pencilpusher_reload_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pencilpusher_reload_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pencilpusher_reload_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pencilpusher_reload_005.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pencilpusher_reload_006.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\darklady_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\darklady_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\darklady_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\darklady_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\darklady_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\darklady_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\darklady_reload_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\darklady_reload_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\darklady_reload_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\darklady_reload_005.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\darklady_reload_006.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\darklady_reload_007.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\darklady_reload_008.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\clamshell_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\clamshell_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\clamshell_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\clamshell_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\clamshell_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\clamshell_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\clamshell_reload_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\gunion_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\gunion_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\gunion_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\gunion_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\gunion_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\gunion_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\gunion_reload_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\gunion_reload_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\gunion_reload_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\gunion_reload_005.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\gunion_reload_006.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\hookgun_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\hookgun_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\hookgun_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\hookgun_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\hookgun_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\betsy_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\betsy_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\betsy_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bubblefist_charge_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bubblefist_charge_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bubblefist_charge_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bubblefist_charge_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bubblefist_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bubblefist_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bubblefist_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bubblefist_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bubblefist_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bubblefist_idle_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bubblefist_idle_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bubblefist_idle_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_charge_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_charge_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_charge_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_charge_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_charge_005.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_charge_006.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_charge_007.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_charge_008.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_charge_009.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_charge_010.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_fire_005.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_idle_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_idle_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_idle_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_idle_005.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_idle_006.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_idle_007.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_idle_008.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_idle_009.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_idle_010.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_out_of_ammo_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pinaka_reload_001.json" />
+    <EmbeddedResource Include="Resources\Sounds\sounds.bnk" />
+    <EmbeddedResource Include="Resources\GunJsons2\cornnon_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\cornnon_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\cornnon_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\cornnon_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\cornnon_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\dulcannon_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\dulcannon_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\dulcannon_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\dulcannon_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\dulcannon_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\wex_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\wex_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\wex_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\wex_idle_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\wex_idle_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\wex_idle_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\wex_idle_005.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\wex_idle_006.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\wex_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\killdevil_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\killdevil_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\killdevil_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\killdevil_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\killdevil_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\killdevil_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\killdevil_reload_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\killdevil_reload_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\killdevil_reload_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\killdevil_reload_005.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\killdevil_reload_006.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_charge_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_charge_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_charge_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_charge_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_charge_005.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_charge_006.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_charge_007.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_charge_008.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_charge_009.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_reload_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_reload_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_reload_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_reload_005.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_reload_006.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_reload_007.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_reload_008.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_throw_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_throw_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_throw_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\snakegrenadelauncher_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\snakegrenadelauncher_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\snakegrenadelauncher_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\snakegrenadelauncher_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\snakegrenadelauncher_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\snakegrenadelauncher_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\snakeminigun_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\snakeminigun_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\snakeminigun_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\snakeminigun_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\snakeshotgun_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\snakeshotgun_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\snakeshotgun_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\snakeshotgun_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\snakeshotgun_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\snakeshotgun_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bluemoon_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bluemoon_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bluemoon_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bluemoon_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bluemoon_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bluemoon_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bluemoon_reload_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bluemoon_reload_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\bluemoon_reload_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_empty_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\javelin_out_of_ammo_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\solstice_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\solstice_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\solstice_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\solstice_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\solstice_fire_005.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\solstice_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\solstice_idle_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\solstice_idle_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\solstice_idle_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\solstice_idle_005.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\solstice_idle_006.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\solstice_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\solstice_reload_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\solstice_reload_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\solstice_reload_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\solstice_reload_005.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\xray_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\xray_idle_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\moltenheat_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\moltenheat_idle_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\moltenheat_idle_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\moltenheat_idle_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\moltenheat_idle_005.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\moltenheat_idle_006.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pallbearer_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pallbearer_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pallbearer_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pallbearer_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pallbearer_fire_005.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pallbearer_fire_006.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pallbearer_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pallbearer_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pallbearer_reload_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pallbearer_reload_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\pallbearer_reload_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\welder_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\welder_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\welder_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\welder_idle_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\welder_idle_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\welder_idle_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_fireEAST_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_fireNE_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_fireNORTH_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_fireNW_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_fireSOUTH_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_fireSW_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_fireWEST_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_idleEAST_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_idleEAST_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_idleNE_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_idleNE_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_idleNORTH_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_idleNORTH_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_idleNW_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_idleNW_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_idleSE_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_idleSE_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_idleSOUTH_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_idleSOUTH_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_idleSW_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_idleSW_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_idleWEST_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_idleWEST_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\domelord_fireSE_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\monsoon_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\monsoon_idle_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\monsoon_idle_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\monsoon_idle_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\hornetsnest_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\hornetsnest_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\magicpaintbrush_fire_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\magicpaintbrush_fire_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\magicpaintbrush_fire_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\magicpaintbrush_fire_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\magicpaintbrush_idle_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\magicpaintbrush_reload_001.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\magicpaintbrush_reload_002.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\magicpaintbrush_reload_003.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\magicpaintbrush_reload_004.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\magicpaintbrush_reload_005.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\magicpaintbrush_reload_006.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\magicpaintbrush_reload_007.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\magicpaintbrush_reload_008.json" />
+    <EmbeddedResource Include="Resources\GunJsons2\magicpaintbrush_reload_009.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\NeoItemSprites\flamechamber_icon.png" />

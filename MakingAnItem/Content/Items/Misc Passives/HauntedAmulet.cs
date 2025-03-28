@@ -54,7 +54,7 @@ namespace NevernamedsItems
             blinky.baseData.AccelerationCurve = (PickupObjectDatabase.GetById(760) as Gun).DefaultModule.projectiles[0].baseData.AccelerationCurve;
             blinky.baseData.CustomAccelerationCurveDuration = (PickupObjectDatabase.GetById(760) as Gun).DefaultModule.projectiles[0].baseData.CustomAccelerationCurveDuration;
             blinky.baseData.IgnoreAccelCurveTime = (PickupObjectDatabase.GetById(760) as Gun).DefaultModule.projectiles[0].baseData.IgnoreAccelCurveTime;
-            blinky.hitEffects.overrideMidairDeathVFX = RainbowGuonStone.RedGuonTransitionVFX;
+            blinky.hitEffects.overrideMidairDeathVFX = SharedVFX.ColouredPoofRed;
             blinky.hitEffects.alwaysUseMidair = true;
 
             pinky = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
@@ -87,7 +87,7 @@ namespace NevernamedsItems
             pinky.baseData.AccelerationCurve = (PickupObjectDatabase.GetById(760) as Gun).DefaultModule.projectiles[0].baseData.AccelerationCurve;
             pinky.baseData.CustomAccelerationCurveDuration = (PickupObjectDatabase.GetById(760) as Gun).DefaultModule.projectiles[0].baseData.CustomAccelerationCurveDuration;
             pinky.baseData.IgnoreAccelCurveTime = (PickupObjectDatabase.GetById(760) as Gun).DefaultModule.projectiles[0].baseData.IgnoreAccelCurveTime;
-            pinky.hitEffects.overrideMidairDeathVFX = RainbowGuonStone.RedGuonTransitionVFX;
+            pinky.hitEffects.overrideMidairDeathVFX = SharedVFX.ColouredPoofPink;
             pinky.hitEffects.alwaysUseMidair = true;
 
             inky = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
@@ -120,7 +120,7 @@ namespace NevernamedsItems
             inky.baseData.AccelerationCurve = (PickupObjectDatabase.GetById(760) as Gun).DefaultModule.projectiles[0].baseData.AccelerationCurve;
             inky.baseData.CustomAccelerationCurveDuration = (PickupObjectDatabase.GetById(760) as Gun).DefaultModule.projectiles[0].baseData.CustomAccelerationCurveDuration;
             inky.baseData.IgnoreAccelCurveTime = (PickupObjectDatabase.GetById(760) as Gun).DefaultModule.projectiles[0].baseData.IgnoreAccelCurveTime;
-            inky.hitEffects.overrideMidairDeathVFX = RainbowGuonStone.CyanGuonTransitionVFX;
+            inky.hitEffects.overrideMidairDeathVFX = SharedVFX.ColouredPoofCyan;
             inky.hitEffects.alwaysUseMidair = true;
 
             clyde = (PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
@@ -153,7 +153,7 @@ namespace NevernamedsItems
             clyde.baseData.AccelerationCurve = (PickupObjectDatabase.GetById(760) as Gun).DefaultModule.projectiles[0].baseData.AccelerationCurve;
             clyde.baseData.CustomAccelerationCurveDuration = (PickupObjectDatabase.GetById(760) as Gun).DefaultModule.projectiles[0].baseData.CustomAccelerationCurveDuration;
             clyde.baseData.IgnoreAccelCurveTime = (PickupObjectDatabase.GetById(760) as Gun).DefaultModule.projectiles[0].baseData.IgnoreAccelCurveTime;
-            clyde.hitEffects.overrideMidairDeathVFX = RainbowGuonStone.OrangeGuonTransitionVFX;
+            clyde.hitEffects.overrideMidairDeathVFX = SharedVFX.ColouredPoofOrange;
             clyde.hitEffects.alwaysUseMidair = true;
         }
         public static int ID;

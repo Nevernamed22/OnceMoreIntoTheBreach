@@ -47,14 +47,18 @@ namespace NevernamedsItems
             Projectile projectile = StandardisedProjectiles.snake.InstantiateAndFakeprefab();        
             gun.DefaultModule.projectiles[0] = projectile;
 
-            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
-            gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Snake Clip", "NevernamedsItems/Resources/CustomGunAmmoTypes/snakeclip_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/snakeclip_clipempty");
-
+            gun.AddClipSprites("snakeclip");
 
             gun.quality = PickupObject.ItemQuality.D;
             ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             ID = gun.PickupObjectId;
+
+            AdvancedHoveringGunSynergyProcessor SerpentsReach = gun.gameObject.AddComponent<AdvancedHoveringGunSynergyProcessor>();
+            SerpentsReach.RequiredSynergy = "Serpents Reach";
+            SerpentsReach.requiresTargetGunInInventory = true;
+            SerpentsReach.FireType = HoveringGunController.FireType.ON_COOLDOWN;
+            SerpentsReach.Trigger = AdvancedHoveringGunSynergyProcessor.TriggerStyle.CONSTANT;
         }
         public static int ID;
     }

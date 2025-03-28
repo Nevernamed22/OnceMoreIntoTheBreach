@@ -35,7 +35,7 @@ namespace NevernamedsItems
                 SpeedMultiplier = 0f,
 
                 //Eh
-                OverheadVFX = LockdownStatusEffect.lockdownVFXObject,
+                OverheadVFX = SharedVFX.LockdownOverhead,
                 AffectsEnemies = true,
                 AffectsPlayers = false,
                 AppliesOutlineTint = false,

@@ -12,143 +12,142 @@ namespace NevernamedsItems
 {
     public class LobbedProjectile : Projectile
     {
-        private RoomHandler m_room;
+        public static Vector2 GetRelativeAim(PlayerController player)
+        {
+            BraveInput instanceForPlayer = BraveInput.GetInstanceForPlayer(player.PlayerIDX);
+            Vector2 a = Vector2.zero;
+            if (instanceForPlayer != null)
+            {
+                if (instanceForPlayer.IsKeyboardAndMouse(false))
+                {
+                    a = player.unadjustedAimPoint.XY() - player.CenterPosition;
+                }
+                else
+                {
+                    bool flag4 = instanceForPlayer.ActiveActions == null;
+                    if (flag4)
+                    {
+                        return a;
+                    }
+                    a = instanceForPlayer.ActiveActions.Aim.Vector;
+                }
+            }
+            return a;
+        }
         public override void Start()
         {
-            AIActor nearestEnemy = ((Vector2)base.LastPosition).GetNearestEnemyToPosition(true, Dungeonator.RoomHandler.ActiveEnemyType.All, null, null);
-            if (nearestEnemy != null) { SetDestination(nearestEnemy.Position); }
-
-            m_canCollide = false;
+            canCollide = false;
+            pierceMinorBreakables = true;
             PierceProjModifier pierce = this.gameObject.GetOrAddComponent<PierceProjModifier>();
             pierce.penetratesBreakables = true;
-            pierce.penetration = 999999;
+            pierce.BeastModeLevel = PierceProjModifier.BeastModeStatus.BEAST_MODE_LEVEL_ONE;
             pierce.preventPenetrationOfActors = false;
-            m_currentHeightSpeed = initialSpeed;
             base.Start();
             sprite.transform.localRotation = transform.rotation;
             transform.rotation = Quaternion.identity;
-            m_originalHeightOffGround = sprite.HeightOffGround;
-            specRigidbody.OnPreMovement += HandleHeight;
-
-            
-
-                /*    if (this.ProjectilePlayerOwner() && this.ProjectilePlayerOwner().CurrentGun && !BraveInput.GetInstanceForPlayer(this.ProjectilePlayerOwner().PlayerIDX).IsKeyboardAndMouse(false))
+            originalHeightOffGround = sprite.HeightOffGround;
+            OnPostUpdate += HandleHeight;
+            localLastPosition = transform.position;
+            baseData.range = 999999f;
+            if (destinationDist < 0f)
+            {
+                if (forcedDistance > 0f)
+                {
+                    destinationDist = forcedDistance;
+                }
+                else
+                {
+                    var own = Owner;
+                    var shoot = Shooter;
+                    if (own is PlayerController p && own.specRigidbody == shoot)
                     {
-                        Vector2 start = this.ProjectilePlayerOwner().CurrentGun.barrelOffset.position;
-
-                        Dungeon dungeon = GameManager.Instance.Dungeon;
-                        Vector2 vector = start + this.ProjectilePlayerOwner().CurrentGun.CurrentAngle.DegreeToVector2().normalized * 20;
-                        this.m_room = start.GetAbsoluteRoom();
-                        bool flag = false;
-                        Vector2 vector2 = start;
-                        IntVector2 intVector = vector2.ToIntVector2(VectorConversions.Floor);
-                        if (dungeon.data.CheckInBoundsAndValid(intVector))
-                        {
-                            flag = dungeon.data[intVector].isExitCell;
-                        }
-                        float num = vector.x - start.x;
-                        float num2 = vector.y - start.y;
-                        float num3 = Mathf.Sign(vector.x - start.x);
-                        float num4 = Mathf.Sign(vector.y - start.y);
-                        bool flag2 = num3 > 0f;
-                        bool flag3 = num4 > 0f;
-                        int num5 = 0;
-                        while (Vector2.Distance(vector2, vector) > 0.1f && num5 < 10000)
-                        {
-                            num5++;
-                            float num6 = Mathf.Abs((((!flag2) ? Mathf.Floor(vector2.x) : Mathf.Ceil(vector2.x)) - vector2.x) / num);
-                            float num7 = Mathf.Abs((((!flag3) ? Mathf.Floor(vector2.y) : Mathf.Ceil(vector2.y)) - vector2.y) / num2);
-                            int num8 = Mathf.FloorToInt(vector2.x);
-                            int num9 = Mathf.FloorToInt(vector2.y);
-                            IntVector2 intVector2 = new IntVector2(num8, num9);
-                            bool flag4 = false;
-                            if (!dungeon.data.CheckInBoundsAndValid(intVector2))
-                            {
-                                break;
-                            }
-                            CellData cellData = dungeon.data[intVector2];
-                            if (cellData.nearestRoom != this.m_room || cellData.isExitCell != flag)
-                            {
-                                break;
-                            }
-                            if (cellData.type != CellType.WALL)
-                            {
-                                flag4 = true;
-                            }
-                            if (flag4)
-                            {
-                                intVector = intVector2;
-                            }
-                            if (num6 < num7)
-                            {
-                                num8++;
-                                vector2.x += num6 * num + 0.1f * Mathf.Sign(num);
-                                vector2.y += num6 * num2 + 0.1f * Mathf.Sign(num2);
-                            }
-                            else
-                            {
-                                num9++;
-                                vector2.x += num7 * num + 0.1f * Mathf.Sign(num);
-                                vector2.y += num7 * num2 + 0.1f * Mathf.Sign(num2);
-                            }
-                        }
-                        Vector2 end = intVector.ToCenterVector2();
-                        Vector2 found = Vector2.zero;
-                        List<AIActor> activeEnemies = start.GetAbsoluteRoom().GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
-                        if (activeEnemies != null)
-                        {
-                            for (int i = 0; i < activeEnemies.Count; i++)
-                            {
-                                if (found == Vector2.zero)
-                                {
-                                    AIActor aiactor = activeEnemies[i];
-                                    if (aiactor && aiactor.healthHaver && !aiactor.healthHaver.IsDead)
-                                    {
-                                        Vector2 zero = Vector2.zero;
-                                        if (BraveUtility.LineIntersectsAABB(start, end, aiactor.specRigidbody.HitboxPixelCollider.UnitBottomLeft, aiactor.specRigidbody.HitboxPixelCollider.UnitDimensions, out zero))
-                                        {
-                                            found = aiactor.specRigidbody.UnitCenter;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        SetDestination(found);
-                    }*/
+                        SetPlayerDestination(p);
+                    }
+                    else if (shoot != null && shoot.aiActor != null && shoot.aiActor.TargetRigidbody != null)
+                    {
+                        SetDestination(shoot.aiActor.TargetRigidbody.UnitCenter);
+                    }
+                    else if (own is PlayerController p2)
+                    {
+                        SetPlayerDestination(p2);
+                    }
+                }
             }
+            if (destinationDist < 0f)
+            {
+                destinationDist = 0.0625f;
+            }
+        }
 
-        public virtual void HandleHeight(SpeculativeRigidbody body)
+        public void SetPlayerDestination(PlayerController play)
         {
-            m_currentHeightSpeed += speedCurve.Evaluate(m_elapsedBounceTime) * 60 * LocalDeltaTime * (Owner is PlayerController ? (Owner as PlayerController).stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed) : 1f);
-            m_elapsedBounceTime += LocalDeltaTime * (Owner is PlayerController ? (Owner as PlayerController).stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed) : 1f);
-            m_currentHeight += (m_currentHeightSpeed * LocalDeltaTime) * (Owner is PlayerController ? (Owner as PlayerController).stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed) : 1f);
-            m_currentHeight = Mathf.Max(m_currentHeight, 0f);
-            sprite.transform.localPosition = new Vector3(sprite.transform.localPosition.x, Mathf.Max(m_currentHeight, 0f));
-            sprite.HeightOffGround = m_originalHeightOffGround + m_currentHeight;
-            sprite.UpdateZDepth();
-            if (transform.rotation.eulerAngles.z != 0f)
+            var inp = BraveInput.GetInstanceForPlayer(play.PlayerIDX);
+            if (inp != null)
             {
-                Quaternion rotation = sprite.transform.rotation;
-                rotation.eulerAngles = new Vector3(sprite.transform.rotation.eulerAngles.x, sprite.transform.rotation.eulerAngles.y, sprite.transform.rotation.eulerAngles.z + transform.rotation.eulerAngles.z);
-                sprite.transform.rotation = rotation;
-                transform.rotation = Quaternion.identity;
+                if (inp.IsKeyboardAndMouse() && !LobbedProjectileMotion.CONTROLLER_LOB_DEBUG)
+                {
+                    SetDestination(play.CenterPosition + GetRelativeAim(play));
+                }
+                else
+                {
+                    PhysicsEngine.Instance.Raycast(specRigidbody.UnitCenter, GetRelativeAim(play).normalized, 1000f, out var res, true, true, int.MaxValue, CollisionLayer.Projectile, false, x => !(x.minorBreakable == null && x.majorBreakable == null));
+                    if (res.SpeculativeRigidbody == null)
+                    {
+                        RaycastResult.Pool.Free(ref res);
+                        PhysicsEngine.Instance.Raycast(specRigidbody.UnitCenter, GetRelativeAim(play).normalized, 1000f, out res, true, true, int.MaxValue, CollisionLayer.Projectile, false, x => !(x.minorBreakable == null && (x.majorBreakable == null || (!x.majorBreakable.m_isBroken && (x.GetComponent<FlippableCover>() == null || !x.GetComponent<FlippableCover>().m_flipped)))));
+                    }
+                    if (res.SpeculativeRigidbody == null)
+                    {
+                        RaycastResult.Pool.Free(ref res);
+                        PhysicsEngine.Instance.Raycast(specRigidbody.UnitCenter, GetRelativeAim(play).normalized, 1000f, out res, true, true, int.MaxValue, CollisionLayer.Projectile, false, x => !((x.majorBreakable == null || (!x.majorBreakable.m_isBroken && (x.GetComponent<FlippableCover>() == null || !x.GetComponent<FlippableCover>().m_flipped))) && (x.minorBreakable == null || !x.minorBreakable.IsBroken)));
+                    }
+                    if (res.SpeculativeRigidbody != null)
+                    {
+                        SetDestination(res.SpeculativeRigidbody.UnitCenter + res.SpeculativeRigidbody.Velocity * baseData.speed * timeToLandWithNormalShotSpeed / 23);
+                    }
+                    else
+                    {
+                        SetDestination(res.Contact);
+                        destinationDist = Mathf.Max(destinationDist - 0.25f, 0.0625f);
+                    }
+                }
             }
-            if (projectile.shouldRotate && projectile.angularVelocity == 0)
+        }
+
+        public void HandleHeight(Projectile proj)
+        {
+            proj.specRigidbody.Velocity *= destinationDist / 23f / timeToLandWithNormalShotSpeed;
+            if (sprite != null)
             {
-                projectile.sprite.transform.rotation = Quaternion.Euler(0f, 0f, (projectile.sprite.transform.position - lastSpritePosition).XY().ToAngle());
+                var currentHeight = Mathf.Max(localDistanceElapsed / destinationDist * 4 * visualHeight * (1 - localDistanceElapsed / destinationDist), 0f);
+                sprite.transform.localPosition = new Vector3(sprite.transform.localPosition.x, Mathf.Max(currentHeight, 0f));
+                sprite.HeightOffGround = originalHeightOffGround + currentHeight;
+                if (transform.rotation.eulerAngles.z != 0f)
+                {
+                    Quaternion rotation = sprite.transform.rotation;
+                    rotation.eulerAngles = new Vector3(sprite.transform.rotation.eulerAngles.x, sprite.transform.rotation.eulerAngles.y, sprite.transform.rotation.eulerAngles.z + transform.rotation.eulerAngles.z);
+                    sprite.transform.rotation = rotation;
+                    transform.rotation = Quaternion.identity;
+                }
+                if (shouldRotate && angularVelocity == 0)
+                {
+                    sprite.transform.rotation = Quaternion.Euler(0f, 0f, (sprite.transform.position - lastSpritePosition).XY().ToAngle());
+                }
+                lastSpritePosition = sprite.transform.position;
             }
-            lastSpritePosition = projectile.sprite.transform.position;
-            if (m_currentHeight <= 0f && m_currentHeightSpeed < 0f && !m_isDestroying)
+            localDistanceElapsed += Vector3.Distance(localLastPosition, transform.position);
+            localLastPosition = transform.position;
+            if (localDistanceElapsed >= destinationDist && !isDestroying)
             {
+                localDistanceElapsed = 0f;
                 StartCoroutine(HandleDestruction());
-                m_isDestroying = true;
+                isDestroying = true;
             }
         }
 
         public override void OnPreCollision(SpeculativeRigidbody body, PixelCollider collider, SpeculativeRigidbody collision, PixelCollider collisionCollider)
         {
-            if (!m_canCollide && collision.GetComponentInParent<DungeonDoorController>() == null && (collision.GetComponent<MajorBreakable>() == null || !collision.GetComponent<MajorBreakable>().IsSecretDoor))
+            if (!canHitAnythingEvenWhenNotGrounded && !canCollide && collision.GetComponentInParent<DungeonDoorController>() == null && (collision.GetComponent<MajorBreakable>() == null || !collision.GetComponent<MajorBreakable>().IsSecretDoor))
             {
                 PhysicsEngine.SkipCollision = true;
                 return;
@@ -156,53 +155,14 @@ namespace NevernamedsItems
             base.OnPreCollision(body, collider, collision, collisionCollider);
         }
 
-        public void EnsureSimulatedTime()
-        {
-            if (simulatedTime == null)
-            {
-                float? time = SimulateTime();
-                simulatedTime = time;
-            }
-        }
-
         public void SetDestination(Vector2 destination, Vector2? overrideStart = null)
         {
-            EnsureSimulatedTime();
-            if (simulatedTime != null)
+            var lastdd = destinationDist;
+            destinationDist = Mathf.Max(Vector2.Distance(transform.position.XY(), destination), 0.0625f);
+            if (lastdd >= 0f)
             {
-                if (m_originalSpeed == null) m_originalSpeed = baseData.speed;
-                baseData.speed = m_originalSpeed.GetValueOrDefault() * Vector2.Distance(overrideStart ?? transform.position.XY(), destination) / (simulatedTime.GetValueOrDefault() * Time.timeScale);
+                localDistanceElapsed *= destinationDist / lastdd;
             }
-        }
-
-        public float? SimulateTime()
-        {
-            if (speedCurve.keys[speedCurve.length - 1].value >= 0f)
-            {
-                return null;
-            }
-            float time = 0f;
-            float speed = initialSpeed;
-            float height = 0f;
-            float actualSpeed = 1f;
-            float distance = 0f;
-            bool breakNextFrame = false;
-            while (true)
-            {
-                time += GameManager.INVARIANT_DELTA_TIME * (Owner is PlayerController ? (Owner as PlayerController).stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed) : 1f);
-                speed += speedCurve.Evaluate(time) * 60 * GameManager.INVARIANT_DELTA_TIME * (Owner is PlayerController ? (Owner as PlayerController).stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed) : 1f);
-                height += speed * GameManager.INVARIANT_DELTA_TIME * (Owner is PlayerController ? (Owner as PlayerController).stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed) : 1f);
-                distance += actualSpeed * GameManager.INVARIANT_DELTA_TIME;
-                if (breakNextFrame)
-                {
-                    break;
-                }
-                if (height <= 0f && speed < 0f)
-                {
-                    breakNextFrame = true;
-                }
-            }
-            return time;
         }
 
         public override void Move()
@@ -225,26 +185,33 @@ namespace NevernamedsItems
 
         protected IEnumerator HandleDestruction()
         {
-            m_canCollide = true;
+            canCollide = true;
             yield return null;
-            var cachedSpeed = baseData.speed;
             while (!ShouldBeDestroyed)
             {
-                baseData.speed = 0f;
-                UpdateSpeed();
+                isLingering = true;
                 OnFloorLinger();
                 yield return null;
             }
-            baseData.speed = cachedSpeed;
-            UpdateSpeed();
-            if (GetComponent<BounceProjModifier>() != null && GetComponent<BounceProjModifier>().numberOfBounces > 0 && IsAffectedByBounce)
+            isLingering = false;
+            if (IsAffectedByBounce && GetComponent<BounceProjModifier>() != null && GetComponent<BounceProjModifier>().numberOfBounces > 0)
             {
-                m_canCollide = false;
-                m_elapsedBounceTime = 0f;
-                m_currentHeightSpeed = initialSpeed;
-                m_currentHeight = 0f;
+                canCollide = false;
                 GetComponent<BounceProjModifier>().numberOfBounces--;
-                m_isDestroying = false;
+                isDestroying = false;
+
+                SpawnProjModifier spawner = GetComponent<SpawnProjModifier>();
+                if (spawner && spawnCollisionProjectilesOnFloorBounce)
+                {
+                    spawner.SpawnCollisionProjectiles(this.m_transform.position.XY(), base.specRigidbody.Velocity.normalized, null, false);
+                }
+
+                GoopModifier gooper = GetComponent<GoopModifier>();
+                if (gooper && spawnCollisionGoopOnFloorBounce)
+                {
+                    DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(gooper.goopDefinition).TimedAddGoopCircle(SafeCenter, gooper.CollisionSpawnRadius, 0.5f, false);
+                }
+
                 DoBounceReset();
             }
             else
@@ -262,18 +229,194 @@ namespace NevernamedsItems
         public virtual void OnFloorLinger()
         {
         }
-        protected float? simulatedTime;
-        public AnimationCurve speedCurve;
-        public float initialSpeed;
-        public float flySpeedMultiplier;
-        public Vector2 destinationOffset;
-        protected float m_elapsedBounceTime;
-        protected bool m_isDestroying;
-        protected float m_currentHeightSpeed;
-        protected float m_currentHeight;
-        protected float m_originalHeightOffGround;
-        protected bool m_canCollide;
-        protected float? m_originalSpeed;
+
+        public bool spawnCollisionProjectilesOnFloorBounce = false;
+        public bool spawnCollisionGoopOnFloorBounce = false;
+        public float forcedDistance = -1f;
+        public float timeToLandWithNormalShotSpeed = 0.5f;
+        public float visualHeight = 5f;
+        public bool canHitAnythingEvenWhenNotGrounded;
+        protected Vector3 lastSpritePosition;
+        protected float destinationDist = -1f;
+        protected bool isDestroying;
+        protected float originalHeightOffGround;
+        protected bool canCollide;
+        protected float localDistanceElapsed;
+        protected Vector3 localLastPosition;
+        protected bool isLingering = false;
+    }
+    public class LobbedProjectileMotion : BraveBehaviour
+    {
+        public void Start()
+        {
+            canCollide = false;
+            projectile.pierceMinorBreakables = true;
+            PierceProjModifier pierce = this.gameObject.GetOrAddComponent<PierceProjModifier>();
+            pierce.penetratesBreakables = true;
+            pierce.BeastModeLevel = PierceProjModifier.BeastModeStatus.BEAST_MODE_LEVEL_ONE; //this applies infinite penetration for some reason
+            pierce.preventPenetrationOfActors = false;
+            transform.rotation = Quaternion.identity;
+            if (projectile.sprite != null)
+            {
+                projectile.sprite.transform.localRotation = transform.rotation;
+                lastSpritePosition = projectile.sprite.transform.position;
+                originalHeightOffGround = projectile.sprite.HeightOffGround;
+            }
+            specRigidbody.OnPreRigidbodyCollision += OnPreCollision;
+            specRigidbody.OnRigidbodyCollision += OnRigidbodyCollision;
+            projectile.OnPostUpdate += HandleHeight;
+            projectile.angularVelocity = 0f;
+            localLastPosition = transform.position;
+            projectile.baseData.range = 999999f;
+            if (destinationDist < 0f)
+            {
+                if (forcedDistance > 0f)
+                {
+                    destinationDist = forcedDistance;
+                }
+                else
+                {
+                    var own = projectile.Owner;
+                    var shoot = projectile.Shooter;
+                    if (own is PlayerController p && own.specRigidbody == shoot)
+                    {
+                        SetPlayerDestination(p);
+                    }
+                    else if (shoot != null && shoot.aiActor != null && shoot.aiActor.TargetRigidbody != null)
+                    {
+                        SetDestination(shoot.aiActor.TargetRigidbody.UnitCenter);
+                    }
+                    else if (own is PlayerController p2)
+                    {
+                        SetPlayerDestination(p2);
+                    }
+                }
+            }
+            if (destinationDist < 0f)
+            {
+                destinationDist = 0.0625f;
+            }
+        }
+
+        public static bool CONTROLLER_LOB_DEBUG = false;
+
+        public void SetPlayerDestination(PlayerController play)
+        {
+            var inp = BraveInput.GetInstanceForPlayer(play.PlayerIDX);
+            if (inp != null)
+            {
+                if (inp.IsKeyboardAndMouse() && !CONTROLLER_LOB_DEBUG)
+                {
+                    SetDestination(play.CenterPosition + LobbedProjectile.GetRelativeAim(play));
+                }
+                else
+                {
+                    PhysicsEngine.Instance.Raycast(specRigidbody.UnitCenter, LobbedProjectile.GetRelativeAim(play).normalized, 1000f, out var res, true, true, int.MaxValue, CollisionLayer.Projectile, false, x => !(x.minorBreakable == null && x.majorBreakable == null));
+                    if (res.SpeculativeRigidbody == null)
+                    {
+                        RaycastResult.Pool.Free(ref res);
+                        PhysicsEngine.Instance.Raycast(specRigidbody.UnitCenter, LobbedProjectile.GetRelativeAim(play).normalized, 1000f, out res, true, true, int.MaxValue, CollisionLayer.Projectile, false, x => !(x.minorBreakable == null && (x.majorBreakable == null || (!x.majorBreakable.m_isBroken && (x.GetComponent<FlippableCover>() == null || !x.GetComponent<FlippableCover>().m_flipped)))));
+                    }
+                    if (res.SpeculativeRigidbody == null)
+                    {
+                        RaycastResult.Pool.Free(ref res);
+                        PhysicsEngine.Instance.Raycast(specRigidbody.UnitCenter, LobbedProjectile.GetRelativeAim(play).normalized, 1000f, out res, true, true, int.MaxValue, CollisionLayer.Projectile, false, x => !((x.majorBreakable == null || (!x.majorBreakable.m_isBroken && (x.GetComponent<FlippableCover>() == null || !x.GetComponent<FlippableCover>().m_flipped))) && (x.minorBreakable == null || !x.minorBreakable.IsBroken)));
+                    }
+                    if (res.SpeculativeRigidbody != null)
+                    {
+                        SetDestination(res.SpeculativeRigidbody.UnitCenter + res.SpeculativeRigidbody.Velocity * projectile.baseData.speed * timeToLandWithNormalShotSpeed / 23);
+                    }
+                    else
+                    {
+                        SetDestination(res.Contact);
+                        destinationDist = Mathf.Max(destinationDist - 0.25f, 0.0625f);
+                    }
+                }
+            }
+        }
+
+        public void HandleHeight(Projectile proj)
+        {
+            proj.specRigidbody.Velocity *= destinationDist / 23f / timeToLandWithNormalShotSpeed;
+            if (projectile.sprite != null)
+            {
+                var currentHeight = Mathf.Max(localDistanceElapsed / destinationDist * 4 * visualHeight * (1 - localDistanceElapsed / destinationDist), 0f);
+                projectile.sprite.transform.localPosition = new Vector3(projectile.sprite.transform.localPosition.x, Mathf.Max(currentHeight, 0f));
+                projectile.sprite.HeightOffGround = originalHeightOffGround + currentHeight;
+                if (transform.rotation.eulerAngles.z != 0f)
+                {
+                    Quaternion rotation = projectile.sprite.transform.rotation;
+                    rotation.eulerAngles = new Vector3(projectile.sprite.transform.rotation.eulerAngles.x, projectile.sprite.transform.rotation.eulerAngles.y, projectile.sprite.transform.rotation.eulerAngles.z + transform.rotation.eulerAngles.z);
+                    projectile.sprite.transform.rotation = rotation;
+                    transform.rotation = Quaternion.identity;
+                }
+                if (projectile.shouldRotate && projectile.angularVelocity == 0)
+                {
+                    projectile.sprite.transform.rotation = Quaternion.Euler(0f, 0f, (projectile.sprite.transform.position - lastSpritePosition).XY().ToAngle());
+                }
+                lastSpritePosition = projectile.sprite.transform.position;
+            }
+            localDistanceElapsed += Vector3.Distance(localLastPosition, transform.position);
+            localLastPosition = transform.position;
+            if (localDistanceElapsed >= destinationDist && !isDestroying)
+            {
+                localDistanceElapsed = 0f;
+                StartCoroutine(HandleDestruction());
+                isDestroying = true;
+            }
+        }
+
+        public void OnPreCollision(SpeculativeRigidbody body, PixelCollider collider, SpeculativeRigidbody collision, PixelCollider collisionCollider)
+        {
+            if (!canHitAnythingEvenWhenNotGrounded && !canCollide && collision.GetComponentInParent<DungeonDoorController>() == null && (collision.GetComponent<MajorBreakable>() == null || !collision.GetComponent<MajorBreakable>().IsSecretDoor))
+            {
+                PhysicsEngine.SkipCollision = true;
+                return;
+            }
+        }
+
+        public void SetDestination(Vector2 destination)
+        {
+            var lastdd = destinationDist;
+            destinationDist = Mathf.Max(Vector2.Distance(transform.position.XY(), destination), 0.0625f);
+            if (lastdd >= 0f)
+            {
+                localDistanceElapsed *= destinationDist / lastdd;
+            }
+        }
+
+        public void OnRigidbodyCollision(CollisionData rigidbodyCollision)
+        {
+            projectile.m_hasPierced = false;
+        }
+
+        protected IEnumerator HandleDestruction()
+        {
+            canCollide = true;
+            yield return null;
+            if (GetComponent<BounceProjModifier>() != null && GetComponent<BounceProjModifier>().numberOfBounces > 0)
+            {
+                canCollide = false;
+                GetComponent<BounceProjModifier>().numberOfBounces--;
+                isDestroying = false;
+            }
+            else
+            {
+                projectile.DieInAir(false, true, true, false);
+            }
+            yield break;
+        }
+
+        public float forcedDistance = -1f;
+        public float timeToLandWithNormalShotSpeed = 0.5f;
+        public float visualHeight = 5f;
+        public bool canHitAnythingEvenWhenNotGrounded;
         private Vector3 lastSpritePosition;
+        private float destinationDist = -1f;
+        private bool isDestroying;
+        private float originalHeightOffGround;
+        private bool canCollide;
+        private float localDistanceElapsed;
+        private Vector3 localLastPosition;
     }
 }

@@ -114,7 +114,7 @@ namespace NevernamedsItems
                 SpeedMultiplier = 0f,
 
                 //Eh
-                OverheadVFX = LockdownStatusEffect.lockdownVFXObject,
+                OverheadVFX = SharedVFX.LockdownOverhead,
                 AffectsEnemies = true,
                 AffectsPlayers = false,
                 AppliesOutlineTint = false,
@@ -154,7 +154,7 @@ namespace NevernamedsItems
                 resistanceType = EffectResistanceType.None,
                 DamagePerSecondToEnemies = 2f,
                 ignitesGoops = false,
-                OverheadVFX = PlagueStatusEffectSetup.PlagueOverheadVFX,
+                OverheadVFX = SharedVFX.PlagueOverhead,
                 AffectsEnemies = true,
                 AffectsPlayers = false,
                 AppliesOutlineTint = false,
@@ -180,6 +180,14 @@ namespace NevernamedsItems
                 PlaysVFXOnActor = false,
             };
             return confusion;
+        }
+        public static GameActorCryingEffect GenerateCryingEfffect(float duration)
+        {
+            GameActorCryingEffect crying = new GameActorCryingEffect
+            {
+                duration = duration,
+            };
+            return crying;
         }
         public static GameActorSizeEffect GenerateSizeEffect(float duration, Vector2 targetScale)
         {

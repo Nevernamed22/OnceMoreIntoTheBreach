@@ -26,28 +26,8 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.EXCLUDED;
             item.SetTag("guon_stone");
 
-            BuildPrefab();
-            item.OrbitalPrefab = orbitalPrefab;
+            item.OrbitalPrefab = ItemSetup.CreateOrbitalObject("Wood Guon Stone", "woodguon_ingame", new IntVector2(9, 9), new IntVector2(-4, -5)).GetComponent<PlayerOrbital>();
             item.CanBeDropped = false;
-        }
-
-        private static void BuildPrefab()
-        {
-            GameObject prefab = ItemBuilder.SpriteFromBundle("WoodGuonOrbital", Initialisation.itemCollection.GetSpriteIdByName("woodguon_ingame"), Initialisation.itemCollection);
-            prefab.name = "Wood Guon Orbital";
-            var body = prefab.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(7, 13));
-            body.CollideWithTileMap = false;
-            body.CollideWithOthers = true;
-            body.PrimaryPixelCollider.CollisionLayer = CollisionLayer.EnemyBulletBlocker;
-
-            orbitalPrefab = prefab.AddComponent<PlayerOrbital>();
-            orbitalPrefab.motionStyle = PlayerOrbital.OrbitalMotionStyle.ORBIT_PLAYER_ALWAYS;
-            orbitalPrefab.shouldRotate = false;
-            orbitalPrefab.orbitRadius = 2.5f;
-            orbitalPrefab.orbitDegreesPerSecond = 120f;
-            orbitalPrefab.SetOrbitalTier(0);
-
-            prefab.MakeFakePrefab();
         }
 
         public override void Pickup(PlayerController player)

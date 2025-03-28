@@ -105,7 +105,27 @@ namespace NevernamedsItems
             SBBRebondir.SynergyNameToCheck = "Super Bounce Bros";
 
             AddDualWield(Gaxe.ID, TotemOfGundying.ID, "Offhand Immortal");
+            AddDualWield(Type56.ID, M70.ID, "Acceptable Substitutes");
             #endregion
+
+            //-------------------------------------------------------------ORBITAL GUNS
+            AdvancedHoveringGunSynergyProcessor SerpentsReach = PickupObjectDatabase.GetById(SnakePistol.ID).gameObject.AddComponent<AdvancedHoveringGunSynergyProcessor>();
+            SerpentsReach.RequiredSynergy = "Serpents Reach";
+            SerpentsReach.requiresTargetGunInInventory = true;
+            SerpentsReach.fireDelayBasedOnGun = true;
+            SerpentsReach.FireType = HoveringGunController.FireType.ON_RELOAD;
+            SerpentsReach.Trigger = AdvancedHoveringGunSynergyProcessor.TriggerStyle.CONSTANT;
+            SerpentsReach.PositionType = HoveringGunController.HoverPosition.OVERHEAD;
+            SerpentsReach.IDsToSpawn = new List<int>{ SnakeMinigun.ID }.ToArray();
+
+            AdvancedHoveringGunSynergyProcessor SerpentsReach2 = PickupObjectDatabase.GetById(SnakeMinigun.ID).gameObject.AddComponent<AdvancedHoveringGunSynergyProcessor>();
+            SerpentsReach2.RequiredSynergy = "Serpents Reach";
+            SerpentsReach2.requiresTargetGunInInventory = true;
+            SerpentsReach2.fireDelayBasedOnGun = true;
+            SerpentsReach2.FireType = HoveringGunController.FireType.ON_RELOAD;
+            SerpentsReach2.Trigger = AdvancedHoveringGunSynergyProcessor.TriggerStyle.CONSTANT;
+            SerpentsReach2.PositionType = HoveringGunController.HoverPosition.OVERHEAD;
+            SerpentsReach2.IDsToSpawn = new List<int> { SnakePistol.ID }.ToArray();
         }
         public static void AddSynergyForm(int baseGun, int newGun, string synergy)
         {

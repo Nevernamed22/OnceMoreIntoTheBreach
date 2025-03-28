@@ -49,6 +49,7 @@ namespace NevernamedsItems
 
                 if (mod != gun.DefaultModule)
                 {
+
                     Projectile projectile = DataCloners.CopyFields<TachyonProjectile>(Instantiate(mod.projectiles[0]));
                     projectile.gameObject.SetActive(false);
                     FakePrefab.MarkAsFakePrefab(projectile.gameObject);

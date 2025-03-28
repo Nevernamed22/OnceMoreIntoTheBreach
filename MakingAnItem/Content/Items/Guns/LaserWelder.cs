@@ -97,7 +97,7 @@ namespace NevernamedsItems
             LaserWelderExplosion = new ExplosionData()
             {
                 breakSecretWalls = false,
-                effect = EasyVFXDatabase.BloodExplosion,
+                effect = SharedVFX.BloodExplosion,
                 doDamage = true,
                 damageRadius = 2.5f,
                 damageToPlayer = 0,
@@ -187,7 +187,7 @@ namespace NevernamedsItems
                     Vector2 pos = enemy.sprite.WorldCenter;
 
                     Exploder.Explode(pos, LaserWelder.LaserWelderExplosion, Vector2.zero);
-                    UnityEngine.Object.Instantiate<GameObject>(EasyVFXDatabase.TeleporterPrototypeTelefragVFX, enemy.UnitCenter, Quaternion.identity);
+                    UnityEngine.Object.Instantiate<GameObject>(SharedVFX.TeleporterPrototypeTelefragVFX, enemy.UnitCenter, Quaternion.identity);
                     if (!enemy.healthHaver.IsBoss) enemy.aiActor.EraseFromExistenceWithRewards();
                 }
                 else if (RepairableEnemies.ContainsKey(enemy.aiActor.EnemyGuid))

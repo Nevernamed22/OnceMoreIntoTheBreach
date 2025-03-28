@@ -107,7 +107,7 @@ namespace NevernamedsItems
             BeamProjSpewModifier spew = projectile.gameObject.AddComponent<BeamProjSpewModifier>();
             spew.bulletToSpew = spewProj;
             spew.accuracyVariance = 5;
-
+            spew.tickOnTimer = true;
 
             gun.DefaultModule.projectiles[0] = projectile;
 

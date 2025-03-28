@@ -89,7 +89,7 @@ namespace NevernamedsItems
                 float amt = Mathf.Lerp(1f, gun.GunPlayerOwner().PlayerHasActiveSynergy("Back in Grozny") ? 4f : 3f, timeRemaining / 3.5f);
                 //ETGModConsole.Log(amt);
                 gun.AddCurrentGunStatModifier(PlayerStats.StatType.RateOfFire, amt, StatModifier.ModifyMethod.MULTIPLICATIVE);
-                (Owner as PlayerController).stats.RecalculateStats((Owner as PlayerController));
+                (Owner as PlayerController).stats.RecalculateStatsWithoutRebuildingGunVolleys((Owner as PlayerController));
             }
             base.Update();
         }

@@ -74,31 +74,15 @@ namespace NevernamedsItems
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Claymore Bullets", "NevernamedsItems/Resources/CustomGunAmmoTypes/claymore_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/claymore_clipempty");
 
+            gun.carryPixelOffset = new IntVector2(15,0);
+            gun.carryPixelUpOffset = new IntVector2(-15,10);
+            gun.carryPixelDownOffset = new IntVector2(-15,-10);
 
             ETGMod.Databases.Items.Add(gun, false, "ANY");
             ID = gun.PickupObjectId;
 
-            gun.TrimGunSprites();
-
             gun.SetupUnlockOnCustomFlag(CustomDungeonFlags.ADVDRAGUN_KILLED_BULLET, true);
         }
         public static int ID;
-        public class ExplosiveSlashModifier : ProjectileSlashingBehaviour
-        {
-            public ExplosionData explosionData;
-            public override void SlashHitTarget(GameActor target, bool fatal)
-            {
-                for (int i = 0; i < GameManager.Instance.AllPlayers.Length; i++)
-                {
-                    PlayerController playerController = GameManager.Instance.AllPlayers[i];
-                    if (playerController && playerController.specRigidbody)
-                    {
-                        this.explosionData.ignoreList.Add(playerController.specRigidbody);
-                    }
-                }
-                Exploder.Explode(target.CenterPosition, explosionData, Vector2.zero);
-                base.SlashHitTarget(target, fatal);
-            }
-        }
     }
 }

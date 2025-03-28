@@ -50,7 +50,7 @@ namespace NevernamedsItems
             motion.randomiseStart = true;
             projectile.gameObject.AddComponent<PierceProjModifier>();
 
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.BlueLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.BlueLaserCircleVFX;
             projectile.hitEffects.alwaysUseMidair = true;
 
             List<string> BeamAnimPaths = new List<string>()

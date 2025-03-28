@@ -14,38 +14,14 @@ namespace NevernamedsItems
 {
     class ActiveTestingItem : PlayerItem
     {
-        //Call this method from the Start() method of your ETGModule extension class
         public static void Init()
         {
-            //The name of the item
-            string itemName = "<WIP> Active Testing Item <WIP>";
-
-            //Refers to an embedded png in the project. Make sure to embed your resources! Google it.
-            string resourceName = "NevernamedsItems/Resources/workinprogress_icon";
-
-            //Create new GameObject
-            GameObject obj = new GameObject(itemName);
-
-            //Add a ActiveItem component to the object
-            var item = obj.AddComponent<ActiveTestingItem>();
-
-            //Adds a tk2dSprite component to the object and adds your texture to the item sprite collection
-            ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
-
-            //Ammonomicon entry variables
-            string shortDesc = "Work In Progress";
-            string longDesc = "This item was created by an amateur gunsmith so that he may test different concepts instead of going the whole nine yards and making a whole new item.";
-
-            //Adds the item to the gungeon item list, the ammonomicon, the loot table, etc.
-            //"kts" here is the item pool. In the console you'd type kts:sweating_bullets
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "nn");
-
-            //Set the cooldown type and duration of the cooldown
+            ActiveTestingItem item = ItemSetup.NewItem<ActiveTestingItem>(
+              "<WIP> Active Testing Item <WIP>",
+              "Work In Progress",
+              "This item was created by an amateur gunsmith so that he may test different concepts instead of going the whole nine yards and making a whole new item.",
+              "workinprogress_icon") as ActiveTestingItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 0);
-
-            //Adds a passive modifier, like curse, coolness, damage, etc. to the item. Works for passives and actives.
-
-            //Set some other fields
             item.consumable = false;
             item.quality = ItemQuality.EXCLUDED;
 
@@ -60,30 +36,13 @@ namespace NevernamedsItems
         {
             return true;
         }
-        //float duration = 20f;
-        public static string audioString = "bower";
-        public static string textToShow = null;
-        public IEnumerator voicetest(PlayerController user)
-        {
-            TextBoxManager.ShowTextBox(user.sprite.WorldCenter + new Vector2(0f, 1f), user.transform, -1f,
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                audioString, instant: false);
-            yield return new WaitForSeconds(5f);
-            TextBoxManager.ShowTextBox(user.sprite.WorldCenter + new Vector2(0f, 1f), user.transform, -1f,
-                 "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                 audioString, instant: false);
-            yield break;
-        }
+        public static GoopDefinition def = EasyGoopDefinitions.BulletKingWine;
+        public static string sound = "Stop_BOSS_tank_idle_01";
+        public static List<GameObject> excluded = new List<GameObject>();
         public override void DoEffect(PlayerController user)
         {
-            //user.StartCoroutine(voicetest(user));
-            if (textToShow == null) { textToShow = $"[sprite \"accuracy_ui\"]"; }
 
-            TextBoxManager.ShowTextBox(user.sprite.WorldCenter + new Vector2(0f, 1f), user.transform, -1f,
-                textToShow,
-                audioString, instant: false);
-
-            //ETGModConsole.Log(user.stats.GetStatValue(PlayerStats.StatType.AdditionalItemCapacity) + " and  " + user.stats.GetStatValue(PlayerStats.StatType.AdditionalGunCapacity));
+            AkSoundEngine.PostEvent(sound, user.gameObject);
 
             //IntVector2 bestRewardLocation = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
             //ChestToolbox.ChestTier tier = RandomEnum<ChestToolbox.ChestTier>.Get();
@@ -106,61 +65,7 @@ namespace NevernamedsItems
 
             //ProjectileImpactVFXPool hit = (PickupObjectDatabase.GetById(178) as Gun).GetComponent<FireOnReloadSynergyProcessor>().DirectedBurstSettings.ProjectileInterface.SpecifiedProjectile.hitEffects;
 
-
-            //GameManager.Instance.MainCameraController.Camera.transform.rotation = Quaternion.Euler(0, 0, 180);
             // CurseManager.AddCurse("Curse of Butterfingers", true);
-            /* AkSoundEngine.PostEvent("Play_ClownHonk", user.gameObject);
-             foreach(Projectile proj in StaticReferenceManager.AllProjectiles)
-             {
-
-                 ETGModConsole.Log($"<color=#ff0000ff>{proj.gameObject.name}</color>");
-                 bool isBem = proj.GetComponent<BasicBeamController>() != null;
-
-                 ETGModConsole.Log($"<color=#ff0000ff>Is Beam: </color>{isBem}");
-                 if (isBem)
-                 {
-                     ETGModConsole.Log("Bone Count: " + proj.GetComponent<BasicBeamController>().GetBoneCount());
-                     ETGModConsole.Log("UsesBones: " + proj.GetComponent<BasicBeamController>().UsesBones);
-                     ETGModConsole.Log("Interpolate: " + proj.GetComponent<BasicBeamController>().interpolateStretchedBones);
-                 }
-                 ETGModConsole.Log("<color=#ff0000ff>Components</color>");
-                 ETGModConsole.Log("<color=#ff0000ff>Children</color>");
-                 foreach (Component component in proj.GetComponentsInChildren<Component>())
-                 {
-                     ETGModConsole.Log(component.GetType().ToString());
-                 }
-                 ETGModConsole.Log("<color=#ff0000ff>Parents</color>");
-                 foreach (Component component in proj.GetComponentsInParent<Component>())
-                 {
-                     ETGModConsole.Log(component.GetType().ToString());
-                 }
-                 ETGModConsole.Log("<color=#ff0000ff>---------------------------------</color>");
-             }*/
-
-
-
-            //Vector3 place = user.GetCursorPosition(4);
-            //GameObject carto = UnityEngine.Object.Instantiate<GameObject>(Initialisation.toSpawn, place, Quaternion.identity);
-            // if (carto.GetComponent<DungeonPlaceable>()) DungeonPlaceableUtility.InstantiateDungeonPlaceable(carto, user.CurrentRoom, ((Vector2)carto.transform.position).ToIntVector2(), false);
-            //SaveAPIManager.SetFlag(CustomDungeonFlags.CHEATED_DEATH_SHADE, true);
-            // CurseManager.AddCurse("Curse of Butterfingers");
-            /*  ChamberGunProcessor processor = user.CurrentGun.GetComponentInChildren<ChamberGunProcessor>();
-              if (processor)
-              {
-                  ETGModConsole.Log("Keep: " + processor.CastleGunID);
-                  ETGModConsole.Log("Oub: " + processor.OublietteGunID);
-                  ETGModConsole.Log("GP: " + processor.GungeonGunID);
-                  ETGModConsole.Log("Abbey: " + processor.AbbeyGunID);
-                  ETGModConsole.Log("Mines: " + processor.MinesGunID);
-                  ETGModConsole.Log("Rat: " + processor.RatgeonGunID);
-                  ETGModConsole.Log("Hollow: " + processor.HollowGunID);
-                  ETGModConsole.Log("R&G: " + processor.OfficeGunID);
-                  ETGModConsole.Log("Forge: " + processor.ForgeGunID);
-                  ETGModConsole.Log("BulletHell: " + processor.HellGunID);
-              }*/
-
-
-            //BeamToolbox.FreeFireBeamFromAnywhere(LaserBullets.SimpleRedBeam, user, user.gameObject, Vector2.zero, false, user.CurrentGun.CurrentAngle, 10, true);
 
             /* Vector2 yourPosition = user.sprite.WorldCenter;
              List<AIActor> activeEnemies = user.CurrentRoom.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);

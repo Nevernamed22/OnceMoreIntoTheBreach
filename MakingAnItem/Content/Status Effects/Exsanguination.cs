@@ -14,45 +14,14 @@ namespace NevernamedsItems
         {
             effectStackVFX = new Dictionary<int, GameObject>()
             {
-                {1, VFXToolbox.CreateOverheadVFX(new List<string>()
-                {
-                    "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/Exsanguination/exsanguination_stackone_001.png",
-                    "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/Exsanguination/exsanguination_stackone_002.png",
-                }, "ExsanguinationStack1", 10)},
-                {2, VFXToolbox.CreateOverheadVFX(new List<string>()
-                {
-                    "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/Exsanguination/exsanguination_stacktwo_001.png",
-                    "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/Exsanguination/exsanguination_stacktwo_002.png",
-                }, "ExsanguinationStack2", 10)},
-                {3, VFXToolbox.CreateOverheadVFX(new List<string>()
-                {
-                    "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/Exsanguination/exsanguination_stackthree_001.png",
-                    "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/Exsanguination/exsanguination_stackthree_002.png",
-                    "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/Exsanguination/exsanguination_stackthree_003.png",
-                }, "ExsanguinationStack3", 10)},
-                {4, VFXToolbox.CreateOverheadVFX(new List<string>()
-                {
-                    "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/Exsanguination/exsanguination_stackfour_001.png",
-                    "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/Exsanguination/exsanguination_stackfour_002.png",
-                    "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/Exsanguination/exsanguination_stackfour_003.png",
-                    "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/Exsanguination/exsanguination_stackfour_004.png",
-                }, "ExsanguinationStack4", 10)},
-                {5, VFXToolbox.CreateOverheadVFX(new List<string>()
-                {
-                    "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/Exsanguination/exsanguination_stackfive_001.png",
-                    "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/Exsanguination/exsanguination_stackfive_002.png",
-                    "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/Exsanguination/exsanguination_stackfive_003.png",
-                    "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/Exsanguination/exsanguination_stackfive_004.png",
-                    "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/Exsanguination/exsanguination_stackfive_005.png",
-                }, "ExsanguinationStack5", 10)}
+                {1, VFXToolbox.CreateVFXBundle("ExsanguinationOverhead_1", false, 0f) },
+                {2, VFXToolbox.CreateVFXBundle("ExsanguinationOverhead_2", false, 0f) },
+                {3, VFXToolbox.CreateVFXBundle("ExsanguinationOverhead_3", false, 0f) },
+                {4, VFXToolbox.CreateVFXBundle("ExsanguinationOverhead_4", false, 0f) },
+                {5, VFXToolbox.CreateVFXBundle("ExsanguinationOverhead_5", false, 0f) }
             };
 
-            labelStackVFX = VFXToolbox.CreateOverheadVFX(new List<string>()
-                {
-                    "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/Exsanguination/exsanguination_stacklabel_001.png",
-                    "NevernamedsItems/Resources/MiscVFX/StatusEffectVFX/Exsanguination/exsanguination_stacklabel_002.png",
-                }, "ExsanguinationStackLabel", 10);
-
+            labelStackVFX = VFXToolbox.CreateVFXBundle("ExsanguinationOverhead_Label", false, 0f);
 
             BloodParticleDoer = FakePrefab.Clone(PickupObjectDatabase.GetById(449).GetComponent<TeleporterPrototypeItem>().TelefragVFXPrefab.gameObject);
             BloodParticleDoer.GetComponent<ParticleSystem>().emission.SetBurst(0, new ParticleSystem.Burst { count = 1, time = 0, cycleCount = 1, repeatInterval = 0.010f, maxCount = 1, minCount = 1 });

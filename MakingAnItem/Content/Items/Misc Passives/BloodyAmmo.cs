@@ -39,7 +39,7 @@ namespace NevernamedsItems
         }
         public override void DisableEffect(PlayerController player)
         {
-            if (player.GetExtComp()) player.GetExtComp().OnPickedUpAmmo -= OnAmmoCollected;
+            if (player != null && player.GetExtComp()) player.GetExtComp().OnPickedUpAmmo -= OnAmmoCollected;
             base.DisableEffect(player);
         }
     }

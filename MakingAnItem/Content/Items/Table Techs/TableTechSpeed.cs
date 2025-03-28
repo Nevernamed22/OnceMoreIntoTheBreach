@@ -41,7 +41,7 @@ namespace NevernamedsItems
         private void SpeedEffect(FlippableCover obj)
         {
             PlayerController owner = base.Owner;
-            owner.PlayEffectOnActor(EasyVFXDatabase.SpeedUpVFX, new Vector3(0, 0.25f, 0), true, true);
+            owner.PlayEffectOnActor(SharedVFX.SpeedUpVFX, new Vector3(0, 0.25f, 0), true, true);
             PlayerToolbox tools = owner.GetComponent<PlayerToolbox>();
             if (tools)
             {

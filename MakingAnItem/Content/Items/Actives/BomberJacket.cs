@@ -16,9 +16,9 @@ namespace NevernamedsItems
                "Bomber Jacket",
                "Kamakablooey",
                "Use to create an explosion around yourself." + "\n\nBrought to the Gungeon by a rather unscrupulous individual, it has since been modified to be safe to the user, and been renamed so it can be shown on the internet without losing one's entire career.",
-               "bomberjacket_icon") as PlayerItem;
+               "bomberjacket_improved") as PlayerItem;
 
-        
+            item.usableDuringDodgeRoll = true;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 120);
             item.AddPassiveStatModifier( PlayerStats.StatType.AdditionalItemCapacity, 2f, StatModifier.ModifyMethod.ADDITIVE);
             item.consumable = false;

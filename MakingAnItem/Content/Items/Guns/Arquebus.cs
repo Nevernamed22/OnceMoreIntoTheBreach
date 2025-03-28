@@ -74,9 +74,6 @@ namespace NevernamedsItems
             projectile.pierceMinorBreakables = true;
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.MUSKETBALL;
-            gun.TrimGunSprites();
-
-
 
             gun.quality = PickupObject.ItemQuality.B;
             ETGMod.Databases.Items.Add(gun, null, "ANY");

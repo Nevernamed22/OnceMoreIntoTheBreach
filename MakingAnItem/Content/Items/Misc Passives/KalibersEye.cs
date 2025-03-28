@@ -19,7 +19,7 @@ namespace NevernamedsItems
                "Kaliber's Eye",
                "They are mine.",
                "Makes the Gundead your own." + "\n\nDestroy them, but do not waste them.",
-               "kaliberseye_icon") as PassiveItem;
+               "kaliberseye_improved") as PassiveItem;
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.quality = PickupObject.ItemQuality.S;
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
@@ -81,7 +81,7 @@ namespace NevernamedsItems
                 {
 
                     var enemyToSpawn = EnemyDatabase.GetOrLoadByGuid(enemyGuid);
-                    Instantiate<GameObject>(EasyVFXDatabase.BloodiedScarfPoofVFX, position.ToVector3(), Quaternion.identity);
+                    Instantiate<GameObject>(SharedVFX.BloodiedScarfPoofVFX, position.ToVector3(), Quaternion.identity);
                     AIActor TargetActor = AIActor.Spawn(enemyToSpawn, position, GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(position), true, AIActor.AwakenAnimationType.Default, true);
                     PhysicsEngine.Instance.RegisterOverlappingGhostCollisionExceptions(TargetActor.specRigidbody, null, false);
                     CustomEnemyTagsSystem tags = TargetActor.gameObject.GetOrAddComponent<CustomEnemyTagsSystem>();

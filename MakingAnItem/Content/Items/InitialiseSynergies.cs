@@ -1759,6 +1759,109 @@ namespace NevernamedsItems
                 new List<string>() { "nn:repeatovolver" },
                 new List<string>() { "nn:shadow_ring", "nn:bullet_bullets", "shadow_clone" });
 
+            CustomSynergies.Add("Acceptable Substitutes",
+                new List<string>() { "nn:m70", "nn:type_56" });
+
+            CustomSynergies.Add("People's Army",
+                new List<string>() { "nn:m70", "makarov" });
+
+            CustomSynergies.Add("Shot in the Back",
+                new List<string>() { "nn:m70" },
+                new List<string>() { "nn:shot_in_the_arm", "nn:backwards_bullets", "backup_gun", "nn:back_warder" });
+
+            CustomSynergies.Add("Sleepin In a Cardboard Box",
+               new List<string>() { "nn:heart_box", "box" });
+
+            CustomSynergies.Add("Kalibers Hooks",
+                new List<string>() { "nn:hook_gun" },
+                new List<string>() { "high_kaliber" });
+
+            CustomSynergies.Add("Several Truths",
+                new List<string>() { "nn:truth_knowers_trance" },
+                new List<string>() { "nn:true_blank" });
+
+            CustomSynergies.Add("Bubble Column",
+                new List<string>() { "nn:bubble_fist" },
+                new List<string>() { "nn:miners_bullets", "nn:diamond_gun" });
+
+            CustomSynergies.Add("F#!^@in' Bubbles",
+               new List<string>() { "nn:bubble_fist" },
+               new List<string>() { "trank_gun" });
+
+            CustomSynergies.Add("Wealth Untold",
+               new List<string>() { "nn:opulent_blank", "gold_ammolet" });
+
+            CustomSynergies.Add("Paid In Full",
+               new List<string>() { "nn:payback", "nn:heart_of_gold" });
+
+            AdvancedSynergyEntry KernelPanic = CustomSynergies.Add("Kernel Panic",
+               new List<string>() { "nn:cornnon" },
+               new List<string>() { "nn:keygen", "nn:guru_meditation" });
+            KernelPanic.ActiveWhenGunUnequipped = false;
+            KernelPanic.statModifiers.Add(new StatModifier()
+            {
+                amount = 1.2f,
+                statToBoost = PlayerStats.StatType.Damage,
+                modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+            });
+
+            CustomSynergies.Add("Serpents Reach",
+               new List<string>() { "nn:snake_pistol", "nn:snake_minigun" });
+
+            CustomSynergies.Add("Rock Python",
+                new List<string>() { "melted_rock" },
+                new List<string>() { "nn:snake_pistol", "nn:snake_minigun" });
+
+            CustomSynergies.Add("Cordon Blue",
+               new List<string>() { "nn:chamembert", "nn:sonic_cylinder" });
+
+            CustomSynergies.Add("Elimentaly, My Dear Watson",
+               new List<string>() { "nn:chamembert", "elimentaler" });
+
+            CustomSynergies.Add("To Brie or Not To Brie",
+                new List<string>() { "nn:chamembert" },
+                new List<string>() { "resourceful_sack", "partially_eaten_cheese" });
+
+            CustomSynergies.Add("Re Roll We Roll",
+                new List<string>() { "nn:goobleck" },
+                new List<string>() { "nn:paraglocks" });
+
+            CustomSynergies.Add("Brown And Sticky",
+                new List<string>() { "nn:javelin" },
+                new List<string>() { "honeycomb", "bee_hive" });
+
+            CustomSynergies.Add("Stick 2 It",
+               new List<string>() { "nn:javelin", "nn:ring_of_ammo_redemption" });
+
+            AdvancedSynergyEntry LiterallThrowing = CustomSynergies.Add("Literally Throwing",
+               new List<string>() { "nn:diamond_bracelet" },
+               new List<string>() { "nn:javelin", "nn:tomahawk", "kruller_glaive" });
+            LiterallThrowing.ActiveWhenGunUnequipped = false;
+            LiterallThrowing.statModifiers.Add(new StatModifier()
+            {
+                amount = 2.5f,
+                statToBoost = PlayerStats.StatType.Damage,
+                modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+            });
+
+            CustomSynergies.Add("The Two Tables",
+                new List<string>() { "nn:table_tech-nology" },
+                new List<string>() { "nn:shroomed_gun", "nn:shroomed_bullets", "nn:y_beam", "nn:the_grey_staff" });
+
+            CustomSynergies.Add("Flippity Beoooow!",
+                new List<string>() { "nn:table_tech-nology" },
+                new List<string>() { "raiden_coil", "space_friend" });
+
+            AdvancedSynergyEntry FiveFingerGuns = CustomSynergies.Add("Five Finger Guns",
+              new List<string>() { "nn:five_finger_discount", "nn:finger_guns" });
+            FiveFingerGuns.ActiveWhenGunUnequipped = false;
+            FiveFingerGuns.statModifiers.Add(new StatModifier()
+            {
+                amount = 1.2f,
+                statToBoost = PlayerStats.StatType.Accuracy,
+                modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+            });
+
             #endregion
 
             //TODO

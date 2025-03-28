@@ -13,25 +13,12 @@ namespace NevernamedsItems
 {
     class CompanionisedEnemyUtility
     {
-        public static GameObject FriendlyVFX;
         public static void InitHooks()
         {
             DisplaceHook = new Hook(
     typeof(DisplaceBehavior).GetMethod("SpawnImage", BindingFlags.Instance | BindingFlags.NonPublic),
     typeof(CompanionisedEnemyUtility).GetMethod("DisplacedImageSpawnHook", BindingFlags.Instance | BindingFlags.NonPublic),
     typeof(DisplaceBehavior));
-
-
-            List<string> FriendVFXPaths = new List<string>()
-            {
-                "NevernamedsItems/Resources/MiscVFX/friendlyoverhead_vfx_001",
-                "NevernamedsItems/Resources/MiscVFX/friendlyoverhead_vfx_002",
-                "NevernamedsItems/Resources/MiscVFX/friendlyoverhead_vfx_003",
-                "NevernamedsItems/Resources/MiscVFX/friendlyoverhead_vfx_004",
-                "NevernamedsItems/Resources/MiscVFX/friendlyoverhead_vfx_005"
-            };
-            GameObject friendly = VFXToolbox.CreateOverheadVFX(FriendVFXPaths, "FriendlyOverhead", 10);
-            FriendlyVFX = friendly;
         }
         public static Hook DisplaceHook;
         private void DisplacedImageSpawnHook(Action<DisplaceBehavior> orig, DisplaceBehavior sourceBehaviour)
@@ -96,7 +83,7 @@ namespace NevernamedsItems
         public static AIActor SpawnCompanionisedEnemy(PlayerController owner, string enemyGuid, IntVector2 position, bool doTint, Color enemyTint, int baseDMG, int jammedDMGMult, bool shouldBeJammed, bool doFriendlyOverhead)
         {
             var enemyToSpawn = EnemyDatabase.GetOrLoadByGuid(enemyGuid);
-            UnityEngine.Object.Instantiate<GameObject>(EasyVFXDatabase.BloodiedScarfPoofVFX, position.ToVector3(), Quaternion.identity);
+            UnityEngine.Object.Instantiate<GameObject>(SharedVFX.BloodiedScarfPoofVFX, position.ToVector3(), Quaternion.identity);
             AIActor TargetActor = AIActor.Spawn(enemyToSpawn, position, GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(position), true, AIActor.AwakenAnimationType.Default, true);
             PhysicsEngine.Instance.RegisterOverlappingGhostCollisionExceptions(TargetActor.specRigidbody, null, false);
 
@@ -128,7 +115,7 @@ namespace NevernamedsItems
 
             if (doFriendlyOverhead)
             {
-                GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(FriendlyVFX);
+                GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(SharedVFX.FriendlyOverhead);
                 tk2dBaseSprite component = gameObject.GetComponent<tk2dBaseSprite>();
                 gameObject.transform.parent = TargetActor.transform;
                 if (TargetActor.healthHaver.IsBoss)

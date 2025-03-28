@@ -55,7 +55,7 @@ namespace NevernamedsItems
                 projectile.baseData.speed *= 1f;
                 projectile.baseData.damage *= 1f;
                 projectile.hitEffects.alwaysUseMidair = true;
-                projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.GreenLaserCircleVFX;
+                projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.GreenLaserCircleVFX;
                 projectile.SetProjectileSprite("pumpcharge_green_projectile", 8, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 7, 5);
                 projectile.gameObject.AddComponent<BloodBurstOnKill>();
                 if (mod != gun.DefaultModule) { mod.ammoCost = 0; }
@@ -75,7 +75,7 @@ namespace NevernamedsItems
             projectile2.baseData.speed *= 1f;
             projectile2.baseData.damage *= 1.4f;
                 projectile2.hitEffects.alwaysUseMidair = true;
-            projectile2.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.YellowLaserCircleVFX;
+            projectile2.hitEffects.overrideMidairDeathVFX = SharedVFX.YellowLaserCircleVFX;
             projectile2.gameObject.AddComponent<BloodBurstOnKill>();
 
             projectile2.SetProjectileSprite("pumpcharge_yellow_projectile", 10, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 5);
@@ -89,7 +89,7 @@ namespace NevernamedsItems
             projectile3.baseData.speed *= 1f;
                 projectile3.hitEffects.alwaysUseMidair = true;
             
-            projectile3.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.YellowLaserCircleVFX;
+            projectile3.hitEffects.overrideMidairDeathVFX = SharedVFX.YellowLaserCircleVFX;
             projectile3.gameObject.AddComponent<BloodBurstOnKill>();
             projectile3.baseData.damage *= 1.8f;
             projectile3.SetProjectileSprite("pumpcharge_orange_projectile", 12, 6, true, tk2dBaseSprite.Anchor.MiddleCenter, 11, 5);
@@ -103,7 +103,7 @@ namespace NevernamedsItems
                 projectile4.gameObject.AddComponent<BloodBurstOnKill>();
             projectile4.baseData.speed *= 1f;
                 projectile4.hitEffects.alwaysUseMidair = true;
-            projectile4.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
+            projectile4.hitEffects.overrideMidairDeathVFX = SharedVFX.RedLaserCircleVFX;
 
             projectile4.baseData.damage *= 2.2f;
             projectile4.SetProjectileSprite("pumpcharge_red_projectile", 17, 8, true, tk2dBaseSprite.Anchor.MiddleCenter, 16, 7);
@@ -280,7 +280,7 @@ namespace NevernamedsItems
                 if (owner && owner.PlayerHasActiveSynergy("Blood For The Blood God")) procChance = 0.2f;
                 if (UnityEngine.Random.value <= procChance)
                 {
-                    UnityEngine.Object.Instantiate<GameObject>(EasyVFXDatabase.TeleporterPrototypeTelefragVFX, enemy.UnitCenter, Quaternion.identity);
+                    UnityEngine.Object.Instantiate<GameObject>(SharedVFX.TeleporterPrototypeTelefragVFX, enemy.UnitCenter, Quaternion.identity);
                     if (owner && owner.PlayerHasActiveSynergy("Blood For The Blood God"))
                     {
                         GoopDefinition Blood = EasyGoopDefinitions.GenerateBloodGoop(15, Color.red, 20);

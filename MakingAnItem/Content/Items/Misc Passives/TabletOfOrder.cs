@@ -18,7 +18,7 @@ namespace NevernamedsItems
               "Tablet Of Order",
               "Everything In It's Place",
               "Buffs enemies, but removes their ability to call in reinforcements." + "\n\nAn ancient magical artefact once used by the Order of the True Gun to quell dissent in their ranks.",
-              "tabletoforder_icon") as PassiveItem;          
+              "tabletoforder_improved") as PassiveItem;          
             item.quality = PickupObject.ItemQuality.B;
             item.SetupUnlockOnCustomFlag(CustomDungeonFlags.CHALLENGE_WHATARMY_BEATEN, true);
         }

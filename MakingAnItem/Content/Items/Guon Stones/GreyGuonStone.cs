@@ -7,134 +7,65 @@ using System.Collections;
 using System.Reflection;
 using MonoMod.RuntimeDetour;
 using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
     class GreyGuonStone : AdvancedPlayerOrbitalItem
     {
-        public static PlayerOrbital orbitalPrefab;
         public static PlayerOrbital upgradeOrbitalPrefab;
         public static void Init()
         {
             AdvancedPlayerOrbitalItem item = ItemSetup.NewItem<GreyGuonStone>(
             "Grey Guon Stone",
             "Vengeful Rock",
-            "Any creature that harms this stone's bearer shall be harmed in kind." + "\n\nBlood unto blood, as it has always been.",
+            "Any creature that harms this stone or its bearer shall be harmed in kind." + "\n\nBlood unto blood, as it has always been.",
             "greyguon_icon") as AdvancedPlayerOrbitalItem;
             item.quality = PickupObject.ItemQuality.C;
 
-            BuildPrefab();
-            item.OrbitalPrefab = orbitalPrefab;
-            BuildSynergyPrefab();
+            item.OrbitalPrefab = ItemSetup.CreateOrbitalObject("Grey Guon Stone", "greyguon_animated_ingame1", new IntVector2(9, 9), new IntVector2(-4, -5), "greyguon_orbital").GetComponent<PlayerOrbital>();
 
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
             item.SetTag("guon_stone");
 
             item.HasAdvancedUpgradeSynergy = true;
             item.AdvancedUpgradeSynergy = "Greyer Guon Stone";
-            item.AdvancedUpgradeOrbitalPrefab = GreyGuonStone.upgradeOrbitalPrefab.gameObject;
-        }
-        public static void BuildPrefab()
-        {
-            if (GreyGuonStone.orbitalPrefab != null) return;
-
-            GameObject orbital = GuonToolbox.MakeAnimatedOrbital("Grey Guon Orbital",
-                2.5f, //Orbital radius
-                120f, //Orbital degrees per second
-                0, //Orbital Tier
-                PlayerOrbital.OrbitalMotionStyle.ORBIT_PLAYER_ALWAYS, //Orbit mode
-                0, //Perfect orbital factor (synergy guons have it set around 10, other guons are 0)
-                new List<string>() 
-                {
-                     "greyguon_animated_ingame1",
-                     "greyguon_animated_ingame2",
-                     "greyguon_animated_ingame3",
-                     "greyguon_animated_ingame4",
-                },
-                6, //FPS
-                new Vector2(9, 9), //Collider Dimensions
-                new Vector2(0, 0), //Collider Offsets
-                tk2dBaseSprite.Anchor.LowerLeft, //Sprite Anchor
-                tk2dSpriteAnimationClip.WrapMode.Loop); //Wrap mode
-            orbitalPrefab = orbital.GetComponent<PlayerOrbital>();
-
-
-           /* GameObject prefab = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/greyguon_ingame");
-            prefab.name = "Grey Guon Orbital";
-            var body = prefab.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(7, 13));
-            body.CollideWithTileMap = false;
-            body.CollideWithOthers = true;
-            body.PrimaryPixelCollider.CollisionLayer = CollisionLayer.EnemyBulletBlocker;
-
-            orbitalPrefab = prefab.AddComponent<PlayerOrbital>();
-            orbitalPrefab.motionStyle = PlayerOrbital.OrbitalMotionStyle.ORBIT_PLAYER_ALWAYS;
-            orbitalPrefab.shouldRotate = false;
-            orbitalPrefab.orbitRadius = 2.5f;
-            orbitalPrefab.orbitDegreesPerSecond = 120f;
-            orbitalPrefab.SetOrbitalTier(0);
-
-            GameObject.DontDestroyOnLoad(prefab);
-            FakePrefab.MarkAsFakePrefab(prefab);
-            prefab.SetActive(false);*/
-        }
-
-        public static void BuildSynergyPrefab()
-        {
-            bool flag = GreyGuonStone.upgradeOrbitalPrefab == null;
-            if (flag)
-            {
-                
-                GameObject gameObject = ItemBuilder.SpriteFromBundle("GreyGuonOrbitalSynergy", Initialisation.itemCollection.GetSpriteIdByName("greyguon_synergy"), Initialisation.itemCollection);
-                gameObject.name = "Grey Guon Orbital Synergy Form";
-                SpeculativeRigidbody speculativeRigidbody = gameObject.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(12, 12));
-                GreyGuonStone.upgradeOrbitalPrefab = gameObject.AddComponent<PlayerOrbital>();
-                speculativeRigidbody.CollideWithTileMap = false;
-                speculativeRigidbody.CollideWithOthers = true;
-                speculativeRigidbody.PrimaryPixelCollider.CollisionLayer = CollisionLayer.EnemyBulletBlocker;
-                GreyGuonStone.upgradeOrbitalPrefab.shouldRotate = false;
-                GreyGuonStone.upgradeOrbitalPrefab.orbitRadius = 2.5f;
-                GreyGuonStone.upgradeOrbitalPrefab.orbitDegreesPerSecond = 90f;
-                GreyGuonStone.upgradeOrbitalPrefab.orbitDegreesPerSecond = 120f;
-                GreyGuonStone.upgradeOrbitalPrefab.SetOrbitalTier(0);
-                UnityEngine.Object.DontDestroyOnLoad(gameObject);
-                FakePrefab.MarkAsFakePrefab(gameObject);
-                gameObject.SetActive(false);
-            }
+            item.AdvancedUpgradeOrbitalPrefab = ItemSetup.CreateOrbitalObject("Greyer Guon Stone", "greyguon_synergy", new IntVector2(12, 12), new IntVector2(-6, -6), perfectOrbitalFactor: 10);
         }
         private void OwnerHitByProjectile(Projectile incomingProjectile, PlayerController arg2)
         {
-            if (incomingProjectile.Owner)
+            if (incomingProjectile.Owner) { DealDamageToEnemy(incomingProjectile.Owner, 25f); }
+        }
+        private void DealDamageToEnemy(GameActor target, float damage)
+        {
+            if (target && target.healthHaver && !target.healthHaver.IsDead && Owner != null)
             {
-                var target = incomingProjectile.Owner;
-                float damageToDeal = 1;
-                float userDamage = Owner.stats.GetStatValue(PlayerStats.StatType.Damage);
-                if (Owner.HasPickupID(286) || Owner.HasPickupID(158) || Owner.HasPickupID(434))
-                {
-                    damageToDeal = userDamage * 50;
-                }
-                else
-                {
-                    damageToDeal = userDamage * 25;
-                }
-                if (target.aiActor.IsBlackPhantom) damageToDeal *= 3f;
-                target.healthHaver.ApplyDamage(damageToDeal, Vector2.zero, "Guon Wrath", CoreDamageTypes.None, DamageCategory.Unstoppable, true, null, false);
+                float finalDamage = damage * Owner.stats.GetStatValue(PlayerStats.StatType.Damage);
+                if (Owner.PlayerHasActiveSynergy("Greyer Guon Stone")) finalDamage *= 2;
+                if (target.aiActor && target.aiActor.IsBlackPhantom) finalDamage *= 3;
+                target.healthHaver.ApplyDamage(finalDamage, Vector2.zero, "Guon Wrath", CoreDamageTypes.None, DamageCategory.Unstoppable, true, null, false);
             }
+        }
+        public override void OnOrbitalCreated(GameObject orbital)
+        {
+            SpeculativeRigidbody orbBody = orbital.GetComponent<SpeculativeRigidbody>();
+            if (orbBody) orbBody.OnPreRigidbodyCollision += this.OnGuonHit;
+            base.OnOrbitalCreated(orbital);
+        }
+        private void OnGuonHit(SpeculativeRigidbody myRigidbody, PixelCollider myCollider, SpeculativeRigidbody other, PixelCollider otherCollider)
+        {
+            Projectile component = other.GetComponent<Projectile>();
+            if (component != null && component.Owner is AIActor) { DealDamageToEnemy(component.Owner, 5); }
         }
         public override void Pickup(PlayerController player)
         {
             player.OnHitByProjectile += this.OwnerHitByProjectile;
             base.Pickup(player);
         }
-
-        public override DebrisObject Drop(PlayerController player)
+        public override void DisableEffect(PlayerController player)
         {
-            player.OnHitByProjectile -= this.OwnerHitByProjectile;
-            return base.Drop(player);
-        }
-        public override void OnDestroy()
-        {
-            if (Owner) Owner.OnHitByProjectile -= this.OwnerHitByProjectile;
-            base.OnDestroy();
+            if (player) player.OnHitByProjectile -= OwnerHitByProjectile;
+            base.DisableEffect(player);
         }
     }
 }

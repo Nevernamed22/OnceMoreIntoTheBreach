@@ -18,7 +18,7 @@ namespace NevernamedsItems
             "Rocket Man",
             "Gonna be a long long time",
             "Chance to fire random rockets." + "\n\nThe prized relic of a reclusive group of Detoknights, though in truth it does not belong to them at all...",
-            "rocketman_icon");           
+            "rocketman_improved");           
             item.quality = PickupObject.ItemQuality.B;
             RocketManID = item.PickupObjectId;
         }

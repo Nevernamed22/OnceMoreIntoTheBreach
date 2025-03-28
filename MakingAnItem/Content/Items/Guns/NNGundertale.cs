@@ -123,7 +123,7 @@ namespace NevernamedsItems
             AkSoundEngine.PostEvent("Play_OBJ_enemy_charmed_01", gun.gameObject);
             HandleSpawnLoot(enemy);
             var CurrentRoom = enemy.transform.position.GetAbsoluteRoom();
-            UnityEngine.Object.Instantiate<GameObject>(EasyVFXDatabase.GundetaleSpareVFX, (enemy.sprite.WorldTopCenter + new Vector2(0, 0.25f)), Quaternion.identity);
+            UnityEngine.Object.Instantiate<GameObject>(SharedVFX.GundetaleSpareVFX, (enemy.sprite.WorldTopCenter + new Vector2(0, 0.25f)), Quaternion.identity);
             if (enemy.GetComponent<KillOnRoomUnseal>())
             {
                 UnityEngine.Object.Destroy(enemy.GetComponent<KillOnRoomUnseal>());
@@ -149,6 +149,8 @@ namespace NevernamedsItems
                 enemy.healthHaver.bossHealthBar = HealthHaver.BossBarType.None;
                 enemy.healthHaver.EndBossState(false);
             }
+            if (enemy.gameObject.GetComponent<FloatingEyeController>()) { UnityEngine.Object.Destroy(enemy.gameObject.GetComponent<FloatingEyeController>()); }
+            if (enemy.gameObject.GetComponent<CrazedController>()) { UnityEngine.Object.Destroy(enemy.gameObject.GetComponent<CrazedController>()); }
             if (enemy.aiAnimator)
             {
                 enemy.aiAnimator.PlayUntilCancelled("idle", false, null, -1f, false);

@@ -56,7 +56,6 @@ namespace NevernamedsItems
             projectile.pierceMinorBreakables = true;
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.MUSKETBALL;
-            gun.TrimGunSprites();
 
             
 

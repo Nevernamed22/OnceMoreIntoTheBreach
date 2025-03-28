@@ -60,7 +60,7 @@ namespace NevernamedsItems
             projectile.baseData.damage = 10;
             projectile.baseData.force *= 1.2f;
             projectile.baseData.speed *= 0.9f;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.PurpleLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.PurpleLaserCircleVFX;
 
             List<string> BeamAnimPaths = new List<string>()
             {
@@ -75,7 +75,7 @@ namespace NevernamedsItems
             leftWiggle.gameObject.MakeFakePrefab();
             leftWiggle.SetProjectileSprite("cortexblaster_proj", 17, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 11, 3);
             leftWiggle.hitEffects.alwaysUseMidair = true;
-            leftWiggle.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.PurpleLaserCircleVFX;
+            leftWiggle.hitEffects.overrideMidairDeathVFX = SharedVFX.PurpleLaserCircleVFX;
             leftWiggle.baseData.damage = 11;
             leftWiggle.baseData.force *= 1.2f;
             leftWiggle.pierceMinorBreakables = true;
@@ -103,7 +103,7 @@ namespace NevernamedsItems
             rightWiggle.gameObject.MakeFakePrefab();
             rightWiggle.SetProjectileSprite("cortexblaster_proj", 17, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 11, 3);
             rightWiggle.hitEffects.alwaysUseMidair = true;
-            rightWiggle.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.PurpleLaserCircleVFX;
+            rightWiggle.hitEffects.overrideMidairDeathVFX = SharedVFX.PurpleLaserCircleVFX;
             rightWiggle.startInverted = true;
             rightWiggle.baseData.damage = 11;
             rightWiggle.baseData.force *= 1.2f;
@@ -131,7 +131,7 @@ namespace NevernamedsItems
             Projectile chargeprojectile = (PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
             chargeprojectile.SetProjectileSprite("cortexblaster_proj", 17, 7, false, tk2dBaseSprite.Anchor.MiddleCenter, 11, 3);
             chargeprojectile.hitEffects.alwaysUseMidair = true;
-            chargeprojectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.PurpleLaserCircleVFX;
+            chargeprojectile.hitEffects.overrideMidairDeathVFX = SharedVFX.PurpleLaserCircleVFX;
             chargeprojectile.baseData.damage = 11;
             chargeprojectile.baseData.force *= 1.2f;
             chargeprojectile.baseData.speed *= 0.9f;

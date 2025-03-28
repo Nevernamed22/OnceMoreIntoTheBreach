@@ -17,7 +17,7 @@ namespace NevernamedsItems
             "Toolbox",
             "Robust",
             "Makes a random object." + "\n\nA blunt object popular for it's usefulness in bludgeoning other people (or yourself) in the head." + "\n\nAlso holds tools, or whatever.",
-            "toolbox_icon") as PlayerItem;
+            "toolbox_improved") as PlayerItem;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 60);
             item.consumable = false;
             item.quality = ItemQuality.D;
@@ -67,7 +67,7 @@ namespace NevernamedsItems
                 }
                 else
                 {
-                    SpawnObjectManager.SpawnObject(thingToSpawn, convertedVector, EasyVFXDatabase.BloodiedScarfPoofVFX);
+                    SpawnObjectManager.SpawnObject(thingToSpawn, convertedVector, SharedVFX.BloodiedScarfPoofVFX);
                 }
 
                 if (user.PlayerHasActiveSynergy("His Grace")) { KillRandomEnemy(user.CurrentRoom); }
@@ -84,7 +84,7 @@ namespace NevernamedsItems
             for (int i = 0; i < 2; i++)
             {
                 Vector3 positionToSpawn3 = room.GetRandomVisibleClearSpot(2, 2).ToVector3();
-                SpawnObjectManager.SpawnObject(BraveUtility.RandomElement(PossibleObjects), positionToSpawn3, EasyVFXDatabase.BloodiedScarfPoofVFX);
+                SpawnObjectManager.SpawnObject(BraveUtility.RandomElement(PossibleObjects), positionToSpawn3, SharedVFX.BloodiedScarfPoofVFX);
             }
         }
 
@@ -94,7 +94,7 @@ namespace NevernamedsItems
             AIActor randomActiveEnemy = room.GetRandomActiveEnemy(true);
             if (randomActiveEnemy.IsNormalEnemy && randomActiveEnemy.healthHaver && !randomActiveEnemy.healthHaver.IsBoss)
             {
-                UnityEngine.Object.Instantiate<GameObject>(EasyVFXDatabase.TeleporterPrototypeTelefragVFX, randomActiveEnemy.CenterPosition.ToVector3ZisY(0f), Quaternion.identity);
+                UnityEngine.Object.Instantiate<GameObject>(SharedVFX.TeleporterPrototypeTelefragVFX, randomActiveEnemy.CenterPosition.ToVector3ZisY(0f), Quaternion.identity);
                 randomActiveEnemy.healthHaver.ApplyDamage(100000f, Vector2.zero, "His Grace", CoreDamageTypes.None, DamageCategory.Normal, true, null, false);
             }
         }

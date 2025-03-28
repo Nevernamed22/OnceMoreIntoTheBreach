@@ -49,7 +49,7 @@ namespace NevernamedsItems
                 Vector2 maxpos = actor.sprite.WorldTopRight;
                 for (int i = 0; i < num; i++)
                 {
-                    GameObject piss = UnityEngine.Object.Instantiate(EasyVFXDatabase.JarateDrip, new Vector2(UnityEngine.Random.Range(minpos.x, maxpos.x), UnityEngine.Random.Range(minpos.y, maxpos.y)), Quaternion.identity);
+                    GameObject piss = UnityEngine.Object.Instantiate(SharedVFX.JarateDrip, new Vector2(UnityEngine.Random.Range(minpos.x, maxpos.x), UnityEngine.Random.Range(minpos.y, maxpos.y)), Quaternion.identity);
                     piss.transform.parent = actor.transform;
                     piss.GetComponent<tk2dBaseSprite>().HeightOffGround = 0.2f;
                     actor.sprite.AttachRenderer(piss.GetComponent<tk2dBaseSprite>());

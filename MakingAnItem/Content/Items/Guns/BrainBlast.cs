@@ -89,7 +89,7 @@ namespace NevernamedsItems
             projectile.transform.parent = gun.barrelOffset;
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.BEAM;
 
-            gun.muzzleFlashEffects = VFXToolbox.CreateVFXPoolBundle("BrainBlastMuzzle", new IntVector2(22, 22), tk2dBaseSprite.Anchor.MiddleCenter, true, 0.4f, VFXAlignment.Fixed);
+            gun.muzzleFlashEffects = VFXToolbox.CreateVFXPoolBundle("BrainBlastMuzzle", true, 0.4f, VFXAlignment.Fixed);
             gun.carryPixelOffset = new IntVector2(5, 20);
 
             gun.quality = PickupObject.ItemQuality.B;

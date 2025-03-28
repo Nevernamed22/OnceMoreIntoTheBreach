@@ -17,7 +17,7 @@ namespace NevernamedsItems
             EasyGoopDefinitions.PitGoop.damagesEnemies = false;
             EasyGoopDefinitions.PitGoop.damagesPlayers = false;
             EasyGoopDefinitions.PitGoop.baseColor32 = Color.black;
-            EasyGoopDefinitions.PitGoop.goopTexture = ResourceExtractor.GetTextureFromResource("NevernamedsItems/Resources/pitgooptex.png");
+            EasyGoopDefinitions.PitGoop.goopTexture = Initialisation.assetBundle.LoadAsset<Texture2D>("pitgooptex");
             EasyGoopDefinitions.PitGoop.usesLifespan = true;
             EasyGoopDefinitions.PitGoop.lifespan = 30f;
             EasyGoopDefinitions.PitGoop.overrideOpaqueness = 1f;

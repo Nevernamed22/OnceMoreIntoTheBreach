@@ -48,7 +48,7 @@ namespace NevernamedsItems
             projectile.baseData.damage *= 1.6f;
             projectile.baseData.force *= 1.2f;
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.RedLaserCircleVFX;
             projectile.SetProjectileSpriteRight("primos1_projectile", 17, 17, true, tk2dBaseSprite.Anchor.MiddleCenter, 15, 15);
             PrimosBulletBehaviour primosbullet = projectile.gameObject.GetOrAddComponent<PrimosBulletBehaviour>();
 

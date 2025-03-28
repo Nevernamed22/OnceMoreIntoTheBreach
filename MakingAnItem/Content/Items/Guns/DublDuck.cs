@@ -46,7 +46,7 @@ namespace NevernamedsItems
             projectile.baseData.damage = 15f;
             ProjectileShootbackMod shootback = projectile.gameObject.AddComponent<ProjectileShootbackMod>();
             shootback.prefabToFire = ((Gun)PickupObjectDatabase.GetById(27)).DefaultModule.finalProjectile;
-
+            shootback.shootBackOnDestruction = true;
             projectile.pierceMinorBreakables = true;
 
             gun.quality = PickupObject.ItemQuality.C;

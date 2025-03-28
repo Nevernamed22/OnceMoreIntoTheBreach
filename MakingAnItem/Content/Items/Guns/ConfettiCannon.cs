@@ -29,8 +29,6 @@ namespace NevernamedsItems
 
             gun.SetGunSprites("confetticannon");
 
-            gun.TrimGunSprites();
-
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 0);

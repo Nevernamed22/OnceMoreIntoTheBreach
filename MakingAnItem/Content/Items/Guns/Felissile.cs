@@ -69,7 +69,7 @@ namespace NevernamedsItems
             projectile.baseData.damage = 11f;
             projectile.SetProjectileCollisionRight("felissile_normal_projectile", Initialisation.ProjectileCollection, 10, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 8);
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.WhiteCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.WhiteCircleVFX;
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Felissile Rockets", "NevernamedsItems/Resources/CustomGunAmmoTypes/felissile_rocket_clipfull", "NevernamedsItems/Resources/CustomGunAmmoTypes/felissile_rocket_clipempty");

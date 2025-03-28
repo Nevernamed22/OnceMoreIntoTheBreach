@@ -18,7 +18,7 @@ namespace NevernamedsItems
             TableTechVitality item = ItemSetup.NewItem<TableTechVitality>(
                 "Table Tech Vitality",
                "Flip Health",
-               "Chance to conjure rejuvenation when a table is flipped"+ "\n\nPart one of the infamous \"Tablos Apocrypha\" of the \"Table Sutra\", legends say that this page is written in blood...",
+               "Chance to conjure rejuvenation when a table is flipped"+ "\n\nPart one of the infamous \"Tablos Apocrypha\" of the \"Tabla Sutra\", legends say that this page is written in blood...",
                "tabletechvitality_icon") as TableTechVitality;
             item.quality = PickupObject.ItemQuality.B;
             item.TableFlocking = true;

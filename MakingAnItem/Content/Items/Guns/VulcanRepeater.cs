@@ -38,7 +38,7 @@ namespace NevernamedsItems
             gun.DefaultModule.numberOfShotsInClip = 1;
             gun.SetBaseMaxAmmo(50);
             gun.quality = PickupObject.ItemQuality.A;
-            gun.TrimGunSprites();
+
             ETGMod.Databases.Items.Add(gun, false, "ANY");
 
             gun.barrelOffset.transform.localPosition = new Vector3(40f / 16f, 14f / 16f, 0f);

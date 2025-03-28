@@ -31,6 +31,8 @@ namespace NevernamedsItems
             (PickupObjectDatabase.GetById(402) as Gun).gameObject.AddComponent<SnowballerModifiers>();
             (PickupObjectDatabase.GetById(33) as Gun).gameObject.AddComponent<TearJerkerModifiers>();
             (PickupObjectDatabase.GetById(596) as Gun).gameObject.AddComponent<TeapotModifiers>();
+            (PickupObjectDatabase.GetById(79) as Gun).gameObject.AddComponent<MakarovModifiers>();
+
 
             Planets = new List<Projectile>()
         {
@@ -43,6 +45,27 @@ namespace NevernamedsItems
             (PickupObjectDatabase.GetById(597) as Gun).DefaultModule.projectiles[6],
             (PickupObjectDatabase.GetById(597) as Gun).DefaultModule.projectiles[7],
         };
+        }
+    }
+
+    public class MakarovModifiers : MonoBehaviour
+    {
+        private Gun self;
+        private void Start()
+        {
+            self = base.GetComponent<Gun>();
+            self.PostProcessProjectile += OnFired;
+        }
+        private void OnFired(Projectile proj)
+        {
+            if (self && self.GunPlayerOwner() && self.GunPlayerOwner().PlayerHasActiveSynergy("People's Army"))
+            {
+                FixedFlakBehaviour fixedFlak = proj.gameObject.AddComponent<FixedFlakBehaviour>();
+                fixedFlak.angleIsRelative = true;
+                fixedFlak.postProcess = true;
+                fixedFlak.AddProjectile(M70.flak, 90f);
+                fixedFlak.AddProjectile(M70.flak, -90f);
+            }
         }
     }
     public class TeapotModifiers : MonoBehaviour

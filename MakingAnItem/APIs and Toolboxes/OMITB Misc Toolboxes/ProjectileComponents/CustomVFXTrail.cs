@@ -10,7 +10,7 @@ namespace NevernamedsItems
     {
         public CustomVFXTrail()
         {
-            anchor = Anchor.MiddleLeft;
+            anchor = Anchor.Center;
             timeBetweenSpawns = 0.1f;
             fixedHeightOffGround = -1f;
             inheritVelocity = false;
@@ -31,6 +31,7 @@ namespace NevernamedsItems
                 else { fixedHeightOffGround = self.sprite ? self.sprite.HeightOffGround : 0f; }
             }
             fixedHeightOffGround += heightOffset;
+
         }
         public VFXPool VFX;
         public float timeBetweenSpawns;
@@ -44,8 +45,8 @@ namespace NevernamedsItems
         private Projectile self;
         public enum Anchor
         {
-            MiddleLeft,
-            Center,
+            ChildTransform,
+            Center
         }
         private void Update()
         {
@@ -77,11 +78,11 @@ namespace NevernamedsItems
             Vector2 found = self.LastPosition;
             switch (anchor)
             {
-                case Anchor.MiddleLeft:
-                    if (self.specRigidbody != null) { found = self.specRigidbody.UnitCenterLeft; }
-                    break;
                 case Anchor.Center:
                     if (self.specRigidbody != null) { found = self.specRigidbody.UnitCenter; }
+                    break;
+                case Anchor.ChildTransform:
+                    if (self.transform.Find("CustomVFXSpawnpoint") != null) { found = self.transform.Find("CustomVFXSpawnpoint").position; } 
                     break;
             }
             return found;

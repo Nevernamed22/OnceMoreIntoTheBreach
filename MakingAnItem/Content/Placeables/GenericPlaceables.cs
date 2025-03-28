@@ -17,7 +17,7 @@ namespace NevernamedsItems
             megaStatueBase = SpriteBuilder.SpriteFromResource("NevernamedsItems/Resources/PlaceableObjects/megastatue_base.png", new GameObject("MegaStatue_base"));
             megaStatueBase.SetActive(false);
             FakePrefab.MarkAsFakePrefab(megaStatueBase);
-            megaStatueBase.GetComponent<tk2dSprite>().HeightOffGround = 0.1f;
+            megaStatueBase.GetComponent<tk2dSprite>().HeightOffGround = -1f;
             megaStatueBase.AddComponent<PlacedBlockerConfigurable>();
 
             var megaStatueBaseBody = megaStatueBase.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(new IntVector2(0, -3), new IntVector2(32, 35));
@@ -53,7 +53,7 @@ namespace NevernamedsItems
             megaStatuePose = FakePrefab.Clone(megaStatueBase);
             megaStatuePoseStatue.transform.SetParent(megaStatuePose.transform);
             megaStatuePoseStatue.transform.localPosition = new Vector3(-2.125f, 0.8125f, 50f);
-            megaStatuePoseStatue.GetComponent<tk2dSprite>().HeightOffGround = 10f;
+            megaStatuePoseStatue.GetComponent<tk2dSprite>().HeightOffGround = 1.25f;
             DungeonPlaceable megastatueposeplaceable = BreakableAPIToolbox.GenerateDungeonPlaceable(new Dictionary<GameObject, float>(){{ megaStatuePose.gameObject, 1f }});
             megastatueposeplaceable.isPassable = false;
             megastatueposeplaceable.width = 2;
@@ -65,7 +65,7 @@ namespace NevernamedsItems
             megaStatueDiscus = FakePrefab.Clone(megaStatueBase);
             megaStatueDiscusStatue.transform.SetParent(megaStatueDiscus.transform);
             megaStatueDiscusStatue.transform.localPosition = new Vector3(-1f, 1.0625f, 50f);
-            megaStatueDiscusStatue.GetComponent<tk2dSprite>().HeightOffGround = 10f;
+            megaStatueDiscusStatue.GetComponent<tk2dSprite>().HeightOffGround = 1.25f;
             DungeonPlaceable megastatueDiscusplaceable = BreakableAPIToolbox.GenerateDungeonPlaceable(new Dictionary<GameObject, float>() { { megaStatueDiscus.gameObject, 1f } });
             megastatueDiscusplaceable.isPassable = false;
             megastatueDiscusplaceable.width = 2;
@@ -77,7 +77,7 @@ namespace NevernamedsItems
             megaStatueShotput = FakePrefab.Clone(megaStatueBase);
             megaStatueShotputStatue.transform.SetParent(megaStatueShotput.transform);
             megaStatueShotputStatue.transform.localPosition = new Vector3(-1.375f, 1.0625f, 50f);
-            megaStatueShotputStatue.GetComponent<tk2dSprite>().HeightOffGround = 10f;
+            megaStatueShotputStatue.GetComponent<tk2dSprite>().HeightOffGround = 1.25f;
             DungeonPlaceable megastatueshotputplaceable = BreakableAPIToolbox.GenerateDungeonPlaceable(new Dictionary<GameObject, float>() { { megaStatueShotput.gameObject, 1f } });
             megastatueshotputplaceable.isPassable = false;
             megastatueshotputplaceable.width = 2;
@@ -89,7 +89,7 @@ namespace NevernamedsItems
             megaStatueBroken = FakePrefab.Clone(megaStatueBase);
             megaStatueBrokenStatue.transform.SetParent(megaStatueBroken.transform);
             megaStatueBrokenStatue.transform.localPosition = new Vector3(-1f, 1.0625f, 50f);
-            megaStatueBrokenStatue.GetComponent<tk2dSprite>().HeightOffGround = 10f;
+            megaStatueBrokenStatue.GetComponent<tk2dSprite>().HeightOffGround = 1.25f;
             DungeonPlaceable megastatuebrokenplaceable = BreakableAPIToolbox.GenerateDungeonPlaceable(new Dictionary<GameObject, float>() { { megaStatueBroken.gameObject, 1f } });
             megastatuebrokenplaceable.isPassable = false;
             megastatuebrokenplaceable.width = 2;
@@ -117,6 +117,5 @@ namespace NevernamedsItems
         public static GameObject megaStatueShotput;
         public static GameObject megaStatueDiscus;
         public static GameObject megaStatueBroken;
-        public static GameObject megaStatueRandom;
     }
 }

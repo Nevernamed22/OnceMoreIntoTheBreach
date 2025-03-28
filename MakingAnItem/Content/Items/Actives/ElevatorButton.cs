@@ -5,6 +5,7 @@ using System.Text;
 using Dungeonator;
 using Alexandria.ItemAPI;
 using UnityEngine;
+using Alexandria.ChestAPI;
 
 namespace NevernamedsItems
 {
@@ -173,12 +174,12 @@ namespace NevernamedsItems
             }
             else
             {
-                IntVector2 bestRewardLocation = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
-                Chest rainbow_Chest = GameManager.Instance.RewardManager.Rainbow_Chest;
-                rainbow_Chest.IsLocked = false;
-                Chest.Spawn(rainbow_Chest, bestRewardLocation);
+                ChestUtility.SpawnChestEasy(user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true),
+                ChestUtility.ChestTier.RAINBOW,
+                false, //Locked
+                Chest.GeneralChestType.UNSPECIFIED
+             );
             }
-
         }
     }
 }

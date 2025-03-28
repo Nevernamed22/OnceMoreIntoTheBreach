@@ -13,9 +13,10 @@ namespace NevernamedsItems
         {
             self = base.GetComponent<Projectile>();
         }
-        private void Update()
+        public float RotPerFrame = 1f;
+        private void FixedUpdate()
         {
-            base.transform.Rotate(0, 0, 1f);
+            base.transform.Rotate(0, 0, RotPerFrame);
         }
     }
 }

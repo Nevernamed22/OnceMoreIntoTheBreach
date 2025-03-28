@@ -50,7 +50,7 @@ namespace NevernamedsItems
             projectile.baseData.damage = 6f;
             projectile.SetProjectileSprite("theoutbreak_proj", 10, 10, true, tk2dBaseSprite.Anchor.MiddleCenter, 9, 9);
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.hitEffects.overrideMidairDeathVFX = RainbowGuonStone.GreyGuonTransitionVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.ColouredPoofGrey;
 
             projectile.transform.parent = gun.barrelOffset;
 
@@ -62,8 +62,9 @@ namespace NevernamedsItems
             projectile2.baseData.speed *= 0.8f;
             projectile2.baseData.damage = 14.1414f;
             projectile2.baseData.range *= 2;
-            PrefabStatusEffectsToApply statusE = projectile2.gameObject.AddComponent<PrefabStatusEffectsToApply>();
-            statusE.effects = new List<GameActorEffect>() { StaticStatusEffects.StandardPlagueEffect };
+            ModdedStatusEffectApplier statusEffects = projectile2.gameObject.AddComponent<ModdedStatusEffectApplier>();
+            statusEffects.appliesPlague = true;
+
 
             GoopModifier goopmod = projectile2.gameObject.AddComponent<GoopModifier>();
             goopmod.SpawnGoopOnCollision = true;
@@ -72,8 +73,8 @@ namespace NevernamedsItems
             goopmod.goopDefinition = EasyGoopDefinitions.PlagueGoop;
 
             projectile2.hitEffects.alwaysUseMidair = true;
-            projectile2.hitEffects.overrideMidairDeathVFX = RainbowGuonStone.RedGuonTransitionVFX;
-            projectile.AnimateProjectileBundle("OutbreakPlagueProjectile",
+            projectile2.hitEffects.overrideMidairDeathVFX = SharedVFX.ColouredPoofRed;
+            projectile2.AnimateProjectileBundle("OutbreakPlagueProjectile",
                    Initialisation.ProjectileCollection,
                    Initialisation.projectileAnimationCollection,
                    "OutbreakPlagueProjectile",

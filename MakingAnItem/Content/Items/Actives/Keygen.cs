@@ -166,13 +166,12 @@ namespace NevernamedsItems
         }
         private void SpareChest(Chest chest)
         {
-            UnityEngine.Object.Instantiate<GameObject>(EasyVFXDatabase.GundetaleSpareVFX, (chest.sprite.WorldTopCenter + new Vector2(0, 0.25f)), Quaternion.identity);
-
+            UnityEngine.Object.Instantiate<GameObject>(SharedVFX.GundetaleSpareVFX, (chest.sprite.WorldTopCenter + new Vector2(0, 0.25f)), Quaternion.identity);
         }
         private void TeleportChest(Chest chest, PlayerController user)
         {
             CachedChestData item = new CachedChestData(chest);
-            SpawnManager.SpawnVFX(EasyVFXDatabase.ChestTeleporterTimeWarp, chest.sprite.WorldCenter, Quaternion.identity, true);
+            SpawnManager.SpawnVFX(SharedVFX.ChestTeleporterTimeWarp, chest.sprite.WorldCenter, Quaternion.identity, true);
             user.CurrentRoom.DeregisterInteractable(chest);
             chest.DeregisterChestOnMinimap();
             if (chest.majorBreakable)

@@ -53,11 +53,10 @@ namespace NevernamedsItems
             projectile.hitEffects.overrideMidairDeathVFX = (PickupObjectDatabase.GetById(506) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX;
             projectile.hitEffects.alwaysUseMidair = true;
 
-            sparkle = VFXToolbox.CreateVFXBundle("DiamondSparkle", new IntVector2(7, 7), tk2dBaseSprite.Anchor.MiddleCenter, true, 0.4f);
 
             SpriteSparkler particles = projectile.gameObject.GetOrAddComponent<SpriteSparkler>();
             particles.doVFX = true;
-            particles.VFX = sparkle;
+            particles.VFX = SharedVFX.BlueSparkle;
             particles.particlesPerSecond = 20f;
 
             projectile.SetProjectileSprite("diamond_projectile", 11, 11, false, tk2dBaseSprite.Anchor.MiddleCenter, 10, 10);
@@ -72,12 +71,11 @@ namespace NevernamedsItems
 
             SpriteSparkler sparkler = gun.shellCasing.AddComponent<SpriteSparkler>();
             sparkler.doVFX = true;
-            sparkler.VFX = sparkle;
+            sparkler.VFX = SharedVFX.BlueSparkle;
             sparkler.particlesPerSecond = 0.5f;
             sparkler.randomise = true;
         }
         public static int DiamondGunID;
-        public static GameObject sparkle;
         public override void PostProcessProjectile(Projectile projectile)
         {
             try
@@ -129,7 +127,7 @@ namespace NevernamedsItems
                     Vector2 maxpos = gun.sprite.sprite.WorldTopRight;
                     for (int i = 0; i < num; i++)
                     {
-                        GameObject sparkleinst = UnityEngine.Object.Instantiate(sparkle, new Vector2(UnityEngine.Random.Range(minpos.x, maxpos.x), UnityEngine.Random.Range(minpos.y, maxpos.y)), Quaternion.identity);
+                        GameObject sparkleinst = UnityEngine.Object.Instantiate(SharedVFX.BlueSparkle, new Vector2(UnityEngine.Random.Range(minpos.x, maxpos.x), UnityEngine.Random.Range(minpos.y, maxpos.y)), Quaternion.identity);
                         sparkleinst.GetComponent<tk2dBaseSprite>().HeightOffGround = 0.2f;
                     }
                 }

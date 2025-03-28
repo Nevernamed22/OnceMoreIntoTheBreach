@@ -43,8 +43,8 @@ namespace NevernamedsItems
             gun.reloadTime = 1.2f;
             gun.DefaultModule.cooldownTime = 0.75f;
 
-            gun.muzzleFlashEffects = VFXToolbox.CreateVFXPoolBundle("DoomBoomMuzzle", new IntVector2(36, 41), tk2dBaseSprite.Anchor.MiddleLeft, false, 0, VFXAlignment.Fixed);
-          
+            gun.muzzleFlashEffects = SharedVFX.DoomBoomMuzzle;
+
             gun.DefaultModule.numberOfShotsInClip = 2;
             gun.barrelOffset.transform.localPosition = new Vector3(34f / 16f, 19f / 16f, 0f);
             gun.SetBaseMaxAmmo(50);
@@ -56,7 +56,7 @@ namespace NevernamedsItems
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.damage = 20f;
             projectile.baseData.speed *= 0.8f;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.BigWhitePoofVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.BigWhitePoofVFX;
             projectile.hitEffects.alwaysUseMidair = true;
             projectile.gameObject.AddComponent<DoomExplosion>();
 
@@ -76,12 +76,10 @@ namespace NevernamedsItems
                    MiscTools.DupeList<IntVector2?>(null, 8), //Override collider offsets
                    MiscTools.DupeList<Projectile>(null, 8)); // Override to copy from    
 
-            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
-            gun.DefaultModule.customAmmoType = "white";
+            gun.AddClipSprites("smallghost");
 
             ETGMod.Databases.Items.Add(gun, false, "ANY");
             ID = gun.PickupObjectId;
-            gun.TrimGunSprites();
         }
         public static GameObject vfx;
         public static int ID;

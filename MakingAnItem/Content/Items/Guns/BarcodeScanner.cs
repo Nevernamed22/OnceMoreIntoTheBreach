@@ -53,7 +53,7 @@ namespace NevernamedsItems
             projectile.baseData.damage = 6f;
             projectile.SetProjectileSprite("barcodescanner_projectile", 4, 14, false, tk2dBaseSprite.Anchor.MiddleCenter, 2, 12);
             projectile.hitEffects.alwaysUseMidair = true;
-            projectile.hitEffects.overrideMidairDeathVFX = EasyVFXDatabase.RedLaserCircleVFX;
+            projectile.hitEffects.overrideMidairDeathVFX = SharedVFX.RedLaserCircleVFX;
             projectile.transform.parent = gun.barrelOffset;
             projectile.gameObject.AddComponent<BarcodeScannerProjectile>();
             gun.AddPassiveStatModifier(PlayerStats.StatType.GlobalPriceMultiplier, 0.9f, StatModifier.ModifyMethod.MULTIPLICATIVE);
