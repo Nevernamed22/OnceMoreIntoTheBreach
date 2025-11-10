@@ -16,7 +16,7 @@ namespace NevernamedsItems
             PickupObject item = ItemSetup.NewItem<RandoRounds>(
              "Rando Rounds",
              "Something Up",
-             "Increases two random bullet related stats by 15%." + "\n\nThese shells were hand-crafted by Chancelot, the disgraced Ex-Knight of the Octagonal Table." + "\n\nOne of the order's most popular members, he was cast out after being caught in Princess Gunivere's chambers.",
+             "Increases two random bullet related stats by 15%." + "\n\nThese shells were hand-crafted by Chancellot, the disgraced Ex-Knight of the Octagonal Table." + "\n\nOne of the order's most popular members, he was cast out after being caught in Princess Gunivere's chambers.",
              "rando6_icon");
             item.quality = PickupObject.ItemQuality.C;
             item.SetTag("bullet_modifier");

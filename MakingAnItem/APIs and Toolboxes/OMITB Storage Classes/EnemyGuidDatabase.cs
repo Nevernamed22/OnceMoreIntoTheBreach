@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class EnemyGuidDatabase
 {
+    public static readonly string Bullet_Kin = "01972dee89fc4404a5c408d50007dad5";
+    public static readonly string Bullet_Kin_AK47 = "db35531e66ce41cbb81d507a34366dfe";
+    public static readonly string Tanker = "df7fb62405dc4697b7721862c7b6b3cd";
+    public static readonly string Tanker_Summoned = "47bdfec22e8e4568a619130a267eab5b";
+
+    public static readonly string Mimic_Brown = "2ebf8ef6728648089babb507dec4edb7";
     public static Dictionary<string, string> Entries { get; set; } = new Dictionary<string, string>()
     {
         //Bullet Kin & Variants
@@ -209,7 +215,7 @@ public class EnemyGuidDatabase
         //Bosses
         //{"smiley", "ea40fcc863d34b0088f490f4e57f8913"},
         //{"shades", "c00390483f394a849c36143eb878998f"},
-        {"gatling_gull", "ec6b674e0acd4553b47ee94493d66422"}, //Blacklist
+        {"gatling_gull", "blobu"}, //Blacklist
         {"bullet_king", "ffca09398635467da3b1f4a54bcfda80"}, //ERROR SHELLS BLACKLIST
         {"blobulord", "1b5810fafbec445d89921a4efb4e42b7"}, //ERROR SHELLS BLACKLIST
         {"beholster", "4b992de5b4274168a8878ef9bf7ea36b"}, //Blacklist

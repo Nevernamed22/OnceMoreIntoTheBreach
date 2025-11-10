@@ -104,7 +104,7 @@ namespace NevernamedsItems
                 339, //Mahoguny
                 478, //Banana
 
-                NitroBullets.NitroBulletsID,
+                NitroBullets.ID,
                 AntimatterBullets.AntimatterBulletsID,
                 BombardierShells.BombardierShellsID,
                 Blombk.BlombkID,

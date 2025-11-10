@@ -27,8 +27,8 @@ namespace NevernamedsItems
 
             var counter = ItemBuilder.SpriteFromBundle("chancellot_counter", Initialisation.NPCCollection.GetSpriteIdByName("chancellot_counter"), Initialisation.NPCCollection, new GameObject("Counter"));
             counter.transform.SetParent(chancellotShop.transform);
-            counter.GetComponent<tk2dSprite>().HeightOffGround = -1f;
-            var counterBody = counter.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(new IntVector2(-15, -1), new IntVector2(128, 17));
+            counter.GetComponent<tk2dSprite>().HeightOffGround = -1f;                                    //-15 / -1
+            var counterBody = counter.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(new IntVector2(0, 0), new IntVector2(128, 17));
             counterBody.CollideWithTileMap = false;
             counterBody.CollideWithOthers = true;
             counter.GetComponent<MeshRenderer>().material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTiltedCutout");
@@ -194,12 +194,13 @@ namespace NevernamedsItems
                 base.StartCoroutine(Conversation(BraveUtility.RandomElement(entryStrings), player));
             }
         }
+        public bool angry = false;
         public void Inform(string information, int moneySpent = 0)
         {
             switch (information)
             {
                 case "loss":
-                    base.StartCoroutine(Conversation(BraveUtility.RandomElement(onSlotLoss), GameManager.Instance.PrimaryPlayer, "laugh"));
+                    base.StartCoroutine(Conversation(BraveUtility.RandomElement(onSlotLoss), GameManager.Instance.PrimaryPlayer, angry ? "miffed" : "laugh"));
                     break;
                 case "minorwin":
                     base.StartCoroutine(Conversation(BraveUtility.RandomElement(onSlotWin), GameManager.Instance.PrimaryPlayer, "miffed"));
@@ -208,10 +209,14 @@ namespace NevernamedsItems
                     base.StartCoroutine(Conversation(BraveUtility.RandomElement(onSlotBigWin), GameManager.Instance.PrimaryPlayer, "angry"));
                     break;
                 case "dispenserfail":
-                    base.StartCoroutine(Conversation(BraveUtility.RandomElement(onDispenseFail), GameManager.Instance.PrimaryPlayer, "laugh"));
+                    base.StartCoroutine(Conversation(BraveUtility.RandomElement(angry ? onDispenseFailAngry : onDispenseFail), GameManager.Instance.PrimaryPlayer, angry ? "miffed" : "laugh"));
                     break;
                 case "dispenserbuy":
-                    base.StartCoroutine(Conversation(BraveUtility.RandomElement(onDispense), GameManager.Instance.PrimaryPlayer));
+                    base.StartCoroutine(Conversation(BraveUtility.RandomElement(angry ? onDispenseAngry : onDispense), GameManager.Instance.PrimaryPlayer, angry ? "miffed" : null));
+                    break;
+                case "break":
+                    base.StartCoroutine(Conversation(BraveUtility.RandomElement(breakSlotMachine), GameManager.Instance.PrimaryPlayer, "angry"));
+                    angry = true;
                     break;
             }
             if (moneySpent > 0) { SaveAPIManager.RegisterStatChange(CustomTrackedStats.CHANCELOT_MONEY_SPENT, moneySpent); }
@@ -313,13 +318,13 @@ namespace NevernamedsItems
                     if (SaveAPIManager.GetFlag(CustomDungeonFlags.ALLJAMMEDMODE_ENABLED_GENUINE)) { interactions.AddRange(allJammedInteractions); }
                     if (firstInteract != null) { interactions.Remove(firstInteract); }
 
-                    string chosen = BraveUtility.RandomElement(talkStrings);
-                    yield return Conversation(chosen, interactor);
+                    string chosen = BraveUtility.RandomElement(angry ? talkAngry : talkStrings);
+                    yield return Conversation(chosen, interactor, angry ? "miffed" : "talk");
                     firstInteract = chosen;
                 }
                 else
                 {
-                    yield return Conversation(BraveUtility.RandomElement(boredStrings), interactor);
+                    yield return Conversation(BraveUtility.RandomElement(angry ? talkAngry : boredStrings), interactor, angry ? "miffed" : "talk");
                 }
                 timesspoken++;
             }
@@ -343,6 +348,8 @@ namespace NevernamedsItems
             allChancelots.Remove(this);
             base.OnDestroy();
         }
+
+        //Regular Dialogue
         public static List<string> allJammedInteractions = new List<string>()
         {
             "Something about you... the shadows cling to you in droves...",
@@ -416,6 +423,35 @@ namespace NevernamedsItems
             "Preposterous!",
             "Taffer!",
             "You must surely be cheating!"
+        };
+
+        //Angry Dialogue
+        public static List<string> breakSlotMachine = new List<string>()
+        {
+            "You BROKE it!?",
+            "Sweet Mercy!",
+            "Bastard!"
+        };
+        public static List<string> onDispenseAngry = new List<string>()
+        {
+            "Purchase what you need, and GET OUT!",
+            "I have my eye on you, taffer!",
+            "If I could raise the prices on the Dispensers, I would."
+        };
+        public static List<string> onDispenseFailAngry = new List<string>()
+        {
+            "Trying to rob me now, lowborn?",
+            "Scoundrel.",
+            "Get Out!",
+            "Parasite."
+        };
+        public static List<string> talkAngry = new List<string>()
+        {
+            "Get out.",
+            "You aren't welcome here.",
+            "...thief and a scoundrel...",
+            "...no respect for knights...",
+            "You are lucky I do not cut thee down where thee stand."
         };
     }
 }

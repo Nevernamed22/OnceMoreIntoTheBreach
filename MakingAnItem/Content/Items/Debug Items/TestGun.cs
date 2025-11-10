@@ -25,48 +25,53 @@ namespace NevernamedsItems
 
             Game.Items.Rename("outdated_gun_mods:testinator", "nn:testinator");
             var behav = gun.gameObject.AddComponent<TestGun>();
-            behav.preventNormalFireAudio = true;
-            behav.overrideNormalFireAudio = "Play_GoldenEye_BulletFire";
             gun.SetLongDescription("Made for fun. Probably broken.");
 
             gun.SetGunSprites("wailingmagnum");
+            gun.AddCustomSwitchGroup("TestGun", "", "");
 
             gun.SetAnimationFPS(gun.shootAnimation, 10);
 
             gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
 
             gun.DefaultModule.ammoCost = 1;
-            gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
+            gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Burst;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Ordered;
             gun.reloadTime = 1.1f;
+            gun.DefaultModule.burstShotCount = 5;
+            gun.DefaultModule.burstCooldownTime = 0.1f;
             gun.DefaultModule.cooldownTime = 0.1f;
-            gun.DefaultModule.numberOfShotsInClip = 7;
+            gun.DefaultModule.numberOfShotsInClip = 50;
             gun.SetBaseMaxAmmo(700);
+
+            SpecialSoundDoer sound = gun.gameObject.AddComponent<SpecialSoundDoer>();
+            sound.StartOfBurstSound = "Play_GoldenEye_BulletFire";
+            sound.StartOfBurstRequiredNamePrefix = "wailingmagnum";
 
             //Projectile proj = (PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0].InstantiateAndFakeprefab();
 
-            LobbedProjectile proj = DataCloners.CopyFields<LobbedProjectile>(Instantiate((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]));
-            proj.gameObject.MakeFakePrefab();
-            proj.gameObject.AddComponent<BounceProjModifier>().numberOfBounces = 5;
-            proj.visualHeight = 2f;
-            proj.spawnCollisionProjectilesOnFloorBounce = true;
+            /* LobbedProjectile proj = DataCloners.CopyFields<LobbedProjectile>(Instantiate((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]));
+             proj.gameObject.MakeFakePrefab();
+             proj.gameObject.AddComponent<BounceProjModifier>().numberOfBounces = 5;
+             proj.visualHeight = 2f;
+             proj.spawnCollisionProjectilesOnFloorBounce = true;
 
-            SpawnProjModifier flak = proj.gameObject.AddComponent<SpawnProjModifier>();
-            flak.spawnProjectilesOnCollision = true;
-            flak.spawnCollisionProjectilesOnBounce = true;
-            flak.randomRadialStartAngle = true;
-            flak.numberToSpawnOnCollison = 5;
-            flak.collisionSpawnStyle = SpawnProjModifier.CollisionSpawnStyle.RADIAL;
+             SpawnProjModifier flak = proj.gameObject.AddComponent<SpawnProjModifier>();
+             flak.spawnProjectilesOnCollision = true;
+             flak.spawnCollisionProjectilesOnBounce = true;
+             flak.randomRadialStartAngle = true;
+             flak.numberToSpawnOnCollison = 5;
+             flak.collisionSpawnStyle = SpawnProjModifier.CollisionSpawnStyle.RADIAL;*/
 
-            LobbedProjectile subproj = DataCloners.CopyFields<LobbedProjectile>(Instantiate((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]));
-            subproj.gameObject.MakeFakePrefab();
-            subproj.gameObject.AddComponent<BounceProjModifier>().numberOfBounces = 1;
-            subproj.AdditionalScaleMultiplier = 0.5f;
-            subproj.visualHeight = 1f;
-            subproj.forcedDistance = 2;
-            flak.projectileToSpawnOnCollision = subproj;
+            /* LobbedProjectile subproj = DataCloners.CopyFields<LobbedProjectile>(Instantiate((PickupObjectDatabase.GetById(56) as Gun).DefaultModule.projectiles[0]));
+             subproj.gameObject.MakeFakePrefab();
+             subproj.gameObject.AddComponent<BounceProjModifier>().numberOfBounces = 1;
+             subproj.AdditionalScaleMultiplier = 0.5f;
+             subproj.visualHeight = 1f;
+             subproj.forcedDistance = 2;
+             flak.projectileToSpawnOnCollision = subproj;*/
 
-            gun.DefaultModule.projectiles[0] = proj;
+            //gun.DefaultModule.projectiles[0] = proj;
 
             //   gun.DefaultModule.projectiles[0] = GameOfLifeHandler.GOLProjPrefab;
 

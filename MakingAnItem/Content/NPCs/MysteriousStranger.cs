@@ -61,7 +61,7 @@ namespace NevernamedsItems
         public static List<string> validPeople = new List<string>()
         {
             "pretzel",
-            //"marcy",
+            "marcy",
             "notsoai",
             "skilotar",
             "dallan",
@@ -92,6 +92,8 @@ namespace NevernamedsItems
             { "bunny", new List<string>(){ "oh, hello.", "hi again.", "welcome back.", "hello." } },
             { "an3s", new List<string>(){ "Howzit.", "Hello!!", "Ho brah, you like come over?" } },
             { "schro", new List<string>(){ "well well well, look who made it! Ive been waiting for ya to arrive!", "Oh hey! Ya caught me at the perfect time!", "Hm? Oh, hey, didnt see ya there!" } },
+            { "marcy", new List<string>(){ "Please, free me!" } },
+            { "rat", new List<string>(){ "{wj}squeak!{w}" } },
         };
         public static Dictionary<string, List<string>> giveItemDialogue = new Dictionary<string, List<string>>()
         {
@@ -109,6 +111,8 @@ namespace NevernamedsItems
             { "bunny", new List<string>(){ "{wj}h a v e   f u n !{w}" } },
             { "an3s", new List<string>(){ "Take this, hopefully you could make some use of it in this god-forsaken Gungeon, god knows I can't.", "Kulia i ka nu'u." } },
             { "schro", new List<string>(){ "Found this earlier, take it. Dont tell the Hegemony anything." } },
+            { "marcy", new List<string>(){ "Oh, hello NICKNAME!", "Please help me, some evil +!?+*!!! gave me this artifact, and it twisted my form into this awful monstrosity.", "Please take it off my hands to free me from this terrible, terrible curse!" } },
+            { "rat", new List<string>(){ "{wj}squeak.{w}" } },
         };
         public static Dictionary<string, List<string>> randomDialogue = new Dictionary<string, List<string>>()
         {
@@ -126,6 +130,9 @@ namespace NevernamedsItems
             { "bunny", new List<string>(){ "ever make a mistake that you wish you could undo? turns out not having opposable thumbs kinda sucks.", "understanding the unknown, knowledge expanding further and further out, all for naught.", "its incredible how much exhaustion this tiny little body can hold.", "i know what you are.", "if youre good enough, you can occasionally trespass into places we were never meant to be in. thats kinda how i got here.", "sometimes, when i press my head against the walls of the Gungeon, i can hear what sounds like a distress signal. but what do i know, im just a bunny.", "know when to turn back, because once it is too late, the only way youll have left to go, is deeper, deeper, yet deeper.", "maybe ill get it right next time." } },
             { "an3s", new List<string>(){ "Carry on with your gungeoneering.", "E hele!", "I have nothing more to say to you." } },
             { "schro", new List<string>(){ "Ever met the trigger twins? Great pair, baked me a cake before.", "Look dude, I've got things to post online.", "Sorry I didnt have anything better, man.", "Ooh! I met this guy once. Cant remember his name. Just before ya, you missed him. Nice revolver he had. Somethin card related." } },
+            { "marcy", new List<string>(){ "Lorem Ipsum Dolor Sit Amet" } },
+            { "rat", new List<string>(){ "{wj}squeak.{w}",  } },
+
         };
         public static Dictionary<string, List<string>> boredDialogue = new Dictionary<string, List<string>>()
         {
@@ -143,13 +150,15 @@ namespace NevernamedsItems
             { "bunny", new List<string>(){ "I think it is time for a rest." } },
             { "an3s", new List<string>(){ "Carry on with your gungeoneering.", "E hele!", "I have nothing more to say to you." } },
             { "schro", new List<string>(){ "Look, I ain't got nothin else.", "What, you lookin to chat?", "I could rant for ya if you'd like that.", "Lookin for a date? No thanks.", "well, get a move on now." } },
+            { "marcy", new List<string>(){ "Lorem Ipsum Dolor Sit Amet" } },
+            { "rat", new List<string>(){ "{wj}squeak.{w}", "{wj}squeak.{w}", "{wj}squeak.{w}", "{wj}squeak.{w}", "{wj}squeak (thank you for freeing me from my curse){w}", "{wj}squeak (I knew those hot goths in my area were too good to be true){w}", "{wj}squeak (I lost my favorite rock. :( I think it was that damn rat){w}", "{wj}squeak (you know that other rat in here is a real piece of work. Just know I don't have anything to do with him){w}" } },
         };
         public static Dictionary<string, List<string>> shotAtDialogue = new Dictionary<string, List<string>>()
         {
             { "pretzel", new List<string>(){ "Can you appreciate in some other direction please?! D:" } },
             { "notsoai", new List<string>(){"You should be on the front line - The production line, that is.","Axiom Munitions 5-Megawatt Personal Refractive Shields never fail!","You're lucky they don't give me arms - or arms.","That ammunition usage is completely suboptimal.","Really?","That's a safety violation!"} },
             { "accidia", new List<string>(){ "Hehehe! {wq}Friend{w} bullets :D", "Bullets from a {wq}friend{w} :D" } },
-            { "round", new List<string>(){ "You're lucky that missed.", "I could totally kick your teeth in if I wanted to." } },
+            { "round", new List<string>(){ "You're lucky that missed.", "I could totally kick your teeth in if I wanted to.", "This really is brutal.", "I could take two of you in a fight, right?" } },
             { "nickel", new List<string>(){ "Sorrow be upon thee!", "You're a charlatan!", "Enough of this!", "Perish at my hands!" } },
             { "spapi", new List<string>(){ "Google Witches" } },
             { "turtle", new List<string>(){ "Whatcha doing??!" } },
@@ -160,6 +169,8 @@ namespace NevernamedsItems
             { "bunny", new List<string>(){ "not yet, i have unfinished business.", "you missed.", "maybe next time." } },
             { "an3s", new List<string>(){ "If you no like stop I'm gonna end up giving you mean lickings brah.", "Just give up, this magical ring protects me from your bullets." } },
             { "schro", new List<string>(){ "Did'ja really think id just stand there and take it?", "Y'know, this doesn't seem like the best use of your time.", "Oddly enough, I feel attacked.", "That's rude.", "Ah, so close!", "HAH! YA MISSED!", "I'd say your aim is poison, but poison actually kills people." } },
+            { "marcy", new List<string>(){ "Haven't I suffered enough? Look at me!", "This is a hate crime." } },
+            { "rat", new List<string>(){ "{wj}SQUEAK{w}" } },
         };
         public static Dictionary<string, string> voice = new Dictionary<string, string>()
         {
@@ -177,6 +188,8 @@ namespace NevernamedsItems
             { "bunny", "truthknower" },
             { "an3s", "fool" },
             { "schro", "robot" },
+            { "marcy", "convict" },
+            { "rat", "witch3" },
         };
         public string currentPerson;
 
@@ -318,6 +331,13 @@ namespace NevernamedsItems
                 Pixelator.Instance.LerpToLetterbox(1, 0.25f);
                 GameManager.Instance.MainCameraController.SetManualControl(false, true);
 
+                if (currentPerson == "marcy")
+                {
+                    currentPerson = "rat";
+                    base.spriteAnimator.Play($"{currentPerson}_idle");
+                    //AkSoundEngine.PostEvent("gastervanish", this.gameObject);
+                    LootEngine.DoDefaultPurplePoof(base.transform.position);
+                }
                 if (currentPerson == "spapi")
                 {
                     m_room.Entered -= PlayerEnteredRoom;

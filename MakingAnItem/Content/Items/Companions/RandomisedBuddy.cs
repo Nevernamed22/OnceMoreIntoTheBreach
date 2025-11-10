@@ -19,10 +19,10 @@ namespace NevernamedsItems
         public static List<string> validForms = new List<string>()
         {
         /*Numbers*/ "8bomb",
-        /*A*/   "amogus", "amogusded", "adventurer", "artifactmonger", "apachethunder",
+        /*A*/   "alternate", "amogus", "amogusded", "adventurer", "artifactmonger", "apachethunder",
         /*B*/    "baba", "blinky", "boo", "bunnybullet", "birdblue", "birdgreen", "birdpurple", "birdyellow", "blackstache", "blasthelmet", "blocknerghost", "brotheralbern", "bubbleblack", "bulletfrost", "bulletshadow", "bulletshockrounds",
         /*Buddy Syntax*/    "buddyalexandria", "buddyandromeda", "buddyantipus", "buddyarrowkin", "buddyaseprite", "buddybattery", "buddybee", "buddybello", "buddyblobulon", "buddyblueshotgun", "buddybookllet", "buddybubs", "buddybulletkin", "buddybulletplayer", "buddycompanioncube", "buddydisarmingpersonality", "buddyfairy", "buddyfallenbulletkin", "buddyflynt", "buddykyle", "buddymistake", "buddyoldred", "buddypetrock", "buddypig", "buddypoisonvial", "buddypooka", "buddyprismatism", "buddyredshotgun", "buddyrobot", "buddyrusty", "buddyshade", "buddyskeleton", "buddyskilotar", "buddyskullet", "buddysnipershell", "buddytentacle", "buddytim", "buddytnt", "buddytrorc", "buddywilson",
-        /*C*/   "clickanddrag", "clyde", "crimsonchamber", "cuphead", "cuteghost", "carrot", "chocoboblack", "chocoboyellow", "clippy", "clone", "coolbullet","cooltist", "cosmonaut", "cubeflesh", "cubelead", "cubemountain", "cultist", "cultistgreenapple", "cultistorange", "cultistredapple", "cultiststrawberry", "claygod", "crappysword",
+        /*C*/   "clickanddrag", "clyde", "crimsonchamber", "cuphead", "cuteghost", "carrot", "chocoboblack", "chocoboyellow", "clippy", "clone", "coolbullet","cooltist", "cosmonaut", "cubeflesh", "cubelead", "cubemountain", "cultist", "cultistgreenapple", "cultistorange", "cultistredapple", "cultiststrawberry", "claygod", "crappysword", "concentriccircles",
         /*D*/   "defaultman", "darumablue", "darumabrown", "darumared", "decoy", "decoyice", "decoypoison", "demonhead", "detex", "detplus", "ddebot1", "ddebot2", "drifloon",
         /*E*/   "elquilliam", "eyeball", "elevatoractionbadguy", "evilcryptbug", "evilcryptdemon", "evilcryptevillord", "evilcryptghost", "evilcryptsnake", "evilcryptspaceman", "evilcrypttreeman",
         /*F*/   "fygar", "froggy", "fuselier", "flemoid", "fredchexter", "freetvs", 
@@ -37,7 +37,7 @@ namespace NevernamedsItems
         /*O*/   "oldnevernamed","octorok", "oldblood", "oldknight", "owlskeleton",
         /*P*/   "p03", "pacman", "perfection", "pinky", "poglizard", "personalityfear", "personalityrage", "phanto", "phantogold", "piku", "plasmacube", "peglin",
         /*R*/   "randal", "revolvenant", "rippy", "rubberjester",
-        /*S*/   "sansyskeleton", "scaredghost", "semibot", "settingsbutton", "slenderman", "stickman", "sue", "scientistchilds","scientistdukes", "sepulchergeist", "serenade", "skullred", "snitchbrick", "spaceboy", "spacehole", "spiketrap", "spindrone", "steambot", "stonehead", "sun", "skifreeyeti", "spoilsportrobot",
+        /*S*/   "sansyskeleton", "scaredghost", "scrappeddebugenemy", "semibot", "settingsbutton", "slenderman", "stickman", "sue", "scientistchilds","scientistdukes", "sepulchergeist", "serenade", "skullred", "snitchbrick", "spaceboy", "spacehole", "spiketrap", "spindrone", "steambot", "stonehead", "sun", "skifreeyeti", "spoilsportrobot", "stockguy", "spanospy",
         /*T*/   "tcboutblue", "tcboutred", "technoblade", "textfilebuddy", "thedreamer", "thepointyone", "thomasthebullet", "turtlemelon", "terminator", "tootscraze", "toughguy", "theguyfromelevatoraction",
         /*U*/   "ufo",
         /*V*/   "voidcore", "vvvvvv",

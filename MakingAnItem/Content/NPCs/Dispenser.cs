@@ -154,8 +154,9 @@ namespace NevernamedsItems
             if (interactor.carriedConsumables.Currency > Cost)
             {
                 interactor.carriedConsumables.Currency -= Cost;
-                base.spriteAnimator.Play("dispenser_sale");
-
+                AkSoundEngine.PostEvent("Play_OBJ_bottle_cork_01", base.gameObject);
+                yield return new WaitForSeconds(0.2f);
+                base.spriteAnimator.Play("dispenser_sale");            
                 yield return new WaitForSeconds(0.5f);
                 Vector2 point = base.transform.position + new Vector3(6f / 16f, -10f / 16f, 0f);
                 LootEngine.SpawnItem(PickupObjectDatabase.GetById(forSale).gameObject, point, Vector2.down, 1);

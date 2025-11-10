@@ -21,13 +21,7 @@ namespace NevernamedsItems
             item.quality = PickupObject.ItemQuality.D;
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
 
-            List<string> mandatorySynergyItems = new List<string>() { "nn:nitroglycylinder" };
-            List<string> optionalSynergyItems = new List<string>() { "nn:nitro_bullets", "explosive_rounds" };
-            CustomSynergies.Add("Bomb Voyage!", mandatorySynergyItems, optionalSynergyItems);
-
-            List<string> mandatorySynergyItems2 = new List<string>() { "nn:nitro_bullets" };
-            List<string> optionalSynergyItems2 = new List<string>() { "nn:nitroglycylinder", "explosive_rounds", };
-            CustomSynergies.Add("...Badda Boom!", mandatorySynergyItems2, optionalSynergyItems2);
+           
 
             NitroglycylinderID = item.PickupObjectId;
         }

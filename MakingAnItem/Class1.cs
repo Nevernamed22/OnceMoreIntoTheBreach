@@ -52,6 +52,7 @@ namespace NevernamedsItems
         public static tk2dSpriteCollectionData TrapCollection;
         public static tk2dSpriteCollectionData EnvironmentCollection;
         public static tk2dSpriteCollectionData GunDressingCollection;
+        public static tk2dSpriteCollectionData EnemyProjectileCollection;
 
         public static tk2dSpriteAnimation projectileAnimationCollection;
         public static tk2dSpriteAnimation gunAnimationCollection;
@@ -62,6 +63,8 @@ namespace NevernamedsItems
         public static tk2dSpriteAnimation mysteriousStrangerAnimationCollection;
         public static tk2dSpriteAnimation trapAnimationCollection;
         public static tk2dSpriteAnimation environmentAnimationCollection;
+
+       // public static tk2dSpriteCollectionData ammonomiconCollection = AmmonomiconController.ForceInstance.EncounterIconCollection;
         public void Awake()
         {
         }
@@ -97,6 +100,7 @@ namespace NevernamedsItems
                 TrapCollection = AssetBundleLoader.FastLoadSpriteCollection(assetBundle, "TrapCollection", "TrapCollectionMaterial.mat");
                 EnvironmentCollection = AssetBundleLoader.FastLoadSpriteCollection(assetBundle, "EnvironmentCollection", "EnvironmentCollectionMaterial.mat");
                 GunDressingCollection = AssetBundleLoader.FastLoadSpriteCollection(assetBundle, "GunDressing", "GunDressingMaterial.mat");
+                EnemyProjectileCollection = AssetBundleLoader.FastLoadSpriteCollection(assetBundle, "EnemyProjectileCollection", "EnemyProjectileCollectionMaterial.mat");
 
                 projectileAnimationCollection = assetBundle.LoadAsset<GameObject>("ProjectileAnimationCollection").GetComponent<tk2dSpriteAnimation>();
                 gunAnimationCollection = assetBundle.LoadAsset<GameObject>("GunAnimationCollection").GetComponent<tk2dSpriteAnimation>();
@@ -125,6 +129,8 @@ namespace NevernamedsItems
                 ETGModMainBehaviour.Instance.gameObject.AddComponent<GlobalUpdate>();
                 ETGModMainBehaviour.Instance.gameObject.AddComponent<CustomDarknessHandler>();
                 GameOfLifeHandler.Init();
+
+                EnemyBulletDatabase.Init();
 
                 //Challenges
                 Challenges.Init();
@@ -958,6 +964,12 @@ namespace NevernamedsItems
                     RepeatovolverInfinite.Add();
                     #endregion
 
+                    //-----------------------------------------------------ENEMIES GET INITIALISED
+                    DebugEnemy.Init();
+                    Deacon.Init();
+                    BouncerBulletKin.Init();
+                    MolotovKin.Init();
+                    Muskin.Init();
 
                     //-----------------------------------------------------SHRINES GET INITIALISED
                     #region ShrineInitialisation

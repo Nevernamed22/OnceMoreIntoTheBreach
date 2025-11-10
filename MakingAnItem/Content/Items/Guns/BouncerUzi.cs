@@ -19,7 +19,7 @@ namespace NevernamedsItems
             Game.Items.Rename("outdated_gun_mods:bouncer_uzi", "nn:bouncer_uzi");
             gun.gameObject.AddComponent<BouncerUzi>();
             gun.SetShortDescription("Let's Bounce");
-            gun.SetLongDescription("A standard machine pistol the bullets of which have been wrapped in rubber- though that doesnt make them less deadly."+"\n\nLegends tell of a mythical troupe of Gundead who used these whimsical barkers, but nobody has seen hide nor hair of them in many years.");
+            gun.SetLongDescription("A standard machine pistol the bullets of which have been wrapped in rubber- though that doesnt make them less deadly."+"\n\nLegends tell of a much-feared troupe of Gundead who use these whimsical barkers.");
 
             gun.SetGunSprites("bounceruzi");
 

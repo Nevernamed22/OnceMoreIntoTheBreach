@@ -1,7 +1,9 @@
 ﻿using Dungeonator;
+using HarmonyLib;
 using MonoMod.RuntimeDetour;
 using SaveAPI;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -10,6 +12,20 @@ using UnityEngine;
 
 namespace NevernamedsItems
 {
+    [HarmonyPatch(typeof(Dungeon), "Regenerate", MethodType.Normal)]
+    public class RegenerateDungeonPatch
+    {
+        [HarmonyPostfix]
+        public static IEnumerator LateRegenerateDungeon(IEnumerator enumerator, Dungeon __instance, bool cleanup)
+        {
+            yield return enumerator;
+            foreach(IntVector2 vec in StaticReferenceManagerOMITB.LowWallDict.Keys)
+            {
+                StaticReferenceManagerOMITB.LowWallDict[vec].ConfigureOnLevelLoad();
+            }
+            yield break;
+        }
+    }
     class FloorAndGenerationToolbox
     {
         public static void Init()

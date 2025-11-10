@@ -6,6 +6,9 @@ using Alexandria.ItemAPI;
 using UnityEngine;
 using System.Collections;
 using SaveAPI;
+using Alexandria.Misc;
+using Dungeonator;
+using Alexandria.EnemyAPI;
 
 namespace NevernamedsItems
 {
@@ -14,11 +17,12 @@ namespace NevernamedsItems
         public static void Init()
         {
             PlayerItem item = ItemSetup.NewItem<UnengravedBullets>(
-            "Unengraved Bullets",
-            "Waiting for the right moment...",
-            "The first enemy shot while this item is active becomes permanently insta-killable.\n\n" + "These bullets, while unremarkable at the moment, are brimming with murderous potential.",
-            "unengravedbullets_icon") as PlayerItem;          
-            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.None, 500);
+            "Engraving Kit",
+            "Waiting For The Right Moment...",
+            "Can be used on the nearest enemy, once per floor. Enemies whose names have been engraved can be instantly slain.\n\nThese bullets, while unremarkable at the moment, are brimming with murderous potential.",
+            "engravingkit_icon") as PlayerItem;
+            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 1);
+
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
@@ -27,131 +31,87 @@ namespace NevernamedsItems
             Doug.AddToLootPool(item.PickupObjectId);
         }
 
-        float duration = 4;
-        private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
+        public int usesThisFloor = 0;
+        public override void Pickup(PlayerController player)
         {
-            sourceProjectile.OnHitEnemy += this.OnHitEnemy;
-        }
-        private void PostProcessBeam(BeamController sourceBeam)
-        {
-            try
-            {
-                sourceBeam.projectile.OnHitEnemy += this.OnHitEnemy;
-            }
-            catch (Exception e)
-            {
-                ETGModConsole.Log(e.Message);
-            }
-        }
-        public override void DoEffect(PlayerController user)
-        {
-            //Play a sound effect
-            //Activates the effect
-            StartEffect(user);
-
-            //start a coroutine which calls the EndEffect method when the item's effect duration runs out
-            StartCoroutine(ItemBuilder.HandleDuration(this, duration, user, EndEffect));
-        }
-
-        private void StartEffect(PlayerController user)
-        {
-            ableToGiveItem = true;
-            user.PostProcessProjectile += this.PostProcessProjectile;
-            user.PostProcessBeam += this.PostProcessBeam;
-            //ETGModConsole.Log("Unengraved Bullets has been activated");
-        }
-        private void EndEffect(PlayerController user)
-        {
-            ableToGiveItem = false;
-            user.PostProcessProjectile -= this.PostProcessProjectile;
-            user.PostProcessBeam -= this.PostProcessBeam;
+            player.OnNewFloorLoaded += OnNewFloor;
+            base.Pickup(player);
         }
         public override void OnPreDrop(PlayerController user)
         {
-            if (base.IsCurrentlyActive)
+            if (user) { user.OnNewFloorLoaded -= OnNewFloor; }
+            base.OnPreDrop(user);
+        }
+        public override void OnDestroy()
+        {
+            if (LastOwner != null) { LastOwner.OnNewFloorLoaded -= OnNewFloor; }
+            base.OnDestroy();
+        }
+        public void OnNewFloor(PlayerController player)
+        {
+            usesThisFloor = 0;
+        }
+        public List<string> engravedGUIDs = new List<string>();
+        public override bool CanBeUsed(PlayerController user)
+        {
+            AIActor nearestEnemyToPosition = MathsAndLogicHelper.GetNearestEnemyToPosition(user.CenterPosition, true, RoomHandler.ActiveEnemyType.All, null,
+                x => x.healthHaver && !x.healthHaver.IsBoss && !engravedGUIDs.Contains(x.EnemyGuid));
+            if (nearestEnemyToPosition != null && Vector2.Distance(user.CenterPosition, nearestEnemyToPosition.Position) < 4f && usesThisFloor < MaxUsesthisFloor(user)) { return true; }
+            else return false;
+        }
+        public int MaxUsesthisFloor(PlayerController user)
+        {
+            if (user.PlayerHasActiveSynergy("Crafting Supplies")) { return 2; }
+            else return 1;
+        }
+        public override void DoEffect(PlayerController user)
+        {
+            AIActor nearestEnemyToPosition = MathsAndLogicHelper.GetNearestEnemyToPosition(user.CenterPosition, true, RoomHandler.ActiveEnemyType.All, null, x => x.healthHaver && !x.healthHaver.IsBoss);
+            if (nearestEnemyToPosition != null)
             {
-                base.IsCurrentlyActive = false;
-                EndEffect(user);
+                PassiveItem engravedbullets = user.passiveItems.Find(x => x is EngravedBullets);
+                if (engravedbullets == null)
+                {
+                    user.AcquirePassiveItemPrefabDirectly(PickupObjectDatabase.GetById(EngravedBullets.ID) as PassiveItem);
+                    engravedbullets = user.passiveItems.Find(x => x is EngravedBullets);
+                }
+
+                AkSoundEngine.PostEvent("Play_WPN_Life_Orb_Capture_01", base.gameObject);
+                nearestEnemyToPosition.PlayEffectOnActor(PickupObjectDatabase.GetById(595).GetComponent<LifeOrbGunModifier>().OnKilledEnemyVFX, Vector3.zero);
+
+                EngravedBullets engravedComp = engravedbullets as EngravedBullets;
+                engravedGUIDs.Add(nearestEnemyToPosition.EnemyGuid);
+                engravedComp.engravedGUIDs.Add(nearestEnemyToPosition.EnemyGuid);
+                foreach (List<string> possibleCluster in alikeGUIDs)
+                {
+                    if (possibleCluster.Contains(nearestEnemyToPosition.EnemyGuid))
+                    {
+                        engravedComp.engravedGUIDs.AddRange(possibleCluster);
+                        engravedGUIDs.AddRange(possibleCluster);
+                    }
+                }
+
+                string enemyName = "Unknown";
+                if (nearestEnemyToPosition.encounterTrackable != null && nearestEnemyToPosition.encounterTrackable.journalData != null && nearestEnemyToPosition.encounterTrackable.journalData.GetPrimaryDisplayName() != null)
+                {
+                    enemyName = nearestEnemyToPosition.encounterTrackable.journalData.GetPrimaryDisplayName();
+                }
+                else if (!string.IsNullOrEmpty(nearestEnemyToPosition.ActorName)) { enemyName = nearestEnemyToPosition.ActorName; }
+
+                GameUIRoot.Instance.notificationController.DoCustomNotification("NAME ENGRAVED", enemyName, Initialisation.itemCollection, Initialisation.itemCollection.GetSpriteIdByName("engravedbullets_improved"), UINotificationController.NotificationColor.PURPLE, false, false);
+
+               usesThisFloor++;
             }
         }
 
-        bool ableToGiveItem;
-        public static string engravedEnemy;
-
-        private void OnHitEnemy(Projectile arg1, SpeculativeRigidbody arg2, bool arg3)
+        List<List<string>> alikeGUIDs = new List<List<string>>()
         {
-            string enemyToKillGuid = arg2?.aiActor?.EnemyGuid;
-            if (!string.IsNullOrEmpty(enemyToKillGuid))
+            new List<string>() //Tankers
             {
-                //ETGModConsole.Log("The enemy you just hit had this guid: " + enemyToKillGuid);
-                if (enemyBlacklist.Contains(enemyToKillGuid))
-                {
-                    Debug.Log("The selected enemy (" + enemyToKillGuid + ") is on the enemy Blacklist, either because it is a boss, unkillable, or some sort of harmless thing I can't imagine someone wanting to instakill - NN");
-                }
-                else if (ableToGiveItem == true)
-                {
-                    ableToGiveItem = false;
-                    engravedEnemy = enemyToKillGuid;
-                    string header = "Bullets Engraved";
-                    string text = "";
-                    this.Notify(header, text);
-                    EndEffect(LastOwner);
-                    GiveEngravedBulletsRemoveUnengravedBullets();
-                }
-                else if (ableToGiveItem == false) return;
-                else return;
+                 EnemyGuidDatabase.Tanker,
+                 EnemyGuidDatabase.Tanker_Summoned
             }
-        }
-
-        private void Notify(string header, string text)
-        {
-            tk2dBaseSprite notificationObjectSprite = GameUIRoot.Instance.notificationController.notificationObjectSprite;
-            GameUIRoot.Instance.notificationController.DoCustomNotification(header, text, notificationObjectSprite.Collection, notificationObjectSprite.spriteId, UINotificationController.NotificationColor.PURPLE, true, true);
-        }
-        private void GiveEngravedBulletsRemoveUnengravedBullets()
-        {
-            var engravedBulletsItem = Gungeon.Game.Items["nn:engraved_bullets"];
-            LastOwner.AcquirePassiveItemPrefabDirectly(engravedBulletsItem as PassiveItem);
-            LastOwner.RemoveActiveItem(this.PickupObjectId);
-        }
-
-        public List<string> enemyBlacklist = new List<string>()
-        {
-            "fa6a7ac20a0e4083a4c2ee0d86f8bbf7", //Red Caped Bullet Kin
-            "47bdfec22e8e4568a619130a267eab5b", //Tankers summoned by the Treadnaught
-            "ea40fcc863d34b0088f490f4e57f8913", //Smiley
-            "c00390483f394a849c36143eb878998f", //Shades
-            "ec6b674e0acd4553b47ee94493d66422", //Gatling Gull
-            "ffca09398635467da3b1f4a54bcfda80", //Bullet King
-            "1b5810fafbec445d89921a4efb4e42b7", //Blobulord
-            "4b992de5b4274168a8878ef9bf7ea36b", //Beholster
-            "c367f00240a64d5d9f3c26484dc35833", //Gorgun
-            "da797878d215453abba824ff902e21b4", //Ammoconda
-            "5729c8b5ffa7415bb3d01205663a33ef", //Old King
-            "fa76c8cfdf1c4a88b55173666b4bc7fb", //Treadnaught
-            "8b0dd96e2fe74ec7bebc1bc689c0008a", //Mine Flayer
-            "5e0af7f7d9de4755a68d2fd3bbc15df4", //Cannonbalrog
-            "9189f46c47564ed588b9108965f975c9", //Door Lord
-            "6868795625bd46f3ae3e4377adce288b", //Resourceful Rat
-            "4d164ba3f62648809a4a82c90fc22cae", //Rat Mech
-            "6c43fddfd401456c916089fdd1c99b1c", //High Priest
-            "3f11bbbc439c4086a180eb0fb9990cb4", //Kill Pillars
-            "f3b04a067a65492f8b279130323b41f0", //Wallmonger
-            "41ee1c8538e8474a82a74c4aff99c712", //Helicopter Agunim
-            "465da2bb086a4a88a803f79fe3a27677", //Dragun
-            "05b8afe0b6cc4fffa9dc6036fa24c8ec", //Advanced Dragun
-            "cd88c3ce60c442e9aa5b3904d31652bc", //Lich
-            "68a238ed6a82467ea85474c595c49c6e", //Megalich
-            "7c5d5f09911e49b78ae644d2b50ff3bf", //Infinilich
-            "76bc43539fc24648bff4568c75c686d1", //Chicken
-            "0ff278534abb4fbaaa65d3f638003648", //Poopulons Corn
-            "6ad1cafc268f4214a101dca7af61bc91", //Passive Rat
-            "14ea47ff46b54bb4a98f91ffcffb656d", //Candle Rat
         };
-    }
-
-    internal class StartEffect
-    {
     }
 
     public class EngravedBullets : PassiveItem
@@ -160,13 +120,16 @@ namespace NevernamedsItems
         {
             PickupObject item = ItemSetup.NewItem<EngravedBullets>(
             "Engraved Bullets",
-            "Bullet with your name on it",
-            "These bullets are specially made to absolutely annihilate one specific foe.\n\n" + "They may run. They may hide. But you will find them.",
-            "engravedbullets_icon");
+            "Bullet With Your Name On It",
+            "These bullets are tailored to annihilate specific foes.\n\nThey may run. They may hide. But you will find them.",
+            "engravedbullets_improved");
             item.SetTag("bullet_modifier");
-            item.quality = PickupObject.ItemQuality.EXCLUDED;
+            item.quality = PickupObject.ItemQuality.SPECIAL;
+            item.RemovePickupFromLootTables();
+            ID = item.PickupObjectId;
         }
-        string enemyToKillEngraved = UnengravedBullets.engravedEnemy;
+        public static int ID;
+        public List<string> engravedGUIDs = new List<string>();
         public override void Pickup(PlayerController player)
         {
             base.Pickup(player);
@@ -180,7 +143,60 @@ namespace NevernamedsItems
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
             ProjectileInstakillBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
-            instakill.enemyGUIDsToKill.Add(enemyToKillEngraved);
+            instakill.enemyGUIDsToKill.AddRange(engravedGUIDs);
+            instakill.soundEvent = "Play_WPN_kthulu_blast_01";
+            instakill.vfx = PickupObjectDatabase.GetById(595).GetComponent<LifeOrbGunModifier>().OnBurstDamageVFX;
+            instakill.extraKnockback = 30f;
+            instakill.onInstaKill += OnInstaKill;
+        }
+        public void OnInstaKill(Projectile bullet, AIActor target)
+        {
+            if (base.Owner)
+            {
+                if (base.Owner.PlayerHasActiveSynergy("In-Grave"))
+                {
+                    GameObject gemy = StandardisedProjectiles.ghost.InstantiateAndFireInDirection(
+                      target.specRigidbody.UnitCenter, BraveUtility.RandomAngle());
+                    if (bullet.Owner)
+                    {
+                        Projectile proj = gemy.GetComponent<Projectile>();
+                        proj.Owner = bullet.Owner;
+                        proj.Shooter = bullet.Owner.specRigidbody;
+                        if (bullet.ProjectilePlayerOwner())
+                        {
+                            bullet.ProjectilePlayerOwner().DoPostProcessProjectile(proj);
+                            proj.ScaleByPlayerStats(bullet.ProjectilePlayerOwner());
+                        }
+                        proj.specRigidbody.RegisterGhostCollisionException(target.specRigidbody);
+                    }
+                }
+                if (base.Owner.PlayerHasActiveSynergy("Excellence in Journalism"))
+                {
+                    List<AIActor> activeEnemies = target.ParentRoom.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+                    if (activeEnemies != null)
+                    {
+                        for (int i = 0; i < activeEnemies.Count; i++)
+                        {
+                            AIActor aiactor = activeEnemies[i];
+                            if (aiactor.IsNormalEnemy && aiactor != target)
+                            {
+                                float distance = Vector2.Distance(target.ClosestPointOnEnemy(aiactor.CenterPosition), aiactor.ClosestPointOnEnemy(target.CenterPosition));
+                                if (distance <= 4f)
+                                {
+                                    Vector2 vec = new Vector2(target.Position.x, target.Position.y).CalculateVectorBetween(aiactor.Position);
+                                    if (aiactor.knockbackDoer) { aiactor.knockbackDoer.ApplyKnockback(vec, 7f); }
+                                    if (aiactor.healthHaver) { aiactor.healthHaver.ApplyDamage(10f, vec, "Synergy", CoreDamageTypes.Void); }
+                                }
+                            }
+                        }
+                    }
+                }
+                if (base.Owner.PlayerHasActiveSynergy("Come To Collect"))
+                {
+                    LootEngine.SpawnCurrency(target.specRigidbody.UnitCenter, UnityEngine.Random.Range(1, 3));
+                }
+
+            }
         }
         public override void DisableEffect(PlayerController player)
         {

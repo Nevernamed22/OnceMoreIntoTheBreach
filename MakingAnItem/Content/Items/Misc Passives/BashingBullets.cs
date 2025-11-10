@@ -56,7 +56,7 @@ namespace NevernamedsItems
         }
         private void OnCollide(SpeculativeRigidbody selfbody, PixelCollider selfcollider, SpeculativeRigidbody otherbody, PixelCollider othercollider)
         {
-            if (otherbody && otherbody.gameObject && (otherbody.gameObject.GetComponent<MinorBreakable>() || otherbody.gameObject.GetComponent<MajorBreakable>()))
+            if (otherbody && otherbody.gameObject && (otherbody.gameObject.GetComponent<MinorBreakable>() || otherbody.gameObject.GetComponent<MajorBreakable>()) && otherbody.GetComponent<BashelliskBodyController>() == null)
             {
                 GameObject hitVFX = (PickupObjectDatabase.GetById(541) as Gun).DefaultModule.chargeProjectiles[0].Projectile.hitEffects.enemy.effects[0].effects[0].effect;
                 UnityEngine.Object.Instantiate<GameObject>(hitVFX, self.specRigidbody.UnitCenter, Quaternion.identity);

@@ -11,6 +11,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using Alexandria.Misc;
+using static UnityEngine.UI.GridLayoutGroup;
+using Brave.BulletScript;
 
 namespace NevernamedsItems
 {
@@ -141,9 +144,29 @@ namespace NevernamedsItems
 
             mapIcon = ItemBuilder.SpriteFromBundle("slotmachine_map", Initialisation.NPCCollection.GetSpriteIdByName("slotmachine_map"), Initialisation.NPCCollection, new GameObject("slotmachine_map"));
             mapIcon.MakeFakePrefab();
+
+
+            LobbedProjectile proj = DataCloners.CopyFields<LobbedProjectile>(Instantiate((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]));
+            proj.gameObject.MakeFakePrefab();
+            proj.visualHeight = 2f;
+            proj.canHitAnythingEvenWhenNotGrounded = false;
+            proj.InstantiateAndFakeprefab();
+            proj.baseData.speed *= 0.5f;
+            proj.SetProjectileSprite("enemy_grenade", 15, 15, true, tk2dBaseSprite.Anchor.MiddleCenter, 13, 13, overrideCollection: Initialisation.EnemyProjectileCollection);
+
+            ExplosiveModifier explod = proj.gameObject.AddComponent<ExplosiveModifier>();
+            explod.IgnoreQueues = true;
+            explod.explosionData = StaticExplosionDatas.genericLargeExplosion;
+
+            proj.gameObject.AddComponent<ProjectileSpinner>();
+
+            grenade = proj.gameObject;
+
+            smoke = EnemyDatabase.GetOrLoadByGuid("5e0af7f7d9de4755a68d2fd3bbc15df4").transform.Find("Room Smoke Particles").gameObject;
         }
         public RoomHandler m_room;
         public static GameObject mapIcon;
+        public static GameObject smoke;
         public GameObject instancedMapIcon;
         public Chancellot master;
 
@@ -157,6 +180,10 @@ namespace NevernamedsItems
         public tk2dSpriteAnimator wheel2;
         public tk2dSpriteAnimator wheel3;
 
+        public static GameObject grenade;
+
+        public int NumCreditsPaidOut = 0;
+        public GameObject curSmoke = null;
         public bool busy;
         public int currentBet = 20;
 
@@ -273,38 +300,56 @@ namespace NevernamedsItems
 
             yield return new WaitForSeconds(0.5f);
 
+            bool anyBullet = outcomeA == "fail" || outcomeA == "fail" || outcomeC == "fail";
             bool x2 = outcomeA == "x2" || outcomeA == "x2" || outcomeC == "x2";
             List<string> noPoints = new List<string>() { "fail", "x2" };
 
-            //Determine Ultimate Outcome
-            int exp = 0;
-            if (outcomeB == outcomeA)
+            bool toBreak = false;
+            if (winValue > 0)
             {
-                if (outcomeB == outcomeC) { Payout(outcomeB, 2, x2); exp = noPoints.Contains(outcomeB) ? 0 : 2; }
-                else { Payout(outcomeB, 1, x2); exp = noPoints.Contains(outcomeB) ? 0 : 1; }
+                float chanceToBreak = winValue / 250f;
+                if (outcomeA == "fail" && outcomeA == "fail" && outcomeC == "fail") { chanceToBreak *= 2; }
+                if (UnityEngine.Random.value <= chanceToBreak) { toBreak = true; }
             }
-            else if (outcomeB == outcomeC) { Payout(outcomeB, 1, x2); exp = noPoints.Contains(outcomeB) ? 0 : 1; }
-            else if (outcomeA == outcomeC) { Payout(outcomeA, 1, x2); exp = noPoints.Contains(outcomeA) ? 0 : 1; }
 
-            switch (exp)
+            if (toBreak)
             {
-                case 0:
-                    if (currentBet > 100) { faceAnimator.Play("slotface_bigloss"); }
-                    else { faceAnimator.Play("slotface_minorloss"); }
-                    if (master) { master.Inform("loss"); }
-                    AkSoundEngine.PostEvent("Play_OBJ_Chest_Synergy_Lose_01", base.gameObject);
-                    break;
-                case 1:
-                    faceAnimator.Play("slotface_minorwin");
-                    if (master) { master.Inform("minorwin"); }
-                    AkSoundEngine.PostEvent("Play_OBJ_Chest_Synergy_Win_01", base.gameObject);
-                    break;
-                case 2:
-                    faceAnimator.Play("slotface_bigwin");
-                    if (master) { master.Inform("bigwin"); }
-                    AkSoundEngine.PostEvent("Play_OBJ_Chest_Synergy_Win_01", base.gameObject);
-                    break;
+                if (master) { master.Inform("break"); }
+                Break();
             }
+            else
+            {
+                //Determine Ultimate Outcome
+                int exp = 0;
+                if (outcomeB == outcomeA)
+                {
+                    if (outcomeB == outcomeC) { Payout(outcomeB, 2, x2, anyBullet); exp = noPoints.Contains(outcomeB) ? 0 : 2; }
+                    else { Payout(outcomeB, 1, x2, anyBullet); exp = noPoints.Contains(outcomeB) ? 0 : 1; }
+                }
+                else if (outcomeB == outcomeC) { Payout(outcomeB, 1, x2, anyBullet); exp = noPoints.Contains(outcomeB) ? 0 : 1; }
+                else if (outcomeA == outcomeC) { Payout(outcomeA, 1, x2, anyBullet); exp = noPoints.Contains(outcomeA) ? 0 : 1; }
+                else { winValue -= 0.1f; }
+                switch (exp)
+                {
+                    case 0:
+                        if (currentBet > 100) { faceAnimator.Play("slotface_bigloss"); }
+                        else { faceAnimator.Play("slotface_minorloss"); }
+                        if (master) { master.Inform("loss"); }
+                        AkSoundEngine.PostEvent("Play_OBJ_Chest_Synergy_Lose_01", base.gameObject);
+                        break;
+                    case 1:
+                        faceAnimator.Play("slotface_minorwin");
+                        if (master) { master.Inform("minorwin"); }
+                        AkSoundEngine.PostEvent("Play_OBJ_Chest_Synergy_Win_01", base.gameObject);
+                        break;
+                    case 2:
+                        faceAnimator.Play("slotface_bigwin");
+                        if (master) { master.Inform("bigwin"); }
+                        AkSoundEngine.PostEvent("Play_OBJ_Chest_Synergy_Win_01", base.gameObject);
+                        break;
+                }
+            }
+  
             playingOutcomeFace = true;
             timePlayingOutcomeFace = 0f;
 
@@ -312,27 +357,48 @@ namespace NevernamedsItems
             busy = false;
             yield break;
         }
-
-        public void Payout(string payout, int level, bool anysliderisx2)
+        float winValue = 0;
+        public void Payout(string payout, int level, bool anysliderisx2, bool anySliderIsBullet)
         {
+
             switch (payout)
             {
                 case "fail":
+                    Vector2 firePos = base.transform.position + new Vector3(29f / 16f, -5f / 16f);
+                    UnityEngine.Object.Instantiate<GameObject>((PickupObjectDatabase.GetById(9) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX, firePos, Quaternion.identity);
+                    for (int i = 0; i < (3 * level) * (anysliderisx2 ? 1 : 2); i++)
+                    {
+                        GameObject spawnedProj = ProjSpawnHelper.SpawnProjectileTowardsPoint(grenade, firePos, GameManager.Instance.PrimaryPlayer.CenterPosition, 0, 40, null);
+                        LobbedProjectile component2 = spawnedProj.GetComponent<LobbedProjectile>();
+                        component2.UpdateCollisionMask();
+                        component2.specRigidbody.RegisterSpecificCollisionException(base.specRigidbody);
+                        if (anysliderisx2) { component2.BecomeBlackBullet(); }
+                        component2.forcedDistance = Vector2.Distance(firePos, GameManager.Instance.PrimaryPlayer.CenterPosition);
+                        component2.forcedDistance *= (UnityEngine.Random.Range(50f, 150f) / 100f);
+                        component2.baseData.speed *= (UnityEngine.Random.Range(50f, 150f) / 100f);
+                        component2.UpdateSpeed();
+                    }
+                    winValue -= 1f;
                     break;
                 case "x2":
+                    winValue -= 0.5f;
                     break;
                 case "copper":
-                    CashOut(Mathf.CeilToInt((float)currentBet * (level == 1 ? 1.2f : 1.4f)), false, anysliderisx2);
+                    winValue += 1;
+                    CashOut(Mathf.CeilToInt((float)currentBet * (level == 1 ? 1.2f : 1.4f)), false, anysliderisx2, anySliderIsBullet);
                     break;
                 case "silver":
-                    CashOut(Mathf.CeilToInt((float)currentBet * (level == 1 ? 1.5f : 2f)), false, anysliderisx2);
-                    if (level == 2) { CashOut(Mathf.CeilToInt((float)currentBet * 0.1f), true, anysliderisx2); }
+                    winValue += 4;
+                    CashOut(Mathf.CeilToInt((float)currentBet * (level == 1 ? 1.5f : 2f)), false, anysliderisx2, anySliderIsBullet);
+                    if (level == 2) { CashOut(Mathf.CeilToInt((float)currentBet * 0.1f), true, anysliderisx2, anySliderIsBullet); }
                     break;
                 case "gold":
-                    CashOut(Mathf.CeilToInt((float)currentBet * (level == 1 ? 2f : 3f)), false, anysliderisx2);
-                    CashOut(Mathf.CeilToInt((float)currentBet * (level == 1 ? 0.1f : 0.5f)), true, anysliderisx2);
+                    winValue += 8;
+                    CashOut(Mathf.CeilToInt((float)currentBet * (level == 1 ? 2f : 3f)), false, anysliderisx2, anySliderIsBullet);
+                    CashOut(Mathf.CeilToInt((float)currentBet * (level == 1 ? 0.1f : 0.5f)), true, anysliderisx2, anySliderIsBullet);
                     break;
                 case "chest":
+                    winValue += 10;
                     Vector2 spawnPoint = base.transform.position + new Vector3(13f / 16f, -31f / 16f);
                     Vector2 spawnPoint2 = base.transform.position + new Vector3(13f / 16f, -60f / 16f);
 
@@ -353,10 +419,55 @@ namespace NevernamedsItems
 
                     if (UnityEngine.Random.value <= ((level == 2) ? 0.000666f : 0.000333f)) { chosen = ChestUtility.ChestTier.RAINBOW; }
 
-                    ChestUtility.SpawnChestEasy(spawnPoint.ToIntVector2(), chosen, false, Chest.GeneralChestType.UNSPECIFIED);
-                    if (anysliderisx2) { ChestUtility.SpawnChestEasy(spawnPoint2.ToIntVector2(), chosen, false, Chest.GeneralChestType.UNSPECIFIED); }
+                    ChestUtility.SpawnChestEasy(spawnPoint.ToIntVector2(), chosen, anySliderIsBullet, Chest.GeneralChestType.UNSPECIFIED);
+                    if (anysliderisx2) { ChestUtility.SpawnChestEasy(spawnPoint2.ToIntVector2(), chosen, anySliderIsBullet, Chest.GeneralChestType.UNSPECIFIED); }
                     break;
             }
+        }
+        public bool isBroken = false;
+        public void Unbreak()
+        {
+
+            if (!isBroken) return;
+
+            this.face.SetActive(true);
+            this.lever.gameObject.SetActive(true);
+            this.increaseButton.gameObject.SetActive(true);
+            this.decreaseButton.gameObject.SetActive(true);
+            this.wheel1.gameObject.SetActive(true);
+            this.wheel2.gameObject.SetActive(true);
+            this.wheel3.gameObject.SetActive(true);
+            if (curSmoke) { UnityEngine.Object.Destroy(curSmoke); }
+
+            AkSoundEngine.PostEvent("electricdrillbuzz", base.gameObject);
+            UnityEngine.Object.Instantiate<GameObject>((PickupObjectDatabase.GetById(9) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX, this.specRigidbody.UnitCenter, Quaternion.identity);
+
+
+            base.sprite.SetSprite(Initialisation.NPCCollection.GetSpriteIdByName("slotmachine_body"));
+
+            isBroken = false;
+        }
+        public void Break()
+        {
+            if (isBroken) return;
+            winValue = 0;
+            this.face.SetActive(false);
+            this.lever.gameObject.SetActive(false);
+            this.increaseButton.gameObject.SetActive(false);
+            this.decreaseButton.gameObject.SetActive(false);
+            this.wheel1.gameObject.SetActive(false);
+            this.wheel2.gameObject.SetActive(false);
+            this.wheel3.gameObject.SetActive(false);
+
+            if (curSmoke) { UnityEngine.Object.Destroy(curSmoke); }
+            GameObject newSmoke = GameObject.Instantiate(smoke, base.transform.position + new Vector3(29f / 16f, -5f / 16f), Quaternion.identity);
+            curSmoke = newSmoke;
+
+            Exploder.DoDefaultExplosion(base.specRigidbody.UnitCenter, Vector2.zero);
+
+            base.sprite.SetSprite(Initialisation.NPCCollection.GetSpriteIdByName("slotmachine_broken"));
+
+            isBroken = true;
         }
         public ChestUtility.ChestTier UpgradeTier(ChestUtility.ChestTier tier, int AMT = 1)
         {
@@ -402,9 +513,21 @@ namespace NevernamedsItems
         {
             ChestUtility.SpawnChestEasy(vec, tier, false, Chest.GeneralChestType.UNSPECIFIED, Alexandria.Misc.ThreeStateValue.UNSPECIFIED, Alexandria.Misc.ThreeStateValue.FORCENO);
         }
-        public void CashOut(int amount, bool hc, bool doubled)
+        public void CashOut(int amount, bool hc, bool doubled, bool impacted)
         {
+
             int fin = doubled ? amount * 2 : amount;
+            if (impacted)
+            {
+                fin = Mathf.FloorToInt((float)fin * UnityEngine.Random.Range(0.75f, 0.95f));
+            }
+            if (NumCreditsPaidOut >= 100) { return; }
+            if (hc)
+            {
+                int tot = NumCreditsPaidOut += fin;
+                if (tot > 100) { fin -= (tot - 100); }
+                NumCreditsPaidOut += fin;
+            }
             SaveAPIManager.RegisterStatChange(CustomTrackedStats.GAMBLING_WINNINGS, fin - currentBet);
             LootEngine.SpawnCurrency(base.transform.position + new Vector3(29f / 16f, -5f / 16f), fin, hc, new Vector2?(Vector2.down * 1.75f), new float?(45f), 4f, 0.05f);
         }
@@ -469,6 +592,7 @@ namespace NevernamedsItems
             "fail",
             "fail",
             "fail",
+            "fail",
             "copper",
             "copper",
             "copper",
@@ -482,16 +606,6 @@ namespace NevernamedsItems
             "chest",
             "x2",
         };
-
-        public void Detonate()
-        {
-            if (instancedMapIcon)
-            {
-                Minimap.Instance.DeregisterRoomIcon(this.m_room, this.instancedMapIcon);
-                this.instancedMapIcon = null;
-            }
-        }
-
     }
     public class SlotMachineButton : BraveBehaviour, IPlayerInteractable
     {
@@ -528,7 +642,7 @@ namespace NevernamedsItems
 
         public void Interact(PlayerController interactor)
         {
-            if (master && !master.busy)
+            if (master && !master.busy && !master.isBroken)
             {
                 master.DoodadTriggered(betAlteration, false, interactor);
             }
@@ -582,7 +696,7 @@ namespace NevernamedsItems
 
         public void Interact(PlayerController interactor)
         {
-            if (master && !master.busy)
+            if (master && !master.busy && !master.isBroken)
             {
                 base.StartCoroutine(Sequence(interactor));
             }
@@ -600,7 +714,7 @@ namespace NevernamedsItems
             interactor.ClearInputOverride("slotMachine");
             if (selectedResponse == 0)
             {
-                    AkSoundEngine.PostEvent("Play_OBJ_daggershield_shot_01", base.gameObject);
+                AkSoundEngine.PostEvent("Play_OBJ_daggershield_shot_01", base.gameObject);
                 master.DoodadTriggered(0, true, interactor);
             }
             yield break;

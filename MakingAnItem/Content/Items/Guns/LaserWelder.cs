@@ -163,6 +163,10 @@ namespace NevernamedsItems
                         }
                         breakable.StartCoroutine(ResetInvul(breakable));
                     }
+                    if (otherRigidbody.gameObject.GetComponent<SlotMachine>())
+                    {
+                        otherRigidbody.gameObject.GetComponent<SlotMachine>().Unbreak();
+                    }
                 }
             }
             catch (Exception e)

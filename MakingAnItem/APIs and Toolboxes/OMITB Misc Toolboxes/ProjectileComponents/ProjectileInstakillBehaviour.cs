@@ -26,8 +26,17 @@ namespace NevernamedsItems
                 bool shouldActivate = false;
                 if (enemyGUIDsToKill.Contains(enemy.aiActor.EnemyGuid)) shouldActivate = true;
                 foreach (string tag in tagsToKill) { if (enemy.aiActor.HasTag(tag)) shouldActivate = true; }
-                if (shouldActivate) enemy.healthHaver.ApplyDamage((enemy.healthHaver.IsBoss && !enemy.healthHaver.IsSubboss && protectBosses) ? bossBonusDMG : 1E+07f, Vector2.zero, "Erasure", CoreDamageTypes.None, (enemy.healthHaver.IsBoss && !enemy.healthHaver.IsSubboss && protectBosses) ? DamageCategory.Environment : DamageCategory.Unstoppable, true, null, false);
-
+                if (shouldActivate && enemy.healthHaver.IsAlive)
+                {
+                    if (!string.IsNullOrEmpty(soundEvent)) { AkSoundEngine.PostEvent(soundEvent, enemy.gameObject); }
+                    if (vfx != null) { enemy.aiActor.PlayEffectOnActor(vfx, Vector3.zero); }
+                    if (extraKnockback > 0)
+                    {
+                        enemy.knockbackDoer.ApplyKnockback(bullet.Direction, extraKnockback);
+                    }
+                    if (onInstaKill != null) { onInstaKill(bullet, enemy.aiActor); }
+                    enemy.healthHaver.ApplyDamage((enemy.healthHaver.IsBoss && !enemy.healthHaver.IsSubboss && protectBosses) ? bossBonusDMG : 1E+07f, impartFinalDamageDirection ? bullet.Direction : Vector2.zero, "Erasure", CoreDamageTypes.None, (enemy.healthHaver.IsBoss && !enemy.healthHaver.IsSubboss && protectBosses) ? DamageCategory.Environment : DamageCategory.Unstoppable, true, null, false);
+                }
                 if (enemyGUIDSToEraseFromExistence.Contains(enemy.aiActor.EnemyGuid)) enemy.aiActor.EraseFromExistenceWithRewards();
             }
         }
@@ -37,5 +46,10 @@ namespace NevernamedsItems
         public List<string> enemyGUIDSToEraseFromExistence = new List<string>();
         public List<string> tagsToKill = new List<string>();
         public bool protectBosses;
+        public GameObject vfx = null;
+        public string soundEvent = null;
+        public bool impartFinalDamageDirection = true;
+        public float extraKnockback = 0f;
+        public Action<Projectile, AIActor> onInstaKill;
     }
 }

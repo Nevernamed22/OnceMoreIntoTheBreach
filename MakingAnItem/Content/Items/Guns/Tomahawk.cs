@@ -68,7 +68,7 @@ namespace NevernamedsItems
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.BLUE_SHOTGUN;
 
             gun.reloadTime = 1f;
-            gun.barrelOffset.transform.localPosition = new Vector3(35f / 16f, 29f / 16f, 0f);
+            gun.SetBarrel(35, 29);
             gun.SetBaseMaxAmmo(200);
             gun.gunClass = GunClass.SHOTGUN;
             gun.quality = PickupObject.ItemQuality.B;

@@ -34,6 +34,7 @@ namespace NevernamedsItems
             buttoncomp.resetDelay = float.MaxValue;
             buttoncomp.triggerDelay = 0;
             buttoncomp.triggerAnimName = "goldbutton_press";
+            //buttoncomp.damagesFlyingPlayers = true;
 
             tk2dSpriteAnimator animator = buttonobj.GetOrAddComponent<tk2dSpriteAnimator>();
             animator.Library = Initialisation.trapAnimationCollection;

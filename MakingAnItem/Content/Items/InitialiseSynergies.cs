@@ -1864,6 +1864,34 @@ namespace NevernamedsItems
 
             #endregion
 
+            #region MoreOldMigratedSynergies
+
+            CustomSynergies.Add("Bomb Voyage!",
+                new List<string>() { "nn:nitroglycylinder" },
+                new List<string>() { "nn:nitro_bullets", "explosive_rounds" });
+
+            CustomSynergies.Add("...Badda Boom!",
+                new List<string>() { "nn:nitro_bullets" },
+                new List<string>() { "nn:nitroglycylinder", "explosive_rounds" });
+            #endregion
+
+            #region 1.33
+            CustomSynergies.Add("In-Grave",
+                new List<string>() { "nn:engraving_kit" },
+                new List<string>() { "nn:doom_boom", "nn:scythe" });
+
+            CustomSynergies.Add("Come To Collect",
+                new List<string>() { "nn:engraving_kit" },
+                new List<string>() { "nn:ring_of_fortune", "nn:lucky_coin", "brick_of_cash" });
+
+            CustomSynergies.Add("Excellence in Journalism",
+                new List<string>() { "nn:engraving_kit" },
+                new List<string>() { "thompson" });
+
+            CustomSynergies.Add("Crafting Supplies",
+               new List<string>() { "nn:engraving_kit", "nn:sculptors_chisel" });
+            #endregion
+
             //TODO
 
             //Yours To Keep - Crown of Guns, Vulcan Cannon, and Smileys/Shades Revolver

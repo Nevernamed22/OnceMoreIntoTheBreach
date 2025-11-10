@@ -28,6 +28,7 @@ namespace NevernamedsItems
         {
             if (SaveAPIManager.GetFlag(CustomDungeonFlags.ALLJAMMEDMODE_ENABLED_CONSOLE) || SaveAPIManager.GetFlag(CustomDungeonFlags.ALLJAMMEDMODE_ENABLED_GENUINE))
             {
+                if (enemy.CompanionOwner != null) { enemy.BlackPhantomProperties.MaxTotalHealth = -1f; }
                 enemy.BecomeBlackPhantom();
             }
         }

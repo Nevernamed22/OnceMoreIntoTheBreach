@@ -65,6 +65,7 @@ namespace NevernamedsItems
                 }
             }
         }
+
         public static void ChestPreOpen(Chest self, PlayerController opener)
         {
             JammedChestBehav jamness = self.gameObject.GetComponent<JammedChestBehav>();

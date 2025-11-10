@@ -16,8 +16,8 @@ namespace NevernamedsItems
             PickupObject item = ItemSetup.NewItem<MistakeBullets>(
             "Mistake Bullets",
             "Your Bullets Suck!",
-            "Gain a firerate and reload speed bonus, in exchange for negative knockback.\n\n" + "No relation to the actual Mistake though. These bullets were made by a hunchbacked hermit living in space Albania or something.",
-            "mistakebullets_icon");
+            "Grants a firerate and reload speed bonus, in exchange for negative knockback.\n\n" + "These bullets surprisingly have no relation to the mysterious entity known as The Mistake, being crafted by a hunchbacked hermit on a distant world known as 'Space-Albania'... probably. ",
+            "mistakebullets_improved");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.KnockbackMultiplier, -3, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.RateOfFire, 1.2f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ReloadSpeed, 0.7f, StatModifier.ModifyMethod.MULTIPLICATIVE);
@@ -50,32 +50,23 @@ namespace NevernamedsItems
 
         public override void Pickup(PlayerController player)
         {
-            bool flag = !this.m_pickedUpThisRun;
-            if (flag)
+            if (!m_pickedUpThisRun)
             {
-                PickupObject byId = PickupObjectDatabase.GetById(565);
-                player.AcquirePassiveItemPrefabDirectly(byId as PassiveItem);
-                PickupObject byId2 = PickupObjectDatabase.GetById(127);
-                player.AcquirePassiveItemPrefabDirectly(byId2 as PassiveItem);
+                player.AcquirePassiveItemPrefabDirectly(PickupObjectDatabase.GetById(565) as PassiveItem);
+                player.AcquirePassiveItemPrefabDirectly(PickupObjectDatabase.GetById(127) as PassiveItem);
             }
             player.PostProcessProjectile += this.PostProcess;
             player.PostProcessBeam += this.ProcessBeam;
             base.Pickup(player);
         }
-        public override DebrisObject Drop(PlayerController player)
+        public override void DisableEffect(PlayerController player)
         {
-            player.PostProcessProjectile -= this.PostProcess;
-            player.PostProcessBeam -= this.ProcessBeam;
-            return base.Drop(player);
-        }
-        public override void OnDestroy()
-        {
-            if (Owner)
+            if (player)
             {
-                Owner.PostProcessProjectile -= this.PostProcess;
-                Owner.PostProcessBeam -= this.ProcessBeam;
+                player.PostProcessProjectile -= this.PostProcess;
+                player.PostProcessBeam -= this.ProcessBeam;
             }
-            base.OnDestroy();
+            base.DisableEffect(player);
         }
     }
 }

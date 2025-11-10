@@ -108,6 +108,7 @@ namespace NevernamedsItems
         public static GameObject BloodCandleVFX;
         public static GameObject TinyBluePoofVFX;
         public static GameObject BlueSparkle;
+        public static GameObject PinkSparkle;
 
         public static void Init()
         {
@@ -194,6 +195,7 @@ namespace NevernamedsItems
             BloodCandleVFX = VFXToolbox.CreateVFXBundle("BloodCandleVFX", false, 0, 10, 20, new Color32(255, 0, 0, 255));
             TinyBluePoofVFX = VFXToolbox.CreateVFXBundle("TinyBluePoof", false, 0, 3, 5, new Color32(149, 197, 246, 255));
             BlueSparkle = VFXToolbox.CreateVFXBundle("DiamondSparkle", new IntVector2(7, 7), tk2dBaseSprite.Anchor.MiddleCenter, true, 0.4f);
+            PinkSparkle = VFXToolbox.CreateVFXBundle("PinkSparkle", new IntVector2(7, 7), tk2dBaseSprite.Anchor.MiddleCenter, true, 0.4f);
         }
         public static void GatherVanillaEffects()
         {

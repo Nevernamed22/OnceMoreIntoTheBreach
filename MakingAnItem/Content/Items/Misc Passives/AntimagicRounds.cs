@@ -25,8 +25,12 @@ namespace NevernamedsItems
             Doug.AddToLootPool(item.PickupObjectId);
 
             AntimagicRoundsID = item.PickupObjectId;
+
+
+
         }
         public static int AntimagicRoundsID;
+
         public override void Pickup(PlayerController player)
         {
             base.Pickup(player);
@@ -35,6 +39,11 @@ namespace NevernamedsItems
         }
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
+            SpriteSparkler particles = sourceProjectile.gameObject.GetOrAddComponent<SpriteSparkler>();
+            particles.doVFX = true;
+            particles.VFX = SharedVFX.PinkSparkle;
+            particles.particlesPerSecond = 20f;
+
             ProjectileInstakillBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
             instakill.tagsToKill.AddRange(new List<string> { "gunjurer", "gunsinger", "bookllet" });
             instakill.enemyGUIDsToKill.AddRange(new List<string> { EnemyGuidDatabase.Entries["wizbang"], EnemyGuidDatabase.Entries["pot_fairy"] });

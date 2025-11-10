@@ -15,7 +15,7 @@ namespace NevernamedsItems
             PickupObject item = ItemSetup.NewItem<HardReloadBullets>(
             "Hard Reload Bullets",
             "Slippery Buggers",
-            "These bullets were made by a narcissistic gunslinger purely to flex his highly trained fine motor skills on others.",
+            "Increases damage, but decreases the speed of reloading.\n\nThese bullets were made by a narcissistic gunslinger purely to flex his highly trained fine motor skills on others.",
             "hardreloadbullets_icon");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ReloadSpeed, 1.5f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.30f, StatModifier.ModifyMethod.MULTIPLICATIVE);

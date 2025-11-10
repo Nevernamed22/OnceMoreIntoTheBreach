@@ -58,7 +58,7 @@ namespace NevernamedsItems
              "Titan Bullets",
              "Absolute Unit",
              "Bullets increase massively in size, and slightly in damage." + "\n\nThese bullets are so big that enemies are left in shock and awe.",
-             "titanbullets_icon");            
+             "titanbullets_improved");            
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.PlayerBulletScale, 10, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.05f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = PickupObject.ItemQuality.D;
@@ -76,11 +76,9 @@ namespace NevernamedsItems
         }
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
-            if (UnityEngine.Random.value < (0.3f * effectChanceScalar)) { sourceProjectile.OnHitEnemy += AddStunEffect; }
-        }
-        private void AddStunEffect(Projectile arg1, SpeculativeRigidbody arg2, bool arg3)
-        {
-            if (arg2 != null && arg2.healthHaver.IsAlive && !arg2.healthHaver.IsBoss) { arg2.behaviorSpeculator.Stun(1f, true); }
+            sourceProjectile.AppliesStun = true;
+            sourceProjectile.AppliedStunDuration = 1f;
+            sourceProjectile.StunApplyChance = 0.3f * effectChanceScalar;
         }
         public override void DisableEffect(PlayerController player)
         {

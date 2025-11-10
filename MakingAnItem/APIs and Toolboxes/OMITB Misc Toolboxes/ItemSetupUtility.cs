@@ -25,7 +25,7 @@ namespace NevernamedsItems
             ItemBuilder.SetupItem(item as PickupObject, subtitle, description, "nn");
             return item as PickupObject;
         }
-        public static void SetProjectileSprite(this Projectile proj, string spriteID, int pixelWidth, int pixelHeight, bool lightened = true, tk2dBaseSprite.Anchor anchor = tk2dBaseSprite.Anchor.LowerLeft, int? overrideColliderPixelWidth = null, int? overrideColliderPixelHeight = null, bool anchorChangesCollider = true, bool fixesScale = false, int? overrideColliderOffsetX = null, int? overrideColliderOffsetY = null, Projectile overrideProjectileToCopyFrom = null, bool useFolder = false)
+        public static void SetProjectileSprite(this Projectile proj, string spriteID, int pixelWidth, int pixelHeight, bool lightened = true, tk2dBaseSprite.Anchor anchor = tk2dBaseSprite.Anchor.LowerLeft, int? overrideColliderPixelWidth = null, int? overrideColliderPixelHeight = null, bool anchorChangesCollider = true, bool fixesScale = false, int? overrideColliderOffsetX = null, int? overrideColliderOffsetY = null, Projectile overrideProjectileToCopyFrom = null, bool useFolder = false, tk2dSpriteCollectionData overrideCollection = null)
         {
             if (useFolder)
             {
@@ -33,7 +33,7 @@ namespace NevernamedsItems
             }
             else
             {
-                proj.SetProjectileCollisionRight(spriteID, Initialisation.ProjectileCollection, pixelWidth, pixelHeight, lightened, anchor, overrideColliderPixelWidth, overrideColliderPixelHeight, anchorChangesCollider, fixesScale, overrideColliderOffsetX, overrideColliderOffsetY, overrideProjectileToCopyFrom);
+                proj.SetProjectileCollisionRight(spriteID, overrideCollection != null ? overrideCollection : Initialisation.ProjectileCollection, pixelWidth, pixelHeight, lightened, anchor, overrideColliderPixelWidth, overrideColliderPixelHeight, anchorChangesCollider, fixesScale, overrideColliderOffsetX, overrideColliderOffsetY, overrideProjectileToCopyFrom);
             }
         }
 
