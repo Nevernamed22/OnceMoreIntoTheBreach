@@ -38,7 +38,7 @@ namespace NevernamedsItems
             ProjectileInstakillBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
             instakill.tagsToKill.Add("blobulon");
             instakill.protectBosses = false;
-            instakill.enemyGUIDSToEraseFromExistence.Add(EnemyGuidDatabase.Entries["bloodbulon"]);
+            instakill.enemyGUIDSToEraseFromExistence.Add(GUIDs.Bloodbulon);
         }
         private void PostProcessBeam(BeamController sourceBeam)
         {

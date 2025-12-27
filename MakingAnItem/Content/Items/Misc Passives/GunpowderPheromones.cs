@@ -18,82 +18,32 @@ namespace NevernamedsItems
               "This oddly aromatic powder has peculiar effects on Gundead. Explosive Gundead seem the most succeptable.",
               "gunpowderpheromones_improved") as PassiveItem;
             item.quality = PickupObject.ItemQuality.D;
-            GunpowderPheromonesID = item.PickupObjectId;
+            ID = item.PickupObjectId;
         }
-        public static int GunpowderPheromonesID;
-        public static List<string> explosiveKin = new List<string>()
+        public static int ID;
+        public static List<string> OtherAffectedEnemies = new List<string>()
         {
-            EnemyGuidDatabase.Entries["brollet"],
-            EnemyGuidDatabase.Entries["grenat"],
-            EnemyGuidDatabase.Entries["grenade_kin"],
-            EnemyGuidDatabase.Entries["dynamite_kin"],
-            EnemyGuidDatabase.Entries["bombshee"],
-            EnemyGuidDatabase.Entries["m80_kin"],
-            EnemyGuidDatabase.Entries["mine_flayers_claymore"],
-            EnemyGuidDatabase.Entries["det"],
-            EnemyGuidDatabase.Entries["x_det"],
-            EnemyGuidDatabase.Entries["diagonal_x_det"],
-            EnemyGuidDatabase.Entries["vertical_det"],
-            EnemyGuidDatabase.Entries["horizontal_det"],
-            EnemyGuidDatabase.Entries["diagonal_det"],
-            EnemyGuidDatabase.Entries["vertical_x_det"],
-            EnemyGuidDatabase.Entries["horizontal_x_det"],
+
         };
-        public static List<string> shotgunEnemies = new List<string>()
+        public static List<string> ManuallyExcludedEnemies = new List<string>()
         {
-            EnemyGuidDatabase.Entries["red_shotgun_kin"],
-            EnemyGuidDatabase.Entries["blue_shotgun_kin"],
-            EnemyGuidDatabase.Entries["veteran_shotgun_kin"],
-            EnemyGuidDatabase.Entries["mutant_shotgun_kin"],
-            EnemyGuidDatabase.Entries["executioner"],
-            EnemyGuidDatabase.Entries["ashen_shotgun_kin"],
-            EnemyGuidDatabase.Entries["shotgrub"],
-            EnemyGuidDatabase.Entries["creech"],
-            EnemyGuidDatabase.Entries["western_shotgun_kin"],
-            EnemyGuidDatabase.Entries["shotgat"],
-            EnemyGuidDatabase.Entries["pirate_shotgun_kin"],
+            GUIDs.Lead_Maiden,
+            GUIDs.Fridge_Maiden,
+            GUIDs.Shambling_Round
         };
         public void AIActorMods(AIActor target)
         {
-            if (target && target.aiActor && target.aiActor.EnemyGuid != null)
+            if (target && target.healthHaver && !target.healthHaver.IsBoss && !string.IsNullOrEmpty(target.EnemyGuid) && !ManuallyExcludedEnemies.Contains(target.EnemyGuid))
             {
-                string enemyGuid = target?.aiActor?.EnemyGuid;
-                if (!string.IsNullOrEmpty(enemyGuid))
+                if (target.gameObject.GetComponent<ExplodeOnDeath>() != null || OtherAffectedEnemies.Contains(target.EnemyGuid) || (Owner.PlayerHasActiveSynergy("Shotgun Pheromones") && target.HasTag("shotgun_kin")))
                 {
-                    try
+                    target.ApplyEffect(GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultPermanentCharmEffect, 1f, null);
+                    target.gameObject.AddComponent<ContinualKillOnRoomClear>();
+                    target.IsHarmlessEnemy = true;
+                    target.IgnoreForRoomClear = true;
+                    if (target.gameObject.GetComponent<SpawnEnemyOnDeath>())
                     {
-                        //ETGModConsole.Log("This enemy's Guid is: " + enemyGuid);                   
-                        if (explosiveKin.Contains(enemyGuid))
-                        {
-                            target.ApplyEffect(GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultPermanentCharmEffect, 1f, null);
-                            target.gameObject.AddComponent<KillOnRoomClear>();
-                            target.IsHarmlessEnemy = true;
-                            target.IgnoreForRoomClear = true;
-                            if (target.gameObject.GetComponent<SpawnEnemyOnDeath>())
-                            {
-                                Destroy(target.gameObject.GetComponent<SpawnEnemyOnDeath>());
-                            }
-                            return;
-                        }
-                        else if (Owner.HasPickupID(Gungeon.Game.Items["nn:shutdown_shells"].PickupObjectId))
-                        {
-                            if (shotgunEnemies.Contains(enemyGuid))
-                            {
-                                target.ApplyEffect(GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultPermanentCharmEffect, 1f, null);
-                                target.gameObject.AddComponent<KillOnRoomClear>();
-                                target.IsHarmlessEnemy = true;
-                                target.IgnoreForRoomClear = true;
-                                if (target.gameObject.GetComponent<SpawnEnemyOnDeath>())
-                                {
-                                    Destroy(target.gameObject.GetComponent<SpawnEnemyOnDeath>());
-                                }
-                                return;
-                            }
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        ETGModConsole.Log(e.Message);
+                        Destroy(target.gameObject.GetComponent<SpawnEnemyOnDeath>());
                     }
                 }
             }
@@ -107,6 +57,6 @@ namespace NevernamedsItems
         {
             ETGMod.AIActor.OnPreStart -= AIActorMods;
             base.DisableEffect(player);
-        }      
+        }
     }
 }

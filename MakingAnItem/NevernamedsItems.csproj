@@ -35,21 +35,25 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="APIs and Toolboxes\AssetBundleLoader.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Extensions and Hooks\GunExtensions.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Extensions and Hooks\MiscPatches.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Extensions and Hooks\NPCPatches.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Extensions and Hooks\OMITBActions.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\BeamComponents\BeamBlankModifier.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\CustomStaticReferenceManager.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\EnemyComponents\SpawnDebrisOnDeath.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\GeneralComponents\SpriteSparkler.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\GeneralComponents\RelativeLabelAttacher.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\GunComponents\AdvancedHoveringGunSynergyController.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\GunComponents\AdvancedVolleyModificationSynergyProcessor.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\GunComponents\GunShootNegater.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\GunComponents\SpecialSoundDoer.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ItemSetupUtility.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\MiscTools.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\BeamAngleMovementBehaviour.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\BeamAttachVFXToEnd.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\BeamAutoAddMotionModule.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\BeamExplosiveModifier.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\BeamProjSpewModifier.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\BulletSharkProjectileDoer.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\ConvertToHelixOnSpawn.cs" />
@@ -74,6 +78,7 @@
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\ProjectileSpriteRotation.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\ProjectileTilemapGracePeriod.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\RandomRoomPosBehaviour.cs" />
+    <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\RemoteBulletsBehaviour.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\SimpleProjectileTrail.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\SimpleStickInEnemyHandler.cs" />
     <Compile Include="APIs and Toolboxes\OMITB Misc Toolboxes\ProjectileComponents\SneakyShotgunComponent.cs" />
@@ -88,11 +93,18 @@
     <Compile Include="APIs and Toolboxes\OMITB Storage Classes\EnemyBulletDatabase.cs" />
     <Compile Include="Characters\OMITBChars.cs" />
     <Compile Include="Content\Enemies\BouncerBulletKin.cs" />
+    <Compile Include="Content\Enemies\Candelabra.cs" />
+    <Compile Include="Content\Enemies\Chasser.cs" />
     <Compile Include="Content\Enemies\Deacon.cs" />
     <Compile Include="Content\Enemies\DeBug.cs" />
+    <Compile Include="Content\Enemies\GreaterSnakeshooter.cs" />
+    <Compile Include="Content\Enemies\LesserSnakeshooter.cs" />
     <Compile Include="Content\Enemies\MolotovKin.cs" />
     <Compile Include="Content\Enemies\Muskin.cs" />
-    <Compile Include="Content\Enemies\UnhousedBulletScripts.cs" />
+    <Compile Include="Content\Enemies\Scripts and Behaviours\CustomShootBeamGunBehaviour.cs" />
+    <Compile Include="Content\Enemies\SpentBullat.cs" />
+    <Compile Include="Content\Enemies\Scripts and Behaviours\UnhousedBulletScripts.cs" />
+    <Compile Include="Content\Enemies\WarHead.cs" />
     <Compile Include="Content\Entities\EntityTools.cs" />
     <Compile Include="Content\Goops\Hole.cs" />
     <Compile Include="Content\Goops\JarateGoop.cs" />
@@ -101,6 +113,7 @@
     <Compile Include="Content\Items\Actives\FriendshipBracelet.cs" />
     <Compile Include="Content\Items\Actives\HelmOfChaos.cs" />
     <Compile Include="Content\Items\Actives\LaserKnife.cs" />
+    <Compile Include="Content\Items\Actives\MysteryEgg.cs" />
     <Compile Include="Content\Items\Actives\ShellNecklace.cs" />
     <Compile Include="Content\Items\Actives\SubstitutiaryLocomotion.cs" />
     <Compile Include="Content\Items\Companions\Cubud.cs" />
@@ -208,6 +221,7 @@
     <Compile Include="Content\Items\Misc Passives\Chamembert.cs" />
     <Compile Include="Content\Items\Misc Passives\ChanceCard.cs" />
     <Compile Include="Content\Items\Misc Passives\ColdOne.cs" />
+    <Compile Include="Content\Items\Misc Passives\CookieClickerEgg.cs" />
     <Compile Include="Content\Items\Misc Passives\CrosshairNecklace.cs" />
     <Compile Include="Content\Items\Misc Passives\DeathMask.cs" />
     <Compile Include="Content\Items\Misc Passives\Dreamcatcher.cs" />
@@ -248,10 +262,14 @@
     <Compile Include="Content\NPCs\Colorscant Squad.cs" />
     <Compile Include="Content\NPCs\Dispenser.cs" />
     <Compile Include="Content\NPCs\Doug.cs" />
+    <Compile Include="Content\NPCs\FortuneTeller.cs" />
     <Compile Include="Content\NPCs\GenericCultist.cs" />
     <Compile Include="Content\NPCs\Jammomaster.cs" />
+    <Compile Include="Content\NPCs\MadameAutomata.cs" />
     <Compile Include="Content\NPCs\MysteriousStranger.cs" />
     <Compile Include="Content\NPCs\SlotMachine.cs" />
+    <Compile Include="Content\NPCs\TarotCardGunModifier.cs" />
+    <Compile Include="Content\NPCs\TarotCards.cs" />
     <Compile Include="Content\NPCs\TempNPCTools.cs" />
     <Compile Include="Content\OMITB Misc Game Changers\Challenges\ChallengeEffects.cs" />
     <Compile Include="Content\OMITB Misc Game Changers\Challenges\ChallengeUnlocks.cs" />
@@ -4827,7 +4845,7 @@
       <HintPath>..\packages\HarmonyX.2.7.0\lib\net35\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Alexandria, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EtG.Alexandria.0.4.17\lib\net35\Alexandria.dll</HintPath>
+      <HintPath>..\packages\EtG.Alexandria.0.5.2\lib\net35\Alexandria.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EtG.GameLibs.2.1.9.1\lib\net35\Assembly-CSharp.dll</HintPath>
@@ -4845,7 +4863,7 @@
       <HintPath>..\packages\Ionic.Zip.1.9.1.8\lib\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="ModTheGungeonAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EtG.ModTheGungeonAPI.1.9.0\lib\net35\ModTheGungeonAPI.dll</HintPath>
+      <HintPath>..\packages\EtG.ModTheGungeonAPI.1.9.2\lib\net35\ModTheGungeonAPI.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.10.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
       <HintPath>..\packages\Mono.Cecil.0.10.4\lib\net35\Mono.Cecil.dll</HintPath>
@@ -5040,7 +5058,6 @@
     <EmbeddedResource Include="Content\NPCs\Rooms\IronsideRoom.newroom" />
     <EmbeddedResource Include="Content\NPCs\Rooms\DougRoom.newroom" />
     <None Include="packages.config" />
-    <EmbeddedResource Include="Resources\Sounds\OMITBSoundbank.bnk" />
     <EmbeddedResource Include="Resources\GunJsons\accelerator_fire_001.jtk2d" />
     <EmbeddedResource Include="Resources\GunJsons\accelerator_fire_002.jtk2d" />
     <EmbeddedResource Include="Resources\GunJsons\accelerator_fire_003.jtk2d" />
@@ -7389,7 +7406,6 @@
     <EmbeddedResource Include="Resources\GunJsons2\pinaka_idle_010.json" />
     <EmbeddedResource Include="Resources\GunJsons2\pinaka_out_of_ammo_001.json" />
     <EmbeddedResource Include="Resources\GunJsons2\pinaka_reload_001.json" />
-    <EmbeddedResource Include="Resources\Sounds\sounds.bnk" />
     <EmbeddedResource Include="Resources\GunJsons2\cornnon_fire_001.json" />
     <EmbeddedResource Include="Resources\GunJsons2\cornnon_fire_002.json" />
     <EmbeddedResource Include="Resources\GunJsons2\cornnon_fire_003.json" />
@@ -7559,6 +7575,30 @@
     <EmbeddedResource Include="Resources\GunJsons2\magicpaintbrush_reload_007.json" />
     <EmbeddedResource Include="Resources\GunJsons2\magicpaintbrush_reload_008.json" />
     <EmbeddedResource Include="Resources\GunJsons2\magicpaintbrush_reload_009.json" />
+    <EmbeddedResource Include="Resources\Sounds\OMITBSoundbank.bnk" />
+    <EmbeddedResource Include="Resources\Sounds\OMITB.bnk" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_fire2_001.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_fire2_002.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_fire2_003.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_fire2_004.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_fire2_005.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_fire3_001.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_fire3_002.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_fire3_003.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_fire3_004.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_fire_001.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_fire_002.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_fire_003.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_fire_004.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_idle_001.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_reload_001.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_reload_002.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_reload_003.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_reload_004.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_reload_005.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_reload_006.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_reload_007.jtk2d" />
+    <EmbeddedResource Include="Resources\GunJsons2\rapidriposte2_reload_008.jtk2d" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\NeoItemSprites\flamechamber_icon.png" />

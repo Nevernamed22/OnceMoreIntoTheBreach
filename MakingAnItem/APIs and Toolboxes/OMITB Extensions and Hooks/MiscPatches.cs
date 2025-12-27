@@ -37,4 +37,5 @@ namespace NevernamedsItems
             __result *= (modification * 10f);
         }
     }
+    
 }

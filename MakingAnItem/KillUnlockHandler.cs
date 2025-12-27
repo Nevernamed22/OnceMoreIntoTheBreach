@@ -141,11 +141,11 @@ namespace NevernamedsItems
             if (charmed) SaveAPIManager.RegisterStatChange(CustomTrackedStats.CHARMED_ENEMIES_KILLED, 1);
 
             //Specific Enemy Kills
-            if (guid == EnemyGuidDatabase.Entries["key_bullet_kin"])
+            if (guid == GUIDs.Keybullet_Kin)
             {
                 if (jammed && !SaveAPIManager.GetFlag(CustomDungeonFlags.KILLEDJAMMEDKEYBULLETKIN)) SaveAPIManager.SetFlag(CustomDungeonFlags.KILLEDJAMMEDKEYBULLETKIN, true);
             }
-            if (guid == EnemyGuidDatabase.Entries["chance_bullet_kin"])
+            if (guid == GUIDs.Chance_Kin)
             {
                 if (jammed && !SaveAPIManager.GetFlag(CustomDungeonFlags.KILLEDJAMMEDCHANCEKIN)) SaveAPIManager.SetFlag(CustomDungeonFlags.KILLEDJAMMEDCHANCEKIN, true);
             }

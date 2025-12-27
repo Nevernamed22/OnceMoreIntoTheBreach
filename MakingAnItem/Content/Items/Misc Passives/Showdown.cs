@@ -24,7 +24,7 @@ namespace NevernamedsItems
         {
             if (!target.healthHaver.IsBoss)
             {
-                if (target.GetAbsoluteParentRoom().area.PrototypeRoomCategory == PrototypeDungeonRoom.RoomCategory.BOSS && (!target.IsHarmlessEnemy || target.EnemyGuid == EnemyGuidDatabase.Entries["mine_flayers_claymore"]) && target.GetAbsoluteParentRoom().IsSealed)
+                if (target.GetAbsoluteParentRoom().area.PrototypeRoomCategory == PrototypeDungeonRoom.RoomCategory.BOSS && (!target.IsHarmlessEnemy || target.EnemyGuid == GUIDs.Mine_Flayer_Claymore) && target.GetAbsoluteParentRoom().IsSealed)
                 {
                     if (Owner.PlayerHasActiveSynergy("Frenemies"))
                     {

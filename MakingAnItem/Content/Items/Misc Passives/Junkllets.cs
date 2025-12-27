@@ -11,7 +11,7 @@ namespace NevernamedsItems
 {
     class Junkllets : PassiveItem
     {
-       public static void Init()
+        public static void Init()
         {
             PickupObject item = ItemSetup.NewItem<Junkllets>(
             "Junkllets",
@@ -42,16 +42,9 @@ namespace NevernamedsItems
                 RemoveStat(PlayerStats.StatType.Damage);
                 foreach (PassiveItem item in player.passiveItems)
                 {
-                    if (item.PickupObjectId == 127 || item.PickupObjectId == 580 || item.PickupObjectId == 641 || item.PickupObjectId == 148)
+                    if (JunkIDs.Contains(item.PickupObjectId))
                     {
-                        if (player.HasPickupID(Gungeon.Game.Items["nn:full_armour_jacket"].PickupObjectId))
-                        { 
-                            AddStat(PlayerStats.StatType.Damage, 1.07f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-                        }
-                        else
-                        {
-                            AddStat(PlayerStats.StatType.Damage, 1.05f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-                        }
+                        AddStat(PlayerStats.StatType.Damage, player.PlayerHasActiveSynergy("Man... or Machine?") ? 1.07f : 1.05f, StatModifier.ModifyMethod.MULTIPLICATIVE);
                     }
                 }
 
@@ -59,6 +52,14 @@ namespace NevernamedsItems
                 player.stats.RecalculateStats(player, true, false);
             }
         }
+        public static List<int> JunkIDs = new List<int>()
+        {
+            127, //Junk
+            580, //Junkan
+            641, //Gold Junk
+            148, //Lies
+
+        };
 
 
         private void AddStat(PlayerStats.StatType statType, float amount, StatModifier.ModifyMethod method = StatModifier.ModifyMethod.ADDITIVE)
@@ -75,7 +76,7 @@ namespace NevernamedsItems
                 modifyType = method
             };
 
-            
+
             if (this.passiveStatModifiers == null)
                 this.passiveStatModifiers = new StatModifier[] { modifier };
             else

@@ -109,7 +109,7 @@ namespace NevernamedsItems
                 BombardierShells.BombardierShellsID,
                 Blombk.BlombkID,
                 Nitroglycylinder.NitroglycylinderID,
-                GunpowderPheromones.GunpowderPheromonesID,
+                GunpowderPheromones.ID,
                 RocketMan.RocketManID,
                 ChemGrenade.ChemGrenadeID,
                 InfantryGrenade.InfantryGrenadeID,

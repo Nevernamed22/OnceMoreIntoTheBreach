@@ -55,7 +55,7 @@ namespace NevernamedsItems
             orAddComponent.companioniseEnemy = true;
             orAddComponent.deleteProjAfterSpawn = true;
             orAddComponent.enemyBulletDamage = 15f;
-            orAddComponent.guidToSpawn = EnemyGuidDatabase.Entries["bullat"];
+            orAddComponent.guidToSpawn = GUIDs.Bullat;
             orAddComponent.ignoreSpawnedEnemyForGoodMimic = true;
             orAddComponent.killSpawnedEnemyOnRoomClear = true;
             orAddComponent.procChance = 1f;
@@ -99,7 +99,7 @@ namespace NevernamedsItems
                     orAddComponent.companioniseEnemy = true;
                     orAddComponent.deleteProjAfterSpawn = true;
                     orAddComponent.enemyBulletDamage = 30f;
-                    orAddComponent.guidToSpawn = EnemyGuidDatabase.Entries["shotgat"];
+                    orAddComponent.guidToSpawn = GUIDs.Shotgat;
                     orAddComponent.ignoreSpawnedEnemyForGoodMimic = true;
                     orAddComponent.killSpawnedEnemyOnRoomClear = true;
                     orAddComponent.procChance = 1f;
@@ -114,7 +114,7 @@ namespace NevernamedsItems
                     orAddComponent.companioniseEnemy = true;
                     orAddComponent.deleteProjAfterSpawn = true;
                     orAddComponent.enemyBulletDamage = 10f;
-                    orAddComponent.guidToSpawn = EnemyGuidDatabase.Entries["grenat"];
+                    orAddComponent.guidToSpawn = GUIDs.Grenat;
                     orAddComponent.ignoreSpawnedEnemyForGoodMimic = true;
                     orAddComponent.killSpawnedEnemyOnRoomClear = true;
                     orAddComponent.procChance = 1f;
@@ -129,7 +129,7 @@ namespace NevernamedsItems
                     orAddComponent.companioniseEnemy = true;
                     orAddComponent.deleteProjAfterSpawn = true;
                     orAddComponent.enemyBulletDamage = 10f;
-                    orAddComponent.guidToSpawn = EnemyGuidDatabase.Entries["spirat"];
+                    orAddComponent.guidToSpawn = GUIDs.Spirat;
                     orAddComponent.ignoreSpawnedEnemyForGoodMimic = true;
                     orAddComponent.killSpawnedEnemyOnRoomClear = true;
                     orAddComponent.procChance = 1f;

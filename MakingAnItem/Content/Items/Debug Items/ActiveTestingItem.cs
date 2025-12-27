@@ -38,10 +38,17 @@ namespace NevernamedsItems
         }
         public static GoopDefinition def = EasyGoopDefinitions.BulletKingWine;
         public static string sound = "Stop_BOSS_tank_idle_01";
+        public static string soundSwitchOverride;
+        public static string soundSwitchGroup = "WPN_Guns";
         public static List<GameObject> excluded = new List<GameObject>();
         public override void DoEffect(PlayerController user)
         {
+            base.sprite.SetSprite(SpriteBuilder.itemCollection, SpriteBuilder.itemCollection.GetSpriteIdByName("blood_brooch_001"));
 
+            if (soundSwitchOverride != null && soundSwitchGroup != null)
+            {
+                AkSoundEngine.SetSwitch(soundSwitchGroup, soundSwitchOverride, user.gameObject);
+            }
             AkSoundEngine.PostEvent(sound, user.gameObject);
 
             //IntVector2 bestRewardLocation = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);

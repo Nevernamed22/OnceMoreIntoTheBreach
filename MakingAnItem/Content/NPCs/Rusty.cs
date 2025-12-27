@@ -134,6 +134,7 @@ namespace NevernamedsItems
                 TheLodger.TheLodgerID,
                 HeatRay.HeatRayID,
                 Spitballer.ID,
+                CookieClickerEgg.ID,
             };
             foreach (int i in LootTable) { AddToLootPool(i); }
 

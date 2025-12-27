@@ -22,6 +22,7 @@ using Alexandria;
 using Alexandria.Misc;
 using Alexandria.Assetbundle;
 using HarmonyLib;
+using Alexandria.SoundAPI;
 
 namespace NevernamedsItems
 {
@@ -124,7 +125,7 @@ namespace NevernamedsItems
 
                 EnemyTools.Init();
                 SaveAPIManager.Setup("nn");
-                AudioResourceLoader.InitAudio();
+                SoundManager.LoadSoundbanksFromAssembly();
                 CurseManager.Init();
                 ETGModMainBehaviour.Instance.gameObject.AddComponent<GlobalUpdate>();
                 ETGModMainBehaviour.Instance.gameObject.AddComponent<CustomDarknessHandler>();
@@ -139,7 +140,7 @@ namespace NevernamedsItems
                 PlayerToolsSetup.Init();
                 CompanionisedEnemyUtility.InitHooks();
 
-                FloorAndGenerationToolbox.Init();
+                FloorGenTools.Init();
                 ComplexProjModBeamCompatibility.Init();
 
                 SharedVFX.Init();
@@ -519,6 +520,9 @@ namespace NevernamedsItems
                     //Mushrooms
                     PercussionCap.Init();
                     BlastingCap.Init();
+                    //Eggs
+                    CookieClickerEgg.Init();
+                    MysteryEgg.Init();
                     //True Misc
                     Lvl2Molotov.Init();
                     GoldenAppleCore.Init();
@@ -970,6 +974,12 @@ namespace NevernamedsItems
                     BouncerBulletKin.Init();
                     MolotovKin.Init();
                     Muskin.Init();
+                    Chasser.Init();
+                    SpentBullat.Init();
+                    Candelabra.Init();
+                    LesserSnakeshooter.Init();
+                    GreaterSnakeshooter.Init();
+                    WarHead.Init();
 
                     //-----------------------------------------------------SHRINES GET INITIALISED
                     #region ShrineInitialisation
@@ -999,6 +1009,9 @@ namespace NevernamedsItems
                     Beggar.Init();
                     Jammomaster.Init();
                     GenericCultist.Init();
+                    TarotCards.InitCards();
+                    FortuneTeller.Init();
+                    MadameAutomata.Init();
                     #endregion
 
                     ChromaGun.Add();
@@ -1075,7 +1088,7 @@ namespace NevernamedsItems
                     }
                 }, null);
 
-
+                
                 ETGModConsole.Commands.GetGroup("nn").AddUnit("setObj", delegate (string[] args)
                 {
                     if (tempdict == null)

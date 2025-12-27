@@ -36,19 +36,12 @@ namespace NevernamedsItems
             currentItems = player.passiveItems.Count;
             if (currentItems != lastItems)
             {
-                RemoveStat(PlayerStats.StatType.Damage);
+                this.RemovePassiveStatModifier(PlayerStats.StatType.Damage);
                 foreach (PassiveItem item in player.passiveItems)
                 {
                     if (item.PickupObjectId == 565)
                     {
-                        if (Owner.HasPickupID(Gungeon.Game.Items["nn:glass_chamber"].PickupObjectId))
-                        {
-                            AddStat(PlayerStats.StatType.Damage, 1.1f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-                        }
-                        else
-                        {
-                            AddStat(PlayerStats.StatType.Damage, 1.05f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-                        }
+                        this.AddPassiveStatModifier(PlayerStats.StatType.Damage, Owner.PlayerHasActiveSynergy("Glassworks") ? 1.1f : 1.05f, StatModifier.ModifyMethod.MULTIPLICATIVE);
                     }
                 }
 
@@ -57,59 +50,21 @@ namespace NevernamedsItems
             }
         }
 
-
-        private void AddStat(PlayerStats.StatType statType, float amount, StatModifier.ModifyMethod method = StatModifier.ModifyMethod.ADDITIVE)
+        private void OnNewFloor()
         {
-            StatModifier modifier = new StatModifier
-            {
-                amount = amount,
-                statToBoost = statType,
-                modifyType = method
-            };
-
-            if (this.passiveStatModifiers == null)
-                this.passiveStatModifiers = new StatModifier[] { modifier };
-            else
-                this.passiveStatModifiers = this.passiveStatModifiers.Concat(new StatModifier[] { modifier }).ToArray();
+            if (Owner) { Owner.AcquirePassiveItemPrefabDirectly(PickupObjectDatabase.GetById(565) as PassiveItem); }
         }
 
-        private void RemoveStat(PlayerStats.StatType statType)
-        {
-            var newModifiers = new List<StatModifier>();
-            for (int i = 0; i < passiveStatModifiers.Length; i++)
-            {
-                if (passiveStatModifiers[i].statToBoost != statType)
-                    newModifiers.Add(passiveStatModifiers[i]);
-            }
-            this.passiveStatModifiers = newModifiers.ToArray();
-        }
         public override void Pickup(PlayerController player)
         {
-            bool flag = !this.m_pickedUpThisRun;
-            if (flag)
-            {
-                PickupObject byId = PickupObjectDatabase.GetById(565);
-                player.AcquirePassiveItemPrefabDirectly(byId as PassiveItem);
-            }
+            if (!m_pickedUpThisRun) { player.AcquirePassiveItemPrefabDirectly(PickupObjectDatabase.GetById(565) as PassiveItem); }
             GameManager.Instance.OnNewLevelFullyLoaded += this.OnNewFloor;
             base.Pickup(player);
         }
-        public override DebrisObject Drop(PlayerController player)
+        public override void DisableEffect(PlayerController player)
         {
             GameManager.Instance.OnNewLevelFullyLoaded -= this.OnNewFloor;
-            return base.Drop(player);
-        }
-        public override void OnDestroy()
-        {
-            GameManager.Instance.OnNewLevelFullyLoaded -= this.OnNewFloor;
-            base.OnDestroy();
-        }
-        private void OnNewFloor()
-        {
-            if (Owner)
-            {
-                Owner.AcquirePassiveItemPrefabDirectly(PickupObjectDatabase.GetById(565) as PassiveItem);
-            }
+            base.DisableEffect(player);
         }
     }
 }

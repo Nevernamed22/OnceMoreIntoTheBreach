@@ -16,7 +16,7 @@ namespace NevernamedsItems
             "Hard Reload Bullets",
             "Slippery Buggers",
             "Increases damage, but decreases the speed of reloading.\n\nThese bullets were made by a narcissistic gunslinger purely to flex his highly trained fine motor skills on others.",
-            "hardreloadbullets_icon");
+            "hardreloadbullets_improved");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ReloadSpeed, 1.5f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.30f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = PickupObject.ItemQuality.C;

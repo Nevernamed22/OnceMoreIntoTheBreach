@@ -37,7 +37,7 @@ namespace NevernamedsItems
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
-            gun.reloadTime = 2f;
+            gun.reloadTime = 3f;
             gun.DefaultModule.cooldownTime = 1f;
             gun.DefaultModule.numberOfShotsInClip = 1;
             gun.barrelOffset.transform.localPosition = new Vector3(79f / 16f, 24f / 16f, 0f);

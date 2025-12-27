@@ -26,7 +26,7 @@ namespace NevernamedsItems
             if (Owner != null && Owner.CurrentRoom != null && Owner.CurrentRoom.HasActiveEnemies(RoomHandler.ActiveEnemyType.RoomClear))
             {
                 AIActor enemy = Owner.CurrentRoom.GetRandomActiveEnemy(false);
-                enemy.Transmogrify(EnemyDatabase.GetOrLoadByGuid(EnemyGuidDatabase.Entries["chicken"]), (GameObject)ResourceCache.Acquire("Global VFX/VFX_Item_Spawn_Poof"));
+                enemy.Transmogrify(EnemyDatabase.GetOrLoadByGuid(GUIDs.Chicken), (GameObject)ResourceCache.Acquire("Global VFX/VFX_Item_Spawn_Poof"));
             }
         }
         public override void Pickup(PlayerController player)

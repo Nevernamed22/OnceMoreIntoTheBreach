@@ -110,14 +110,14 @@ namespace NevernamedsItems
         private void Start()
         {
             player = base.GetComponent<PlayerController>();
-            FloorAndGenerationToolbox.OnFloorEntered += LevelLoadStart;
-            FloorAndGenerationToolbox.OnFloorEntered += LevelLoadFinish;
+            FloorGenTools.OnDungeonLoadingEnd += LevelLoadStart;
+            FloorGenTools.OnDungeonLoadingStart += LevelLoadFinish;
             activeTurtles = new List<GameObject>();
         }
         private void OnDestroy()
         {
-            FloorAndGenerationToolbox.OnFloorEntered -= LevelLoadStart;
-            FloorAndGenerationToolbox.OnFloorEntered -= LevelLoadFinish;
+            FloorGenTools.OnDungeonLoadingEnd -= LevelLoadStart;
+            FloorGenTools.OnDungeonLoadingStart -= LevelLoadFinish;
         }
         private void LevelLoadStart()
         {

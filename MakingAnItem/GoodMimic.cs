@@ -341,68 +341,68 @@ namespace NevernamedsItems
 
         public static Dictionary<string, int> Entries { get; set; } = new Dictionary<string, int>()
         {
-             {EnemyGuidDatabase.Entries["shelleton"], 464}, //Shelleton --> Shellegun
-             {EnemyGuidDatabase.Entries["gunzookie"], 599},
-             {EnemyGuidDatabase.Entries["gunzockie"], 599},
-             {EnemyGuidDatabase.Entries["gigi"], 445}, //Gigi --> Scrambler
-             {EnemyGuidDatabase.Entries["bird_parrot"], 445}, //Parrot --> Scrambler
-             {EnemyGuidDatabase.Entries["skusket"], 45}, //Skusket --> Skull Spitter
-             {EnemyGuidDatabase.Entries["black_skusket"], 45}, //Black Skusket --> Skull Spitter
-             {EnemyGuidDatabase.Entries["skusket_head"], 45}, //Skusket Head --> Skull Spitter
-             {EnemyGuidDatabase.Entries["muzzle_wisp"], 125}, //Muzzle Wisp --> Flame Hand
-             {EnemyGuidDatabase.Entries["muzzle_flare"], 698}, //Muzzle Flare --> Flame Hand+Maximize Spell
-             {EnemyGuidDatabase.Entries["grenade_kin"], 19}, //Pinhead --> Grenade Launcher
-             {EnemyGuidDatabase.Entries["mountain_cube"], 130}, //Mountain Cube --> Glacier
-             {EnemyGuidDatabase.Entries["shambling_round"], 23}, //Shambing Round --> Dungeon Eagle
-             {EnemyGuidDatabase.Entries["fuselier"], 332}, //Fuselier --> Lil' Bomber
-             {EnemyGuidDatabase.Entries["bullet_shark"], Gunshark.GunsharkID}, //Bullet Shark --> Gunshark
-             {EnemyGuidDatabase.Entries["bookllet"], Bookllet.BooklletID}, //Bookllet --> Bookllet
-             {EnemyGuidDatabase.Entries["blue_bookllet"], Bookllet.BooklletID},
-             {EnemyGuidDatabase.Entries["green_bookllet"], Bookllet.BooklletID},
-             {EnemyGuidDatabase.Entries["necronomicon"], Bookllet.BooklletID},
-             {EnemyGuidDatabase.Entries["bombshee"], 3}, // Bombshee --> Screecher
-             {EnemyGuidDatabase.Entries["bullet_king"], 551}, // Bullet King --> Crown of Guns
-             {EnemyGuidDatabase.Entries["gatling_gull"], 84}, // Gatling Gull --> Vulcan Cannon
-             {EnemyGuidDatabase.Entries["treadnaught"], 486}, // Treadnaught --> Treadnaught Barrel
-             {EnemyGuidDatabase.Entries["cannonbalrog"], 37}, // Cannonbalrog --> Serious Cannon
-             {EnemyGuidDatabase.Entries["dragun"], 146}, // Dragun --> Dragunfire
-             {EnemyGuidDatabase.Entries["dragun_advanced"], 670}, // Advanced Dragun --> High Dragunfire
-             {EnemyGuidDatabase.Entries["helicopter_agunim"], 707}, // Advanced Dragun --> Vulcan Cannon
+             {GUIDs.Shelleton, 464}, //Shelleton --> Shellegun
+             {GUIDs.Gunzookie, 599},
+             {GUIDs.Gunzockie, 599},
+             {GUIDs.Gigi, 445}, //Gigi --> Scrambler
+             {GUIDs.Parrot, 445}, //Parrot --> Scrambler
+             {GUIDs.Skusket, 45}, //Skusket --> Skull Spitter
+             {GUIDs.Black_Skusket, 45}, //Black Skusket --> Skull Spitter
+             {GUIDs.Skusket_Head, 45}, //Skusket Head --> Skull Spitter
+             {GUIDs.Muzzle_Wisp, 125}, //Muzzle Wisp --> Flame Hand
+             {GUIDs.Muzzle_Flare, 698}, //Muzzle Flare --> Flame Hand+Maximize Spell
+             {GUIDs.Pinhead, 19}, //Pinhead --> Grenade Launcher
+             {GUIDs.Mountain_Cube, 130}, //Mountain Cube --> Glacier
+             {GUIDs.Shambling_Round, 23}, //Shambing Round --> Dungeon Eagle
+             {GUIDs.Fuselier, 332}, //Fuselier --> Lil' Bomber
+             {GUIDs.Bullet_Shark, Gunshark.GunsharkID}, //Bullet Shark --> Gunshark
+             {GUIDs.Bookllet, Bookllet.BooklletID}, //Bookllet --> Bookllet
+             {GUIDs.Blue_Bookllet, Bookllet.BooklletID},
+             {GUIDs.Green_Bookllet, Bookllet.BooklletID},
+             {GUIDs.Angry_Necronomicon, Bookllet.BooklletID},
+             {GUIDs.Bombshee, 3}, // Bombshee --> Screecher
+             {GUIDs.Bullet_King, 551}, // Bullet King --> Crown of Guns
+             {GUIDs.Gatling_Gull, 84}, // Gatling Gull --> Vulcan Cannon
+             {GUIDs.Treadnaught, 486}, // Treadnaught --> Treadnaught Barrel
+             {GUIDs.Cannonbalrog, 37}, // Cannonbalrog --> Serious Cannon
+             {GUIDs.Dragun, 146}, // Dragun --> Dragunfire
+             {GUIDs.Advanced_Dragun, 670}, // Advanced Dragun --> High Dragunfire
+             {GUIDs.Helicopter_Agunim, 707}, // Advanced Dragun --> Vulcan Cannon
  
-             {EnemyGuidDatabase.Entries["tazie"], StunGun.StunGunID}, // Tazie --> Stun Gun
-             {EnemyGuidDatabase.Entries["gun_nut"], BulletBlade.BulletBladeID}, //Gun Nut --> Bullet Blade
-             {EnemyGuidDatabase.Entries["spectral_gun_nut"], BulletBladeGhostForme.GhostBladeID}, //Gun Nut --> Bullet Blade
-             {EnemyGuidDatabase.Entries["hooded_bullet"], 761}, //Confirmed --> High Kaliber
-             {EnemyGuidDatabase.Entries["fungun"], FungoCannon.FungoCannonID}, //Fungun --> Fungo Cannon
-             {EnemyGuidDatabase.Entries["spogre"], FungoCannon.FungoCannonID}, //Spogre --> Fungo Cannon
-             {EnemyGuidDatabase.Entries["key_bullet_kin"], Rekeyter.RekeyterID}, //Keybullet Kin --> Rekeyter  
-             {EnemyGuidDatabase.Entries["lore_gunjurer"], Lorebook.LorebookID}, //Lore Gunjurer --> Lorebook  
-             {EnemyGuidDatabase.Entries["blizzbulon"], Icicle.IcicleID}, //Blizzbulon --> Icicle
-             {EnemyGuidDatabase.Entries["phaser_spider"], PhaserSpiderling.PhaserSpiderlingID}, //Phaser Spider --> Phaser Spiderling
-             {EnemyGuidDatabase.Entries["lead_maiden"], MaidenRifle.MaidenRifleID}, //Lead Maiden --> Maiden Rifle
-             {EnemyGuidDatabase.Entries["bullat"], Bullatterer.BullattererID}, //Bullat --> Bullatterer
-             {EnemyGuidDatabase.Entries["spirat"], Bullatterer.BullattererID}, //Spirat --> Bullatterer
-             {EnemyGuidDatabase.Entries["grenat"], Bullatterer.BullattererID}, //Grenat --> Bullatterer
-             {EnemyGuidDatabase.Entries["shotgat"], Bullatterer.BullattererID}, //Shotgat --> Bullatterer
-             {EnemyGuidDatabase.Entries["king_bullat"], KingBullatterer.KingBullattererID}, //King Bullat --> Bullatterer+King Bullatterer
-             {EnemyGuidDatabase.Entries["gargoyle"], KingBullatterer.KingBullattererID}, //Gargoyle --> Bullatterer+King Bullatterer
-             {EnemyGuidDatabase.Entries["dynamite_kin"], DynamiteLauncher.DynamiteLauncherID}, //Nitra --> Dynamite launcher
-             {EnemyGuidDatabase.Entries["misfire_beast"], Beastclaw.BeastclawID}, //Misfire Beast --> Beastclaw
+             {GUIDs.Tazie, StunGun.StunGunID}, // Tazie --> Stun Gun
+             {GUIDs.Gun_Nut, BulletBlade.BulletBladeID}, //Gun Nut --> Bullet Blade
+             {GUIDs.Spectral_Gun_Nut, BulletBladeGhostForme.GhostBladeID }, //Gun Nut --> Bullet Blade
+             {GUIDs.Confirmed, 761}, //Confirmed --> High Kaliber
+             {GUIDs.Fungun, FungoCannon.FungoCannonID}, //Fungun --> Fungo Cannon
+             {GUIDs.Spogre, FungoCannon.FungoCannonID}, //Spogre --> Fungo Cannon
+             {GUIDs.Keybullet_Kin, Rekeyter.RekeyterID}, //Keybullet Kin --> Rekeyter  
+             {GUIDs.Lore_Gunjurer, Lorebook.LorebookID}, //Lore Gunjurer --> Lorebook  
+             {GUIDs.Blizzbulon, Icicle.IcicleID}, //Blizzbulon --> Icicle
+             {GUIDs.Phaser_Spider, PhaserSpiderling.PhaserSpiderlingID}, //Phaser Spider --> Phaser Spiderling
+             {GUIDs.Lead_Maiden, MaidenRifle.MaidenRifleID}, //Lead Maiden --> Maiden Rifle
+             {GUIDs.Bullat, Bullatterer.BullattererID}, //Bullat --> Bullatterer
+             {GUIDs.Spirat, Bullatterer.BullattererID}, //Spirat --> Bullatterer
+             {GUIDs.Grenat, Bullatterer.BullattererID}, //Grenat --> Bullatterer
+             {GUIDs.Shotgat, Bullatterer.BullattererID}, //Shotgat --> Bullatterer
+             {GUIDs.King_Bullat, KingBullatterer.KingBullattererID}, //King Bullat --> Bullatterer+King Bullatterer
+             {GUIDs.Bullat_Gargoyle, KingBullatterer.KingBullattererID}, //Gargoyle --> Bullatterer+King Bullatterer
+             {GUIDs.Nitra, DynamiteLauncher.DynamiteLauncherID}, //Nitra --> Dynamite launcher
+             {GUIDs.Misfire_Beast, Beastclaw.BeastclawID}, //Misfire Beast --> Beastclaw
 
 
-             {ModdedGUIDDatabase.ExpandTheGungeonGUIDs["com4nd0_boss"], HeavyAssaultRifle.HeavyAssaultRifleID}, //Com4nd0 Boss --> Heavy Assault Rifle
-             {ModdedGUIDDatabase.ExpandTheGungeonGUIDs["parasitic_abomination"], 333}, //Parasitic Abomination --> Mutation
-             {ModdedGUIDDatabase.ExpandTheGungeonGUIDs["cronenberg"], 333}, //Cronenberg --> Mutation
-             {ModdedGUIDDatabase.ExpandTheGungeonGUIDs["agressive_cronenberg"], 333}, //Agressive Cronenberg --> Mutation
+             {GUIDs.Expand.Com4nd0_Boss, HeavyAssaultRifle.HeavyAssaultRifleID}, //Com4nd0 Boss --> Heavy Assault Rifle
+             {GUIDs.Expand.Parasitic_Abomination, 333}, //Parasitic Abomination --> Mutation
+             {GUIDs.Expand.Cronenberg, 333}, //Cronenberg --> Mutation
+             {GUIDs.Expand.Aggressive_Cronenberg, 333}, //Cronenberg --> Mutation
  
  
-             {EnemyGuidDatabase.Entries["great_bullet_shark"], GunsharkMegasharkSynergyForme.GunsharkMegasharkSynergyFormeID}, //Great Bullet Shark --> Gunshark+Megashark
+             {GUIDs.Great_Bullet_Shark, GunsharkMegasharkSynergyForme.GunsharkMegasharkSynergyFormeID}, //Great Bullet Shark --> Gunshark+Megashark
              
  
         };
         public static Dictionary<string, int> SpecialOverrideGuns { get; set; } = new Dictionary<string, int>()
         {
-             {EnemyGuidDatabase.Entries["shroomer"], ShroomedGun.ShroomedGunID}, //Shroomer --> ShroomedGun             
+             {GUIDs.Shroomer, ShroomedGun.ShroomedGunID}, //Shroomer --> ShroomedGun             
         };
     }
 }

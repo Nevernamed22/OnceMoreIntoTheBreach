@@ -114,78 +114,7 @@ namespace NevernamedsItems
         }
 
     } //Makes the beam wander NONFUNCTIONAL
-    public class BeamExplosiveModifier : MonoBehaviour
-    {
-        public BeamExplosiveModifier()
-        {
-            canHarmOwner = false;
-            explosionData = GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultSmallExplosionData;
-            chancePerTick = 1;
-            tickDelay = 0.1f;
-            ignoreQueues = true;
-        }
-        private void Start()
-        {
-            timer = tickDelay;
-            this.projectile = base.GetComponent<Projectile>();
-            this.beamController = base.GetComponent<BeamController>();
-            this.basicBeamController = base.GetComponent<BasicBeamController>();
-            if (this.projectile.Owner is PlayerController) this.owner = this.projectile.Owner as PlayerController;
-        }
-        private void Update()
-        {
-            if (timer > 0)
-            {
-                timer -= BraveTime.DeltaTime;
-            }
-            if (timer <= 0)
-            {
-                DoTick();
-                timer = tickDelay;
-            }
-        }
-        private void DoTick()
-        {
-            //ETGModConsole.Log("Tick Triggered");
-            if (UnityEngine.Random.value < chancePerTick)
-            {
-                LinkedList<BasicBeamController.BeamBone> bones;
-                bones = basicBeamController.m_bones;
-                LinkedListNode<BasicBeamController.BeamBone> linkedListNode = bones.Last;
-                Vector2 bonePosition = basicBeamController.GetBonePosition(linkedListNode.Value);
-                Explode(bonePosition);
 
-            }
-        }
-        private void Explode(Vector2 pos)
-        {
-            if (!canHarmOwner && owner != null)
-            {
-                for (int i = 0; i < GameManager.Instance.AllPlayers.Length; i++)
-                {
-                    PlayerController playerController = GameManager.Instance.AllPlayers[i];
-                    if (playerController && playerController.specRigidbody)
-                    {
-                        this.explosionData.ignoreList.Add(playerController.specRigidbody);
-                    }
-                }
-            }
-            Exploder.Explode(pos, this.explosionData, Vector2.zero, null, this.ignoreQueues);
-        }
-        public bool ignoreQueues;
-
-        public float chancePerTick;
-        public float tickDelay;
-
-        public ExplosionData explosionData;
-        public bool canHarmOwner;
-
-        private float timer;
-        private Projectile projectile;
-        private BasicBeamController basicBeamController;
-        private BeamController beamController;
-        private PlayerController owner;
-    } //Makes the end of the beam explode!
     internal class EmmisiveBeams : MonoBehaviour
     {
         public EmmisiveBeams()
@@ -432,66 +361,7 @@ namespace NevernamedsItems
         }
 
     } //Makes the beam always angle away from it's owner
-    public class BeamBlankModifier : MonoBehaviour
-    {
-        public BeamBlankModifier()
-        {
-            blankType = EasyBlankType.MINI;
-            chancePerTick = 0.25f;
-            tickDelay = 1f;
-        }
-        private void Start()
-        {
-            timer = tickDelay;
-            this.projectile = base.GetComponent<Projectile>();
-            this.beamController = base.GetComponent<BeamController>();
-            this.basicBeamController = base.GetComponent<BasicBeamController>();
-            if (this.projectile.Owner is PlayerController) this.owner = this.projectile.Owner as PlayerController;
-
-
-        }
-        private void Update()
-        {
-            if (timer > 0)
-            {
-                timer -= BraveTime.DeltaTime;
-            }
-            if (timer <= 0)
-            {
-                DoTick();
-                timer = tickDelay;
-            }
-        }
-        private void DoTick()
-        {
-            if (UnityEngine.Random.value < chancePerTick)
-            {
-                LinkedList<BasicBeamController.BeamBone> bones;
-                bones = basicBeamController.m_bones; 
-                LinkedListNode<BasicBeamController.BeamBone> linkedListNode = bones.Last;
-                Vector2 bonePosition = basicBeamController.GetBonePosition(linkedListNode.Value);
-                Blank(bonePosition);
-
-            }
-        }
-        private void Blank(Vector2 pos)
-        {
-            GameObject silencerVFX = (GameObject)ResourceCache.Acquire("Global VFX/BlankVFX_Ghost");
-            AkSoundEngine.PostEvent("Play_OBJ_silenceblank_small_01", base.gameObject);
-            GameObject gameObject = new GameObject("silencer");
-            SilencerInstance silencerInstance = gameObject.AddComponent<SilencerInstance>();
-            float additionalTimeAtMaxRadius = 0.25f;
-            silencerInstance.TriggerSilencer(pos, 20f, 5, silencerVFX, 0f, 3f, 3f, 3f, 30f, 3f, additionalTimeAtMaxRadius, owner, true, false);
-        }
-        public float chancePerTick;
-        public float tickDelay;
-        EasyBlankType blankType;
-        private float timer;
-        private Projectile projectile;
-        private BasicBeamController basicBeamController;
-        private BeamController beamController;
-        private PlayerController owner;
-    }
+    
     public class EnemyBulletConverterBeam : MonoBehaviour
     {
         public EnemyBulletConverterBeam()

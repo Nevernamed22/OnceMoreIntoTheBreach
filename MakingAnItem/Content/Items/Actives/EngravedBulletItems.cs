@@ -100,7 +100,7 @@ namespace NevernamedsItems
 
                 GameUIRoot.Instance.notificationController.DoCustomNotification("NAME ENGRAVED", enemyName, Initialisation.itemCollection, Initialisation.itemCollection.GetSpriteIdByName("engravedbullets_improved"), UINotificationController.NotificationColor.PURPLE, false, false);
 
-               usesThisFloor++;
+                usesThisFloor++;
             }
         }
 
@@ -108,8 +108,8 @@ namespace NevernamedsItems
         {
             new List<string>() //Tankers
             {
-                 EnemyGuidDatabase.Tanker,
-                 EnemyGuidDatabase.Tanker_Summoned
+                 GUIDs.Tanker,
+                 GUIDs.Tanker_Summoned
             }
         };
     }
@@ -144,9 +144,9 @@ namespace NevernamedsItems
         {
             ProjectileInstakillBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
             instakill.enemyGUIDsToKill.AddRange(engravedGUIDs);
-            instakill.soundEvent = "Play_WPN_kthulu_blast_01";
+            instakill.soundEvents.Add("Play_WPN_kthulu_blast_01");
             instakill.vfx = PickupObjectDatabase.GetById(595).GetComponent<LifeOrbGunModifier>().OnBurstDamageVFX;
-            instakill.extraKnockback = 30f;
+            instakill.extraKnockback += 30f;
             instakill.onInstaKill += OnInstaKill;
         }
         public void OnInstaKill(Projectile bullet, AIActor target)

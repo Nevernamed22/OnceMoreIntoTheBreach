@@ -155,7 +155,7 @@ namespace NevernamedsItems
                 target.EraseFromExistence(true);
                 gun.ammo += Math.Max(Mathf.CeilToInt(target.healthHaver.GetMaxHealth() * 1.5f), 5);
             }
-            else if (target.EnemyGuid == EnemyGuidDatabase.Entries["chicken"])
+            else if (target.EnemyGuid == GUIDs.Chicken)
             {
                 if (gun.CurrentOwner && (gun.CurrentOwner as PlayerController).PlayerHasActiveSynergy("Chickadoo"))
                 {

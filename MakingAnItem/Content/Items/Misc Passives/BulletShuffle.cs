@@ -152,7 +152,7 @@ namespace NevernamedsItems
                             scalingProjectileModifier.PercentGainPerUnit = 10f;
                             break;
                         case 24: //Remote Bullets ------------------------------- WORKS
-                            sourceProjectile.gameObject.GetOrAddComponent<RemoteBulletsProjectileBehaviour>();
+                            sourceProjectile.gameObject.GetOrAddComponent<RemoteBulletsBehaviour>();
                             break;
                         case 25: //Zombie Bullets ------------------------------- WORKS
                             sourceProjectile.OnDestruction += HandleZombieEffect;
@@ -308,12 +308,20 @@ namespace NevernamedsItems
                             ProjectileInstakillBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
                             instakill.tagsToKill.Add("blobulon");
                             instakill.protectBosses = false;
-                            instakill.enemyGUIDSToEraseFromExistence.Add(EnemyGuidDatabase.Entries["bloodbulon"]);
+                            instakill.enemyGUIDSToEraseFromExistence.Add(GUIDs.Bloodbulon);
                             break;
                         case 57: //Antimagic Rounds
+                            SpriteSparkler particles = sourceProjectile.gameObject.GetOrAddComponent<SpriteSparkler>();
+                            particles.doVFX = true;
+                            particles.VFX = SharedVFX.PinkSparkle;
+                            particles.particlesPerSecond = 20f;
                             ProjectileInstakillBehaviour instakill2 = sourceProjectile.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
                             instakill2.tagsToKill.AddRange(new List<string> { "gunjurer", "gunsinger", "bookllet" });
-                            instakill2.enemyGUIDsToKill.AddRange(new List<string> { EnemyGuidDatabase.Entries["wizbang"], EnemyGuidDatabase.Entries["pot_fairy"] });
+                            instakill2.enemyGUIDsToKill.AddRange(new List<string> { GUIDs.Wizbang, GUIDs.Gun_Fairy });
+                            instakill2.vfx = (PickupObjectDatabase.GetById(57) as Gun).DefaultModule.projectiles[0].hitEffects.tileMapVertical.effects[0].effects[0].effect;
+                            instakill2.extraKnockback += 30f;
+                            instakill2.onInstaKill += AntimagicRounds.OnInstaKill;
+                            instakill2.soundEvents.Add("Play_WPN_spellactionrevolver_shot_01");
                             break;
                         case 58: //Antimatter Bullets
                             ExplodeOnBulletIntersection mod = sourceProjectile.gameObject.GetOrAddComponent<ExplodeOnBulletIntersection>();

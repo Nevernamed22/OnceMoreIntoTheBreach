@@ -1,7 +1,7 @@
 ﻿using Alexandria.BreakableAPI;
 using Alexandria.EnemyAPI;
 using Alexandria.ItemAPI;
-using Alexandria.NPCAPI;
+using Alexandria.CharacterAPI;
 using Brave.BulletScript;
 using Gungeon;
 using Microsoft.Cci;

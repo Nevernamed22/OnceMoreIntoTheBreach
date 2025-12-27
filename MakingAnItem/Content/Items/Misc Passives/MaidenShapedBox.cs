@@ -72,8 +72,8 @@ namespace NevernamedsItems
 
         public static List<string> listMaidens = new List<string>()
         {
-            EnemyGuidDatabase.Entries["lead_maiden"],
-            EnemyGuidDatabase.Entries["fridge_maiden"],
+            GUIDs.Lead_Maiden,
+            GUIDs.Fridge_Maiden,
         };
 
         private void OnHitEnemy(Projectile arg1, SpeculativeRigidbody arg2, bool arg3)

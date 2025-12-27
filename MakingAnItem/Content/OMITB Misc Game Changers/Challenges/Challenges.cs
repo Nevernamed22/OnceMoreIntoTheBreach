@@ -143,7 +143,7 @@ namespace NevernamedsItems
                         if (AIActor.GetAbsoluteParentRoom().area.PrototypeRoomCategory == PrototypeDungeonRoom.RoomCategory.BOSS && AIActor.GetAbsoluteParentRoom().RoomContainsMineFlayer()) proc = 0.2f;
                         if (UnityEngine.Random.value <= proc)
                         {
-                            List<string> ChaosPalette = MagickeCauldron.GenerateChaosPalette();
+                            List<string> ChaosPalette = GUIDs.GenerateChaosPalette();
                             string guid = BraveUtility.RandomElement(ChaosPalette);
                             var enemyPrefab = EnemyDatabase.GetOrLoadByGuid(guid);
                             AIActor aiactor = AIActor.Spawn(enemyPrefab, AIActor.gameActor.CenterPosition.ToIntVector2(VectorConversions.Floor), AIActor.GetAbsoluteParentRoom(), true, AIActor.AwakenAnimationType.Default, true);
@@ -426,24 +426,23 @@ namespace NevernamedsItems
         }
         private static List<string> ValidDoubleableBosses = new List<string>()
         {
-            EnemyGuidDatabase.Entries["blockner_rematch"],
-            EnemyGuidDatabase.Entries["fuselier"],
-            EnemyGuidDatabase.Entries["shadow_agunim"],
-            EnemyGuidDatabase.Entries["gatling_gull"],
-            EnemyGuidDatabase.Entries["bullet_king"],
-            EnemyGuidDatabase.Entries["blobulord"],
-            EnemyGuidDatabase.Entries["beholster"],
-            EnemyGuidDatabase.Entries["gorgun"],
-            EnemyGuidDatabase.Entries["ammoconda"],
-            EnemyGuidDatabase.Entries["old_king"],
-            EnemyGuidDatabase.Entries["treadnaught"],
-            EnemyGuidDatabase.Entries["mine_flayer"],
-            //EnemyGuidDatabase.Entries["cannonbalrog"],
-            EnemyGuidDatabase.Entries["door_lord"],
-            EnemyGuidDatabase.Entries["helicopter_agunim"],
-            "6c43fddfd401456c916089fdd1c99b1c", //High Priest
-            "ea40fcc863d34b0088f490f4e57f8913", //Smiley
-        "c00390483f394a849c36143eb878998f", //shades
+            GUIDs.Blockners_Ghost,
+            GUIDs.Fuselier,
+            GUIDs.Shadow_Magician,
+            GUIDs.Gatling_Gull,
+            GUIDs.Bullet_King,
+            GUIDs.Blobulord,
+            GUIDs.Beholster,
+            GUIDs.Gorgun,
+            GUIDs.Ammoconda,
+            GUIDs.Old_King,
+            GUIDs.Treadnaught,
+            GUIDs.Mine_Flayer,
+            GUIDs.Door_Lord,
+            GUIDs.Helicopter_Agunim,
+            GUIDs.High_Priest,
+            GUIDs.Smiley,
+            GUIDs.Shades
         };
     }
 

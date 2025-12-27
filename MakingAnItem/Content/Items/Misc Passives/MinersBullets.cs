@@ -36,7 +36,7 @@ namespace NevernamedsItems
         {
             ProjectileInstakillBehaviour instakill = sourceProjectile.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
             instakill.tagsToKill.AddRange(new List<string>() { "sliding_cube", "cube_blobulon" });
-            if (Owner.PlayerHasActiveSynergy("Eye of the Spider")) instakill.enemyGUIDsToKill.Add(EnemyGuidDatabase.Entries["phaser_spider"]);
+            if (Owner.PlayerHasActiveSynergy("Eye of the Spider")) instakill.enemyGUIDsToKill.Add(GUIDs.Phaser_Spider);
         }
         private void PostProcessBeam(BeamController sourceBeam)
         {

@@ -54,7 +54,7 @@ namespace NevernamedsItems
             projectile.baseData.range = 100;
             projectile.baseData.force = 10;
             projectile.pierceMinorBreakables = true;
-            RemoteBulletsProjectileBehaviour remote = projectile.gameObject.GetOrAddComponent<RemoteBulletsProjectileBehaviour>();
+            RemoteBulletsBehaviour remote = projectile.gameObject.GetOrAddComponent<RemoteBulletsBehaviour>();
             remote.trackingTime = 1000;
             PillarocketFiring firing = projectile.gameObject.GetOrAddComponent<PillarocketFiring>();
 

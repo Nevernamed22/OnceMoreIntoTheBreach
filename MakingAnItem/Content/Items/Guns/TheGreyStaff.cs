@@ -53,7 +53,7 @@ namespace NevernamedsItems
 
             BounceProjModifier ricochet = projectile.gameObject.AddComponent<BounceProjModifier>();
             ricochet.numberOfBounces = 2;
-            RemoteBulletsProjectileBehaviour remo = projectile.gameObject.AddComponent<RemoteBulletsProjectileBehaviour>();
+            RemoteBulletsBehaviour remo = projectile.gameObject.AddComponent<RemoteBulletsBehaviour>();
             gun.DefaultModule.projectiles[0] = projectile;
 
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;

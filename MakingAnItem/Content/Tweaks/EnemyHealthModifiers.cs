@@ -15,16 +15,16 @@ namespace NevernamedsItems
         {
             if (enemy && !string.IsNullOrEmpty(enemy.EnemyGuid) && enemy.healthHaver != null)
             {
-                if (enemy.EnemyGuid == EnemyGuidDatabase.Entries["ammoconda_ball"] && enemy.GetAbsoluteParentRoom().area.PrototypeRoomCategory == PrototypeDungeonRoom.RoomCategory.BOSS)
+                if (enemy.EnemyGuid == GUIDs.Ammoconda_Ball && enemy.GetAbsoluteParentRoom().area.PrototypeRoomCategory == PrototypeDungeonRoom.RoomCategory.BOSS)
                 {
-                    if (enemy.healthHaver.GetMaxHealth() > (15 * AIActor.BaseLevelHealthModifier))
+                    if (enemy.healthHaver.GetMaxHealth() > (30 * AIActor.BaseLevelHealthModifier))
                     {
-                        float newHP = 15 * AIActor.BaseLevelHealthModifier;
+                        float newHP = 30 * AIActor.BaseLevelHealthModifier;
                         enemy.healthHaver.ForceSetCurrentHealth(newHP);
                         enemy.healthHaver.SetHealthMaximum(newHP);
                     }
                 }
-                if (enemy.EnemyGuid == EnemyGuidDatabase.Entries["black_skusket"])
+                if (enemy.EnemyGuid == GUIDs.Black_Skusket)
                 {
                     if (enemy.healthHaver.GetMaxHealth() > (10 * AIActor.BaseLevelHealthModifier))
                     {

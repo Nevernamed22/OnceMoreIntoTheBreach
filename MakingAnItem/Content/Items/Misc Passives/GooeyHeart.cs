@@ -34,7 +34,7 @@ namespace NevernamedsItems
         }
         private void HandleHeal(float damage, bool fatal, HealthHaver enemy)
         {
-            if (enemy && enemy.aiActor && enemy.aiActor.HasTag("blobulon"))
+            if (enemy && enemy.aiActor && enemy.aiActor.HasTag("blobulon") && fatal)
             {
                 if (Owner.ForceZeroHealthState && UnityEngine.Random.value <= 0.025f)
                 {

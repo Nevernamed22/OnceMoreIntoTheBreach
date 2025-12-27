@@ -65,7 +65,7 @@ namespace NevernamedsItems
             projectile.pierceMinorBreakables = true;
             projectile.PenetratesInternalWalls = true;
 
-            RemoteBulletsProjectileBehaviour remote = projectile.gameObject.GetOrAddComponent<RemoteBulletsProjectileBehaviour>();
+            RemoteBulletsBehaviour remote = projectile.gameObject.GetOrAddComponent<RemoteBulletsBehaviour>();
             ComplexProjectileModifier shockRounds = PickupObjectDatabase.GetById(298) as ComplexProjectileModifier;
             ChainLightningModifier shockroundsshocky = projectile.gameObject.GetOrAddComponent<ChainLightningModifier>();
             shockroundsshocky.LinkVFXPrefab = shockRounds.ChainLightningVFX;

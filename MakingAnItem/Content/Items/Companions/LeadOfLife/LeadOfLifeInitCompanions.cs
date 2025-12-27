@@ -155,7 +155,7 @@ namespace NevernamedsItems
                 LeadOfLifeBasicShooter RemoteBulletsCompanionattackComp = LeadOfLifeBasicShooter.AddToPrefab(LeadOfLife.RemoteBulletsCompanion.prefab, 530);
                 Projectile RemoteBulletsBullet = GetProjectileForID(86);
                 RemoteBulletsBullet.baseData.damage *= 1.1f;
-                RemoteBulletsBullet.gameObject.AddComponent<RemoteBulletsProjectileBehaviour>();
+                RemoteBulletsBullet.gameObject.AddComponent<RemoteBulletsBehaviour>();
                 RemoteBulletsCompanionattackComp.bulletsToFire = new List<Projectile>() { RemoteBulletsBullet };
 
                 LeadOfLife.KatanaBulletsCompanion.prefab = BuildIndividualPrefab(LeadOfLife.KatanaBulletsCompanion, "katanabulletscompanion", 822, 7, new IntVector2(7, 7), new IntVector2(8, 1));
@@ -537,16 +537,16 @@ namespace NevernamedsItems
                 ProjectileInstakillBehaviour blobkill = AlkaliBulletsCompanionBullet.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
                 blobkill.tagsToKill.Add("blobulon");
                 blobkill.protectBosses = false;
-                blobkill.enemyGUIDSToEraseFromExistence.Add(EnemyGuidDatabase.Entries["bloodbulon"]);
+                blobkill.enemyGUIDSToEraseFromExistence.Add(GUIDs.Bloodbulon);
                 AlkaliBulletsCompanionattackComp.bulletsToFire = new List<Projectile>() { AlkaliBulletsCompanionBullet };
 
-                LeadOfLife.AntimagicRoundsCompanion.prefab = BuildIndividualPrefab(LeadOfLife.AntimagicRoundsCompanion, "antimagicroundscompanion", AntimagicRounds.AntimagicRoundsID, 7, new IntVector2(7, 7), new IntVector2(9, 1), false, false, true);
-                LeadOfLifeBasicShooter AntimagicRoundsCompanionattackComp = LeadOfLifeBasicShooter.AddToPrefab(LeadOfLife.AntimagicRoundsCompanion.prefab, AntimagicRounds.AntimagicRoundsID);
+                LeadOfLife.AntimagicRoundsCompanion.prefab = BuildIndividualPrefab(LeadOfLife.AntimagicRoundsCompanion, "antimagicroundscompanion", AntimagicRounds.ID, 7, new IntVector2(7, 7), new IntVector2(9, 1), false, false, true);
+                LeadOfLifeBasicShooter AntimagicRoundsCompanionattackComp = LeadOfLifeBasicShooter.AddToPrefab(LeadOfLife.AntimagicRoundsCompanion.prefab, AntimagicRounds.ID);
                 Projectile AntimagicRoundsCompanionBullet = GetProjectileForID(56);
                 AntimagicRoundsCompanionBullet.AdjustPlayerProjectileTint(ExtendedColours.purple, 1); 
                 ProjectileInstakillBehaviour wizkill = AntimagicRoundsCompanionBullet.gameObject.GetOrAddComponent<ProjectileInstakillBehaviour>();
                 wizkill.tagsToKill.AddRange(new List<string> { "gunjurer", "gunsinger", "bookllet" });
-                wizkill.enemyGUIDsToKill.AddRange(new List<string> { EnemyGuidDatabase.Entries["wizbang"], EnemyGuidDatabase.Entries["pot_fairy"] });
+                wizkill.enemyGUIDsToKill.AddRange(new List<string> { GUIDs.Wizbang, GUIDs.Gun_Fairy });
                 AntimagicRoundsCompanionattackComp.bulletsToFire = new List<Projectile>() { AntimagicRoundsCompanionBullet };
 
                 LeadOfLife.AntimatterBulletsCompanion.prefab = BuildIndividualPrefab(LeadOfLife.AntimatterBulletsCompanion, "antimatterbulletscompanion", AntimatterBullets.AntimatterBulletsID, 7, new IntVector2(7, 7), new IntVector2(6, 1), false, false, true);

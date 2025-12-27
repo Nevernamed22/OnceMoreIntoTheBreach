@@ -60,7 +60,7 @@ namespace NevernamedsItems
             orAddComponent.companioniseEnemy = true;
             orAddComponent.deleteProjAfterSpawn = true;
             orAddComponent.enemyBulletDamage = 15f;
-            orAddComponent.guidToSpawn = EnemyGuidDatabase.Entries["bullat"];
+            orAddComponent.guidToSpawn = GUIDs.Bullat;
             orAddComponent.ignoreSpawnedEnemyForGoodMimic = true;
             orAddComponent.killSpawnedEnemyOnRoomClear = true;
             orAddComponent.procChance = 1f;

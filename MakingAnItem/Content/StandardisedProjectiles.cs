@@ -260,11 +260,16 @@ namespace NevernamedsItems
 
             snake = initsnake;
 
+            var cm = UnityEngine.Object.Instantiate<GameObject>((GameObject)BraveResources.Load("Global Prefabs/_ChallengeManager", ".prefab"));
+            skyRocket = (cm.GetComponent<ChallengeManager>().PossibleChallenges.Where(c => c.challenge is SkyRocketChallengeModifier).First().challenge as SkyRocketChallengeModifier).Rocket.InstantiateAndFakeprefab();
+            UnityEngine.Object.Destroy(cm);
+
         }
         public static Projectile snake;
         public static Projectile smoke;
         public static Projectile ghost;
         public static Projectile flamethrower;
+        public static GameObject skyRocket;
         private class IsCorpseWithSynergy : MonoBehaviour
         {
             public void Start()

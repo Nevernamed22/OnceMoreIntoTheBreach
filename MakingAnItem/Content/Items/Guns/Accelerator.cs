@@ -58,8 +58,8 @@ namespace NevernamedsItems
             orAddComponent.penetratesBreakables = true;
             orAddComponent.penetration = 1;
 
-            projectile.SetProjectileCollisionRight("accelerator_projectile", Initialisation.ProjectileCollection, 11, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 8);
-            
+            projectile.SetProjectileSprite("accelerator_projectile", 11, 9, true, tk2dBaseSprite.Anchor.MiddleCenter, 10, 8);
+
             projectile.transform.parent = gun.barrelOffset;
 
 

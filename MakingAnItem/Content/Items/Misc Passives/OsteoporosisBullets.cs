@@ -62,10 +62,10 @@ namespace NevernamedsItems
 
         public static List<string> Skellebosses = new List<string>()
         {
-            EnemyGuidDatabase.Entries["lich"],
-            EnemyGuidDatabase.Entries["megalich"],
-            EnemyGuidDatabase.Entries["infinilich"],
-            EnemyGuidDatabase.Entries["cannonbalrog"],
+            GUIDs.Lich,
+            GUIDs.Lich_Phase_2,
+            GUIDs.Lich_Phase_3,
+            GUIDs.Cannonbalrog
         };
 
     }

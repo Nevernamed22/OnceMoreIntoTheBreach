@@ -99,7 +99,7 @@ namespace NevernamedsItems
                 LeadSoul.LeadSoulID,
                 GSwitch.GSwitchID,
                 MaidenRifle.MaidenRifleID,
-                RapidRiposte.RapidRiposteID,
+                RapidRiposte.ID,
                 Converter.ConverterID,
             };
             foreach (int i in LootTable) { AddToLootPool(i); }

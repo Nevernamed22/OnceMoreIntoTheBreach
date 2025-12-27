@@ -19,8 +19,6 @@ namespace NevernamedsItems
                "kevin_icon") as PassiveItem;          
             item.quality = PickupObject.ItemQuality.D;
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
-            List<string> mandatorySynergyItems = new List<string>() { "nn:kevin", "eyepatch" };
-            CustomSynergies.Add("High Lord Kevin", mandatorySynergyItems);
             item.SetTag("non_companion_living_item");
             KevinID = item.PickupObjectId;
         }
@@ -29,11 +27,9 @@ namespace NevernamedsItems
         public GameActorCharmEffect charmEffect;
         private void SpawnKevin()
         {
-            string kevinGuid;
-            if (Owner.HasPickupID(118)) kevinGuid = "70216cae6c1346309d86d4a0b4603045";
-            else kevinGuid = "01972dee89fc4404a5c408d50007dad5";
+
             PlayerController player = this.Owner;
-            var Kevin = EnemyDatabase.GetOrLoadByGuid(kevinGuid);
+            var Kevin = EnemyDatabase.GetOrLoadByGuid(Owner.PlayerHasActiveSynergy("High Lord Kevin") ? GUIDs.Veteran_Bullet_Kin : GUIDs.Bullet_Kin );
             IntVector2? bestRewardLocation = Owner.CurrentRoom.GetRandomVisibleClearSpot(2, 2);
             AIActor TargetActor = AIActor.Spawn(Kevin.aiActor, bestRewardLocation.Value, GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(bestRewardLocation.Value), true, AIActor.AwakenAnimationType.Default, true);
             //TargetActor.gameActor.ApplyEffect(this.charmEffect, 100f, null);

@@ -248,7 +248,7 @@ namespace NevernamedsItems
         }
         public static List<string> DisplacerIgnoreList = new List<string>()
         {
-            EnemyGuidDatabase.Entries["super_space_turtle_dummy"],
+            GUIDs.Turtle,
         };
         private void OnPreCollision(SpeculativeRigidbody myRigidBody, PixelCollider myPixelCollider, SpeculativeRigidbody otherRigidBody, PixelCollider otherPixelCollider)
         {

@@ -163,7 +163,7 @@ namespace NevernamedsItems
             { "spapi", new List<string>(){ "Google Witches" } },
             { "turtle", new List<string>(){ "Whatcha doing??!" } },
             { "qaday", new List<string>(){ "I didn't choose to have this, but it's kinda necessary when this happens ._.", "It's okay, let it all out.", "There's probably better target practice out there not gonna lie.", "Yeah, that's fair." } },
-            { "skilotar", new List<string>(){ "Begone Mutt!", "GUARRRDSS!!", "Do you fancy yourself a Jester?!", "dude...   uncool." } },
+            { "skilotar", new List<string>(){ "GUARRRDSS!!", "Do you fancy yourself a Jester?!", "dude...   uncool." } },
             { "dallan", new List<string>(){ "Parried!", "Nah. I drink bulletproof coffee.", "Do you {wj}like{w} hurting other people?", "What is {wj}wrong{w} with you?", "And to think I'm here to help...", "You're not getting those bullets back you know." } },
             { "littlewasp", new List<string>(){ "Nooo! I'm a nice wasp! I'M NICE!", "Aah! That was close!", "Eek!" } },
             { "bunny", new List<string>(){ "not yet, i have unfinished business.", "you missed.", "maybe next time." } },

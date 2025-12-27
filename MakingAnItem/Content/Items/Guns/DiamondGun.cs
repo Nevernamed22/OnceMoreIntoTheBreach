@@ -163,24 +163,23 @@ namespace NevernamedsItems
         }
         public static List<string> undead = new List<string>()
         {
-            EnemyGuidDatabase.Entries["spent"],
-            EnemyGuidDatabase.Entries["gummy"],
-            EnemyGuidDatabase.Entries["skullet"],
-            EnemyGuidDatabase.Entries["skullmet"],
-            EnemyGuidDatabase.Entries["shelleton"],
-            EnemyGuidDatabase.Entries["gummy_spent"],
-            EnemyGuidDatabase.Entries["skusket"],
-            EnemyGuidDatabase.Entries["revolvenant"],
+            GUIDs.Spent,
+            GUIDs.Gummy,
+            GUIDs.Skullet,
+            GUIDs.Skullmet,
+            GUIDs.Shelleton,
+            GUIDs.Large_Spent,
+            GUIDs.Skusket,
+            GUIDs.Revolvenant,
+            GUIDs.Skusket_Head,
+            GUIDs.Black_Skusket,
+            GUIDs.Planetside.Skullvenant
         };
         public static List<string> arthropods = new List<string>()
         {
-            EnemyGuidDatabase.Entries["phaser_spider"],
-            EnemyGuidDatabase.Entries["shotgrub"],
-            EnemyGuidDatabase.Entries["creech"],
+            GUIDs.Phaser_Spider,
+            GUIDs.Shotgrub,
+            GUIDs.Creech,
         };
-        public DiamondGun()
-        {
-
-        }
     }
 }

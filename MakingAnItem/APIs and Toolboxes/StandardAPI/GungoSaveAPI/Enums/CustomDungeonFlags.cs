@@ -16,6 +16,7 @@ namespace SaveAPI
         CURSES_DISABLED,
         BOWLERSHOP_METONCE,
         CHANCELOT_METONCE,
+        FORTUNETELLER_METONCE,
         //---------------------------------------------Task Based Unlocks
         PLAYERHELDMORETHANFIVEARMOUR,
         KILLEDJAMMEDKEYBULLETKIN,

@@ -8,6 +8,7 @@ using Alexandria.ItemAPI;
 using SaveAPI;
 using Dungeonator;
 using Alexandria.DungeonAPI;
+using Steamworks;
 
 namespace NevernamedsItems
 {
@@ -84,13 +85,16 @@ namespace NevernamedsItems
 
         public override void Pickup(PlayerController player)
         {
-            BeggarsBelief.IncrementFlag(player, typeof(ChanceCard));
+            ChanceCard.IncrementFlag(player, typeof(ChanceCard));
             base.Pickup(player);
         }
 
         public override void DisableEffect(PlayerController player)
         {
-            BeggarsBelief.DecrementFlag(player, typeof(ChanceCard));
+            if (player != null)
+            {
+                ChanceCard.DecrementFlag(player, typeof(ChanceCard));
+            }
             base.DisableEffect(player);
         }
     }

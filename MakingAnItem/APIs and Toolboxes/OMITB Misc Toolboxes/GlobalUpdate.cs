@@ -1,4 +1,5 @@
 ﻿using Dungeonator;
+using SaveAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,16 +16,21 @@ namespace NevernamedsItems
             {
                 if (GameManager.Instance)
                 {
-                    if (Dungeon.IsGenerating && !DungeonWasGeneratingLastChecked)
+                    if (Dungeon.IsGenerating && !DungeonWasGeneratingLastChecked) //Player exited floor, transitioning to loading screen
                     {
-                        List<PlayerController> player = new List<PlayerController>();
-                        if (GameManager.Instance.PrimaryPlayer != null) player.Add(GameManager.Instance.PrimaryPlayer);
-                        if (GameManager.Instance.SecondaryPlayer != null) player.Add(GameManager.Instance.SecondaryPlayer);
-                        FloorAndGenerationToolbox.OnFloorUnloaded(player);
+                        if (FloorGenTools.OnDungeonLoadingStart != null) { FloorGenTools.OnDungeonLoadingStart(); }
+                        if (CurseManager.CurrentActiveCurses.Count > 0)
+                        {
+                            if (!SaveAPIManager.GetFlag(CustomDungeonFlags.FLOOR_CLEARED_WITH_CURSE))
+                            {
+                                SaveAPIManager.SetFlag(CustomDungeonFlags.FLOOR_CLEARED_WITH_CURSE, true);
+                            }
+                        }
+                        CurseManager.RemoveAllCurses();
                     }
-                    if (!Dungeon.IsGenerating && DungeonWasGeneratingLastChecked)
+                    if (!Dungeon.IsGenerating && DungeonWasGeneratingLastChecked) //Player entered floor, transitioning from loading screen
                     {
-                        FloorAndGenerationToolbox.OnFloorLoaded();
+                        if (FloorGenTools.OnDungeonLoadingEnd != null) { FloorGenTools.OnDungeonLoadingEnd(); }
                     }
                 }
                 DungeonWasGeneratingLastChecked = Dungeon.IsGenerating;

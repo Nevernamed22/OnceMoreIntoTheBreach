@@ -28,7 +28,10 @@ namespace NevernamedsItems
                 foreach (string tag in tagsToKill) { if (enemy.aiActor.HasTag(tag)) shouldActivate = true; }
                 if (shouldActivate && enemy.healthHaver.IsAlive)
                 {
-                    if (!string.IsNullOrEmpty(soundEvent)) { AkSoundEngine.PostEvent(soundEvent, enemy.gameObject); }
+                    if (soundEvents != null && soundEvents.Count() > 0)
+                    {
+                        foreach(string sound in soundEvents) { AkSoundEngine.PostEvent(sound, enemy.gameObject); }                    
+                    }
                     if (vfx != null) { enemy.aiActor.PlayEffectOnActor(vfx, Vector3.zero); }
                     if (extraKnockback > 0)
                     {
@@ -47,7 +50,7 @@ namespace NevernamedsItems
         public List<string> tagsToKill = new List<string>();
         public bool protectBosses;
         public GameObject vfx = null;
-        public string soundEvent = null;
+        public List<string> soundEvents = new List<string>();
         public bool impartFinalDamageDirection = true;
         public float extraKnockback = 0f;
         public Action<Projectile, AIActor> onInstaKill;

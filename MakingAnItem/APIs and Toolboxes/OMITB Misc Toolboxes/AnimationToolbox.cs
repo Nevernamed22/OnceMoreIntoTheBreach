@@ -12,14 +12,14 @@ namespace NevernamedsItems
     }
     public static class AnimationUtilityExtensions
     {
-        public static void PlayUntilFinished(this tk2dSpriteAnimator animator, string clipName, string revertClip)
+        public static void PlayUntilFinished(this tk2dSpriteAnimator animator, string clipName, string revertClip, bool log = false)
         {
             tk2dSpriteAnimationClip clip = animator.GetClipByName(clipName);
             if (clip == null) { Debug.LogError($"Selected clip '{clipName}' does not exist."); return; }
             if (clip.frames.Length <= 0) { Debug.LogError($"Selected clip '{clipName}' has no frames."); return; }
             if (clip.fps <= 0) { Debug.LogError($"Selected clip '{clipName}' has a framerate of 0 or lower, and as such cannot be played until finished."); return; }
             float duration = (clip.frames.Length / clip.fps);
-            ETGModConsole.Log(duration.ToString());
+            if (log) ETGModConsole.Log($"<color=#d90b5a>Animation Utility</color> | Playing clip for duration: <color=#f5cd56>{duration}</color>");
             animator.PlayForDuration(clipName, duration, revertClip);
         }
         public static void AddAnimationToObject(this GameObject target, tk2dSpriteCollectionData spriteCollection, string animationName, List<string> spritePaths, int fps, Vector2 colliderDimensions, Vector2 colliderOffsets, tk2dBaseSprite.Anchor anchor, tk2dSpriteAnimationClip.WrapMode wrapMode, bool isDefaultAnimation = false)
@@ -110,7 +110,7 @@ namespace NevernamedsItems
                 {
                     if (resourceNames[i].StartsWith(data.pathDirectory.Replace('/', '.'), StringComparison.OrdinalIgnoreCase))
                     {
-                      // ETGModConsole.Log($"Resource Found: {resourceNames[i]}.");
+                        // ETGModConsole.Log($"Resource Found: {resourceNames[i]}.");
                         list.Add(SpriteBuilder.AddSpriteToCollection(resourceNames[i], tk2dSpriteCollectionData));
                     }
                 }
@@ -177,6 +177,6 @@ namespace NevernamedsItems
             public tk2dSpriteAnimationClip.WrapMode wrapMode = tk2dSpriteAnimationClip.WrapMode.Loop;
             public int fps;
             public string pathDirectory;
-        }       
+        }
     }
 }

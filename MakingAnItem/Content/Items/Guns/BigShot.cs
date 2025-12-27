@@ -304,7 +304,7 @@ namespace NevernamedsItems
                         bouncing.numberOfBounces += 2;
                         break;
                     case 3:
-                        RemoteBulletsProjectileBehaviour remote = self.gameObject.GetOrAddComponent<RemoteBulletsProjectileBehaviour>();
+                        RemoteBulletsBehaviour remote = self.gameObject.GetOrAddComponent<RemoteBulletsBehaviour>();
                         break;
                     case 4:
                         AngryBulletsProjectileBehaviour angry = self.gameObject.GetOrAddComponent<AngryBulletsProjectileBehaviour>();

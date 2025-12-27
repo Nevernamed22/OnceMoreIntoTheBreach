@@ -436,6 +436,8 @@ namespace NevernamedsItems
                 RequiresLightBackgroundInLoadingScreen = false
             };
 
+            AlexandriaTags.SetTag(guid, "shotgun_kin");
+
             EncounterDatabaseEntry encounterEntry = new EncounterDatabaseEntry()
             {
                 doesntDamageSecretWalls = false,

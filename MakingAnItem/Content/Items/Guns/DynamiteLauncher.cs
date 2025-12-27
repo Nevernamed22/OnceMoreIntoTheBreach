@@ -105,7 +105,7 @@ namespace NevernamedsItems
                 nitraSpawning.deleteProjAfterSpawn = false;
                 nitraSpawning.enemyBulletDamage = 30f;
                 nitraSpawning.knockbackAmountAwayFromOwner = 40;
-                nitraSpawning.guidToSpawn = EnemyGuidDatabase.Entries["dynamite_kin"];
+                nitraSpawning.guidToSpawn = GUIDs.Nitra;
                 nitraSpawning.ignoreSpawnedEnemyForGoodMimic = true;
                 nitraSpawning.killSpawnedEnemyOnRoomClear = true;
                 nitraSpawning.procChance = 1f;

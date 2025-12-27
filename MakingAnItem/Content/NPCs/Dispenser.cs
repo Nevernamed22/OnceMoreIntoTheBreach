@@ -22,7 +22,7 @@ namespace NevernamedsItems
             dispenser.SetActive(false);
             FakePrefab.MarkAsFakePrefab(dispenser);
             tk2dSprite dispenserSprite = dispenser.GetComponent<tk2dSprite>();
-            dispenserSprite.HeightOffGround = 0.1f;
+            dispenserSprite.HeightOffGround = 0f;
             dispenser.AddComponent<Dispenser>();
 
             tk2dSpriteAnimator dispenserAnimator = dispenser.GetOrAddComponent<tk2dSpriteAnimator>();
@@ -42,7 +42,7 @@ namespace NevernamedsItems
             itempoint.transform.SetParent(dispenser.transform);
             itempoint.transform.localPosition = new Vector3(11f / 16f, 26f / 16f, 0f);
             tk2dSprite itempointSprite = itempoint.GetComponent<tk2dSprite>();
-            itempointSprite.HeightOffGround = 10f;
+            itempointSprite.HeightOffGround = 3f;
 
             var smallStatueShadow = ItemBuilder.SpriteFromBundle("dispenser_shadow", Initialisation.NPCCollection.GetSpriteIdByName("dispenser_shadow"), Initialisation.NPCCollection, new GameObject("DispenserShadow"));
             tk2dSprite smallStatueShadowSprite = smallStatueShadow.GetComponent<tk2dSprite>();

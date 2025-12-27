@@ -44,7 +44,7 @@ namespace NevernamedsItems
 
         public override void Update()
         {
-            if (Owner)
+            if (Owner && GameManager.Instance.Dungeon && !GameManager.Instance.IsLoadingLevel && !GameManager.Instance.Dungeon.IsEndTimes)
             {
                 if (!Owner.IsDodgeRolling && Challenges.CurrentChallenge != ChallengeType.KEEP_IT_COOL)
                 {

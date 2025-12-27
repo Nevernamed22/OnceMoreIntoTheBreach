@@ -21,6 +21,7 @@ namespace NevernamedsItems
             companionItem.quality = PickupObject.ItemQuality.C;
 
             companionItem.CompanionGuid = RandomisedBuddyController.guid;
+            companionItem.AddToSubShop(ItemBuilder.ShopType.Goopton);
 
             ID = companionItem.PickupObjectId;
         }

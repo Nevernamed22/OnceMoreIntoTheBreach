@@ -21,6 +21,8 @@ namespace NevernamedsItems
         public static GameObject MachoBraceOverheadVFX = PickupObjectDatabase.GetById(665).GetComponent<MachoBraceItem>().OverheadVFX;
         public static GameObject LastBulletStandingX;
         public static GameObject HealingSparkles = BraveResources.Load<GameObject>("Global VFX/VFX_Healing_Sparkles_001", ".prefab");
+        public static GameObject FlameTrapRing = (LoadHelper.LoadAssetFromAnywhere("assets/data/prefabs/traps/trap_flame_gungeon_1x1.prefab") as GameObject).GetComponent<BasicTrapController>().activeVfx[0].gameObject;
+        public static GameObject FlameTrapPoof = (LoadHelper.LoadAssetFromAnywhere("assets/data/prefabs/traps/trap_flame_gungeon_1x1.prefab") as GameObject).GetComponent<BasicTrapController>().activeVfx[1].gameObject;
         //Projectile Death Effects
         public static GameObject GreenLaserCircleVFX = (PickupObjectDatabase.GetById(89) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX;
         public static GameObject YellowLaserCircleVFX = (PickupObjectDatabase.GetById(651) as Gun).DefaultModule.projectiles[0].hitEffects.overrideMidairDeathVFX;
@@ -116,6 +118,8 @@ namespace NevernamedsItems
 
             //Status Effect VFX
             ERRORShellsOverhead = VFXToolbox.CreateVFXBundle("ErrorShellsOverhead", false, 0f);
+            ERRORShellsOverhead.GetComponent<tk2dBaseSprite>().renderer.material = new Material(Shader.Find("Brave/Internal/GlitchUnlit"));
+            ERRORShellsOverhead.GetComponent<tk2dBaseSprite>().usesOverrideMaterial = true;
             PlagueOverhead = VFXToolbox.CreateVFXBundle("PlagueOverhead", false, 0f);
             FriendlyOverhead = VFXToolbox.CreateVFXBundle("FriendlyOverhead", false, 0f);
             LockdownOverhead = VFXToolbox.CreateVFXBundle("LockdownOverhead", false, 0f);
@@ -195,7 +199,7 @@ namespace NevernamedsItems
             BloodCandleVFX = VFXToolbox.CreateVFXBundle("BloodCandleVFX", false, 0, 10, 20, new Color32(255, 0, 0, 255));
             TinyBluePoofVFX = VFXToolbox.CreateVFXBundle("TinyBluePoof", false, 0, 3, 5, new Color32(149, 197, 246, 255));
             BlueSparkle = VFXToolbox.CreateVFXBundle("DiamondSparkle", new IntVector2(7, 7), tk2dBaseSprite.Anchor.MiddleCenter, true, 0.4f);
-            PinkSparkle = VFXToolbox.CreateVFXBundle("PinkSparkle", new IntVector2(7, 7), tk2dBaseSprite.Anchor.MiddleCenter, true, 0.4f);
+            PinkSparkle = VFXToolbox.CreateVFXBundle("PinkSparkle", new IntVector2(7, 7), tk2dBaseSprite.Anchor.MiddleCenter, true, 0.4f, 5, new Color32(231, 188, 255, 255));
         }
         public static void GatherVanillaEffects()
         {

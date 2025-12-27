@@ -16,7 +16,7 @@ namespace NevernamedsItems
             PickupObject item = ItemSetup.NewItem<BlueSyrup>(
             "Blue Syrup",
             "Blank Label",
-            "Goes down smooth, comes up rough.\n\nAn old fashioned cure-all for whatever ails you. It tastes like gasoline.",
+            "Chance to regurgitate a blanking blue bubble. Goes down smooth, comes up rough.\n\nAn old fashioned cure-all for whatever ails you. It tastes like gasoline.",
             "bluesyrup_icon");
             
             item.quality = PickupObject.ItemQuality.B;

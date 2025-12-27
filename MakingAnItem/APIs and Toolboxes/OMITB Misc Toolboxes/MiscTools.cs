@@ -2,6 +2,7 @@
 using Alexandria.SoundAPI;
 using HarmonyLib;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,18 @@ namespace NevernamedsItems
 {
     public static class MiscTools
     {
+        public static IEnumerator LerpTransformToPosition(Transform target, Vector2 targetPosition, float time)
+        {
+            Vector2 startPosition = target.position;
+            float elapsed = 0;
+            while (elapsed <= time)
+            {
+                target.position = Vector2.Lerp(startPosition, targetPosition, elapsed / time);
+                elapsed += BraveTime.DeltaTime;
+                yield return null;
+            }
+            yield break;
+        }
         public static List<T> DupeList<T>(T value, int length)
         {
             List<T> list = new List<T>();
@@ -83,12 +96,7 @@ namespace NevernamedsItems
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = name;
         }
-        public static void AddCustomSwitchGroup(this Gun gun, string name, string fire, string reload)
-        {
-            gun.gunSwitchGroup = name;
-            SoundManager.AddCustomSwitchData("WPN_Guns", gun.gunSwitchGroup, "Play_WPN_Gun_Reload_01", reload);
-            SoundManager.AddCustomSwitchData("WPN_Guns", gun.gunSwitchGroup, "Play_WPN_Gun_Shot_01", fire);
-        }
+        
         public static void Add<T>(ref T[] array, T toAdd)
         {
             List<T> list = array.ToList();

@@ -1873,6 +1873,9 @@ namespace NevernamedsItems
             CustomSynergies.Add("...Badda Boom!",
                 new List<string>() { "nn:nitro_bullets" },
                 new List<string>() { "nn:nitroglycylinder", "explosive_rounds" });
+
+            CustomSynergies.Add("High Lord Kevin",
+               new List<string>() { "nn:kevin", "eyepatch" });
             #endregion
 
             #region 1.33

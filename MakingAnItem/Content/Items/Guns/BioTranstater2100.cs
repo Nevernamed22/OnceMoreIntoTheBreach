@@ -55,7 +55,7 @@ namespace NevernamedsItems
             SimpleRandomTransmogrifyComponent transmog = projectile.gameObject.AddComponent<SimpleRandomTransmogrifyComponent>();
             transmog.maintainHPPercent = true;
             transmog.chaosPalette = true;
-            transmog.RandomStringList.AddRange(MagickeCauldron.chaosEnemyPalette);
+            transmog.RandomStringList.AddRange(GUIDs.GenerateChaosPalette());
             if (projectile.GetComponent<PierceProjModifier>()) Destroy(projectile.GetComponent<PierceProjModifier>());
 
             gun.DefaultModule.projectiles[0] = projectile;

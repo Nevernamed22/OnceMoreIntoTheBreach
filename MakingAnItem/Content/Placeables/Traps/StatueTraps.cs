@@ -99,6 +99,23 @@ namespace NevernamedsItems
             Projectile component = gameObject.GetComponent<Projectile>();
             component.Shooter = base.specRigidbody;
             component.OwnerName = StringTableManager.GetEnemiesString("#TRAP", -1);
+            spawnedProjBody.OnPreRigidbodyCollision += this.HandlePreCollision;
+
+        }
+        private void HandlePreCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherPixelCollider)
+        {
+            try
+            {
+                if (otherRigidbody)
+                {
+                    if (otherRigidbody && otherRigidbody.gameObject && otherRigidbody.gameObject.GetComponent<KinStatueTrap>()) { PhysicsEngine.SkipCollision = true; } 
+                }
+            }
+            catch (Exception e)
+            {
+                ETGModConsole.Log(e.Message);
+                ETGModConsole.Log(e.StackTrace);
+            }
         }
     }
 }

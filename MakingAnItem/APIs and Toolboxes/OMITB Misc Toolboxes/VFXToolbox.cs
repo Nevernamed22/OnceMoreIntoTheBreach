@@ -99,8 +99,166 @@ namespace NevernamedsItems
         }
 
 
+        public static Shader GlitchShader;
+        public static void BecomeGlitched(GameObject targetObject, float GlitchInterval = 0.1f, float DispProbability = 0.4f, float DispIntensity = 0.01f, float ColorProbability = 0.4f, float ColorIntensity = 0.04f)
+        {
+            if (targetObject == null) { return; }
 
+            tk2dBaseSprite sprite = null;
+            try
+            {
+                if (!targetObject.GetComponent<tk2dBaseSprite>()) { return; }
+                sprite = targetObject.GetComponent<tk2dBaseSprite>();
+            }
+            catch { }
+                ;
+            if (sprite == null) { return; }
 
+            if (targetObject.transform != null && targetObject.transform.position.GetAbsoluteRoom() != null)
+            {
+                if (GameManager.Instance.Dungeon.data.Entrance != null)
+                {
+                    if (targetObject.transform.position.GetAbsoluteRoom().GetRoomName().StartsWith(GameManager.Instance.Dungeon.data.Entrance.GetRoomName()))
+                    {
+                        return;
+                    }
+                }
+            }
+            if (string.IsNullOrEmpty(targetObject.name)) { return; }
+            if (targetObject.name.StartsWith("SellPit")) { return; }
+            if (targetObject.name.StartsWith("PitTop")) { return; }
+            if (targetObject.name.StartsWith("PitBottom")) { return; }
+            if (targetObject.name.StartsWith("NPC_PitDweller")) { return; }
+            if (targetObject.name.StartsWith("player")) { return; }
+            if (targetObject.name.StartsWith("BossStatuesDummy")) { return; }
+            if (targetObject.GetComponentInChildren<BossStatueController>(true) != null | targetObject.GetComponent<BossStatueController>() != null) { return; }
+            if (targetObject.GetComponentInChildren<BossStatuesController>(true) != null | targetObject.GetComponent<BossStatuesController>() != null) { return; }
+            if (sprite.renderer.material.name.ToLower().StartsWith("glitchmaterial")) { return; }
+            if (sprite.renderer.material.name.ToLower().StartsWith("hologrammaterial")) { return; }
+            if (sprite.renderer.material.name.ToLower().StartsWith("galaxymaterial")) { return; }
+            if (sprite.renderer.material.name.ToLower().StartsWith("spacematerial")) { return; }
+            if (sprite.renderer.material.name.ToLower().StartsWith("paradoxmaterial")) { return; }
+            if (sprite.renderer.material.name.ToLower().StartsWith("cosmichorrormaterial")) { return; }
+            if (sprite.renderer.material.name.ToLower().StartsWith("rainbowmaterial")) { return; }
+            if (targetObject.GetComponent<AIActor>() != null)
+            {
+                AIActor m_AIActor = targetObject.GetComponent<AIActor>();
+                if (m_AIActor.GetActorName().StartsWith("Glitched") |
+                    m_AIActor.ActorName.ToLower().StartsWith("glitched") | m_AIActor.IsBlackPhantom | m_AIActor.ActorName.StartsWith("Statue")
+                   )
+                {
+                    return;
+                }
+            }
+
+            ApplyGlitchShader(sprite, true, GlitchInterval, DispProbability, DispIntensity, ColorProbability, ColorIntensity);
+        }
+        public static void ApplyGlitchShader(tk2dBaseSprite sprite, bool usesOverrideMaterial = true, float GlitchInterval = 0.1f, float DispProbability = 0.4f, float DispIntensity = 0.01f, float ColorProbability = 0.4f, float ColorIntensity = 0.04f)
+        {
+            try
+            {
+                if (sprite == null) { return; }
+                if (!GlitchShader) { GlitchShader = ShaderCache.Acquire("Brave/Internal/Glitch"); }
+                Material m_cachedMaterial = new Material(GlitchShader);
+                m_cachedMaterial.name = "GlitchMaterial";
+                m_cachedMaterial.SetFloat("_GlitchInterval", GlitchInterval);
+                m_cachedMaterial.SetFloat("_DispProbability", DispProbability);
+                m_cachedMaterial.SetFloat("_DispIntensity", DispIntensity);
+                m_cachedMaterial.SetFloat("_ColorProbability", ColorProbability);
+                m_cachedMaterial.SetFloat("_ColorIntensity", ColorIntensity);
+
+                m_cachedMaterial.SetFloat("_WrapDispCoords", 0);
+
+                MeshRenderer spriteComponent = sprite.GetComponent<MeshRenderer>();
+                if (spriteComponent == null) { return; }
+
+                Material[] sharedMaterials = spriteComponent.sharedMaterials;
+                if (sharedMaterials == null) { return; }
+                if (sharedMaterials.Length > 0)
+                {
+                    foreach (Material material in sharedMaterials)
+                    {
+                        if (material.name.ToLower().StartsWith("glitchmaterial")) { return; }
+                        if (material.name.ToLower().StartsWith("hologrammaterial")) { return; }
+                        if (material.name.ToLower().StartsWith("galaxymaterial")) { return; }
+                        if (material.name.ToLower().StartsWith("spacematerial")) { return; }
+                        if (material.name.ToLower().StartsWith("paradoxmaterial")) { return; }
+                        if (material.name.ToLower().StartsWith("cosmichorrormaterial")) { return; }
+                        if (material.name.ToLower().StartsWith("rainbowmaterial")) { return; }
+                    }
+                }
+                Array.Resize(ref sharedMaterials, sharedMaterials.Length + 1);
+                // Material CustomMaterial = Instantiate(m_cachedGlitchMaterial);
+                if (sharedMaterials[0].GetTexture("_MainTex") == null) { return; }
+                m_cachedMaterial.SetTexture("_MainTex", sharedMaterials[0].GetTexture("_MainTex"));
+                sharedMaterials[sharedMaterials.Length - 1] = m_cachedMaterial;
+                spriteComponent.sharedMaterials = sharedMaterials;
+                sprite.usesOverrideMaterial = usesOverrideMaterial;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogException(ex);
+                return;
+            }
+        }
+
+        public static void ApplyGlitchShader(tk2dSprite sprite, float GlitchInterval = 0.1f, float DispProbability = 0.4f, float DispIntensity = 0.01f, float ColorProbability = 0.4f, float ColorIntensity = 0.04f)
+        {
+
+            try
+            {
+                if (sprite == null) { return; }
+                // Material m_cachedMaterial = new Material(ShaderCache.Acquire("Brave/Internal/Glitch"));
+                if (!GlitchShader) { GlitchShader = ShaderCache.Acquire("Brave/Internal/Glitch"); }
+                Material m_cachedMaterial = new Material(GlitchShader);
+                m_cachedMaterial.name = "GlitchMaterial";
+                m_cachedMaterial.SetFloat("_GlitchInterval", GlitchInterval);
+                m_cachedMaterial.SetFloat("_DispProbability", DispProbability);
+                m_cachedMaterial.SetFloat("_DispIntensity", DispIntensity);
+                m_cachedMaterial.SetFloat("_ColorProbability", ColorProbability);
+                m_cachedMaterial.SetFloat("_ColorIntensity", ColorIntensity);
+                m_cachedMaterial.SetFloat("_WrapDispCoords", 0);
+
+                MeshRenderer spriteComponent = sprite.GetComponent<MeshRenderer>();
+                Material[] sharedMaterials = spriteComponent.sharedMaterials;
+                Array.Resize(ref sharedMaterials, sharedMaterials.Length + 1);
+                m_cachedMaterial.SetTexture("_MainTex", sharedMaterials[0].GetTexture("_MainTex"));
+                sharedMaterials[sharedMaterials.Length - 1] = m_cachedMaterial;
+                spriteComponent.sharedMaterials = sharedMaterials;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogException(ex);
+                return;
+            }
+        }
+
+        public static void ApplyGlitchShader(tk2dSlicedSprite sprite, float GlitchInterval = 0.1f, float DispProbability = 0.4f, float DispIntensity = 0.01f, float ColorProbability = 0.4f, float ColorIntensity = 0.04f)
+        {
+            try
+            {
+                if (sprite == null) { return; }
+                Material m_cachedMaterial = new Material(ShaderCache.Acquire("Brave/Internal/Glitch"));
+                m_cachedMaterial.name = "GlitchMaterial";
+                m_cachedMaterial.SetFloat("_GlitchInterval", GlitchInterval);
+                m_cachedMaterial.SetFloat("_DispProbability", DispProbability);
+                m_cachedMaterial.SetFloat("_DispIntensity", DispIntensity);
+                m_cachedMaterial.SetFloat("_ColorProbability", ColorProbability);
+                m_cachedMaterial.SetFloat("_ColorIntensity", ColorIntensity);
+
+                MeshRenderer spriteComponent = sprite.GetComponent<MeshRenderer>();
+                Material[] sharedMaterials = spriteComponent.sharedMaterials;
+                Array.Resize(ref sharedMaterials, sharedMaterials.Length + 1);
+                m_cachedMaterial.SetTexture("_MainTex", sharedMaterials[0].GetTexture("_MainTex"));
+                sharedMaterials[sharedMaterials.Length - 1] = m_cachedMaterial;
+                spriteComponent.sharedMaterials = sharedMaterials;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogException(ex);
+                return;
+            }
+        }
 
 
 
@@ -220,7 +378,7 @@ namespace NevernamedsItems
             return Obj;
         }
 
-        public static GameObject CreateVFXBundle(string name, bool usesZHeight, float zHeightOffset, float emissivePower = -1, float emissiveColourPower = -1, Color? emissiveColour = null, bool persist = false, tk2dSpriteCollectionData overrideCollection = null)
+        public static GameObject CreateVFXBundle(string name, bool usesZHeight, float zHeightOffset, float emissivePower = -1, float emissiveColourPower = -1, Color? emissiveColour = null, bool persist = false, tk2dSpriteCollectionData overrideCollection = null, tk2dSpriteAnimation overrideAnimationCollection = null)
         {
             GameObject Obj = new GameObject(name);
             VFXObject vfObj = new VFXObject();
@@ -230,8 +388,12 @@ namespace NevernamedsItems
 
             tk2dSpriteCollectionData VFXSpriteCollection = overrideCollection != null ? overrideCollection : Initialisation.VFXCollection;
             tk2dSprite sprite = Obj.GetOrAddComponent<tk2dSprite>();
+            if (usesZHeight)
+            {
+                sprite.HeightOffGround = zHeightOffset;
+            }
             tk2dSpriteAnimator animator = Obj.GetOrAddComponent<tk2dSpriteAnimator>();
-            tk2dSpriteAnimation animation = Initialisation.vfxAnimationCollection;
+            tk2dSpriteAnimation animation = overrideAnimationCollection != null ? overrideAnimationCollection : Initialisation.vfxAnimationCollection;
             animator.Library = animation;
             sprite.collection = VFXSpriteCollection;
 
@@ -240,7 +402,7 @@ namespace NevernamedsItems
             List<tk2dSpriteDefinition> frames = new List<tk2dSpriteDefinition>();
             foreach (tk2dSpriteAnimationFrame frame in clip.frames) { frames.Add(VFXSpriteCollection.spriteDefinitions[frame.spriteId]); }
 
-                sprite.usesOverrideMaterial = true;
+            sprite.usesOverrideMaterial = true;
             sprite.renderer.material.shader = ShaderCache.Acquire("tk2d/CutoutVertexColorTintableTilted");
 
             if (emissivePower > 0)
@@ -274,7 +436,7 @@ namespace NevernamedsItems
             return Obj;
         }
 
-        public static VFXPool CreateVFXPoolBundle(string name, bool usesZHeight, float zHeightOffset, VFXAlignment alignment = VFXAlignment.NormalAligned, float emissivePower = -1, Color? emissiveColour = null, bool persist = false)
+        public static VFXPool CreateVFXPoolBundle(string name, bool usesZHeight, float zHeightOffset, VFXAlignment alignment = VFXAlignment.NormalAligned, float emissivePower = -1, Color? emissiveColour = null, bool persist = false, bool orphaned = false)
         {
             GameObject Obj = new GameObject(name);
             VFXPool pool = new VFXPool();
@@ -318,6 +480,7 @@ namespace NevernamedsItems
             vfObj.alignment = alignment;
             vfObj.destructible = false;
             vfObj.effect = Obj;
+            vfObj.orphaned = orphaned;
             complex.effects = new VFXObject[] { vfObj };
             pool.effects = new VFXComplex[] { complex };
             return pool;
