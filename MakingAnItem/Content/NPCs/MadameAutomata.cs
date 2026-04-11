@@ -773,7 +773,11 @@ namespace NevernamedsItems
             "Timmy is dead.",
             "The town is dead. Look east in woods.",
             "You are persistent. Find heart over ocean.",
-            "Excuuuuuse me, Princess."
+            "Excuuuuuse me, Princess.",
+            "Take a cat and rub it on a cat, then that cat gets all fat.",
+            "History of Powder Rangers has NO set schedule...",
+            "Always remember to bite more than you can chew out of the hand that feeds you...",
+            "There's no more time for crying over spilled milk.",
 
         };
     }

@@ -356,7 +356,10 @@ namespace NevernamedsItems
         }
         private void SpawnShieldOnDestroy(Projectile self)
         {
-            MiscToolbox.SpawnShield(self.ProjectilePlayerOwner(), self.sprite.WorldCenter);
+            if (self != null & self.ProjectilePlayerOwner() != null)
+            {
+                MiscToolbox.SpawnShield(self.ProjectilePlayerOwner(), self.SafeCenter);
+            }
         }
         private void KaliberShit(Projectile self, SpeculativeRigidbody enemy, bool fatal)
         {

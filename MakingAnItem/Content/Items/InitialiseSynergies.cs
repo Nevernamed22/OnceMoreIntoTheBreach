@@ -1876,6 +1876,9 @@ namespace NevernamedsItems
 
             CustomSynergies.Add("High Lord Kevin",
                new List<string>() { "nn:kevin", "eyepatch" });
+
+            CustomSynergies.Add("Holy Smackerel",
+               new List<string>() { "nn:cleansing_rounds", "silver_bullets" });
             #endregion
 
             #region 1.33

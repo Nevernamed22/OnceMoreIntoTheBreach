@@ -101,6 +101,7 @@
     <Compile Include="Content\Enemies\LesserSnakeshooter.cs" />
     <Compile Include="Content\Enemies\MolotovKin.cs" />
     <Compile Include="Content\Enemies\Muskin.cs" />
+    <Compile Include="Content\Enemies\Scripts and Behaviours\ApachesMoveErraticallyBehaviour.cs" />
     <Compile Include="Content\Enemies\Scripts and Behaviours\CustomShootBeamGunBehaviour.cs" />
     <Compile Include="Content\Enemies\SpentBullat.cs" />
     <Compile Include="Content\Enemies\Scripts and Behaviours\UnhousedBulletScripts.cs" />
@@ -4845,7 +4846,7 @@
       <HintPath>..\packages\HarmonyX.2.7.0\lib\net35\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Alexandria, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EtG.Alexandria.0.5.2\lib\net35\Alexandria.dll</HintPath>
+      <HintPath>..\packages\EtG.Alexandria.0.5.6\lib\net35\Alexandria.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\EtG.GameLibs.2.1.9.1\lib\net35\Assembly-CSharp.dll</HintPath>

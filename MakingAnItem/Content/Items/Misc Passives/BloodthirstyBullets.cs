@@ -17,7 +17,7 @@ namespace NevernamedsItems
             PickupObject item = ItemSetup.NewItem<BloodthirstyBullets>(
              "Bloodthirsty Bullets",
              "Born in the Fray",
-             "Bullets either deal massive bonus damage to enemies, or enjam them." + "\n\nThese bullets were designed, cast, and shaped in the middle of combat to train them for the battlefield.",
+             "Bullets either deal massive bonus damage to enemies, or enjam them.\n\nThese bullets were designed, cast, and shaped in the middle of combat to train them for the battlefield.",
              "bloodthirstybullets_improved");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.quality = PickupObject.ItemQuality.B;
@@ -27,58 +27,99 @@ namespace NevernamedsItems
             Doug.AddToLootPool(item.PickupObjectId);
         }
         public static int BloodthirstyBulletsID;
+        public static readonly float chanceToJam = 0.4f;
+        public static readonly float synergy_chanceToJam = 0.2f;
+        public static readonly float damageMultiplier = 6f;
+        public static readonly float synergy_damageMultiplier = 12f;
         public override void Pickup(PlayerController player)
         {
             base.Pickup(player);
             player.PostProcessProjectile += this.PostProcessProjectile;
             player.PostProcessBeam += this.PostProcessBeam;
+            player.PostProcessBeamTick += this.PostProcessBeamTick;
+        }
+        private void ModifyDealtDamage(Projectile p, HealthHaver h, HealthHaver.ModifyDamageEventArgs args)
+        {
+            if (p != null && h != null && args != null && h.aiActor && !h.aiActor.IsBlackPhantom)
+            {
+                args.ModifiedDamage *= (p.ProjectilePlayerOwner() && p.ProjectilePlayerOwner().PlayerHasActiveSynergy("[todo: Add funny synergy name]")) ? synergy_damageMultiplier : damageMultiplier;
+            }
         }
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
-            try
+            if (sourceProjectile == null) return;
+
+            PlayerController player = sourceProjectile.ProjectilePlayerOwner();
+
+            if (AllJammedState.AllJammedActive == true)
             {
-                if (AllJammedState.AllJammedActive == true)
+                sourceProjectile.baseData.damage *= (player != null && player.PlayerHasActiveSynergy("[todo: Add funny synergy name]")) ? 1.9f : 1.45f;
+            }
+            else
+            {
+                if (UnityEngine.Random.value <= (player != null && player.PlayerHasActiveSynergy("[todo: Add funny synergy name]") ? synergy_chanceToJam : chanceToJam))
                 {
-                    sourceProjectile.baseData.damage *= 1.45f;
+                    sourceProjectile.OnHitEnemy += OnHitEnemy;
                 }
                 else
                 {
-                    BloodthirstyBulletsComp comp = sourceProjectile.gameObject.GetOrAddComponent<BloodthirstyBulletsComp>();
-                    if (sourceProjectile.ProjectilePlayerOwner() && sourceProjectile.ProjectilePlayerOwner().PlayerHasActiveSynergy("[todo: Add funny synergy name]"))
-                    {
-                        comp.nonJamDamageMult = 30;
-                        comp.jamChance = 0.2f;
-                    }
+                    sourceProjectile.Ext().ModifyDealtDamage += ModifyDealtDamage;
                 }
             }
-            catch (Exception e)
+        }
+
+        private void OnHitEnemy(Projectile p, SpeculativeRigidbody en, bool fatal)
+        {
+            if (en && en.aiActor && !en.aiActor.IsBlackPhantom && en.aiActor.healthHaver && !en.aiActor.healthHaver.IsDead)
             {
-                ETGModConsole.Log(e.Message);
+                en.aiActor.BecomeBlackPhantom();
             }
         }
         private void PostProcessBeam(BeamController sourceBeam)
         {
-            if (sourceBeam && sourceBeam.projectile)
+            if (sourceBeam == null || sourceBeam.projectile == null) { return; }
+
+            Projectile sourceProjectile = sourceBeam.projectile;
+            PlayerController player = sourceProjectile.ProjectilePlayerOwner();
+
+            if (AllJammedState.AllJammedActive == true)
             {
-                PostProcessProjectile(sourceBeam.projectile, 1);
+                sourceProjectile.baseData.damage *= (player != null && player.PlayerHasActiveSynergy("[todo: Add funny synergy name]")) ? 1.9f : 1.45f;
+            }
+            else
+            {
+                sourceProjectile.Ext().ModifyDealtDamage += ModifyDealtDamage;
             }
         }
-        public override DebrisObject Drop(PlayerController player)
+        private void PostProcessBeamTick(BeamController beam, SpeculativeRigidbody hitRigidBody, float tickrate)
         {
-            DebrisObject debrisObject = base.Drop(player);
-            player.PostProcessProjectile -= this.PostProcessProjectile;
-            player.PostProcessBeam -= this.PostProcessBeam;
-            return debrisObject;
-        }
-        public override void OnDestroy()
-        {
-            if (Owner)
+            if (AllJammedState.AllJammedActive == true || beam == null || beam.projectile == null || hitRigidBody == null) return;
+
+            PlayerController player = beam.projectile.ProjectilePlayerOwner();
+
+            float procChance = (player != null && player.PlayerHasActiveSynergy("[todo: Add funny synergy name]") ? synergy_chanceToJam : chanceToJam);
+
+            GameActor gameActor = hitRigidBody.gameActor;
+            
+            if (!gameActor)
             {
-                Owner.PostProcessProjectile -= this.PostProcessProjectile;
-                Owner.PostProcessBeam -= this.PostProcessBeam;
+                return;
             }
-            base.OnDestroy();
+            if (UnityEngine.Random.value < BraveMathCollege.SliceProbability(procChance, tickrate))
+            {
+                if (gameActor is AIActor && !(gameActor as AIActor).IsBlackPhantom) { (gameActor as AIActor).BecomeBlackPhantom(); }   
+            }
         }
 
+        public override void DisableEffect(PlayerController player)
+        {
+            if (player)
+            {
+                player.PostProcessProjectile -= this.PostProcessProjectile;
+                player.PostProcessBeam -= this.PostProcessBeam;
+                player.PostProcessBeamTick -= this.PostProcessBeamTick;
+            }
+            base.DisableEffect(player);
+        }
     }
 }

@@ -68,22 +68,25 @@ namespace NevernamedsItems
         }
         private void flightCheck(Gun currentGun)
         {
-            //ETGModConsole.Log("Flightchecked");
-            PlayerController playerController = currentGun.CurrentOwner as PlayerController;
-            if (currentGun == this.gun && !this.GaveFlight && playerController.PlayerHasActiveSynergy("Birdie!"))
+
+            if (currentGun && currentGun.GunPlayerOwner())
             {
-                base.Player.SetIsFlying(true, "GolfBirdie", false, false);
-                base.Player.AdditionalCanDodgeRollWhileFlying.AddOverride("GolfBirdie", null);
-                this.GaveFlight = true;
-            }
-            else
-            {
-                if ((currentGun != this.gun || !playerController.PlayerHasActiveSynergy("Birdie!")) && this.GaveFlight)
+                PlayerController playerController = currentGun.GunPlayerOwner();
+                if (currentGun == this.gun && !this.GaveFlight && playerController.PlayerHasActiveSynergy("Birdie!"))
                 {
-                    base.Player.SetIsFlying(false, "GolfBirdie", false, false);
-                    base.Player.AdditionalCanDodgeRollWhileFlying.RemoveOverride("GolfBirdie");
-                    this.GaveFlight = false;
-                    
+                    base.Player.SetIsFlying(true, "GolfBirdie", false, false);
+                    base.Player.AdditionalCanDodgeRollWhileFlying.AddOverride("GolfBirdie", null);
+                    this.GaveFlight = true;
+                }
+                else
+                {
+                    if ((currentGun != this.gun || !playerController.PlayerHasActiveSynergy("Birdie!")) && this.GaveFlight)
+                    {
+                        base.Player.SetIsFlying(false, "GolfBirdie", false, false);
+                        base.Player.AdditionalCanDodgeRollWhileFlying.RemoveOverride("GolfBirdie");
+                        this.GaveFlight = false;
+
+                    }
                 }
             }
         }
@@ -94,12 +97,15 @@ namespace NevernamedsItems
         protected override void Update()
         {
             base.Update();
-            PlayerController player = gun.CurrentOwner as PlayerController;
-            hasBirdieNow = player.PlayerHasActiveSynergy("Birdie!");
-            if (hasBirdieNow != hadBirdieLastWeChecked)
+            if (gun && gun.GunPlayerOwner())
             {
-                flightCheck(player.CurrentGun);
-                hadBirdieLastWeChecked = hasBirdieNow;
+                PlayerController player = gun.GunPlayerOwner();
+                hasBirdieNow = player.PlayerHasActiveSynergy("Birdie!");
+                if (hasBirdieNow != hadBirdieLastWeChecked)
+                {
+                    flightCheck(player.CurrentGun);
+                    hadBirdieLastWeChecked = hasBirdieNow;
+                }
             }
         }
         public override void OnReload(PlayerController player, Gun gun)
@@ -111,14 +117,20 @@ namespace NevernamedsItems
         {
             //ETGModConsole.Log("OnPickup Was Triggered");
             base.OnPickedUpByPlayer(player);
-            player.GunChanged += this.changedGun;
-            flightCheck(player.CurrentGun);
+            if (player)
+            {
+                player.GunChanged += this.changedGun;
+                flightCheck(player.CurrentGun);
+            }
         }
         protected override void OnPostDroppedByPlayer(PlayerController player)
         {
-            player.GunChanged -= this.changedGun;
-            flightCheck(player.CurrentGun);
-            player.stats.RecalculateStats(player, true, false);
+            if (player)
+            {
+                player.GunChanged -= this.changedGun;
+                flightCheck(player.CurrentGun);
+                player.stats.RecalculateStats(player, true, false);
+            }
             base.OnPostDroppedByPlayer(player);
         }
         public GolfRifle()

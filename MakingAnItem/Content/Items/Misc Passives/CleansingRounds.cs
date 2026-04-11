@@ -17,75 +17,58 @@ namespace NevernamedsItems
              "Undo What Is Done",
              "These holy shells are capable of saving the Gundead from eternal Jamnation.",
              "cleansingrounds_improved");
-            List<string> mandatorySynergyItems = new List<string>() { "nn:cleansing_rounds", "silver_bullets" };
-            CustomSynergies.Add("Holy Smackerel", mandatorySynergyItems);
+
             item.quality = PickupObject.ItemQuality.B;
             item.SetTag("bullet_modifier");
             Doug.AddToLootPool(item.PickupObjectId);
         }
+
+        public float ChanceToUnjam
+        {
+            get
+            {
+                return (Owner != null && Owner.PlayerHasActiveSynergy("Holy Smackerel")) ? 0.5f : 0.1f;
+            }
+        }
+
         public override void Pickup(PlayerController player)
         {
             base.Pickup(player);
             player.PostProcessProjectile += this.PostProcessProjectile;
-            player.PostProcessBeam += this.PostProcessBeam;
+            player.PostProcessBeamTick += this.PostProcessBeam;
+        }
+        public override void DisableEffect(PlayerController player)
+        {
+            base.DisableEffect(player);
+            if (player)
+            {
+                player.PostProcessProjectile -= this.PostProcessProjectile;
+                player.PostProcessBeamTick -= this.PostProcessBeam;
+            }
         }
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
-                sourceProjectile.OnHitEnemy += this.OnHitEnemy;
+            sourceProjectile.OnHitEnemy += OnHitEnemy;
         }
-        private void PostProcessBeam(BeamController sourceBeam)
+        private void PostProcessBeam(BeamController beam, SpeculativeRigidbody hitRigidBody, float tickrate)
         {
-            try
+            float procChance = ChanceToUnjam;
+            AIActor actor = hitRigidBody.aiActor;
+            if (!actor) return;
+            if (actor.IsBlackPhantom && UnityEngine.Random.value < BraveMathCollege.SliceProbability(procChance, tickrate))
             {
-                sourceBeam.projectile.OnHitEnemy += this.OnHitEnemy;
-            }
-            catch (Exception e)
-            {
-                ETGModConsole.Log(e.Message);
+                actor.UnbecomeBlackPhantom();
             }
         }
-
-        private void OnHitEnemy(Projectile arg1, SpeculativeRigidbody arg2, bool arg3)
+        private void OnHitEnemy(Projectile projectile, SpeculativeRigidbody rigidbody, bool fatal)
         {
-            if (arg2 != null && arg2.aiActor != null && Owner != null)
+            if (projectile != null && rigidbody != null && rigidbody.aiActor != null && !fatal && rigidbody.healthHaver != null && !rigidbody.healthHaver.IsDead && rigidbody.aiActor.IsBlackPhantom)
             {
-                if (!arg2.aiActor.IsBlackPhantom) return;
-                else if (!arg2.healthHaver.IsDead)
+                if (UnityEngine.Random.value <= ChanceToUnjam)
                 {
-                    float procChance = UnityEngine.Random.value;
-                    if (Owner.HasPickupID(538))
-                    {
-                        if (procChance > 0.5)
-                        {
-                            arg2.aiActor.UnbecomeBlackPhantom();
-                        }
-                    }
-                    else
-                    {
-                        if (procChance < 0.1)
-                        {
-                            arg2.aiActor.UnbecomeBlackPhantom();
-                        }
-                    }
+                    rigidbody.aiActor.UnbecomeBlackPhantom();
                 }
             }
         }
-        public override DebrisObject Drop(PlayerController player)
-        {
-            DebrisObject debrisObject = base.Drop(player);
-            player.PostProcessProjectile -= this.PostProcessProjectile;
-            player.PostProcessBeam -= this.PostProcessBeam;
-            return debrisObject;
-        }
-        public override void OnDestroy()
-        {
-            if (Owner)
-            {
-                Owner.PostProcessProjectile -= this.PostProcessProjectile;
-                Owner.PostProcessBeam -= this.PostProcessBeam;
-            }
-            base.OnDestroy();
-        }
-
     }
 }

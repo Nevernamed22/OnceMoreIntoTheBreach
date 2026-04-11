@@ -141,7 +141,7 @@ namespace NevernamedsItems
         {
             try
             {
-                if (otherRigidbody)
+                if (otherRigidbody && otherRigidbody.aiActor == null)
                 {
                     foreach (MajorBreakable breakable in otherRigidbody.GetComponentsInChildren<MajorBreakable>())
                     {
@@ -154,7 +154,7 @@ namespace NevernamedsItems
                             breakable.HitPoints += (missingHP * 0.2f);
                             if (breakable.GetComponent<Chest>())
                             {
-                               
+
                                 breakable.GetComponent<Chest>().ForceKillFuse();
                                 int idleID = breakable.GetComponent<Chest>().m_cachedSpriteForCoop;
                                 breakable.m_inZeroHPState = false;
@@ -188,10 +188,12 @@ namespace NevernamedsItems
                 //ETGModConsole.Log("OnHitEnemyRan");
                 if (fatal)
                 {
-                    Vector2 pos = enemy.sprite.WorldCenter;
+                    Vector2 pos = enemy.transform.position;
+                    if (enemy.sprite != null) { pos = enemy.sprite.WorldCenter; }
+                    else if (enemy.specRigidbody != null) { pos = enemy.UnitCenter; }
 
                     Exploder.Explode(pos, LaserWelder.LaserWelderExplosion, Vector2.zero);
-                    UnityEngine.Object.Instantiate<GameObject>(SharedVFX.TeleporterPrototypeTelefragVFX, enemy.UnitCenter, Quaternion.identity);
+                    UnityEngine.Object.Instantiate<GameObject>(SharedVFX.TeleporterPrototypeTelefragVFX, pos, Quaternion.identity);
                     if (!enemy.healthHaver.IsBoss) enemy.aiActor.EraseFromExistenceWithRewards();
                 }
                 else if (RepairableEnemies.ContainsKey(enemy.aiActor.EnemyGuid))

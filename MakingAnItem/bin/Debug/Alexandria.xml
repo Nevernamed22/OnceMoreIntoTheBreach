@@ -36,6 +36,138 @@
             <param name="data">The sprite collection of your guns.</param>
             <param name="path">The direct filepath to all of your *embedded gun jsons.*.</param>
         </member>
+        <member name="M:Alexandria.EnemyAPI.AIActorUtility.DeleteOwnedBullets(GameActor,System.Single,System.Boolean)">
+            <summary>
+            Deletes all bullets belonging to the GameActor.
+            </summary>
+            <param name="enemy">The target actor.</param>
+            <param name="chancePerProjectile">The individual chance per bullet for it to be deleted. 100% by default.</param>
+            <param name="deleteBulletLimbs">If true 'bullet limbs' belonging to the actor will also be deleted. Bullet limbs exist on Misfire Beasts, Revolvenants, and others.</param>
+        </member>
+        <member name="M:Alexandria.EnemyAPI.AIActorUtility.DoCorrectForWalls(AIActor)">
+            <summary>
+            Updates the position of the AIActor to hopefully prevent it from becoming stuck in a wall. NOT FOOLPROOF.
+            </summary>
+            <param name="enemy">The target AIActor.</param>       
+        </member>
+        <member name="M:Alexandria.EnemyAPI.AIActorUtility.IsInMinecart(AIActor)">
+            <summary>
+            Returns true if the AIActor is riding in a minecart.
+            </summary>
+            <param name="target">The target AIActor.</param>
+        </member>
+        <member name="M:Alexandria.EnemyAPI.AIActorUtility.ClosestPointOnEnemy(AIActor,UnityEngine.Vector2)">
+            <summary>
+            Returns The closest Vector2 position on the enemy's hitbox to the given position.
+            </summary>
+            <param name="target">The target AIActor.</param>
+            <param name="pointComparison">The Vector2 position to which the closest point on the enemy's hitbox should be calculated.</param>
+        </member>
+        <member name="M:Alexandria.EnemyAPI.AIActorUtility.ClosestPointOnRigidBody(SpeculativeRigidbody,UnityEngine.Vector2)">
+            <summary>
+            Returns The closest Vector2 position on the SpeculativeRigidbody's hitbox to the given position.
+            </summary>
+            <param name="target">The target SpeculativeRigidbody.</param>
+            <param name="pointComparison">The Vector2 position to which the closest point on the SpeculativeRigidbody's hitbox should be calculated.</param>
+        </member>
+        <member name="M:Alexandria.EnemyAPI.AIActorUtility.IsSecretlyTheMineFlayer(AIActor)">
+            <summary>
+            Returns true AIActor is 'secretly' the Mine Flayer as part of the Mine Flayer's bell shell-game attack.
+            </summary>
+            <param name="target">The AIActor to be checked.</param>
+        </member>
+        <member name="M:Alexandria.EnemyAPI.AIActorUtility.ApplyGlitter(AIActor)">
+            <summary>
+            Applies the 'Glitter' visual effect from the Mailbox to the AIActor.
+            </summary>
+            <param name="target">The AIActor to be glittered.</param>
+        </member>
+        <member name="M:Alexandria.EnemyAPI.AIActorUtility.DoGeniePunch(AIActor,PlayerController)">
+            <summary>
+            Causes a Genie to punch the AIActor, like the effect of the Magic Lamp.
+            </summary>
+            <param name="enemy">The AIActor to be punched.</param>
+            <param name="owner">The owner of the Genie.</param>
+        </member>
+        <member name="M:Alexandria.EnemyAPI.AIActorUtility.GetDirectionalAnimation(AIAnimator,System.String)">
+            <summary>
+            Returns a directional animation on the AIAnimator corresponding to the given animation name.
+            </summary>
+            <param name="self">The AIAnimator to be checked.</param>
+            <param name="animName">The name of the animation being checked for.</param>
+        </member>
+        <member name="M:Alexandria.EnemyAPI.AIActorUtility.AdvancedTransmogrify(AIActor,AIActor,UnityEngine.GameObject,System.String,System.Boolean,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            A more advanced method of transmogrifying an enemy into another enemy. Returns the resulting enemy. Returns null if the original enemy could not be transmogrified.
+            </summary>
+            <param name="startEnemy">The enemy who will be transmogrified.</param>
+            <param name="EnemyPrefab">The prefab of the enemy that the original will be transmogrified into.</param>
+            <param name="EffectVFX">The VFX to be played at the position of the transmogrification.</param>
+            <param name="audioEvent">The audio to be played when the transmogrification occurs.</param>
+            <param name="ignoreAlreadyTransmogged">If true, will be unable to transmogrify enemies who have already been transmogrified.</param>
+            <param name="guidsToIgnore">If the target's guid is present in this list, it cannot be transmogrified.</param>
+            <param name="tagsToIgnore">If the target has any of the tags present in this list, it cannot be transmogrified.</param>
+            <param name="defuseExplosives">If true, enemies set to explode upon death will not explode when transmogrified.</param>
+            <param name="carryOverRewards">If true, the loot drops of the old enemy will carry over to the new enemy.</param>
+            <param name="maintainHealthPercent">If true, the new enemy's percentage of remaining HP will be the same as the old enemy's percentage of remaining HP.</param>
+            <param name="maintainsJammedState">If true, the jamedness of the new enemy depends on the jamedness of the old enemy.</param>
+            <param name="giveIsTransmogrifiedBool">If true, sets the new actor's 'IsTransmogrified' bool to true. If false, there will be no way to tell that the actor has been transmogrified.</param>
+            <param name="logEverything">If true, non-essential information about why enemies were unable to be transmogged will be added to the log. Do not leave true in release builds.</param>
+        </member>
+        <member name="M:Alexandria.EnemyAPI.EnemyBuildingTools.AddAIBeamShooter(AIActor,UnityEngine.Transform,System.String,Projectile,ProjectileModule,System.Single)">
+            <summary>
+            Adds an AIBeamShooter component to an enemy. AIBeamShooters are important for enemies to be able to use beam-related behaviors.
+            </summary>
+            <param name="enemy">The target actor.</param>
+            <param name="transform">The position at which the beam, when created, will fire from.</param>
+            <param name="name">The name of your AIBeamShooter component.</param>
+            <param name="beamProjectile">The projectile component of your beam.</param>
+            <param name="beamModule">The projectile module which houses your beamProjectile.</param>
+            <param name="angle">The starting angle of your beam when it is fired. Used only by specific things.</param>
+        </member>
+        <member name="M:Alexandria.EnemyAPI.EnemyBuildingTools.AddNewDirectionAnimation(AIAnimator,System.String,System.String[],DirectionalAnimation.FlipType[],DirectionalAnimation.DirectionType)">
+            <summary>
+            Adds a directional animation to your AIAnimator (Mostly found in enemies). Directional animations control the animations that play depending on direction.
+            </summary>
+            <param name="animator">The target AIAnimator.</param>
+            <param name="Prefix">The prefix of your directional animation. When making your enemy play a specific animation, use this prefix to play the animation so it also accounts for direction.</param>
+            <param name="animationNames">All of the tk2d sprite animations in your directional animation. These HAVE to be set up in specific configurations. Check out the bottom of this page to see how https://mtgmodders.gitbook.io/etg-modding-guide/misc/making-an-enemy</param>
+            <param name="flipType">The amount of different animations your directional animation uses. Ex: a directional aniamtion with left-right aniamtions will be 2.</param>
+            <param name="directionType">The direction type of your animator. This will change how many angles it will take into account for. Refer to https://mtgmodders.gitbook.io/etg-modding-guide/misc/making-an-enemy for more detail.</param>
+        </member>
+        <member name="M:Alexandria.EnemyAPI.EnemyBuildingTools.DestroyUnnecessaryHandObjects(UnityEngine.Transform)">
+            <summary>
+            Destroys any remnant hand objects on your enemy.
+            </summary>
+            <param name="transform">The targets Transform.</param>
+        </member>
+        <member name="M:Alexandria.EnemyAPI.EnemyBuildingTools.AddShadowToAIActor(AIActor,UnityEngine.GameObject,UnityEngine.Vector2,System.String)">
+            <summary>
+            Links a gameobject to your enemy to be its shadow.
+            </summary>
+            <param name="actor">The target.</param>
+            <param name="shadowObject">The gameobject that will act as a shadow.</param>
+            <param name="attachpoint">The position of the shadow. Must be somewhere on the enemy, so use your enemy position as your start position, as unintuitive as it seems.</param>
+            <param name="name">The name of your shadow object.</param>
+        </member>
+        <member name="M:Alexandria.EnemyAPI.EnemyBuildingTools.GenerateShootPoint(UnityEngine.GameObject,UnityEngine.Vector2,System.String)">
+            <summary>
+            Generates, and returns a gameobject that can be used as a shootpoint.
+            </summary>
+            <param name="attacher">The target.</param>
+            <param name="attachpoint">The position of the shoot point. Must be somewhere on the enemy, so use your enemy position as your start position, as unintuitive as it seems.</param>
+            <param name="name">The name of your shoot point.</param>
+        </member>
+        <member name="M:Alexandria.EnemyAPI.EnemyBuildingTools.CopyBulletBankEntry(AIBulletBank.Entry,System.String,System.String,VFXPool,System.Boolean)">
+            <summary>
+            Returns a deplicate BulletBank.Entry that you can modify the bullet Object of without altering the original. Useful for making specific projectiles fire without audio or have them have special effects i.e hitscan.
+            </summary>
+            <param name="entryToCopy">The enrty you are copying in the first place.</param>
+            <param name="Name">Your new Bullet Bank entry name. You will use this name when trying to spawn a projectile from this entry.</param>
+            <param name="AudioEvent">The audio event your projectile will sound when it is fired. Change this to "DNC" if you want to keep the original audio, or set it to null to have none.</param>
+            <param name="muzzleflashVFX">Your muzzle flash VFX it will play when the bullet is fired.</param>
+            <param name="ChangeMuzzleFlashToEmpty">If set to true and muzzleflashVFX is NULL, will remove the muzzleflash from your entry.</param>
+        </member>
         <member name="M:Alexandria.BreakableAPI.BreakableAPIToolbox.GenerateTeleporterController(System.String,System.String[],System.String[],System.String[],System.String,System.Int32,System.Int32,UnityEngine.GameObject,UnityEngine.GameObject,UnityEngine.GameObject,UnityEngine.GameObject,tk2dSpriteAnimator)">
             <summary>
             Generates, and returns a TeleporterController. This is for generating a Teleporter that you can teleport to from the map. Of note, any of the gameObject stuff at the end of the method is nullable and should use the default teleporter VFX stuff if left as null
@@ -752,6 +884,949 @@
         <member name="M:Alexandria.CharacterAPI.ToolsCharApi.AddComplex(StringDBTable,System.String,System.String)">
             <summary>Adds a complex string to a StringDBTable.</summary>
         </member>
+        <member name="T:Alexandria.Misc.IAmmoDisplayAugment">
+            <summary>Interface that can be implemented by any Component attached to a Gun in order to display extra information above the ammo display.</summary>
+        </member>
+        <member name="M:Alexandria.Misc.IAmmoDisplayAugment.GetText">
+            <summary>Returns a line of formatted text (including colors / sprites) to display above the ammo display.</summary>
+        </member>
+        <member name="M:Alexandria.Misc.CustomAmmoDisplayExtensions.VanillaAmmoDisplay(PlayerController)">
+            <summary>Helper function to print out vanilla ammo display for a player</summary>
+        </member>
+        <member name="T:Alexandria.Misc.EasyLight">
+            <summary>Helper class for adding nice looking lights to Guns, Projectiles, and other GameObjects.</summary>
+        </member>
+        <member name="P:Alexandria.Misc.EasyLight.IsOn">
+            <summary>Whether the light is current on or not. May still be invisible if its parent is deactivated.</summary>
+        </member>
+        <member name="M:Alexandria.Misc.EasyLight.Toggle">
+            <summary>Turns the light on if off, and turns it off if on.</summary>
+        </member>
+        <member name="M:Alexandria.Misc.EasyLight.TurnOn">
+            <summary>Turns the light on.</summary>
+        </member>
+        <member name="M:Alexandria.Misc.EasyLight.TurnOff(System.Boolean)">
+            <summary>Turns the light off, optionally skipping its fade out animation.</summary>
+        </member>
+        <member name="M:Alexandria.Misc.EasyLight.SetBrightness(System.Single)">
+            <summary>Sets the brightness of a light.</summary>
+        </member>
+        <member name="M:Alexandria.Misc.EasyLight.SetRadius(System.Single)">
+            <summary>Sets how far the light extends from its origin point.</summary>
+        </member>
+        <member name="M:Alexandria.Misc.EasyLight.SetConeWidth(System.Single)">
+            <summary>Sets the angle spanned by cone lights.</summary>
+        </member>
+        <member name="M:Alexandria.Misc.EasyLight.SetColor(UnityEngine.Color)">
+            <summary>Sets the color of the light.</summary>
+        </member>
+        <member name="M:Alexandria.Misc.EasyLight.TrackObject(UnityEngine.GameObject)">
+            <summary>For cone lights, automatically tracks the specified GameObject's transform.</summary>
+        </member>
+        <member name="M:Alexandria.Misc.EasyLight.PointInDirection(System.Single)">
+            <summary>For cone lights, points the light in the direction specified by angle.</summary>
+        </member>
+        <member name="M:Alexandria.Misc.EasyLight.PointAt(UnityEngine.Vector2)">
+            <summary>For cone lights, points the light towards the specified position.</summary>
+        </member>
+        <member name="M:Alexandria.Misc.EasyLight.Create(System.Nullable{UnityEngine.Vector2},UnityEngine.Transform,System.Nullable{UnityEngine.Color},System.Single,System.Single,System.Boolean,System.Single,System.Single,System.Single,System.Boolean,System.Boolean,System.Single,System.Single,System.Boolean,System.Boolean)">
+            <summary>Creates an Easy Light at the specified positinon and / or parented to the specified object</summary>
+            <param name="pos">Where to place the light. Can be ignored if parent is non-null. Must be set if parent is null.</param>
+            <param name="parent">The transform to parent the light to. If null, the light cannot be moved from its initial position.</param>
+            <param name="color">The color of the light. Can be changed later using SetColor().</param>
+            <param name="maxLifeTime">If greater than zero, determines the amount of time before the light is destroyed.</param>
+            <param name="radius">How far the light radiates from its origin point.</param>
+            <param name="growIn">If true, the light will grow to its radius when fading in and shrink to nothingness when fading out.</param>
+            <param name="brightness">The brightness of the light. Setting to anything lower than 3.5f can have strange effects. Can be changed later using SetBrightness().</param>
+            <param name="fadeInTime">If greater than 0, determines how long the light takes to reach its max brightness when turned on.</param>
+            <param name="fadeOutTime">If greater than 0, determines how long the light takes to reach zero brightness when turned off.</param>
+            <param name="destroyWithParent">(MIGHT NOT WORK) If true, the light is destroyed when its parent is destroyed. If false, the light persists after its parent is destroyed.</param>
+            <param name="useCone">If true, the light will be emitted in a cone instead of in all directions.</param>
+            <param name="coneWidth">If useCone is true, determines the angle spanned by the cone of light. Can be changed later using SetConeWidth().</param>
+            <param name="coneDirection">If useCone is true, determines the angle the cone of light is pointed at. Can be changed later using PointInDirection() or PointAt().</param>
+            <param name="rotateWithParent">If true, if useCone is true, and if parented to a Gun / Projectile, automatically points the cone in the direction of the gun barrel / projectile respectively.</param>
+            <param name="turnOnImmediately">If true, the light is turned on immediately when created. If false, the light must be turned on manually with Toggle() or TurnOn().</param>
+        </member>
+        <member name="M:Alexandria.Misc.EasyLightExtensions.AddLight(Gun,System.Single,System.Nullable{UnityEngine.Color},System.Boolean,System.Boolean,System.Single,System.Single,System.Single,System.Boolean,System.Single,System.Boolean)">
+            <summary>Attaches an EasyLight to a gun.</summary>
+            <param name="brightness">The brightness of the light. Setting to anything lower than 3.5f can have strange effects. Can be changed later using SetBrightness().</param>
+            <param name="color">The color of the light. Can be changed later using SetColor().</param>
+            <param name="useCone">If true, the light will be emitted in a cone instead of in all directions.</param>
+            <param name="turnOnImmediately">If true, the light is turned on immediately when created. If false, the light must be turned on manually with Toggle() or TurnOn().</param>
+            <param name="fadeInTime">If greater than 0, determines how long the light takes to reach its max brightness when turned on.</param>
+            <param name="fadeOutTime">If greater than 0, determines how long the light takes to reach zero brightness when turned off.</param>
+            <param name="coneWidth">If useCone is true, determines the angle spanned by the cone of light. Can be changed later using SetConeWidth().</param>
+            <param name="rotateWithParent">If true, if useCone is true, and if parented to a Gun / Projectile, automatically points the cone in the direction of the gun barrel / projectile respectively.</param>
+            <param name="radius">How far the light radiates from its origin point.</param>
+            <param name="growIn">If true, the light will grow to its radius when fading in and shrink to nothingness when fading out.</param>
+        </member>
+        <member name="M:Alexandria.Misc.EasyLightExtensions.AddLight(Projectile,System.Single,System.Nullable{UnityEngine.Color},System.Boolean,System.Boolean,System.Single,System.Single,System.Single,System.Boolean,System.Single,System.Boolean)">
+            <summary>Attaches an EasyLight to a projectile.</summary>
+            <param name="brightness">The brightness of the light. Setting to anything lower than 3.5f can have strange effects. Can be changed later using SetBrightness().</param>
+            <param name="color">The color of the light. Can be changed later using SetColor().</param>
+            <param name="useCone">If true, the light will be emitted in a cone instead of in all directions.</param>
+            <param name="turnOnImmediately">If true, the light is turned on immediately when created. If false, the light must be turned on manually with Toggle() or TurnOn().</param>
+            <param name="fadeInTime">If greater than 0, determines how long the light takes to reach its max brightness when turned on.</param>
+            <param name="fadeOutTime">If greater than 0, determines how long the light takes to reach zero brightness when turned off.</param>
+            <param name="coneWidth">If useCone is true, determines the angle spanned by the cone of light. Can be changed later using SetConeWidth().</param>
+            <param name="rotateWithParent">If true, if useCone is true, and if parented to a Gun / Projectile, automatically points the cone in the direction of the gun barrel / projectile respectively.</param>
+            <param name="radius">How far the light radiates from its origin point.</param>
+            <param name="growIn">If true, the light will grow to its radius when fading in and shrink to nothingness when fading out.</param>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnRunStart">
+            <summary>
+            Runs whenever the player begins a new run. Triggers in all gamemodes, including shortcuts and bossrush.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.PostDungeonTrueStart">
+            <summary>
+            Runs whenever a new Dungeon instance is created, but BEFORE it is built. Used to modify aspects of Dungeon so they get applied on generation.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnNewPlayercontrollerSpawned">
+            <summary>
+            Runs whenever a new PlayerController is created.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnRewardPedestalSpawned">
+            <summary>
+            Runs whenever a new Reward Pedestal (IE: The pedestals created by bosses) is spawned.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnShrineUsed">
+            <summary>
+            Runs whenever a shrine of the type AdvancedShrineController is used. Pending improvement.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnShopItemStarted">
+            <summary>
+            Runs whenever a new ShopItemController is created.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnRatMazeFailed">
+            <summary>
+            Runs whenever a player fails in the Rat Maze, taking a wrong turn.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnMinorBreakableShattered">
+            <summary>
+            Runs when a minorbreakable is shattered.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnRewardPedestalDetermineContents">
+            <summary>
+            Runs just before a reward pedestal determines it's contents. 
+            Can be used to modify the contents by adding to the 'overrideItemPool' list in 'ValidPedestalContents'.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnChestPostSpawn">
+            <summary>
+            Runs when a new chest spawns. With room-reward chests, runs just after the chest has settled itself on the ground.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnChestPreOpen">
+            <summary>
+            Runs between the player interacting with a chest, and the chest opening.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnChestBroken">
+            <summary>
+            Runs whenever a chest is broken.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnAnyHealthHaverDie">
+            <summary>
+            Runs whenever any HealthHaver is killed.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnAnyPlayerCollectedAmmo">
+            <summary>
+            Runs whenever any PlayerController collects an ammo box.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnAnyPlayerCollectedKey">
+            <summary>
+            Runs whenever any player collects a key pickup. Note that Rat Keys count as keys.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnAnyPlayerCollectedHealth">
+            <summary>
+            Runs whenever any player collects an HP pickup. Note that Armor pickups count as HP.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnAnyPlayerNudgedHealth">
+            <summary>
+            Runs whenever any player touches an HP Pickup. Occurs before pickup, and will still run even if the player's HP is full and they are unable to collect the pickup.
+            Note that armor counts as an HP pickup.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnAnyPlayerCollectedBlank">
+            <summary>
+            Runs whenever any player collects a blank.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnAnyPlayerCollectedPickup">
+            <summary>
+            (DOES NOT WORK) Runs whenever any player collects any kind of Pickup Object. Runs AFTER pickup, so be aware of that.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnAnyPlayerDroppedPassiveItem">
+            <summary>
+            Runs whenever any player drops a passive item.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnBossKilled">
+            <summary>
+            Runs whenever any Boss HealthHaver is killed.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnExplosionComplex">
+            <summary>
+            Runs whenever an explosion occurs. Contains more information about the explosion than the vanilla action.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnLOTJSpawned">
+            <summary>
+            Runs when the Lord of the Jammed spawns.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.OnPostProcessItemSpawn">
+            <summary>
+            Runs when a loot item spawned by the Loot Engine becomes grounded and registered.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.CustomActions.ValidPedestalContents.overrideItemPool">
+            <summary>
+            A list of tuples which will be converted into an override loot pool for the pedestal if set. 
+            The first value is an integer, and represents an item id, while the second is a float an represents the weight.
+            </summary>
+        </member>
+        <member name="M:Alexandria.Misc.EasyEnumExtender.ExtendEnumsInAssembly(System.String,System.Reflection.Assembly)">
+            <summary>
+            In each class with the [EnumExtension(enumType)] attribute sets each public and static field to a new value of the given enum, named after the field.
+            </summary>
+            <param name="guid">The guid of your mod.</param>
+            <param name="asmbl">The assembly, the classes of which will be affected. If null, defaults to the assembly that called this method.</param>
+        </member>
+        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.PreProcessSlash">
+            <summary>
+            Runs just before a melee slash belonging to the attached player occurs, containing information about the slash and facilitating modification.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.PostProcessSlash">
+            <summary>
+            Runs after a melee slash belonging to the attached player occurs.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnSlashHitEnemy">
+            <summary>
+            Runs when an AIActor is hit by a melee slash belonging to the attached player. Ideal for transferring bullet effects.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnPickedUpAmmo">
+            <summary>
+            Runs whenever the attached player collects an ammo box.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnPickedUpKey">
+            <summary>
+            Runs whenever the attached player collects a key pickup. Note, Rat Keys count as Keys.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnPickedUpHP">
+            <summary>
+            Runs whenever the attached player collects HP. Note, Armor is counted as HP.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnNudgedHP">
+            <summary>
+            Runs whenever the attached player touches HP. Occurs before pickup, and will still run if the player nudges a heart pickup at full HP.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnPickedUpBlank">
+            <summary>
+            Runs whenever the attached player collects a blank.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnDroppedPassiveItem">
+            <summary>
+            Runs whenever the attached player drops a passive item.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnCompanionSpawnedBullet">
+            <summary>
+            Runs whenever a companion belonging to the attached player spawns a projectile.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnCompanionStatsQueried">
+            <summary>
+            Runs whenever a QueryCompanionStats is called. Useful for modifying companion stats not accessible via OnCompanionSpawnedBullet.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnBlessedGunChanged">
+            <summary>
+            Runs whenever the player's gun changes in Blessed Mode.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnActiveItemPreDrop">
+            <summary>
+            Runs just before the attached player drops their active item, for any reason.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnBlankModificationItemProcessed">
+            <summary>
+            Runs whenever a BlankModificationItem belonging to the attached player is processed after a blank.
+            </summary>
+        </member>
+        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnNewOrbitalInitialised">
+            <summary>
+            Runs whenever a PlayerOrbital belonging to the attached player is initialised.
+            </summary>
+        </member>
+        <member name="M:Alexandria.Misc.ExtendedPlayerComponent.Enrage(System.Single,System.Boolean)">
+            <summary>
+            Triggers a rage effect (like the Enraging Photo) for the specified duration. Rage gives double damage, and comes with associated visual effects.
+            </summary>
+            <param name="dur">The length of the desired rage.</param>
+            <param name="resetExisting">If true, the given rage duration will override the duration of existing rage (if the player is already enraged) instead of adding to it. Can be used to cancel rage by setting duration to zero.</param>
+        </member>
+        <member name="M:Alexandria.Misc.ExtendedPlayerComponent.TriggerInvulnerableFrames(System.Single,System.Boolean)">
+            <summary>
+            Triggers blinking invulnerability frames for the specified duration. Does not trigger if the player is already invulnerable from basegame I-frames.
+            </summary>
+            <param name="incorporealityTime">The length of the desired invulnerability.</param>
+            <param name="resetExisting">If true, the given incorporeality duration will override the duration of existing incorporeality (if the player is already invulnerable) instead of adding to it. Can be used to cancel I-frames by setting duration to zero.</param>
+        </member>
+        <member name="M:Alexandria.Misc.GameManagerUtility.GetPlayerWithItemID(GameManager,System.Int32,System.Boolean)">
+            <summary>
+            Returns the playercontroller with the specified item ID, if there is one. Returns null if no players have the item ID.
+            </summary>
+            <param name="managerInstance">The instance Gamemanager.</param>
+            <param name="id">The item ID being searched for.</param>
+            <param name="randomIfBoth">If true, and BOTH players have the specified item, the returned player will be random. If false in the same situation of both players having the item, prioritises the Primary Player.</param>
+        </member>
+        <member name="M:Alexandria.Misc.GameManagerUtility.AnyPlayerHasActiveSynergy(GameManager,System.String)">
+            <summary>
+            Returns true if the Primary Player OR the Secondary Player have the specified synergy. Does not check the secondary player if the secondary player does not exist.
+            </summary>
+            <param name="managerInstance">The instance Gamemanager.</param>
+            <param name="synergyID">The synergy name string to check for.</param>        
+        </member>
+        <member name="M:Alexandria.Misc.GameManagerUtility.AnyPlayerHasPickupID(GameManager,System.Int32)">
+            <summary>
+            Returns true if the Primary Player OR the Secondary Player have the specified item ID in their inventory. Does not check the secondary player if the secondary player does not exist.
+            </summary>
+            <param name="managerInstance">The instance Gamemanager.</param>
+            <param name="itemID">The item ID to check for.</param>        
+        </member>
+        <member name="M:Alexandria.Misc.GameManagerUtility.GetCombinedPlayersStatAmount(GameManager,PlayerStats.StatType)">
+            <summary>
+            Returns the total stat value of the specified stat shared between both players. Does not check players that do not exist.
+            </summary>
+            <param name="managerInstance">The instance Gamemanager.</param>
+            <param name="stat">The specified stat to return the combined total of.</param>        
+        </member>
+        <member name="M:Alexandria.Misc.PlayerUtility.RemoveItemFromInventory(PlayerController,PickupObject)">
+            <summary>
+            Removes the given pickupobject from the player's inventory if it is present in the player's inventory. Works on passives, actives, and guns.
+            </summary>
+            <param name="player">The target player.</param>
+            <param name="item">The item or gun to be removed.</param>
+        </member>
+        <member name="M:Alexandria.Misc.PlayerUtility.IsStarterItem(PlayerController,System.Int32)">
+            <summary>
+            Returns true if the given ID corresponds to one of the target player's starting items.
+            </summary>
+            <param name="player">The target player.</param>
+            <param name="id">The item ID being checked.</param>
+        </member>
+        <member name="M:Alexandria.Misc.PlayerUtility.GetNumberOfItemInInventory(PlayerController,System.Int32)">
+            <summary>
+            Returns an integer value corresponding to the number of copies of a given passive or active item present in the player's inventory. 
+            </summary>
+            <param name="player">The target player.</param>
+            <param name="itemID">The item ID being counted.</param>
+        </member>
+        <member name="M:Alexandria.Misc.PlayerUtility.RemovePassiveItemAtIndex(PlayerController,System.Int32)">
+            <summary>
+            Removes the item at the given index in the target player's inventory.
+            </summary>
+            <param name="player">The target player.</param>
+            <param name="index">The index at which the item should be removed.</param>
+        </member>
+        <member name="M:Alexandria.Misc.PlayerUtility.GetExtComp(PlayerController)">
+            <summary>
+            Returns the ExtendedPlayerComponent present on the specified player. Returns null if the ExtendedPlayerComponent is not present, however this should never happen.
+            </summary>
+            <param name="owner">The target player.</param>
+        </member>
+        <member name="M:Alexandria.Misc.PlayerUtility.PositionInDistanceFromAimDir(PlayerController,System.Single)">
+            <summary>
+            Returns a Vector2 position corresponding to the specified distance from the player in the direction they are currently aiming.
+            </summary>
+            <param name="player">The target player.</param>
+            <param name="distance">The distance from the player that the returned position ought to be.</param>
+        </member>
+        <member name="M:Alexandria.Misc.PlayerUtility.GetCursorPosition(PlayerController,System.Single)">
+            <summary>
+            Returns the position of the target player's cursor. Returned Vector2 is nullable, and will be null if the target player is using a controller.
+            </summary>
+            <param name="user">The target player.</param>
+            <param name="fallbackAimDirDistance">If the player does not have a cursor, and fallbackAimDirDistance is greater than zero, returns a position the specified distance in the direction being aimed.</param>
+        </member>
+        <member name="M:Alexandria.Misc.PlayerUtility.NextHitWillKillPlayer(PlayerController,System.Single)">
+            <summary>
+            Returns true if the specified damage amount will kill the target player. Rudimentary, use with caution.
+            </summary>
+            <param name="player">The target player.</param>
+            <param name="damageAmount">The damage amount to be checked against the player's current HP.</param>
+        </member>
+        <member name="M:Alexandria.Misc.PlayerUtility.GiveAmmoToGunNotInHand(PlayerController,System.Int32,System.Int32)">
+            <summary>
+            Gives the specified amount of ammo to the gun in the target player's inventory with the specified ID. Does nothing if the gun corresponding to the ID is not in the player's inventory.
+            </summary>
+            <param name="player">The target player.</param>
+            <param name="idToGive">The target gun ID to restore ammo to.</param>
+            <param name="AmmoToGive">The amount of ammo to restore.</param>
+        </member>
+        <member name="M:Alexandria.Misc.PlayerUtility.RecalculateOrbitals(PlayerController)">
+            <summary>
+            Recalculates the orbital tier and orbital index of the specified player's orbitals. Can resolve issues arising from spawning, deleting, or altering orbitals.
+            </summary>
+            <param name="player">The target player.</param>
+        </member>
+        <member name="M:Alexandria.Misc.PlayerUtility.TriggerInvulnerableFrames(PlayerController,System.Single)">
+            <summary>
+            Shorthand extension to trigger the invulnerability frame function of the ExtendedPlayerComponent.
+            </summary>
+            <param name="player">The target player.</param>
+            <param name="incorporealityTime">How long the invulnerability frames should last.</param>
+        </member>
+        <member name="M:Alexandria.Misc.PlayerUtility.DoEasyBlank(PlayerController,UnityEngine.Vector2,Alexandria.Misc.EasyBlankType)">
+            <summary>
+            Simple shorthand to trigger a blank effect belonging to the target player at a specified position.
+            </summary>
+            <param name="blankOwner">The target player, who the blank effect belongs to.</param>
+            <param name="blankPosition">The position of the blank effect.</param>
+            <param name="type">The 'type' of blank. Set to FULL for a full room blank, or MINI for a microblank, like the effect of Blank Bullets.</param>
+        </member>
+        <member name="M:Alexandria.Misc.RuntimeRoomhandlerUtility.GetXEnemiesInRoom(Dungeonator.RoomHandler,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Returns a specified number of unique enemies in the target room. Returns a list of AIActors.
+            </summary>
+            <param name="room">The target room.</param>
+            <param name="numOfEnemiesToReturn">How many enemies the returned list should contain. May return fewer than the specified amount if there are not enough valid enemies in the room.</param>
+            <param name="reqForRoomClear">If true, will only return enemies which are required for room clear.</param>
+            <param name="canReturnBosses">If false, returned list of AIActors cannot contain bosses.</param>
+        </member>
+        <member name="M:Alexandria.Misc.RuntimeRoomhandlerUtility.RoomContainsMineFlayer(Dungeonator.RoomHandler)">
+            <summary>
+            Returns true if the target room contains the Mine Flayer boss, or another AIActor (such as a bell) who is 'secretly' the Mine Flayer.
+            </summary>
+            <param name="room">The target room.</param>
+        </member>
+        <member name="M:Alexandria.Misc.ShadowBulletDoer.SpawnChainedShadowBullets(Projectile,System.Int32,System.Single,System.Single,Projectile,System.Boolean)">
+            <summary>
+            Spawns a chain of Shadow Bullets style 'shadow' projectiles behind the original bullet. 
+            </summary>
+            <param name="source">The target projectile.</param>
+            <param name="numberInChain">How many shadow bullets should be spawned.</param>
+            <param name="pauseLength">How long the pause should be between each shadow bullet in the chain spawning.</param>
+            <param name="chainScaleMult">A scale multiplier automatically applied to the spawned clones.</param>
+            <param name="overrideProj">If set, the shadow bullet chain will be made up of copies of the override projectile instead of the original projectile.</param>
+            <param name="shadowcolour">If true, applies the shadowy colouration from the Shadow Bullets item to the clones.</param>
+        </member>
+        <member name="M:Alexandria.Misc.ShadowBulletDoer.SpawnShadowBullet(Projectile,UnityEngine.Vector3,System.Single,System.Single,System.Boolean)">
+            <summary>
+            Creates a duplicate 'shadow' bullet with the same parameters as the original at a set position and with a set rotation. Returns the spawned clone for additional modification.
+            </summary>
+            <param name="obj">The target projectile.</param>
+            <param name="position">The position that the 'shadow' bullet should be spawned at.</param>
+            <param name="rotation">The rotation of the 'shadow' bullet. Used to determine angle. 0 is equivalent to directly to the right.</param>
+            <param name="chainScaleMult">A scale multiplier automatically applied to the spawned clone.</param>
+            <param name="shadowcolour">If true, applies the shadowy colouration from the Shadow Bullets item to the clone.</param>
+        </member>
+        <member name="M:Alexandria.Misc.SupplyDropDoer.SpawnSupplyDrop(UnityEngine.Vector2,System.Int32,System.Single,System.Boolean)">
+            <summary>
+            Spawns a falling crate (like the Supply Drop item) at the specified position. Returns the spawned crate's crate behaviour. Returned behaviour contains an OnCrateLanded action for custom effects.
+            </summary>
+            <param name="position">The position the crate should be spawned at.</param>
+            <param name="lootIDToSpawn">An item or gun ID to be dropped by the crate. Leave as -1 for no item.</param>
+            <param name="crateDespawnDelay">How long after opening should the crate wait to despawn. If left as -1, the crate will despawn when the spawned loot is collected (if the loot spawn ID was set).</param>
+            <param name="preventAutoDespawn">If true, prevents the crate from despawning automatically. Call RemoveCrate() to remove manually.</param>
+        </member>
+        <member name="M:Alexandria.Misc.SupplyDropDoer.SimplerCrateBehaviour.RemoveCrate">
+            <summary>
+            Causes the crate to play it's despawn animation, and disappear.
+            </summary>
+        </member>
+        <member name="M:Alexandria.Misc.SupplyDropDoer.SimplerCrateBehaviour.ClearLandingTarget">
+            <summary>
+            Removes the crate's landing target VFX, if one is present.
+            </summary>
+        </member>
+        <member name="M:Alexandria.Misc.Tk2dSpriteAnimatorUtility.AddEventTriggersToAnimation(tk2dSpriteAnimator,System.String,System.Collections.Generic.Dictionary{System.Int32,System.String})">
+            <summary>
+            Adds an event trigger to specific frames in an animation. 
+            </summary>
+            <param name="animator">The target tk2dSpriteAnimator.</param>
+            <param name="animationName">The name of the aniamtion you want to affect.</param>
+            <param name="frameAndEventName">A dictionary containing the frames and the event name you want to trigger at that frame. Ex: { 0, "sparkle" }, will trigger the event 'sparkle' on the first frame of the animation </param>
+        </member>
+        <member name="M:Alexandria.Misc.Tk2dSpriteAnimatorUtility.AddOffsetToFrames(tk2dSpriteAnimator,System.String,System.Collections.Generic.Dictionary{System.Int32,UnityEngine.Vector3},System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Offsets specific frames positions in an animation. Be wary to NOT use this on the same frames AND aniamtions multiple times!
+            </summary>
+            <param name="animator">The target tk2dSpriteAnimator.</param>
+            <param name="animationName">The name of the aniamtion you want to affect.</param>
+            <param name="Offset">A dictionary containing the frames and the offset you want to apply to that frame. Ex: { 0, new Vector3(0.25f, 0.25f) }, will ofsset the frame by 4 pixels up and 4 pixels right on the first frame of the animation </param>
+            <param name="idListfallback">Can be left as null. Used to store ids between uses to make sure not to offset these frames on accident.</param>
+        </member>
+        <member name="M:Alexandria.Misc.Tk2dSpriteAnimatorUtility.AddSoundsToAnimationFrame(tk2dSpriteAnimator,System.String,System.Collections.Generic.Dictionary{System.Int32,System.String})">
+            <summary>
+            Adds triggers to specific frames in an animation to play sounds. 
+            </summary>
+            <param name="animator">The target tk2dSpriteAnimator.</param>
+            <param name="animationName">The name of the aniamtion you want to affect.</param>
+            <param name="frameAndSoundName">A dictionary containing the frames and the sound name you want to trigger at that frame. Ex: { 0, "Play_ENM_hammer_target_01" }, will play the sound 'Play_ENM_hammer_target_01' on the first frame of the animation </param>
+        </member>
+        <member name="M:Alexandria.Misc.Tk2dSpriteAnimatorUtility.MarkAnimationAsSpawn(tk2dSpriteAnimator,System.String)">
+            <summary>
+            Marks all frames in an animation as spawning frames. Probably only used for enemies. 
+            </summary>
+            <param name="animator">The target tk2dSpriteAnimator.</param>
+            <param name="animationName">The name of the aniamtion you want to affect.</param>
+        </member>
+        <member name="M:Alexandria.Misc.Tk2dSpriteAnimatorUtility.AddInvulnverabilityFramesToAnimation(tk2dSpriteAnimator,System.String,System.Collections.Generic.Dictionary{System.Int32,System.Boolean})">
+            <summary>
+            Marks specific frames in an animation to make the enemy invulnerable to damage on those frames. 
+            </summary>
+            <param name="animator">The target tk2dSpriteAnimator.</param>
+            <param name="animationName">The name of the aniamtion you want to affect.</param>
+            <param name="frameAndBool">A dictionary containing the frames and a true/false for whether it'll be invulnerable on that frame. (Default is false) Ex: { 0, true }, will make the enemy invulnerable on the first frame of the animation </param>
+        </member>
+        <member name="M:Alexandria.Misc.ProjectileUtility.ProjectilePlayerOwner(Projectile)">
+            <summary>
+            Fetches the PlayerController of the player who owns the projectile. If the projectile is not owned by a player, returns null.
+            </summary>
+            <param name="bullet">The target projectile</param>
+        </member>
+        <member name="M:Alexandria.Misc.ProjectileUtility.Ext(Projectile)">
+            <summary>
+            Returns the ProjectileExt component attached to the given projectile. If one does not exist, adds one and returns it. If the given projectile is null, returns null.
+            </summary>
+            <param name="proj">The target projectile</param>
+        </member>
+        <member name="M:Alexandria.Misc.ProjectileUtility.InstantiateAndFireTowardsPosition(Projectile,UnityEngine.Vector2,UnityEngine.Vector2,System.Single,System.Single,PlayerController)">
+            <summary>
+            Instantiates a projectile and fires it in the direction of a given Vector2 position. Returns the instantiated projectile for further modification.
+            </summary>
+            <param name="projectile">The projectile prefab to be instantiated.</param>
+            <param name="startingPosition">The position the projectile should be spawned at.</param>
+            <param name="targetPosition">The target position that the projectile should be fired towards.</param>
+            <param name="angleOffset">The amount of degrees that the projectile's trajectory should be offset by. For example, '45' will cause the projectile to be fired 45 degrees to the left of the target. Leave 0 for a direct shot.</param>
+            <param name="angleVariance">The amount of degrees the projectile's angle can vary from the final angle. Essentially accuracy/spread.</param>
+            <param name="playerToScaleAccuracyOff">If set to a player controller, that player's accuracy stat will affect the angle variance of the instantiated projectile.</param>
+        </member>
+        <member name="M:Alexandria.Misc.ProjectileUtility.InstantiateAndFireInDirection(Projectile,UnityEngine.Vector2,System.Single,System.Single,PlayerController)">
+            <summary>
+            Instantiates a projectile and fires it along a given angle. Returns the instantiated projectile for further modification.
+            </summary>
+            <param name="projectile">The projectile prefab to be instantiated.</param>
+            <param name="startingPosition">The position the projectile should be spawned at.</param>
+            <param name="angle">The angle the projectile should be fired. 0 corresponds with directly to the right. 180 corresponds with directly to the left.</param>
+            <param name="angleVariance">The amount of degrees the projectile's angle can vary from the given angle. Essentially accuracy/spread.</param>
+            <param name="playerToScaleAccuracyOff">If set to a player controller, that player's accuracy stat will affect the angle variance of the instantiated projectile.</param>
+        </member>
+        <member name="M:Alexandria.Misc.ProjectileUtility.GetAbsoluteRoom(Projectile)">
+            <summary>
+            Returns the RoomHandler of the room that the projectile is inside.
+            </summary>
+            <param name="bullet">The target projectile.</param>
+        </member>
+        <member name="M:Alexandria.Misc.ProjectileUtility.SendInRandomDirection(Projectile)">
+            <summary>
+            Sends the bullet flying in a random direction.
+            </summary>
+            <param name="bullet">The target projectile.</param>
+        </member>
+        <member name="M:Alexandria.Misc.ProjectileUtility.GetVectorToNearestEnemy(Projectile,System.Boolean,Dungeonator.RoomHandler.ActiveEnemyType,System.Collections.Generic.List{AIActor},System.Func{AIActor,System.Boolean})">
+            <summary>
+            Returns a vector corresponding to the direction of the nearest enemy to the projectile's position. Returns Vector2.zero if the Projectile is null
+            </summary>
+            <param name="bullet">The target projectile</param>
+            <param name="checkIsWorthShooting">If true, the projectile will ignore enemies with IsWorthShootingAt set to false, such as Mountain Cubes.</param>
+            <param name="type">Determines whether or not the projectile should take into account if an enemy needs to be killed for room clear.</param>
+            <param name="overrideValidityCheck">A function which allows for the setting of custom parameters for whether or not an enemy is valid.</param>
+            <param name="excludedActors">Enemies that are in this list will not be taken into account.</param>
+        </member>
+        <member name="M:Alexandria.Misc.ProjectileUtility.ReflectBullet(Projectile,System.Boolean,GameActor,System.Single,System.Boolean,System.Single,System.Single,System.Single,System.String)">
+            <summary>
+            Changes the trajectory of the targeted projectile and assigns it a new owner, 'reflecting' it as with the effect of Rolling Eye.
+            </summary>
+            <param name="p">The target projectile</param>
+            <param name="retargetReflectedBullet">If true, the reflected bullet will be automatically sent back in the direction of it's previous owner.</param>
+            <param name="newOwner">The intended new owner of the projectile. Can be a player or an enemy.</param>
+            <param name="minReflectedBulletSpeed">The minimum speed of the projectile once it is reflected. If it's current speed is less than the minimum, it will be accelerated to the minimum.</param>
+            <param name="doPostProcessing">If true, and the newOwner is a player, the reflected bullet will scale with the new owner's stats and will be post processed by their items.</param>
+            <param name="scaleModifier">A scale multiplier which will be applied to the projectile as it is reflected.</param>
+            <param name="baseDamage">The damage that the reflected projectile should deal.</param>
+            <param name="spread">How many degrees the projectile's trajectory can vary by if it is retargeted towards it's previous owner.</param>
+            <param name="sfx">A sound effect which is played when the projectile is reflected.</param>
+        </member>
+        <member name="M:Alexandria.Misc.ProjectileUtility.SetupProjectile(System.Int32)">
+            <summary>
+            Automatically instantiates and fakeprefabs the first projectile of the default module of the given gun ID and returns the new fake prefab.
+            </summary>
+            <param name="id">The gun ID whose first, default projectile you wish to return a clone of</param>
+        </member>
+        <member name="M:Alexandria.Misc.ProjectileUtility.InstantiateAndFakeprefab(Projectile)">
+            <summary>
+            Automatically instantiates and fakeprefabs the given projectile and returns the new fake prefab.
+            </summary>
+            <param name="projToCopy">The original projectile which you intend to return a clone of</param>
+        </member>
+        <member name="M:Alexandria.Misc.ProjectileUtility.ApplyClonedShaderProjModifier(Projectile,ShaderProjModifier)">
+            <summary>
+            Clones an existing ShadeProjModifier and applies it to the target projectile. ShadeProjModifiers are visual effects like that of the Tangler.
+            </summary>
+            <param name="self">The target projectile</param>
+            <param name="shaderToClone">The original ShaderProjModifier which you intend to clone onto the target.</param>
+        </member>
+        <member name="M:Alexandria.Misc.ProjectileUtility.RemoveFromPool(Projectile)">
+            <summary>
+            Prevents the bullet from pooling and being recycled by enemies. Use on enemy bullets that you apply strange effects to.
+            </summary>
+            <param name="proj">The target projectile.</param>
+        </member>
+        <member name="M:Alexandria.Misc.ProjectileUtility.ConvertToHelixMotion(Projectile,System.Boolean)">
+            <summary>
+            Easily converts a bullet to the Helix Bullets projectile motion, including compensating for the presence of orbital bullets.
+            </summary>
+            <param name="bullet">The target projectile.</param>
+            <param name="isInverted">Whether or not the helix motion should go left or right to start off.</param>
+        </member>
+        <member name="M:Alexandria.Misc.ProjectileUtility.ApplyCompanionModifierToBullet(Projectile,PlayerController)">
+            <summary>
+            Applies companion modifiers easily to a target projectile. By default includes the multipliers from Battle Standard and the Lute.
+            </summary>
+            <param name="bullet">The target projectile</param>
+            <param name="owner">The player whose companion modifiers should be taken into account.</param>
+        </member>
+        <member name="M:Alexandria.Misc.ProjectileUtility.GetFullListOfStatusEffects(Projectile,System.Boolean)">
+            <summary>
+            Conglomerates all status effects that a projectile will apply into a single list.
+            </summary>
+            <param name="bullet">The target projectile</param>
+            <param name="ignoresProbability">If false, the method will only return a status effect if a random value is equal or less than it's chance to apply. If true, it will ignore the status effect's chance to apply and return it regardless.</param>
+        </member>
+        <member name="M:Alexandria.Misc.ProjectileUtility.ReturnRealDamageWithModifiers(Projectile,HealthHaver)">
+            <summary>
+            Approximates the damage that the projectile would apply to a given target, applying both boss damage multipliers and jammed damage multipliers. General shorthand.
+            </summary>
+            <param name="bullet">Target projectile</param>
+            <param name="target">The enemy whom the potential damage against is being calculated</param>
+        </member>
+        <member name="M:Alexandria.Misc.ProjectileUtility.AssignToPlayer(Projectile,PlayerController,System.Boolean)">
+            <summary>
+            Makes the target projectile the property of the given player, and scales the projectile's stats off of that player's stats.
+            </summary>
+            <param name="bullet">Target projectile</param>
+            <param name="player">The player the bullet will be assigned to.</param>
+            <param name="postProcess">Whether or not to automatically postprocess the given projectile.</param>
+        </member>
+        <member name="M:Alexandria.Misc.VolleyRebuildHelpers.RecalculateStatsWithoutRebuildingGunVolleys(PlayerStats,PlayerController)">
+            <summary>Prevent gun volleys from being rebuilt when recalculating the players' stats</summary>
+        </member>
+        <member name="M:Alexandria.Misc.EnumSaveData.GetValueAsObject``1(System.String,System.String)">
+            <summary>
+            Get the value of a key as an object in the save data.
+            </summary>
+            <param name="guid">The GUID of the mod.</param>
+            <param name="key">The key to get the value of.</param>
+            <returns>The value of the key as an object.</returns>
+            <typeparam name="T">The type of object you are getting.</typeparam>
+        </member>
+        <member name="M:Alexandria.Misc.EnumSaveData.GetValue(System.String,System.String)">
+            <summary>
+            Get the value of a key as a string in the save data.
+            </summary>
+            <param name="guid">The GUID of the mod.</param>
+            <param name="key">The key to get the value of.</param>
+            <returns>The value of the key as a string.</returns>
+        </member>
+        <member name="M:Alexandria.Misc.EnumSaveData.GetValueAsInt(System.String,System.String)">
+            <summary>
+            Get the value of a key as an integer in the save data.
+            </summary>
+            <param name="guid">The GUID of the mod.</param>
+            <param name="key">The key to get the value of.</param>
+            <returns>The value of the key as an integer.</returns>
+        </member>
+        <member name="M:Alexandria.Misc.EnumSaveData.GetValueAsFloat(System.String,System.String)">
+            <summary>
+            Get the value of a key as a float in the save data.
+            </summary>
+            <param name="guid">The GUID of the mod.</param>
+            <param name="key">The key to get the value of.</param>
+            <returns>The value of the key as a float.</returns>
+        </member>
+        <member name="M:Alexandria.Misc.EnumSaveData.GetValueAsBoolean(System.String,System.String)">
+            <summary>
+            Get the value of a key as a boolean in the save data.
+            </summary>
+            <param name="guid">The GUID of the mod.</param>
+            <param name="key">The key to get the value of.</param>
+            <returns>The value of the key as a boolean.</returns>
+        </member>
+        <member name="M:Alexandria.Misc.EnumSaveData.SetValueAsObject``1(System.String,System.String,``0)">
+            <summary>
+            Set the value of a key as an object in the save data,
+            It's recommended to not save an object that implements Unity's Object class as it can cause a infinite recursion and crash the game.
+            </summary>
+            <param name="guid">The GUID of the mod.</param>
+            <param name="key">The key to set the value of.</param>
+            <param name="value">The object value to set.</param>
+            <typeparam name="T">The type of object you are setting.</typeparam>
+        </member>
+        <member name="M:Alexandria.Misc.EnumSaveData.SetValue(System.String,System.String,System.Object)">
+            <summary>
+            Set the value of a key in the save data.
+            </summary>
+            <param name="guid">The GUID of the mod.</param>
+            <param name="key">The key to set the value of.</param>
+            <param name="value">The value to set.</param>
+        </member>
+        <member name="M:Alexandria.Misc.LootUtility.CreateLootTable(System.Collections.Generic.List{GenericLootTable},DungeonPrerequisite[])">
+            <summary>
+            Creates a new blank loot table
+            </summary>
+            <param name="includedLootTables">i think this litterally dose fuck all</param> 
+            <param name="prerequisites">the prerequisites of the loot table... whatever the fuck that means</param>
+            <returns></returns>
+        </member>
+        <member name="M:Alexandria.Misc.LootUtility.AddItemToPool(GenericLootTable,PickupObject,System.Single)">
+            <summary>
+            Adds an item to a loot table via PickupObject
+            </summary>
+            <param name="lootTable">The loot table you want to add to</param> 
+            <param name="po">The PickupObject you're adding</param>
+            <param name="weight">The Weight of the item you're adding (default is 1)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Alexandria.Misc.LootUtility.AddItemsToPool(GenericLootTable,System.Int32[])">
+            <summary>
+            Adds an item to a loot table via PickupObject (Will keep weight at 1)
+            </summary>
+            <param name="lootTable">The loot table you want to add to</param> 
+            <param name="items">A list of item IDs you want to add to your loottable</param>
+            <returns></returns>
+        </member>
+        <member name="M:Alexandria.Misc.LootUtility.AddItemsToPool(GenericLootTable,System.Collections.Generic.Dictionary{System.Int32,System.Single})">
+            <summary>
+            Adds an item to a loot table via PickupObject (Will keep weight at 1)
+            </summary>
+            <param name="lootTable">The loot table you want to add to</param> 
+            <param name="items">A dictionary of item IDs and their weights. The FIRST VALUE IS THE ID.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Alexandria.Misc.LootUtility.AddItemToPool(GenericLootTable,System.Int32,System.Single)">
+            <summary>
+            Adds an item to a loot table via PickupObjectId
+            </summary>
+            <param name="lootTable">The loot table you want to add to</param> 
+            <param name="poID">The id of the PickupObject you're adding</param>
+            <param name="weight">The Weight of the item you're adding (default is 1)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Alexandria.Misc.LootUtility.RemovePickupFromLootTables(PickupObject)">
+            <summary>
+            Removes a pickup object from the default guns and items loot table
+            </summary>
+            <param name="po">The pickup object you want to remove</param> 
+            <returns></returns>
+        </member>
+        <member name="M:Alexandria.Misc.LootUtility.FindWeightedGameObjectInCollection(WeightedGameObjectCollection,PickupObject)">
+            <summary>
+            Finds a weighted game object corresponding to a given pickup object in a weighted game object collection.
+            </summary>
+            <param name="collection">The collection you are searching</param> 
+            <param name="po">The pickup object you want to find</param> 
+            <returns></returns>
+        </member>
+        <member name="M:Alexandria.Misc.LootUtility.FindWeightedGameObjectInCollection(WeightedGameObjectCollection,System.Int32)">
+            <summary>
+            Finds a weighted game object corresponding to a given pickup object id in a weighted game object collection.
+            </summary>
+            <param name="collection">The collection you are searching</param> 
+            <param name="id">The id of the pickup object you want to find</param> 
+            <returns></returns>
+        </member>
+        <member name="M:Alexandria.Misc.LootUtility.FindWeightedGameObjectInCollection(WeightedGameObjectCollection,UnityEngine.GameObject)">
+            <summary>
+            Finds a weighted game object corresponding to a given gameobject in a weighted game object collection.
+            </summary>
+            <param name="collection">The collection you are searching</param> 
+            <param name="obj">The gameobject you want to find</param> 
+            <returns></returns>
+        </member>
+        <member name="M:Alexandria.Misc.Shared.CallPrivate(MonoMod.Cil.ILCursor,System.Type,System.String)">
+            <summary>Convenience method for calling an internal / private static function with an ILCursor</summary>
+        </member>
+        <member name="M:Alexandria.Misc.Shared.DeclareLocal``1(MonoMod.Cil.ILContext)">
+            <summary>Declare a local variable in an ILManipulator</summary>
+        </member>
+        <member name="F:Alexandria.Misc.Shared.rx_enum_field">
+            <summary>Retrieves a field from within an enumerator</summary>
+        </member>
+        <member name="M:Alexandria.Misc.Shared.Append``1(``0[]@,``0[])">
+            <summary>Adds 1 or more elements to an array.</summary>
+        </member>
+        <member name="M:Alexandria.Misc.MathsAndLogicHelper.CalculateVectorBetween(UnityEngine.Vector2,UnityEngine.Vector2)">
+            <summary>
+            Returns a Vector2 value corresponding to the direction between the first and second positions. Useful for trajectories.
+            </summary>
+            <param name="startVector">The starting position in the trajectory.</param>
+            <param name="endVector">The ending position in the trajectory.</param>
+        </member>
+        <member name="M:Alexandria.Misc.MathsAndLogicHelper.CalculateVectorBetween(UnityEngine.Vector3,UnityEngine.Vector3)">
+            <summary>
+            Returns a Vector2 value corresponding to the direction between the first and second positions. Useful for trajectories.
+            </summary>
+            <param name="startVector">The starting position in the trajectory.</param>
+            <param name="endVector">The ending position in the trajectory.</param>
+        </member>
+        <member name="M:Alexandria.Misc.MathsAndLogicHelper.RadianToVector2(System.Single)">
+            <summary>
+            Converts a given radian into a Vector2.
+            </summary>
+            <param name="radian">The radian to convert.</param>
+        </member>
+        <member name="M:Alexandria.Misc.MathsAndLogicHelper.DegreeToVector2(System.Single)">
+            <summary>
+            Converts an angle degree into a Vector2.
+            </summary>
+            <param name="degree">The degree to convert.</param>
+        </member>
+        <member name="M:Alexandria.Misc.MathsAndLogicHelper.DegreeToVector2(System.Int32)">
+            <summary>
+            Converts an angle degree into a Vector2.
+            </summary>
+            <param name="degree">The degree to convert.</param>
+        </member>
+        <member name="M:Alexandria.Misc.MathsAndLogicHelper.isEven(System.Single)">
+            <summary>
+            Returns true if the given float is even.
+            </summary>
+            <param name="number">The float to check.</param>
+        </member>
+        <member name="M:Alexandria.Misc.MathsAndLogicHelper.isEven(System.Int32)">
+            <summary>
+            Returns true if the given integer is even.
+            </summary>
+            <param name="number">The integer to check.</param>
+        </member>
+        <member name="M:Alexandria.Misc.MathsAndLogicHelper.IsBetweenRange(System.Single,System.Single,System.Single)">
+            <summary>
+            Returns true if the given float is between the provided number range.
+            </summary>
+            <param name="numberToCheck">The float to check.</param>
+            <param name="bottom">The low end of the given range to check.</param>
+            <param name="top">The high end of the given range to check.</param>
+        </member>
+        <member name="M:Alexandria.Misc.MathsAndLogicHelper.GetAccuracyAngled(System.Single,System.Single,PlayerController)">
+            <summary>
+            Takes a float which represents an angle, and returns that same angle with a random degree of variance, similarly to gun accuracy.
+            </summary>
+            <param name="startFloat">The starting angle.</param>
+            <param name="variance">The amount by which the starting angle may vary in either direction.</param>
+            <param name="playerToScaleAccuracyOff">If set, the amount of variance will be affected by the given player's accuracy stat.</param>
+        </member>
+        <member name="M:Alexandria.Misc.MathsAndLogicHelper.RemoveInvalidIDListEntries(System.Collections.Generic.List{System.Int32},System.Boolean,System.Boolean)">
+            <summary>
+            Takes a list of item IDs. Removes 'invalid' entries based on set criteria, and returns the modified list.
+            </summary>
+            <param name="starterList">The list to be checked. Should only contain existing item IDs.</param>
+            <param name="checkPlayerInventories">Removes item IDs that are currently in a player's inventory.</param>
+            <param name="checkUnlocked">Removes item IDs which have not yet been unlocked.</param>
+        </member>
+        <member name="M:Alexandria.Misc.MathsAndLogicHelper.GetRandomQuality(PickupObjectDatabase,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Returns a random item quality between D and S, with decreasing probability. Configurable probability. If one tier chance is set, all must be set. D tier is not set, as it is the default if no other tiers are chosen.
+            </summary>
+            <param name="dat">The pickupobjectdatabase.</param>
+            <param name="cChance">The chance for the returned item to be C Tier.</param>
+            <param name="bChance">The chance for the returned item to be B Tier.</param>
+            <param name="aChance">The chance for the returned item to be A Tier.</param>
+            <param name="sChance">The chance for the returned item to be S Tier.</param>
+        </member>
+        <member name="M:Alexandria.Misc.MathsAndLogicHelper.GetNearestEnemyToPosition(UnityEngine.Vector2,System.Boolean,Dungeonator.RoomHandler.ActiveEnemyType,System.Collections.Generic.List{AIActor},System.Func{AIActor,System.Boolean})">
+            <summary>
+            Returns the AIActor of the nearest enemy to the Vector2 position.
+            By default, will only return engaged enemies with HealthHavers who are alive and vulnerable. Use overrideValidityCheck if this is not what you want.
+            </summary>
+            <param name="position">The position to check.</param>
+            <param name="checkIsWorthShootingAt">If true, will ignore enemies such as Mountain Cubes.</param>
+            <param name="type">Controls whether or not the check should ignore enemies who are not required for room clear.</param>
+            <param name="excludedActors">AIactors on this list will be ignored.</param>
+            <param name="overrideValidityCheck">A func which allows the manual checking of custom parameters for enemy validity.</param>
+        </member>
+        <member name="M:Alexandria.Misc.MathsAndLogicHelper.GetNearestEnemyToPosition(IntVector2,System.Boolean,Dungeonator.RoomHandler.ActiveEnemyType,System.Collections.Generic.List{AIActor},System.Func{AIActor,System.Boolean})">
+            <summary>
+            Returns the AIActor of the nearest enemy to the IntVector2 position.
+            By default, will only return engaged enemies with HealthHavers who are alive and vulnerable. Use overrideValidityCheck if this is not what you want.
+            </summary>
+            <param name="position">The position to check.</param>
+            <param name="checkIsWorthShootingAt">If true, will ignore enemies such as Mountain Cubes.</param>
+            <param name="type">Controls whether or not the check should ignore enemies who are not required for room clear.</param>
+            <param name="excludedActors">AIactors on this list will be ignored.</param>
+            <param name="overrideValidityCheck">A func which allows the manual checking of custom parameters for enemy validity.</param>
+        </member>
+        <member name="M:Alexandria.Misc.MathsAndLogicHelper.GetVectorToNearestEnemy(UnityEngine.Vector2,System.Boolean,Dungeonator.RoomHandler.ActiveEnemyType,System.Collections.Generic.List{AIActor},System.Func{AIActor,System.Boolean})">
+            <summary>
+            Returns a Vector2 corresponding to the direction towards the nearest enemy to the initial position.
+            By default, will only return engaged enemies with HealthHavers who are alive and vulnerable. Use overrideValidityCheck if this is not what you want.
+            </summary>
+            <param name="position">The position to check.</param>
+            <param name="checkIsWorthShooting">If true, will ignore enemies such as Mountain Cubes.</param>
+            <param name="type">Controls whether or not the check should ignore enemies who are not required for room clear.</param>
+            <param name="excludedActors">AIactors on this list will be ignored.</param>
+            <param name="overrideValidityCheck">A func which allows the manual checking of custom parameters for enemy validity.</param>
+        </member>
+        <member name="M:Alexandria.Misc.MathsAndLogicHelper.GetPositionOfNearestEnemy(UnityEngine.Vector2,Alexandria.Misc.ActorCenter,System.Boolean,Dungeonator.RoomHandler.ActiveEnemyType,System.Collections.Generic.List{AIActor},System.Func{AIActor,System.Boolean})">
+            <summary>
+            Returns a Vector2 corresponding to position of the nearest enemy to the original position.
+            By default, will only return engaged enemies with HealthHavers who are alive and vulnerable. Use overrideValidityCheck if this is not what you want.
+            Returns Vector2.zero if there is not a valid enemy in the room, or it did not have the required component for the centerType.
+            </summary>
+            <param name="position">The position to check.</param>
+            <param name="centerType">How the position of the enemy should be determined. RIGIDBODY will return the SpecRigidBody UnitCenter, SPRITE will return the Sprite.WorldCenter, and TRANSFORM will return the Transform position.</param>
+            <param name="checkIsWorthShootingAt">If true, will ignore enemies such as Mountain Cubes.</param>
+            <param name="type">Controls whether or not the check should ignore enemies who are not required for room clear.</param>
+            <param name="excludedActors">AIactors on this list will be ignored.</param>
+            <param name="overrideValidityCheck">A func which allows the manual checking of custom parameters for enemy validity.</param>
+        </member>
+        <member name="M:Alexandria.Misc.MathsAndLogicHelper.KeyByValue``2(System.Collections.Generic.Dictionary{``0,``1},``1)">
+            <summary>
+            Searches a dictionary for a specific value, and returns the corresponding key. Essentially a reverse dictionary search.
+            </summary>
+            <param name="dict">The dictionary to be searched.</param>
+            <param name="val">The value being searched for.</param>
+        </member>
+        <member name="M:Alexandria.Misc.MathsAndLogicHelper.GetCenteredLookingPosForObj(UnityEngine.Vector2,SpeculativeRigidbody,System.Boolean,System.Boolean)">
+            <summary>
+            Returns a position relative to the initial Vector2 where the provided SpeculativeRigidBody may be spawned such that it's center will be centered upon the original position.
+            </summary>
+            <param name="originalValue">The original position, where the given rigidbody is desired to be centered upon.</param>
+            <param name="rigidBody">The rigidbody whose dimensions are being compensated for.</param>
+            <param name="centerX">If true, will return a position which will center the rigidbody along the X coordinate.</param>
+            <param name="centerY">If true, will return a position which will center the rigidbody along the Y coordinate.</param>
+        </member>
+        <member name="M:Alexandria.Misc.RandomEnum`1.Get">
+            <summary>
+            Returns a random value of the Enum.
+            </summary>
+        </member>
         <member name="M:Alexandria.ChestAPI.ChestUtility.AddFuse(Chest)">
             <summary>
             Attaches a fuse to the chest, and ignites it. Does nothing if the chest is already fused.
@@ -1013,138 +2088,6 @@
             <summary>
             LEGACY VERSION, use customPlaceables instead.
             </summary>
-        </member>
-        <member name="M:Alexandria.EnemyAPI.AIActorUtility.DeleteOwnedBullets(GameActor,System.Single,System.Boolean)">
-            <summary>
-            Deletes all bullets belonging to the GameActor.
-            </summary>
-            <param name="enemy">The target actor.</param>
-            <param name="chancePerProjectile">The individual chance per bullet for it to be deleted. 100% by default.</param>
-            <param name="deleteBulletLimbs">If true 'bullet limbs' belonging to the actor will also be deleted. Bullet limbs exist on Misfire Beasts, Revolvenants, and others.</param>
-        </member>
-        <member name="M:Alexandria.EnemyAPI.AIActorUtility.DoCorrectForWalls(AIActor)">
-            <summary>
-            Updates the position of the AIActor to hopefully prevent it from becoming stuck in a wall. NOT FOOLPROOF.
-            </summary>
-            <param name="enemy">The target AIActor.</param>       
-        </member>
-        <member name="M:Alexandria.EnemyAPI.AIActorUtility.IsInMinecart(AIActor)">
-            <summary>
-            Returns true if the AIActor is riding in a minecart.
-            </summary>
-            <param name="target">The target AIActor.</param>
-        </member>
-        <member name="M:Alexandria.EnemyAPI.AIActorUtility.ClosestPointOnEnemy(AIActor,UnityEngine.Vector2)">
-            <summary>
-            Returns The closest Vector2 position on the enemy's hitbox to the given position.
-            </summary>
-            <param name="target">The target AIActor.</param>
-            <param name="pointComparison">The Vector2 position to which the closest point on the enemy's hitbox should be calculated.</param>
-        </member>
-        <member name="M:Alexandria.EnemyAPI.AIActorUtility.ClosestPointOnRigidBody(SpeculativeRigidbody,UnityEngine.Vector2)">
-            <summary>
-            Returns The closest Vector2 position on the SpeculativeRigidbody's hitbox to the given position.
-            </summary>
-            <param name="target">The target SpeculativeRigidbody.</param>
-            <param name="pointComparison">The Vector2 position to which the closest point on the SpeculativeRigidbody's hitbox should be calculated.</param>
-        </member>
-        <member name="M:Alexandria.EnemyAPI.AIActorUtility.IsSecretlyTheMineFlayer(AIActor)">
-            <summary>
-            Returns true AIActor is 'secretly' the Mine Flayer as part of the Mine Flayer's bell shell-game attack.
-            </summary>
-            <param name="target">The AIActor to be checked.</param>
-        </member>
-        <member name="M:Alexandria.EnemyAPI.AIActorUtility.ApplyGlitter(AIActor)">
-            <summary>
-            Applies the 'Glitter' visual effect from the Mailbox to the AIActor.
-            </summary>
-            <param name="target">The AIActor to be glittered.</param>
-        </member>
-        <member name="M:Alexandria.EnemyAPI.AIActorUtility.DoGeniePunch(AIActor,PlayerController)">
-            <summary>
-            Causes a Genie to punch the AIActor, like the effect of the Magic Lamp.
-            </summary>
-            <param name="enemy">The AIActor to be punched.</param>
-            <param name="owner">The owner of the Genie.</param>
-        </member>
-        <member name="M:Alexandria.EnemyAPI.AIActorUtility.GetDirectionalAnimation(AIAnimator,System.String)">
-            <summary>
-            Returns a directional animation on the AIAnimator corresponding to the given animation name.
-            </summary>
-            <param name="self">The AIAnimator to be checked.</param>
-            <param name="animName">The name of the animation being checked for.</param>
-        </member>
-        <member name="M:Alexandria.EnemyAPI.AIActorUtility.AdvancedTransmogrify(AIActor,AIActor,UnityEngine.GameObject,System.String,System.Boolean,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
-            <summary>
-            A more advanced method of transmogrifying an enemy into another enemy. Returns the resulting enemy. Returns null if the original enemy could not be transmogrified.
-            </summary>
-            <param name="startEnemy">The enemy who will be transmogrified.</param>
-            <param name="EnemyPrefab">The prefab of the enemy that the original will be transmogrified into.</param>
-            <param name="EffectVFX">The VFX to be played at the position of the transmogrification.</param>
-            <param name="audioEvent">The audio to be played when the transmogrification occurs.</param>
-            <param name="ignoreAlreadyTransmogged">If true, will be unable to transmogrify enemies who have already been transmogrified.</param>
-            <param name="guidsToIgnore">If the target's guid is present in this list, it cannot be transmogrified.</param>
-            <param name="tagsToIgnore">If the target has any of the tags present in this list, it cannot be transmogrified.</param>
-            <param name="defuseExplosives">If true, enemies set to explode upon death will not explode when transmogrified.</param>
-            <param name="carryOverRewards">If true, the loot drops of the old enemy will carry over to the new enemy.</param>
-            <param name="maintainHealthPercent">If true, the new enemy's percentage of remaining HP will be the same as the old enemy's percentage of remaining HP.</param>
-            <param name="maintainsJammedState">If true, the jamedness of the new enemy depends on the jamedness of the old enemy.</param>
-            <param name="giveIsTransmogrifiedBool">If true, sets the new actor's 'IsTransmogrified' bool to true. If false, there will be no way to tell that the actor has been transmogrified.</param>
-            <param name="logEverything">If true, non-essential information about why enemies were unable to be transmogged will be added to the log. Do not leave true in release builds.</param>
-        </member>
-        <member name="M:Alexandria.EnemyAPI.EnemyBuildingTools.AddAIBeamShooter(AIActor,UnityEngine.Transform,System.String,Projectile,ProjectileModule,System.Single)">
-            <summary>
-            Adds an AIBeamShooter component to an enemy. AIBeamShooters are important for enemies to be able to use beam-related behaviors.
-            </summary>
-            <param name="enemy">The target actor.</param>
-            <param name="transform">The position at which the beam, when created, will fire from.</param>
-            <param name="name">The name of your AIBeamShooter component.</param>
-            <param name="beamProjectile">The projectile component of your beam.</param>
-            <param name="beamModule">The projectile module which houses your beamProjectile.</param>
-            <param name="angle">The starting angle of your beam when it is fired. Used only by specific things.</param>
-        </member>
-        <member name="M:Alexandria.EnemyAPI.EnemyBuildingTools.AddNewDirectionAnimation(AIAnimator,System.String,System.String[],DirectionalAnimation.FlipType[],DirectionalAnimation.DirectionType)">
-            <summary>
-            Adds a directional animation to your AIAnimator (Mostly found in enemies). Directional animations control the animations that play depending on direction.
-            </summary>
-            <param name="animator">The target AIAnimator.</param>
-            <param name="Prefix">The prefix of your directional animation. When making your enemy play a specific animation, use this prefix to play the animation so it also accounts for direction.</param>
-            <param name="animationNames">All of the tk2d sprite animations in your directional animation. These HAVE to be set up in specific configurations. Check out the bottom of this page to see how https://mtgmodders.gitbook.io/etg-modding-guide/misc/making-an-enemy</param>
-            <param name="flipType">The amount of different animations your directional animation uses. Ex: a directional aniamtion with left-right aniamtions will be 2.</param>
-            <param name="directionType">The direction type of your animator. This will change how many angles it will take into account for. Refer to https://mtgmodders.gitbook.io/etg-modding-guide/misc/making-an-enemy for more detail.</param>
-        </member>
-        <member name="M:Alexandria.EnemyAPI.EnemyBuildingTools.DestroyUnnecessaryHandObjects(UnityEngine.Transform)">
-            <summary>
-            Destroys any remnant hand objects on your enemy.
-            </summary>
-            <param name="transform">The targets Transform.</param>
-        </member>
-        <member name="M:Alexandria.EnemyAPI.EnemyBuildingTools.AddShadowToAIActor(AIActor,UnityEngine.GameObject,UnityEngine.Vector2,System.String)">
-            <summary>
-            Links a gameobject to your enemy to be its shadow.
-            </summary>
-            <param name="actor">The target.</param>
-            <param name="shadowObject">The gameobject that will act as a shadow.</param>
-            <param name="attachpoint">The position of the shadow. Must be somewhere on the enemy, so use your enemy position as your start position, as unintuitive as it seems.</param>
-            <param name="name">The name of your shadow object.</param>
-        </member>
-        <member name="M:Alexandria.EnemyAPI.EnemyBuildingTools.GenerateShootPoint(UnityEngine.GameObject,UnityEngine.Vector2,System.String)">
-            <summary>
-            Generates, and returns a gameobject that can be used as a shootpoint.
-            </summary>
-            <param name="attacher">The target.</param>
-            <param name="attachpoint">The position of the shoot point. Must be somewhere on the enemy, so use your enemy position as your start position, as unintuitive as it seems.</param>
-            <param name="name">The name of your shoot point.</param>
-        </member>
-        <member name="M:Alexandria.EnemyAPI.EnemyBuildingTools.CopyBulletBankEntry(AIBulletBank.Entry,System.String,System.String,VFXPool,System.Boolean)">
-            <summary>
-            Returns a deplicate BulletBank.Entry that you can modify the bullet Object of without altering the original. Useful for making specific projectiles fire without audio or have them have special effects i.e hitscan.
-            </summary>
-            <param name="entryToCopy">The enrty you are copying in the first place.</param>
-            <param name="Name">Your new Bullet Bank entry name. You will use this name when trying to spawn a projectile from this entry.</param>
-            <param name="AudioEvent">The audio event your projectile will sound when it is fired. Change this to "DNC" if you want to keep the original audio, or set it to null to have none.</param>
-            <param name="muzzleflashVFX">Your muzzle flash VFX it will play when the bullet is fired.</param>
-            <param name="ChangeMuzzleFlashToEmpty">If set to true and muzzleflashVFX is NULL, will remove the muzzleflash from your entry.</param>
         </member>
         <member name="M:Alexandria.ItemAPI.ProjectileSlashingBehaviour.SlashHitTarget(GameActor,System.Boolean)">
             <summary>
@@ -2112,943 +3055,6 @@
             <param name="aiActor">The AIActor to be checked.</param>
             <param name="tags">The list of tags to be checked for.</param>
             <param name="reqAll">If true, the AIActor must have ALL specified tags to return true. If false, the AIActor must only have one.</param>
-        </member>
-        <member name="T:Alexandria.Misc.IAmmoDisplayAugment">
-            <summary>Interface that can be implemented by any Component attached to a Gun in order to display extra information above the ammo display.</summary>
-        </member>
-        <member name="M:Alexandria.Misc.IAmmoDisplayAugment.GetText">
-            <summary>Returns a line of formatted text (including colors / sprites) to display above the ammo display.</summary>
-        </member>
-        <member name="M:Alexandria.Misc.CustomAmmoDisplayExtensions.VanillaAmmoDisplay(PlayerController)">
-            <summary>Helper function to print out vanilla ammo display for a player</summary>
-        </member>
-        <member name="T:Alexandria.Misc.EasyLight">
-            <summary>Helper class for adding nice looking lights to Guns, Projectiles, and other GameObjects.</summary>
-        </member>
-        <member name="P:Alexandria.Misc.EasyLight.IsOn">
-            <summary>Whether the light is current on or not. May still be invisible if its parent is deactivated.</summary>
-        </member>
-        <member name="M:Alexandria.Misc.EasyLight.Toggle">
-            <summary>Turns the light on if off, and turns it off if on.</summary>
-        </member>
-        <member name="M:Alexandria.Misc.EasyLight.TurnOn">
-            <summary>Turns the light on.</summary>
-        </member>
-        <member name="M:Alexandria.Misc.EasyLight.TurnOff(System.Boolean)">
-            <summary>Turns the light off, optionally skipping its fade out animation.</summary>
-        </member>
-        <member name="M:Alexandria.Misc.EasyLight.SetBrightness(System.Single)">
-            <summary>Sets the brightness of a light.</summary>
-        </member>
-        <member name="M:Alexandria.Misc.EasyLight.SetRadius(System.Single)">
-            <summary>Sets how far the light extends from its origin point.</summary>
-        </member>
-        <member name="M:Alexandria.Misc.EasyLight.SetConeWidth(System.Single)">
-            <summary>Sets the angle spanned by cone lights.</summary>
-        </member>
-        <member name="M:Alexandria.Misc.EasyLight.SetColor(UnityEngine.Color)">
-            <summary>Sets the color of the light.</summary>
-        </member>
-        <member name="M:Alexandria.Misc.EasyLight.TrackObject(UnityEngine.GameObject)">
-            <summary>For cone lights, automatically tracks the specified GameObject's transform.</summary>
-        </member>
-        <member name="M:Alexandria.Misc.EasyLight.PointInDirection(System.Single)">
-            <summary>For cone lights, points the light in the direction specified by angle.</summary>
-        </member>
-        <member name="M:Alexandria.Misc.EasyLight.PointAt(UnityEngine.Vector2)">
-            <summary>For cone lights, points the light towards the specified position.</summary>
-        </member>
-        <member name="M:Alexandria.Misc.EasyLight.Create(System.Nullable{UnityEngine.Vector2},UnityEngine.Transform,System.Nullable{UnityEngine.Color},System.Single,System.Single,System.Boolean,System.Single,System.Single,System.Single,System.Boolean,System.Boolean,System.Single,System.Single,System.Boolean,System.Boolean)">
-            <summary>Creates an Easy Light at the specified positinon and / or parented to the specified object</summary>
-            <param name="pos">Where to place the light. Can be ignored if parent is non-null. Must be set if parent is null.</param>
-            <param name="parent">The transform to parent the light to. If null, the light cannot be moved from its initial position.</param>
-            <param name="color">The color of the light. Can be changed later using SetColor().</param>
-            <param name="maxLifeTime">If greater than zero, determines the amount of time before the light is destroyed.</param>
-            <param name="radius">How far the light radiates from its origin point.</param>
-            <param name="growIn">If true, the light will grow to its radius when fading in and shrink to nothingness when fading out.</param>
-            <param name="brightness">The brightness of the light. Setting to anything lower than 3.5f can have strange effects. Can be changed later using SetBrightness().</param>
-            <param name="fadeInTime">If greater than 0, determines how long the light takes to reach its max brightness when turned on.</param>
-            <param name="fadeOutTime">If greater than 0, determines how long the light takes to reach zero brightness when turned off.</param>
-            <param name="destroyWithParent">(MIGHT NOT WORK) If true, the light is destroyed when its parent is destroyed. If false, the light persists after its parent is destroyed.</param>
-            <param name="useCone">If true, the light will be emitted in a cone instead of in all directions.</param>
-            <param name="coneWidth">If useCone is true, determines the angle spanned by the cone of light. Can be changed later using SetConeWidth().</param>
-            <param name="coneDirection">If useCone is true, determines the angle the cone of light is pointed at. Can be changed later using PointInDirection() or PointAt().</param>
-            <param name="rotateWithParent">If true, if useCone is true, and if parented to a Gun / Projectile, automatically points the cone in the direction of the gun barrel / projectile respectively.</param>
-            <param name="turnOnImmediately">If true, the light is turned on immediately when created. If false, the light must be turned on manually with Toggle() or TurnOn().</param>
-        </member>
-        <member name="M:Alexandria.Misc.EasyLightExtensions.AddLight(Gun,System.Single,System.Nullable{UnityEngine.Color},System.Boolean,System.Boolean,System.Single,System.Single,System.Single,System.Boolean,System.Single,System.Boolean)">
-            <summary>Attaches an EasyLight to a gun.</summary>
-            <param name="brightness">The brightness of the light. Setting to anything lower than 3.5f can have strange effects. Can be changed later using SetBrightness().</param>
-            <param name="color">The color of the light. Can be changed later using SetColor().</param>
-            <param name="useCone">If true, the light will be emitted in a cone instead of in all directions.</param>
-            <param name="turnOnImmediately">If true, the light is turned on immediately when created. If false, the light must be turned on manually with Toggle() or TurnOn().</param>
-            <param name="fadeInTime">If greater than 0, determines how long the light takes to reach its max brightness when turned on.</param>
-            <param name="fadeOutTime">If greater than 0, determines how long the light takes to reach zero brightness when turned off.</param>
-            <param name="coneWidth">If useCone is true, determines the angle spanned by the cone of light. Can be changed later using SetConeWidth().</param>
-            <param name="rotateWithParent">If true, if useCone is true, and if parented to a Gun / Projectile, automatically points the cone in the direction of the gun barrel / projectile respectively.</param>
-            <param name="radius">How far the light radiates from its origin point.</param>
-            <param name="growIn">If true, the light will grow to its radius when fading in and shrink to nothingness when fading out.</param>
-        </member>
-        <member name="M:Alexandria.Misc.EasyLightExtensions.AddLight(Projectile,System.Single,System.Nullable{UnityEngine.Color},System.Boolean,System.Boolean,System.Single,System.Single,System.Single,System.Boolean,System.Single,System.Boolean)">
-            <summary>Attaches an EasyLight to a projectile.</summary>
-            <param name="brightness">The brightness of the light. Setting to anything lower than 3.5f can have strange effects. Can be changed later using SetBrightness().</param>
-            <param name="color">The color of the light. Can be changed later using SetColor().</param>
-            <param name="useCone">If true, the light will be emitted in a cone instead of in all directions.</param>
-            <param name="turnOnImmediately">If true, the light is turned on immediately when created. If false, the light must be turned on manually with Toggle() or TurnOn().</param>
-            <param name="fadeInTime">If greater than 0, determines how long the light takes to reach its max brightness when turned on.</param>
-            <param name="fadeOutTime">If greater than 0, determines how long the light takes to reach zero brightness when turned off.</param>
-            <param name="coneWidth">If useCone is true, determines the angle spanned by the cone of light. Can be changed later using SetConeWidth().</param>
-            <param name="rotateWithParent">If true, if useCone is true, and if parented to a Gun / Projectile, automatically points the cone in the direction of the gun barrel / projectile respectively.</param>
-            <param name="radius">How far the light radiates from its origin point.</param>
-            <param name="growIn">If true, the light will grow to its radius when fading in and shrink to nothingness when fading out.</param>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnRunStart">
-            <summary>
-            Runs whenever the player begins a new run. Triggers in all gamemodes, including shortcuts and bossrush.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.PostDungeonTrueStart">
-            <summary>
-            Runs whenever a new Dungeon instance is created, but BEFORE it is built. Used to modify aspects of Dungeon so they get applied on generation.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnNewPlayercontrollerSpawned">
-            <summary>
-            Runs whenever a new PlayerController is created.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnRewardPedestalSpawned">
-            <summary>
-            Runs whenever a new Reward Pedestal (IE: The pedestals created by bosses) is spawned.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnShrineUsed">
-            <summary>
-            Runs whenever a shrine of the type AdvancedShrineController is used. Pending improvement.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnShopItemStarted">
-            <summary>
-            Runs whenever a new ShopItemController is created.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnRatMazeFailed">
-            <summary>
-            Runs whenever a player fails in the Rat Maze, taking a wrong turn.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnMinorBreakableShattered">
-            <summary>
-            Runs when a minorbreakable is shattered.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnRewardPedestalDetermineContents">
-            <summary>
-            Runs just before a reward pedestal determines it's contents. 
-            Can be used to modify the contents by adding to the 'overrideItemPool' list in 'ValidPedestalContents'.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnChestPostSpawn">
-            <summary>
-            Runs when a new chest spawns. With room-reward chests, runs just after the chest has settled itself on the ground.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnChestPreOpen">
-            <summary>
-            Runs between the player interacting with a chest, and the chest opening.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnChestBroken">
-            <summary>
-            Runs whenever a chest is broken.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnAnyHealthHaverDie">
-            <summary>
-            Runs whenever any HealthHaver is killed.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnAnyPlayerCollectedAmmo">
-            <summary>
-            Runs whenever any PlayerController collects an ammo box.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnAnyPlayerCollectedKey">
-            <summary>
-            Runs whenever any player collects a key pickup. Note that Rat Keys count as keys.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnAnyPlayerCollectedHealth">
-            <summary>
-            Runs whenever any player collects an HP pickup. Note that Armor pickups count as HP.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnAnyPlayerNudgedHealth">
-            <summary>
-            Runs whenever any player touches an HP Pickup. Occurs before pickup, and will still run even if the player's HP is full and they are unable to collect the pickup.
-            Note that armor counts as an HP pickup.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnAnyPlayerCollectedBlank">
-            <summary>
-            Runs whenever any player collects a blank.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnAnyPlayerCollectedPickup">
-            <summary>
-            (DOES NOT WORK) Runs whenever any player collects any kind of Pickup Object. Runs AFTER pickup, so be aware of that.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnAnyPlayerDroppedPassiveItem">
-            <summary>
-            Runs whenever any player drops a passive item.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnBossKilled">
-            <summary>
-            Runs whenever any Boss HealthHaver is killed.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnExplosionComplex">
-            <summary>
-            Runs whenever an explosion occurs. Contains more information about the explosion than the vanilla action.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnLOTJSpawned">
-            <summary>
-            Runs when the Lord of the Jammed spawns.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.OnPostProcessItemSpawn">
-            <summary>
-            Runs when a loot item spawned by the Loot Engine becomes grounded and registered.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.CustomActions.ValidPedestalContents.overrideItemPool">
-            <summary>
-            A list of tuples which will be converted into an override loot pool for the pedestal if set. 
-            The first value is an integer, and represents an item id, while the second is a float an represents the weight.
-            </summary>
-        </member>
-        <member name="M:Alexandria.Misc.EasyEnumExtender.ExtendEnumsInAssembly(System.String,System.Reflection.Assembly)">
-            <summary>
-            In each class with the [EnumExtension(enumType)] attribute sets each public and static field to a new value of the given enum, named after the field.
-            </summary>
-            <param name="guid">The guid of your mod.</param>
-            <param name="asmbl">The assembly, the classes of which will be affected. If null, defaults to the assembly that called this method.</param>
-        </member>
-        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.PreProcessSlash">
-            <summary>
-            Runs just before a melee slash belonging to the attached player occurs, containing information about the slash and facilitating modification.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.PostProcessSlash">
-            <summary>
-            Runs after a melee slash belonging to the attached player occurs.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnSlashHitEnemy">
-            <summary>
-            Runs when an AIActor is hit by a melee slash belonging to the attached player. Ideal for transferring bullet effects.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnPickedUpAmmo">
-            <summary>
-            Runs whenever the attached player collects an ammo box.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnPickedUpKey">
-            <summary>
-            Runs whenever the attached player collects a key pickup. Note, Rat Keys count as Keys.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnPickedUpHP">
-            <summary>
-            Runs whenever the attached player collects HP. Note, Armor is counted as HP.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnNudgedHP">
-            <summary>
-            Runs whenever the attached player touches HP. Occurs before pickup, and will still run if the player nudges a heart pickup at full HP.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnPickedUpBlank">
-            <summary>
-            Runs whenever the attached player collects a blank.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnDroppedPassiveItem">
-            <summary>
-            Runs whenever the attached player drops a passive item.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnCompanionSpawnedBullet">
-            <summary>
-            Runs whenever a companion belonging to the attached player spawns a projectile.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnCompanionStatsQueried">
-            <summary>
-            Runs whenever a QueryCompanionStats is called. Useful for modifying companion stats not accessible via OnCompanionSpawnedBullet.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnBlessedGunChanged">
-            <summary>
-            Runs whenever the player's gun changes in Blessed Mode.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnActiveItemPreDrop">
-            <summary>
-            Runs just before the attached player drops their active item, for any reason.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnBlankModificationItemProcessed">
-            <summary>
-            Runs whenever a BlankModificationItem belonging to the attached player is processed after a blank.
-            </summary>
-        </member>
-        <member name="F:Alexandria.Misc.ExtendedPlayerComponent.OnNewOrbitalInitialised">
-            <summary>
-            Runs whenever a PlayerOrbital belonging to the attached player is initialised.
-            </summary>
-        </member>
-        <member name="M:Alexandria.Misc.ExtendedPlayerComponent.Enrage(System.Single,System.Boolean)">
-            <summary>
-            Triggers a rage effect (like the Enraging Photo) for the specified duration. Rage gives double damage, and comes with associated visual effects.
-            </summary>
-            <param name="dur">The length of the desired rage.</param>
-            <param name="resetExisting">If true, the given rage duration will override the duration of existing rage (if the player is already enraged) instead of adding to it. Can be used to cancel rage by setting duration to zero.</param>
-        </member>
-        <member name="M:Alexandria.Misc.ExtendedPlayerComponent.TriggerInvulnerableFrames(System.Single,System.Boolean)">
-            <summary>
-            Triggers blinking invulnerability frames for the specified duration. Does not trigger if the player is already invulnerable from basegame I-frames.
-            </summary>
-            <param name="incorporealityTime">The length of the desired invulnerability.</param>
-            <param name="resetExisting">If true, the given incorporeality duration will override the duration of existing incorporeality (if the player is already invulnerable) instead of adding to it. Can be used to cancel I-frames by setting duration to zero.</param>
-        </member>
-        <member name="M:Alexandria.Misc.GameManagerUtility.GetPlayerWithItemID(GameManager,System.Int32,System.Boolean)">
-            <summary>
-            Returns the playercontroller with the specified item ID, if there is one. Returns null if no players have the item ID.
-            </summary>
-            <param name="managerInstance">The instance Gamemanager.</param>
-            <param name="id">The item ID being searched for.</param>
-            <param name="randomIfBoth">If true, and BOTH players have the specified item, the returned player will be random. If false in the same situation of both players having the item, prioritises the Primary Player.</param>
-        </member>
-        <member name="M:Alexandria.Misc.GameManagerUtility.AnyPlayerHasActiveSynergy(GameManager,System.String)">
-            <summary>
-            Returns true if the Primary Player OR the Secondary Player have the specified synergy. Does not check the secondary player if the secondary player does not exist.
-            </summary>
-            <param name="managerInstance">The instance Gamemanager.</param>
-            <param name="synergyID">The synergy name string to check for.</param>        
-        </member>
-        <member name="M:Alexandria.Misc.GameManagerUtility.AnyPlayerHasPickupID(GameManager,System.Int32)">
-            <summary>
-            Returns true if the Primary Player OR the Secondary Player have the specified item ID in their inventory. Does not check the secondary player if the secondary player does not exist.
-            </summary>
-            <param name="managerInstance">The instance Gamemanager.</param>
-            <param name="itemID">The item ID to check for.</param>        
-        </member>
-        <member name="M:Alexandria.Misc.GameManagerUtility.GetCombinedPlayersStatAmount(GameManager,PlayerStats.StatType)">
-            <summary>
-            Returns the total stat value of the specified stat shared between both players. Does not check players that do not exist.
-            </summary>
-            <param name="managerInstance">The instance Gamemanager.</param>
-            <param name="stat">The specified stat to return the combined total of.</param>        
-        </member>
-        <member name="M:Alexandria.Misc.PlayerUtility.RemoveItemFromInventory(PlayerController,PickupObject)">
-            <summary>
-            Removes the given pickupobject from the player's inventory if it is present in the player's inventory. Works on passives, actives, and guns.
-            </summary>
-            <param name="player">The target player.</param>
-            <param name="item">The item or gun to be removed.</param>
-        </member>
-        <member name="M:Alexandria.Misc.PlayerUtility.IsStarterItem(PlayerController,System.Int32)">
-            <summary>
-            Returns true if the given ID corresponds to one of the target player's starting items.
-            </summary>
-            <param name="player">The target player.</param>
-            <param name="id">The item ID being checked.</param>
-        </member>
-        <member name="M:Alexandria.Misc.PlayerUtility.GetNumberOfItemInInventory(PlayerController,System.Int32)">
-            <summary>
-            Returns an integer value corresponding to the number of copies of a given passive or active item present in the player's inventory. 
-            </summary>
-            <param name="player">The target player.</param>
-            <param name="itemID">The item ID being counted.</param>
-        </member>
-        <member name="M:Alexandria.Misc.PlayerUtility.RemovePassiveItemAtIndex(PlayerController,System.Int32)">
-            <summary>
-            Removes the item at the given index in the target player's inventory.
-            </summary>
-            <param name="player">The target player.</param>
-            <param name="index">The index at which the item should be removed.</param>
-        </member>
-        <member name="M:Alexandria.Misc.PlayerUtility.GetExtComp(PlayerController)">
-            <summary>
-            Returns the ExtendedPlayerComponent present on the specified player. Returns null if the ExtendedPlayerComponent is not present, however this should never happen.
-            </summary>
-            <param name="owner">The target player.</param>
-        </member>
-        <member name="M:Alexandria.Misc.PlayerUtility.PositionInDistanceFromAimDir(PlayerController,System.Single)">
-            <summary>
-            Returns a Vector2 position corresponding to the specified distance from the player in the direction they are currently aiming.
-            </summary>
-            <param name="player">The target player.</param>
-            <param name="distance">The distance from the player that the returned position ought to be.</param>
-        </member>
-        <member name="M:Alexandria.Misc.PlayerUtility.GetCursorPosition(PlayerController,System.Single)">
-            <summary>
-            Returns the position of the target player's cursor. Returned Vector2 is nullable, and will be null if the target player is using a controller.
-            </summary>
-            <param name="user">The target player.</param>
-            <param name="fallbackAimDirDistance">If the player does not have a cursor, and fallbackAimDirDistance is greater than zero, returns a position the specified distance in the direction being aimed.</param>
-        </member>
-        <member name="M:Alexandria.Misc.PlayerUtility.NextHitWillKillPlayer(PlayerController,System.Single)">
-            <summary>
-            Returns true if the specified damage amount will kill the target player. Rudimentary, use with caution.
-            </summary>
-            <param name="player">The target player.</param>
-            <param name="damageAmount">The damage amount to be checked against the player's current HP.</param>
-        </member>
-        <member name="M:Alexandria.Misc.PlayerUtility.GiveAmmoToGunNotInHand(PlayerController,System.Int32,System.Int32)">
-            <summary>
-            Gives the specified amount of ammo to the gun in the target player's inventory with the specified ID. Does nothing if the gun corresponding to the ID is not in the player's inventory.
-            </summary>
-            <param name="player">The target player.</param>
-            <param name="idToGive">The target gun ID to restore ammo to.</param>
-            <param name="AmmoToGive">The amount of ammo to restore.</param>
-        </member>
-        <member name="M:Alexandria.Misc.PlayerUtility.RecalculateOrbitals(PlayerController)">
-            <summary>
-            Recalculates the orbital tier and orbital index of the specified player's orbitals. Can resolve issues arising from spawning, deleting, or altering orbitals.
-            </summary>
-            <param name="player">The target player.</param>
-        </member>
-        <member name="M:Alexandria.Misc.PlayerUtility.TriggerInvulnerableFrames(PlayerController,System.Single)">
-            <summary>
-            Shorthand extension to trigger the invulnerability frame function of the ExtendedPlayerComponent.
-            </summary>
-            <param name="player">The target player.</param>
-            <param name="incorporealityTime">How long the invulnerability frames should last.</param>
-        </member>
-        <member name="M:Alexandria.Misc.PlayerUtility.DoEasyBlank(PlayerController,UnityEngine.Vector2,Alexandria.Misc.EasyBlankType)">
-            <summary>
-            Simple shorthand to trigger a blank effect belonging to the target player at a specified position.
-            </summary>
-            <param name="blankOwner">The target player, who the blank effect belongs to.</param>
-            <param name="blankPosition">The position of the blank effect.</param>
-            <param name="type">The 'type' of blank. Set to FULL for a full room blank, or MINI for a microblank, like the effect of Blank Bullets.</param>
-        </member>
-        <member name="M:Alexandria.Misc.RuntimeRoomhandlerUtility.GetXEnemiesInRoom(Dungeonator.RoomHandler,System.Int32,System.Boolean,System.Boolean)">
-            <summary>
-            Returns a specified number of unique enemies in the target room. Returns a list of AIActors.
-            </summary>
-            <param name="room">The target room.</param>
-            <param name="numOfEnemiesToReturn">How many enemies the returned list should contain. May return fewer than the specified amount if there are not enough valid enemies in the room.</param>
-            <param name="reqForRoomClear">If true, will only return enemies which are required for room clear.</param>
-            <param name="canReturnBosses">If false, returned list of AIActors cannot contain bosses.</param>
-        </member>
-        <member name="M:Alexandria.Misc.RuntimeRoomhandlerUtility.RoomContainsMineFlayer(Dungeonator.RoomHandler)">
-            <summary>
-            Returns true if the target room contains the Mine Flayer boss, or another AIActor (such as a bell) who is 'secretly' the Mine Flayer.
-            </summary>
-            <param name="room">The target room.</param>
-        </member>
-        <member name="M:Alexandria.Misc.ShadowBulletDoer.SpawnChainedShadowBullets(Projectile,System.Int32,System.Single,System.Single,Projectile,System.Boolean)">
-            <summary>
-            Spawns a chain of Shadow Bullets style 'shadow' projectiles behind the original bullet. 
-            </summary>
-            <param name="source">The target projectile.</param>
-            <param name="numberInChain">How many shadow bullets should be spawned.</param>
-            <param name="pauseLength">How long the pause should be between each shadow bullet in the chain spawning.</param>
-            <param name="chainScaleMult">A scale multiplier automatically applied to the spawned clones.</param>
-            <param name="overrideProj">If set, the shadow bullet chain will be made up of copies of the override projectile instead of the original projectile.</param>
-            <param name="shadowcolour">If true, applies the shadowy colouration from the Shadow Bullets item to the clones.</param>
-        </member>
-        <member name="M:Alexandria.Misc.ShadowBulletDoer.SpawnShadowBullet(Projectile,UnityEngine.Vector3,System.Single,System.Single,System.Boolean)">
-            <summary>
-            Creates a duplicate 'shadow' bullet with the same parameters as the original at a set position and with a set rotation. Returns the spawned clone for additional modification.
-            </summary>
-            <param name="obj">The target projectile.</param>
-            <param name="position">The position that the 'shadow' bullet should be spawned at.</param>
-            <param name="rotation">The rotation of the 'shadow' bullet. Used to determine angle. 0 is equivalent to directly to the right.</param>
-            <param name="chainScaleMult">A scale multiplier automatically applied to the spawned clone.</param>
-            <param name="shadowcolour">If true, applies the shadowy colouration from the Shadow Bullets item to the clone.</param>
-        </member>
-        <member name="M:Alexandria.Misc.SupplyDropDoer.SpawnSupplyDrop(UnityEngine.Vector2,System.Int32,System.Single,System.Boolean)">
-            <summary>
-            Spawns a falling crate (like the Supply Drop item) at the specified position. Returns the spawned crate's crate behaviour. Returned behaviour contains an OnCrateLanded action for custom effects.
-            </summary>
-            <param name="position">The position the crate should be spawned at.</param>
-            <param name="lootIDToSpawn">An item or gun ID to be dropped by the crate. Leave as -1 for no item.</param>
-            <param name="crateDespawnDelay">How long after opening should the crate wait to despawn. If left as -1, the crate will despawn when the spawned loot is collected (if the loot spawn ID was set).</param>
-            <param name="preventAutoDespawn">If true, prevents the crate from despawning automatically. Call RemoveCrate() to remove manually.</param>
-        </member>
-        <member name="M:Alexandria.Misc.SupplyDropDoer.SimplerCrateBehaviour.RemoveCrate">
-            <summary>
-            Causes the crate to play it's despawn animation, and disappear.
-            </summary>
-        </member>
-        <member name="M:Alexandria.Misc.SupplyDropDoer.SimplerCrateBehaviour.ClearLandingTarget">
-            <summary>
-            Removes the crate's landing target VFX, if one is present.
-            </summary>
-        </member>
-        <member name="M:Alexandria.Misc.Tk2dSpriteAnimatorUtility.AddEventTriggersToAnimation(tk2dSpriteAnimator,System.String,System.Collections.Generic.Dictionary{System.Int32,System.String})">
-            <summary>
-            Adds an event trigger to specific frames in an animation. 
-            </summary>
-            <param name="animator">The target tk2dSpriteAnimator.</param>
-            <param name="animationName">The name of the aniamtion you want to affect.</param>
-            <param name="frameAndEventName">A dictionary containing the frames and the event name you want to trigger at that frame. Ex: { 0, "sparkle" }, will trigger the event 'sparkle' on the first frame of the animation </param>
-        </member>
-        <member name="M:Alexandria.Misc.Tk2dSpriteAnimatorUtility.AddOffsetToFrames(tk2dSpriteAnimator,System.String,System.Collections.Generic.Dictionary{System.Int32,UnityEngine.Vector3},System.Collections.Generic.List{System.Int32})">
-            <summary>
-            Offsets specific frames positions in an animation. Be wary to NOT use this on the same frames AND aniamtions multiple times!
-            </summary>
-            <param name="animator">The target tk2dSpriteAnimator.</param>
-            <param name="animationName">The name of the aniamtion you want to affect.</param>
-            <param name="Offset">A dictionary containing the frames and the offset you want to apply to that frame. Ex: { 0, new Vector3(0.25f, 0.25f) }, will ofsset the frame by 4 pixels up and 4 pixels right on the first frame of the animation </param>
-            <param name="idListfallback">Can be left as null. Used to store ids between uses to make sure not to offset these frames on accident.</param>
-        </member>
-        <member name="M:Alexandria.Misc.Tk2dSpriteAnimatorUtility.AddSoundsToAnimationFrame(tk2dSpriteAnimator,System.String,System.Collections.Generic.Dictionary{System.Int32,System.String})">
-            <summary>
-            Adds triggers to specific frames in an animation to play sounds. 
-            </summary>
-            <param name="animator">The target tk2dSpriteAnimator.</param>
-            <param name="animationName">The name of the aniamtion you want to affect.</param>
-            <param name="frameAndSoundName">A dictionary containing the frames and the sound name you want to trigger at that frame. Ex: { 0, "Play_ENM_hammer_target_01" }, will play the sound 'Play_ENM_hammer_target_01' on the first frame of the animation </param>
-        </member>
-        <member name="M:Alexandria.Misc.Tk2dSpriteAnimatorUtility.MarkAnimationAsSpawn(tk2dSpriteAnimator,System.String)">
-            <summary>
-            Marks all frames in an animation as spawning frames. Probably only used for enemies. 
-            </summary>
-            <param name="animator">The target tk2dSpriteAnimator.</param>
-            <param name="animationName">The name of the aniamtion you want to affect.</param>
-        </member>
-        <member name="M:Alexandria.Misc.Tk2dSpriteAnimatorUtility.AddInvulnverabilityFramesToAnimation(tk2dSpriteAnimator,System.String,System.Collections.Generic.Dictionary{System.Int32,System.Boolean})">
-            <summary>
-            Marks specific frames in an animation to make the enemy invulnerable to damage on those frames. 
-            </summary>
-            <param name="animator">The target tk2dSpriteAnimator.</param>
-            <param name="animationName">The name of the aniamtion you want to affect.</param>
-            <param name="frameAndBool">A dictionary containing the frames and a true/false for whether it'll be invulnerable on that frame. (Default is false) Ex: { 0, true }, will make the enemy invulnerable on the first frame of the animation </param>
-        </member>
-        <member name="M:Alexandria.Misc.ProjectileUtility.ProjectilePlayerOwner(Projectile)">
-            <summary>
-            Fetches the PlayerController of the player who owns the projectile. If the projectile is not owned by a player, returns null.
-            </summary>
-            <param name="bullet">The target projectile</param>
-        </member>
-        <member name="M:Alexandria.Misc.ProjectileUtility.InstantiateAndFireTowardsPosition(Projectile,UnityEngine.Vector2,UnityEngine.Vector2,System.Single,System.Single,PlayerController)">
-            <summary>
-            Instantiates a projectile and fires it in the direction of a given Vector2 position. Returns the instantiated projectile for further modification.
-            </summary>
-            <param name="projectile">The projectile prefab to be instantiated.</param>
-            <param name="startingPosition">The position the projectile should be spawned at.</param>
-            <param name="targetPosition">The target position that the projectile should be fired towards.</param>
-            <param name="angleOffset">The amount of degrees that the projectile's trajectory should be offset by. For example, '45' will cause the projectile to be fired 45 degrees to the left of the target. Leave 0 for a direct shot.</param>
-            <param name="angleVariance">The amount of degrees the projectile's angle can vary from the final angle. Essentially accuracy/spread.</param>
-            <param name="playerToScaleAccuracyOff">If set to a player controller, that player's accuracy stat will affect the angle variance of the instantiated projectile.</param>
-        </member>
-        <member name="M:Alexandria.Misc.ProjectileUtility.InstantiateAndFireInDirection(Projectile,UnityEngine.Vector2,System.Single,System.Single,PlayerController)">
-            <summary>
-            Instantiates a projectile and fires it along a given angle. Returns the instantiated projectile for further modification.
-            </summary>
-            <param name="projectile">The projectile prefab to be instantiated.</param>
-            <param name="startingPosition">The position the projectile should be spawned at.</param>
-            <param name="angle">The angle the projectile should be fired. 0 corresponds with directly to the right. 180 corresponds with directly to the left.</param>
-            <param name="angleVariance">The amount of degrees the projectile's angle can vary from the given angle. Essentially accuracy/spread.</param>
-            <param name="playerToScaleAccuracyOff">If set to a player controller, that player's accuracy stat will affect the angle variance of the instantiated projectile.</param>
-        </member>
-        <member name="M:Alexandria.Misc.ProjectileUtility.GetAbsoluteRoom(Projectile)">
-            <summary>
-            Returns the RoomHandler of the room that the projectile is inside.
-            </summary>
-            <param name="bullet">The target projectile.</param>
-        </member>
-        <member name="M:Alexandria.Misc.ProjectileUtility.SendInRandomDirection(Projectile)">
-            <summary>
-            Sends the bullet flying in a random direction.
-            </summary>
-            <param name="bullet">The target projectile.</param>
-        </member>
-        <member name="M:Alexandria.Misc.ProjectileUtility.GetVectorToNearestEnemy(Projectile,System.Boolean,Dungeonator.RoomHandler.ActiveEnemyType,System.Collections.Generic.List{AIActor},System.Func{AIActor,System.Boolean})">
-            <summary>
-            Returns a vector corresponding to the direction of the nearest enemy to the projectile's position. Returns Vector2.zero if the Projectile is null
-            </summary>
-            <param name="bullet">The target projectile</param>
-            <param name="checkIsWorthShooting">If true, the projectile will ignore enemies with IsWorthShootingAt set to false, such as Mountain Cubes.</param>
-            <param name="type">Determines whether or not the projectile should take into account if an enemy needs to be killed for room clear.</param>
-            <param name="overrideValidityCheck">A function which allows for the setting of custom parameters for whether or not an enemy is valid.</param>
-            <param name="excludedActors">Enemies that are in this list will not be taken into account.</param>
-        </member>
-        <member name="M:Alexandria.Misc.ProjectileUtility.ReflectBullet(Projectile,System.Boolean,GameActor,System.Single,System.Boolean,System.Single,System.Single,System.Single,System.String)">
-            <summary>
-            Changes the trajectory of the targeted projectile and assigns it a new owner, 'reflecting' it as with the effect of Rolling Eye.
-            </summary>
-            <param name="p">The target projectile</param>
-            <param name="retargetReflectedBullet">If true, the reflected bullet will be automatically sent back in the direction of it's previous owner.</param>
-            <param name="newOwner">The intended new owner of the projectile. Can be a player or an enemy.</param>
-            <param name="minReflectedBulletSpeed">The minimum speed of the projectile once it is reflected. If it's current speed is less than the minimum, it will be accelerated to the minimum.</param>
-            <param name="doPostProcessing">If true, and the newOwner is a player, the reflected bullet will scale with the new owner's stats and will be post processed by their items.</param>
-            <param name="scaleModifier">A scale multiplier which will be applied to the projectile as it is reflected.</param>
-            <param name="baseDamage">The damage that the reflected projectile should deal.</param>
-            <param name="spread">How many degrees the projectile's trajectory can vary by if it is retargeted towards it's previous owner.</param>
-            <param name="sfx">A sound effect which is played when the projectile is reflected.</param>
-        </member>
-        <member name="M:Alexandria.Misc.ProjectileUtility.SetupProjectile(System.Int32)">
-            <summary>
-            Automatically instantiates and fakeprefabs the first projectile of the default module of the given gun ID and returns the new fake prefab.
-            </summary>
-            <param name="id">The gun ID whose first, default projectile you wish to return a clone of</param>
-        </member>
-        <member name="M:Alexandria.Misc.ProjectileUtility.InstantiateAndFakeprefab(Projectile)">
-            <summary>
-            Automatically instantiates and fakeprefabs the given projectile and returns the new fake prefab.
-            </summary>
-            <param name="projToCopy">The original projectile which you intend to return a clone of</param>
-        </member>
-        <member name="M:Alexandria.Misc.ProjectileUtility.ApplyClonedShaderProjModifier(Projectile,ShaderProjModifier)">
-            <summary>
-            Clones an existing ShadeProjModifier and applies it to the target projectile. ShadeProjModifiers are visual effects like that of the Tangler.
-            </summary>
-            <param name="self">The target projectile</param>
-            <param name="shaderToClone">The original ShaderProjModifier which you intend to clone onto the target.</param>
-        </member>
-        <member name="M:Alexandria.Misc.ProjectileUtility.RemoveFromPool(Projectile)">
-            <summary>
-            Prevents the bullet from pooling and being recycled by enemies. Use on enemy bullets that you apply strange effects to.
-            </summary>
-            <param name="proj">The target projectile.</param>
-        </member>
-        <member name="M:Alexandria.Misc.ProjectileUtility.ConvertToHelixMotion(Projectile,System.Boolean)">
-            <summary>
-            Easily converts a bullet to the Helix Bullets projectile motion, including compensating for the presence of orbital bullets.
-            </summary>
-            <param name="bullet">The target projectile.</param>
-            <param name="isInverted">Whether or not the helix motion should go left or right to start off.</param>
-        </member>
-        <member name="M:Alexandria.Misc.ProjectileUtility.ApplyCompanionModifierToBullet(Projectile,PlayerController)">
-            <summary>
-            Applies companion modifiers easily to a target projectile. By default includes the multipliers from Battle Standard and the Lute.
-            </summary>
-            <param name="bullet">The target projectile</param>
-            <param name="owner">The player whose companion modifiers should be taken into account.</param>
-        </member>
-        <member name="M:Alexandria.Misc.ProjectileUtility.GetFullListOfStatusEffects(Projectile,System.Boolean)">
-            <summary>
-            Conglomerates all status effects that a projectile will apply into a single list.
-            </summary>
-            <param name="bullet">The target projectile</param>
-            <param name="ignoresProbability">If false, the method will only return a status effect if a random value is equal or less than it's chance to apply. If true, it will ignore the status effect's chance to apply and return it regardless.</param>
-        </member>
-        <member name="M:Alexandria.Misc.ProjectileUtility.ReturnRealDamageWithModifiers(Projectile,HealthHaver)">
-            <summary>
-            Approximates the damage that the projectile would apply to a given target, applying both boss damage multipliers and jammed damage multipliers. General shorthand.
-            </summary>
-            <param name="bullet">Target projectile</param>
-            <param name="target">The enemy whom the potential damage against is being calculated</param>
-        </member>
-        <member name="M:Alexandria.Misc.ProjectileUtility.AssignToPlayer(Projectile,PlayerController,System.Boolean)">
-            <summary>
-            Makes the target projectile the property of the given player, and scales the projectile's stats off of that player's stats.
-            </summary>
-            <param name="bullet">Target projectile</param>
-            <param name="player">The player the bullet will be assigned to.</param>
-            <param name="postProcess">Whether or not to automatically postprocess the given projectile.</param>
-        </member>
-        <member name="M:Alexandria.Misc.VolleyRebuildHelpers.RecalculateStatsWithoutRebuildingGunVolleys(PlayerStats,PlayerController)">
-            <summary>Prevent gun volleys from being rebuilt when recalculating the players' stats</summary>
-        </member>
-        <member name="M:Alexandria.Misc.EnumSaveData.GetValueAsObject``1(System.String,System.String)">
-            <summary>
-            Get the value of a key as an object in the save data.
-            </summary>
-            <param name="guid">The GUID of the mod.</param>
-            <param name="key">The key to get the value of.</param>
-            <returns>The value of the key as an object.</returns>
-            <typeparam name="T">The type of object you are getting.</typeparam>
-        </member>
-        <member name="M:Alexandria.Misc.EnumSaveData.GetValue(System.String,System.String)">
-            <summary>
-            Get the value of a key as a string in the save data.
-            </summary>
-            <param name="guid">The GUID of the mod.</param>
-            <param name="key">The key to get the value of.</param>
-            <returns>The value of the key as a string.</returns>
-        </member>
-        <member name="M:Alexandria.Misc.EnumSaveData.GetValueAsInt(System.String,System.String)">
-            <summary>
-            Get the value of a key as an integer in the save data.
-            </summary>
-            <param name="guid">The GUID of the mod.</param>
-            <param name="key">The key to get the value of.</param>
-            <returns>The value of the key as an integer.</returns>
-        </member>
-        <member name="M:Alexandria.Misc.EnumSaveData.GetValueAsFloat(System.String,System.String)">
-            <summary>
-            Get the value of a key as a float in the save data.
-            </summary>
-            <param name="guid">The GUID of the mod.</param>
-            <param name="key">The key to get the value of.</param>
-            <returns>The value of the key as a float.</returns>
-        </member>
-        <member name="M:Alexandria.Misc.EnumSaveData.GetValueAsBoolean(System.String,System.String)">
-            <summary>
-            Get the value of a key as a boolean in the save data.
-            </summary>
-            <param name="guid">The GUID of the mod.</param>
-            <param name="key">The key to get the value of.</param>
-            <returns>The value of the key as a boolean.</returns>
-        </member>
-        <member name="M:Alexandria.Misc.EnumSaveData.SetValueAsObject``1(System.String,System.String,``0)">
-            <summary>
-            Set the value of a key as an object in the save data,
-            It's recommended to not save an object that implements Unity's Object class as it can cause a infinite recursion and crash the game.
-            </summary>
-            <param name="guid">The GUID of the mod.</param>
-            <param name="key">The key to set the value of.</param>
-            <param name="value">The object value to set.</param>
-            <typeparam name="T">The type of object you are setting.</typeparam>
-        </member>
-        <member name="M:Alexandria.Misc.EnumSaveData.SetValue(System.String,System.String,System.Object)">
-            <summary>
-            Set the value of a key in the save data.
-            </summary>
-            <param name="guid">The GUID of the mod.</param>
-            <param name="key">The key to set the value of.</param>
-            <param name="value">The value to set.</param>
-        </member>
-        <member name="M:Alexandria.Misc.LootUtility.CreateLootTable(System.Collections.Generic.List{GenericLootTable},DungeonPrerequisite[])">
-            <summary>
-            Creates a new blank loot table
-            </summary>
-            <param name="includedLootTables">i think this litterally dose fuck all</param> 
-            <param name="prerequisites">the prerequisites of the loot table... whatever the fuck that means</param>
-            <returns></returns>
-        </member>
-        <member name="M:Alexandria.Misc.LootUtility.AddItemToPool(GenericLootTable,PickupObject,System.Single)">
-            <summary>
-            Adds an item to a loot table via PickupObject
-            </summary>
-            <param name="lootTable">The loot table you want to add to</param> 
-            <param name="po">The PickupObject you're adding</param>
-            <param name="weight">The Weight of the item you're adding (default is 1)</param>
-            <returns></returns>
-        </member>
-        <member name="M:Alexandria.Misc.LootUtility.AddItemsToPool(GenericLootTable,System.Int32[])">
-            <summary>
-            Adds an item to a loot table via PickupObject (Will keep weight at 1)
-            </summary>
-            <param name="lootTable">The loot table you want to add to</param> 
-            <param name="items">A list of item IDs you want to add to your loottable</param>
-            <returns></returns>
-        </member>
-        <member name="M:Alexandria.Misc.LootUtility.AddItemsToPool(GenericLootTable,System.Collections.Generic.Dictionary{System.Int32,System.Single})">
-            <summary>
-            Adds an item to a loot table via PickupObject (Will keep weight at 1)
-            </summary>
-            <param name="lootTable">The loot table you want to add to</param> 
-            <param name="items">A dictionary of item IDs and their weights. The FIRST VALUE IS THE ID.</param>
-            <returns></returns>
-        </member>
-        <member name="M:Alexandria.Misc.LootUtility.AddItemToPool(GenericLootTable,System.Int32,System.Single)">
-            <summary>
-            Adds an item to a loot table via PickupObjectId
-            </summary>
-            <param name="lootTable">The loot table you want to add to</param> 
-            <param name="poID">The id of the PickupObject you're adding</param>
-            <param name="weight">The Weight of the item you're adding (default is 1)</param>
-            <returns></returns>
-        </member>
-        <member name="M:Alexandria.Misc.LootUtility.RemovePickupFromLootTables(PickupObject)">
-            <summary>
-            Removes a pickup object from the default guns and items loot table
-            </summary>
-            <param name="po">The pickup object you want to remove</param> 
-            <returns></returns>
-        </member>
-        <member name="M:Alexandria.Misc.LootUtility.FindWeightedGameObjectInCollection(WeightedGameObjectCollection,PickupObject)">
-            <summary>
-            Finds a weighted game object corresponding to a given pickup object in a weighted game object collection.
-            </summary>
-            <param name="collection">The collection you are searching</param> 
-            <param name="po">The pickup object you want to find</param> 
-            <returns></returns>
-        </member>
-        <member name="M:Alexandria.Misc.LootUtility.FindWeightedGameObjectInCollection(WeightedGameObjectCollection,System.Int32)">
-            <summary>
-            Finds a weighted game object corresponding to a given pickup object id in a weighted game object collection.
-            </summary>
-            <param name="collection">The collection you are searching</param> 
-            <param name="id">The id of the pickup object you want to find</param> 
-            <returns></returns>
-        </member>
-        <member name="M:Alexandria.Misc.LootUtility.FindWeightedGameObjectInCollection(WeightedGameObjectCollection,UnityEngine.GameObject)">
-            <summary>
-            Finds a weighted game object corresponding to a given gameobject in a weighted game object collection.
-            </summary>
-            <param name="collection">The collection you are searching</param> 
-            <param name="obj">The gameobject you want to find</param> 
-            <returns></returns>
-        </member>
-        <member name="M:Alexandria.Misc.Shared.CallPrivate(MonoMod.Cil.ILCursor,System.Type,System.String)">
-            <summary>Convenience method for calling an internal / private static function with an ILCursor</summary>
-        </member>
-        <member name="M:Alexandria.Misc.Shared.DeclareLocal``1(MonoMod.Cil.ILContext)">
-            <summary>Declare a local variable in an ILManipulator</summary>
-        </member>
-        <member name="F:Alexandria.Misc.Shared.rx_enum_field">
-            <summary>Retrieves a field from within an enumerator</summary>
-        </member>
-        <member name="M:Alexandria.Misc.Shared.Append``1(``0[]@,``0[])">
-            <summary>Adds 1 or more elements to an array.</summary>
-        </member>
-        <member name="M:Alexandria.Misc.MathsAndLogicHelper.CalculateVectorBetween(UnityEngine.Vector2,UnityEngine.Vector2)">
-            <summary>
-            Returns a Vector2 value corresponding to the direction between the first and second positions. Useful for trajectories.
-            </summary>
-            <param name="startVector">The starting position in the trajectory.</param>
-            <param name="endVector">The ending position in the trajectory.</param>
-        </member>
-        <member name="M:Alexandria.Misc.MathsAndLogicHelper.CalculateVectorBetween(UnityEngine.Vector3,UnityEngine.Vector3)">
-            <summary>
-            Returns a Vector2 value corresponding to the direction between the first and second positions. Useful for trajectories.
-            </summary>
-            <param name="startVector">The starting position in the trajectory.</param>
-            <param name="endVector">The ending position in the trajectory.</param>
-        </member>
-        <member name="M:Alexandria.Misc.MathsAndLogicHelper.RadianToVector2(System.Single)">
-            <summary>
-            Converts a given radian into a Vector2.
-            </summary>
-            <param name="radian">The radian to convert.</param>
-        </member>
-        <member name="M:Alexandria.Misc.MathsAndLogicHelper.DegreeToVector2(System.Single)">
-            <summary>
-            Converts an angle degree into a Vector2.
-            </summary>
-            <param name="degree">The degree to convert.</param>
-        </member>
-        <member name="M:Alexandria.Misc.MathsAndLogicHelper.DegreeToVector2(System.Int32)">
-            <summary>
-            Converts an angle degree into a Vector2.
-            </summary>
-            <param name="degree">The degree to convert.</param>
-        </member>
-        <member name="M:Alexandria.Misc.MathsAndLogicHelper.isEven(System.Single)">
-            <summary>
-            Returns true if the given float is even.
-            </summary>
-            <param name="number">The float to check.</param>
-        </member>
-        <member name="M:Alexandria.Misc.MathsAndLogicHelper.isEven(System.Int32)">
-            <summary>
-            Returns true if the given integer is even.
-            </summary>
-            <param name="number">The integer to check.</param>
-        </member>
-        <member name="M:Alexandria.Misc.MathsAndLogicHelper.IsBetweenRange(System.Single,System.Single,System.Single)">
-            <summary>
-            Returns true if the given float is between the provided number range.
-            </summary>
-            <param name="numberToCheck">The float to check.</param>
-            <param name="bottom">The low end of the given range to check.</param>
-            <param name="top">The high end of the given range to check.</param>
-        </member>
-        <member name="M:Alexandria.Misc.MathsAndLogicHelper.GetAccuracyAngled(System.Single,System.Single,PlayerController)">
-            <summary>
-            Takes a float which represents an angle, and returns that same angle with a random degree of variance, similarly to gun accuracy.
-            </summary>
-            <param name="startFloat">The starting angle.</param>
-            <param name="variance">The amount by which the starting angle may vary in either direction.</param>
-            <param name="playerToScaleAccuracyOff">If set, the amount of variance will be affected by the given player's accuracy stat.</param>
-        </member>
-        <member name="M:Alexandria.Misc.MathsAndLogicHelper.RemoveInvalidIDListEntries(System.Collections.Generic.List{System.Int32},System.Boolean,System.Boolean)">
-            <summary>
-            Takes a list of item IDs. Removes 'invalid' entries based on set criteria, and returns the modified list.
-            </summary>
-            <param name="starterList">The list to be checked. Should only contain existing item IDs.</param>
-            <param name="checkPlayerInventories">Removes item IDs that are currently in a player's inventory.</param>
-            <param name="checkUnlocked">Removes item IDs which have not yet been unlocked.</param>
-        </member>
-        <member name="M:Alexandria.Misc.MathsAndLogicHelper.GetRandomQuality(PickupObjectDatabase,System.Single,System.Single,System.Single,System.Single)">
-            <summary>
-            Returns a random item quality between D and S, with decreasing probability. Configurable probability. If one tier chance is set, all must be set. D tier is not set, as it is the default if no other tiers are chosen.
-            </summary>
-            <param name="dat">The pickupobjectdatabase.</param>
-            <param name="cChance">The chance for the returned item to be C Tier.</param>
-            <param name="bChance">The chance for the returned item to be B Tier.</param>
-            <param name="aChance">The chance for the returned item to be A Tier.</param>
-            <param name="sChance">The chance for the returned item to be S Tier.</param>
-        </member>
-        <member name="M:Alexandria.Misc.MathsAndLogicHelper.GetNearestEnemyToPosition(UnityEngine.Vector2,System.Boolean,Dungeonator.RoomHandler.ActiveEnemyType,System.Collections.Generic.List{AIActor},System.Func{AIActor,System.Boolean})">
-            <summary>
-            Returns the AIActor of the nearest enemy to the Vector2 position.
-            By default, will only return engaged enemies with HealthHavers who are alive and vulnerable. Use overrideValidityCheck if this is not what you want.
-            </summary>
-            <param name="position">The position to check.</param>
-            <param name="checkIsWorthShootingAt">If true, will ignore enemies such as Mountain Cubes.</param>
-            <param name="type">Controls whether or not the check should ignore enemies who are not required for room clear.</param>
-            <param name="excludedActors">AIactors on this list will be ignored.</param>
-            <param name="overrideValidityCheck">A func which allows the manual checking of custom parameters for enemy validity.</param>
-        </member>
-        <member name="M:Alexandria.Misc.MathsAndLogicHelper.GetNearestEnemyToPosition(IntVector2,System.Boolean,Dungeonator.RoomHandler.ActiveEnemyType,System.Collections.Generic.List{AIActor},System.Func{AIActor,System.Boolean})">
-            <summary>
-            Returns the AIActor of the nearest enemy to the IntVector2 position.
-            By default, will only return engaged enemies with HealthHavers who are alive and vulnerable. Use overrideValidityCheck if this is not what you want.
-            </summary>
-            <param name="position">The position to check.</param>
-            <param name="checkIsWorthShootingAt">If true, will ignore enemies such as Mountain Cubes.</param>
-            <param name="type">Controls whether or not the check should ignore enemies who are not required for room clear.</param>
-            <param name="excludedActors">AIactors on this list will be ignored.</param>
-            <param name="overrideValidityCheck">A func which allows the manual checking of custom parameters for enemy validity.</param>
-        </member>
-        <member name="M:Alexandria.Misc.MathsAndLogicHelper.GetVectorToNearestEnemy(UnityEngine.Vector2,System.Boolean,Dungeonator.RoomHandler.ActiveEnemyType,System.Collections.Generic.List{AIActor},System.Func{AIActor,System.Boolean})">
-            <summary>
-            Returns a Vector2 corresponding to the direction towards the nearest enemy to the initial position.
-            By default, will only return engaged enemies with HealthHavers who are alive and vulnerable. Use overrideValidityCheck if this is not what you want.
-            </summary>
-            <param name="position">The position to check.</param>
-            <param name="checkIsWorthShooting">If true, will ignore enemies such as Mountain Cubes.</param>
-            <param name="type">Controls whether or not the check should ignore enemies who are not required for room clear.</param>
-            <param name="excludedActors">AIactors on this list will be ignored.</param>
-            <param name="overrideValidityCheck">A func which allows the manual checking of custom parameters for enemy validity.</param>
-        </member>
-        <member name="M:Alexandria.Misc.MathsAndLogicHelper.GetPositionOfNearestEnemy(UnityEngine.Vector2,Alexandria.Misc.ActorCenter,System.Boolean,Dungeonator.RoomHandler.ActiveEnemyType,System.Collections.Generic.List{AIActor},System.Func{AIActor,System.Boolean})">
-            <summary>
-            Returns a Vector2 corresponding to position of the nearest enemy to the original position.
-            By default, will only return engaged enemies with HealthHavers who are alive and vulnerable. Use overrideValidityCheck if this is not what you want.
-            Returns Vector2.zero if there is not a valid enemy in the room, or it did not have the required component for the centerType.
-            </summary>
-            <param name="position">The position to check.</param>
-            <param name="centerType">How the position of the enemy should be determined. RIGIDBODY will return the SpecRigidBody UnitCenter, SPRITE will return the Sprite.WorldCenter, and TRANSFORM will return the Transform position.</param>
-            <param name="checkIsWorthShootingAt">If true, will ignore enemies such as Mountain Cubes.</param>
-            <param name="type">Controls whether or not the check should ignore enemies who are not required for room clear.</param>
-            <param name="excludedActors">AIactors on this list will be ignored.</param>
-            <param name="overrideValidityCheck">A func which allows the manual checking of custom parameters for enemy validity.</param>
-        </member>
-        <member name="M:Alexandria.Misc.MathsAndLogicHelper.KeyByValue``2(System.Collections.Generic.Dictionary{``0,``1},``1)">
-            <summary>
-            Searches a dictionary for a specific value, and returns the corresponding key. Essentially a reverse dictionary search.
-            </summary>
-            <param name="dict">The dictionary to be searched.</param>
-            <param name="val">The value being searched for.</param>
-        </member>
-        <member name="M:Alexandria.Misc.MathsAndLogicHelper.GetCenteredLookingPosForObj(UnityEngine.Vector2,SpeculativeRigidbody,System.Boolean,System.Boolean)">
-            <summary>
-            Returns a position relative to the initial Vector2 where the provided SpeculativeRigidBody may be spawned such that it's center will be centered upon the original position.
-            </summary>
-            <param name="originalValue">The original position, where the given rigidbody is desired to be centered upon.</param>
-            <param name="rigidBody">The rigidbody whose dimensions are being compensated for.</param>
-            <param name="centerX">If true, will return a position which will center the rigidbody along the X coordinate.</param>
-            <param name="centerY">If true, will return a position which will center the rigidbody along the Y coordinate.</param>
-        </member>
-        <member name="M:Alexandria.Misc.RandomEnum`1.Get">
-            <summary>
-            Returns a random value of the Enum.
-            </summary>
         </member>
         <member name="M:Alexandria.RoomRewardAPI.HandleValidRoomRewardContents(Dungeonator.RoomHandler,Alexandria.RoomRewardAPI.ValidRoomRewardContents@,System.Single@)">
             <summary>Returns true if and only if we should return early from HandleRoomClearReward</summary>

@@ -7,6 +7,7 @@ using Alexandria.ItemAPI;
 using UnityEngine;
 using MonoMod.RuntimeDetour;
 using System.Reflection;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -26,54 +27,36 @@ namespace NevernamedsItems
 
         private void PostProcessProjectile(Projectile sourceProjectile, float effectChanceScalar)
         {
-            try
-            {
-                sourceProjectile.specRigidbody.OnPreRigidbodyCollision = (SpeculativeRigidbody.OnPreRigidbodyCollisionDelegate)Delegate.Combine(sourceProjectile.specRigidbody.OnPreRigidbodyCollision, new SpeculativeRigidbody.OnPreRigidbodyCollisionDelegate(this.HandlePreCollision));
-            }
-            catch (Exception e)
-            {
-                ETGModConsole.Log(e.Message);
-            }
+            sourceProjectile.Ext().ModifyDealtDamage += ModifyDealtDamage;
         }
-        private void HandlePreCollision(SpeculativeRigidbody myRigidbody, PixelCollider myPixelCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherPixelCollider)
+        private void PostProcessBeam(BeamController beam)
         {
-            if (otherRigidbody && otherRigidbody.healthHaver)
+            if (beam && beam.projectile != null) { PostProcessProjectile(beam.projectile, 1f); }
+        }
+        private void ModifyDealtDamage(Projectile p, HealthHaver h, HealthHaver.ModifyDamageEventArgs args)
+        {
+            if (p != null && h != null && args != null)
             {
-                float MaxEnemyHealth = otherRigidbody.healthHaver.GetMaxHealth();
-                float HalfEnemyHealth = MaxEnemyHealth * 0.5f;
-                float CurrentEnemyHealth = otherRigidbody.healthHaver.GetCurrentHealth();
-                if (CurrentEnemyHealth > HalfEnemyHealth)
+                if (h.currentHealth >= (h.GetMaxHealth() / 2f))
                 {
-                    float originalDamage = myRigidbody.projectile.baseData.damage;
-                    myRigidbody.projectile.baseData.damage *= 1.5f;
-                    GameManager.Instance.StartCoroutine(this.ChangeProjectileDamage(myRigidbody.projectile, originalDamage));
+                    args.ModifiedDamage *= 1.5f;
                 }
             }
-        }
-        private IEnumerator ChangeProjectileDamage(Projectile bullet, float oldDamage)
-        {
-            yield return new WaitForSeconds(0.1f);
-            if (bullet != null)
-            {
-                bullet.baseData.damage = oldDamage;
-            }
-            yield break;
-        }
-        public override DebrisObject Drop(PlayerController player)
-        {
-            DebrisObject debrisObject = base.Drop(player);
-            player.PostProcessProjectile -= this.PostProcessProjectile;
-            return debrisObject;
         }
         public override void Pickup(PlayerController player)
         {
             base.Pickup(player);
             player.PostProcessProjectile += this.PostProcessProjectile;
+            player.PostProcessBeam += this.PostProcessBeam;
         }
-        public override void OnDestroy()
+        public override void DisableEffect(PlayerController player)
         {
-            if (Owner) Owner.PostProcessProjectile -= this.PostProcessProjectile;
-            base.OnDestroy();
+            base.DisableEffect(player);
+            if (player)
+            {
+                player.PostProcessProjectile -= this.PostProcessProjectile;
+                player.PostProcessBeam -= this.PostProcessBeam;
+            }
         }
     }
 }

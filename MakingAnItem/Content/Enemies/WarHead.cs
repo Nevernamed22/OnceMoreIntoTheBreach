@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using Dungeonator;
+using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
@@ -90,6 +91,7 @@ namespace NevernamedsItems
             animator.GetClipByName("attack").frames[5].eventInfo = "fire_rocket";
             animator.GetClipByName("attack").frames[5].eventAudio = "Play_ENM_holy_cross_01";
 
+            AIanimator.facingType = AIAnimator.FacingType.Movement;
 
             var healthHaver = enemy.AddComponent<HealthHaver>();
             healthHaver.RegisterBodySprite(enemy.GetComponent<tk2dBaseSprite>());
@@ -111,15 +113,17 @@ namespace NevernamedsItems
             aiActor.BlackPhantomProperties = new BlackPhantomProperties();
             aiActor.BlackPhantomProperties.BonusHealthPercentIncrease = 2.2f;
 
+
+
             var bs = enemy.GetOrAddComponent<BehaviorSpeculator>();
-            bs.PostAwakenDelay = 0.5f;
+            bs.PostAwakenDelay = 2f;
             bs.AttackBehaviors = new List<AttackBehaviorBase>();
             bs.OverrideBehaviors = new List<OverrideBehaviorBase>();
             bs.OtherBehaviors = new List<BehaviorBase>();
 
             GameObject shootPoint = new GameObject("shootPoint");
             shootPoint.transform.SetParent(enemy.transform);
-            shootPoint.transform.localPosition = new Vector3(0f, 20f / 16f, 0f);
+            shootPoint.transform.localPosition = new Vector3(0f, 23f / 16f, 0f);
 
             AIBulletBank bank = enemy.GetOrAddComponent<AIBulletBank>();
             bank.CollidesWithEnemies = false;
@@ -176,28 +180,47 @@ namespace NevernamedsItems
                     ObjectPermanence = true,
                     SearchInterval = 0.25f,
                     PauseOnTargetSwitch = false,
-                    PauseTime = 0.25f,
+                    PauseTime = 5f,
                 }
             };
             bs.MovementBehaviors = new List<MovementBehaviorBase>
             {
-                new MoveErraticallyBehavior
+                new ApachesMoveErraticallyBehavior
                 {
-                    AvoidTarget = true,
                     PathInterval = 1f,
                     PointReachedPauseTime = 2f,
-                    PreventFiringWhileMoving = false,
-                    UseTargetsRoom = false,
-                    StayOnScreen = false,
                 }
             };
             bs.AttackBehaviors = new List<AttackBehaviorBase>
             {
-                new WarHeadRocketBehaviour
+
+                new SequentialAttackBehaviorGroup()
                 {
-                    TellAnimation = "attack",
-                    Rocket = StandardisedProjectiles.skyRocket,
-                    RocketOrigin = shootPoint.transform,
+                    RunInClass = true,
+                    AttackBehaviors = new List<AttackBehaviorBase>()
+                    {
+                        new WarHeadRocketBehaviour
+                        {
+                            TellAnimation = "attack",
+                            Rocket = StandardisedProjectiles.skyRocket,
+                            RocketOrigin = shootPoint.transform,
+                            Cooldown = 1f,
+                        },
+                        new WarHeadRocketBehaviour
+                        {
+                            TellAnimation = "attack",
+                            Rocket = StandardisedProjectiles.skyRocket,
+                            RocketOrigin = shootPoint.transform,
+                            Cooldown = 1f,
+                        },
+                         new WarHeadRocketBehaviour
+                        {
+                            TellAnimation = "attack",
+                            Rocket = StandardisedProjectiles.skyRocket,
+                            RocketOrigin = shootPoint.transform,
+                            Cooldown = 5f,
+                        }
+                    }
                 }
             };
 
@@ -289,12 +312,7 @@ namespace NevernamedsItems
             public override void Start()
             {
                 base.Start();
-                if (!string.IsNullOrEmpty(TellAnimation))
-                {
-                    this.m_aiAnimator.PlayUntilFinished(this.TellAnimation, true, null, -1f, false);
-                    tk2dSpriteAnimator spriteAnimator = this.m_aiAnimator.spriteAnimator;
-                    spriteAnimator.AnimationEventTriggered += HandleAnimationEvent;
-                }
+
             }
             public override void Upkeep()
             {
@@ -308,14 +326,27 @@ namespace NevernamedsItems
             {
                 base.Update();
                 if (!IsReady()) { return BehaviorResult.Continue; }
-                return  BehaviorResult.SkipAllRemainingBehaviors;
+
+                if (State == AttackState.WAITING)
+                {
+                    State = AttackState.TELEGRAPHING;
+                }
+
+                if (State == AttackState.TELEGRAPHING)
+                {
+                    return BehaviorResult.SkipAllRemainingBehaviors;
+                }
+                return BehaviorResult.Continue;
             }
             private void HandleAnimationEvent(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip, int frameNo)
             {
                 tk2dSpriteAnimationFrame frame = clip.GetFrame(frameNo);
                 if (frame.eventInfo == "fire_rocket")
                 {
+                    State = AttackState.ENDING;
                     this.FireRocket();
+                    animator.AnimationEventTriggered -= HandleAnimationEvent;
+
                 }
             }
             private void FireRocket()
@@ -326,6 +357,42 @@ namespace NevernamedsItems
                 component.transform.position = component.transform.position.WithY(component.transform.position.y - componentInChildren.transform.localPosition.y);
                 component.ExplosionData.ignoreList.Add(this.m_aiActor.specRigidbody);
                 //this.m_aiActor.sprite.AttachRenderer(component.GetComponentInChildren<tk2dSprite>());
+            }
+
+            private enum AttackState
+            {
+                WAITING,
+                TELEGRAPHING,
+                ENDING
+            }
+            private AttackState m_state;
+            private AttackState State
+            {
+                get
+                {
+                    return this.m_state;
+                }
+                set
+                {
+                    this.m_state = value;
+                    this.BeginState(this.m_state);
+                }
+            }
+            private void BeginState(AttackState State)
+            {
+                switch (State)
+                {
+                    case AttackState.TELEGRAPHING:
+                        if (!string.IsNullOrEmpty(TellAnimation))
+                        {
+                            this.m_aiActor.ClearPath();
+                            this.m_aiAnimator.PlayUntilFinished(this.TellAnimation, true, null, -1f, false);
+                            tk2dSpriteAnimator spriteAnimator = this.m_aiAnimator.spriteAnimator;
+                            spriteAnimator.AnimationEventTriggered += HandleAnimationEvent;
+                        }
+                        break;
+
+                }
             }
         }
     }
