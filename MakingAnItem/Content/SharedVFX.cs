@@ -98,6 +98,9 @@ namespace NevernamedsItems
         public static GameObject KnockbackUpVFX;
         public static GameObject ReloadSpeedUpVFX;
 
+        //Enemy VFX
+        public static GameObject WarHeadFiringVFX;
+
         //Misc
         public static GameObject GundetaleSpareVFX;
         public static GameObject LoveBurstAOE;
@@ -186,6 +189,10 @@ namespace NevernamedsItems
 
             //Stat Up VFX
             SpeedUpVFX = VFXToolbox.CreateVFXBundle("SpeedUpVFX", true, 0.18f);
+
+            //Enemy VFX
+            WarHeadFiringVFX = VFXToolbox.CreateVFXBundle("WarHeadAttack", true, 2f);
+
 
             //Misc
             GundetaleSpareVFX = VFXToolbox.CreateVFXBundle("GundertaleSpare", true, 0.18f, 5, 5, new Color32(255, 229, 87, 255));

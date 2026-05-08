@@ -101,7 +101,8 @@
     <Compile Include="Content\Enemies\LesserSnakeshooter.cs" />
     <Compile Include="Content\Enemies\MolotovKin.cs" />
     <Compile Include="Content\Enemies\Muskin.cs" />
-    <Compile Include="Content\Enemies\Scripts and Behaviours\ApachesMoveErraticallyBehaviour.cs" />
+    <Compile Include="Content\Enemies\Scripts and Behaviours\DoNothingAttackBehaviour.cs" />
+    <Compile Include="Content\Enemies\Scripts and Behaviours\OMITBSimpleWanderBehaviour.cs" />
     <Compile Include="Content\Enemies\Scripts and Behaviours\CustomShootBeamGunBehaviour.cs" />
     <Compile Include="Content\Enemies\SpentBullat.cs" />
     <Compile Include="Content\Enemies\Scripts and Behaviours\UnhousedBulletScripts.cs" />
@@ -325,6 +326,7 @@
     <Compile Include="Content\Items\Misc Passives\Starfruit.cs" />
     <Compile Include="Content\Items\New Item Classes\AffectEnemiesInProximityTickItem.cs" />
     <Compile Include="Content\Items\Misc Passives\RectangularMirror.cs" />
+    <Compile Include="Content\Placeables\BasicButtonController.cs" />
     <Compile Include="Content\Placeables\Breakables.cs" />
     <Compile Include="Content\Placeables\Breakables\BigBlank.cs" />
     <Compile Include="Content\Placeables\Breakables\BulletScarecrow.cs" />

@@ -17,6 +17,7 @@ namespace SaveAPI
         BOWLERSHOP_METONCE,
         CHANCELOT_METONCE,
         FORTUNETELLER_METONCE,
+        MADAMEAUTOMATA_REPAIRED,
         //---------------------------------------------Task Based Unlocks
         PLAYERHELDMORETHANFIVEARMOUR,
         KILLEDJAMMEDKEYBULLETKIN,

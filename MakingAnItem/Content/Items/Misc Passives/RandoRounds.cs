@@ -6,6 +6,8 @@ using System.Text;
 using UnityEngine;
 using Alexandria.ItemAPI;
 using SaveAPI;
+using System.Security.Policy;
+using System.Collections;
 
 namespace NevernamedsItems
 {
@@ -24,113 +26,76 @@ namespace NevernamedsItems
             item.AddItemToDougMetaShop(19);
             Doug.AddToLootPool(item.PickupObjectId);
         }
-        bool hasPicked = false;
-        public int randomNumber;
-        public string randomNumberToString;
-        private void PickStats()
-        {
-            if (hasPicked) return;
-            else
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    Effect effect = BraveUtility.RandomElement(statEffects);
-                    statEffects.Remove(effect);
-                    if (effect.modifyMethod == StatModifier.ModifyMethod.MULTIPLICATIVE)
-                    {
-                        AddStat(effect.statToEffect, effect.amount, StatModifier.ModifyMethod.MULTIPLICATIVE);
-                    }
-                    else
-                    {
-                        AddStat(effect.statToEffect, effect.amount, StatModifier.ModifyMethod.ADDITIVE);
-                    }
-                }
-                Owner.stats.RecalculateStats(Owner, true, false);
-                hasPicked = true;
-            }
-        }
-        public List<Effect> statEffects = new List<Effect>();
-        public struct Effect
-        {
-            public PlayerStats.StatType statToEffect;
-            public float amount;
-            public StatModifier.ModifyMethod modifyMethod;
-            public Action<Effect, PlayerController> action;
-        }
-        public void DefineEffects()
-        {
-            statEffects.Add(new Effect()
-            {
-                statToEffect = PlayerStats.StatType.Accuracy,
-                modifyMethod = StatModifier.ModifyMethod.MULTIPLICATIVE,
-                amount = .85f,
-            });
-            statEffects.Add(new Effect()
-            {
-                statToEffect = PlayerStats.StatType.ReloadSpeed,
-                modifyMethod = StatModifier.ModifyMethod.MULTIPLICATIVE,
-                amount = 0.85f,
-            });
-            statEffects.Add(new Effect()
-            {
-                statToEffect = PlayerStats.StatType.Damage,
-                modifyMethod = StatModifier.ModifyMethod.MULTIPLICATIVE,
-                amount = 1.15f,
-            });
-            statEffects.Add(new Effect()
-            {
-                statToEffect = PlayerStats.StatType.PlayerBulletScale,
-                modifyMethod = StatModifier.ModifyMethod.MULTIPLICATIVE,
-                amount = 1.15f,
-            });
-            statEffects.Add(new Effect()
-            {
-                statToEffect = PlayerStats.StatType.ProjectileSpeed,
-                modifyMethod = StatModifier.ModifyMethod.MULTIPLICATIVE,
-                amount = 1.15f,
-            });
-            statEffects.Add(new Effect()
-            {
-                statToEffect = PlayerStats.StatType.RateOfFire,
-                modifyMethod = StatModifier.ModifyMethod.MULTIPLICATIVE,
-                amount = 1.15f,
-            });
-        }
+        List<int> chosenStats = null;
         public override void Pickup(PlayerController player)
         {
-            base.Pickup(player);
-            DefineEffects();
-            PickStats();
-        }
-        private void AddStat(PlayerStats.StatType statType, float amount, StatModifier.ModifyMethod method = StatModifier.ModifyMethod.ADDITIVE)
-        {
-            /*foreach (var m in passiveStatModifiers)
+            if (!m_pickedUpThisRun)
             {
-                if (m.statToBoost == statType) return; //don't add duplicates
-            }*/
+                int one = UnityEngine.Random.Range(0, 6);
+                int two = one;
+                while (two == one) { two = UnityEngine.Random.Range(0, 6); }
+                chosenStats = new List<int>() { one, two };
 
-            StatModifier modifier = new StatModifier
-            {
-                amount = amount,
-                statToBoost = statType,
-                modifyType = method
-            };
-
-            if (this.passiveStatModifiers == null)
-                this.passiveStatModifiers = new StatModifier[] { modifier };
-            else
-                this.passiveStatModifiers = this.passiveStatModifiers.Concat(new StatModifier[] { modifier }).ToArray();
-        }
-
-        private void RemoveStat(PlayerStats.StatType statType)
-        {
-            var newModifiers = new List<StatModifier>();
-            for (int i = 0; i < passiveStatModifiers.Length; i++)
-            {
-                if (passiveStatModifiers[i].statToBoost != statType)
-                    newModifiers.Add(passiveStatModifiers[i]);
+                this.AddPassiveStatModifier(Stats[chosenStats[0]]);
+                this.AddPassiveStatModifier(Stats[chosenStats[1]]);
             }
-            this.passiveStatModifiers = newModifiers.ToArray();
+            player.StartCoroutine(ShowText(player));
+            base.Pickup(player);
         }
+        public IEnumerator ShowText(PlayerController player)
+        {
+            VFXToolbox.DoRisingStringFade(StatLabels[chosenStats[0]], player.sprite.WorldCenter + new Vector2(0f, 1f), Color.red);
+            yield return new WaitForSeconds(1f);
+            VFXToolbox.DoRisingStringFade(StatLabels[chosenStats[1]], player.sprite.WorldCenter + new Vector2(0f, 1f), Color.red);
+            yield break;
+        }
+        public static readonly List<StatModifier> Stats = new List<StatModifier>()
+        {
+            new StatModifier()
+            {
+                 statToBoost = PlayerStats.StatType.Accuracy,
+                 amount = 0.85f,
+                 modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+            },
+            new StatModifier()
+            {
+                 statToBoost = PlayerStats.StatType.ReloadSpeed,
+                 amount = 0.85f,
+                 modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+            },
+            new StatModifier()
+            {
+                 statToBoost = PlayerStats.StatType.Damage,
+                 amount = 1.15f,
+                 modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+            },
+            new StatModifier()
+            {
+                 statToBoost = PlayerStats.StatType.PlayerBulletScale,
+                 amount = 1.15f,
+                 modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+            },
+            new StatModifier()
+            {
+                 statToBoost = PlayerStats.StatType.ProjectileSpeed,
+                 amount = 1.15f,
+                 modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+            },
+            new StatModifier()
+            {
+                 statToBoost = PlayerStats.StatType.RateOfFire,
+                 amount = 1.15f,
+                 modifyType = StatModifier.ModifyMethod.MULTIPLICATIVE,
+            }
+        };
+        public static readonly List<string> StatLabels = new List<string>()
+        {
+            "ACCURACY UP",
+            "RELOAD SPEED UP",
+            "DAMAGE UP",
+            "BULLET SIZE UP",
+            "SHOT SPEED UP",
+            "FIRERATE UP"
+        };
     }
 }

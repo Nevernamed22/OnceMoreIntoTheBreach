@@ -1,17 +1,37 @@
 ﻿using Alexandria.ItemAPI;
 using Alexandria.SoundAPI;
+using Dungeonator;
 using HarmonyLib;
+using Pathfinding;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using static ETGMod;
 
 namespace NevernamedsItems
 {
     public static class MiscTools
     {
+        public static IntVector2? GetRandomAvailableCellInRadius(this RoomHandler room, IntVector2 clearance, Vector2 radiusCenter, float minRadius, float maxRadius,  CellTypes? passableCellTypes = null, bool canPassOccupied = false)
+        {
+            return (room.GetRandomAvailableCell(clearance, passableCellTypes, canPassOccupied, delegate (IntVector2 c)
+                {
+                    for (int X = 0; X < clearance.x; X++)
+                    {
+                        for (int Y = 0; Y < clearance.y; Y++)
+                        {
+                            if (GameManager.Instance.Dungeon.data.isTopWall(c.x + X, c.y + Y)) { return false; }
+                            if (GameManager.Instance.Dungeon.data.isAnyFaceWall(c.x + X, c.y + Y)) { return false; }
+                        }
+                    }
+                    float dist = Vector2.Distance(radiusCenter, c.ToVector2());
+                    if (dist > maxRadius || dist < minRadius) { return false; }
+                    return true;
+                }));
+        }
         public static IEnumerator LerpTransformToPosition(Transform target, Vector2 targetPosition, float time)
         {
             Vector2 startPosition = target.position;
@@ -96,7 +116,7 @@ namespace NevernamedsItems
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.customAmmoType = name;
         }
-        
+
         public static void Add<T>(ref T[] array, T toAdd)
         {
             List<T> list = array.ToList();

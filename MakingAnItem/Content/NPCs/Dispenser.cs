@@ -151,7 +151,7 @@ namespace NevernamedsItems
         private IEnumerator HandleInteraction(PlayerController interactor)
         {
             busy = true;
-            if (interactor.carriedConsumables.Currency > Cost)
+            if (interactor.carriedConsumables.Currency >= Cost)
             {
                 interactor.carriedConsumables.Currency -= Cost;
                 AkSoundEngine.PostEvent("Play_OBJ_bottle_cork_01", base.gameObject);

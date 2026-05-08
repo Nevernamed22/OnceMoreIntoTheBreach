@@ -11,7 +11,7 @@ using Alexandria.Misc;
 
 namespace NevernamedsItems
 {
-    class GoldButton : BasicTrapController
+    class GoldButton : BasicButtonController
     {
         public static void Init()
         {
@@ -26,15 +26,30 @@ namespace NevernamedsItems
             buttonobj.SetLayerRecursively(LayerMask.NameToLayer("FG_Critical"));
             buttonobj.GetComponent<MeshRenderer>().material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTilted");
 
+            var buttonBody = buttonobj.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(new IntVector2(0, 0), new IntVector2(32, 32));
+            buttonBody.CollideWithTileMap = false;
+            buttonBody.CollideWithOthers = true;
+            buttonBody.PixelColliders = new List<PixelCollider>()
+            {
+                new PixelCollider()
+                {
+                   ColliderGenerationMode = PixelCollider.PixelColliderGeneration.Manual,
+                   CollisionLayer = CollisionLayer.LowObstacle,
+                   ManualWidth = 32,
+                   ManualHeight = 32,
+                   ManualOffsetX = 0,
+                   ManualOffsetY = 0,
+                   IsTrigger = true
+                }
+            };
+
             GoldButton buttoncomp = buttonobj.AddComponent<GoldButton>();
             buttoncomp.isPassable = true;
             buttoncomp.placeableHeight = 2;
             buttoncomp.placeableWidth = 2;
-            buttoncomp.triggerMethod = TriggerMethod.PlaceableFootprint;
-            buttoncomp.resetDelay = float.MaxValue;
-            buttoncomp.triggerDelay = 0;
-            buttoncomp.triggerAnimName = "goldbutton_press";
-            //buttoncomp.damagesFlyingPlayers = true;
+            buttoncomp.UntriggerDelay = -1;
+            buttoncomp.triggerAnimationName = "goldbutton_press";
+            buttoncomp.idleAnimationName = "goldbutton_idle";
 
             tk2dSpriteAnimator animator = buttonobj.GetOrAddComponent<tk2dSpriteAnimator>();
             animator.Library = Initialisation.trapAnimationCollection;
@@ -49,11 +64,9 @@ namespace NevernamedsItems
             StaticReferences.StoredDungeonPlaceables.Add("goldbutton", buttonPlaceable);
             Alexandria.DungeonAPI.StaticReferences.customPlaceables.Add("nn:goldbutton", buttonPlaceable);
         }
-        public override void TriggerTrap(SpeculativeRigidbody target)
+        public override void SteppedOn(SpeculativeRigidbody sourceSpecRigidbody, CollisionData collisionData)
         {
-            base.TriggerTrap(target);
-
-            List<AIActor> activeEnemies = base.m_parentRoom.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+            List<AIActor> activeEnemies = base.m_parentroom.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
             GameManager.Instance.MainCameraController.DoScreenShake(StaticExplosionDatas.genericLargeExplosion.ss, null, false);
             Pixelator.Instance.FadeToColor(0.1f, Color.white, true, 0.1f);
             Exploder.DoDistortionWave(base.sprite.WorldCenter, 0.4f, 0.15f, 10f, 0.4f);
@@ -75,5 +88,6 @@ namespace NevernamedsItems
                 }
             }
         }
+        
     }
 }

@@ -3,96 +3,212 @@
   "WorkspaceRootPath": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|c:\\users\\travi\\documents\\github\\oncemoreintothebreach\\makinganitem\\content\\items\\misc passives\\promethianbullets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\promethianbullets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\hallowedbullets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\hallowedbullets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\cleansingrounds.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\cleansingrounds.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\initialisesynergies.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\initialisesynergies.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\bloodthirstybullets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\bloodthirstybullets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\pestiferouslead.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\pestiferouslead.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\guns\\blowgun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\blowgun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\enemies\\scripts and behaviours\\apachesmoveerraticallybehaviour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\enemies\\scripts and behaviours\\apachesmoveerraticallybehaviour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\witheringchamber.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\witheringchamber.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\enemies\\warhead.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\enemies\\warhead.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\enemies\\scripts and behaviours\\customshootbeamgunbehaviour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\enemies\\scripts and behaviours\\customshootbeamgunbehaviour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\npcs\\madameautomata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|c:\\users\\travi\\documents\\github\\oncemoreintothebreach\\makinganitem\\content\\npcs\\madameautomata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\npcs\\madameautomata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\npcs\\fortuneteller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\apis and toolboxes\\standardapi\\gungosaveapi\\enums\\customdungeonflags.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\apis and toolboxes\\standardapi\\gungosaveapi\\enums\\customdungeonflags.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\npcs\\chancellot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\npcs\\chancellot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|c:\\users\\travi\\documents\\github\\oncemoreintothebreach\\makinganitem\\content\\npcs\\fortuneteller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\npcs\\fortuneteller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\enemies\\bouncerbulletkin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\enemies\\bouncerbulletkin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|c:\\users\\travi\\documents\\github\\oncemoreintothebreach\\makinganitem\\content\\npcs\\genericcultist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\npcs\\genericcultist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\guns\\laserwelder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\laserwelder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|c:\\users\\travi\\documents\\github\\oncemoreintothebreach\\makinganitem\\content\\npcs\\bowlershop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\npcs\\bowlershop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\guns\\golfrifle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\golfrifle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\bulletshuffle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\bulletshuffle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\guns\\confetticannon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\confetticannon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|c:\\users\\travi\\documents\\github\\oncemoreintothebreach\\makinganitem\\content\\sharedvfx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\sharedvfx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\enemies\\candelabra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\enemies\\candelabra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\hardreloadbullets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\hardreloadbullets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\enemies\\greatersnakeshooter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\enemies\\greatersnakeshooter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\enemies\\deacon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|c:\\users\\travi\\documents\\github\\oncemoreintothebreach\\makinganitem\\content\\enemies\\deacon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\enemies\\deacon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\apis and toolboxes\\omitb misc toolboxes\\playertoolbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\apis and toolboxes\\omitb misc toolboxes\\playertoolbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\guns\\killdevil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\killdevil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|c:\\users\\travi\\documents\\github\\oncemoreintothebreach\\makinganitem\\apis and toolboxes\\omitb misc toolboxes\\vfxtoolbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\apis and toolboxes\\omitb misc toolboxes\\vfxtoolbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|c:\\users\\travi\\documents\\github\\oncemoreintothebreach\\makinganitem\\content\\items\\guns\\beams\\welder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\beams\\welder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\bashingbullets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\bashingbullets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|c:\\users\\travi\\documents\\github\\oncemoreintothebreach\\makinganitem\\content\\items\\guns\\magicpaintbrush.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\magicpaintbrush.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|c:\\users\\travi\\documents\\github\\oncemoreintothebreach\\makinganitem\\apis and toolboxes\\omitb misc toolboxes\\projectilecomponents\\projectilespriterotation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\apis and toolboxes\\omitb misc toolboxes\\projectilecomponents\\projectilespriterotation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\guns\\chewinggun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\chewinggun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|c:\\users\\travi\\documents\\github\\oncemoreintothebreach\\makinganitem\\content\\items\\guns\\gumgun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\gumgun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|c:\\users\\travi\\documents\\github\\oncemoreintothebreach\\makinganitem\\content\\items\\ammolets\\furiousammolet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\ammolets\\furiousammolet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\heartbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\heartbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\spectrebullets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\spectrebullets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\actives\\shadehand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\actives\\shadehand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\ammolets\\wickerammolet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\ammolets\\wickerammolet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\apis and toolboxes\\omitb storage classes\\enemyguiddatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\apis and toolboxes\\omitb storage classes\\enemyguiddatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\guns\\am0.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\am0.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\guns\\synergy formes\\am0spreadforme.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\synergy formes\\am0spreadforme.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\enemies\\chasser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\enemies\\chasser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\apis and toolboxes\\omitb extensions and hooks\\gunextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\apis and toolboxes\\omitb extensions and hooks\\gunextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\guns\\cornnon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\cornnon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\guns\\darklady.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\darklady.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\guns\\dulcannon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\dulcannon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\apis and toolboxes\\omitb misc toolboxes\\misctools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\apis and toolboxes\\omitb misc toolboxes\\misctools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\guns\\decretioncannon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\decretioncannon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\apis and toolboxes\\omitb misc toolboxes\\projectilecomponents\\slowdownovertimemodifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\apis and toolboxes\\omitb misc toolboxes\\projectilecomponents\\slowdownovertimemodifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\guns\\defender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\defender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\pyromania.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\pyromania.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\apis and toolboxes\\assetbundleloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\apis and toolboxes\\assetbundleloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\debug items\\activetestingitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\debug items\\activetestingitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\npcs\\jammomaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\npcs\\jammomaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\enemies\\scripts and behaviours\\omitbsimplewanderbehaviour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\enemies\\scripts and behaviours\\omitbsimplewanderbehaviour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\enemies\\scripts and behaviours\\donothingattackbehaviour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\enemies\\scripts and behaviours\\donothingattackbehaviour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\enemies\\scripts and behaviours\\unhousedbulletscripts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\enemies\\scripts and behaviours\\unhousedbulletscripts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\enemies\\scripts and behaviours\\customshootbeamgunbehaviour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\enemies\\scripts and behaviours\\customshootbeamgunbehaviour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\apis and toolboxes\\omitb misc toolboxes\\floorandgenerationtoolbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\apis and toolboxes\\omitb misc toolboxes\\floorandgenerationtoolbox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\npcs\\dispenser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\npcs\\dispenser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\placeables\\basicbuttoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\placeables\\basicbuttoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\junkllets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\junkllets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\randorounds.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\randorounds.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\errorshells.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\errorshells.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\apis and toolboxes\\omitb misc toolboxes\\projectilecomponents\\distortionwavedamager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\apis and toolboxes\\omitb misc toolboxes\\projectilecomponents\\distortionwavedamager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\standardisedprojectiles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -105,10 +221,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\apis and toolboxes\\omitb extensions and hooks\\miscpatches.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\apis and toolboxes\\omitb extensions and hooks\\miscpatches.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\apis and toolboxes\\omitb extensions and hooks\\gunextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\apis and toolboxes\\omitb extensions and hooks\\gunextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\guns\\javelin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -143,20 +255,8 @@
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\enemies\\debug.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\enemies\\chasser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\enemies\\chasser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\enemies\\scripts and behaviours\\unhousedbulletscripts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\enemies\\scripts and behaviours\\unhousedbulletscripts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\placeables\\breakables.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\placeables\\breakables.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\entities\\entitytools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\entities\\entitytools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\actives\\mysteryegg.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -189,14 +289,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\enemies\\lessersnakeshooter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\enemies\\lessersnakeshooter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\apis and toolboxes\\omitb misc toolboxes\\misctools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\apis and toolboxes\\omitb misc toolboxes\\misctools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\npcs\\chancellot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\npcs\\chancellot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\npcs\\tarotcardgunmodifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -251,10 +343,6 @@
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\placeables\\lowwalls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\debug items\\activetestingitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\debug items\\activetestingitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\npcs\\slotmachine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\npcs\\slotmachine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -291,10 +379,6 @@
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\actives\\gswitch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\npcs\\dispenser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\npcs\\dispenser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\placeables\\traps\\statuetraps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\placeables\\traps\\statuetraps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -313,10 +397,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\apis and toolboxes\\omitb misc toolboxes\\projectilecomponents\\beamexplosivemodifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\apis and toolboxes\\omitb misc toolboxes\\projectilecomponents\\beamexplosivemodifier.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\apis and toolboxes\\standardapi\\gungosaveapi\\enums\\customdungeonflags.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\apis and toolboxes\\standardapi\\gungosaveapi\\enums\\customdungeonflags.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\apis and toolboxes\\standardapi\\gungosaveapi\\advancedgamestats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -339,24 +419,12 @@
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\npcs\\doug.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\glassrounds.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\glassrounds.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\junkllets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\junkllets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\supersonicshots.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\supersonicshots.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\nitrobullets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\nitrobullets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\bashingbullets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\bashingbullets.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\companions\\goobleck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -375,20 +443,12 @@
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\companions\\randomisedbuddy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\errorshells.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\errorshells.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\misc passives\\antimagicrounds.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\misc passives\\antimagicrounds.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\actives\\keygen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\actives\\keygen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\apis and toolboxes\\omitb storage classes\\enemyguiddatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\apis and toolboxes\\omitb storage classes\\enemyguiddatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\companions\\angryspirit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -447,10 +507,6 @@
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\demolitionist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\placeables\\traps\\guillotine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\placeables\\traps\\guillotine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\guns\\kineticblaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\kineticblaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -475,10 +531,6 @@
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\placeables\\breakables\\bulletscarecrow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\placeables\\goldbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\placeables\\goldbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\shrines\\shrinesetup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\shrines\\shrinesetup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -499,10 +551,6 @@
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\monsoon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\guns\\am0.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\am0.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\makinganitem\\content\\items\\guns\\rustyshotgun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D851FF74-C4B3-47C1-9ECC-AD359EBF9B93}|MakingAnItem\\NevernamedsItems.csproj|solutionrelative:makinganitem\\content\\items\\guns\\rustyshotgun.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -518,20 +566,202 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 12,
               "Title": "Class1.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Class1.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Class1.cs",
               "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Class1.cs",
               "RelativeToolTip": "MakingAnItem\\Class1.cs",
-              "ViewState": "AgIAAKQAAAAAAAAAAAAAwNEAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAPgCAAAAAAAAAAAnwA0DAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-06T01:44:39.147Z",
               "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GenericCultist.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\GenericCultist.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\NPCs\\GenericCultist.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\GenericCultist.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\NPCs\\GenericCultist.cs",
+              "ViewState": "AgIAAGYAAAAAAAAAAADwv4EAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T13:46:57.352Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FortuneTeller.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\FortuneTeller.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\NPCs\\FortuneTeller.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\FortuneTeller.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\NPCs\\FortuneTeller.cs",
+              "ViewState": "AgIAAD8BAAAAAAAAAAAqwFgBAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T13:41:09.621Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "BowlerShop.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\BowlerShop.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\NPCs\\BowlerShop.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\BowlerShop.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\NPCs\\BowlerShop.cs",
+              "ViewState": "AgIAAJcAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T13:41:03.541Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MadameAutomata.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\MadameAutomata.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\NPCs\\MadameAutomata.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\MadameAutomata.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\NPCs\\MadameAutomata.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAkwGIAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T13:40:18.854Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Deacon.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Deacon.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\Deacon.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Deacon.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Enemies\\Deacon.cs",
+              "ViewState": "AgIAAIIAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T13:29:19.843Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SharedVFX.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\SharedVFX.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\SharedVFX.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\SharedVFX.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\SharedVFX.cs",
+              "ViewState": "AgIAAJ8AAAAAAAAAAAAhwMAAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T13:16:54.403Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WarHead.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\WarHead.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\WarHead.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\WarHead.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Enemies\\WarHead.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-21T03:12:52.889Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "VFXToolbox.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\VFXToolbox.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\VFXToolbox.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\VFXToolbox.cs",
+              "RelativeToolTip": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\VFXToolbox.cs",
+              "ViewState": "AgIAAOEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T13:15:44.245Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CustomDungeonFlags.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\StandardAPI\\GungoSaveAPI\\Enums\\CustomDungeonFlags.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\StandardAPI\\GungoSaveAPI\\Enums\\CustomDungeonFlags.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\StandardAPI\\GungoSaveAPI\\Enums\\CustomDungeonFlags.cs",
+              "RelativeToolTip": "MakingAnItem\\APIs and Toolboxes\\StandardAPI\\GungoSaveAPI\\Enums\\CustomDungeonFlags.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-12T15:56:49.522Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Chancellot.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\Chancellot.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\NPCs\\Chancellot.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\Chancellot.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\NPCs\\Chancellot.cs",
+              "ViewState": "AgIAAP8AAAAAAAAAAAAIwBoBAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-17T13:42:21.851Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Welder.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Beams\\Welder.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\Beams\\Welder.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Beams\\Welder.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Guns\\Beams\\Welder.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAnwEgAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T12:35:50.332Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "MagicPaintbrush.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\MagicPaintbrush.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\MagicPaintbrush.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\MagicPaintbrush.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Guns\\MagicPaintbrush.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAnwGEAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T12:34:23.72Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ProjectileSpriteRotation.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\ProjectileSpriteRotation.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\ProjectileSpriteRotation.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\ProjectileSpriteRotation.cs",
+              "RelativeToolTip": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\ProjectileSpriteRotation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T12:34:14.666Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Gumgun.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Gumgun.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\Gumgun.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Gumgun.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Guns\\Gumgun.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T12:31:48.405Z",
               "EditorCaption": ""
             },
             {
@@ -540,285 +770,445 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PromethianBullets.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\PromethianBullets.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\PromethianBullets.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\PromethianBullets.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\PromethianBullets.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAIwBsAAABhAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "PlayerToolbox.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\PlayerToolbox.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\PlayerToolbox.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\PlayerToolbox.cs",
+              "RelativeToolTip": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\PlayerToolbox.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAYwCoAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-08T06:04:12.843Z",
+              "WhenOpened": "2026-05-03T19:09:21.396Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HallowedBullets.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\HallowedBullets.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\HallowedBullets.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\HallowedBullets.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\HallowedBullets.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAADwvyEAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-08T06:03:21.349Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "InitialiseSynergies.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\InitialiseSynergies.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\InitialiseSynergies.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\InitialiseSynergies.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Items\\InitialiseSynergies.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEoHAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T13:35:32.456Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CleansingRounds.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\CleansingRounds.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\CleansingRounds.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\CleansingRounds.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\CleansingRounds.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAowDQAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T13:33:15.964Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "PestiferousLead.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\PestiferousLead.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\PestiferousLead.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\PestiferousLead.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\PestiferousLead.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAgwEYAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-07T13:15:41.511Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "BloodthirstyBullets.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\BloodthirstyBullets.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\BloodthirstyBullets.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\BloodthirstyBullets.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\BloodthirstyBullets.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAcwCgAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T00:55:04.715Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Blowgun.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Blowgun.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\Blowgun.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Blowgun.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Guns\\Blowgun.cs",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAwwFkAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-22T16:32:33.548Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "ApachesMoveErraticallyBehaviour.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\ApachesMoveErraticallyBehaviour.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\ApachesMoveErraticallyBehaviour.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\ApachesMoveErraticallyBehaviour.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\ApachesMoveErraticallyBehaviour.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAA0AAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-22T16:19:09.117Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "WitheringChamber.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\WitheringChamber.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\WitheringChamber.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\WitheringChamber.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\WitheringChamber.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAwwEMAAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-30T19:09:07.218Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "GolfRifle.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\GolfRifle.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\GolfRifle.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\GolfRifle.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Guns\\GolfRifle.cs",
-              "ViewState": "AgIAAGMAAAAAAAAAAAAowHsAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-13T03:50:31.16Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "WarHead.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\WarHead.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\WarHead.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\WarHead.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Enemies\\WarHead.cs",
-              "ViewState": "AgIAAOMAAAAAAAAAAAAuwNoAAABHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-21T03:12:52.889Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "MadameAutomata.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\MadameAutomata.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\NPCs\\MadameAutomata.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\MadameAutomata.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\NPCs\\MadameAutomata.cs",
-              "ViewState": "AgIAAPECAAAAAAAAAAAAAAwDAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T01:06:51.701Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "ConfettiCannon.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\ConfettiCannon.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\ConfettiCannon.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\ConfettiCannon.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Guns\\ConfettiCannon.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-26T23:35:03.691Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "CustomShootBeamGunBehaviour.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\CustomShootBeamGunBehaviour.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\CustomShootBeamGunBehaviour.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\CustomShootBeamGunBehaviour.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\CustomShootBeamGunBehaviour.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-28T10:18:09Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "BulletShuffle.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\BulletShuffle.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\BulletShuffle.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\BulletShuffle.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\BulletShuffle.cs",
-              "ViewState": "AgIAAE8BAAAAAAAAAAAMwGMBAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-27T12:46:24.013Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "LaserWelder.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\LaserWelder.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\LaserWelder.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\LaserWelder.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Guns\\LaserWelder.cs",
-              "ViewState": "AgIAAH0AAAAAAAAAAAAwwMsAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-30T18:58:08.406Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "BouncerBulletKin.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\BouncerBulletKin.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\BouncerBulletKin.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\BouncerBulletKin.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Enemies\\BouncerBulletKin.cs",
-              "ViewState": "AgIAALsAAAAAAAAAAAAgwDcBAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-26T08:18:41.155Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "FortuneTeller.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\FortuneTeller.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\NPCs\\FortuneTeller.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\FortuneTeller.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\NPCs\\FortuneTeller.cs",
-              "ViewState": "AgIAAG0AAAAAAAAAAAAAAJIAAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T08:33:17.933Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
               "Title": "Candelabra.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Candelabra.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\Candelabra.cs",
               "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Candelabra.cs",
               "RelativeToolTip": "MakingAnItem\\Content\\Enemies\\Candelabra.cs",
-              "ViewState": "AgIAAA0DAAAAAAAAAAAmwBkDAAAHAAAAAAAAAA==",
+              "ViewState": "AgIAAOYCAAAAAAAAAAAAAPsCAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-17T12:58:01.591Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "GreaterSnakeshooter.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\GreaterSnakeshooter.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\GreaterSnakeshooter.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\GreaterSnakeshooter.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Enemies\\GreaterSnakeshooter.cs",
-              "ViewState": "AgIAACEBAAAAAAAAAAAswCkBAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-26T06:44:06.198Z"
+              "WhenOpened": "2025-11-17T12:58:01.591Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 20,
-              "Title": "HardReloadBullets.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\HardReloadBullets.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\HardReloadBullets.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\HardReloadBullets.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\HardReloadBullets.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAbAAAAAAAAAA==",
+              "Title": "FuriousAmmolet.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Ammolets\\FuriousAmmolet.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Ammolets\\FuriousAmmolet.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Ammolets\\FuriousAmmolet.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Ammolets\\FuriousAmmolet.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAowC0AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-08T10:16:19.846Z"
+              "WhenOpened": "2026-05-03T19:12:52.945Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Cornnon.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Cornnon.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\Cornnon.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Cornnon.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Guns\\Cornnon.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAD4vyIAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-03T11:24:24.881Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "AM0SpreadForme.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Synergy Formes\\AM0SpreadForme.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\Synergy Formes\\AM0SpreadForme.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Synergy Formes\\AM0SpreadForme.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Guns\\Synergy Formes\\AM0SpreadForme.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-03T16:28:46.123Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "KillDevil.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\KillDevil.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\KillDevil.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\KillDevil.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Guns\\KillDevil.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAgwEAAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T01:06:41.823Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 22,
-              "Title": "Deacon.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Deacon.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\Deacon.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Deacon.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Enemies\\Deacon.cs",
-              "ViewState": "AgIAAD8AAAAAAAAAAAAAAFsAAAAMAAAAAAAAAA==",
+              "Title": "SpectreBullets.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\SpectreBullets.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\SpectreBullets.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\SpectreBullets.cs*",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\SpectreBullets.cs*",
+              "ViewState": "AgIAADsAAAAAAAAAAAAuwEoAAABRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T12:01:02.53Z"
+              "WhenOpened": "2026-05-03T17:58:34.306Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "EntityTools.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Entities\\EntityTools.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Entities\\EntityTools.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Entities\\EntityTools.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Entities\\EntityTools.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAArwDMAAAAbAAAAAAAAAA==",
+              "DocumentIndex": 23,
+              "Title": "ShadeHand.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Actives\\ShadeHand.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Actives\\ShadeHand.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Actives\\ShadeHand.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Actives\\ShadeHand.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAvwDYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-17T13:37:15.842Z"
+              "WhenOpened": "2026-05-03T19:09:22.067Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "BashingBullets.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\BashingBullets.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\BashingBullets.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\BashingBullets.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\BashingBullets.cs",
+              "ViewState": "AgIAAHkAAAAAAAAAAAAnwKAAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T09:32:15.037Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "HeartBox.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\HeartBox.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\HeartBox.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\HeartBox.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\HeartBox.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAnwDMAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-03T19:10:31.507Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ChewingGun.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\ChewingGun.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\ChewingGun.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\ChewingGun.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Guns\\ChewingGun.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAgwF4AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-03T11:24:18.871Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "WickerAmmolet.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Ammolets\\WickerAmmolet.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Ammolets\\WickerAmmolet.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Ammolets\\WickerAmmolet.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Ammolets\\WickerAmmolet.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAWwEkAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-03T11:21:14.659Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 34,
+              "Title": "DecretionCannon.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\DecretionCannon.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\DecretionCannon.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\DecretionCannon.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Guns\\DecretionCannon.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAgwCMAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-03T09:59:59.336Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "DarkLady.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\DarkLady.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\DarkLady.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\DarkLady.cs*",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Guns\\DarkLady.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-03T09:59:50.354Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Dulcannon.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Dulcannon.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\Dulcannon.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Dulcannon.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Guns\\Dulcannon.cs",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAowBwAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-03T09:48:11.102Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "GunExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Extensions and Hooks\\GunExtensions.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Extensions and Hooks\\GunExtensions.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Extensions and Hooks\\GunExtensions.cs",
+              "RelativeToolTip": "MakingAnItem\\APIs and Toolboxes\\OMITB Extensions and Hooks\\GunExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T04:03:10.653Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "AM0.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\AM0.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\AM0.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\AM0.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Guns\\AM0.cs",
+              "ViewState": "AgIAAIUAAAAAAAAAAAAcwKEAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T15:53:21.843Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "EnemyGuidDatabase.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Storage Classes\\EnemyGuidDatabase.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Storage Classes\\EnemyGuidDatabase.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Storage Classes\\EnemyGuidDatabase.cs",
+              "RelativeToolTip": "MakingAnItem\\APIs and Toolboxes\\OMITB Storage Classes\\EnemyGuidDatabase.cs",
+              "ViewState": "AgIAAHUCAAAAAAAAAAAmwNsCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-11T22:03:22.351Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "SlowDownOverTimeModifier.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\SlowDownOverTimeModifier.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\SlowDownOverTimeModifier.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\SlowDownOverTimeModifier.cs",
+              "RelativeToolTip": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\SlowDownOverTimeModifier.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-03T10:57:16.569Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Chasser.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Chasser.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\Chasser.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Chasser.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Enemies\\Chasser.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAiwB4AAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T12:43:25.918Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "Defender.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Defender.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\Defender.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Defender.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Guns\\Defender.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-03T09:59:41.089Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "AssetBundleLoader.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\AssetBundleLoader.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\AssetBundleLoader.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\AssetBundleLoader.cs",
+              "RelativeToolTip": "MakingAnItem\\APIs and Toolboxes\\AssetBundleLoader.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAowHEAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-03T08:31:54.227Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "DoNothingAttackBehaviour.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\DoNothingAttackBehaviour.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\DoNothingAttackBehaviour.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\DoNothingAttackBehaviour.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\DoNothingAttackBehaviour.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T04:29:47.948Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Pyromania.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\Pyromania.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\Pyromania.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\Pyromania.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\Pyromania.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAAC7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T07:30:17.673Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "MiscTools.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\MiscTools.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\MiscTools.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\MiscTools.cs",
+              "RelativeToolTip": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\MiscTools.cs",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAjwHoAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T11:51:04.525Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "Jammomaster.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\Jammomaster.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\NPCs\\Jammomaster.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\Jammomaster.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\NPCs\\Jammomaster.cs",
+              "ViewState": "AgIAAH8AAAAAAAAAAAAYwKAAAABTAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T11:15:57.018Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "ERRORShells.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\ERRORShells.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\ERRORShells.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\ERRORShells.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\ERRORShells.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAjwGYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-11T21:19:17.639Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "Junkllets.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\Junkllets.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\Junkllets.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\Junkllets.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\Junkllets.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAwwAsAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-12T10:18:44.521Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "UnhousedBulletScripts.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\UnhousedBulletScripts.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\UnhousedBulletScripts.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\UnhousedBulletScripts.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\UnhousedBulletScripts.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAowFQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T12:39:53.114Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "ActiveTestingItem.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Debug Items\\ActiveTestingItem.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Debug Items\\ActiveTestingItem.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Debug Items\\ActiveTestingItem.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Debug Items\\ActiveTestingItem.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAAwEMAAACCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-18T21:52:22.66Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "CustomShootBeamGunBehaviour.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\CustomShootBeamGunBehaviour.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\CustomShootBeamGunBehaviour.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\CustomShootBeamGunBehaviour.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\CustomShootBeamGunBehaviour.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-21T04:33:08.156Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "OMITBSimpleWanderBehaviour.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\OMITBSimpleWanderBehaviour.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\OMITBSimpleWanderBehaviour.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\OMITBSimpleWanderBehaviour.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\OMITBSimpleWanderBehaviour.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAgwEgAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-22T16:19:09.117Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "BasicButtonController.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Placeables\\BasicButtonController.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Placeables\\BasicButtonController.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Placeables\\BasicButtonController.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Placeables\\BasicButtonController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T23:19:33.565Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "FloorAndGenerationToolbox.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\FloorAndGenerationToolbox.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\FloorAndGenerationToolbox.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\FloorAndGenerationToolbox.cs",
+              "RelativeToolTip": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\FloorAndGenerationToolbox.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-18T07:43:25.488Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "Dispenser.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\Dispenser.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\NPCs\\Dispenser.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\Dispenser.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\NPCs\\Dispenser.cs",
+              "ViewState": "AgIAAI8AAAAAAAAAAAAAwJkAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T15:12:53.504Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "DistortionWaveDamager.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\DistortionWaveDamager.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\DistortionWaveDamager.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\DistortionWaveDamager.cs",
+              "RelativeToolTip": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\DistortionWaveDamager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T00:06:13.957Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
               "Title": "DeBug.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\DeBug.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\DeBug.cs",
@@ -830,7 +1220,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 49,
+              "Title": "RandoRounds.cs",
+              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\RandoRounds.cs",
+              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\RandoRounds.cs",
+              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\RandoRounds.cs",
+              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\RandoRounds.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwB4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T00:57:24.354Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
               "Title": "Accelerator.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Accelerator.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\Accelerator.cs",
@@ -842,7 +1244,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 57,
               "Title": "BloodyBox.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Actives\\BloodyBox.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Actives\\BloodyBox.cs",
@@ -854,7 +1256,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 55,
               "Title": "Javelin.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Javelin.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\Javelin.cs",
@@ -866,7 +1268,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 52,
               "Title": "StandardisedProjectiles.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\StandardisedProjectiles.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\StandardisedProjectiles.cs",
@@ -878,19 +1280,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "GunExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Extensions and Hooks\\GunExtensions.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Extensions and Hooks\\GunExtensions.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Extensions and Hooks\\GunExtensions.cs",
-              "RelativeToolTip": "MakingAnItem\\APIs and Toolboxes\\OMITB Extensions and Hooks\\GunExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-11T04:03:10.653Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 53,
               "Title": "GooeyHeart.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\GooeyHeart.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\GooeyHeart.cs",
@@ -902,19 +1292,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
-              "Title": "UnhousedBulletScripts.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\UnhousedBulletScripts.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\UnhousedBulletScripts.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\UnhousedBulletScripts.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Enemies\\Scripts and Behaviours\\UnhousedBulletScripts.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAmwFQAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-26T12:39:53.114Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 54,
               "Title": "MiscPatches.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Extensions and Hooks\\MiscPatches.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Extensions and Hooks\\MiscPatches.cs",
@@ -926,7 +1304,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 60,
               "Title": "LilMunchy.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Companions\\LilMunchy.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Companions\\LilMunchy.cs",
@@ -938,7 +1316,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 56,
               "Title": "TarotCards.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\TarotCards.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\NPCs\\TarotCards.cs",
@@ -950,7 +1328,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 59,
               "Title": "BlueSyrup.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\BlueSyrup.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\BlueSyrup.cs",
@@ -962,7 +1340,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 64,
               "Title": "MysteryEgg.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Actives\\MysteryEgg.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Actives\\MysteryEgg.cs",
@@ -974,7 +1352,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 61,
               "Title": "RapidRiposte.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\RapidRiposte.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\RapidRiposte.cs",
@@ -986,7 +1364,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 63,
               "Title": "Breakables.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Placeables\\Breakables.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Placeables\\Breakables.cs",
@@ -998,19 +1376,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "Chasser.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Chasser.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\Chasser.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Chasser.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Enemies\\Chasser.cs",
-              "ViewState": "AgIAAKwAAAAAAAAAAAAAAIwAAAA5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-26T12:43:25.918Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 65,
               "Title": "CookieClickerEgg.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\CookieClickerEgg.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\CookieClickerEgg.cs",
@@ -1022,7 +1388,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 66,
               "Title": "ChanceCard.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\ChanceCard.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\ChanceCard.cs",
@@ -1034,7 +1400,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 67,
               "Title": "Rusty.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\Rusty.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\NPCs\\Rusty.cs",
@@ -1046,7 +1412,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 68,
               "Title": "CustomTrackedStats.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\StandardAPI\\GungoSaveAPI\\Enums\\CustomTrackedStats.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\StandardAPI\\GungoSaveAPI\\Enums\\CustomTrackedStats.cs",
@@ -1058,7 +1424,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 70,
               "Title": "SpentBullat.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\SpentBullat.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\SpentBullat.cs",
@@ -1070,7 +1436,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 69,
               "Title": "MysteriousStranger.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\MysteriousStranger.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\NPCs\\MysteriousStranger.cs",
@@ -1082,7 +1448,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 71,
               "Title": "LesserSnakeshooter.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\LesserSnakeshooter.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\LesserSnakeshooter.cs",
@@ -1094,31 +1460,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
-              "Title": "MiscTools.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\MiscTools.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\MiscTools.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\MiscTools.cs",
-              "RelativeToolTip": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\MiscTools.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAArwCgAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T11:51:04.525Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 48,
-              "Title": "Chancellot.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\Chancellot.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\NPCs\\Chancellot.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\Chancellot.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\NPCs\\Chancellot.cs",
-              "ViewState": "AgIAALUAAAAAAAAAAAAAALUAAACQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-17T13:42:21.851Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 73,
               "Title": "OBrienFist.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\OBrienFist.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\OBrienFist.cs",
@@ -1130,7 +1472,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 72,
               "Title": "TarotCardGunModifier.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\TarotCardGunModifier.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\NPCs\\TarotCardGunModifier.cs",
@@ -1142,7 +1484,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 76,
               "Title": "AudioResourceLoader.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\SoundCode\\AudioResourceLoader.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\SoundCode\\AudioResourceLoader.cs",
@@ -1154,7 +1496,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 82,
               "Title": "ClownShotgun.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\ClownShotgun.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\ClownShotgun.cs",
@@ -1166,7 +1508,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 74,
               "Title": "Muskin.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Enemies\\Muskin.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Enemies\\Muskin.cs",
@@ -1178,7 +1520,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 79,
               "Title": "Exsanguination.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Status Effects\\Exsanguination.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Status Effects\\Exsanguination.cs",
@@ -1190,7 +1532,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 75,
               "Title": "RiteOfPassage.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\RiteOfPassage.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\RiteOfPassage.cs",
@@ -1202,7 +1544,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 78,
               "Title": "Ironside.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\Ironside.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\NPCs\\Ironside.cs",
@@ -1214,7 +1556,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 77,
               "Title": "ExtendedColours.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Storage Classes\\ExtendedColours.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Storage Classes\\ExtendedColours.cs",
@@ -1226,7 +1568,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 81,
               "Title": "PocketChest.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Actives\\PocketChest.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Actives\\PocketChest.cs",
@@ -1238,7 +1580,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 83,
               "Title": "LeadOfLifeInitCompanions.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Companions\\LeadOfLife\\LeadOfLifeInitCompanions.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Companions\\LeadOfLife\\LeadOfLifeInitCompanions.cs",
@@ -1250,7 +1592,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 80,
               "Title": "InherentExsanguinationEffect.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\InherentExsanguinationEffect.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\InherentExsanguinationEffect.cs",
@@ -1262,7 +1604,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 86,
               "Title": "AppleActive.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Actives\\AppleActive.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Actives\\AppleActive.cs",
@@ -1274,7 +1616,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 85,
               "Title": "SlotMachine.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\SlotMachine.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\NPCs\\SlotMachine.cs",
@@ -1286,7 +1628,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 84,
               "Title": "LowWalls.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Placeables\\LowWalls.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Placeables\\LowWalls.cs",
@@ -1298,19 +1640,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
-              "Title": "ActiveTestingItem.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Debug Items\\ActiveTestingItem.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Debug Items\\ActiveTestingItem.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Debug Items\\ActiveTestingItem.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Debug Items\\ActiveTestingItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-18T21:52:22.66Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 87,
               "Title": "TierBullets.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\TierBullets.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\TierBullets.cs",
@@ -1322,7 +1652,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 88,
               "Title": "LeadOfLifeCompanionCountReactiveShooter.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Companions\\LeadOfLife\\CompanionControllerVariants\\LeadOfLifeCompanionCountReactiveShooter.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Companions\\LeadOfLife\\CompanionControllerVariants\\LeadOfLifeCompanionCountReactiveShooter.cs",
@@ -1334,7 +1664,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 89,
               "Title": "LuckyCoin.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Actives\\LuckyCoin.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Actives\\LuckyCoin.cs",
@@ -1346,7 +1676,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 90,
               "Title": "BeamBlankModifier.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\BeamComponents\\BeamBlankModifier.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\BeamComponents\\BeamBlankModifier.cs",
@@ -1358,7 +1688,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 91,
               "Title": "BlankProjModifier.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\BlankProjModifier.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\BlankProjModifier.cs",
@@ -1370,7 +1700,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 92,
               "Title": "GuonToolbox.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\GuonToolbox.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\GuonToolbox.cs",
@@ -1382,7 +1712,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
+              "DocumentIndex": 93,
               "Title": "GSwitch.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Actives\\GSwitch.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Actives\\GSwitch.cs",
@@ -1394,7 +1724,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 76,
+              "DocumentIndex": 97,
               "Title": "Bloodwash.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Synergy Formes\\Bloodwash.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\Synergy Formes\\Bloodwash.cs",
@@ -1406,7 +1736,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 74,
+              "DocumentIndex": 95,
               "Title": "NoCollideBehaviour.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\NoCollideBehaviour.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\NoCollideBehaviour.cs",
@@ -1418,7 +1748,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 73,
+              "DocumentIndex": 94,
               "Title": "StatueTraps.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Placeables\\Traps\\StatueTraps.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Placeables\\Traps\\StatueTraps.cs",
@@ -1430,19 +1760,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 72,
-              "Title": "Dispenser.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\Dispenser.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\NPCs\\Dispenser.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\Dispenser.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\NPCs\\Dispenser.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAACgAAABsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-07T15:12:53.504Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 75,
+              "DocumentIndex": 96,
               "Title": "BloodCandle.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Placeables\\Traps\\BloodCandle.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Placeables\\Traps\\BloodCandle.cs",
@@ -1454,7 +1772,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 77,
+              "DocumentIndex": 98,
               "Title": "BeamExplosiveModifier.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\BeamExplosiveModifier.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\BeamExplosiveModifier.cs",
@@ -1466,19 +1784,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 78,
-              "Title": "CustomDungeonFlags.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\StandardAPI\\GungoSaveAPI\\Enums\\CustomDungeonFlags.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\StandardAPI\\GungoSaveAPI\\Enums\\CustomDungeonFlags.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\StandardAPI\\GungoSaveAPI\\Enums\\CustomDungeonFlags.cs",
-              "RelativeToolTip": "MakingAnItem\\APIs and Toolboxes\\StandardAPI\\GungoSaveAPI\\Enums\\CustomDungeonFlags.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-12T15:56:49.522Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 79,
+              "DocumentIndex": 99,
               "Title": "AdvancedGameStats.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\StandardAPI\\GungoSaveAPI\\AdvancedGameStats.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\StandardAPI\\GungoSaveAPI\\AdvancedGameStats.cs",
@@ -1490,7 +1796,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 81,
+              "DocumentIndex": 101,
               "Title": "PassiveTestingItem.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Debug Items\\PassiveTestingItem.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Debug Items\\PassiveTestingItem.cs",
@@ -1502,7 +1808,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 82,
+              "DocumentIndex": 102,
               "Title": "LeadOfLifeCompanionController.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Companions\\LeadOfLife\\LeadOfLifeCompanionController.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Companions\\LeadOfLife\\LeadOfLifeCompanionController.cs",
@@ -1514,7 +1820,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 80,
+              "DocumentIndex": 100,
               "Title": "Commands.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\OMITB Misc Game Changers\\Commands\\Commands.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\OMITB Misc Game Changers\\Commands\\Commands.cs",
@@ -1526,7 +1832,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 83,
+              "DocumentIndex": 103,
               "Title": "Doug.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\NPCs\\Doug.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\NPCs\\Doug.cs",
@@ -1538,31 +1844,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 84,
-              "Title": "GlassRounds.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\GlassRounds.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\GlassRounds.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\GlassRounds.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\GlassRounds.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAgwDIAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-12T09:13:34.207Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 85,
-              "Title": "Junkllets.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\Junkllets.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\Junkllets.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\Junkllets.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\Junkllets.cs",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAIwCwAAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-12T10:18:44.521Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 89,
+              "DocumentIndex": 106,
               "Title": "Goobleck.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Companions\\Goobleck.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Companions\\Goobleck.cs",
@@ -1574,7 +1856,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 86,
+              "DocumentIndex": 104,
               "Title": "SupersonicShots.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\SupersonicShots.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\SupersonicShots.cs",
@@ -1586,7 +1868,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 91,
+              "DocumentIndex": 108,
               "Title": "MrFahrenheit.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\MrFahrenheit.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\MrFahrenheit.cs",
@@ -1598,7 +1880,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 92,
+              "DocumentIndex": 109,
               "Title": "RandomisedBuddy.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Companions\\RandomisedBuddy.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Companions\\RandomisedBuddy.cs",
@@ -1610,19 +1892,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 88,
-              "Title": "BashingBullets.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\BashingBullets.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\BashingBullets.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\BashingBullets.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\BashingBullets.cs",
-              "ViewState": "AgIAAI0AAAAAAAAAAAAmwA4AAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T09:32:15.037Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 87,
+              "DocumentIndex": 105,
               "Title": "NitroBullets.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\NitroBullets.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\NitroBullets.cs",
@@ -1634,7 +1904,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 94,
+              "DocumentIndex": 110,
               "Title": "AntimagicRounds.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\AntimagicRounds.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\AntimagicRounds.cs",
@@ -1646,7 +1916,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 95,
+              "DocumentIndex": 111,
               "Title": "Keygen.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Actives\\Keygen.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Actives\\Keygen.cs",
@@ -1658,19 +1928,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 93,
-              "Title": "ERRORShells.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\ERRORShells.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\ERRORShells.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\ERRORShells.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Misc Passives\\ERRORShells.cs",
-              "ViewState": "AgIAAMwAAAAAAAAAAAAwwNIAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-11T21:19:17.639Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 90,
+              "DocumentIndex": 107,
               "Title": "ServiceWeaponPierce.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Synergy Formes\\ServiceWeaponPierce.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\Synergy Formes\\ServiceWeaponPierce.cs",
@@ -1682,19 +1940,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 96,
-              "Title": "EnemyGuidDatabase.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Storage Classes\\EnemyGuidDatabase.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Storage Classes\\EnemyGuidDatabase.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Storage Classes\\EnemyGuidDatabase.cs",
-              "RelativeToolTip": "MakingAnItem\\APIs and Toolboxes\\OMITB Storage Classes\\EnemyGuidDatabase.cs",
-              "ViewState": "AgIAAKEBAAAAAAAAAAAAAAgCAABDAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-11T22:03:22.351Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 97,
+              "DocumentIndex": 112,
               "Title": "AngrySpirit.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Companions\\AngrySpirit.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Companions\\AngrySpirit.cs",
@@ -1706,7 +1952,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 99,
+              "DocumentIndex": 114,
               "Title": "OsteoporosisBullets.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\OsteoporosisBullets.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\OsteoporosisBullets.cs",
@@ -1718,7 +1964,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 98,
+              "DocumentIndex": 113,
               "Title": "CustomStaticReferenceManager.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\CustomStaticReferenceManager.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\CustomStaticReferenceManager.cs",
@@ -1730,7 +1976,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 100,
+              "DocumentIndex": 115,
               "Title": "GlobalUpdate.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\GlobalUpdate.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\GlobalUpdate.cs",
@@ -1742,7 +1988,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 101,
+              "DocumentIndex": 116,
               "Title": "Musket.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Musket.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\Musket.cs",
@@ -1754,7 +2000,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 102,
+              "DocumentIndex": 117,
               "Title": "BlueMoon.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\BlueMoon.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\BlueMoon.cs",
@@ -1766,7 +2012,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 103,
+              "DocumentIndex": 118,
               "Title": "SpriteSparkler.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\GeneralComponents\\SpriteSparkler.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\GeneralComponents\\SpriteSparkler.cs",
@@ -1778,7 +2024,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 105,
+              "DocumentIndex": 120,
               "Title": "CustomCandles.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Placeables\\Breakables\\CustomCandles.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Placeables\\Breakables\\CustomCandles.cs",
@@ -1790,7 +2036,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 104,
+              "DocumentIndex": 119,
               "Title": "FlamethrowerMk1.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Beams\\FlamethrowerMk1.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\Beams\\FlamethrowerMk1.cs",
@@ -1802,7 +2048,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 106,
+              "DocumentIndex": 121,
               "Title": "LobbedProjectile.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileTypes\\LobbedProjectile.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileTypes\\LobbedProjectile.cs",
@@ -1814,7 +2060,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 109,
+              "DocumentIndex": 124,
               "Title": "BarcodeScanner.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\BarcodeScanner.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\BarcodeScanner.cs",
@@ -1826,7 +2072,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 110,
+              "DocumentIndex": 125,
               "Title": "Demolitionist.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Demolitionist.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\Demolitionist.cs",
@@ -1838,7 +2084,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 107,
+              "DocumentIndex": 122,
               "Title": "50calrounds.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\50calrounds.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\50calrounds.cs",
@@ -1850,7 +2096,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 108,
+              "DocumentIndex": 123,
               "Title": "DoomBoom.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\DoomBoom.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\DoomBoom.cs",
@@ -1862,7 +2108,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 112,
+              "DocumentIndex": 126,
               "Title": "KineticBlaster.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\KineticBlaster.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\KineticBlaster.cs",
@@ -1874,19 +2120,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 111,
-              "Title": "Guillotine.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Placeables\\Traps\\Guillotine.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Placeables\\Traps\\Guillotine.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Placeables\\Traps\\Guillotine.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Placeables\\Traps\\Guillotine.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOEAAABGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-07T16:42:21.499Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 113,
+              "DocumentIndex": 127,
               "Title": "ArtilleryBelt.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Misc Passives\\ArtilleryBelt.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Misc Passives\\ArtilleryBelt.cs",
@@ -1898,7 +2132,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 114,
+              "DocumentIndex": 128,
               "Title": "PathfindingProjectile.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileTypes\\PathfindingProjectile.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileTypes\\PathfindingProjectile.cs",
@@ -1910,7 +2144,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 115,
+              "DocumentIndex": 129,
               "Title": "LightningProjectileComp.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\LightningProjectileComp.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\APIs and Toolboxes\\OMITB Misc Toolboxes\\ProjectileComponents\\LightningProjectileComp.cs",
@@ -1922,7 +2156,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 117,
+              "DocumentIndex": 131,
               "Title": "BulletScarecrow.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Placeables\\Breakables\\BulletScarecrow.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Placeables\\Breakables\\BulletScarecrow.cs",
@@ -1934,7 +2168,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 116,
+              "DocumentIndex": 130,
               "Title": "BigBlank.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Placeables\\Breakables\\BigBlank.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Placeables\\Breakables\\BigBlank.cs",
@@ -1946,7 +2180,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 119,
+              "DocumentIndex": 132,
               "Title": "ShrineSetup.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Shrines\\ShrineSetup.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Shrines\\ShrineSetup.cs",
@@ -1958,19 +2192,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 118,
-              "Title": "GoldButton.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Placeables\\GoldButton.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Placeables\\GoldButton.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Placeables\\GoldButton.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Placeables\\GoldButton.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAuwDEAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-07T04:43:10.29Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 120,
+              "DocumentIndex": 133,
               "Title": "GenericPlaceables.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Placeables\\GenericPlaceables.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Placeables\\GenericPlaceables.cs",
@@ -1982,7 +2204,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 121,
+              "DocumentIndex": 134,
               "Title": "Beastclaw.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Beastclaw.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\Beastclaw.cs",
@@ -1994,7 +2216,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 123,
+              "DocumentIndex": 136,
               "Title": "Monsoon.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Monsoon.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\Monsoon.cs",
@@ -2006,19 +2228,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 124,
-              "Title": "AM0.cs",
-              "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\AM0.cs",
-              "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\AM0.cs",
-              "ToolTip": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\AM0.cs",
-              "RelativeToolTip": "MakingAnItem\\Content\\Items\\Guns\\AM0.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAQwB4AAABHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T15:53:21.843Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 125,
+              "DocumentIndex": 137,
               "Title": "RustyShotgun.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\RustyShotgun.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\RustyShotgun.cs",
@@ -2030,7 +2240,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 122,
+              "DocumentIndex": 135,
               "Title": "UnrustyShotgun.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Guns\\Synergy Formes\\UnrustyShotgun.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Guns\\Synergy Formes\\UnrustyShotgun.cs",
@@ -2042,7 +2252,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 126,
+              "DocumentIndex": 138,
               "Title": "LeadOfLifeComplexShooter.cs",
               "DocumentMoniker": "C:\\Users\\travi\\Documents\\GitHub\\OnceMoreIntoTheBreach\\MakingAnItem\\Content\\Items\\Companions\\LeadOfLife\\CompanionControllerVariants\\LeadOfLifeComplexShooter.cs",
               "RelativeDocumentMoniker": "MakingAnItem\\Content\\Items\\Companions\\LeadOfLife\\CompanionControllerVariants\\LeadOfLifeComplexShooter.cs",

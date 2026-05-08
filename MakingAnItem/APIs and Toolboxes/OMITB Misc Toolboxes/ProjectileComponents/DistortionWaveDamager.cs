@@ -47,7 +47,7 @@ namespace NevernamedsItems
                     for (int i = 0; i < activeEnemies.Count; i++)
                     {
                         AIActor aiactor = activeEnemies[i];
-                        if (aiactor != null && aiactor.IsNormalEnemy && aiactor.transform)
+                        if (aiactor != null && aiactor.IsNormalEnemy && aiactor.transform && aiactor.healthHaver != null && !aiactor.healthHaver.IsDead)
                         {
                             float num = Vector2.Distance(vector2, aiactor.CenterPosition);
                             if (num <= Range)

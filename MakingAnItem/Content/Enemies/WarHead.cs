@@ -89,7 +89,7 @@ namespace NevernamedsItems
 
             animator.GetClipByName("attack").frames[5].triggerEvent = true;
             animator.GetClipByName("attack").frames[5].eventInfo = "fire_rocket";
-            animator.GetClipByName("attack").frames[5].eventAudio = "Play_ENM_holy_cross_01";
+            animator.GetClipByName("attack").frames[5].eventAudio = "Play_WPN_yarirocketlauncher_shot_01";
 
             AIanimator.facingType = AIAnimator.FacingType.Movement;
 
@@ -123,7 +123,7 @@ namespace NevernamedsItems
 
             GameObject shootPoint = new GameObject("shootPoint");
             shootPoint.transform.SetParent(enemy.transform);
-            shootPoint.transform.localPosition = new Vector3(0f, 23f / 16f, 0f);
+            shootPoint.transform.localPosition = new Vector3(0f, 15f / 16f, 0f);
 
             AIBulletBank bank = enemy.GetOrAddComponent<AIBulletBank>();
             bank.CollidesWithEnemies = false;
@@ -185,10 +185,9 @@ namespace NevernamedsItems
             };
             bs.MovementBehaviors = new List<MovementBehaviorBase>
             {
-                new ApachesMoveErraticallyBehavior
+                new OMITBSimpleWanderBehaviour
                 {
-                    PathInterval = 1f,
-                    PointReachedPauseTime = 2f,
+                    PointReachedPauseTime = -1f,
                 }
             };
             bs.AttackBehaviors = new List<AttackBehaviorBase>
@@ -197,6 +196,7 @@ namespace NevernamedsItems
                 new SequentialAttackBehaviorGroup()
                 {
                     RunInClass = true,
+                    OverrideCooldowns = new List<float>(){1.2f, 1.2f, 5f, 5f},
                     AttackBehaviors = new List<AttackBehaviorBase>()
                     {
                         new WarHeadRocketBehaviour
@@ -204,22 +204,27 @@ namespace NevernamedsItems
                             TellAnimation = "attack",
                             Rocket = StandardisedProjectiles.skyRocket,
                             RocketOrigin = shootPoint.transform,
-                            Cooldown = 1f,
+                            Cooldown = 0f,
+                            //InitialCooldownVariance = 0.1f
                         },
                         new WarHeadRocketBehaviour
                         {
                             TellAnimation = "attack",
                             Rocket = StandardisedProjectiles.skyRocket,
                             RocketOrigin = shootPoint.transform,
-                            Cooldown = 1f,
+                            Cooldown = 0f,
+                            //InitialCooldownVariance = 0.1f
                         },
                          new WarHeadRocketBehaviour
                         {
                             TellAnimation = "attack",
                             Rocket = StandardisedProjectiles.skyRocket,
                             RocketOrigin = shootPoint.transform,
-                            Cooldown = 5f,
-                        }
+                            Cooldown = 0f,
+                            AttackCooldown = 0f,
+                            //InitialCooldownVariance = 0.1f
+                        },
+                         new DoNothingAttackBehaviour(){},
                     }
                 }
             };
@@ -244,8 +249,8 @@ namespace NevernamedsItems
             SpriteBuilder.AddToAmmonomicon(WarHeadSpriteCollection.GetSpriteDefinition("warhead_idleright_001"));
 
             ETGMod.Databases.Strings.Enemies.AddComplex("#WARHEAD_ENCNAME", "War Head");
-            ETGMod.Databases.Strings.Enemies.AddComplex("#WARHEAD_SHORTDESC", "");
-            ETGMod.Databases.Strings.Enemies.AddComplex("#WARHEAD_LONGDESC", "");
+            ETGMod.Databases.Strings.Enemies.AddComplex("#WARHEAD_SHORTDESC", "Ain't No Senator's Son");
+            ETGMod.Databases.Strings.Enemies.AddComplex("#WARHEAD_LONGDESC", "Short, stocky gundead capable of firing an endless amount of ballistic missile strikes from their cavernous cranium.\n\nDevoting the majority of their headspace to heavy ordnance has left these creatures rather dim. They can be easily fooled into blowing up their own comrades with a little clever maneuvering.");
 
             EncounterTrackable tracker = enemy.gameObject.GetOrAddComponent<EncounterTrackable>();
             tracker.DoNotificationOnEncounter = true;
@@ -257,7 +262,7 @@ namespace NevernamedsItems
             tracker.ProxyEncounterGuid = string.Empty;
             tracker.journalData = new JournalEntry()
             {
-                enemyPortraitSprite = Initialisation.assetBundle.LoadAsset<Texture2D>("ammonomicon_chasser"),
+                enemyPortraitSprite = Initialisation.assetBundle.LoadAsset<Texture2D>("ammonomicon_warhead"),
                 AmmonomiconSprite = "warhead_idleright_001",
                 PrimaryDisplayName = "#WARHEAD_ENCNAME",
                 NotificationPanelDescription = "#WARHEAD_SHORTDESC",
@@ -306,47 +311,66 @@ namespace NevernamedsItems
         }
         public class WarHeadRocketBehaviour : BasicAttackBehavior
         {
+            public WarHeadRocketBehaviour()
+            {
+                WaitAfterAttack = 0.5f;
+            }
+
             public string TellAnimation;
             public Transform RocketOrigin;
             public GameObject Rocket;
+            public float WaitAfterAttack;
+
+            private bool isAttacking = false;
+            private float waitTimer;
+            private float initialcooldown;
             public override void Start()
             {
                 base.Start();
-
+                initialcooldown = UnityEngine.Random.Range(0f, 0.25f);
             }
             public override void Upkeep()
             {
                 base.Upkeep();
+                DecrementTimer(ref waitTimer, false);
+                DecrementTimer(ref initialcooldown, false);
             }
             public override bool IsReady()
             {
-                return base.IsReady();
+                return base.IsReady() && initialcooldown <= 0;
             }
+
             public override BehaviorResult Update()
             {
                 base.Update();
                 if (!IsReady()) { return BehaviorResult.Continue; }
+                
+               
 
-                if (State == AttackState.WAITING)
+                //If is Ready and is not attacking
+                if (!isAttacking)
                 {
-                    State = AttackState.TELEGRAPHING;
+                    if (!string.IsNullOrEmpty(TellAnimation))
+                    {
+                        isAttacking = true;
+                        this.m_aiActor.ClearPath();
+                        this.m_aiAnimator.PlayUntilFinished(this.TellAnimation, true, null, -1f, false);
+                        tk2dSpriteAnimator spriteAnimator = this.m_aiAnimator.spriteAnimator;
+                        spriteAnimator.AnimationEventTriggered += HandleAnimationEvent;
+                    }
                 }
-
-                if (State == AttackState.TELEGRAPHING)
-                {
-                    return BehaviorResult.SkipAllRemainingBehaviors;
-                }
-                return BehaviorResult.Continue;
+                return BehaviorResult.SkipAllRemainingBehaviors;
             }
             private void HandleAnimationEvent(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip, int frameNo)
             {
                 tk2dSpriteAnimationFrame frame = clip.GetFrame(frameNo);
                 if (frame.eventInfo == "fire_rocket")
                 {
-                    State = AttackState.ENDING;
                     this.FireRocket();
+                    SpawnManager.SpawnVFX(SharedVFX.WarHeadFiringVFX, RocketOrigin.position, Quaternion.identity);
                     animator.AnimationEventTriggered -= HandleAnimationEvent;
-
+                    isAttacking = false;
+                    UpdateCooldowns();
                 }
             }
             private void FireRocket()
@@ -356,43 +380,6 @@ namespace NevernamedsItems
                 tk2dSprite componentInChildren = component.GetComponentInChildren<tk2dSprite>();
                 component.transform.position = component.transform.position.WithY(component.transform.position.y - componentInChildren.transform.localPosition.y);
                 component.ExplosionData.ignoreList.Add(this.m_aiActor.specRigidbody);
-                //this.m_aiActor.sprite.AttachRenderer(component.GetComponentInChildren<tk2dSprite>());
-            }
-
-            private enum AttackState
-            {
-                WAITING,
-                TELEGRAPHING,
-                ENDING
-            }
-            private AttackState m_state;
-            private AttackState State
-            {
-                get
-                {
-                    return this.m_state;
-                }
-                set
-                {
-                    this.m_state = value;
-                    this.BeginState(this.m_state);
-                }
-            }
-            private void BeginState(AttackState State)
-            {
-                switch (State)
-                {
-                    case AttackState.TELEGRAPHING:
-                        if (!string.IsNullOrEmpty(TellAnimation))
-                        {
-                            this.m_aiActor.ClearPath();
-                            this.m_aiAnimator.PlayUntilFinished(this.TellAnimation, true, null, -1f, false);
-                            tk2dSpriteAnimator spriteAnimator = this.m_aiAnimator.spriteAnimator;
-                            spriteAnimator.AnimationEventTriggered += HandleAnimationEvent;
-                        }
-                        break;
-
-                }
             }
         }
     }

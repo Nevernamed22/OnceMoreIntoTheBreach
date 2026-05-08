@@ -2,9 +2,12 @@
 using Alexandria.DungeonAPI;
 using Alexandria.ItemAPI;
 using Dungeonator;
+using SaveAPI;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using UnityEngine;
 
@@ -16,6 +19,7 @@ namespace NevernamedsItems
         {
             var madameAutomata = ItemBuilder.SpriteFromBundle("madameautomata_base", Initialisation.NPCCollection.GetSpriteIdByName("madameautomata_base"), Initialisation.NPCCollection, new GameObject("Madame Automata"));
             madameAutomata.MakeFakePrefab();
+            madameAutomata.AddComponent<MadameAutomata>();
 
             SpeculativeRigidbody tentRigidBody = madameAutomata.GetOrAddComponent<SpeculativeRigidbody>();
             tentRigidBody.CollideWithOthers = true;
@@ -63,7 +67,7 @@ namespace NevernamedsItems
             glass_back.transform.SetParent(madameAutomata.transform);
             glass_back.transform.localPosition = new Vector3(3f / 16f, 20f / 16f);
             tk2dSprite glass_back_sprite = glass_back.GetComponent<tk2dSprite>();
-            glass_back_sprite.HeightOffGround = 1f;
+            glass_back_sprite.HeightOffGround = 1.6f;
             glass_back_sprite.IsPerpendicular = true;
             glass_back_sprite.renderer.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTilted");
             glass_back_sprite.usesOverrideMaterial = true;
@@ -71,7 +75,7 @@ namespace NevernamedsItems
             var glass_front = ItemBuilder.SpriteFromBundle("madameautomata_glass_front", Initialisation.NPCCollection.GetSpriteIdByName("madameautomata_glass_front"), Initialisation.NPCCollection, new GameObject("Glass Front"));
             glass_front.transform.SetParent(madameAutomata.transform);
             glass_front.transform.localPosition = new Vector3(2f / 16f, 12f / 16f);
-            tk2dSprite glass_front_sprite = glass_back.GetComponent<tk2dSprite>();
+            tk2dSprite glass_front_sprite = glass_front.GetComponent<tk2dSprite>();
             glass_front_sprite.HeightOffGround = 2f;
             glass_front_sprite.SortingOrder = 0;
             glass_front_sprite.IsPerpendicular = true;
@@ -82,20 +86,25 @@ namespace NevernamedsItems
             coinslot.transform.SetParent(madameAutomata.transform);
             coinslot.transform.localPosition = new Vector3(1f, 11f / 16f);
             tk2dSprite coinslot_sprite = coinslot.GetComponent<tk2dSprite>();
-            coinslot_sprite.HeightOffGround = 1f;
+            coinslot_sprite.HeightOffGround = 0.9f;
             coinslot_sprite.IsPerpendicular = true;
             coinslot_sprite.renderer.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTilted");
             coinslot_sprite.usesOverrideMaterial = true;
+            coinslot.AddComponent<MadameAutomataCoinSlotController>();
 
             var puppet = ItemBuilder.SpriteFromBundle("madameautomata_broken_001", Initialisation.NPCCollection.GetSpriteIdByName("madameautomata_broken_001"), Initialisation.NPCCollection, new GameObject("Puppet"));
             puppet.transform.SetParent(madameAutomata.transform);
             puppet.transform.localPosition = new Vector3(1f, 18f / 16f);
             tk2dSpriteAnimator puppetAnimator = puppet.GetOrAddComponent<tk2dSpriteAnimator>();
-            puppetAnimator.sprite.HeightOffGround = 1f;
+            puppetAnimator.sprite.HeightOffGround = 1.3f;
             puppetAnimator.Library = Initialisation.npcAnimationCollection;
             puppetAnimator.defaultClipId = Initialisation.npcAnimationCollection.GetClipIdByName("madameautomata_broken");
             puppetAnimator.DefaultClipId = Initialisation.npcAnimationCollection.GetClipIdByName("madameautomata_broken");
             puppetAnimator.playAutomatically = true;
+
+            Transform talktransform = new GameObject("talkpoint").transform;
+            talktransform.SetParent(madameAutomata.transform);
+            talktransform.transform.localPosition = new Vector3(1f, 20f / 16f);
 
             Dictionary<GameObject, float> dict = new Dictionary<GameObject, float>() { { madameAutomata, 1f } };
             DungeonPlaceable placeable = BreakableAPIToolbox.GenerateDungeonPlaceable(dict);
@@ -177,7 +186,7 @@ namespace NevernamedsItems
             new ConditionalAutomataFortune(){ overrideFlag = GungeonFlags.ACHIEVEMENT_BEASTMODE,
                 fortunes = new List<string>(){ "Beastmode has more effects... probably.", "Beastmode has no deeper secrets... probably.", "Beastmode just exists to spite corporate execs." } },
         };
-            
+
         public static List<string> MeaninglessFortunes = new List<string>()
         {
             "Look to La Luna",
@@ -780,5 +789,121 @@ namespace NevernamedsItems
             "There's no more time for crying over spilled milk.",
 
         };
+
+        private void Start()
+        {
+            talkpoint = base.transform.Find("talkpoint");
+            m_room = GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(base.transform.position.IntXY(VectorConversions.Round));
+            Puppet = base.transform.Find("Puppet").GetComponent<tk2dSpriteAnimator>();
+            coinslot = base.transform.Find("CoinSlot").GetComponent<MadameAutomataCoinSlotController>();
+            coinslot.OnConfigure(this);
+
+            if (!SaveAPIManager.GetFlag(CustomDungeonFlags.MADAMEAUTOMATA_REPAIRED))
+            {
+                IsBroken = true;
+            }
+        }
+        public IEnumerator Repair(PlayerController player)
+        {
+            IsBroken = false;
+            SaveAPIManager.SetFlag(CustomDungeonFlags.MADAMEAUTOMATA_REPAIRED, true);
+            yield break;
+        }
+        public void DebugBreakAgain()
+        {
+            IsBroken = true;
+            SaveAPIManager.SetFlag(CustomDungeonFlags.MADAMEAUTOMATA_REPAIRED, false);
+        }
+        public IEnumerator DeliverFortune(PlayerController player)
+        {
+            if (UnityEngine.Random.value <= 0.01f)
+            {
+                yield return DeliverRealFortune(player);
+            }
+            else
+            {
+                string fortune = "Placeholder!";
+                fortune = BraveUtility.RandomElement(MeaninglessFortunes);
+                TextBoxManager.ClearTextBox(talkpoint);
+                Puppet.PlayForDuration("madameautomata_talk", 3f, "madameautomata_idle", false);
+                TextBoxManager.ShowTextBox(talkpoint.position, talkpoint, 3f, fortune, "witch2", false, TextBoxManager.BoxSlideOrientation.NO_ADJUSTMENT, false, false);
+            }
+
+            yield break;
+        }
+        public IEnumerator DeliverRealFortune(PlayerController player)
+        {
+
+            yield break;
+        }
+        public IEnumerator LongConversation(List<string> dialogue, PlayerController speaker, bool clearAfter = false, string itemName = "")
+        {
+            int conversationIndex = 0;
+            while (conversationIndex <= dialogue.Count - 1)
+            {
+                TextBoxManager.ClearTextBox(talkpoint);
+                TextBoxManager.ShowTextBox(talkpoint.position, talkpoint, -1f, dialogue[conversationIndex], "owl", instant: false, showContinueText: true);
+                float timer = 0;
+                while (!BraveInput.GetInstanceForPlayer(speaker.PlayerIDX).ActiveActions.GetActionFromType(GungeonActions.GungeonActionType.Interact).WasPressed || timer < 0.4f)
+                {
+                    timer += BraveTime.DeltaTime;
+                    yield return null;
+                }
+                conversationIndex++;
+            }
+            if (clearAfter) { TextBoxManager.ClearTextBox(talkpoint); }
+            yield break;
+        }
+
+        public bool IsBroken;
+        public MadameAutomataCoinSlotController coinslot;
+        public tk2dSpriteAnimator Puppet;
+        public RoomHandler m_room;
+        private Transform talkpoint;
+
+        public class MadameAutomataCoinSlotController : BraveBehaviour, IPlayerInteractable
+        {
+
+            public MadameAutomata master;
+
+            public void OnConfigure(MadameAutomata m)
+            {
+                master = m;
+                if (master != null && master.m_room != null) { master.m_room.RegisterInteractable(this); }
+                SpriteOutlineManager.AddOutlineToSprite(sprite, Color.black);
+            }
+            public float GetDistanceToPoint(Vector2 point)
+            {
+                return Vector2.Distance(point, base.transform.position) / 2f;
+            }
+
+            public void OnEnteredRange(PlayerController interactor)
+            {
+                SpriteOutlineManager.RemoveOutlineFromSprite(sprite, true);
+                SpriteOutlineManager.AddOutlineToSprite(sprite, Color.white);
+            }
+
+            public void OnExitRange(PlayerController interactor)
+            {
+                SpriteOutlineManager.RemoveOutlineFromSprite(sprite, true);
+                SpriteOutlineManager.AddOutlineToSprite(sprite, Color.black);
+            }
+
+            public void Interact(PlayerController interactor)
+            {
+                master.StartCoroutine(master.DeliverFortune(interactor));
+            }
+            public string GetAnimationState(PlayerController interactor, out bool shouldBeFlipped)
+            {
+                shouldBeFlipped = false;
+                return string.Empty;
+            }
+
+            public float GetOverrideMaxDistance()
+            {
+                return 2f;
+            }
+        }
     }
+
 }

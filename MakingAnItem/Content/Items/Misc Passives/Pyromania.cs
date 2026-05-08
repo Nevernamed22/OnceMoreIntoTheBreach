@@ -7,6 +7,8 @@ using UnityEngine;
 using Alexandria.ItemAPI;
 using Alexandria.Misc;
 using Dungeonator;
+using Pathfinding;
+using static ETGMod;
 
 namespace NevernamedsItems
 {
@@ -46,7 +48,8 @@ namespace NevernamedsItems
             yield return new WaitForSeconds(1f);
             for (int j = 0; j < 5; j++)
             {
-                IntVector2 position = room.GetRandomVisibleClearSpot(2, 2);
+                IntVector2 position = (IntVector2)(room.GetRandomAvailableCellInRadius(new IntVector2(1, 2), GameManager.Instance.PrimaryPlayer.CenterPosition, 5f, 100f, CellTypes.FLOOR));
+
                 GameObject barrel = UnityEngine.Object.Instantiate<GameObject>(EasyPlaceableObjects.ExplosiveBarrel, position.ToVector3(), Quaternion.identity);
 
                 SpeculativeRigidbody ObjectSpecRigidBody = barrel.GetComponentInChildren<SpeculativeRigidbody>();

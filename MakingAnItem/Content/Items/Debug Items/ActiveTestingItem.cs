@@ -9,6 +9,7 @@ using Alexandria.Misc;
 using UnityEngine;
 using System.Collections;
 using SaveAPI;
+using static UnityEngine.UI.GridLayoutGroup;
 
 namespace NevernamedsItems
 {
@@ -41,16 +42,89 @@ namespace NevernamedsItems
         public static string soundSwitchOverride;
         public static string soundSwitchGroup = "WPN_Guns";
         public static List<GameObject> excluded = new List<GameObject>();
+
+        public static List<CustomSynergyType> LookFor = new List<CustomSynergyType>()
+        {
+             CustomSynergyType.MAN_IN_BLACK,
+             CustomSynergyType.SPONGE_CUBE,
+             CustomSynergyType.BLOOD_LOCKET,
+             CustomSynergyType.RADIOACTIVE_JEWELRY,
+             CustomSynergyType.PAYDAY_ONEITEM,
+             CustomSynergyType.PAYDAY_TWOITEM,
+             CustomSynergyType.PAYDAY_THREEITEM,
+             CustomSynergyType.MASTER_CHEF,
+             CustomSynergyType.POISON_HOOK,
+             CustomSynergyType.BIG_TABLE_SHOTGUN,
+             CustomSynergyType.GRASSCUTTER,
+             CustomSynergyType.LOZ_STUFF,
+             CustomSynergyType.HAMMER_AND_NAIL,
+             CustomSynergyType.LOWER_CASE_HACK,
+        };
         public override void DoEffect(PlayerController user)
         {
-            base.sprite.SetSprite(SpriteBuilder.itemCollection, SpriteBuilder.itemCollection.GetSpriteIdByName("blood_brooch_001"));
 
-            if (soundSwitchOverride != null && soundSwitchGroup != null)
+            foreach (AdvancedSynergyEntry entry in GameManager.Instance.SynergyManager.synergies)
             {
-                AkSoundEngine.SetSwitch(soundSwitchGroup, soundSwitchOverride, user.gameObject);
-            }
-            AkSoundEngine.PostEvent(sound, user.gameObject);
+                string name = string.IsNullOrEmpty(entry.NameKey) ? StringTableManager.GetSynergyString(entry.NameKey, -1) : "NULL";
+                string foo = "";
+                string components = "";
+                string components2 = "";
+                bool add = false;
 
+                if (entry.bonusSynergies != null)
+                {
+                    foreach (CustomSynergyType syn in entry.bonusSynergies)
+                    {
+                        foo += (" " + syn.ToString());
+                        if (LookFor.Contains(syn)) { add = true; }
+                    }
+                }
+
+                if (entry.MandatoryGunIDs != null)
+                {
+                    foreach (int id in entry.MandatoryGunIDs)
+                    {
+                        components += (" " + PickupObjectDatabase.GetById(id).EncounterNameOrDisplayName);
+                    }
+                }
+
+                if (entry.MandatoryItemIDs != null)
+                {
+                    foreach (int id in entry.MandatoryItemIDs)
+                    {
+                        components += (" " + PickupObjectDatabase.GetById(id).EncounterNameOrDisplayName);
+                    }
+                }
+
+                if (entry.OptionalGunIDs != null)
+                {
+                    foreach (int id in entry.OptionalGunIDs)
+                    {
+                        components2 += (" " + PickupObjectDatabase.GetById(id).EncounterNameOrDisplayName);
+                    }
+                }
+
+                if (entry.OptionalItemIDs != null)
+                {
+                    foreach (int id in entry.OptionalItemIDs)
+                    {
+                        components2 += (" " + PickupObjectDatabase.GetById(id).EncounterNameOrDisplayName);
+                    }
+                }
+
+                if (string.IsNullOrEmpty(foo)) { foo = "NULL"; }
+                if (add) ETGModConsole.Log($"{foo} ----> ({entry.NameKey}) {name} ({components}) ({components2})");
+            }
+
+
+            /* base.sprite.SetSprite(SpriteBuilder.itemCollection, SpriteBuilder.itemCollection.GetSpriteIdByName("blood_brooch_001"));
+
+             if (soundSwitchOverride != null && soundSwitchGroup != null)
+             {
+                 AkSoundEngine.SetSwitch(soundSwitchGroup, soundSwitchOverride, user.gameObject);
+             }
+             AkSoundEngine.PostEvent(sound, user.gameObject);
+            */
             //IntVector2 bestRewardLocation = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
             //ChestToolbox.ChestTier tier = RandomEnum<ChestToolbox.ChestTier>.Get();
             //ChestToolbox.SpawnChestEasy(bestRewardLocation, tier, true, Chest.GeneralChestType.UNSPECIFIED);
